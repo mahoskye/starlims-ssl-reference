@@ -7,7 +7,7 @@ Complete API reference for the **STARLIMS Scripting Language (SSL)** — coverin
 | Section | Count | Description |
 |---------|-------|-------------|
 | [Functions](reference/functions/index.md) | 330 | Built-in functions for strings, arrays, dates, database, files, and more |
-| [Classes](reference/classes/index.md) | 28 | Object types for data tables, dictionaries, regex, email, and system services |
+| [Classes](reference/classes/index.md) | 29 | Object types for data tables, dictionaries, regex, email, and system services |
 | [Keywords](reference/keywords/index.md) | 38 | Language keywords for control flow, declarations, and error handling |
 | [Operators](reference/operators/index.md) | 32 | Arithmetic, comparison, logical, bitwise, and assignment operators |
 | [Types](reference/types/index.md) | 8 | Core SSL types: number, string, boolean, date, array, object, codeblock, netobject |

@@ -1,6 +1,6 @@
 ---
 title: "Operators"
-summary: "31 operators - arithmetic, comparison, logical, bitwise, and assignment."
+summary: "32 operators - arithmetic, comparison, logical, bitwise, and assignment."
 starlims:
   applies_to: [11]
   verified_against: [11]
@@ -8,7 +8,7 @@ starlims:
 
 # Operators
 
-**31 operators** — arithmetic, comparison, logical, bitwise, and assignment.
+**32 operators** — arithmetic, comparison, logical, bitwise, and assignment.
 
 ## Precedence Table
 

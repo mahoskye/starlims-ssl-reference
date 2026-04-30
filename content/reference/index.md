@@ -1,6 +1,6 @@
 ---
 title: "API Reference"
-summary: "Complete reference for all 468 SSL language elements."
+summary: "Complete reference for all 446 SSL language elements."
 starlims:
   applies_to: [11]
   verified_against: [11]
@@ -8,7 +8,7 @@ starlims:
 
 # API Reference
 
-Complete reference for all 468 SSL language elements.
+Complete reference for all 446 SSL language elements.
 
 Each element page includes:
 
@@ -22,10 +22,10 @@ Each element page includes:
 
 ## Sections
 
-- [Functions](functions/index.md) — 354 built-in functions
+- [Functions](functions/index.md) — 330 built-in functions
 - [Classes](classes/index.md) — 29 object types
 - [Keywords](keywords/index.md) — 38 language keywords
 - [Operators](operators/index.md) — 32 operators with precedence table
 - [Types](types/index.md) — 8 core SSL types
 - [Literals](literals/index.md) — 3 literal values
-- [Special Forms](special-forms/index.md) — 4 language constructs
+- [Special Forms](special-forms/index.md) — 6 language constructs
