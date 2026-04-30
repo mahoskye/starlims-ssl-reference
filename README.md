@@ -51,3 +51,16 @@ mkdocs build
 
 Pushes to `main` are deployed to GitHub Pages automatically via
 `.github/workflows/deploy.yml`.
+
+## License
+
+This work is licensed under a [Creative Commons Attribution 4.0
+International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
+See [LICENSE](LICENSE) for the full text.
+
+You are free to share and adapt the material for any purpose, including
+commercially, as long as you give appropriate credit. A suggested
+attribution:
+
+> "STARLIMS SSL Reference" by Benjamin Buddle (mahoskye), licensed under
+> CC BY 4.0. Source: https://github.com/mahoskye/starlims-ssl-reference
