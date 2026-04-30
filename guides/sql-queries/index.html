@@ -1,0 +1,1682 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Complete API reference for the STARLIMS Scripting Language (SSL)">
+      
+      
+      
+        <link rel="canonical" href="https://mahoskye.github.io/starlims-ssl-reference/guides/sql-queries/">
+      
+      
+        <link rel="prev" href="../error-handling/">
+      
+      
+        <link rel="next" href="../sql-transactions/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Working with SQL - SSL API Reference</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#working-with-sql-in-ssl" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SSL API Reference" class="md-header__button md-logo" aria-label="SSL API Reference" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SSL API Reference
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Working with SQL
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mahoskye/starlims-ssl-reference" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mahoskye/starlims-ssl-reference
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../type-system/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Guides
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SSL API Reference" class="md-nav__button md-logo" aria-label="SSL API Reference" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SSL API Reference
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mahoskye/starlims-ssl-reference" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mahoskye/starlims-ssl-reference
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../type-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Type System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Error Handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Working with SQL
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Working with SQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-the-right-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choosing the right function
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connection-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection names
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameterized-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameterized queries
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parameterized queries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it works
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameter-count-must-match" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameter count must match
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#placeholders-inside-string-literals-are-ignored" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Placeholders inside string literals are ignored
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-in-clauses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building IN clauses
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Building IN clauses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparearrayforin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PrepareArrayForIn
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#buildstringforin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BuildStringForIn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string-concatenation-not-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        String concatenation (not recommended)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Function reference
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Function reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lsearch-single-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LSearch — single value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lselect1-result-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LSelect1 — result array
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runsql-execute-statements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RunSQL — execute statements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getdataset-xml-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GetDataSet — XML output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sqlexecute-flexible-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQLExecute — flexible execution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SQLExecute — flexible execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#named-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Named parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#array-expansion-for-in-clauses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Array expansion for IN clauses
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Return type
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-injection-protection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL injection protection
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-transactions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL & Transactions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../reference/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-the-right-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choosing the right function
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connection-names" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection names
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameterized-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameterized queries
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parameterized queries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-it-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How it works
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameter-count-must-match" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameter count must match
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#placeholders-inside-string-literals-are-ignored" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Placeholders inside string literals are ignored
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-in-clauses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building IN clauses
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Building IN clauses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preparearrayforin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PrepareArrayForIn
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#buildstringforin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BuildStringForIn
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#string-concatenation-not-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        String concatenation (not recommended)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#function-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Function reference
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Function reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lsearch-single-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LSearch — single value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lselect1-result-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LSelect1 — result array
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runsql-execute-statements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RunSQL — execute statements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getdataset-xml-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GetDataSet — XML output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sqlexecute-flexible-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQLExecute — flexible execution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SQLExecute — flexible execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#named-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Named parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#array-expansion-for-in-clauses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Array expansion for IN clauses
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Return type
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-injection-protection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL injection protection
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../type-system/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Guides
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="working-with-sql-in-ssl">Working with SQL in SSL<a class="headerlink" href="#working-with-sql-in-ssl" title="Permanent link">&para;</a></h1>
+<p>SSL provides several functions for executing SQL against the LIMS database. Choosing the right one depends on what you need back — a success flag, a single value, a result array, or an XML dataset.</p>
+<h2 id="choosing-the-right-function">Choosing the right function<a class="headerlink" href="#choosing-the-right-function" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Use when you need</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../reference/functions/RunSQL/"><code>RunSQL</code></a></td>
+<td>Execute INSERT, UPDATE, DELETE, or DDL</td>
+<td>boolean (<a href="../../reference/literals/true/"><code>.T.</code></a> on success)</td>
+</tr>
+<tr>
+<td><a href="../../reference/functions/LSearch/"><code>LSearch</code></a></td>
+<td>Retrieve a single value from one row</td>
+<td>The value, or a default if no rows</td>
+</tr>
+<tr>
+<td><a href="../../reference/functions/LSelect/"><code>LSelect</code></a> / <a href="../../reference/functions/LSelect1/"><code>LSelect1</code></a></td>
+<td>Retrieve multiple rows as an array</td>
+<td>2D array (rows × columns)</td>
+</tr>
+<tr>
+<td><a href="../../reference/functions/GetDataSet/"><code>GetDataSet</code></a></td>
+<td>XML dataset from a SELECT</td>
+<td>XML string</td>
+</tr>
+<tr>
+<td><a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a></td>
+<td>Named-parameter queries; configurable return type</td>
+<td>Array, XML string, or dataset object</td>
+</tr>
+</tbody>
+</table>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">/* Single value;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">sName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">&quot;SELECT name FROM users WHERE user_id = ?&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;USR001&quot;</span><span class="p">});</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">/* Multiple rows;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="s2">&quot;SELECT sample_id, status FROM samples WHERE batch = ?&quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;B-100&quot;</span><span class="p">});</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1">/* Execute a statement;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;UPDATE samples SET status = &#39;C&#39; WHERE sample_id = ?&quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;S-001&quot;</span><span class="p">});</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1">/* XML dataset;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSet</span><span class="p">(</span><span class="s2">&quot;SELECT sample_id FROM samples WHERE batch = ?&quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;B-100&quot;</span><span class="p">});</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1">/* Named-parameter query;</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">sBatch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;B-100&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;SELECT sample_id FROM samples WHERE batch = ?sBatch?&quot;</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="connection-names">Connection names<a class="headerlink" href="#connection-names" title="Permanent link">&para;</a></h2>
+<p>Most SQL functions accept an optional connection name parameter that identifies which configured database to run the query against. When omitted, the function uses the current default connection.</p>
+<p>The connection name is the key registered in the system's database configuration. You can discover available names at runtime with <a href="../../reference/functions/GetConnectionStrings/"><code>GetConnectionStrings</code></a>, which returns a 2D array where column 1 is the connection name, column 2 is the provider, and column 3 is the full connection string.</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">/* See what connections are available;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">aConns</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetConnectionStrings</span><span class="p">();</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aConns</span><span class="p">);</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">aConns</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; (&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aConns</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;)&quot;</span><span class="p">);</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">:NEXT</span><span class="p">;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1">/* Query using the default connection (omit the parameter);</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="s2">&quot;SELECT sample_id FROM sample WHERE status = ?&quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">});</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1">/* Query against a specific named connection;</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="s2">&quot;SELECT sample_id FROM sample WHERE status = ?&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ARCHIVE&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">});</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1">/* Check what the current default is;</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">sDefault</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDefaultConnection</span><span class="p">();</span>
+</code></pre></div>
+<p>The same connection name parameter appears in <a href="../../reference/functions/RunSQL/"><code>RunSQL</code></a>, <a href="../../reference/functions/LSearch/"><code>LSearch</code></a>, <a href="../../reference/functions/LSelect1/"><code>LSelect1</code></a>, <a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a>, <a href="../../reference/functions/GetDataSet/"><code>GetDataSet</code></a>, and related functions — always as the second argument after the SQL string.</p>
+<h2 id="parameterized-queries">Parameterized queries<a class="headerlink" href="#parameterized-queries" title="Permanent link">&para;</a></h2>
+<p>All SQL functions support parameterized queries using the <code>?</code> placeholder. This is the <strong>recommended approach</strong> for any query that includes user-supplied or variable data.</p>
+<h3 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h3>
+<p>Place a <code>?</code> in your SQL wherever a value should go, then pass the values as an array as the last argument. The engine replaces each <code>?</code> with a database-appropriate parameter (e.g., <code>@param1</code> for SQL Server, <code>:param1</code> for Oracle) and binds the values safely.</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">/* Parameterized — safe;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SELECT * FROM samples WHERE batch_id = ? AND status = ?&quot;</span><span class="p">;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;B-100&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">});</span>
+</code></pre></div>
+<p>The values are <strong>bound as parameters</strong>, not interpolated into the SQL string. This means:</p>
+<ul>
+<li>No SQL injection risk from the values</li>
+<li>Proper handling of special characters (quotes, etc.)</li>
+<li>Correct type binding for dates, numbers, and nulls</li>
+<li>Better query plan caching on the database server</li>
+</ul>
+<h3 id="parameter-count-must-match">Parameter count must match<a class="headerlink" href="#parameter-count-must-match" title="Permanent link">&para;</a></h3>
+<p>The number of <code>?</code> placeholders must match the number of elements in the values array. A mismatch throws a "Parameters count mismatch" error. Each <code>?</code> is positional — there are no named parameters, so if you need the same value in multiple places, you must pass it multiple times.</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">/* Correct: 2 placeholders, 2 values;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;UPDATE t SET a = ? WHERE b = ?&quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sNewValue</span><span class="p">,</span><span class="w"> </span><span class="n">sKeyValue</span><span class="p">});</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1">/* Wrong: 2 placeholders, 1 value — throws error;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;UPDATE t SET a = ? WHERE b = ?&quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sNewValue</span><span class="p">});</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1">/* Same value used twice — must appear twice in the array;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;INSERT INTO audit_log (changed_by, approved_by, sample_id)&quot;</span><span class="p">;</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSQL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; VALUES (?, ?, ?)&quot;</span><span class="p">;</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sCurrentUser</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentUser</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">});</span>
+</code></pre></div>
+<h3 id="placeholders-inside-string-literals-are-ignored">Placeholders inside string literals are ignored<a class="headerlink" href="#placeholders-inside-string-literals-are-ignored" title="Permanent link">&para;</a></h3>
+<p>The engine skips <code>?</code> characters that appear inside single-quoted string literals in the SQL. This means you can safely include literal question marks in string values:</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">/* The ? inside &#39;What?&#39; is not treated as a placeholder;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;INSERT INTO log (msg, user_id) VALUES (&#39;What?&#39;, ?)&quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sUserId</span><span class="p">});</span>
+</code></pre></div>
+<h3 id="building-in-clauses">Building IN clauses<a class="headerlink" href="#building-in-clauses" title="Permanent link">&para;</a></h3>
+<p>SQL <code>IN (...)</code> clauses need special handling because you can't use a single <code>?</code> for a list of values. SSL provides two helpers:</p>
+<h4 id="preparearrayforin">PrepareArrayForIn<a class="headerlink" href="#preparearrayforin" title="Permanent link">&para;</a></h4>
+<p>Sanitizes an array for use with a parameterized <code>IN</code> clause. It modifies the array in place — replacing empty string elements with a sentinel value that matches nothing, and appending a typed sentinel for empty arrays so the query stays syntactically valid.</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIds</span><span class="p">,</span><span class="w"> </span><span class="n">sTemp</span><span class="p">,</span><span class="w"> </span><span class="n">sPlaceholders</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1">/* Build the array of values to match;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">aSampleIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;S-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S-003&quot;</span><span class="p">};</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1">/* Prepare the array — replaces empty strings with sentinels;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="nf">PrepareArrayForIn</span><span class="p">(</span><span class="n">aSampleIds</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">);</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1">/* Array is now: {&quot;S-001&quot;, &quot;S-002&quot;, &quot;S-003&quot;} (unchanged, no empties);</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1">/* Build matching ? placeholders: ?,?,?;</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="n">sTemp</span><span class="w">         </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">&quot;?,&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aSampleIds</span><span class="p">));</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="n">sPlaceholders</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Left</span><span class="p">(</span><span class="n">sTemp</span><span class="p">,</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">sTemp</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="c1">/* sPlaceholders = &quot;?,?,?&quot;;</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="c1">/* Use with parameterized query;</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SELECT sample_id, status FROM samples&quot;</span><span class="p">;</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSQL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; WHERE sample_id IN (&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPlaceholders</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;)&quot;</span><span class="p">;</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="n">aSampleIds</span><span class="p">);</span>
+</code></pre></div>
+<p><a href="../../reference/functions/PrepareArrayForIn/"><code>PrepareArrayForIn</code></a> returns the array (modified in place). The second parameter controls the sentinel type for empty arrays:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Use for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"string"</code></td>
+<td>Text columns</td>
+</tr>
+<tr>
+<td><code>"numeric"</code></td>
+<td>Numeric columns</td>
+</tr>
+<tr>
+<td><code>"date"</code></td>
+<td>Date columns</td>
+</tr>
+</tbody>
+</table>
+<h4 id="buildstringforin">BuildStringForIn<a class="headerlink" href="#buildstringforin" title="Permanent link">&para;</a></h4>
+<p>Builds a complete <code>('val1','val2','val3')</code> string for direct inclusion in SQL. Escapes single quotes within the values automatically.</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIds</span><span class="p">,</span><span class="w"> </span><span class="n">sInClause</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1">/* Build the array of values to match;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">aSampleIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;S-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S-003&quot;</span><span class="p">};</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1">/* Generate the IN clause string;</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">sInClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">BuildStringForIn</span><span class="p">(</span><span class="n">aSampleIds</span><span class="p">);</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="c1">/* Result: (&#39;S-001&#39;,&#39;S-002&#39;,&#39;S-003&#39;);</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="c1">/* Use it in the query;</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SELECT sample_id, status FROM samples&quot;</span><span class="p">;</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSQL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; WHERE sample_id IN &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInClause</span><span class="p">;</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="n">sSQL</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Empty array behavior</p>
+<p>Both functions handle empty arrays gracefully by substituting a type-appropriate sentinel value that matches no real rows. This ensures the SQL is syntactically valid and returns zero rows instead of throwing an error.</p>
+</div>
+<h2 id="string-concatenation-not-recommended">String concatenation (not recommended)<a class="headerlink" href="#string-concatenation-not-recommended" title="Permanent link">&para;</a></h2>
+<p>The alternative to parameterized queries is building the SQL string with concatenation and <a href="../../reference/functions/LimsString/"><code>LimsString</code></a>:</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">/* String concatenation — avoid when possible;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SELECT * FROM samples WHERE batch_id = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sBatchId</span><span class="p">);</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSQL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; AND status = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sStatus</span><span class="p">);</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="n">sSQL</span><span class="p">);</span>
+</code></pre></div>
+<p><a href="../../reference/functions/LimsString/"><code>LimsString</code></a> wraps strings in single quotes and formats dates and numbers for SQL. While it handles basic quoting, it is <strong>not a substitute for parameterized queries</strong>:</p>
+<ul>
+<li>No protection against SQL injection if values contain crafted content</li>
+<li>Date and number formatting depends on server locale settings</li>
+<li>More error-prone to construct correctly</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Prefer parameterized queries</p>
+<p>Use <code>?</code> placeholders with an array of values for any query that includes variable data. Reserve string concatenation for fully static SQL or cases where the table/column name itself is dynamic (which cannot be parameterized).</p>
+</div>
+<h2 id="function-reference">Function reference<a class="headerlink" href="#function-reference" title="Permanent link">&para;</a></h2>
+<h3 id="lsearch-single-value">LSearch — single value<a class="headerlink" href="#lsearch-single-value" title="Permanent link">&para;</a></h3>
+<p>Returns the first column of the first row, or a default value if no rows match:</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">/* Get a single value with a fallback default;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">&quot;SELECT status FROM samples WHERE sample_id = ?&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;UNKNOWN&quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;S-001&quot;</span><span class="p">});</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1">/* Numeric result;</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">nCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">&quot;SELECT COUNT(*) FROM samples WHERE batch_id = ?&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;B-100&quot;</span><span class="p">});</span>
+</code></pre></div>
+<p>The second parameter is the default returned when the query finds no rows. This avoids needing to check for NIL after every lookup.</p>
+<h3 id="lselect1-result-array">LSelect1 — result array<a class="headerlink" href="#lselect1-result-array" title="Permanent link">&para;</a></h3>
+<p>Returns a 2D array where rows are the first dimension and columns are the second:</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="s2">&quot;SELECT sample_id, status, priority FROM samples WHERE batch = ?&quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;B-100&quot;</span><span class="p">});</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="c1">/* Access: aResults[row, column];</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aResults</span><span class="p">);</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span><span class="w">     </span><span class="c1">/* first column;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="n">sStatus</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span><span class="w">     </span><span class="c1">/* second column;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="n">sPriority</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">];</span><span class="w">     </span><span class="c1">/* third column;</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSampleId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; — &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="k">:NEXT</span><span class="p">;</span>
+</code></pre></div>
+<p>If the query returns no rows, <a href="../../reference/functions/LSelect1/"><code>LSelect1</code></a> returns an empty array. Always check with <a href="../../reference/functions/ALen/"><code>ALen</code></a> before iterating.</p>
+<h3 id="runsql-execute-statements">RunSQL — execute statements<a class="headerlink" href="#runsql-execute-statements" title="Permanent link">&para;</a></h3>
+<p>Returns <a href="../../reference/literals/true/"><code>.T.</code></a> on success. Error behavior depends on <a href="../../reference/functions/IgnoreSqlErrors/"><code>IgnoreSqlErrors</code></a> and <a href="../../reference/functions/ShowSqlErrors/"><code>ShowSqlErrors</code></a> flags (see <a href="../sql-transactions/#sql-error-handling">SQL &amp; Transactions guide</a>).</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">bOk</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;INSERT INTO audit_log (action, ts) VALUES (?, ?)&quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LOGIN&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">DToS</span><span class="p">(</span><span class="nf">Now</span><span class="p">())});</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bOk</span><span class="p">;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Audit log insert failed&quot;</span><span class="p">);</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">:ENDIF</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="getdataset-xml-output">GetDataSet — XML output<a class="headerlink" href="#getdataset-xml-output" title="Permanent link">&para;</a></h3>
+<p>Returns a SELECT result as an XML string. Useful when passing data to external systems or storing structured output:</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSet</span><span class="p">(</span><span class="s2">&quot;SELECT sample_id, status FROM samples WHERE batch = ?&quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;B-100&quot;</span><span class="p">});</span>
+</code></pre></div>
+<h2 id="sqlexecute-flexible-execution">SQLExecute — flexible execution<a class="headerlink" href="#sqlexecute-flexible-execution" title="Permanent link">&para;</a></h2>
+<p><a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a> differs from the other SQL functions in two ways: it uses <strong>named <code>?varName?</code> placeholders</strong> instead of a positional values array, and its return type is controlled by an explicit parameter.</p>
+<h3 id="named-parameters">Named parameters<a class="headerlink" href="#named-parameters" title="Permanent link">&para;</a></h3>
+<p>Instead of passing a separate values array, you embed variable names directly in the SQL using <code>?varName?</code> syntax. The engine substitutes the current value of each named variable from the calling scope at execution time:</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">sBatch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;B-100&quot;</span><span class="p">;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;SELECT sample_id FROM samples WHERE batch = ?sBatch? AND status = ?sStatus?&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>No values array is needed — the variable names in the SQL string are resolved automatically.</p>
+<div class="admonition warning">
+<p class="admonition-title">Don't mix syntaxes</p>
+<p><code>?varName?</code> only works with <a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a>. The other functions (<a href="../../reference/functions/RunSQL/"><code>RunSQL</code></a>, <a href="../../reference/functions/LSearch/"><code>LSearch</code></a>, <a href="../../reference/functions/LSelect1/"><code>LSelect1</code></a>, <a href="../../reference/functions/GetDataSet/"><code>GetDataSet</code></a>) use positional <code>?</code> with a values array. Using <code>?varName?</code> with those functions will not substitute values.</p>
+</div>
+<h3 id="array-expansion-for-in-clauses">Array expansion for IN clauses<a class="headerlink" href="#array-expansion-for-in-clauses" title="Permanent link">&para;</a></h3>
+<p>When a <code>?varName?</code> placeholder refers to a local array variable, <a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a> automatically expands it into a matching set of positional placeholders. A three-element array becomes <code>?,?,?</code> inline:</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">aStatusCodes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;P&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;C&quot;</span><span class="p">};</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="s2">    SELECT sample_id, status</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="s2">    FROM samples</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="s2">    WHERE status IN (?aStatusCodes?)</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="s2">&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>This is the cleanest way to build a dynamic <code>IN</code> clause with <a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a> — no placeholder string building required.</p>
+<div class="admonition warning">
+<p class="admonition-title">Array must be a local variable</p>
+<p>The array must be declared and assigned as a local variable in the calling scope. Passing a UDObject property directly (e.g. <code>?oFilter:StatusCodes?</code>) causes a runtime error. Copy the property to a local variable first:</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">aStatusCodes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oFilter</span><span class="p">:</span><span class="n">StatusCodes</span><span class="p">;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM samples WHERE status IN (?aStatusCodes?)&quot;</span><span class="p">);</span>
+</code></pre></div>
+</div>
+<h3 id="return-type">Return type<a class="headerlink" href="#return-type" title="Permanent link">&para;</a></h3>
+<p>The sixth parameter controls what <a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a> returns for <code>SELECT</code> statements:</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>omitted or <a href="../../reference/literals/false/"><code>.F.</code></a></td>
+<td>array (rows × columns)</td>
+</tr>
+<tr>
+<td><a href="../../reference/literals/true/"><code>.T.</code></a> or <code>"xml"</code></td>
+<td>XML string</td>
+</tr>
+<tr>
+<td><code>"dataset"</code></td>
+<td><a href="../../reference/types/netobject/"><code>netobject</code></a> wrapping a .NET <code>DataSet</code></td>
+</tr>
+</tbody>
+</table>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1">/* Default — returns array;</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;SELECT sample_id, status FROM samples WHERE batch = ?sBatch?&quot;</span><span class="p">);</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1">/* XML output;</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;SELECT sample_id, status FROM samples WHERE batch = ?sBatch?&quot;</span><span class="p">,,,,,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1">/* Dataset object — returns a netobject wrapping a .NET DataSet;</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="n">oDs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;SELECT sample_id, status FROM samples WHERE batch = ?sBatch?&quot;</span><span class="p">,,,,,</span><span class="w"> </span><span class="s2">&quot;dataset&quot;</span><span class="p">);</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="c1">/* Non-SELECT — returns boolean success;</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="n">bOk</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;DELETE FROM temp_data WHERE session_id = ?sSessionId?&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>See the <a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code> reference</a> for a full example of traversing a dataset result.</p>
+<h2 id="sql-injection-protection">SQL injection protection<a class="headerlink" href="#sql-injection-protection" title="Permanent link">&para;</a></h2>
+<p>SSL includes a <a href="../../reference/functions/DetectSqlInjections/"><code>DetectSqlInjections</code></a> function that can be enabled per connection to detect suspicious patterns:</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1">/* Enable injection detection on the default connection;</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nf">DetectSqlInjections</span><span class="p">(</span><span class="kc">.T.</span><span class="p">);</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1">/* Your queries run with detection active;</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sUserSuppliedSQL</span><span class="p">);</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="c1">/* Disable when done;</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="nf">DetectSqlInjections</span><span class="p">(</span><span class="kc">.F.</span><span class="p">);</span>
+</code></pre></div>
+<p>However, <strong>parameterized queries are the primary defense</strong>. <a href="../../reference/functions/DetectSqlInjections/"><code>DetectSqlInjections</code></a> is a secondary safeguard, not a replacement for proper parameter binding.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/mahoskye/starlims-ssl-reference" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.indexes", "navigation.prune", "navigation.top", "navigation.path", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/navigation.js"></script>
+      
+    
+  </body>
+</html>

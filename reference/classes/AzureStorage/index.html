@@ -1,0 +1,4698 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Complete API reference for the STARLIMS Scripting Language (SSL)">
+      
+      
+      
+        <link rel="canonical" href="https://mahoskye.github.io/starlims-ssl-reference/reference/classes/AzureStorage/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../BatchSupport/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>AzureStorage - SSL API Reference</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#azurestorage" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="SSL API Reference" class="md-header__button md-logo" aria-label="SSL API Reference" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SSL API Reference
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AzureStorage
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/mahoskye/starlims-ssl-reference" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mahoskye/starlims-ssl-reference
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Getting Started
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../guides/type-system/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Guides
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="SSL API Reference" class="md-nav__button md-logo" aria-label="SSL API Reference" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SSL API Reference
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/mahoskye/starlims-ssl-reference" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    mahoskye/starlims-ssl-reference
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../../guides/type-system/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../functions/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functions
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classes
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Classes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AzureStorage
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AzureStorage
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#when-to-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constructors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Constructors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azurestorage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AzureStorage{}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azurestoragesconnectionname" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AzureStorage{sConnectionName}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azurestoragesaccountname-saccountkey" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AzureStorage{sAccountName, sAccountKey}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azurestoragesaccountname-saccountkey-busehttp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AzureStorage{sAccountName, sAccountKey, bUseHttp}
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Methods Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#createtable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CreateTable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deletetable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeleteTable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insertentity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InsertEntity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insertentities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InsertEntities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selectentity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SelectEntity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selectentities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SelectEntities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleteentity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeleteEntity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleteentities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeleteEntities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updateentity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UpdateEntity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#createcontainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CreateContainer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deletecontainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeleteContainer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#putblob" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PutBlob
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getblob" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GetBlob
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleteblob" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeleteBlob
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readblobastext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReadBlobAsText
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inheritance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inheritance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best practices
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caveats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caveats
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-table-and-insert-one-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a table and insert one entity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-matching-entities-and-update-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Query matching entities and update one
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-files-download-a-copy-and-read-a-blob-as-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload files, download a copy, and read a blob as text
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BatchSupport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BatchSupport
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CDataColumn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CDataColumn
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CDataColumns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CDataColumns
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CDataField/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CDataField
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CDataRow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CDataRow
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CDataTable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CDataTable
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Email/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Email
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EnterpriseExporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EnterpriseExporter
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FtpsClient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FtpsClient
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../HtmlConverter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HtmlConverter
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PatcherSupport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PatcherSupport
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PdfSupport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PdfSupport
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RegSetup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RegSetup
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SDMS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SDMS
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SDMSDocUploader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SDMSDocUploader
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQLConnection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQLConnection
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SSLBaseDictionary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSLBaseDictionary
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SSLCodeProvider/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSLCodeProvider
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SSLDataset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSLDataset
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SSLError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSLError
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SSLExpando/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSLExpando
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SSLIntDictionary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSLIntDictionary
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SSLRegex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSLRegex
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SSLSQLError/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSLSQLError
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SSLStringDictionary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSLStringDictionary
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Sequence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sequence
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TablesImport/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TablesImport
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../WebServices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WebServices
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--published"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../keywords/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keywords
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../operators/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Operators
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../types/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Types
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../literals/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Literals
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../special-forms/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Special Forms
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../missing-documentation.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation Gaps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#when-to-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to use
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constructors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Constructors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azurestorage_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AzureStorage{}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azurestoragesconnectionname" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AzureStorage{sConnectionName}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azurestoragesaccountname-saccountkey" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AzureStorage{sAccountName, sAccountKey}
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azurestoragesaccountname-saccountkey-busehttp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AzureStorage{sAccountName, sAccountKey, bUseHttp}
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Methods Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#createtable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CreateTable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deletetable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeleteTable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insertentity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InsertEntity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insertentities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        InsertEntities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selectentity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SelectEntity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selectentities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SelectEntities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleteentity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeleteEntity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleteentities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeleteEntities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updateentity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UpdateEntity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#createcontainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CreateContainer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deletecontainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeleteContainer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#putblob" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PutBlob
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getblob" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GetBlob
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleteblob" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DeleteBlob
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readblobastext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ReadBlobAsText
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inheritance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inheritance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best practices
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caveats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caveats
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-table-and-insert-one-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a table and insert one entity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-matching-entities-and-update-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Query matching entities and update one
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-files-download-a-copy-and-read-a-blob-as-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload files, download a copy, and read a blob as text
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Reference
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Classes
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="azurestorage">AzureStorage<a class="headerlink" href="#azurestorage" title="Permanent link">&para;</a></h1>
+<p>Provides SSL access to Azure Table Storage and Azure Blob Storage through one class.</p>
+<p><code>AzureStorage</code> lets an SSL script work with Azure tables and blobs after you create the object with either a configured Azure connection or explicit account credentials. The class exposes table operations for creating tables, inserting entities, selecting entities, updating entities, and deleting entities. It also exposes blob operations for creating containers, uploading files, downloading blobs to local files, deleting blobs, and reading blob contents as text. Create and delete operations are idempotent for existing or missing tables and containers, <code>SelectEntity</code> returns <a href="../../literals/nil/"><code>NIL</code></a> when the requested entity is not found, <code>SelectEntities</code> returns an array of matching entities, and <code>UpdateEntity</code> returns <a href="../../literals/true/"><code>.T.</code></a> on success or <a href="../../literals/false/"><code>.F.</code></a> when the target entity does not exist.</p>
+<h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
+<ul>
+<li>When you need to store structured records in Azure Table Storage from SSL.</li>
+<li>When you need to upload, download, or delete files in Azure Blob Storage.</li>
+<li>When your Azure connection is already configured in LIMS and you want to reuse that configuration.</li>
+<li>When you need one API surface for both table and blob operations.</li>
+</ul>
+<h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">&para;</a></h2>
+<h3 id="azurestorage_1"><code>AzureStorage{}</code><a class="headerlink" href="#azurestorage_1" title="Permanent link">&para;</a></h3>
+<p>Uses the first configured Azure connection available to the application.</p>
+<p><strong>Raises:</strong></p>
+<ul>
+<li><strong>When no Azure connection is configured:</strong> <code>Azure connection error: Could not find a connection string that has provider name = 'MicrosoftAzure'.</code></li>
+</ul>
+<h3 id="azurestoragesconnectionname"><code>AzureStorage{sConnectionName}</code><a class="headerlink" href="#azurestoragesconnectionname" title="Permanent link">&para;</a></h3>
+<p>Uses the named Azure connection from the application configuration.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sConnectionName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Name of the configured Azure connection to use.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Raises:</strong></p>
+<ul>
+<li><strong>When the named connection does not exist:</strong> <code>Azure connection error: Could not find Azure connection string with name = '&lt;sConnectionName&gt;'.</code></li>
+<li><strong>When the configured connection string is missing required account settings:</strong> A runtime error indicating the missing token such as <code>Account Name</code> or <code>Account Key</code>.</li>
+</ul>
+<h3 id="azurestoragesaccountname-saccountkey"><code>AzureStorage{sAccountName, sAccountKey}</code><a class="headerlink" href="#azurestoragesaccountname-saccountkey" title="Permanent link">&para;</a></h3>
+<p>Creates the client from an explicit Azure account name and key.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sAccountName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Azure storage account name.</td>
+</tr>
+<tr>
+<td><code>sAccountKey</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Azure storage account key.</td>
+</tr>
+</tbody>
+</table>
+<p>This constructor uses HTTP.</p>
+<h3 id="azurestoragesaccountname-saccountkey-busehttp"><code>AzureStorage{sAccountName, sAccountKey, bUseHttp}</code><a class="headerlink" href="#azurestoragesaccountname-saccountkey-busehttp" title="Permanent link">&para;</a></h3>
+<p>Creates the client from an explicit Azure account name and key.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sAccountName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Azure storage account name.</td>
+</tr>
+<tr>
+<td><code>sAccountKey</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Azure storage account key.</td>
+</tr>
+<tr>
+<td><code>bUseHttp</code></td>
+<td><a href="../../types/boolean/">boolean</a></td>
+<td>no</td>
+<td>Despite the parameter name, passing <a href="../../literals/true/"><code>.T.</code></a> uses HTTPS and <a href="../../literals/false/"><code>.F.</code></a> uses HTTP.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods-summary">Methods Summary<a class="headerlink" href="#methods-summary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Returns</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CreateTable</code></td>
+<td>none</td>
+<td>Creates a table if needed.</td>
+</tr>
+<tr>
+<td><code>DeleteTable</code></td>
+<td>none</td>
+<td>Deletes a table if it exists.</td>
+</tr>
+<tr>
+<td><code>InsertEntity</code></td>
+<td>none</td>
+<td>Inserts one table entity.</td>
+</tr>
+<tr>
+<td><code>InsertEntities</code></td>
+<td>none</td>
+<td>Inserts multiple table entities in batches.</td>
+</tr>
+<tr>
+<td><code>SelectEntity</code></td>
+<td><a href="../../types/object/">object</a></td>
+<td>Returns one entity or <a href="../../literals/nil/"><code>NIL</code></a> when not found.</td>
+</tr>
+<tr>
+<td><code>SelectEntities</code></td>
+<td><a href="../../types/array/">array</a></td>
+<td>Returns entities that match an equality-based filter.</td>
+</tr>
+<tr>
+<td><code>DeleteEntity</code></td>
+<td>none</td>
+<td>Deletes one entity if it exists.</td>
+</tr>
+<tr>
+<td><code>DeleteEntities</code></td>
+<td>none</td>
+<td>Deletes multiple entities in batches.</td>
+</tr>
+<tr>
+<td><code>UpdateEntity</code></td>
+<td><a href="../../types/boolean/">boolean</a></td>
+<td>Updates one entity and reports success.</td>
+</tr>
+<tr>
+<td><code>CreateContainer</code></td>
+<td>none</td>
+<td>Creates a blob container if needed.</td>
+</tr>
+<tr>
+<td><code>DeleteContainer</code></td>
+<td>none</td>
+<td>Deletes a blob container if it exists.</td>
+</tr>
+<tr>
+<td><code>PutBlob</code></td>
+<td>none</td>
+<td>Uploads a local file as a blob.</td>
+</tr>
+<tr>
+<td><code>GetBlob</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>Downloads a blob and returns the local file path.</td>
+</tr>
+<tr>
+<td><code>DeleteBlob</code></td>
+<td>none</td>
+<td>Deletes a blob.</td>
+</tr>
+<tr>
+<td><code>ReadBlobAsText</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>Returns blob contents as text.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<h3 id="createtable"><code>CreateTable</code><a class="headerlink" href="#createtable" title="Permanent link">&para;</a></h3>
+<p>Creates a table when it does not already exist.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sTableName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Azure table name. It must start with a letter, contain only letters and numbers, and be 3 to 63 characters long.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> none — Returns nothing.</p>
+<p><strong>Raises:</strong></p>
+<ul>
+<li><strong>When <code>sTableName</code> is invalid:</strong> <code>Invalid table name.</code> followed by the Azure table naming rules.</li>
+<li><strong>When Azure returns an unexpected success status:</strong> A runtime error describing the unexpected HTTP status.</li>
+</ul>
+<p>If the table already exists, the method completes without error.</p>
+<h3 id="deletetable"><code>DeleteTable</code><a class="headerlink" href="#deletetable" title="Permanent link">&para;</a></h3>
+<p>Deletes a table when it exists.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sTableName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Azure table name.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> none — Returns nothing.</p>
+<p><strong>Raises:</strong></p>
+<ul>
+<li><strong>When Azure returns an unexpected success status:</strong> A runtime error describing the unexpected HTTP status.</li>
+</ul>
+<p>If the table does not exist, the method completes without error.</p>
+<h3 id="insertentity"><code>InsertEntity</code><a class="headerlink" href="#insertentity" title="Permanent link">&para;</a></h3>
+<p>Inserts one entity into a table.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sTableName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Azure table name.</td>
+</tr>
+<tr>
+<td><code>oEntity</code></td>
+<td><a href="../../types/object/">object</a></td>
+<td>yes</td>
+<td>Entity object. It must include <code>PartitionKey</code> and <code>RowKey</code> properties before insertion.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> none — Returns nothing.</p>
+<p><strong>Raises:</strong></p>
+<ul>
+<li><strong>When <code>oEntity</code> does not contain <code>PartitionKey</code>:</strong> <code>Cannot insert an Azure table entity without a 'PartitionKey' property.</code></li>
+<li><strong>When <code>oEntity</code> does not contain <code>RowKey</code>:</strong> <code>Cannot insert an Azure table entity without a 'RowKey' property.</code></li>
+<li><strong>When Azure returns an unexpected success status:</strong> A runtime error describing the unexpected HTTP status.</li>
+</ul>
+<h3 id="insertentities"><code>InsertEntities</code><a class="headerlink" href="#insertentities" title="Permanent link">&para;</a></h3>
+<p>Inserts multiple entities into a table in batches.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sTableName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Azure table name.</td>
+</tr>
+<tr>
+<td><code>aEntities</code></td>
+<td><a href="../../types/array/">array</a></td>
+<td>yes</td>
+<td>Array of entity objects. Each entity must include <code>PartitionKey</code> and <code>RowKey</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> none — Returns nothing.</p>
+<p><strong>Raises:</strong></p>
+<ul>
+<li><strong>When any entity is missing <code>PartitionKey</code>:</strong> <code>Cannot insert an Azure table entity without a 'PartitionKey' property.</code></li>
+<li><strong>When any entity is missing <code>RowKey</code>:</strong> <code>Cannot insert an Azure table entity without a 'RowKey' property.</code></li>
+<li><strong>When Azure returns an unexpected batch status:</strong> A runtime error describing the unexpected HTTP status.</li>
+</ul>
+<p>If <code>aEntities</code> is <a href="../../literals/nil/"><code>NIL</code></a> or empty, the method does nothing.</p>
+<h3 id="selectentity"><code>SelectEntity</code><a class="headerlink" href="#selectentity" title="Permanent link">&para;</a></h3>
+<p>Returns one entity identified by partition key and row key.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sTableName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Azure table name.</td>
+</tr>
+<tr>
+<td><code>sPartitionKey</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Partition key value.</td>
+</tr>
+<tr>
+<td><code>sRowKey</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Row key value.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <a href="../../types/object/">object</a> — The matching entity, or <a href="../../literals/nil/"><code>NIL</code></a> when Azure returns <code>404 Not Found</code>.</p>
+<h3 id="selectentities"><code>SelectEntities</code><a class="headerlink" href="#selectentities" title="Permanent link">&para;</a></h3>
+<p>Returns all entities that match an equality-based attribute filter.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sTableName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Azure table name.</td>
+</tr>
+<tr>
+<td><code>oAttributes</code></td>
+<td><a href="../../types/object/">object</a></td>
+<td>yes</td>
+<td>Filter object. String, number, date, and boolean properties become equality conditions. If a property value is an array, each element becomes an OR condition for that property.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <a href="../../types/array/">array</a> — Array of matching entities. If Azure returns <code>404 Not Found</code>, the method returns an empty array rather than <a href="../../literals/nil/"><code>NIL</code></a>.</p>
+<p><strong>Raises:</strong></p>
+<ul>
+<li><strong>When a filter property uses an unsupported value type:</strong> <code>Data type for attribute '&lt;name&gt;' is not supported. Only the following data types are supported with Azure queries: string, number, date, bool.</code></li>
+</ul>
+<h3 id="deleteentity"><code>DeleteEntity</code><a class="headerlink" href="#deleteentity" title="Permanent link">&para;</a></h3>
+<p>Deletes one entity identified by partition key and row key.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sTableName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Azure table name.</td>
+</tr>
+<tr>
+<td><code>sPartitionKey</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Partition key value.</td>
+</tr>
+<tr>
+<td><code>sRowKey</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Row key value.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> none — Returns nothing.</p>
+<p>If the entity does not exist, the method completes without error.</p>
+<h3 id="deleteentities"><code>DeleteEntities</code><a class="headerlink" href="#deleteentities" title="Permanent link">&para;</a></h3>
+<p>Deletes multiple entities in batches.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sTableName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Azure table name.</td>
+</tr>
+<tr>
+<td><code>aEntities</code></td>
+<td><a href="../../types/array/">array</a></td>
+<td>yes</td>
+<td>Array of key pairs. Each element must be an array whose first value is the partition key and second value is the row key.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> none — Returns nothing.</p>
+<p><strong>Raises:</strong></p>
+<ul>
+<li><strong>When Azure returns an unexpected batch status:</strong> A runtime error describing the unexpected HTTP status.</li>
+</ul>
+<p>If <code>aEntities</code> is <a href="../../literals/nil/"><code>NIL</code></a> or empty, the method does nothing.</p>
+<h3 id="updateentity"><code>UpdateEntity</code><a class="headerlink" href="#updateentity" title="Permanent link">&para;</a></h3>
+<p>Updates one existing entity identified by its <code>PartitionKey</code> and <code>RowKey</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sTableName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Azure table name.</td>
+</tr>
+<tr>
+<td><code>oEntity</code></td>
+<td><a href="../../types/object/">object</a></td>
+<td>yes</td>
+<td>Entity object to write back. It must include non-empty string <code>PartitionKey</code> and <code>RowKey</code> properties.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <a href="../../types/boolean/">boolean</a> — <a href="../../literals/true/"><code>.T.</code></a> when the update succeeds, or <a href="../../literals/false/"><code>.F.</code></a> when the target entity does not exist.</p>
+<p><strong>Raises:</strong></p>
+<ul>
+<li><strong>When <code>oEntity</code> does not contain <code>PartitionKey</code>:</strong> <code>Cannot update an Azure table entity without a 'PartitionKey' property.</code></li>
+<li><strong>When <code>oEntity</code> does not contain <code>RowKey</code>:</strong> <code>Cannot update an Azure table entity without a 'RowKey' property.</code></li>
+<li><strong>When <code>PartitionKey</code> is not a non-empty string:</strong> <code>Update Azure table entity: 'PartitionKey' must be a non-null string.</code></li>
+<li><strong>When <code>RowKey</code> is not a non-empty string:</strong> <code>Update Azure table entity: 'RowKey' must be a non-null string.</code></li>
+<li><strong>When Azure returns an unexpected success status:</strong> A runtime error describing the unexpected HTTP status.</li>
+</ul>
+<h3 id="createcontainer"><code>CreateContainer</code><a class="headerlink" href="#createcontainer" title="Permanent link">&para;</a></h3>
+<p>Creates a blob container when it does not already exist.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sContainerName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Blob container name. It must be lowercase, may include numbers and dashes, must be 3 to 63 characters long, and cannot contain consecutive dashes.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> none — Returns nothing.</p>
+<p><strong>Raises:</strong></p>
+<ul>
+<li><strong>When <code>sContainerName</code> is invalid:</strong> <code>Invalid container name.</code> followed by the container naming rules.</li>
+<li><strong>When Azure returns an unexpected success status:</strong> A runtime error describing the unexpected HTTP status.</li>
+</ul>
+<p>If the container already exists, the method completes without error.</p>
+<h3 id="deletecontainer"><code>DeleteContainer</code><a class="headerlink" href="#deletecontainer" title="Permanent link">&para;</a></h3>
+<p>Deletes a blob container when it exists.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sContainerName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Blob container name.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> none — Returns nothing.</p>
+<p><strong>Raises:</strong></p>
+<ul>
+<li><strong>When Azure returns an unexpected success status:</strong> A runtime error describing the unexpected HTTP status.</li>
+</ul>
+<p>If the container does not exist, the method completes without error.</p>
+<h3 id="putblob"><code>PutBlob</code><a class="headerlink" href="#putblob" title="Permanent link">&para;</a></h3>
+<p>Uploads a local file as a blob.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sContainerName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Blob container name.</td>
+</tr>
+<tr>
+<td><code>sLocalPath</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Local file path to upload.</td>
+</tr>
+<tr>
+<td><code>sBlobName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>no</td>
+<td>Blob name. When omitted or <a href="../../literals/nil/"><code>NIL</code></a>, the method uses the base file name from <code>sLocalPath</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> none — Returns nothing.</p>
+<p><strong>Raises:</strong></p>
+<ul>
+<li><strong>When <code>sLocalPath</code> does not exist:</strong> <code>File does not exist: &lt;sLocalPath&gt;</code></li>
+<li><strong>When the file is larger than 64 MB:</strong> <code>Not implemented for files bigger than 64 MB: &lt;sLocalPath&gt;</code></li>
+<li><strong>When <code>sBlobName</code> is empty, longer than 1024 characters, or ends with <code>.</code> or <a href="../../operators/divide/"><code>/</code></a>:</strong> <code>Invalid blob name. Blob names cannot end with a dot (.) or a forward slash (/). A blob name must be between 1 and 1024 characters long.</code></li>
+<li><strong>When Azure returns an unexpected success status:</strong> A runtime error describing the unexpected HTTP status.</li>
+</ul>
+<h3 id="getblob"><code>GetBlob</code><a class="headerlink" href="#getblob" title="Permanent link">&para;</a></h3>
+<p>Downloads a blob to a local file and returns the destination path.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sContainerName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Blob container name.</td>
+</tr>
+<tr>
+<td><code>sBlobName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Blob name.</td>
+</tr>
+<tr>
+<td><code>sDestPath</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>no</td>
+<td>Destination file path. When omitted or <a href="../../literals/nil/"><code>NIL</code></a>, the method creates a temporary file path under the application work area.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <a href="../../types/string/">string</a> — The path of the downloaded local file.</p>
+<h3 id="deleteblob"><code>DeleteBlob</code><a class="headerlink" href="#deleteblob" title="Permanent link">&para;</a></h3>
+<p>Deletes a blob.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sContainerName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Blob container name.</td>
+</tr>
+<tr>
+<td><code>sBlobName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Blob name.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> none — Returns nothing.</p>
+<h3 id="readblobastext"><code>ReadBlobAsText</code><a class="headerlink" href="#readblobastext" title="Permanent link">&para;</a></h3>
+<p>Downloads a blob to a temporary file, reads that file as text, deletes the temporary file, and returns the text.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sContainerName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Blob container name.</td>
+</tr>
+<tr>
+<td><code>sBlobName</code></td>
+<td><a href="../../types/string/">string</a></td>
+<td>yes</td>
+<td>Blob name.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong> <a href="../../types/string/">string</a> — Blob contents read as text.</p>
+<h2 id="inheritance">Inheritance<a class="headerlink" href="#inheritance" title="Permanent link">&para;</a></h2>
+<p><strong>Base class:</strong> <a href="../../types/object/"><code>object</code></a></p>
+<h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
+<div class="admonition success">
+<p class="admonition-title">Do</p>
+<ul>
+<li>Use a configured connection name when Azure credentials are managed centrally in LIMS.</li>
+<li>Include <code>PartitionKey</code> and <code>RowKey</code> on every table entity you insert or update.</li>
+<li>Treat <code>SelectEntity()</code> returning <a href="../../literals/nil/"><code>NIL</code></a> as a normal not-found result.</li>
+<li>Check the boolean result from <code>UpdateEntity()</code> to detect a missing target row.</li>
+<li>Use <code>GetBlob()</code> when you need a local file and <code>ReadBlobAsText()</code> when you need the blob contents as text.</li>
+</ul>
+</div>
+<div class="admonition failure">
+<p class="admonition-title">Don't</p>
+<ul>
+<li>Assume the credential constructors default to HTTPS. The two-argument constructor uses HTTP, and the three-argument constructor only uses HTTPS when <code>bUseHttp</code> is <a href="../../literals/true/"><code>.T.</code></a>.</li>
+<li>Build <code>SelectEntities()</code> filters with comparison operators such as less-than or greater-than.
+  The public API only builds equality filters from the properties you supply.</li>
+<li>Expect <code>GetBlob()</code> to return blob contents. It returns a file path to the downloaded blob.</li>
+<li>Omit <code>PartitionKey</code> or <code>RowKey</code> when inserting or updating entities. Those calls fail before the request is sent.</li>
+</ul>
+</div>
+<h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The parameterless constructor requires at least one Azure connection configured for the application.</li>
+<li>A named connection must include the Azure account settings the class expects, including account name and account key.</li>
+<li>The three-argument constructor's <code>bUseHttp</code> parameter name does not match the observed behavior. Passing <a href="../../literals/true/"><code>.T.</code></a> enables HTTPS and <a href="../../literals/false/"><code>.F.</code></a> uses HTTP.</li>
+<li><code>CreateTable()</code> and <code>CreateContainer()</code> succeed silently when the target already exists.</li>
+<li><code>DeleteTable()</code>, <code>DeleteEntity()</code>, and <code>DeleteContainer()</code> succeed silently when the target does not exist.</li>
+<li><code>SelectEntities()</code> always returns an array object from SSL, even when Azure reports no matches.</li>
+<li><code>PutBlob()</code> reads the full file into memory and rejects files larger than 64 MB.</li>
+<li><code>ReadBlobAsText()</code> is intended for text content. Use <code>GetBlob()</code> for binary files or when you need a saved local copy.</li>
+</ul>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="create-a-table-and-insert-one-entity">Create a table and insert one entity<a class="headerlink" href="#create-a-table-and-insert-one-entity" title="Permanent link">&para;</a></h3>
+<p>Create a table if needed, build a single entity, and insert it.</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateCustomerRecord</span><span class="p">;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oAzure</span><span class="p">,</span><span class="w"> </span><span class="n">oCustomer</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Customers&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">oAzure</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">AzureStorage</span><span class="p">{</span><span class="s2">&quot;AzureStorage&quot;</span><span class="p">};</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">CreateTable</span><span class="p">(</span><span class="n">sTableName</span><span class="p">);</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="n">oCustomer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateLocal</span><span class="p">();</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">PartitionKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CUSTOMER&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">RowKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CUST001&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">CompanyName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Acme Corp&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">ContactName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Jane Smith&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">Phone</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;555-1234&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">InsertEntity</span><span class="p">(</span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">oCustomer</span><span class="p">);</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Inserted customer &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">RowKey</span><span class="w"> </span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; into &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="p">);</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="k">:ENDPROC</span><span class="p">;</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="c1">/* Usage;</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CreateCustomerRecord&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
+<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Inserted customer CUST001 into Customers
+</code></pre></div>
+<h3 id="query-matching-entities-and-update-one">Query matching entities and update one<a class="headerlink" href="#query-matching-entities-and-update-one" title="Permanent link">&para;</a></h3>
+<p>Use an equality-based filter with <code>SelectEntities()</code>, then update one returned entity.</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RestockProducts</span><span class="p">;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oAzure</span><span class="p">,</span><span class="w"> </span><span class="n">oFilter</span><span class="p">,</span><span class="w"> </span><span class="n">aProducts</span><span class="p">,</span><span class="w"> </span><span class="n">oProduct</span><span class="p">;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ProductInventory&quot;</span><span class="p">;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="n">oAzure</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">AzureStorage</span><span class="p">{</span><span class="s2">&quot;InventoryConnection&quot;</span><span class="p">};</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="n">oFilter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateLocal</span><span class="p">();</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="n">oFilter</span><span class="p">:</span><span class="n">Status</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LOW&quot;</span><span class="p">;</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="n">oFilter</span><span class="p">:</span><span class="n">Warehouse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;MAIN&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;BACKUP&quot;</span><span class="p">};</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="n">aProducts</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">SelectEntities</span><span class="p">(</span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">oFilter</span><span class="p">);</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aProducts</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No low-stock products matched the filter&quot;</span><span class="p">);</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="n">oProduct</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aProducts</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="n">oProduct</span><span class="p">:</span><span class="n">Status</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;RESTOCKED&quot;</span><span class="p">;</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">    </span><span class="n">oProduct</span><span class="p">:</span><span class="n">RestockNote</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Updated from SSL example&quot;</span><span class="p">;</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">    </span><span class="n">bUpdated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">UpdateEntity</span><span class="p">(</span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">oProduct</span><span class="p">);</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">;</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Updated product &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oProduct</span><span class="p">:</span><span class="n">RowKey</span><span class="p">);</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;The selected product was no longer available for update&quot;</span><span class="p">);</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">;</span>
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="k">:ENDPROC</span><span class="p">;</span>
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="c1">/* Usage;</span>
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RestockProducts&quot;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="upload-files-download-a-copy-and-read-a-blob-as-text">Upload files, download a copy, and read a blob as text<a class="headerlink" href="#upload-files-download-a-copy-and-read-a-blob-as-text" title="Permanent link">&para;</a></h3>
+<p>Manage a blob container, upload files, then use both blob retrieval patterns.</p>
+<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ManageDocumentStorage</span><span class="p">;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oAzure</span><span class="p">,</span><span class="w"> </span><span class="n">aFiles</span><span class="p">,</span><span class="w"> </span><span class="n">sContainerName</span><span class="p">,</span><span class="w"> </span><span class="n">sLocalPath</span><span class="p">;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBlobName</span><span class="p">,</span><span class="w"> </span><span class="n">sDownloadedPath</span><span class="p">,</span><span class="w"> </span><span class="n">sBlobText</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">oAzure</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">AzureStorage</span><span class="p">{</span><span class="s2">&quot;myaccount&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mysecretkey&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">};</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">sContainerName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;documents&quot;</span><span class="p">;</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">CreateContainer</span><span class="p">(</span><span class="n">sContainerName</span><span class="p">);</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="n">aFiles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;report.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;invoice.txt&quot;</span><span class="p">};</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFiles</span><span class="p">);</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="n">sLocalPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\\Temp\\&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aFiles</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="n">sBlobName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aFiles</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">        </span><span class="k">:TRY</span><span class="p">;</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">            </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">PutBlob</span><span class="p">(</span><span class="n">sContainerName</span><span class="p">,</span><span class="w"> </span><span class="n">sLocalPath</span><span class="p">,</span><span class="w"> </span><span class="n">sBlobName</span><span class="p">);</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Uploaded &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBlobName</span><span class="p">);</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">            </span><span class="c1">/* Displays the uploaded blob name;</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">        </span><span class="k">:CATCH</span><span class="p">;</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">            </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">                </span><span class="s2">&quot;UPLOAD ERROR&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">                </span><span class="s2">&quot;Upload failed for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBlobName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">            </span><span class="p">);</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">            </span><span class="c1">/* Displays upload failure details;</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">        </span><span class="k">:ENDTRY</span><span class="p">;</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">    </span><span class="n">sDownloadedPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">GetBlob</span><span class="p">(</span><span class="n">sContainerName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;report.txt&quot;</span><span class="p">);</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Downloaded report to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDownloadedPath</span><span class="p">);</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">    </span><span class="c1">/* Displays the downloaded file path;</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="w">    </span><span class="n">sBlobText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">ReadBlobAsText</span><span class="p">(</span><span class="n">sContainerName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;invoice.txt&quot;</span><span class="p">);</span>
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Invoice text length: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Len</span><span class="p">(</span><span class="n">sBlobText</span><span class="p">)));</span>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="w">    </span><span class="c1">/* Displays the invoice text length;</span>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="w">    </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">DeleteContainer</span><span class="p">(</span><span class="n">sContainerName</span><span class="p">);</span>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="k">:ENDPROC</span><span class="p">;</span>
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="c1">/* Usage;</span>
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ManageDocumentStorage&quot;</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../../functions/CreateLocal/"><code>CreateLocal</code></a></li>
+<li><a href="../../functions/GetLastSSLError/"><code>GetLastSSLError</code></a></li>
+<li><a href="../SSLExpando/"><code>SSLExpando</code></a></li>
+<li><a href="../SSLError/"><code>SSLError</code></a></li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/mahoskye/starlims-ssl-reference" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tabs", "navigation.indexes", "navigation.prune", "navigation.top", "navigation.path", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../javascripts/navigation.js"></script>
+      
+    
+  </body>
+</html>
