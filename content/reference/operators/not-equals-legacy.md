@@ -3,7 +3,7 @@ title: "not-equals-legacy"
 summary: "Returns .T. when two values are not equal under SSL's strict inequality rules."
 id: ssl.operator.not-equals-legacy
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

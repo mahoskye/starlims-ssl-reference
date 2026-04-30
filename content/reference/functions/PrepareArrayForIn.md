@@ -3,7 +3,7 @@ title: "PrepareArrayForIn"
 summary: "Prepares an array for SQL IN clause helpers by mutating it in place."
 id: ssl.function.preparearrayforin
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

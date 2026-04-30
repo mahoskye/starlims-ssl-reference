@@ -3,7 +3,7 @@ title: "SQLConnection"
 summary: "Represents a configured database connection returned by GetConnectionByName."
 id: ssl.class.sqlconnection
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

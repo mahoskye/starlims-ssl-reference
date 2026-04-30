@@ -3,7 +3,7 @@ title: "GetFromFtp"
 summary: "Downloads a file from an FTP or SFTP server to a local file."
 id: ssl.function.getfromftp
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

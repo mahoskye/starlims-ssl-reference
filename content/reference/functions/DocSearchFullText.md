@@ -3,7 +3,7 @@ title: "DocSearchFullText"
 summary: "Performs a Documentum full-text search and returns matching documents as an array."
 id: ssl.function.docsearchfulltext
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

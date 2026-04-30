@@ -3,7 +3,7 @@ title: "CDataField"
 summary: "Represents one field in a CDataRow."
 id: ssl.class.cdatafield
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

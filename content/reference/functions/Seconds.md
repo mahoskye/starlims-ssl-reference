@@ -3,7 +3,7 @@ title: "Seconds"
 summary: "Returns the current time of day as the number of whole seconds since midnight."
 id: ssl.function.seconds
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

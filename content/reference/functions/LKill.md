@@ -3,7 +3,7 @@ title: "LKill"
 summary: "Deletes a public variable from the current SSL session by name and returns an empty string."
 id: ssl.function.lkill
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

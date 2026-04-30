@@ -3,7 +3,7 @@ title: "DeleteDirOnFtp"
 summary: "Deletes a remote directory over FTP or SFTP."
 id: ssl.function.deletedironftp
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

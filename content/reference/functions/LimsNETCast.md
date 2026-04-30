@@ -3,7 +3,7 @@ title: "LimsNETCast"
 summary: "Prepares a value for a requested interop type such as an enum, by-reference value, numeric type, or typed array."
 id: ssl.function.limsnetcast
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "CombineFiles"
 summary: "Concatenates multiple files into one output file on disk."
 id: ssl.function.combinefiles
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

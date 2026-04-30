@@ -3,7 +3,7 @@ title: "ERROR"
 summary: "Defines a legacy error handler for the statements that follow it in the current procedure or method."
 id: ssl.keyword.error
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

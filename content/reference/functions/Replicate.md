@@ -3,7 +3,7 @@ title: "Replicate"
 summary: "Creates a string by repeating the source string a specified number of times."
 id: ssl.function.replicate
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

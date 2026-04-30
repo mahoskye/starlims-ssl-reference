@@ -3,7 +3,7 @@ title: "LDir"
 summary: "Retrieves an array of file and directory names matching a specified pattern and optional attribute filter."
 id: ssl.function.ldir
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

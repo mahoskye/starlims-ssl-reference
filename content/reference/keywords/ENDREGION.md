@@ -3,7 +3,7 @@ title: "ENDREGION"
 summary: "Keyword that marks the end of a :REGION block; it has no standalone runtime behavior."
 id: ssl.keyword.endregion
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

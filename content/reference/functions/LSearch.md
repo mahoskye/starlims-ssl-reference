@@ -3,7 +3,7 @@ title: "LSearch"
 summary: "Returns a single value from a SQL query, or a caller-supplied fallback when the query produces no scalar result."
 id: ssl.function.lsearch
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

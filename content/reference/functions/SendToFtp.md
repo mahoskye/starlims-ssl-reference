@@ -3,7 +3,7 @@ title: "SendToFtp"
 summary: "Uploads one local file to an FTP or SFTP server."
 id: ssl.function.sendtoftp
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

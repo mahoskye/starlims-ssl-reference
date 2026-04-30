@@ -3,7 +3,7 @@ title: "MimeDecode"
 summary: "Decodes MIME-encoded data to its plain string representation."
 id: ssl.function.mimedecode
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

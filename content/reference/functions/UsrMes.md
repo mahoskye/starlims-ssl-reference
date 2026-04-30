@@ -3,7 +3,7 @@ title: "UsrMes"
 summary: "Writes a user message to the user log and returns the formatted log text."
 id: ssl.function.usrmes
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

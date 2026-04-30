@@ -3,7 +3,7 @@ title: "SSLBaseDictionary"
 summary: "Provides the shared dictionary surface used by SSL dictionary classes such as SSLStringDictionary{} and SSLIntDictionary{}."
 id: ssl.class.sslbasedictionary
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

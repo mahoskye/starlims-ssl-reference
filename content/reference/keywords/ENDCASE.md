@@ -3,7 +3,7 @@ title: "ENDCASE"
 summary: "Closes a :BEGINCASE block after its :CASE branches and optional :OTHERWISE branch."
 id: ssl.keyword.endcase
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

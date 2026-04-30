@@ -3,7 +3,7 @@ title: "IsDBConnected"
 summary: "Checks whether STARLIMS currently has a database connection available for a given connection name."
 id: ssl.function.isdbconnected
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

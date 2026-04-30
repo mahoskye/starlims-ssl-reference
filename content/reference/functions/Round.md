@@ -3,7 +3,7 @@ title: "Round"
 summary: "Rounds a numeric value to a specific number of decimal places using a configurable midpoint handling strategy."
 id: ssl.function.round
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

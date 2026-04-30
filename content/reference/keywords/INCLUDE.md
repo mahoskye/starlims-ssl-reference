@@ -3,7 +3,7 @@ title: "INCLUDE"
 summary: "Inserts another SSL script's source into the current file so its statements compile as if they were written inline."
 id: ssl.keyword.include
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

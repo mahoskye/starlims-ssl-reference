@@ -3,7 +3,7 @@ title: "RoundPoint5"
 summary: "Rounds a numeric value to a half-point increment."
 id: ssl.function.roundpoint5
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

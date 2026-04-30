@@ -3,7 +3,7 @@ title: "DocGetMetadata"
 summary: "Retrieves metadata rows for a Documentum object."
 id: ssl.function.docgetmetadata
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

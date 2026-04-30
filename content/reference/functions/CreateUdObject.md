@@ -3,7 +3,7 @@ title: "CreateUdObject"
 summary: "Creates a dynamic object or instantiates a user-defined class."
 id: ssl.function.createudobject
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

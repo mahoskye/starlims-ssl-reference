@@ -3,7 +3,7 @@ title: "DosSupport"
 summary: "Executes operating system-level file and directory commands."
 id: ssl.function.dossupport
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

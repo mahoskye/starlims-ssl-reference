@@ -3,7 +3,7 @@ title: "DocGetFolders"
 summary: "Retrieves the immediate child folders of a Documentum folder as a sorted two-dimensional array."
 id: ssl.function.docgetfolders
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

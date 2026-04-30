@@ -3,7 +3,7 @@ title: "EXITFOR"
 summary: "Terminates the innermost active :FOR loop immediately and continues with the statement after the matching :NEXT."
 id: ssl.keyword.exitfor
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

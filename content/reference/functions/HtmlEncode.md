@@ -3,7 +3,7 @@ title: "HtmlEncode"
 summary: "Converts selected characters in a string to entity sequences for HTML or XML text output."
 id: ssl.function.htmlencode
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

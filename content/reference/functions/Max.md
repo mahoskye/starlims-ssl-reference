@@ -3,7 +3,7 @@ title: "Max"
 summary: "Returns whichever of two values compares greater when both arguments are the same supported type."
 id: ssl.function.max
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

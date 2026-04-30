@@ -3,7 +3,7 @@ title: "LimsGetDateFormat"
 summary: "Returns the current global date format string used for date parsing and formatting."
 id: ssl.function.limsgetdateformat
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "CDataColumn"
 summary: "Provides metadata for a single column in a CDataTable."
 id: ssl.class.cdatacolumn
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

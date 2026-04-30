@@ -3,7 +3,7 @@ title: "IF"
 summary: "Executes a block of statements only when a condition evaluates to true."
 id: ssl.keyword.if
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

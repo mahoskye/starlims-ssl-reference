@@ -3,7 +3,7 @@ title: "constructor"
 summary: "Runs one-time class initialization code when a user-defined class instance is created."
 id: ssl.special_form.constructor
 element_type: special_form
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

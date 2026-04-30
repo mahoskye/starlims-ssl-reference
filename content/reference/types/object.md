@@ -3,7 +3,7 @@ title: "object"
 summary: "Represents SSL object values, including dynamic objects and class instances."
 id: ssl.type.object
 element_type: type
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

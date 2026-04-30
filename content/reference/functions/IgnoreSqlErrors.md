@@ -3,7 +3,7 @@ title: "IgnoreSqlErrors"
 summary: "Enables or disables SQL error suppression and returns the previous setting."
 id: ssl.function.ignoresqlerrors
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

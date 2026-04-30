@@ -3,7 +3,7 @@ title: "plus"
 summary: "Adds numbers, concatenates strings, or adds days to dates depending on operand types."
 id: ssl.operator.plus
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

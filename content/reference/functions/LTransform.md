@@ -3,7 +3,7 @@ title: "LTransform"
 summary: "Formats a numeric expression as a string by applying a picture string."
 id: ssl.function.ltransform
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

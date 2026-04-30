@@ -3,7 +3,7 @@ title: "IsDefined"
 summary: "Determines whether a variable name is currently defined."
 id: ssl.function.isdefined
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "AEvalA"
 summary: "Evaluate a code block for each selected array element and write the result back to the same array."
 id: ssl.function.aevala
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

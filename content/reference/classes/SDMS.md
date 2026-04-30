@@ -3,7 +3,7 @@ title: "SDMS"
 summary: "Interacts with an external SDMS server to download documents, download Unified XML templates, create an SDMSDocUploader, and generate password hashes for SDMS authentication."
 id: ssl.class.sdms
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

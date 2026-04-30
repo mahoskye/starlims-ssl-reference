@@ -3,7 +3,7 @@ title: "UserTimeZone"
 summary: "Returns the current user's UTC offset in minutes. If a user-specific offset is not available as a numeric value, the function returns the server's UTC offset instead."
 id: ssl.function.usertimezone
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

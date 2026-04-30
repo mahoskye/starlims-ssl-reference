@@ -3,7 +3,7 @@ title: "ExecUdf"
 summary: "Executes SSL source supplied as a string and returns the result."
 id: ssl.function.execudf
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "TablesImport"
 summary: "Loads one imported table at a time from a folder structure and returns it as a CDataTable."
 id: ssl.class.tablesimport
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

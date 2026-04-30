@@ -3,7 +3,7 @@ title: "ToScientific"
 summary: "Converts a numeric value to a scientific-notation string."
 id: ssl.function.toscientific
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

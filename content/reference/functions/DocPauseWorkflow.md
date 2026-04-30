@@ -3,7 +3,7 @@ title: "DocPauseWorkflow"
 summary: "Temporarily halts workflow processing to prevent further steps until manual intervention or review."
 id: ssl.function.docpauseworkflow
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

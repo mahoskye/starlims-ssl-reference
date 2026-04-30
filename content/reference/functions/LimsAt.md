@@ -3,7 +3,7 @@ title: "LimsAt"
 summary: "Finds the first occurrence of a substring in a string at or after a 1-based starting position."
 id: ssl.function.limsat
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

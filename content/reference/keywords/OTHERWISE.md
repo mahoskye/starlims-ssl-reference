@@ -3,7 +3,7 @@ title: "OTHERWISE"
 summary: "Executes the default branch of a :BEGINCASE block when no earlier :CASE branch runs."
 id: ssl.keyword.otherwise
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

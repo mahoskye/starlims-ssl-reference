@@ -3,7 +3,7 @@ title: "CDataRow"
 summary: "Represents one row in a CDataTable."
 id: ssl.class.cdatarow
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

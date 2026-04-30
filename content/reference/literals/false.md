@@ -3,7 +3,7 @@ title: "false"
 summary: "The .F. literal represents the boolean value false in SSL. It can be written as .F. or .f. (case-insensitive). Use .F. to initialize boolean flags, to explicitly pass a false argument to a function, or to represent a negative or disabled state."
 id: ssl.literal.false
 element_type: literal
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]
@@ -16,7 +16,7 @@ starlims:
 The `.F.` literal represents the boolean value false in SSL. It can be written as `.F.` or `.f.` (case-insensitive). Use `.F.` to initialize boolean flags, to explicitly pass a false argument to a function, or to represent a negative or disabled state.
 
 In all logical and conditional contexts, `.F.` is treated as boolean false and
-interacts with [`.AND.`](and.md), [`.OR.`](Or.md), and [`.NOT.`](Not.md) as expected.
+interacts with [`.AND.`](../operators/and.md), [`.OR.`](../operators/or.md), and [`.NOT.`](../operators/not.md) as expected.
 
 Comparing `.F.` to a non-boolean (for example `.F. = 0` or `.F. = 1`) raises a runtime error. Boolean equality requires both operands to be booleans. Wrap such comparisons in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) or check the type explicitly if a zero-like test is what you actually want.
 

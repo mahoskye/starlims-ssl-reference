@@ -3,7 +3,7 @@ title: "SetGroupSeparator"
 summary: "Changes the group (thousands) separator character used when numbers are formatted as strings across the application."
 id: ssl.function.setgroupseparator
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

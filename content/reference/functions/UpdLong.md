@@ -3,7 +3,7 @@ title: "UpdLong"
 summary: "Updates a large field value in a database table from the contents of a file, using search criteria for row selection."
 id: ssl.function.updlong
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

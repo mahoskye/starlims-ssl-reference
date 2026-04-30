@@ -3,7 +3,7 @@ title: "Asc"
 summary: "Return the character code of the first character in a string."
 id: ssl.function.asc
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

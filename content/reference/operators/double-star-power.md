@@ -3,7 +3,7 @@ title: "double-star-power"
 summary: "Raises one number to the exponent of another number."
 id: ssl.operator.double-star-power
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

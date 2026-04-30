@@ -3,7 +3,7 @@ title: "DocGetDocuments"
 summary: "Retrieves documents from a Documentum repository folder as a two-dimensional array."
 id: ssl.function.docgetdocuments
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

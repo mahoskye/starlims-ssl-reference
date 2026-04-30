@@ -3,7 +3,7 @@ title: "IsInvariantDate"
 summary: "Checks whether a date value has an unspecified (invariant) kind."
 id: ssl.function.isinvariantdate
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

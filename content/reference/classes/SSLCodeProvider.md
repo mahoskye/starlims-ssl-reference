@@ -3,7 +3,7 @@ title: "SSLCodeProvider"
 summary: "Compiles published server scripts and data sources and returns the compilation results as an SSLCompilerErrorList."
 id: ssl.class.sslcodeprovider
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

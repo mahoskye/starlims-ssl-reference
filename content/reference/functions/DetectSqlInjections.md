@@ -3,7 +3,7 @@ title: "DetectSqlInjections"
 summary: "Enables or disables SQL injection detection for a database connection and returns the previous setting."
 id: ssl.function.detectsqlinjections
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

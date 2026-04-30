@@ -3,7 +3,7 @@ title: "GetFromApplication"
 summary: "Returns a comma-separated string of connected usernames when called with the special key \"STARLIMSUSERS\" in a CUSTOM session context."
 id: ssl.function.getfromapplication
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

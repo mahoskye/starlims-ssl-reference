@@ -3,7 +3,7 @@ title: "DocEndDocumentumInterface"
 summary: "Ends the current Documentum interface context."
 id: ssl.function.docenddocumentuminterface
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

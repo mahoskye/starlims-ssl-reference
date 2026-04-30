@@ -3,7 +3,7 @@ title: "DOW"
 summary: "Returns the numeric day of week for a date."
 id: ssl.function.dow
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

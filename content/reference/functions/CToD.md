@@ -3,7 +3,7 @@ title: "CToD"
 summary: "Converts a string in the current SSL date format to a date value."
 id: ssl.function.ctod
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

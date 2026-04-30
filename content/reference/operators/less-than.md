@@ -3,7 +3,7 @@ title: "less-than"
 summary: "Compares two values of the same supported type and returns .T. when the left operand is strictly less than the right operand."
 id: ssl.operator.less-than
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

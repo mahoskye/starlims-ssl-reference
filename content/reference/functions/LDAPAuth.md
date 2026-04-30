@@ -3,7 +3,7 @@ title: "LDAPAuth"
 summary: "Authenticates a user by binding directly to an LDAP server."
 id: ssl.function.ldapauth
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

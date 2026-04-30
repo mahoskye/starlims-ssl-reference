@@ -3,7 +3,7 @@ title: "FtpsClient"
 summary: "Transfers files and manages directories on an FTPS server."
 id: ssl.class.ftpsclient
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

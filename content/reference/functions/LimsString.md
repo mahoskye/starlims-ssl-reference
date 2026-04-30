@@ -3,7 +3,7 @@ title: "LimsString"
 summary: "Converts a value to a string, returning \"NIL\" when the input is NIL."
 id: ssl.function.limsstring
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

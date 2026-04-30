@@ -3,7 +3,7 @@ title: "DocExportDocument"
 summary: "Exports a specified document to a chosen format and returns the result as a string."
 id: ssl.function.docexportdocument
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

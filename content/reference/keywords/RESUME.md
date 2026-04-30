@@ -3,7 +3,7 @@ title: "RESUME"
 summary: "Continues execution after a legacy :ERROR handler, starting with the statement after the one that failed."
 id: ssl.keyword.resume
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

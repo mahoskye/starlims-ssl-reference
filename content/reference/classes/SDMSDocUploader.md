@@ -3,7 +3,7 @@ title: "SDMSDocUploader"
 summary: "Uploads files into SDMS, attaches uploads to workflow steps, and checks in document revisions."
 id: ssl.class.sdmsdocuploader
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

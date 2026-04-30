@@ -3,7 +3,7 @@ title: "GetDataSet"
 summary: "Executes a SQL query on the default database connection and returns the result as an XML dataset string."
 id: ssl.function.getdataset
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

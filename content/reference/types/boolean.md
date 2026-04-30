@@ -3,7 +3,7 @@ title: "boolean"
 summary: "Represents logical true/false values in SSL."
 id: ssl.type.boolean
 element_type: type
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

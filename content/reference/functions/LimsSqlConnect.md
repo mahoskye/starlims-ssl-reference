@@ -3,7 +3,7 @@ title: "LimsSqlConnect"
 summary: "Registers a configured database connection by connection name."
 id: ssl.function.limssqlconnect
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

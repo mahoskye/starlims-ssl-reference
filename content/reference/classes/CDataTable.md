@@ -3,7 +3,7 @@ title: "CDataTable"
 summary: "Provides an in-memory table object for working with rows, columns, XML, and database persistence from SSL."
 id: ssl.class.cdatatable
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

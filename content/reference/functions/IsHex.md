@@ -3,7 +3,7 @@ title: "IsHex"
 summary: "Validates whether a string contains only uppercase hexadecimal characters."
 id: ssl.function.ishex
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

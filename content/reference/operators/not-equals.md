@@ -3,7 +3,7 @@ title: "not-equals"
 summary: "Returns .T. when two values are not strictly equal under SSL equality rules."
 id: ssl.operator.not-equals
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "DECLARE"
 summary: "Declares one or more variables in the current SSL scope."
 id: ssl.keyword.declare
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

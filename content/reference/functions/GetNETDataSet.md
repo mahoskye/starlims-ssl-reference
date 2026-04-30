@@ -3,7 +3,7 @@ title: "GetNETDataSet"
 summary: "Executes a SQL command and returns the result either as dataset XML or as a netobject wrapping a dataset."
 id: ssl.function.getnetdataset
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

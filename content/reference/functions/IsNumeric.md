@@ -3,7 +3,7 @@ title: "IsNumeric"
 summary: "Determines whether a string is a valid numeric value, with optional support for hexadecimal input."
 id: ssl.function.isnumeric
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

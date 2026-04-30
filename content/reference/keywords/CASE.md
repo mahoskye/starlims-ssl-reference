@@ -3,7 +3,7 @@ title: "CASE"
 summary: "Executes a block of statements if a specific boolean expression evaluates to true within a CASE structure."
 id: ssl.keyword.case
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

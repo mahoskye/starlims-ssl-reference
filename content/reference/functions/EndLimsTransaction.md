@@ -3,7 +3,7 @@ title: "EndLimsTransaction"
 summary: "Ends a LIMS transaction on the default connection or on a named connection."
 id: ssl.function.endlimstransaction
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

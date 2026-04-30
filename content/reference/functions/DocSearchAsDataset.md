@@ -3,7 +3,7 @@ title: "DocSearchAsDataset"
 summary: "Searches Documentum and returns the matches as dataset XML."
 id: ssl.function.docsearchasdataset
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

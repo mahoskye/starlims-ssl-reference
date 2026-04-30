@@ -3,7 +3,7 @@ title: "LimsTime"
 summary: "Returns the current time as a formatted string."
 id: ssl.function.limstime
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

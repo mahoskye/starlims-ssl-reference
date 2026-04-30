@@ -3,7 +3,7 @@ title: "DocDelete"
 summary: "Deletes a Documentum document by object ID."
 id: ssl.function.docdelete
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

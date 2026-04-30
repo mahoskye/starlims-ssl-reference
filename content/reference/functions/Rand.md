@@ -3,7 +3,7 @@ title: "Rand"
 summary: "Generates a pseudo-random number between 0 (inclusive) and 1 (exclusive)."
 id: ssl.function.rand
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

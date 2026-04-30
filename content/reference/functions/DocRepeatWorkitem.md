@@ -3,7 +3,7 @@ title: "DocRepeatWorkitem"
 summary: "Repeats a Documentum workitem and can reassign it to a new user list."
 id: ssl.function.docrepeatworkitem
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

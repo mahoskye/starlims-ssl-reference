@@ -3,7 +3,7 @@ title: "GetDBMSProviderName"
 summary: "Returns the uppercase DBMS provider identifier for a named database connection."
 id: ssl.function.getdbmsprovidername
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

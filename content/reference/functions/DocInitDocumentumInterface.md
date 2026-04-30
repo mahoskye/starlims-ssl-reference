@@ -3,7 +3,7 @@ title: "DocInitDocumentumInterface"
 summary: "Creates a fresh Documentum interface context for the current execution."
 id: ssl.function.docinitdocumentuminterface
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

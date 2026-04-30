@@ -3,7 +3,7 @@ title: "DateAdd"
 summary: "Adds a time interval to a date and returns the resulting date."
 id: ssl.function.dateadd
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

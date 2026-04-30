@@ -3,7 +3,7 @@ title: "nil"
 summary: "NIL is the SSL literal for an explicit absent value. It is case-insensitive, so NIL, nil, and Nil are all valid spellings."
 id: ssl.literal.nil
 element_type: literal
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

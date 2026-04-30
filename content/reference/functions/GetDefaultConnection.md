@@ -3,7 +3,7 @@ title: "GetDefaultConnection"
 summary: "Returns the current default database connection name."
 id: ssl.function.getdefaultconnection
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

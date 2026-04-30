@@ -3,7 +3,7 @@ title: "ReadBytesBase64"
 summary: "Reads a file from disk and returns its contents as a base64-encoded string."
 id: ssl.function.readbytesbase64
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

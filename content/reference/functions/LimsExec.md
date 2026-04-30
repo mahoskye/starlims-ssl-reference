@@ -3,7 +3,7 @@ title: "LimsExec"
 summary: "Launches an external application without waiting for it to finish."
 id: ssl.function.limsexec
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

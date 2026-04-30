@@ -3,7 +3,7 @@ title: "LLower"
 summary: "Converts all characters in a string to their lowercase equivalents."
 id: ssl.function.llower
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

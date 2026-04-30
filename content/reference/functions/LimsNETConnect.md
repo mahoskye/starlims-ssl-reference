@@ -3,7 +3,7 @@ title: "LimsNETConnect"
 summary: "Loads a .NET assembly, resolves a type, and either returns a type handle or creates an instance for SSL interop."
 id: ssl.function.limsnetconnect
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

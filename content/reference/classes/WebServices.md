@@ -3,7 +3,7 @@ title: "WebServices"
 summary: "Creates client objects for outbound HTTP and SOAP integrations."
 id: ssl.class.webservices
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

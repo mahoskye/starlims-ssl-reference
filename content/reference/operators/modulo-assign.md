@@ -3,7 +3,7 @@ title: "modulo-assign"
 summary: "Updates a numeric variable, property, or array element in place by applying % and storing the remainder back into the left side."
 id: ssl.operator.modulo-assign
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

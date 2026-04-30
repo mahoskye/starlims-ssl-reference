@@ -3,7 +3,7 @@ title: "AScanExact"
 summary: "Return the index of the first array element that matches a value or condition exactly."
 id: ssl.function.ascanexact
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

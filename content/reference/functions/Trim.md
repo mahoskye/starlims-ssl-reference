@@ -3,7 +3,7 @@ title: "Trim"
 summary: "Removes trailing whitespace from a string."
 id: ssl.function.trim
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

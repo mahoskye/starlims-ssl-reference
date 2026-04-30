@@ -3,7 +3,7 @@ title: "ShowSqlErrors"
 summary: "Sets the SQL error display flag and returns the previous setting."
 id: ssl.function.showsqlerrors
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

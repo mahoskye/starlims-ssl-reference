@@ -3,7 +3,7 @@ title: "BeginLimsTransaction"
 summary: "Starts a LIMS database transaction on the default connection or on a named connection."
 id: ssl.function.beginlimstransaction
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

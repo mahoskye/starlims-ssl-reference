@@ -3,7 +3,7 @@ title: "DocExistsUser"
 summary: "Determines whether a Documentum user exists for a supplied login context."
 id: ssl.function.docexistsuser
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

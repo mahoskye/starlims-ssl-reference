@@ -3,7 +3,7 @@ title: "CATCH"
 summary: "Handles errors raised in the immediately preceding :TRY block."
 id: ssl.keyword.catch
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

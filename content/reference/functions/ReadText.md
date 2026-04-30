@@ -3,7 +3,7 @@ title: "ReadText"
 summary: "Retrieves text content from a file in memory, allowing partial reads and encoding selection."
 id: ssl.function.readtext
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

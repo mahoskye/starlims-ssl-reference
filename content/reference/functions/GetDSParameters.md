@@ -3,7 +3,7 @@ title: "GetDSParameters"
 summary: "Returns an array of parameter key strings for the named data source."
 id: ssl.function.getdsparameters
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

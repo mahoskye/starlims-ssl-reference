@@ -3,7 +3,7 @@ title: "Min"
 summary: "Returns whichever of two values compares lower when both arguments are the same supported type."
 id: ssl.function.min
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

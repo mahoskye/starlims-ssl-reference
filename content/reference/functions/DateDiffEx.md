@@ -3,7 +3,7 @@ title: "DateDiffEx"
 summary: "Returns the elapsed interval between two date values as an object."
 id: ssl.function.datediffex
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "ConvertReport"
 summary: "Converts a report file identified by a file path and returns .T. when the conversion completes."
 id: ssl.function.convertreport
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

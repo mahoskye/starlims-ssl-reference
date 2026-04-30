@@ -3,7 +3,7 @@ title: "GetLastSSLError"
 summary: "Retrieves the most recent SSL error encountered during the current process."
 id: ssl.function.getlastsslerror
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

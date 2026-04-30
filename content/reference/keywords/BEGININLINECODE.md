@@ -3,7 +3,7 @@ title: "BEGININLINECODE"
 summary: "Starts a named inline SSL code block that is stored for later retrieval with GetInlineCode."
 id: ssl.keyword.begininlinecode
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

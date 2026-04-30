@@ -3,7 +3,7 @@ title: "SSLStringDictionary"
 summary: "Stores values by string key."
 id: ssl.class.sslstringdictionary
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

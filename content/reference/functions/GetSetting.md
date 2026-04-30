@@ -3,7 +3,7 @@ title: "GetSetting"
 summary: "Retrieves a single named setting."
 id: ssl.function.getsetting
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "REGION"
 summary: "Starts a named region block whose body is stored as text for later retrieval with GetRegion()."
 id: ssl.keyword.region
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

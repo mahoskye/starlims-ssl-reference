@@ -3,7 +3,7 @@ title: "WriteText"
 summary: "Writes string content to a file."
 id: ssl.function.writetext
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

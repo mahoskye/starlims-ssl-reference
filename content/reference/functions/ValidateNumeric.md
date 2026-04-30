@@ -3,7 +3,7 @@ title: "ValidateNumeric"
 summary: "Determines whether a string is a valid numeric value under the current STARLIMS numeric settings."
 id: ssl.function.validatenumeric
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "modulo"
 summary: "Calculates the remainder after dividing one number by another."
 id: ssl.operator.modulo
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

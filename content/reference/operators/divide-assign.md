@@ -3,7 +3,7 @@ title: "divide-assign"
 summary: "Divides a numeric value by another numeric value and stores the quotient back in the left operand."
 id: ssl.operator.divide-assign
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

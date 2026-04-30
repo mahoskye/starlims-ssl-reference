@@ -3,7 +3,7 @@ title: "Left"
 summary: "Extracts the leftmost characters from a string."
 id: ssl.function.left
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "DateFromNumbers"
 summary: "Creates a date value from individual numeric components."
 id: ssl.function.datefromnumbers
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

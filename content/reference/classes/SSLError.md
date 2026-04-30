@@ -3,7 +3,7 @@ title: "SSLError"
 summary: "Represents an SSL error and exposes its message, location, code, formatted diagnostic text, and nested SSL error details."
 id: ssl.class.sslerror
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

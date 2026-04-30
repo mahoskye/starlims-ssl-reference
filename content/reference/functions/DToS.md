@@ -3,7 +3,7 @@ title: "DToS"
 summary: "Converts a date value to an 8-character string in yyyyMMdd format."
 id: ssl.function.dtos
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

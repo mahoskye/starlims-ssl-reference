@@ -3,7 +3,7 @@ title: "SigFig"
 summary: "Returns a string produced by applying a named rounding standard to a numeric value."
 id: ssl.function.sigfig
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

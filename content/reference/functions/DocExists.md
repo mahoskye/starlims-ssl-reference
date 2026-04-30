@@ -3,7 +3,7 @@ title: "DocExists"
 summary: "Checks whether a Documentum document exists for a given object ID."
 id: ssl.function.docexists
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

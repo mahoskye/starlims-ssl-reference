@@ -3,7 +3,7 @@ title: "INHERIT"
 summary: "Specifies the parent class for an SSL class."
 id: ssl.keyword.inherit
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]
@@ -22,14 +22,14 @@ The keyword can only appear directly after the class declaration, and only one p
 
 ## Behavior
 
-`:INHERIT` modifies a [`:CLASS`](CLASS.md) definition. The inherited class becomes the parent for member lookup, so child methods can use [`Base:MethodName()`](Base.md) to call inherited behavior and can access inherited fields through normal class member rules.
+`:INHERIT` modifies a [`:CLASS`](CLASS.md) definition. The inherited class becomes the parent for member lookup, so child methods can use [`Base:MethodName()`](../special-forms/base.md) to call inherited behavior and can access inherited fields through normal class member rules.
 
 The keyword does not stand alone and is not used in script code outside a class definition.
 
 ## When to use
 
 - When a new class should reuse fields or methods from an existing parent class.
-- When a child class needs to override behavior and still call the parent implementation with [`Base:MethodName()`](Base.md).
+- When a child class needs to override behavior and still call the parent implementation with [`Base:MethodName()`](../special-forms/base.md).
 - When several class scripts should share a common structure or API.
 
 ## Syntax
@@ -54,7 +54,7 @@ The keyword does not stand alone and is not used in script code outside a class 
 !!! success "Do"
     - Place `:INHERIT` immediately after [`:CLASS`](CLASS.md) `ClassName;`.
     - Use a plain or qualified parent class name such as `BaseValidator` or `Lab.BaseValidator`.
-    - Use [`Base:MethodName()`](Base.md) in child methods when you want to extend, not replace, inherited behavior.
+    - Use [`Base:MethodName()`](../special-forms/base.md) in child methods when you want to extend, not replace, inherited behavior.
 
 !!! failure "Don't"
     - Put [`:DECLARE`](DECLARE.md) statements or methods before `:INHERIT` because SSL only accepts `:INHERIT` directly after the class declaration.
@@ -146,7 +146,7 @@ SampleID is required
 
 ### Specializing a base report class
 
-Overrides a parent method and still calls the parent implementation via [`Base:`](Base.md). The derived constructor sets the title and compliance values; `GetHeader` extends the base header with standard and limit details.
+Overrides a parent method and still calls the parent implementation via [`Base:`](../special-forms/base.md). The derived constructor sets the title and compliance values; `GetHeader` extends the base header with standard and limit details.
 
 Base class script:
 
@@ -332,5 +332,5 @@ DoProc("RunPolymorphicWorkflow");
 ## Related
 
 - [`CLASS`](CLASS.md)
-- [`Base:`](Base.md)
-- [`Me:`](Me.md)
+- [`Base:`](../special-forms/base.md)
+- [`Me:`](../special-forms/me.md)

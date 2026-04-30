@@ -3,7 +3,7 @@ title: "SQLRemoveComments"
 summary: "Removes SQL comments from a string and returns the cleaned SQL text."
 id: ssl.function.sqlremovecomments
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

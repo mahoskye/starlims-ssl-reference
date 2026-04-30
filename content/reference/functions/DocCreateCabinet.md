@@ -3,7 +3,7 @@ title: "DocCreateCabinet"
 summary: "Creates a Documentum cabinet and returns the string result from the create operation."
 id: ssl.function.doccreatecabinet
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

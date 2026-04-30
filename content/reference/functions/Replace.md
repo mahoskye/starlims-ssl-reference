@@ -3,7 +3,7 @@ title: "Replace"
 summary: "Replaces all occurrences of a specified substring within a string with another substring and returns the resulting string."
 id: ssl.function.replace
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

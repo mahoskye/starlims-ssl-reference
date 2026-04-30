@@ -3,7 +3,7 @@ title: "DocDeleteFolder"
 summary: "Deletes a Documentum folder and optionally allows the delete only when the folder is empty."
 id: ssl.function.docdeletefolder
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

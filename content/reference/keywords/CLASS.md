@@ -3,7 +3,7 @@ title: "CLASS"
 summary: "Defines a class in SSL. A class file can declare fields, methods, an optional base class, and a Constructor procedure for instance initialization."
 id: ssl.keyword.class
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]
@@ -18,7 +18,7 @@ Defines a class in SSL. A class file can declare fields, methods, an optional ba
 
 The `:CLASS` keyword starts a class definition. After `:CLASS`, you can add an optional [`:INHERIT`](INHERIT.md) line, one or more [`:DECLARE`](DECLARE.md) field declarations, regular methods defined with [`:PROCEDURE`](PROCEDURE.md), and an optional [`Constructor`](../special-forms/constructor.md) declared as `:PROCEDURE Constructor;`. If [`:INHERIT`](INHERIT.md) is omitted, the class inherits from the built-in base object automatically. If you omit the constructor, SSL creates an empty zero-argument constructor for you. There is no `:ENDCLASS` keyword; the class continues to the end of the file.
 
-Use [`CreateUdObject`](../functions/CreateUdObject.md) to instantiate a user-defined class. Inside class methods, call sibling methods with [`Me:MethodName()`](ME.md) and inherited methods with [`Base:MethodName()`](Base.md).
+Use [`CreateUdObject`](../functions/CreateUdObject.md) to instantiate a user-defined class. Inside class methods, call sibling methods with [`Me:MethodName()`](../special-forms/me.md) and inherited methods with [`Base:MethodName()`](../special-forms/base.md).
 
 ## Behavior
 
@@ -66,7 +66,7 @@ Constructors use the reserved declaration name [`Constructor`](../special-forms/
       the object shape is easy to read.
     - Place regular methods before [`Constructor`](../special-forms/constructor.md) and keep the constructor last for predictable structure.
     - Instantiate user-defined classes with [`CreateUdObject`](../functions/CreateUdObject.md) instead of built-in-class curly-brace syntax.
-    - Use [`Me:`](Me.md) for sibling method calls and [`Base:`](Base.md) for inherited behavior inside class methods.
+    - Use [`Me:`](../special-forms/me.md) for sibling method calls and [`Base:`](../special-forms/base.md) for inherited behavior inside class methods.
 
 !!! failure "Don't"
     - Mix script logic and a class definition in the same file. `:CLASS` runs
@@ -191,9 +191,9 @@ UsrMes(oSample:GetSummary());
 Sample SAM-002 is Logged, result 98.6
 ```
 
-### Coordinate several class methods through [`Me:`](Me.md)
+### Coordinate several class methods through [`Me:`](../special-forms/me.md)
 
-Use a class to manage state across multiple operations instead of passing many separate values between procedures. `LoadAndReport` delegates to `AddResult` via [`Me:`](Me.md) and returns the accumulated summary.
+Use a class to manage state across multiple operations instead of passing many separate values between procedures. `LoadAndReport` delegates to `AddResult` via [`Me:`](../special-forms/me.md) and returns the accumulated summary.
 
 Class definition:
 
@@ -262,8 +262,8 @@ Runs: 4, pass: 3, fail: 1
 ## Related
 
 - [`INHERIT`](INHERIT.md)
-- [`Me:`](Me.md)
-- [`Base:`](Base.md)
+- [`Me:`](../special-forms/me.md)
+- [`Base:`](../special-forms/base.md)
 - [`DECLARE`](DECLARE.md)
 - [`PROCEDURE`](PROCEDURE.md)
 - [`constructor`](../special-forms/constructor.md)

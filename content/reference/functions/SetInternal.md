@@ -3,7 +3,7 @@ title: "SetInternal"
 summary: "Assigns a value to a named property on a target value and returns NIL."
 id: ssl.function.setinternal
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

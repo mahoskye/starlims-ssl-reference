@@ -3,7 +3,7 @@ title: "GetUserData"
 summary: "Returns the current session user name as a string."
 id: ssl.function.getuserdata
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

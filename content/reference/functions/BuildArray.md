@@ -3,7 +3,7 @@ title: "BuildArray"
 summary: "Splits text into a one-dimensional array using a literal delimiter."
 id: ssl.function.buildarray
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

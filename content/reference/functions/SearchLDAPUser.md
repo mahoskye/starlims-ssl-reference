@@ -3,7 +3,7 @@ title: "SearchLDAPUser"
 summary: "Searches LDAP for exactly one user and returns that entry's distinguished name."
 id: ssl.function.searchldapuser
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

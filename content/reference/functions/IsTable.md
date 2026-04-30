@@ -3,7 +3,7 @@ title: "IsTable"
 summary: "Checks whether a table exists in a database connection."
 id: ssl.function.istable
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

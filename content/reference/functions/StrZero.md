@@ -3,7 +3,7 @@ title: "StrZero"
 summary: "Formats a number as a zero-padded string, with optional total width and decimal precision."
 id: ssl.function.strzero
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

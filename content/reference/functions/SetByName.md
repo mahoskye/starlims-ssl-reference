@@ -3,7 +3,7 @@ title: "SetByName"
 summary: "Assigns a value to a variable whose name is supplied at runtime."
 id: ssl.function.setbyname
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

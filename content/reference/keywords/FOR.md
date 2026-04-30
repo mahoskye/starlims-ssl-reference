@@ -3,7 +3,7 @@ title: "FOR"
 summary: "Executes a counted loop by assigning a numeric variable, checking it against a numeric limit, and updating it after each iteration."
 id: ssl.keyword.for
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

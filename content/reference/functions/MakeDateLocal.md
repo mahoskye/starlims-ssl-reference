@@ -3,7 +3,7 @@ title: "MakeDateLocal"
 summary: "Sets a date value, or selected date columns in an array, to local date kind in place."
 id: ssl.function.makedatelocal
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "LDAPAuthEX"
 summary: "Authenticates an LDAP user by searching for exactly one directory entry and then binding as that user."
 id: ssl.function.ldapauthex
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

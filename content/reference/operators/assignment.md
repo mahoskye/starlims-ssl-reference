@@ -3,7 +3,7 @@ title: "assignment"
 summary: "Stores a value in a variable, object property, or array element and evaluates to the assigned value."
 id: ssl.operator.assignment
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

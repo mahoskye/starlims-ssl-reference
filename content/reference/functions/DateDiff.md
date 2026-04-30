@@ -3,7 +3,7 @@ title: "DateDiff"
 summary: "Returns the whole-number difference between two date values in a requested unit."
 id: ssl.function.datediff
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

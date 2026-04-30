@@ -3,7 +3,7 @@ title: "RaiseError"
 summary: "Raises an SSL runtime error using the supplied message and optional location, error code, and inner error."
 id: ssl.function.raiseerror
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

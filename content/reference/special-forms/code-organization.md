@@ -3,7 +3,7 @@ title: "Code Organization"
 summary: "Comment regions group related procedures or code sections in long files. They are purely organizational - they have no effect on compilation or execution, but development tools use them for code folding and navigation."
 id: ssl.special_form.code-organization
 element_type: special_form
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

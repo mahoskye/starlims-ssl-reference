@@ -3,7 +3,7 @@ title: "GetAppWorkPathFolder"
 summary: "Returns the path to the application's working directory as a string."
 id: ssl.function.getappworkpathfolder
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

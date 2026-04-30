@@ -3,7 +3,7 @@ title: "code-block"
 summary: "Defines an anonymous code block with bound variables and a single expression body. A code block can be created at the top level, passed as a function argument, or assigned to a variable for later execution."
 id: ssl.special_form.code-block
 element_type: special_form
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

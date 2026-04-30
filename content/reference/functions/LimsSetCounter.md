@@ -3,7 +3,7 @@ title: "LimsSetCounter"
 summary: "Generates the next counter value and, when given matching field and value arrays, inserts a new row with that key."
 id: ssl.function.limssetcounter
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

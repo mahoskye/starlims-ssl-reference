@@ -3,7 +3,7 @@ title: "DateToString"
 summary: "Converts a date value to a string using a specified or default format."
 id: ssl.function.datetostring
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

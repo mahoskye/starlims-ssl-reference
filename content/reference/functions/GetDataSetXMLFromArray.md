@@ -3,7 +3,7 @@ title: "GetDataSetXMLFromArray"
 summary: "Generates dataset XML from in-memory values, field definitions, and output flags."
 id: ssl.function.getdatasetxmlfromarray
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

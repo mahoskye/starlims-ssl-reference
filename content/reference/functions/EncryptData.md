@@ -3,7 +3,7 @@ title: "EncryptData"
 summary: "Encrypts a string with a password by using the legacy built-in RC2, DES, or 3DES algorithms."
 id: ssl.function.encryptdata
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

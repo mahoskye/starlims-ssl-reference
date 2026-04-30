@@ -3,7 +3,7 @@ title: "LimsRecordsAffected"
 summary: "Returns the number of records affected by the most recent database operation."
 id: ssl.function.limsrecordsaffected
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

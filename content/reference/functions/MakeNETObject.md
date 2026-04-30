@@ -3,7 +3,7 @@ title: "MakeNETObject"
 summary: "Converts an SSL value to a .NET interop object."
 id: ssl.function.makenetobject
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

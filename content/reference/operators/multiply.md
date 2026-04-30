@@ -3,7 +3,7 @@ title: "multiply"
 summary: "Multiplies one number by another number and returns the product."
 id: ssl.operator.multiply
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

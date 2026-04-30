@@ -3,7 +3,7 @@ title: "Hour"
 summary: "Extracts the hour component from a date value."
 id: ssl.function.hour
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

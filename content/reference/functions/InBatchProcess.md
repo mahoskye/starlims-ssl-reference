@@ -3,7 +3,7 @@ title: "InBatchProcess"
 summary: "Returns whether the current SSL execution context is running in a batch process."
 id: ssl.function.inbatchprocess
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "DocStartWorkflow"
 summary: "Starts a Documentum workflow and returns the created workflow ID together with the start-activity performers."
 id: ssl.function.docstartworkflow
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "Sequence"
 summary: "Creates and manages a database sequence for a table field on Oracle or SQL Server."
 id: ssl.class.sequence
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

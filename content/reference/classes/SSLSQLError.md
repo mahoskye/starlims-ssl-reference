@@ -3,7 +3,7 @@ title: "SSLSQLError"
 summary: "Represents the SQL-specific error object returned after a database failure."
 id: ssl.class.sslsqlerror
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

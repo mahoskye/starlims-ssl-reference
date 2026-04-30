@@ -3,7 +3,7 @@ title: "Year"
 summary: "Extracts the numeric year from a date value."
 id: ssl.function.year
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "SetDefaultConnection"
 summary: "Changes the active default database connection name and returns the previous default connection."
 id: ssl.function.setdefaultconnection
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

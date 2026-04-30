@@ -3,7 +3,7 @@ title: "bang"
 summary: "Performs boolean negation, returning the opposite boolean value."
 id: ssl.operator.bang
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

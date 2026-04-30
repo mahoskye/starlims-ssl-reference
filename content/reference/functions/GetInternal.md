@@ -3,7 +3,7 @@ title: "GetInternal"
 summary: "Retrieves the current value of a named property from a value that supports property access."
 id: ssl.function.getinternal
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

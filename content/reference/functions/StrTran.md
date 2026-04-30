@@ -3,7 +3,7 @@ title: "StrTran"
 summary: "Replaces all occurrences of a specified substring with another substring in a source string."
 id: ssl.function.strtran
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

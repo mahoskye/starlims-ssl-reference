@@ -3,7 +3,7 @@ title: "IsInTransaction"
 summary: "Returns .T. if the specified database connection currently has an open transaction."
 id: ssl.function.isintransaction
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

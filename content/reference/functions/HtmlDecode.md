@@ -3,7 +3,7 @@ title: "HtmlDecode"
 summary: "Converts selected HTML/XML entity sequences in a string back to literal characters."
 id: ssl.function.htmldecode
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "DocRemoveAllUsersFromGroup"
 summary: "Removes every user from a Documentum group."
 id: ssl.function.docremoveallusersfromgroup
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

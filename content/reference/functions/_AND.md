@@ -3,7 +3,7 @@ title: "_AND"
 summary: "Performs a bitwise AND operation between two integer numbers and returns the result."
 id: ssl.function._and
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

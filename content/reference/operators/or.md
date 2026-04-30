@@ -3,7 +3,7 @@ title: "or"
 summary: "Combines two boolean expressions and returns .T. when either operand is .T.."
 id: ssl.operator.or
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

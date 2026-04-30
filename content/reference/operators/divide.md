@@ -3,7 +3,7 @@ title: "divide"
 summary: "Divides the left number by the right number and returns the result as a number."
 id: ssl.operator.divide
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

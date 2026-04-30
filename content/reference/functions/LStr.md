@@ -3,7 +3,7 @@ title: "LStr"
 summary: "Converts a value to its trimmed string representation, returning \"NIL\" when the input is NIL."
 id: ssl.function.lstr
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "UrlEncode"
 summary: "Converts a string into a format safe for inclusion in a URL by encoding unsafe characters."
 id: ssl.function.urlencode
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

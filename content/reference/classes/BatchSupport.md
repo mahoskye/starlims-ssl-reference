@@ -3,7 +3,7 @@ title: "BatchSupport"
 summary: "Provides batch-status checks and memory usage information for the current SSL process."
 id: ssl.class.batchsupport
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

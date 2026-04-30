@@ -3,7 +3,7 @@ title: "me"
 summary: "Provides a reference to the current class instance inside :CLASS methods."
 id: ssl.special_form.me
 element_type: special_form
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

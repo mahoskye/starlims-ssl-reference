@@ -3,7 +3,7 @@ title: "Eval"
 summary: "Invokes a code block with the supplied arguments and returns the block's result."
 id: ssl.function.eval
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "AllTrim"
 summary: "Remove leading and trailing space characters from a string."
 id: ssl.function.alltrim
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

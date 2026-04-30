@@ -3,7 +3,7 @@ title: "DelArray"
 summary: "Removes an element from an array at a specified one-based index and returns the same array."
 id: ssl.function.delarray
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

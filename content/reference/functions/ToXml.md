@@ -3,7 +3,7 @@ title: "ToXml"
 summary: "Converts a value to an XML string."
 id: ssl.function.toxml
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

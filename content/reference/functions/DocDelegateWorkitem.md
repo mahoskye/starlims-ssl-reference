@@ -3,7 +3,7 @@ title: "DocDelegateWorkitem"
 summary: "Delegates a Documentum workflow work item to another user and returns whether the delegation succeeded."
 id: ssl.function.docdelegateworkitem
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

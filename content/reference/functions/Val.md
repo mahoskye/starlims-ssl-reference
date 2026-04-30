@@ -3,7 +3,7 @@ title: "Val"
 summary: "Converts numeric text at the start of a string to a number."
 id: ssl.function.val
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

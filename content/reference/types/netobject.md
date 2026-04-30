@@ -3,7 +3,7 @@ title: "netobject"
 summary: "Provides dynamic access to external objects for property access, method invocation, and selected interop scenarios in SSL."
 id: ssl.type.netobject
 element_type: type
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "DocCommandFailed"
 summary: "Checks whether the most recent Documentum command in the current session failed."
 id: ssl.function.doccommandfailed
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

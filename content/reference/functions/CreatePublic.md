@@ -3,7 +3,7 @@ title: "CreatePublic"
 summary: "Creates or overwrites a public variable by name."
 id: ssl.function.createpublic
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

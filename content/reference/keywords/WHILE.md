@@ -3,7 +3,7 @@ title: "WHILE"
 summary: "Repeats a block of statements as long as a supplied condition evaluates to true."
 id: ssl.keyword.while
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

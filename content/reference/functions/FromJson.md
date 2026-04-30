@@ -3,7 +3,7 @@ title: "FromJson"
 summary: "Parses a JSON string into the closest SSL-native value or returns the input unchanged if it is not a string. JSON arrays become arrays, objects become SSLExpando instances, numbers become numbers, booleans become booleans, and strings become strings or dates when the value starts with SSLDate|. Null input, empty strings, and JSON null values return NIL. Invalid JSON tokens raise an error."
 id: ssl.function.fromjson
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

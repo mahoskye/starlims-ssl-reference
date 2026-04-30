@@ -3,7 +3,7 @@ title: "Integer"
 summary: "Returns the whole-number portion of a numeric value by truncating the fractional part toward zero."
 id: ssl.function.integer
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

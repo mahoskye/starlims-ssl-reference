@@ -3,7 +3,7 @@ title: "PUBLIC"
 summary: "Declares global variables that can be accessed from any scope in the program."
 id: ssl.keyword.public
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

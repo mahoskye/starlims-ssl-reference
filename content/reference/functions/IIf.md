@@ -3,7 +3,7 @@ title: "IIf"
 summary: "Selects one of two values based on a boolean condition."
 id: ssl.function.iif
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

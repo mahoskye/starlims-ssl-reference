@@ -3,7 +3,7 @@ title: "GetFromSession"
 summary: "Retrieves the value associated with a specified key from the current user session."
 id: ssl.function.getfromsession
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

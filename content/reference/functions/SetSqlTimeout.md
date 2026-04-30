@@ -3,7 +3,7 @@ title: "SetSqlTimeout"
 summary: "Sets the SQL command timeout for a database connection and returns the previous timeout value for that same connection."
 id: ssl.function.setsqltimeout
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

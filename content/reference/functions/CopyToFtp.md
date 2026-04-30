@@ -3,7 +3,7 @@ title: "CopyToFtp"
 summary: "Appends the same text content to one or more files on an FTP or SFTP server."
 id: ssl.function.copytoftp
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

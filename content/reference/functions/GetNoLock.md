@@ -3,7 +3,7 @@ title: "GetNoLock"
 summary: "Returns the database-specific no-lock clause for a connection."
 id: ssl.function.getnolock
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "ClientStartOfDay"
 summary: "Returns the timestamp for the start of the client's calendar day."
 id: ssl.function.clientstartofday
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

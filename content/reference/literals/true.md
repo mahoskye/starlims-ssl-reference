@@ -3,7 +3,7 @@ title: "true"
 summary: "The .T. literal represents the boolean value true in SSL and is case-insensitive."
 id: ssl.literal.true
 element_type: literal
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "MatFunc"
 summary: "Calculates a mathematical operation on a given number based on the specified function name."
 id: ssl.function.matfunc
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

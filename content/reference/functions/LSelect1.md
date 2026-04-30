@@ -3,7 +3,7 @@ title: "LSelect1"
 summary: "Executes a parameterized SQL SELECT command and returns the result as an array of rows."
 id: ssl.function.lselect1
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "SetDecimalSeparator"
 summary: "Sets the current decimal separator and returns the previous setting."
 id: ssl.function.setdecimalseparator
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

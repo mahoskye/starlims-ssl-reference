@@ -3,7 +3,7 @@ title: "Empty"
 summary: "Returns .T. when a value is considered empty by SSL; otherwise returns .F."
 id: ssl.function.empty
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

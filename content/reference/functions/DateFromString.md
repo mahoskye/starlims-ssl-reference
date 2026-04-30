@@ -3,7 +3,7 @@ title: "DateFromString"
 summary: "Parses a string into a date value with optional format and culture controls."
 id: ssl.function.datefromstring
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "DocGetWorkitemProperties"
 summary: "Retrieves workflow flags and linked document IDs for a Documentum work item."
 id: ssl.function.docgetworkitemproperties
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "InfoMes"
 summary: "Logs an informational user message and returns the same formatted string as UsrMes."
 id: ssl.function.infomes
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

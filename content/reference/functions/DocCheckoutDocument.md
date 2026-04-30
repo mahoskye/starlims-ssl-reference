@@ -3,7 +3,7 @@ title: "DocCheckoutDocument"
 summary: "Checks out an existing Documentum document and returns the local checkout file path."
 id: ssl.function.doccheckoutdocument
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

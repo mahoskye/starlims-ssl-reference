@@ -3,7 +3,7 @@ title: "DeleteFromFtp"
 summary: "Deletes a remote file through FTP, or through SFTP when bIsSFTP is .T.."
 id: ssl.function.deletefromftp
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "ExtractCol"
 summary: "Extracts one column from a two-dimensional array and returns the extracted values as a new array."
 id: ssl.function.extractcol
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

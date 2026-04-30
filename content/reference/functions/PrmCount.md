@@ -3,7 +3,7 @@ title: "PrmCount"
 summary: "Returns how many arguments were passed to the currently executing procedure."
 id: ssl.function.prmcount
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

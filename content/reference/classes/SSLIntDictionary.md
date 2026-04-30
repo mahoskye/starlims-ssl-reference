@@ -3,7 +3,7 @@ title: "SSLIntDictionary"
 summary: "Stores values by whole-number keys."
 id: ssl.class.sslintdictionary
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

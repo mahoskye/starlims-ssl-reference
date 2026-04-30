@@ -3,7 +3,7 @@ title: "DEFAULT"
 summary: "Assigns a fallback expression to a parameter when the caller omits that argument."
 id: ssl.keyword.default
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

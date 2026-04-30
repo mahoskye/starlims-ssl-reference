@@ -3,7 +3,7 @@ title: "SSLExpando"
 summary: "SSLExpando is a built-in object class for storing named values whose shape is decided at runtime."
 id: ssl.class.sslexpando
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

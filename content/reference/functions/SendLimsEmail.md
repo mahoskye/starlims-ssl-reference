@@ -3,7 +3,7 @@ title: "SendLimsEmail"
 summary: "Sends an email through SMTP and returns whether the send succeeded."
 id: ssl.function.sendlimsemail
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

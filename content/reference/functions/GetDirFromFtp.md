@@ -3,7 +3,7 @@ title: "GetDirFromFtp"
 summary: "Lists directory entries from an FTP server, or from an SFTP server when bIsSFTP is .T.."
 id: ssl.function.getdirfromftp
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

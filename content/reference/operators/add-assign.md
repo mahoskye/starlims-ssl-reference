@@ -3,7 +3,7 @@ title: "add-assign"
 summary: "Updates a variable, property, or array element in place by applying + and then storing the result back into the left side."
 id: ssl.operator.add-assign
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

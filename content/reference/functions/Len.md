@@ -3,7 +3,7 @@ title: "Len"
 summary: "Returns the number of characters in a string or the element count of an array."
 id: ssl.function.len
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

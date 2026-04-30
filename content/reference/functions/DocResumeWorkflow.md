@@ -3,7 +3,7 @@ title: "DocResumeWorkflow"
 summary: "Resumes a Documentum workflow identified by sWorkflowId."
 id: ssl.function.docresumeworkflow
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

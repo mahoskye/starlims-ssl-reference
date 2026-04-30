@@ -3,7 +3,7 @@ title: "HtmlConverter"
 summary: "Converts XFD form XML into HTML form XML and exposes the most recent conversion log."
 id: ssl.class.htmlconverter
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

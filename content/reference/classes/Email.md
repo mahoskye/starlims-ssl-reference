@@ -3,7 +3,7 @@ title: "Email"
 summary: "Composes, loads, saves, sends, or queues email messages with attachments and optional signing or encryption."
 id: ssl.class.email
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

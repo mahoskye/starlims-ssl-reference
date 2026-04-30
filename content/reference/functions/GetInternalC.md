@@ -3,7 +3,7 @@ title: "GetInternalC"
 summary: "Retrieves a value by applying a chained series of index operations to a root value."
 id: ssl.function.getinternalc
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

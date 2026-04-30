@@ -3,7 +3,7 @@ title: "PatcherSupport"
 summary: "Provides helper methods for collecting package-style dictionary metadata, connecting to another STARLIMS system, and comparing one collected result table to another."
 id: ssl.class.patchersupport
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "SendFromOutbox"
 summary: "Sends every email currently queued in the outbox."
 id: ssl.function.sendfromoutbox
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

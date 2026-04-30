@@ -3,7 +3,7 @@ title: "Branch"
 summary: "Transfers control to a label in the current procedure."
 id: ssl.function.branch
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]
@@ -15,7 +15,7 @@ Transfers control to a label in the current procedure.
 
 `Branch` requires exactly one argument. If that argument is a string literal, SSL uses that literal text as the branch target. If it is any other expression, SSL evaluates it, converts the result to a string, and compares that text against the labels registered in the current procedure. If a computed target does not match any label, execution continues with the next statement.
 
-For normal label declarations such as [`:LABEL CLEANUP;`](label.md), the target text must match the stored label text, so the usual form is `Branch("LABEL CLEANUP")`. Forward references are supported within the same procedure because labels are collected before code generation. When `Branch` is used inside a [`:TRY`](../keywords/TRY.md) or [`:CATCH`](../keywords/CATCH.md) region, SSL leaves that protected region before transferring control.
+For normal label declarations such as [`:LABEL CLEANUP;`](../keywords/LABEL.md), the target text must match the stored label text, so the usual form is `Branch("LABEL CLEANUP")`. Forward references are supported within the same procedure because labels are collected before code generation. When `Branch` is used inside a [`:TRY`](../keywords/TRY.md) or [`:CATCH`](../keywords/CATCH.md) region, SSL leaves that protected region before transferring control.
 `Branch` does not return a useful value.
 
 ## When to use
@@ -51,17 +51,17 @@ Branch(vTarget)
 
 !!! success "Do"
     - Use descriptive labels that make the jump target obvious, such as `CLEANUP` or `RECOVER`.
-    - For labels declared with [`:LABEL name;`](label.md), pass the matching target text such as `"LABEL CLEANUP"`.
+    - For labels declared with [`:LABEL name;`](../keywords/LABEL.md), pass the matching target text such as `"LABEL CLEANUP"`.
     - Prefer one shared cleanup or recovery label over repeating the same shutdown logic in several places.
 
 !!! failure "Don't"
-    - Pass plain label names such as `"CLEANUP"` for a normal [`:LABEL CLEANUP;`](label.md) target. The text must match the stored label name exactly.
+    - Pass plain label names such as `"CLEANUP"` for a normal [`:LABEL CLEANUP;`](../keywords/LABEL.md) target. The text must match the stored label name exactly.
     - Use `Branch` as a substitute for ordinary [`:IF`](../keywords/IF.md), [`:FOR`](../keywords/FOR.md), [`:WHILE`](../keywords/WHILE.md), or [`:RETURN`](../keywords/RETURN.md) flow when structured control is sufficient.
     - Assume a computed target will raise an error when it does not match. A computed miss simply falls through to the next statement.
 
 ## Caveats
 
-- For [`:LABEL name;`](label.md), the usual branch target is `"LABEL name"`. For mashed labels such as [`:LABELNAME;`](label.md), the target text must match that exact token text instead.
+- For [`:LABEL name;`](../keywords/LABEL.md), the usual branch target is `"LABEL name"`. For mashed labels such as [`:LABELNAME;`](../keywords/LABEL.md), the target text must match that exact token text instead.
 
 ## Examples
 

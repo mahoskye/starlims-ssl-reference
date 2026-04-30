@@ -3,7 +3,7 @@ title: "number"
 summary: "The number type represents numeric values in SSL. Use it for arithmetic, ordering, exact numeric comparisons, shifts, and integer-only bitwise work."
 id: ssl.type.number
 element_type: type
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

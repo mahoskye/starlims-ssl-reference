@@ -3,7 +3,7 @@ title: "MimeEncode"
 summary: "Encodes a string so it can be round-tripped later with MimeDecode."
 id: ssl.function.mimeencode
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

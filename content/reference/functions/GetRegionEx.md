@@ -3,7 +3,7 @@ title: "GetRegionEx"
 summary: "Retrieves a named region string, optionally using a caller-supplied local region map before falling back to the current region scope."
 id: ssl.function.getregionex
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

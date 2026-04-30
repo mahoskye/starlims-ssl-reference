@@ -3,7 +3,7 @@ title: "WriteToFtp"
 summary: "Appends text to a remote file over FTP or SFTP."
 id: ssl.function.writetoftp
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "GetConnectionStrings"
 summary: "Retrieves all configured database connections as a two-dimensional array."
 id: ssl.function.getconnectionstrings
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

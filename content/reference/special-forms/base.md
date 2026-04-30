@@ -3,7 +3,7 @@ title: "base"
 summary: "Provides explicit access to members on a class's immediate parent type from within a class method."
 id: ssl.special_form.base
 element_type: special_form
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

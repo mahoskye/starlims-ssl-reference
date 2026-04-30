@@ -3,7 +3,7 @@ title: "hash"
 summary: "Returns .T. when two values are not equal and .F. when they are equal."
 id: ssl.operator.hash
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

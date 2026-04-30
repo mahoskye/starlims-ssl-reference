@@ -3,7 +3,7 @@ title: "RunApp"
 summary: "Launches an external application and waits for it to exit."
 id: ssl.function.runapp
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

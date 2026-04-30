@@ -3,7 +3,7 @@ title: "BEGINCASE"
 summary: "Starts a :BEGINCASE block for evaluating one or more boolean :CASE conditions, with an optional :OTHERWISE branch and a required :ENDCASE."
 id: ssl.keyword.begincase
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

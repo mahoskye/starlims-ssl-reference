@@ -3,7 +3,7 @@ title: "ExecInternal"
 summary: "Calls a method on an object by name and returns that method's result."
 id: ssl.function.execinternal
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

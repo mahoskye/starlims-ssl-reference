@@ -3,7 +3,7 @@ title: "SSLDataset"
 summary: "Represents dataset results so SSL code can work with query output as an object, convert the first table to an array, export XML, or pass the dataset handle to APIs that expect one."
 id: ssl.class.ssldataset
 element_type: class
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

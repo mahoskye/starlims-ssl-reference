@@ -3,7 +3,7 @@ title: "DocGetTasks"
 summary: "Retrieves Documentum workflow tasks as a two-dimensional array."
 id: ssl.function.docgettasks
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

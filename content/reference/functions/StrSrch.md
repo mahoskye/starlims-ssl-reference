@@ -3,7 +3,7 @@ title: "StrSrch"
 summary: "Finds a substring by occurrence number or from a specific 1-based starting position."
 id: ssl.function.strsrch
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

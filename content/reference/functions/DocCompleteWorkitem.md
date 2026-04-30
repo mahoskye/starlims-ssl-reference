@@ -3,7 +3,7 @@ title: "DocCompleteWorkitem"
 summary: "Completes a Documentum workflow work item and returns whether the operation succeeded."
 id: ssl.function.doccompleteworkitem
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

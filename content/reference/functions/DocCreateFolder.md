@@ -3,7 +3,7 @@ title: "DocCreateFolder"
 summary: "Creates a Documentum folder under a parent path and returns the string result from the create operation."
 id: ssl.function.doccreatefolder
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

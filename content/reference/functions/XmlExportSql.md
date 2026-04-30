@@ -3,7 +3,7 @@ title: "XmlExportSql"
 summary: "Runs a SQL query, writes the result set to an XML file, and returns an empty string on success or an error message on failure."
 id: ssl.function.xmlexportsql
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

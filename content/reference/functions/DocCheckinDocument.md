@@ -3,7 +3,7 @@ title: "DocCheckinDocument"
 summary: "Checks a local file into an existing Documentum document."
 id: ssl.function.doccheckindocument
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

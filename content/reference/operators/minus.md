@@ -3,7 +3,7 @@ title: "minus"
 summary: "Subtracts numbers, trims trailing spaces before string concatenation, or performs date arithmetic depending on operand types."
 id: ssl.operator.minus
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

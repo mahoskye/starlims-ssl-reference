@@ -3,7 +3,7 @@ title: "DocAcquireWorkitem"
 summary: "Acquires a Documentum work item and returns whether the acquisition succeeded."
 id: ssl.function.docacquireworkitem
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

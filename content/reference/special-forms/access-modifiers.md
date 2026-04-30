@@ -3,7 +3,7 @@ title: "Access Modifiers"
 summary: "SSL supports two comment-based access modifiers that control procedure visibility. Place one on the line immediately before a :PROCEDURE declaration."
 id: ssl.special_form.access-modifiers
 element_type: special_form
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

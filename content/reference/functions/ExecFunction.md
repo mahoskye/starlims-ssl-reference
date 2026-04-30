@@ -3,7 +3,7 @@ title: "ExecFunction"
 summary: "Invokes a function by name at runtime and returns the result."
 id: ssl.function.execfunction
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

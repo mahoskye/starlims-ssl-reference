@@ -9,7 +9,7 @@ tags:
   - block-closer
   - looping
   - control-flow
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

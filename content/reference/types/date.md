@@ -3,7 +3,7 @@ title: "date"
 summary: "The date type represents calendar-based values in SSL. Use it for date arithmetic, ordering, formatting, and serialization without converting values to strings first."
 id: ssl.type.date
 element_type: type
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

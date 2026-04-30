@@ -3,7 +3,7 @@ title: "Abs"
 summary: "Calculates the absolute value of a number."
 id: ssl.function.abs
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

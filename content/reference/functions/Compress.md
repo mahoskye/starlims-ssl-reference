@@ -3,7 +3,7 @@ title: "Compress"
 summary: "Compresses a non-empty string and returns the compressed result as either a base64 string or a generated file path."
 id: ssl.function.compress
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

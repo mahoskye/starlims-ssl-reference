@@ -3,7 +3,7 @@ title: "VerifySignature"
 summary: "Verifies a base64-encoded digital signature against a string by using the public key from a supplied X.509 certificate."
 id: ssl.function.verifysignature
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

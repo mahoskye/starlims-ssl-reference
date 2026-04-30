@@ -3,7 +3,7 @@ title: "string"
 summary: "Represents SSL text values, including string literals, comparisons, indexing, and JSON serialization."
 id: ssl.type.string
 element_type: type
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

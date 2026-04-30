@@ -3,7 +3,7 @@ title: "AddColDelimiters"
 summary: "Qualify each column in an array as table.column with database-specific identifier delimiters."
 id: ssl.function.addcoldelimiters
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

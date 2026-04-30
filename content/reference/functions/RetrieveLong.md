@@ -3,7 +3,7 @@ title: "RetrieveLong"
 summary: "Retrieves a value from one database column and writes it to a file when the selected value is returned as binary data."
 id: ssl.function.retrievelong
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

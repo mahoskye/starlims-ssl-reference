@@ -3,7 +3,7 @@ title: "Month"
 summary: "Extracts the numeric month from a date value."
 id: ssl.function.month
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

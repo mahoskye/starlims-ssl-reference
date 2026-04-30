@@ -3,7 +3,7 @@ title: "decrement"
 summary: "Decreases a number variable by one, trims trailing spaces in strings, or subtracts days from a date depending on operand type."
 id: ssl.operator.decrement
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

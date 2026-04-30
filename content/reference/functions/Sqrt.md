@@ -3,7 +3,7 @@ title: "Sqrt"
 summary: "Calculates the square root of a number."
 id: ssl.function.sqrt
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "array"
 summary: "Represents ordered, 1-based collections of SSL values, including nested arrays."
 id: ssl.type.array
 element_type: type
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

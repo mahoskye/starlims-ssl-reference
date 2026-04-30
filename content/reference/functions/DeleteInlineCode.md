@@ -3,7 +3,7 @@ title: "DeleteInlineCode"
 summary: "Removes a named inline code entry."
 id: ssl.function.deleteinlinecode
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "GetDataSetFromArrayEx"
 summary: "Generates a dataset XML string from array values, with control over field definitions, table name, header output, and schema output."
 id: ssl.function.getdatasetfromarrayex
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

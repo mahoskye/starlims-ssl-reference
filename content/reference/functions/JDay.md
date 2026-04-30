@@ -3,7 +3,7 @@ title: "JDay"
 summary: "Returns the day-of-year number for a date, or for today's date when no argument is supplied."
 id: ssl.function.jday
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

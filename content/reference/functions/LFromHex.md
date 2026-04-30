@@ -3,7 +3,7 @@ title: "LFromHex"
 summary: "Converts a hexadecimal string to a string by reading the input in two-character chunks and decoding each chunk as a byte."
 id: ssl.function.lfromhex
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

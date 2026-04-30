@@ -3,7 +3,7 @@ title: "codeblock"
 summary: "Represents a callable expression value that you can store, pass, and evaluate."
 id: ssl.type.codeblock
 element_type: type
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

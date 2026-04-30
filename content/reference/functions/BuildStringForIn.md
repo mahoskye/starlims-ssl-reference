@@ -3,7 +3,7 @@ title: "BuildStringForIn"
 summary: "Builds a quoted string list for a SQL IN clause from an array."
 id: ssl.function.buildstringforin
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "LSelectC"
 summary: "Executes a SQL SELECT statement and returns the result as a two-dimensional SSL array."
 id: ssl.function.lselectc
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "PARAMETERS"
 summary: "Declares named input parameters for a script, procedure, method, or constructor."
 id: ssl.keyword.parameters
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

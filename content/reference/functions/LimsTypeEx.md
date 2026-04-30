@@ -3,7 +3,7 @@ title: "LimsTypeEx"
 summary: "Returns the public SSL type name for a value."
 id: ssl.function.limstypeex
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

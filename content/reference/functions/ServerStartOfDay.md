@@ -3,7 +3,7 @@ title: "ServerStartOfDay"
 summary: "Returns a date value set to the start of its day."
 id: ssl.function.serverstartofday
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

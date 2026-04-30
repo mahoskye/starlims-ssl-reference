@@ -3,7 +3,7 @@ title: "DocSearchUsingDql"
 summary: "Executes a Documentum DQL query and returns the result set as a two-dimensional array."
 id: ssl.function.docsearchusingdql
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

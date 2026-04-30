@@ -3,7 +3,7 @@ title: "Rat"
 summary: "Finds the last occurrence of a substring in a string and returns its one-based position."
 id: ssl.function.rat
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

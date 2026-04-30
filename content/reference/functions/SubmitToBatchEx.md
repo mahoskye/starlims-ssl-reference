@@ -3,7 +3,7 @@ title: "SubmitToBatchEx"
 summary: "Submits SSL code to batch execution and returns the submitted job identifier."
 id: ssl.function.submittobatchex
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

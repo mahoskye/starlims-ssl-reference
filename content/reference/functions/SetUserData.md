@@ -3,7 +3,7 @@ title: "SetUserData"
 summary: "Sets the current user name for the active execution context."
 id: ssl.function.setuserdata
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

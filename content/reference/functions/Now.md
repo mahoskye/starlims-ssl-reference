@@ -3,7 +3,7 @@ title: "Now"
 summary: "Returns the current system date and time as an SSL date value."
 id: ssl.function.now
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

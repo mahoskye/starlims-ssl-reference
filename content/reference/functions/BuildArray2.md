@@ -3,7 +3,7 @@ title: "BuildArray2"
 summary: "Parses text into a two-dimensional array using separate row and column delimiters."
 id: ssl.function.buildarray2
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

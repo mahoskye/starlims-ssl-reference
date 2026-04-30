@@ -3,7 +3,7 @@ title: "EXITCASE"
 summary: "Ends the current :CASE or :OTHERWISE branch and continues after :ENDCASE."
 id: ssl.keyword.exitcase
 element_type: keyword
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

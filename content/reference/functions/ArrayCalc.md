@@ -3,7 +3,7 @@ title: "ArrayCalc"
 summary: "Perform a selected array operation by passing an operation code."
 id: ssl.function.arraycalc
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

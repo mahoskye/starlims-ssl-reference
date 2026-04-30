@@ -3,7 +3,7 @@ title: "DOY"
 summary: "Calculates the ordinal day number of a date within its year."
 id: ssl.function.doy
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

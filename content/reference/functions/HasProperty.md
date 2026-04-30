@@ -3,7 +3,7 @@ title: "HasProperty"
 summary: "Checks whether a value exposes a named property."
 id: ssl.function.hasproperty
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

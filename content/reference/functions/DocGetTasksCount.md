@@ -3,7 +3,7 @@ title: "DocGetTasksCount"
 summary: "Returns the number of workflow tasks in the Documentum inbox for the active session."
 id: ssl.function.docgettaskscount
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

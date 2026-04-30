@@ -3,7 +3,7 @@ title: "ReadFromFtp"
 summary: "Retrieves a remote file as a string by using FTP, or SFTP when bIsSFTP is .T.."
 id: ssl.function.readfromftp
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

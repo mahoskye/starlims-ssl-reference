@@ -3,7 +3,7 @@ title: "At"
 summary: "Finds the first occurrence of a substring in a string and returns its one-based position."
 id: ssl.function.at
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "LimsXOr"
 summary: "Calculates the bitwise exclusive OR of two integer-valued numbers."
 id: ssl.function.limsxor
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

@@ -3,7 +3,7 @@ title: "Right"
 summary: "Extracts a specified number of characters from the end of a string."
 id: ssl.function.right
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

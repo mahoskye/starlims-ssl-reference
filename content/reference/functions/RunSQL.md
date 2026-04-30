@@ -3,7 +3,7 @@ title: "RunSQL"
 summary: "Executes a SQL statement and returns whether execution completed without an uncaught SQL error."
 id: ssl.function.runsql
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

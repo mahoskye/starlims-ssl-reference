@@ -3,7 +3,7 @@ title: "AFill"
 summary: "Fill an array element range with the same value and return the same array."
 id: ssl.function.afill
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

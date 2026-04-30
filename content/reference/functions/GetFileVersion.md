@@ -3,7 +3,7 @@ title: "GetFileVersion"
 summary: "Retrieves the file version string for a specified file path."
 id: ssl.function.getfileversion
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

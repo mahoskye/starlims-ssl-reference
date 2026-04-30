@@ -3,7 +3,7 @@ title: "shift-left"
 summary: "Shifts the bits of one integer number to the left by the number of positions specified by another integer number."
 id: ssl.operator.shift-left
 element_type: operator
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

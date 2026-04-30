@@ -3,7 +3,7 @@ title: "Day"
 summary: "Extracts the day-of-month number from a date value."
 id: ssl.function.day
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

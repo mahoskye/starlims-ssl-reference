@@ -3,7 +3,7 @@ title: "LimsType"
 summary: "Returns the single-character SSL type code for a variable name or expression."
 id: ssl.function.limstype
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

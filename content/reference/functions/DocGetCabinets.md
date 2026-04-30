@@ -3,7 +3,7 @@ title: "DocGetCabinets"
 summary: "Returns the cabinet names available from the current Documentum connection."
 id: ssl.function.docgetcabinets
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

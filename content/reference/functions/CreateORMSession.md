@@ -3,7 +3,7 @@ title: "CreateORMSession"
 summary: "Creates the shared ORM session object for the current SSL runtime, or returns the existing one if it has already been created."
 id: ssl.function.createormsession
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

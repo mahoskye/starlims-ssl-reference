@@ -3,7 +3,7 @@ title: "StringToDate"
 summary: "Converts a formatted date string into a date value using a specified pattern."
 id: ssl.function.stringtodate
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]

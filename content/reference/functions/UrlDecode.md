@@ -3,7 +3,7 @@ title: "UrlDecode"
 summary: "Decodes a URL-encoded string."
 id: ssl.function.urldecode
 element_type: function
-status: published
+doc_status: published
 starlims:
   applies_to: [11]
   verified_against: [11]
