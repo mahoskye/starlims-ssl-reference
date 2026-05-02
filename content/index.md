@@ -21,6 +21,8 @@ Complete API reference for the **STARLIMS Scripting Language (SSL)** — coverin
 - [Error Handling](guides/error-handling.md) — structured and legacy error handling patterns
 - [Working with SQL](guides/sql-queries.md) — parameterized queries, IN clauses, and choosing the right SQL function
 - [SQL & Transactions](guides/sql-transactions.md) — transaction control, nesting, isolation levels, and error handling
+- [Naming Conventions](guides/naming-conventions.md) — Hungarian prefixes, casing rules, and constants
+- [Data Source Files](guides/data-sources.md) — SSL and SQL data source syntax and directives
 
 ## About this reference
 

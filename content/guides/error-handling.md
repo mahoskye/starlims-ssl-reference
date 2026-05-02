@@ -27,6 +27,7 @@ SSL provides two error handling models: the modern **structured** model ([`:TRY`
 - [`:FINALLY`](../reference/keywords/FINALLY.md) always executes, even after [`:RETURN`](../reference/keywords/RETURN.md) inside [`:TRY`](../reference/keywords/TRY.md) or [`:CATCH`](../reference/keywords/CATCH.md)
 - Use [`GetLastSSLError`](../reference/functions/GetLastSSLError.md) inside [`:CATCH`](../reference/keywords/CATCH.md) to retrieve the error object, then access `:Description` or `:FullDescription` for the message text
 - Use [`RaiseError`](../reference/functions/RaiseError.md) to throw a custom error
+- [`:RETURN`](../reference/keywords/RETURN.md), [`:EXITFOR`](../reference/keywords/EXITFOR.md), [`:EXITWHILE`](../reference/keywords/EXITWHILE.md), and [`:LOOP`](../reference/keywords/LOOP.md) inside a [`:FINALLY`](../reference/keywords/FINALLY.md) block are **compile-time errors** — keep cleanup code linear and let it fall through
 
 ### Common patterns
 
