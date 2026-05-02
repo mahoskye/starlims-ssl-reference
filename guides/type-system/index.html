@@ -423,6 +423,10 @@
       
         
       
+        
+      
+        
+      
     
     
     
@@ -560,6 +564,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#variable-initialization-and-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variable initialization and scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#type-checking" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -672,6 +687,62 @@
     
   
     SQL & Transactions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../naming-conventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Naming Conventions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-sources/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Source Files
   
 
     
@@ -805,6 +876,17 @@
     <span class="md-ellipsis">
       
         NIL semantics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variable-initialization-and-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variable initialization and scope
       
     </span>
   </a>
@@ -996,10 +1078,19 @@
 <ul>
 <li><a href="../../reference/literals/nil/"><code>NIL</code></a> equals only <a href="../../reference/literals/nil/"><code>NIL</code></a> — <code>NIL = NIL</code> is <a href="../../reference/literals/true/"><code>.T.</code></a>, <code>NIL = ""</code> is <a href="../../reference/literals/false/"><code>.F.</code></a></li>
 <li><a href="../../reference/functions/Empty/"><code>Empty</code></a>(<a href="../../reference/literals/nil/"><code>NIL</code></a>) returns <a href="../../reference/literals/true/"><code>.T.</code></a></li>
-<li>Variables declared with <a href="../../reference/keywords/DECLARE/"><code>:DECLARE</code></a> start as empty string, <strong>not</strong> NIL</li>
 <li>Functions that fail silently often return NIL</li>
 <li>When calling external libraries or receiving values from the platform layer, null values surface as <a href="../../reference/literals/nil/"><code>NIL</code></a> in SSL</li>
 </ul>
+<h2 id="variable-initialization-and-scope">Variable initialization and scope<a class="headerlink" href="#variable-initialization-and-scope" title="Permanent link">&para;</a></h2>
+<p>Variables declared with <a href="../../reference/keywords/DECLARE/"><code>:DECLARE</code></a> initialize to <strong>empty string <code>""</code></strong>, not <a href="../../reference/literals/nil/"><code>NIL</code></a>. <a href="../../reference/functions/Empty/"><code>Empty</code></a> returns <a href="../../reference/literals/true/"><code>.T.</code></a> for <code>""</code>, <code>0</code>, <a href="../../reference/literals/nil/"><code>NIL</code></a>, and <a href="../../reference/literals/false/"><code>.F.</code></a>, so it is the safe way to test for an uninitialized or default-state value across types.</p>
+<p>When a variable is referenced, lookup proceeds in this order:</p>
+<ol>
+<li><strong>Local scope</strong> — the current procedure</li>
+<li><strong>Caller scopes</strong> — up the call stack</li>
+<li><strong>Public variables</strong> — declared with <a href="../../reference/keywords/PUBLIC/"><code>:PUBLIC</code></a></li>
+</ol>
+<p>Reading a caller's variable works but generates a warning. Always declare variables locally.</p>
+<p>Re-declaring an existing variable with <a href="../../reference/keywords/DECLARE/"><code>:DECLARE</code></a> is silently ignored — no error is thrown and the existing value is preserved.</p>
 <h2 id="type-checking">Type checking<a class="headerlink" href="#type-checking" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
