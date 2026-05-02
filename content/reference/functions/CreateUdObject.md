@@ -182,7 +182,7 @@ Usage:
 :PROCEDURE CreateSampleTicket;
 	:DECLARE oTicket, sMessage;
 
-	oTicket := CreateUdObject("SampleTicket", {"LAB-0042", 2});
+	oTicket := CreateUdObject("Samples.SampleTicket", {"LAB-0042", 2});
 	sMessage := oTicket:Describe();
 	UsrMes(sMessage);
 

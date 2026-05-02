@@ -115,7 +115,7 @@ Usage:
 ```ssl
 :DECLARE oAnalyzer, sSummary;
 
-oAnalyzer := CreateUdObject("SampleAnalyzer", {"SAM-001", 42});
+oAnalyzer := CreateUdObject("Samples.SampleAnalyzer", {"SAM-001", 42});
 sSummary := oAnalyzer:GetDescription();
 
 UsrMes(sSummary);
@@ -181,7 +181,7 @@ Usage:
 ```ssl
 :DECLARE oSample;
 
-oSample := CreateUdObject("QcSample", {"SAM-002", "Logged", 98.6});
+oSample := CreateUdObject("Samples.QcSample", {"SAM-002", "Logged", 98.6});
 UsrMes(oSample:GetSummary());
 ```
 
@@ -247,7 +247,7 @@ Usage:
 ```ssl
 :DECLARE oTracker, sReport;
 
-oTracker := CreateUdObject("ResultTracker");
+oTracker := CreateUdObject("Samples.ResultTracker");
 sReport := oTracker:LoadAndReport({95, 102, 88, 110}, 90);
 
 UsrMes(sReport);
