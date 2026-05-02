@@ -22,9 +22,22 @@ SSL has eight core value types plus NIL (the absence of a value). Every variable
 
 - [`NIL`](../reference/literals/nil.md) equals only [`NIL`](../reference/literals/nil.md) — `NIL = NIL` is [`.T.`](../reference/literals/true.md), `NIL = ""` is [`.F.`](../reference/literals/false.md)
 - [`Empty`](../reference/functions/Empty.md)([`NIL`](../reference/literals/nil.md)) returns [`.T.`](../reference/literals/true.md)
-- Variables declared with [`:DECLARE`](../reference/keywords/DECLARE.md) start as empty string, **not** NIL
 - Functions that fail silently often return NIL
 - When calling external libraries or receiving values from the platform layer, null values surface as [`NIL`](../reference/literals/nil.md) in SSL
+
+## Variable initialization and scope
+
+Variables declared with [`:DECLARE`](../reference/keywords/DECLARE.md) initialize to **empty string `""`**, not [`NIL`](../reference/literals/nil.md). [`Empty`](../reference/functions/Empty.md) returns [`.T.`](../reference/literals/true.md) for `""`, `0`, [`NIL`](../reference/literals/nil.md), and [`.F.`](../reference/literals/false.md), so it is the safe way to test for an uninitialized or default-state value across types.
+
+When a variable is referenced, lookup proceeds in this order:
+
+1. **Local scope** — the current procedure
+2. **Caller scopes** — up the call stack
+3. **Public variables** — declared with [`:PUBLIC`](../reference/keywords/PUBLIC.md)
+
+Reading a caller's variable works but generates a warning. Always declare variables locally.
+
+Re-declaring an existing variable with [`:DECLARE`](../reference/keywords/DECLARE.md) is silently ignored — no error is thrown and the existing value is preserved.
 
 ## Type checking
 
