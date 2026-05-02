@@ -1,16 +1,14 @@
 # Data Source Files
 
-STARLIMS has three kinds of executable SSL files. **Data source files** are not compiled directly — they are preprocessed by server-side builders that rewrite them into compiler-compatible SSL before compilation. This means data source files use parameter syntax and directives that do not exist elsewhere in the SSL grammar.
+STARLIMS has three kinds of executable SSL files: **server scripts**, **SSL data sources**, and **SQL data sources**. Data source files use parameter syntax and directives that don't appear in ordinary scripts. If you are writing an ordinary script, follow the rules in [Getting Started](../getting-started.md). The rest of this page covers data source files specifically.
 
 ## File types at a glance
 
-| File type | Compiler-handled | Parameter syntax | Notes |
-|-----------|------------------|------------------|-------|
-| **Server script** | Yes | `:PARAMETERS p1, p2;` + [`:DEFAULT`](../reference/keywords/DEFAULT.md) lines | Standard SSL — all grammar rules apply |
-| **SSL data source** | Preprocessed first | `:PARAMETERS p1 := val1, p2 := val2;` | Rewritten into script form before compilation |
-| **SQL data source** | Preprocessed first | `:PARAMETERS p1 := val1, p2 := val2;` | Rewritten into a [`GetSSLDataset`](../reference/functions/GetSSLDataset.md) call before compilation |
-
-If you are writing an ordinary script, follow the rules in [Getting Started](../getting-started.md). The rest of this page covers data source files specifically.
+| File type | Parameter syntax | Notes |
+|-----------|------------------|-------|
+| **Server script** | `:PARAMETERS p1, p2;` + [`:DEFAULT`](../reference/keywords/DEFAULT.md) lines | Standard SSL — all grammar rules apply |
+| **SSL data source** | `:PARAMETERS p1 := val1, p2 := val2;` | Inline defaults; standard script layout rules do not apply |
+| **SQL data source** | `:PARAMETERS p1 := val1, p2 := val2;` plus directives | Resolved at runtime through [`GetSSLDataset`](../reference/functions/GetSSLDataset.md) |
 
 ## Inline parameter defaults
 
@@ -22,22 +20,14 @@ In SSL and SQL data source files, [`:PARAMETERS`](../reference/keywords/PARAMETE
 
 **Rules:**
 
-- Every parameter **must** have a default value (the builder reports an error otherwise).
+- Every parameter **must** have a default value.
 - `:PARAMETERS;` with no parameters is an error.
 - Do **not** use `:DEFAULT` lines in data sources — defaults are inline only.
 - Standard script layout rules do not apply.
 
-The builder rewrites the inline form into compiler-compatible SSL before compilation:
-
-```ssl
-:PARAMETERS sStatus, nMaxRows;
-:DEFAULT sStatus, "A";
-:DEFAULT nMaxRows, 100;
-```
-
 ## SQL data source directives
 
-SQL data source files accept additional directives that the `SqlDataSourceBuilder` consumes during preprocessing. They are **not** SSL keywords:
+SQL data source files accept additional directives that are not SSL keywords and are valid only in this file type:
 
 ```ssl
 :DSN := connectionName;
@@ -57,8 +47,6 @@ WHERE status = ?sStatus?
 | `:TABLENAME := name;` | Table name for the resulting dataset |
 | `:NULLASBLANK := true;` | Controls null-to-blank conversion |
 | `:INVARIANTDATECOLUMNS := col1, col2;` | Columns treated as invariant (culture-neutral) dates |
-
-The builder rewrites the entire file into an SSL script that calls [`GetSSLDataset`](../reference/functions/GetSSLDataset.md) with the appropriate arguments.
 
 ## Calling data sources
 
