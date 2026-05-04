@@ -1,6 +1,6 @@
-# SSL API Reference
+# SSL Reference
 
-Complete API reference for the **STARLIMS Scripting Language (SSL)** — covering every function, class, keyword, operator, type, and language construct available to SSL developers.
+Complete reference for the **STARLIMS Scripting Language (SSL)** — covering every function, class, keyword, operator, type, and language construct available to SSL developers.
 
 ## What's here
 

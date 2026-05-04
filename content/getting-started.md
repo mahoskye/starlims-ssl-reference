@@ -134,7 +134,7 @@ The [`=`](reference/operators/equals.md) operator on strings does **prefix match
 
 ## Next steps
 
-- Browse the [API Reference](reference/index.md) for specific elements
+- Browse the [SSL Reference](reference/index.md) for specific elements
 - Read the [Type System](guides/type-system.md) guide for coercion rules
 - See [Error Handling](guides/error-handling.md) for exception patterns
 - Review [Naming Conventions](guides/naming-conventions.md) for Hungarian prefixes and casing
