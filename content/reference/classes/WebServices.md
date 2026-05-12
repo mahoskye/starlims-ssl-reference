@@ -31,20 +31,20 @@ Creates a `WebServices` factory object.
 
 | Method | Returns | Description |
 |--------|---------|-------------|
-| `CreateHttpClient()` | [object](../types/object.md) | Returns a new HTTP client object. |
-| `CreateSoapClient()` | [object](../types/object.md) | Returns a new SOAP client object. |
+| `CreateHttpClient()` | [`HttpClient`](../returns/HttpClient.md) | Returns a new HTTP client object. |
+| `CreateSoapClient()` | [`SoapClient`](../returns/SoapClient.md) | Returns a new SOAP client object. |
 
 ### `CreateHttpClient`
 
-Returns a new HTTP client object.
+Returns a new [`HttpClient`](../returns/HttpClient.md). See its page for the methods available on the returned object — `CreateHttpRequest`, `GetResponse`, `GetText`, `GetXmlDom`, `SaveFile`, `GetLastServerException`.
 
-**Returns:** [object](../types/object.md) — A new HTTP client object.
+**Returns:** [`HttpClient`](../returns/HttpClient.md) — A new HTTP client object.
 
 ### `CreateSoapClient`
 
-Returns a new SOAP client object.
+Returns a new [`SoapClient`](../returns/SoapClient.md). See its page for the methods available on the returned object — `UseWebService`, `UseWebServiceWithCredentials`, `CallWebService`, and the [`Parameters`](../returns/SoapParameters.md) property used to populate inputs.
 
-**Returns:** [object](../types/object.md) — A new SOAP client object.
+**Returns:** [`SoapClient`](../returns/SoapClient.md) — A new SOAP client object.
 
 ## Inheritance
 
@@ -60,11 +60,10 @@ Returns a new SOAP client object.
 !!! failure "Don't"
     - Call `CreateSoapClient()` when you need an HTTP client.
     - Call `CreateHttpClient()` when you need a SOAP client.
-    - Assume this page documents the full API of the returned client objects.
 
 ## Caveats
 
-- This page documents the `WebServices` factory class only. The returned HTTP and SOAP client objects have their own APIs that are not described here.
+- This page documents the factory only. The returned clients and the objects they surface in turn (`HttpRequest`, `HttpResponse`, `HttpException`, `SoapResponse`, `SoapParameters`) live in the [Returns](../returns/index.md) section.
 
 ## Examples
 
@@ -112,4 +111,7 @@ DoProc("CreateIntegrationClient", {.T.});
 
 ## Related
 
+- [`HttpClient`](../returns/HttpClient.md)
+- [`SoapClient`](../returns/SoapClient.md)
+- [Returns section](../returns/index.md)
 - [`object`](../types/object.md)
