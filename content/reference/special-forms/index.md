@@ -1,6 +1,6 @@
 ---
 title: "Special Forms"
-summary: "6 language constructs - class infrastructure, scope references, code organization, and access control."
+summary: "8 language constructs - class infrastructure, scope references, code organization, access control, and endpoint runtime ambients."
 starlims:
   applies_to: [11]
   verified_against: [11]
@@ -8,7 +8,7 @@ starlims:
 
 # Special Forms
 
-**6 language constructs** — class infrastructure, scope references, code organization, and access control.
+**8 language constructs** — class infrastructure, scope references, code organization, access control, and endpoint runtime ambients.
 
 | Special Form | Description |
 |--------------|-------------|
@@ -18,3 +18,5 @@ starlims:
 | [code-organization](code-organization.md) | Comment regions (`/* region` / `/* endregion`) for grouping related procedures or code sections in long files. |
 | [constructor](constructor.md) | Runs one-time initialization code when a user-defined class instance is created. |
 | [me](me.md) | Provides a reference to the current class instance inside class method bodies, enabling direct access to the object's properties and methods. |
+| [request](request.md) | The incoming HTTP request inside an endpoint script — an [`SSLRequest`](../returns/SSLRequest.md) (or [`SSLWsRequest`](../returns/SSLWsRequest.md) in a web-service context). |
+| [response](response.md) | The outgoing HTTP response inside an endpoint script — an [`SSLResponse`](../returns/SSLResponse.md) (or [`SSLWsResponse`](../returns/SSLWsResponse.md) in a web-service context). |

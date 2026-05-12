@@ -1,6 +1,6 @@
 ---
 title: "SSLCodeProvider"
-summary: "Compiles published server scripts and data sources and returns the compilation results as an SSLCompilerErrorList."
+summary: "Compiles published server scripts and data sources and returns a list of compilation errors."
 id: ssl.class.sslcodeprovider
 element_type: class
 doc_status: published
@@ -11,9 +11,11 @@ starlims:
 
 # SSLCodeProvider
 
-Compiles published server scripts and data sources and returns the compilation results as an `SSLCompilerErrorList`.
+Compiles published server scripts and data sources and returns a list of compilation errors.
 
 Use `SSLCodeProvider{}` when you need to validate published SSL code before a release, during deployment checks, or while troubleshooting compile failures. The class can compile all server scripts, all data sources, one item, or all items in one or more categories. For single-item methods, pass either the item GUID or its full name in `category.name` format.
+
+Every compile method returns the same shape: a list of compilation errors. An empty list means the compile succeeded. Each entry identifies the script (name and id), the kind of script, the location of the failure (line and column), and the error message. Index into the list and read those fields directly to surface or log the errors.
 
 ## When to use
 
@@ -32,36 +34,36 @@ Creates a code provider instance.
 
 | Name | Returns | Description |
 |------|---------|-------------|
-| `CompileAll` | `SSLCompilerErrorList` | Compiles all server scripts and data sources. |
-| `CompileAllServerScripts` | `SSLCompilerErrorList` | Compiles all server scripts. |
-| `CompileAllDataSources` | `SSLCompilerErrorList` | Compiles all data sources. |
-| `CompileServerScript` | `SSLCompilerErrorList` | Compiles one server script by GUID or full name. |
-| `CompileServerScripts` | `SSLCompilerErrorList` | Compiles multiple server scripts. |
-| `CompileServerScriptCategory` | `SSLCompilerErrorList` | Compiles all server scripts in one category. |
-| `CompileServerScriptCategories` | `SSLCompilerErrorList` | Compiles all server scripts in multiple categories. |
-| `CompileDataSource` | `SSLCompilerErrorList` | Compiles one data source by GUID or full name. |
-| `CompileDataSources` | `SSLCompilerErrorList` | Compiles multiple data sources. |
-| `CompileDataSourceCategory` | `SSLCompilerErrorList` | Compiles all data sources in one category. |
-| `CompileDataSourceCategories` | `SSLCompilerErrorList` | Compiles all data sources in multiple categories. |
-| `CompileScript` | `SSLCompilerErrorList` | Accepts SSL code text, but currently raises a not-implemented error for non-null input. |
+| `CompileAll` | [object](../types/object.md) | Compiles all server scripts and data sources. |
+| `CompileAllServerScripts` | [object](../types/object.md) | Compiles all server scripts. |
+| `CompileAllDataSources` | [object](../types/object.md) | Compiles all data sources. |
+| `CompileServerScript` | [object](../types/object.md) | Compiles one server script by GUID or full name. |
+| `CompileServerScripts` | [object](../types/object.md) | Compiles multiple server scripts. |
+| `CompileServerScriptCategory` | [object](../types/object.md) | Compiles all server scripts in one category. |
+| `CompileServerScriptCategories` | [object](../types/object.md) | Compiles all server scripts in multiple categories. |
+| `CompileDataSource` | [object](../types/object.md) | Compiles one data source by GUID or full name. |
+| `CompileDataSources` | [object](../types/object.md) | Compiles multiple data sources. |
+| `CompileDataSourceCategory` | [object](../types/object.md) | Compiles all data sources in one category. |
+| `CompileDataSourceCategories` | [object](../types/object.md) | Compiles all data sources in multiple categories. |
+| `CompileScript` | [object](../types/object.md) | Accepts SSL code text, but currently raises a not-implemented error for non-null input. |
 
 ### `CompileAll`
 
 Compiles all published server scripts and all published data sources.
 
-**Returns:** SSLCompilerErrorList — Compilation errors collected from both server scripts and data sources.
+**Returns:** [object](../types/object.md) — Compilation errors collected from both server scripts and data sources.
 
 ### `CompileAllServerScripts`
 
 Compiles all server scripts.
 
-**Returns:** SSLCompilerErrorList — Compilation errors collected from all server scripts.
+**Returns:** [object](../types/object.md) — Compilation errors collected from all server scripts.
 
 ### `CompileAllDataSources`
 
 Compiles all data sources.
 
-**Returns:** SSLCompilerErrorList — Compilation errors collected from all data sources.
+**Returns:** [object](../types/object.md) — Compilation errors collected from all data sources.
 
 ### `CompileServerScript`
 
@@ -71,7 +73,7 @@ Compiles one server script by GUID or full name.
 |-----------|------|----------|-------------|
 | `sScriptId` | [string](../types/string.md) | yes | Server script GUID or full name in `category.script` format. |
 
-**Returns:** SSLCompilerErrorList — Compilation errors for the requested server script.
+**Returns:** [object](../types/object.md) — Compilation errors for the requested server script.
 
 **Raises:**
 - `Argument sScriptId cannot be null.` when `sScriptId` is omitted.
@@ -86,7 +88,7 @@ Compiles multiple server scripts.
 |-----------|------|----------|-------------|
 | `aScriptsIds` | [array](../types/array.md) | yes | Array of server script GUIDs or full names in `category.script` format. |
 
-**Returns:** SSLCompilerErrorList — Combined compilation errors for the requested server scripts.
+**Returns:** [object](../types/object.md) — Combined compilation errors for the requested server scripts.
 
 **Raises:**
 - `Argument aScriptsIds cannot be null.` when `aScriptsIds` is omitted.
@@ -99,7 +101,7 @@ Compiles all server scripts in one category.
 |-----------|------|----------|-------------|
 | `sCategoryId` | [string](../types/string.md) | yes | Category GUID used to select the server scripts to compile. |
 
-**Returns:** SSLCompilerErrorList — Combined compilation errors for the server scripts in that category.
+**Returns:** [object](../types/object.md) — Combined compilation errors for the server scripts in that category.
 
 **Raises:**
 - `Argument sCategoryId cannot be null.` when `sCategoryId` is omitted.
@@ -112,7 +114,7 @@ Compiles all server scripts in multiple categories.
 |-----------|------|----------|-------------|
 | `aCategoriesIds` | [array](../types/array.md) | yes | Array of category GUIDs. |
 
-**Returns:** SSLCompilerErrorList — Combined compilation errors for all server scripts in the requested categories.
+**Returns:** [object](../types/object.md) — Combined compilation errors for all server scripts in the requested categories.
 
 **Raises:**
 - `Argument aCategoriesIds cannot be null.` when `aCategoriesIds` is omitted.
@@ -125,7 +127,7 @@ Compiles one data source by GUID or full name.
 |-----------|------|----------|-------------|
 | `sScriptId` | [string](../types/string.md) | yes | Data source GUID or full name in `category.datasource` format. |
 
-**Returns:** SSLCompilerErrorList — Compilation errors for the requested data source.
+**Returns:** [object](../types/object.md) — Compilation errors for the requested data source.
 
 **Raises:**
 - `Argument sScriptId cannot be null.` when `sScriptId` is omitted.
@@ -140,7 +142,7 @@ Compiles multiple data sources.
 |-----------|------|----------|-------------|
 | `aScriptsIds` | [array](../types/array.md) | yes | Array of data source GUIDs or full names in `category.datasource` format. |
 
-**Returns:** SSLCompilerErrorList — Combined compilation errors for the requested data sources.
+**Returns:** [object](../types/object.md) — Combined compilation errors for the requested data sources.
 
 **Raises:**
 - `Argument aScriptsIds cannot be null.` when `aScriptsIds` is omitted.
@@ -153,7 +155,7 @@ Compiles all data sources in one category.
 |-----------|------|----------|-------------|
 | `sCategoryId` | [string](../types/string.md) | yes | Category GUID used to select the data sources to compile. |
 
-**Returns:** SSLCompilerErrorList — Combined compilation errors for the data sources in that category.
+**Returns:** [object](../types/object.md) — Combined compilation errors for the data sources in that category.
 
 **Raises:**
 - `Argument sCategoryId cannot be null.` when `sCategoryId` is omitted.
@@ -166,7 +168,7 @@ Compiles all data sources in multiple categories.
 |-----------|------|----------|-------------|
 | `aCategoriesIds` | [array](../types/array.md) | yes | Array of category GUIDs. |
 
-**Returns:** SSLCompilerErrorList — Combined compilation errors for all data sources in the requested categories.
+**Returns:** [object](../types/object.md) — Combined compilation errors for all data sources in the requested categories.
 
 **Raises:**
 - `Argument aCategoriesIds cannot be null.` when `aCategoriesIds` is omitted.
@@ -179,7 +181,7 @@ Accepts a block of SSL code as text.
 |-----------|------|----------|-------------|
 | `sCode` | [string](../types/string.md) | yes | SSL code text to compile. |
 
-**Returns:** SSLCompilerErrorList — Intended compilation result object.
+**Returns:** [object](../types/object.md) — Intended compilation result object.
 
 **Raises:**
 - `Argument sCode cannot be null.` when `sCode` is omitted.
@@ -194,7 +196,7 @@ Accepts a block of SSL code as text.
 !!! success "Do"
     - Pass a full `category.name` or a GUID when targeting one server script or data source.
     - Use the bulk and category methods when validating larger changes.
-    - Check the returned `SSLCompilerErrorList` even when you expect a clean compile.
+    - Check the returned error list even when you expect a clean compile.
     - Use category GUIDs with the `...Category` and `...Categories` methods.
 
 !!! failure "Don't"
@@ -212,7 +214,7 @@ Accepts a block of SSL code as text.
 
 ### Compile one server script
 
-Compiles a specific server script by full name and returns the `SSLCompilerErrorList` to the caller for inspection.
+Compiles a specific server script by full name and returns the error list to the caller for inspection.
 
 ```ssl
 :PROCEDURE ValidateOneScript;
@@ -229,7 +231,7 @@ Call it with `DoProc("ValidateOneScript")`.
 
 ### Compile one category of data sources
 
-Compiles all data sources in a known category by its GUID and returns the combined `SSLCompilerErrorList` to the caller.
+Compiles all data sources in a known category by its GUID and returns the combined error list to the caller.
 
 ```ssl
 :PROCEDURE ValidateDataSourceCategory;
