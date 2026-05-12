@@ -73,6 +73,42 @@ nSmall := 1.2e-3;
 | [`ToJson()`](../functions/ToJson.md) | Method | [`string`](string.md) | Serializes the number with `.` as the decimal separator and `,` as the group separator. |
 | `clone()` | Method | `number` | Creates a copy of the current numeric value. |
 
+## Calling .NET numeric methods
+
+In addition to the SSL-defined members above, any public method or property on the underlying .NET numeric type is callable on a `number` value with the `:` method-call syntax. The runtime forwards `nValue:Name(args)` to that .NET value by name.
+
+The .NET type that backs a `number` depends on the current value: integer-valued numbers within the 32-bit signed integer range present as `System.Int32`, and all other numeric values present as `System.Double`. As a result, the available member set varies with the value. Members common to both types — for example, `CompareTo(other)`, `Equals(other)`, and `ToString(sFormat)` with a .NET format string — work for any numeric value. Type-specific members only resolve when the value happens to match that type, so guard with `IsInt` if needed.
+
+Static numeric helpers that live on other .NET types — for example, `System.Math.Sqrt` or `System.Math.Round` — are not reachable through this dispatch, because `Math` is not the value's type. Use the SSL function library for those operations.
+
+This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined number members and SSL-native math functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover.
+
+### Example: formatting a number with grouped digits
+
+Uses .NET's single-argument `ToString(sFormat)` overload with the `"N0"` standard format string to render a large integer with thousands separators. SSL's own `ToString()` and `ToString(sDecimal, sGroup)` overloads are unaffected; the single-argument form resolves to the .NET method on the backing numeric type and uses the current culture's separators.
+
+```ssl
+:PROCEDURE FormatRecordCount;
+    :DECLARE nRecords, sFormatted;
+
+    nRecords := 1234567;
+    sFormatted := nRecords:ToString("N0");
+
+    UsrMes(sFormatted);
+
+    :RETURN sFormatted;
+:ENDPROC;
+
+/* Usage;
+DoProc("FormatRecordCount");
+```
+
+[`UsrMes`](../functions/UsrMes.md) displays:
+
+```
+1,234,567
+```
+
 ## Indexing
 
 - **Supported:** false

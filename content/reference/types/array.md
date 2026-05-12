@@ -61,6 +61,45 @@ Arrays support identity comparison operators. Arithmetic and relational operator
 | `value` | Property | — | `any` | Gets or replaces the full array contents. |
 | `Count` | Property | — | [`number`](number.md) | Returns the number of top-level elements. |
 
+## Calling .NET `Array` methods
+
+In addition to the SSL-defined members above, any public method or property on the underlying .NET array is callable on an `array` value with the `:` method-call syntax. The runtime forwards `aValues:Name(args)` to the underlying `System.Object[]` (which inherits from `System.Array`) by name.
+
+In practice, this passthrough is rarely the best path for SSL arrays, for two reasons:
+
+- The most useful array operations in .NET — `Sort`, `Reverse`, `IndexOf`, `BinarySearch` — are static methods on `System.Array` that take the array as an explicit parameter rather than a receiver. They are reached most reliably through explicit netobject interop with [`LimsNETTypeOf`](../functions/LimsNETTypeOf.md) (see [`netobject`](netobject.md)) rather than through the implicit `:` passthrough on an array value.
+- The instance-level members reachable through the `:` syntax are limited (`Length`, `Rank`, `GetType()`, `Clone()`) and largely overlap with SSL's own array surface. Where they do differ, the semantics differ subtly — for example, `Clone()` returns a shallow copy of the underlying `object[]`, while SSL's `clone()` produces a deep copy of the SSL array and its nested values.
+
+Prefer SSL-native array functions ([`ALen`](../functions/ALen.md), [`AScan`](../functions/AScan.md), [`SortArray`](../functions/SortArray.md), [`AAdd`](../functions/AAdd.md)) and the SSL-defined members for portability and readability. Reach for the .NET passthrough only when you need a specific `System.Array` operation that the SSL library does not cover.
+
+This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete.
+
+### Example: reading the underlying `Array.Length` property
+
+Reads .NET's `Length` property on the underlying `System.Object[]` through the `:` dispatch. The result matches what SSL exposes through the `Count` property and [`ALen`](../functions/ALen.md), so this is primarily a demonstration that the dispatch works on `array` values rather than a recommended pattern.
+
+```ssl
+:PROCEDURE ShowArrayLength;
+    :DECLARE aSamples, nLength;
+
+    aSamples := {"S-1001", "S-1002", "S-1003"};
+    nLength := aSamples:Length;
+
+    UsrMes("Length: " + LimsString(nLength));
+
+    :RETURN nLength;
+:ENDPROC;
+
+/* Usage;
+DoProc("ShowArrayLength");
+```
+
+[`UsrMes`](../functions/UsrMes.md) displays:
+
+```text
+Length: 3
+```
+
 ## Indexing
 
 | Attribute | Value |

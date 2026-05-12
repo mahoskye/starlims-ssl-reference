@@ -21,6 +21,8 @@ The `netobject` type represents a value returned by SSL's .NET interop helpers s
 
 `IsEmpty()` returns [`.T.`](../literals/true.md) only when the wrapped reference is null. [`ToJson()`](../functions/ToJson.md) is supported only when the wrapped value is a `DataSet`; other wrapped values raise an error. `netobject` does not support [`AddProperty()`](../functions/AddProperty.md).
 
+The reflection-based dispatch behind `Invoke()` and `GetProperty()` is also available implicitly on every SSL value. Writing `sValue:ToUpper()` on a [`string`](string.md), `dDate:AddMonths(3)` on a [`date`](date.md), or `aValues:Length` on an [`array`](array.md) forwards to the underlying .NET value in the same way `oNetObject:Invoke("MethodName")` does here. Use `netobject` and its explicit methods when working with externally constructed .NET values; see the type pages for [`string`](string.md), [`number`](number.md), [`date`](date.md), [`boolean`](boolean.md), and [`array`](array.md) for the implicit form.
+
 ## Creating values
 
 `netobject` values cannot be created with a literal. They are returned by interop functions.

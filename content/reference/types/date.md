@@ -58,6 +58,50 @@ dParsed := CToD("04/15/2026");
 | `MakeLocal()` | Method | [`NIL`](../literals/nil.md) | Marks the date as a local-time value so JSON output includes the local offset. |
 | `ChangeKind(nKind)` | Method | [`NIL`](../literals/nil.md) | Changes how the stored date is interpreted for later serialization. |
 
+## Calling .NET `DateTime` methods
+
+In addition to the SSL-defined members above, any public method or property on .NET's `System.DateTime` is callable on a non-empty `date` value with the `:` method-call syntax. The runtime forwards `dValue:Name(args)` to the underlying .NET date by name, so the surface is effectively the full `System.DateTime` API.
+
+This is particularly useful for arithmetic that SSL's [`+`](../operators/plus.md) and [`-`](../operators/minus.md) operators do not cover, since those only add or subtract whole-day offsets. `System.DateTime` offers month-aware and year-aware arithmetic — for example `AddMonths(n)`, `AddYears(n)`, `AddHours(n)`, `AddMinutes(n)` — and component accessors such as `Year`, `Month`, `Day`, `DayOfWeek`, and `DayOfYear`.
+
+Empty dates cannot be dispatched through this passthrough. The underlying .NET value of an empty date is `null`, and calling a method on it raises a null-reference error. Always guard with [`Empty`](../functions/Empty.md) before reaching for .NET members.
+
+This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined date members and SSL-native date functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover.
+
+### Example: month-aware date arithmetic
+
+Uses .NET's `AddMonths(nMonths)` method to compute a date three months after a start date. SSL's [`+`](../operators/plus.md) operator only adds whole-day offsets, so month-aware arithmetic — which correctly handles end-of-month and leap-year edge cases — is only available through this passthrough.
+
+```ssl
+:PROCEDURE ComputeReviewDate;
+    :DECLARE dStartDate, dReviewDate;
+
+    dStartDate := CToD("01/31/2026");
+
+    :IF Empty(dStartDate);
+        UsrMes("Start date is required");
+        :RETURN .F.;
+    :ENDIF;
+
+    dReviewDate := dStartDate:AddMonths(3);
+
+    UsrMes(dReviewDate:ToString("MM/dd/yyyy"));
+
+    :RETURN dReviewDate;
+:ENDPROC;
+
+/* Usage;
+DoProc("ComputeReviewDate");
+```
+
+[`UsrMes`](../functions/UsrMes.md) displays:
+
+```
+04/30/2026
+```
+
+January 31 plus three months lands on April 30, because April has only 30 days. `AddMonths` clamps to the last day of the target month.
+
 ## Indexing
 
 - **Supported:** false

@@ -63,6 +63,38 @@ sBracketed := [text value];
 | `CompareTo(sOther)` | Method | `sOther` (`string`) | [`number`](number.md) | Returns a negative number, `0`, or a positive number based on lexical ordering. |
 | `Index(nPos)` | Method | `nPos` ([`number`](number.md)) | `string` | Returns the character at the specified 1-based position. In SSL code this is normally used through `sValue[nPos]`. |
 
+## Calling .NET `String` methods
+
+In addition to the SSL-defined members above, any public method or property on .NET's `System.String` is callable on a `string` value with the `:` method-call syntax. The runtime forwards `sValue:Name(args)` to the underlying .NET string by name, so the surface is effectively the full `System.String` API. Static methods such as `String.Format` and `String.Join` are reachable through the same syntax; for a static call the receiver is only used to locate the type.
+
+This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer SSL-native string functions ([`Replace`](../functions/Replace.md), [`Upper`](../functions/Upper.md), [`Lower`](../functions/Lower.md), [`SubStr`](../functions/SubStr.md), and similar) for portability, and reserve direct .NET calls for behavior the SSL library does not cover.
+
+### Example: calling `String.Format` through a string value
+
+Uses .NET's static `String.Format` to build a formatted message. The receiver `sName` only directs the runtime to `System.String`; the formatted output comes entirely from the arguments.
+
+```ssl
+:PROCEDURE BuildGreeting;
+    :DECLARE sName, sMessage;
+
+    sName := "Hello";
+    sMessage := sName:Format("{0} world", sName);
+
+    UsrMes(sMessage);
+
+    :RETURN sMessage;
+:ENDPROC;
+
+/* Usage;
+DoProc("BuildGreeting");
+```
+
+[`UsrMes`](../functions/UsrMes.md) displays:
+
+```
+Hello world
+```
+
 ## Indexing
 
 | Attribute | Value |

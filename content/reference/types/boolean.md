@@ -66,6 +66,43 @@ bOther := .F.;
 | [`ToJson()`](../functions/ToJson.md) | [string](string.md) | Returns the JSON boolean text `true` or `false`. |
 | `clone()` | boolean | Returns a copy of the boolean value. |
 
+## Calling .NET `Boolean` methods
+
+In addition to the SSL-defined members above, any public method or property on .NET's `System.Boolean` is callable on a `boolean` value with the `:` method-call syntax. The runtime forwards `bValue:Name(args)` to the underlying .NET boolean by name.
+
+`System.Boolean` exposes a very thin instance surface — essentially `CompareTo(other)`, `Equals(other)`, and `ToString()` — and its members either duplicate or differ subtly from SSL's native idioms. Notably, .NET's `ToString()` returns the strings `"True"` or `"False"` rather than SSL's [`.T.`](../literals/true.md) or [`.F.`](../literals/false.md), so reaching for it as a display conversion can be surprising. Use SSL's logical operators, [`Empty`](../functions/Empty.md), and [`LimsString`](../functions/LimsString.md) for boolean work; there is rarely a reason to dispatch through the .NET passthrough on a boolean value.
+
+This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete.
+
+### Example: how .NET `ToString()` differs from SSL conventions
+
+Compares `bFlag:ToString()` against [`LimsString`](../functions/LimsString.md) to show that the .NET passthrough produces `"True"` and `"False"` while SSL's conversion functions produce [`.T.`](../literals/true.md) and [`.F.`](../literals/false.md). Prefer [`LimsString`](../functions/LimsString.md) when building user-facing text from a boolean value.
+
+```ssl
+:PROCEDURE CompareBooleanFormats;
+    :DECLARE bFlag, sDotNet, sSsl;
+
+    bFlag := .T.;
+    sDotNet := bFlag:ToString();
+    sSsl := LimsString(bFlag);
+
+    UsrMes("Via .NET ToString(): " + sDotNet);
+    UsrMes("Via LimsString():    " + sSsl);
+
+    :RETURN sSsl;
+:ENDPROC;
+
+/* Usage;
+DoProc("CompareBooleanFormats");
+```
+
+[`UsrMes`](../functions/UsrMes.md) displays:
+
+```text
+Via .NET ToString(): True
+Via LimsString():    .T.
+```
+
 ## Indexing
 
 - **Supported:** false
