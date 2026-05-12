@@ -498,6 +498,8 @@
       
         
       
+        
+      
     
     
     
@@ -2597,6 +2599,88 @@
       
         
       
+    
+    
+    
+      
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+  
+    <a href="../../returns/" class="md-nav__link">
+      
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Returns
+  
+
+    
+  </span>
+  
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -2965,6 +3049,10 @@
       
         
           
+        
+      
+        
+      
         
       
         
@@ -3437,8 +3525,9 @@
 
 
 <h1 id="sslcodeprovider">SSLCodeProvider<a class="headerlink" href="#sslcodeprovider" title="Permanent link">&para;</a></h1>
-<p>Compiles published server scripts and data sources and returns the compilation results as an <code>SSLCompilerErrorList</code>.</p>
+<p>Compiles published server scripts and data sources and returns a list of compilation errors.</p>
 <p>Use <code>SSLCodeProvider{}</code> when you need to validate published SSL code before a release, during deployment checks, or while troubleshooting compile failures. The class can compile all server scripts, all data sources, one item, or all items in one or more categories. For single-item methods, pass either the item GUID or its full name in <code>category.name</code> format.</p>
+<p>Every compile method returns the same shape: a list of compilation errors. An empty list means the compile succeeded. Each entry identifies the script (name and id), the kind of script, the location of the failure (line and column), and the error message. Index into the list and read those fields directly to surface or log the errors.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need to validate all published server scripts before a release.</li>
@@ -3461,75 +3550,75 @@
 <tbody>
 <tr>
 <td><code>CompileAll</code></td>
-<td><code>SSLCompilerErrorList</code></td>
+<td><a href="../../types/object/">object</a></td>
 <td>Compiles all server scripts and data sources.</td>
 </tr>
 <tr>
 <td><code>CompileAllServerScripts</code></td>
-<td><code>SSLCompilerErrorList</code></td>
+<td><a href="../../types/object/">object</a></td>
 <td>Compiles all server scripts.</td>
 </tr>
 <tr>
 <td><code>CompileAllDataSources</code></td>
-<td><code>SSLCompilerErrorList</code></td>
+<td><a href="../../types/object/">object</a></td>
 <td>Compiles all data sources.</td>
 </tr>
 <tr>
 <td><code>CompileServerScript</code></td>
-<td><code>SSLCompilerErrorList</code></td>
+<td><a href="../../types/object/">object</a></td>
 <td>Compiles one server script by GUID or full name.</td>
 </tr>
 <tr>
 <td><code>CompileServerScripts</code></td>
-<td><code>SSLCompilerErrorList</code></td>
+<td><a href="../../types/object/">object</a></td>
 <td>Compiles multiple server scripts.</td>
 </tr>
 <tr>
 <td><code>CompileServerScriptCategory</code></td>
-<td><code>SSLCompilerErrorList</code></td>
+<td><a href="../../types/object/">object</a></td>
 <td>Compiles all server scripts in one category.</td>
 </tr>
 <tr>
 <td><code>CompileServerScriptCategories</code></td>
-<td><code>SSLCompilerErrorList</code></td>
+<td><a href="../../types/object/">object</a></td>
 <td>Compiles all server scripts in multiple categories.</td>
 </tr>
 <tr>
 <td><code>CompileDataSource</code></td>
-<td><code>SSLCompilerErrorList</code></td>
+<td><a href="../../types/object/">object</a></td>
 <td>Compiles one data source by GUID or full name.</td>
 </tr>
 <tr>
 <td><code>CompileDataSources</code></td>
-<td><code>SSLCompilerErrorList</code></td>
+<td><a href="../../types/object/">object</a></td>
 <td>Compiles multiple data sources.</td>
 </tr>
 <tr>
 <td><code>CompileDataSourceCategory</code></td>
-<td><code>SSLCompilerErrorList</code></td>
+<td><a href="../../types/object/">object</a></td>
 <td>Compiles all data sources in one category.</td>
 </tr>
 <tr>
 <td><code>CompileDataSourceCategories</code></td>
-<td><code>SSLCompilerErrorList</code></td>
+<td><a href="../../types/object/">object</a></td>
 <td>Compiles all data sources in multiple categories.</td>
 </tr>
 <tr>
 <td><code>CompileScript</code></td>
-<td><code>SSLCompilerErrorList</code></td>
+<td><a href="../../types/object/">object</a></td>
 <td>Accepts SSL code text, but currently raises a not-implemented error for non-null input.</td>
 </tr>
 </tbody>
 </table>
 <h3 id="compileall"><code>CompileAll</code><a class="headerlink" href="#compileall" title="Permanent link">&para;</a></h3>
 <p>Compiles all published server scripts and all published data sources.</p>
-<p><strong>Returns:</strong> SSLCompilerErrorList — Compilation errors collected from both server scripts and data sources.</p>
+<p><strong>Returns:</strong> <a href="../../types/object/">object</a> — Compilation errors collected from both server scripts and data sources.</p>
 <h3 id="compileallserverscripts"><code>CompileAllServerScripts</code><a class="headerlink" href="#compileallserverscripts" title="Permanent link">&para;</a></h3>
 <p>Compiles all server scripts.</p>
-<p><strong>Returns:</strong> SSLCompilerErrorList — Compilation errors collected from all server scripts.</p>
+<p><strong>Returns:</strong> <a href="../../types/object/">object</a> — Compilation errors collected from all server scripts.</p>
 <h3 id="compilealldatasources"><code>CompileAllDataSources</code><a class="headerlink" href="#compilealldatasources" title="Permanent link">&para;</a></h3>
 <p>Compiles all data sources.</p>
-<p><strong>Returns:</strong> SSLCompilerErrorList — Compilation errors collected from all data sources.</p>
+<p><strong>Returns:</strong> <a href="../../types/object/">object</a> — Compilation errors collected from all data sources.</p>
 <h3 id="compileserverscript"><code>CompileServerScript</code><a class="headerlink" href="#compileserverscript" title="Permanent link">&para;</a></h3>
 <p>Compiles one server script by GUID or full name.</p>
 <table>
@@ -3550,7 +3639,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Returns:</strong> SSLCompilerErrorList — Compilation errors for the requested server script.</p>
+<p><strong>Returns:</strong> <a href="../../types/object/">object</a> — Compilation errors for the requested server script.</p>
 <p><strong>Raises:</strong>
 - <code>Argument sScriptId cannot be null.</code> when <code>sScriptId</code> is omitted.
 - <code>Argument sScriptId cannot be null or empty.</code> when <code>sScriptId</code> is an empty string.
@@ -3575,7 +3664,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Returns:</strong> SSLCompilerErrorList — Combined compilation errors for the requested server scripts.</p>
+<p><strong>Returns:</strong> <a href="../../types/object/">object</a> — Combined compilation errors for the requested server scripts.</p>
 <p><strong>Raises:</strong>
 - <code>Argument aScriptsIds cannot be null.</code> when <code>aScriptsIds</code> is omitted.</p>
 <h3 id="compileserverscriptcategory"><code>CompileServerScriptCategory</code><a class="headerlink" href="#compileserverscriptcategory" title="Permanent link">&para;</a></h3>
@@ -3598,7 +3687,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Returns:</strong> SSLCompilerErrorList — Combined compilation errors for the server scripts in that category.</p>
+<p><strong>Returns:</strong> <a href="../../types/object/">object</a> — Combined compilation errors for the server scripts in that category.</p>
 <p><strong>Raises:</strong>
 - <code>Argument sCategoryId cannot be null.</code> when <code>sCategoryId</code> is omitted.</p>
 <h3 id="compileserverscriptcategories"><code>CompileServerScriptCategories</code><a class="headerlink" href="#compileserverscriptcategories" title="Permanent link">&para;</a></h3>
@@ -3621,7 +3710,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Returns:</strong> SSLCompilerErrorList — Combined compilation errors for all server scripts in the requested categories.</p>
+<p><strong>Returns:</strong> <a href="../../types/object/">object</a> — Combined compilation errors for all server scripts in the requested categories.</p>
 <p><strong>Raises:</strong>
 - <code>Argument aCategoriesIds cannot be null.</code> when <code>aCategoriesIds</code> is omitted.</p>
 <h3 id="compiledatasource"><code>CompileDataSource</code><a class="headerlink" href="#compiledatasource" title="Permanent link">&para;</a></h3>
@@ -3644,7 +3733,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Returns:</strong> SSLCompilerErrorList — Compilation errors for the requested data source.</p>
+<p><strong>Returns:</strong> <a href="../../types/object/">object</a> — Compilation errors for the requested data source.</p>
 <p><strong>Raises:</strong>
 - <code>Argument sScriptId cannot be null.</code> when <code>sScriptId</code> is omitted.
 - <code>Argument sScriptId cannot be null or empty.</code> when <code>sScriptId</code> is an empty string.
@@ -3669,7 +3758,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Returns:</strong> SSLCompilerErrorList — Combined compilation errors for the requested data sources.</p>
+<p><strong>Returns:</strong> <a href="../../types/object/">object</a> — Combined compilation errors for the requested data sources.</p>
 <p><strong>Raises:</strong>
 - <code>Argument aScriptsIds cannot be null.</code> when <code>aScriptsIds</code> is omitted.</p>
 <h3 id="compiledatasourcecategory"><code>CompileDataSourceCategory</code><a class="headerlink" href="#compiledatasourcecategory" title="Permanent link">&para;</a></h3>
@@ -3692,7 +3781,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Returns:</strong> SSLCompilerErrorList — Combined compilation errors for the data sources in that category.</p>
+<p><strong>Returns:</strong> <a href="../../types/object/">object</a> — Combined compilation errors for the data sources in that category.</p>
 <p><strong>Raises:</strong>
 - <code>Argument sCategoryId cannot be null.</code> when <code>sCategoryId</code> is omitted.</p>
 <h3 id="compiledatasourcecategories"><code>CompileDataSourceCategories</code><a class="headerlink" href="#compiledatasourcecategories" title="Permanent link">&para;</a></h3>
@@ -3715,7 +3804,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Returns:</strong> SSLCompilerErrorList — Combined compilation errors for all data sources in the requested categories.</p>
+<p><strong>Returns:</strong> <a href="../../types/object/">object</a> — Combined compilation errors for all data sources in the requested categories.</p>
 <p><strong>Raises:</strong>
 - <code>Argument aCategoriesIds cannot be null.</code> when <code>aCategoriesIds</code> is omitted.</p>
 <h3 id="compilescript"><code>CompileScript</code><a class="headerlink" href="#compilescript" title="Permanent link">&para;</a></h3>
@@ -3738,7 +3827,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Returns:</strong> SSLCompilerErrorList — Intended compilation result object.</p>
+<p><strong>Returns:</strong> <a href="../../types/object/">object</a> — Intended compilation result object.</p>
 <p><strong>Raises:</strong>
 - <code>Argument sCode cannot be null.</code> when <code>sCode</code> is omitted.
 - <code>The method or operation is not implemented.</code> for any non-null <code>sCode</code> value.</p>
@@ -3750,7 +3839,7 @@
 <ul>
 <li>Pass a full <code>category.name</code> or a GUID when targeting one server script or data source.</li>
 <li>Use the bulk and category methods when validating larger changes.</li>
-<li>Check the returned <code>SSLCompilerErrorList</code> even when you expect a clean compile.</li>
+<li>Check the returned error list even when you expect a clean compile.</li>
 <li>Use category GUIDs with the <code>...Category</code> and <code>...Categories</code> methods.</li>
 </ul>
 </div>
@@ -3770,7 +3859,7 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="compile-one-server-script">Compile one server script<a class="headerlink" href="#compile-one-server-script" title="Permanent link">&para;</a></h3>
-<p>Compiles a specific server script by full name and returns the <code>SSLCompilerErrorList</code> to the caller for inspection.</p>
+<p>Compiles a specific server script by full name and returns the error list to the caller for inspection.</p>
 <div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateOneScript</span><span class="p">;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oProvider</span><span class="p">,</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -3782,7 +3871,7 @@
 </code></pre></div>
 <p>Call it with <code>DoProc("ValidateOneScript")</code>.</p>
 <h3 id="compile-one-category-of-data-sources">Compile one category of data sources<a class="headerlink" href="#compile-one-category-of-data-sources" title="Permanent link">&para;</a></h3>
-<p>Compiles all data sources in a known category by its GUID and returns the combined <code>SSLCompilerErrorList</code> to the caller.</p>
+<p>Compiles all data sources in a known category by its GUID and returns the combined error list to the caller.</p>
 <div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateDataSourceCategory</span><span class="p">;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oProvider</span><span class="p">,</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
