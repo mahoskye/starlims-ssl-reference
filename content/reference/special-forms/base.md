@@ -15,24 +15,20 @@ starlims:
 
 Provides explicit access to members on a class's immediate parent type from within a class method.
 
-Use `Base:MemberName` when a derived class needs the parent implementation or the parent version of a member instead of the current class version. `Base` always targets the current class's base type, so `Base:MethodName()` calls the parent method directly and `Base:FieldName` or `Base:PropertyName` reads or writes the parent member rather than the derived one.
+Use `Base:MemberName` when a derived class needs the parent implementation or the parent version of a member instead of the current class version. `Base` always targets the current class's base type, so `Base:MethodName()` calls the parent method directly and `Base:FieldName` reads or writes the parent field rather than the derived one.
 
-`Base` resolves the member lookup against the immediate parent class of the current class. For method calls, the parent method must exist or compilation fails. For field or property access, the compiler resolves the member against the parent type and warns if it cannot find a matching base member.
-
-!!! warning "Inherited fields must be qualified"
-    Inside a derived class method, a bare identifier refers to a local variable or [`:PARAMETERS`](../keywords/PARAMETERS.md) entry — never to a field declared on the parent class. Read or write a parent field as `Base:fieldName`, and a field declared on the current class as [`Me:fieldName`](me.md). Compound assignments (`+=`, `-=`, etc.) need the same qualification.
+`Base` resolves the member lookup against the immediate parent class of the current class. For method calls, the parent method must exist or compilation fails. For field access, the compiler resolves the member against the parent type and warns if it cannot find a matching base member.
 
 ## When to use it
 
 - When an overridden method needs to call the parent implementation.
-- When derived code needs the parent version of a field or property.
+- When derived code needs the parent version of a field.
 - When a derived constructor must run parent initialization before its own setup.
 
 ## Syntax
 
 ```ssl
 Base:FieldName;
-Base:PropertyName;
 Base:MethodName(args);
 Base:Constructor(args);
 ```
@@ -61,7 +57,7 @@ Base:Constructor(args);
 - `Base` must be written as member access: `Base:MethodName()` or `Base:FieldName`.
   It cannot be used as a standalone expression.
 - A missing base method is a compile-time error.
-- Base field and property access is limited to members available on the parent type.
+- Base field access is limited to members available on the parent type.
 - `Base` outside a [`:CLASS`](../keywords/CLASS.md) method raises a compile-time error.
 
 ## Examples
