@@ -281,4 +281,4 @@ Three [special forms](../special-forms/index.md#class-infrastructure) are only m
 - [`Base:`](../special-forms/base.md)
 - [`DECLARE`](DECLARE.md)
 - [`PROCEDURE`](PROCEDURE.md)
-- [`constructor`](../special-forms/constructor.md)
+- [`Constructor`](../special-forms/constructor.md)
