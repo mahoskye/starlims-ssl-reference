@@ -1,5 +1,5 @@
 ---
-title: "me"
+title: "Me:"
 summary: "Provides a reference to the current class instance inside :CLASS methods."
 id: ssl.special_form.me
 element_type: special_form
@@ -9,7 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# me
+# Me:
 
 ## What it does
 
@@ -210,6 +210,6 @@ MaxRetries = 5
 
 ## Related elements
 
-- [`base`](base.md)
-- [`constructor`](constructor.md)
+- [`Base:`](base.md)
+- [`Constructor`](constructor.md)
 - [`CLASS`](../keywords/CLASS.md)

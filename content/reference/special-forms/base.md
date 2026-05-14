@@ -1,5 +1,5 @@
 ---
-title: "base"
+title: "Base:"
 summary: "Provides explicit access to members on a class's immediate parent type from within a class method."
 id: ssl.special_form.base
 element_type: special_form
@@ -9,7 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# base
+# Base:
 
 ## What it does
 
@@ -48,7 +48,7 @@ Base:Constructor(args);
     - Keep `Base` usage focused on places where the parent implementation is clearly part of the design.
 
 !!! failure "Don't"
-    - Use `Base` when [`Me`](me.md)`:MethodName()` is the intended polymorphic call path. `Base` skips the derived override.
+    - Use `Base` when [`Me:`](me.md)`MethodName()` is the intended polymorphic call path. `Base` skips the derived override.
     - Assume a derived member name automatically exists on the parent class too. `Base` only works with members available on the parent type.
     - Scatter `Base` calls through unrelated logic. Overuse makes inheritance behavior harder to follow.
 
@@ -210,7 +210,7 @@ Legal name: Alice Adams
 
 ## Related elements
 
-- [`me`](me.md)
-- [`constructor`](constructor.md)
+- [`Me:`](me.md)
+- [`Constructor`](constructor.md)
 - [`CLASS`](../keywords/CLASS.md)
 - [`INHERIT`](../keywords/INHERIT.md)

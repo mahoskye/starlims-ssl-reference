@@ -1,5 +1,5 @@
 ---
-title: "constructor"
+title: "Constructor"
 summary: "Runs one-time class initialization code when a user-defined class instance is created."
 id: ssl.special_form.constructor
 element_type: special_form
@@ -9,7 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# constructor
+# Constructor
 
 ## What it does
 
@@ -243,7 +243,7 @@ Batch A: 10
 ## Related elements
 
 - [`CreateUdObject`](../functions/CreateUdObject.md)
-- [`me`](me.md)
-- [`base`](base.md)
+- [`Me:`](me.md)
+- [`Base:`](base.md)
 - [`CLASS`](../keywords/CLASS.md)
 - [`INHERIT`](../keywords/INHERIT.md)
