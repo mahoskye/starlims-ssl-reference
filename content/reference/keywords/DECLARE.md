@@ -119,7 +119,7 @@ DoProc("DescribeSampleStatus", {"LAB-001"});
 
 ### Declaring class fields
 
-Use `:DECLARE` in a class body to define fields shared by all class methods. The fields declared at the class level are readable and writable from every method.
+Use `:DECLARE` in a class body to define fields shared by all class methods. The fields declared at the class level are readable and writable from every method, but a method must qualify each reference with [`Me:fieldName`](../special-forms/me.md) (or [`Base:fieldName`](../special-forms/base.md) for an inherited parent field). A bare identifier inside the method body always refers to a local variable or [`:PARAMETERS`](PARAMETERS.md) entry, never to the class field of the same name.
 
 Class definition:
 
@@ -131,16 +131,16 @@ Class definition:
 :PROCEDURE SetSample;
 	:PARAMETERS sID;
 
-	sSampleID := sID;
+	Me:sSampleID := sID;
 :ENDPROC;
 
 :PROCEDURE AddResult;
-	nResultCount += 1;
+	Me:nResultCount += 1;
 :ENDPROC;
 
 :PROCEDURE Constructor;
-	sSampleID := "";
-	nResultCount := 0;
+	Me:sSampleID := "";
+	Me:nResultCount := 0;
 :ENDPROC;
 ```
 

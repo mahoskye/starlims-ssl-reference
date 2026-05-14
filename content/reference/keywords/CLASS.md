@@ -26,6 +26,9 @@ Use [`CreateUdObject`](../functions/CreateUdObject.md) to instantiate a user-def
 
 Class fields are declared with [`:DECLARE`](DECLARE.md) in the class body and are available to class methods. Methods are defined with [`:PROCEDURE`](PROCEDURE.md) ... [`:ENDPROC`](ENDPROC.md) just like script procedures, but inside a class they are invoked through the instance, for example `oSample:GetSummary()` or `Me:GetSummary()`.
 
+!!! warning "Qualify class fields with `Me:` (or `Base:`)"
+    Inside a class method, references to class-level [`:DECLARE`](DECLARE.md) fields must be qualified with [`Me:fieldName`](../special-forms/me.md) (or [`Base:fieldName`](../special-forms/base.md) for an inherited parent field). A bare identifier refers to a local variable or [`:PARAMETERS`](PARAMETERS.md) entry in the current procedure — not to the class field of the same name. This applies to reads, writes, and compound assignments (`+=`, `-=`, etc.), and it applies inside `Constructor` just like any other method.
+
 Constructors use the reserved declaration name [`Constructor`](../special-forms/constructor.md). A constructor may take parameters, but it cannot return a value. If no constructor is declared, SSL generates an empty zero-argument constructor automatically.
 
 ## When to use
@@ -67,6 +70,7 @@ Constructors use the reserved declaration name [`Constructor`](../special-forms/
     - Place regular methods before [`Constructor`](../special-forms/constructor.md) and keep the constructor last for predictable structure.
     - Instantiate user-defined classes with [`CreateUdObject`](../functions/CreateUdObject.md) instead of built-in-class curly-brace syntax.
     - Use [`Me:`](../special-forms/me.md) for sibling method calls and [`Base:`](../special-forms/base.md) for inherited behavior inside class methods.
+    - Qualify every class-field reference inside a method with [`Me:`](../special-forms/me.md) (or [`Base:`](../special-forms/base.md) for a parent field). A bare name resolves to a local or parameter, not the class field.
 
 !!! failure "Don't"
     - Mix script logic and a class definition in the same file. `:CLASS` runs
@@ -96,8 +100,8 @@ Class definition:
 :PROCEDURE GetDescription;
     :DECLARE sDescription;
 
-    sDescription := "Sample " + sSampleName + ": "
-			        + LimsString(nResultValue);
+    sDescription := "Sample " + Me:sSampleName + ": "
+			        + LimsString(Me:nResultValue);
 
     :RETURN sDescription;
 :ENDPROC;
@@ -105,8 +109,8 @@ Class definition:
 :PROCEDURE Constructor;
     :PARAMETERS sName, nValue;
 
-    sSampleName := sName;
-    nResultValue := nValue;
+    Me:sSampleName := sName;
+    Me:nResultValue := nValue;
 :ENDPROC;
 ```
 
@@ -139,14 +143,14 @@ Base class script:
 :DECLARE sSampleId, sStatus;
 
 :PROCEDURE GetSummary;
-    :RETURN "Sample " + sSampleId + " is " + sStatus;
+    :RETURN "Sample " + Me:sSampleId + " is " + Me:sStatus;
 :ENDPROC;
 
 :PROCEDURE Constructor;
     :PARAMETERS sId, sState;
 
-    sSampleId := sId;
-    sStatus := sState;
+    Me:sSampleId := sId;
+    Me:sStatus := sState;
 :ENDPROC;
 ```
 
@@ -162,7 +166,7 @@ Derived class script:
     :DECLARE sSummary;
 
     sSummary := Base:GetSummary();
-    sSummary := sSummary + ", result " + LimsString(nResultValue);
+    sSummary := sSummary + ", result " + LimsString(Me:nResultValue);
 
     :RETURN sSummary;
 :ENDPROC;
@@ -170,9 +174,9 @@ Derived class script:
 :PROCEDURE Constructor;
     :PARAMETERS sId, sState, nResult;
 
-    sSampleId := sId;
-    sStatus := sState;
-    nResultValue := nResult;
+    Me:sSampleId := sId;
+    Me:sStatus := sState;
+    Me:nResultValue := nResult;
 :ENDPROC;
 ```
 
@@ -205,21 +209,21 @@ Class definition:
 :PROCEDURE AddResult;
     :PARAMETERS nValue, nLimit;
 
-    AAdd(aValues, nValue);
+    AAdd(Me:aValues, nValue);
 
     :IF nValue >= nLimit;
-        nPassCount += 1;
+        Me:nPassCount += 1;
     :ELSE;
-        nFailCount += 1;
+        Me:nFailCount += 1;
     :ENDIF;
 :ENDPROC;
 
 :PROCEDURE GetSummary;
     :DECLARE sSummary;
 
-    sSummary := "Runs: " + LimsString(ALen(aValues));
-    sSummary := sSummary + ", pass: " + LimsString(nPassCount);
-    sSummary := sSummary + ", fail: " + LimsString(nFailCount);
+    sSummary := "Runs: " + LimsString(ALen(Me:aValues));
+    sSummary := sSummary + ", pass: " + LimsString(Me:nPassCount);
+    sSummary := sSummary + ", fail: " + LimsString(Me:nFailCount);
 
     :RETURN sSummary;
 :ENDPROC;
@@ -236,9 +240,9 @@ Class definition:
 :ENDPROC;
 
 :PROCEDURE Constructor;
-    aValues := {};
-    nPassCount := 0;
-    nFailCount := 0;
+    Me:aValues := {};
+    Me:nPassCount := 0;
+    Me:nFailCount := 0;
 :ENDPROC;
 ```
 
@@ -258,6 +262,14 @@ UsrMes(sReport);
 ```
 Runs: 4, pass: 3, fail: 1
 ```
+
+## Class infrastructure
+
+Three [special forms](../special-forms/index.md#class-infrastructure) are only meaningful inside a class method body and are part of how every class is written:
+
+- [`Me:`](../special-forms/me.md) — reference to the current instance. Required to qualify class-level [`:DECLARE`](DECLARE.md) fields and to call sibling methods.
+- [`Base:`](../special-forms/base.md) — explicit access to fields, properties, or methods defined on the immediate parent class declared via [`:INHERIT`](INHERIT.md).
+- [`Constructor`](../special-forms/constructor.md) — reserved declaration name (`:PROCEDURE Constructor;`) that runs one-time initialization when an instance is created.
 
 ## Related
 

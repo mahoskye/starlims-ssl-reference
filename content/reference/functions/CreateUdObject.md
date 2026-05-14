@@ -165,14 +165,14 @@ Class definition:
 :DECLARE sSampleID, nPriority;
 
 :PROCEDURE Describe;
-	:RETURN sSampleID + " priority " + LimsString(nPriority);
+	:RETURN Me:sSampleID + " priority " + LimsString(Me:nPriority);
 :ENDPROC;
 
 :PROCEDURE Constructor;
 	:PARAMETERS sNewSampleID, nNewPriority;
 
-	sSampleID := sNewSampleID;
-	nPriority := nNewPriority;
+	Me:sSampleID := sNewSampleID;
+	Me:nPriority := nNewPriority;
 :ENDPROC;
 ```
 

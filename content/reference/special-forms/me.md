@@ -17,6 +17,9 @@ Provides a reference to the current class instance inside [`:CLASS`](../keywords
 
 Use `Me` when code in a class method needs to read or write the current instance's fields and properties, or call another method on the same object. `Me:MemberName` resolves against the current class first. If a field or property is not found there, member lookup falls back to inherited members. For method calls, the target method must exist or compilation fails.
 
+!!! warning "`Me:` is required for class-field access"
+    A bare identifier inside a class method always refers to a local variable or [`:PARAMETERS`](../keywords/PARAMETERS.md) entry, never to a class-level [`:DECLARE`](../keywords/DECLARE.md) field. To read or write an instance field — including inside `Constructor` — you must write `Me:fieldName`. Use [`Base:fieldName`](base.md) for a field declared on the parent class. Compound assignments (`+=`, `-=`, etc.) need the same qualification.
+
 `Me` evaluates to the current instance of the class where the code is running. `Me:FieldName` and `Me:PropertyName` resolve against the current class first, then fall back to inherited members when needed. `Me:MethodName()` calls a method on the same instance, which is the normal way to invoke sibling methods from inside class code. `Me` is case-insensitive, but examples and new code should use the canonical `Me` form.
 
 ## When to use it
