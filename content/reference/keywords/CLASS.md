@@ -263,6 +263,14 @@ UsrMes(sReport);
 Runs: 4, pass: 3, fail: 1
 ```
 
+## Class infrastructure
+
+Three [special forms](../special-forms/index.md#class-infrastructure) are only meaningful inside a class method body and are part of how every class is written:
+
+- [`Me:`](../special-forms/me.md) — reference to the current instance. Required to qualify class-level [`:DECLARE`](DECLARE.md) fields and to call sibling methods.
+- [`Base:`](../special-forms/base.md) — explicit access to fields, properties, or methods defined on the immediate parent class declared via [`:INHERIT`](INHERIT.md).
+- [`Constructor`](../special-forms/constructor.md) — reserved declaration name (`:PROCEDURE Constructor;`) that runs one-time initialization when an instance is created.
+
 ## Related
 
 - [`INHERIT`](INHERIT.md)
