@@ -15,24 +15,24 @@ starlims:
 
 Provides a reference to the current class instance inside [`:CLASS`](../keywords/CLASS.md) methods.
 
-Use `Me` when code in a class method needs to read or write the current instance's fields and properties, or call another method on the same object. `Me:MemberName` resolves against the current class first. If a field or property is not found there, member lookup falls back to inherited members. For method calls, the target method must exist or compilation fails.
+Use `Me` when code in a class method needs to read or write the current instance's fields, or call another method on the same object. `Me:MemberName` resolves against the current class first. If a field is not found there, member lookup falls back to inherited members. For method calls, the target method must exist or compilation fails.
 
 !!! warning "`Me:` is required for class-field access"
     A bare identifier inside a class method always refers to a local variable or [`:PARAMETERS`](../keywords/PARAMETERS.md) entry, never to a class-level [`:DECLARE`](../keywords/DECLARE.md) field. To read or write an instance field — including inside `Constructor` — you must write `Me:fieldName`. Use [`Base:fieldName`](base.md) for a field declared on the parent class. Compound assignments (`+=`, `-=`, etc.) need the same qualification.
 
-`Me` evaluates to the current instance of the class where the code is running. `Me:FieldName` and `Me:PropertyName` resolve against the current class first, then fall back to inherited members when needed. `Me:MethodName()` calls a method on the same instance, which is the normal way to invoke sibling methods from inside class code. `Me` is case-insensitive, but examples and new code should use the canonical `Me` form.
+`Me` evaluates to the current instance of the class where the code is running. `Me:FieldName` resolves against the current class first, then falls back to inherited members when needed. `Me:MethodName()` calls a method on the same instance, which is the normal way to invoke sibling methods from inside class code. `Me` is case-insensitive, but examples and new code should use the canonical `Me` form.
 
 ## When to use it
 
-- When you need to access or modify a property of the current object from within a class method.
+- When you need to access or modify a field of the current object from within a class method.
 - When invoking another method on the same instance, especially if polymorphic or overridden behavior is expected.
-- When you need to disambiguate between a local variable and an instance property that share the same name.
+- When you need to disambiguate between a local variable and an instance field that share the same name.
 
 ## Syntax
 
 ```ssl
 Me;
-Me:PropertyName;
+Me:FieldName;
 Me:MethodName(args);
 ```
 
@@ -46,9 +46,9 @@ Me:MethodName(args);
 ## Notes for daily SSL work
 
 !!! success "Do"
-    - Use `Me` to access properties and methods within class method bodies.
+    - Use `Me` to access fields and methods within class method bodies.
     - Use `Me:Method(args)` to call other methods on the same instance.
-    - Use `Me` to disambiguate when a parameter or local variable shadows an instance property.
+    - Use `Me` to disambiguate when a parameter or local variable shadows an instance field.
 
 !!! failure "Don't"
     - Use `Me` in standalone procedures, global scope, or outside a class. It produces a compile-time error.
@@ -59,12 +59,12 @@ Me:MethodName(args);
 
 - Using `Me` outside a class method body results in a compile-time error.
 - `Me` is case-insensitive, but `Me` is the canonical spelling in documentation and examples.
-- Fields and properties referenced through `Me` can resolve from the current class or an ancestor class.
+- Fields referenced through `Me` can resolve from the current class or an ancestor class.
 - A missing `Me:MethodName()` target is a compile-time error.
 
 ## Examples
 
-### Accessing instance properties
+### Accessing instance fields
 
 Sets `nQuantity` and `nUnitPrice` via `Me` in the constructor, then reads them in `CalculateTotal`. With `{5, 12}` as arguments, the result is 60.
 
@@ -163,7 +163,7 @@ UsrMes("Status: " + oSample:GetStatus());
 Status: PROCESSED
 ```
 
-### Disambiguating parameters from instance properties
+### Disambiguating parameters from instance fields
 
 `Constructor` takes `sKey` and `sValue` as parameters with the same names as the class fields. `Me:sKey` and `Me:sValue` write to the instance fields while the bare names refer to the local parameters.
 

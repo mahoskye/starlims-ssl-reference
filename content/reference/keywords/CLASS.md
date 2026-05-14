@@ -24,10 +24,13 @@ Use [`CreateUdObject`](../functions/CreateUdObject.md) to instantiate a user-def
 
 `:CLASS` changes the file into class context. After the class declaration, SSL accepts an optional [`:INHERIT`](INHERIT.md), then field declarations and method definitions. The class body is not closed by another keyword; it ends only at end-of-file.
 
-Class fields are declared with [`:DECLARE`](DECLARE.md) in the class body and are available to class methods. Methods are defined with [`:PROCEDURE`](PROCEDURE.md) ... [`:ENDPROC`](ENDPROC.md) just like script procedures, but inside a class they are invoked through the instance, for example `oSample:GetSummary()` or `Me:GetSummary()`.
+Methods are defined with [`:PROCEDURE`](PROCEDURE.md) ... [`:ENDPROC`](ENDPROC.md) just like script procedures, but inside a class they are invoked through the instance, for example `oSample:GetSummary()` or `Me:GetSummary()`.
 
-!!! warning "Qualify class fields with `Me:` (or `Base:`)"
-    Inside a class method, references to class-level [`:DECLARE`](DECLARE.md) fields must be qualified with [`Me:fieldName`](../special-forms/me.md) (or [`Base:fieldName`](../special-forms/base.md) for an inherited parent field). A bare identifier refers to a local variable or [`:PARAMETERS`](PARAMETERS.md) entry in the current procedure — not to the class field of the same name. This applies to reads, writes, and compound assignments (`+=`, `-=`, etc.), and it applies inside `Constructor` just like any other method.
+### Class fields
+
+Class fields are declared with [`:DECLARE`](DECLARE.md) in the class body and are shared by all methods on the class. Each method must qualify field references with [`Me:fieldName`](../special-forms/me.md), or [`Base:fieldName`](../special-forms/base.md) for an inherited parent field. A bare identifier inside a method body resolves to a local variable or [`:PARAMETERS`](PARAMETERS.md) entry in that procedure — never to the class field of the same name. The qualification rule applies to reads, writes, and compound assignments (`+=`, `-=`, etc.), and it applies inside [`Constructor`](../special-forms/constructor.md) just like any other method.
+
+### Constructors
 
 Constructors use the reserved declaration name [`Constructor`](../special-forms/constructor.md). A constructor may take parameters, but it cannot return a value. If no constructor is declared, SSL generates an empty zero-argument constructor automatically.
 
@@ -268,7 +271,7 @@ Runs: 4, pass: 3, fail: 1
 Three [special forms](../special-forms/index.md#class-infrastructure) are only meaningful inside a class method body and are part of how every class is written:
 
 - [`Me:`](../special-forms/me.md) — reference to the current instance. Required to qualify class-level [`:DECLARE`](DECLARE.md) fields and to call sibling methods.
-- [`Base:`](../special-forms/base.md) — explicit access to fields, properties, or methods defined on the immediate parent class declared via [`:INHERIT`](INHERIT.md).
+- [`Base:`](../special-forms/base.md) — explicit access to fields or methods defined on the immediate parent class declared via [`:INHERIT`](INHERIT.md).
 - [`Constructor`](../special-forms/constructor.md) — reserved declaration name (`:PROCEDURE Constructor;`) that runs one-time initialization when an instance is created.
 
 ## Related

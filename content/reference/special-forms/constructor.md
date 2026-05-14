@@ -19,9 +19,6 @@ Use `Constructor` to set initial field values, validate incoming arguments, and 
 
 When `CreateUdObject("ClassName")` or `CreateUdObject("ClassName", {args})` creates a user-defined class instance, SSL runs that class's constructor automatically. Before the constructor body runs, SSL also emits a call to the base class's parameterless constructor. Constructors cannot return values.
 
-!!! warning "Qualify class fields with `Me:` inside `Constructor`"
-    A constructor is an ordinary class method as far as identifier resolution is concerned: assignments to class-level [`:DECLARE`](../keywords/DECLARE.md) fields must be written as `Me:fieldName := ...` (or [`Base:fieldName`](base.md) for a parent field). A bare `fieldName := ...` writes to a local variable or [`:PARAMETERS`](../keywords/PARAMETERS.md) entry, leaving the instance field untouched.
-
 Because `Constructor` is a special declaration form, it cannot be called as a
 normal method from SSL code.
 
@@ -63,6 +60,10 @@ oItem := CreateUdObject("MyClass");
 oItem := CreateUdObject("MyClass", {"Sample-001", 42});
 ```
 
+### Assigning to class fields
+
+A constructor is an ordinary class method for identifier resolution: write to class-level [`:DECLARE`](../keywords/DECLARE.md) fields as `Me:fieldName := ...` (or [`Base:fieldName`](base.md) for a parent field). A bare `fieldName := ...` writes to a local variable or [`:PARAMETERS`](../keywords/PARAMETERS.md) entry instead, leaving the instance field untouched. See [`Me:`](me.md) for the full rule.
+
 ## Context rules
 
 `Constructor` can only be declared inside a [`:CLASS`](../keywords/CLASS.md) block. Using it outside a class does not produce a valid procedure declaration. Inside a constructor, `:RETURN;` is allowed as an early exit, but `:RETURN value;` is a compile-time error.
@@ -91,7 +92,7 @@ SSL automatically emits a call to the base class's parameterless constructor bef
 
 ## Examples
 
-### Basic property initialization
+### Basic field initialization
 
 Sets `nCount` to zero in the constructor so every new `SampleCounter` instance starts from a known state. Calling `Increment()` twice and then `GetCount()` returns 2.
 

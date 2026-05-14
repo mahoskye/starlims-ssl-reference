@@ -17,7 +17,7 @@ Forms that only have meaning inside a [`:CLASS`](../keywords/CLASS.md) method bo
 | Special Form | Description |
 |--------------|-------------|
 | [me](me.md) | Reference to the current instance inside a class method. Required to qualify class-level fields and to call sibling methods. |
-| [base](base.md) | Explicit access to fields, properties, or methods defined on the immediate parent class. |
+| [base](base.md) | Explicit access to fields or methods defined on the immediate parent class. |
 | [constructor](constructor.md) | Reserved declaration name (`:PROCEDURE Constructor;`) that runs one-time initialization when an instance is created. |
 
 ## Endpoint ambients
