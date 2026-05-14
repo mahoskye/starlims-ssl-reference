@@ -1805,6 +1805,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Behavior">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Class fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constructors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3252,6 +3280,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Behavior">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Class fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constructors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constructors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3488,11 +3544,10 @@
 <p>Use <a href="../../functions/CreateUdObject/"><code>CreateUdObject</code></a> to instantiate a user-defined class. Inside class methods, call sibling methods with <a href="../../special-forms/me/"><code>Me:MethodName()</code></a> and inherited methods with <a href="../../special-forms/base/"><code>Base:MethodName()</code></a>.</p>
 <h2 id="behavior">Behavior<a class="headerlink" href="#behavior" title="Permanent link">&para;</a></h2>
 <p><code>:CLASS</code> changes the file into class context. After the class declaration, SSL accepts an optional <a href="../INHERIT/"><code>:INHERIT</code></a>, then field declarations and method definitions. The class body is not closed by another keyword; it ends only at end-of-file.</p>
-<p>Class fields are declared with <a href="../DECLARE/"><code>:DECLARE</code></a> in the class body and are available to class methods. Methods are defined with <a href="../PROCEDURE/"><code>:PROCEDURE</code></a> ... <a href="../ENDPROC/"><code>:ENDPROC</code></a> just like script procedures, but inside a class they are invoked through the instance, for example <code>oSample:GetSummary()</code> or <code>Me:GetSummary()</code>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Qualify class fields with <code>Me:</code> (or <code>Base:</code>)</p>
-<p>Inside a class method, references to class-level <a href="../DECLARE/"><code>:DECLARE</code></a> fields must be qualified with <a href="../../special-forms/me/"><code>Me:fieldName</code></a> (or <a href="../../special-forms/base/"><code>Base:fieldName</code></a> for an inherited parent field). A bare identifier refers to a local variable or <a href="../PARAMETERS/"><code>:PARAMETERS</code></a> entry in the current procedure — not to the class field of the same name. This applies to reads, writes, and compound assignments (<code>+=</code>, <code>-=</code>, etc.), and it applies inside <code>Constructor</code> just like any other method.</p>
-</div>
+<p>Methods are defined with <a href="../PROCEDURE/"><code>:PROCEDURE</code></a> ... <a href="../ENDPROC/"><code>:ENDPROC</code></a> just like script procedures, but inside a class they are invoked through the instance, for example <code>oSample:GetSummary()</code> or <code>Me:GetSummary()</code>.</p>
+<h3 id="class-fields">Class fields<a class="headerlink" href="#class-fields" title="Permanent link">&para;</a></h3>
+<p>Class fields are declared with <a href="../DECLARE/"><code>:DECLARE</code></a> in the class body and are shared by all methods on the class. Each method must qualify field references with <a href="../../special-forms/me/"><code>Me:fieldName</code></a>, or <a href="../../special-forms/base/"><code>Base:fieldName</code></a> for an inherited parent field. A bare identifier inside a method body resolves to a local variable or <a href="../PARAMETERS/"><code>:PARAMETERS</code></a> entry in that procedure — never to the class field of the same name. The qualification rule applies to reads, writes, and compound assignments (<code>+=</code>, <code>-=</code>, etc.), and it applies inside <a href="../../special-forms/constructor/"><code>Constructor</code></a> just like any other method.</p>
+<h3 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">&para;</a></h3>
 <p>Constructors use the reserved declaration name <a href="../../special-forms/constructor/"><code>Constructor</code></a>. A constructor may take parameters, but it cannot return a value. If no constructor is declared, SSL generates an empty zero-argument constructor automatically.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3704,7 +3759,7 @@
 <p>Three <a href="../../special-forms/#class-infrastructure">special forms</a> are only meaningful inside a class method body and are part of how every class is written:</p>
 <ul>
 <li><a href="../../special-forms/me/"><code>Me:</code></a> — reference to the current instance. Required to qualify class-level <a href="../DECLARE/"><code>:DECLARE</code></a> fields and to call sibling methods.</li>
-<li><a href="../../special-forms/base/"><code>Base:</code></a> — explicit access to fields, properties, or methods defined on the immediate parent class declared via <a href="../INHERIT/"><code>:INHERIT</code></a>.</li>
+<li><a href="../../special-forms/base/"><code>Base:</code></a> — explicit access to fields or methods defined on the immediate parent class declared via <a href="../INHERIT/"><code>:INHERIT</code></a>.</li>
 <li><a href="../../special-forms/constructor/"><code>Constructor</code></a> — reserved declaration name (<code>:PROCEDURE Constructor;</code>) that runs one-time initialization when an instance is created.</li>
 </ul>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>

@@ -2157,6 +2157,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Syntax">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assigning-to-class-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assigning to class fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2205,10 +2222,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#basic-property-initialization" class="md-nav__link">
+  <a href="#basic-field-initialization" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Basic property initialization
+        Basic field initialization
       
     </span>
   </a>
@@ -2460,6 +2477,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Syntax">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#assigning-to-class-fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assigning to class fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2508,10 +2542,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#basic-property-initialization" class="md-nav__link">
+  <a href="#basic-field-initialization" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Basic property initialization
+        Basic field initialization
       
     </span>
   </a>
@@ -2665,10 +2699,6 @@
 <p>Runs one-time class initialization code when a user-defined class instance is created.</p>
 <p>Use <code>Constructor</code> to set initial field values, validate incoming arguments, and prepare an object before any other instance method runs. It is a reserved constructor declaration name inside <a href="../../keywords/CLASS/"><code>:CLASS</code></a>, not a normal method name. If a class does not declare a constructor, SSL generates a default parameterless constructor.</p>
 <p>When <code>CreateUdObject("ClassName")</code> or <code>CreateUdObject("ClassName", {args})</code> creates a user-defined class instance, SSL runs that class's constructor automatically. Before the constructor body runs, SSL also emits a call to the base class's parameterless constructor. Constructors cannot return values.</p>
-<div class="admonition warning">
-<p class="admonition-title">Qualify class fields with <code>Me:</code> inside <code>Constructor</code></p>
-<p>A constructor is an ordinary class method as far as identifier resolution is concerned: assignments to class-level <a href="../../keywords/DECLARE/"><code>:DECLARE</code></a> fields must be written as <code>Me:fieldName := ...</code> (or <a href="../base/"><code>Base:fieldName</code></a> for a parent field). A bare <code>fieldName := ...</code> writes to a local variable or <a href="../../keywords/PARAMETERS/"><code>:PARAMETERS</code></a> entry, leaving the instance field untouched.</p>
-</div>
 <p>Because <code>Constructor</code> is a special declaration form, it cannot be called as a
 normal method from SSL code.</p>
 <h2 id="when-to-use-it">When to use it<a class="headerlink" href="#when-to-use-it" title="Permanent link">&para;</a></h2>
@@ -2701,6 +2731,8 @@ normal method from SSL code.</p>
 <div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">oItem</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">&quot;MyClass&quot;</span><span class="p">);</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">oItem</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">&quot;MyClass&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Sample-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">});</span>
 </code></pre></div>
+<h3 id="assigning-to-class-fields">Assigning to class fields<a class="headerlink" href="#assigning-to-class-fields" title="Permanent link">&para;</a></h3>
+<p>A constructor is an ordinary class method for identifier resolution: write to class-level <a href="../../keywords/DECLARE/"><code>:DECLARE</code></a> fields as <code>Me:fieldName := ...</code> (or <a href="../base/"><code>Base:fieldName</code></a> for a parent field). A bare <code>fieldName := ...</code> writes to a local variable or <a href="../../keywords/PARAMETERS/"><code>:PARAMETERS</code></a> entry instead, leaving the instance field untouched. See <a href="../me/"><code>Me:</code></a> for the full rule.</p>
 <h2 id="context-rules">Context rules<a class="headerlink" href="#context-rules" title="Permanent link">&para;</a></h2>
 <p><code>Constructor</code> can only be declared inside a <a href="../../keywords/CLASS/"><code>:CLASS</code></a> block. Using it outside a class does not produce a valid procedure declaration. Inside a constructor, <code>:RETURN;</code> is allowed as an early exit, but <code>:RETURN value;</code> is a compile-time error.</p>
 <p>SSL automatically emits a call to the base class's parameterless constructor before the constructor body executes. You do not need to call <code>Base:Constructor()</code> when the base constructor takes no arguments. If you need to invoke a base constructor that takes parameters, call <code>Base:Constructor(args)</code> explicitly. The explicit call passes the arguments that the auto-call cannot.</p>
@@ -2730,7 +2762,7 @@ normal method from SSL code.</p>
 <li>If no constructor is declared, SSL provides an implicit parameterless one.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<h3 id="basic-property-initialization">Basic property initialization<a class="headerlink" href="#basic-property-initialization" title="Permanent link">&para;</a></h3>
+<h3 id="basic-field-initialization">Basic field initialization<a class="headerlink" href="#basic-field-initialization" title="Permanent link">&para;</a></h3>
 <p>Sets <code>nCount</code> to zero in the constructor so every new <code>SampleCounter</code> instance starts from a known state. Calling <code>Increment()</code> twice and then <code>GetCount()</code> returns 2.</p>
 <p>Class script:</p>
 <div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:CLASS</span><span class="w"> </span><span class="n">SampleCounter</span><span class="p">;</span>

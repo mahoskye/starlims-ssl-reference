@@ -2149,10 +2149,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#accessing-instance-properties" class="md-nav__link">
+  <a href="#accessing-instance-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Accessing instance properties
+        Accessing instance fields
       
     </span>
   </a>
@@ -2171,10 +2171,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#disambiguating-parameters-from-instance-properties" class="md-nav__link">
+  <a href="#disambiguating-parameters-from-instance-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Disambiguating parameters from instance properties
+        Disambiguating parameters from instance fields
       
     </span>
   </a>
@@ -2508,10 +2508,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#accessing-instance-properties" class="md-nav__link">
+  <a href="#accessing-instance-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Accessing instance properties
+        Accessing instance fields
       
     </span>
   </a>
@@ -2530,10 +2530,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#disambiguating-parameters-from-instance-properties" class="md-nav__link">
+  <a href="#disambiguating-parameters-from-instance-fields" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Disambiguating parameters from instance properties
+        Disambiguating parameters from instance fields
       
     </span>
   </a>
@@ -2663,21 +2663,21 @@
 <h1 id="me">me<a class="headerlink" href="#me" title="Permanent link">&para;</a></h1>
 <h2 id="what-it-does">What it does<a class="headerlink" href="#what-it-does" title="Permanent link">&para;</a></h2>
 <p>Provides a reference to the current class instance inside <a href="../../keywords/CLASS/"><code>:CLASS</code></a> methods.</p>
-<p>Use <code>Me</code> when code in a class method needs to read or write the current instance's fields and properties, or call another method on the same object. <code>Me:MemberName</code> resolves against the current class first. If a field or property is not found there, member lookup falls back to inherited members. For method calls, the target method must exist or compilation fails.</p>
+<p>Use <code>Me</code> when code in a class method needs to read or write the current instance's fields, or call another method on the same object. <code>Me:MemberName</code> resolves against the current class first. If a field is not found there, member lookup falls back to inherited members. For method calls, the target method must exist or compilation fails.</p>
 <div class="admonition warning">
 <p class="admonition-title"><code>Me:</code> is required for class-field access</p>
 <p>A bare identifier inside a class method always refers to a local variable or <a href="../../keywords/PARAMETERS/"><code>:PARAMETERS</code></a> entry, never to a class-level <a href="../../keywords/DECLARE/"><code>:DECLARE</code></a> field. To read or write an instance field — including inside <code>Constructor</code> — you must write <code>Me:fieldName</code>. Use <a href="../base/"><code>Base:fieldName</code></a> for a field declared on the parent class. Compound assignments (<code>+=</code>, <code>-=</code>, etc.) need the same qualification.</p>
 </div>
-<p><code>Me</code> evaluates to the current instance of the class where the code is running. <code>Me:FieldName</code> and <code>Me:PropertyName</code> resolve against the current class first, then fall back to inherited members when needed. <code>Me:MethodName()</code> calls a method on the same instance, which is the normal way to invoke sibling methods from inside class code. <code>Me</code> is case-insensitive, but examples and new code should use the canonical <code>Me</code> form.</p>
+<p><code>Me</code> evaluates to the current instance of the class where the code is running. <code>Me:FieldName</code> resolves against the current class first, then falls back to inherited members when needed. <code>Me:MethodName()</code> calls a method on the same instance, which is the normal way to invoke sibling methods from inside class code. <code>Me</code> is case-insensitive, but examples and new code should use the canonical <code>Me</code> form.</p>
 <h2 id="when-to-use-it">When to use it<a class="headerlink" href="#when-to-use-it" title="Permanent link">&para;</a></h2>
 <ul>
-<li>When you need to access or modify a property of the current object from within a class method.</li>
+<li>When you need to access or modify a field of the current object from within a class method.</li>
 <li>When invoking another method on the same instance, especially if polymorphic or overridden behavior is expected.</li>
-<li>When you need to disambiguate between a local variable and an instance property that share the same name.</li>
+<li>When you need to disambiguate between a local variable and an instance field that share the same name.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
 <div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="bp">Me</span><span class="p">;</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="bp">Me</span><span class="p">:</span><span class="n">PropertyName</span><span class="p">;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="bp">Me</span><span class="p">:</span><span class="n">FieldName</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="bp">Me</span><span class="p">:</span><span class="nf">MethodName</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="context-rules">Context rules<a class="headerlink" href="#context-rules" title="Permanent link">&para;</a></h2>
@@ -2690,9 +2690,9 @@
 <div class="admonition success">
 <p class="admonition-title">Do</p>
 <ul>
-<li>Use <code>Me</code> to access properties and methods within class method bodies.</li>
+<li>Use <code>Me</code> to access fields and methods within class method bodies.</li>
 <li>Use <code>Me:Method(args)</code> to call other methods on the same instance.</li>
-<li>Use <code>Me</code> to disambiguate when a parameter or local variable shadows an instance property.</li>
+<li>Use <code>Me</code> to disambiguate when a parameter or local variable shadows an instance field.</li>
 </ul>
 </div>
 <div class="admonition failure">
@@ -2707,11 +2707,11 @@
 <ul>
 <li>Using <code>Me</code> outside a class method body results in a compile-time error.</li>
 <li><code>Me</code> is case-insensitive, but <code>Me</code> is the canonical spelling in documentation and examples.</li>
-<li>Fields and properties referenced through <code>Me</code> can resolve from the current class or an ancestor class.</li>
+<li>Fields referenced through <code>Me</code> can resolve from the current class or an ancestor class.</li>
 <li>A missing <code>Me:MethodName()</code> target is a compile-time error.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<h3 id="accessing-instance-properties">Accessing instance properties<a class="headerlink" href="#accessing-instance-properties" title="Permanent link">&para;</a></h3>
+<h3 id="accessing-instance-fields">Accessing instance fields<a class="headerlink" href="#accessing-instance-fields" title="Permanent link">&para;</a></h3>
 <p>Sets <code>nQuantity</code> and <code>nUnitPrice</code> via <code>Me</code> in the constructor, then reads them in <code>CalculateTotal</code>. With <code>{5, 12}</code> as arguments, the result is 60.</p>
 <p>Class script:</p>
 <div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:CLASS</span><span class="w"> </span><span class="n">OrderCalculator</span><span class="p">;</span>
@@ -2788,7 +2788,7 @@
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
 <div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Status: PROCESSED
 </code></pre></div>
-<h3 id="disambiguating-parameters-from-instance-properties">Disambiguating parameters from instance properties<a class="headerlink" href="#disambiguating-parameters-from-instance-properties" title="Permanent link">&para;</a></h3>
+<h3 id="disambiguating-parameters-from-instance-fields">Disambiguating parameters from instance fields<a class="headerlink" href="#disambiguating-parameters-from-instance-fields" title="Permanent link">&para;</a></h3>
 <p><code>Constructor</code> takes <code>sKey</code> and <code>sValue</code> as parameters with the same names as the class fields. <code>Me:sKey</code> and <code>Me:sValue</code> write to the instance fields while the bare names refer to the local parameters.</p>
 <p>Class script:</p>
 <div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">:CLASS</span><span class="w"> </span><span class="n">ConfigEntry</span><span class="p">;</span>
