@@ -19,6 +19,9 @@ Use `Constructor` to set initial field values, validate incoming arguments, and 
 
 When `CreateUdObject("ClassName")` or `CreateUdObject("ClassName", {args})` creates a user-defined class instance, SSL runs that class's constructor automatically. Before the constructor body runs, SSL also emits a call to the base class's parameterless constructor. Constructors cannot return values.
 
+!!! warning "Qualify class fields with `Me:` inside `Constructor`"
+    A constructor is an ordinary class method as far as identifier resolution is concerned: assignments to class-level [`:DECLARE`](../keywords/DECLARE.md) fields must be written as `Me:fieldName := ...` (or [`Base:fieldName`](base.md) for a parent field). A bare `fieldName := ...` writes to a local variable or [`:PARAMETERS`](../keywords/PARAMETERS.md) entry, leaving the instance field untouched.
+
 Because `Constructor` is a special declaration form, it cannot be called as a
 normal method from SSL code.
 
@@ -100,15 +103,15 @@ Class script:
 :DECLARE nCount;
 
 :PROCEDURE Constructor;
-    nCount := 0;
+    Me:nCount := 0;
 :ENDPROC;
 
 :PROCEDURE Increment;
-    nCount += 1;
+    Me:nCount += 1;
 :ENDPROC;
 
 :PROCEDURE GetCount;
-    :RETURN nCount;
+    :RETURN Me:nCount;
 :ENDPROC;
 ```
 
@@ -149,17 +152,17 @@ Class script:
         RaiseError("Sample ID is required");
     :ENDIF;
 
-    sSampleId := sId;
+    Me:sSampleId := sId;
 
     :IF Empty(sInitialStatus);
-        sStatus := "PENDING";
+        Me:sStatus := "PENDING";
     :ELSE;
-        sStatus := sInitialStatus;
+        Me:sStatus := sInitialStatus;
     :ENDIF;
 :ENDPROC;
 
 :PROCEDURE GetSummary;
-    :RETURN sSampleId + " (" + sStatus + ")";
+    :RETURN Me:sSampleId + " (" + Me:sStatus + ")";
 :ENDPROC;
 ```
 
@@ -194,11 +197,11 @@ Parent class script:
 :DECLARE nCount;
 
 :PROCEDURE Constructor;
-    nCount := 10;
+    Me:nCount := 10;
 :ENDPROC;
 
 :PROCEDURE GetCount;
-    :RETURN nCount;
+    :RETURN Me:nCount;
 :ENDPROC;
 ```
 
@@ -213,11 +216,11 @@ Derived class script:
 :PROCEDURE Constructor;
     :PARAMETERS sValue;
 
-    sLabel := sValue;
+    Me:sLabel := sValue;
 :ENDPROC;
 
 :PROCEDURE GetSummary;
-    :RETURN sLabel + ": " + LimsString(Me:GetCount());
+    :RETURN Me:sLabel + ": " + LimsString(Me:GetCount());
 :ENDPROC;
 ```
 

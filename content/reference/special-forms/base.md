@@ -19,6 +19,9 @@ Use `Base:MemberName` when a derived class needs the parent implementation or th
 
 `Base` resolves the member lookup against the immediate parent class of the current class. For method calls, the parent method must exist or compilation fails. For field or property access, the compiler resolves the member against the parent type and warns if it cannot find a matching base member.
 
+!!! warning "Inherited fields must be qualified"
+    Inside a derived class method, a bare identifier refers to a local variable or [`:PARAMETERS`](../keywords/PARAMETERS.md) entry — never to a field declared on the parent class. Read or write a parent field as `Base:fieldName`, and a field declared on the current class as [`Me:fieldName`](me.md). Compound assignments (`+=`, `-=`, etc.) need the same qualification.
+
 ## When to use it
 
 - When an overridden method needs to call the parent implementation.
@@ -76,17 +79,17 @@ Parent class:
 :PROCEDURE Add;
 	:PARAMETERS nValue;
 
-	nTotal += nValue;
+	Me:nTotal += nValue;
 :ENDPROC;
 
 
 :PROCEDURE GetTotal;
-	:RETURN nTotal;
+	:RETURN Me:nTotal;
 :ENDPROC;
 
 
 :PROCEDURE Constructor;
-	nTotal := 0;
+	Me:nTotal := 0;
 :ENDPROC;
 ```
 
@@ -101,7 +104,7 @@ Derived class:
 :PROCEDURE Add;
 	:PARAMETERS nValue;
 
-	nLastValue := nValue;
+	Me:nLastValue := nValue;
 	Base:Add(nValue);
 
 	UsrMes("Added " + LimsString(nValue));
@@ -109,13 +112,13 @@ Derived class:
 
 
 :PROCEDURE GetLastValue;
-	:RETURN nLastValue;
+	:RETURN Me:nLastValue;
 :ENDPROC;
 
 
 :PROCEDURE Constructor;
 	Base:Constructor();
-	nLastValue := 0;
+	Me:nLastValue := 0;
 :ENDPROC;
 ```
 
@@ -151,14 +154,14 @@ Parent class:
 :DECLARE sLegalName;
 
 :PROCEDURE GetLegalName;
-	:RETURN sLegalName;
+	:RETURN Me:sLegalName;
 :ENDPROC;
 
 
 :PROCEDURE Constructor;
 	:PARAMETERS sName;
 
-	sLegalName := sName;
+	Me:sLegalName := sName;
 :ENDPROC;
 ```
 
@@ -188,8 +191,8 @@ Derived class:
 
 	Base:Constructor(sName);
 
-	sBadgeName := sBadge;
-	sRole := sEmpRole;
+	Me:sBadgeName := sBadge;
+	Me:sRole := sEmpRole;
 :ENDPROC;
 ```
 

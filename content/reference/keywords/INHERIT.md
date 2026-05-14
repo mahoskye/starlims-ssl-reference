@@ -22,7 +22,7 @@ The keyword can only appear directly after the class declaration, and only one p
 
 ## Behavior
 
-`:INHERIT` modifies a [`:CLASS`](CLASS.md) definition. The inherited class becomes the parent for member lookup, so child methods can use [`Base:MethodName()`](../special-forms/base.md) to call inherited behavior and can access inherited fields through normal class member rules.
+`:INHERIT` modifies a [`:CLASS`](CLASS.md) definition. The inherited class becomes the parent for member lookup, so child methods can use [`Base:MethodName()`](../special-forms/base.md) to call inherited behavior and can read or write inherited fields with [`Base:fieldName`](../special-forms/base.md). Inside any class method, a bare identifier refers to a local or [`:PARAMETERS`](PARAMETERS.md) entry — class-level fields declared in the child must be qualified with [`Me:`](../special-forms/me.md), and fields declared on the parent must be qualified with [`Base:`](../special-forms/base.md).
 
 The keyword does not stand alone and is not used in script code outside a class definition.
 
@@ -80,12 +80,12 @@ Base class script:
 :PROCEDURE SetField;
     :PARAMETERS sName, sVal;
 
-    sFieldName := sName;
-    sValue := sVal;
+    Me:sFieldName := sName;
+    Me:sValue := sVal;
 :ENDPROC;
 
 :PROCEDURE IsBlank;
-    :RETURN Empty(sValue);
+    :RETURN Empty(Me:sValue);
 :ENDPROC;
 
 :PROCEDURE Constructor;
@@ -102,7 +102,7 @@ Derived class script:
 :PROCEDURE ValidateId;
     :DECLARE bBlank;
 
-    Me:SetField("SampleID", sSampleId);
+    Me:SetField("SampleID", Me:sSampleId);
     bBlank := Me:IsBlank();
 
     :IF bBlank;
@@ -113,7 +113,7 @@ Derived class script:
 :ENDPROC;
 
 :PROCEDURE Constructor;
-    sSampleId := "";
+    Me:sSampleId := "";
 :ENDPROC;
 ```
 
@@ -155,11 +155,11 @@ Base class script:
 :DECLARE sTitle;
 
 :PROCEDURE GetHeader;
-    :RETURN "Report: " + sTitle;
+    :RETURN "Report: " + Me:sTitle;
 :ENDPROC;
 
 :PROCEDURE Constructor;
-    sTitle := "Generic Report";
+    Me:sTitle := "Generic Report";
 :ENDPROC;
 ```
 
@@ -175,16 +175,16 @@ Derived class script:
     :DECLARE sHeader;
 
     sHeader := Base:GetHeader();
-    sHeader := sHeader + " | Standard: " + sRegStandard;
-    sHeader := sHeader + " | Limit: " + LimsString(nContaminantLimit) + " ppm";
+    sHeader := sHeader + " | Standard: " + Me:sRegStandard;
+    sHeader := sHeader + " | Limit: " + LimsString(Me:nContaminantLimit) + " ppm";
 
     :RETURN sHeader;
 :ENDPROC;
 
 :PROCEDURE Constructor;
-    sTitle := "Environmental Compliance";
-    nContaminantLimit := 50;
-    sRegStandard := "EPA-2018";
+    Me:sTitle := "Environmental Compliance";
+    Me:nContaminantLimit := 50;
+    Me:sRegStandard := "EPA-2018";
 :ENDPROC;
 ```
 
@@ -219,20 +219,20 @@ Parent class script:
 :DECLARE sWorkflowName, sStatus;
 
 :PROCEDURE Execute;
-    :RETURN sStatus;
+    :RETURN Me:sStatus;
 :ENDPROC;
 
 :PROCEDURE GetStatus;
-    :RETURN sStatus;
+    :RETURN Me:sStatus;
 :ENDPROC;
 
 :PROCEDURE GetName;
-    :RETURN sWorkflowName;
+    :RETURN Me:sWorkflowName;
 :ENDPROC;
 
 :PROCEDURE Constructor;
-    sWorkflowName := "Base Workflow";
-    sStatus := "Initialized";
+    Me:sWorkflowName := "Base Workflow";
+    Me:sStatus := "Initialized";
 :ENDPROC;
 ```
 
@@ -246,23 +246,23 @@ First derived class script:
 :PROCEDURE Execute;
     :DECLARE sApprover;
 
-    :IF nCurrentStep <= ALen(aApprovers);
-        sApprover := aApprovers[nCurrentStep];
-        sStatus := "Awaiting " + sApprover;
-        nCurrentStep += 1;
-        :RETURN sStatus;
+    :IF Me:nCurrentStep <= ALen(Me:aApprovers);
+        sApprover := Me:aApprovers[Me:nCurrentStep];
+        Me:sStatus := "Awaiting " + sApprover;
+        Me:nCurrentStep += 1;
+        :RETURN Me:sStatus;
     :ENDIF;
 
-    sStatus := "All approvals received";
+    Me:sStatus := "All approvals received";
 
-    :RETURN sStatus;
+    :RETURN Me:sStatus;
 :ENDPROC;
 
 :PROCEDURE Constructor;
-    sWorkflowName := "Approval Workflow";
-    aApprovers := {"Supervisor", "Manager", "Director"};
-    nCurrentStep := 1;
-    sStatus := "Pending approval";
+    Me:sWorkflowName := "Approval Workflow";
+    Me:aApprovers := {"Supervisor", "Manager", "Director"};
+    Me:nCurrentStep := 1;
+    Me:sStatus := "Pending approval";
 :ENDPROC;
 ```
 
@@ -274,22 +274,22 @@ Second derived class script:
 :DECLARE nSentCount;
 
 :PROCEDURE Execute;
-    nSentCount += 1;
+    Me:nSentCount += 1;
 
-    :IF nSentCount >= 3;
-        sStatus := "All notifications sent";
-        :RETURN sStatus;
+    :IF Me:nSentCount >= 3;
+        Me:sStatus := "All notifications sent";
+        :RETURN Me:sStatus;
     :ENDIF;
 
-    sStatus := "Sending notification " + LimsString(nSentCount);
+    Me:sStatus := "Sending notification " + LimsString(Me:nSentCount);
 
-    :RETURN sStatus;
+    :RETURN Me:sStatus;
 :ENDPROC;
 
 :PROCEDURE Constructor;
-    sWorkflowName := "Notification Workflow";
-    nSentCount := 0;
-    sStatus := "Pending notification";
+    Me:sWorkflowName := "Notification Workflow";
+    Me:nSentCount := 0;
+    Me:sStatus := "Pending notification";
 :ENDPROC;
 ```
 
