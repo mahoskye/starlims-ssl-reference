@@ -1924,6 +1924,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#class-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Class infrastructure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#related" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3154,16 +3165,6 @@
       
         
       
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
     
     
     
@@ -3370,6 +3371,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#class-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Class infrastructure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#related" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3477,6 +3489,10 @@
 <h2 id="behavior">Behavior<a class="headerlink" href="#behavior" title="Permanent link">&para;</a></h2>
 <p><code>:CLASS</code> changes the file into class context. After the class declaration, SSL accepts an optional <a href="../INHERIT/"><code>:INHERIT</code></a>, then field declarations and method definitions. The class body is not closed by another keyword; it ends only at end-of-file.</p>
 <p>Class fields are declared with <a href="../DECLARE/"><code>:DECLARE</code></a> in the class body and are available to class methods. Methods are defined with <a href="../PROCEDURE/"><code>:PROCEDURE</code></a> ... <a href="../ENDPROC/"><code>:ENDPROC</code></a> just like script procedures, but inside a class they are invoked through the instance, for example <code>oSample:GetSummary()</code> or <code>Me:GetSummary()</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Qualify class fields with <code>Me:</code> (or <code>Base:</code>)</p>
+<p>Inside a class method, references to class-level <a href="../DECLARE/"><code>:DECLARE</code></a> fields must be qualified with <a href="../../special-forms/me/"><code>Me:fieldName</code></a> (or <a href="../../special-forms/base/"><code>Base:fieldName</code></a> for an inherited parent field). A bare identifier refers to a local variable or <a href="../PARAMETERS/"><code>:PARAMETERS</code></a> entry in the current procedure — not to the class field of the same name. This applies to reads, writes, and compound assignments (<code>+=</code>, <code>-=</code>, etc.), and it applies inside <code>Constructor</code> just like any other method.</p>
+</div>
 <p>Constructors use the reserved declaration name <a href="../../special-forms/constructor/"><code>Constructor</code></a>. A constructor may take parameters, but it cannot return a value. If no constructor is declared, SSL generates an empty zero-argument constructor automatically.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3524,6 +3540,7 @@
 <li>Place regular methods before <a href="../../special-forms/constructor/"><code>Constructor</code></a> and keep the constructor last for predictable structure.</li>
 <li>Instantiate user-defined classes with <a href="../../functions/CreateUdObject/"><code>CreateUdObject</code></a> instead of built-in-class curly-brace syntax.</li>
 <li>Use <a href="../../special-forms/me/"><code>Me:</code></a> for sibling method calls and <a href="../../special-forms/base/"><code>Base:</code></a> for inherited behavior inside class methods.</li>
+<li>Qualify every class-field reference inside a method with <a href="../../special-forms/me/"><code>Me:</code></a> (or <a href="../../special-forms/base/"><code>Base:</code></a> for a parent field). A bare name resolves to a local or parameter, not the class field.</li>
 </ul>
 </div>
 <div class="admonition failure">
@@ -3552,8 +3569,8 @@
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetDescription</span><span class="p">;</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDescription</span><span class="p">;</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="n">sDescription</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nResultValue</span><span class="p">);</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="n">sDescription</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="bp">Me</span><span class="p">:</span><span class="n">nResultValue</span><span class="p">);</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sDescription</span><span class="p">;</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="k">:ENDPROC</span><span class="p">;</span>
@@ -3561,8 +3578,8 @@
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="bp">Constructor</span><span class="p">;</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sName</span><span class="p">,</span><span class="w"> </span><span class="n">nValue</span><span class="p">;</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="n">sSampleName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sName</span><span class="p">;</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="n">nResultValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nValue</span><span class="p">;</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sName</span><span class="p">;</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">nResultValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nValue</span><span class="p">;</span>
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Usage:</p>
@@ -3584,14 +3601,14 @@
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSummary</span><span class="p">;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="p">;</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="k">:ENDPROC</span><span class="p">;</span>
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
 <a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="bp">Constructor</span><span class="p">;</span>
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sId</span><span class="p">,</span><span class="w"> </span><span class="n">sState</span><span class="p">;</span>
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sId</span><span class="p">;</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sState</span><span class="p">;</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sId</span><span class="p">;</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sState</span><span class="p">;</span>
 <a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Derived class script:</p>
@@ -3604,7 +3621,7 @@
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">Base</span><span class="p">:</span><span class="nf">GetSummary</span><span class="p">();</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, result &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nResultValue</span><span class="p">);</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, result &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="bp">Me</span><span class="p">:</span><span class="n">nResultValue</span><span class="p">);</span>
 <a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
 <a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
 <a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="k">:ENDPROC</span><span class="p">;</span>
@@ -3612,9 +3629,9 @@
 <a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="bp">Constructor</span><span class="p">;</span>
 <a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sId</span><span class="p">,</span><span class="w"> </span><span class="n">sState</span><span class="p">,</span><span class="w"> </span><span class="n">nResult</span><span class="p">;</span>
 <a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>
-<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">    </span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sId</span><span class="p">;</span>
-<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sState</span><span class="p">;</span>
-<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">    </span><span class="n">nResultValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nResult</span><span class="p">;</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sId</span><span class="p">;</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sState</span><span class="p">;</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">nResultValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nResult</span><span class="p">;</span>
 <a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Usage:</p>
@@ -3636,21 +3653,21 @@
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AddResult</span><span class="p">;</span>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">nValue</span><span class="p">,</span><span class="w"> </span><span class="n">nLimit</span><span class="p">;</span>
 <a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">nValue</span><span class="p">);</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="nf">AAdd</span><span class="p">(</span><span class="bp">Me</span><span class="p">:</span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">nValue</span><span class="p">);</span>
 <a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
 <a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nValue</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">nLimit</span><span class="p">;</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">        </span><span class="n">nPassCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">        </span><span class="bp">Me</span><span class="p">:</span><span class="n">nPassCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">        </span><span class="n">nFailCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">        </span><span class="bp">Me</span><span class="p">:</span><span class="n">nFailCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="k">:ENDPROC</span><span class="p">;</span>
 <a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>
 <a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSummary</span><span class="p">;</span>
 <a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
 <a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>
-<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Runs: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aValues</span><span class="p">));</span>
-<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, pass: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nPassCount</span><span class="p">);</span>
-<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, fail: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFailCount</span><span class="p">);</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Runs: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="bp">Me</span><span class="p">:</span><span class="n">aValues</span><span class="p">));</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, pass: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="bp">Me</span><span class="p">:</span><span class="n">nPassCount</span><span class="p">);</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a><span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, fail: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="bp">Me</span><span class="p">:</span><span class="n">nFailCount</span><span class="p">);</span>
 <a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>
 <a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
 <a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="k">:ENDPROC</span><span class="p">;</span>
@@ -3667,9 +3684,9 @@
 <a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a><span class="k">:ENDPROC</span><span class="p">;</span>
 <a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a>
 <a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="bp">Constructor</span><span class="p">;</span>
-<a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a><span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
-<a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a><span class="w">    </span><span class="n">nPassCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a><span class="w">    </span><span class="n">nFailCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a><span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
+<a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a><span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">nPassCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a><span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">nFailCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a><span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Usage:</p>
@@ -3683,6 +3700,13 @@
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
 <div class="language-text highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Runs: 4, pass: 3, fail: 1
 </code></pre></div>
+<h2 id="class-infrastructure">Class infrastructure<a class="headerlink" href="#class-infrastructure" title="Permanent link">&para;</a></h2>
+<p>Three <a href="../../special-forms/#class-infrastructure">special forms</a> are only meaningful inside a class method body and are part of how every class is written:</p>
+<ul>
+<li><a href="../../special-forms/me/"><code>Me:</code></a> — reference to the current instance. Required to qualify class-level <a href="../DECLARE/"><code>:DECLARE</code></a> fields and to call sibling methods.</li>
+<li><a href="../../special-forms/base/"><code>Base:</code></a> — explicit access to fields, properties, or methods defined on the immediate parent class declared via <a href="../INHERIT/"><code>:INHERIT</code></a>.</li>
+<li><a href="../../special-forms/constructor/"><code>Constructor</code></a> — reserved declaration name (<code>:PROCEDURE Constructor;</code>) that runs one-time initialization when an instance is created.</li>
+</ul>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../INHERIT/"><code>INHERIT</code></a></li>
