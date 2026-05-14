@@ -98,4 +98,4 @@ Groups a script's procedures into three named regions: declarations, public API,
 
 - [`REGION`](../keywords/REGION.md)
 - [`ENDREGION`](../keywords/ENDREGION.md)
-- [`access-modifiers`](access-modifiers.md)
+- [Access Modifiers](access-modifiers.md)

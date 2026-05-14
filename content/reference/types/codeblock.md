@@ -153,6 +153,6 @@ DoProc("FindFirstOutOfSpec");
 ## Related elements
 
 - [`Eval`](../functions/Eval.md)
-- [`code-block`](../special-forms/code-block.md)
+- [Code Block](../special-forms/code-block.md)
 - [`LimsTypeEx`](../functions/LimsTypeEx.md)
 - [`object`](object.md)
