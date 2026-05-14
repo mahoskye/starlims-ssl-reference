@@ -1,5 +1,5 @@
 ---
-title: "code-block"
+title: "Code Block"
 summary: "Defines an anonymous code block with bound variables and a single expression body. A code block can be created at the top level, passed as a function argument, or assigned to a variable for later execution."
 id: ssl.special_form.code-block
 element_type: special_form
@@ -9,7 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# code-block
+# Code Block
 
 ## What it does
 
