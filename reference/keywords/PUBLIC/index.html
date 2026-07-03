@@ -3435,8 +3435,8 @@
 
 
 <h1 id="public">PUBLIC<a class="headerlink" href="#public" title="Permanent link">&para;</a></h1>
-<p>Declares global variables that can be accessed from any scope in the program.</p>
-<p>The <code>:PUBLIC</code> keyword declares one or more names as public variables. Like <a href="../DECLARE/"><code>:DECLARE</code></a>, it is a regular statement, so SSL allows it anywhere a statement is valid in a script or procedure body. Each declared public variable becomes part of the shared public-variable store, starts with the empty string <code>""</code>, and can then be read or updated from any scope that runs in the same program context.</p>
+<p>Declares public variables shared down the call stack — visible to the declaring scope and every scope it calls.</p>
+<p>The <code>:PUBLIC</code> keyword declares one or more names as public variables. Like <a href="../DECLARE/"><code>:DECLARE</code></a>, it is a regular statement, so SSL allows it anywhere a statement is valid in a script or procedure body. Each declared public variable starts with the empty string <code>""</code> and can then be read or updated by the declaring scope and any scope invoked beneath it on the call stack — public variables are call-stack scoped, not program-global.</p>
 <h2 id="behavior">Behavior<a class="headerlink" href="#behavior" title="Permanent link">&para;</a></h2>
 <p><code>:PUBLIC</code> creates shared variable names rather than routine-local working variables. After a public name is declared, assignments to that name update the same shared value across procedures and script-level code.</p>
 <p>Key runtime behavior:</p>
