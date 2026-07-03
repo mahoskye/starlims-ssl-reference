@@ -228,6 +228,10 @@ DoProc("RoundTripBooleanFlags");
 State restored correctly
 ```
 
+## Caveats
+
+- Member access with `:` forwards to the underlying .NET Boolean object when no SSL-side member matches (e.g. `bFlag:ToString()`). An unmatched member is legitimate .NET passthrough, not an error — tools must never flag it as an unknown member (style guide `dotnet_member_passthrough`).
+
 ## Related elements
 
 - [`true`](../literals/true.md)

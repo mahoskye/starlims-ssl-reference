@@ -46,6 +46,7 @@ CATEGORIES = (
     "literals",
     "types",
     "special-forms",
+    "returns",
 )
 
 
@@ -202,6 +203,12 @@ def parse_bullet_list(section: str) -> list[str]:
         sub = re.match(r"^\s+[-*]\s+(.+?)\s*$", raw)
         if sub and current is not None:
             current = current + "; " + sub.group(1)
+            continue
+        # Wrapped continuation line of the current bullet joins with a space
+        # (previously dropped, truncating multi-line bullets mid-sentence).
+        cont = re.match(r"^\s+(?![-*]\s)(\S.*?)\s*$", raw)
+        if cont and current is not None:
+            current = current + " " + cont.group(1)
     if current is not None:
         items.append(strip_inline_markdown(current))
     return items

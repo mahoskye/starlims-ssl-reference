@@ -116,6 +116,23 @@ Reads a template region that contains `{USER}` and `{DATE}` placeholders and rep
 DoProc("BuildWelcomeMessage");
 ```
 
+### Fill a JSON template region
+
+Region bodies are raw text, so they can hold JSON, SQL, or any other template. `$Name$`-style tokens are a common placeholder convention; the source and destination arrays drive the substitution.
+
+```ssl
+:DECLARE sJson;
+
+sJson := GetRegion("TestJSON", {"$RunID$", "$CustomerName$"}, {1234, "Bill Smith"});
+
+:REGION TestJSON;
+{
+    "run_name": "$RunID$",
+    "customer": "$CustomerName$"
+}
+:ENDREGION;
+```
+
 ## Related
 
 - [`GetRegionEx`](GetRegionEx.md)

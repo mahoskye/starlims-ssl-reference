@@ -163,6 +163,10 @@ Builds a `DataSet` with one row, reads a cell value through the `DataRow` indexe
 DoProc("SerializeDataSetNetObject");
 ```
 
+## Caveats
+
+- Member access with `:` forwards to the underlying .NET wrapped object when no SSL-side member matches (e.g. `oNet:AnyMember(...)`). An unmatched member is legitimate .NET passthrough, not an error — tools must never flag it as an unknown member (style guide `dotnet_member_passthrough`).
+
 ## Related elements
 
 - [`MakeNETObject`](../functions/MakeNETObject.md)
