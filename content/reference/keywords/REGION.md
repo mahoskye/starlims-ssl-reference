@@ -170,6 +170,23 @@ DoProc("BuildStatusMessage", {"COMPLETE"});
 The sample review is complete
 ```
 
+### Hold a JSON template for GetRegion
+
+The captured body is raw text, so a region can hold a JSON (or SQL, or any other) template whose `$Name$` placeholders are filled by [`GetRegion`](../functions/GetRegion.md) at retrieval time.
+
+```ssl
+:DECLARE sJson;
+
+sJson := GetRegion("TestJSON", {"$RunID$", "$CustomerName$"}, {1234, "Bill Smith"});
+
+:REGION TestJSON;
+{
+    "run_name": "$RunID$",
+    "customer": "$CustomerName$"
+}
+:ENDREGION;
+```
+
 ## Related
 
 - [`ENDREGION`](ENDREGION.md)

@@ -67,7 +67,7 @@ If the same include target is encountered again while compiling a script, the la
 ## Caveats
 
 - `:INCLUDE` must be written in uppercase with the leading colon.
-- The target name must use identifier syntax, not a quoted string.
+- The target name is normally written in identifier syntax (`:INCLUDE ScriptName;` or `:INCLUDE Category.ScriptName;`). A quoted-string target (`:INCLUDE "ScriptName";`) also occurs in production code and is accepted.
 - If the target script cannot be loaded, compilation fails.
 
 ## Examples

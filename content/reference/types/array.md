@@ -242,6 +242,10 @@ Snapshot tests: 3
 [["S-1001",["pH","Conductivity","Turbidity"]],["S-1002",["pH"]]]
 ```
 
+## Caveats
+
+- Member access with `:` forwards to the underlying .NET list object when no SSL-side member matches (e.g. `aValues:Count`). An unmatched member is legitimate .NET passthrough, not an error — tools must never flag it as an unknown member (style guide `dotnet_member_passthrough`).
+
 ## Related elements
 
 - [`AAdd`](../functions/AAdd.md)

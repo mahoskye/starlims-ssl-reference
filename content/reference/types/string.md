@@ -212,6 +212,10 @@ DoProc("BuildCommentPayload");
 "No comment provided"
 ```
 
+## Caveats
+
+- Member access with `:` forwards to the underlying .NET String object when no SSL-side member matches (e.g. `sValue:EndsWith("suffix")`). An unmatched member is legitimate .NET passthrough, not an error — tools must never flag it as an unknown member (style guide `dotnet_member_passthrough`).
+
 ## Related elements
 
 - [`LimsString`](../functions/LimsString.md)

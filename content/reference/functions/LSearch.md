@@ -77,6 +77,7 @@ Common return shapes include:
 ## Caveats
 
 - `LSearch` falls back only when the scalar result is missing or database `NULL`. An actual empty string from the database is returned as-is.
+- Passing a non-array value as `aArrayOfValues` (the fourth parameter) can lock up the application — the runtime's error handling for this type mismatch is anything but graceful. Always pass an array of bind values or omit the parameter entirely.
 
 ## Examples
 
