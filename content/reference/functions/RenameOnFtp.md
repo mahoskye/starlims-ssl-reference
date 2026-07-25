@@ -48,7 +48,7 @@ RenameOnFtp(sServerNameOrIP, [sRemoteDirectory], sFileNameOld, sFileNameNew, [sU
 
 ## Returns
 
-**[boolean](../types/boolean.md)** - [`.T.`](../literals/true.md) when the rename completes; [`.F.`](../literals/false.md) when the underlying FTP or SFTP move helper cannot complete the rename.
+**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the rename completes; [`.F.`](../literals/false.md) when the underlying FTP or SFTP move helper cannot complete the rename.
 
 ## Exceptions
 

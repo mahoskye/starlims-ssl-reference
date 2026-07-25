@@ -1,6 +1,6 @@
 ---
 title: "ToJson"
-summary: "Serializes a value to a JSON string."
+summary: "Serializes an SSL value, array, or object to a JSON string."
 id: ssl.function.tojson
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # ToJson
 
-Serializes a value to a JSON string.
+Serializes an SSL value, array, or object to a JSON string.
 
 `ToJson()` returns a string representation of the supplied value in JSON form. It supports normal SSL values such as strings, numbers, booleans, dates, arrays, and objects. [`NIL`](../literals/nil.md) is returned as the literal string `null`.
 

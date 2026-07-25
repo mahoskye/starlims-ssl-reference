@@ -1,6 +1,6 @@
 ---
 title: "UrlDecode"
-summary: "Decodes a URL-encoded string."
+summary: "Decodes percent-encoded URL text back into its readable string form."
 id: ssl.function.urldecode
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # UrlDecode
 
-Decodes a URL-encoded string.
+Decodes percent-encoded URL text back into its readable string form.
 
 `UrlDecode` takes a [string](../types/string.md) value and returns its decoded form. If `sData` is [`NIL`](../literals/nil.md), the function returns [`NIL`](../literals/nil.md). If `sData` is not a [string](../types/string.md), the function raises an error. Use it when you receive URL-encoded text and need the readable value in SSL.
 

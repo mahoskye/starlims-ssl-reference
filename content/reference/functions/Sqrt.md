@@ -1,6 +1,6 @@
 ---
 title: "Sqrt"
-summary: "Calculates the square root of a number."
+summary: "Calculates the non-negative square root of a numeric value."
 id: ssl.function.sqrt
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # Sqrt
 
-Calculates the square root of a number.
+Calculates the non-negative square root of a numeric value.
 
 `Sqrt` returns the square root of `nNumber`. For zero and positive values,
 it returns the expected non-negative result. Passing a negative number returns the special numeric value `NaN`. Passing [`NIL`](../literals/nil.md) raises an error for `nNumber`.

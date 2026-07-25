@@ -1,6 +1,6 @@
 ---
 title: "ToXml"
-summary: "Converts a value to an XML string."
+summary: "Serializes a value, array, or dynamic object to an XML string."
 id: ssl.function.toxml
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # ToXml
 
-Converts a value to an XML string.
+Serializes a value, array, or dynamic object to an XML string.
 
 `ToXml` always returns a string that starts with an XML declaration. It can
 serialize primitive values, arrays, [`NIL`](../literals/nil.md), and dynamic objects. If serialization fails, `ToXml` does not raise an exception — it returns XML containing an `<error>` element instead. Use [`FromXml`](FromXml.md) to deserialize XML produced in the built-in format.

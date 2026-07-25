@@ -43,8 +43,7 @@ GetNETDataSet(sCommandString, [sConnectionName], [aValues], [sTableName], [bRetu
 
 ## Returns
 
-- **[string](../types/string.md)** — Dataset XML with schema. Returned when `bReturnXml` is omitted or [`.T.`](../literals/true.md).
-- **[netobject](../types/netobject.md)** — The dataset wrapped for .NET interop. Returned when `bReturnXml` is [`.F.`](../literals/false.md).
+**[string](../types/string.md) or [netobject](../types/netobject.md)** — Dataset XML with schema when `bReturnXml` is omitted or [`.T.`](../literals/true.md); the dataset wrapped for .NET interop when `bReturnXml` is [`.F.`](../literals/false.md).
 
 ## Exceptions
 

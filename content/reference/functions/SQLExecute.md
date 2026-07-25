@@ -44,7 +44,7 @@ SQLExecute(sCommandString, [sConnectionName], [bRollbackExistingTransaction], [b
 
 ## Returns
 
-**any**
+**any** — Rows for a `SELECT` statement, as an array, XML string, or dataset object depending on `vReturnType`; a boolean success value for other statements.
 
 When the prepared SQL begins with `SELECT`, the return value depends on `vReturnType`:
 

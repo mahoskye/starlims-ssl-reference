@@ -1,6 +1,6 @@
 ---
 title: "WriteText"
-summary: "Writes string content to a file."
+summary: "Writes or appends string content to a text file with optional encoding."
 id: ssl.function.writetext
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # WriteText
 
-Writes string content to a file.
+Writes or appends string content to a text file with optional encoding.
 
 `WriteText` creates a new file or writes over an existing one by default. When `sAppend` is set to `"Y"` or `"y"`, it appends the new text to the end of the file instead. If you omit `sEncoding`, the function writes using `UTF8`.
 
