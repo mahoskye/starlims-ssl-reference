@@ -1,6 +1,6 @@
 ---
 title: "ClearLastSSLError"
-summary: "Clears the current SSL error state."
+summary: "Clears the stored SSL error so later error checks start clean."
 id: ssl.function.clearlastsslerror
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # ClearLastSSLError
 
-Clears the current SSL error state.
+Clears the stored SSL error so later error checks start clean.
 
 `ClearLastSSLError` removes the currently stored SSL error and returns [`.T.`](../literals/true.md).
 It does not tell you whether an error was present before the call. If you need the previous error details, read [`GetLastSSLError`](GetLastSSLError.md) first.

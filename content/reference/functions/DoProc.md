@@ -1,6 +1,6 @@
 ---
 title: "DoProc"
-summary: "Calls a procedure by name at runtime."
+summary: "Calls a local or scripted procedure by name with an optional argument array."
 id: ssl.function.doproc
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # DoProc
 
-Calls a procedure by name at runtime.
+Calls a local or scripted procedure by name with an optional argument array.
 
 `DoProc` takes a procedure name and an optional argument array. A one-segment name calls a procedure in the current script. A three-segment name is passed through the same runtime path used by [`ExecFunction`](ExecFunction.md).
 

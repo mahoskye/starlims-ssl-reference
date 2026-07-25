@@ -1,6 +1,6 @@
 ---
 title: "DeleteInlineCode"
-summary: "Removes a named inline code entry."
+summary: "Removes a named inline code entry using a case-insensitive name lookup."
 id: ssl.function.deleteinlinecode
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # DeleteInlineCode
 
-Removes a named inline code entry.
+Removes a named inline code entry using a case-insensitive name lookup.
 
 `DeleteInlineCode` removes an inline code entry by name and returns [`.T.`](../literals/true.md) when the call completes without error. The argument is converted to a string and the lookup is case-insensitive, so `"MyBlock"`, `"myblock"`, and `"MYBLOCK"` all target the same entry.
 

@@ -45,7 +45,7 @@ HtmlDecode(sData)
 
 ## Returns
 
-**[string](../types/string.md)** - The decoded string with supported entity sequences replaced by their literal characters. Returns [`NIL`](../literals/nil.md) when `sData` is [`NIL`](../literals/nil.md).
+**[string](../types/string.md)** — The decoded string with supported entity sequences replaced by their literal characters. Returns [`NIL`](../literals/nil.md) when `sData` is [`NIL`](../literals/nil.md).
 
 ## Best practices
 

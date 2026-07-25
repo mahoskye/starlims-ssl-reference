@@ -37,7 +37,7 @@ SQLRemoveComments(sStatement)
 
 ## Returns
 
-**[string](../types/string.md) or NIL**
+**[string](../types/string.md) or NIL** — The SQL text with comments removed, or [`NIL`](../literals/nil.md) when `sStatement` is [`NIL`](../literals/nil.md).
 
 | Condition | Return type | Behavior |
 |-----------|-------------|----------|

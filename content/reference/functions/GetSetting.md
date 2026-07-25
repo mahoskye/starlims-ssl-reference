@@ -1,6 +1,6 @@
 ---
 title: "GetSetting"
-summary: "Retrieves a single named setting."
+summary: "Retrieves the stored value of a named configuration setting."
 id: ssl.function.getsetting
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # GetSetting
 
-Retrieves a single named setting.
+Retrieves the stored value of a named configuration setting.
 
 `GetSetting` accepts a setting name and returns the stored value for that name. The value is surfaced as the matching SSL value type. In practice, settings are returned as string, numeric, date, or Boolean values. If the setting name is not found, the function returns an empty string.
 
