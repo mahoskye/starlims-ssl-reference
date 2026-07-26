@@ -55,6 +55,14 @@ when the text drifts:
 So: keep the section skeleton of existing pages in the same category, and
 keep the `Do` / `Don't` admonition titles exactly as they are.
 
+Two section vocabularies exist **by deliberate per-category convention**:
+functions, classes, and keywords use `When to use` / `Best practices` /
+`Exceptions` / `Caveats` / `Related`; operators, types, literals, and most
+special forms use `When to use it` / `Notes for daily SSL work` /
+`Errors and edge cases` / `Related elements`. The extractor recognizes both
+(`Errors and edge cases` feeds `caveats`, `Notes for daily SSL work` feeds
+`best_practices`) — follow whichever vocabulary the page's category uses.
+
 Every reference page carries frontmatter:
 
 ```yaml

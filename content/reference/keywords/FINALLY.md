@@ -3,13 +3,6 @@ title: "FINALLY"
 summary: "Starts the cleanup section of a :TRY block and always runs after the protected work completes."
 id: ssl.keyword.finally
 element_type: keyword
-category: error-handling
-tags:
-  - exception-handling
-  - cleanup
-  - try-catch
-  - try-finally
-  - control-flow
 doc_status: published
 starlims:
   applies_to: [11]

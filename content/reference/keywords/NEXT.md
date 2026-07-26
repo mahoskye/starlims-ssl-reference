@@ -3,11 +3,6 @@ title: "NEXT"
 summary: "Closes a :FOR loop and returns control to the loop's increment-and-test step."
 id: ssl.keyword.next
 element_type: keyword
-category: loop
-tags:
-  - loop-control
-  - for-loop
-  - block-terminator
 doc_status: published
 starlims:
   applies_to: [11]

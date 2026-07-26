@@ -3,13 +3,6 @@ title: "TRY"
 summary: "Starts a protected block that can transfer control to :CATCH, :FINALLY, or both when errors occur."
 id: ssl.keyword.try
 element_type: keyword
-category: error-handling
-tags:
-  - exception-handling
-  - cleanup
-  - try-catch
-  - try-finally
-  - control-flow
 doc_status: published
 starlims:
   applies_to: [11]
