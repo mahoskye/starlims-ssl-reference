@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -4363,7 +4363,7 @@ specific unit.</p>
 <li>When you need to detect whether <code>dEndDate</code> is earlier than <code>dStartDate</code>.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">DateDiffEx</span><span class="p">(</span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dEndDate</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DateDiffEx</span><span class="p">(</span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dEndDate</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4446,74 +4446,74 @@ specific unit.</p>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="read-hours-and-minutes-from-an-approval-interval">Read hours and minutes from an approval interval<a class="headerlink" href="#read-hours-and-minutes-from-an-approval-interval" title="Permanent link">&para;</a></h3>
 <p>Computes the interval between a submission time and an approval time, then reads the <code>Hours</code> and <code>Minutes</code> members from the returned object to build a summary message.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowApprovalInterval</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dSubmittedAt</span><span class="p">,</span><span class="w"> </span><span class="n">dApprovedAt</span><span class="p">,</span><span class="w"> </span><span class="n">oInterval</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">dSubmittedAt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">dApprovedAt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">oInterval</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateDiffEx</span><span class="p">(</span><span class="n">dSubmittedAt</span><span class="p">,</span><span class="w"> </span><span class="n">dApprovedAt</span><span class="p">);</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Approval time: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oInterval</span><span class="p">:</span><span class="n">Hours</span><span class="p">)</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; hours and &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oInterval</span><span class="p">:</span><span class="n">Minutes</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; minutes&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oInterval</span><span class="p">;</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowApprovalInterval&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowApprovalInterval</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dSubmittedAt</span><span class="p">,</span><span class="w"> </span><span class="n">dApprovedAt</span><span class="p">,</span><span class="w"> </span><span class="n">oInterval</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">dSubmittedAt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dApprovedAt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">oInterval</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateDiffEx</span><span class="p">(</span><span class="n">dSubmittedAt</span><span class="p">,</span><span class="w"> </span><span class="n">dApprovedAt</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Approval time: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oInterval</span><span class="p">:</span><span class="n">Hours</span><span class="p">)</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; hours and &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oInterval</span><span class="p">:</span><span class="n">Minutes</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; minutes&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oInterval</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowApprovalInterval&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Approval time: 6 hours and 15 minutes
+<div class="language-text highlight"><pre><span></span><code>Approval time: 6 hours and 15 minutes
 </code></pre></div>
 <h3 id="reject-an-end-date-that-is-earlier-than-the-start-date">Reject an end date that is earlier than the start date<a class="headerlink" href="#reject-an-end-date-that-is-earlier-than-the-start-date" title="Permanent link">&para;</a></h3>
 <p>Computes the interval between two dates where the end precedes the start, checks <code>TotalDays</code> for a negative value, and returns early with an error message.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateIntervalOrder</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dEndDate</span><span class="p">,</span><span class="w"> </span><span class="n">oInterval</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">dStartDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">dEndDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="n">oInterval</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateDiffEx</span><span class="p">(</span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dEndDate</span><span class="p">);</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oInterval</span><span class="p">:</span><span class="n">TotalDays</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;End date must be on or after the start date&quot;</span><span class="p">;</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Interval is valid&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateIntervalOrder&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateIntervalOrder</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dEndDate</span><span class="p">,</span><span class="w"> </span><span class="n">oInterval</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">dStartDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dEndDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">oInterval</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateDiffEx</span><span class="p">(</span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dEndDate</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oInterval</span><span class="p">:</span><span class="n">TotalDays</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;End date must be on or after the start date&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Interval is valid&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateIntervalOrder&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="break-a-multi-day-turnaround-into-days-hours-and-minutes">Break a multi-day turnaround into days, hours, and minutes<a class="headerlink" href="#break-a-multi-day-turnaround-into-days-hours-and-minutes" title="Permanent link">&para;</a></h3>
 <p>Computes the elapsed interval between a receipt time and a completion time three days later, then formats the <code>Days</code>, <code>Hours</code>, and <code>Minutes</code> members into a single summary string.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeTurnaround</span><span class="p">;</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dReceivedAt</span><span class="p">,</span><span class="w"> </span><span class="n">dCompletedAt</span><span class="p">,</span><span class="w"> </span><span class="n">oInterval</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">dReceivedAt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="n">dCompletedAt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="n">oInterval</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateDiffEx</span><span class="p">(</span><span class="n">dReceivedAt</span><span class="p">,</span><span class="w"> </span><span class="n">dCompletedAt</span><span class="p">);</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Turnaround time: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oInterval</span><span class="p">:</span><span class="n">Days</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; days, &quot;</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oInterval</span><span class="p">:</span><span class="n">Hours</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; hours, &quot;</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oInterval</span><span class="p">:</span><span class="n">Minutes</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; minutes&quot;</span><span class="p">;</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSummary</span><span class="p">);</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oInterval</span><span class="p">;</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SummarizeTurnaround&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeTurnaround</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dReceivedAt</span><span class="p">,</span><span class="w"> </span><span class="n">dCompletedAt</span><span class="p">,</span><span class="w"> </span><span class="n">oInterval</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">dReceivedAt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dCompletedAt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">oInterval</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateDiffEx</span><span class="p">(</span><span class="n">dReceivedAt</span><span class="p">,</span><span class="w"> </span><span class="n">dCompletedAt</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Turnaround time: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oInterval</span><span class="p">:</span><span class="n">Days</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; days, &quot;</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oInterval</span><span class="p">:</span><span class="n">Hours</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; hours, &quot;</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oInterval</span><span class="p">:</span><span class="n">Minutes</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; minutes&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSummary</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oInterval</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SummarizeTurnaround&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Turnaround time: 3 days, 3 hours, 35 minutes
+<div class="language-text highlight"><pre><span></span><code>Turnaround time: 3 days, 3 hours, 35 minutes
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

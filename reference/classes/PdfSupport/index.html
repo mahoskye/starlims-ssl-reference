@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -3358,104 +3358,104 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="add-text-to-a-page-from-an-image">Add text to a page from an image<a class="headerlink" href="#add-text-to-a-page-from-an-image" title="Permanent link">&para;</a></h3>
 <p>Imports a JPEG as a new PDF page, then calls <code>SetTextStyle</code> to switch to bold green Arial before drawing a label at coordinates (50, 50) with <code>AddTextOnPage</code>. The default text style (Verdana 20 black) is only overridden for calls after <code>SetTextStyle</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AddTextOverlayToImage</span><span class="p">;</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPdf</span><span class="p">,</span><span class="w"> </span><span class="n">sImagePath</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">,</span><span class="w"> </span><span class="n">sLabel</span><span class="p">;</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">sImagePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/Documents/InspectionPhoto.jpg&quot;</span><span class="p">;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/Documents/LabeledPhoto.pdf&quot;</span><span class="p">;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">sLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;PASS - Inspected&quot;</span><span class="p">;</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="n">oPdf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">PdfSupport</span><span class="p">{};</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">AddPageFromImage</span><span class="p">(</span><span class="n">sImagePath</span><span class="p">);</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">SetTextStyle</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bold&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Green&quot;</span><span class="p">);</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">AddTextOnPage</span><span class="p">(</span><span class="n">sLabel</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Save</span><span class="p">(</span><span class="n">sOutputPath</span><span class="p">);</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Image exported to PDF with text overlay&quot;</span><span class="p">);</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AddTextOverlayToImage&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AddTextOverlayToImage</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPdf</span><span class="p">,</span><span class="w"> </span><span class="n">sImagePath</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">,</span><span class="w"> </span><span class="n">sLabel</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sImagePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/Documents/InspectionPhoto.jpg&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/Documents/LabeledPhoto.pdf&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;PASS - Inspected&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">oPdf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">PdfSupport</span><span class="p">{};</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">AddPageFromImage</span><span class="p">(</span><span class="n">sImagePath</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">SetTextStyle</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bold&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Green&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">AddTextOnPage</span><span class="p">(</span><span class="n">sLabel</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Save</span><span class="p">(</span><span class="n">sOutputPath</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Image exported to PDF with text overlay&quot;</span><span class="p">);</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AddTextOverlayToImage&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Image exported to PDF with text overlay
+<div class="language-text highlight"><pre><span></span><code>Image exported to PDF with text overlay
 </code></pre></div>
 <h3 id="assemble-and-secure-a-multi-source-pdf">Assemble and secure a multi-source PDF<a class="headerlink" href="#assemble-and-secure-a-multi-source-pdf" title="Permanent link">&para;</a></h3>
 <p>Merges a header image, all pages from an existing PDF, and a footer image into one document, then sets <code>Encrypted128Bit</code> security and disables printing, modifying, and content extraction before saving. The page count reflects the total pages across all merged sources.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AssembleSecureMultiSourcePdf</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPdf</span><span class="p">,</span><span class="w"> </span><span class="n">sImage1</span><span class="p">,</span><span class="w"> </span><span class="n">sImage2</span><span class="p">,</span><span class="w"> </span><span class="n">sExistingPdf</span><span class="p">;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">,</span><span class="w"> </span><span class="n">sUserPass</span><span class="p">,</span><span class="w"> </span><span class="n">sOwnerPass</span><span class="p">,</span><span class="w"> </span><span class="n">sMsg</span><span class="p">;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPageCount</span><span class="p">;</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="n">sImage1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/documents/report_header.png&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="n">sImage2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/documents/report_footer.png&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="n">sExistingPdf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/documents/reference.pdf&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/documents/final_report.pdf&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="n">sUserPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;UserPass2024&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="n">sOwnerPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;OwnerPass2024&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="n">oPdf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">PdfSupport</span><span class="p">{};</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">AddPageFromImage</span><span class="p">(</span><span class="n">sImage1</span><span class="p">);</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">AddPDFDocument</span><span class="p">(</span><span class="n">sExistingPdf</span><span class="p">);</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">AddPageFromImage</span><span class="p">(</span><span class="n">sImage2</span><span class="p">);</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="n">nPageCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oPdf</span><span class="p">:</span><span class="n">PageCount</span><span class="p">;</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="n">DocumentSecurityLevel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Encrypted128Bit&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="n">UserPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sUserPass</span><span class="p">;</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="n">OwnerPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sOwnerPass</span><span class="p">;</span>
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="n">PermitPrint</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="n">PermitModifyDocument</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="n">PermitExtractContent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Save</span><span class="p">(</span><span class="n">sOutputPath</span><span class="p">);</span>
-<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>
-<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">    </span><span class="n">sMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Assembled PDF has &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nPageCount</span><span class="p">);</span>
-<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">    </span><span class="n">sMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMsg</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; pages and is print-protected&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>
-<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMsg</span><span class="p">);</span>
-<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>
-<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AssembleSecureMultiSourcePdf&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AssembleSecureMultiSourcePdf</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPdf</span><span class="p">,</span><span class="w"> </span><span class="n">sImage1</span><span class="p">,</span><span class="w"> </span><span class="n">sImage2</span><span class="p">,</span><span class="w"> </span><span class="n">sExistingPdf</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">,</span><span class="w"> </span><span class="n">sUserPass</span><span class="p">,</span><span class="w"> </span><span class="n">sOwnerPass</span><span class="p">,</span><span class="w"> </span><span class="n">sMsg</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPageCount</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sImage1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/documents/report_header.png&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sImage2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/documents/report_footer.png&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sExistingPdf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/documents/reference.pdf&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/documents/final_report.pdf&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;UserPass2024&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOwnerPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;OwnerPass2024&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">oPdf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">PdfSupport</span><span class="p">{};</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">AddPageFromImage</span><span class="p">(</span><span class="n">sImage1</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">AddPDFDocument</span><span class="p">(</span><span class="n">sExistingPdf</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">AddPageFromImage</span><span class="p">(</span><span class="n">sImage2</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">nPageCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oPdf</span><span class="p">:</span><span class="n">PageCount</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="n">DocumentSecurityLevel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Encrypted128Bit&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="n">UserPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sUserPass</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="n">OwnerPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sOwnerPass</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="n">PermitPrint</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="n">PermitModifyDocument</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="n">PermitExtractContent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Save</span><span class="p">(</span><span class="n">sOutputPath</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">sMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Assembled PDF has &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nPageCount</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMsg</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; pages and is print-protected&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMsg</span><span class="p">);</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AssembleSecureMultiSourcePdf&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays (page count depends on merged sources):</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Assembled PDF has 5 pages and is print-protected
+<div class="language-text highlight"><pre><span></span><code>Assembled PDF has 5 pages and is print-protected
 </code></pre></div>
 <h3 id="protect-and-print-a-pdf-report">Protect and print a PDF report<a class="headerlink" href="#protect-and-print-a-pdf-report" title="Permanent link">&para;</a></h3>
 <p>Opens an existing PDF, draws a title on page 1, then applies <code>Protect</code>, which sets a 128-bit security profile. The <code>PermitModifyDocument</code> override shows that individual permissions can be tightened after <code>Protect</code>. The final <code>Print</code> call sends the saved file path to Adobe Reader. It does not print the in-memory document.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GenerateSecureReport</span><span class="p">;</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sPdfPath</span><span class="p">,</span><span class="w"> </span><span class="n">sPrinterName</span><span class="p">;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sPdfPath</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;C:/Reports/QuarterlyReport.pdf&quot;</span><span class="p">;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sPrinterName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;HP_LaserJet_5000&quot;</span><span class="p">;</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPdf</span><span class="p">,</span><span class="w"> </span><span class="n">sAdobePath</span><span class="p">,</span><span class="w"> </span><span class="n">sReportTitle</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="n">sAdobePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/Program Files/Adobe/Acrobat DC/Acrobat/Acrobat.exe&quot;</span><span class="p">;</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="n">sReportTitle</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Q4 Analytical Results&quot;</span><span class="p">;</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/Reports/Secure_QuarterlyReport.pdf&quot;</span><span class="p">;</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="n">oPdf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">PdfSupport</span><span class="p">{};</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Open</span><span class="p">(</span><span class="n">sPdfPath</span><span class="p">);</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">SetTextStyle</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bold&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Black&quot;</span><span class="p">);</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">AddTextOnPage</span><span class="p">(</span><span class="n">sReportTitle</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Protect</span><span class="p">(</span><span class="s2">&quot;SecureReport123&quot;</span><span class="p">);</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="n">PermitModifyDocument</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Save</span><span class="p">(</span><span class="n">sOutputPath</span><span class="p">);</span>
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">        </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Print</span><span class="p">(</span><span class="n">sAdobePath</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">,</span><span class="w"> </span><span class="n">sPrinterName</span><span class="p">);</span>
-<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Report generated and sent to printer: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPrinterName</span><span class="p">);</span>
-<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
-<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Print failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
-<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="w">        </span><span class="c1">/* Displays on failure: Print failed;</span>
-<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
-<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>
-<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GenerateSecureReport&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GenerateSecureReport</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sPdfPath</span><span class="p">,</span><span class="w"> </span><span class="n">sPrinterName</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sPdfPath</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;C:/Reports/QuarterlyReport.pdf&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sPrinterName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;HP_LaserJet_5000&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPdf</span><span class="p">,</span><span class="w"> </span><span class="n">sAdobePath</span><span class="p">,</span><span class="w"> </span><span class="n">sReportTitle</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sAdobePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/Program Files/Adobe/Acrobat DC/Acrobat/Acrobat.exe&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sReportTitle</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Q4 Analytical Results&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/Reports/Secure_QuarterlyReport.pdf&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">oPdf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">PdfSupport</span><span class="p">{};</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Open</span><span class="p">(</span><span class="n">sPdfPath</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">SetTextStyle</span><span class="p">(</span><span class="s2">&quot;Arial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bold&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Black&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">AddTextOnPage</span><span class="p">(</span><span class="n">sReportTitle</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Protect</span><span class="p">(</span><span class="s2">&quot;SecureReport123&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="n">PermitModifyDocument</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Save</span><span class="p">(</span><span class="n">sOutputPath</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Print</span><span class="p">(</span><span class="n">sAdobePath</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">,</span><span class="w"> </span><span class="n">sPrinterName</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Report generated and sent to printer: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPrinterName</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Print failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">/* Displays on failure: Print failed;</span>
+<span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GenerateSecureReport&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

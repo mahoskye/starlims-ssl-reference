@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -3875,7 +3875,7 @@ Use <a href="../IsTableFld/"><code>IsTableFld</code></a> when you only need to t
 <li>When a script can run against more than one database connection.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">TableFldLst</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="n">sTableName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">TableFldLst</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="n">sTableName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3953,64 +3953,64 @@ Use <a href="../IsTableFld/"><code>IsTableFld</code></a> when you only need to t
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="list-all-fields-for-a-known-table">List all fields for a known table<a class="headerlink" href="#list-all-fields-for-a-known-table" title="Permanent link">&para;</a></h3>
 <p>Call <code>TableFldLst</code> with an explicit connection name and use the returned array length to confirm the field count.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowSampleFields</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFieldNames</span><span class="p">,</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sample&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">aFieldNames</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">TableFldLst</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">);</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;sample has &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFieldNames</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; fields&quot;</span><span class="p">);</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="c1">/* Displays: sample has &lt;n&gt; fields;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aFieldNames</span><span class="p">;</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowSampleFields&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowSampleFields</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFieldNames</span><span class="p">,</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sample&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aFieldNames</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">TableFldLst</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;sample has &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFieldNames</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; fields&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">/* Displays: sample has &lt;n&gt; fields;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aFieldNames</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowSampleFields&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="validate-required-fields-on-the-default-connection">Validate required fields on the default connection<a class="headerlink" href="#validate-required-fields-on-the-default-connection" title="Permanent link">&para;</a></h3>
 <p>Pass <a href="../../literals/nil/"><code>NIL</code></a> for the connection to use the default, then scan the returned array for each required field name and collect any that are absent.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetMissingSampleFields</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFieldNames</span><span class="p">,</span><span class="w"> </span><span class="n">aRequiredFields</span><span class="p">,</span><span class="w"> </span><span class="n">aMissingFields</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sample&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">aRequiredFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;sample_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;received_date&quot;</span><span class="p">};</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="n">aMissingFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="n">aFieldNames</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">TableFldLst</span><span class="p">(</span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">);</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRequiredFields</span><span class="p">);</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">        </span><span class="n">sFieldName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aRequiredFields</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">AScan</span><span class="p">(</span><span class="n">aFieldNames</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aMissingFields</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">);</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aMissingFields</span><span class="p">;</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetMissingSampleFields&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetMissingSampleFields</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFieldNames</span><span class="p">,</span><span class="w"> </span><span class="n">aRequiredFields</span><span class="p">,</span><span class="w"> </span><span class="n">aMissingFields</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sample&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aRequiredFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;sample_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;received_date&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aMissingFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">    </span><span class="n">aFieldNames</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">TableFldLst</span><span class="p">(</span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRequiredFields</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sFieldName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aRequiredFields</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
+
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">AScan</span><span class="p">(</span><span class="n">aFieldNames</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aMissingFields</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aMissingFields</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetMissingSampleFields&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="catch-runtime-metadata-errors-before-continuing">Catch runtime metadata errors before continuing<a class="headerlink" href="#catch-runtime-metadata-errors-before-continuing" title="Permanent link">&para;</a></h3>
 <p>Wrap the call in <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle connection or table errors and return an empty array as a safe fallback instead of propagating the failure.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">TryLoadAuditFields</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFieldNames</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="n">aFieldNames</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">TableFldLst</span><span class="p">(</span><span class="s2">&quot;LAB&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;audit_log&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aFieldNames</span><span class="p">;</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Unable to read audit_log fields: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="c1">/* Displays on failure: audit_log read failed;</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="p">{};</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;TryLoadAuditFields&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">TryLoadAuditFields</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFieldNames</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
+<span class="w">        </span><span class="n">aFieldNames</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">TableFldLst</span><span class="p">(</span><span class="s2">&quot;LAB&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;audit_log&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aFieldNames</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Unable to read audit_log fields: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">/* Displays on failure: audit_log read failed;</span>
+
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;TryLoadAuditFields&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

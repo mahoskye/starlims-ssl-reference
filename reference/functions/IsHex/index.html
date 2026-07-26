@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -4249,7 +4249,7 @@
 <li>When normalizing mixed-case input with <a href="../Upper/"><code>Upper</code></a> and then validating it.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">IsHex</span><span class="p">(</span><span class="n">sSource</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">IsHex</span><span class="p">(</span><span class="n">sSource</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4316,64 +4316,64 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="check-whether-a-string-contains-only-uppercase-hex-characters">Check whether a string contains only uppercase hex characters<a class="headerlink" href="#check-whether-a-string-contains-only-uppercase-hex-characters" title="Permanent link">&para;</a></h3>
 <p>Call <code>IsHex</code> on a hardcoded value and branch on the result. The input <code>"A3F7"</code> contains only valid uppercase hex digits, so the true branch executes.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateHexCode</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;A3F7&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">bIsValidHex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsHex</span><span class="p">(</span><span class="n">sUserInput</span><span class="p">);</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">;</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Valid uppercase hex value&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sStatus</span><span class="p">);</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Value contains non-hex characters&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sStatus</span><span class="p">);</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="k">:ENDPROC</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateHexCode</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;A3F7&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bIsValidHex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsHex</span><span class="p">(</span><span class="n">sUserInput</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Valid uppercase hex value&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sStatus</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Value contains non-hex characters&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sStatus</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Call with <code>DoProc("ValidateHexCode")</code>.</p>
 <h3 id="normalize-mixed-case-input-before-validating">Normalize mixed-case input before validating<a class="headerlink" href="#normalize-mixed-case-input-before-validating" title="Permanent link">&para;</a></h3>
 <p>Trim whitespace and convert to uppercase before calling <code>IsHex</code>, so that values like <code>" a3f7 "</code> pass validation rather than failing on case or whitespace. Calling with <code>"a3f7"</code> produces <code>"A3F7"</code> after normalization, which is valid; calling with <code>"not hex"</code> produces <code>"NOT HEX"</code>, which is not.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeAndValidateHex</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sInput</span><span class="p">;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">sHexValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="nf">AllTrim</span><span class="p">(</span><span class="n">sInput</span><span class="p">));</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="n">bIsValidHex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsHex</span><span class="p">(</span><span class="n">sHexValue</span><span class="p">);</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">;</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Normalized value is valid: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">);</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">        </span><span class="c1">/* Displays normalized valid message;</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Normalized value is not valid hex: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">);</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">        </span><span class="c1">/* Displays normalized invalid message;</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">;</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="k">:ENDPROC</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeAndValidateHex</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sInput</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sHexValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="nf">AllTrim</span><span class="p">(</span><span class="n">sInput</span><span class="p">));</span>
+<span class="w">    </span><span class="n">bIsValidHex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsHex</span><span class="p">(</span><span class="n">sHexValue</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Normalized value is valid: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">/* Displays normalized valid message;</span>
+<span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Normalized value is not valid hex: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">/* Displays normalized invalid message;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Call with <code>DoProc("NormalizeAndValidateHex", {"a3f7"})</code>.</p>
 <h3 id="filter-and-convert-a-batch-of-hex-strings">Filter and convert a batch of hex strings<a class="headerlink" href="#filter-and-convert-a-batch-of-hex-strings" title="Permanent link">&para;</a></h3>
 <p>Use <code>IsHex</code> as a gate before calling <a href="../LHex2Dec/"><code>LHex2Dec</code></a>, so that only valid uppercase hex strings are converted. From the five inputs, <code>"ab"</code> (lowercase), <code>"0x10"</code> (prefix), and <code>"FF"</code>, <code>"1A"</code>, and <code>"7B"</code> (valid) demonstrate how the filter works. Three values pass and two are silently skipped.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertValidHexBatch</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRawValues</span><span class="p">,</span><span class="w"> </span><span class="n">aDecimalValues</span><span class="p">,</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">,</span><span class="w"> </span><span class="n">nDecimalValue</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">aRawValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;1A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;FF&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ab&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x10&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;7B&quot;</span><span class="p">};</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">aDecimalValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRawValues</span><span class="p">);</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="n">sHexValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aRawValues</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">IsHex</span><span class="p">(</span><span class="n">sHexValue</span><span class="p">);</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">            </span><span class="n">nDecimalValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LHex2Dec</span><span class="p">(</span><span class="n">sHexValue</span><span class="p">);</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aDecimalValues</span><span class="p">,</span><span class="w"> </span><span class="n">nDecimalValue</span><span class="p">);</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aDecimalValues</span><span class="p">;</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="k">:ENDPROC</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertValidHexBatch</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRawValues</span><span class="p">,</span><span class="w"> </span><span class="n">aDecimalValues</span><span class="p">,</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">,</span><span class="w"> </span><span class="n">nDecimalValue</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aRawValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;1A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;FF&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ab&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x10&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;7B&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aDecimalValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRawValues</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sHexValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aRawValues</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
+
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">IsHex</span><span class="p">(</span><span class="n">sHexValue</span><span class="p">);</span>
+<span class="w">            </span><span class="n">nDecimalValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LHex2Dec</span><span class="p">(</span><span class="n">sHexValue</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aDecimalValues</span><span class="p">,</span><span class="w"> </span><span class="n">nDecimalValue</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aDecimalValues</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Call with <code>DoProc("ConvertValidHexBatch")</code>.</p>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>

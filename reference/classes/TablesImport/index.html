@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -2784,41 +2784,41 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="load-an-imported-table">Load an imported table<a class="headerlink" href="#load-an-imported-table" title="Permanent link">&para;</a></h3>
 <p>Loads a lookup table from an import folder and reports either the row count or the load error. It checks the return value before using the table and reads <code>ErrMsg</code> to get the failure reason when loading fails.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadSampleTypes</span><span class="p">;</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFolder</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">oImport</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">sError</span><span class="p">;</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">sFolder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/STARLIMS/Import/LookupTables&quot;</span><span class="p">;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sampletypes&quot;</span><span class="p">;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="n">sFolder</span><span class="p">};</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="n">oImport</span><span class="p">:</span><span class="n">IncludeORIGREC</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="nf">GetTable</span><span class="p">(</span><span class="n">sTableName</span><span class="p">);</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oTable</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="n">sError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="n">ErrMsg</span><span class="p">;</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sError</span><span class="p">);</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Unable to load table &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="p">);</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">                </span><span class="s2">&quot;Unable to load table &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sError</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">            </span><span class="p">);</span><span class="w"> </span><span class="c1">/* Displays on failure: table load error;</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">        </span><span class="s2">&quot;Loaded &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; with &quot;</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oTable</span><span class="p">:</span><span class="n">RowsCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; rows&quot;</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">    </span><span class="p">);</span><span class="w"> </span><span class="c1">/* Displays loaded row count;</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oTable</span><span class="p">;</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LoadSampleTypes&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadSampleTypes</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFolder</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">oImport</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">sError</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sFolder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/STARLIMS/Import/LookupTables&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sampletypes&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="n">sFolder</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oImport</span><span class="p">:</span><span class="n">IncludeORIGREC</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="nf">GetTable</span><span class="p">(</span><span class="n">sTableName</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oTable</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="n">ErrMsg</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sError</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Unable to load table &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span>
+<span class="w">                </span><span class="s2">&quot;Unable to load table &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sError</span>
+<span class="w">            </span><span class="p">);</span><span class="w"> </span><span class="c1">/* Displays on failure: table load error;</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span>
+<span class="w">        </span><span class="s2">&quot;Loaded &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; with &quot;</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oTable</span><span class="p">:</span><span class="n">RowsCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; rows&quot;</span>
+<span class="w">    </span><span class="p">);</span><span class="w"> </span><span class="c1">/* Displays loaded row count;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oTable</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LoadSampleTypes&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -3921,7 +3921,7 @@
 <li>When normalizing data by consistently keeping the lesser of two same-type values.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">Min</span><span class="p">(</span><span class="n">vValue1</span><span class="p">,</span><span class="w"> </span><span class="n">vValue2</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Min</span><span class="p">(</span><span class="n">vValue1</span><span class="p">,</span><span class="w"> </span><span class="n">vValue2</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3996,65 +3996,65 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="find-the-earlier-of-two-dates">Find the earlier of two dates<a class="headerlink" href="#find-the-earlier-of-two-dates" title="Permanent link">&para;</a></h3>
 <p>Pick the earlier of two scheduled dates for a user event.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetEarlierEventDate</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dEventDate1</span><span class="p">,</span><span class="w"> </span><span class="n">dEventDate2</span><span class="p">,</span><span class="w"> </span><span class="n">dEarlierDate</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">dEventDate1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/15/2026&quot;</span><span class="p">);</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">dEventDate2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/10/2026&quot;</span><span class="p">);</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="n">dEarlierDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Min</span><span class="p">(</span><span class="n">dEventDate1</span><span class="p">,</span><span class="w"> </span><span class="n">dEventDate2</span><span class="p">);</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Earlier event date: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dEarlierDate</span><span class="p">);</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">dEarlierDate</span><span class="p">;</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetEarlierEventDate&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetEarlierEventDate</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dEventDate1</span><span class="p">,</span><span class="w"> </span><span class="n">dEventDate2</span><span class="p">,</span><span class="w"> </span><span class="n">dEarlierDate</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">dEventDate1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/15/2026&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dEventDate2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/10/2026&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dEarlierDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Min</span><span class="p">(</span><span class="n">dEventDate1</span><span class="p">,</span><span class="w"> </span><span class="n">dEventDate2</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Earlier event date: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dEarlierDate</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">dEarlierDate</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetEarlierEventDate&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Earlier event date: 03/10/2026
+<div class="language-text highlight"><pre><span></span><code>Earlier event date: 03/10/2026
 </code></pre></div>
 <h3 id="keep-the-smaller-of-two-measurements">Keep the smaller of two measurements<a class="headerlink" href="#keep-the-smaller-of-two-measurements" title="Permanent link">&para;</a></h3>
 <p>Use <code>Min</code> to keep the smaller of two measured values before recording a result.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SelectLowerReading</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">nReadingA</span><span class="p">,</span><span class="w"> </span><span class="n">nReadingB</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nLowerValue</span><span class="p">,</span><span class="w"> </span><span class="n">sOutput</span><span class="p">;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">nLowerValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Min</span><span class="p">(</span><span class="n">nReadingA</span><span class="p">,</span><span class="w"> </span><span class="n">nReadingB</span><span class="p">);</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Lower reading: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nLowerValue</span><span class="p">);</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sOutput</span><span class="p">);</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nLowerValue</span><span class="p">;</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SelectLowerReading&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mf">42.5</span><span class="p">,</span><span class="w"> </span><span class="mf">38.7</span><span class="p">});</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SelectLowerReading</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">nReadingA</span><span class="p">,</span><span class="w"> </span><span class="n">nReadingB</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nLowerValue</span><span class="p">,</span><span class="w"> </span><span class="n">sOutput</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nLowerValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Min</span><span class="p">(</span><span class="n">nReadingA</span><span class="p">,</span><span class="w"> </span><span class="n">nReadingB</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Lower reading: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nLowerValue</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sOutput</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nLowerValue</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SelectLowerReading&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mf">42.5</span><span class="p">,</span><span class="w"> </span><span class="mf">38.7</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Lower reading: 38.7
+<div class="language-text highlight"><pre><span></span><code>Lower reading: 38.7
 </code></pre></div>
 <h3 id="select-the-lower-sorting-string-as-a-canonical-key">Select the lower-sorting string as a canonical key<a class="headerlink" href="#select-the-lower-sorting-string-as-a-canonical-key" title="Permanent link">&para;</a></h3>
 <p>Normalize two candidate labels, then keep the lower-sorting one as a stable key.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetCanonicalName</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sName1</span><span class="p">,</span><span class="w"> </span><span class="n">sName2</span><span class="p">;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLeftName</span><span class="p">,</span><span class="w"> </span><span class="n">sRightName</span><span class="p">,</span><span class="w"> </span><span class="n">sCanonicalKey</span><span class="p">;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="n">sLeftName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="nf">AllTrim</span><span class="p">(</span><span class="n">sName1</span><span class="p">));</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="n">sRightName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="nf">AllTrim</span><span class="p">(</span><span class="n">sName2</span><span class="p">));</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="n">sCanonicalKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Min</span><span class="p">(</span><span class="n">sLeftName</span><span class="p">,</span><span class="w"> </span><span class="n">sRightName</span><span class="p">);</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Canonical key: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCanonicalKey</span><span class="p">);</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sCanonicalKey</span><span class="p">;</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetCanonicalName&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;ALPHA&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;BETA&quot;</span><span class="p">});</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetCanonicalName</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sName1</span><span class="p">,</span><span class="w"> </span><span class="n">sName2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLeftName</span><span class="p">,</span><span class="w"> </span><span class="n">sRightName</span><span class="p">,</span><span class="w"> </span><span class="n">sCanonicalKey</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sLeftName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="nf">AllTrim</span><span class="p">(</span><span class="n">sName1</span><span class="p">));</span>
+<span class="w">    </span><span class="n">sRightName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="nf">AllTrim</span><span class="p">(</span><span class="n">sName2</span><span class="p">));</span>
+<span class="w">    </span><span class="n">sCanonicalKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Min</span><span class="p">(</span><span class="n">sLeftName</span><span class="p">,</span><span class="w"> </span><span class="n">sRightName</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Canonical key: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCanonicalKey</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sCanonicalKey</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetCanonicalName&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;ALPHA&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;BETA&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Canonical key: ALPHA
+<div class="language-text highlight"><pre><span></span><code>Canonical key: ALPHA
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

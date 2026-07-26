@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -2726,7 +2726,7 @@
 <li>When comparing string keys using SSL's built-in lexicographic ordering.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">vLeft</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">vRight</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="n">vLeft</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">vRight</span>
 </code></pre></div>
 <h2 id="type-behavior">Type behavior<a class="headerlink" href="#type-behavior" title="Permanent link">&para;</a></h2>
 <table>
@@ -2789,81 +2789,81 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="validating-an-upper-numeric-limit">Validating an upper numeric limit<a class="headerlink" href="#validating-an-upper-numeric-limit" title="Permanent link">&para;</a></h3>
 <p>Checks whether <code>nCurrentTemp</code> stays at or below <code>nSafeLimit</code>. With 8.5 &lt;= 10.0, the result is <a href="../../literals/true/"><code>.T.</code></a> and the within-limit branch runs.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckMaximumTemperature</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSafeLimit</span><span class="p">,</span><span class="w"> </span><span class="n">nCurrentTemp</span><span class="p">,</span><span class="w"> </span><span class="n">bWithinLimit</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">nSafeLimit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">10.0</span><span class="p">;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">nCurrentTemp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">8.5</span><span class="p">;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="n">bWithinLimit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nCurrentTemp</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">nSafeLimit</span><span class="p">;</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bWithinLimit</span><span class="p">;</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Temperature is within the safe limit&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Temperature exceeds the safe limit&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCurrentTemp</span><span class="p">));</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bWithinLimit</span><span class="p">;</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckMaximumTemperature&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckMaximumTemperature</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSafeLimit</span><span class="p">,</span><span class="w"> </span><span class="n">nCurrentTemp</span><span class="p">,</span><span class="w"> </span><span class="n">bWithinLimit</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nSafeLimit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">10.0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nCurrentTemp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">8.5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bWithinLimit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nCurrentTemp</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">nSafeLimit</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bWithinLimit</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Temperature is within the safe limit&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Temperature exceeds the safe limit&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCurrentTemp</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bWithinLimit</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckMaximumTemperature&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Temperature is within the safe limit: 8.5
+<div class="language-text highlight"><pre><span></span><code>Temperature is within the safe limit: 8.5
 </code></pre></div>
 <h3 id="accepting-records-up-to-a-cutoff-date">Accepting records up to a cutoff date<a class="headerlink" href="#accepting-records-up-to-a-cutoff-date" title="Permanent link">&para;</a></h3>
 <p>Checks whether <code>dEntryDate</code> falls on or before <code>dCutoff</code>. With 03/28/2024 &lt;= 03/31/2024, the result is <a href="../../literals/true/"><code>.T.</code></a> and the within-cutoff branch runs.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckDateCutoff</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dEntryDate</span><span class="p">,</span><span class="w"> </span><span class="n">dCutoff</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">dEntryDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/28/2024&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">dCutoff</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/31/2024&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">bIsValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dEntryDate</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">dCutoff</span><span class="p">;</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Entry date is within the cutoff period&quot;</span><span class="p">;</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Entry date exceeds the cutoff period&quot;</span><span class="p">;</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dEntryDate</span><span class="p">));</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckDateCutoff&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckDateCutoff</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dEntryDate</span><span class="p">,</span><span class="w"> </span><span class="n">dCutoff</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">dEntryDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/28/2024&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dCutoff</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/31/2024&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bIsValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dEntryDate</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">dCutoff</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Entry date is within the cutoff period&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Entry date exceeds the cutoff period&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dEntryDate</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckDateCutoff&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Entry date is within the cutoff period: 03/28/2024
+<div class="language-text highlight"><pre><span></span><code>Entry date is within the cutoff period: 03/28/2024
 </code></pre></div>
 <h3 id="comparing-batch-keys-against-an-inclusive-boundary">Comparing batch keys against an inclusive boundary<a class="headerlink" href="#comparing-batch-keys-against-an-inclusive-boundary" title="Permanent link">&para;</a></h3>
 <p>Uses <code>&lt;=</code> on strings to check whether a batch key sorts before or at the processing boundary. <code>"BATCH-042"</code> is lexicographically less than <code>"BATCH-100"</code>, so the result is <a href="../../literals/true/"><code>.T.</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckBatchBoundary</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">,</span><span class="w"> </span><span class="n">sBoundary</span><span class="p">,</span><span class="w"> </span><span class="n">bInRange</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BATCH-042&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="n">sBoundary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BATCH-100&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="n">bInRange</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">sBoundary</span><span class="p">;</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bInRange</span><span class="p">;</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Batch is within the processing boundary&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Batch is beyond the processing boundary&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">);</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bInRange</span><span class="p">;</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckBatchBoundary&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckBatchBoundary</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">,</span><span class="w"> </span><span class="n">sBoundary</span><span class="p">,</span><span class="w"> </span><span class="n">bInRange</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BATCH-042&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBoundary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BATCH-100&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bInRange</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">sBoundary</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bInRange</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Batch is within the processing boundary&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Batch is beyond the processing boundary&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bInRange</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckBatchBoundary&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Batch is within the processing boundary: BATCH-042
+<div class="language-text highlight"><pre><span></span><code>Batch is within the processing boundary: BATCH-042
 </code></pre></div>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>

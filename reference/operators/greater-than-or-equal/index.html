@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -2703,7 +2703,7 @@
 <li>When comparing string keys using SSL's built-in lexicographic ordering.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">vLeft</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">vRight</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="n">vLeft</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">vRight</span>
 </code></pre></div>
 <h2 id="type-behavior">Type behavior<a class="headerlink" href="#type-behavior" title="Permanent link">&para;</a></h2>
 <table>
@@ -2761,92 +2761,92 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="validating-a-minimum-passing-score">Validating a minimum passing score<a class="headerlink" href="#validating-a-minimum-passing-score" title="Permanent link">&para;</a></h3>
 <p>Checks whether <code>nScore</code> meets or exceeds <code>nMinPassing</code>. With 72 &gt;= 70, the comparison is <a href="../../literals/true/"><code>.T.</code></a> and the passing branch runs.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckPassingScore</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nScore</span><span class="p">,</span><span class="w"> </span><span class="n">nMinPassing</span><span class="p">,</span><span class="w"> </span><span class="n">bIsPassing</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">nScore</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">72</span><span class="p">;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">nMinPassing</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">70</span><span class="p">;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="n">bIsPassing</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nScore</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">nMinPassing</span><span class="p">;</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsPassing</span><span class="p">;</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Student passed with a score of &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nScore</span><span class="p">);</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Student did not pass. Score: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nScore</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; minimum: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">            </span><span class="n">nMinPassing</span><span class="p">);</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bIsPassing</span><span class="p">;</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckPassingScore&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckPassingScore</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nScore</span><span class="p">,</span><span class="w"> </span><span class="n">nMinPassing</span><span class="p">,</span><span class="w"> </span><span class="n">bIsPassing</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nScore</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">72</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nMinPassing</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">70</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bIsPassing</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nScore</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">nMinPassing</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsPassing</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Student passed with a score of &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nScore</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Student did not pass. Score: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nScore</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; minimum: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span>
+<span class="w">            </span><span class="n">nMinPassing</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bIsPassing</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckPassingScore&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Student passed with a score of 72
+<div class="language-text highlight"><pre><span></span><code>Student passed with a score of 72
 </code></pre></div>
 <h3 id="filtering-log-dates-from-a-cutoff-forward">Filtering log dates from a cutoff forward<a class="headerlink" href="#filtering-log-dates-from-a-cutoff-forward" title="Permanent link">&para;</a></h3>
 <p>Includes log dates that fall on or after <code>dReferenceDate</code>. The cutoff is 01/15/2024, so three of the four entries qualify.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FilterActivityLogs</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dReferenceDate</span><span class="p">,</span><span class="w"> </span><span class="n">dLogDate</span><span class="p">,</span><span class="w"> </span><span class="n">bIsEligible</span><span class="p">,</span><span class="w"> </span><span class="n">aLogs</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nMatchCount</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">dReferenceDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/15/2024&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">aLogs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/10/2024&quot;</span><span class="p">),</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/15/2024&quot;</span><span class="p">),</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/20/2024&quot;</span><span class="p">),</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;02/01/2024&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="p">};</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="n">nMatchCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aLogs</span><span class="p">);</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="n">dLogDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aLogs</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">        </span><span class="n">bIsEligible</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dLogDate</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">dReferenceDate</span><span class="p">;</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsEligible</span><span class="p">;</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">            </span><span class="n">nMatchCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Included log &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; dated &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dLogDate</span><span class="p">));</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Matching logs: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nMatchCount</span><span class="p">));</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nMatchCount</span><span class="p">;</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>
-<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FilterActivityLogs&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FilterActivityLogs</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dReferenceDate</span><span class="p">,</span><span class="w"> </span><span class="n">dLogDate</span><span class="p">,</span><span class="w"> </span><span class="n">bIsEligible</span><span class="p">,</span><span class="w"> </span><span class="n">aLogs</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nMatchCount</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">dReferenceDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/15/2024&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aLogs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/10/2024&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/15/2024&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/20/2024&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;02/01/2024&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">nMatchCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aLogs</span><span class="p">);</span>
+<span class="w">        </span><span class="n">dLogDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aLogs</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
+<span class="w">        </span><span class="n">bIsEligible</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dLogDate</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">dReferenceDate</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsEligible</span><span class="p">;</span>
+<span class="w">            </span><span class="n">nMatchCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Included log &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; dated &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dLogDate</span><span class="p">));</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Matching logs: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nMatchCount</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nMatchCount</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FilterActivityLogs&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays one line per matching log, then the total:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Included log 2 dated 01/15/2024
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Included log 3 dated 01/20/2024
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>Included log 4 dated 02/01/2024
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>Matching logs: 3
+<div class="language-text highlight"><pre><span></span><code>Included log 2 dated 01/15/2024
+Included log 3 dated 01/20/2024
+Included log 4 dated 02/01/2024
+Matching logs: 3
 </code></pre></div>
 <h3 id="routing-batch-ids-from-a-lexical-boundary">Routing batch IDs from a lexical boundary<a class="headerlink" href="#routing-batch-ids-from-a-lexical-boundary" title="Permanent link">&para;</a></h3>
 <p>Uses string ordering to check whether a batch ID is at or after a boundary. <code>"BATCH-200"</code> is lexicographically &gt;= <code>"BATCH-150"</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckBatchBoundary</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">,</span><span class="w"> </span><span class="n">sBoundary</span><span class="p">,</span><span class="w"> </span><span class="n">bAtOrAfter</span><span class="p">;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BATCH-200&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="n">sBoundary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BATCH-150&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="n">bAtOrAfter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">sBoundary</span><span class="p">;</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bAtOrAfter</span><span class="p">;</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Batch &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is at or after the boundary&quot;</span><span class="p">);</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Batch &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is before the boundary&quot;</span><span class="p">);</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bAtOrAfter</span><span class="p">;</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckBatchBoundary&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckBatchBoundary</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">,</span><span class="w"> </span><span class="n">sBoundary</span><span class="p">,</span><span class="w"> </span><span class="n">bAtOrAfter</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BATCH-200&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBoundary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BATCH-150&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">bAtOrAfter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">sBoundary</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bAtOrAfter</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Batch &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is at or after the boundary&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Batch &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is before the boundary&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bAtOrAfter</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckBatchBoundary&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Batch BATCH-200 is at or after the boundary
+<div class="language-text highlight"><pre><span></span><code>Batch BATCH-200 is at or after the boundary
 </code></pre></div>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>

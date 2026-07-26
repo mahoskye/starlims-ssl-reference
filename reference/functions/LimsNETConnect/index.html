@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -3585,7 +3585,7 @@
 <li>When you need constructor by-reference or out values copied back into an SSL array.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">LimsNETConnect</span><span class="p">([</span><span class="n">sAssembly</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sTypeName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aArgs</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bAsStatic</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LimsNETConnect</span><span class="p">([</span><span class="n">sAssembly</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sTypeName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aArgs</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bAsStatic</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3718,68 +3718,68 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="access-a-static-net-member">Access a static .NET member<a class="headerlink" href="#access-a-static-net-member" title="Permanent link">&para;</a></h3>
 <p>Return a type handle and call a static member.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AccessStaticMathMembers</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oMathType</span><span class="p">,</span><span class="w"> </span><span class="n">nAbsValue</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxValue</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">oMathType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(,</span><span class="w"> </span><span class="s2">&quot;System.Math&quot;</span><span class="p">,,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">nAbsValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oMathType</span><span class="p">:</span><span class="nf">Abs</span><span class="p">(</span><span class="o">-</span><span class="mi">42</span><span class="p">);</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="n">nMaxValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oMathType</span><span class="p">:</span><span class="nf">Max</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Absolute value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nAbsValue</span><span class="p">));</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Maximum value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nMaxValue</span><span class="p">));</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AccessStaticMathMembers&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AccessStaticMathMembers</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oMathType</span><span class="p">,</span><span class="w"> </span><span class="n">nAbsValue</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxValue</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">oMathType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(,</span><span class="w"> </span><span class="s2">&quot;System.Math&quot;</span><span class="p">,,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nAbsValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oMathType</span><span class="p">:</span><span class="nf">Abs</span><span class="p">(</span><span class="o">-</span><span class="mi">42</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nMaxValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oMathType</span><span class="p">:</span><span class="nf">Max</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Absolute value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nAbsValue</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Maximum value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nMaxValue</span><span class="p">));</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AccessStaticMathMembers&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="create-an-instance-with-constructor-arguments">Create an instance with constructor arguments<a class="headerlink" href="#create-an-instance-with-constructor-arguments" title="Permanent link">&para;</a></h3>
 <p>Create an object and call instance methods on it.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildStringWithNET</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oBuilder</span><span class="p">,</span><span class="w"> </span><span class="n">sText</span><span class="p">;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">oBuilder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(,</span><span class="w"> </span><span class="s2">&quot;System.Text.StringBuilder&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">});</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">oBuilder</span><span class="p">:</span><span class="nf">Append</span><span class="p">(</span><span class="s2">&quot; SSL&quot;</span><span class="p">);</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="n">oBuilder</span><span class="p">:</span><span class="nf">Append</span><span class="p">(</span><span class="s2">&quot; interop&quot;</span><span class="p">);</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="n">sText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oBuilder</span><span class="p">:</span><span class="nf">ToString</span><span class="p">();</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sText</span><span class="p">);</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildStringWithNET&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildStringWithNET</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oBuilder</span><span class="p">,</span><span class="w"> </span><span class="n">sText</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">oBuilder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(,</span><span class="w"> </span><span class="s2">&quot;System.Text.StringBuilder&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">});</span>
+<span class="w">    </span><span class="n">oBuilder</span><span class="p">:</span><span class="nf">Append</span><span class="p">(</span><span class="s2">&quot; SSL&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oBuilder</span><span class="p">:</span><span class="nf">Append</span><span class="p">(</span><span class="s2">&quot; interop&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">sText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oBuilder</span><span class="p">:</span><span class="nf">ToString</span><span class="p">();</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sText</span><span class="p">);</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildStringWithNET&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Hello SSL interop
+<div class="language-text highlight"><pre><span></span><code>Hello SSL interop
 </code></pre></div>
 <h3 id="receive-by-reference-constructor-updates">Receive by-reference constructor updates<a class="headerlink" href="#receive-by-reference-constructor-updates" title="Permanent link">&para;</a></h3>
 <p>Pass a by-reference placeholder in the constructor argument array and then read the updated array entry after construction.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateWithByRefOutput</span><span class="p">;</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAssembly</span><span class="p">,</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">aArgs</span><span class="p">,</span><span class="w"> </span><span class="n">oObject</span><span class="p">;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nInput</span><span class="p">,</span><span class="w"> </span><span class="n">nOutput</span><span class="p">;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="n">sAssembly</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CustomInterop.dll&quot;</span><span class="p">;</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CustomInterop.SampleProcessor&quot;</span><span class="p">;</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="n">nInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="n">nOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="n">aArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="n">nInput</span><span class="p">,</span><span class="w"> </span><span class="nf">LimsNETCast</span><span class="p">(</span><span class="n">nOutput</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;byref&quot;</span><span class="p">)};</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">        </span><span class="n">oObject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(</span><span class="n">sAssembly</span><span class="p">,</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">aArgs</span><span class="p">);</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">        </span><span class="n">nOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aArgs</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Object created successfully&quot;</span><span class="p">);</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Updated output value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nOutput</span><span class="p">));</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">        </span><span class="c1">/* Displays updated output value on success;</span>
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="nf">GetLastSSLError</span><span class="p">():</span><span class="n">Description</span><span class="p">);</span>
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">        </span><span class="c1">/* Displays failure details;</span>
-<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
-<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>
-<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CreateWithByRefOutput&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateWithByRefOutput</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAssembly</span><span class="p">,</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">aArgs</span><span class="p">,</span><span class="w"> </span><span class="n">oObject</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nInput</span><span class="p">,</span><span class="w"> </span><span class="n">nOutput</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sAssembly</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CustomInterop.dll&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CustomInterop.SampleProcessor&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="n">nInput</span><span class="p">,</span><span class="w"> </span><span class="nf">LimsNETCast</span><span class="p">(</span><span class="n">nOutput</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;byref&quot;</span><span class="p">)};</span>
+
+<span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oObject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(</span><span class="n">sAssembly</span><span class="p">,</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">aArgs</span><span class="p">);</span>
+<span class="w">        </span><span class="n">nOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aArgs</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Object created successfully&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Updated output value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nOutput</span><span class="p">));</span>
+<span class="w">        </span><span class="c1">/* Displays updated output value on success;</span>
+<span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="nf">GetLastSSLError</span><span class="p">():</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">/* Displays failure details;</span>
+<span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CreateWithByRefOutput&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -4319,7 +4319,7 @@
 <li>When matching other code that already uses <code>LimsTime()</code> as the time-string helper.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">LimsTime</span><span class="p">()</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LimsTime</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>This function takes no parameters.</p>
@@ -4349,44 +4349,44 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="capture-time-once-for-consistent-output-across-related-messages">Capture time once for consistent output across related messages<a class="headerlink" href="#capture-time-once-for-consistent-output-across-related-messages" title="Permanent link">&para;</a></h3>
 <p>Capture <code>LimsTime()</code> once at the start of a step and reuse the value in both the user message and the audit log, so both show the same time even if execution takes a moment.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogReviewStep</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTime</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sUserMsg</span><span class="p">,</span><span class="w"> </span><span class="n">sAuditMsg</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;S-100123&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">sTime</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsTime</span><span class="p">();</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">sUserMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Review started for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; at &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTime</span><span class="p">;</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="n">sAuditMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;AUDIT &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; START &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTime</span><span class="p">;</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sUserMsg</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Displays review start time;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sAuditMsg</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Displays matching audit time;</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sTime</span><span class="p">;</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LogReviewStep&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogReviewStep</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTime</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sUserMsg</span><span class="p">,</span><span class="w"> </span><span class="n">sAuditMsg</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;S-100123&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTime</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsTime</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">sUserMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Review started for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; at &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTime</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sAuditMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;AUDIT &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; START &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTime</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sUserMsg</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Displays review start time;</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sAuditMsg</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Displays matching audit time;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sTime</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LogReviewStep&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="combine-today-and-limstime-for-a-display-timestamp">Combine <a href="../Today/"><code>Today()</code></a> and <code>LimsTime()</code> for a display timestamp<a class="headerlink" href="#combine-today-and-limstime-for-a-display-timestamp" title="Permanent link">&para;</a></h3>
 <p>Pair <a href="../Today/"><code>Today()</code></a> and <code>LimsTime()</code> to build a full timestamp label for a printed document.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowPrintedLabelTimestamp</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dPrinted</span><span class="p">,</span><span class="w"> </span><span class="n">sPrintedTime</span><span class="p">,</span><span class="w"> </span><span class="n">sStamp</span><span class="p">;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">dPrinted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">sPrintedTime</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsTime</span><span class="p">();</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">dPrinted</span><span class="p">);</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="n">sStamp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Printed on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dPrinted</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; at &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPrintedTime</span><span class="p">;</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sStamp</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Displays printed date and time stamp;</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sStamp</span><span class="p">;</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowPrintedLabelTimestamp&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowPrintedLabelTimestamp</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dPrinted</span><span class="p">,</span><span class="w"> </span><span class="n">sPrintedTime</span><span class="p">,</span><span class="w"> </span><span class="n">sStamp</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">dPrinted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>
+<span class="w">    </span><span class="n">sPrintedTime</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsTime</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">dPrinted</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sStamp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Printed on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dPrinted</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; at &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPrintedTime</span><span class="p">;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sStamp</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Displays printed date and time stamp;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sStamp</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowPrintedLabelTimestamp&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

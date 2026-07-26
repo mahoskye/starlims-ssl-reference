@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -3917,7 +3917,7 @@
 <li>When reconciling Documentum cabinet names with values stored in a STARLIMS table.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">DocGetCabinets</span><span class="p">()</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocGetCabinets</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>This function takes no parameters.</p>
@@ -3947,97 +3947,97 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="list-all-cabinet-names">List all cabinet names<a class="headerlink" href="#list-all-cabinet-names" title="Permanent link">&para;</a></h3>
 <p>Calls <code>DocGetCabinets()</code>, exits early when the result is empty, then prints each cabinet name in turn.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListCabinetNames</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aCabinets</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sCabinetName</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">aCabinets</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetCabinets</span><span class="p">();</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCabinets</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No cabinets were returned.&quot;</span><span class="p">);</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCabinets</span><span class="p">);</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">        </span><span class="n">sCabinetName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aCabinets</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Cabinet: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCabinetName</span><span class="p">);</span><span class="w"> </span><span class="c1">/* Displays each cabinet name;</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ListCabinetNames&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListCabinetNames</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aCabinets</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sCabinetName</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aCabinets</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetCabinets</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCabinets</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No cabinets were returned.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCabinets</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sCabinetName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aCabinets</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Cabinet: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCabinetName</span><span class="p">);</span><span class="w"> </span><span class="c1">/* Displays each cabinet name;</span>
+<span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ListCabinetNames&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="validate-a-configured-cabinet-name">Validate a configured cabinet name<a class="headerlink" href="#validate-a-configured-cabinet-name" title="Permanent link">&para;</a></h3>
 <p>Searches the cabinet list for a case-insensitive match against a configured name, then checks <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> on a negative result to distinguish a backend failure from a genuinely missing cabinet.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateCabinetName</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sTargetCabinet</span><span class="p">;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aCabinets</span><span class="p">,</span><span class="w"> </span><span class="n">bExists</span><span class="p">;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">aCabinets</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetCabinets</span><span class="p">();</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="n">bExists</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">AScan</span><span class="p">(</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="n">aCabinets</span><span class="p">,</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="p">{</span><span class="err">|</span><span class="n">sName</span><span class="err">|</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sName</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sTargetCabinet</span><span class="p">)}</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bExists</span><span class="p">;</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Cabinet is available: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetCabinet</span><span class="p">);</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum lookup failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">        </span><span class="c1">/* Displays on command failure: lookup failed;</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Cabinet was not found: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetCabinet</span><span class="p">);</span>
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>
-<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateCabinetName&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;QA_Reports&quot;</span><span class="p">});</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateCabinetName</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sTargetCabinet</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aCabinets</span><span class="p">,</span><span class="w"> </span><span class="n">bExists</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aCabinets</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetCabinets</span><span class="p">();</span>
+<span class="w">    </span><span class="n">bExists</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">AScan</span><span class="p">(</span>
+<span class="w">        </span><span class="n">aCabinets</span><span class="p">,</span>
+<span class="w">        </span><span class="p">{</span><span class="err">|</span><span class="n">sName</span><span class="err">|</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sName</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sTargetCabinet</span><span class="p">)}</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bExists</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Cabinet is available: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetCabinet</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum lookup failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="c1">/* Displays on command failure: lookup failed;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Cabinet was not found: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetCabinet</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateCabinetName&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;QA_Reports&quot;</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="reconcile-cabinets-against-a-control-table">Reconcile cabinets against a control table<a class="headerlink" href="#reconcile-cabinets-against-a-control-table" title="Permanent link">&para;</a></h3>
 <p>Fetches the live cabinet list, checks <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> immediately, then compares against configured cabinet names from a control table and inserts an audit row for each cabinet that is missing in Documentum.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditConfiguredCabinets</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aCabinets</span><span class="p">,</span><span class="w"> </span><span class="n">aConfigured</span><span class="p">,</span><span class="w"> </span><span class="n">aMissing</span><span class="p">,</span><span class="w"> </span><span class="n">sCabinetName</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">aCabinets</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetCabinets</span><span class="p">();</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Unable to retrieve cabinets: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="c1">/* Displays on command failure: cabinet retrieval failed;</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="p">{};</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="n">aConfigured</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="s2">&quot;SELECT cabinet_name</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="s2">        FROM doc_cabinet_config</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="s2">        WHERE active_flag = ?</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="s2">        ORDER BY cabinet_name</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="s2">    &quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Y&quot;</span><span class="p">});</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="n">aMissing</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aConfigured</span><span class="p">);</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">        </span><span class="n">sCabinetName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aConfigured</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">AScan</span><span class="p">(</span><span class="n">aCabinets</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="err">|</span><span class="n">sName</span><span class="err">|</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sName</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sCabinetName</span><span class="p">)})</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aMissing</span><span class="p">,</span><span class="w"> </span><span class="n">sCabinetName</span><span class="p">);</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">            </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="s2">                INSERT INTO doc_cabinet_audit (</span>
-<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="s2">                    cabinet_name, status</span>
-<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="s2">                )</span>
-<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="s2">                VALUES (</span>
-<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="s2">                    ?, ?</span>
-<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="s2">                )</span>
-<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="s2">            &quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sCabinetName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Missing in Documentum&quot;</span><span class="p">});</span>
-<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
-<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>
-<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aMissing</span><span class="p">;</span>
-<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>
-<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AuditConfiguredCabinets&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditConfiguredCabinets</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aCabinets</span><span class="p">,</span><span class="w"> </span><span class="n">aConfigured</span><span class="p">,</span><span class="w"> </span><span class="n">aMissing</span><span class="p">,</span><span class="w"> </span><span class="n">sCabinetName</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aCabinets</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetCabinets</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Unable to retrieve cabinets: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="c1">/* Displays on command failure: cabinet retrieval failed;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aConfigured</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="s2">&quot;SELECT cabinet_name</span>
+<span class="s2">        FROM doc_cabinet_config</span>
+<span class="s2">        WHERE active_flag = ?</span>
+<span class="s2">        ORDER BY cabinet_name</span>
+<span class="s2">    &quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Y&quot;</span><span class="p">});</span>
+<span class="w">    </span><span class="n">aMissing</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aConfigured</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sCabinetName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aConfigured</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
+
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">AScan</span><span class="p">(</span><span class="n">aCabinets</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="err">|</span><span class="n">sName</span><span class="err">|</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sName</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sCabinetName</span><span class="p">)})</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aMissing</span><span class="p">,</span><span class="w"> </span><span class="n">sCabinetName</span><span class="p">);</span>
+
+<span class="w">            </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="s2">                INSERT INTO doc_cabinet_audit (</span>
+<span class="s2">                    cabinet_name, status</span>
+<span class="s2">                )</span>
+<span class="s2">                VALUES (</span>
+<span class="s2">                    ?, ?</span>
+<span class="s2">                )</span>
+<span class="s2">            &quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sCabinetName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Missing in Documentum&quot;</span><span class="p">});</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aMissing</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AuditConfiguredCabinets&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

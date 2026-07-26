@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -4250,7 +4250,7 @@
 <li>When parsing text in stages and continuing each search after an earlier match.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">LimsAt</span><span class="p">(</span><span class="n">sSubString</span><span class="p">,</span><span class="w"> </span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">nOffset</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LimsAt</span><span class="p">(</span><span class="n">sSubString</span><span class="p">,</span><span class="w"> </span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">nOffset</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4334,90 +4334,90 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="locate-a-dash-in-a-sample-id">Locate a dash in a sample ID<a class="headerlink" href="#locate-a-dash-in-a-sample-id" title="Permanent link">&para;</a></h3>
 <p>Search <code>"ABC-12345"</code> for a dash. <code>LimsAt</code> returns <code>0</code> when nothing is found and a positive 1-based position otherwise — the dash in this input is at position 4.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindDashPosition</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">nDashPos</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ABC-12345&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">nDashPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsAt</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">);</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nDashPos</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Dash not found&quot;</span><span class="p">);</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sample ID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">);</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Dash found at position: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDashPos</span><span class="p">));</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nDashPos</span><span class="p">;</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FindDashPosition&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindDashPosition</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">nDashPos</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ABC-12345&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nDashPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsAt</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nDashPos</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Dash not found&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sample ID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Dash found at position: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDashPos</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nDashPos</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FindDashPosition&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Sample ID: ABC-12345
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Dash found at position: 4
+<div class="language-text highlight"><pre><span></span><code>Sample ID: ABC-12345
+Dash found at position: 4
 </code></pre></div>
 <h3 id="find-the-second-occurrence-of-a-separator">Find the second occurrence of a separator<a class="headerlink" href="#find-the-second-occurrence-of-a-separator" title="Permanent link">&para;</a></h3>
 <p>Use the first match's position as the offset for the second <code>LimsAt</code> call. In <code>"Orders/2026/Incoming/Batch01"</code>, the first <a href="../../operators/divide/"><code>/</code></a> is at position 7 and the second is at position 12.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindSecondSlash</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPath</span><span class="p">,</span><span class="w"> </span><span class="n">nFirstSlash</span><span class="p">,</span><span class="w"> </span><span class="n">nSecondSlash</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">sPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Orders/2026/Incoming/Batch01&quot;</span><span class="p">;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">nFirstSlash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsAt</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sPath</span><span class="p">);</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nFirstSlash</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="n">nSecondSlash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsAt</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sPath</span><span class="p">,</span><span class="w"> </span><span class="n">nFirstSlash</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;First slash: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFirstSlash</span><span class="p">));</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Second slash: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSecondSlash</span><span class="p">));</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nSecondSlash</span><span class="p">;</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FindSecondSlash&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindSecondSlash</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPath</span><span class="p">,</span><span class="w"> </span><span class="n">nFirstSlash</span><span class="p">,</span><span class="w"> </span><span class="n">nSecondSlash</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Orders/2026/Incoming/Batch01&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nFirstSlash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsAt</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sPath</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nFirstSlash</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nSecondSlash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsAt</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sPath</span><span class="p">,</span><span class="w"> </span><span class="n">nFirstSlash</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;First slash: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFirstSlash</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Second slash: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSecondSlash</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nSecondSlash</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FindSecondSlash&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>First slash: 7
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Second slash: 12
+<div class="language-text highlight"><pre><span></span><code>First slash: 7
+Second slash: 12
 </code></pre></div>
 <h3 id="extract-a-field-value-after-a-known-label">Extract a field value after a known label<a class="headerlink" href="#extract-a-field-value-after-a-known-label" title="Permanent link">&para;</a></h3>
 <p>Locate the <code>OWNER=</code> label with <code>LimsAt</code>, use <a href="../Len/"><code>Len</code></a> to calculate the value start position, then find the closing <a href="../../operators/or/"><code>|</code></a> with a second <code>LimsAt</code> call before extracting the value with <a href="../SubStr/"><code>SubStr</code></a>. The header <code>"STATUS=Logged|OWNER=JSMITH|BATCH=LAB-2026-0042"</code> yields <code>"JSMITH"</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExtractOwnerValue</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sHeader</span><span class="p">,</span><span class="w"> </span><span class="n">sLabel</span><span class="p">,</span><span class="w"> </span><span class="n">sOwner</span><span class="p">;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nLabelPos</span><span class="p">,</span><span class="w"> </span><span class="n">nValuePos</span><span class="p">,</span><span class="w"> </span><span class="n">nNextPipe</span><span class="p">;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="n">sHeader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;STATUS=Logged|OWNER=JSMITH|BATCH=LAB-2026-0042&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="n">sLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;OWNER=&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="n">nLabelPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsAt</span><span class="p">(</span><span class="n">sLabel</span><span class="p">,</span><span class="w"> </span><span class="n">sHeader</span><span class="p">);</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nLabelPos</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="n">nValuePos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nLabelPos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">sLabel</span><span class="p">);</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="n">nNextPipe</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsAt</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sHeader</span><span class="p">,</span><span class="w"> </span><span class="n">nValuePos</span><span class="p">);</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nNextPipe</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">        </span><span class="n">sOwner</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubStr</span><span class="p">(</span><span class="n">sHeader</span><span class="p">,</span><span class="w"> </span><span class="n">nValuePos</span><span class="p">);</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">        </span><span class="n">sOwner</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubStr</span><span class="p">(</span><span class="n">sHeader</span><span class="p">,</span><span class="w"> </span><span class="n">nValuePos</span><span class="p">,</span><span class="w"> </span><span class="n">nNextPipe</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">nValuePos</span><span class="p">);</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>
-<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Owner: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOwner</span><span class="p">);</span>
-<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>
-<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sOwner</span><span class="p">;</span>
-<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>
-<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExtractOwnerValue&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExtractOwnerValue</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sHeader</span><span class="p">,</span><span class="w"> </span><span class="n">sLabel</span><span class="p">,</span><span class="w"> </span><span class="n">sOwner</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nLabelPos</span><span class="p">,</span><span class="w"> </span><span class="n">nValuePos</span><span class="p">,</span><span class="w"> </span><span class="n">nNextPipe</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sHeader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;STATUS=Logged|OWNER=JSMITH|BATCH=LAB-2026-0042&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;OWNER=&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nLabelPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsAt</span><span class="p">(</span><span class="n">sLabel</span><span class="p">,</span><span class="w"> </span><span class="n">sHeader</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nLabelPos</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nValuePos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nLabelPos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">sLabel</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nNextPipe</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsAt</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sHeader</span><span class="p">,</span><span class="w"> </span><span class="n">nValuePos</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nNextPipe</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sOwner</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubStr</span><span class="p">(</span><span class="n">sHeader</span><span class="p">,</span><span class="w"> </span><span class="n">nValuePos</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sOwner</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubStr</span><span class="p">(</span><span class="n">sHeader</span><span class="p">,</span><span class="w"> </span><span class="n">nValuePos</span><span class="p">,</span><span class="w"> </span><span class="n">nNextPipe</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">nValuePos</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Owner: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOwner</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sOwner</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExtractOwnerValue&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Owner: JSMITH
+<div class="language-text highlight"><pre><span></span><code>Owner: JSMITH
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -3873,7 +3873,7 @@
 <li>When you want to supply explicit field definitions instead of relying on generated <code>FieldN</code> names.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">GetDataSetFromArrayEx</span><span class="p">(</span><span class="n">aArrayOfValues</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">aArrayFields</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sTableName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bIncludeHeader</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bIncludeSchema</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetDataSetFromArrayEx</span><span class="p">(</span><span class="n">aArrayOfValues</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">aArrayFields</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sTableName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bIncludeHeader</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bIncludeSchema</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3971,68 +3971,68 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="export-rows-with-explicit-field-names">Export rows with explicit field names<a class="headerlink" href="#export-rows-with-explicit-field-names" title="Permanent link">&para;</a></h3>
 <p>Passes a named table, explicit field definitions, header enabled, and schema disabled to produce a minimal XML dataset string.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildUserDatasetXml</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="p">{</span><span class="s2">&quot;USR001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Alice Johnson&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alice.johnson@example.com&quot;</span><span class="p">},</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="p">{</span><span class="s2">&quot;USR002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bob Smith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;bob.smith@example.com&quot;</span><span class="p">}</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="p">};</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;user_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;user_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">};</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSetFromArrayEx</span><span class="p">(</span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;users&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildUserDatasetXml&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildUserDatasetXml</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">&quot;USR001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Alice Johnson&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alice.johnson@example.com&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">&quot;USR002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bob Smith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;bob.smith@example.com&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;user_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;user_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSetFromArrayEx</span><span class="p">(</span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;users&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildUserDatasetXml&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="include-schema-with-typed-field-definitions">Include schema with typed field definitions<a class="headerlink" href="#include-schema-with-typed-field-definitions" title="Permanent link">&para;</a></h3>
 <p>Uses array-form field definitions to supply type metadata alongside column names, enabling schema output for a dataset with numeric and date columns.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildResultDatasetWithSchema</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="p">{</span><span class="s2">&quot;LAB-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">7.12</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/18/2026&quot;</span><span class="p">)},</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="p">{</span><span class="s2">&quot;LAB-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">6.98</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/19/2026&quot;</span><span class="p">)}</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="p">};</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">        </span><span class="p">{</span><span class="s2">&quot;sample_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">},</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="p">{</span><span class="s2">&quot;result_value&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;N&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="p">{</span><span class="s2">&quot;analysis_date&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;D&quot;</span><span class="p">}</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="p">};</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSetFromArrayEx</span><span class="p">(</span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;lab_results&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildResultDatasetWithSchema&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildResultDatasetWithSchema</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">&quot;LAB-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">7.12</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/18/2026&quot;</span><span class="p">)},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">&quot;LAB-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">6.98</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/19/2026&quot;</span><span class="p">)}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">&quot;sample_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">&quot;result_value&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;N&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">&quot;analysis_date&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;D&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSetFromArrayEx</span><span class="p">(</span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;lab_results&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildResultDatasetWithSchema&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="build-a-schema-only-dataset-template">Build a schema-only dataset template<a class="headerlink" href="#build-a-schema-only-dataset-template" title="Permanent link">&para;</a></h3>
 <p>Passes an empty row array with schema enabled to produce an XML dataset that contains only the field definitions — useful as an import template structure.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildImportTemplateXml</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="p">{</span><span class="s2">&quot;sample_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">},</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">},</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="p">{</span><span class="s2">&quot;received_date&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;D&quot;</span><span class="p">}</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="p">};</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSetFromArrayEx</span><span class="p">(</span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sample_import&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildImportTemplateXml&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildImportTemplateXml</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">&quot;sample_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">&quot;received_date&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;D&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSetFromArrayEx</span><span class="p">(</span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sample_import&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildImportTemplateXml&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

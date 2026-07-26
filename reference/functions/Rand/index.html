@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -3898,7 +3898,7 @@
   <code>Rand()</code>.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">Rand</span><span class="p">([</span><span class="n">nSeed</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Rand</span><span class="p">([</span><span class="n">nSeed</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3943,76 +3943,76 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="pick-a-random-array-element">Pick a random array element<a class="headerlink" href="#pick-a-random-array-element" title="Permanent link">&para;</a></h3>
 <p>Use <code>Rand()</code> to select one value from an array.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PickRandomCode</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aCodes</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">,</span><span class="w"> </span><span class="n">sCode</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">aCodes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Alpha&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bravo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Charlie&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Delta&quot;</span><span class="p">};</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">nCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCodes</span><span class="p">);</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Integer</span><span class="p">(</span><span class="nf">Rand</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aCodes</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Selected code: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCode</span><span class="p">);</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PickRandomCode&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PickRandomCode</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aCodes</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">,</span><span class="w"> </span><span class="n">sCode</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aCodes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Alpha&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bravo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Charlie&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Delta&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">nCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCodes</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Integer</span><span class="p">(</span><span class="nf">Rand</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aCodes</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Selected code: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCode</span><span class="p">);</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PickRandomCode&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Selected code: Charlie
+<div class="language-text highlight"><pre><span></span><code>Selected code: Charlie
 </code></pre></div>
 <p>The selected element varies on every call.</p>
 <h3 id="repeat-the-same-first-seeded-value">Repeat the same first seeded value<a class="headerlink" href="#repeat-the-same-first-seeded-value" title="Permanent link">&para;</a></h3>
 <p>Use the same seed twice when you need the same first result again.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareSeededValue</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSeed</span><span class="p">,</span><span class="w"> </span><span class="n">nFirst</span><span class="p">,</span><span class="w"> </span><span class="n">nSecond</span><span class="p">,</span><span class="w"> </span><span class="n">bSame</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">nSeed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">12345</span><span class="p">;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">nFirst</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Rand</span><span class="p">(</span><span class="n">nSeed</span><span class="p">);</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="n">nSecond</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Rand</span><span class="p">(</span><span class="n">nSeed</span><span class="p">);</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="n">bSame</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nFirst</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">nSecond</span><span class="p">;</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;First: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFirst</span><span class="p">);</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, Second: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSecond</span><span class="p">);</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, Same value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bSame</span><span class="p">);</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompareSeededValue&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareSeededValue</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSeed</span><span class="p">,</span><span class="w"> </span><span class="n">nFirst</span><span class="p">,</span><span class="w"> </span><span class="n">nSecond</span><span class="p">,</span><span class="w"> </span><span class="n">bSame</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nSeed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">12345</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nFirst</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Rand</span><span class="p">(</span><span class="n">nSeed</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nSecond</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Rand</span><span class="p">(</span><span class="n">nSeed</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bSame</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nFirst</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">nSecond</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;First: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFirst</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, Second: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSecond</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, Same value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bSame</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompareSeededValue&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>First: &lt;seeded_value&gt;, Second: &lt;seeded_value&gt;, Same value: T
+<div class="language-text highlight"><pre><span></span><code>First: &lt;seeded_value&gt;, Second: &lt;seeded_value&gt;, Same value: T
 </code></pre></div>
 <p>Both values are identical and <code>Same value</code> is <code>T</code> regardless of the runtime's RNG implementation. The exact numbers depend on the platform.</p>
 <h3 id="seed-once-then-consume-a-repeatable-sequence">Seed once, then consume a repeatable sequence<a class="headerlink" href="#seed-once-then-consume-a-repeatable-sequence" title="Permanent link">&para;</a></h3>
 <p>Seed the generator once and use later <code>Rand()</code> calls to advance through that seeded sequence.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildRepeatableSequence</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSeed</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">nSeed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">250</span><span class="p">;</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="nf">Rand</span><span class="p">(</span><span class="n">nSeed</span><span class="p">));</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="nf">Rand</span><span class="p">());</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sequence: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aValues</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aValues</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aValues</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildRepeatableSequence&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildRepeatableSequence</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSeed</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nSeed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">250</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="w">    </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="nf">Rand</span><span class="p">(</span><span class="n">nSeed</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="nf">Rand</span><span class="p">());</span>
+<span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sequence: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aValues</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aValues</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aValues</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildRepeatableSequence&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Sequence: &lt;first_value&gt;, &lt;second_value&gt;, &lt;third_value&gt;
+<div class="language-text highlight"><pre><span></span><code>Sequence: &lt;first_value&gt;, &lt;second_value&gt;, &lt;third_value&gt;
 </code></pre></div>
 <p>The same seed always produces the same sequence. The exact numbers depend on the platform's RNG implementation.</p>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>

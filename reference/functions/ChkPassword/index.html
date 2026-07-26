@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -3585,7 +3585,7 @@
 <li>When your script accepts either standard application credentials or <code>DOMAIN\user</code> style input.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">ChkPassword</span><span class="p">([</span><span class="n">sUserName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sPassword</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">ChkPassword</span><span class="p">([</span><span class="n">sUserName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sPassword</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3643,91 +3643,91 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="validate-credentials-from-a-login-form">Validate credentials from a login form<a class="headerlink" href="#validate-credentials-from-a-login-form" title="Permanent link">&para;</a></h3>
 <p>Validates a user name and password passed as procedure parameters and displays an accepted or rejected message based on the result.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateLogin</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">bIsValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ChkPassword</span><span class="p">(</span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Credentials accepted for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">;</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Credentials were not accepted for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateLogin&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SecurePass123&quot;</span><span class="p">});</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateLogin</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">bIsValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ChkPassword</span><span class="p">(</span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Credentials accepted for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Credentials were not accepted for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateLogin&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SecurePass123&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays one of:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Credentials accepted for jsmith
+<div class="language-text highlight"><pre><span></span><code>Credentials accepted for jsmith
 </code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Credentials were not accepted for jsmith
+<div class="language-text highlight"><pre><span></span><code>Credentials were not accepted for jsmith
 </code></pre></div>
 <h3 id="re-authenticate-the-current-session-user">Re-authenticate the current session user<a class="headerlink" href="#re-authenticate-the-current-session-user" title="Permanent link">&para;</a></h3>
 <p>Passes <a href="../../literals/nil/"><code>NIL</code></a> for <code>sUserName</code> so <code>ChkPassword</code> uses the current session user from <a href="../GetUserData/"><code>GetUserData</code></a>, and displays the result.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConfirmCurrentUser</span><span class="p">;</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bConfirmed</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetUserData</span><span class="p">();</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="n">bConfirmed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ChkPassword</span><span class="p">(</span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bConfirmed</span><span class="p">;</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Re-authentication succeeded for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Re-authentication failed for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bConfirmed</span><span class="p">;</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ConfirmCurrentUser&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SecurePass123&quot;</span><span class="p">});</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConfirmCurrentUser</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bConfirmed</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetUserData</span><span class="p">();</span>
+<span class="w">    </span><span class="n">bConfirmed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ChkPassword</span><span class="p">(</span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bConfirmed</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Re-authentication succeeded for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Re-authentication failed for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bConfirmed</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ConfirmCurrentUser&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SecurePass123&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays one of:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Re-authentication succeeded for jsmith
+<div class="language-text highlight"><pre><span></span><code>Re-authentication succeeded for jsmith
 </code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Re-authentication failed for jsmith
+<div class="language-text highlight"><pre><span></span><code>Re-authentication failed for jsmith
 </code></pre></div>
 <h3 id="accept-domain-qualified-or-application-credentials">Accept domain-qualified or application credentials<a class="headerlink" href="#accept-domain-qualified-or-application-credentials" title="Permanent link">&para;</a></h3>
 <p>Accepts either a <code>DOMAIN\user</code> name or a plain application user name, then calls <a href="../SetUserPassword/"><code>SetUserPassword</code></a> only when the credential check succeeds.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ChangePasswordAfterCheck</span><span class="p">;</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">;</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bAuthenticated</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredHash</span><span class="p">;</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="n">bAuthenticated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ChkPassword</span><span class="p">(</span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentPassword</span><span class="p">);</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bAuthenticated</span><span class="p">;</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Current credentials were not accepted.&quot;</span><span class="p">);</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
-<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span><span class="n">sStoredHash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetUserPassword</span><span class="p">(</span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">);</span>
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
-<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sStoredHash</span><span class="p">);</span>
-<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Password update did not complete.&quot;</span><span class="p">);</span>
-<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>
-<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Password updated successfully for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
-<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>
-<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sStoredHash</span><span class="p">;</span>
-<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>
-<a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ChangePasswordAfterCheck&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;OldPass123&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;NewSecurePass!&quot;</span><span class="p">});</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ChangePasswordAfterCheck</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bAuthenticated</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredHash</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">bAuthenticated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ChkPassword</span><span class="p">(</span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentPassword</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bAuthenticated</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Current credentials were not accepted.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sStoredHash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetUserPassword</span><span class="p">(</span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sStoredHash</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Password update did not complete.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Password updated successfully for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sStoredHash</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ChangePasswordAfterCheck&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;OldPass123&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;NewSecurePass!&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> or <a href="../ErrorMes/"><code>ErrorMes</code></a> displays one of:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Current credentials were not accepted.
+<div class="language-text highlight"><pre><span></span><code>Current credentials were not accepted.
 </code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Password update did not complete.
+<div class="language-text highlight"><pre><span></span><code>Password update did not complete.
 </code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Password updated successfully for jsmith
+<div class="language-text highlight"><pre><span></span><code>Password updated successfully for jsmith
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -2871,7 +2871,7 @@
 <li>When you want to catch unexpected inputs and log them or route them to a default handler.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">:OTHERWISE</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:OTHERWISE</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="keyword-group">Keyword group<a class="headerlink" href="#keyword-group" title="Permanent link">&para;</a></h2>
 <p><strong>Group:</strong> Control Flow
@@ -2900,102 +2900,102 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="providing-a-fallback-status-message">Providing a fallback status message<a class="headerlink" href="#providing-a-fallback-status-message" title="Permanent link">&para;</a></h3>
 <p>Shows how <code>:OTHERWISE</code> handles a status string that matches none of the listed <a href="../CASE/"><code>:CASE</code></a> conditions. With <code>sStatus</code> set to <code>"Draft"</code> or <code>"Approved"</code>, a matching branch runs; with <code>"UNKNOWN"</code>, no branch matches and <code>:OTHERWISE</code> provides the fallback.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDocumentStatus</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Draft&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Document is still in draft&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Approved&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Document is approved&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Document status is not recognized: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Displays fallback status for unmatched input;</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDocumentStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;UNKNOWN&quot;</span><span class="p">});</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDocumentStatus</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Draft&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Document is still in draft&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Approved&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Document is approved&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Document status is not recognized: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Displays fallback status for unmatched input;</span>
+<span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDocumentStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;UNKNOWN&quot;</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="routing-unmatched-work-to-a-support-queue">Routing unmatched work to a support queue<a class="headerlink" href="#routing-unmatched-work-to-a-support-queue" title="Permanent link">&para;</a></h3>
 <p>Routes workflow tasks to a specialized team based on task type. With <code>oTask:Type</code> set to <code>"PATHOLOGY"</code>, no specific team matches and <code>:OTHERWISE</code> routes the task to general support.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RouteWorkflowTask</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">oTask</span><span class="p">;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTaskType</span><span class="p">,</span><span class="w"> </span><span class="n">sAssignedGroup</span><span class="p">,</span><span class="w"> </span><span class="n">sLogMsg</span><span class="p">;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">sTaskType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">oTask</span><span class="p">:</span><span class="n">Type</span><span class="p">);</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sTaskType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;CHEMISTRY&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="n">sAssignedGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Chemistry Lab Team&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">        </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NotifyChemistryTeam&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">oTask</span><span class="p">});</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sTaskType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;MICROBIOLOGY&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">        </span><span class="n">sAssignedGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Micro Lab Team&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">        </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NotifyMicroTeam&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">oTask</span><span class="p">});</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sTaskType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;CALIBRATION&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">        </span><span class="n">sAssignedGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Instrumentation Team&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">        </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NotifyInstrumentTeam&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">oTask</span><span class="p">});</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">        </span><span class="n">sAssignedGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;General Support Group&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">        </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NotifySupportTeam&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">oTask</span><span class="p">});</span>
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">        </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Task type &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTaskType</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; was routed to general support&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLogMsg</span><span class="p">);</span>
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">        </span><span class="c1">/* Displays fallback routing message for unmatched task types;</span>
-<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
-<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>
-<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">    </span><span class="n">oTask</span><span class="p">:</span><span class="n">AssignedGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sAssignedGroup</span><span class="p">;</span>
-<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>
-<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sAssignedGroup</span><span class="p">;</span>
-<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>
-<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oTask</span><span class="p">;</span>
-<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="n">oTask</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateLocal</span><span class="p">();</span>
-<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="n">oTask</span><span class="p">:</span><span class="n">Type</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;PATHOLOGY&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RouteWorkflowTask&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">oTask</span><span class="p">});</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RouteWorkflowTask</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">oTask</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTaskType</span><span class="p">,</span><span class="w"> </span><span class="n">sAssignedGroup</span><span class="p">,</span><span class="w"> </span><span class="n">sLogMsg</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sTaskType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">oTask</span><span class="p">:</span><span class="n">Type</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sTaskType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;CHEMISTRY&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sAssignedGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Chemistry Lab Team&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NotifyChemistryTeam&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">oTask</span><span class="p">});</span>
+<span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sTaskType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;MICROBIOLOGY&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sAssignedGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Micro Lab Team&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NotifyMicroTeam&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">oTask</span><span class="p">});</span>
+<span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sTaskType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;CALIBRATION&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sAssignedGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Instrumentation Team&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NotifyInstrumentTeam&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">oTask</span><span class="p">});</span>
+<span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sAssignedGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;General Support Group&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NotifySupportTeam&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">oTask</span><span class="p">});</span>
+<span class="w">        </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Task type &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTaskType</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; was routed to general support&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLogMsg</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">/* Displays fallback routing message for unmatched task types;</span>
+<span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">oTask</span><span class="p">:</span><span class="n">AssignedGroup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sAssignedGroup</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sAssignedGroup</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="k">:DECLARE</span><span class="w"> </span><span class="n">oTask</span><span class="p">;</span>
+<span class="n">oTask</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateLocal</span><span class="p">();</span>
+<span class="n">oTask</span><span class="p">:</span><span class="n">Type</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;PATHOLOGY&quot;</span><span class="p">;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RouteWorkflowTask&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">oTask</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="applying-a-policy-fallback-after-multi-condition-checks">Applying a policy fallback after multi-condition checks<a class="headerlink" href="#applying-a-policy-fallback-after-multi-condition-checks" title="Permanent link">&para;</a></h3>
 <p>Resolves a release action from role, workflow stage, and override flag. With <code>sUserRole</code> set to <code>"TECHNICIAN"</code> and <code>sStage</code> set to <code>"REVIEW"</code>, no specific combination matches and <code>:OTHERWISE</code> escalates the action.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResolveReleaseAction</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sUserRole</span><span class="p">,</span><span class="w"> </span><span class="n">sStage</span><span class="p">,</span><span class="w"> </span><span class="n">bHasOverride</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAction</span><span class="p">,</span><span class="w"> </span><span class="n">sAuditMsg</span><span class="p">;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">sUserRole</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sUserRole</span><span class="p">);</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">sStage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sStage</span><span class="p">);</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sUserRole</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;ADMIN&quot;</span><span class="p">;</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="n">sAction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;APPROVE&quot;</span><span class="p">;</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sUserRole</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;SUPERVISOR&quot;</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">sStage</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;REVIEW&quot;</span><span class="p">;</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="n">sAction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;APPROVE&quot;</span><span class="p">;</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sUserRole</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;ANALYST&quot;</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">sStage</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;DRAFT&quot;</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">bHasOverride</span><span class="p">;</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">        </span><span class="n">sAction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SUBMIT_FOR_REVIEW&quot;</span><span class="p">;</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="n">sAction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ESCALATE&quot;</span><span class="p">;</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">        </span><span class="n">sAuditMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Unhandled role/stage combination: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserRole</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStage</span><span class="p">;</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sAuditMsg</span><span class="p">);</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">        </span><span class="c1">/* Displays escalation message for an unmatched role and stage;</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sAction</span><span class="p">;</span>
-<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>
-<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ResolveReleaseAction&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;TECHNICIAN&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;REVIEW&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">});</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResolveReleaseAction</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sUserRole</span><span class="p">,</span><span class="w"> </span><span class="n">sStage</span><span class="p">,</span><span class="w"> </span><span class="n">bHasOverride</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAction</span><span class="p">,</span><span class="w"> </span><span class="n">sAuditMsg</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sUserRole</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sUserRole</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sStage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sStage</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sUserRole</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;ADMIN&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sAction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;APPROVE&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sUserRole</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;SUPERVISOR&quot;</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">sStage</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;REVIEW&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sAction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;APPROVE&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sUserRole</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;ANALYST&quot;</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">sStage</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;DRAFT&quot;</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">bHasOverride</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sAction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SUBMIT_FOR_REVIEW&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sAction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ESCALATE&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sAuditMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Unhandled role/stage combination: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserRole</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStage</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sAuditMsg</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">/* Displays escalation message for an unmatched role and stage;</span>
+<span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sAction</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ResolveReleaseAction&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;TECHNICIAN&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;REVIEW&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

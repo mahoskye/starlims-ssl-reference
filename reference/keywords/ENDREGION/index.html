@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -2801,7 +2801,7 @@
 <li>When closing every <a href="../REGION/"><code>:REGION</code></a> block — <code>:ENDREGION;</code> is required to complete the region capture.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">:ENDREGION</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:ENDREGION</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="keyword-group">Keyword group<a class="headerlink" href="#keyword-group" title="Permanent link">&para;</a></h2>
 <p><strong>Group:</strong> Organization
@@ -2828,30 +2828,30 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="closing-a-named-region-template">Closing a named region template<a class="headerlink" href="#closing-a-named-region-template" title="Permanent link">&para;</a></h3>
 <p><code>:ENDREGION;</code> ends the region capture so the template text can be retrieved with <a href="../../functions/GetRegion/"><code>GetRegion()</code></a>. The <code>%USER%</code> placeholder is replaced with the current <code>MYUSERNAME</code> value at retrieval time.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildHeaderTemplate</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSource</span><span class="p">,</span><span class="w"> </span><span class="n">aTarget</span><span class="p">,</span><span class="w"> </span><span class="n">sHeader</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">aSource</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;%USER%&quot;</span><span class="p">};</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">aTarget</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="n">MYUSERNAME</span><span class="p">};</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="c1">/* Capture a reusable text template;</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="k">:REGION</span><span class="w"> </span><span class="n">ReportHeader</span><span class="p">;</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">Laboratory</span><span class="w"> </span><span class="n">report</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">Prepared</span><span class="w"> </span><span class="n">for</span><span class="p">:</span><span class="w"> </span><span class="o">%</span><span class="n">USER</span><span class="o">%</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="k">:ENDREGION</span><span class="p">;</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="n">sHeader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="s2">&quot;ReportHeader&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">aSource</span><span class="p">,</span><span class="w"> </span><span class="n">aTarget</span><span class="p">);</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sHeader</span><span class="p">);</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sHeader</span><span class="p">;</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildHeaderTemplate&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildHeaderTemplate</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSource</span><span class="p">,</span><span class="w"> </span><span class="n">aTarget</span><span class="p">,</span><span class="w"> </span><span class="n">sHeader</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aSource</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;%USER%&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aTarget</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="n">MYUSERNAME</span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">/* Capture a reusable text template;</span>
+<span class="w">    </span><span class="k">:REGION</span><span class="w"> </span><span class="n">ReportHeader</span><span class="p">;</span>
+<span class="n">Laboratory</span><span class="w"> </span><span class="n">report</span>
+<span class="n">Prepared</span><span class="w"> </span><span class="n">for</span><span class="p">:</span><span class="w"> </span><span class="o">%</span><span class="n">USER</span><span class="o">%</span>
+<span class="w">    </span><span class="k">:ENDREGION</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sHeader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="s2">&quot;ReportHeader&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">aSource</span><span class="p">,</span><span class="w"> </span><span class="n">aTarget</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sHeader</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sHeader</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildHeaderTemplate&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays this output when the current user is <code>jsmith</code>:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Laboratory report
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Prepared for: jsmith
+<div class="language-text highlight"><pre><span></span><code>Laboratory report
+Prepared for: jsmith
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

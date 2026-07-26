@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -3804,7 +3804,7 @@
   SSL procedures or integrations.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">Compress</span><span class="p">(</span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bToFile</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Compress</span><span class="p">(</span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bToFile</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3881,116 +3881,116 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="compress-text-in-memory">Compress text in memory<a class="headerlink" href="#compress-text-in-memory" title="Permanent link">&para;</a></h3>
 <p>Compresses a multi-line report string and displays both the original and compressed lengths to show the size reduction.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompressReportText</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sReport</span><span class="p">,</span><span class="w"> </span><span class="n">sCompressed</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nOriginalLen</span><span class="p">,</span><span class="w"> </span><span class="n">nCompressedLen</span><span class="p">;</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">sReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Batch 24018&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="n">sReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sReport</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Status=Released&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">sReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sReport</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Reviewer=jsmith&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="n">sReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sReport</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Comment=Ready for archive&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="n">nOriginalLen</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">sReport</span><span class="p">);</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="n">sCompressed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Compress</span><span class="p">(</span><span class="n">sReport</span><span class="p">);</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="n">nCompressedLen</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">sCompressed</span><span class="p">);</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Original length: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nOriginalLen</span><span class="p">));</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Compressed length: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCompressedLen</span><span class="p">));</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sCompressed</span><span class="p">;</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompressReportText&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompressReportText</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sReport</span><span class="p">,</span><span class="w"> </span><span class="n">sCompressed</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nOriginalLen</span><span class="p">,</span><span class="w"> </span><span class="n">nCompressedLen</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Batch 24018&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sReport</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Status=Released&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sReport</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Reviewer=jsmith&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sReport</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Comment=Ready for archive&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nOriginalLen</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">sReport</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">sCompressed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Compress</span><span class="p">(</span><span class="n">sReport</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nCompressedLen</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">sCompressed</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Original length: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nOriginalLen</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Compressed length: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCompressedLen</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sCompressed</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompressReportText&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Original length: 72
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Compressed length: [value less than 72]
+<div class="language-text highlight"><pre><span></span><code>Original length: 72
+Compressed length: [value less than 72]
 </code></pre></div>
 <h3 id="write-compressed-output-to-a-temporary-file">Write compressed output to a temporary file<a class="headerlink" href="#write-compressed-output-to-a-temporary-file" title="Permanent link">&para;</a></h3>
 <p>Passes <code>bToFile := .T.</code> to write compressed bytes to a generated temp file, then decompresses it to verify the round-trip is lossless.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateCompressedPayloadFile</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sZipPath</span><span class="p">,</span><span class="w"> </span><span class="n">sRestored</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Order=4711&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPayload</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Sample=S-000245&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPayload</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Status=Logged&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPayload</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Reviewer=jsmith&quot;</span><span class="p">;</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="n">sZipPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Compress</span><span class="p">(</span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="n">sRestored</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Decompress</span><span class="p">(</span><span class="n">sZipPath</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sRestored</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sPayload</span><span class="p">;</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Compressed file created: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sZipPath</span><span class="p">);</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Compressed file verification failed&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sZipPath</span><span class="p">;</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CreateCompressedPayloadFile&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateCompressedPayloadFile</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sZipPath</span><span class="p">,</span><span class="w"> </span><span class="n">sRestored</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Order=4711&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPayload</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Sample=S-000245&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPayload</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Status=Logged&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPayload</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Reviewer=jsmith&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sZipPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Compress</span><span class="p">(</span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">sRestored</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Decompress</span><span class="p">(</span><span class="n">sZipPath</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sRestored</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sPayload</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Compressed file created: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sZipPath</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Compressed file verification failed&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sZipPath</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CreateCompressedPayloadFile&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Compressed file created: [Temp path].zip
+<div class="language-text highlight"><pre><span></span><code>Compressed file created: [Temp path].zip
 </code></pre></div>
 <h3 id="batch-process-payloads-and-verify-mixed-output-modes">Batch process payloads and verify mixed output modes<a class="headerlink" href="#batch-process-payloads-and-verify-mixed-output-modes" title="Permanent link">&para;</a></h3>
 <p>Selects in-memory or file output per payload based on length, then verifies each result by decompressing and comparing back to the original.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PrepareCompressedExports</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aPayloads</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sCompressed</span><span class="p">,</span><span class="w"> </span><span class="n">sMode</span><span class="p">,</span><span class="w"> </span><span class="n">sRestored</span><span class="p">;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oResult</span><span class="p">;</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="n">aPayloads</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">        </span><span class="s2">&quot;Short payload for API transfer&quot;</span><span class="p">,</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">        </span><span class="s2">&quot;Long payload &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">&quot;ABC123&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">),</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">        </span><span class="s2">&quot;Audit payload &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">&quot;ZX&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">)</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="p">};</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aPayloads</span><span class="p">);</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">        </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aPayloads</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">sPayload</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">            </span><span class="n">sCompressed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Compress</span><span class="p">(</span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">            </span><span class="n">sMode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;FILE&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">            </span><span class="n">sCompressed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Compress</span><span class="p">(</span><span class="n">sPayload</span><span class="p">);</span>
-<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="w">            </span><span class="n">sMode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;MEMORY&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>
-<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">sMode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;FILE&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="w">            </span><span class="n">sRestored</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Decompress</span><span class="p">(</span><span class="n">sCompressed</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
-<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="w">            </span><span class="n">sRestored</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Decompress</span><span class="p">(</span><span class="n">sCompressed</span><span class="p">);</span>
-<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>
-<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="w">        </span><span class="n">oResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">();</span>
-<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="w">        </span><span class="n">oResult</span><span class="p">:</span><span class="n">mode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMode</span><span class="p">;</span>
-<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a><span class="w">        </span><span class="n">oResult</span><span class="p">:</span><span class="n">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sCompressed</span><span class="p">;</span>
-<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="w">        </span><span class="n">oResult</span><span class="p">:</span><span class="n">matchesSource</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sRestored</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sPayload</span><span class="p">;</span>
-<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>
-<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">oResult</span><span class="p">);</span>
-<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>
-<a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Payload &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span>
-<a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a><span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; stored as &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sMode</span><span class="p">);</span>
-<a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a><span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
-<a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a>
-<a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
-<a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a>
-<a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PrepareCompressedExports&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PrepareCompressedExports</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aPayloads</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sCompressed</span><span class="p">,</span><span class="w"> </span><span class="n">sMode</span><span class="p">,</span><span class="w"> </span><span class="n">sRestored</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oResult</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aPayloads</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;Short payload for API transfer&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;Long payload &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">&quot;ABC123&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">),</span>
+<span class="w">        </span><span class="s2">&quot;Audit payload &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">&quot;ZX&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">)</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aPayloads</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aPayloads</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
+
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">sPayload</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sCompressed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Compress</span><span class="p">(</span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
+<span class="w">            </span><span class="n">sMode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;FILE&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sCompressed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Compress</span><span class="p">(</span><span class="n">sPayload</span><span class="p">);</span>
+<span class="w">            </span><span class="n">sMode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;MEMORY&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">sMode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;FILE&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sRestored</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Decompress</span><span class="p">(</span><span class="n">sCompressed</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sRestored</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Decompress</span><span class="p">(</span><span class="n">sCompressed</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">oResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">();</span>
+<span class="w">        </span><span class="n">oResult</span><span class="p">:</span><span class="n">mode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMode</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oResult</span><span class="p">:</span><span class="n">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sCompressed</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oResult</span><span class="p">:</span><span class="n">matchesSource</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sRestored</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sPayload</span><span class="p">;</span>
+
+<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">oResult</span><span class="p">);</span>
+
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Payload &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; stored as &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sMode</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PrepareCompressedExports&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays one line per payload:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Payload 1 stored as MEMORY
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Payload 2 stored as FILE
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Payload 3 stored as FILE
+<div class="language-text highlight"><pre><span></span><code>Payload 1 stored as MEMORY
+Payload 2 stored as FILE
+Payload 3 stored as FILE
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -3667,7 +3667,7 @@
 <li>When adjusting an array by position without reconstructing it from scratch.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">DelArray</span><span class="p">(</span><span class="n">aTarget</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DelArray</span><span class="p">(</span><span class="n">aTarget</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3746,81 +3746,81 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="remove-an-item-by-index">Remove an item by index<a class="headerlink" href="#remove-an-item-by-index" title="Permanent link">&para;</a></h3>
 <p>Displays the array contents before and after removing the element at a given index, showing how later elements shift left.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RemoveArrayElement</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Red&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Green&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Yellow&quot;</span><span class="p">};</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Array before deletion: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aValues</span><span class="p">);</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DelArray</span><span class="p">(</span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">);</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Array after removing index &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aValues</span><span class="p">);</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="k">:ENDPROC</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RemoveArrayElement</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Red&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Green&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Yellow&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Array before deletion: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aValues</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DelArray</span><span class="p">(</span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Array after removing index &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aValues</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Array before deletion: Red,Green,Blue,Yellow
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Array after removing index 2: Red,Blue,Yellow
+<div class="language-text highlight"><pre><span></span><code>Array before deletion: Red,Green,Blue,Yellow
+Array after removing index 2: Red,Blue,Yellow
 </code></pre></div>
 <h3 id="remove-matching-entries-by-iterating-backwards">Remove matching entries by iterating backwards<a class="headerlink" href="#remove-matching-entries-by-iterating-backwards" title="Permanent link">&para;</a></h3>
 <p>Iterates in reverse order to safely remove all entries except a target value, collecting removed items in a separate array without index-shift errors.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessPendingSamples</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aPendingSamples</span><span class="p">,</span><span class="w"> </span><span class="n">aProcessedSamples</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">aPendingSamples</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="s2">&quot;SAMPLE-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAMPLE-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAMPLE-003&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAMPLE-004&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAMPLE-005&quot;</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="p">};</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="n">aProcessedSamples</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aPendingSamples</span><span class="p">)</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:STEP</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aPendingSamples</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="p">(</span><span class="n">sSampleID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;SAMPLE-003&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">            </span><span class="n">aPendingSamples</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DelArray</span><span class="p">(</span><span class="n">aPendingSamples</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">);</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aProcessedSamples</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">);</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Processed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aProcessedSamples</span><span class="p">));</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Still pending: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aPendingSamples</span><span class="p">));</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="k">:ENDPROC</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessPendingSamples</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aPendingSamples</span><span class="p">,</span><span class="w"> </span><span class="n">aProcessedSamples</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aPendingSamples</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;SAMPLE-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAMPLE-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAMPLE-003&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAMPLE-004&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAMPLE-005&quot;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">aProcessedSamples</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aPendingSamples</span><span class="p">)</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:STEP</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aPendingSamples</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
+
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="p">(</span><span class="n">sSampleID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;SAMPLE-003&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="n">aPendingSamples</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DelArray</span><span class="p">(</span><span class="n">aPendingSamples</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aProcessedSamples</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Processed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aProcessedSamples</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Still pending: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aPendingSamples</span><span class="p">));</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Processed: SAMPLE-005,SAMPLE-004,SAMPLE-002,SAMPLE-001
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Still pending: SAMPLE-003
+<div class="language-text highlight"><pre><span></span><code>Processed: SAMPLE-005,SAMPLE-004,SAMPLE-002,SAMPLE-001
+Still pending: SAMPLE-003
 </code></pre></div>
 <h3 id="remove-a-pre-specified-list-of-positions">Remove a pre-specified list of positions<a class="headerlink" href="#remove-a-pre-specified-list-of-positions" title="Permanent link">&para;</a></h3>
 <p>Removes multiple elements by supplying positions in descending order so that each removal does not shift the remaining target indices.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RemoveMultipleEntries</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleList</span><span class="p">,</span><span class="w"> </span><span class="n">aPositions</span><span class="p">,</span><span class="w"> </span><span class="n">nIdx</span><span class="p">,</span><span class="w"> </span><span class="n">nRemoved</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">aSampleList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Alpha&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Beta&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Gamma&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Delta&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Epsilon&quot;</span><span class="p">};</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="n">aPositions</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">};</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="n">nRemoved</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aPositions</span><span class="p">);</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">        </span><span class="n">nIdx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aPositions</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nIdx</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">nIdx</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aSampleList</span><span class="p">);</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">            </span><span class="n">aSampleList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DelArray</span><span class="p">(</span><span class="n">aSampleList</span><span class="p">,</span><span class="w"> </span><span class="n">nIdx</span><span class="p">);</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">            </span><span class="n">nRemoved</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Removed &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nRemoved</span><span class="p">)</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; entries. Remaining: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aSampleList</span><span class="p">);</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aSampleList</span><span class="p">;</span>
-<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="k">:ENDPROC</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RemoveMultipleEntries</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleList</span><span class="p">,</span><span class="w"> </span><span class="n">aPositions</span><span class="p">,</span><span class="w"> </span><span class="n">nIdx</span><span class="p">,</span><span class="w"> </span><span class="n">nRemoved</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aSampleList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Alpha&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Beta&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Gamma&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Delta&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Epsilon&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aPositions</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">};</span>
+<span class="w">    </span><span class="n">nRemoved</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aPositions</span><span class="p">);</span>
+<span class="w">        </span><span class="n">nIdx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aPositions</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
+
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nIdx</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">nIdx</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aSampleList</span><span class="p">);</span>
+<span class="w">            </span><span class="n">aSampleList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DelArray</span><span class="p">(</span><span class="n">aSampleList</span><span class="p">,</span><span class="w"> </span><span class="n">nIdx</span><span class="p">);</span>
+<span class="w">            </span><span class="n">nRemoved</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Removed &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nRemoved</span><span class="p">)</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; entries. Remaining: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aSampleList</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aSampleList</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Removed 3 entries. Remaining: Alpha,Gamma
+<div class="language-text highlight"><pre><span></span><code>Removed 3 entries. Remaining: Alpha,Gamma
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

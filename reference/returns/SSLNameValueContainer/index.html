@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -2191,8 +2191,8 @@
 <p>A name/value bag — read or list values from a request's headers, query string, cookies, forms, server variables, or client certificate fields.</p>
 <p>An <code>SSLNameValueContainer</code> is the object returned by six properties on <a href="../SSLRequest/"><code>SSLRequest</code></a>: <code>QueryString</code>, <code>Cookies</code>, <code>Forms</code>, <code>Headers</code>, <code>ServerVariables</code>, and <code>ClientCertificate</code>. Each instance wraps a single name/value collection from the incoming HTTP request. You read individual values by name, list every key, or replace a value.</p>
 <p>Two reading idioms are equivalent for known names:</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oContainer</span><span class="p">:</span><span class="nf">Get</span><span class="p">(</span><span class="s2">&quot;SomeName&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">/* explicit method call ;</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oContainer</span><span class="p">:</span><span class="n">SomeName</span><span class="p">;</span><span class="w">          </span><span class="c1">/* expando-style member access ;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oContainer</span><span class="p">:</span><span class="nf">Get</span><span class="p">(</span><span class="s2">&quot;SomeName&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">/* explicit method call ;</span>
+<span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oContainer</span><span class="p">:</span><span class="n">SomeName</span><span class="p">;</span><span class="w">          </span><span class="c1">/* expando-style member access ;</span>
 </code></pre></div>
 <p>The expando form is more concise and is the recommended idiom for fixed, known keys (e.g., reading a specific query parameter or header). Use <code>Get</code> when the key is dynamic — the value is in a variable, looped over from <code>AllKeys</code>, etc.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
@@ -2310,49 +2310,49 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="read-one-query-string-value">Read one query-string value<a class="headerlink" href="#read-one-query-string-value" title="Permanent link">&para;</a></h3>
 <p>Reads a single named query parameter from the incoming request.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GreetByName</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oQueryString</span><span class="p">,</span><span class="w"> </span><span class="n">sName</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">oQueryString</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">QueryString</span><span class="p">;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">sName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oQueryString</span><span class="p">:</span><span class="n">Name</span><span class="p">;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">&quot;Hello, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sName</span><span class="p">);</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1">/* Usage: GET /MyEndpoint?Name=Alice ;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GreetByName</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oQueryString</span><span class="p">,</span><span class="w"> </span><span class="n">sName</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">oQueryString</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">QueryString</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oQueryString</span><span class="p">:</span><span class="n">Name</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">&quot;Hello, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sName</span><span class="p">);</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage: GET /MyEndpoint?Name=Alice ;</span>
 </code></pre></div>
 <h3 id="iterate-every-header">Iterate every header<a class="headerlink" href="#iterate-every-header" title="Permanent link">&para;</a></h3>
 <p>Lists every header on the incoming request, then writes each name/value pair to the response body.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DumpHeaders</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oHeaders</span><span class="p">,</span><span class="w"> </span><span class="n">aKeys</span><span class="p">,</span><span class="w"> </span><span class="n">sKey</span><span class="p">,</span><span class="w"> </span><span class="n">sValue</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">oHeaders</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">Headers</span><span class="p">;</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">aKeys</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHeaders</span><span class="p">:</span><span class="n">AllKeys</span><span class="p">;</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">aKeys</span><span class="p">);</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="n">sKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aKeys</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHeaders</span><span class="p">:</span><span class="nf">Get</span><span class="p">(</span><span class="n">sKey</span><span class="p">);</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">        </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="n">sKey</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sValue</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="c1">/* Usage: any HTTP request that hits this endpoint ;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DumpHeaders</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oHeaders</span><span class="p">,</span><span class="w"> </span><span class="n">aKeys</span><span class="p">,</span><span class="w"> </span><span class="n">sKey</span><span class="p">,</span><span class="w"> </span><span class="n">sValue</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">oHeaders</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">Headers</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aKeys</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHeaders</span><span class="p">:</span><span class="n">AllKeys</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">aKeys</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aKeys</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHeaders</span><span class="p">:</span><span class="nf">Get</span><span class="p">(</span><span class="n">sKey</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="n">sKey</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sValue</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
+<span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage: any HTTP request that hits this endpoint ;</span>
 </code></pre></div>
 <h3 id="read-a-cookie-with-a-dynamic-key">Read a cookie with a dynamic key<a class="headerlink" href="#read-a-cookie-with-a-dynamic-key" title="Permanent link">&para;</a></h3>
 <p>Looks up a cookie whose name comes from another piece of state, so the expando form is not appropriate.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadDynamicCookie</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oCookies</span><span class="p">,</span><span class="w"> </span><span class="n">sCookieName</span><span class="p">,</span><span class="w"> </span><span class="n">sValue</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">sCookieName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;session_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">UserName</span><span class="p">;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">oCookies</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">Cookies</span><span class="p">;</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oCookies</span><span class="p">:</span><span class="nf">Get</span><span class="p">(</span><span class="n">sCookieName</span><span class="p">);</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sValue</span><span class="p">);</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">&quot;No cookie set for this user&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">&quot;Found cookie: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sValue</span><span class="p">);</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="k">:ENDPROC</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadDynamicCookie</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oCookies</span><span class="p">,</span><span class="w"> </span><span class="n">sCookieName</span><span class="p">,</span><span class="w"> </span><span class="n">sValue</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sCookieName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;session_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">UserName</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oCookies</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">Cookies</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oCookies</span><span class="p">:</span><span class="nf">Get</span><span class="p">(</span><span class="n">sCookieName</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sValue</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">&quot;No cookie set for this user&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">&quot;Found cookie: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sValue</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

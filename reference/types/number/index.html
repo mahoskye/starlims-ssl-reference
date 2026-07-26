@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -2137,10 +2137,10 @@
 <p>SSL has a single numeric type for whole numbers and fractional values. Numeric values support arithmetic operators, comparison operators, exponentiation, and shift operators. Integer-only bitwise operations are available through the <a href="../../functions/_AND/"><code>_AND()</code></a>, <a href="../../functions/_OR/"><code>_OR()</code></a>, <a href="../../functions/_XOR/"><code>_XOR()</code></a>, and <a href="../../functions/_NOT/"><code>_NOT()</code></a> built-ins. Numeric values are scalar values, so they do not support <code>[]</code> indexing. For display or string building, convert numbers explicitly with <a href="../../functions/LimsString/"><code>LimsString</code></a> or <code>ToString()</code>.</p>
 <h2 id="creating-values">Creating values<a class="headerlink" href="#creating-values" title="Permanent link">&para;</a></h2>
 <p>Number values are created from numeric literals: integers, decimals, negatives, and scientific notation.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">nCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">nRatio</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">3.14</span><span class="p">;</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">nNeg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">-</span><span class="mi">5</span><span class="p">;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">nSmall</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="err">.2</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="n">nCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="n">nRatio</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">3.14</span><span class="p">;</span>
+<span class="n">nNeg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">-</span><span class="mi">5</span><span class="p">;</span>
+<span class="n">nSmall</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="err">.2</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">;</span>
 </code></pre></div>
 <ul>
 <li><strong>Runtime type:</strong> <code>NUMERIC</code></li>
@@ -2349,22 +2349,22 @@
 <p>This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined number members and SSL-native math functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover.</p>
 <h3 id="example-formatting-a-number-with-grouped-digits">Example: formatting a number with grouped digits<a class="headerlink" href="#example-formatting-a-number-with-grouped-digits" title="Permanent link">&para;</a></h3>
 <p>Uses .NET's single-argument <code>ToString(sFormat)</code> overload with the <code>"N0"</code> standard format string to render a large integer with thousands separators. SSL's own <code>ToString()</code> and <code>ToString(sDecimal, sGroup)</code> overloads are unaffected; the single-argument form resolves to the .NET method on the backing numeric type and uses the current culture's separators.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatRecordCount</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nRecords</span><span class="p">,</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">nRecords</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1234567</span><span class="p">;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">sFormatted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nRecords</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;N0&quot;</span><span class="p">);</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sFormatted</span><span class="p">);</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">;</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FormatRecordCount&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatRecordCount</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nRecords</span><span class="p">,</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nRecords</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1234567</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFormatted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nRecords</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;N0&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sFormatted</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FormatRecordCount&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>1,234,567
+<div class="language-text highlight"><pre><span></span><code>1,234,567
 </code></pre></div>
 <h2 id="indexing">Indexing<a class="headerlink" href="#indexing" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2393,119 +2393,119 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="basic-arithmetic-and-comparison">Basic arithmetic and comparison<a class="headerlink" href="#basic-arithmetic-and-comparison" title="Permanent link">&para;</a></h3>
 <p>Computes area, perimeter, ratio, and squared width for a 10 x 5 rectangle, then verifies the area equals 50.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NumberArithmetic</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nWidth</span><span class="p">,</span><span class="w"> </span><span class="n">nHeight</span><span class="p">,</span><span class="w"> </span><span class="n">nArea</span><span class="p">,</span><span class="w"> </span><span class="n">nPerimeter</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nRatio</span><span class="p">,</span><span class="w"> </span><span class="n">nSquared</span><span class="p">;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">nWidth</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">nHeight</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="n">nArea</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nWidth</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nHeight</span><span class="p">;</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="n">nPerimeter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nWidth</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nHeight</span><span class="p">);</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="n">nRatio</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nWidth</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">nHeight</span><span class="p">;</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="n">nSquared</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nWidth</span><span class="w"> </span><span class="err">^</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Area: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nArea</span><span class="p">));</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="c1">/* Displays: Area: 50;</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Perimeter: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nPerimeter</span><span class="p">));</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="c1">/* Displays: Perimeter: 30;</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Ratio: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nRatio</span><span class="p">));</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="c1">/* Displays: Ratio: 2;</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Width squared: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSquared</span><span class="p">));</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="c1">/* Displays: Width squared: 100;</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nArea</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Area check passed&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nArea</span><span class="p">;</span>
-<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>
-<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NumberArithmetic&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NumberArithmetic</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nWidth</span><span class="p">,</span><span class="w"> </span><span class="n">nHeight</span><span class="p">,</span><span class="w"> </span><span class="n">nArea</span><span class="p">,</span><span class="w"> </span><span class="n">nPerimeter</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nRatio</span><span class="p">,</span><span class="w"> </span><span class="n">nSquared</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nWidth</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nHeight</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nArea</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nWidth</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nHeight</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nPerimeter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nWidth</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">nHeight</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nRatio</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nWidth</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">nHeight</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nSquared</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nWidth</span><span class="w"> </span><span class="err">^</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Area: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nArea</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">/* Displays: Area: 50;</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Perimeter: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nPerimeter</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">/* Displays: Perimeter: 30;</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Ratio: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nRatio</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">/* Displays: Ratio: 2;</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Width squared: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSquared</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">/* Displays: Width squared: 100;</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nArea</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Area check passed&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nArea</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NumberArithmetic&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="integer-only-shifts-masks-and-formatting">Integer-only shifts, masks, and formatting<a class="headerlink" href="#integer-only-shifts-masks-and-formatting" title="Permanent link">&para;</a></h3>
 <p>Validates that the values are integer-valued before using shifts and bitwise built-ins, starting from <code>nFlags = 6</code> (binary 0110) and <code>nMask = 3</code> (binary 0011).</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NumberBitwiseOps</span><span class="p">;</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nFlags</span><span class="p">,</span><span class="w"> </span><span class="n">nMask</span><span class="p">,</span><span class="w"> </span><span class="n">nShifted</span><span class="p">,</span><span class="w"> </span><span class="n">nMasked</span><span class="p">;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nCombined</span><span class="p">,</span><span class="w"> </span><span class="n">nToggled</span><span class="p">;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="n">nFlags</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="n">nMask</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">nFlags</span><span class="p">:</span><span class="n">IsInt</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="err">!</span><span class="n">nMask</span><span class="p">:</span><span class="n">IsInt</span><span class="p">;</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Bitwise operations require integer values&quot;</span><span class="p">);</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="n">nShifted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nFlags</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="c1">/* 6 &lt;&lt; 1 = 12;</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="n">nMasked</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">_AND</span><span class="p">(</span><span class="n">nFlags</span><span class="p">,</span><span class="w"> </span><span class="n">nMask</span><span class="p">);</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="c1">/* 6 AND 3 = 2;</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="n">nCombined</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">_OR</span><span class="p">(</span><span class="n">nFlags</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">    </span><span class="c1">/* 6 OR 8 = 14;</span>
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">    </span><span class="n">nToggled</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">_XOR</span><span class="p">(</span><span class="n">nFlags</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">    </span><span class="c1">/* 6 XOR 2 = 4;</span>
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>
-<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Shifted: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nShifted</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="p">));</span>
-<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">    </span><span class="c1">/* Displays: Shifted: 12;</span>
-<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Masked: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nMasked</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="p">));</span>
-<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">    </span><span class="c1">/* Displays: Masked: 2;</span>
-<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Combined: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nCombined</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="p">));</span>
-<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="w">    </span><span class="c1">/* Displays: Combined: 14;</span>
-<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Toggled: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nToggled</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="p">));</span>
-<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="w">    </span><span class="c1">/* Displays: Toggled: 4;</span>
-<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>
-<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nCombined</span><span class="p">;</span>
-<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>
-<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NumberBitwiseOps&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NumberBitwiseOps</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nFlags</span><span class="p">,</span><span class="w"> </span><span class="n">nMask</span><span class="p">,</span><span class="w"> </span><span class="n">nShifted</span><span class="p">,</span><span class="w"> </span><span class="n">nMasked</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nCombined</span><span class="p">,</span><span class="w"> </span><span class="n">nToggled</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nFlags</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nMask</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">nFlags</span><span class="p">:</span><span class="n">IsInt</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="err">!</span><span class="n">nMask</span><span class="p">:</span><span class="n">IsInt</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Bitwise operations require integer values&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nShifted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nFlags</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">/* 6 &lt;&lt; 1 = 12;</span>
+<span class="w">    </span><span class="n">nMasked</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">_AND</span><span class="p">(</span><span class="n">nFlags</span><span class="p">,</span><span class="w"> </span><span class="n">nMask</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">/* 6 AND 3 = 2;</span>
+<span class="w">    </span><span class="n">nCombined</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">_OR</span><span class="p">(</span><span class="n">nFlags</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">/* 6 OR 8 = 14;</span>
+<span class="w">    </span><span class="n">nToggled</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">_XOR</span><span class="p">(</span><span class="n">nFlags</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">/* 6 XOR 2 = 4;</span>
+
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Shifted: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nShifted</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">/* Displays: Shifted: 12;</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Masked: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nMasked</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">/* Displays: Masked: 2;</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Combined: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nCombined</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">/* Displays: Combined: 14;</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Toggled: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nToggled</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="c1">/* Displays: Toggled: 4;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nCombined</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NumberBitwiseOps&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="statistical-aggregation-with-bitwise-classification">Statistical aggregation with bitwise classification<a class="headerlink" href="#statistical-aggregation-with-bitwise-classification" title="Permanent link">&para;</a></h3>
 <p>Computes mean and variance over an array of measurements, then uses bitwise flags to classify the result. For <code>{10, 20, 30}</code>: mean = 20, variance ~= 66.67, class bits = 2 (high variance set).</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AnalyzeMeasurements</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aMeasurements</span><span class="p">;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSum</span><span class="p">,</span><span class="w"> </span><span class="n">nSumSq</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">,</span><span class="w"> </span><span class="n">nMean</span><span class="p">,</span><span class="w"> </span><span class="n">nVariance</span><span class="p">;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nClassBits</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sReport</span><span class="p">;</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="n">nCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aMeasurements</span><span class="p">);</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nCount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;No data&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="n">nSum</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="n">nSumSq</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">        </span><span class="n">nSum</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="n">nSum</span><span class="w">   </span><span class="o">+</span><span class="w"> </span><span class="n">aMeasurements</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">        </span><span class="n">nSumSq</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nSumSq</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">aMeasurements</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]</span><span class="w"> </span><span class="err">^</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="n">nMean</span><span class="w">     </span><span class="o">:=</span><span class="w"> </span><span class="n">nSum</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">    </span><span class="n">nVariance</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">(</span><span class="n">nSumSq</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">nCount</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">nMean</span><span class="w"> </span><span class="err">^</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>
-<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nMean</span><span class="p">:</span><span class="n">IsInt</span><span class="p">;</span>
-<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">        </span><span class="n">nClassBits</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nMean</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
-<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">            </span><span class="n">nClassBits</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">_OR</span><span class="p">(</span><span class="n">nClassBits</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
-<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nVariance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span>
-<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="w">            </span><span class="n">nClassBits</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">_OR</span><span class="p">(</span><span class="n">nClassBits</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
-<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="w">        </span><span class="n">nClassBits</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>
-<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="w">    </span><span class="n">sReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Mean: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nMean</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a><span class="w">               </span><span class="s2">&quot; | Variance: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nVariance</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="w">               </span><span class="s2">&quot; | ClassBits: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nClassBits</span><span class="p">);</span>
-<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>
-<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sReport</span><span class="p">);</span>
-<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nMean</span><span class="p">;</span>
-<a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>
-<a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AnalyzeMeasurements&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">}});</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AnalyzeMeasurements</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aMeasurements</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSum</span><span class="p">,</span><span class="w"> </span><span class="n">nSumSq</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">,</span><span class="w"> </span><span class="n">nMean</span><span class="p">,</span><span class="w"> </span><span class="n">nVariance</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nClassBits</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sReport</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aMeasurements</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nCount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;No data&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nSum</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nSumSq</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
+<span class="w">        </span><span class="n">nSum</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="n">nSum</span><span class="w">   </span><span class="o">+</span><span class="w"> </span><span class="n">aMeasurements</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
+<span class="w">        </span><span class="n">nSumSq</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nSumSq</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">aMeasurements</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]</span><span class="w"> </span><span class="err">^</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nMean</span><span class="w">     </span><span class="o">:=</span><span class="w"> </span><span class="n">nSum</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nVariance</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">(</span><span class="n">nSumSq</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">nCount</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">nMean</span><span class="w"> </span><span class="err">^</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nMean</span><span class="p">:</span><span class="n">IsInt</span><span class="p">;</span>
+<span class="w">        </span><span class="n">nClassBits</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nMean</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="w">            </span><span class="n">nClassBits</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">_OR</span><span class="p">(</span><span class="n">nClassBits</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nVariance</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span>
+<span class="w">            </span><span class="n">nClassBits</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">_OR</span><span class="p">(</span><span class="n">nClassBits</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">        </span><span class="n">nClassBits</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Mean: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nMean</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">               </span><span class="s2">&quot; | Variance: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nVariance</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">               </span><span class="s2">&quot; | ClassBits: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nClassBits</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sReport</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nMean</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AnalyzeMeasurements&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">}});</span>
 </code></pre></div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>

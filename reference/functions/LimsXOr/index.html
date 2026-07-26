@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -3919,7 +3919,7 @@
 <li>When you need a reversible combine-and-restore pattern for integer values.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">LimsXOr</span><span class="p">(</span><span class="n">nVal1</span><span class="p">,</span><span class="w"> </span><span class="n">nVal2</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LimsXOr</span><span class="p">(</span><span class="n">nVal1</span><span class="p">,</span><span class="w"> </span><span class="n">nVal2</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3990,82 +3990,82 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="toggle-one-flag-bit">Toggle one flag bit<a class="headerlink" href="#toggle-one-flag-bit" title="Permanent link">&para;</a></h3>
 <p>Use XOR with a mask to flip one bit in an integer value.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ToggleFlagBit</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nFlags</span><span class="p">,</span><span class="w"> </span><span class="n">nMask</span><span class="p">,</span><span class="w"> </span><span class="n">nResult</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">nFlags</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">nMask</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">nResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsXOr</span><span class="p">(</span><span class="n">nFlags</span><span class="p">,</span><span class="w"> </span><span class="n">nMask</span><span class="p">);</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Original flags: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFlags</span><span class="p">));</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Updated flags: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nResult</span><span class="p">));</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nResult</span><span class="p">;</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ToggleFlagBit&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ToggleFlagBit</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nFlags</span><span class="p">,</span><span class="w"> </span><span class="n">nMask</span><span class="p">,</span><span class="w"> </span><span class="n">nResult</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nFlags</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nMask</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsXOr</span><span class="p">(</span><span class="n">nFlags</span><span class="p">,</span><span class="w"> </span><span class="n">nMask</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Original flags: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFlags</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Updated flags: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nResult</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nResult</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ToggleFlagBit&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Original flags: 5
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Updated flags: 1
+<div class="language-text highlight"><pre><span></span><code>Original flags: 5
+Updated flags: 1
 </code></pre></div>
 <h3 id="find-which-bits-changed-between-two-values">Find which bits changed between two values<a class="headerlink" href="#find-which-bits-changed-between-two-values" title="Permanent link">&para;</a></h3>
 <p>Compare two integer flag values and report the positions that differ.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListChangedBits</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nOriginal</span><span class="p">,</span><span class="w"> </span><span class="n">nUpdated</span><span class="p">,</span><span class="w"> </span><span class="n">nDiff</span><span class="p">,</span><span class="w"> </span><span class="n">nMask</span><span class="p">,</span><span class="w"> </span><span class="n">aChanged</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">nOriginal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">nUpdated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">46</span><span class="p">;</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">nDiff</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsXOr</span><span class="p">(</span><span class="n">nOriginal</span><span class="p">,</span><span class="w"> </span><span class="n">nUpdated</span><span class="p">);</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="n">nMask</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="n">aChanged</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">_AND</span><span class="p">(</span><span class="n">nDiff</span><span class="p">,</span><span class="w"> </span><span class="n">nMask</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aChanged</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">);</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">        </span><span class="n">nMask</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nMask</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Changed bit positions: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aChanged</span><span class="p">));</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aChanged</span><span class="p">;</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ListChangedBits&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListChangedBits</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nOriginal</span><span class="p">,</span><span class="w"> </span><span class="n">nUpdated</span><span class="p">,</span><span class="w"> </span><span class="n">nDiff</span><span class="p">,</span><span class="w"> </span><span class="n">nMask</span><span class="p">,</span><span class="w"> </span><span class="n">aChanged</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nOriginal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nUpdated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">46</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nDiff</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsXOr</span><span class="p">(</span><span class="n">nOriginal</span><span class="p">,</span><span class="w"> </span><span class="n">nUpdated</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nMask</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aChanged</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">_AND</span><span class="p">(</span><span class="n">nDiff</span><span class="p">,</span><span class="w"> </span><span class="n">nMask</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aChanged</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">nMask</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nMask</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Changed bit positions: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aChanged</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aChanged</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ListChangedBits&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Changed bit positions: {3}
+<div class="language-text highlight"><pre><span></span><code>Changed bit positions: {3}
 </code></pre></div>
 <h3 id="encode-and-restore-a-value-with-the-same-key">Encode and restore a value with the same key<a class="headerlink" href="#encode-and-restore-a-value-with-the-same-key" title="Permanent link">&para;</a></h3>
 <p>XOR is reversible: applying the same key twice restores the original value.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">EncodeAndRestore</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSample</span><span class="p">,</span><span class="w"> </span><span class="n">nKey</span><span class="p">,</span><span class="w"> </span><span class="n">nEncoded</span><span class="p">,</span><span class="w"> </span><span class="n">nDecoded</span><span class="p">;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">nSample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">123</span><span class="p">;</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="n">nKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">87</span><span class="p">;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="n">nEncoded</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsXOr</span><span class="p">(</span><span class="n">nSample</span><span class="p">,</span><span class="w"> </span><span class="n">nKey</span><span class="p">);</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="n">nDecoded</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsXOr</span><span class="p">(</span><span class="n">nEncoded</span><span class="p">,</span><span class="w"> </span><span class="n">nKey</span><span class="p">);</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Original: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSample</span><span class="p">));</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Encoded: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nEncoded</span><span class="p">));</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Decoded: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDecoded</span><span class="p">));</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nDecoded</span><span class="p">;</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;EncodeAndRestore&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">EncodeAndRestore</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSample</span><span class="p">,</span><span class="w"> </span><span class="n">nKey</span><span class="p">,</span><span class="w"> </span><span class="n">nEncoded</span><span class="p">,</span><span class="w"> </span><span class="n">nDecoded</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nSample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">123</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">87</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">nEncoded</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsXOr</span><span class="p">(</span><span class="n">nSample</span><span class="p">,</span><span class="w"> </span><span class="n">nKey</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nDecoded</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsXOr</span><span class="p">(</span><span class="n">nEncoded</span><span class="p">,</span><span class="w"> </span><span class="n">nKey</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Original: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSample</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Encoded: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nEncoded</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Decoded: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDecoded</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nDecoded</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;EncodeAndRestore&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Original: 123
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>Encoded: 44
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Decoded: 123
+<div class="language-text highlight"><pre><span></span><code>Original: 123
+Encoded: 44
+Decoded: 123
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

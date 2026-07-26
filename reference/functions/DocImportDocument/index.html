@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -4109,14 +4109,14 @@
 <li>When you want to check import failures with <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> and <a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a>.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">DocImportDocument</span><span class="p">(</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">sDocFile</span><span class="p">,</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">sDestinationPath</span><span class="p">,</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">[</span><span class="n">sDocName</span><span class="p">],</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="p">[</span><span class="n">sDocType</span><span class="p">],</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="p">[</span><span class="n">sAppCode</span><span class="p">],</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="p">[</span><span class="n">sAclName</span><span class="p">]</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">)</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocImportDocument</span><span class="p">(</span>
+<span class="w">    </span><span class="n">sDocFile</span><span class="p">,</span>
+<span class="w">    </span><span class="n">sDestinationPath</span><span class="p">,</span>
+<span class="w">    </span><span class="p">[</span><span class="n">sDocName</span><span class="p">],</span>
+<span class="w">    </span><span class="p">[</span><span class="n">sDocType</span><span class="p">],</span>
+<span class="w">    </span><span class="p">[</span><span class="n">sAppCode</span><span class="p">],</span>
+<span class="w">    </span><span class="p">[</span><span class="n">sAclName</span><span class="p">]</span>
+<span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4222,158 +4222,158 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="import-with-only-the-required-arguments">Import with only the required arguments<a class="headerlink" href="#import-with-only-the-required-arguments" title="Permanent link">&para;</a></h3>
 <p>Imports a single file using only the two required arguments, then checks <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> to detect a failed import, using <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> to ensure the Documentum interface is always cleaned up.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportDocumentBasic</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocFile</span><span class="p">,</span><span class="w"> </span><span class="n">sDestinationPath</span><span class="p">,</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">sDocFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\\Docs\\Result.pdf&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">sDestinationPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/Standard/Reports/2026&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">&quot;Repository1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;analyst&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">);</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">        </span><span class="n">sImportResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocImportDocument</span><span class="p">(</span><span class="n">sDocFile</span><span class="p">,</span><span class="w"> </span><span class="n">sDestinationPath</span><span class="p">);</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Import failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Import completed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">);</span>
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">;</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
-<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
-<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
-<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
-<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ImportDocumentBasic&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportDocumentBasic</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocFile</span><span class="p">,</span><span class="w"> </span><span class="n">sDestinationPath</span><span class="p">,</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sDocFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\\Docs\\Result.pdf&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDestinationPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/Standard/Reports/2026&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">&quot;Repository1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;analyst&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">sImportResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocImportDocument</span><span class="p">(</span><span class="n">sDocFile</span><span class="p">,</span><span class="w"> </span><span class="n">sDestinationPath</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Import failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Import completed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
+<span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ImportDocumentBasic&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="import-with-metadata-and-acl">Import with metadata and ACL<a class="headerlink" href="#import-with-metadata-and-acl" title="Permanent link">&para;</a></h3>
 <p>Imports a typed document with all six metadata fields, showing how to supply name, type, application code, and ACL alongside the required source and destination paths.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportTypedDocument</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocFile</span><span class="p">,</span><span class="w"> </span><span class="n">sDestinationPath</span><span class="p">,</span><span class="w"> </span><span class="n">sDocName</span><span class="p">,</span><span class="w"> </span><span class="n">sDocType</span><span class="p">;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAppCode</span><span class="p">,</span><span class="w"> </span><span class="n">sAclName</span><span class="p">,</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">sDocFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\\Docs\\BatchRelease.pdf&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="n">sDestinationPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/Quality/BatchRelease/2026&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="n">sDocName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BatchRelease-2026-04-18&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="n">sDocType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BatchRelease&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="n">sAppCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;QC&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="n">sAclName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;QC_REVIEWERS&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">&quot;Repository1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;analyst&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">);</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">        </span><span class="n">sImportResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocImportDocument</span><span class="p">(</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">            </span><span class="n">sDocFile</span><span class="p">,</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">            </span><span class="n">sDestinationPath</span><span class="p">,</span>
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">            </span><span class="n">sDocName</span><span class="p">,</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">            </span><span class="n">sDocType</span><span class="p">,</span>
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">            </span><span class="n">sAppCode</span><span class="p">,</span>
-<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">            </span><span class="n">sAclName</span>
-<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">        </span><span class="p">);</span>
-<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>
-<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Import failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
-<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>
-<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Typed import completed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">);</span>
-<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">;</span>
-<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
-<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
-<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
-<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>
-<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ImportTypedDocument&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportTypedDocument</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocFile</span><span class="p">,</span><span class="w"> </span><span class="n">sDestinationPath</span><span class="p">,</span><span class="w"> </span><span class="n">sDocName</span><span class="p">,</span><span class="w"> </span><span class="n">sDocType</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAppCode</span><span class="p">,</span><span class="w"> </span><span class="n">sAclName</span><span class="p">,</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sDocFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\\Docs\\BatchRelease.pdf&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDestinationPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/Quality/BatchRelease/2026&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDocName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BatchRelease-2026-04-18&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDocType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BatchRelease&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sAppCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;QC&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sAclName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;QC_REVIEWERS&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">&quot;Repository1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;analyst&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">sImportResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocImportDocument</span><span class="p">(</span>
+<span class="w">            </span><span class="n">sDocFile</span><span class="p">,</span>
+<span class="w">            </span><span class="n">sDestinationPath</span><span class="p">,</span>
+<span class="w">            </span><span class="n">sDocName</span><span class="p">,</span>
+<span class="w">            </span><span class="n">sDocType</span><span class="p">,</span>
+<span class="w">            </span><span class="n">sAppCode</span><span class="p">,</span>
+<span class="w">            </span><span class="n">sAclName</span>
+<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Import failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Typed import completed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
+<span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ImportTypedDocument&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="import-several-files-and-capture-per-file-failures">Import several files and capture per-file failures<a class="headerlink" href="#import-several-files-and-capture-per-file-failures" title="Permanent link">&para;</a></h3>
 <p>Iterates a list of three documents and imports each one, collecting per-file failure messages using <a href="../AAdd/"><code>AAdd</code></a> and reporting any failures after the loop completes.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportDocumentBatch</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aImports</span><span class="p">,</span><span class="w"> </span><span class="n">aFailures</span><span class="p">,</span><span class="w"> </span><span class="n">aRow</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">aImports</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">            </span><span class="s2">&quot;C:\\Docs\\COA-001.pdf&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">            </span><span class="s2">&quot;/Quality/COA/2026&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">            </span><span class="s2">&quot;COA-001&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">            </span><span class="s2">&quot;COA&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">            </span><span class="s2">&quot;QC&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">            </span><span class="s2">&quot;QC_REVIEWERS&quot;</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="p">},</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">            </span><span class="s2">&quot;C:\\Docs\\COA-002.pdf&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">            </span><span class="s2">&quot;/Quality/COA/2026&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">            </span><span class="s2">&quot;COA-002&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">            </span><span class="s2">&quot;COA&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">            </span><span class="s2">&quot;QC&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">            </span><span class="s2">&quot;QC_REVIEWERS&quot;</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">        </span><span class="p">},</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">            </span><span class="s2">&quot;C:\\Docs\\COA-003.pdf&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">            </span><span class="s2">&quot;/Quality/COA/2026&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">            </span><span class="s2">&quot;COA-003&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">            </span><span class="s2">&quot;COA&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">            </span><span class="s2">&quot;QC&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">            </span><span class="s2">&quot;QC_REVIEWERS&quot;</span>
-<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">        </span><span class="p">}</span>
-<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">    </span><span class="p">};</span>
-<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">    </span><span class="n">aFailures</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
-<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>
-<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
-<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>
-<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">&quot;Repository1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;analyst&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
-<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="p">{};</span>
-<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>
-<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="w">        </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aImports</span><span class="p">);</span>
-<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a><span class="w">            </span><span class="n">aRow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aImports</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
-<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>
-<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a><span class="w">            </span><span class="n">sImportResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocImportDocument</span><span class="p">(</span>
-<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="w">                </span><span class="n">aRow</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a><span class="w">                </span><span class="n">aRow</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
-<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a><span class="w">                </span><span class="n">aRow</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
-<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="w">                </span><span class="n">aRow</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
-<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a><span class="w">                </span><span class="n">aRow</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
-<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a><span class="w">                </span><span class="n">aRow</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
-<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="w">            </span><span class="p">);</span>
-<a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a>
-<a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a><span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a><span class="w">                </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aRow</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
-<a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a><span class="w">                </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aFailures</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">);</span>
-<a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a><span class="w">            </span><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a><span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Imported &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aRow</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">);</span>
-<a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a><span class="w">                </span><span class="c1">/* Displays per success: Imported file path and result;</span>
-<a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a><span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a><span class="w">        </span><span class="k">:NEXT</span><span class="p">;</span>
-<a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a>
-<a id="__codelineno-3-63" name="__codelineno-3-63" href="#__codelineno-3-63"></a><span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFailures</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-3-64" name="__codelineno-3-64" href="#__codelineno-3-64"></a><span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;One or more imports failed&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-65" name="__codelineno-3-65" href="#__codelineno-3-65"></a><span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-66" name="__codelineno-3-66" href="#__codelineno-3-66"></a>
-<a id="__codelineno-3-67" name="__codelineno-3-67" href="#__codelineno-3-67"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aFailures</span><span class="p">;</span>
-<a id="__codelineno-3-68" name="__codelineno-3-68" href="#__codelineno-3-68"></a><span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
-<a id="__codelineno-3-69" name="__codelineno-3-69" href="#__codelineno-3-69"></a><span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
-<a id="__codelineno-3-70" name="__codelineno-3-70" href="#__codelineno-3-70"></a><span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
-<a id="__codelineno-3-71" name="__codelineno-3-71" href="#__codelineno-3-71"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-72" name="__codelineno-3-72" href="#__codelineno-3-72"></a>
-<a id="__codelineno-3-73" name="__codelineno-3-73" href="#__codelineno-3-73"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-3-74" name="__codelineno-3-74" href="#__codelineno-3-74"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ImportDocumentBatch&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportDocumentBatch</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aImports</span><span class="p">,</span><span class="w"> </span><span class="n">aFailures</span><span class="p">,</span><span class="w"> </span><span class="n">aRow</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aImports</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;C:\\Docs\\COA-001.pdf&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;/Quality/COA/2026&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;COA-001&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;COA&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;QC&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;QC_REVIEWERS&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;C:\\Docs\\COA-002.pdf&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;/Quality/COA/2026&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;COA-002&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;COA&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;QC&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;QC_REVIEWERS&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;C:\\Docs\\COA-003.pdf&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;/Quality/COA/2026&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;COA-003&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;COA&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;QC&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;QC_REVIEWERS&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">aFailures</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
+
+<span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">&quot;Repository1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;analyst&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aImports</span><span class="p">);</span>
+<span class="w">            </span><span class="n">aRow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aImports</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
+
+<span class="w">            </span><span class="n">sImportResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocImportDocument</span><span class="p">(</span>
+<span class="w">                </span><span class="n">aRow</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+<span class="w">                </span><span class="n">aRow</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+<span class="w">                </span><span class="n">aRow</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+<span class="w">                </span><span class="n">aRow</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+<span class="w">                </span><span class="n">aRow</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span>
+<span class="w">                </span><span class="n">aRow</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+<span class="w">            </span><span class="p">);</span>
+
+<span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
+<span class="w">                </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aRow</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
+<span class="w">                </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aFailures</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">);</span>
+<span class="w">            </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Imported &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aRow</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">);</span>
+<span class="w">                </span><span class="c1">/* Displays per success: Imported file path and result;</span>
+<span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:NEXT</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFailures</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;One or more imports failed&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aFailures</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
+<span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ImportDocumentBatch&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

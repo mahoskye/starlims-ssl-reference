@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -2894,7 +2894,7 @@
 <li>When you want to introduce a new variable at the point where a later block of logic starts using it.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">:DECLARE</span><span class="w"> </span><span class="n">variable1</span><span class="p">[,</span><span class="w"> </span><span class="n">variable2</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">];</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">variable1</span><span class="p">[,</span><span class="w"> </span><span class="n">variable2</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">];</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -2943,84 +2943,84 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="defining-local-variables-at-procedure-start">Defining local variables at procedure start<a class="headerlink" href="#defining-local-variables-at-procedure-start" title="Permanent link">&para;</a></h3>
 <p>Declare all working variables before the procedure uses them. With the hardcoded values, the output shows <code>nResult</code> converted to a string via <a href="../../functions/LimsString/"><code>LimsString</code></a> and concatenated into the message.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">InitializeSampleRecord</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleName</span><span class="p">,</span><span class="w"> </span><span class="n">nResult</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">sSampleName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Calcium Carbonate Test&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="n">nResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">98.6</span><span class="p">;</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; - &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleName</span><span class="p">;</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; registered with result &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nResult</span><span class="p">);</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;InitializeSampleRecord&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">InitializeSampleRecord</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleName</span><span class="p">,</span><span class="w"> </span><span class="n">nResult</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSampleName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Calcium Carbonate Test&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">98.6</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; - &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleName</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; registered with result &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nResult</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;InitializeSampleRecord&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Sample LAB-2024-0042 - Calcium Carbonate Test registered with result 98.6
+<div class="language-text highlight"><pre><span></span><code>Sample LAB-2024-0042 - Calcium Carbonate Test registered with result 98.6
 </code></pre></div>
 <h3 id="declaring-a-variable-where-a-new-logic-block-starts">Declaring a variable where a new logic block starts<a class="headerlink" href="#declaring-a-variable-where-a-new-logic-block-starts" title="Permanent link">&para;</a></h3>
 <p><code>:DECLARE</code> can appear later in the statement flow when a new working variable becomes needed. Here <code>sAuditText</code> is only declared inside the <a href="../IF/"><code>:IF</code></a> block where it is used, keeping it scoped to its purpose.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DescribeSampleStatus</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">bIncludeAudit</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">bIncludeAudit</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is ready for review&quot;</span><span class="p">;</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIncludeAudit</span><span class="p">;</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAuditText</span><span class="p">;</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="n">sAuditText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Checked by &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MYUSERNAME</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="nf">Today</span><span class="p">());</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; (&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sAuditText</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;)&quot;</span><span class="p">;</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DescribeSampleStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LAB-001&quot;</span><span class="p">});</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DescribeSampleStatus</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">bIncludeAudit</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">bIncludeAudit</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is ready for review&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIncludeAudit</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAuditText</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">sAuditText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Checked by &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MYUSERNAME</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="nf">Today</span><span class="p">());</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; (&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sAuditText</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;)&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DescribeSampleStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LAB-001&quot;</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="declaring-class-fields">Declaring class fields<a class="headerlink" href="#declaring-class-fields" title="Permanent link">&para;</a></h3>
 <p>Use <code>:DECLARE</code> in a class body to define fields shared by all class methods. The fields declared at the class level are readable and writable from every method, but a method must qualify each reference with <a href="../../special-forms/me/"><code>Me:fieldName</code></a> (or <a href="../../special-forms/base/"><code>Base:fieldName</code></a> for an inherited parent field). A bare identifier inside the method body always refers to a local variable or <a href="../PARAMETERS/"><code>:PARAMETERS</code></a> entry, never to the class field of the same name.</p>
 <p>Class definition:</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">:CLASS</span><span class="w"> </span><span class="n">SampleContext</span><span class="p">;</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">nResultCount</span><span class="p">;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SetSample</span><span class="p">;</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sID</span><span class="p">;</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sID</span><span class="p">;</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AddResult</span><span class="p">;</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">nResultCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="bp">Constructor</span><span class="p">;</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">nResultCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="k">:ENDPROC</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">SampleContext</span><span class="p">;</span>
+
+<span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">nResultCount</span><span class="p">;</span>
+
+<span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SetSample</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sID</span><span class="p">;</span>
+
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sID</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AddResult</span><span class="p">;</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">nResultCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="k">:PROCEDURE</span><span class="w"> </span><span class="bp">Constructor</span><span class="p">;</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">nResultCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Usage:</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oContext</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">oContext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">&quot;SampleContext&quot;</span><span class="p">);</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">oContext</span><span class="p">:</span><span class="nf">SetSample</span><span class="p">(</span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">);</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">oContext</span><span class="p">:</span><span class="nf">AddResult</span><span class="p">();</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Tracked sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oContext</span><span class="p">:</span><span class="n">sSampleID</span><span class="p">;</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; with &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oContext</span><span class="p">:</span><span class="n">nResultCount</span><span class="p">);</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; result&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oContext</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="n">oContext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">&quot;SampleContext&quot;</span><span class="p">);</span>
+<span class="n">oContext</span><span class="p">:</span><span class="nf">SetSample</span><span class="p">(</span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">);</span>
+<span class="n">oContext</span><span class="p">:</span><span class="nf">AddResult</span><span class="p">();</span>
+
+<span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Tracked sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oContext</span><span class="p">:</span><span class="n">sSampleID</span><span class="p">;</span>
+<span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; with &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oContext</span><span class="p">:</span><span class="n">nResultCount</span><span class="p">);</span>
+<span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; result&quot;</span><span class="p">;</span>
+<span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Tracked sample LAB-2024-0042 with 1 result
+<div class="language-text highlight"><pre><span></span><code>Tracked sample LAB-2024-0042 with 1 result
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

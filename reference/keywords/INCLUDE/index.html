@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -2896,9 +2896,9 @@
 <li>When a script depends on shared top-level SSL code that should compile as part of the current script.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">:INCLUDE</span><span class="w"> </span><span class="n">scriptName</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:INCLUDE</span><span class="w"> </span><span class="n">scriptName</span><span class="p">;</span>
 </code></pre></div>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:INCLUDE</span><span class="w"> </span><span class="n">category</span><span class="err">.</span><span class="n">scriptName</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:INCLUDE</span><span class="w"> </span><span class="n">category</span><span class="err">.</span><span class="n">scriptName</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -2948,45 +2948,45 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="include-shared-declarations-before-script-logic">Include shared declarations before script logic<a class="headerlink" href="#include-shared-declarations-before-script-logic" title="Permanent link">&para;</a></h3>
 <p>Brings common declarations into a script before using them. <code>gcDefaultSampleId</code> is declared in the included <code>Common.SampleGlobals</code> script and is available to statements after the include.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">:INCLUDE</span><span class="w"> </span><span class="n">Common</span><span class="err">.</span><span class="n">SampleGlobals</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">gcDefaultSampleId</span><span class="p">;</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Processing sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:INCLUDE</span><span class="w"> </span><span class="n">Common</span><span class="err">.</span><span class="n">SampleGlobals</span><span class="p">;</span>
+
+<span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">;</span>
+
+<span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">gcDefaultSampleId</span><span class="p">;</span>
+
+<span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Processing sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Processing sample &lt;gcDefaultSampleId&gt;
+<div class="language-text highlight"><pre><span></span><code>Processing sample &lt;gcDefaultSampleId&gt;
 </code></pre></div>
 <h3 id="include-shared-helper-procedures-and-call-them">Include shared helper procedures and call them<a class="headerlink" href="#include-shared-helper-procedures-and-call-them" title="Permanent link">&para;</a></h3>
 <p>Includes helper procedures from another script, then calls them with <a href="../../functions/DoProc/"><code>DoProc</code></a> from the current script. <code>GetOrderStatus</code> and <code>MarkOrderComplete</code> are both defined in the included <code>Common.OrderHelpers</code> script.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">:INCLUDE</span><span class="w"> </span><span class="n">Common</span><span class="err">.</span><span class="n">OrderHelpers</span><span class="p">;</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOrderId</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">sOrderId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ORDER-001&quot;</span><span class="p">;</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetOrderStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sOrderId</span><span class="p">});</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="k">:IF</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Pending&quot;</span><span class="p">;</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;MarkOrderComplete&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sOrderId</span><span class="p">});</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="k">:ENDIF</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:INCLUDE</span><span class="w"> </span><span class="n">Common</span><span class="err">.</span><span class="n">OrderHelpers</span><span class="p">;</span>
+
+<span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOrderId</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
+
+<span class="n">sOrderId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ORDER-001&quot;</span><span class="p">;</span>
+<span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetOrderStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sOrderId</span><span class="p">});</span>
+
+<span class="k">:IF</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Pending&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;MarkOrderComplete&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sOrderId</span><span class="p">});</span>
+<span class="k">:ENDIF</span><span class="p">;</span>
 </code></pre></div>
 <h3 id="share-reusable-setup-across-multiple-procedures">Share reusable setup across multiple procedures<a class="headerlink" href="#share-reusable-setup-across-multiple-procedures" title="Permanent link">&para;</a></h3>
 <p>Uses a single include to make batch utilities available across related batch-processing steps in the same script. The helpers come from the included <code>Common.BatchUtilities</code> script.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">:INCLUDE</span><span class="w"> </span><span class="n">Common</span><span class="err">.</span><span class="n">BatchUtilities</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">,</span><span class="w"> </span><span class="n">aSamples</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">sBatchId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BATCH-001&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">aSamples</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LoadBatchSamples&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sBatchId</span><span class="p">});</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateBatchSamples&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">aSamples</span><span class="p">});</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildBatchAuditMessage&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sBatchId</span><span class="p">});</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:INCLUDE</span><span class="w"> </span><span class="n">Common</span><span class="err">.</span><span class="n">BatchUtilities</span><span class="p">;</span>
+
+<span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">,</span><span class="w"> </span><span class="n">aSamples</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="n">sBatchId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BATCH-001&quot;</span><span class="p">;</span>
+<span class="n">aSamples</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LoadBatchSamples&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sBatchId</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateBatchSamples&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">aSamples</span><span class="p">});</span>
+
+<span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildBatchAuditMessage&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sBatchId</span><span class="p">});</span>
+<span class="nf">InfoMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/InfoMes/"><code>InfoMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&lt;batch audit message&gt;
+<div class="language-text highlight"><pre><span></span><code>&lt;batch audit message&gt;
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

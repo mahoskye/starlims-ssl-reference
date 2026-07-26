@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -3275,52 +3275,52 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="compile-one-server-script">Compile one server script<a class="headerlink" href="#compile-one-server-script" title="Permanent link">&para;</a></h3>
 <p>Compiles a specific server script by full name and returns the error list to the caller for inspection.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateOneScript</span><span class="p">;</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oProvider</span><span class="p">,</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">oProvider</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLCodeProvider</span><span class="p">{};</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">oErrors</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oProvider</span><span class="p">:</span><span class="nf">CompileServerScript</span><span class="p">(</span><span class="s2">&quot;QC.ReleaseSample&quot;</span><span class="p">);</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="k">:ENDPROC</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateOneScript</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oProvider</span><span class="p">,</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">oProvider</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLCodeProvider</span><span class="p">{};</span>
+<span class="w">    </span><span class="n">oErrors</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oProvider</span><span class="p">:</span><span class="nf">CompileServerScript</span><span class="p">(</span><span class="s2">&quot;QC.ReleaseSample&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Call it with <code>DoProc("ValidateOneScript")</code>.</p>
 <h3 id="compile-one-category-of-data-sources">Compile one category of data sources<a class="headerlink" href="#compile-one-category-of-data-sources" title="Permanent link">&para;</a></h3>
 <p>Compiles all data sources in a known category by its GUID and returns the combined error list to the caller.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateDataSourceCategory</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oProvider</span><span class="p">,</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">oProvider</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLCodeProvider</span><span class="p">{};</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">oErrors</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oProvider</span><span class="p">:</span><span class="nf">CompileDataSourceCategory</span><span class="p">(</span><span class="s2">&quot;7D7E2CC8-0CC9-4F32-9D31-54C51A7E7C40&quot;</span><span class="p">);</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="k">:ENDPROC</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateDataSourceCategory</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oProvider</span><span class="p">,</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">oProvider</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLCodeProvider</span><span class="p">{};</span>
+<span class="w">    </span><span class="n">oErrors</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oProvider</span><span class="p">:</span><span class="nf">CompileDataSourceCategory</span><span class="p">(</span><span class="s2">&quot;7D7E2CC8-0CC9-4F32-9D31-54C51A7E7C40&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Call it with <code>DoProc("ValidateDataSourceCategory")</code>.</p>
 <h3 id="compile-all-server-scripts-and-data-sources">Compile all server scripts and data sources<a class="headerlink" href="#compile-all-server-scripts-and-data-sources" title="Permanent link">&para;</a></h3>
 <p>Runs a full validation pass across all published scripts and data sources. Useful as a pre-deployment check.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateAllPublishedCode</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oProvider</span><span class="p">,</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">oProvider</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLCodeProvider</span><span class="p">{};</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">oErrors</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oProvider</span><span class="p">:</span><span class="nf">CompileAll</span><span class="p">();</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="k">:ENDPROC</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateAllPublishedCode</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oProvider</span><span class="p">,</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">oProvider</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLCodeProvider</span><span class="p">{};</span>
+<span class="w">    </span><span class="n">oErrors</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oProvider</span><span class="p">:</span><span class="nf">CompileAll</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Call it with <code>DoProc("ValidateAllPublishedCode")</code>.</p>
 <h3 id="compile-a-selected-list-of-changed-scripts">Compile a selected list of changed scripts<a class="headerlink" href="#compile-a-selected-list-of-changed-scripts" title="Permanent link">&para;</a></h3>
 <p>Compiles a targeted list of changed scripts in one pass rather than recompiling everything.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateChangedScripts</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oProvider</span><span class="p">,</span><span class="w"> </span><span class="n">oErrors</span><span class="p">,</span><span class="w"> </span><span class="n">aScriptIds</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">aScriptIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;QC.ReleaseSample&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;QC.ApproveBatch&quot;</span><span class="p">};</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">oProvider</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLCodeProvider</span><span class="p">{};</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="n">oErrors</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oProvider</span><span class="p">:</span><span class="nf">CompileServerScripts</span><span class="p">(</span><span class="n">aScriptIds</span><span class="p">);</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="k">:ENDPROC</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateChangedScripts</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oProvider</span><span class="p">,</span><span class="w"> </span><span class="n">oErrors</span><span class="p">,</span><span class="w"> </span><span class="n">aScriptIds</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aScriptIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;QC.ReleaseSample&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;QC.ApproveBatch&quot;</span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">oProvider</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLCodeProvider</span><span class="p">{};</span>
+<span class="w">    </span><span class="n">oErrors</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oProvider</span><span class="p">:</span><span class="nf">CompileServerScripts</span><span class="p">(</span><span class="n">aScriptIds</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Call it with <code>DoProc("ValidateChangedScripts")</code>.</p>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>

@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -4363,7 +4363,7 @@
 <li>When you want to change only specific columns instead of every value in a row.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">MakeDateLocal</span><span class="p">(</span><span class="n">vDate</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">vColumnsIndex</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">MakeDateLocal</span><span class="p">(</span><span class="n">vDate</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">vColumnsIndex</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4454,81 +4454,81 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="change-a-single-date-to-local-kind">Change a single date to local kind<a class="headerlink" href="#change-a-single-date-to-local-kind" title="Permanent link">&para;</a></h3>
 <p>Mark a date invariant, then switch it back to local with <code>MakeDateLocal</code>. Both <a href="../UsrMes/"><code>UsrMes</code></a> calls fire because the two <a href="../../keywords/IF/"><code>:IF</code></a> conditions are independent.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoteDateToLocal</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dRunDate</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">dRunDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/15/2024&quot;</span><span class="p">);</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nf">MakeDateInvariant</span><span class="p">(</span><span class="n">dRunDate</span><span class="p">);</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">IsInvariantDate</span><span class="p">(</span><span class="n">dRunDate</span><span class="p">);</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;The date starts as invariant.&quot;</span><span class="p">);</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="nf">MakeDateLocal</span><span class="p">(</span><span class="n">dRunDate</span><span class="p">);</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">IsInvariantDate</span><span class="p">(</span><span class="n">dRunDate</span><span class="p">);</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;The same date value is now marked as local.&quot;</span><span class="p">);</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DemoteDateToLocal&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoteDateToLocal</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dRunDate</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">dRunDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/15/2024&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">MakeDateInvariant</span><span class="p">(</span><span class="n">dRunDate</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">IsInvariantDate</span><span class="p">(</span><span class="n">dRunDate</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;The date starts as invariant.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">MakeDateLocal</span><span class="p">(</span><span class="n">dRunDate</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">IsInvariantDate</span><span class="p">(</span><span class="n">dRunDate</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;The same date value is now marked as local.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DemoteDateToLocal&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>The date starts as invariant.
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>The same date value is now marked as local.
+<div class="language-text highlight"><pre><span></span><code>The date starts as invariant.
+The same date value is now marked as local.
 </code></pre></div>
 <h3 id="update-selected-date-columns-in-a-row-array">Update selected date columns in a row array<a class="headerlink" href="#update-selected-date-columns-in-a-row-array" title="Permanent link">&para;</a></h3>
 <p>Mark columns 2 and 3 as invariant, then immediately switch them back to local using the same column index array.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LocalizeOrderDates</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aDateCols</span><span class="p">;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="p">{</span><span class="s2">&quot;ORD-101&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/01/2024&quot;</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/03/2024&quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;Pending&quot;</span><span class="p">},</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="p">{</span><span class="s2">&quot;ORD-102&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/05/2024&quot;</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/08/2024&quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;Released&quot;</span><span class="p">}</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="p">};</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="n">aDateCols</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">};</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="nf">MakeDateInvariant</span><span class="p">(</span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aDateCols</span><span class="p">);</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="nf">MakeDateLocal</span><span class="p">(</span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aDateCols</span><span class="p">);</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Selected date columns were updated in place.&quot;</span><span class="p">);</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aRows</span><span class="p">;</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LocalizeOrderDates&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LocalizeOrderDates</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aDateCols</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">&quot;ORD-101&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/01/2024&quot;</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/03/2024&quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;Pending&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">&quot;ORD-102&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/05/2024&quot;</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/08/2024&quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;Released&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">aDateCols</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">};</span>
+
+<span class="w">    </span><span class="nf">MakeDateInvariant</span><span class="p">(</span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aDateCols</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">MakeDateLocal</span><span class="p">(</span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aDateCols</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Selected date columns were updated in place.&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aRows</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LocalizeOrderDates&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Selected date columns were updated in place.
+<div class="language-text highlight"><pre><span></span><code>Selected date columns were updated in place.
 </code></pre></div>
 <h3 id="handle-a-non-date-value-in-a-targeted-column">Handle a non-date value in a targeted column<a class="headerlink" href="#handle-a-non-date-value-in-a-targeted-column" title="Permanent link">&para;</a></h3>
 <p>Target column 2 which holds a status string rather than a date. <code>MakeDateLocal</code> raises an error that is caught and displayed.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">TryLocalizeInvalidColumn</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">nBadCol</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">        </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/01/2024&quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;Pending&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">},</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">        </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/02/2024&quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;Released&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">}</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="p">};</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="n">nBadCol</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">        </span><span class="nf">MakeDateLocal</span><span class="p">(</span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">nBadCol</span><span class="p">);</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
-<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;TryLocalizeInvalidColumn&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">TryLocalizeInvalidColumn</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">nBadCol</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/01/2024&quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;Pending&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/02/2024&quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;Released&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">}</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">nBadCol</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">MakeDateLocal</span><span class="p">(</span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">nBadCol</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;TryLocalizeInvalidColumn&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../ErrorMes/"><code>ErrorMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Column: 2 doesn&#39;t contain date values.
+<div class="language-text highlight"><pre><span></span><code>Column: 2 doesn&#39;t contain date values.
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

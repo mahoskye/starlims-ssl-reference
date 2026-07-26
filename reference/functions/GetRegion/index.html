@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -3410,7 +3410,7 @@
 <li>When the same region text needs lightweight token replacement before display or reuse.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">GetRegion</span><span class="p">(</span><span class="n">sRegionName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">aSourceValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aDestinationValues</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetRegion</span><span class="p">(</span><span class="n">sRegionName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">aSourceValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aDestinationValues</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3506,53 +3506,53 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="look-up-a-region-with-error-handling">Look up a region with error handling<a class="headerlink" href="#look-up-a-region-with-error-handling" title="Permanent link">&para;</a></h3>
 <p>Wraps the lookup in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle the case where the region is not in scope, displaying the content if found or the error description if the region does not exist.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowBanner</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBanner</span><span class="p">;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="n">sBanner</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="s2">&quot;WelcomeBanner&quot;</span><span class="p">);</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">        </span><span class="c1">/* Displays the stored region text;</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sBanner</span><span class="p">);</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="c1">/* Displays the missing-region error text;</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="nf">GetLastSSLError</span><span class="p">():</span><span class="n">Description</span><span class="p">);</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sBanner</span><span class="p">;</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowBanner&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowBanner</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBanner</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sBanner</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="s2">&quot;WelcomeBanner&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">/* Displays the stored region text;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sBanner</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">/* Displays the missing-region error text;</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="nf">GetLastSSLError</span><span class="p">():</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sBanner</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowBanner&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="replace-placeholders-in-region-text">Replace placeholders in region text<a class="headerlink" href="#replace-placeholders-in-region-text" title="Permanent link">&para;</a></h3>
 <p>Reads a template region that contains <code>{USER}</code> and <code>{DATE}</code> placeholders and replaces both with runtime values in a single call, showing how parallel source and destination arrays drive the substitution.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildWelcomeMessage</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSrc</span><span class="p">,</span><span class="w"> </span><span class="n">aDst</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">aSrc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;{USER}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;{DATE}&quot;</span><span class="p">};</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">aDst</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="n">MYUSERNAME</span><span class="p">,</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="nf">Today</span><span class="p">())};</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="s2">&quot;WelcomeTemplate&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">aSrc</span><span class="p">,</span><span class="w"> </span><span class="n">aDst</span><span class="p">);</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildWelcomeMessage&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildWelcomeMessage</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSrc</span><span class="p">,</span><span class="w"> </span><span class="n">aDst</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aSrc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;{USER}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;{DATE}&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aDst</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="n">MYUSERNAME</span><span class="p">,</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="nf">Today</span><span class="p">())};</span>
+
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="s2">&quot;WelcomeTemplate&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">aSrc</span><span class="p">,</span><span class="w"> </span><span class="n">aDst</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildWelcomeMessage&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="fill-a-json-template-region">Fill a JSON template region<a class="headerlink" href="#fill-a-json-template-region" title="Permanent link">&para;</a></h3>
 <p>Region bodies are raw text, so they can hold JSON, SQL, or any other template. <code>$Name$</code>-style tokens are a common placeholder convention; the source and destination arrays drive the substitution.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sJson</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">sJson</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="s2">&quot;TestJSON&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;$RunID$&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;$CustomerName$&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bill Smith&quot;</span><span class="p">});</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">:REGION</span><span class="w"> </span><span class="n">TestJSON</span><span class="p">;</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">{</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="s2">&quot;run_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$RunID$&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="s2">&quot;customer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$CustomerName$&quot;</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">}</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="k">:ENDREGION</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sJson</span><span class="p">;</span>
+
+<span class="n">sJson</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="s2">&quot;TestJSON&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;$RunID$&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;$CustomerName$&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bill Smith&quot;</span><span class="p">});</span>
+
+<span class="k">:REGION</span><span class="w"> </span><span class="n">TestJSON</span><span class="p">;</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;run_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$RunID$&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;customer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$CustomerName$&quot;</span>
+<span class="p">}</span>
+<span class="k">:ENDREGION</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -3717,7 +3717,7 @@
 <li>When you need alias support such as <a href="../../types/string/"><code>string</code></a> or <code>int</code> instead of writing the full <code>System.*</code> name.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3790,48 +3790,48 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="resolve-a-built-in-alias">Resolve a built-in alias<a class="headerlink" href="#resolve-a-built-in-alias" title="Permanent link">&para;</a></h3>
 <p>Use one of the built-in aliases and inspect the resolved full name. The alias <code>"string"</code> expands to <code>System.String</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">oType</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">oType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">);</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Resolved type: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">FullName</span><span class="p">));</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">oType</span><span class="p">;</span>
+
+<span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">;</span>
+<span class="n">oType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">);</span>
+
+<span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Resolved type: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">FullName</span><span class="p">));</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Resolved type: System.String
+<div class="language-text highlight"><pre><span></span><code>Resolved type: System.String
 </code></pre></div>
 <h3 id="resolve-a-fully-qualified-type-name">Resolve a fully qualified type name<a class="headerlink" href="#resolve-a-fully-qualified-type-name" title="Permanent link">&para;</a></h3>
 <p>Use the full name when you want an exact type instead of relying on an alias. <code>"System.Text.StringBuilder"</code> resolves to a type with short name <code>StringBuilder</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">oType</span><span class="p">,</span><span class="w"> </span><span class="n">sTypeLabel</span><span class="p">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;System.Text.StringBuilder&quot;</span><span class="p">;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">oType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">);</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">sTypeLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">Name</span><span class="p">);</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Resolved type name: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeLabel</span><span class="p">);</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Full name: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">FullName</span><span class="p">));</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">oType</span><span class="p">,</span><span class="w"> </span><span class="n">sTypeLabel</span><span class="p">;</span>
+
+<span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;System.Text.StringBuilder&quot;</span><span class="p">;</span>
+<span class="n">oType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">);</span>
+<span class="n">sTypeLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">Name</span><span class="p">);</span>
+
+<span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Resolved type name: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeLabel</span><span class="p">);</span>
+<span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Full name: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">FullName</span><span class="p">));</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Resolved type name: StringBuilder
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Full name: System.Text.StringBuilder
+<div class="language-text highlight"><pre><span></span><code>Resolved type name: StringBuilder
+Full name: System.Text.StringBuilder
 </code></pre></div>
 <h3 id="validate-dynamic-input-before-lookup">Validate dynamic input before lookup<a class="headerlink" href="#validate-dynamic-input-before-lookup" title="Permanent link">&para;</a></h3>
 <p>Guard user-supplied input, then catch lookup failures so the script can report a useful message. Because <code>"CustomLib.Models.FooBar"</code> is a non-empty string but an unknown type, the <a href="../../keywords/TRY/"><code>:TRY</code></a> fires and the <a href="../../keywords/CATCH/"><code>:CATCH</code></a> branch reports the error.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">oType</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CustomLib.Models.FooBar&quot;</span><span class="p">;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">:IF</span><span class="w"> </span><span class="nf">LimsTypeEx</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">&quot;STRING&quot;</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="nf">AllTrim</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">));</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Type name must be a non-empty string.&quot;</span><span class="p">);</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="k">:ELSE</span><span class="p">;</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">        </span><span class="n">oType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">);</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Resolved type: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">FullName</span><span class="p">));</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Could not resolve type: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="k">:ENDIF</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">oType</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
+
+<span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CustomLib.Models.FooBar&quot;</span><span class="p">;</span>
+
+<span class="k">:IF</span><span class="w"> </span><span class="nf">LimsTypeEx</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">&quot;STRING&quot;</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="nf">AllTrim</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Type name must be a non-empty string.&quot;</span><span class="p">);</span>
+<span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Resolved type: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">FullName</span><span class="p">));</span>
+<span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Could not resolve type: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
+<span class="k">:ENDIF</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

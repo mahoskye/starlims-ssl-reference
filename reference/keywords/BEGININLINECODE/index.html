@@ -47,8 +47,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -2894,14 +2894,14 @@
 <li>When you need a named block whose text can be reused with different local variable substitutions.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">:BEGININLINECODE</span><span class="w"> </span><span class="n">BlockName</span><span class="p">;</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="c1">/* Inline SSL code here;</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">:ENDINLINECODE</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:BEGININLINECODE</span><span class="w"> </span><span class="n">BlockName</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">/* Inline SSL code here;</span>
+<span class="k">:ENDINLINECODE</span><span class="p">;</span>
 </code></pre></div>
 <p>You can also quote the block name:</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">:BEGININLINECODE</span><span class="w"> </span><span class="s2">&quot;BlockName&quot;</span><span class="p">;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="c1">/* Inline SSL code here;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">:ENDINLINECODE</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:BEGININLINECODE</span><span class="w"> </span><span class="s2">&quot;BlockName&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">/* Inline SSL code here;</span>
+<span class="k">:ENDINLINECODE</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -2950,96 +2950,96 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="store-and-run-a-simple-inline-block">Store and run a simple inline block<a class="headerlink" href="#store-and-run-a-simple-inline-block" title="Permanent link">&para;</a></h3>
 <p>Define a named inline block, retrieve it with <a href="../../functions/GetInlineCode/"><code>GetInlineCode</code></a>, execute it with <a href="../../functions/ExecUdf/"><code>ExecUdf</code></a>, and then remove it with <a href="../../functions/DeleteInlineCode/"><code>DeleteInlineCode</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunGreeting</span><span class="p">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="k">:BEGININLINECODE</span><span class="w"> </span><span class="n">GreetingBlock</span><span class="p">;</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;Hello from inline code&quot;</span><span class="p">;</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="k">:ENDINLINECODE</span><span class="p">;</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetInlineCode</span><span class="p">(</span><span class="s2">&quot;GreetingBlock&quot;</span><span class="p">);</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ExecUdf</span><span class="p">(</span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="nf">DeleteInlineCode</span><span class="p">(</span><span class="s2">&quot;GreetingBlock&quot;</span><span class="p">);</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunGreeting&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunGreeting</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:BEGININLINECODE</span><span class="w"> </span><span class="n">GreetingBlock</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;Hello from inline code&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDINLINECODE</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetInlineCode</span><span class="p">(</span><span class="s2">&quot;GreetingBlock&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ExecUdf</span><span class="p">(</span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">DeleteInlineCode</span><span class="p">(</span><span class="s2">&quot;GreetingBlock&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunGreeting&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Hello from inline code
+<div class="language-text highlight"><pre><span></span><code>Hello from inline code
 </code></pre></div>
 <h3 id="substitute-local-variables-before-execution">Substitute local variables before execution<a class="headerlink" href="#substitute-local-variables-before-execution" title="Permanent link">&para;</a></h3>
 <p>Pass local variable names to <a href="../../functions/GetInlineCode/"><code>GetInlineCode</code></a> so the returned code uses the current values of those variables. Here <code>sStatus</code> and <code>nCount</code> are substituted before <a href="../../functions/ExecUdf/"><code>ExecUdf</code></a> executes the tailored snippet.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildStatusMessage</span><span class="p">;</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">;</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="n">nCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="k">:BEGININLINECODE</span><span class="w"> </span><span class="n">StatusMessage</span><span class="p">;</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;Status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, Count: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCount</span><span class="p">);</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="k">:ENDINLINECODE</span><span class="p">;</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetInlineCode</span><span class="p">(</span><span class="s2">&quot;StatusMessage&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;sStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;nCount&quot;</span><span class="p">});</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ExecUdf</span><span class="p">(</span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="nf">DeleteInlineCode</span><span class="p">(</span><span class="s2">&quot;StatusMessage&quot;</span><span class="p">);</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildStatusMessage&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildStatusMessage</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:BEGININLINECODE</span><span class="w"> </span><span class="n">StatusMessage</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;Status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, Count: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCount</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ENDINLINECODE</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetInlineCode</span><span class="p">(</span><span class="s2">&quot;StatusMessage&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;sStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;nCount&quot;</span><span class="p">});</span>
+<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ExecUdf</span><span class="p">(</span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">DeleteInlineCode</span><span class="p">(</span><span class="s2">&quot;StatusMessage&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildStatusMessage&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Status: Logged, Count: 3
+<div class="language-text highlight"><pre><span></span><code>Status: Logged, Count: 3
 </code></pre></div>
 <h3 id="choose-between-multiple-named-blocks">Choose between multiple named blocks<a class="headerlink" href="#choose-between-multiple-named-blocks" title="Permanent link">&para;</a></h3>
 <p>Store more than one inline block and select which one to execute by name. With <code>sAction</code> set to <code>"LOG"</code>, the matching block is retrieved and executed.</p>
-<div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunAction</span><span class="p">;</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sAction</span><span class="p">;</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="k">:BEGININLINECODE</span><span class="w"> </span><span class="n">LogAction</span><span class="p">;</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;Action logged&quot;</span><span class="p">;</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="k">:ENDINLINECODE</span><span class="p">;</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="k">:BEGININLINECODE</span><span class="w"> </span><span class="n">RetryAction</span><span class="p">;</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;Action retried&quot;</span><span class="p">;</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="k">:ENDINLINECODE</span><span class="p">;</span>
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
-<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sAction</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;LOG&quot;</span><span class="p">;</span>
-<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">        </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetInlineCode</span><span class="p">(</span><span class="s2">&quot;LogAction&quot;</span><span class="p">);</span>
-<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sAction</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;RETRY&quot;</span><span class="p">;</span>
-<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">        </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetInlineCode</span><span class="p">(</span><span class="s2">&quot;RetryAction&quot;</span><span class="p">);</span>
-<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">        </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Unknown action&quot;</span><span class="p">;</span>
-<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
-<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>
-<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sCode</span><span class="p">);</span>
-<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="w">        </span><span class="nf">DeleteInlineCode</span><span class="p">(</span><span class="s2">&quot;LogAction&quot;</span><span class="p">);</span>
-<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="w">        </span><span class="nf">DeleteInlineCode</span><span class="p">(</span><span class="s2">&quot;RetryAction&quot;</span><span class="p">);</span>
-<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>
-<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a><span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
-<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a><span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>
-<a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a><span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ExecUdf</span><span class="p">(</span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
-<a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a>
-<a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a><span class="w">    </span><span class="nf">DeleteInlineCode</span><span class="p">(</span><span class="s2">&quot;LogAction&quot;</span><span class="p">);</span>
-<a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a><span class="w">    </span><span class="nf">DeleteInlineCode</span><span class="p">(</span><span class="s2">&quot;RetryAction&quot;</span><span class="p">);</span>
-<a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a>
-<a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a><span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
-<a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a><span class="k">:ENDPROC</span><span class="p">;</span>
-<a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a>
-<a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a><span class="c1">/* Usage;</span>
-<a id="__codelineno-6-43" name="__codelineno-6-43" href="#__codelineno-6-43"></a><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunAction&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LOG&quot;</span><span class="p">});</span>
+<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunAction</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sAction</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:BEGININLINECODE</span><span class="w"> </span><span class="n">LogAction</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;Action logged&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDINLINECODE</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:BEGININLINECODE</span><span class="w"> </span><span class="n">RetryAction</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;Action retried&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDINLINECODE</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sAction</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;LOG&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetInlineCode</span><span class="p">(</span><span class="s2">&quot;LogAction&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sAction</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;RETRY&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetInlineCode</span><span class="p">(</span><span class="s2">&quot;RetryAction&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Unknown action&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sCode</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">DeleteInlineCode</span><span class="p">(</span><span class="s2">&quot;LogAction&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">DeleteInlineCode</span><span class="p">(</span><span class="s2">&quot;RetryAction&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ExecUdf</span><span class="p">(</span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">DeleteInlineCode</span><span class="p">(</span><span class="s2">&quot;LogAction&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">DeleteInlineCode</span><span class="p">(</span><span class="s2">&quot;RetryAction&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunAction&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LOG&quot;</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
