@@ -96,8 +96,7 @@ Read a PDF file, then save the encoded content with a positional-parameter SQL u
 
 	sPdfBase64 := ReadBytesBase64(sPdfPath);
 
-	sSQL :=
-		"
+	sSQL := "
 	    UPDATE sample_table SET
 	        pdf_content_base64 = ?
 	    WHERE sample_id = ?

@@ -78,8 +78,7 @@ Run a query and write the results to a file. The empty-string return value signa
 :PROCEDURE ExportSampleResultsToXml;
     :DECLARE sSql, sFile, sResult;
 
-    sSql :=
-        "
+    sSql := "
         SELECT sample_id, sample_name, status
         FROM sample
         WHERE status = 'A'
@@ -109,8 +108,7 @@ Target a named database and wrap the call in [`:TRY`](../keywords/TRY.md) / [`:C
     :DECLARE sSql, sDb, sResult, oErr;
 
     sDb := "LIMBDATA";
-    sSql :=
-        "
+    sSql := "
         SELECT sample_id, sample_name, status, received_date
         FROM sample
         WHERE status = 'A'

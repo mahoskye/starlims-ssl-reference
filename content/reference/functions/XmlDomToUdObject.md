@@ -115,8 +115,7 @@ element.
 :PROCEDURE ReadTestResults;
 	:DECLARE sXml, oOrder, aTests, oTest, sSummary, nIndex;
 
-	sXml :=
-		"
+	sXml := "
 <order>
     <tests>
         <test code='pH'>7.1</test>

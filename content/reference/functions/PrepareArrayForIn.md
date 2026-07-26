@@ -85,8 +85,7 @@ PrepareArrayForIn(aTarget, sItemType)
 	PrepareArrayForIn(aSampleIDs, "string");
 
 	sInClause := BuildStringForIn(aSampleIDs);
-	sSQL :=
-		"
+	sSQL := "
 	    SELECT sampleid, samplename
 	    FROM sample
 	    WHERE sampleid IN
@@ -137,8 +136,7 @@ When `aOrderIDs` arrives empty, `PrepareArrayForIn` adds a numeric sentinel (`-2
 	sTemp := Replicate("?,", ALen(aOrderIDs));
 	sPlaceholders := Left(sTemp, Len(sTemp) - 1);
 
-	sSQL :=
-		"
+	sSQL := "
 	    SELECT orderid, ordno, status
 	    FROM orders
 	    WHERE orderid IN (

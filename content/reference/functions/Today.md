@@ -99,9 +99,7 @@ Capture the current date once and reuse it as a named [`SQLExecute`](SQLExecute.
 
 	dToday := Today();
 
-	sSQL :=
-
-		"
+	sSQL := "
 	    SELECT sample_id, receivedate, status
 	    FROM sample
 	    WHERE receivedate = ?dToday?
@@ -145,9 +143,7 @@ step uses the same date.
 	dReviewDate := Today();
 	sSampleID := "S-1001";
 
-	sSQL :=
-
-		"
+	sSQL := "
 	    UPDATE sample SET
 	        review_date = ?,
 	        status = ?
