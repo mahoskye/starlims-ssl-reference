@@ -1,5 +1,5 @@
 ---
-title: "not-equals-legacy"
+title: "<> (not-equals-legacy)"
 summary: "Returns .T. when two values are not equal under SSL's strict inequality rules."
 id: ssl.operator.not-equals-legacy
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# not-equals-legacy
-
+# <> (not-equals-legacy)
 ## What it does
 
 Returns [`.T.`](../literals/true.md) when two values are not equal under SSL's strict inequality rules.

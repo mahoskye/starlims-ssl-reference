@@ -1,5 +1,5 @@
 ---
-title: "greater-than"
+title: "> (greater-than)"
 summary: "Compares two values of the same supported type and returns .T. when the left operand is strictly greater than the right operand."
 id: ssl.operator.greater-than
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# greater-than
-
+# > (greater-than)
 ## What it does
 
 Compares two values of the same supported type and returns [`.T.`](../literals/true.md) when the left operand is strictly greater than the right operand.

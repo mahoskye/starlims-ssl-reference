@@ -1,5 +1,5 @@
 ---
-title: "or"
+title: ".OR. (or)"
 summary: "Combines two boolean expressions and returns .T. when either operand is .T.."
 id: ssl.operator.or
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# or
-
+# .OR. (or)
 ## What it does
 
 Combines two boolean expressions and returns [`.T.`](../literals/true.md) when either operand is [`.T.`](../literals/true.md).

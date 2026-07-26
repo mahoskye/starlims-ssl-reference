@@ -1,5 +1,5 @@
 ---
-title: "and"
+title: ".AND. (and)"
 summary: "Combines two boolean expressions and returns .T. only when both are .T.."
 id: ssl.operator.and
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# and
-
+# .AND. (and)
 ## What it does
 
 Combines two boolean expressions and returns [`.T.`](../literals/true.md) only when both are [`.T.`](../literals/true.md).

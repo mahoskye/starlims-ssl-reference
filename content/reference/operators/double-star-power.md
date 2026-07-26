@@ -1,5 +1,5 @@
 ---
-title: "double-star-power"
+title: "** (double-star-power)"
 summary: "Raises one number to the exponent of another number."
 id: ssl.operator.double-star-power
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# double-star-power
-
+# ** (double-star-power)
 ## What it does
 
 Raises one number to the exponent of another number.

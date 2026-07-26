@@ -1,5 +1,5 @@
 ---
-title: "dollar"
+title: "$ (dollar)"
 summary: "Tests whether the left string is found within the right operand as a substring."
 id: ssl.operator.dollar
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# dollar
-
+# $ (dollar)
 ## What it does
 
 Tests whether the left string is found within the right operand as a substring.

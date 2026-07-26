@@ -1,5 +1,5 @@
 ---
-title: "assignment"
+title: ":= (assignment)"
 summary: "Stores a value in a variable, object property, or array element and evaluates to the assigned value."
 id: ssl.operator.assignment
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# assignment
-
+# := (assignment)
 ## What it does
 
 Stores a value in a variable, object property, or array element and evaluates to the assigned value.

@@ -1,5 +1,5 @@
 ---
-title: "strict-equals"
+title: "== (strict-equals)"
 summary: "Returns .T. when two values are strictly equal under SSL equality rules."
 id: ssl.operator.strict-equals
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# strict-equals
-
+# == (strict-equals)
 ## What it does
 
 Returns [`.T.`](../literals/true.md) when two values are strictly equal under SSL equality rules.

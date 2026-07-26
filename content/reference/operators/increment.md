@@ -1,5 +1,5 @@
 ---
-title: "increment"
+title: "++ (increment)"
 summary: "Increases a number variable by one, modifying its value in place."
 id: ssl.operator.increment
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# increment
-
+# ++ (increment)
 ## What it does
 
 Increases a number variable by one, modifying its value in place.

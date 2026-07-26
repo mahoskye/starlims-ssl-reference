@@ -1,5 +1,5 @@
 ---
-title: "not-equals"
+title: "!= (not-equals)"
 summary: "Returns .T. when two values are not strictly equal under SSL equality rules."
 id: ssl.operator.not-equals
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# not-equals
-
+# != (not-equals)
 ## What it does
 
 Returns [`.T.`](../literals/true.md) when two values are not strictly equal under SSL equality rules.

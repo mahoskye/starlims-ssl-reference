@@ -1,5 +1,5 @@
 ---
-title: "bang"
+title: "! (bang)"
 summary: "Performs boolean negation, returning the opposite boolean value."
 id: ssl.operator.bang
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# bang
-
+# ! (bang)
 ## What it does
 
 Performs boolean negation, returning [`.T.`](../literals/true.md) for [`.F.`](../literals/false.md) and [`.F.`](../literals/false.md) for [`.T.`](../literals/true.md).

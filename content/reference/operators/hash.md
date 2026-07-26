@@ -1,5 +1,5 @@
 ---
-title: "hash"
+title: "# (hash)"
 summary: "Returns .T. when two values are not equal and .F. when they are equal."
 id: ssl.operator.hash
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# hash
-
+# # (hash)
 ## What it does
 
 Returns [`.T.`](../literals/true.md) when two values are not equal and [`.F.`](../literals/false.md) when they are equal.

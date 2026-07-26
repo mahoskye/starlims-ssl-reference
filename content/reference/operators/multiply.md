@@ -1,5 +1,5 @@
 ---
-title: "multiply"
+title: "* (multiply)"
 summary: "Multiplies one number by another number and returns the product."
 id: ssl.operator.multiply
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# multiply
-
+# * (multiply)
 ## What it does
 
 Multiplies one number by another number and returns the product.

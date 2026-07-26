@@ -1,5 +1,5 @@
 ---
-title: "minus"
+title: "- (minus)"
 summary: "Subtracts numbers, trims trailing spaces before string concatenation, or performs date arithmetic depending on operand types."
 id: ssl.operator.minus
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# minus
-
+# - (minus)
 ## What it does
 
 Subtracts numbers, trims trailing spaces before string concatenation, or performs date arithmetic depending on operand types.
