@@ -11,8 +11,16 @@
 }
 
 .md-typeset table[data-ssl-table="exceptions"] {
+  /* display/width override Material's `table:not([class])` inline-block
+     rule (equal specificity; this sheet loads later), replacing the old
+     JS inline-style workaround. */
+  display: table;
   table-layout: fixed;
   width: 100%;
+}
+
+.md-typeset .md-typeset__table:has(> table[data-ssl-table="exceptions"]) {
+  display: block;
 }
 
 .md-typeset table[data-ssl-table="exceptions"] col {

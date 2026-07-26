@@ -31,8 +31,14 @@ def on_page_markdown(markdown, page, config, files):
 
 
 def on_page_content(html, page, config, files):
-    """Mark exception tables so column widths can be styled consistently."""
-    return re.sub(
+    """Mark exception tables for styling; keep code blocks out of search.
+
+    Code examples dominated the search index (~3.3MB) while adding noise —
+    searching an identifier surfaced every example using it ahead of the
+    element's own page. ``data-search-exclude`` drops ``<pre>`` block
+    contents from the index; titles and prose remain searchable.
+    """
+    html = re.sub(
         r'(<h2 id="exceptions">.*?</h2>\s*)<table>',
         (
             r'\1<table data-ssl-table="exceptions">'
@@ -41,3 +47,4 @@ def on_page_content(html, page, config, files):
         html,
         flags=re.DOTALL,
     )
+    return html.replace("<pre>", "<pre data-search-exclude>")
