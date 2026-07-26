@@ -1,14 +1,14 @@
 ---
-title: "Returns"
+title: "Obtained Objects"
 summary: "Objects you obtain from another element — clients, requests, responses, and other return-shaped values that are not constructed directly."
 starlims:
   applies_to: [11]
   verified_against: [11]
 ---
 
-# Returns
+# Obtained Objects
 
-Some SSL objects are not constructed with `Name{}` syntax. You obtain them from another element — typically by calling a method on a class. They have their own properties and methods that are useful in their own right, so they get their own pages here.
+Some SSL objects are not constructed with `Name{}` syntax. You obtain them from another element — typically by calling a method on a class. They have their own properties and methods that are useful in their own right, so they get their own pages here. (This category is unrelated to the "Returns" section on function pages, which documents return values.)
 
 Two clusters live here today: the HTTP/SOAP client objects produced by [`WebServices`](../classes/WebServices.md), and the endpoint runtime objects produced by the [`Request`](../special-forms/request.md) and [`Response`](../special-forms/response.md) ambients available inside endpoint scripts. Other return-shaped objects elsewhere in the reference are linked at the bottom for discovery.
 

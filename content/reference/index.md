@@ -24,7 +24,7 @@ Element pages draw from a common set of sections — the exact mix varies by cat
 
 - [Functions](functions/index.md) — 330 built-in functions
 - [Classes](classes/index.md) — 29 object types
-- [Returns](returns/index.md) — 12 objects obtained from another element (HTTP/SOAP client cluster + endpoint runtime objects)
+- [Obtained Objects](returns/index.md) — 12 objects obtained from another element (HTTP/SOAP client cluster + endpoint runtime objects)
 - [Keywords](keywords/index.md) — 38 language keywords
 - [Operators](operators/index.md) — 32 operators with precedence table
 - [Types](types/index.md) — 8 core SSL types

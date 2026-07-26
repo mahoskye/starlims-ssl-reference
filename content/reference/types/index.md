@@ -10,6 +10,8 @@ starlims:
 
 **8 core SSL types** — the building blocks of every SSL expression.
 
+Every SSL value has one of these types. Each page documents the type's literal forms, the operators and functions that work on it, its member functions (including the .NET members that pass through at runtime), and its comparison and coercion behavior — the details that differ most from other languages.
+
 | Type | Description |
 | --- | --- |
 | [array](array.md) | Represents ordered, 1-based collections capable of storing values of any type, including nested arrays, with support for indexing, member access, and common collection operations. |

@@ -63,7 +63,7 @@ Returns a new [`SoapClient`](../returns/SoapClient.md). See its page for the met
 
 ## Caveats
 
-- This page documents the factory only. The returned clients and the objects they surface in turn (`HttpRequest`, `HttpResponse`, `HttpException`, `SoapResponse`, `SoapParameters`) live in the [Returns](../returns/index.md) section.
+- This page documents the factory only. The returned clients and the objects they surface in turn (`HttpRequest`, `HttpResponse`, `HttpException`, `SoapResponse`, `SoapParameters`) live in the [Obtained Objects](../returns/index.md) section.
 
 ## Examples
 
@@ -113,5 +113,5 @@ DoProc("CreateIntegrationClient", {.T.});
 
 - [`HttpClient`](../returns/HttpClient.md)
 - [`SoapClient`](../returns/SoapClient.md)
-- [Returns section](../returns/index.md)
+- [Obtained Objects](../returns/index.md)
 - [`object`](../types/object.md)
