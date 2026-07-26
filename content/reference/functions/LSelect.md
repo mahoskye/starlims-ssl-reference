@@ -90,8 +90,7 @@ Skip `aFieldList` and `sConnectionName` with adjacent commas, then pass the valu
 :PROCEDURE GetOpenSamples;
 	:DECLARE sSQL, aRows, nIndex;
 
-	sSQL :=
-		"
+	sSQL := "
 	    SELECT sample_id, status
 	    FROM sample
 	    WHERE status = ?
@@ -123,9 +122,7 @@ Filter by two parameters on a named connection. The procedure returns the result
 	:DEFAULT dCutoff, Today() - 7;
 	:DECLARE sSQL, aRows;
 
-	sSQL :=
-
-		"
+	sSQL := "
 	    SELECT sample_id, status, received_date
 	    FROM sample
 	    WHERE status = ?
@@ -151,8 +148,7 @@ Pass [`.F.`](../literals/false.md) for `bNullAsBlank` and name both date columns
 	:PARAMETERS dStartDate, dEndDate;
 	:DECLARE sSQL, aRows, nIndex, dClosedDate;
 
-	sSQL :=
-		"
+	sSQL := "
 	    SELECT audit_id, opened_date, closed_date
 	    FROM audit_log
 	    WHERE opened_date >= ?

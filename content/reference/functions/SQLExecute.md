@@ -101,8 +101,7 @@ Execute a parameterized `SELECT` using named `?varName?` substitution and receiv
 	:DEFAULT sStatus, "Logged";
 	:DECLARE sSQL, aTasks, nIndex;
 
-	sSQL :=
-		"
+	sSQL := "
 	    SELECT ordno, testcode, status
 	    FROM ordtask
 	    WHERE status = ?sStatus?
@@ -133,8 +132,7 @@ Execute an `UPDATE` statement and check the boolean return value; use [`:TRY`](.
 	:PARAMETERS sOrdNo, sTestCode, sUserName;
 	:DECLARE sSQL, bSuccess, oErr;
 
-	sSQL :=
-		"
+	sSQL := "
 	    UPDATE ordtask SET
 	        status = 'Complete',
 	        completed_by = ?sUserName?
@@ -181,8 +179,7 @@ Request a dataset object instead of an array, then traverse its rows using the .
 		RaiseError("Batch ID is required");
 	:ENDIF;
 
-	sSQL :=
-		"
+	sSQL := "
 	    SELECT sample_id, status, received_date
 	    FROM sample
 	    WHERE batch_id = ?sBatch?

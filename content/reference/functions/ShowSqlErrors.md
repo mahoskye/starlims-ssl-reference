@@ -68,8 +68,7 @@ Enable SQL error display for a single lookup, then restore the previous setting 
 	bPrevShow := ShowSqlErrors(.T.);
 
 	:TRY;
-		sSql :=
-		"
+		sSql := "
 		    SELECT status
 		    FROM sample
 		    WHERE sampleid = ?
@@ -101,8 +100,7 @@ Suppress both SQL errors and SQL error display together for a cleanup operation,
 	bPrevShow := ShowSqlErrors(.F.);
 
 	:TRY;
-		sDeleteSql :=
-		"
+		sDeleteSql := "
 		    DELETE FROM temp_results
 		    WHERE logdate < ?
 		";

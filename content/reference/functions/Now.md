@@ -121,9 +121,7 @@ Capture `Now()` once so both the SQL update and the confirmation message use the
 
 	dReleasedAt := Now();
 	sStatus := "Released";
-	sSQL :=
-
-		"
+	sSQL := "
 	    UPDATE sample SET
 	        released_at = ?,
 	        status = ?
