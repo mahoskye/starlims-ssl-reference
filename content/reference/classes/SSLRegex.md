@@ -36,7 +36,7 @@ Matches SSL strings against a stored regular expression pattern.
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `sPattern` | [string](../types/string.md) | yes | Regular expression pattern to store |
-| `bCaseSensitive` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) for case-sensitive matching, [`.F.`](../literals/false.md) for case-insensitive matching |
+| `bCaseSensitive` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) for case-sensitive matching, [`.F.`](../literals/false.md) for case-insensitive matching. Omitting this parameter gives case-sensitive matching. |
 
 **Raises:**
 - `Argument sPattern cannot be null.`
@@ -48,7 +48,7 @@ Matches SSL strings against a stored regular expression pattern.
 |------|------|--------|-------------|
 | `CaseSensitive` | [boolean](../types/boolean.md) | read-only | Reports the value exposed by the class for case sensitivity |
 
-`CaseSensitive` returns [`.F.`](../literals/false.md) for the one-argument constructor and for `SSLRegex{pattern, .F.}`. It also returns [`.F.`](../literals/false.md) when you explicitly pass [`.T.`](../literals/true.md), so do not rely on this property to confirm whether matching is case-sensitive.
+`CaseSensitive` does not reliably report the matching mode. Matching *behavior* is controlled by the constructor argument — case-sensitive unless you pass `.F.` — but in observed runtime behavior this property returns [`.F.`](../literals/false.md) for the one-argument constructor, for `SSLRegex{pattern, .F.}`, and even when you explicitly pass [`.T.`](../literals/true.md). Never use this property to confirm whether matching is case-sensitive.
 
 ## Methods
 

@@ -66,6 +66,7 @@ DoProc(sProcedureName, [aArguments]);
 
 ## Caveats
 
+- `DoProc` is a compile-time error inside class methods — every name form is rejected, not just same-class calls. Use `Me:MethodName()` or `Base:MethodName()` instead.
 - One-segment names are resolved case-insensitively in the current script.
 - Three-segment names are passed into the executor path instead of local method lookup.
 

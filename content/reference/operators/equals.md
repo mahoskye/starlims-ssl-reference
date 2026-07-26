@@ -72,7 +72,7 @@ bEqual := vLeft = vRight;
 
 - String comparison is case-sensitive and uses prefix semantics, not exact-match semantics.
 - `"" = "abc"` is [`.F.`](../literals/false.md), but `"abc" = ""` is [`.T.`](../literals/true.md) because an empty right operand always matches.
-- Left operand is a code block: raises `== : Cannot compare to a code block`.
+- Left operand is a code block: raises `== : Cannot compare to a code block`. The observed message begins with `== :` even though the operator written is `=`; a code block on the right side against a string left operand returns [`.F.`](../literals/false.md) instead of raising.
 
 ## Examples
 

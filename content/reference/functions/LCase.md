@@ -65,6 +65,7 @@ Behavior by branch:
 
 ## Caveats
 
+- Despite its name, `LCase` does **not** lowercase a string. Use [`Lower`](Lower.md) (or the culture-aware [`LLower`](LLower.md)) to convert a string to lowercase.
 - `LCase` can return different value types depending on the selected expression.
 - Only the selected branch is executed.
 - Whitespace-only `sFalseValue` is treated the same as an empty false branch and returns `""`.
@@ -141,6 +142,8 @@ DoProc("GetEffectiveLimit");
 
 ## Related
 
+- [`Lower`](Lower.md)
+- [`LLower`](LLower.md)
 - [`IIf`](IIf.md)
 - [`IF`](../keywords/IF.md)
 - [`boolean`](../types/boolean.md)

@@ -19,7 +19,7 @@ starlims:
 | [:INCLUDE](INCLUDE.md) | Inserts another SSL script's source into the current file so its statements compile inline. |
 | [:INHERIT](INHERIT.md) | Specifies the parent class for an SSL class. |
 | [:PARAMETERS](PARAMETERS.md) | Declares named input parameters for a script, procedure, method, or constructor. |
-| [:PUBLIC](PUBLIC.md) | Declares global variables that can be accessed from any scope in the program. |
+| [:PUBLIC](PUBLIC.md) | Declares public variables shared down the call stack — visible to the declaring scope and every scope it calls. |
 
 ## Control Flow
 

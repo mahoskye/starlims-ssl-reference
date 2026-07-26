@@ -53,7 +53,7 @@ aRows := LSelect1("SELECT sample_id FROM sample WHERE status = ?", "ARCHIVE", {"
 sDefault := GetDefaultConnection();
 ```
 
-The same connection name parameter appears in [`RunSQL`](../reference/functions/RunSQL.md), [`LSearch`](../reference/functions/LSearch.md), [`LSelect1`](../reference/functions/LSelect1.md), [`SQLExecute`](../reference/functions/SQLExecute.md), [`GetDataSet`](../reference/functions/GetDataSet.md), and related functions — always as the second argument after the SQL string.
+The same connection name parameter appears in [`RunSQL`](../reference/functions/RunSQL.md), [`LSelect`](../reference/functions/LSelect.md), [`LSelect1`](../reference/functions/LSelect1.md), [`SQLExecute`](../reference/functions/SQLExecute.md), and related functions as the second argument after the SQL string. Watch for two exceptions: [`LSearch`](../reference/functions/LSearch.md) takes the connection name as its **third** argument (after the default value), and [`GetDataSet`](../reference/functions/GetDataSet.md) has no connection parameter at all — use [`GetDataSetEx`](../reference/functions/GetDataSetEx.md) (connection name second) to query a named connection.
 
 ## Parameterized queries
 
