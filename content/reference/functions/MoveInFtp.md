@@ -59,7 +59,7 @@ MoveInFtp(sServerNameOrIP, [sRemoteDirectoryFrom], [sRemoteDirectoryTo], sRemote
 | `sProxy` is a non-empty string. | `The proxy parameter cannot be used. The system will automatically use the proxy specified by Internet Explorer > Local Area Network settings.` |
 
 !!! note
-    The SFTP-path error for a missing `sServerNameOrIP` says `FTP server name or IP cannot be missing.` — same as the FTP message. This appears to be a runtime quirk; the message text does not change on the SFTP path.
+    The SFTP-path error for a missing `sServerNameOrIP` says `FTP server name or IP cannot be missing.` — same as the FTP message. The message text does not change on the SFTP path.
 
 ## Best practices
 

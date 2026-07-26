@@ -105,7 +105,7 @@ Use [`ErrorMes`](../reference/functions/ErrorMes.md) instead of [`UsrMes`](../re
 
 ### Legacy pattern with :RESUME
 
-When [`:RESUME`](../reference/keywords/RESUME.md) is present inside the [`:ERROR`](../reference/keywords/ERROR.md) block, the compiler wraps **each statement** individually. If a statement fails, the [`:ERROR`](../reference/keywords/ERROR.md) handler runs, then [`:RESUME`](../reference/keywords/RESUME.md) continues execution at the **next** statement after the one that failed.
+When [`:RESUME`](../reference/keywords/RESUME.md) is present inside the [`:ERROR`](../reference/keywords/ERROR.md) block, **each statement** is protected individually. If a statement fails, the [`:ERROR`](../reference/keywords/ERROR.md) handler runs, then [`:RESUME`](../reference/keywords/RESUME.md) continues execution at the **next** statement after the one that failed.
 
 ```ssl
 :PROCEDURE LegacyResumeExample;

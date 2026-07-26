@@ -39,7 +39,7 @@ Procedures with no modifier are **public** by default and can be called from any
 
 ## Context rules
 
-The modifier must appear on the line **immediately before** the [`:PROCEDURE`](../keywords/PROCEDURE.md) keyword. The exact syntax is `/*@private;` or `/*@protected;`, with no spaces between `/*` and `@`, and the modifier name must be lowercase. Procedures without a modifier are public by default. The compiler extracts these annotations before parsing; they are not regular comments.
+The modifier must appear on the line **immediately before** the [`:PROCEDURE`](../keywords/PROCEDURE.md) keyword. The exact syntax is `/*@private;` or `/*@protected;`, with no spaces between `/*` and `@`, and the modifier name must be lowercase. Procedures without a modifier are public by default. Although these annotations use comment syntax, SSL recognizes them as access modifiers — they are not regular comments.
 
 | Modifier | Same script | Inheriting scripts | External scripts |
 | --- | --- | --- | --- |

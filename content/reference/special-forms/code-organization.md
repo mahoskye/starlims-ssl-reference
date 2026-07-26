@@ -32,7 +32,7 @@ Comment regions group related procedures or code sections in long files. They ar
 /* endregion;
 ```
 
-`/* region` and `/* endregion` follow standard SSL comment syntax — they end with `;` and are treated as comments by the compiler. Region names use **Title Case** by convention.
+`/* region` and `/* endregion` follow standard SSL comment syntax — they end with `;` and have no effect on how the code runs. Region names use **Title Case** by convention.
 
 ## Context rules
 
@@ -54,7 +54,7 @@ Comment regions group related procedures or code sections in long files. They ar
 
 ## Errors and edge cases
 
-- An unclosed `/* region` has no compiler effect but may confuse editor folding.
+- An unclosed `/* region` has no effect on execution but may confuse editor folding.
 - [`:REGION`](../keywords/REGION.md) / [`:ENDREGION`](../keywords/ENDREGION.md) keywords are **not** the same as comment regions. They are a legacy construct used for storing and retrieving named text blocks via [`GetRegion`](../functions/GetRegion.md) and [`GetRegionEx`](../functions/GetRegionEx.md). See [`REGION`](../keywords/REGION.md) and [`ENDREGION`](../keywords/ENDREGION.md) for details.
 
 ## Examples
