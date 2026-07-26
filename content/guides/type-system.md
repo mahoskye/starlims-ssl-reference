@@ -69,7 +69,7 @@ The [`=`](../reference/operators/equals.md) / [`==`](../reference/operators/stri
 
 | Left Type | Right Type | Behavior |
 |-----------|-----------|----------|
-| [string](../reference/types/string.md) | [string](../reference/types/string.md) | **Prefix match** — `"abc" = "ab"` is [`.F.`](../reference/literals/false.md), but `"ab" = "abc"` is [`.T.`](../reference/literals/true.md) |
+| [string](../reference/types/string.md) | [string](../reference/types/string.md) | **Prefix match** — [`.T.`](../reference/literals/true.md) when the left string starts with the right string (or the right string is empty): `"abcdef" = "abc"` is `.T.`, but `"abc" = "abcdef"` is [`.F.`](../reference/literals/false.md) |
 | [string](../reference/types/string.md) | non-string | Returns [`.F.`](../reference/literals/false.md) (no error) |
 | [number](../reference/types/number.md) | [number](../reference/types/number.md) | Exact numeric equality |
 | [number](../reference/types/number.md) | non-number | Throws runtime error |

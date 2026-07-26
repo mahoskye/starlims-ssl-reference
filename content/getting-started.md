@@ -51,9 +51,12 @@ These are top-level statements — in a procedure body they would be indented.
 :CATCH;
     UsrMes("Query failed: " + GetLastSSLError():Description);
 :FINALLY;
-    EndLimsTransaction();
+    UsrMes("Query attempt finished");
+    /* :FINALLY runs whether the query succeeded or failed;
 :ENDTRY;
 ```
+
+If the work inside `:TRY` opens a transaction, close it in `:FINALLY` guarded with `IsInTransaction()` — see [SQL Transactions](guides/sql-transactions.md) for the full pattern.
 
 ### Procedures
 

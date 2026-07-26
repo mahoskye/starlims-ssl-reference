@@ -296,7 +296,7 @@ starlims:
 | [ExecInternal](ExecInternal.md) | Calls a method by name on a specified stored object, passing up to twenty-one arguments, and returns the method's result. |
 | [ExecUdf](ExecUdf.md) | Executes a string of SSL code dynamically with optional arguments and result caching. |
 | [IIf](IIf.md) | Selects one of two values based on a boolean condition. |
-| [LCase](LCase.md) | Returns one of two string values based on a boolean condition. |
+| [LCase](LCase.md) | Conditionally evaluates one of two SSL expressions supplied as strings. |
 | [LimsExec](LimsExec.md) | Executes an external application with optional arguments and user interface visibility. |
 | [PrmCount](PrmCount.md) | Returns the number of parameters passed to the currently running procedure. |
 | [RunApp](RunApp.md) | Launches an external application with optional arguments and indicates if execution succeeded (or throws on invalid parameters). |
