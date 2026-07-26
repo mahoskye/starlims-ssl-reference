@@ -8,6 +8,12 @@ on:
 permissions:
   contents: write
 
+# Deploys force-push gh-pages; concurrent runs race and the losers fail.
+# Serialize: one deploy at a time, and a newer push supersedes an in-flight one.
+concurrency:
+  group: deploy-docs
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
