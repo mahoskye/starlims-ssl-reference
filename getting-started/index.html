@@ -1059,9 +1059,11 @@
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">:CATCH</span><span class="p">;</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Query failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">():</span><span class="n">Description</span><span class="p">);</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">:FINALLY</span><span class="p">;</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nf">EndLimsTransaction</span><span class="p">();</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="k">:ENDTRY</span><span class="p">;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Query attempt finished&quot;</span><span class="p">);</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="c1">/* :FINALLY runs whether the query succeeded or failed;</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="k">:ENDTRY</span><span class="p">;</span>
 </code></pre></div>
+<p>If the work inside <code>:TRY</code> opens a transaction, close it in <code>:FINALLY</code> guarded with <code>IsInTransaction()</code> — see <a href="../guides/sql-transactions/">SQL Transactions</a> for the full pattern.</p>
 <h3 id="procedures">Procedures<a class="headerlink" href="#procedures" title="Permanent link">&para;</a></h3>
 <div class="language-ssl highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CalculateAverage</span><span class="p">;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aValues</span><span class="p">;</span>
