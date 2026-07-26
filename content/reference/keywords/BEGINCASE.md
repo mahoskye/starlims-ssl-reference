@@ -34,14 +34,14 @@ Without [`:EXITCASE;`](EXITCASE.md), a matched branch does not automatically sto
 ```ssl
 :BEGINCASE;
 :CASE <condition>;
-    /* statements;
-    :EXITCASE;
+	/* statements;
+	:EXITCASE;
 :CASE <condition>;
-    /* statements;
-    :EXITCASE;
+	/* statements;
+	:EXITCASE;
 :OTHERWISE;
-    /* statements;
-    :EXITCASE;
+	/* statements;
+	:EXITCASE;
 :ENDCASE;
 ```
 

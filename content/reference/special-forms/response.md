@@ -23,7 +23,7 @@ The value is an [`SSLResponse`](../returns/SSLResponse.md) — set its propertie
 
 ```ssl
 Response:PropertyName := value;
-Response:MethodName(args);
+Response:MethodName(args)
 ```
 
 ## Availability

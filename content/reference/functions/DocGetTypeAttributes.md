@@ -140,9 +140,9 @@ Counts how many attributes are single-value and how many are repeating for a cal
     :NEXT;
 
     sSummary := "Type " + sTypeName
-		        + " has " + LimsString(nSingle)
-		        + " single-value attributes and " + LimsString(nRepeating)
-		        + " repeating attributes";
+                + " has " + LimsString(nSingle)
+                + " single-value attributes and " + LimsString(nRepeating)
+                + " repeating attributes";
     UsrMes(sSummary);
 
     :RETURN aAttrs;
@@ -190,7 +190,7 @@ Logs in to Documentum, fetches type attributes, and distinguishes a failed looku
 
         :FOR nIndex := 1 :TO ALen(aAttrs);
             UsrMes(aAttrs[nIndex, 1] + " type="
-	                + LimsString(aAttrs[nIndex, 4]));
+                    + LimsString(aAttrs[nIndex, 4]));
         :NEXT;
 
         :RETURN aAttrs;

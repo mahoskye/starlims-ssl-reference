@@ -100,7 +100,7 @@ DoProc("CheckStatusChange");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Status changed from PENDING to COMPLETE
 ```
 
@@ -142,7 +142,7 @@ DoProc("CheckReplicateMismatch");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Replicate count differs
 ```
 
@@ -181,7 +181,7 @@ DoProc("CheckSettingsDifference");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Objects are different instances but have the same status
 ```
 

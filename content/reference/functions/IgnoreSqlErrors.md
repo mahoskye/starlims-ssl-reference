@@ -99,7 +99,7 @@ Uses [`:FINALLY`](../keywords/FINALLY.md) to guarantee restoration even if the a
     :TRY;
         sInsertSql := "
             INSERT INTO ordtask_archive
-	            (ordno, testcode, status, logdate)
+                (ordno, testcode, status, logdate)
             SELECT ordno, testcode, status, logdate
             FROM ordtask
             WHERE status = ?

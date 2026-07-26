@@ -82,7 +82,7 @@ DoProc("BuildSearchUrl");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 https://example.com/api/search?company=O%27Reilly+%26+Associates
 ```
 

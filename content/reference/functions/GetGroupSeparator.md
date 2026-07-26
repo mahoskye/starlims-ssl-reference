@@ -25,7 +25,7 @@ Returns the current group separator as a string.
 ## Syntax
 
 ```ssl
-GetGroupSeparator();
+GetGroupSeparator()
 ```
 
 ## Parameters

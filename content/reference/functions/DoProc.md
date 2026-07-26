@@ -26,7 +26,7 @@ The second argument, when supplied, must be an array. `DoProc` does not enforce 
 ## Syntax
 
 ```ssl
-DoProc(sProcedureName, [aArguments]);
+DoProc(sProcedureName, [aArguments])
 ```
 
 ## Parameters
@@ -121,7 +121,7 @@ Dispatches to two local procedures by name: one that logs a message and one that
 	:RETURN sDescription;
 :ENDPROC;
 
-/* Usage example;
+/* Usage;
 DoProc("CallProcedureDynamically");
 ```
 
@@ -159,7 +159,7 @@ Selects one of two handler procedures based on a boolean flag and dispatches to 
 	ErrorMes("ERROR: " + sMessage);
 :ENDPROC;
 
-/* Usage example;
+/* Usage;
 DoProc("RouteStatusMessage", {.T., "Something failed"});
 ```
 
@@ -181,7 +181,7 @@ Builds a three-segment procedure name at runtime and dispatches to it using `DoP
 	:RETURN vResult;
 :ENDPROC;
 
-/* Usage example;
+/* Usage;
 DoProc("SubmitConfiguredStep", {"ProcessSample", "S-001", "jsmith"});
 ```
 

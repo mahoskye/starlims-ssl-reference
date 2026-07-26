@@ -103,7 +103,7 @@ DoProc("DisplaySampleInfo", {"S-1001", "LAB-A"});
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Processing sample S-1001 in laboratory LAB-A
 ```
 
@@ -154,12 +154,12 @@ Data source files use the inline-default form instead of separate [`:DEFAULT`](D
 :PARAMETERS sStatus := "Logged", nMaxRows := 50;
 
 :RETURN SQLExecute("
-	        SELECT sample_id, status
-	        FROM sample
-	        WHERE status = ?sStatus?
-	          AND ROWNUM <= ?nMaxRows?
-	        ORDER BY sample_id
-	    ");
+            SELECT sample_id, status
+            FROM sample
+            WHERE status = ?sStatus?
+              AND ROWNUM <= ?nMaxRows?
+            ORDER BY sample_id
+        ");
 ```
 
 ## Related

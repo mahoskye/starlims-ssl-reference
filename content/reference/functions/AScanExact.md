@@ -1,6 +1,6 @@
 ---
 title: "AScanExact"
-summary: "Return the index of the first array element that matches a value or condition exactly."
+summary: "Returns the index of the first array element that matches a value or condition exactly."
 id: ssl.function.ascanexact
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # AScanExact
 
-Return the index of the first array element that matches a value or condition exactly.
+Returns the index of the first array element that matches a value or condition exactly.
 
 AScanExact searches `aTarget` from a 1-based starting position and returns the index of the first match. You can search by value or by passing a code block. If you omit `nStart`, the scan begins at element `1`. If you omit `nCount`, AScanExact searches from `nStart` through the end of the array. If no match is found, it returns `0`.
 

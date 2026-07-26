@@ -1,6 +1,6 @@
 ---
 title: "Asc"
-summary: "Return the character code of the first character in a string."
+summary: "Returns the character code of the first character in a string."
 id: ssl.function.asc
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # Asc
 
-Return the character code of the first character in a string.
+Returns the character code of the first character in a string.
 
 Asc returns the numeric code for the first character of `sSource`. Characters after the first one are ignored.
 

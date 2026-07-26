@@ -84,7 +84,7 @@ DoProc("CalculateTotalPrice");
 
 `UsrMes` displays:
 
-```
+```text
 Total price: 100
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: "ArrayNew"
-summary: "Create a new array with up to three dimensions."
+summary: "Creates a new array with up to three dimensions."
 id: ssl.function.arraynew
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # ArrayNew
 
-Create a new array with up to three dimensions.
+Creates a new array with up to three dimensions.
 
 ArrayNew creates a one-dimensional, two-dimensional, or three-dimensional
 array. If `nDim1` is omitted, it defaults to `0`, so `ArrayNew()` returns an

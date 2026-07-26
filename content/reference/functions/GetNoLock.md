@@ -87,7 +87,7 @@ Gets the no-lock hint for a named connection and embeds it immediately after the
     :RETURN aSamples;
 :ENDPROC;
 
-/* Example call;
+/* Usage;
 DoProc("LoadLoggedSamples");
 ```
 
@@ -112,7 +112,7 @@ Omits `sConnectionName` so the function resolves against the current default con
     :RETURN sSQL;
 :ENDPROC;
 
-/* Example call;
+/* Usage;
 DoProc("BuildOpenTaskQuery");
 ```
 
@@ -147,7 +147,7 @@ Retrieves the hint once and reuses the same value after each table name in a mul
     :RETURN aRows;
 :ENDPROC;
 
-/* Example call;
+/* Usage;
 DoProc("LoadPendingResults");
 ```
 

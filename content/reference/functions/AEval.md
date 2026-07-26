@@ -1,6 +1,6 @@
 ---
 title: "AEval"
-summary: "Evaluate a code block for each array element and return the same array."
+summary: "Evaluates a code block for each array element and returns the same array."
 id: ssl.function.aeval
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # AEval
 
-Evaluate a code block for each array element and return the same array.
+Evaluates a code block for each array element and returns the same array.
 
 AEval iterates an array in order, calls the supplied code block once for each selected element, and returns the original array. The code block receives the current element as its argument. AEval ignores the code block's return value, so it is intended for side effects such as logging, updating external variables, or calling other routines while walking an array.
 
@@ -106,10 +106,10 @@ Supplies `nStart` and `nCount` to limit iteration to elements 3 and 4 (the two `
 	nCount := 2;
 
 	AEval(aStatuses,
-          {|sStatus| UsrMes("Queue status: " + sStatus)},
-          nStart,
-          nCount
-         );
+		  {|sStatus| UsrMes("Queue status: " + sStatus)},
+		  nStart,
+		  nCount
+		 );
 :ENDPROC;
 
 /* Usage;

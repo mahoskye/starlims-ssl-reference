@@ -109,7 +109,7 @@ DoProc("ParseHeader");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Status=ACT, Sample=SAM00012345
 ```
 

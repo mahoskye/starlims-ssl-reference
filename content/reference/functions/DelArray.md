@@ -120,7 +120,7 @@ Iterates in reverse order to safely remove all entries except a target value, co
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Processed: SAMPLE-005,SAMPLE-004,SAMPLE-002,SAMPLE-001
 Still pending: SAMPLE-003
 ```
@@ -156,7 +156,7 @@ Removes multiple elements by supplying positions in descending order so that eac
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Removed 3 entries. Remaining: Alpha,Gamma
 ```
 

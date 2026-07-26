@@ -159,9 +159,9 @@ Queries the highest existing ID in the table to determine the next safe starting
     oSeq := Sequence{"SQLSERVER", "sample", "sample_id"};
 
     nMaxId := LSearch("
-	    SELECT MAX(sample_id)
-	    FROM sample
-	", 0);
+        SELECT MAX(sample_id)
+        FROM sample
+    ", 0);
 
     nStartValue := nMaxId + 1;
 

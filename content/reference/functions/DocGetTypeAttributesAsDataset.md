@@ -88,7 +88,7 @@ DoProc("ShowTypeAttributes");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Attributes for dm_document:
 [dataset text]
 ```

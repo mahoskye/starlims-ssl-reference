@@ -83,11 +83,11 @@ Enables SQL injection detection on a named connection and reports whether detect
 
     :IF bPreviousState;
         sMessage := "SQL injection detection was already enabled for "
-		            + sConnectionName;
+                    + sConnectionName;
 
     :ELSE;
         sMessage := "SQL injection detection is now enabled for "
-		            + sConnectionName;
+                    + sConnectionName;
     :ENDIF;
 
     UsrMes(sMessage);

@@ -112,7 +112,7 @@ DoProc("ShowSerializedObject");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 <serialized XML representation of oRecord>
 ```
 
@@ -144,7 +144,7 @@ DoProc("UpdateAndReadProperty");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Priority: 2
 ```
 
@@ -198,7 +198,7 @@ DoProc("DemoRunObjectAction");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Status: Complete
 ```
 

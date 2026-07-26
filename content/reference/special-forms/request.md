@@ -25,7 +25,7 @@ The value is an [`SSLRequest`](../returns/SSLRequest.md) — read its properties
 Request;
 Request:PropertyName;
 Request:CollectionName:Key;
-Request:MethodName(args);
+Request:MethodName(args)
 ```
 
 ## Availability

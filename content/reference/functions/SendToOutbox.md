@@ -25,22 +25,22 @@ Use `SendToOutbox` when your workflow needs to persist the message first and sen
 
 ```ssl
 SendToOutbox(
-    sSMTP,
-    aRecipients,
-    sFromWho,
-    [sSubject],
-    [sMessageBody],
-    [aAttachList],
-    [aCCList],
-    [aBCCList],
-    [sReplyTo],
-    [nPort],
-    [sUName],
-    [sUPass],
-    [bIgnoreErrors],
-    [bUseSSL],
-    [bIsBodyHTML],
-    [sEncryptedData]
+	sSMTP,
+	aRecipients,
+	sFromWho,
+	[sSubject],
+	[sMessageBody],
+	[aAttachList],
+	[aCCList],
+	[aBCCList],
+	[sReplyTo],
+	[nPort],
+	[sUName],
+	[sUPass],
+	[bIgnoreErrors],
+	[bUseSSL],
+	[bIsBodyHTML],
+	[sEncryptedData]
 )
 ```
 

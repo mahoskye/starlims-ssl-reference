@@ -36,9 +36,9 @@ Within a full conditional block:
 
 ```ssl
 :IF bCondition;
-    /* Statements for the true branch;
+	/* Statements for the true branch;
 :ELSE;
-    /* Statements for the false branch;
+	/* Statements for the false branch;
 :ENDIF;
 ```
 
@@ -106,9 +106,9 @@ Use `:ELSE` to apply a fallback value when a lookup yields no result. If [`LSear
 	sDefaultStatus := "PENDING";
 
 	sResult := LSearch("
-	    SELECT status
-	    FROM samples
-	    WHERE sample_id = ?
+		SELECT status
+		FROM samples
+		WHERE sample_id = ?
 	", "",, {sSampleID});
 
 	:IF !Empty(sResult);

@@ -88,7 +88,7 @@ DoProc("DoubleLoopCounter");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Counter values: 1 2 4 8 16 32 
 ```
 
@@ -121,7 +121,7 @@ DoProc("ScaleMeasurements");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Scaled sum: 12.159
 ```
 

@@ -80,16 +80,16 @@ Compares `bFlag:ToString()` against [`LimsString`](../functions/LimsString.md) t
 
 ```ssl
 :PROCEDURE CompareBooleanFormats;
-    :DECLARE bFlag, sDotNet, sSsl;
+	:DECLARE bFlag, sDotNet, sSsl;
 
-    bFlag := .T.;
-    sDotNet := bFlag:ToString();
-    sSsl := LimsString(bFlag);
+	bFlag := .T.;
+	sDotNet := bFlag:ToString();
+	sSsl := LimsString(bFlag);
 
-    UsrMes("Via .NET ToString(): " + sDotNet);
-    UsrMes("Via LimsString():    " + sSsl);
+	UsrMes("Via .NET ToString(): " + sDotNet);
+	UsrMes("Via LimsString():    " + sSsl);
 
-    :RETURN sSsl;
+	:RETURN sSsl;
 :ENDPROC;
 
 /* Usage;

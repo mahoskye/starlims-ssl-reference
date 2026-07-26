@@ -97,7 +97,7 @@ DoProc("ShowGridAsText");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Product,Qty;Widget,5;Gadget,3
 ```
 
@@ -131,7 +131,7 @@ DoProc("ExportInstrumentRows");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 SAM-1001|pH|7.2
 SAM-1002|Cond|15.8
 SAM-1003|Temp|22.4
@@ -164,7 +164,7 @@ DoProc("ShowBuildString2Behavior");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 A/NIL/C||D/E
 ```
 

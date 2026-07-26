@@ -1,6 +1,6 @@
 ---
 title: "AEvalA"
-summary: "Evaluate a code block for each selected array element and write the result back to the same array."
+summary: "Evaluates a code block for each selected array element and writes the result back to the same array."
 id: ssl.function.aevala
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # AEvalA
 
-Evaluate a code block for each selected array element and write the result back to the same array.
+Evaluates a code block for each selected array element and writes the result back to the same array.
 
 AEvalA iterates an array in order, calls the supplied code block once for each selected element, stores the code block result into that array position, and returns the same array. The code block receives the current element as its argument.
 

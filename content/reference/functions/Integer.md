@@ -81,7 +81,7 @@ UsrMes(sMessage);
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Original: 99.95, Integer: 99
 ```
 
@@ -104,7 +104,7 @@ UsrMes(sMessage);
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Original: -2.7, Integer: -2
 ```
 

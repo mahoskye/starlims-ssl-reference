@@ -27,14 +27,14 @@ Missing `sServerNameOrIP`, missing `sRemoteDirectory`, and a non-empty `sProxy` 
 
 ```ssl
 MakeDirOnFtp(
-    sServerNameOrIP,
-    sRemoteDirectory,
-    [sUserName],
-    [sPassword],
-    [nPort],
-    [sProxy],
-    [bIsSFTP],
-    [sPrivateKeyFilePath]
+	sServerNameOrIP,
+	sRemoteDirectory,
+	[sUserName],
+	[sPassword],
+	[nPort],
+	[sProxy],
+	[bIsSFTP],
+	[sPrivateKeyFilePath]
 )
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: "AScan"
-summary: "Return the index of the first array element that matches a value or condition."
+summary: "Returns the index of the first array element that matches a value or condition."
 id: ssl.function.ascan
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # AScan
 
-Return the index of the first array element that matches a value or condition.
+Returns the index of the first array element that matches a value or condition.
 
 AScan searches `aTarget` from a 1-based starting position and returns the index of the first match. You can search by value or by passing a code block. If you omit `nStart`, the scan begins at element `1`. If you omit `nCount`, AScan searches from `nStart` through the end of the array. If no match is found, it returns `0`.
 
@@ -87,7 +87,7 @@ DoProc("FindStatus");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Matching status found at position 3
 ```
 
@@ -112,7 +112,7 @@ DoProc("FindFirstEven");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 First even number is at position 3
 ```
 

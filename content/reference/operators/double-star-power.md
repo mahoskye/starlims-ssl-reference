@@ -79,7 +79,7 @@ DoProc("CalculateSquare");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 The square of 7 is 49
 ```
 

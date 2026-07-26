@@ -88,7 +88,7 @@ DoProc("CheckAccessPermission");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Access granted
 ```
 
@@ -123,7 +123,7 @@ DoProc("CheckSamplePresence");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Sample DEMO-001 was found
 ```
 
@@ -165,7 +165,7 @@ DoProc("AllowProcessing");
 
 [`UsrMes`](../functions/UsrMes.md) displays (`bIsReadyNow` is [`.T.`](../literals/true.md), so the [`LSearch`](../functions/LSearch.md) is never executed):
 
-```
+```text
 Processing can continue
 ```
 

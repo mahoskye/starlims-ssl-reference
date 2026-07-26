@@ -1,6 +1,6 @@
 ---
 title: "AllTrim"
-summary: "Remove leading and trailing space characters from a string."
+summary: "Removes leading and trailing space characters from a string."
 id: ssl.function.alltrim
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # AllTrim
 
-Remove leading and trailing space characters from a string.
+Removes leading and trailing space characters from a string.
 
 AllTrim returns `sSource` with leading and trailing space characters removed. It trims ordinary space characters at the beginning and end of the string and leaves embedded spaces unchanged. It requires a non-[`NIL`](../literals/nil.md) string argument and raises an error when `sSource` is [`NIL`](../literals/nil.md).
 
@@ -66,7 +66,7 @@ Removes leading and trailing spaces from an input string and shows the cleaned r
 
 ```ssl
 :PROCEDURE CleanSearchInput;
-    :DECLARE sRawInput, sCleanInput;
+	:DECLARE sRawInput, sCleanInput;
 
 	sRawInput := "   copper sample   ";
 	sCleanInput := AllTrim(sRawInput);

@@ -93,7 +93,7 @@ DoProc("BuildDelimitedIdentifier", {"LIMSDB", "orders"});
 
 [`UsrMes`](UsrMes.md) displays (SQL Server DSN, `sName` = `"orders"`):
 
-```
+```text
 Delimited identifier: [orders]
 ```
 

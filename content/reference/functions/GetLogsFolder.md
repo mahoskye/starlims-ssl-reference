@@ -76,7 +76,7 @@ DoProc("ShowLogFilePath");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Log file path: C:\Logs\session.log
 ```
 
@@ -103,7 +103,7 @@ DoProc("CountLogFiles");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Log files found: 3
 ```
 

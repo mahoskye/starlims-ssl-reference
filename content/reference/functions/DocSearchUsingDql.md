@@ -115,7 +115,7 @@ Fetches three columns from documents in a specific folder path and assembles eac
 
     :TRY;
         sDql := "SELECT r_object_id, object_name, title FROM dm_document "
-	            + "WHERE folder('/Quality/Specs', DESCEND)";
+                + "WHERE folder('/Quality/Specs', DESCEND)";
         aResults := DocSearchUsingDql(sDql, 25);
         aSummary := {};
 
@@ -151,8 +151,8 @@ Shows that when `RETURN_TOP` is already in the DQL text, `nResultSetSize` has no
 
     :TRY;
         sDql := "SELECT r_object_id, object_name, subject FROM dm_document "
-	            + "WHERE object_name LIKE 'Protocol%' "
-	            + "ENABLE (RETURN_TOP 5)";
+                + "WHERE object_name LIKE 'Protocol%' "
+                + "ENABLE (RETURN_TOP 5)";
         aResults := DocSearchUsingDql(sDql, 50);
 
         :IF ALen(aResults) == 0 .AND. DocCommandFailed();

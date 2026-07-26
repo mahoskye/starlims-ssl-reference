@@ -121,7 +121,7 @@ DoProc("BuildStringWithNET");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Hello SSL interop
 ```
 

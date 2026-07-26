@@ -140,7 +140,7 @@ Sends the same manifest text to three remote files in one SFTP call, using a pri
     sPassword := "demo-passphrase";
     sPrivateKeyPath := "C:/keys/partner_feed.ppk";
     sManifest := "batch=20260418" + Chr(13) + Chr(10)
-		         + "status=ready" + Chr(13) + Chr(10);
+                 + "status=ready" + Chr(13) + Chr(10);
 
     aRemoteFiles := {"manifest_a.txt", "manifest_b.txt", "manifest_c.txt"};
 

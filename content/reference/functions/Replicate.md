@@ -93,8 +93,7 @@ Build a separator line and surround a title with it.
     nWidth := 40;
     sTitle := "Analysis Results";
     sSeparator := Replicate("-", nWidth);
-    sOutput :=
-        sSeparator + Chr(10) +
+    sOutput := sSeparator + Chr(10) +
         sTitle + " | Generated: " + DToC(Today()) + Chr(10) +
         sSeparator;
 

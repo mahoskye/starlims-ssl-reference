@@ -77,7 +77,7 @@ DoProc("SaveTempExport");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Temporary export saved to: C:\STARLIMS\Work\temp_export_001.txt
 ```
 

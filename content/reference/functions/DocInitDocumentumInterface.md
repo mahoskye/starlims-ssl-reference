@@ -24,7 +24,7 @@ Creates a fresh Documentum interface context for the current execution.
 ## Syntax
 
 ```ssl
-DocInitDocumentumInterface();
+DocInitDocumentumInterface()
 ```
 
 ## Parameters

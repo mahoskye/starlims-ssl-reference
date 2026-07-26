@@ -95,7 +95,7 @@ Collects all even numbers from 2 to `nLimit` using `:STEP 2`. With `nLimit` set 
 	:RETURN aEvenNumbers;
 :ENDPROC;
 
-/* Usage example;
+/* Usage;
 DoProc("CountByTwos");
 ```
 
@@ -125,7 +125,7 @@ Builds a countdown array from 5 to 1 using `:STEP -1`. With five iterations in d
 	:RETURN aValues;
 :ENDPROC;
 
-/* Usage example;
+/* Usage;
 DoProc("BuildCountdown");
 ```
 
@@ -158,7 +158,7 @@ Validates the step before entering the loop to prevent an infinite loop when the
 	:RETURN aValues;
 :ENDPROC;
 
-/* Usage example;
+/* Usage;
 DoProc("CollectPositions", {1, 10, 0});
 ```
 

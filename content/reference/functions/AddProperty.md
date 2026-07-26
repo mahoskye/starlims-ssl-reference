@@ -1,6 +1,6 @@
 ---
 title: "AddProperty"
-summary: "Add one or more properties to an object."
+summary: "Adds one or more properties to an object."
 id: ssl.function.addproperty
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # AddProperty
 
-Add one or more properties to an object.
+Adds one or more properties to an object.
 
 AddProperty adds a property to `oTarget` when `vPropName` is a string, or adds multiple properties when `vPropName` is an array of strings. Each new property is created with an initial value of `""`. The function returns [`NIL`](../literals/nil.md).
 

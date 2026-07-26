@@ -61,7 +61,7 @@ Retrieve the separator as a numeric code, then convert it to a displayable chara
     sSepChar := Chr(nSepCode);
 
     sMessage := "Decimal separator code: " + LimsString(nSepCode)
-		        + " character: " + sSepChar;
+                + " character: " + sSepChar;
 
     UsrMes(sMessage);
 :ENDPROC;
@@ -119,8 +119,8 @@ Use [`SetDecimalSeparator`](SetDecimalSeparator.md) to change the current separa
     sCurrentSep := GetDecimalSeparator();
 
     UsrMes("Code: " + LimsString(nSepCode)
-	        + " character: " + sSepChar
-	        + " string API: " + sCurrentSep);
+            + " character: " + sSepChar
+            + " string API: " + sCurrentSep);
 
     SetDecimalSeparator(sPrevSep);
 :ENDPROC;

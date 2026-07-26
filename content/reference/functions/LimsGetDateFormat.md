@@ -73,7 +73,7 @@ DoProc("ShowDateFormatPrompt");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Enter date using format: MM/dd/yyyy
 ```
 

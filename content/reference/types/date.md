@@ -96,7 +96,7 @@ DoProc("ComputeReviewDate");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 04/30/2026
 ```
 

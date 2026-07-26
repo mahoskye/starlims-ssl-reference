@@ -75,14 +75,14 @@ Uses .NET's static `String.Format` to build a formatted message. The receiver `s
 
 ```ssl
 :PROCEDURE BuildGreeting;
-    :DECLARE sName, sMessage;
+	:DECLARE sName, sMessage;
 
-    sName := "Hello";
-    sMessage := sName:Format("{0} world", sName);
+	sName := "Hello";
+	sMessage := sName:Format("{0} world", sName);
 
-    UsrMes(sMessage);
+	UsrMes(sMessage);
 
-    :RETURN sMessage;
+	:RETURN sMessage;
 :ENDPROC;
 
 /* Usage;
@@ -91,7 +91,7 @@ DoProc("BuildGreeting");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Hello world
 ```
 
@@ -144,7 +144,7 @@ DoProc("GetFirstLetter");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 First letter: S
 ```
 
@@ -208,7 +208,7 @@ DoProc("BuildCommentPayload");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 "No comment provided"
 ```
 

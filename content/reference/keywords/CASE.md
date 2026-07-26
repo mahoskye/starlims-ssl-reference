@@ -105,7 +105,7 @@ DoProc("CalculateSampleResult");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Standard sample passed QC with result: 82.5
 ```
 

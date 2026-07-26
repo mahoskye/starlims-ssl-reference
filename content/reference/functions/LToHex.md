@@ -85,7 +85,7 @@ DoProc("EncodeSampleId");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Hex value: 4142432D3132333435
 ```
 

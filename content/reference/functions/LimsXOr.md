@@ -122,7 +122,7 @@ DoProc("ListChangedBits");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Changed bit positions: {3}
 ```
 

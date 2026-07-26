@@ -28,7 +28,7 @@ Sets the current user name for the active execution context.
 ## Syntax
 
 ```ssl
-SetUserData(sUserName);
+SetUserData(sUserName)
 ```
 
 ## Parameters

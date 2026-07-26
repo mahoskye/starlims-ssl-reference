@@ -142,7 +142,7 @@ Fetches the live cabinet list, checks [`DocCommandFailed`](DocCommandFailed.md) 
             AAdd(aMissing, sCabinetName);
 
             RunSQL("
-	            INSERT INTO doc_cabinet_audit (
+                INSERT INTO doc_cabinet_audit (
                     cabinet_name, status
                 )
                 VALUES (

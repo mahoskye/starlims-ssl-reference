@@ -81,7 +81,7 @@ DoProc("DecodeEncodedText");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Decoded: Q1 Summary: Sales up 12%; Margin stable
 ```
 

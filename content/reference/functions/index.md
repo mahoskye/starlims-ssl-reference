@@ -52,10 +52,10 @@ starlims:
 | [AEvalA](AEvalA.md) | Applies a code block to each element of an array, replacing elements in place with the result. |
 | [AFill](AFill.md) | Fills a specified range of elements in an array with a given value, modifying the original array in place. |
 | [ALen](ALen.md) | Calculates the number of elements in a given array. |
-| [AScan](AScan.md) | Finds the index of the first array element matching a given value or condition. |
-| [AScanExact](AScanExact.md) | Searches an array for the first element that exactly matches a specified value or meets a condition. |
 | [ArrayCalc](ArrayCalc.md) | Performs a wide range of operations—such as copying, merging, filling, sorting, and calculating statistics—on an array in a single flexible call. |
 | [ArrayNew](ArrayNew.md) | Creates a new array with up to three specified dimensions, each with an explicit length. |
+| [AScan](AScan.md) | Finds the index of the first array element matching a given value or condition. |
+| [AScanExact](AScanExact.md) | Searches an array for the first element that exactly matches a specified value or meets a condition. |
 | [BuildArray](BuildArray.md) | Splits a string into an array using a specified delimiter, optionally trimming spaces from each element. |
 | [BuildArray2](BuildArray2.md) | Parses a string into a two-dimensional array using customizable line and column delimiters. |
 | [CompArray](CompArray.md) | Determines whether two arrays are structurally and value-wise equal. |
@@ -132,10 +132,10 @@ starlims:
 | [LimsRecordsAffected](LimsRecordsAffected.md) | Returns the number of records affected by the most recent database operation. |
 | [LimsSetCounter](LimsSetCounter.md) | Updates a numeric counter in a database table and inserts a new row with the result. |
 | [PrepareArrayForIn](PrepareArrayForIn.md) | Fills an array's missing or empty entries with type-appropriate default values in place. |
-| [ReturnLastSQLError](ReturnLastSQLError.md) | Retrieves the most recent SQL error that occurred during a database operation. |
 | [RetrieveLong](RetrieveLong.md) | Retrieves large binary or text data from a database column and writes it to a file. |
-| [SQLRemoveComments](SQLRemoveComments.md) | Removes all comments from an SQL statement, returning the cleaned result. |
+| [ReturnLastSQLError](ReturnLastSQLError.md) | Retrieves the most recent SQL error that occurred during a database operation. |
 | [ShowSqlErrors](ShowSqlErrors.md) | Alters the application-wide setting that determines whether SQL errors are visibly displayed to users. |
+| [SQLRemoveComments](SQLRemoveComments.md) | Removes all comments from an SQL statement, returning the cleaned result. |
 | [UpdLong](UpdLong.md) | Updates a large field value in a database table from the contents of a file, using search criteria for row selection. |
 | [XmlExportSql](XmlExportSql.md) | Exports SQL query results to an XML file on disk, returning an empty string on success or an error message if failed. |
 
@@ -153,14 +153,10 @@ starlims:
 
 | Function | Description |
 |----------|-------------|
-| [CMonth](CMonth.md) | Returns the full month name for a given date value. |
-| [CToD](CToD.md) | Converts a date string to a date value, raising an exception if the input is `NIL` or returning an empty date if parsing fails. |
 | [ClientEndOfDay](ClientEndOfDay.md) | Calculates the end-of-day timestamp for a given date, adjusted to the client's local timezone. |
 | [ClientStartOfDay](ClientStartOfDay.md) | Calculates the local start of day for a given date, adjusting for timezone differences. |
-| [DOW](DOW.md) | Calculates the day of the week for a given date and returns it as a numeric value. |
-| [DOY](DOY.md) | Calculates the numeric day of the year for a given date value. |
-| [DToC](DToC.md) | Converts a date value to a formatted string using the current date format settings. |
-| [DToS](DToS.md) | Converts a date value to a string in the yyyymmdd format. |
+| [CMonth](CMonth.md) | Returns the full month name for a given date value. |
+| [CToD](CToD.md) | Converts a date string to a date value, raising an exception if the input is `NIL` or returning an empty date if parsing fails. |
 | [DateAdd](DateAdd.md) | Adds a specified time interval to a date and returns the resulting date. |
 | [DateDiff](DateDiff.md) | Calculates the difference between two dates and returns the result in a specified unit of time. |
 | [DateDiffEx](DateDiffEx.md) | Calculates the difference between two dates and returns the result as a time interval object. |
@@ -169,6 +165,10 @@ starlims:
 | [DateFromString](DateFromString.md) | Converts a date represented as a string into a date value using optional format and culture settings. |
 | [DateToString](DateToString.md) | Converts a date value to a string using a specified or default format. |
 | [Day](Day.md) | Extracts the day of the month as a number from a date value. |
+| [DOW](DOW.md) | Calculates the day of the week for a given date and returns it as a numeric value. |
+| [DOY](DOY.md) | Calculates the numeric day of the year for a given date value. |
+| [DToC](DToC.md) | Converts a date value to a formatted string using the current date format settings. |
+| [DToS](DToS.md) | Converts a date value to a string in the yyyymmdd format. |
 | [Hour](Hour.md) | Extracts the hour component (0–23) from a date value; raises an error if the date is `NIL`. |
 | [IsInvariantDate](IsInvariantDate.md) | Checks if a date value is in an invariant (unspecified) state and returns a boolean result. |
 | [JDay](JDay.md) | Returns the numeric day of the year (1–366) for a given date value. |
@@ -371,6 +371,10 @@ Manage *inline code* — SSL snippets stored in the dictionary between [`:BEGINI
 
 | Function | Description |
 |----------|-------------|
+| [_AND](_AND.md) | Performs a bitwise AND operation between two integer numbers and returns the result. |
+| [_NOT](_NOT.md) | Performs bitwise complement on an integer number (fractional values are rejected, not truncated). |
+| [_OR](_OR.md) | Performs a bitwise OR operation on two integer values and returns the result as a number. |
+| [_XOR](_XOR.md) | Calculates the bitwise exclusive OR of two integer-valued numbers and returns the result. |
 | [Abs](Abs.md) | Calculates the non-negative value of a number, removing any sign. |
 | [GetDecimalSep](GetDecimalSep.md) | Returns the current decimal separator character as its byte value. |
 | [GetDecimalSeparator](GetDecimalSeparator.md) | Returns the current decimal separator character defined in the system or application configuration. |
@@ -391,10 +395,6 @@ Manage *inline code* — SSL snippets stored in the dictionary between [`:BEGINI
 | [StdRound](StdRound.md) | Returns a string representation of a number rounded to a specified number of digits using a named industry or regulatory rounding standard. |
 | [ToScientific](ToScientific.md) | Converts a numeric value to its scientific notation string representation with customizable decimal places. |
 | [ValidateNumeric](ValidateNumeric.md) | Validates whether a string accurately represents a numeric value based on SSL conventions. |
-| [_AND](_AND.md) | Performs a bitwise AND operation between two integer numbers and returns the result. |
-| [_NOT](_NOT.md) | Performs bitwise complement on an integer number (fractional values are rejected, not truncated). |
-| [_OR](_OR.md) | Performs a bitwise OR operation on two integer values and returns the result as a number. |
-| [_XOR](_XOR.md) | Calculates the bitwise exclusive OR of two integer-valued numbers and returns the result. |
 
 ## Object & Interop
 
@@ -445,15 +445,15 @@ Manage *inline code* — SSL snippets stored in the dictionary between [`:BEGINI
 | [HtmlEncode](HtmlEncode.md) | Encodes special characters in a string as HTML entities for safe use in HTML content. |
 | [IsGuid](IsGuid.md) | Validates whether a string conforms to the GUID format and indicates validity as a boolean. |
 | [IsHex](IsHex.md) | Validates whether a string contains only uppercase hexadecimal characters (0-9 and A-F). |
-| [LLower](LLower.md) | Converts all characters in a string to their lowercase equivalents. |
-| [LStr](LStr.md) | Converts a numeric value to a trimmed string, or returns "NIL" for `NIL` input. |
-| [LToHex](LToHex.md) | Converts a string or integer to its hexadecimal string representation. |
-| [LTrim](LTrim.md) | Removes leading whitespace from a string, returning NIL if the input is empty or contains only whitespace. |
 | [Left](Left.md) | Extracts a substring from the start of a string up to a specified length, or returns `NIL` if the length is zero or negative. |
 | [Len](Len.md) | Calculates the length of a string or the number of elements in an array. |
 | [LimsAt](LimsAt.md) | Returns the 1-based position of a substring within a string, starting from a specified 1-based offset, or 0 if not found. |
 | [LimsString](LimsString.md) | Converts any value to a LIMS-formatted string, returning "NIL" for `NIL` inputs. |
+| [LLower](LLower.md) | Converts all characters in a string to their lowercase equivalents. |
 | [Lower](Lower.md) | Converts all characters in a string to lowercase. |
+| [LStr](LStr.md) | Converts a numeric value to a trimmed string, or returns "NIL" for `NIL` input. |
+| [LToHex](LToHex.md) | Converts a string or integer to its hexadecimal string representation. |
+| [LTrim](LTrim.md) | Removes leading whitespace from a string, returning NIL if the input is empty or contains only whitespace. |
 | [MimeDecode](MimeDecode.md) | Decodes MIME-encoded data to its plain string representation. |
 | [MimeEncode](MimeEncode.md) | Converts a string into its MIME-encoded form for safe transmission and storage in contexts that require text to be encoded. |
 | [Rat](Rat.md) | Returns the one-based position of the last occurrence of a substring within a source string. |
@@ -491,11 +491,11 @@ Manage *inline code* — SSL snippets stored in the dictionary between [`:BEGINI
 | [Integer](Integer.md) | Truncates the fractional part of a number and returns the nearest integer value toward zero. |
 | [LFromHex](LFromHex.md) | Converts a hexadecimal-encoded string into its ASCII string representation. |
 | [LHex2Dec](LHex2Dec.md) | Converts a hexadecimal number string to its decimal string representation. |
-| [LTransform](LTransform.md) | Converts an expression to a string using a custom numeric formatting pattern. |
 | [LimsNETCast](LimsNETCast.md) | Converts a given value to a specified target type, such as enum, reference, number, or array, according to the instructions in the type string. |
 | [LimsNETTypeOf](LimsNETTypeOf.md) | Resolves a type name to its corresponding .NET type object for dynamic operations. |
 | [LimsType](LimsType.md) | Identifies the SSL type code for a value referenced by a string parameter. |
 | [LimsTypeEx](LimsTypeEx.md) | Returns the SSL type name of a given value as a string. |
+| [LTransform](LTransform.md) | Converts an expression to a string using a custom numeric formatting pattern. |
 | [Nothing](Nothing.md) | Returns true when val is `NIL`, empty, or stringifies to "0"; otherwise returns false. |
 | [ToJson](ToJson.md) | Serializes a value to its JSON string representation. |
 | [ToNumeric](ToNumeric.md) | Converts a string to a numeric value, with optional hexadecimal support. |

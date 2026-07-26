@@ -31,7 +31,7 @@ Unlike [`:REGION`](REGION.md), the inline body is validated as executable SSL. U
 
 ```ssl
 :BEGININLINECODE BlockName;
-    /* Inline SSL code here;
+	/* Inline SSL code here;
 :ENDINLINECODE;
 ```
 
@@ -39,7 +39,7 @@ You can also quote the block name:
 
 ```ssl
 :BEGININLINECODE "BlockName";
-    /* Inline SSL code here;
+	/* Inline SSL code here;
 :ENDINLINECODE;
 ```
 
@@ -98,7 +98,7 @@ DoProc("RunGreeting");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Hello from inline code
 ```
 
@@ -130,7 +130,7 @@ DoProc("BuildStatusMessage");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Status: Logged, Count: 3
 ```
 

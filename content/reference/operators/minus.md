@@ -87,7 +87,7 @@ DoProc("SubtractNumbers");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 100 minus 30 equals 70
 ```
 
@@ -115,7 +115,7 @@ DoProc("TrimAndJoinStrings");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Joined: [SampleAnalysis]
 ```
 
@@ -146,7 +146,7 @@ DoProc("CalculateDateDifference");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Reminder date: 03/12/2024, days until due: 5
 ```
 

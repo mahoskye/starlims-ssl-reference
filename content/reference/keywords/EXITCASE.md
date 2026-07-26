@@ -90,7 +90,7 @@ DoProc("GetSamplePriority", {"HIGH"});
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Sample priority: Process within 24 hours
 ```
 
@@ -128,7 +128,7 @@ DoProc("ClassifyResult", {80});
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Warning
 ```
 

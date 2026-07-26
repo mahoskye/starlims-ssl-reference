@@ -109,7 +109,7 @@ Logs in to Documentum, checks out a single document by ID, and displays either t
     :ENDTRY;
 :ENDPROC;
 
-/* Usage example;
+/* Usage;
 DoProc("CheckoutDocumentBasic");
 ```
 
@@ -147,7 +147,7 @@ Guards against an empty document ID before calling checkout and returns a struct
     :RETURN oResult;
 :ENDPROC;
 
-/* Usage example;
+/* Usage;
 DoProc("CheckoutDocumentWithStatus", {"DOC-2024-001"});
 ```
 
@@ -217,7 +217,7 @@ Checks out a list of document IDs, collects a failure object for each one that d
     :ENDTRY;
 :ENDPROC;
 
-/* Usage example;
+/* Usage;
 DoProc("CheckoutDocumentsBatch");
 ```
 

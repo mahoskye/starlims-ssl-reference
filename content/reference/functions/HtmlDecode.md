@@ -71,14 +71,14 @@ Convert encoded comparison text into a readable message.
 
 ```ssl
 :PROCEDURE ShowDecodedMessage;
-    :DECLARE sEncodedText, sDecodedText;
+	:DECLARE sEncodedText, sDecodedText;
 
-    sEncodedText := "Formula requires x &lt; 100 &amp; y &gt; 0";
-    sDecodedText := HtmlDecode(sEncodedText);
+	sEncodedText := "Formula requires x &lt; 100 &amp; y &gt; 0";
+	sDecodedText := HtmlDecode(sEncodedText);
 
-    UsrMes(sDecodedText);
+	UsrMes(sDecodedText);
 
-    :RETURN sDecodedText;
+	:RETURN sDecodedText;
 :ENDPROC;
 
 /* Usage;

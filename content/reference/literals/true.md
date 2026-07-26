@@ -86,7 +86,7 @@ DoProc("ProcessWithValidation");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Validation enabled — processing LAB-2024-0042
 ```
 
