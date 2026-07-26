@@ -3,12 +3,6 @@ title: "ENDWHILE"
 summary: "Closes a :WHILE loop block."
 id: ssl.keyword.endwhile
 element_type: keyword
-category: control-flow
-tags:
-  - while-loop
-  - block-closer
-  - looping
-  - control-flow
 doc_status: published
 starlims:
   applies_to: [11]

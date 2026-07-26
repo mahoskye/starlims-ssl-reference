@@ -3,11 +3,6 @@ title: "TO"
 summary: "Sets the inclusive loop limit used by a :FOR loop."
 id: ssl.keyword.to
 element_type: keyword
-category: loop
-tags:
-  - loop-control
-  - for-loop
-  - range
 doc_status: published
 starlims:
   applies_to: [11]

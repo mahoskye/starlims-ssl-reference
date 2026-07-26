@@ -3,12 +3,6 @@ title: "EXITWHILE"
 summary: "Terminates the innermost active :WHILE loop and continues with the statement after the matching :ENDWHILE."
 id: ssl.keyword.exitwhile
 element_type: keyword
-category: loop
-tags:
-  - loop-control
-  - exit
-  - while-loop
-  - early-exit
 doc_status: published
 starlims:
   applies_to: [11]

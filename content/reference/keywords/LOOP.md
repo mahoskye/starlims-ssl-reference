@@ -3,12 +3,6 @@ title: "LOOP"
 summary: "Skips the rest of the current :WHILE or :FOR iteration and continues with the next iteration of the innermost active loop."
 id: ssl.keyword.loop
 element_type: keyword
-category: loop
-tags:
-  - loop-control
-  - continue
-  - for-loop
-  - while-loop
 doc_status: published
 starlims:
   applies_to: [11]

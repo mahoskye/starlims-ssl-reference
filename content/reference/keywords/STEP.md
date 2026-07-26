@@ -3,11 +3,6 @@ title: "STEP"
 summary: "Sets the increment or decrement used by a :FOR loop between iterations."
 id: ssl.keyword.step
 element_type: keyword
-category: loop
-tags:
-  - loop-control
-  - for-loop
-  - increment
 doc_status: published
 starlims:
   applies_to: [11]

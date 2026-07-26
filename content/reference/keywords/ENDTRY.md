@@ -3,13 +3,6 @@ title: "ENDTRY"
 summary: "Closes a structured :TRY block after its :CATCH and/or :FINALLY sections."
 id: ssl.keyword.endtry
 element_type: keyword
-category: error-handling
-tags:
-  - exception-handling
-  - block-closer
-  - try-catch
-  - finally
-  - control-flow
 doc_status: published
 starlims:
   applies_to: [11]

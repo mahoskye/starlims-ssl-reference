@@ -7,8 +7,13 @@ Walks ``content/reference/<category>/*.md`` and pulls out:
 * The ``## Exceptions`` section, parsed as a list of ``{trigger, message}``
   pairs from its markdown table.
 * The ``## Caveats`` section, parsed as a list of bullet items (free prose).
+  Pages in the operator-family vocabulary (operators, types, literals, most
+  special forms) title this section ``## Errors and edge cases``; both are
+  recognized, and a page with both contributes both.
 * The ``## Best practices`` section, split into ``do`` and ``dont`` bullet
   lists from the ``!!! success "Do"`` / ``!!! failure "Don't"`` admonitions.
+  The operator-family title ``## Notes for daily SSL work`` is recognized
+  the same way.
 
 Output: ``content/data/ssl-element-meta.json``. Downstream repositories
 (``ssl-style-guide`` -> ``ssl-mcp-server``, ``starlims-lsp``,
@@ -259,6 +264,18 @@ def extract_element(path: Path) -> dict[str, Any] | None:
     if not fm.get("id") or not fm.get("element_type"):
         return None
     sections = split_sections(body)
+    # Two section vocabularies exist by category convention: functions/
+    # classes/keywords use "Caveats" / "Best practices"; operators/types/
+    # literals/most special forms use "Errors and edge cases" / "Notes for
+    # daily SSL work". Both are recognized; a page with both contributes both.
+    caveats = parse_bullet_list(sections.get("caveats", "")) + parse_bullet_list(
+        sections.get("errors and edge cases", "")
+    )
+    best = parse_best_practices(sections.get("best practices", ""))
+    best_alt = parse_best_practices(sections.get("notes for daily ssl work", ""))
+    best_practices = dict(best)
+    for key, items in best_alt.items():
+        best_practices[key] = best_practices.get(key, []) + items
     return {
         "id": fm.get("id", ""),
         "element_type": fm.get("element_type", ""),
@@ -267,8 +284,8 @@ def extract_element(path: Path) -> dict[str, Any] | None:
         "doc_status": fm.get("doc_status", ""),
         "source_path": path.relative_to(REPO_ROOT).as_posix(),
         "exceptions": parse_exceptions_table(sections.get("exceptions", "")),
-        "caveats": parse_bullet_list(sections.get("caveats", "")),
-        "best_practices": parse_best_practices(sections.get("best practices", "")),
+        "caveats": caveats,
+        "best_practices": best_practices,
     }
 
 

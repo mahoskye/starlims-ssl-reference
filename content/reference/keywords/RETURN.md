@@ -3,13 +3,6 @@ title: "RETURN"
 summary: "Ends the current script, procedure, or method immediately and can optionally return a value."
 id: ssl.keyword.return
 element_type: keyword
-category: control-flow
-tags:
-  - procedure
-  - script
-  - method
-  - control-flow
-  - return-value
 doc_status: published
 starlims:
   applies_to: [11]
