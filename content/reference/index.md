@@ -1,6 +1,6 @@
 ---
 title: "SSL Reference"
-summary: "Complete reference for all 460 SSL language elements."
+summary: "Reference for 460 SSL language elements as implemented in STARLIMS v11."
 starlims:
   applies_to: [11]
   verified_against: [11]
@@ -8,14 +8,14 @@ starlims:
 
 # SSL Reference
 
-Complete reference for all 460 SSL language elements.
+Reference for 460 SSL language elements, documenting behavior as implemented in STARLIMS version 11.
 
-Each element page includes:
+Element pages draw from a common set of sections — the exact mix varies by category:
 
 - **Summary** and detailed description
 - **Parameters** with types, defaults, and requirements
 - **Return values** and type information
-- **Exceptions** with conditions and messages
+- **Exceptions** with conditions and messages, where known
 - **Best practices** — do/don't pairs with rationale
 - **Code examples** demonstrating common and advanced usage
 - **Related elements** for cross-reference

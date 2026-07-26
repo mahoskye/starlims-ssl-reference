@@ -23,6 +23,13 @@ def on_startup(**kwargs):
         _lex_mod._lexer_cache.clear()
 
 
+def on_page_markdown(markdown, page, config, files):
+    """Use each page's summary as its meta description for search engines."""
+    if "description" not in page.meta and page.meta.get("summary"):
+        page.meta["description"] = page.meta["summary"]
+    return markdown
+
+
 def on_page_content(html, page, config, files):
     """Mark exception tables so column widths can be styled consistently."""
     return re.sub(
