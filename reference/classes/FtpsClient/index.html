@@ -3694,7 +3694,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="upload-a-local-file">Upload a local file<a class="headerlink" href="#upload-a-local-file" title="Permanent link">&para;</a></h3>
 <p>Establishes a full <code>Connect</code> -&gt; <code>Login</code> -&gt; <code>Secure</code> session in explicit TLS mode, uploads a local file with <code>SendToFtps</code>, and logs the server response from each step. <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> guarantees <code>Disconnect</code> runs even if <code>SendToFtps</code> fails.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UploadReportToFtps</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UploadReportToFtps</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oFtps</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">,</span><span class="w"> </span><span class="n">bOk</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oFtps</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">FtpsClient</span><span class="p">{};</span>
@@ -3737,7 +3737,7 @@
 </code></pre></div>
 <h3 id="list-a-directory-and-verify-a-file">List a directory and verify a file<a class="headerlink" href="#list-a-directory-and-verify-a-file" title="Permanent link">&para;</a></h3>
 <p>Reads a remote directory with <code>GetDirFromFtps</code>, prints each entry's name, size, date, time, and attributes, then calls <code>CheckOnFtps</code> to confirm a specific file is present. Each row of the 2D listing array is formatted as a <a href="../../operators/or/"><code>|</code></a>-delimited line.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReviewFtpsFolder</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReviewFtpsFolder</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oFtps</span><span class="p">,</span><span class="w"> </span><span class="n">aEntries</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">bFound</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">,</span><span class="w"> </span><span class="n">sLine</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oFtps</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">FtpsClient</span><span class="p">{};</span>
@@ -3785,7 +3785,7 @@
 </code></pre></div>
 <h3 id="append-content-with-custom-tls-settings">Append content with custom TLS settings<a class="headerlink" href="#append-content-with-custom-tls-settings" title="Permanent link">&para;</a></h3>
 <p>Calls <code>SetTlsParameters</code> before <code>Connect</code> to specify a cipher suite, expected common name, and certificate file. Then <code>WriteToFtps</code> appends a CRLF-terminated log line to an existing remote file because <code>WriteToFtps</code> writes starting at the current file length, so the call adds to rather than replaces the log.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AppendComplianceLog</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AppendComplianceLog</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oFtps</span><span class="p">,</span><span class="w"> </span><span class="n">sContent</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">,</span><span class="w"> </span><span class="n">bOk</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oFtps</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">FtpsClient</span><span class="p">{};</span>

@@ -4339,7 +4339,7 @@
 <li>When building workflows that require special handling for uninitialized or default date values.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">IsInvariantDate</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">IsInvariantDate</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4407,7 +4407,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="block-a-workflow-when-the-review-date-is-invariant">Block a workflow when the review date is invariant<a class="headerlink" href="#block-a-workflow-when-the-review-date-is-invariant" title="Permanent link">&para;</a></h3>
 <p>Call <code>IsInvariantDate</code> on a date produced by <a href="../CToD/"><code>CToD</code></a> with an empty string. An empty date string yields an invariant date, so the <a href="../../keywords/IF/"><code>:IF</code></a> branch fires and <a href="../ErrorMes/"><code>ErrorMes</code></a> blocks the workflow. If a proper date were supplied, the <a href="../../keywords/ELSE/"><code>:ELSE</code></a> branch would fire and <a href="../InfoMes/"><code>InfoMes</code></a> would display the approval message.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckReviewDateInvariant</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckReviewDateInvariant</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dReviewDate</span><span class="p">,</span><span class="w"> </span><span class="n">bIsInvariant</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dReviewDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
@@ -4425,7 +4425,7 @@
 </code></pre></div>
 <h3 id="count-user-set-versus-invariant-dates-across-imported-records">Count user-set versus invariant dates across imported records<a class="headerlink" href="#count-user-set-versus-invariant-dates-across-imported-records" title="Permanent link">&para;</a></h3>
 <p>Iterate over a list of sample records, each represented as a three-element array of <code>{dReceived, dAnalyzed, dReported}</code> dates, and use <code>IsInvariantDate</code> to count how many date fields are set versus still invariant. With the data below, three fields have real dates and six are invariant, and the warning fires because <code>nInvariantDates</code> is greater than zero.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateImportedDates</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateImportedDates</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRecords</span><span class="p">,</span><span class="w"> </span><span class="n">aDates</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nDateIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nUserDates</span><span class="p">,</span><span class="w"> </span><span class="n">nInvariantDates</span><span class="p">,</span><span class="w"> </span><span class="n">sMsg</span><span class="p">;</span>
 

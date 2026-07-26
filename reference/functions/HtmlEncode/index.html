@@ -4258,7 +4258,7 @@
 <li>When you need the exact entity replacements supported by <code>HtmlEncode</code> before passing the result to another system.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">HtmlEncode</span><span class="p">(</span><span class="n">sData</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">HtmlEncode</span><span class="p">(</span><span class="n">sData</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4308,7 +4308,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="encode-a-string-before-inserting-it-into-html">Encode a string before inserting it into HTML<a class="headerlink" href="#encode-a-string-before-inserting-it-into-html" title="Permanent link">&para;</a></h3>
 <p>Encode user-supplied text before placing it inside a markup string, so that special characters become safe entity sequences rather than markup.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildCommentMarkup</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildCommentMarkup</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sComment</span><span class="p">,</span><span class="w"> </span><span class="n">sEncodedComment</span><span class="p">,</span><span class="w"> </span><span class="n">sHtml</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sComment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Meeting at 3pm &lt;review&gt; &amp; &#39;coffee&#39;&quot;</span><span class="p">;</span>
@@ -4324,11 +4324,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildCommentMarkup&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>&lt;p&gt;Meeting at 3pm &amp;lt;review&amp;gt; &amp;amp; &amp;apos;coffee&amp;apos;&lt;/p&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>&lt;p&gt;Meeting at 3pm &amp;lt;review&amp;gt; &amp;amp; &amp;apos;coffee&amp;apos;&lt;/p&gt;
 </code></pre></div>
 <h3 id="encode-attribute-values-when-building-an-xml-element">Encode attribute values when building an XML element<a class="headerlink" href="#encode-attribute-values-when-building-an-xml-element" title="Permanent link">&para;</a></h3>
 <p>Encode each attribute value inline while composing an XML element string, so that quotes and special characters inside values do not break the markup structure.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSampleXml</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSampleXml</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;A&amp;B&lt;42&gt;&quot;</span><span class="p">;</span>
@@ -4345,11 +4345,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildSampleXml&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>&lt;sample id=&#39;A&amp;amp;B&amp;lt;42&amp;gt;&#39; status=&#39;Ready &amp;quot;now&amp;quot;&#39;&gt;&lt;/sample&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>&lt;sample id=&#39;A&amp;amp;B&amp;lt;42&amp;gt;&#39; status=&#39;Ready &amp;quot;now&amp;quot;&#39;&gt;&lt;/sample&gt;
 </code></pre></div>
 <h3 id="encode-a-batch-of-values-including-nil-entries">Encode a batch of values including NIL entries<a class="headerlink" href="#encode-a-batch-of-values-including-nil-entries" title="Permanent link">&para;</a></h3>
 <p>Encode an array containing a mix of strings and a <a href="../../literals/nil/"><code>NIL</code></a> entry, showing that <code>HtmlEncode</code> passes <a href="../../literals/nil/"><code>NIL</code></a> through unchanged while encoding all other values. After the loop, <code>aEncodedNotes[1]</code> holds <code>&amp;lt;alpha&amp;gt;</code>, entry 2 remains <a href="../../literals/nil/"><code>NIL</code></a>, <code>aEncodedNotes[3]</code> holds <code>Tom &amp;amp; Jerry</code>, and <code>aEncodedNotes[4]</code> holds <code>She said &amp;quot;go&amp;quot;</code>. The <a href="../UsrMes/"><code>UsrMes</code></a> call confirms that the <a href="../../literals/nil/"><code>NIL</code></a> entry was preserved.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">EncodeNotes</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">EncodeNotes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aNotes</span><span class="p">,</span><span class="w"> </span><span class="n">aEncodedNotes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">vEncoded</span><span class="p">;</span>
 
@@ -4370,7 +4370,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;EncodeNotes&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>true
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>true
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

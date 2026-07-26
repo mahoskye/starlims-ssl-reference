@@ -4241,7 +4241,7 @@
 <li>When you are coordinating SQL error suppression with <a href="../ShowSqlErrors/"><code>ShowSqlErrors</code></a> for quieter maintenance or cleanup flows.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">IgnoreSqlErrors</span><span class="p">(</span><span class="n">bEnable</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">IgnoreSqlErrors</span><span class="p">(</span><span class="n">bEnable</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4293,7 +4293,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="suppress-errors-for-a-batch-of-best-effort-deletes">Suppress errors for a batch of best-effort deletes<a class="headerlink" href="#suppress-errors-for-a-batch-of-best-effort-deletes" title="Permanent link">&para;</a></h3>
 <p>Shows the save-and-restore pattern: capture the previous value before enabling suppression, run best-effort deletes where any individual failure is intentionally ignored, then restore the original setting so later SQL operations are unaffected.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CleanupOptionalAuditRows</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CleanupOptionalAuditRows</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bPrevIgnore</span><span class="p">,</span><span class="w"> </span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">aSampleIds</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bPrevIgnore</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IgnoreSqlErrors</span><span class="p">(</span><span class="kc">.T.</span><span class="p">);</span>
@@ -4316,7 +4316,7 @@
 </code></pre></div>
 <h3 id="restore-the-previous-setting-with-finally">Restore the previous setting with <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a><a class="headerlink" href="#restore-the-previous-setting-with-finally" title="Permanent link">&para;</a></h3>
 <p>Uses <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> to guarantee restoration even if the archive SQL throws. Capturing the return value before the <a href="../../keywords/TRY/"><code>:TRY</code></a> block and restoring it in <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> prevents the suppression flag from being stranded if an error escapes the block.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ArchiveCompletedTasks</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ArchiveCompletedTasks</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bPrevIgnore</span><span class="p">,</span><span class="w"> </span><span class="n">sInsertSql</span><span class="p">,</span><span class="w"> </span><span class="n">sDeleteSql</span><span class="p">,</span><span class="w"> </span><span class="n">dCutoff</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dCutoff</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span>
@@ -4349,7 +4349,7 @@
 </code></pre></div>
 <h3 id="coordinate-sql-suppression-and-error-display-together">Coordinate SQL suppression and error display together<a class="headerlink" href="#coordinate-sql-suppression-and-error-display-together" title="Permanent link">&para;</a></h3>
 <p>Combines <code>IgnoreSqlErrors</code> with <a href="../ShowSqlErrors/"><code>ShowSqlErrors</code></a> to make a maintenance window fully quiet. Both settings are saved before the block and restored in <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> in reverse order, display restored first and then suppression, to match the reverse of how they were set.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunQuietMaintenance</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunQuietMaintenance</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bPrevIgnore</span><span class="p">,</span><span class="w"> </span><span class="n">bPrevShow</span><span class="p">,</span><span class="w"> </span><span class="n">sDeleteSql</span><span class="p">,</span><span class="w"> </span><span class="n">sUpdateSql</span><span class="p">,</span><span class="w"> </span><span class="n">dCutoff</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dCutoff</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>

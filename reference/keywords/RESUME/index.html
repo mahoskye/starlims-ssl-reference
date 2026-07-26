@@ -2851,7 +2851,7 @@
 <li>When you need broad legacy error coverage across the remaining statements in a procedure rather than a smaller <a href="../TRY/"><code>:TRY</code></a> block.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:RESUME</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:RESUME</span><span class="p">;</span>
 </code></pre></div>
 <p><code>:RESUME</code> takes no parameters.</p>
 <h2 id="keyword-group">Keyword group<a class="headerlink" href="#keyword-group" title="Permanent link">&para;</a></h2>
@@ -2884,7 +2884,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="skip-a-failed-update-and-continue-logging">Skip a failed update and continue logging<a class="headerlink" href="#skip-a-failed-update-and-continue-logging" title="Permanent link">&para;</a></h3>
 <p>Uses <code>:RESUME</code> so a failed <a href="../../functions/RunSQL/"><code>RunSQL</code></a> call does not stop the rest of the procedure. When the SQL update fails, the error handler logs the failure and execution continues to the confirmation message.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateSampleStatus_Legacy</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateSampleStatus_Legacy</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SAMPL-2024-042&quot;</span><span class="p">;</span>
@@ -2906,7 +2906,7 @@
 </code></pre></div>
 <h3 id="continue-a-batch-after-record-level-failures">Continue a batch after record-level failures<a class="headerlink" href="#continue-a-batch-after-record-level-failures" title="Permanent link">&para;</a></h3>
 <p>Logs each bad record and continues processing the rest of the array. With <code>{"SMP-001", "INVALID", "SMP-002"}</code>, the <code>"INVALID"</code> entry triggers the error handler once while the loop completes all three iterations via <code>:RESUME</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateSampleRecords</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateSampleRecords</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aSampleIDs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">nValidated</span><span class="p">,</span><span class="w"> </span><span class="n">nFailed</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sLogMsg</span><span class="p">;</span>
 

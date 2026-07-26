@@ -3242,7 +3242,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="send-a-notification-email">Send a notification email<a class="headerlink" href="#send-a-notification-email" title="Permanent link">&para;</a></h3>
 <p>Shows the basic <code>Email{}</code> pattern: set all required properties, call <code>Send()</code>, and check the boolean result. Because <code>Email{}</code> suppresses exceptions, a failure returns <a href="../../literals/false/"><code>.F.</code></a> and the error detail is available through <code>oEmail:Exception:Description</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SendNotificationEmail</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SendNotificationEmail</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oEmail</span><span class="p">,</span><span class="w"> </span><span class="n">bSent</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oEmail</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Email</span><span class="p">{};</span>
@@ -3278,7 +3278,7 @@
 </code></pre></div>
 <h3 id="queue-a-signed-report-for-outbox-delivery">Queue a signed report for outbox delivery<a class="headerlink" href="#queue-a-signed-report-for-outbox-delivery" title="Permanent link">&para;</a></h3>
 <p>Uses <code>Email{.F.}</code> so failures raise exceptions, then wraps the operation in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a>. Signs the message with a <code>.pfx</code> certificate before queuing it with <a href="../../functions/SendToOutbox/"><code>SendToOutbox()</code></a>. Since <code>IgnoreExceptions</code> is <a href="../../literals/false/"><code>.F.</code></a>, certificate load failures propagate to <a href="../../keywords/CATCH/"><code>:CATCH</code></a> rather than silently returning <a href="../../literals/false/"><code>.F.</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">QueueSignedReport</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">QueueSignedReport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oEmail</span><span class="p">,</span><span class="w"> </span><span class="n">bQueued</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oEmail</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Email</span><span class="p">{</span><span class="kc">.F.</span><span class="p">};</span>

@@ -4362,7 +4362,7 @@ If the input date is empty, the function returns <code>0</code>. If the argument
 <li>When you need the minute without parsing a formatted date string.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Minute</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Minute</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4430,7 +4430,7 @@ If the input date is empty, the function returns <code>0</code>. If the argument
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="show-the-current-minute">Show the current minute<a class="headerlink" href="#show-the-current-minute" title="Permanent link">&para;</a></h3>
 <p>Get the current system time with <a href="../Now/"><code>Now</code></a> and extract the minute component. The output depends on when the procedure runs.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowCurrentMinute</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowCurrentMinute</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dNow</span><span class="p">,</span><span class="w"> </span><span class="n">nMinute</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dNow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Now</span><span class="p">();</span>
@@ -4446,12 +4446,12 @@ If the input date is empty, the function returns <code>0</code>. If the argument
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowCurrentMinute&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Current minute: 42
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Current minute: 42
 </code></pre></div>
 <p>The exact value depends on when the procedure runs.</p>
 <h3 id="count-events-into-60-minute-buckets">Count events into 60 minute buckets<a class="headerlink" href="#count-events-into-60-minute-buckets" title="Permanent link">&para;</a></h3>
 <p>Build a 60-slot counter array and increment each slot by the minute component of each event timestamp. Events at the same minute accumulate in the same slot.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CountEventsByMinute</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CountEventsByMinute</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aEvents</span><span class="p">,</span><span class="w"> </span><span class="n">aMinuteCounts</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nMinute</span><span class="p">,</span><span class="w"> </span><span class="n">nSlot</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aEvents</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
@@ -4483,7 +4483,7 @@ If the input date is empty, the function returns <code>0</code>. If the argument
 </code></pre></div>
 <h3 id="route-requests-that-arrive-in-the-last-five-minutes-of-the-hour">Route requests that arrive in the last five minutes of the hour<a class="headerlink" href="#route-requests-that-arrive-in-the-last-five-minutes-of-the-hour" title="Permanent link">&para;</a></h3>
 <p>Classify each request as <code>ESCALATE</code> when its timestamp falls at minute 55 or later, and <code>STANDARD</code> otherwise. This lets downstream logic apply a different processing path for near-deadline submissions.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ClassifyRequestsByMinute</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ClassifyRequestsByMinute</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRequests</span><span class="p">,</span><span class="w"> </span><span class="n">aStatuses</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">dRequestedAt</span><span class="p">,</span><span class="w"> </span><span class="n">nMinute</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRequests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>

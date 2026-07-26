@@ -4362,7 +4362,7 @@
   <code>12</code>.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">CMonth</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">CMonth</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4431,7 +4431,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="display-a-month-name-for-a-date-value">Display a month name for a date value<a class="headerlink" href="#display-a-month-name-for-a-date-value" title="Permanent link">&para;</a></h3>
 <p>Converts a specific date to a month name and displays it in a message. March 15, 2024 produces <code>"March"</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowReceiveMonth</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowReceiveMonth</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dReceiveDate</span><span class="p">,</span><span class="w"> </span><span class="n">sMonthName</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dReceiveDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/15/2024&quot;</span><span class="p">);</span>
@@ -4446,11 +4446,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowReceiveMonth&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Sample received in March
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample received in March
 </code></pre></div>
 <h3 id="skip-empty-dates-when-building-a-list-of-month-labels">Skip empty dates when building a list of month labels<a class="headerlink" href="#skip-empty-dates-when-building-a-list-of-month-labels" title="Permanent link">&para;</a></h3>
 <p>Builds an array of month names from a mixed list that includes an empty date, skipping any entries where the date is empty so blank month labels are not added to the result.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildMonthLabels</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildMonthLabels</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aDates</span><span class="p">,</span><span class="w"> </span><span class="n">aMonthLabels</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">dReviewDate</span><span class="p">,</span><span class="w"> </span><span class="n">sMonthName</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aDates</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/10/2024&quot;</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/22/2024&quot;</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)};</span>
@@ -4475,7 +4475,7 @@
 </code></pre></div>
 <h3 id="group-records-into-month-and-year-buckets">Group records into month-and-year buckets<a class="headerlink" href="#group-records-into-month-and-year-buckets" title="Permanent link">&para;</a></h3>
 <p>Groups dates from multiple calendar years into labeled buckets by combining the month name from <code>CMonth</code> with the year from <a href="../Year/"><code>Year</code></a>, so January 2024 and January 2025 become distinct buckets.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildMonthlySummary</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildMonthlySummary</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aDates</span><span class="p">,</span><span class="w"> </span><span class="n">aSummary</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">dLogDate</span><span class="p">,</span><span class="w"> </span><span class="n">sBucket</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMonthName</span><span class="p">,</span><span class="w"> </span><span class="n">nMonth</span><span class="p">,</span><span class="w"> </span><span class="n">nYear</span><span class="p">,</span><span class="w"> </span><span class="n">nPos</span><span class="p">;</span>
 

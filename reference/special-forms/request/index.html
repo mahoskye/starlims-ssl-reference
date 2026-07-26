@@ -2041,7 +2041,7 @@
 <p>The value is an <a href="../../returns/SSLRequest/"><code>SSLRequest</code></a> — read its properties to inspect the incoming method, URL, headers, query string, cookies, body, and so on. When the script is invoked specifically as a web service, the value is the <a href="../../returns/SSLWsRequest/"><code>SSLWsRequest</code></a> subclass, which adds a <code>Parameters</code> array on top of everything <code>SSLRequest</code> exposes.</p>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
 <p><code>Request</code> has no declaration syntax — it is an ambient identifier the runtime makes available by name. Reference it directly:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="n">Request</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">Request</span><span class="p">;</span>
 <span class="n">Request</span><span class="p">:</span><span class="n">PropertyName</span><span class="p">;</span>
 <span class="n">Request</span><span class="p">:</span><span class="n">CollectionName</span><span class="p">:</span><span class="n">Key</span><span class="p">;</span>
 <span class="n">Request</span><span class="p">:</span><span class="nf">MethodName</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
@@ -2049,7 +2049,7 @@
 <h2 id="availability">Availability<a class="headerlink" href="#availability" title="Permanent link">&para;</a></h2>
 <p><code>Request</code> is available <strong>only inside endpoint scripts</strong>. Outside that context — for example, in a script invoked through <code>DoProc</code> from an interactive desktop session, or in a job triggered without an HTTP envelope — referencing <code>Request</code> raises an undeclared-variable error.</p>
 <p>If your code may run in either context, guard with a <code>:TRY</code> / <code>:CATCH</code> block:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserAgent</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserAgent</span><span class="p">;</span>
 
 <span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sUserAgent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">UserAgent</span><span class="p">;</span>
@@ -2091,7 +2091,7 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="read-a-query-parameter-and-the-authenticated-user">Read a query parameter and the authenticated user<a class="headerlink" href="#read-a-query-parameter-and-the-authenticated-user" title="Permanent link">&para;</a></h3>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GreetCurrentUser</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GreetCurrentUser</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sId</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">QueryString</span><span class="p">:</span><span class="n">Id</span><span class="p">;</span>
@@ -2102,7 +2102,7 @@
 </code></pre></div>
 <h3 id="branch-on-whether-the-call-is-a-web-service">Branch on whether the call is a web service<a class="headerlink" href="#branch-on-whether-the-call-is-a-web-service" title="Permanent link">&para;</a></h3>
 <p>Reads the inherited <code>IsHTMLWsRequest</code> flag to decide which return path to take.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FlexibleEndpoint</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FlexibleEndpoint</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sId</span><span class="p">,</span><span class="w"> </span><span class="n">oResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">QueryString</span><span class="p">:</span><span class="n">Id</span><span class="p">;</span>

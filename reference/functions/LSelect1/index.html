@@ -4040,7 +4040,7 @@
 <li>When you need to control how database <code>NULL</code> values and date columns are mapped into SSL values.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LSelect1</span><span class="p">(</span><span class="n">sCommandString</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aArrayOfValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bNullAsBlank</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aInvariantDateCols</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LSelect1</span><span class="p">(</span><span class="n">sCommandString</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aArrayOfValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bNullAsBlank</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aInvariantDateCols</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4150,7 +4150,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="fetch-rows-and-handle-an-empty-result">Fetch rows and handle an empty result<a class="headerlink" href="#fetch-rows-and-handle-an-empty-result" title="Permanent link">&para;</a></h3>
 <p>Query all samples ordered by ID. When the result is empty, report it and return immediately. Otherwise, print one line per row.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FetchSampleRecordsForGrid</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FetchSampleRecordsForGrid</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aSamples</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleName</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
@@ -4182,7 +4182,7 @@
 </code></pre></div>
 <h3 id="build-a-dynamic-where-clause-with-parameter-binding">Build a dynamic WHERE clause with parameter binding<a class="headerlink" href="#build-a-dynamic-where-clause-with-parameter-binding" title="Permanent link">&para;</a></h3>
 <p>Accumulate <code>?</code> placeholders and matching values into <code>aParams</code> as filters are applied, then pass <code>aParams</code> to <code>LSelect1</code> with a skipped connection argument.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">QuerySamplesByStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">QuerySamplesByStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatusFilter</span><span class="p">,</span><span class="w"> </span><span class="n">sDepartmentFilter</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatusFilter</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ALL&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sDepartmentFilter</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ALL&quot;</span><span class="p">;</span>
@@ -4236,7 +4236,7 @@
 </code></pre></div>
 <h3 id="preserve-date-columns-without-timezone-conversion">Preserve date columns without timezone conversion<a class="headerlink" href="#preserve-date-columns-without-timezone-conversion" title="Permanent link">&para;</a></h3>
 <p>Pass column indexes in <code>aInvariantDateCols</code> to prevent timezone adjustment on the <code>create_date</code> and <code>result_date</code> columns.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSamplesWithInvariantDates</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSamplesWithInvariantDates</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">dStartDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">aInvariantCols</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nRowCount</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">dCreateDate</span><span class="p">,</span><span class="w"> </span><span class="n">dResultDate</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sOutput</span><span class="p">;</span>

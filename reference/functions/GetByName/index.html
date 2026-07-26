@@ -3605,7 +3605,7 @@
 <li>When you must resolve variable names dynamically, especially in workflows involving variable indirection or user-supplied identifiers.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetByName</span><span class="p">(</span><span class="n">sName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">GetByName</span><span class="p">(</span><span class="n">sName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3673,7 +3673,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="retrieve-a-variable-whose-name-is-known-only-at-runtime">Retrieve a variable whose name is known only at runtime<a class="headerlink" href="#retrieve-a-variable-whose-name-is-known-only-at-runtime" title="Permanent link">&para;</a></h3>
 <p>Create a variable with <a href="../CreateLocal/"><code>CreateLocal</code></a>, then retrieve it by name using a string variable rather than a direct reference.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetUserVariable</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetUserVariable</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sVarName</span><span class="p">,</span><span class="w"> </span><span class="n">sValue</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sVarName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sUserName&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">CreateLocal</span><span class="p">(</span><span class="n">sVarName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Alice&quot;</span><span class="p">);</span>
@@ -3686,11 +3686,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetUserVariable&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Value of sUserName is: Alice
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Value of sUserName is: Alice
 </code></pre></div>
 <h3 id="collect-a-set-of-named-variables-into-a-report">Collect a set of named variables into a report<a class="headerlink" href="#collect-a-set-of-named-variables-into-a-report" title="Permanent link">&para;</a></h3>
 <p>Set up several named session variables, then retrieve them by name in a loop and format the results as a report.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CollectSessionValues</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CollectSessionValues</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aVarNames</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">sReport</span><span class="p">,</span><span class="w"> </span><span class="n">sVal</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">CreateLocal</span><span class="p">(</span><span class="s2">&quot;sUserId&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">);</span>
@@ -3719,7 +3719,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CollectSessionValues&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Session Audit Report
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Session Audit Report
 sUserId: jsmith
 sWorkstation: WS-01
 sDepartment: Laboratory
@@ -3727,7 +3727,7 @@ sRole: Analyst
 </code></pre></div>
 <h3 id="inspect-session-variable-types-using-dynamic-lookup">Inspect session variable types using dynamic lookup<a class="headerlink" href="#inspect-session-variable-types-using-dynamic-lookup" title="Permanent link">&para;</a></h3>
 <p>Create several session variables of different types, then retrieve each by name and report both the value and its SSL type string.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">InspectSessionState</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">InspectSessionState</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sVarName</span><span class="p">,</span><span class="w"> </span><span class="n">sReport</span><span class="p">,</span><span class="w"> </span><span class="n">vValue</span><span class="p">,</span><span class="w"> </span><span class="n">aVarNames</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">sFormattedLine</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">CreateLocal</span><span class="p">(</span><span class="s2">&quot;sCurrentUser&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">);</span>
@@ -3753,7 +3753,7 @@ sRole: Analyst
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;InspectSessionState&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>sCurrentUser = jsmith (STRING)
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>sCurrentUser = jsmith (STRING)
 nSessionTimeout = 300 (DOUBLE)
 bIsAuthenticated = .T. (LOGIC)
 </code></pre></div>

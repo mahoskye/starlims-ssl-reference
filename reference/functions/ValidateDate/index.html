@@ -4341,7 +4341,7 @@ When <code>bUseDateFormat</code> is omitted, <a href="../../literals/nil/"><code
 <li>When you want invalid date text to return <a href="../../literals/false/"><code>.F.</code></a> but still want bad argument types to fail fast.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">ValidateDate</span><span class="p">(</span><span class="n">sDateString</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bUseDateFormat</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ValidateDate</span><span class="p">(</span><span class="n">sDateString</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bUseDateFormat</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4417,7 +4417,7 @@ When <code>bUseDateFormat</code> is omitted, <a href="../../literals/nil/"><code
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="validate-a-strict-yyyymmdd-import-value">Validate a strict <code>yyyyMMdd</code> import value<a class="headerlink" href="#validate-a-strict-yyyymmdd-import-value" title="Permanent link">&para;</a></h3>
 <p>Pass <a href="../../literals/false/"><code>.F.</code></a> as the second argument to enable strict <code>yyyyMMdd</code> mode. A structurally valid date like <code>"20240315"</code> passes while a date like <code>"20240230"</code> (February 30) fails.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateImportDate</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateImportDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sImportDate</span><span class="p">,</span><span class="w"> </span><span class="n">bValid</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sImportDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;20240315&quot;</span><span class="p">;</span>
@@ -4437,7 +4437,7 @@ When <code>bUseDateFormat</code> is omitted, <a href="../../literals/nil/"><code
 </code></pre></div>
 <h3 id="validate-input-in-the-current-date-format">Validate input in the current date format<a class="headerlink" href="#validate-input-in-the-current-date-format" title="Permanent link">&para;</a></h3>
 <p>Omit the second argument to validate user-entered text against the runtime's configured date format.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateEnteredDate</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateEnteredDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sEnteredDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sEnteredDate</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bValid</span><span class="p">;</span>
@@ -4456,7 +4456,7 @@ When <code>bUseDateFormat</code> is omitted, <a href="../../literals/nil/"><code
 </code></pre></div>
 <h3 id="apply-mode-specific-validation-to-rows-from-different-sources">Apply mode-specific validation to rows from different sources<a class="headerlink" href="#apply-mode-specific-validation-to-rows-from-different-sources" title="Permanent link">&para;</a></h3>
 <p>Choose the validation mode based on the source field: <code>SYSTEM</code> rows use strict <code>yyyyMMdd</code> mode; <code>USER</code> rows use the current date format. The second SYSTEM row (<code>"20240230"</code>) fails because February 30 is not a real date.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReviewIncomingDates</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReviewIncomingDates</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="n">sDateText</span><span class="p">,</span><span class="w"> </span><span class="n">bUseDateFormat</span><span class="p">,</span><span class="w"> </span><span class="n">bValid</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nValidCount</span><span class="p">,</span><span class="w"> </span><span class="n">nInvalidCount</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 

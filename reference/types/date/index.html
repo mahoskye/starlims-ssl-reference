@@ -2103,7 +2103,7 @@
 <p>Date values are usually created by date-returning functions such as <a href="../../functions/Today/"><code>Today</code></a>, <a href="../../functions/Now/"><code>Now</code></a>, <a href="../../functions/CToD/"><code>CToD</code></a>, or <a href="../../functions/StringToDate/"><code>StringToDate</code></a>. SSL does not provide a date literal, so you build or parse dates through functions. Dates support adding or subtracting a numeric day offset, subtracting one date from another to get a day count, and comparing two dates with the standard equality and ordering operators. Date values are not indexable.</p>
 <h2 id="creating-values">Creating values<a class="headerlink" href="#creating-values" title="Permanent link">&para;</a></h2>
 <p>SSL has no date literal. Create date values with functions that return dates.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="n">dToday</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">dToday</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>
 <span class="n">dNow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Now</span><span class="p">();</span>
 <span class="n">dParsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/15/2026&quot;</span><span class="p">);</span>
 </code></pre></div>
@@ -2252,7 +2252,7 @@
 <p>This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined date members and SSL-native date functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover.</p>
 <h3 id="example-month-aware-date-arithmetic">Example: month-aware date arithmetic<a class="headerlink" href="#example-month-aware-date-arithmetic" title="Permanent link">&para;</a></h3>
 <p>Uses .NET's <code>AddMonths(nMonths)</code> method to compute a date three months after a start date. SSL's <a href="../../operators/plus/"><code>+</code></a> operator only adds whole-day offsets, so month-aware arithmetic — which correctly handles end-of-month and leap-year edge cases — is only available through this passthrough.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ComputeReviewDate</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ComputeReviewDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dReviewDate</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dStartDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/31/2026&quot;</span><span class="p">);</span>
@@ -2273,7 +2273,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ComputeReviewDate&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>04/30/2026
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>04/30/2026
 </code></pre></div>
 <p>January 31 plus three months lands on April 30, because April has only 30 days. <code>AddMonths</code> clamps to the last day of the target month.</p>
 <h2 id="indexing">Indexing<a class="headerlink" href="#indexing" title="Permanent link">&para;</a></h2>
@@ -2303,7 +2303,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="validating-a-required-date">Validating a required date<a class="headerlink" href="#validating-a-required-date" title="Permanent link">&para;</a></h3>
 <p>Checks for an empty date before continuing. <code>CToD("")</code> returns an empty date, so <code>IsEmpty()</code> returns <a href="../../literals/true/"><code>.T.</code></a> and the procedure exits early.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateRequiredDate</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateRequiredDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dSubmittedDate</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dSubmittedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
@@ -2323,11 +2323,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateRequiredDate&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Required date is missing
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Required date is missing
 </code></pre></div>
 <h3 id="calculating-a-due-date-and-days-remaining">Calculating a due date and days remaining<a class="headerlink" href="#calculating-a-due-date-and-days-remaining" title="Permanent link">&para;</a></h3>
 <p>Adds 14 days to a start date, then compares the due date with today to show days overdue or remaining. Output varies depending on the current date.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckTaskDueDate</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckTaskDueDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dToday</span><span class="p">,</span><span class="w"> </span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nDaysRemaining</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
@@ -2356,7 +2356,7 @@
 </code></pre></div>
 <h3 id="controlling-json-serialization-output">Controlling JSON serialization output<a class="headerlink" href="#controlling-json-serialization-output" title="Permanent link">&para;</a></h3>
 <p>Clones the current date twice, marks one as invariant and one as local, then serializes both to show how the output format differs. Output includes the current timestamp and varies each time the example runs.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDateJsonModes</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDateJsonModes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dSourceDate</span><span class="p">,</span><span class="w"> </span><span class="n">dInvariantDate</span><span class="p">,</span><span class="w"> </span><span class="n">dLocalDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sInvariantJson</span><span class="p">,</span><span class="w"> </span><span class="n">sLocalJson</span><span class="p">;</span>
 
@@ -2380,7 +2380,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDateJsonModes&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/InfoMes/"><code>InfoMes</code></a> displays (values vary by current date and time zone):</p>
-<div class="language-text highlight"><pre><span></span><code>Invariant JSON: &quot;2026-04-23T14:30:00&quot;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Invariant JSON: &quot;2026-04-23T14:30:00&quot;
 Local JSON: &quot;2026-04-23T14:30:00+05:00&quot;
 </code></pre></div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>

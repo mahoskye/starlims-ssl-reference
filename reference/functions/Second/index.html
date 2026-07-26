@@ -4361,7 +4361,7 @@
 <li>When you need to distinguish events that occur within the same minute.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Second</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Second</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4429,7 +4429,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="show-the-current-second">Show the current second<a class="headerlink" href="#show-the-current-second" title="Permanent link">&para;</a></h3>
 <p>Retrieve the current timestamp and extract its seconds component. The output varies on every call.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowCurrentSecond</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowCurrentSecond</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dNow</span><span class="p">,</span><span class="w"> </span><span class="n">nSecond</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dNow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Now</span><span class="p">();</span>
@@ -4443,11 +4443,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowCurrentSecond&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Current second: &lt;0–59&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Current second: &lt;0–59&gt;
 </code></pre></div>
 <h3 id="flag-events-that-land-on-a-minute-boundary">Flag events that land on a minute boundary<a class="headerlink" href="#flag-events-that-land-on-a-minute-boundary" title="Permanent link">&para;</a></h3>
 <p>Classify a list of timestamped events by checking whether their seconds component is zero, then collect the results for further processing.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ClassifyEventsBySecond</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ClassifyEventsBySecond</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aEvents</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">dLoggedAt</span><span class="p">,</span><span class="w"> </span><span class="n">nSecond</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aEvents</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
@@ -4477,7 +4477,7 @@
 </code></pre></div>
 <h3 id="count-events-into-60-second-buckets">Count events into 60 second buckets<a class="headerlink" href="#count-events-into-60-second-buckets" title="Permanent link">&para;</a></h3>
 <p>Accumulate a list of timestamped events into per-second occurrence counts using <code>Second</code> to map each event to its slot in a 60-element array.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CountEventsBySecond</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CountEventsBySecond</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aEvents</span><span class="p">,</span><span class="w"> </span><span class="n">aSecondCounts</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nSecond</span><span class="p">,</span><span class="w"> </span><span class="n">nSlot</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aEvents</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>

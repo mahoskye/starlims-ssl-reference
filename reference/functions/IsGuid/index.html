@@ -4249,7 +4249,7 @@
 <li>When a value may be missing and you want to guard against the error raised for <a href="../../literals/nil/"><code>NIL</code></a> input.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">IsGuid</span><span class="p">(</span><span class="n">sGuid</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">IsGuid</span><span class="p">(</span><span class="n">sGuid</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4314,7 +4314,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="validate-a-user-provided-identifier-before-use">Validate a user-provided identifier before use<a class="headerlink" href="#validate-a-user-provided-identifier-before-use" title="Permanent link">&para;</a></h3>
 <p>Call <code>IsGuid</code> on a single input string and branch on the result to confirm whether it is safe to pass to lookup or save logic. The hardcoded value is a valid GUID, so the true branch executes.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateGuidInput</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateGuidInput</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;3F2504E0-4F89-11D3-9A0C-0305E82C3301&quot;</span><span class="p">;</span>
@@ -4334,11 +4334,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateGuidInput&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Valid GUID: 3F2504E0-4F89-11D3-9A0C-0305E82C3301
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Valid GUID: 3F2504E0-4F89-11D3-9A0C-0305E82C3301
 </code></pre></div>
 <h3 id="filter-imported-identifiers-into-valid-and-invalid-groups">Filter imported identifiers into valid and invalid groups<a class="headerlink" href="#filter-imported-identifiers-into-valid-and-invalid-groups" title="Permanent link">&para;</a></h3>
 <p>Iterate over a mixed list of identifier strings and use <code>IsGuid</code> to route each one into a valid or invalid collection. The summary line shows the final counts for both groups.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FilterValidGuids</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FilterValidGuids</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRawIdentifiers</span><span class="p">,</span><span class="w"> </span><span class="n">aValidGuids</span><span class="p">,</span><span class="w"> </span><span class="n">aInvalidIds</span><span class="p">,</span><span class="w"> </span><span class="n">sIdentifier</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sReport</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRawIdentifiers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
@@ -4375,11 +4375,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FilterValidGuids&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Valid: 4 | Invalid: 3
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Valid: 4 | Invalid: 3
 </code></pre></div>
 <h3 id="guard-against-nil-input-with-explicit-validation-and-error-handling">Guard against NIL input with explicit validation and error handling<a class="headerlink" href="#guard-against-nil-input-with-explicit-validation-and-error-handling" title="Permanent link">&para;</a></h3>
 <p>When <code>IsGuid</code> receives a value from an external source that may be <a href="../../literals/nil/"><code>NIL</code></a> or a non-string type, check for <a href="../../literals/nil/"><code>NIL</code></a> first and convert to string before calling the function. Wrap the call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> for any remaining unexpected errors.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateOptionalGuid</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateOptionalGuid</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">vGuid</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sGuid</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 

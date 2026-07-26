@@ -4340,7 +4340,7 @@
 <li>When you require consistent system-timed values for workflows, rather than user-input or fixed times.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Now</span><span class="p">()</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Now</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>This function takes no parameters.</p>
@@ -4372,7 +4372,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="capture-the-current-timestamp-for-a-log-entry">Capture the current timestamp for a log entry<a class="headerlink" href="#capture-the-current-timestamp-for-a-log-entry" title="Permanent link">&para;</a></h3>
 <p>Call <code>Now()</code> once and store the result before displaying it. The exact timestamp depends on when the procedure runs.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogTimestamp</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogTimestamp</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dTimestamp</span><span class="p">,</span><span class="w"> </span><span class="n">sLogMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dTimestamp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Now</span><span class="p">();</span>
@@ -4387,12 +4387,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LogTimestamp&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Event recorded at 04/23/2026 14:30:00
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Event recorded at 04/23/2026 14:30:00
 </code></pre></div>
 <p>The exact timestamp varies.</p>
 <h3 id="measure-elapsed-time-between-two-timestamps">Measure elapsed time between two timestamps<a class="headerlink" href="#measure-elapsed-time-between-two-timestamps" title="Permanent link">&para;</a></h3>
 <p>Capture the start time, do work, then capture the end time and pass both to <a href="../DateDiff/"><code>DateDiff</code></a>. The elapsed count is typically <code>0</code> in this example because both <code>Now()</code> calls happen immediately after each other.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">MeasureElapsedTime</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">MeasureElapsedTime</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dStart</span><span class="p">,</span><span class="w"> </span><span class="n">dEnd</span><span class="p">,</span><span class="w"> </span><span class="n">nElapsedSeconds</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dStart</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Now</span><span class="p">();</span>
@@ -4415,7 +4415,7 @@
 </code></pre></div>
 <h3 id="use-one-captured-timestamp-across-a-sql-update-and-follow-up-message">Use one captured timestamp across a SQL update and follow-up message<a class="headerlink" href="#use-one-captured-timestamp-across-a-sql-update-and-follow-up-message" title="Permanent link">&para;</a></h3>
 <p>Capture <code>Now()</code> once so both the SQL update and the confirmation message use the same timestamp. The message reflects whether the update succeeded.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">StampReleasedSamples</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">StampReleasedSamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dReleasedAt</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dReleasedAt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Now</span><span class="p">();</span>
@@ -4444,10 +4444,10 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;StampReleasedSamples&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays either:</p>
-<div class="language-text highlight"><pre><span></span><code>Sample released at 04/23/2026 14:30:00
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample released at 04/23/2026 14:30:00
 </code></pre></div>
 <p>or:</p>
-<div class="language-text highlight"><pre><span></span><code>Sample release update failed
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample release update failed
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

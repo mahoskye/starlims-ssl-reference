@@ -3549,7 +3549,7 @@
 <li>When using a full <a href="../../keywords/IF/"><code>:IF</code></a> block would make a simple expression harder to read.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">IIf</span><span class="p">(</span><span class="n">bCondition</span><span class="p">,</span><span class="w"> </span><span class="n">vTrueValue</span><span class="p">,</span><span class="w"> </span><span class="n">vFalseValue</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">IIf</span><span class="p">(</span><span class="n">bCondition</span><span class="p">,</span><span class="w"> </span><span class="n">vTrueValue</span><span class="p">,</span><span class="w"> </span><span class="n">vFalseValue</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3633,7 +3633,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="assign-a-label-based-on-a-boolean-flag">Assign a label based on a boolean flag<a class="headerlink" href="#assign-a-label-based-on-a-boolean-flag" title="Permanent link">&para;</a></h3>
 <p>Select a status label for display based on a boolean flag, showing the most direct use of <code>IIf</code> as a compact conditional assignment.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetApprovalStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetApprovalStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsApproved</span><span class="p">,</span><span class="w"> </span><span class="n">sStatusLabel</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bIsApproved</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
@@ -3648,11 +3648,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetApprovalStatus&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Approved
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Approved
 </code></pre></div>
 <h3 id="select-a-prepared-sql-filter">Select a prepared SQL filter<a class="headerlink" href="#select-a-prepared-sql-filter" title="Permanent link">&para;</a></h3>
 <p>Build a SQL filter clause dynamically by selecting between two pre-prepared filter strings, showing how <code>IIf</code> can be embedded directly inside a string concatenation expression.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSampleQuery</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSampleQuery</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bLoggedOnly</span><span class="p">,</span><span class="w"> </span><span class="n">sStatusFilter</span><span class="p">,</span><span class="w"> </span><span class="n">sDateFilter</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bLoggedOnly</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
@@ -3674,7 +3674,7 @@
 </code></pre></div>
 <h3 id="prepare-both-branch-values-before-calling-iif">Prepare both branch values before calling IIf<a class="headerlink" href="#prepare-both-branch-values-before-calling-iif" title="Permanent link">&para;</a></h3>
 <p>Illustrates the recommended style: compute both branch values before the <code>IIf</code> call rather than inline, making both branches easier to read and avoiding complex expressions inside the call itself.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetReportLabel</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetReportLabel</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bUseDetailed</span><span class="p">,</span><span class="w"> </span><span class="n">sShortLabel</span><span class="p">,</span><span class="w"> </span><span class="n">sDetailedLabel</span><span class="p">,</span><span class="w"> </span><span class="n">sLabel</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bUseDetailed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>

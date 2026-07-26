@@ -4107,7 +4107,7 @@
 <li>When you want to inspect Documentum failure state with <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> and <a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a> after a <a href="../../literals/false/"><code>.F.</code></a> result.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocAcquireWorkitem</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocAcquireWorkitem</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4173,7 +4173,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="acquire-a-work-item-after-logging-in-to-documentum">Acquire a work item after logging in to Documentum<a class="headerlink" href="#acquire-a-work-item-after-logging-in-to-documentum" title="Permanent link">&para;</a></h3>
 <p>Logs in to a Documentum repository, acquires a specific work item, and displays whether the acquisition succeeded.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AcquireWorkitemForProcessing</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AcquireWorkitemForProcessing</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">,</span><span class="w"> </span><span class="n">bAcquired</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Repository1&quot;</span><span class="p">;</span>
@@ -4209,7 +4209,7 @@
 </code></pre></div>
 <h3 id="capture-the-documentum-error-message-immediately-after-a-failed-acquisition">Capture the Documentum error message immediately after a failed acquisition<a class="headerlink" href="#capture-the-documentum-error-message-immediately-after-a-failed-acquisition" title="Permanent link">&para;</a></h3>
 <p>Accepts the work item identifier as a procedure parameter, attempts acquisition, and builds a diagnostic error message by appending the Documentum error description when <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> reports a failure.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AcquireWorkitemWithDiagnostics</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AcquireWorkitemWithDiagnostics</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">,</span><span class="w"> </span><span class="n">bAcquired</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">;</span>
 
@@ -4249,7 +4249,7 @@
 </code></pre></div>
 <h3 id="acquire-multiple-work-items-and-collect-each-failure-message-before-the-next-call">Acquire multiple work items and collect each failure message before the next call<a class="headerlink" href="#acquire-multiple-work-items-and-collect-each-failure-message-before-the-next-call" title="Permanent link">&para;</a></h3>
 <p>Iterates a list of work item identifiers, acquires each one, and collects failure messages immediately after each failed attempt — before the next acquisition replaces the Documentum error state.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AcquireWorkitemsInBatch</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AcquireWorkitemsInBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">aWorkitemIds</span><span class="p">,</span><span class="w"> </span><span class="n">aFailures</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">,</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">,</span><span class="w"> </span><span class="n">bAcquired</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 

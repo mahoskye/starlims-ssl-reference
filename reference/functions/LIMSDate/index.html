@@ -4363,7 +4363,7 @@
 <li>When you want string inputs parsed using the current STARLIMS date format.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LIMSDate</span><span class="p">(</span><span class="n">vDate</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sFormat</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LIMSDate</span><span class="p">(</span><span class="n">vDate</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sFormat</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4439,7 +4439,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="format-a-date-string-using-an-explicit-pattern">Format a date string using an explicit pattern<a class="headerlink" href="#format-a-date-string-using-an-explicit-pattern" title="Permanent link">&para;</a></h3>
 <p>Call <code>LIMSDate</code> with a date string and an explicit format to see both the input and the formatted result. The input <code>"03/15/2024"</code> formats to <code>"2024-03-15"</code> under the <code>"yyyy-MM-dd"</code> pattern.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatUserDate</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatUserDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">sFormattedDisplay</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;03/15/2024&quot;</span><span class="p">;</span>
@@ -4454,11 +4454,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FormatUserDate&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Entered: 03/15/2024 | Displayed: 2024-03-15
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Entered: 03/15/2024 | Displayed: 2024-03-15
 </code></pre></div>
 <h3 id="handle-blank-and-invalid-date-strings-without-exceptions">Handle blank and invalid date strings without exceptions<a class="headerlink" href="#handle-blank-and-invalid-date-strings-without-exceptions" title="Permanent link">&para;</a></h3>
 <p>Process a batch of legacy date strings where some entries are blank or unparseable. <code>LIMSDate</code> treats both as null dates and returns a blank placeholder shaped like the format. Neither raises an exception.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatLegacyDates</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatLegacyDates</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aLegacyRecords</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">sSourceDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFormattedDate</span><span class="p">,</span><span class="w"> </span><span class="n">sReportLine</span><span class="p">;</span>
 
@@ -4486,7 +4486,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FormatLegacyDates&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays one line per record, for example:</p>
-<div class="language-text highlight"><pre><span></span><code>Sample: SAM001 | Imported: 1998/03/15
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample: SAM001 | Imported: 1998/03/15
 Sample: SAM002 | Imported:
 Sample: SAM003 | Imported:
 Sample: SAM004 | Imported: 2001/12/31
@@ -4494,7 +4494,7 @@ Sample: SAM005 | Imported: 1999/07/04
 </code></pre></div>
 <h3 id="apply-mmm-format-normalization-across-multiple-dates">Apply MMM format normalization across multiple dates<a class="headerlink" href="#apply-mmm-format-normalization-across-multiple-dates" title="Permanent link">&para;</a></h3>
 <p>Show that a format containing <code>MMM</code> is normalized to <code>dd-MMM-yyyy</code> regardless of what was passed. The supplied format <code>"dd-MMM-yy"</code> is replaced, so all three dates render with a four-digit year.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatReportDates</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatReportDates</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dReportDate</span><span class="p">,</span><span class="w"> </span><span class="n">dSampleDate</span><span class="p">,</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDisplayFormat</span><span class="p">,</span><span class="w"> </span><span class="n">sReportDate</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleDate</span><span class="p">,</span><span class="w"> </span><span class="n">sDueDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aReportRows</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
@@ -4525,7 +4525,7 @@ Sample: SAM005 | Imported: 1999/07/04
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FormatReportDates&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Report Generated: 11-Apr-2026
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Report Generated: 11-Apr-2026
 Earliest Sample: 08-Apr-2026
 Due Date: 15-Apr-2026
 </code></pre></div>

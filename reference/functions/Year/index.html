@@ -4339,7 +4339,7 @@
 <li>When extracting the year to compare with user input or other numeric values.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Year</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Year</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4403,7 +4403,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="check-a-birth-year-against-a-minimum-age-requirement">Check a birth year against a minimum age requirement<a class="headerlink" href="#check-a-birth-year-against-a-minimum-age-requirement" title="Permanent link">&para;</a></h3>
 <p>Compute the age as a year difference and check whether it meets a minimum. The output below uses <code>CToD("01/01/2000")</code> and <code>18</code> as sample inputs.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateMinimumAge</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateMinimumAge</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">dBirthDate</span><span class="p">,</span><span class="w"> </span><span class="n">nMinAge</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nBirthYear</span><span class="p">,</span><span class="w"> </span><span class="n">nCurrentYear</span><span class="p">,</span><span class="w"> </span><span class="n">nAge</span><span class="p">,</span><span class="w"> </span><span class="n">bIsEligible</span><span class="p">;</span>
 
@@ -4439,7 +4439,7 @@
 </code></pre></div>
 <h3 id="count-events-grouped-by-calendar-year">Count events grouped by calendar year<a class="headerlink" href="#count-events-grouped-by-calendar-year" title="Permanent link">&para;</a></h3>
 <p>Extract the year from each date and accumulate counts per year in a <a href="../../classes/SSLStringDictionary/"><code>SSLStringDictionary</code></a>. The sample data contains 3 events in 2023, 3 in 2024, and 2 in 2025.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CountEventsByYear</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CountEventsByYear</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aEventDates</span><span class="p">,</span><span class="w"> </span><span class="n">oYearCounts</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">dEventDate</span><span class="p">,</span><span class="w"> </span><span class="n">nYear</span><span class="p">,</span><span class="w"> </span><span class="n">sReport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nEvents2023</span><span class="p">,</span><span class="w"> </span><span class="n">nEvents2024</span><span class="p">,</span><span class="w"> </span><span class="n">nEvents2025</span><span class="p">;</span>
 
@@ -4489,14 +4489,14 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CountEventsByYear&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Event Summary by Year:
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Event Summary by Year:
 2023: 3 events
 2024: 3 events
 2025: 2 events
 </code></pre></div>
 <h3 id="filter-records-matching-a-specific-year-and-month">Filter records matching a specific year and month<a class="headerlink" href="#filter-records-matching-a-specific-year-and-month" title="Permanent link">&para;</a></h3>
 <p>Combine <code>Year()</code> and <a href="../Month/"><code>Month</code></a> to select only rows that match both the target year and month. With the defaults (<code>2024</code>, <code>3</code>), two rows from March 2024 are returned.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FilterRecordsByYearMonth</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FilterRecordsByYearMonth</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">nTargetYear</span><span class="p">,</span><span class="w"> </span><span class="n">nTargetMonth</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">nTargetYear</span><span class="p">,</span><span class="w"> </span><span class="mi">2024</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">nTargetMonth</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
@@ -4540,7 +4540,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FilterRecordsByYearMonth&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Found 2 record(s) for 3/2024
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Found 2 record(s) for 3/2024
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

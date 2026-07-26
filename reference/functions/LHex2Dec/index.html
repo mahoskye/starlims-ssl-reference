@@ -3695,7 +3695,7 @@
 <li>When you validate external input with <a href="../IsHex/"><code>IsHex</code></a> before converting it.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LHex2Dec</span><span class="p">(</span><span class="n">sSource</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LHex2Dec</span><span class="p">(</span><span class="n">sSource</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3755,7 +3755,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="convert-a-validated-hex-value">Convert a validated hex value<a class="headerlink" href="#convert-a-validated-hex-value" title="Permanent link">&para;</a></h3>
 <p>Pass a known-valid uppercase hex string to get the decimal representation. <code>"1A7F"</code> in hex is <code>6783</code> in decimal.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertHexValue</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertHexValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">,</span><span class="w"> </span><span class="n">sDecimalValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sHexValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;1A7F&quot;</span><span class="p">;</span>
@@ -3770,11 +3770,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ConvertHexValue&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Decimal value: 6783
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Decimal value: 6783
 </code></pre></div>
 <h3 id="normalize-input-before-conversion">Normalize input before conversion<a class="headerlink" href="#normalize-input-before-conversion" title="Permanent link">&para;</a></h3>
 <p>Trim whitespace and convert to uppercase before validating with <a href="../IsHex/"><code>IsHex</code></a>, then pass the cleaned value to <code>LHex2Dec()</code>. For input <code>"1a7f"</code> the normalized value is <code>"1A7F"</code> and the result is <code>"6783"</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeAndConvertHex</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeAndConvertHex</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sInput</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">,</span><span class="w"> </span><span class="n">sDecimalValue</span><span class="p">;</span>
 
@@ -3799,7 +3799,7 @@
 </code></pre></div>
 <h3 id="convert-a-batch-of-validated-values">Convert a batch of validated values<a class="headerlink" href="#convert-a-batch-of-validated-values" title="Permanent link">&para;</a></h3>
 <p>Process a list of incoming hex values, trimming and normalizing each one before validation. With the five inputs, <code>"GG"</code> is invalid and four others pass, so the batch yields four converted values and one skip.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertHexBatch</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertHexBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aInput</span><span class="p">,</span><span class="w"> </span><span class="n">aDecimalValues</span><span class="p">,</span><span class="w"> </span><span class="n">aInvalidValues</span><span class="p">,</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;1A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;FF&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;7B&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;GG&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; 2C &quot;</span><span class="p">};</span>

@@ -4041,7 +4041,7 @@
 <li>When legacy R1-compatible column settings are required on the returned dataset object.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetNETDataSet</span><span class="p">(</span><span class="n">sCommandString</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sTableName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bReturnXml</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bR1Compatible</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">GetNETDataSet</span><span class="p">(</span><span class="n">sCommandString</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sTableName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bReturnXml</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bR1Compatible</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4171,7 +4171,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="return-dataset-xml-with-the-defaults">Return dataset XML with the defaults<a class="headerlink" href="#return-dataset-xml-with-the-defaults" title="Permanent link">&para;</a></h3>
 <p>Runs a query against the default connection with no parameters and displays the length of the returned XML string.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportOpenSamples</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportOpenSamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sSql</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
@@ -4192,11 +4192,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportOpenSamples&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Returned XML length: 547
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Returned XML length: 547
 </code></pre></div>
 <h3 id="use-positional-parameters-and-set-the-table-name">Use positional parameters and set the table name<a class="headerlink" href="#use-positional-parameters-and-set-the-table-name" title="Permanent link">&para;</a></h3>
 <p>Passes a status filter through a positional <code>?</code> placeholder and assigns a stable table name to the returned XML so downstream code can reference it by name.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportSamplesByStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportSamplesByStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">;</span>
@@ -4219,7 +4219,7 @@
 </code></pre></div>
 <h3 id="return-a-dataset-object-for-net-interop">Return a dataset object for .NET interop<a class="headerlink" href="#return-a-dataset-object-for-net-interop" title="Permanent link">&para;</a></h3>
 <p>Sets <code>bReturnXml</code> to <a href="../../literals/false/"><code>.F.</code></a> to get a <a href="../../types/netobject/"><code>netobject</code></a> wrapping the dataset instead of XML, and wraps the call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to report any query failure.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadSamplesAsObject</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadSamplesAsObject</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">oDataSet</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
@@ -4249,10 +4249,10 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LoadSamplesAsObject&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Returned type: System.Data.DataSet
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Returned type: System.Data.DataSet
 </code></pre></div>
 <p>On failure, <a href="../ErrorMes/"><code>ErrorMes</code></a> displays a message beginning with:</p>
-<div class="language-text highlight"><pre><span></span><code>GetNETDataSet failed: ...
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>GetNETDataSet failed: ...
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

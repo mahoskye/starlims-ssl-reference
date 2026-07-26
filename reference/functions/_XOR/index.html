@@ -3941,7 +3941,7 @@
 <li>When you are calculating a simple XOR-based checksum across integer values.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">_XOR</span><span class="p">(</span><span class="n">nValue1</span><span class="p">,</span><span class="w"> </span><span class="n">nValue2</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">_XOR</span><span class="p">(</span><span class="n">nValue1</span><span class="p">,</span><span class="w"> </span><span class="n">nValue2</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4020,7 +4020,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="toggle-a-flag-in-an-integer">Toggle a flag in an integer<a class="headerlink" href="#toggle-a-flag-in-an-integer" title="Permanent link">&para;</a></h3>
 <p>Toggle one permission bit by XORing with a mask.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">TogglePermissionFlag</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">TogglePermissionFlag</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPermissions</span><span class="p">,</span><span class="w"> </span><span class="n">nToggleMask</span><span class="p">,</span><span class="w"> </span><span class="n">nResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nPermissions</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
@@ -4036,12 +4036,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;TogglePermissionFlag&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Original permissions: 5
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Original permissions: 5
 Toggled permissions: 1
 </code></pre></div>
 <h3 id="identify-changed-flags-between-two-values">Identify changed flags between two values<a class="headerlink" href="#identify-changed-flags-between-two-values" title="Permanent link">&para;</a></h3>
 <p>Compare an original flag set to an updated one and isolate the changed bits. <code>_XOR(3, 5)</code> returns <code>6</code> (<code>011 XOR 101 = 110</code>), and subsequent <a href="../_AND/"><code>_AND</code></a> checks identify which named flags changed.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindChangedFlags</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindChangedFlags</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nOriginalFlags</span><span class="p">,</span><span class="w"> </span><span class="n">nUpdatedFlags</span><span class="p">,</span><span class="w"> </span><span class="n">nChangedFlags</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nArchiveMask</span><span class="p">,</span><span class="w"> </span><span class="n">nReviewMask</span><span class="p">;</span>
 
@@ -4070,13 +4070,13 @@ Toggled permissions: 1
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FindChangedFlags&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Changed flags: 6
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Changed flags: 6
 Archive flag changed.
 Review flag changed.
 </code></pre></div>
 <h3 id="compute-a-checksum-across-a-list-of-integers">Compute a checksum across a list of integers<a class="headerlink" href="#compute-a-checksum-across-a-list-of-integers" title="Permanent link">&para;</a></h3>
 <p>Accumulate an XOR checksum across multiple values and compare it to an expected value. The XOR of <code>{170, 85, 204, 51, 136}</code> produces <code>136</code>, matching the expected checksum.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">VerifyXorChecksum</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">VerifyXorChecksum</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">nChecksum</span><span class="p">,</span><span class="w"> </span><span class="n">nExpectedChecksum</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">bMatches</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">170</span><span class="p">,</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span><span class="w"> </span><span class="mi">204</span><span class="p">,</span><span class="w"> </span><span class="mi">51</span><span class="p">,</span><span class="w"> </span><span class="mi">136</span><span class="p">};</span>
@@ -4104,7 +4104,7 @@ Review flag changed.
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;VerifyXorChecksum&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Computed checksum: 136
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Computed checksum: 136
 Checksum verified.
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>

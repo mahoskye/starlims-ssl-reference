@@ -4362,7 +4362,7 @@ input date is empty, the function returns <code>0</code>. If the argument is <a 
 <li>When you need the hour without separately parsing a formatted date string.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Hour</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Hour</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4430,7 +4430,7 @@ input date is empty, the function returns <code>0</code>. If the argument is <a 
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="choose-a-greeting-based-on-the-current-hour">Choose a greeting based on the current hour<a class="headerlink" href="#choose-a-greeting-based-on-the-current-hour" title="Permanent link">&para;</a></h3>
 <p>Call <code>Hour</code> on the current timestamp and use its value to select a time-of-day greeting. Because the procedure reads the live clock, the greeting and hour shown in the output are representative, and the actual values depend on when the procedure runs.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowLoginGreeting</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowLoginGreeting</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dNow</span><span class="p">,</span><span class="w"> </span><span class="n">nHour</span><span class="p">,</span><span class="w"> </span><span class="n">sGreeting</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dNow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Now</span><span class="p">();</span>
@@ -4455,11 +4455,11 @@ input date is empty, the function returns <code>0</code>. If the argument is <a 
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowLoginGreeting&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Good morning. Current hour: 9
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Good morning. Current hour: 9
 </code></pre></div>
 <h3 id="count-events-into-24-hourly-buckets">Count events into 24 hourly buckets<a class="headerlink" href="#count-events-into-24-hourly-buckets" title="Permanent link">&para;</a></h3>
 <p>Build a 24-element frequency array by extracting the hour from each event's timestamp and incrementing the corresponding slot. This shows how <code>Hour</code> converts a full timestamp into an array index for time-based aggregation.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CountEventsByHour</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CountEventsByHour</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aEvents</span><span class="p">,</span><span class="w"> </span><span class="n">aHourCounts</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nHour</span><span class="p">,</span><span class="w"> </span><span class="n">nSlot</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aEvents</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
@@ -4489,7 +4489,7 @@ input date is empty, the function returns <code>0</code>. If the argument is <a 
 </code></pre></div>
 <h3 id="route-requests-based-on-whether-they-fall-inside-business-hours">Route requests based on whether they fall inside business hours<a class="headerlink" href="#route-requests-based-on-whether-they-fall-inside-business-hours" title="Permanent link">&para;</a></h3>
 <p>Classify a list of timestamped requests as either ready to process or queued, using <code>Hour</code> to test each timestamp against a configurable business-hours window. Requests whose hour falls before <code>nOpenHour</code> or at or after <code>nCloseHour</code> are assigned the <code>QUEUE</code> status.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ClassifyRequestsByHour</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ClassifyRequestsByHour</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRequests</span><span class="p">,</span><span class="w"> </span><span class="n">aStatuses</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">dRequestedAt</span><span class="p">,</span><span class="w"> </span><span class="n">nHour</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nOpenHour</span><span class="p">,</span><span class="w"> </span><span class="n">nCloseHour</span><span class="p">;</span>
 

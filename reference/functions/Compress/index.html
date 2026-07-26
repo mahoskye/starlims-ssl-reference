@@ -3804,7 +3804,7 @@
   SSL procedures or integrations.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Compress</span><span class="p">(</span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bToFile</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Compress</span><span class="p">(</span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bToFile</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3881,7 +3881,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="compress-text-in-memory">Compress text in memory<a class="headerlink" href="#compress-text-in-memory" title="Permanent link">&para;</a></h3>
 <p>Compresses a multi-line report string and displays both the original and compressed lengths to show the size reduction.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompressReportText</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompressReportText</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sReport</span><span class="p">,</span><span class="w"> </span><span class="n">sCompressed</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nOriginalLen</span><span class="p">,</span><span class="w"> </span><span class="n">nCompressedLen</span><span class="p">;</span>
 
@@ -3905,12 +3905,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompressReportText&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Original length: 72
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Original length: 72
 Compressed length: [value less than 72]
 </code></pre></div>
 <h3 id="write-compressed-output-to-a-temporary-file">Write compressed output to a temporary file<a class="headerlink" href="#write-compressed-output-to-a-temporary-file" title="Permanent link">&para;</a></h3>
 <p>Passes <code>bToFile := .T.</code> to write compressed bytes to a generated temp file, then decompresses it to verify the round-trip is lossless.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateCompressedPayloadFile</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateCompressedPayloadFile</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sZipPath</span><span class="p">,</span><span class="w"> </span><span class="n">sRestored</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Order=4711&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
@@ -3935,11 +3935,11 @@ Compressed length: [value less than 72]
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CreateCompressedPayloadFile&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Compressed file created: [Temp path].zip
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Compressed file created: [Temp path].zip
 </code></pre></div>
 <h3 id="batch-process-payloads-and-verify-mixed-output-modes">Batch process payloads and verify mixed output modes<a class="headerlink" href="#batch-process-payloads-and-verify-mixed-output-modes" title="Permanent link">&para;</a></h3>
 <p>Selects in-memory or file output per payload based on length, then verifies each result by decompressing and comparing back to the original.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PrepareCompressedExports</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PrepareCompressedExports</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aPayloads</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sCompressed</span><span class="p">,</span><span class="w"> </span><span class="n">sMode</span><span class="p">,</span><span class="w"> </span><span class="n">sRestored</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oResult</span><span class="p">;</span>
@@ -3988,7 +3988,7 @@ Compressed length: [value less than 72]
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PrepareCompressedExports&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays one line per payload:</p>
-<div class="language-text highlight"><pre><span></span><code>Payload 1 stored as MEMORY
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Payload 1 stored as MEMORY
 Payload 2 stored as FILE
 Payload 3 stored as FILE
 </code></pre></div>

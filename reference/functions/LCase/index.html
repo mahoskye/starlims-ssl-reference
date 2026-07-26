@@ -3549,7 +3549,7 @@
 <li>When you want the false branch to fall back to an empty string.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LCase</span><span class="p">(</span><span class="n">bCondition</span><span class="p">,</span><span class="w"> </span><span class="n">sTrueValue</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sFalseValue</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LCase</span><span class="p">(</span><span class="n">bCondition</span><span class="p">,</span><span class="w"> </span><span class="n">sTrueValue</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sFalseValue</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3637,7 +3637,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="choose-between-two-literal-labels">Choose between two literal labels<a class="headerlink" href="#choose-between-two-literal-labels" title="Permanent link">&para;</a></h3>
 <p>Pass quoted string literals as both branch arguments. Because the branch expressions are evaluated as SSL, the inner quotes make each branch a string literal rather than an identifier. With <code>bApproved</code> set to <a href="../../literals/true/"><code>.T.</code></a>, the true branch fires and <code>sLabel</code> receives <code>"Approved"</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetApprovalLabel</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetApprovalLabel</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bApproved</span><span class="p">,</span><span class="w"> </span><span class="n">sLabel</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bApproved</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
@@ -3651,11 +3651,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetApprovalLabel&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Approved
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Approved
 </code></pre></div>
 <h3 id="use-an-empty-false-branch">Use an empty false branch<a class="headerlink" href="#use-an-empty-false-branch" title="Permanent link">&para;</a></h3>
 <p>Omit the false branch to get an empty string when the condition is <a href="../../literals/false/"><code>.F.</code></a>. When <code>bNeedsReview</code> is <a href="../../literals/true/"><code>.T.</code></a>, the suffix <code>"-R"</code> is appended; when it is <a href="../../literals/false/"><code>.F.</code></a>, <code>sSuffix</code> is <code>""</code> and the base code is returned unchanged.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSampleCode</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSampleCode</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bNeedsReview</span><span class="p">,</span><span class="w"> </span><span class="n">sBaseCode</span><span class="p">,</span><span class="w"> </span><span class="n">sSuffix</span><span class="p">,</span><span class="w"> </span><span class="n">sFinalCode</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bNeedsReview</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
@@ -3672,7 +3672,7 @@
 </code></pre></div>
 <h3 id="return-a-non-string-value-from-a-variable-expression">Return a non-string value from a variable expression<a class="headerlink" href="#return-a-non-string-value-from-a-variable-expression" title="Permanent link">&para;</a></h3>
 <p>Pass variable names (without quotes) as the branch expressions to have <code>LCase</code> return the value of whichever variable is selected. With <code>bUseOverride</code> set to <a href="../../literals/true/"><code>.T.</code></a>, the expression <code>"nOverrideLimit"</code> is evaluated and <code>nEffectiveLimit</code> receives <code>25</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetEffectiveLimit</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetEffectiveLimit</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bUseOverride</span><span class="p">,</span><span class="w"> </span><span class="n">nDefaultLimit</span><span class="p">,</span><span class="w"> </span><span class="n">nOverrideLimit</span><span class="p">,</span><span class="w"> </span><span class="n">nEffectiveLimit</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bUseOverride</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>

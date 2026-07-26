@@ -4340,7 +4340,7 @@
 <li>When building scheduling or UI logic that depends on the actual month length.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">NoOfDays</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">NoOfDays</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4434,7 +4434,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="validate-a-day-number-against-the-selected-month">Validate a day number against the selected month<a class="headerlink" href="#validate-a-day-number-against-the-selected-month" title="Permanent link">&para;</a></h3>
 <p><code>CToD("02/15/2024")</code> is a February date in a leap year, so <code>NoOfDays()</code> returns <code>29</code>. Day <code>31</code> exceeds that limit, so <code>bValid</code> is <a href="../../literals/false/"><code>.F.</code></a> and the message reports the excess.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateDayOfMonth</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateDayOfMonth</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dSelectedDate</span><span class="p">,</span><span class="w"> </span><span class="n">nEnteredDay</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxDays</span><span class="p">,</span><span class="w"> </span><span class="n">bValid</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dSelectedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;02/15/2024&quot;</span><span class="p">);</span>
@@ -4460,11 +4460,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateDayOfMonth&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Day 31 exceeds the 29 days in February.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Day 31 exceeds the 29 days in February.
 </code></pre></div>
 <h3 id="calculate-the-last-day-of-a-month">Calculate the last day of a month<a class="headerlink" href="#calculate-the-last-day-of-a-month" title="Permanent link">&para;</a></h3>
 <p>Get the last valid day of <code>dInputDate</code>'s month using <a href="../DateFromNumbers/"><code>DateFromNumbers</code></a>. An empty input returns an empty date immediately; otherwise, the result is the final day of the month.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetMonthEndDate</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetMonthEndDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">dInputDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nLastDay</span><span class="p">,</span><span class="w"> </span><span class="n">dMonthEnd</span><span class="p">;</span>
 
@@ -4489,11 +4489,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetMonthEndDate&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/15/2024&quot;</span><span class="p">)});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Month end is 03/31/2024
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Month end is 03/31/2024
 </code></pre></div>
 <h3 id="compare-month-lengths-across-multiple-reporting-periods">Compare month lengths across multiple reporting periods<a class="headerlink" href="#compare-month-lengths-across-multiple-reporting-periods" title="Permanent link">&para;</a></h3>
 <p>Iterate over four period dates and print each month's length. February periods receive an additional note because their length varies with the year.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReviewReportingPeriods</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReviewReportingPeriods</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aPeriods</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">dPeriodDate</span><span class="p">,</span><span class="w"> </span><span class="n">nDaysInMonth</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aPeriods</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
@@ -4525,7 +4525,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ReviewReportingPeriods&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>January 2024 has 31 days.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>January 2024 has 31 days.
 February 2024 has 29 days. Check leap-year rules for February-sensitive schedules.
 February 2025 has 28 days. Check leap-year rules for February-sensitive schedules.
 April 2025 has 30 days.

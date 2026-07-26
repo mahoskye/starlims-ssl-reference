@@ -2902,10 +2902,10 @@
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
 <p>Standard script, procedure, method, or constructor body:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">param1</span><span class="p">[,</span><span class="w"> </span><span class="n">param2</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">];</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">param1</span><span class="p">[,</span><span class="w"> </span><span class="n">param2</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">];</span>
 </code></pre></div>
 <p>SSL or SQL data source file:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">param1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">default1</span><span class="p">[,</span><span class="w"> </span><span class="n">param2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">default2</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">];</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">param1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">default1</span><span class="p">[,</span><span class="w"> </span><span class="n">param2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">default2</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">];</span>
 </code></pre></div>
 <h2 id="parameters_1">Parameters<a class="headerlink" href="#parameters_1" title="Permanent link">&para;</a></h2>
 <table>
@@ -2966,7 +2966,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="declaring-parameters-for-a-procedure">Declaring parameters for a procedure<a class="headerlink" href="#declaring-parameters-for-a-procedure" title="Permanent link">&para;</a></h3>
 <p>Names the two values the caller passes in. With <code>sSampleID</code> set to <code>"S-1001"</code> and <code>sLabCode</code> set to <code>"LAB-A"</code>, the procedure builds and displays the combined message.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DisplaySampleInfo</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DisplaySampleInfo</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sLabCode</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
@@ -2981,11 +2981,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DisplaySampleInfo&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;S-1001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-A&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Processing sample S-1001 in laboratory LAB-A
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Processing sample S-1001 in laboratory LAB-A
 </code></pre></div>
 <h3 id="pairing-parameters-with-default">Pairing PARAMETERS with DEFAULT<a class="headerlink" href="#pairing-parameters-with-default" title="Permanent link">&para;</a></h3>
 <p>In standard SSL, <code>:PARAMETERS</code> comes first and any optional trailing values are added with separate <a href="../DEFAULT/"><code>:DEFAULT</code></a> lines immediately after it. The first call omits <code>sStatus</code> and <code>nMaxRows</code> (both use their defaults); the second call overrides both. Row counts depend on the database.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FetchSampleRows</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FetchSampleRows</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxRows</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">nMaxRows</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span>
@@ -3020,7 +3020,7 @@
 </code></pre></div>
 <h3 id="using-parameters-in-a-data-source-file">Using PARAMETERS in a data source file<a class="headerlink" href="#using-parameters-in-a-data-source-file" title="Permanent link">&para;</a></h3>
 <p>Data source files use the inline-default form instead of separate <a href="../DEFAULT/"><code>:DEFAULT</code></a> statements. Both <code>sStatus</code> and <code>nMaxRows</code> have inline defaults that the caller can override when invoking the data source.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
 
 <span class="k">:RETURN</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;</span>
 <span class="s2">            SELECT sample_id, status</span>

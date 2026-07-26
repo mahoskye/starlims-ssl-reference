@@ -3605,7 +3605,7 @@
 <li>When you need a separate history check alongside credential verification and password-update logic.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">ChkNewPassword</span><span class="p">(</span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">vPrevPasswords</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ChkNewPassword</span><span class="p">(</span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">vPrevPasswords</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3677,7 +3677,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="check-an-array-of-previous-passwords">Check an array of previous passwords<a class="headerlink" href="#check-an-array-of-previous-passwords" title="Permanent link">&para;</a></h3>
 <p>Checks a proposed password against an in-memory array of prior passwords. Because <code>"Str0ngP@ssw0rd!"</code> appears as the second history entry, the function returns <a href="../../literals/false/"><code>.F.</code></a> and the rejection message is displayed.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckPasswordHistory</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckPasswordHistory</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">,</span><span class="w"> </span><span class="n">aPrevPasswords</span><span class="p">,</span><span class="w"> </span><span class="n">bPasswordOk</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sNewPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Str0ngP@ssw0rd!&quot;</span><span class="p">;</span>
@@ -3704,11 +3704,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckPasswordHistory&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Password rejected. Choose a password you have not used before.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Password rejected. Choose a password you have not used before.
 </code></pre></div>
 <h3 id="check-comma-separated-password-history">Check comma-separated password history<a class="headerlink" href="#check-comma-separated-password-history" title="Permanent link">&para;</a></h3>
 <p>Passes a comma-separated history string as the second argument, showing the alternative to an array. Because <code>"SecurePass123"</code> appears in the history string, the function returns <a href="../../literals/false/"><code>.F.</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckPasswordHistoryString</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckPasswordHistoryString</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sPrevPasswords</span><span class="p">,</span><span class="w"> </span><span class="n">bIsNew</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sNewPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SecurePass123&quot;</span><span class="p">;</span>
@@ -3731,11 +3731,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckPasswordHistoryString&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Password was already used. Choose a different value.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Password was already used. Choose a different value.
 </code></pre></div>
 <h3 id="password-change-flow-with-reuse-check">Password change flow with reuse check<a class="headerlink" href="#password-change-flow-with-reuse-check" title="Permanent link">&para;</a></h3>
 <p>Combines <a href="../ChkPassword/"><code>ChkPassword</code></a>, <code>ChkNewPassword</code>, and <a href="../SetUserPassword/"><code>SetUserPassword</code></a> in a single procedure that verifies the current credential, checks the new password against history, and updates it only when both checks pass.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateUserPasswordIfAllowed</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateUserPasswordIfAllowed</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">,</span><span class="w"> </span><span class="n">aPrevPasswords</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oResult</span><span class="p">,</span><span class="w"> </span><span class="n">bCurrentOk</span><span class="p">,</span><span class="w"> </span><span class="n">bIsNew</span><span class="p">;</span>
 

@@ -4011,7 +4011,7 @@
 <li>When auditing or diagnosing which provider is configured for each connection.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetDBMSProviderName</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">GetDBMSProviderName</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4077,7 +4077,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="get-the-provider-identifier-for-a-connection">Get the provider identifier for a connection<a class="headerlink" href="#get-the-provider-identifier-for-a-connection" title="Permanent link">&para;</a></h3>
 <p>Calls the function with an explicit connection name and displays the returned uppercase provider identifier.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowProviderName</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowProviderName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sProviderName</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sProviderName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDBMSProviderName</span><span class="p">(</span><span class="s2">&quot;LIMS&quot;</span><span class="p">);</span>
@@ -4089,11 +4089,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowProviderName&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Provider: SQLSERVER
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Provider: SQLSERVER
 </code></pre></div>
 <h3 id="handle-an-unknown-connection-name-safely">Handle an unknown connection name safely<a class="headerlink" href="#handle-an-unknown-connection-name-safely" title="Permanent link">&para;</a></h3>
 <p>Wraps the call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> so an unknown connection name returns an empty string instead of propagating the exception to the caller.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetProviderSafe</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetProviderSafe</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sProviderName</span><span class="p">;</span>
 
@@ -4111,7 +4111,7 @@
 </code></pre></div>
 <h3 id="branch-logic-by-provider-identifier">Branch logic by provider identifier<a class="headerlink" href="#branch-logic-by-provider-identifier" title="Permanent link">&para;</a></h3>
 <p>Uses the returned identifier to select a provider-specific integration strategy, falling back to <code>"GENERIC"</code> when the connection is not found.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AdaptIntegrationByProvider</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AdaptIntegrationByProvider</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sProvider</span><span class="p">,</span><span class="w"> </span><span class="n">sStrategy</span><span class="p">;</span>
 

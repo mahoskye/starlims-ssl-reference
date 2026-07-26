@@ -3668,7 +3668,7 @@
 <li>When you need to parse text that uses a custom or multi-character literal separator.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">BuildArray</span><span class="p">(</span><span class="n">sText</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bCrlfOk</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sDelimiter</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bUnique</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bTrimSpaces</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">BuildArray</span><span class="p">(</span><span class="n">sText</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bCrlfOk</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sDelimiter</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bUnique</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bTrimSpaces</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3748,7 +3748,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="split-a-comma-separated-list">Split a comma-separated list<a class="headerlink" href="#split-a-comma-separated-list" title="Permanent link">&para;</a></h3>
 <p>Splits a comma-delimited status string into individual values and joins them back with brackets to confirm each element.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseStatusList</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseStatusList</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStatusList</span><span class="p">,</span><span class="w"> </span><span class="n">aStatuses</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sStatusList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Logged,Complete,Pending&quot;</span><span class="p">;</span>
@@ -3767,11 +3767,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseStatusList&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Statuses: [Logged] [Complete] [Pending]
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Statuses: [Logged] [Complete] [Pending]
 </code></pre></div>
 <h3 id="trim-values-from-a-custom-delimited-filter">Trim values from a custom-delimited filter<a class="headerlink" href="#trim-values-from-a-custom-delimited-filter" title="Permanent link">&para;</a></h3>
 <p>Splits a pipe-delimited string with surrounding spaces, using <code>bTrimSpaces</code> to clean each element so the result contains compact identifiers.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseSampleFilter</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseSampleFilter</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFilter</span><span class="p">,</span><span class="w"> </span><span class="n">aSampleIds</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sFilter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;  S-1001  | S-1002 |  S-1003  &quot;</span><span class="p">;</span>
@@ -3791,14 +3791,14 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseSampleFilter&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Parsed sample IDs:
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Parsed sample IDs:
 - S-1001
 - S-1002
 - S-1003
 </code></pre></div>
 <h3 id="preserve-embedded-line-breaks-with-a-multi-character-delimiter">Preserve embedded line breaks with a multi-character delimiter<a class="headerlink" href="#preserve-embedded-line-breaks-with-a-multi-character-delimiter" title="Permanent link">&para;</a></h3>
 <p>Passes <code>bCrlfOk := .T.</code> so that CR/LF characters inside each section are kept intact, and uses a multi-character <code>"||NEXT||"</code> string as the delimiter to split the template into two sections.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseTemplateSections</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseTemplateSections</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTemplate</span><span class="p">,</span><span class="w"> </span><span class="n">aSections</span><span class="p">,</span><span class="w"> </span><span class="n">sPreview</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sTemplate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Summary line 1&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -3822,7 +3822,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseTemplateSections&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Section count: 2
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Section count: 2
 
 Section 1:
 Summary line 1

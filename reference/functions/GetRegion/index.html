@@ -3410,7 +3410,7 @@
 <li>When the same region text needs lightweight token replacement before display or reuse.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetRegion</span><span class="p">(</span><span class="n">sRegionName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">aSourceValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aDestinationValues</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">GetRegion</span><span class="p">(</span><span class="n">sRegionName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">aSourceValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aDestinationValues</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3506,7 +3506,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="look-up-a-region-with-error-handling">Look up a region with error handling<a class="headerlink" href="#look-up-a-region-with-error-handling" title="Permanent link">&para;</a></h3>
 <p>Wraps the lookup in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle the case where the region is not in scope, displaying the content if found or the error description if the region does not exist.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowBanner</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowBanner</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBanner</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
@@ -3527,7 +3527,7 @@
 </code></pre></div>
 <h3 id="replace-placeholders-in-region-text">Replace placeholders in region text<a class="headerlink" href="#replace-placeholders-in-region-text" title="Permanent link">&para;</a></h3>
 <p>Reads a template region that contains <code>{USER}</code> and <code>{DATE}</code> placeholders and replaces both with runtime values in a single call, showing how parallel source and destination arrays drive the substitution.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildWelcomeMessage</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildWelcomeMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSrc</span><span class="p">,</span><span class="w"> </span><span class="n">aDst</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aSrc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;{USER}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;{DATE}&quot;</span><span class="p">};</span>
@@ -3543,7 +3543,7 @@
 </code></pre></div>
 <h3 id="fill-a-json-template-region">Fill a JSON template region<a class="headerlink" href="#fill-a-json-template-region" title="Permanent link">&para;</a></h3>
 <p>Region bodies are raw text, so they can hold JSON, SQL, or any other template. <code>$Name$</code>-style tokens are a common placeholder convention; the source and destination arrays drive the substitution.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sJson</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sJson</span><span class="p">;</span>
 
 <span class="n">sJson</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="s2">&quot;TestJSON&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;$RunID$&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;$CustomerName$&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bill Smith&quot;</span><span class="p">});</span>
 

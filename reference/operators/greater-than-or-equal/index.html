@@ -2703,7 +2703,7 @@
 <li>When comparing string keys using SSL's built-in lexicographic ordering.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="n">vLeft</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">vRight</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">vLeft</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">vRight</span>
 </code></pre></div>
 <h2 id="type-behavior">Type behavior<a class="headerlink" href="#type-behavior" title="Permanent link">&para;</a></h2>
 <table>
@@ -2761,7 +2761,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="validating-a-minimum-passing-score">Validating a minimum passing score<a class="headerlink" href="#validating-a-minimum-passing-score" title="Permanent link">&para;</a></h3>
 <p>Checks whether <code>nScore</code> meets or exceeds <code>nMinPassing</code>. With 72 &gt;= 70, the comparison is <a href="../../literals/true/"><code>.T.</code></a> and the passing branch runs.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckPassingScore</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckPassingScore</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nScore</span><span class="p">,</span><span class="w"> </span><span class="n">nMinPassing</span><span class="p">,</span><span class="w"> </span><span class="n">bIsPassing</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nScore</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">72</span><span class="p">;</span>
@@ -2784,11 +2784,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckPassingScore&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Student passed with a score of 72
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Student passed with a score of 72
 </code></pre></div>
 <h3 id="filtering-log-dates-from-a-cutoff-forward">Filtering log dates from a cutoff forward<a class="headerlink" href="#filtering-log-dates-from-a-cutoff-forward" title="Permanent link">&para;</a></h3>
 <p>Includes log dates that fall on or after <code>dReferenceDate</code>. The cutoff is 01/15/2024, so three of the four entries qualify.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FilterActivityLogs</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FilterActivityLogs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dReferenceDate</span><span class="p">,</span><span class="w"> </span><span class="n">dLogDate</span><span class="p">,</span><span class="w"> </span><span class="n">bIsEligible</span><span class="p">,</span><span class="w"> </span><span class="n">aLogs</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nMatchCount</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dReferenceDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/15/2024&quot;</span><span class="p">);</span>
@@ -2819,14 +2819,14 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FilterActivityLogs&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays one line per matching log, then the total:</p>
-<div class="language-text highlight"><pre><span></span><code>Included log 2 dated 01/15/2024
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Included log 2 dated 01/15/2024
 Included log 3 dated 01/20/2024
 Included log 4 dated 02/01/2024
 Matching logs: 3
 </code></pre></div>
 <h3 id="routing-batch-ids-from-a-lexical-boundary">Routing batch IDs from a lexical boundary<a class="headerlink" href="#routing-batch-ids-from-a-lexical-boundary" title="Permanent link">&para;</a></h3>
 <p>Uses string ordering to check whether a batch ID is at or after a boundary. <code>"BATCH-200"</code> is lexicographically &gt;= <code>"BATCH-150"</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckBatchBoundary</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckBatchBoundary</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">,</span><span class="w"> </span><span class="n">sBoundary</span><span class="p">,</span><span class="w"> </span><span class="n">bAtOrAfter</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BATCH-200&quot;</span><span class="p">;</span>
@@ -2846,7 +2846,7 @@ Matching logs: 3
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckBatchBoundary&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Batch BATCH-200 is at or after the boundary
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Batch BATCH-200 is at or after the boundary
 </code></pre></div>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>

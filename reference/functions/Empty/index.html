@@ -3674,7 +3674,7 @@
 <li>When you need to distinguish an empty array from an array that contains data.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Empty</span><span class="p">(</span><span class="n">vValue</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Empty</span><span class="p">(</span><span class="n">vValue</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3765,7 +3765,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="block-save-when-a-required-note-is-blank">Block save when a required note is blank<a class="headerlink" href="#block-save-when-a-required-note-is-blank" title="Permanent link">&para;</a></h3>
 <p>Use <code>Empty()</code> to reject a note that is empty or contains only whitespace.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateSampleNote</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateSampleNote</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sUserNote</span><span class="p">,</span><span class="w"> </span><span class="n">bCanSave</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">;</span>
@@ -3784,11 +3784,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateSampleNote&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Sample LAB-2024-0042 requires a note before saving
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample LAB-2024-0042 requires a note before saving
 </code></pre></div>
 <h3 id="keep-only-meaningful-values-from-mixed-input">Keep only meaningful values from mixed input<a class="headerlink" href="#keep-only-meaningful-values-from-mixed-input" title="Permanent link">&para;</a></h3>
 <p>Filter out values that SSL treats as empty, including <a href="../../literals/nil/"><code>NIL</code></a>, <code>0</code>, <a href="../../literals/false/"><code>.F.</code></a>, and blank strings.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FilterMeaningfulValues</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FilterMeaningfulValues</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aInput</span><span class="p">,</span><span class="w"> </span><span class="n">aKept</span><span class="p">,</span><span class="w"> </span><span class="n">vValue</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nKept</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
@@ -3817,11 +3817,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FilterMeaningfulValues&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Kept 4 of 9 input values
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Kept 4 of 9 input values
 </code></pre></div>
 <h3 id="validate-optional-workflow-inputs-by-type">Validate optional workflow inputs by type<a class="headerlink" href="#validate-optional-workflow-inputs-by-type" title="Permanent link">&para;</a></h3>
 <p>Use <code>Empty()</code> for strings, dates, and arrays, but validate object content with property checks instead of assuming an object itself will be empty. With the sample inputs here, <code>dDueDate</code> is empty, so the procedure returns <a href="../../literals/false/"><code>.F.</code></a> after displaying the due-date message.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateWorkflowInputs</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateWorkflowInputs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStepName</span><span class="p">,</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">,</span><span class="w"> </span><span class="n">aTests</span><span class="p">,</span><span class="w"> </span><span class="n">oOwner</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sStepName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Review Sample&quot;</span><span class="p">;</span>

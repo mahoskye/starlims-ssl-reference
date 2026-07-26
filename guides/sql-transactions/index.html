@@ -1198,7 +1198,7 @@
 <h2 id="transaction-basics">Transaction basics<a class="headerlink" href="#transaction-basics" title="Permanent link">&para;</a></h2>
 <h3 id="starting-and-ending-transactions">Starting and ending transactions<a class="headerlink" href="#starting-and-ending-transactions" title="Permanent link">&para;</a></h3>
 <p>Place <a href="../../reference/functions/BeginLimsTransaction/"><code>BeginLimsTransaction</code></a> inside the <a href="../../reference/keywords/TRY/"><code>:TRY</code></a> block so that a connection failure is caught cleanly. Use <a href="../../reference/functions/IsInTransaction/"><code>IsInTransaction</code></a> in <a href="../../reference/keywords/FINALLY/"><code>:FINALLY</code></a> to avoid calling <a href="../../reference/functions/EndLimsTransaction/"><code>EndLimsTransaction</code></a> on a transaction that never started.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bCommit</span><span class="p">,</span><span class="w"> </span><span class="n">oError</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bCommit</span><span class="p">,</span><span class="w"> </span><span class="n">oError</span><span class="p">;</span>
 <span class="n">bCommit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 
 <span class="k">:TRY</span><span class="p">;</span>
@@ -1248,19 +1248,19 @@
 </tbody>
 </table>
 <h3 id="endlimstransaction-parameters">EndLimsTransaction parameters<a class="headerlink" href="#endlimstransaction-parameters" title="Permanent link">&para;</a></h3>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">EndLimsTransaction</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">bCommit</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">EndLimsTransaction</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">bCommit</span><span class="p">);</span>
 </code></pre></div>
 <ul>
 <li><strong>sConnectionName</strong> — database connection name; omit for the default connection</li>
 <li><strong>bCommit</strong> — <a href="../../reference/literals/true/"><code>.T.</code></a> to commit, <a href="../../reference/literals/false/"><code>.F.</code></a> to rollback</li>
 </ul>
 <p>Omitting the first argument uses the default connection:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">EndLimsTransaction</span><span class="p">(,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span><span class="w">    </span><span class="c1">/* commit on default connection;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">EndLimsTransaction</span><span class="p">(,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span><span class="w">    </span><span class="c1">/* commit on default connection;</span>
 <span class="nf">EndLimsTransaction</span><span class="p">(,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span><span class="w">    </span><span class="c1">/* rollback on default connection;</span>
 </code></pre></div>
 <h2 id="nested-transactions">Nested transactions<a class="headerlink" href="#nested-transactions" title="Permanent link">&para;</a></h2>
 <p>SSL supports nested <a href="../../reference/functions/BeginLimsTransaction/"><code>BeginLimsTransaction</code></a> calls. The engine uses a <strong>reference-counting</strong> model — only the <strong>outermost</strong> Begin/End pair actually starts and commits or rolls back the database transaction. Inner calls increment and decrement a counter.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">BeginLimsTransaction</span><span class="p">();</span><span class="w">          </span><span class="c1">/* count = 1, DB transaction starts;</span>
 
 <span class="w">    </span><span class="nf">BeginLimsTransaction</span><span class="p">();</span><span class="w">          </span><span class="c1">/* count = 2, no new DB transaction;</span>
@@ -1279,7 +1279,7 @@
 </code></pre></div>
 <h3 id="inner-rollback-poisons-the-outer-transaction">Inner rollback poisons the outer transaction<a class="headerlink" href="#inner-rollback-poisons-the-outer-transaction" title="Permanent link">&para;</a></h3>
 <p>This is the most critical behavior to understand: <strong>if any inner transaction is rolled back, the outer transaction cannot commit</strong>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">BeginLimsTransaction</span><span class="p">();</span>
 
 <span class="w">    </span><span class="nf">BeginLimsTransaction</span><span class="p">();</span>
@@ -1311,7 +1311,7 @@
 <p>If you call <code>EndLimsTransaction(, .T.)</code> on an outer transaction where an inner transaction was rolled back, the commit silently becomes a rollback AND throws. Always use <a href="../../reference/keywords/TRY/"><code>:TRY</code></a> / <a href="../../reference/keywords/CATCH/"><code>:CATCH</code></a> / <a href="../../reference/keywords/FINALLY/"><code>:FINALLY</code></a> around your transaction boundaries.</p>
 </div>
 <h3 id="safe-nested-transaction-pattern">Safe nested transaction pattern<a class="headerlink" href="#safe-nested-transaction-pattern" title="Permanent link">&para;</a></h3>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessBatchWithSteps</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessBatchWithSteps</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aBatchItems</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">bAllSucceeded</span><span class="p">,</span><span class="w"> </span><span class="n">oError</span><span class="p">;</span>
 
@@ -1344,7 +1344,7 @@
 <h2 id="isolation-levels">Isolation levels<a class="headerlink" href="#isolation-levels" title="Permanent link">&para;</a></h2>
 <p>In most cases, calling <a href="../../reference/functions/BeginLimsTransaction/"><code>BeginLimsTransaction</code></a> with no arguments is the right choice — the server's configured default isolation level applies (typically Read Committed, configurable per tenant by the system administrator).</p>
 <p>For advanced scenarios where you need explicit control, <a href="../../reference/functions/BeginLimsTransaction/"><code>BeginLimsTransaction</code></a> accepts an optional second parameter to override the isolation level:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">BeginLimsTransaction</span><span class="p">(,</span><span class="w"> </span><span class="s2">&quot;Repeatable Read&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">BeginLimsTransaction</span><span class="p">(,</span><span class="w"> </span><span class="s2">&quot;Repeatable Read&quot;</span><span class="p">);</span>
 <span class="nf">BeginLimsTransaction</span><span class="p">(,</span><span class="w"> </span><span class="s2">&quot;Serializable&quot;</span><span class="p">);</span>
 <span class="nf">BeginLimsTransaction</span><span class="p">(,</span><span class="w"> </span><span class="s2">&quot;Snapshot&quot;</span><span class="p">);</span>
 </code></pre></div>
@@ -1435,7 +1435,7 @@
 </tr>
 </tbody>
 </table>
-<div class="language-ssl highlight"><pre><span></span><code><span class="c1">/* Suppress non-fatal SQL errors for a batch operation;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="c1">/* Suppress non-fatal SQL errors for a batch operation;</span>
 <span class="nf">IgnoreSqlErrors</span><span class="p">(</span><span class="kc">.T.</span><span class="p">);</span>
 <span class="nf">ShowSqlErrors</span><span class="p">(</span><span class="kc">.F.</span><span class="p">);</span>
 
@@ -1459,7 +1459,7 @@
 </div>
 <h3 id="sqlexecute-with-auto-rollback">SQLExecute with auto-rollback<a class="headerlink" href="#sqlexecute-with-auto-rollback" title="Permanent link">&para;</a></h3>
 <p><a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a> has a <code>bRollbackExistingTransaction</code> parameter. When <a href="../../reference/literals/true/"><code>.T.</code></a> and the SQL fails, it automatically calls <a href="../../reference/functions/EndLimsTransaction/"><code>EndLimsTransaction</code></a>(, .F.) on the current connection:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">BeginLimsTransaction</span><span class="p">();</span>
 
 <span class="w">    </span><span class="c1">/* If this fails and rollbackExistingTransaction is .T.,</span>
@@ -1476,7 +1476,7 @@
 </code></pre></div>
 <h2 id="complete-transaction-pattern">Complete transaction pattern<a class="headerlink" href="#complete-transaction-pattern" title="Permanent link">&para;</a></h2>
 <p>This pattern covers the common case — a procedure that modifies data with proper error handling, transaction management, and error reporting:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateSampleStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateSampleStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">sNewStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bCommit</span><span class="p">,</span><span class="w"> </span><span class="n">oError</span><span class="p">;</span>
 

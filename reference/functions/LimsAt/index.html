@@ -4250,7 +4250,7 @@
 <li>When parsing text in stages and continuing each search after an earlier match.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LimsAt</span><span class="p">(</span><span class="n">sSubString</span><span class="p">,</span><span class="w"> </span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">nOffset</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LimsAt</span><span class="p">(</span><span class="n">sSubString</span><span class="p">,</span><span class="w"> </span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">nOffset</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4334,7 +4334,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="locate-a-dash-in-a-sample-id">Locate a dash in a sample ID<a class="headerlink" href="#locate-a-dash-in-a-sample-id" title="Permanent link">&para;</a></h3>
 <p>Search <code>"ABC-12345"</code> for a dash. <code>LimsAt</code> returns <code>0</code> when nothing is found and a positive 1-based position otherwise — the dash in this input is at position 4.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindDashPosition</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindDashPosition</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">nDashPos</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ABC-12345&quot;</span><span class="p">;</span>
@@ -4355,12 +4355,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FindDashPosition&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Sample ID: ABC-12345
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample ID: ABC-12345
 Dash found at position: 4
 </code></pre></div>
 <h3 id="find-the-second-occurrence-of-a-separator">Find the second occurrence of a separator<a class="headerlink" href="#find-the-second-occurrence-of-a-separator" title="Permanent link">&para;</a></h3>
 <p>Use the first match's position as the offset for the second <code>LimsAt</code> call. In <code>"Orders/2026/Incoming/Batch01"</code>, the first <a href="../../operators/divide/"><code>/</code></a> is at position 7 and the second is at position 12.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindSecondSlash</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindSecondSlash</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPath</span><span class="p">,</span><span class="w"> </span><span class="n">nFirstSlash</span><span class="p">,</span><span class="w"> </span><span class="n">nSecondSlash</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Orders/2026/Incoming/Batch01&quot;</span><span class="p">;</span>
@@ -4382,12 +4382,12 @@ Dash found at position: 4
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FindSecondSlash&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>First slash: 7
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>First slash: 7
 Second slash: 12
 </code></pre></div>
 <h3 id="extract-a-field-value-after-a-known-label">Extract a field value after a known label<a class="headerlink" href="#extract-a-field-value-after-a-known-label" title="Permanent link">&para;</a></h3>
 <p>Locate the <code>OWNER=</code> label with <code>LimsAt</code>, use <a href="../Len/"><code>Len</code></a> to calculate the value start position, then find the closing <a href="../../operators/or/"><code>|</code></a> with a second <code>LimsAt</code> call before extracting the value with <a href="../SubStr/"><code>SubStr</code></a>. The header <code>"STATUS=Logged|OWNER=JSMITH|BATCH=LAB-2026-0042"</code> yields <code>"JSMITH"</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExtractOwnerValue</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExtractOwnerValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sHeader</span><span class="p">,</span><span class="w"> </span><span class="n">sLabel</span><span class="p">,</span><span class="w"> </span><span class="n">sOwner</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nLabelPos</span><span class="p">,</span><span class="w"> </span><span class="n">nValuePos</span><span class="p">,</span><span class="w"> </span><span class="n">nNextPipe</span><span class="p">;</span>
 
@@ -4417,7 +4417,7 @@ Second slash: 12
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExtractOwnerValue&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Owner: JSMITH
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Owner: JSMITH
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

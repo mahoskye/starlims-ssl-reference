@@ -4364,7 +4364,7 @@
 <li>When refactoring legacy string-based date manipulations to use proper date types for improved reliability and clarity.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">StringToDate</span><span class="p">(</span><span class="n">sDateString</span><span class="p">,</span><span class="w"> </span><span class="n">sDateFormat</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">StringToDate</span><span class="p">(</span><span class="n">sDateString</span><span class="p">,</span><span class="w"> </span><span class="n">sDateFormat</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4440,7 +4440,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="validate-a-user-entered-date-string">Validate a user-entered date string<a class="headerlink" href="#validate-a-user-entered-date-string" title="Permanent link">&para;</a></h3>
 <p>Parse a user-supplied date string against a fixed pattern and use an empty-date check to detect mismatches. The function never raises on a bad format, so the guard must be explicit.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateSampleDate</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateSampleDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">sFormat</span><span class="p">,</span><span class="w"> </span><span class="n">dParsedDate</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;03/15/2024&quot;</span><span class="p">;</span>
@@ -4461,7 +4461,7 @@
 </code></pre></div>
 <h3 id="parse-and-separate-valid-and-invalid-rows-from-an-import-feed">Parse and separate valid and invalid rows from an import feed<a class="headerlink" href="#parse-and-separate-valid-and-invalid-rows-from-an-import-feed" title="Permanent link">&para;</a></h3>
 <p>Loop over rows from a CSV-style import, attempt to parse each date string, and collect accepted and rejected entries into separate arrays. The row with <code>"20240230"</code> (February 30) fails because that date does not exist.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportSampleDatesFromCSV</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportSampleDatesFromCSV</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aAccepted</span><span class="p">,</span><span class="w"> </span><span class="n">aRejected</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">sDateString</span><span class="p">,</span><span class="w"> </span><span class="n">dParsedDate</span><span class="p">;</span>
 
@@ -4496,7 +4496,7 @@
 </code></pre></div>
 <h3 id="normalize-dates-arriving-in-different-formats-from-multiple-sources">Normalize dates arriving in different formats from multiple sources<a class="headerlink" href="#normalize-dates-arriving-in-different-formats-from-multiple-sources" title="Permanent link">&para;</a></h3>
 <p>Dispatch to the correct format string based on each row's source system, then parse and collect a status alongside each normalized date. The <code>"legacy"</code> row with <code>"15-Mars-2024"</code> fails because <code>"Mars"</code> is not an invariant-culture month abbreviation; the <code>"custom"</code> source has no registered format and is marked unsupported without attempting to parse.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeIncomingDates</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeIncomingDates</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aEvents</span><span class="p">,</span><span class="w"> </span><span class="n">aNormalized</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="n">sDateText</span><span class="p">,</span><span class="w"> </span><span class="n">sFormat</span><span class="p">,</span><span class="w"> </span><span class="n">dEventDate</span><span class="p">;</span>
 

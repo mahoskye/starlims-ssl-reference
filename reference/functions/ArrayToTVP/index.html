@@ -4279,7 +4279,7 @@ target database from <code>sConnectionName</code> when that argument is a string
 <li>When the same calling code may target either SQL Server or Oracle.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">ArrayToTVP</span><span class="p">(</span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sDataType</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sConnectionName</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ArrayToTVP</span><span class="p">(</span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sDataType</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sConnectionName</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4401,7 +4401,7 @@ target database from <code>sConnectionName</code> when that argument is a string
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="create-an-integer-tvp">Create an integer TVP<a class="headerlink" href="#create-an-integer-tvp" title="Permanent link">&para;</a></h3>
 <p>Builds an integer TVP by passing <code>"INT"</code> as the type hint, then checks that the result is non-empty before proceeding.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildIntegerTVP</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildIntegerTVP</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aOrderIds</span><span class="p">,</span><span class="w"> </span><span class="n">oTVP</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aOrderIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">1001</span><span class="p">,</span><span class="w"> </span><span class="mi">1002</span><span class="p">,</span><span class="w"> </span><span class="mi">1003</span><span class="p">};</span>
@@ -4419,7 +4419,7 @@ target database from <code>sConnectionName</code> when that argument is a string
 </code></pre></div>
 <h3 id="let-the-function-infer-a-string-tvp">Let the function infer a string TVP<a class="headerlink" href="#let-the-function-infer-a-string-tvp" title="Permanent link">&para;</a></h3>
 <p>Omits the type hint so the function infers string behavior from the array contents. A <a href="../../literals/nil/"><code>NIL</code></a> element is accepted as long as the non-<a href="../../literals/nil/"><code>NIL</code></a> elements are all strings.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildStringTVP</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildStringTVP</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIds</span><span class="p">,</span><span class="w"> </span><span class="n">oTVP</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aSampleIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SMP-0001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SMP-0002&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SMP-0004&quot;</span><span class="p">};</span>
@@ -4437,7 +4437,7 @@ target database from <code>sConnectionName</code> when that argument is a string
 </code></pre></div>
 <h3 id="target-a-specific-connection-and-catch-errors">Target a specific connection and catch errors<a class="headerlink" href="#target-a-specific-connection-and-catch-errors" title="Permanent link">&para;</a></h3>
 <p>Passes a named connection to direct the TVP at a non-default database, and wraps the call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle resolution failures.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildRemoteTVP</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildRemoteTVP</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aIds</span><span class="p">,</span><span class="w"> </span><span class="n">oTVP</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">2001</span><span class="p">,</span><span class="w"> </span><span class="mi">2002</span><span class="p">,</span><span class="w"> </span><span class="mi">2003</span><span class="p">};</span>
@@ -4456,7 +4456,7 @@ target database from <code>sConnectionName</code> when that argument is a string
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildRemoteTVP&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p>On failure, <a href="../ErrorMes/"><code>ErrorMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>TVP creation failed: &lt;error message&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>TVP creation failed: &lt;error message&gt;
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

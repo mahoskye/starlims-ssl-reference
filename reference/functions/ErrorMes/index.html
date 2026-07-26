@@ -3471,7 +3471,7 @@
 <li>When you still want the resulting message string returned to your code.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">vCaption</span><span class="p">,</span><span class="w"> </span><span class="n">vMessage</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">vCaption</span><span class="p">,</span><span class="w"> </span><span class="n">vMessage</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3527,7 +3527,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="log-a-validation-failure">Log a validation failure<a class="headerlink" href="#log-a-validation-failure" title="Permanent link">&para;</a></h3>
 <p>Log a simple validation error and keep the returned message string.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateResult</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateResult</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">sLogged</span><span class="p">;</span>
 
@@ -3545,11 +3545,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateResult&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;S-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><code>ErrorMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Validation Failed: Sample S-001 is missing a result value
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Validation Failed: Sample S-001 is missing a result value
 </code></pre></div>
 <h3 id="log-a-caught-exception">Log a caught exception<a class="headerlink" href="#log-a-caught-exception" title="Permanent link">&para;</a></h3>
 <p>Capture the runtime error text in a <a href="../../keywords/CATCH/"><code>:CATCH</code></a> block and write it with a stable caption.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SaveResult</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SaveResult</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
@@ -3574,11 +3574,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SaveResult&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;S-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Positive&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><code>ErrorMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>SaveResult failed: Sample S-001: &lt;error description&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>SaveResult failed: Sample S-001: &lt;error description&gt;
 </code></pre></div>
 <h3 id="log-a-transaction-rollback">Log a transaction rollback<a class="headerlink" href="#log-a-transaction-rollback" title="Permanent link">&para;</a></h3>
 <p>Use <code>ErrorMes</code> for a critical batch failure where the transaction is rolled back and the failure must be recorded.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ApproveBatch</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ApproveBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">,</span><span class="w"> </span><span class="n">aSampleIDs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bCommitted</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
@@ -3610,7 +3610,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ApproveBatch&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;BATCH-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;S-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S-002&quot;</span><span class="p">}});</span>
 </code></pre></div>
 <p><code>ErrorMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Batch approval failed: BATCH-001 rolled back: &lt;error description&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Batch approval failed: BATCH-001 rolled back: &lt;error description&gt;
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

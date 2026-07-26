@@ -3609,7 +3609,7 @@ If the key is <code>"STARLIMSUSERS"</code> but the current session mode is not <
 <li>When you need a quick application-wide user snapshot rather than a session-specific value.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetFromApplication</span><span class="p">(</span><span class="n">sKey</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">GetFromApplication</span><span class="p">(</span><span class="n">sKey</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3678,7 +3678,7 @@ If the key is <code>"STARLIMSUSERS"</code> but the current session mode is not <
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="display-the-connected-users-list">Display the connected users list<a class="headerlink" href="#display-the-connected-users-list" title="Permanent link">&para;</a></h3>
 <p>Retrieves the connected users string and displays it when the current session mode supports the lookup.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowConnectedUsers</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowConnectedUsers</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUsers</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUsers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFromApplication</span><span class="p">(</span><span class="s2">&quot;STARLIMSUSERS&quot;</span><span class="p">);</span>
@@ -3700,7 +3700,7 @@ If the key is <code>"STARLIMSUSERS"</code> but the current session mode is not <
 </code></pre></div>
 <h3 id="validate-the-key-before-calling">Validate the key before calling<a class="headerlink" href="#validate-the-key-before-calling" title="Permanent link">&para;</a></h3>
 <p>Guards the call so the function is only invoked with its one supported key, returning <a href="../../literals/nil/"><code>NIL</code></a> immediately for any other input.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LookupConnectedUsers</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LookupConnectedUsers</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sKey</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUsers</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
@@ -3732,7 +3732,7 @@ If the key is <code>"STARLIMSUSERS"</code> but the current session mode is not <
 </code></pre></div>
 <h3 id="handle-missing-session-context-safely">Handle missing Session context safely<a class="headerlink" href="#handle-missing-session-context-safely" title="Permanent link">&para;</a></h3>
 <p>Wraps the lookup in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> so a missing <code>Session</code> variable or other runtime error is caught and reported rather than propagated.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditConnectedUsers</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditConnectedUsers</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUsers</span><span class="p">,</span><span class="w"> </span><span class="n">sReport</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>

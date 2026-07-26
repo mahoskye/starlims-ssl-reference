@@ -4242,7 +4242,7 @@
 <li>When support or logging code needs the SQL text, SQL state, or numeric error code from the last failure.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetLastSQLError</span><span class="p">()</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">GetLastSQLError</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>This function takes no parameters.</p>
@@ -4273,7 +4273,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="read-the-sql-error-inside-catch">Read the SQL error inside <a href="../../keywords/CATCH/"><code>:CATCH</code></a><a class="headerlink" href="#read-the-sql-error-inside-catch" title="Permanent link">&para;</a></h3>
 <p>Runs a <a href="../RunSQL/"><code>RunSQL</code></a> call that references a non-existent column, catches the failure in <a href="../../keywords/CATCH/"><code>:CATCH</code></a>, reads the error object, and displays the description with <a href="../ErrorMes/"><code>ErrorMes</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowLastSqlError</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowLastSqlError</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">,</span><span class="w"> </span><span class="n">oSqlErr</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
@@ -4301,7 +4301,7 @@
 </code></pre></div>
 <h3 id="return-structured-diagnostics-for-support-code">Return structured diagnostics for support code<a class="headerlink" href="#return-structured-diagnostics-for-support-code" title="Permanent link">&para;</a></h3>
 <p>Extracts individual <a href="../../classes/SSLSQLError/"><code>SSLSQLError</code></a> properties after a failed <a href="../SQLExecute/"><code>SQLExecute</code></a> call and packs them into a diagnostic object, returning <a href="../../literals/nil/"><code>NIL</code></a> when no error object is available.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSqlDiagnostic</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSqlDiagnostic</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOrdNo</span><span class="p">,</span><span class="w"> </span><span class="n">oSqlErr</span><span class="p">,</span><span class="w"> </span><span class="n">oDiag</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sOrdNo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ORD-100045&quot;</span><span class="p">;</span>
@@ -4336,7 +4336,7 @@
 </code></pre></div>
 <h3 id="combine-a-formatted-message-with-raw-sql-diagnostics">Combine a formatted message with raw SQL diagnostics<a class="headerlink" href="#combine-a-formatted-message-with-raw-sql-diagnostics" title="Permanent link">&para;</a></h3>
 <p>Uses <a href="../FormatSqlErrorMessage/"><code>FormatSqlErrorMessage</code></a> for a user-facing string alongside raw properties (<code>SQLState</code>, <code>GenCode</code>, <code>Sql</code>, <code>ErrorStackTrace</code>) packed into a support ticket object.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CaptureSqlFailureForSupport</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CaptureSqlFailureForSupport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOrdNo</span><span class="p">,</span><span class="w"> </span><span class="n">oSqlErr</span><span class="p">,</span><span class="w"> </span><span class="n">oTicket</span><span class="p">,</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sOrdNo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ORD-100045&quot;</span><span class="p">;</span>

@@ -2829,7 +2829,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="read-a-value-from-an-existing-key">Read a value from an existing key<a class="headerlink" href="#read-a-value-from-an-existing-key" title="Permanent link">&para;</a></h3>
 <p>Opens a key under <code>HKEY_LOCAL_MACHINE\SOFTWARE\MyApplication</code>, reads the <code>InstallPath</code> value, and closes the key. Checks the return value of <code>RegOpenKey()</code> before querying and checks for <a href="../../literals/nil/"><code>NIL</code></a> to distinguish a missing value from an empty one.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadRegistryInstallPath</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadRegistryInstallPath</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oRegistry</span><span class="p">,</span><span class="w"> </span><span class="n">bOpened</span><span class="p">,</span><span class="w"> </span><span class="n">vInstallPath</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oRegistry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">RegSetup</span><span class="p">{};</span>
@@ -2854,7 +2854,7 @@
 </code></pre></div>
 <h3 id="read-multiple-values-and-always-close-the-key">Read multiple values and always close the key<a class="headerlink" href="#read-multiple-values-and-always-close-the-key" title="Permanent link">&para;</a></h3>
 <p>Uses <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> to guarantee <code>RegCloseKey()</code> runs even if an exception is raised mid-read. Initialising <code>bOpened</code> to <a href="../../literals/false/"><code>.F.</code></a> before the <a href="../../keywords/TRY/"><code>:TRY</code></a> block lets the <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> guard skip the close call when the key was never opened.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadRegistryDetailsSafely</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadRegistryDetailsSafely</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oRegistry</span><span class="p">,</span><span class="w"> </span><span class="n">bOpened</span><span class="p">,</span><span class="w"> </span><span class="n">vVersion</span><span class="p">,</span><span class="w"> </span><span class="n">vInstallPath</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oRegistry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">RegSetup</span><span class="p">{};</span>

@@ -3719,7 +3719,7 @@
 <li>When you want a more tolerant conversion than <a href="../ToNumeric/"><code>ToNumeric</code></a>.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Val</span><span class="p">(</span><span class="n">sNumber</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Val</span><span class="p">(</span><span class="n">sNumber</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3790,7 +3790,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="convert-a-simple-numeric-string">Convert a simple numeric string<a class="headerlink" href="#convert-a-simple-numeric-string" title="Permanent link">&para;</a></h3>
 <p>Convert clean numeric text and use the result in a calculation.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertSimpleValue</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertSimpleValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">nValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;42.5&quot;</span><span class="p">;</span>
@@ -3803,11 +3803,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ConvertSimpleValue&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Doubled value: 85
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Doubled value: 85
 </code></pre></div>
 <h3 id="extract-the-leading-number-from-mixed-text">Extract the leading number from mixed text<a class="headerlink" href="#extract-the-leading-number-from-mixed-text" title="Permanent link">&para;</a></h3>
 <p>Use <code>Val</code> when the number comes first and descriptive text follows. Everything after the numeric prefix is ignored.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseMeasuredResult</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseMeasuredResult</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sReportedValue</span><span class="p">,</span><span class="w"> </span><span class="n">nResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sReportedValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;12.5 mg/L&quot;</span><span class="p">;</span>
@@ -3822,11 +3822,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseMeasuredResult&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Numeric result: 12.5
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Numeric result: 12.5
 </code></pre></div>
 <h3 id="choose-between-tolerant-and-strict-conversion">Choose between tolerant and strict conversion<a class="headerlink" href="#choose-between-tolerant-and-strict-conversion" title="Permanent link">&para;</a></h3>
 <p>Pass <code>bRequireWholeValue = .T.</code> to require that the entire string be numeric (using <a href="../ToNumeric/"><code>ToNumeric</code></a>), or <a href="../../literals/false/"><code>.F.</code></a> to accept a leading numeric prefix (using <code>Val</code>). With <code>"100.0"</code> and either flag the result is the same.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportQuantityField</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportQuantityField</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sRawValue</span><span class="p">,</span><span class="w"> </span><span class="n">bRequireWholeValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">bRequireWholeValue</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nValue</span><span class="p">;</span>
@@ -3846,7 +3846,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ImportQuantityField&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;100.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Imported quantity: 100
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Imported quantity: 100
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

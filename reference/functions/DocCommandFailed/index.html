@@ -3805,7 +3805,7 @@
 <li>When you want to branch to logging or recovery logic before continuing the workflow.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocCommandFailed</span><span class="p">()</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocCommandFailed</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>This function takes no parameters.</p>
@@ -3837,7 +3837,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="check-whether-a-login-attempt-was-recorded-as-a-failure">Check whether a login attempt was recorded as a failure<a class="headerlink" href="#check-whether-a-login-attempt-was-recorded-as-a-failure" title="Permanent link">&para;</a></h3>
 <p>Calls <code>DocCommandFailed</code> immediately after a login attempt to detect a recorded Documentum failure, then displays either an error message or a success message.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckDocumentumLogin</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckDocumentumLogin</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">,</span><span class="w"> </span><span class="n">bFailed</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Repository1&quot;</span><span class="p">;</span>
@@ -3868,7 +3868,7 @@
 </code></pre></div>
 <h3 id="return-early-when-a-document-command-records-a-failure">Return early when a document command records a failure<a class="headerlink" href="#return-early-when-a-document-command-records-a-failure" title="Permanent link">&para;</a></h3>
 <p>Cancels checkout for a document id passed as a parameter and returns <a href="../../literals/false/"><code>.F.</code></a> immediately when <code>DocCommandFailed</code> reports a recorded failure.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CancelCheckoutSafely</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CancelCheckoutSafely</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sDocumentId</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
@@ -3904,7 +3904,7 @@
 </code></pre></div>
 <h3 id="capture-failures-for-each-document-in-a-batch-loop">Capture failures for each document in a batch loop<a class="headerlink" href="#capture-failures-for-each-document-in-a-batch-loop" title="Permanent link">&para;</a></h3>
 <p>Iterates a list of document IDs, attempts checkout for each one, captures any recorded failure message before the next call can overwrite it, and reports whether any failures occurred.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CollectDocumentumFailures</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CollectDocumentumFailures</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aDocumentIds</span><span class="p">,</span><span class="w"> </span><span class="n">aFailures</span><span class="p">,</span><span class="w"> </span><span class="n">sDocumentId</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aDocumentIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;DOC-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;DOC-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;DOC-003&quot;</span><span class="p">};</span>

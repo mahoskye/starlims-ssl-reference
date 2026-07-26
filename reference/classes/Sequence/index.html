@@ -3020,7 +3020,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="create-a-sequence-and-read-the-next-value">Create a sequence and read the next value<a class="headerlink" href="#create-a-sequence-and-read-the-next-value" title="Permanent link">&para;</a></h3>
 <p>Creates a SQL Server sequence for a sample table with a custom starting value and cache size, then reads the next value. Checks <code>Exists</code> first to avoid creating a sequence that is already present.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateSampleSequence</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateSampleSequence</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oSeq</span><span class="p">,</span><span class="w"> </span><span class="n">nNextValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oSeq</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Sequence</span><span class="p">{</span><span class="s2">&quot;SQLSERVER&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sample&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sample_id&quot;</span><span class="p">};</span>
@@ -3040,7 +3040,7 @@
 </code></pre></div>
 <h3 id="reset-after-importing-existing-records">Reset after importing existing records<a class="headerlink" href="#reset-after-importing-existing-records" title="Permanent link">&para;</a></h3>
 <p>Queries the highest existing ID in the table to determine the next safe starting value, then either creates the sequence fresh or resets it if one already exists.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SyncSampleSequence</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SyncSampleSequence</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oSeq</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxId</span><span class="p">,</span><span class="w"> </span><span class="n">nStartValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oSeq</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Sequence</span><span class="p">{</span><span class="s2">&quot;SQLSERVER&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sample&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sample_id&quot;</span><span class="p">};</span>
@@ -3067,7 +3067,7 @@
 </code></pre></div>
 <h3 id="target-another-database-before-sequence-operations">Target another database before sequence operations<a class="headerlink" href="#target-another-database-before-sequence-operations" title="Permanent link">&para;</a></h3>
 <p>Builds an Oracle sequence object with a prefix, redirects it to a named database with <code>SetDatabase</code>, then creates the sequence only if it does not already exist there.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateHistorySequence</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateHistorySequence</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oSeq</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oSeq</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Sequence</span><span class="p">{</span><span class="s2">&quot;ORACLE&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;result_log&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;result_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;audit&quot;</span><span class="p">};</span>

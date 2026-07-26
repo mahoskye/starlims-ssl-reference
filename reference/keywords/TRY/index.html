@@ -2873,19 +2873,19 @@
 <li>When you want error-handling scope to match one specific operation instead of covering an entire procedure.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="n">try_statements</span><span class="p">;</span>
 <span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">    </span><span class="n">catch_statements</span><span class="p">;</span>
 <span class="k">:ENDTRY</span><span class="p">;</span>
 </code></pre></div>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="n">try_statements</span><span class="p">;</span>
 <span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">    </span><span class="n">finally_statements</span><span class="p">;</span>
 <span class="k">:ENDTRY</span><span class="p">;</span>
 </code></pre></div>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="n">try_statements</span><span class="p">;</span>
 <span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">    </span><span class="n">catch_statements</span><span class="p">;</span>
@@ -2927,7 +2927,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="handling-a-failed-file-read">Handling a failed file read<a class="headerlink" href="#handling-a-failed-file-read" title="Permanent link">&para;</a></h3>
 <p>Uses <code>:TRY</code> and <a href="../CATCH/"><code>:CATCH</code></a> to prevent a missing or unreadable file from stopping the procedure. When the file cannot be read, the error handler sets the status message and execution continues normally after <a href="../ENDTRY/"><code>:ENDTRY;</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">OpenConfigFile</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">OpenConfigFile</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">sFileContents</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\STARLIMS\config\app.cfg&quot;</span><span class="p">;</span>
@@ -2953,7 +2953,7 @@
 <p>On success, <code>UsrMes</code> displays the first 50 characters of the file. On failure, it displays the error text stored in <code>sStatus</code>.</p>
 <h3 id="pairing-catch-and-finally-for-cleanup">Pairing CATCH and FINALLY for cleanup<a class="headerlink" href="#pairing-catch-and-finally-for-cleanup" title="Permanent link">&para;</a></h3>
 <p>Shows how <code>:TRY</code>, <a href="../CATCH/"><code>:CATCH</code></a>, and <a href="../FINALLY/"><code>:FINALLY</code></a> work together when cleanup must run even after a failure. <a href="../../functions/RaiseError/"><code>RaiseError</code></a> forces the error path; <a href="../FINALLY/"><code>:FINALLY</code></a> releases the lock regardless of which branch ran.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessWithLock</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessWithLock</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bLockAcquired</span><span class="p">,</span><span class="w"> </span><span class="n">oLock</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bLockAcquired</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
@@ -2988,11 +2988,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ProcessWithLock&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Processing failed: Processing failed due to invalid sample state
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Processing failed: Processing failed due to invalid sample state
 </code></pre></div>
 <h3 id="handling-multiple-failure-paths-in-one-catch-block">Handling multiple failure paths in one CATCH block<a class="headerlink" href="#handling-multiple-failure-paths-in-one-catch-block" title="Permanent link">&para;</a></h3>
 <p>Uses one <code>:TRY</code> block for a multi-step operation, then branches inside the single <a href="../CATCH/"><code>:CATCH</code></a> block SSL supports. <a href="../FINALLY/"><code>:FINALLY</code></a> always displays the outcome regardless of success or failure. With <code>sBatchID</code> set to <code>"B-1001"</code> and both the load and update succeeding, the final message confirms processing.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessBatchRecords</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessBatchRecords</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRecords</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sStatusMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bLoadedRecords</span><span class="p">,</span><span class="w"> </span><span class="n">bUpdatedBatch</span><span class="p">;</span>

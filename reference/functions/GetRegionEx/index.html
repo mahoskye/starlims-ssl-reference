@@ -3409,7 +3409,7 @@
 <li>When a shared script receives region overrides from surrounding code and still needs a fallback to the current region scope.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetRegionEx</span><span class="p">(</span><span class="n">sRegionName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">aSourceValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aDestinationValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">oLocalRegions</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">GetRegionEx</span><span class="p">(</span><span class="n">sRegionName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">aSourceValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aDestinationValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">oLocalRegions</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3510,7 +3510,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="look-up-a-region-by-name">Look up a region by name<a class="headerlink" href="#look-up-a-region-by-name" title="Permanent link">&para;</a></h3>
 <p>Retrieves a named region without any token substitution, wrapping the call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> so that a missing region name can be reported without halting the procedure.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowRegionText</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowRegionText</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
@@ -3532,7 +3532,7 @@
 </code></pre></div>
 <h3 id="replace-placeholder-tokens-after-lookup">Replace placeholder tokens after lookup<a class="headerlink" href="#replace-placeholder-tokens-after-lookup" title="Permanent link">&para;</a></h3>
 <p>Retrieves a template region and replaces <code>{CUSTOMER}</code> and <code>{DATE}</code> placeholders in one call by passing parallel source and destination arrays. The exact output depends on what <code>InvoiceTemplate</code> contains in the region scope.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildInvoiceHeader</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildInvoiceHeader</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aDst</span><span class="p">,</span><span class="w"> </span><span class="n">aSrc</span><span class="p">,</span><span class="w"> </span><span class="n">sHeader</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aSrc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;{CUSTOMER}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;{DATE}&quot;</span><span class="p">};</span>
@@ -3549,11 +3549,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildInvoiceHeader&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays this output when <code>InvoiceTemplate</code> = <code>"Invoice for {CUSTOMER} dated {DATE}"</code>:</p>
-<div class="language-text highlight"><pre><span></span><code>Invoice for Acme Corp dated 23/04/2026
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Invoice for Acme Corp dated 23/04/2026
 </code></pre></div>
 <h3 id="override-region-lookup-with-a-local-region-map">Override region lookup with a local region map<a class="headerlink" href="#override-region-lookup-with-a-local-region-map" title="Permanent link">&para;</a></h3>
 <p>Passes a caller-supplied local region map as <code>oLocalRegions</code> so that the local map is checked first; if the name is found there it overrides the global scope, otherwise the fallback lookup proceeds normally. The <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> guards against missing region names in both sources.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResolveImportRegion</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResolveImportRegion</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">oLocalRegions</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aDst</span><span class="p">,</span><span class="w"> </span><span class="n">aSrc</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sRegionText</span><span class="p">;</span>
 

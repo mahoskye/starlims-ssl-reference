@@ -4227,7 +4227,7 @@
 <li>When creating temporary identifiers for files, queues, or other short-lived work items.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">CreateGUID</span><span class="p">()</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">CreateGUID</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>This function takes no parameters.</p>
@@ -4259,7 +4259,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="assign-a-guid-to-a-new-record">Assign a GUID to a new record<a class="headerlink" href="#assign-a-guid-to-a-new-record" title="Permanent link">&para;</a></h3>
 <p>Generates a GUID, assigns it to a new object, and displays the value. The GUID value differs on every call.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PrepareOrderRecord</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PrepareOrderRecord</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOrderId</span><span class="p">,</span><span class="w"> </span><span class="n">oOrder</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oOrder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">();</span>
@@ -4278,7 +4278,7 @@
 </code></pre></div>
 <h3 id="reuse-one-correlation-id-across-steps">Reuse one correlation ID across steps<a class="headerlink" href="#reuse-one-correlation-id-across-steps" title="Permanent link">&para;</a></h3>
 <p>Generates one GUID and uses it in three separate messages so related work can be correlated by the same ID. All three lines show the same GUID, and the value differs on every call.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogRequestAcrossSteps</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogRequestAcrossSteps</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sRequestId</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sRequestId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateGUID</span><span class="p">();</span>
@@ -4301,7 +4301,7 @@
 </code></pre></div>
 <h3 id="assign-batch-and-row-ids-during-import">Assign batch and row IDs during import<a class="headerlink" href="#assign-batch-and-row-ids-during-import" title="Permanent link">&para;</a></h3>
 <p>Generates one batch GUID shared across all rows and one unique row GUID per item, then saves each row with both identifiers.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PrepareImportRows</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PrepareImportRows</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">nCount</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">oImportBatch</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">oRow</span><span class="p">;</span>

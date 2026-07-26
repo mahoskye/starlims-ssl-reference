@@ -3919,7 +3919,7 @@
 <li>When <a href="../Scient/"><code>Scient</code></a> is too fixed and you need explicit precision in the output.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">ToScientific</span><span class="p">(</span><span class="n">nNumber</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">nDecimalPlaces</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ToScientific</span><span class="p">(</span><span class="n">nNumber</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">nDecimalPlaces</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3990,7 +3990,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="format-one-measurement-with-the-default-precision">Format one measurement with the default precision<a class="headerlink" href="#format-one-measurement-with-the-default-precision" title="Permanent link">&para;</a></h3>
 <p>Convert a numeric result to scientific notation without passing the optional precision argument. The default is two decimal places.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatMeasuredValue</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatMeasuredValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nMeasurement</span><span class="p">,</span><span class="w"> </span><span class="n">sScientific</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nMeasurement</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">0.000315</span><span class="p">;</span>
@@ -4003,11 +4003,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FormatMeasuredValue&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Concentration: 3.15E-004 mol/L
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Concentration: 3.15E-004 mol/L
 </code></pre></div>
 <h3 id="apply-a-fixed-precision-to-several-values">Apply a fixed precision to several values<a class="headerlink" href="#apply-a-fixed-precision-to-several-values" title="Permanent link">&para;</a></h3>
 <p>Format several values with the same precision and concatenate them into an export line separated by tab characters.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildScientificExportLine</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildScientificExportLine</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRawValues</span><span class="p">,</span><span class="w"> </span><span class="n">sOutput</span><span class="p">,</span><span class="w"> </span><span class="n">sScientific</span><span class="p">,</span><span class="w"> </span><span class="n">nValue</span><span class="p">,</span><span class="w"> </span><span class="n">nDecimal</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRawValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mf">0.0000456</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0001234</span><span class="p">,</span><span class="w"> </span><span class="mf">5678900.0</span><span class="p">};</span>
@@ -4028,11 +4028,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildScientificExportLine&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Export line: RESULTS&lt;TAB&gt;4.560E-005&lt;TAB&gt;1.234E-004&lt;TAB&gt;5.679E+006
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Export line: RESULTS&lt;TAB&gt;4.560E-005&lt;TAB&gt;1.234E-004&lt;TAB&gt;5.679E+006
 </code></pre></div>
 <h3 id="validate-a-user-supplied-precision-before-formatting">Validate a user-supplied precision before formatting<a class="headerlink" href="#validate-a-user-supplied-precision-before-formatting" title="Permanent link">&para;</a></h3>
 <p>Check that the precision input is numeric and an integer before passing it to <code>ToScientific</code>. This guards against type and format errors before the call rather than catching them after.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatWithRequestedPrecision</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatWithRequestedPrecision</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sPrecision</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sPrecision</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;4&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nMeasurement</span><span class="p">,</span><span class="w"> </span><span class="n">nPrecision</span><span class="p">,</span><span class="w"> </span><span class="n">sScientific</span><span class="p">;</span>
@@ -4064,7 +4064,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FormatWithRequestedPrecision&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Formatted value: 1.5200E-006
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Formatted value: 1.5200E-006
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

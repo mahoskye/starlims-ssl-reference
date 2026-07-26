@@ -3696,7 +3696,7 @@
 <li>When you want to validate external input with <a href="../IsHex/"><code>IsHex</code></a> before decoding it.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LFromHex</span><span class="p">(</span><span class="n">sSource</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LFromHex</span><span class="p">(</span><span class="n">sSource</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3756,7 +3756,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="decode-a-simple-hex-string">Decode a simple hex string<a class="headerlink" href="#decode-a-simple-hex-string" title="Permanent link">&para;</a></h3>
 <p>Call <code>LFromHex</code> with a known-valid hex string to recover the original text. The input <code>"48656C6C6F"</code> decodes byte-by-byte to <code>"Hello"</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DecodeHexMessage</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DecodeHexMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sHexInput</span><span class="p">,</span><span class="w"> </span><span class="n">sDecodedText</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sHexInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;48656C6C6F&quot;</span><span class="p">;</span>
@@ -3769,11 +3769,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DecodeHexMessage&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Decoded text: Hello
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Decoded text: Hello
 </code></pre></div>
 <h3 id="validate-incoming-values-before-decoding">Validate incoming values before decoding<a class="headerlink" href="#validate-incoming-values-before-decoding" title="Permanent link">&para;</a></h3>
 <p>Use <a href="../IsHex/"><code>IsHex</code></a> to filter a batch before calling <code>LFromHex</code>, so only well-formed hex strings are decoded. Three of the four inputs are valid (<code>"XYZ123"</code> is rejected), yielding 3 decoded values and 1 skipped.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DecodeHexBatch</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DecodeHexBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aInput</span><span class="p">,</span><span class="w"> </span><span class="n">aDecoded</span><span class="p">,</span><span class="w"> </span><span class="n">aInvalid</span><span class="p">,</span><span class="w"> </span><span class="n">sHex</span><span class="p">,</span><span class="w"> </span><span class="n">sDecoded</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;48656C6C6F&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;4D61686F&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;XYZ123&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;414243&quot;</span><span class="p">};</span>
@@ -3808,7 +3808,7 @@
 </code></pre></div>
 <h3 id="round-trip-text-through-hex-encoding-and-decoding">Round-trip text through hex encoding and decoding<a class="headerlink" href="#round-trip-text-through-hex-encoding-and-decoding" title="Permanent link">&para;</a></h3>
 <p>Encode with <a href="../LToHex/"><code>LToHex</code></a> and immediately decode with <code>LFromHex</code> to confirm the full round-trip restores the original value. Because <code>"Batch-1042"</code> encodes and decodes correctly, the success branch fires.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">VerifyHexRoundTrip</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">VerifyHexRoundTrip</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOriginalText</span><span class="p">,</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">,</span><span class="w"> </span><span class="n">sDecodedText</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sOriginalText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Batch-1042&quot;</span><span class="p">;</span>

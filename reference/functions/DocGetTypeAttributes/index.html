@@ -4112,7 +4112,7 @@
   checking the Documentum command status after the call.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocGetTypeAttributes</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocGetTypeAttributes</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4221,7 +4221,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="list-attribute-names-for-a-known-type">List attribute names for a known type<a class="headerlink" href="#list-attribute-names-for-a-known-type" title="Permanent link">&para;</a></h3>
 <p>Fetches all attributes for the <code>dm_document</code> type and prints each attribute's name alongside its description, exiting early when the result is empty.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListTypeAttributes</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListTypeAttributes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">aAttrs</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sLine</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;dm_document&quot;</span><span class="p">;</span>
@@ -4244,12 +4244,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ListTypeAttributes&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>No attributes returned for dm_document
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>No attributes returned for dm_document
 [attribute name] - [attribute description]
 </code></pre></div>
 <h3 id="separate-repeating-and-single-value-attributes">Separate repeating and single-value attributes<a class="headerlink" href="#separate-repeating-and-single-value-attributes" title="Permanent link">&para;</a></h3>
 <p>Counts how many attributes are single-value and how many are repeating for a caller-supplied type name, then displays a summary line.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeTypeAttributes</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeTypeAttributes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aAttrs</span><span class="p">,</span><span class="w"> </span><span class="n">nRepeating</span><span class="p">,</span><span class="w"> </span><span class="n">nSingle</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
 
@@ -4282,11 +4282,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SummarizeTypeAttributes&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;dm_document&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Type [type name] has [n] single-value attributes and [n] repeating attributes
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Type [type name] has [n] single-value attributes and [n] repeating attributes
 </code></pre></div>
 <h3 id="distinguish-an-empty-result-from-a-failed-documentum-lookup">Distinguish an empty result from a failed Documentum lookup<a class="headerlink" href="#distinguish-an-empty-result-from-a-failed-documentum-lookup" title="Permanent link">&para;</a></h3>
 <p>Logs in to Documentum, fetches type attributes, and distinguishes a failed lookup (indicated by <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a>) from a type that returned no attributes, then prints the name and type code of each attribute found.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditTypeDefinition</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditTypeDefinition</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aAttrs</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sError</span><span class="p">;</span>
 
@@ -4326,7 +4326,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AuditTypeDefinition&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;ProductionDB&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;doc_user&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dm_document&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p>Possible output:</p>
-<div class="language-text highlight"><pre><span></span><code>Documentum login failed: [Documentum error]
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Documentum login failed: [Documentum error]
 Type attribute lookup failed: [Documentum error]
 No attributes returned for type dm_document
 [attribute name] type=[type code]

@@ -4242,7 +4242,7 @@
 <li>When you need separate counter streams for the same table and field by using different prefixes.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LimsSetCounter</span><span class="p">(</span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sPrefix</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aFields</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">nIncrementWith</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LimsSetCounter</span><span class="p">(</span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sPrefix</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aFields</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">nIncrementWith</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4330,7 +4330,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="insert-a-new-row-with-an-auto-generated-key">Insert a new row with an auto-generated key<a class="headerlink" href="#insert-a-new-row-with-an-auto-generated-key" title="Permanent link">&para;</a></h3>
 <p>Call <code>LimsSetCounter</code> with a table, field name, and an additional field/value pair to insert a new row and retrieve the generated key in one step.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">InsertSampleWithAutoID</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">InsertSampleWithAutoID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nNewSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;sample_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;status_id&quot;</span><span class="p">};</span>
@@ -4347,11 +4347,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;InsertSampleWithAutoID&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Created sample ID: &lt;n&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Created sample ID: &lt;n&gt;
 </code></pre></div>
 <h3 id="use-a-prefix-to-maintain-separate-counter-streams">Use a prefix to maintain separate counter streams<a class="headerlink" href="#use-a-prefix-to-maintain-separate-counter-streams" title="Permanent link">&para;</a></h3>
 <p>Pass different <code>sPrefix</code> values to maintain independent counter streams for the same table and field. Each prefix increments its own counter sequence.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GenerateProjectSamples</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GenerateProjectSamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sProjectAlpha</span><span class="p">,</span><span class="w"> </span><span class="n">sProjectBeta</span><span class="p">,</span><span class="w"> </span><span class="n">aValuesAlpha</span><span class="p">,</span><span class="w"> </span><span class="n">aValuesBeta</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nNextAlpha</span><span class="p">,</span><span class="w"> </span><span class="n">nNextBeta</span><span class="p">;</span>
@@ -4381,7 +4381,7 @@
 </code></pre></div>
 <h3 id="insert-a-full-row-with-error-handling">Insert a full row with error handling<a class="headerlink" href="#insert-a-full-row-with-error-handling" title="Permanent link">&para;</a></h3>
 <p>Wrap <code>LimsSetCounter</code> in a <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> block and check for a <code>0</code> return to handle both counter failure and database errors.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">InsertComplexSubmission</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">InsertComplexSubmission</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="n">sPrefix</span><span class="p">,</span><span class="w"> </span><span class="n">sSubmissionID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">nCounter</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">dSubmitDate</span><span class="p">;</span>
 

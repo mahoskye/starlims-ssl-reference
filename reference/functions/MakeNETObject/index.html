@@ -3583,7 +3583,7 @@
 <li>When you need a consistent conversion step before passing values into .NET.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">MakeNETObject</span><span class="p">(</span><span class="n">vValue</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">MakeNETObject</span><span class="p">(</span><span class="n">vValue</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3632,7 +3632,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="convert-a-string-for-net-interop">Convert a string for .NET interop<a class="headerlink" href="#convert-a-string-for-net-interop" title="Permanent link">&para;</a></h3>
 <p>Convert a plain SSL string to a .NET interop object ready to pass into any .NET-facing API.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertMessageForNet</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertMessageForNet</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">oNetValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample 1001&quot;</span><span class="p">;</span>
@@ -3646,7 +3646,7 @@
 </code></pre></div>
 <h3 id="preserve-nil-input-through-conversion">Preserve <a href="../../literals/nil/"><code>NIL</code></a> input through conversion<a class="headerlink" href="#preserve-nil-input-through-conversion" title="Permanent link">&para;</a></h3>
 <p>Pass an optional value through <code>MakeNETObject</code> and branch on whether the result is <a href="../../literals/nil/"><code>NIL</code></a>. The output message reflects which branch the code took.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertOptionalValue</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertOptionalValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">vValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oNetValue</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
@@ -3667,12 +3667,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ConvertOptionalValue&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Sample 1001&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays one of:</p>
-<div class="language-text highlight"><pre><span></span><code>No value was supplied for .NET interop
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>No value was supplied for .NET interop
 Value converted for .NET interop
 </code></pre></div>
 <h3 id="convert-a-mixed-array-of-values-for-net-interop">Convert a mixed array of values for .NET interop<a class="headerlink" href="#convert-a-mixed-array-of-values-for-net-interop" title="Permanent link">&para;</a></h3>
 <p>Build an array containing already-converted objects, plain values, and <a href="../../literals/nil/"><code>NIL</code></a>, then run each element through <code>MakeNETObject</code>. Existing interop objects pass through unchanged; <a href="../../literals/nil/"><code>NIL</code></a> stays <a href="../../literals/nil/"><code>NIL</code></a>; plain values are wrapped.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PrepareNetInputs</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PrepareNetInputs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aInputs</span><span class="p">,</span><span class="w"> </span><span class="n">aNetInputs</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">oNetValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aInputs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>

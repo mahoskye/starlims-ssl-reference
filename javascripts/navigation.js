@@ -73,27 +73,14 @@
     }
   }
 
-  function fixExceptionsTableWrappers() {
-    var tables = document.querySelectorAll('table[data-ssl-table="exceptions"]');
-    for (var i = 0; i < tables.length; i += 1) {
-      var table = tables[i];
-      // Material's .md-typeset table:not([class]) rule sets display:inline-block
-      // with higher specificity than the wrapper rule, so override it directly.
-      table.style.display = 'table';
-      table.style.width = '100%';
-      var wrapper = table.parentElement;
-      if (wrapper && wrapper.classList.contains('md-typeset__table')) {
-        wrapper.style.display = 'block';
-      }
-    }
-  }
+  // Exceptions-table display fixes live in stylesheets/extra.css
+  // (data-ssl-table selectors) — no inline-style JS needed.
 
   function scheduleScroll() {
     [0, 150, 350, 650].forEach(function (delay) {
       window.setTimeout(function () {
         window.requestAnimationFrame(function () {
           scrollActivePrimaryNavToTop();
-          fixExceptionsTableWrappers();
         });
       }, delay);
     });

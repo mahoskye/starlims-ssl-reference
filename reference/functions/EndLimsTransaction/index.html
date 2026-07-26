@@ -3844,7 +3844,7 @@
 <li>When you are balancing a <a href="../BeginLimsTransaction/"><code>BeginLimsTransaction</code></a> call on the default or a named connection.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">EndLimsTransaction</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bCommit</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">EndLimsTransaction</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bCommit</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3925,7 +3925,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="commit-work-on-the-default-connection">Commit work on the default connection<a class="headerlink" href="#commit-work-on-the-default-connection" title="Permanent link">&para;</a></h3>
 <p>Opens a transaction on the default connection, runs an update, and commits it. The <code>bStarted</code> flag ensures cleanup only runs if the transaction actually opened, and <code>bCommit</code> only becomes <a href="../../literals/true/"><code>.T.</code></a> after the update succeeds.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateSampleStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateSampleStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bStarted</span><span class="p">,</span><span class="w"> </span><span class="n">bCommit</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
@@ -3962,7 +3962,7 @@
 </code></pre></div>
 <h3 id="roll-back-a-named-transaction-on-validation-failure">Roll back a named transaction on validation failure<a class="headerlink" href="#roll-back-a-named-transaction-on-validation-failure" title="Permanent link">&para;</a></h3>
 <p>Opens a transaction on a named connection and validates that no open tasks remain before updating the batch status. If validation fails, <a href="../RaiseError/"><code>RaiseError</code></a> triggers the <a href="../../keywords/CATCH/"><code>:CATCH</code></a> block and <code>bCommit</code> stays <a href="../../literals/false/"><code>.F.</code></a>, causing the transaction to roll back in <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ApplyBatchStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ApplyBatchStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sConnName</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bStarted</span><span class="p">,</span><span class="w"> </span><span class="n">bCommit</span><span class="p">,</span><span class="w"> </span><span class="n">nOpenTasks</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
@@ -4010,7 +4010,7 @@
 </code></pre></div>
 <h3 id="handle-nested-transaction-scopes-on-one-connection">Handle nested transaction scopes on one connection<a class="headerlink" href="#handle-nested-transaction-scopes-on-one-connection" title="Permanent link">&para;</a></h3>
 <p>Opens an outer transaction for a batch update and an inner transaction for the audit log write. If the inner transaction rolls back, <a href="../RaiseError/"><code>RaiseError</code></a> propagates the failure to the outer <a href="../../keywords/CATCH/"><code>:CATCH</code></a>, which rolls back the outer transaction too.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SaveBatchAndAudit</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SaveBatchAndAudit</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sConnName</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bOuterStarted</span><span class="p">,</span><span class="w"> </span><span class="n">bOuterCommit</span><span class="p">,</span><span class="w"> </span><span class="n">bInnerStarted</span><span class="p">,</span><span class="w"> </span><span class="n">bInnerCommit</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 

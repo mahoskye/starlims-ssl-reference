@@ -3381,7 +3381,7 @@
 <li>When a batch process or scheduled job will call <a href="../SendFromOutbox/"><code>SendFromOutbox</code></a> later.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">SendToOutbox</span><span class="p">(</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">SendToOutbox</span><span class="p">(</span>
 <span class="w">    </span><span class="n">sSMTP</span><span class="p">,</span>
 <span class="w">    </span><span class="n">aRecipients</span><span class="p">,</span>
 <span class="w">    </span><span class="n">sFromWho</span><span class="p">,</span>
@@ -3579,7 +3579,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="queue-a-basic-email">Queue a basic email<a class="headerlink" href="#queue-a-basic-email" title="Permanent link">&para;</a></h3>
 <p>Queue a plain-text message using the three required parameters and the subject and body. Check the return value to confirm the row was written.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">QueueBasicEmail</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">QueueBasicEmail</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRecipients</span><span class="p">,</span><span class="w"> </span><span class="n">bQueued</span><span class="p">,</span><span class="w"> </span><span class="n">sFromWho</span><span class="p">,</span><span class="w"> </span><span class="n">sMessageBody</span><span class="p">,</span><span class="w"> </span><span class="n">sSMTP</span><span class="p">,</span><span class="w"> </span><span class="n">sSubject</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sSMTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;smtp.example.com&quot;</span><span class="p">;</span>
@@ -3602,7 +3602,7 @@
 </code></pre></div>
 <h3 id="queue-an-html-email-with-attachments-and-ccbcc">Queue an HTML email with attachments and CC/BCC<a class="headerlink" href="#queue-an-html-email-with-attachments-and-ccbcc" title="Permanent link">&para;</a></h3>
 <p>Queue an HTML message with a PDF attachment, CC and BCC recipients, and SMTP authentication. The message is stored for later batch delivery.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">QueueHtmlEmail</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">QueueHtmlEmail</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aAttachList</span><span class="p">,</span><span class="w"> </span><span class="n">aBCCList</span><span class="p">,</span><span class="w"> </span><span class="n">aCCList</span><span class="p">,</span><span class="w"> </span><span class="n">aRecipients</span><span class="p">,</span><span class="w"> </span><span class="n">bQueued</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBody</span><span class="p">,</span><span class="w"> </span><span class="n">sFromWho</span><span class="p">,</span><span class="w"> </span><span class="n">sReplyTo</span><span class="p">,</span><span class="w"> </span><span class="n">sSMTP</span><span class="p">,</span><span class="w"> </span><span class="n">sSubject</span><span class="p">,</span><span class="w"> </span><span class="n">sUName</span><span class="p">,</span><span class="w"> </span><span class="n">sUPass</span><span class="p">;</span>
 
@@ -3646,7 +3646,7 @@
 </code></pre></div>
 <h3 id="raise-and-handle-validation-errors-explicitly">Raise and handle validation errors explicitly<a class="headerlink" href="#raise-and-handle-validation-errors-explicitly" title="Permanent link">&para;</a></h3>
 <p>Wrap the call in <code>:TRY;</code> to catch the unconditional validation errors and inspect the failure with <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">QueueEmailFailFast</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">QueueEmailFailFast</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aAttachList</span><span class="p">,</span><span class="w"> </span><span class="n">aBCCList</span><span class="p">,</span><span class="w"> </span><span class="n">aCCList</span><span class="p">,</span><span class="w"> </span><span class="n">aRecipients</span><span class="p">,</span><span class="w"> </span><span class="n">bQueued</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBody</span><span class="p">,</span><span class="w"> </span><span class="n">sFromWho</span><span class="p">,</span><span class="w"> </span><span class="n">sReplyTo</span><span class="p">,</span><span class="w"> </span><span class="n">sSMTP</span><span class="p">,</span><span class="w"> </span><span class="n">sSubject</span><span class="p">,</span><span class="w"> </span><span class="n">sUName</span><span class="p">,</span><span class="w"> </span><span class="n">sUPass</span><span class="p">;</span>
 

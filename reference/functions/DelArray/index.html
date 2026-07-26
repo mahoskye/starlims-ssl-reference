@@ -3667,7 +3667,7 @@
 <li>When adjusting an array by position without reconstructing it from scratch.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DelArray</span><span class="p">(</span><span class="n">aTarget</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DelArray</span><span class="p">(</span><span class="n">aTarget</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3746,7 +3746,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="remove-an-item-by-index">Remove an item by index<a class="headerlink" href="#remove-an-item-by-index" title="Permanent link">&para;</a></h3>
 <p>Displays the array contents before and after removing the element at a given index, showing how later elements shift left.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RemoveArrayElement</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RemoveArrayElement</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Red&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Green&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Blue&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Yellow&quot;</span><span class="p">};</span>
@@ -3763,12 +3763,12 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Array before deletion: Red,Green,Blue,Yellow
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Array before deletion: Red,Green,Blue,Yellow
 Array after removing index 2: Red,Blue,Yellow
 </code></pre></div>
 <h3 id="remove-matching-entries-by-iterating-backwards">Remove matching entries by iterating backwards<a class="headerlink" href="#remove-matching-entries-by-iterating-backwards" title="Permanent link">&para;</a></h3>
 <p>Iterates in reverse order to safely remove all entries except a target value, collecting removed items in a separate array without index-shift errors.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessPendingSamples</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessPendingSamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aPendingSamples</span><span class="p">,</span><span class="w"> </span><span class="n">aProcessedSamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
@@ -3791,12 +3791,12 @@ Array after removing index 2: Red,Blue,Yellow
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Processed: SAMPLE-005,SAMPLE-004,SAMPLE-002,SAMPLE-001
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Processed: SAMPLE-005,SAMPLE-004,SAMPLE-002,SAMPLE-001
 Still pending: SAMPLE-003
 </code></pre></div>
 <h3 id="remove-a-pre-specified-list-of-positions">Remove a pre-specified list of positions<a class="headerlink" href="#remove-a-pre-specified-list-of-positions" title="Permanent link">&para;</a></h3>
 <p>Removes multiple elements by supplying positions in descending order so that each removal does not shift the remaining target indices.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RemoveMultipleEntries</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RemoveMultipleEntries</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleList</span><span class="p">,</span><span class="w"> </span><span class="n">aPositions</span><span class="p">,</span><span class="w"> </span><span class="n">nIdx</span><span class="p">,</span><span class="w"> </span><span class="n">nRemoved</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aSampleList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Alpha&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Beta&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Gamma&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Delta&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Epsilon&quot;</span><span class="p">};</span>
@@ -3820,7 +3820,7 @@ Still pending: SAMPLE-003
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Removed 3 entries. Remaining: Alpha,Gamma
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Removed 3 entries. Remaining: Alpha,Gamma
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

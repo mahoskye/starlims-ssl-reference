@@ -3606,7 +3606,7 @@
 <li>When you need to encrypt a non-empty string before storing or transmitting it within an established legacy integration.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">EncryptData</span><span class="p">(</span><span class="n">sInputData</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sAlgorithm</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sKey</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sRetType</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">EncryptData</span><span class="p">(</span><span class="n">sInputData</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sAlgorithm</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sKey</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sRetType</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3707,7 +3707,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="encrypt-a-value-with-defaults">Encrypt a value with defaults<a class="headerlink" href="#encrypt-a-value-with-defaults" title="Permanent link">&para;</a></h3>
 <p>Use the required arguments only and let the function apply its default algorithm and key length.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">EncryptSampleID</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">EncryptSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sInputData</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sEncrypted</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sInputData</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-2026-0001&quot;</span><span class="p">;</span>
@@ -3731,7 +3731,7 @@
 </code></pre></div>
 <h3 id="specify-algorithm-and-key-length">Specify algorithm and key length<a class="headerlink" href="#specify-algorithm-and-key-length" title="Permanent link">&para;</a></h3>
 <p>Pass an explicit algorithm and key length when an existing integration expects fixed settings.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">EncryptInterfacePayload</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">EncryptInterfacePayload</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sInputData</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sAlgorithm</span><span class="p">,</span><span class="w"> </span><span class="n">sKey</span><span class="p">,</span><span class="w"> </span><span class="n">sEncrypted</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sInputData</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">&#39;</span><span class="p">{</span><span class="s2">&quot;sample&quot;</span><span class="p">:</span><span class="s2">&quot;LAB-2026-0001&quot;</span><span class="p">,</span><span class="s2">&quot;status&quot;</span><span class="p">:</span><span class="s2">&quot;Logged&quot;</span><span class="p">}</span><span class="err">&#39;</span><span class="p">;</span>
@@ -3755,7 +3755,7 @@
 </code></pre></div>
 <h3 id="encrypt-multiple-fields-and-verify-round-trip">Encrypt multiple fields and verify round-trip<a class="headerlink" href="#encrypt-multiple-fields-and-verify-round-trip" title="Permanent link">&para;</a></h3>
 <p>Encrypt several values with shared settings, then verify one of them by decrypting it with the same password.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildEncryptedPatientData</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildEncryptedPatientData</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sAlgorithm</span><span class="p">,</span><span class="w"> </span><span class="n">sKey</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPatientID</span><span class="p">,</span><span class="w"> </span><span class="n">sResultCode</span><span class="p">,</span><span class="w"> </span><span class="n">sComment</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sEncPatientID</span><span class="p">,</span><span class="w"> </span><span class="n">sEncResultCode</span><span class="p">,</span><span class="w"> </span><span class="n">sEncComment</span><span class="p">,</span><span class="w"> </span><span class="n">sVerify</span><span class="p">;</span>

@@ -3989,7 +3989,7 @@
 <li>When implementing error handling that guarantees allocated connections are always cleared.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LimsSqlDisconnect</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LimsSqlDisconnect</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4039,7 +4039,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="disconnect-after-a-read-operation">Disconnect after a read operation<a class="headerlink" href="#disconnect-after-a-read-operation" title="Permanent link">&para;</a></h3>
 <p>Connect to a named database, query a sample, and then disconnect explicitly. A warning is shown if the disconnect fails.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FetchSampleData</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FetchSampleData</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnName</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">bDisconnected</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sConnName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;AnalyticalDB&quot;</span><span class="p">;</span>
@@ -4074,7 +4074,7 @@
 </code></pre></div>
 <h3 id="guarantee-cleanup-with-finally">Guarantee cleanup with <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a><a class="headerlink" href="#guarantee-cleanup-with-finally" title="Permanent link">&para;</a></h3>
 <p>Use <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> to guarantee that the named connection is always closed, even if the query or error handling raises an exception.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessSampleData</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessSampleData</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WorkstationDB&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAMP-2024-001&quot;</span><span class="p">;</span>
@@ -4120,7 +4120,7 @@
 </code></pre></div>
 <h3 id="disconnect-all-connections-matching-a-prefix">Disconnect all connections matching a prefix<a class="headerlink" href="#disconnect-all-connections-matching-a-prefix" title="Permanent link">&para;</a></h3>
 <p>Retrieve all registered connection names and disconnect each one whose name starts with <code>TEMP_</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CleanupTempConnections</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CleanupTempConnections</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aAllConns</span><span class="p">,</span><span class="w"> </span><span class="n">sPrefix</span><span class="p">,</span><span class="w"> </span><span class="n">sConnName</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nCleaned</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aAllConns</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetConnectionStrings</span><span class="p">();</span>

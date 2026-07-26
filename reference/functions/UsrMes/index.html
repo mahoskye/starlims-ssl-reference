@@ -3473,7 +3473,7 @@
 <li>When you want a non-error message instead of a forced error log entry.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">UsrMes</span><span class="p">(</span><span class="n">vCaption</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">vMessage</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">UsrMes</span><span class="p">(</span><span class="n">vCaption</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">vMessage</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3529,7 +3529,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="write-a-caption-and-message">Write a caption and message<a class="headerlink" href="#write-a-caption-and-message" title="Permanent link">&para;</a></h3>
 <p>Pass both arguments to write separate caption and message text to the user log. The function returns the full formatted log entry, which includes runtime metadata such as the current user, date, time, and product version.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowUserNotification</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowUserNotification</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessageText</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sMessageText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample login completed successfully&quot;</span><span class="p">;</span>
@@ -3542,7 +3542,7 @@
 </code></pre></div>
 <h3 id="rely-on-the-default-caption">Rely on the default caption<a class="headerlink" href="#rely-on-the-default-caption" title="Permanent link">&para;</a></h3>
 <p>When the second argument is omitted, <code>UsrMes</code> uses <code>****User message****</code> as the caption and moves the single argument into the message body. Capturing the return value lets later code reuse the formatted log text.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogSingleTextMessage</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogSingleTextMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLoggedText</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sLoggedText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Instrument maintenance completed&quot;</span><span class="p">);</span>
@@ -3557,7 +3557,7 @@
 </code></pre></div>
 <h3 id="build-a-multi-line-audit-style-message">Build a multi-line audit-style message<a class="headerlink" href="#build-a-multi-line-audit-style-message" title="Permanent link">&para;</a></h3>
 <p>Build the message body from dynamic fields first, then log it and return the formatted entry for downstream use. The returned string is suitable for displaying in a second dialog or writing to an external log.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogAuditEvent</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogAuditEvent</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAction</span><span class="p">,</span><span class="w"> </span><span class="n">sAuditBody</span><span class="p">,</span><span class="w"> </span><span class="n">sLoggedText</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sAction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Released batch 24-0419&quot;</span><span class="p">;</span>

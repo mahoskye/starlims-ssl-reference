@@ -4012,7 +4012,7 @@
 <li>When you need to branch between a fallback path and normal database processing.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">IsDBConnected</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">IsDBConnected</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4078,7 +4078,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="guard-a-query-with-a-default-connection-check">Guard a query with a default connection check<a class="headerlink" href="#guard-a-query-with-a-default-connection-check" title="Permanent link">&para;</a></h3>
 <p>Check the default connection before executing a query, and exit early with a message when no connection is available. The success path shows that <code>IsDBConnected()</code> without an argument targets the default connection.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckDbBeforeQuery</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckDbBeforeQuery</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsConnected</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bIsConnected</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsDBConnected</span><span class="p">();</span>
@@ -4100,7 +4100,7 @@
 </code></pre></div>
 <h3 id="check-availability-of-multiple-named-connections">Check availability of multiple named connections<a class="headerlink" href="#check-availability-of-multiple-named-connections" title="Permanent link">&para;</a></h3>
 <p>Iterate over a list of connection names and report each one's availability. Passing an explicit name to <code>IsDBConnected</code> lets you verify named connections independently of the current default.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckMultiDatabaseConnections</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckMultiDatabaseConnections</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aConnectionNames</span><span class="p">,</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">bIsConnected</span><span class="p">,</span><span class="w"> </span><span class="n">sStatusMessage</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aConnectionNames</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LIMS_MASTER&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LIMS_REPORTING&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LIMS_ARCHIVE&quot;</span><span class="p">};</span>
@@ -4125,7 +4125,7 @@
 </code></pre></div>
 <h3 id="handle-uninitialized-database-state-with-try">Handle uninitialized database state with <a href="../../keywords/TRY/"><code>:TRY</code></a><a class="headerlink" href="#handle-uninitialized-database-state-with-try" title="Permanent link">&para;</a></h3>
 <p>Wrap the call in <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> for code paths where the runtime database collection may not be initialized. The catch block retrieves the error with <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> and logs it via <a href="../ErrorMes/"><code>ErrorMes</code></a> before returning a safe <a href="../../literals/false/"><code>.F.</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckDatabaseConnectivity</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckDatabaseConnectivity</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sConnName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sConnName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsConnected</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>

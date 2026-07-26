@@ -4361,7 +4361,7 @@
 <li>When combining month checks with <a href="../Year/"><code>Year</code></a> so records from different years do not get mixed together.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Month</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Month</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4429,7 +4429,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="get-the-month-number-from-a-date">Get the month number from a date<a class="headerlink" href="#get-the-month-number-from-a-date" title="Permanent link">&para;</a></h3>
 <p>Extract the month from a known date and display it. <code>CToD("03/15/2024")</code> falls in March, so <code>Month()</code> returns <code>3</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetReceiveMonth</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetReceiveMonth</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dReceiveDate</span><span class="p">,</span><span class="w"> </span><span class="n">nMonth</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dReceiveDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/15/2024&quot;</span><span class="p">);</span>
@@ -4444,11 +4444,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetReceiveMonth&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Received in month 3
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Received in month 3
 </code></pre></div>
 <h3 id="guard-against-an-empty-date-before-using-the-month-value">Guard against an empty date before using the month value<a class="headerlink" href="#guard-against-an-empty-date-before-using-the-month-value" title="Permanent link">&para;</a></h3>
 <p><code>CToD("")</code> produces an empty date, which <code>Month()</code> converts to <code>0</code>. The guard on <code>nMonth == 0</code> routes that case to a safe message instead of treating <code>0</code> as a valid month.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckReviewMonth</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckReviewMonth</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dReviewDate</span><span class="p">,</span><span class="w"> </span><span class="n">nMonth</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dReviewDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
@@ -4470,7 +4470,7 @@
 </code></pre></div>
 <h3 id="filter-records-for-a-target-month-and-year">Filter records for a target month and year<a class="headerlink" href="#filter-records-for-a-target-month-and-year" title="Permanent link">&para;</a></h3>
 <p>Use the defaults (<code>nTargetMonth = 3</code>, <code>nTargetYear = 2024</code>) to filter four sample runs. Two runs fall in March 2024; the March 2025 run and the April 2024 run are excluded.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FilterRunsByMonthYear</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FilterRunsByMonthYear</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">nTargetMonth</span><span class="p">,</span><span class="w"> </span><span class="n">nTargetYear</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">nTargetMonth</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">nTargetYear</span><span class="p">,</span><span class="w"> </span><span class="mi">2024</span><span class="p">;</span>
@@ -4509,7 +4509,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FilterRunsByMonthYear&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Found 2 run(s) for 3/2024
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Found 2 run(s) for 3/2024
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

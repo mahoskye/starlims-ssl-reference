@@ -2873,7 +2873,7 @@
 <li>When you intentionally want either single-branch behavior with <a href="../EXITCASE/"><code>:EXITCASE;</code></a> or controlled multi-match behavior by omitting it.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:BEGINCASE</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:BEGINCASE</span><span class="p">;</span>
 <span class="k">:CASE</span><span class="w"> </span><span class="o">&lt;</span><span class="n">condition</span><span class="o">&gt;</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">/* statements;</span>
 <span class="w">    </span><span class="k">:EXITCASE</span><span class="p">;</span>
@@ -2913,7 +2913,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="condition-based-notification">Condition-based notification<a class="headerlink" href="#condition-based-notification" title="Permanent link">&para;</a></h3>
 <p>Choose one notification path by ending each branch with <a href="../EXITCASE/"><code>:EXITCASE;</code></a>. With <code>nResultValue</code> set to <code>85</code>, the warning branch matches and the notification message is displayed.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NotifyAnalysisStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NotifyAnalysisStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sNotifyMessage</span><span class="p">,</span><span class="w"> </span><span class="n">oEmail</span><span class="p">,</span><span class="w"> </span><span class="n">nResultValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">;</span>
@@ -2955,11 +2955,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NotifyAnalysisStatus&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/InfoMes/"><code>InfoMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>WARNING: LAB-2024-0042 is approaching the threshold limit
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>WARNING: LAB-2024-0042 is approaching the threshold limit
 </code></pre></div>
 <h3 id="dynamic-pricing-configuration">Dynamic pricing configuration<a class="headerlink" href="#dynamic-pricing-configuration" title="Permanent link">&para;</a></h3>
 <p>Ordered conditions ensure the first matching business rule wins. With <code>nBasePrice</code> of <code>100</code>, a contract order of <code>1500</code> units triggers the contract volume discount.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CalculateDynamicPrice</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CalculateDynamicPrice</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">nBasePrice</span><span class="p">,</span><span class="w"> </span><span class="n">sCustomerType</span><span class="p">,</span><span class="w"> </span><span class="n">nOrderVolume</span><span class="p">,</span><span class="w"> </span><span class="n">bHasContract</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sCustomerType</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RETAIL&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">nOrderVolume</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
@@ -3004,11 +3004,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CalculateDynamicPrice&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RETAIL&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Price: 100 -&gt; 70 via Contract Volume Discount
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Price: 100 -&gt; 70 via Contract Volume Discount
 </code></pre></div>
 <h3 id="single-branch-shipment-processing">Single-branch shipment processing<a class="headerlink" href="#single-branch-shipment-processing" title="Permanent link">&para;</a></h3>
 <p>Show the normal single-branch behavior by ending each branch with <a href="../EXITCASE/"><code>:EXITCASE;</code></a>. Passing <code>bRushOrder</code> and <code>bColdChain</code> as <a href="../../literals/true/"><code>.T.</code></a> causes the first matching case body to execute.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildShipmentActions</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildShipmentActions</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">bRushOrder</span><span class="p">,</span><span class="w"> </span><span class="n">bColdChain</span><span class="p">,</span><span class="w"> </span><span class="n">bInternational</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">bRushOrder</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">bColdChain</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>

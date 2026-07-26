@@ -4108,7 +4108,7 @@ sign-off values. If <code>sWorkitemId</code> is <a href="../../literals/nil/"><c
 <li>When your script needs a boolean result and immediate access to the Documentum failure state for the same call.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocCompleteWorkitem</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sSignOffUser</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sSignOffPass</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sSignOffReason</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocCompleteWorkitem</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sSignOffUser</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sSignOffPass</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sSignOffReason</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4196,7 +4196,7 @@ sign-off values. If <code>sWorkitemId</code> is <a href="../../literals/nil/"><c
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="complete-a-single-work-item-after-logging-in">Complete a single work item after logging in<a class="headerlink" href="#complete-a-single-work-item-after-logging-in" title="Permanent link">&para;</a></h3>
 <p>Logs in to Documentum, completes one work item by ID, and displays whether the operation succeeded.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompleteBasicWorkitem</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompleteBasicWorkitem</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">,</span><span class="w"> </span><span class="n">bCompleted</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Repository1&quot;</span><span class="p">;</span>
@@ -4232,7 +4232,7 @@ sign-off values. If <code>sWorkitemId</code> is <a href="../../literals/nil/"><c
 </code></pre></div>
 <h3 id="complete-a-work-item-with-sign-off-and-inspect-the-failure-message-on-error">Complete a work item with sign-off and inspect the failure message on error<a class="headerlink" href="#complete-a-work-item-with-sign-off-and-inspect-the-failure-message-on-error" title="Permanent link">&para;</a></h3>
 <p>Completes a work item with all four sign-off arguments, then reads the Documentum error message to build a specific failure description when the operation returns <a href="../../literals/false/"><code>.F.</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompleteRegulatedWorkitem</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompleteRegulatedWorkitem</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">sSignOffUser</span><span class="p">,</span><span class="w"> </span><span class="n">sSignOffPass</span><span class="p">,</span><span class="w"> </span><span class="n">sSignOffReason</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bCompleted</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">;</span>
 
@@ -4269,7 +4269,7 @@ sign-off values. If <code>sWorkitemId</code> is <a href="../../literals/nil/"><c
 </code></pre></div>
 <h3 id="complete-a-batch-of-work-items-and-stop-on-the-first-failure">Complete a batch of work items and stop on the first failure<a class="headerlink" href="#complete-a-batch-of-work-items-and-stop-on-the-first-failure" title="Permanent link">&para;</a></h3>
 <p>Accepts a work item ID array and sign-off values as parameters, validates each ID is non-blank, and halts the batch immediately on the first failed completion with a specific or generic error message.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompleteWorkitemBatch</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompleteWorkitemBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aWorkitemIds</span><span class="p">,</span><span class="w"> </span><span class="n">sSignOffUser</span><span class="p">,</span><span class="w"> </span><span class="n">sSignOffPass</span><span class="p">,</span><span class="w"> </span><span class="n">sSignOffReason</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">bCompleted</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">;</span>
 

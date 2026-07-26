@@ -3606,7 +3606,7 @@
 <li>When you need to search from a known base DN with either the default user-name filter or a custom filter pattern.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">SearchLDAPUser</span><span class="p">(</span><span class="n">sLdapHost</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">nLdapPort</span><span class="p">],</span><span class="w"> </span><span class="n">sBindUserName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sBindUserPassword</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sSearchUserName</span><span class="p">],</span><span class="w"> </span><span class="n">sLdapDistinguishedNameStartSearch</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sSearchFilter</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bSecure</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">SearchLDAPUser</span><span class="p">(</span><span class="n">sLdapHost</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">nLdapPort</span><span class="p">],</span><span class="w"> </span><span class="n">sBindUserName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sBindUserPassword</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sSearchUserName</span><span class="p">],</span><span class="w"> </span><span class="n">sLdapDistinguishedNameStartSearch</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sSearchFilter</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bSecure</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3752,7 +3752,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="look-up-a-user-with-the-default-filter">Look up a user with the default filter<a class="headerlink" href="#look-up-a-user-with-the-default-filter" title="Permanent link">&para;</a></h3>
 <p>Use the built-in default filter and handle lookup failures explicitly.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetUserDn</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetUserDn</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLdapHost</span><span class="p">,</span><span class="w"> </span><span class="n">nLdapPort</span><span class="p">,</span><span class="w"> </span><span class="n">sBindUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sBindUserPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSearchUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sBaseDn</span><span class="p">,</span><span class="w"> </span><span class="n">sUserDn</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
@@ -3785,7 +3785,7 @@
 <p>Call with <code>DoProc("GetUserDn")</code>.</p>
 <h3 id="search-by-a-different-ldap-attribute">Search by a different LDAP attribute<a class="headerlink" href="#search-by-a-different-ldap-attribute" title="Permanent link">&para;</a></h3>
 <p>Supply a custom filter pattern when the account name is stored in a different attribute.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetUserDnBySamAccountName</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetUserDnBySamAccountName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserDn</span><span class="p">,</span><span class="w"> </span><span class="n">sFilter</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sFilter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;(&amp;(objectClass=user)(sAMAccountName={0}))&quot;</span><span class="p">;</span>
@@ -3806,11 +3806,11 @@
 </code></pre></div>
 <p>Call with <code>DoProc("GetUserDnBySamAccountName")</code>.</p>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Found DN: &lt;distinguished name&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Found DN: &lt;distinguished name&gt;
 </code></pre></div>
 <h3 id="resolve-the-dn-and-store-it-for-later-workflow-steps">Resolve the DN and store it for later workflow steps<a class="headerlink" href="#resolve-the-dn-and-store-it-for-later-workflow-steps" title="Permanent link">&para;</a></h3>
 <p>Use <code>SearchLDAPUser</code> as the lookup step in a larger workflow, then persist the result.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResolveAndStoreUserDn</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResolveAndStoreUserDn</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSearchUserName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLdapHost</span><span class="p">,</span><span class="w"> </span><span class="n">nLdapPort</span><span class="p">,</span><span class="w"> </span><span class="n">sBindUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sBindUserPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBaseDn</span><span class="p">,</span><span class="w"> </span><span class="n">sUserDn</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">;</span>

@@ -1285,7 +1285,7 @@
 <p>SSL provides two error handling models: the modern <strong>structured</strong> model (<a href="../../reference/keywords/TRY/"><code>:TRY</code></a> / <a href="../../reference/keywords/CATCH/"><code>:CATCH</code></a> / <a href="../../reference/keywords/FINALLY/"><code>:FINALLY</code></a>) and the <strong>legacy</strong> model (<a href="../../reference/keywords/ERROR/"><code>:ERROR</code></a> / <a href="../../reference/keywords/RESUME/"><code>:RESUME</code></a>). New code should use structured handling exclusively.</p>
 <h2 id="structured-error-handling">Structured error handling<a class="headerlink" href="#structured-error-handling" title="Permanent link">&para;</a></h2>
 <h3 id="basic-pattern">Basic pattern<a class="headerlink" href="#basic-pattern" title="Permanent link">&para;</a></h3>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">/* Code that might fail;</span>
 <span class="w">    </span><span class="n">oResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sQuery</span><span class="p">);</span>
 <span class="k">:CATCH</span><span class="p">;</span>
@@ -1308,7 +1308,7 @@
 </ul>
 <h3 id="common-patterns">Common patterns<a class="headerlink" href="#common-patterns" title="Permanent link">&para;</a></h3>
 <h4 id="try-catch-with-logging">Try-catch with logging<a class="headerlink" href="#try-catch-with-logging" title="Permanent link">&para;</a></h4>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">DocCheckoutDocument</span><span class="p">(</span><span class="n">sDocId</span><span class="p">);</span>
 <span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
@@ -1317,7 +1317,7 @@
 </code></pre></div>
 <h4 id="try-catch-with-critical-error-reporting">Try-catch with critical error reporting<a class="headerlink" href="#try-catch-with-critical-error-reporting" title="Permanent link">&para;</a></h4>
 <p>Use <a href="../../reference/functions/ErrorMes/"><code>ErrorMes</code></a> instead of <a href="../../reference/functions/UsrMes/"><code>UsrMes</code></a> when an error <strong>must</strong> be logged regardless of server configuration. <a href="../../reference/functions/UsrMes/"><code>UsrMes</code></a> can be silenced on production servers, but <a href="../../reference/functions/ErrorMes/"><code>ErrorMes</code></a> always writes.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sDeleteSQL</span><span class="p">);</span>
 <span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
@@ -1333,7 +1333,7 @@
 </ul>
 </div>
 <h4 id="try-finally-for-resource-cleanup">Try-finally for resource cleanup<a class="headerlink" href="#try-finally-for-resource-cleanup" title="Permanent link">&para;</a></h4>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">BeginLimsTransaction</span><span class="p">();</span>
 <span class="w">    </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sInsertSQL</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sUpdateSQL</span><span class="p">);</span>
@@ -1342,7 +1342,7 @@
 <span class="k">:ENDTRY</span><span class="p">;</span>
 </code></pre></div>
 <h4 id="nested-try-blocks">Nested try blocks<a class="headerlink" href="#nested-try-blocks" title="Permanent link">&para;</a></h4>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oConnection</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(</span><span class="n">sAssembly</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
@@ -1392,7 +1392,7 @@
 </div>
 <h3 id="legacy-pattern-with-resume">Legacy pattern with :RESUME<a class="headerlink" href="#legacy-pattern-with-resume" title="Permanent link">&para;</a></h3>
 <p>When <a href="../../reference/keywords/RESUME/"><code>:RESUME</code></a> is present inside the <a href="../../reference/keywords/ERROR/"><code>:ERROR</code></a> block, <strong>each statement</strong> is protected individually. If a statement fails, the <a href="../../reference/keywords/ERROR/"><code>:ERROR</code></a> handler runs, then <a href="../../reference/keywords/RESUME/"><code>:RESUME</code></a> continues execution at the <strong>next</strong> statement after the one that failed.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LegacyResumeExample</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LegacyResumeExample</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">/* Each statement below is individually protected;</span>
 <span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RiskyOperationA</span><span class="p">();</span>
@@ -1408,7 +1408,7 @@
 <p>If <code>RiskyOperationA()</code> fails, the <a href="../../reference/keywords/ERROR/"><code>:ERROR</code></a> handler runs, <a href="../../reference/keywords/RESUME/"><code>:RESUME</code></a> continues at <code>RiskyOperationB()</code>, and so on. Every statement gets a chance to run.</p>
 <h3 id="legacy-pattern-without-resume">Legacy pattern without :RESUME<a class="headerlink" href="#legacy-pattern-without-resume" title="Permanent link">&para;</a></h3>
 <p>Without <a href="../../reference/keywords/RESUME/"><code>:RESUME</code></a>, the entire procedure body is wrapped in a single try/catch. After the <a href="../../reference/keywords/ERROR/"><code>:ERROR</code></a> handler runs, execution falls through to <a href="../../reference/keywords/ENDPROC/"><code>:ENDPROC</code></a> — there is no resumption.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LegacyNoResumeExample</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LegacyNoResumeExample</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RiskyOperation</span><span class="p">();</span>
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
@@ -1429,7 +1429,7 @@
 <li><code>:RESUME</code> continues execution at the statement <strong>after</strong> the one that failed — inside the <code>:TRY</code> body.</li>
 <li>The procedure can reach its normal success path and return a success value after a handled failure.</li>
 </ul>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">MixedHandlingExample</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">MixedHandlingExample</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">&quot;Raised inside TRY block.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MixedHandlingExample&quot;</span><span class="p">);</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Runs anyway&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">/* :RESUME continues here, inside the TRY body;</span>

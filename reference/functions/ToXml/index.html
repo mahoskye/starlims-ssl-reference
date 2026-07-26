@@ -3696,7 +3696,7 @@ serialize primitive values, arrays, <a href="../../literals/nil/"><code>NIL</cod
 <li>When you want XML that can later be read back with <a href="../FromXml/"><code>FromXml</code></a>.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">ToXml</span><span class="p">(</span><span class="n">vValue</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ToXml</span><span class="p">(</span><span class="n">vValue</span><span class="p">)</span>
 <span class="nf">ToXml</span><span class="p">(</span><span class="n">vValue</span><span class="p">,</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
@@ -3764,7 +3764,7 @@ serialize primitive values, arrays, <a href="../../literals/nil/"><code>NIL</cod
 <h3 id="serialize-a-string-with-the-inferred-tag">Serialize a string with the inferred tag<a class="headerlink" href="#serialize-a-string-with-the-inferred-tag" title="Permanent link">&para;</a></h3>
 <p>Serialize a scalar string value without supplying a type name. The runtime
 infers <code>&lt;string&gt;</code> as the element tag.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">;</span>
@@ -3779,12 +3779,12 @@ infers <code>&lt;string&gt;</code> as the element tag.</p>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportStatus&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>&lt;?xml version=&#39;1.0&#39; ?&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>&lt;?xml version=&#39;1.0&#39; ?&gt;
 &lt;string&gt;Logged&lt;/string&gt;
 </code></pre></div>
 <h3 id="serialize-a-typed-array-for-round-trip-use">Serialize a typed array for round-trip use<a class="headerlink" href="#serialize-a-typed-array-for-round-trip-use" title="Permanent link">&para;</a></h3>
 <p>Pass <code>"double"</code> as <code>sTypeName</code> to tag the array elements explicitly so the XML can be deserialized back to the correct numeric type with <a href="../FromXml/"><code>FromXml</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportResults</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportResults</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mf">7.1</span><span class="p">,</span><span class="w"> </span><span class="mf">7.3</span><span class="p">,</span><span class="w"> </span><span class="mf">7.0</span><span class="p">};</span>
@@ -3799,7 +3799,7 @@ infers <code>&lt;string&gt;</code> as the element tag.</p>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportResults&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>&lt;?xml version=&#39;1.0&#39; ?&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>&lt;?xml version=&#39;1.0&#39; ?&gt;
 &lt;complexType type=&#39;double&#39;  length=&#39;3&#39;&gt;
     &lt;double&gt;7.1&lt;/double&gt;
     &lt;double&gt;7.3&lt;/double&gt;
@@ -3808,7 +3808,7 @@ infers <code>&lt;string&gt;</code> as the element tag.</p>
 </code></pre></div>
 <h3 id="check-for-embedded-serialization-errors">Check for embedded serialization errors<a class="headerlink" href="#check-for-embedded-serialization-errors" title="Permanent link">&para;</a></h3>
 <p>Inspect the returned XML for an <code>&lt;error&gt;</code> element rather than relying on <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a>. This pattern is necessary because <code>ToXml</code> encodes failures in the XML string instead of raising an exception.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportSamplePayload</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportSamplePayload</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">();</span>

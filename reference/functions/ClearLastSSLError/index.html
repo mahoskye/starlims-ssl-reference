@@ -3472,7 +3472,7 @@ It does not tell you whether an error was present before the call. If you need t
 <li>When you want <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> to reflect only failures that happen after a reset point.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">ClearLastSSLError</span><span class="p">()</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ClearLastSSLError</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>This function has no parameters.</p>
@@ -3503,7 +3503,7 @@ It does not tell you whether an error was present before the call. If you need t
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="clear-the-error-after-logging-it">Clear the error after logging it<a class="headerlink" href="#clear-the-error-after-logging-it" title="Permanent link">&para;</a></h3>
 <p>Reads the current SSL error, displays its description, then clears the state so later error checks start fresh.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">HandleAndClearSslError</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">HandleAndClearSslError</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
@@ -3524,7 +3524,7 @@ It does not tell you whether an error was present before the call. If you need t
 </code></pre></div>
 <h3 id="reset-before-a-retry">Reset before a retry<a class="headerlink" href="#reset-before-a-retry" title="Permanent link">&para;</a></h3>
 <p>Logs the error from a failed SQL update, clears the error state, then retries the same operation once so the second attempt is not tainted by the first failure.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RetryStatusUpdate</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RetryStatusUpdate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
@@ -3558,7 +3558,7 @@ It does not tell you whether an error was present before the call. If you need t
 </code></pre></div>
 <h3 id="batch-work-with-per-item-error-resets">Batch work with per-item error resets<a class="headerlink" href="#batch-work-with-per-item-error-resets" title="Permanent link">&para;</a></h3>
 <p>Clears the error state at the start of each loop iteration so a failure on one sample cannot contaminate the error check for the next sample.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessQueuedSamples</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessQueuedSamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIDs</span><span class="p">,</span><span class="w"> </span><span class="n">aFailed</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aSampleIDs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SAM-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAM-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAM-003&quot;</span><span class="p">};</span>

@@ -4363,7 +4363,7 @@
 <li>When you want to change only specific columns instead of every value in a row.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">MakeDateLocal</span><span class="p">(</span><span class="n">vDate</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">vColumnsIndex</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">MakeDateLocal</span><span class="p">(</span><span class="n">vDate</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">vColumnsIndex</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4454,7 +4454,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="change-a-single-date-to-local-kind">Change a single date to local kind<a class="headerlink" href="#change-a-single-date-to-local-kind" title="Permanent link">&para;</a></h3>
 <p>Mark a date invariant, then switch it back to local with <code>MakeDateLocal</code>. Both <a href="../UsrMes/"><code>UsrMes</code></a> calls fire because the two <a href="../../keywords/IF/"><code>:IF</code></a> conditions are independent.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoteDateToLocal</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoteDateToLocal</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dRunDate</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dRunDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/15/2024&quot;</span><span class="p">);</span>
@@ -4475,12 +4475,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DemoteDateToLocal&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>The date starts as invariant.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>The date starts as invariant.
 The same date value is now marked as local.
 </code></pre></div>
 <h3 id="update-selected-date-columns-in-a-row-array">Update selected date columns in a row array<a class="headerlink" href="#update-selected-date-columns-in-a-row-array" title="Permanent link">&para;</a></h3>
 <p>Mark columns 2 and 3 as invariant, then immediately switch them back to local using the same column index array.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LocalizeOrderDates</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LocalizeOrderDates</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aDateCols</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
@@ -4502,11 +4502,11 @@ The same date value is now marked as local.
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LocalizeOrderDates&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Selected date columns were updated in place.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Selected date columns were updated in place.
 </code></pre></div>
 <h3 id="handle-a-non-date-value-in-a-targeted-column">Handle a non-date value in a targeted column<a class="headerlink" href="#handle-a-non-date-value-in-a-targeted-column" title="Permanent link">&para;</a></h3>
 <p>Target column 2 which holds a status string rather than a date. <code>MakeDateLocal</code> raises an error that is caught and displayed.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">TryLocalizeInvalidColumn</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">TryLocalizeInvalidColumn</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">nBadCol</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
@@ -4528,7 +4528,7 @@ The same date value is now marked as local.
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;TryLocalizeInvalidColumn&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../ErrorMes/"><code>ErrorMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Column: 2 doesn&#39;t contain date values.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Column: 2 doesn&#39;t contain date values.
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

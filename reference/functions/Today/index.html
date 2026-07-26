@@ -4344,7 +4344,7 @@ component. Use it when your logic should depend on the current day only.</p>
 <li>When you need a date value that can be passed directly to other SSL date functions.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Today</span><span class="p">()</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Today</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>This function takes no parameters.</p>
@@ -4374,7 +4374,7 @@ component. Use it when your logic should depend on the current day only.</p>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="compare-a-due-date-with-today">Compare a due date with today<a class="headerlink" href="#compare-a-due-date-with-today" title="Permanent link">&para;</a></h3>
 <p>Check whether a record is due today. The due date is set to a specific past date, so the else branch runs and reports that the record is not due today.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckDueToday</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckDueToday</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">,</span><span class="w"> </span><span class="n">dToday</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dToday</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>
@@ -4393,11 +4393,11 @@ component. Use it when your logic should depend on the current day only.</p>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckDueToday&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>The record is not due today
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>The record is not due today
 </code></pre></div>
 <h3 id="use-today-in-a-date-filtered-query">Use <code>Today()</code> in a date-filtered query<a class="headerlink" href="#use-today-in-a-date-filtered-query" title="Permanent link">&para;</a></h3>
 <p>Capture the current date once and reuse it as a named <a href="../SQLExecute/"><code>SQLExecute</code></a> parameter so the query and the result message both reference the same value.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetTodaySamples</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetTodaySamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dToday</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aSamples</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dToday</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>
@@ -4427,13 +4427,13 @@ component. Use it when your logic should depend on the current day only.</p>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetTodaySamples&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays one of:</p>
-<div class="language-text highlight"><pre><span></span><code>Found &lt;n&gt; sample(s) for &lt;date&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Found &lt;n&gt; sample(s) for &lt;date&gt;
 No samples found for &lt;date&gt;
 </code></pre></div>
 <h3 id="reuse-one-captured-date-across-update-logic">Reuse one captured date across update logic<a class="headerlink" href="#reuse-one-captured-date-across-update-logic" title="Permanent link">&para;</a></h3>
 <p>Use one <code>Today()</code> value for both an update and a follow-up message so every
 step uses the same date.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">StampReviewDate</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">StampReviewDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dReviewDate</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dReviewDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>
@@ -4463,7 +4463,7 @@ step uses the same date.</p>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;StampReviewDate&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays one of:</p>
-<div class="language-text highlight"><pre><span></span><code>Sample S-1001 reviewed on &lt;date&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample S-1001 reviewed on &lt;date&gt;
 Review update failed for sample S-1001
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>

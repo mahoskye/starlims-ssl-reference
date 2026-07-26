@@ -3879,7 +3879,7 @@ serializes the returned dataset as XML.</p>
   date columns.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetDataSetXMLFromSelect</span><span class="p">(</span><span class="n">sCommandString</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bIncludeHeader</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bIncludeSchema</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sTableName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bNullAsBlank</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aInvariantDateCols</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">GetDataSetXMLFromSelect</span><span class="p">(</span><span class="n">sCommandString</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bIncludeHeader</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aValues</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bIncludeSchema</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sTableName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bNullAsBlank</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aInvariantDateCols</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4015,7 +4015,7 @@ serializes the returned dataset as XML.</p>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="export-query-results-as-xml-on-the-default-connection">Export query results as XML on the default connection<a class="headerlink" href="#export-query-results-as-xml-on-the-default-connection" title="Permanent link">&para;</a></h3>
 <p>Executes a parameterless query on the default connection using all default output flags and reports the length of the returned XML string.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportActiveSamples</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportActiveSamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sSql</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
@@ -4036,11 +4036,11 @@ serializes the returned dataset as XML.</p>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportActiveSamples&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Returned XML length: 1243
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Returned XML length: 1243
 </code></pre></div>
 <h3 id="query-a-named-connection-with-parameters-and-schema">Query a named connection with parameters and schema<a class="headerlink" href="#query-a-named-connection-with-parameters-and-schema" title="Permanent link">&para;</a></h3>
 <p>Passes a status parameter via a <code>?</code> placeholder to a named connection, with header and schema both enabled in the returned XML.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportSamplesByStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportSamplesByStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">,</span><span class="w"> </span><span class="n">sConnection</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">;</span>
@@ -4064,7 +4064,7 @@ serializes the returned dataset as XML.</p>
 </code></pre></div>
 <h3 id="control-table-name-null-handling-and-invariant-date-columns">Control table name, null handling, and invariant date columns<a class="headerlink" href="#control-table-name-null-handling-and-invariant-date-columns" title="Permanent link">&para;</a></h3>
 <p>Suppresses the XML header, assigns a custom table name, enables null-as-blank, and marks two date columns as invariant. The example wraps the export in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to report failures.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportAuditFragment</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportAuditFragment</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">dStartDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/01/2024&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">,</span><span class="w"> </span><span class="n">sConnection</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">aInvariantDateCols</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
@@ -4095,7 +4095,7 @@ serializes the returned dataset as XML.</p>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportAuditFragment&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/01/2024&quot;</span><span class="p">)});</span>
 </code></pre></div>
 <p><code>ErrorMes</code> displays on failure:</p>
-<div class="language-text highlight"><pre><span></span><code>GetDataSetXMLFromSelect failed: &lt;database error description&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>GetDataSetXMLFromSelect failed: &lt;database error description&gt;
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

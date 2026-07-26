@@ -4012,7 +4012,7 @@
 <li>When different named connections need different timeout values during the same script.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">SetSqlTimeout</span><span class="p">([</span><span class="n">nTimeout</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sConnection</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">SetSqlTimeout</span><span class="p">([</span><span class="n">nTimeout</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sConnection</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4087,7 +4087,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="temporarily-extend-the-timeout-on-the-default-connection">Temporarily extend the timeout on the default connection<a class="headerlink" href="#temporarily-extend-the-timeout-on-the-default-connection" title="Permanent link">&para;</a></h3>
 <p>Save the previous timeout, extend it for a slow query, then restore the original value in <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> so the default connection is always left in a known state.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadRecentOrders</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadRecentOrders</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dCutoff</span><span class="p">,</span><span class="w"> </span><span class="n">nPrevTimeout</span><span class="p">,</span><span class="w"> </span><span class="n">aOrders</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dCutoff</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
@@ -4113,7 +4113,7 @@
 </code></pre></div>
 <h3 id="apply-a-timeout-to-a-specific-named-connection">Apply a timeout to a specific named connection<a class="headerlink" href="#apply-a-timeout-to-a-specific-named-connection" title="Permanent link">&para;</a></h3>
 <p>Extend the timeout on a named connection before a long update, then restore it in <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> regardless of whether the update succeeds.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RefreshArchiveSummary</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RefreshArchiveSummary</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnection</span><span class="p">,</span><span class="w"> </span><span class="n">nPrevTimeout</span><span class="p">,</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sConnection</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ARCHIVE&quot;</span><span class="p">;</span>
@@ -4143,7 +4143,7 @@
 </code></pre></div>
 <h3 id="save-and-restore-timeouts-independently-across-two-connections">Save and restore timeouts independently across two connections<a class="headerlink" href="#save-and-restore-timeouts-independently-across-two-connections" title="Permanent link">&para;</a></h3>
 <p>Set different timeouts on two named connections, query each, then restore both original values in <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> in reverse order.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareOperationalAndArchiveCounts</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareOperationalAndArchiveCounts</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nOpsPrevTimeout</span><span class="p">,</span><span class="w"> </span><span class="n">nArchivePrevTimeout</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aOpsRows</span><span class="p">,</span><span class="w"> </span><span class="n">aArchiveRows</span><span class="p">;</span>
 

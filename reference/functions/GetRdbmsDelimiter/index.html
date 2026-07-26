@@ -4221,7 +4221,7 @@
 <li>When you need to build opening and closing delimiters separately.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetRdbmsDelimiter</span><span class="p">([</span><span class="n">sDSN</span><span class="p">],</span><span class="w"> </span><span class="n">bOpen</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">GetRdbmsDelimiter</span><span class="p">([</span><span class="n">sDSN</span><span class="p">],</span><span class="w"> </span><span class="n">bOpen</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4316,7 +4316,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="wrap-an-identifier-with-platform-specific-delimiters">Wrap an identifier with platform-specific delimiters<a class="headerlink" href="#wrap-an-identifier-with-platform-specific-delimiters" title="Permanent link">&para;</a></h3>
 <p>Retrieves the opening and closing delimiter characters for the given DSN and wraps a single identifier name, demonstrating the two-call pattern for platforms where the delimiters differ.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildDelimitedIdentifier</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildDelimitedIdentifier</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sDSN</span><span class="p">,</span><span class="w"> </span><span class="n">sName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOpen</span><span class="p">,</span><span class="w"> </span><span class="n">sClose</span><span class="p">,</span><span class="w"> </span><span class="n">sIdentifier</span><span class="p">;</span>
 
@@ -4331,11 +4331,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildDelimitedIdentifier&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LIMSDB&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;orders&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays (SQL Server DSN, <code>sName</code> = <code>"orders"</code>):</p>
-<div class="language-text highlight"><pre><span></span><code>Delimited identifier: [orders]
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Delimited identifier: [orders]
 </code></pre></div>
 <h3 id="build-a-provider-specific-select-statement">Build a provider-specific SELECT statement<a class="headerlink" href="#build-a-provider-specific-select-statement" title="Permanent link">&para;</a></h3>
 <p>Guards against an unsupported DSN by checking for an empty delimiter before building the query, then assembles a <code>SELECT</code> statement where both the table name and column name are quoted with platform-specific delimiters.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSelectStatement</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSelectStatement</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sDSN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOpen</span><span class="p">,</span><span class="w"> </span><span class="n">sClose</span><span class="p">,</span><span class="w"> </span><span class="n">sTable</span><span class="p">,</span><span class="w"> </span><span class="n">sColumn</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">;</span>
 
@@ -4359,9 +4359,9 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildSelectStatement&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LIMSDB&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays one of:</p>
-<div class="language-text highlight"><pre><span></span><code>No delimiter mapping is available for this DSN
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>No delimiter mapping is available for this DSN
 </code></pre></div>
-<div class="language-text highlight"><pre><span></span><code>SELECT [orderdate] FROM [orders]
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>SELECT [orderdate] FROM [orders]
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

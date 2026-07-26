@@ -3717,7 +3717,7 @@
 <li>When you need alias support such as <a href="../../types/string/"><code>string</code></a> or <code>int</code> instead of writing the full <code>System.*</code> name.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3790,7 +3790,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="resolve-a-built-in-alias">Resolve a built-in alias<a class="headerlink" href="#resolve-a-built-in-alias" title="Permanent link">&para;</a></h3>
 <p>Use one of the built-in aliases and inspect the resolved full name. The alias <code>"string"</code> expands to <code>System.String</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">oType</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">oType</span><span class="p">;</span>
 
 <span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">;</span>
 <span class="n">oType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">);</span>
@@ -3798,11 +3798,11 @@
 <span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Resolved type: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">FullName</span><span class="p">));</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Resolved type: System.String
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Resolved type: System.String
 </code></pre></div>
 <h3 id="resolve-a-fully-qualified-type-name">Resolve a fully qualified type name<a class="headerlink" href="#resolve-a-fully-qualified-type-name" title="Permanent link">&para;</a></h3>
 <p>Use the full name when you want an exact type instead of relying on an alias. <code>"System.Text.StringBuilder"</code> resolves to a type with short name <code>StringBuilder</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">oType</span><span class="p">,</span><span class="w"> </span><span class="n">sTypeLabel</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">oType</span><span class="p">,</span><span class="w"> </span><span class="n">sTypeLabel</span><span class="p">;</span>
 
 <span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;System.Text.StringBuilder&quot;</span><span class="p">;</span>
 <span class="n">oType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">);</span>
@@ -3812,12 +3812,12 @@
 <span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Full name: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">FullName</span><span class="p">));</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Resolved type name: StringBuilder
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Resolved type name: StringBuilder
 Full name: System.Text.StringBuilder
 </code></pre></div>
 <h3 id="validate-dynamic-input-before-lookup">Validate dynamic input before lookup<a class="headerlink" href="#validate-dynamic-input-before-lookup" title="Permanent link">&para;</a></h3>
 <p>Guard user-supplied input, then catch lookup failures so the script can report a useful message. Because <code>"CustomLib.Models.FooBar"</code> is a non-empty string but an unknown type, the <a href="../../keywords/TRY/"><code>:TRY</code></a> fires and the <a href="../../keywords/CATCH/"><code>:CATCH</code></a> branch reports the error.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">oType</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">oType</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CustomLib.Models.FooBar&quot;</span><span class="p">;</span>
 

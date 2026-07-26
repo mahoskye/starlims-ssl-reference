@@ -4249,7 +4249,7 @@
 <li>When normalizing mixed-case input with <a href="../Upper/"><code>Upper</code></a> and then validating it.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">IsHex</span><span class="p">(</span><span class="n">sSource</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">IsHex</span><span class="p">(</span><span class="n">sSource</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4316,7 +4316,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="check-whether-a-string-contains-only-uppercase-hex-characters">Check whether a string contains only uppercase hex characters<a class="headerlink" href="#check-whether-a-string-contains-only-uppercase-hex-characters" title="Permanent link">&para;</a></h3>
 <p>Call <code>IsHex</code> on a hardcoded value and branch on the result. The input <code>"A3F7"</code> contains only valid uppercase hex digits, so the true branch executes.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateHexCode</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateHexCode</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;A3F7&quot;</span><span class="p">;</span>
@@ -4336,7 +4336,7 @@
 <p>Call with <code>DoProc("ValidateHexCode")</code>.</p>
 <h3 id="normalize-mixed-case-input-before-validating">Normalize mixed-case input before validating<a class="headerlink" href="#normalize-mixed-case-input-before-validating" title="Permanent link">&para;</a></h3>
 <p>Trim whitespace and convert to uppercase before calling <code>IsHex</code>, so that values like <code>" a3f7 "</code> pass validation rather than failing on case or whitespace. Calling with <code>"a3f7"</code> produces <code>"A3F7"</code> after normalization, which is valid; calling with <code>"not hex"</code> produces <code>"NOT HEX"</code>, which is not.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeAndValidateHex</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeAndValidateHex</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sInput</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">;</span>
 
@@ -4357,7 +4357,7 @@
 <p>Call with <code>DoProc("NormalizeAndValidateHex", {"a3f7"})</code>.</p>
 <h3 id="filter-and-convert-a-batch-of-hex-strings">Filter and convert a batch of hex strings<a class="headerlink" href="#filter-and-convert-a-batch-of-hex-strings" title="Permanent link">&para;</a></h3>
 <p>Use <code>IsHex</code> as a gate before calling <a href="../LHex2Dec/"><code>LHex2Dec</code></a>, so that only valid uppercase hex strings are converted. From the five inputs, <code>"ab"</code> (lowercase), <code>"0x10"</code> (prefix), and <code>"FF"</code>, <code>"1A"</code>, and <code>"7B"</code> (valid) demonstrate how the filter works. Three values pass and two are silently skipped.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertValidHexBatch</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertValidHexBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRawValues</span><span class="p">,</span><span class="w"> </span><span class="n">aDecimalValues</span><span class="p">,</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">,</span><span class="w"> </span><span class="n">nDecimalValue</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRawValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;1A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;FF&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ab&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x10&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;7B&quot;</span><span class="p">};</span>

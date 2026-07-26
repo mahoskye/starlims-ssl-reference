@@ -3358,7 +3358,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="add-text-to-a-page-from-an-image">Add text to a page from an image<a class="headerlink" href="#add-text-to-a-page-from-an-image" title="Permanent link">&para;</a></h3>
 <p>Imports a JPEG as a new PDF page, then calls <code>SetTextStyle</code> to switch to bold green Arial before drawing a label at coordinates (50, 50) with <code>AddTextOnPage</code>. The default text style (Verdana 20 black) is only overridden for calls after <code>SetTextStyle</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AddTextOverlayToImage</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AddTextOverlayToImage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPdf</span><span class="p">,</span><span class="w"> </span><span class="n">sImagePath</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">,</span><span class="w"> </span><span class="n">sLabel</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sImagePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/Documents/InspectionPhoto.jpg&quot;</span><span class="p">;</span>
@@ -3379,11 +3379,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AddTextOverlayToImage&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Image exported to PDF with text overlay
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Image exported to PDF with text overlay
 </code></pre></div>
 <h3 id="assemble-and-secure-a-multi-source-pdf">Assemble and secure a multi-source PDF<a class="headerlink" href="#assemble-and-secure-a-multi-source-pdf" title="Permanent link">&para;</a></h3>
 <p>Merges a header image, all pages from an existing PDF, and a footer image into one document, then sets <code>Encrypted128Bit</code> security and disables printing, modifying, and content extraction before saving. The page count reflects the total pages across all merged sources.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AssembleSecureMultiSourcePdf</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AssembleSecureMultiSourcePdf</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPdf</span><span class="p">,</span><span class="w"> </span><span class="n">sImage1</span><span class="p">,</span><span class="w"> </span><span class="n">sImage2</span><span class="p">,</span><span class="w"> </span><span class="n">sExistingPdf</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">,</span><span class="w"> </span><span class="n">sUserPass</span><span class="p">,</span><span class="w"> </span><span class="n">sOwnerPass</span><span class="p">,</span><span class="w"> </span><span class="n">sMsg</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPageCount</span><span class="p">;</span>
@@ -3420,11 +3420,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AssembleSecureMultiSourcePdf&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays (page count depends on merged sources):</p>
-<div class="language-text highlight"><pre><span></span><code>Assembled PDF has 5 pages and is print-protected
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Assembled PDF has 5 pages and is print-protected
 </code></pre></div>
 <h3 id="protect-and-print-a-pdf-report">Protect and print a PDF report<a class="headerlink" href="#protect-and-print-a-pdf-report" title="Permanent link">&para;</a></h3>
 <p>Opens an existing PDF, draws a title on page 1, then applies <code>Protect</code>, which sets a 128-bit security profile. The <code>PermitModifyDocument</code> override shows that individual permissions can be tightened after <code>Protect</code>. The final <code>Print</code> call sends the saved file path to Adobe Reader. It does not print the in-memory document.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GenerateSecureReport</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GenerateSecureReport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sPdfPath</span><span class="p">,</span><span class="w"> </span><span class="n">sPrinterName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sPdfPath</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;C:/Reports/QuarterlyReport.pdf&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sPrinterName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;HP_LaserJet_5000&quot;</span><span class="p">;</span>

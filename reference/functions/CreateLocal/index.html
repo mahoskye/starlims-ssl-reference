@@ -3605,7 +3605,7 @@
 <li>When separate procedure calls need their own local variables even if they reuse the same name.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">CreateLocal</span><span class="p">(</span><span class="n">sVarName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">vVarValue</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">CreateLocal</span><span class="p">(</span><span class="n">sVarName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">vVarValue</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3680,7 +3680,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="create-a-runtime-named-local-variable">Create a runtime-named local variable<a class="headerlink" href="#create-a-runtime-named-local-variable" title="Permanent link">&para;</a></h3>
 <p>Creates a local variable using a name stored in another variable, then reads it back using <a href="../GetByName/"><code>GetByName</code></a> to confirm the stored value.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoCreateLocalBasic</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoCreateLocalBasic</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sVarName</span><span class="p">,</span><span class="w"> </span><span class="n">sValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sVarName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sStatus&quot;</span><span class="p">;</span>
@@ -3695,11 +3695,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DemoCreateLocalBasic&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Local value: Queued
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Local value: Queued
 </code></pre></div>
 <h3 id="initialize-a-local-to-an-empty-string">Initialize a local to an empty string<a class="headerlink" href="#initialize-a-local-to-an-empty-string" title="Permanent link">&para;</a></h3>
 <p>Calls <code>CreateLocal</code> without a second argument so the new variable is initialized to an empty string, then checks whether the variable is empty.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoCreateLocalDefault</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoCreateLocalDefault</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sVarName</span><span class="p">,</span><span class="w"> </span><span class="n">sValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sVarName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sOptionalNote&quot;</span><span class="p">;</span>
@@ -3717,11 +3717,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DemoCreateLocalDefault&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>The local starts as an empty string.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>The local starts as an empty string.
 </code></pre></div>
 <h3 id="shadow-the-same-local-name-in-a-nested-call">Shadow the same local name in a nested call<a class="headerlink" href="#shadow-the-same-local-name-in-a-nested-call" title="Permanent link">&para;</a></h3>
 <p>Two procedures each create a local variable with the same name. The inner procedure's call does not affect the outer scope, so the outer value is unchanged before and after calling the inner procedure.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoCreateLocalOuter</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoCreateLocalOuter</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOuterValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">CreateLocal</span><span class="p">(</span><span class="s2">&quot;sScopeName&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;outer&quot;</span><span class="p">);</span>
@@ -3748,7 +3748,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DemoCreateLocalOuter&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Outer before nested call: outer
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Outer before nested call: outer
 Inner value: inner
 Outer after nested call: outer
 </code></pre></div>

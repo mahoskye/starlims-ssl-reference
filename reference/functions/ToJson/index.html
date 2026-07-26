@@ -3717,7 +3717,7 @@
 <li>When you need JSON output from a value before passing it to another system.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">ToJson</span><span class="p">(</span><span class="n">vValue</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ToJson</span><span class="p">(</span><span class="n">vValue</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3824,7 +3824,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="serialize-a-simple-object">Serialize a simple object<a class="headerlink" href="#serialize-a-simple-object" title="Permanent link">&para;</a></h3>
 <p>Build a small dynamic object and serialize it to JSON. The output includes the object's three properties followed by the required <code>XmlType</code> field that all serialized objects carry.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSampleJson</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSampleJson</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oSample</span><span class="p">,</span><span class="w"> </span><span class="n">sJson</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oSample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">({</span>
@@ -3844,11 +3844,11 @@
 <span class="c1">;</span>
 </code></pre></div>
 <p>Expected JSON:</p>
-<div class="language-text highlight"><pre><span></span><code>{&quot;sampleId&quot;:&quot;SAMP-1001&quot;,&quot;status&quot;:&quot;Logged&quot;,&quot;approved&quot;:false,&quot;XmlType&quot;:&quot;SSLExpando&quot;}
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>{&quot;sampleId&quot;:&quot;SAMP-1001&quot;,&quot;status&quot;:&quot;Logged&quot;,&quot;approved&quot;:false,&quot;XmlType&quot;:&quot;SSLExpando&quot;}
 </code></pre></div>
 <h3 id="serialize-nested-data-for-an-api-payload">Serialize nested data for an API payload<a class="headerlink" href="#serialize-nested-data-for-an-api-payload" title="Permanent link">&para;</a></h3>
 <p>Build a nested payload with a child object, an array, a date, and a number, then serialize the whole structure. This shows how <code>ToJson</code> recurses into nested objects and arrays automatically.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildOrderPayload</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildOrderPayload</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPayload</span><span class="p">,</span><span class="w"> </span><span class="n">oCustomer</span><span class="p">,</span><span class="w"> </span><span class="n">aTests</span><span class="p">,</span><span class="w"> </span><span class="n">sJson</span><span class="p">,</span><span class="w"> </span><span class="n">dRequested</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dRequested</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>
@@ -3877,7 +3877,7 @@
 </code></pre></div>
 <h3 id="handle-values-that-may-not-be-serializable">Handle values that may not be serializable<a class="headerlink" href="#handle-values-that-may-not-be-serializable" title="Permanent link">&para;</a></h3>
 <p>Wrap <code>ToJson</code> in <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> when the caller cannot guarantee the value comes from a supported type. Unsupported external objects raise an exception; this pattern surfaces the message and returns an empty string instead of letting the error propagate.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SerializeSafely</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SerializeSafely</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">vValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sJson</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 

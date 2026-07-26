@@ -4011,7 +4011,7 @@
 <li>When auditing all configured connections to confirm their platforms.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetDBMSName</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">GetDBMSName</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4079,7 +4079,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="get-the-platform-name-for-a-connection">Get the platform name for a connection<a class="headerlink" href="#get-the-platform-name-for-a-connection" title="Permanent link">&para;</a></h3>
 <p>Calls <code>GetDBMSName</code> with an explicit connection name and displays the result in a message.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDatabaseType</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDatabaseType</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDBMSName</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sDBMSName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDBMSName</span><span class="p">(</span><span class="s2">&quot;LIMSDB&quot;</span><span class="p">);</span>
@@ -4091,11 +4091,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDatabaseType&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>DBMS: SQL
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>DBMS: SQL
 </code></pre></div>
 <h3 id="branch-sql-logic-by-database-platform">Branch SQL logic by database platform<a class="headerlink" href="#branch-sql-logic-by-database-platform" title="Permanent link">&para;</a></h3>
 <p>Reads the DBMS name for a given connection and selects the appropriate SQL syntax for row limiting and current-date expressions.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildQueryByDBMS</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildQueryByDBMS</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDBMSName</span><span class="p">,</span><span class="w"> </span><span class="n">sLimitClause</span><span class="p">,</span><span class="w"> </span><span class="n">sDateFunction</span><span class="p">,</span><span class="w"> </span><span class="n">sQuery</span><span class="p">;</span>
 
@@ -4127,7 +4127,7 @@
 </code></pre></div>
 <h3 id="audit-all-configured-connections-for-their-platform">Audit all configured connections for their platform<a class="headerlink" href="#audit-all-configured-connections-for-their-platform" title="Permanent link">&para;</a></h3>
 <p>Iterates every connection returned by <a href="../GetConnectionStrings/"><code>GetConnectionStrings</code></a>, calls <code>GetDBMSName</code> for each, and reports the platform or an error message when a connection cannot be resolved.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditDatabasePlatforms</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditDatabasePlatforms</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aConnections</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sConnName</span><span class="p">,</span><span class="w"> </span><span class="n">sDBMSName</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aConnections</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetConnectionStrings</span><span class="p">();</span>

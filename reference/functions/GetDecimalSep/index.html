@@ -3897,7 +3897,7 @@
 <li>When you want a safe fallback to <code>.</code> if the separator setting is empty.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetDecimalSep</span><span class="p">()</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">GetDecimalSep</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>This function takes no parameters.</p>
@@ -3923,7 +3923,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="show-the-current-separator-code-and-character">Show the current separator code and character<a class="headerlink" href="#show-the-current-separator-code-and-character" title="Permanent link">&para;</a></h3>
 <p>Retrieve the separator as a numeric code, then convert it to a displayable character.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDecimalSeparator</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDecimalSeparator</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSepCode</span><span class="p">,</span><span class="w"> </span><span class="n">sSepChar</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nSepCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDecimalSep</span><span class="p">();</span>
@@ -3939,11 +3939,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDecimalSeparator&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Decimal separator code: 46 character: .
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Decimal separator code: 46 character: .
 </code></pre></div>
 <h3 id="normalize-input-using-the-active-separator">Normalize input using the active separator<a class="headerlink" href="#normalize-input-using-the-active-separator" title="Permanent link">&para;</a></h3>
 <p>Convert a locale-formatted numeric string to a <code>.</code>-based form before further processing.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeNumericText</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeNumericText</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sRawValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSepCode</span><span class="p">,</span><span class="w"> </span><span class="n">sSepChar</span><span class="p">,</span><span class="w"> </span><span class="n">sNormalized</span><span class="p">;</span>
 
@@ -3960,11 +3960,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NormalizeNumericText&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;3,14&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Normalized value: 3.14
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Normalized value: 3.14
 </code></pre></div>
 <h3 id="compare-the-numeric-and-string-separator-apis">Compare the numeric and string separator APIs<a class="headerlink" href="#compare-the-numeric-and-string-separator-apis" title="Permanent link">&para;</a></h3>
 <p>Use <a href="../SetDecimalSeparator/"><code>SetDecimalSeparator</code></a> to change the current separator, then verify the value through both <code>GetDecimalSep</code> and <a href="../GetDecimalSeparator/"><code>GetDecimalSeparator</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">VerifyDecimalSeparatorApis</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">VerifyDecimalSeparatorApis</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPrevSep</span><span class="p">,</span><span class="w"> </span><span class="n">nSepCode</span><span class="p">,</span><span class="w"> </span><span class="n">sSepChar</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentSep</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sPrevSep</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetDecimalSeparator</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">);</span>
@@ -3984,7 +3984,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;VerifyDecimalSeparatorApis&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Code: 44 character: , string API: ,
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Code: 44 character: , string API: ,
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -3845,7 +3845,7 @@
 <li>When a workflow needs a specific transaction isolation level.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">BeginLimsTransaction</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sIsoLevel</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">BeginLimsTransaction</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sIsoLevel</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3931,7 +3931,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="use-the-default-connection">Use the default connection<a class="headerlink" href="#use-the-default-connection" title="Permanent link">&para;</a></h3>
 <p>Wraps a single SQL update in the standard TRY/FINALLY transaction pattern, using a <code>bStarted</code> flag to ensure <a href="../EndLimsTransaction/"><code>EndLimsTransaction</code></a> is only called if the transaction was actually opened.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateSampleStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateSampleStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bStarted</span><span class="p">,</span><span class="w"> </span><span class="n">bCommit</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
@@ -3968,7 +3968,7 @@
 </code></pre></div>
 <h3 id="use-a-named-connection-for-related-updates">Use a named connection for related updates<a class="headerlink" href="#use-a-named-connection-for-related-updates" title="Permanent link">&para;</a></h3>
 <p>Passes <code>sConnName</code> to target a specific connection, then updates an order and all its task codes inside a single transaction so they commit or roll back together.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SaveOrderAndTasks</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SaveOrderAndTasks</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sConnName</span><span class="p">,</span><span class="w"> </span><span class="n">sOrdNo</span><span class="p">,</span><span class="w"> </span><span class="n">sNewStatus</span><span class="p">,</span><span class="w"> </span><span class="n">aTaskCodes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bStarted</span><span class="p">,</span><span class="w"> </span><span class="n">bCommit</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
@@ -4019,7 +4019,7 @@
 </code></pre></div>
 <h3 id="request-a-specific-isolation-level">Request a specific isolation level<a class="headerlink" href="#request-a-specific-isolation-level" title="Permanent link">&para;</a></h3>
 <p>Passes <code>"Serializable"</code> as the isolation level to prevent other transactions from modifying the batch during the check-and-update sequence.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PostCloseoutAudit</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PostCloseoutAudit</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sConnName</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bStarted</span><span class="p">,</span><span class="w"> </span><span class="n">bCommit</span><span class="p">,</span><span class="w"> </span><span class="n">nOpenTasks</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 

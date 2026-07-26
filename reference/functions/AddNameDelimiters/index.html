@@ -4201,7 +4201,7 @@
 <li>When you want a single helper for identifier formatting instead of embedding delimiter characters in string literals.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">AddNameDelimiters</span><span class="p">(</span><span class="n">sDSN</span><span class="p">,</span><span class="w"> </span><span class="n">sName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">AddNameDelimiters</span><span class="p">(</span><span class="n">sDSN</span><span class="p">,</span><span class="w"> </span><span class="n">sName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4255,7 +4255,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="build-a-sql-fragment-with-delimited-identifiers">Build a SQL fragment with delimited identifiers<a class="headerlink" href="#build-a-sql-fragment-with-delimited-identifiers" title="Permanent link">&para;</a></h3>
 <p>Calls <code>AddNameDelimiters</code> twice, once for the table name and once for the column, then joins the results into a SELECT statement. The exact delimiters depend on the DBMS type for the given DSN.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSelectStatement</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSelectStatement</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sColumnName</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">AddNameDelimiters</span><span class="p">(</span><span class="s2">&quot;LIMS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;samples&quot;</span><span class="p">);</span>
@@ -4269,11 +4269,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildSelectStatement&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays (SQL Server example):</p>
-<div class="language-text highlight"><pre><span></span><code>SELECT [sample_id] FROM [samples]
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>SELECT [sample_id] FROM [samples]
 </code></pre></div>
 <h3 id="handle-omitted-values-safely">Handle omitted values safely<a class="headerlink" href="#handle-omitted-values-safely" title="Permanent link">&para;</a></h3>
 <p>Omits <code>sDSN</code> so that no delimiter characters are applied; the function returns the trimmed name unchanged.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDefaultDelimiterBehavior</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDefaultDelimiterBehavior</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">AddNameDelimiters</span><span class="p">(,</span><span class="w"> </span><span class="s2">&quot;status&quot;</span><span class="p">);</span>
@@ -4285,7 +4285,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDefaultDelimiterBehavior&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Delimited name: status
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Delimited name: status
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

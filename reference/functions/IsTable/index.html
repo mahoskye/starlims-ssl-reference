@@ -3872,7 +3872,7 @@
 <li>When a script can work against multiple database connections.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">IsTable</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">IsTable</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3948,7 +3948,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="check-a-table-before-querying-it">Check a table before querying it<a class="headerlink" href="#check-a-table-before-querying-it" title="Permanent link">&para;</a></h3>
 <p>Guard the query with an existence check before calling <a href="../SQLExecute/"><code>SQLExecute</code></a>. If the <code>sample</code> table does not exist on the <code>LAB</code> connection, the message fires and the procedure returns early with an empty array.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSampleRows</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSampleRows</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">aSamples</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB&quot;</span><span class="p">;</span>
@@ -3973,7 +3973,7 @@
 </code></pre></div>
 <h3 id="use-the-default-connection-explicitly">Use the default connection explicitly<a class="headerlink" href="#use-the-default-connection-explicitly" title="Permanent link">&para;</a></h3>
 <p>Pass <a href="../../literals/nil/"><code>NIL</code></a> as the connection name to target the default connection. The <a href="../UsrMes/"><code>UsrMes</code></a> call fires only if <code>audit_log</code> is absent from that connection.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadAuditRows</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadAuditRows</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aAuditRows</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="nf">IsTable</span><span class="p">(</span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;audit_log&quot;</span><span class="p">);</span>
@@ -3995,7 +3995,7 @@
 </code></pre></div>
 <h3 id="validate-a-required-table-set-before-processing">Validate a required table set before processing<a class="headerlink" href="#validate-a-required-table-set-before-processing" title="Permanent link">&para;</a></h3>
 <p>Check that every table a module depends on exists before proceeding. <code>ValidateRequiredTables</code> returns the list of missing names; <code>StartModuleLoad</code> calls it and blocks startup if any are absent.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateRequiredTables</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateRequiredTables</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">aRequiredTables</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aMissingTables</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">;</span>
 

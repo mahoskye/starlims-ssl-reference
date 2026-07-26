@@ -3920,7 +3920,7 @@
 <li>When displaying values such as balances or counts that should always appear without a sign.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Abs</span><span class="p">(</span><span class="n">nValue</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Abs</span><span class="p">(</span><span class="n">nValue</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3981,7 +3981,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="remove-the-negative-sign-from-an-input-value">Remove the negative sign from an input value<a class="headerlink" href="#remove-the-negative-sign-from-an-input-value" title="Permanent link">&para;</a></h3>
 <p>Demonstrates the basic result for a single negative number: the sign is stripped and the magnitude is returned unchanged.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nInput</span><span class="p">,</span><span class="w"> </span><span class="n">nAbsValue</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nInput</span><span class="p">,</span><span class="w"> </span><span class="n">nAbsValue</span><span class="p">;</span>
 
 <span class="n">nInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">-</span><span class="mi">125</span><span class="p">;</span>
 <span class="n">nAbsValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Abs</span><span class="p">(</span><span class="n">nInput</span><span class="p">);</span>
@@ -3989,11 +3989,11 @@
 <span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Absolute value is: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nAbsValue</span><span class="p">));</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Absolute value is: 125
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Absolute value is: 125
 </code></pre></div>
 <h3 id="sum-movement-regardless-of-direction">Sum movement regardless of direction<a class="headerlink" href="#sum-movement-regardless-of-direction" title="Permanent link">&para;</a></h3>
 <p>Shows how <code>Abs</code> helps accumulate total movement when positive and negative deltas should contribute equally to a running total.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SumTotalMovement</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SumTotalMovement</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSteps</span><span class="p">,</span><span class="w"> </span><span class="n">nTotalMovement</span><span class="p">,</span><span class="w"> </span><span class="n">nStep</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aSteps</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">9</span><span class="p">),</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">)};</span>
@@ -4011,11 +4011,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SumTotalMovement&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Total movement: 36
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Total movement: 36
 </code></pre></div>
 <h3 id="compare-measured-deviation-to-a-tolerance">Compare measured deviation to a tolerance<a class="headerlink" href="#compare-measured-deviation-to-a-tolerance" title="Permanent link">&para;</a></h3>
 <p>Uses <code>Abs</code> in a quality-check pattern where only the magnitude of the deviation matters, not its direction. The procedure reports whether the measured result falls within the allowed difference.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckResultAgainstTolerance</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckResultAgainstTolerance</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">nExpected</span><span class="p">,</span><span class="w"> </span><span class="n">nActual</span><span class="p">,</span><span class="w"> </span><span class="n">nAllowedDiff</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nDifference</span><span class="p">;</span>
 

@@ -4087,7 +4087,7 @@
 <li>When you need to inspect all available inbox tasks by passing <a href="../../literals/nil/"><code>NIL</code></a> or <code>""</code> as the filter.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocGetTasks</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocGetTasks</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4207,7 +4207,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="list-task-names-for-one-workflow">List task names for one workflow<a class="headerlink" href="#list-task-names-for-one-workflow" title="Permanent link">&para;</a></h3>
 <p>Queries Documentum for all tasks matching a specific workflow ID and prints each task name, exiting early when the result is empty.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListWorkflowTasks</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListWorkflowTasks</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">aTasks</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WF-100245&quot;</span><span class="p">;</span>
@@ -4233,7 +4233,7 @@
 </code></pre></div>
 <h3 id="detect-lookup-failures-when-filtering-by-workflow">Detect lookup failures when filtering by workflow<a class="headerlink" href="#detect-lookup-failures-when-filtering-by-workflow" title="Permanent link">&para;</a></h3>
 <p>Calls <code>DocGetTasks</code> with a workflow ID and distinguishes a backend failure (empty result with <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> set) from a workflow that genuinely has no tasks, returning an empty array with an error message only on failure.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetWorkflowTasksSafe</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetWorkflowTasksSafe</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aTasks</span><span class="p">,</span><span class="w"> </span><span class="n">sError</span><span class="p">;</span>
 
@@ -4255,7 +4255,7 @@
 </code></pre></div>
 <h3 id="group-all-available-tasks-by-workflow-title">Group all available tasks by workflow title<a class="headerlink" href="#group-all-available-tasks-by-workflow-title" title="Permanent link">&para;</a></h3>
 <p>Fetches all inbox tasks by passing <a href="../../literals/nil/"><code>NIL</code></a> as the filter, then counts how many tasks belong to each distinct workflow title and returns a summary array of <code>{title, count}</code> pairs.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeInboxTasksByWorkflow</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeInboxTasksByWorkflow</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aTasks</span><span class="p">,</span><span class="w"> </span><span class="n">aSummary</span><span class="p">,</span><span class="w"> </span><span class="n">sWorkflowTitle</span><span class="p">,</span><span class="w"> </span><span class="n">nPos</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aTasks</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetTasks</span><span class="p">(</span><span class="kc">NIL</span><span class="p">);</span>

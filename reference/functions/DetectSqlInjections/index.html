@@ -4265,7 +4265,7 @@
 <li>When you want to audit or normalize detection settings across several configured connections.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DetectSqlInjections</span><span class="p">(</span><span class="n">bEnable</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sConnectionName</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DetectSqlInjections</span><span class="p">(</span><span class="n">bEnable</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sConnectionName</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4340,7 +4340,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="enable-detection-for-a-named-connection">Enable detection for a named connection<a class="headerlink" href="#enable-detection-for-a-named-connection" title="Permanent link">&para;</a></h3>
 <p>Enables SQL injection detection on a named connection and reports whether detection was already active.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">EnableDetection</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">EnableDetection</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">bPreviousState</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LABDATA&quot;</span><span class="p">;</span>
@@ -4362,12 +4362,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;EnableDetection&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays one of:</p>
-<div class="language-text highlight"><pre><span></span><code>SQL injection detection was already enabled for LABDATA
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>SQL injection detection was already enabled for LABDATA
 SQL injection detection is now enabled for LABDATA
 </code></pre></div>
 <h3 id="temporarily-disable-detection-and-restore-it">Temporarily disable detection and restore it<a class="headerlink" href="#temporarily-disable-detection-and-restore-it" title="Permanent link">&para;</a></h3>
 <p>Disables SQL injection detection before running a controlled query, then restores the prior setting in a <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> block even if the query fails.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunControlledQuery</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunControlledQuery</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">bPreviousState</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LABDATA&quot;</span><span class="p">;</span>
@@ -4400,7 +4400,7 @@ SQL injection detection is now enabled for LABDATA
 </code></pre></div>
 <h3 id="normalize-detection-across-multiple-connections">Normalize detection across multiple connections<a class="headerlink" href="#normalize-detection-across-multiple-connections" title="Permanent link">&para;</a></h3>
 <p>Enables SQL injection detection on each connection in a list and tracks which ones were changed from their previous state.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeDetectionSettings</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeDetectionSettings</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aConnections</span><span class="p">,</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">aChanged</span><span class="p">,</span><span class="w"> </span><span class="n">bPreviousState</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aConnections</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LIMS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LABDATA&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;REPORTING&quot;</span><span class="p">};</span>
@@ -4422,7 +4422,7 @@ SQL injection detection is now enabled for LABDATA
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NormalizeDetectionSettings&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Connections changed: 3
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Connections changed: 3
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

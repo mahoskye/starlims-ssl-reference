@@ -2896,7 +2896,7 @@
 <li>When different success and failure paths should return different results.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:RETURN</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:RETURN</span><span class="p">;</span>
 <span class="k">:RETURN</span><span class="w"> </span><span class="n">expression</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
@@ -2949,7 +2949,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="return-a-calculated-value-from-a-procedure">Return a calculated value from a procedure<a class="headerlink" href="#return-a-calculated-value-from-a-procedure" title="Permanent link">&para;</a></h3>
 <p>Uses <code>:RETURN</code> to send a computed result back to the caller. With <code>nUnitPrice</code> set to <code>25</code> and <code>nQuantity</code> set to <code>4</code>, the subtotal is <code>100</code> and the total with 8% tax is <code>108</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CalculateTotalWithTax</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CalculateTotalWithTax</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">nUnitPrice</span><span class="p">,</span><span class="w"> </span><span class="n">nQuantity</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSubtotal</span><span class="p">,</span><span class="w"> </span><span class="n">nTaxRate</span><span class="p">,</span><span class="w"> </span><span class="n">nTotal</span><span class="p">;</span>
 
@@ -2966,11 +2966,11 @@
 <span class="nf">UsrMes</span><span class="p">(</span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nResult</span><span class="p">));</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>108
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>108
 </code></pre></div>
 <h3 id="return-early-from-top-level-script-code">Return early from top-level script code<a class="headerlink" href="#return-early-from-top-level-script-code" title="Permanent link">&para;</a></h3>
 <p>Uses guard clauses in script entry-point code to stop processing once a failure is detected. With <code>sBatchID</code> set to <code>"B-1001"</code> and matching samples found, the script reaches the final <code>:RETURN</code> with a loaded-count message.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">,</span><span class="w"> </span><span class="n">aSamples</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">,</span><span class="w"> </span><span class="n">aSamples</span><span class="p">;</span>
 
 <span class="n">sBatchID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;B-1001&quot;</span><span class="p">;</span>
 
@@ -2992,7 +2992,7 @@
 </code></pre></div>
 <h3 id="return-from-try-or-catch-while-finally-still-cleans-up">Return from TRY or CATCH while FINALLY still cleans up<a class="headerlink" href="#return-from-try-or-catch-while-finally-still-cleans-up" title="Permanent link">&para;</a></h3>
 <p>Demonstrates that <a href="../FINALLY/"><code>:FINALLY</code></a> always runs even when <code>:RETURN</code> exits from <a href="../TRY/"><code>:TRY</code></a> or <a href="../CATCH/"><code>:CATCH</code></a>. Regardless of which branch returns, the cleanup message displays.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadBatchStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadBatchStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bCleanupNeeded</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
@@ -3030,7 +3030,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LoadBatchStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;B-1001&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays before the procedure returns:</p>
-<div class="language-text highlight"><pre><span></span><code>Batch status lookup finished
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Batch status lookup finished
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

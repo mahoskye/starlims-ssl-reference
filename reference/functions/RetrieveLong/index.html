@@ -4241,7 +4241,7 @@
 <li>When you can supply a precise <code>sWhereCondition</code> that identifies the row you want to read.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">RetrieveLong</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sColumnName</span><span class="p">,</span><span class="w"> </span><span class="n">sWhereCondition</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputFilePath</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bIsCompressed</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">RetrieveLong</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sColumnName</span><span class="p">,</span><span class="w"> </span><span class="n">sWhereCondition</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputFilePath</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bIsCompressed</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4362,7 +4362,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="export-one-pdf-attachment-and-verify-the-file-was-written">Export one PDF attachment and verify the file was written<a class="headerlink" href="#export-one-pdf-attachment-and-verify-the-file-was-written" title="Permanent link">&para;</a></h3>
 <p>Fetch a single BLOB column, write it to disk, and confirm the file was actually created since <a href="../../literals/true/"><code>.T.</code></a> alone does not guarantee bytes were written.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportAttachmentPdf</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportAttachmentPdf</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sColumnName</span><span class="p">,</span><span class="w"> </span><span class="n">sWhereCondition</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOutputFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">nBytes</span><span class="p">;</span>
 
@@ -4400,11 +4400,11 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Run with:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportAttachmentPdf&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportAttachmentPdf&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="batch-export-approved-report-files">Batch-export approved report files<a class="headerlink" href="#batch-export-approved-report-files" title="Permanent link">&para;</a></h3>
 <p>Query for a list of IDs and export each matching BLOB to a separate file, tracking how many were written versus skipped.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportApprovedReports</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportApprovedReports</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aReportIds</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sColumnName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sReportId</span><span class="p">,</span><span class="w"> </span><span class="n">sWhereCondition</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputFilePath</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nWritten</span><span class="p">,</span><span class="w"> </span><span class="n">nSkipped</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
@@ -4457,7 +4457,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Run with:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportApprovedReports&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportApprovedReports&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

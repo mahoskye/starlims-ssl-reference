@@ -4361,7 +4361,7 @@
 <li>When normalizing a date value before filtering, reporting, or batch logic.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">ServerEndOfDay</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ServerEndOfDay</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4429,7 +4429,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="normalize-a-date-to-the-server-days-end">Normalize a date to the server day's end<a class="headerlink" href="#normalize-a-date-to-the-server-days-end" title="Permanent link">&para;</a></h3>
 <p>Take any date value and return a version stamped to <code>23:59:59.997</code> on the same calendar day, then display the result.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetServerCutoff</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetServerCutoff</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">dWorkDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dCutoff</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
@@ -4445,11 +4445,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetServerCutoff&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Server cutoff: &lt;04/15/2026 23:59:59&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Server cutoff: &lt;04/15/2026 23:59:59&gt;
 </code></pre></div>
 <h3 id="build-a-full-day-server-side-query-range">Build a full-day server-side query range<a class="headerlink" href="#build-a-full-day-server-side-query-range" title="Permanent link">&para;</a></h3>
 <p>Use <a href="../ServerStartOfDay/"><code>ServerStartOfDay</code></a> and <code>ServerEndOfDay</code> together to build an inclusive date range covering one calendar day, then pass both boundaries as query parameters.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetOrdersForDay</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetOrdersForDay</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">dOrderDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dRangeStart</span><span class="p">,</span><span class="w"> </span><span class="n">dRangeEnd</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">sOrdersXml</span><span class="p">;</span>
 
@@ -4474,7 +4474,7 @@
 </code></pre></div>
 <h3 id="compare-server-and-client-day-cutoffs">Compare server and client day cutoffs<a class="headerlink" href="#compare-server-and-client-day-cutoffs" title="Permanent link">&para;</a></h3>
 <p>Compute both the server and client end-of-day boundaries for the same input and show whether they agree.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareDayCutoffs</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareDayCutoffs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">dEventDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dServerEnd</span><span class="p">,</span><span class="w"> </span><span class="n">dClientEnd</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
 
@@ -4497,9 +4497,9 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompareDayCutoffs&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)});</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays one of:</p>
-<div class="language-text highlight"><pre><span></span><code>Server end: [date], Client end: [date] (same cutoff)
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Server end: [date], Client end: [date] (same cutoff)
 </code></pre></div>
-<div class="language-text highlight"><pre><span></span><code>Server end: [date], Client end: [date] (different cutoff)
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Server end: [date], Client end: [date] (different cutoff)
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

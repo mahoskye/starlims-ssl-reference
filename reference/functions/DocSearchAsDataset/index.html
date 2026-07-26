@@ -3856,7 +3856,7 @@
 <li>When you need to include all versions or cap the returned row count.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocSearchAsDataset</span><span class="p">([</span><span class="n">sContains</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sStartLocation</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sObjectType</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sWhere</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bAllVersions</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">nResultSetSize</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocSearchAsDataset</span><span class="p">([</span><span class="n">sContains</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sStartLocation</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sObjectType</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sWhere</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bAllVersions</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">nResultSetSize</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4002,7 +4002,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="search-a-folder-and-return-the-dataset-xml">Search a folder and return the dataset XML<a class="headerlink" href="#search-a-folder-and-return-the-dataset-xml" title="Permanent link">&para;</a></h3>
 <p>Fetches documents containing <code>"Approved"</code> from a specific folder path and returns the raw dataset XML, using <a href="../Empty/"><code>Empty</code></a> to guard against a no-match result.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindApprovedDocsInFolder</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindApprovedDocsInFolder</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sResultsXml</span><span class="p">,</span><span class="w"> </span><span class="n">sContains</span><span class="p">,</span><span class="w"> </span><span class="n">sStartLocation</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sContains</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Approved&quot;</span><span class="p">;</span>
@@ -4025,7 +4025,7 @@
 </code></pre></div>
 <h3 id="parse-the-dataset-xml-into-rows">Parse the dataset XML into rows<a class="headerlink" href="#parse-the-dataset-xml-into-rows" title="Permanent link">&para;</a></h3>
 <p>Searches for revised documents under a configurable path with a result cap, parses the returned dataset XML into a table, and lists each document name and version label.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildRevisedDocReport</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildRevisedDocReport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSectionPath</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxResults</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sSectionPath</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/Documents/Quality&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">nMaxResults</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span>
@@ -4067,7 +4067,7 @@
 </code></pre></div>
 <h3 id="build-a-version-aware-review-queue">Build a version-aware review queue<a class="headerlink" href="#build-a-version-aware-review-queue" title="Permanent link">&para;</a></h3>
 <p>Searches all PDF versions of documents matching <code>"method"</code> under a controlled-docs path and collects their object IDs into an array for downstream processing.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildReviewQueue</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildReviewQueue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sResultsXml</span><span class="p">,</span><span class="w"> </span><span class="n">sWhere</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aObjectIds</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sWhere</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;a_content_type = &#39;pdf&#39;&quot;</span><span class="p">;</span>

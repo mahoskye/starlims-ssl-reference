@@ -2050,7 +2050,7 @@
 <p>The special <code>XmlType</code> property controls the root element name used by <code>Serialize()</code>. <code>IsEmpty()</code> always returns <a href="../../literals/false/"><code>.F.</code></a> for objects, so use a property-list method when you need to check whether a dynamic object currently has any named properties.</p>
 <h2 id="creating-values">Creating values<a class="headerlink" href="#creating-values" title="Permanent link">&para;</a></h2>
 <p>Dynamic objects are created with <a href="../../functions/CreateLocal/"><code>CreateLocal</code></a> (empty) or <a href="../../functions/CreateUdObject/"><code>CreateUdObject</code></a> (with initialization):</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="n">oEmpty</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateLocal</span><span class="p">();</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">oEmpty</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateLocal</span><span class="p">();</span>
 <span class="n">oInit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">({{</span><span class="s2">&quot;sampleId&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-0042&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Pending&quot;</span><span class="p">}});</span>
 </code></pre></div>
 <table>
@@ -2267,7 +2267,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="creating-and-reading-a-dynamic-object">Creating and reading a dynamic object<a class="headerlink" href="#creating-and-reading-a-dynamic-object" title="Permanent link">&para;</a></h3>
 <p>Creates a dynamic object with <a href="../../functions/CreateLocal/"><code>CreateLocal()</code></a>, assigns three named members, and reads them back to build a summary string.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildReviewContext</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildReviewContext</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oContext</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oContext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateLocal</span><span class="p">();</span>
@@ -2287,11 +2287,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildReviewContext&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>LAB-0042 / Pending / 2
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>LAB-0042 / Pending / 2
 </code></pre></div>
 <h3 id="validating-optional-fields-and-cloning-safely">Validating optional fields and cloning safely<a class="headerlink" href="#validating-optional-fields-and-cloning-safely" title="Permanent link">&para;</a></h3>
 <p>Checks for an optional <code>reviewComment</code> property, adds it when missing, clones the object before mutating it, and reports the field count and the snapshot's preserved status.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PrepareApprovalPayload</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PrepareApprovalPayload</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPayload</span><span class="p">,</span><span class="w"> </span><span class="n">oSnapshot</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">({</span>
@@ -2320,12 +2320,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PrepareApprovalPayload&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Fields tracked: 3
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Fields tracked: 3
 Snapshot status: Logged
 </code></pre></div>
 <h3 id="serializing-and-restoring-an-object-tree">Serializing and restoring an object tree<a class="headerlink" href="#serializing-and-restoring-an-object-tree" title="Permanent link">&para;</a></h3>
 <p>Sets <code>XmlType</code>, serializes the object to XML, and restores it into a new dynamic object with <code>Deserialize</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RoundTripObjectXml</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RoundTripObjectXml</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPayload</span><span class="p">,</span><span class="w"> </span><span class="n">oRestored</span><span class="p">,</span><span class="w"> </span><span class="n">aTests</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">({</span>
@@ -2352,7 +2352,7 @@ Snapshot status: Logged
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RoundTripObjectXml&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Restored root: SamplePayload
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Restored root: SamplePayload
 First test: pH
 </code></pre></div>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>

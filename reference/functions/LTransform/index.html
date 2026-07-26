@@ -3674,7 +3674,7 @@
 <li>When you want a non-numeric fallback to pass through as plain text without a separate conversion step.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LTransform</span><span class="p">(</span><span class="n">vExpression</span><span class="p">,</span><span class="w"> </span><span class="n">sPicture</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LTransform</span><span class="p">(</span><span class="n">vExpression</span><span class="p">,</span><span class="w"> </span><span class="n">sPicture</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3726,7 +3726,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="format-a-value-with-fixed-decimals">Format a value with fixed decimals<a class="headerlink" href="#format-a-value-with-fixed-decimals" title="Permanent link">&para;</a></h3>
 <p>Format a single numeric result for display. <code>LTransform(1234.5, "9999.00")</code> replaces leading zeros with spaces; <code>1234.5</code> has no leading zeros in a four-digit integer field, so the result is <code>"1234.50"</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowFormattedResult</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowFormattedResult</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nResult</span><span class="p">,</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">1234.5</span><span class="p">;</span>
@@ -3741,11 +3741,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowFormattedResult&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Formatted result: [1234.50]
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Formatted result: [1234.50]
 </code></pre></div>
 <h3 id="align-positive-and-negative-values">Align positive and negative values<a class="headerlink" href="#align-positive-and-negative-values" title="Permanent link">&para;</a></h3>
 <p>Use the same picture string so multiple numeric values line up consistently. Leading zeros become spaces, and the minus sign is moved immediately before the first non-space digit.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowAlignedValues</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowAlignedValues</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">aLines</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nValue</span><span class="p">,</span><span class="w"> </span><span class="n">sLine</span><span class="p">,</span><span class="w"> </span><span class="n">sOutput</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mf">12.5</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">3.25</span><span class="p">),</span><span class="w"> </span><span class="mf">0.5</span><span class="p">};</span>
@@ -3770,13 +3770,13 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowAlignedValues&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>[  12.50]
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>[  12.50]
 [  -3.25]
 [   0.50]
 </code></pre></div>
 <h3 id="apply-the-picture-only-to-numeric-items">Apply the picture only to numeric items<a class="headerlink" href="#apply-the-picture-only-to-numeric-items" title="Permanent link">&para;</a></h3>
 <p>Guard mixed input so numbers are formatted with <code>LTransform</code> and other values keep their plain text form. <a href="../../literals/nil/"><code>NIL</code></a> items produce an empty slot; the minus sign on <code>-7.0</code> is placed immediately before the first non-space digit.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatMixedValues</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatMixedValues</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">aOutput</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">vValue</span><span class="p">,</span><span class="w"> </span><span class="n">sValue</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mf">1250.5</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Pending&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">7.0</span><span class="p">)};</span>
@@ -3810,7 +3810,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FormatMixedValues&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>1250.50 | Pending |  |   -7.00
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>1250.50 | Pending |  |   -7.00
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

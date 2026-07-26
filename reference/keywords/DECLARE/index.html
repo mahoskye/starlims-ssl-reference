@@ -2894,7 +2894,7 @@
 <li>When you want to introduce a new variable at the point where a later block of logic starts using it.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">variable1</span><span class="p">[,</span><span class="w"> </span><span class="n">variable2</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">];</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">variable1</span><span class="p">[,</span><span class="w"> </span><span class="n">variable2</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">];</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -2943,7 +2943,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="defining-local-variables-at-procedure-start">Defining local variables at procedure start<a class="headerlink" href="#defining-local-variables-at-procedure-start" title="Permanent link">&para;</a></h3>
 <p>Declare all working variables before the procedure uses them. With the hardcoded values, the output shows <code>nResult</code> converted to a string via <a href="../../functions/LimsString/"><code>LimsString</code></a> and concatenated into the message.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">InitializeSampleRecord</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">InitializeSampleRecord</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleName</span><span class="p">,</span><span class="w"> </span><span class="n">nResult</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">;</span>
@@ -2961,11 +2961,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;InitializeSampleRecord&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Sample LAB-2024-0042 - Calcium Carbonate Test registered with result 98.6
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample LAB-2024-0042 - Calcium Carbonate Test registered with result 98.6
 </code></pre></div>
 <h3 id="declaring-a-variable-where-a-new-logic-block-starts">Declaring a variable where a new logic block starts<a class="headerlink" href="#declaring-a-variable-where-a-new-logic-block-starts" title="Permanent link">&para;</a></h3>
 <p><code>:DECLARE</code> can appear later in the statement flow when a new working variable becomes needed. Here <code>sAuditText</code> is only declared inside the <a href="../IF/"><code>:IF</code></a> block where it is used, keeping it scoped to its purpose.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DescribeSampleStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DescribeSampleStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">bIncludeAudit</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">bIncludeAudit</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
@@ -2988,7 +2988,7 @@
 <h3 id="declaring-class-fields">Declaring class fields<a class="headerlink" href="#declaring-class-fields" title="Permanent link">&para;</a></h3>
 <p>Use <code>:DECLARE</code> in a class body to define fields shared by all class methods. The fields declared at the class level are readable and writable from every method, but a method must qualify each reference with <a href="../../special-forms/me/"><code>Me:fieldName</code></a> (or <a href="../../special-forms/base/"><code>Base:fieldName</code></a> for an inherited parent field). A bare identifier inside the method body always refers to a local variable or <a href="../PARAMETERS/"><code>:PARAMETERS</code></a> entry, never to the class field of the same name.</p>
 <p>Class definition:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">SampleContext</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">SampleContext</span><span class="p">;</span>
 
 <span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">nResultCount</span><span class="p">;</span>
 
@@ -3008,7 +3008,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Usage:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oContext</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oContext</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="n">oContext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">&quot;SampleContext&quot;</span><span class="p">);</span>
 <span class="n">oContext</span><span class="p">:</span><span class="nf">SetSample</span><span class="p">(</span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">);</span>
@@ -3020,7 +3020,7 @@
 <span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Tracked sample LAB-2024-0042 with 1 result
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Tracked sample LAB-2024-0042 with 1 result
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -3529,7 +3529,7 @@ array, executes the named function, and returns whatever that function returns. 
 <li>When dispatching to application logic or workflow steps based on database values, user settings, or other runtime sources.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">ExecFunction</span><span class="p">(</span><span class="n">sName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">aParameters</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ExecFunction</span><span class="p">(</span><span class="n">sName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">aParameters</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3605,7 +3605,7 @@ array, executes the named function, and returns whatever that function returns. 
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="call-a-runtime-selected-function-with-arguments">Call a runtime-selected function with arguments<a class="headerlink" href="#call-a-runtime-selected-function-with-arguments" title="Permanent link">&para;</a></h3>
 <p>Calls a function whose name is determined at runtime, passing a date-range argument array. The function name and arguments are data, so changing what runs requires only a configuration change, not a code change.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunConfiguredReport</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunConfiguredReport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFunctionName</span><span class="p">,</span><span class="w"> </span><span class="n">aArgs</span><span class="p">,</span><span class="w"> </span><span class="n">vResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sFunctionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Reports.OrderSummary&quot;</span><span class="p">;</span>
@@ -3622,11 +3622,11 @@ array, executes the named function, and returns whatever that function returns. 
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunConfiguredReport&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Result: &lt;return value of Reports.OrderSummary&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Result: &lt;return value of Reports.OrderSummary&gt;
 </code></pre></div>
 <h3 id="chain-data-driven-workflow-steps">Chain data-driven workflow steps<a class="headerlink" href="#chain-data-driven-workflow-steps" title="Permanent link">&para;</a></h3>
 <p>Iterates a list of workflow step names and calls each with <code>ExecFunction</code>. If any step returns a falsy value or raises an error, <code>bShouldContinue</code> is set to <a href="../../literals/false/"><code>.F.</code></a> and the loop exits early via <a href="../../keywords/EXITFOR/"><code>:EXITFOR</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunAutomatedChain</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunAutomatedChain</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aWorkflowSteps</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nTotalSteps</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStepFunc</span><span class="p">,</span><span class="w"> </span><span class="n">aStepArgs</span><span class="p">,</span><span class="w"> </span><span class="n">vResult</span><span class="p">,</span><span class="w"> </span><span class="n">bShouldContinue</span><span class="p">,</span><span class="w"> </span><span class="n">sLogMsg</span><span class="p">;</span>
 

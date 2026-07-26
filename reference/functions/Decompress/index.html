@@ -3801,7 +3801,7 @@
 <li>When you need to round-trip text through compression for storage, transfer, or temporary file handling.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Decompress</span><span class="p">(</span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bFromFile</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Decompress</span><span class="p">(</span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bFromFile</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3877,7 +3877,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="restore-text-from-an-in-memory-compressed-value">Restore text from an in-memory compressed value<a class="headerlink" href="#restore-text-from-an-in-memory-compressed-value" title="Permanent link">&para;</a></h3>
 <p>Compresses a string to memory with <a href="../Compress/"><code>Compress</code></a>, then restores the original text with <code>Decompress</code> and displays the result.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RestoreCompressedText</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RestoreCompressedText</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOriginal</span><span class="p">,</span><span class="w"> </span><span class="n">sCompressed</span><span class="p">,</span><span class="w"> </span><span class="n">sRestored</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sOriginal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Batch 24018|Status=Released|Reviewer=jsmith&quot;</span><span class="p">;</span>
@@ -3894,11 +3894,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RestoreCompressedText&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Restored text: Batch 24018|Status=Released|Reviewer=jsmith
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Restored text: Batch 24018|Status=Released|Reviewer=jsmith
 </code></pre></div>
 <h3 id="read-compressed-content-from-a-generated-file-path">Read compressed content from a generated file path<a class="headerlink" href="#read-compressed-content-from-a-generated-file-path" title="Permanent link">&para;</a></h3>
 <p>Compresses a multi-line string to a temporary file using <a href="../Compress/"><code>Compress</code></a>, then reads and restores it with <code>Decompress(sCompressedPath, .T.)</code>, verifying the round-trip result.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RestoreCompressedFile</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RestoreCompressedFile</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sCompressedPath</span><span class="p">,</span><span class="w"> </span><span class="n">sRestored</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Order=4711&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
@@ -3925,7 +3925,7 @@
 </code></pre></div>
 <h3 id="restore-a-mixed-batch-of-in-memory-and-file-based-values">Restore a mixed batch of in-memory and file-based values<a class="headerlink" href="#restore-a-mixed-batch-of-in-memory-and-file-based-values" title="Permanent link">&para;</a></h3>
 <p>Iterates over a mixed batch of compressed payloads, some stored in memory and some as file paths, and restores each using the appropriate <code>Decompress</code> call.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RestoreMixedCompressedBatch</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RestoreMixedCompressedBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aInputs</span><span class="p">,</span><span class="w"> </span><span class="n">aFromFile</span><span class="p">,</span><span class="w"> </span><span class="n">aRestored</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sInput</span><span class="p">,</span><span class="w"> </span><span class="n">sRestored</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>

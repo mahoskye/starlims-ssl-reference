@@ -4251,7 +4251,7 @@
 <li>When you want the first occurrence specifically, not the last or a later occurrence.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">At</span><span class="p">(</span><span class="n">sSubString</span><span class="p">,</span><span class="w"> </span><span class="n">sSource</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">At</span><span class="p">(</span><span class="n">sSubString</span><span class="p">,</span><span class="w"> </span><span class="n">sSource</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4329,7 +4329,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="find-a-delimiter-in-a-value">Find a delimiter in a value<a class="headerlink" href="#find-a-delimiter-in-a-value" title="Permanent link">&para;</a></h3>
 <p>Finds the first comma in a CSV-style value so later code can split the string at that position.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCsv</span><span class="p">,</span><span class="w"> </span><span class="n">nCommaPos</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCsv</span><span class="p">,</span><span class="w"> </span><span class="n">nCommaPos</span><span class="p">;</span>
 
 <span class="n">sCsv</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;field1,field2&quot;</span><span class="p">;</span>
 <span class="n">nCommaPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">At</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sCsv</span><span class="p">);</span>
@@ -4337,11 +4337,11 @@
 <span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;First comma position: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCommaPos</span><span class="p">));</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>First comma position: 7
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>First comma position: 7
 </code></pre></div>
 <h3 id="check-for-a-tag-without-case-sensitivity">Check for a tag without case sensitivity<a class="headerlink" href="#check-for-a-tag-without-case-sensitivity" title="Permanent link">&para;</a></h3>
 <p>Converts the source string to uppercase first, then searches for the uppercase tag so the match is case-insensitive.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckUrgentTag</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckUrgentTag</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sInput</span><span class="p">,</span><span class="w"> </span><span class="n">sUpperInput</span><span class="p">,</span><span class="w"> </span><span class="n">nTagPos</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Please handle as UrGenT&quot;</span><span class="p">;</span>
@@ -4358,11 +4358,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckUrgentTag&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>URGENT found at position 18
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>URGENT found at position 18
 </code></pre></div>
 <h3 id="find-repeated-delimiters-in-sequence">Find repeated delimiters in sequence<a class="headerlink" href="#find-repeated-delimiters-in-sequence" title="Permanent link">&para;</a></h3>
 <p>Uses <code>At</code> for the first separator and <a href="../LimsAt/"><code>LimsAt</code></a> for the second and third, passing each result as the starting position for the next search.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LocatePathSeparators</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LocatePathSeparators</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPath</span><span class="p">,</span><span class="w"> </span><span class="n">nFirstSlash</span><span class="p">,</span><span class="w"> </span><span class="n">nSecondSlash</span><span class="p">,</span><span class="w"> </span><span class="n">nThirdSlash</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Orders/2026/Incoming/Batch01&quot;</span><span class="p">;</span>

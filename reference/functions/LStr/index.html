@@ -4227,7 +4227,7 @@
 <li>When preparing data with mixed types where all entries must be strings and <a href="../../literals/nil/"><code>NIL</code></a> values must be made explicit.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LStr</span><span class="p">(</span><span class="n">vNumber</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LStr</span><span class="p">(</span><span class="n">vNumber</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4278,7 +4278,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="convert-a-nil-value-to-the-placeholder-string">Convert a NIL value to the placeholder string<a class="headerlink" href="#convert-a-nil-value-to-the-placeholder-string" title="Permanent link">&para;</a></h3>
 <p>Passing <a href="../../literals/nil/"><code>NIL</code></a> directly to <code>LStr</code> returns the four-character placeholder <code>"NIL"</code>, while a numeric value returns a trimmed decimal string. Both calls demonstrate the two distinct outputs of <code>LStr</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemonstrateLStr</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemonstrateLStr</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Missing: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LStr</span><span class="p">(</span><span class="kc">NIL</span><span class="p">));</span>
@@ -4291,12 +4291,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DemonstrateLStr&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Missing: NIL
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Missing: NIL
 Number:  3.14
 </code></pre></div>
 <h3 id="log-a-batch-of-measurements-with-nil-entries-labeled-explicitly">Log a batch of measurements with NIL entries labeled explicitly<a class="headerlink" href="#log-a-batch-of-measurements-with-nil-entries-labeled-explicitly" title="Permanent link">&para;</a></h3>
 <p>Loop over an array of measurements and convert each entry with <code>LStr</code> so that <a href="../../literals/nil/"><code>NIL</code></a> entries appear as <code>"NIL"</code> in the output rather than causing a concatenation error or producing silent blanks.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogMeasurements</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogMeasurements</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aMeasurements</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">vValue</span><span class="p">,</span><span class="w"> </span><span class="n">sLog</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aMeasurements</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mf">420.5</span><span class="p">,</span><span class="w"> </span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="mf">18.3</span><span class="p">};</span>
@@ -4317,13 +4317,13 @@ Number:  3.14
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LogMeasurements&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Sample 1: 420.5
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample 1: 420.5
 Sample 2: NIL
 Sample 3: 18.3
 </code></pre></div>
 <h3 id="build-a-formatted-report-using-lstr-and-strzero-together">Build a formatted report using LStr and StrZero together<a class="headerlink" href="#build-a-formatted-report-using-lstr-and-strzero-together" title="Permanent link">&para;</a></h3>
 <p>Use <code>LStr</code> to convert numeric results to strings and <a href="../StrZero/"><code>StrZero</code></a> to zero-pad integer sample IDs. The contrast shows where each function fits: <a href="../StrZero/"><code>StrZero</code></a> for fixed-width integers, <code>LStr</code> for plain numeric conversion.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GenerateSampleReport</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GenerateSampleReport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSamples</span><span class="p">,</span><span class="w"> </span><span class="n">sReport</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">nResult</span><span class="p">,</span><span class="w"> </span><span class="n">nSpecMin</span><span class="p">,</span><span class="w"> </span><span class="n">nSpecMax</span><span class="p">,</span><span class="w"> </span><span class="n">bPass</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
@@ -4359,7 +4359,7 @@ Sample 3: 18.3
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GenerateSampleReport&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>ID      Result  Status
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>ID      Result  Status
 001001  45.7    PASS
 001002  38.2    FAIL
 001003  51.2    FAIL

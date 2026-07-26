@@ -2852,7 +2852,7 @@
 <li>When recoverable failures should be logged or corrected before optionally continuing with <a href="../RESUME/"><code>:RESUME</code></a>.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:ERROR</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:ERROR</span><span class="p">;</span>
 </code></pre></div>
 <p><code>:ERROR</code> is followed by one or more handler statements. In practice it is usually paired with <code>:RESUME;</code> later in the same handler block when the procedure should continue after an error.</p>
 <h2 id="keyword-group">Keyword group<a class="headerlink" href="#keyword-group" title="Permanent link">&para;</a></h2>
@@ -2886,7 +2886,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="logging-a-failure-and-stopping-the-procedure">Logging a failure and stopping the procedure<a class="headerlink" href="#logging-a-failure-and-stopping-the-procedure" title="Permanent link">&para;</a></h3>
 <p>Uses one shared legacy handler to catch any failure in the remaining procedure body. If <a href="../../functions/ReadText/"><code>ReadText</code></a> fails, the handler logs the error via <a href="../../functions/ErrorMes/"><code>ErrorMes</code></a>. If it succeeds, the file content is reported via <a href="../../functions/UsrMes/"><code>UsrMes</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadConfiguration</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadConfiguration</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">sContent</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;config/settings.txt&quot;</span><span class="p">;</span>
@@ -2912,7 +2912,7 @@
 </code></pre></div>
 <h3 id="resuming-after-per-record-failures">Resuming after per-record failures<a class="headerlink" href="#resuming-after-per-record-failures" title="Permanent link">&para;</a></h3>
 <p>Uses <a href="../RESUME/"><code>:RESUME</code></a> so a batch loop can continue after logging a recoverable error for a single record. With the input <code>{"S-001", "BAD", "S-003"}</code>, the <code>"BAD"</code> record triggers the error handler and increments the failure count; the other records are processed normally.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportResults</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportResults</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aSampleIDs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">nImported</span><span class="p">,</span><span class="w"> </span><span class="n">nFailed</span><span class="p">;</span>
 

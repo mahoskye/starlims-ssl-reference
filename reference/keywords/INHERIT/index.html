@@ -2899,7 +2899,7 @@
 <li>When several class scripts should share a common structure or API.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="p">:</span><span class="n">INHERIT</span><span class="w"> </span><span class="n">ClassName</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="p">:</span><span class="n">INHERIT</span><span class="w"> </span><span class="n">ClassName</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -2948,7 +2948,7 @@
 <h3 id="creating-a-derived-class-for-shared-validation-logic">Creating a derived class for shared validation logic<a class="headerlink" href="#creating-a-derived-class-for-shared-validation-logic" title="Permanent link">&para;</a></h3>
 <p>Reuses a parent method from a child class. With <code>sSampleId</code> set to <code>""</code>, the validation fails and the error message is displayed.</p>
 <p>Base class script:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">ValidationBase</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">ValidationBase</span><span class="p">;</span>
 <span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="n">sValue</span><span class="p">;</span>
 
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SetField</span><span class="p">;</span>
@@ -2966,7 +2966,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Derived class script:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">SampleValidator</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">SampleValidator</span><span class="p">;</span>
 <span class="p">:</span><span class="n">INHERIT</span><span class="w"> </span><span class="n">ValidationBase</span><span class="p">;</span>
 <span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">;</span>
 
@@ -2988,7 +2988,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Usage:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunValidation</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunValidation</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oVal</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oVal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">&quot;SampleValidator&quot;</span><span class="p">);</span>
@@ -3006,12 +3006,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunValidation&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>SampleID is required
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>SampleID is required
 </code></pre></div>
 <h3 id="specializing-a-base-report-class">Specializing a base report class<a class="headerlink" href="#specializing-a-base-report-class" title="Permanent link">&para;</a></h3>
 <p>Overrides a parent method and still calls the parent implementation via <a href="../../special-forms/base/"><code>Base:</code></a>. The derived constructor sets the title and compliance values; <code>GetHeader</code> extends the base header with standard and limit details.</p>
 <p>Base class script:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">BaseReport</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">BaseReport</span><span class="p">;</span>
 <span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTitle</span><span class="p">;</span>
 
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetHeader</span><span class="p">;</span>
@@ -3023,7 +3023,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Derived class script:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">EnvReport</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">EnvReport</span><span class="p">;</span>
 <span class="p">:</span><span class="n">INHERIT</span><span class="w"> </span><span class="n">BaseReport</span><span class="p">;</span>
 
 <span class="k">:DECLARE</span><span class="w"> </span><span class="n">nContaminantLimit</span><span class="p">,</span><span class="w"> </span><span class="n">sRegStandard</span><span class="p">;</span>
@@ -3045,7 +3045,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Usage:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowReportHeader</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowReportHeader</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oReport</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">&quot;EnvReport&quot;</span><span class="p">);</span>
@@ -3056,12 +3056,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowReportHeader&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Report: Environmental Compliance | Standard: EPA-2018 | Limit: 50 ppm
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Report: Environmental Compliance | Standard: EPA-2018 | Limit: 50 ppm
 </code></pre></div>
 <h3 id="building-a-polymorphic-workflow-hierarchy">Building a polymorphic workflow hierarchy<a class="headerlink" href="#building-a-polymorphic-workflow-hierarchy" title="Permanent link">&para;</a></h3>
 <p>Demonstrates multiple child classes sharing a parent interface. Each workflow implements <code>Execute</code> differently; the caller iterates both through the same loop.</p>
 <p>Parent class script:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">Workflow</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">Workflow</span><span class="p">;</span>
 <span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkflowName</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">Execute</span><span class="p">;</span>
@@ -3082,7 +3082,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>First derived class script:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">ApprovalWorkflow</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">ApprovalWorkflow</span><span class="p">;</span>
 <span class="p">:</span><span class="n">INHERIT</span><span class="w"> </span><span class="n">Workflow</span><span class="p">;</span>
 <span class="k">:DECLARE</span><span class="w"> </span><span class="n">aApprovers</span><span class="p">,</span><span class="w"> </span><span class="n">nCurrentStep</span><span class="p">;</span>
 
@@ -3109,7 +3109,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Second derived class script:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">NotificationWorkflow</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:CLASS</span><span class="w"> </span><span class="n">NotificationWorkflow</span><span class="p">;</span>
 <span class="p">:</span><span class="n">INHERIT</span><span class="w"> </span><span class="n">Workflow</span><span class="p">;</span>
 <span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSentCount</span><span class="p">;</span>
 
@@ -3133,7 +3133,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Usage:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunPolymorphicWorkflow</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunPolymorphicWorkflow</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oWorkflow</span><span class="p">,</span><span class="w"> </span><span class="n">aWorkflows</span><span class="p">,</span><span class="w"> </span><span class="n">nOuter</span><span class="p">,</span><span class="w"> </span><span class="n">nInner</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aWorkflows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>

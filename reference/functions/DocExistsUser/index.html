@@ -4024,7 +4024,7 @@
   user exists.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocExistsUser</span><span class="p">(</span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocExistsUser</span><span class="p">(</span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4099,7 +4099,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="check-one-user-before-continuing">Check one user before continuing<a class="headerlink" href="#check-one-user-before-continuing" title="Permanent link">&para;</a></h3>
 <p>Calls <code>DocExistsUser</code> with hardcoded login and user names and displays whether the user was found in Documentum.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateApprover</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateApprover</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">bExists</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sLoginName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;admin&quot;</span><span class="p">;</span>
@@ -4123,7 +4123,7 @@
 </code></pre></div>
 <h3 id="collect-missing-users-from-a-list">Collect missing users from a list<a class="headerlink" href="#collect-missing-users-from-a-list" title="Permanent link">&para;</a></h3>
 <p>Iterates an array of user names, checks each one against Documentum, and returns an array containing only the names that were not found.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindMissingDocUsers</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindMissingDocUsers</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">aUserNames</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aMissingUsers</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">bExists</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
@@ -4146,7 +4146,7 @@
 </code></pre></div>
 <h3 id="audit-lookups-and-capture-null-argument-errors">Audit lookups and capture null-argument errors<a class="headerlink" href="#audit-lookups-and-capture-null-argument-errors" title="Permanent link">&para;</a></h3>
 <p>Iterates a two-column array of login and user name pairs, wraps each lookup in <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle <a href="../../literals/nil/"><code>NIL</code></a>-argument exceptions, and collects a result row, including any error description, for every pair.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditDocUsers</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditDocUsers</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aRows</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">bExists</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 

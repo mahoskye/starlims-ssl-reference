@@ -4220,7 +4220,7 @@
 <li>When rolling back logic after detecting an unexpected number of affected records.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LimsRecordsAffected</span><span class="p">()</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LimsRecordsAffected</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>This function takes no parameters.</p>
@@ -4250,7 +4250,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="check-update-success-after-an-inventory-adjustment">Check update success after an inventory adjustment<a class="headerlink" href="#check-update-success-after-an-inventory-adjustment" title="Permanent link">&para;</a></h3>
 <p>Call <code>LimsRecordsAffected</code> immediately after an UPDATE to verify that exactly one row was modified. When the expected count matches, the success message fires; otherwise, a warning is shown.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AdjustInventoryCount</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AdjustInventoryCount</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sItemID</span><span class="p">,</span><span class="w"> </span><span class="n">nExpected</span><span class="p">,</span><span class="w"> </span><span class="n">nUpdated</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sItemID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;INV-2024-0042&quot;</span><span class="p">;</span>
@@ -4279,11 +4279,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AdjustInventoryCount&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays on success:</p>
-<div class="language-text highlight"><pre><span></span><code>Inventory adjusted: 1 record updated for INV-2024-0042
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Inventory adjusted: 1 record updated for INV-2024-0042
 </code></pre></div>
 <h3 id="audit-bulk-deletion-results-for-compliance-reporting">Audit bulk deletion results for compliance reporting<a class="headerlink" href="#audit-bulk-deletion-results-for-compliance-reporting" title="Permanent link">&para;</a></h3>
 <p>Use <code>LimsRecordsAffected</code> inside a <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> block after a bulk DELETE to count the removed rows. If the DELETE fails, the catch block surfaces the error.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditBulkDeletion</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditBulkDeletion</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sCutoff</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sCutoff</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;2024-01-01&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nDeleted</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>

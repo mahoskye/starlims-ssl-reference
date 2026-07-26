@@ -3584,7 +3584,7 @@
 <li>When you need to remove a runtime-named public variable after temporary use.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LKill</span><span class="p">(</span><span class="n">sVarName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LKill</span><span class="p">(</span><span class="n">sVarName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3633,7 +3633,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="remove-one-public-variable-by-runtime-name">Remove one public variable by runtime name<a class="headerlink" href="#remove-one-public-variable-by-runtime-name" title="Permanent link">&para;</a></h3>
 <p>Create a public variable, confirm it exists, remove it, then confirm it no longer resolves.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoLKillBasic</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoLKillBasic</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sVarName</span><span class="p">,</span><span class="w"> </span><span class="n">bBefore</span><span class="p">,</span><span class="w"> </span><span class="n">bAfter</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sVarName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sSharedStatus&quot;</span><span class="p">;</span>
@@ -3655,12 +3655,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DemoLKillBasic&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Defined before delete: True
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Defined before delete: True
 Defined after delete: False
 </code></pre></div>
 <h3 id="reset-a-shared-public-value-before-recreating-it">Reset a shared public value before recreating it<a class="headerlink" href="#reset-a-shared-public-value-before-recreating-it" title="Permanent link">&para;</a></h3>
 <p>Remove an old public value so the next step can create the shared variable again with a clean state.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoLKillReset</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoLKillReset</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sVarName</span><span class="p">,</span><span class="w"> </span><span class="n">vValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sVarName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;nSharedCount&quot;</span><span class="p">;</span>
@@ -3685,12 +3685,12 @@ Defined after delete: False
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DemoLKillReset&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Old value: 5
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Old value: 5
 Reset value: 1
 </code></pre></div>
 <h3 id="clean-up-a-set-of-runtime-created-public-variables">Clean up a set of runtime-created public variables<a class="headerlink" href="#clean-up-a-set-of-runtime-created-public-variables" title="Permanent link">&para;</a></h3>
 <p>Track multiple public-variable names in an array and remove each one during a shared cleanup step.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoLKillBatchCleanup</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DemoLKillBatchCleanup</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aVarNames</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sVarName</span><span class="p">,</span><span class="w"> </span><span class="n">bAllRemoved</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aVarNames</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;sFilterStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sFilterOwner&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dFilterDate&quot;</span><span class="p">};</span>
@@ -3725,7 +3725,7 @@ Reset value: 1
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DemoLKillBatchCleanup&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>All shared filters removed: True
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>All shared filters removed: True
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

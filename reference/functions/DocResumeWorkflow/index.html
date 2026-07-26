@@ -4107,7 +4107,7 @@
 <li>When administrative scripts need a simple success or failure result for a resume request.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocResumeWorkflow</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocResumeWorkflow</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4171,7 +4171,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="resume-one-workflow-by-id">Resume one workflow by ID<a class="headerlink" href="#resume-one-workflow-by-id" title="Permanent link">&para;</a></h3>
 <p>Fetches a workflow by ID, branches on the boolean result to build an outcome message, and returns the boolean to the caller.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResumeWorkflowBasic</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResumeWorkflowBasic</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">bResumed</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WF-2024-0042&quot;</span><span class="p">;</span>
@@ -4192,12 +4192,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ResumeWorkflowBasic&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Workflow WF-2024-0042 resumed
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Workflow WF-2024-0042 resumed
 </code></pre></div>
 <p>On failure: <code>Workflow WF-2024-0042 could not be resumed</code></p>
 <h3 id="resume-only-when-the-workflow-is-paused">Resume only when the workflow is paused<a class="headerlink" href="#resume-only-when-the-workflow-is-paused" title="Permanent link">&para;</a></h3>
 <p>Checks the current workflow status with <a href="../DocGetWorkflowStatus/"><code>DocGetWorkflowStatus</code></a> before calling <code>DocResumeWorkflow</code>, so the resume is only attempted when the workflow is in the <code>"Paused"</code> state.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResumePausedWorkflowOnly</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResumePausedWorkflowOnly</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">bResumed</span><span class="p">;</span>
 
@@ -4227,7 +4227,7 @@
 </code></pre></div>
 <h3 id="resume-multiple-workflows-and-collect-results">Resume multiple workflows and collect results<a class="headerlink" href="#resume-multiple-workflows-and-collect-results" title="Permanent link">&para;</a></h3>
 <p>Iterates a list of workflow IDs, skips empty entries, and collects each resume outcome into a summary object, then displays a single count line for resumed, failed, and skipped workflows.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResumeWorkflowBatch</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResumeWorkflowBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aWorkflowIds</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oSummary</span><span class="p">,</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bResumed</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>

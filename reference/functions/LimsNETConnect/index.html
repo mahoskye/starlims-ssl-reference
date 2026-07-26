@@ -3585,7 +3585,7 @@
 <li>When you need constructor by-reference or out values copied back into an SSL array.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LimsNETConnect</span><span class="p">([</span><span class="n">sAssembly</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sTypeName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aArgs</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bAsStatic</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LimsNETConnect</span><span class="p">([</span><span class="n">sAssembly</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sTypeName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aArgs</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bAsStatic</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3718,7 +3718,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="access-a-static-net-member">Access a static .NET member<a class="headerlink" href="#access-a-static-net-member" title="Permanent link">&para;</a></h3>
 <p>Return a type handle and call a static member.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AccessStaticMathMembers</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AccessStaticMathMembers</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oMathType</span><span class="p">,</span><span class="w"> </span><span class="n">nAbsValue</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oMathType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(,</span><span class="w"> </span><span class="s2">&quot;System.Math&quot;</span><span class="p">,,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
@@ -3734,7 +3734,7 @@
 </code></pre></div>
 <h3 id="create-an-instance-with-constructor-arguments">Create an instance with constructor arguments<a class="headerlink" href="#create-an-instance-with-constructor-arguments" title="Permanent link">&para;</a></h3>
 <p>Create an object and call instance methods on it.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildStringWithNET</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildStringWithNET</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oBuilder</span><span class="p">,</span><span class="w"> </span><span class="n">sText</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oBuilder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(,</span><span class="w"> </span><span class="s2">&quot;System.Text.StringBuilder&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Hello&quot;</span><span class="p">});</span>
@@ -3750,11 +3750,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildStringWithNET&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Hello SSL interop
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Hello SSL interop
 </code></pre></div>
 <h3 id="receive-by-reference-constructor-updates">Receive by-reference constructor updates<a class="headerlink" href="#receive-by-reference-constructor-updates" title="Permanent link">&para;</a></h3>
 <p>Pass a by-reference placeholder in the constructor argument array and then read the updated array entry after construction.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateWithByRefOutput</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateWithByRefOutput</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAssembly</span><span class="p">,</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">aArgs</span><span class="p">,</span><span class="w"> </span><span class="n">oObject</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nInput</span><span class="p">,</span><span class="w"> </span><span class="n">nOutput</span><span class="p">;</span>
 

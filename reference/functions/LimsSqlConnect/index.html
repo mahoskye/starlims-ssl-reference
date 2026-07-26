@@ -4016,7 +4016,7 @@ when the registration succeeds and <a href="../../literals/false/"><code>.F.</co
 <li>When you plan to pass <code>sConnectionName</code> to functions such as <a href="../SQLExecute/"><code>SQLExecute</code></a> or <a href="../RunSQL/"><code>RunSQL</code></a> instead of relying on the current default connection.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LimsSqlConnect</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LimsSqlConnect</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4083,7 +4083,7 @@ when the registration succeeds and <a href="../../literals/false/"><code>.F.</co
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="register-a-connection-and-confirm-it-is-available">Register a connection and confirm it is available<a class="headerlink" href="#register-a-connection-and-confirm-it-is-available" title="Permanent link">&para;</a></h3>
 <p>Call <code>LimsSqlConnect</code> with a configured connection name and branch on the boolean result to confirm availability before issuing queries.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConnectToSampleDb</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConnectToSampleDb</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">bConnected</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SampleDB&quot;</span><span class="p">;</span>
@@ -4103,7 +4103,7 @@ when the registration succeeds and <a href="../../literals/false/"><code>.F.</co
 </code></pre></div>
 <h3 id="register-two-connections-and-target-each-one-explicitly">Register two connections and target each one explicitly<a class="headerlink" href="#register-two-connections-and-target-each-one-explicitly" title="Permanent link">&para;</a></h3>
 <p>Register two named connections and pass each connection name to subsequent <a href="../SQLExecute/"><code>SQLExecute</code></a> and <a href="../RunSQL/"><code>RunSQL</code></a> calls to target distinct databases in a single procedure.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SyncBatchAcrossSystems</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SyncBatchAcrossSystems</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLabName</span><span class="p">,</span><span class="w"> </span><span class="n">sInvName</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">,</span><span class="w"> </span><span class="n">sSql</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bLabReady</span><span class="p">,</span><span class="w"> </span><span class="n">bInvReady</span><span class="p">,</span><span class="w"> </span><span class="n">aPending</span><span class="p">,</span><span class="w"> </span><span class="n">nPending</span><span class="p">;</span>
 
@@ -4148,7 +4148,7 @@ when the registration succeeds and <a href="../../literals/false/"><code>.F.</co
 </code></pre></div>
 <h3 id="distinguish-f-returns-from-thrown-errors">Distinguish <a href="../../literals/false/"><code>.F.</code></a> returns from thrown errors<a class="headerlink" href="#distinguish-f-returns-from-thrown-errors" title="Permanent link">&para;</a></h3>
 <p>Wrap <code>LimsSqlConnect</code> in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to separate the normal <a href="../../literals/false/"><code>.F.</code></a> return (unknown connection name) from an internal error that propagates as an exception.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">TestConnectionRegistration</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">TestConnectionRegistration</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">bConnected</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;MissingConnection&quot;</span><span class="p">;</span>

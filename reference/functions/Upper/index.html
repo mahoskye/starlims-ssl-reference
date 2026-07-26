@@ -4250,7 +4250,7 @@
 <li>When combining case normalization with <a href="../AllTrim/"><code>AllTrim</code></a> or <a href="../Trim/"><code>Trim</code></a> for cleaner input handling.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Upper</span><span class="p">(</span><span class="n">sSource</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Upper</span><span class="p">(</span><span class="n">sSource</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4314,7 +4314,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="normalize-user-input-for-case-insensitive-comparison">Normalize user input for case-insensitive comparison<a class="headerlink" href="#normalize-user-input-for-case-insensitive-comparison" title="Permanent link">&para;</a></h3>
 <p>Ensure user-provided codes match expected values regardless of case. <a href="../LimsString/"><code>LimsString</code></a> converts the boolean result to its string form for display.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeCodeForCompare</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeCodeForCompare</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">sExpectedCode</span><span class="p">,</span><span class="w"> </span><span class="n">sNormalizedInput</span><span class="p">,</span><span class="w"> </span><span class="n">bMatch</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;abc&quot;</span><span class="p">;</span>
@@ -4332,11 +4332,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NormalizeCodeForCompare&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Codes match: .T.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Codes match: .T.
 </code></pre></div>
 <h3 id="normalize-a-list-of-mixed-case-codes">Normalize a list of mixed-case codes<a class="headerlink" href="#normalize-a-list-of-mixed-case-codes" title="Permanent link">&para;</a></h3>
 <p>Convert multiple values to a consistent uppercase form before later validation or storage.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeCodes</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeCodes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRawCodes</span><span class="p">,</span><span class="w"> </span><span class="n">aUpperCodes</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRawCodes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Abc-01&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;def-02&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;GhI-03&quot;</span><span class="p">};</span>
@@ -4354,7 +4354,7 @@
 </code></pre></div>
 <h3 id="trim-and-normalize-before-membership-checks">Trim and normalize before membership checks<a class="headerlink" href="#trim-and-normalize-before-membership-checks" title="Permanent link">&para;</a></h3>
 <p>Clean incoming values, convert them to uppercase, and compare them against a normalized allowed list. Both conditional branches produce visible output so the caller knows whether the code was accepted or rejected.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateStatusCode</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateStatusCode</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatusCode</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sNormalizedStatus</span><span class="p">,</span><span class="w"> </span><span class="n">aValidStatuses</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
 

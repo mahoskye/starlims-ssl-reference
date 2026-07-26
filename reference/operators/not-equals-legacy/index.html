@@ -2727,7 +2727,7 @@
 <li>When checking reference inequality on arrays and objects.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="n">bDifferent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">vLeft</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">vRight</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">bDifferent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">vLeft</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">vRight</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="type-behavior">Type behavior<a class="headerlink" href="#type-behavior" title="Permanent link">&para;</a></h2>
 <table>
@@ -2831,7 +2831,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="comparing-exact-string-values-in-legacy-code">Comparing exact string values in legacy code<a class="headerlink" href="#comparing-exact-string-values-in-legacy-code" title="Permanent link">&para;</a></h3>
 <p>Checks whether two status strings differ. <code>"PENDING" &lt;&gt; "COMPLETE"</code> is <a href="../../literals/true/"><code>.T.</code></a>, so the changed branch runs.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckStatusChange</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckStatusChange</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStoredStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentStatus</span><span class="p">,</span><span class="w"> </span><span class="n">bChanged</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sStoredStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;PENDING&quot;</span><span class="p">;</span>
@@ -2853,11 +2853,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckStatusChange&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Status changed from PENDING to COMPLETE
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Status changed from PENDING to COMPLETE
 </code></pre></div>
 <h3 id="guarding-operand-types-before-numeric-inequality">Guarding operand types before numeric inequality<a class="headerlink" href="#guarding-operand-types-before-numeric-inequality" title="Permanent link">&para;</a></h3>
 <p>Checks runtime types first when a legacy comparison may receive mixed values. With both values numeric, <code>4 &lt;&gt; 3</code> is <a href="../../literals/true/"><code>.T.</code></a>, and the mismatch branch runs.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckReplicateMismatch</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckReplicateMismatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nExpected</span><span class="p">,</span><span class="w"> </span><span class="n">nActual</span><span class="p">,</span><span class="w"> </span><span class="n">sExpectedType</span><span class="p">,</span><span class="w"> </span><span class="n">sActualType</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bMismatch</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
@@ -2888,11 +2888,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckReplicateMismatch&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Replicate count differs
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Replicate count differs
 </code></pre></div>
 <h3 id="distinguishing-reference-inequality-from-content-checks">Distinguishing reference inequality from content checks<a class="headerlink" href="#distinguishing-reference-inequality-from-content-checks" title="Permanent link">&para;</a></h3>
 <p>Shows that <code>&lt;&gt;</code> treats two separate arrays as different objects even when they hold the same values. The reference check returns <a href="../../literals/true/"><code>.T.</code></a>; the element-wise walk shows no differences.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareSnapshots</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareSnapshots</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aPrevious</span><span class="p">,</span><span class="w"> </span><span class="n">aCurrent</span><span class="p">,</span><span class="w"> </span><span class="n">bRefDifferent</span><span class="p">,</span><span class="w"> </span><span class="n">bValueDifferent</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 

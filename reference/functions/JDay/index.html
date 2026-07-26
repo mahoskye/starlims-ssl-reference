@@ -4364,7 +4364,7 @@
   instead of raising, unlike <a href="../DOY/"><code>DOY</code></a>.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">JDay</span><span class="p">([</span><span class="n">dDate</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">JDay</span><span class="p">([</span><span class="n">dDate</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4451,7 +4451,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="get-the-day-of-year-for-a-specific-date">Get the day-of-year for a specific date<a class="headerlink" href="#get-the-day-of-year-for-a-specific-date" title="Permanent link">&para;</a></h3>
 <p>Pass a date value and display its ordinal position within the year. March 15 is the 75th day of 2024, a leap year with 29 days in February.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowSampleJDay</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowSampleJDay</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dReceivedDate</span><span class="p">,</span><span class="w"> </span><span class="n">nDayOfYear</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dReceivedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/15/2024&quot;</span><span class="p">);</span>
@@ -4469,11 +4469,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowSampleJDay&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>03/15/2024 is day 75 of the year.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>03/15/2024 is day 75 of the year.
 </code></pre></div>
 <h3 id="get-todays-day-of-year-by-omitting-the-argument">Get today's day-of-year by omitting the argument<a class="headerlink" href="#get-todays-day-of-year-by-omitting-the-argument" title="Permanent link">&para;</a></h3>
 <p>Omit the <code>dDate</code> argument to have <code>JDay</code> use the current date automatically. The output varies depending on when the procedure runs.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogTodayOrdinal</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogTodayOrdinal</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nToday</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nToday</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">JDay</span><span class="p">();</span>
@@ -4488,12 +4488,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LogTodayOrdinal&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Today is day 113 of the year.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Today is day 113 of the year.
 </code></pre></div>
 <p>(day number varies by date)</p>
 <h3 id="skip-empty-dates-to-avoid-the-sentinel-return-value">Skip empty dates to avoid the sentinel return value<a class="headerlink" href="#skip-empty-dates-to-avoid-the-sentinel-return-value" title="Permanent link">&para;</a></h3>
 <p>Use <a href="../Empty/"><code>Empty</code></a> to detect invariant dates before calling <code>JDay</code>, so the sentinel value <code>34</code> is never mistaken for a real result. With the three-element input, two records produce valid day numbers and one is counted as empty.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeScheduleDates</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeScheduleDates</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aDates</span><span class="p">,</span><span class="w"> </span><span class="n">dPlannedDate</span><span class="p">,</span><span class="w"> </span><span class="n">nDayOfYear</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nValidCount</span><span class="p">,</span><span class="w"> </span><span class="n">nEmptyCount</span><span class="p">;</span>
 

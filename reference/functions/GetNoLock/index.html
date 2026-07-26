@@ -4264,7 +4264,7 @@
 <li>When shared SQL-building code runs against both Oracle and non-Oracle connections.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetNoLock</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">GetNoLock</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4329,7 +4329,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="add-the-platform-specific-clause-after-a-table-name">Add the platform-specific clause after a table name<a class="headerlink" href="#add-the-platform-specific-clause-after-a-table-name" title="Permanent link">&para;</a></h3>
 <p>Gets the no-lock hint for a named connection and embeds it immediately after the table name in a dynamically built SQL string.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadLoggedSamples</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadLoggedSamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">sNoLock</span><span class="p">,</span><span class="w"> </span><span class="n">aSamples</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sNoLock</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetNoLock</span><span class="p">(</span><span class="s2">&quot;LIMS&quot;</span><span class="p">);</span>
@@ -4352,7 +4352,7 @@
 </code></pre></div>
 <h3 id="use-the-default-connection-in-a-query-builder">Use the default connection in a query builder<a class="headerlink" href="#use-the-default-connection-in-a-query-builder" title="Permanent link">&para;</a></h3>
 <p>Omits <code>sConnectionName</code> so the function resolves against the current default connection, then uses the returned clause in a query builder that returns the assembled SQL string.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildOpenTaskQuery</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildOpenTaskQuery</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sNoLock</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sNoLock</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetNoLock</span><span class="p">();</span>
@@ -4373,7 +4373,7 @@
 </code></pre></div>
 <h3 id="apply-the-clause-across-multiple-joined-tables">Apply the clause across multiple joined tables<a class="headerlink" href="#apply-the-clause-across-multiple-joined-tables" title="Permanent link">&para;</a></h3>
 <p>Retrieves the hint once and reuses the same value after each table name in a multi-join query, keeping the SQL consistent across all tables.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadPendingResults</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadPendingResults</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnection</span><span class="p">,</span><span class="w"> </span><span class="n">sNoLock</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sConnection</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LIMS&quot;</span><span class="p">;</span>

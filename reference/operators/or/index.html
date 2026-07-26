@@ -2725,7 +2725,7 @@
 <li>When combining alternative permission, status, or validation flags.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="n">leftBoolean</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="n">rightBoolean</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">leftBoolean</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="n">rightBoolean</span>
 </code></pre></div>
 <h2 id="type-behavior">Type behavior<a class="headerlink" href="#type-behavior" title="Permanent link">&para;</a></h2>
 <table>
@@ -2775,7 +2775,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="allowing-either-of-two-access-flags">Allowing either of two access flags<a class="headerlink" href="#allowing-either-of-two-access-flags" title="Permanent link">&para;</a></h3>
 <p>Grants access when either <code>bIsAdmin</code> or <code>bHasOverride</code> is <a href="../../literals/true/"><code>.T.</code></a>. With <code>bIsAdmin = .T.</code>, the left side is <a href="../../literals/true/"><code>.T.</code></a> and <code>bHasOverride</code> is not evaluated.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckAccessPermission</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckAccessPermission</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsAdmin</span><span class="p">,</span><span class="w"> </span><span class="n">bHasOverride</span><span class="p">,</span><span class="w"> </span><span class="n">bCanAccess</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bIsAdmin</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
@@ -2797,11 +2797,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckAccessPermission&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Access granted
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Access granted
 </code></pre></div>
 <h3 id="using-a-fallback-when-the-primary-search-finds-nothing">Using a fallback when the primary search finds nothing<a class="headerlink" href="#using-a-fallback-when-the-primary-search-finds-nothing" title="Permanent link">&para;</a></h3>
 <p>Considers a sample found when it appears in either the current results or the archive. With <code>bLocalFound = .F.</code> and <code>bArchiveFound = .T.</code>, the <code>.OR.</code> is <a href="../../literals/true/"><code>.T.</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckSamplePresence</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckSamplePresence</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">bLocalFound</span><span class="p">,</span><span class="w"> </span><span class="n">bArchiveFound</span><span class="p">,</span><span class="w"> </span><span class="n">bSampleFound</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;DEMO-001&quot;</span><span class="p">;</span>
@@ -2825,11 +2825,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckSamplePresence&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Sample DEMO-001 was found
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample DEMO-001 was found
 </code></pre></div>
 <h3 id="skipping-a-fallback-query-when-the-local-check-already-passes">Skipping a fallback query when the local check already passes<a class="headerlink" href="#skipping-a-fallback-query-when-the-local-check-already-passes" title="Permanent link">&para;</a></h3>
 <p>Places the local boolean check on the left so the archive query runs only when the current status is not already acceptable. With <code>sCurrentStatus = "READY"</code>, <code>bIsReadyNow</code> is <a href="../../literals/true/"><code>.T.</code></a> and the <code>.OR.</code> short-circuits without running the query.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AllowProcessing</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AllowProcessing</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsReadyNow</span><span class="p">,</span><span class="w"> </span><span class="n">bCanProcess</span><span class="p">;</span>
 
@@ -2860,7 +2860,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AllowProcessing&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays (<code>bIsReadyNow</code> is <a href="../../literals/true/"><code>.T.</code></a>, so the <a href="../../functions/LSearch/"><code>LSearch</code></a> is never executed):</p>
-<div class="language-text highlight"><pre><span></span><code>Processing can continue
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Processing can continue
 </code></pre></div>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>

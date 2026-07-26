@@ -2727,7 +2727,7 @@
 <li>When guarding dynamic comparisons where operand types may vary at runtime.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="n">bEqual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">vLeft</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">vRight</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">bEqual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">vLeft</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">vRight</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="type-behavior">Type behavior<a class="headerlink" href="#type-behavior" title="Permanent link">&para;</a></h2>
 <table>
@@ -2831,7 +2831,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="comparing-two-strings-exactly">Comparing two strings exactly<a class="headerlink" href="#comparing-two-strings-exactly" title="Permanent link">&para;</a></h3>
 <p>Shows that <code>==</code> requires an exact match. <code>"Logged" == "Log"</code> is <a href="../../literals/false/"><code>.F.</code></a> because <code>"Log"</code> is not the full string - use <a href="../equals/"><code>equals</code></a> for prefix checks.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckExactStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckExactStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sExpected</span><span class="p">,</span><span class="w"> </span><span class="n">sActual</span><span class="p">,</span><span class="w"> </span><span class="n">bMatch</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sExpected</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">;</span>
@@ -2855,11 +2855,11 @@
 <span class="c1">;</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Status does not match exactly
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Status does not match exactly
 </code></pre></div>
 <h3 id="guarding-dynamic-values-before-strict-comparison">Guarding dynamic values before strict comparison<a class="headerlink" href="#guarding-dynamic-values-before-strict-comparison" title="Permanent link">&para;</a></h3>
 <p>Checks runtime types first when a comparison may receive mixed values. With <code>vLeft = 42</code> (number) and <code>vRight = "42"</code> (string), the types differ and the comparison is skipped.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareDynamicValues</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareDynamicValues</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">vLeft</span><span class="p">,</span><span class="w"> </span><span class="n">vRight</span><span class="p">,</span><span class="w"> </span><span class="n">sLeftType</span><span class="p">,</span><span class="w"> </span><span class="n">sRightType</span><span class="p">,</span><span class="w"> </span><span class="n">bMatch</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">vLeft</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
@@ -2890,7 +2890,7 @@
 </code></pre></div>
 <h3 id="checking-reference-equality-for-objects">Checking reference equality for objects<a class="headerlink" href="#checking-reference-equality-for-objects" title="Permanent link">&para;</a></h3>
 <p>Shows that <code>==</code> returns <a href="../../literals/true/"><code>.T.</code></a> when two variables point to the same instance (<code>oAlias</code>) but <a href="../../literals/false/"><code>.F.</code></a> when they point to different instances with the same property values (<code>oSecond</code>).</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareObjectReferences</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareObjectReferences</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oFirst</span><span class="p">,</span><span class="w"> </span><span class="n">oSecond</span><span class="p">,</span><span class="w"> </span><span class="n">oAlias</span><span class="p">,</span><span class="w"> </span><span class="n">bSameRef</span><span class="p">,</span><span class="w"> </span><span class="n">bDifferentRef</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oFirst</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateLocal</span><span class="p">();</span>

@@ -3873,7 +3873,7 @@
 <li>When you need a simple boolean check instead of a full field list.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">IsTableFld</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">IsTableFld</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3957,7 +3957,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="check-a-field-before-reading-it">Check a field before reading it<a class="headerlink" href="#check-a-field-before-reading-it" title="Permanent link">&para;</a></h3>
 <p>Check whether <code>received_date</code> exists in the <code>sample</code> table on the <code>LAB</code> connection before issuing the query. If the field is absent the guard fires and returns early, avoiding a runtime SQL error.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSamplesWithOptionalDate</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSamplesWithOptionalDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="n">aSamples</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB&quot;</span><span class="p">;</span>
@@ -3982,7 +3982,7 @@
 </code></pre></div>
 <h3 id="use-the-default-connection-explicitly">Use the default connection explicitly<a class="headerlink" href="#use-the-default-connection-explicitly" title="Permanent link">&para;</a></h3>
 <p>Pass <a href="../../literals/nil/"><code>NIL</code></a> as the connection name to target the default database connection. The two <a href="../UsrMes/"><code>UsrMes</code></a> calls are mutually exclusive; only one fires depending on whether the field is found.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckAuditCommentField</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckAuditCommentField</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bHasComment</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bHasComment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsTableFld</span><span class="p">(</span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;audit_log&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;comment_text&quot;</span><span class="p">);</span>
@@ -4001,7 +4001,7 @@
 </code></pre></div>
 <h3 id="validate-several-required-fields-before-processing">Validate several required fields before processing<a class="headerlink" href="#validate-several-required-fields-before-processing" title="Permanent link">&para;</a></h3>
 <p>Collect the names of any required fields that are absent from the <code>result</code> table, then block the export if any are missing. <code>GetMissingResultFields</code> builds the list; <code>StartResultExport</code> calls it and reports an error when the list is non-empty.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetMissingResultFields</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetMissingResultFields</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRequiredFields</span><span class="p">,</span><span class="w"> </span><span class="n">aMissingFields</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 

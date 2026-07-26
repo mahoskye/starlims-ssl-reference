@@ -4107,7 +4107,7 @@
 <li>When you need the start-step performer list for follow-up routing or logging.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocStartWorkflow</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">aDocumentIds</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sPackageName</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocStartWorkflow</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">aDocumentIds</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sPackageName</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4227,7 +4227,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="start-a-workflow-without-documents">Start a workflow without documents<a class="headerlink" href="#start-a-workflow-without-documents" title="Permanent link">&para;</a></h3>
 <p>Starts a simple workflow by ID without document attachments and displays the created workflow instance ID.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">StartSimpleWorkflow</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">StartSimpleWorkflow</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">aWorkflowInfo</span><span class="p">,</span><span class="w"> </span><span class="n">sStartedId</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;QCReview&quot;</span><span class="p">;</span>
@@ -4243,11 +4243,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;StartSimpleWorkflow&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Started workflow [created workflow ID]
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Started workflow [created workflow ID]
 </code></pre></div>
 <h3 id="start-a-workflow-with-attached-documents">Start a workflow with attached documents<a class="headerlink" href="#start-a-workflow-with-attached-documents" title="Permanent link">&para;</a></h3>
 <p>Passes a document ID array and a package name when starting, then reads the performer list from <code>aWorkflowInfo[2]</code> and lists each assigned performer.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">StartWorkflowWithDocuments</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">StartWorkflowWithDocuments</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">aDocumentIds</span><span class="p">,</span><span class="w"> </span><span class="n">sPackageName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aWorkflowInfo</span><span class="p">,</span><span class="w"> </span><span class="n">aPerformers</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
@@ -4272,7 +4272,7 @@
 </code></pre></div>
 <h3 id="start-a-workflow-with-error-handling">Start a workflow with error handling<a class="headerlink" href="#start-a-workflow-with-error-handling" title="Permanent link">&para;</a></h3>
 <p>Wraps the start call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle workflow exceptions, using <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> to extract the error description on failure.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">StartWorkflowSafe</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">StartWorkflowSafe</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">aDocumentIds</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aWorkflowInfo</span><span class="p">,</span><span class="w"> </span><span class="n">oError</span><span class="p">;</span>
 

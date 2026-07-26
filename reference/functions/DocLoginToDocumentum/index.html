@@ -3856,7 +3856,7 @@
 <li>When you want to check login success directly and then inspect the current Documentum error state if the login fails.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3943,7 +3943,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="log-in-and-branch-on-success">Log in and branch on success<a class="headerlink" href="#log-in-and-branch-on-success" title="Permanent link">&para;</a></h3>
 <p>Initializes the Documentum context, attempts a login, and uses <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> to ensure the context is always ended regardless of the login outcome.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoginToDocumentum</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoginToDocumentum</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Repository1&quot;</span><span class="p">;</span>
@@ -3975,7 +3975,7 @@
 </code></pre></div>
 <h3 id="capture-the-recorded-failure-state">Capture the recorded failure state<a class="headerlink" href="#capture-the-recorded-failure-state" title="Permanent link">&para;</a></h3>
 <p>Reads both the boolean return value and <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> after a failed login, showing that the two signals can be checked together to confirm the failure.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckDocumentumLoginFailure</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckDocumentumLoginFailure</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">,</span><span class="w"> </span><span class="n">bFailed</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">;</span>
 
@@ -4005,11 +4005,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckDocumentumLoginFailure&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Login failed: &lt;Documentum error message&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Login failed: &lt;Documentum error message&gt;
 </code></pre></div>
 <h3 id="reinitialize-and-log-in-to-a-different-repository">Reinitialize and log in to a different repository<a class="headerlink" href="#reinitialize-and-log-in-to-a-different-repository" title="Permanent link">&para;</a></h3>
 <p>Connects to two different repositories in sequence by ending and reinitializing the Documentum context between logins.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SwitchDocumentumRepository</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SwitchDocumentumRepository</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFirstBase</span><span class="p">,</span><span class="w"> </span><span class="n">sSecondBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
 

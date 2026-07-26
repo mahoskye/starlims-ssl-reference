@@ -3550,7 +3550,7 @@
 <li>When <a href="../Eval/"><code>Eval</code></a> is not appropriate because you have source text rather than a code block value.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">ExecUdf</span><span class="p">(</span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">aArgs</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bCacheCode</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ExecUdf</span><span class="p">(</span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">aArgs</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bCacheCode</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3634,7 +3634,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="evaluate-a-simple-expression-string">Evaluate a simple expression string<a class="headerlink" href="#evaluate-a-simple-expression-string" title="Permanent link">&para;</a></h3>
 <p>Passes an arithmetic expression as a string to <code>ExecUdf</code> and displays the numeric result. Because the string does not end with <code>;</code>, the runtime wraps it as <code>:RETURN 2 + 3 * 4;</code> and returns <code>14</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunDynamicExpression</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunDynamicExpression</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="n">nResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;2 + 3 * 4&quot;</span><span class="p">;</span>
@@ -3648,11 +3648,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunDynamicExpression&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Calculated value: 14
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Calculated value: 14
 </code></pre></div>
 <h3 id="return-a-local-variable-by-name">Return a local variable by name<a class="headerlink" href="#return-a-local-variable-by-name" title="Permanent link">&para;</a></h3>
 <p>Passes a bare identifier string to <code>ExecUdf</code>. Because <code>"sStatus"</code> matches an existing local variable and does not end with <code>;</code>, the runtime returns that variable's current value directly instead of compiling new code.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReturnLocalValue</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReturnLocalValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">;</span>
@@ -3668,11 +3668,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ReturnLocalValue&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Returned value: Logged
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Returned value: Logged
 </code></pre></div>
 <h3 id="reuse-compiled-dynamic-code-with-caching">Reuse compiled dynamic code with caching<a class="headerlink" href="#reuse-compiled-dynamic-code-with-caching" title="Permanent link">&para;</a></h3>
 <p>Runs the same dynamic code block five times without caching, then five times with caching. Both totals should be equal. The difference is that cached execution skips compilation on the second and later calls.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareCachedExecution</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareCachedExecution</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="n">nIterations</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nUncachedTotal</span><span class="p">,</span><span class="w"> </span><span class="n">nCachedTotal</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nIterations</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
@@ -3709,7 +3709,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompareCachedExecution&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Uncached total: 25250 | Cached total: 25250
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Uncached total: 25250 | Cached total: 25250
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

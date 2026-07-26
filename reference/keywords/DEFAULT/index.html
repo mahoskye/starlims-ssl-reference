@@ -2897,7 +2897,7 @@
 <li>When a common value such as <a href="../../literals/false/"><code>.F.</code></a>, <a href="../../functions/Today/"><code>Today()</code></a>, or a standard status should be applied automatically.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">paramName</span><span class="p">[,</span><span class="w"> </span><span class="n">otherParam</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">];</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">paramName</span><span class="p">[,</span><span class="w"> </span><span class="n">otherParam</span><span class="p">,</span><span class="w"> </span><span class="err">...</span><span class="p">];</span>
 <span class="k">:DEFAULT</span><span class="w"> </span><span class="n">paramName</span><span class="p">,</span><span class="w"> </span><span class="n">defaultExpression</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
@@ -2952,7 +2952,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="defaulting-a-single-optional-flag">Defaulting a single optional flag<a class="headerlink" href="#defaulting-a-single-optional-flag" title="Permanent link">&para;</a></h3>
 <p>Use one <code>:DEFAULT</code> line to make a trailing parameter optional. With only <code>sSampleID</code> supplied, <code>bIncludePrefix</code> defaults to <a href="../../literals/true/"><code>.T.</code></a> and the label is prefixed with <code>"Sample "</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatSampleLabel</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatSampleLabel</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">bIncludePrefix</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">bIncludePrefix</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLabel</span><span class="p">;</span>
@@ -2974,11 +2974,11 @@
 <span class="c1">;</span>
 </code></pre></div>
 <p><a href="../../functions/InfoMes/"><code>InfoMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Sample S-001
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample S-001
 </code></pre></div>
 <h3 id="adding-optional-parameters-without-changing-existing-calls">Adding optional parameters without changing existing calls<a class="headerlink" href="#adding-optional-parameters-without-changing-existing-calls" title="Permanent link">&para;</a></h3>
 <p>Use multiple <code>:DEFAULT</code> lines so callers can omit new trailing arguments. <code>ShowDefaultedCalls</code> demonstrates both a minimal call and a fully specified call. The row counts depend on the database contents.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FetchSampleRows</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FetchSampleRows</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxRows</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">nMaxRows</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span>
@@ -3016,7 +3016,7 @@
 </code></pre></div>
 <h3 id="combining-expression-defaults-with-branch-specific-logic">Combining expression defaults with branch-specific logic<a class="headerlink" href="#combining-expression-defaults-with-branch-specific-logic" title="Permanent link">&para;</a></h3>
 <p>Default values can be expressions. Here <code>MYUSERNAME</code> and <a href="../../functions/Today/"><code>Today()</code></a> provide automatic context. The routine then branches on <code>bIncludeClosed</code> to build the appropriate query.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeUserQueue</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeUserQueue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sOwner</span><span class="p">,</span><span class="w"> </span><span class="n">dRunDate</span><span class="p">,</span><span class="w"> </span><span class="n">bIncludeClosed</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sOwner</span><span class="p">,</span><span class="w"> </span><span class="n">MYUSERNAME</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">dRunDate</span><span class="p">,</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>

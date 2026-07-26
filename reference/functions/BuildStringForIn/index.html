@@ -4221,7 +4221,7 @@
 <li>When you want empty input to produce a non-matching sentinel value instead of an empty <code>IN ()</code> clause.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">BuildStringForIn</span><span class="p">(</span><span class="n">aTarget</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">BuildStringForIn</span><span class="p">(</span><span class="n">aTarget</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4275,7 +4275,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="build-a-literal-in-list-from-selected-ids">Build a literal <code>IN</code> list from selected IDs<a class="headerlink" href="#build-a-literal-in-list-from-selected-ids" title="Permanent link">&para;</a></h3>
 <p>Converts a small array of sample IDs into one quoted list ready to append to a SQL <code>IN</code> clause.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowSampleFilter</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowSampleFilter</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIDs</span><span class="p">,</span><span class="w"> </span><span class="n">sInClause</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aSampleIDs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SAM-2024-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAM-2024-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAM-2024-003&quot;</span><span class="p">};</span>
@@ -4290,11 +4290,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowSampleFilter&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>(&#39;SAM-2024-001&#39;,&#39;SAM-2024-002&#39;,&#39;SAM-2024-003&#39;)
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>(&#39;SAM-2024-001&#39;,&#39;SAM-2024-002&#39;,&#39;SAM-2024-003&#39;)
 </code></pre></div>
 <h3 id="filter-a-query-on-names-that-contain-apostrophes">Filter a query on names that contain apostrophes<a class="headerlink" href="#filter-a-query-on-names-that-contain-apostrophes" title="Permanent link">&para;</a></h3>
 <p>Passes names that include apostrophes to <code>BuildStringForIn</code> and embeds the result directly in a SQL <code>WHERE</code> clause. The apostrophe in <code>"Bob O'Brien"</code> is doubled automatically.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FetchSamplesBySampler</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FetchSamplesBySampler</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSamplerNames</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aSamplerNames</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Alice Johnson&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bob O&#39;Brien&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Carol White&quot;</span><span class="p">};</span>

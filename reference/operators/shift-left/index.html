@@ -2724,7 +2724,7 @@
 <li>When packing byte or flag values into a larger integer.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="n">nResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nLeft</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nShiftCount</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">nResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nLeft</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">nShiftCount</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="type-behavior">Type behavior<a class="headerlink" href="#type-behavior" title="Permanent link">&para;</a></h2>
 <table>
@@ -2774,7 +2774,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="multiplying-by-a-power-of-two">Multiplying by a power of two<a class="headerlink" href="#multiplying-by-a-power-of-two" title="Permanent link">&para;</a></h3>
 <p>Shifts 5 left by 3 positions, equivalent to 5 × 2³ = 40.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">MultiplyByPowerOfTwo</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">MultiplyByPowerOfTwo</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nValue</span><span class="p">,</span><span class="w"> </span><span class="n">nShifted</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
@@ -2790,11 +2790,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;MultiplyByPowerOfTwo&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>5 &lt;&lt; 3 = 40
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>5 &lt;&lt; 3 = 40
 </code></pre></div>
 <h3 id="building-a-flag-mask-for-a-specific-bit-position">Building a flag mask for a specific bit position<a class="headerlink" href="#building-a-flag-mask-for-a-specific-bit-position" title="Permanent link">&para;</a></h3>
 <p>Creates a mask for bit position 4 (<code>1 &lt;&lt; 3 = 8</code>), then sets that bit in <code>nFlags</code> using <a href="../../functions/_OR/"><code>_OR</code></a>. Starting from 5 (binary: 0101), the result is 13 (binary: 1101).</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SetPermissionFlag</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SetPermissionFlag</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nFlags</span><span class="p">,</span><span class="w"> </span><span class="n">nBitPos</span><span class="p">,</span><span class="w"> </span><span class="n">nMask</span><span class="p">,</span><span class="w"> </span><span class="n">nUpdated</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nFlags</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
@@ -2814,11 +2814,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SetPermissionFlag&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Flags=5, Mask=8, Updated=13
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Flags=5, Mask=8, Updated=13
 </code></pre></div>
 <h3 id="packing-two-bytes-into-one-value">Packing two bytes into one value<a class="headerlink" href="#packing-two-bytes-into-one-value" title="Permanent link">&para;</a></h3>
 <p>Shifts the high byte left by 8 positions and adds the low byte to build a 16-bit value. With <code>nHighByte = 3</code> and <code>nLowByte = 15</code>: <code>(3 &lt;&lt; 8) + 15 = 783</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PackBytes</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PackBytes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">nHighByte</span><span class="p">,</span><span class="w"> </span><span class="n">nLowByte</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPacked</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
@@ -2839,7 +2839,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PackBytes&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Packed value: 783
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Packed value: 783
 </code></pre></div>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>

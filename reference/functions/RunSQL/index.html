@@ -4041,7 +4041,7 @@
 <li>When you want to pair the update with <a href="../LimsRecordsAffected/"><code>LimsRecordsAffected</code></a> or <a href="../GetLastSQLError/"><code>GetLastSQLError</code></a> in follow-up logic.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sCommandString</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aValues</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sCommandString</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aValues</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4139,7 +4139,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="insert-one-audit-row-with-positional-parameters">Insert one audit row with positional parameters<a class="headerlink" href="#insert-one-audit-row-with-positional-parameters" title="Permanent link">&para;</a></h3>
 <p>Use <code>?</code> placeholders to pass three bound values to an <code>INSERT</code> statement, avoiding string concatenation entirely.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">InsertAuditEntry</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">InsertAuditEntry</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sAction</span><span class="p">,</span><span class="w"> </span><span class="n">sRecordID</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;JSMITH&quot;</span><span class="p">;</span>
@@ -4165,7 +4165,7 @@
 </code></pre></div>
 <h3 id="update-one-row-and-verify-rows-affected">Update one row and verify rows affected<a class="headerlink" href="#update-one-row-and-verify-rows-affected" title="Permanent link">&para;</a></h3>
 <p>Run an <code>UPDATE</code> on a named connection and call <a href="../LimsRecordsAffected/"><code>LimsRecordsAffected</code></a> to confirm the row was actually found and changed.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReleaseSample</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReleaseSample</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">,</span><span class="w"> </span><span class="n">nRows</span><span class="p">;</span>
 
@@ -4192,7 +4192,7 @@
 </code></pre></div>
 <h3 id="ignore-sql-errors-temporarily-and-inspect-the-stored-error">Ignore SQL errors temporarily and inspect the stored error<a class="headerlink" href="#ignore-sql-errors-temporarily-and-inspect-the-stored-error" title="Permanent link">&para;</a></h3>
 <p>Enable error ignoring for a best-effort <code>UPDATE</code>, then restore the previous settings and surface the stored SQL error if the statement failed.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">TryOptionalUpdate</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">TryOptionalUpdate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">,</span><span class="w"> </span><span class="n">bPrevIgnore</span><span class="p">,</span><span class="w"> </span><span class="n">bPrevShow</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 

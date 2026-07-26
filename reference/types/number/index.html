@@ -2137,7 +2137,7 @@
 <p>SSL has a single numeric type for whole numbers and fractional values. Numeric values support arithmetic operators, comparison operators, exponentiation, and shift operators. Integer-only bitwise operations are available through the <a href="../../functions/_AND/"><code>_AND()</code></a>, <a href="../../functions/_OR/"><code>_OR()</code></a>, <a href="../../functions/_XOR/"><code>_XOR()</code></a>, and <a href="../../functions/_NOT/"><code>_NOT()</code></a> built-ins. Numeric values are scalar values, so they do not support <code>[]</code> indexing. For display or string building, convert numbers explicitly with <a href="../../functions/LimsString/"><code>LimsString</code></a> or <code>ToString()</code>.</p>
 <h2 id="creating-values">Creating values<a class="headerlink" href="#creating-values" title="Permanent link">&para;</a></h2>
 <p>Number values are created from numeric literals: integers, decimals, negatives, and scientific notation.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="n">nCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">nCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
 <span class="n">nRatio</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">3.14</span><span class="p">;</span>
 <span class="n">nNeg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">-</span><span class="mi">5</span><span class="p">;</span>
 <span class="n">nSmall</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="err">.2</span><span class="n">e</span><span class="o">-</span><span class="mi">3</span><span class="p">;</span>
@@ -2349,7 +2349,7 @@
 <p>This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined number members and SSL-native math functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover.</p>
 <h3 id="example-formatting-a-number-with-grouped-digits">Example: formatting a number with grouped digits<a class="headerlink" href="#example-formatting-a-number-with-grouped-digits" title="Permanent link">&para;</a></h3>
 <p>Uses .NET's single-argument <code>ToString(sFormat)</code> overload with the <code>"N0"</code> standard format string to render a large integer with thousands separators. SSL's own <code>ToString()</code> and <code>ToString(sDecimal, sGroup)</code> overloads are unaffected; the single-argument form resolves to the .NET method on the backing numeric type and uses the current culture's separators.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatRecordCount</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatRecordCount</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nRecords</span><span class="p">,</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nRecords</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1234567</span><span class="p">;</span>
@@ -2364,7 +2364,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FormatRecordCount&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>1,234,567
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>1,234,567
 </code></pre></div>
 <h2 id="indexing">Indexing<a class="headerlink" href="#indexing" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2393,7 +2393,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="basic-arithmetic-and-comparison">Basic arithmetic and comparison<a class="headerlink" href="#basic-arithmetic-and-comparison" title="Permanent link">&para;</a></h3>
 <p>Computes area, perimeter, ratio, and squared width for a 10 x 5 rectangle, then verifies the area equals 50.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NumberArithmetic</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NumberArithmetic</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nWidth</span><span class="p">,</span><span class="w"> </span><span class="n">nHeight</span><span class="p">,</span><span class="w"> </span><span class="n">nArea</span><span class="p">,</span><span class="w"> </span><span class="n">nPerimeter</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nRatio</span><span class="p">,</span><span class="w"> </span><span class="n">nSquared</span><span class="p">;</span>
 
@@ -2426,7 +2426,7 @@
 </code></pre></div>
 <h3 id="integer-only-shifts-masks-and-formatting">Integer-only shifts, masks, and formatting<a class="headerlink" href="#integer-only-shifts-masks-and-formatting" title="Permanent link">&para;</a></h3>
 <p>Validates that the values are integer-valued before using shifts and bitwise built-ins, starting from <code>nFlags = 6</code> (binary 0110) and <code>nMask = 3</code> (binary 0011).</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NumberBitwiseOps</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NumberBitwiseOps</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nFlags</span><span class="p">,</span><span class="w"> </span><span class="n">nMask</span><span class="p">,</span><span class="w"> </span><span class="n">nShifted</span><span class="p">,</span><span class="w"> </span><span class="n">nMasked</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nCombined</span><span class="p">,</span><span class="w"> </span><span class="n">nToggled</span><span class="p">;</span>
 
@@ -2464,7 +2464,7 @@
 </code></pre></div>
 <h3 id="statistical-aggregation-with-bitwise-classification">Statistical aggregation with bitwise classification<a class="headerlink" href="#statistical-aggregation-with-bitwise-classification" title="Permanent link">&para;</a></h3>
 <p>Computes mean and variance over an array of measurements, then uses bitwise flags to classify the result. For <code>{10, 20, 30}</code>: mean = 20, variance ~= 66.67, class bits = 2 (high variance set).</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AnalyzeMeasurements</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AnalyzeMeasurements</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aMeasurements</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSum</span><span class="p">,</span><span class="w"> </span><span class="n">nSumSq</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">,</span><span class="w"> </span><span class="n">nMean</span><span class="p">,</span><span class="w"> </span><span class="n">nVariance</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nClassBits</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sReport</span><span class="p">;</span>

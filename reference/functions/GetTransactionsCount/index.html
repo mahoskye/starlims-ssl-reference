@@ -3843,7 +3843,7 @@
 <li>When checking a named connection without changing transaction state.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetTransactionsCount</span><span class="p">()</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">GetTransactionsCount</span><span class="p">()</span>
 <span class="nf">GetTransactionsCount</span><span class="p">(</span><span class="n">sConnection</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
@@ -3913,7 +3913,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="check-the-default-connection-transaction-depth">Check the default connection transaction depth<a class="headerlink" href="#check-the-default-connection-transaction-depth" title="Permanent link">&para;</a></h3>
 <p>Calls <code>GetTransactionsCount</code> without arguments to inspect the default connection's open transaction depth and branches on whether any transactions are currently active.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckDefaultTransactionCount</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckDefaultTransactionCount</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nTranCount</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nTranCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetTransactionsCount</span><span class="p">();</span>
@@ -3937,7 +3937,7 @@
 </code></pre></div>
 <h3 id="check-a-named-connection">Check a named connection<a class="headerlink" href="#check-a-named-connection" title="Permanent link">&para;</a></h3>
 <p>Passes an explicit connection name and displays the current open transaction count for that connection.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckNamedConnection</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckNamedConnection</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnection</span><span class="p">,</span><span class="w"> </span><span class="n">nTranCount</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sConnection</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LIMS&quot;</span><span class="p">;</span>
@@ -3955,11 +3955,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckNamedConnection&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Connection LIMS has 0 open transaction(s).
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Connection LIMS has 0 open transaction(s).
 </code></pre></div>
 <h3 id="end-only-the-transaction-your-code-started">End only the transaction your code started<a class="headerlink" href="#end-only-the-transaction-your-code-started" title="Permanent link">&para;</a></h3>
 <p>Records the transaction depth before the update, opens a new transaction only when none are active, then checks the count at both commit and rollback time before calling <a href="../EndLimsTransaction/"><code>EndLimsTransaction</code></a> to avoid closing a transaction that was opened by the caller.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateSampleStatusSafely</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateSampleStatusSafely</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnection</span><span class="p">,</span><span class="w"> </span><span class="n">nStartCount</span><span class="p">,</span><span class="w"> </span><span class="n">nEndCount</span><span class="p">,</span><span class="w"> </span><span class="n">bStartedHere</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 

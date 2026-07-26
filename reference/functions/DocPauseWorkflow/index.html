@@ -4107,7 +4107,7 @@
 <li>When administrative scripts need to pause a known workflow by ID.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocPauseWorkflow</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocPauseWorkflow</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4171,7 +4171,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="pause-an-ongoing-workflow-for-review">Pause an ongoing workflow for review<a class="headerlink" href="#pause-an-ongoing-workflow-for-review" title="Permanent link">&para;</a></h3>
 <p>Calls <code>DocPauseWorkflow</code> and builds a result message from the boolean return, then displays it. On success the message confirms the pause; on failure it reports which workflow could not be paused.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PauseWorkflowForReview</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PauseWorkflowForReview</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">bPaused</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WF-2024-0042&quot;</span><span class="p">;</span>
@@ -4190,14 +4190,14 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PauseWorkflowForReview&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Workflow WF-2024-0042 paused for review
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Workflow WF-2024-0042 paused for review
 </code></pre></div>
 <p>On failure, <code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Failed to pause workflow WF-2024-0042
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Failed to pause workflow WF-2024-0042
 </code></pre></div>
 <h3 id="pause-a-workflow-only-when-review-is-required">Pause a workflow only when review is required<a class="headerlink" href="#pause-a-workflow-only-when-review-is-required" title="Permanent link">&para;</a></h3>
 <p>Guards the pause call behind a <code>bReviewRequired</code> flag so the workflow is only halted when business rules require it, returning <a href="../../literals/false/"><code>.F.</code></a> immediately when review is not needed.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PauseWorkflowIfReviewRequired</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PauseWorkflowIfReviewRequired</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">bReviewRequired</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bPaused</span><span class="p">;</span>
 
@@ -4222,7 +4222,7 @@
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays either <code>Workflow WF-2024-0042 paused for review</code> or <code>Workflow WF-2024-0042 could not be paused</code>.</p>
 <h3 id="pause-multiple-workflows-and-collect-the-results">Pause multiple workflows and collect the results<a class="headerlink" href="#pause-multiple-workflows-and-collect-the-results" title="Permanent link">&para;</a></h3>
 <p>Iterates a list of workflow IDs, records each result into a summary object, and reports the overall count of successful and failed pause operations.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PauseWorkflowBatch</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PauseWorkflowBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aWorkflowIds</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oSummary</span><span class="p">,</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">bPaused</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPaused</span><span class="p">,</span><span class="w"> </span><span class="n">nFailed</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>

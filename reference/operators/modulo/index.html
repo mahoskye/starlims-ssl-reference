@@ -2725,7 +2725,7 @@
 <li>When you need remainder behavior without updating the left operand in place.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="n">nRemainder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nLeft</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">nRight</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">nRemainder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nLeft</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">nRight</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="type-behavior">Type behavior<a class="headerlink" href="#type-behavior" title="Permanent link">&para;</a></h2>
 <table>
@@ -2787,7 +2787,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="basic-remainder-calculation">Basic remainder calculation<a class="headerlink" href="#basic-remainder-calculation" title="Permanent link">&para;</a></h3>
 <p>Computes 10 % 3. The remainder is 1 because 10 = 3 x 3 + 1.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CalculateRemainder</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CalculateRemainder</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nDividend</span><span class="p">,</span><span class="w"> </span><span class="n">nDivisor</span><span class="p">,</span><span class="w"> </span><span class="n">nRemainder</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nDividend</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
@@ -2805,11 +2805,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CalculateRemainder&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Remainder of 10 divided by 3 is 1
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Remainder of 10 divided by 3 is 1
 </code></pre></div>
 <h3 id="normalizing-a-negative-offset-for-wraparound">Normalizing a negative offset for wraparound<a class="headerlink" href="#normalizing-a-negative-offset-for-wraparound" title="Permanent link">&para;</a></h3>
 <p>Wraps offset -1 into a 5-slot window. <code>((-1 % 5) + 5) % 5</code> normalizes the negative remainder to 4, giving slot index 5.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeWrapOffset</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeWrapOffset</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nOffset</span><span class="p">,</span><span class="w"> </span><span class="n">nWindowSize</span><span class="p">,</span><span class="w"> </span><span class="n">nNormalizedOffset</span><span class="p">,</span><span class="w"> </span><span class="n">nSlotIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nOffset</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
@@ -2827,11 +2827,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NormalizeWrapOffset&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Wrapped slot index: 5
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Wrapped slot index: 5
 </code></pre></div>
 <h3 id="validating-inputs-before-modulo">Validating inputs before modulo<a class="headerlink" href="#validating-inputs-before-modulo" title="Permanent link">&para;</a></h3>
 <p>Guards against a non-numeric divisor and a zero divisor before applying <code>%</code>. With <code>vDivisor = 4</code> and <code>nDividend = 17</code>, the result is 1.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SafeModulo</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SafeModulo</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nDividend</span><span class="p">,</span><span class="w"> </span><span class="n">vDivisor</span><span class="p">,</span><span class="w"> </span><span class="n">sDivisorType</span><span class="p">,</span><span class="w"> </span><span class="n">vResult</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nDividend</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">17</span><span class="p">;</span>
@@ -2860,7 +2860,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SafeModulo&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Remainder: 1
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Remainder: 1
 </code></pre></div>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>

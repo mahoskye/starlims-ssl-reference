@@ -4264,7 +4264,7 @@
 <li>When integrating file-based imports into a STARLIMS script without writing the database update manually.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">UpdLong</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sColumnName</span><span class="p">,</span><span class="w"> </span><span class="n">sWhereCondition</span><span class="p">,</span><span class="w"> </span><span class="n">sInputFilePath</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bIsCompressed</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">UpdLong</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sColumnName</span><span class="p">,</span><span class="w"> </span><span class="n">sWhereCondition</span><span class="p">,</span><span class="w"> </span><span class="n">sInputFilePath</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bIsCompressed</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4392,7 +4392,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="store-a-scanned-document-in-a-sample-table">Store a scanned document in a sample table<a class="headerlink" href="#store-a-scanned-document-in-a-sample-table" title="Permanent link">&para;</a></h3>
 <p>Upload a single file to the <code>DOCUMENT_FILE</code> column of a specific sample row. Wrap the call in <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> because <code>UpdLong</code> raises an exception for any failure rather than returning <a href="../../literals/false/"><code>.F.</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UploadScannedDocument</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UploadScannedDocument</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sColumnName</span><span class="p">,</span><span class="w"> </span><span class="n">sWhereCondition</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
@@ -4419,7 +4419,7 @@
 </code></pre></div>
 <h3 id="bulk-update-asset-images-with-per-item-error-handling">Bulk update asset images with per-item error handling<a class="headerlink" href="#bulk-update-asset-images-with-per-item-error-handling" title="Permanent link">&para;</a></h3>
 <p>Iterate over a list of asset IDs and upload a matching image file for each one. Each iteration is wrapped independently so a failure on one asset does not abort the rest of the batch.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BulkUpdateAssetImages</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BulkUpdateAssetImages</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sColumnName</span><span class="p">,</span><span class="w"> </span><span class="n">sWhereCond</span><span class="p">,</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">sAssetTag</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aAssetIds</span><span class="p">,</span><span class="w"> </span><span class="n">aImageFiles</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nUpdated</span><span class="p">,</span><span class="w"> </span><span class="n">nFailed</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sErrorMsg</span><span class="p">;</span>
@@ -4469,7 +4469,7 @@
 </code></pre></div>
 <h3 id="update-inside-a-transaction-with-temp-file-cleanup">Update inside a transaction with temp file cleanup<a class="headerlink" href="#update-inside-a-transaction-with-temp-file-cleanup" title="Permanent link">&para;</a></h3>
 <p>Copy an external file to a local temp path, update the long column inside a transaction, and use <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> to delete the temp file whether the operation succeeds or fails.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportExternalFileToLongColumn</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportExternalFileToLongColumn</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sColumnName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWhereCond</span><span class="p">,</span><span class="w"> </span><span class="n">sInputPath</span><span class="p">,</span><span class="w"> </span><span class="n">sExternalPath</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bInTrans</span><span class="p">;</span>

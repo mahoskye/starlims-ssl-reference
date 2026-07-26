@@ -3875,7 +3875,7 @@ Use <a href="../IsTableFld/"><code>IsTableFld</code></a> when you only need to t
 <li>When a script can run against more than one database connection.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">TableFldLst</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="n">sTableName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">TableFldLst</span><span class="p">([</span><span class="n">sConnectionName</span><span class="p">],</span><span class="w"> </span><span class="n">sTableName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3953,7 +3953,7 @@ Use <a href="../IsTableFld/"><code>IsTableFld</code></a> when you only need to t
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="list-all-fields-for-a-known-table">List all fields for a known table<a class="headerlink" href="#list-all-fields-for-a-known-table" title="Permanent link">&para;</a></h3>
 <p>Call <code>TableFldLst</code> with an explicit connection name and use the returned array length to confirm the field count.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowSampleFields</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowSampleFields</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFieldNames</span><span class="p">,</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB&quot;</span><span class="p">;</span>
@@ -3971,7 +3971,7 @@ Use <a href="../IsTableFld/"><code>IsTableFld</code></a> when you only need to t
 </code></pre></div>
 <h3 id="validate-required-fields-on-the-default-connection">Validate required fields on the default connection<a class="headerlink" href="#validate-required-fields-on-the-default-connection" title="Permanent link">&para;</a></h3>
 <p>Pass <a href="../../literals/nil/"><code>NIL</code></a> for the connection to use the default, then scan the returned array for each required field name and collect any that are absent.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetMissingSampleFields</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetMissingSampleFields</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFieldNames</span><span class="p">,</span><span class="w"> </span><span class="n">aRequiredFields</span><span class="p">,</span><span class="w"> </span><span class="n">aMissingFields</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sample&quot;</span><span class="p">;</span>
@@ -3994,7 +3994,7 @@ Use <a href="../IsTableFld/"><code>IsTableFld</code></a> when you only need to t
 </code></pre></div>
 <h3 id="catch-runtime-metadata-errors-before-continuing">Catch runtime metadata errors before continuing<a class="headerlink" href="#catch-runtime-metadata-errors-before-continuing" title="Permanent link">&para;</a></h3>
 <p>Wrap the call in <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle connection or table errors and return an empty array as a safe fallback instead of propagating the failure.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">TryLoadAuditFields</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">TryLoadAuditFields</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFieldNames</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>

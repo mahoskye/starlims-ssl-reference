@@ -4318,7 +4318,7 @@
 <li>When creating user interfaces that adapt to the configured date display convention.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LimsGetDateFormat</span><span class="p">()</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LimsGetDateFormat</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>This function takes no parameters.</p>
@@ -4349,7 +4349,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="display-the-expected-date-format-to-the-user">Display the expected date format to the user<a class="headerlink" href="#display-the-expected-date-format-to-the-user" title="Permanent link">&para;</a></h3>
 <p>Call <code>LimsGetDateFormat</code> to retrieve the configured format and display it as part of a user prompt. When the default configuration is active, the format is <code>"MM/dd/yyyy"</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDateFormatPrompt</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDateFormatPrompt</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDateFormat</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sDateFormat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsGetDateFormat</span><span class="p">();</span>
@@ -4360,11 +4360,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDateFormatPrompt&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Enter date using format: MM/dd/yyyy
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Enter date using format: MM/dd/yyyy
 </code></pre></div>
 <h3 id="parse-imported-date-strings-using-the-current-global-format">Parse imported date strings using the current global format<a class="headerlink" href="#parse-imported-date-strings-using-the-current-global-format" title="Permanent link">&para;</a></h3>
 <p>Validate and parse a batch of imported date strings against the live global format. Valid dates are converted with <a href="../StringToDate/"><code>StringToDate</code></a>; rows with unparseable dates log an error and store a null date. All three input dates are valid, so <a href="../InfoMes/"><code>InfoMes</code></a> fires for each row.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseImportedSampleDates</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseImportedSampleDates</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDateFormat</span><span class="p">,</span><span class="w"> </span><span class="n">aRawData</span><span class="p">,</span><span class="w"> </span><span class="n">aParsedDates</span><span class="p">,</span><span class="w"> </span><span class="n">sDateCol</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">dParsed</span><span class="p">,</span><span class="w"> </span><span class="n">bValid</span><span class="p">,</span><span class="w"> </span><span class="n">sLogMsg</span><span class="p">;</span>
 

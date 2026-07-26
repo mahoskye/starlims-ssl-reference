@@ -3606,7 +3606,7 @@
 <li>When you need the resulting stored hash after a successful password update.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">SetUserPassword</span><span class="p">(</span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">SetUserPassword</span><span class="p">(</span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3679,7 +3679,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="set-a-password-and-confirm-success">Set a password and confirm success<a class="headerlink" href="#set-a-password-and-confirm-success" title="Permanent link">&para;</a></h3>
 <p>Update one user and confirm that the function returned a stored hash.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResetSingleUserPassword</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResetSingleUserPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredHash</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">;</span>
@@ -3704,7 +3704,7 @@
 </code></pre></div>
 <h3 id="re-authenticate-before-changing-a-password">Re-authenticate before changing a password<a class="headerlink" href="#re-authenticate-before-changing-a-password" title="Permanent link">&para;</a></h3>
 <p>Require the current password to be correct before storing the new one.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ChangePasswordAfterCheck</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ChangePasswordAfterCheck</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bAuthenticated</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredHash</span><span class="p">;</span>
 
@@ -3733,7 +3733,7 @@
 </code></pre></div>
 <h3 id="apply-password-history-checks-in-a-reset-loop">Apply password-history checks in a reset loop<a class="headerlink" href="#apply-password-history-checks-in-a-reset-loop" title="Permanent link">&para;</a></h3>
 <p>Process multiple requested resets, skipping values that already appear in each user's stored password history.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResetPasswordsWithHistoryCheck</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResetPasswordsWithHistoryCheck</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aResetRequests</span><span class="p">,</span><span class="w"> </span><span class="n">aHistoryByUser</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredHash</span><span class="p">,</span><span class="w"> </span><span class="n">aPrevPasswords</span><span class="p">;</span>
 

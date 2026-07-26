@@ -3717,7 +3717,7 @@
 <li>When handling integration or import scenarios where XML is in the STARLIMS type-tagged format.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">FromXml</span><span class="p">(</span><span class="n">sXml</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">FromXml</span><span class="p">(</span><span class="n">sXml</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3814,7 +3814,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="parse-a-typed-primitive-from-xml">Parse a typed primitive from XML<a class="headerlink" href="#parse-a-typed-primitive-from-xml" title="Permanent link">&para;</a></h3>
 <p>Pass a type-tagged XML string directly to recover the original SSL value.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseXmlInteger</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseXmlInteger</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sXml</span><span class="p">,</span><span class="w"> </span><span class="n">nValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&lt;int&gt;42&lt;/int&gt;&quot;</span><span class="p">;</span>
@@ -3828,11 +3828,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseXmlInteger&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Parsed value: 42
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Parsed value: 42
 </code></pre></div>
 <h3 id="round-trip-an-array-through-xml">Round-trip an array through XML<a class="headerlink" href="#round-trip-an-array-through-xml" title="Permanent link">&para;</a></h3>
 <p>Use <a href="../ToXml/"><code>ToXml</code></a> to serialize an array and <code>FromXml</code> to restore it, verifying that both values match after the round-trip.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RoundTripArray</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RoundTripArray</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aOriginal</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">,</span><span class="w"> </span><span class="n">aRestored</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aOriginal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">};</span>
@@ -3850,13 +3850,13 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RoundTripArray&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>10
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>10
 20
 30
 </code></pre></div>
 <h3 id="handle-an-invalid-or-unrecognized-xml-tag">Handle an invalid or unrecognized XML tag<a class="headerlink" href="#handle-an-invalid-or-unrecognized-xml-tag" title="Permanent link">&para;</a></h3>
 <p>Catch and report the error when the XML contains an unrecognized tag name.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseXmlWithErrorHandling</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseXmlWithErrorHandling</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sXml</span><span class="p">,</span><span class="w"> </span><span class="n">vResult</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&lt;person&gt;John&lt;/person&gt;&quot;</span><span class="p">;</span>
@@ -3873,7 +3873,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseXmlWithErrorHandling&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../ErrorMes/"><code>ErrorMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Parse failed: Unknown tag &lt;person&gt; in XML structure!
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Parse failed: Unknown tag &lt;person&gt; in XML structure!
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

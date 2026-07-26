@@ -3669,7 +3669,7 @@
 <li>When you need to handle custom row and column separators without writing nested split logic.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">BuildArray2</span><span class="p">(</span><span class="n">sText</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sLineDelimiter</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sColDelimiter</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bCrlfOk</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bTrimSpaces</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">BuildArray2</span><span class="p">(</span><span class="n">sText</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sLineDelimiter</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sColDelimiter</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bCrlfOk</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bTrimSpaces</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3753,7 +3753,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="parse-simple-row-and-column-data">Parse simple row and column data<a class="headerlink" href="#parse-simple-row-and-column-data" title="Permanent link">&para;</a></h3>
 <p>Uses the default <code>";"</code> row delimiter and <code>","</code> column delimiter to parse a semicolon-separated table into three rows, each with three fields.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseSimpleTable</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseSimpleTable</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTableText</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aRow</span><span class="p">,</span><span class="w"> </span><span class="n">nRow</span><span class="p">,</span><span class="w"> </span><span class="n">nCol</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sTableText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Name,Department,Role;Jane Smith,Quality,Analyst;&quot;</span>
@@ -3783,14 +3783,14 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseSimpleTable&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Rows parsed: 3
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Rows parsed: 3
 Row 1: Name | Department | Role
 Row 2: Jane Smith | Quality | Analyst
 Row 3: John Davis | Production | Technician
 </code></pre></div>
 <h3 id="use-custom-delimiters-for-imported-records">Use custom delimiters for imported records<a class="headerlink" href="#use-custom-delimiters-for-imported-records" title="Permanent link">&para;</a></h3>
 <p>Passes <code>"##"</code> as the row separator and <code>"|"</code> as the column separator to parse an import string where standard delimiters are already in the data.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseImportedRecords</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseImportedRecords</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sImportText</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aRow</span><span class="p">,</span><span class="w"> </span><span class="n">nRow</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sImportText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;S-1001|Logged|25.4##S-1002|Pending|18.3##&quot;</span>
@@ -3812,14 +3812,14 @@ Row 3: John Davis | Production | Technician
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseImportedRecords&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Imported records:
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Imported records:
 S-1001 -&gt; Logged -&gt; 25.4
 S-1002 -&gt; Pending -&gt; 18.3
 S-1003 -&gt; Closed -&gt; 22.1
 </code></pre></div>
 <h3 id="preserve-embedded-crlf-inside-a-column-value">Preserve embedded CRLF inside a column value<a class="headerlink" href="#preserve-embedded-crlf-inside-a-column-value" title="Permanent link">&para;</a></h3>
 <p>Sets <code>bCrlfOk := .T.</code> so that the CR/LF inside the first row's notes column is not stripped, while <code>"||ROW||"</code> still splits the two records cleanly.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseRowsWithNotes</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseRowsWithNotes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBatchText</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aRow</span><span class="p">,</span><span class="w"> </span><span class="n">sPreview</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sBatchText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;S-1001|Logged|First note line&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -3842,7 +3842,7 @@ S-1003 -&gt; Closed -&gt; 22.1
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseRowsWithNotes&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Sample: S-1001
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample: S-1001
 Status: Logged
 Notes:
 First note line

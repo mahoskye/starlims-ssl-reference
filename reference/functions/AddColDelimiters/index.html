@@ -4220,7 +4220,7 @@
 <li>When you want to prepare a column array in place before building a SELECT list or export query.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">AddColDelimiters</span><span class="p">(</span><span class="n">sDSN</span><span class="p">,</span><span class="w"> </span><span class="n">aCols</span><span class="p">,</span><span class="w"> </span><span class="n">sTable</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">AddColDelimiters</span><span class="p">(</span><span class="n">sDSN</span><span class="p">,</span><span class="w"> </span><span class="n">aCols</span><span class="p">,</span><span class="w"> </span><span class="n">sTable</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4281,7 +4281,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="qualify-a-list-of-columns">Qualify a list of columns<a class="headerlink" href="#qualify-a-list-of-columns" title="Permanent link">&para;</a></h3>
 <p>Adds table qualification and database-specific delimiters to each column name in place. The exact delimiter characters depend on the DBMS type for the given DSN (for example, <code>[</code> and <code>]</code> for SQL Server).</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildQualifiedColumns</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildQualifiedColumns</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aColumns</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aColumns</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;sample_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sample_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;status&quot;</span><span class="p">};</span>
@@ -4297,13 +4297,13 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildQualifiedColumns&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays (SQL Server example):</p>
-<div class="language-text highlight"><pre><span></span><code>[samples].[sample_id]
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>[samples].[sample_id]
 [samples].[sample_name]
 [samples].[status]
 </code></pre></div>
 <h3 id="prepare-columns-before-joining-them-into-sql">Prepare columns before joining them into SQL<a class="headerlink" href="#prepare-columns-before-joining-them-into-sql" title="Permanent link">&para;</a></h3>
 <p>Qualifies the column array in place, then joins the result into a SELECT list using <a href="../BuildString/"><code>BuildString</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSelectList</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSelectList</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aColumns</span><span class="p">,</span><span class="w"> </span><span class="n">sSelectList</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aColumns</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;sample_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;analysis_date&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;status_code&quot;</span><span class="p">};</span>
@@ -4319,11 +4319,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildSelectList&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays (SQL Server example):</p>
-<div class="language-text highlight"><pre><span></span><code>SELECT [samples].[sample_id], [samples].[analysis_date], [samples].[status_code] FROM samples
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>SELECT [samples].[sample_id], [samples].[analysis_date], [samples].[status_code] FROM samples
 </code></pre></div>
 <h3 id="qualify-columns-without-database-specific-wrappers">Qualify columns without database-specific wrappers<a class="headerlink" href="#qualify-columns-without-database-specific-wrappers" title="Permanent link">&para;</a></h3>
 <p>Passes <a href="../../literals/nil/"><code>NIL</code></a> for <code>sDSN</code> so that no delimiter characters are added and the result uses plain <code>table.column</code> notation.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildPlainQualifiedColumns</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildPlainQualifiedColumns</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aColumns</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aColumns</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;sample_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;result_value&quot;</span><span class="p">};</span>
@@ -4339,7 +4339,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildPlainQualifiedColumns&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>results.sample_id
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>results.sample_id
 results.result_value
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>

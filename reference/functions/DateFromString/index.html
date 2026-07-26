@@ -4363,7 +4363,7 @@
 <li>When strict format matching is preferred over relying on the current SSL date format alone.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DateFromString</span><span class="p">(</span><span class="n">sDateAsString</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">vFormat</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bUseLocalCulture</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bMakeInvariant</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DateFromString</span><span class="p">(</span><span class="n">sDateAsString</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">vFormat</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bUseLocalCulture</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bMakeInvariant</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4468,7 +4468,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="parse-a-date-with-one-explicit-format">Parse a date with one explicit format<a class="headerlink" href="#parse-a-date-with-one-explicit-format" title="Permanent link">&para;</a></h3>
 <p>Parses an ISO-style date string by supplying the exact format, then displays the result using the current SSL date format.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseIsoDate</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseIsoDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDateInput</span><span class="p">,</span><span class="w"> </span><span class="n">dParsedDate</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sDateInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;2026-04-11&quot;</span><span class="p">;</span>
@@ -4482,11 +4482,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseIsoDate&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays (assuming MM/DD/YYYY date format):</p>
-<div class="language-text highlight"><pre><span></span><code>Parsed date: 04/11/2026
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Parsed date: 04/11/2026
 </code></pre></div>
 <h3 id="accept-several-exact-import-formats">Accept several exact import formats<a class="headerlink" href="#accept-several-exact-import-formats" title="Permanent link">&para;</a></h3>
 <p>Parses an imported date field that may arrive in one of several approved formats, using an array of format strings and catching failures with <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseImportedDate</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseImportedDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFormats</span><span class="p">,</span><span class="w"> </span><span class="n">dParsedDate</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sDateInput</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sDateInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;25.04.2024&quot;</span><span class="p">;</span>
@@ -4508,7 +4508,7 @@
 </code></pre></div>
 <h3 id="parse-local-culture-input-and-keep-the-result-unspecified">Parse local-culture input and keep the result unspecified<a class="headerlink" href="#parse-local-culture-input-and-keep-the-result-unspecified" title="Permanent link">&para;</a></h3>
 <p>Passes <a href="../../literals/true/"><code>.T.</code></a> for both <code>bUseLocalCulture</code> and <code>bMakeInvariant</code> to parse a user-entered date string with the current local culture while marking the result as an unspecified date.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseLocalDateForStorage</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseLocalDateForStorage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dParsedDate</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sDateInput</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sDateInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;11/04/2026&quot;</span><span class="p">;</span>

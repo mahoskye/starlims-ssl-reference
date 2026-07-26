@@ -3607,7 +3607,7 @@
 <li>When you need to distinguish a genuine signature mismatch from malformed input by wrapping the call in <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a>.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">VerifySignature</span><span class="p">(</span><span class="n">sCertificateString</span><span class="p">,</span><span class="w"> </span><span class="n">sData</span><span class="p">,</span><span class="w"> </span><span class="n">sSignature</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">VerifySignature</span><span class="p">(</span><span class="n">sCertificateString</span><span class="p">,</span><span class="w"> </span><span class="n">sData</span><span class="p">,</span><span class="w"> </span><span class="n">sSignature</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3693,7 +3693,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="verify-a-signed-payload">Verify a signed payload<a class="headerlink" href="#verify-a-signed-payload" title="Permanent link">&para;</a></h3>
 <p>Check whether a payload signature is valid and branch on the boolean result. The function returns <a href="../../literals/true/"><code>.T.</code></a> only when the signature passes; a mismatch returns <a href="../../literals/false/"><code>.F.</code></a> without raising an error.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">VerifySignedPayload</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">VerifySignedPayload</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCertificate</span><span class="p">,</span><span class="w"> </span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sSignature</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sCertificate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtestcertificate&quot;</span><span class="p">;</span>
@@ -3717,7 +3717,7 @@
 </code></pre></div>
 <h3 id="handle-malformed-partner-input">Handle malformed partner input<a class="headerlink" href="#handle-malformed-partner-input" title="Permanent link">&para;</a></h3>
 <p>Catch malformed certificate or signature data separately from a normal mismatch. A <a href="../../literals/false/"><code>.F.</code></a> result from a well-formed input is handled without a <a href="../../keywords/CATCH/"><code>:CATCH</code></a>; an exception from bad input is handled in the <a href="../../keywords/CATCH/"><code>:CATCH</code></a> block.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidatePartnerMessage</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidatePartnerMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sCertificate</span><span class="p">,</span><span class="w"> </span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sSignature</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
@@ -3746,7 +3746,7 @@
 </code></pre></div>
 <h3 id="verify-multiple-signed-records-in-one-pass">Verify multiple signed records in one pass<a class="headerlink" href="#verify-multiple-signed-records-in-one-pass" title="Permanent link">&para;</a></h3>
 <p>Loop through a batch of signed records, track mismatches, and capture malformed records separately. The third record uses <code>"not-base64"</code> as its signature, which raises an error that lands in the <a href="../../keywords/CATCH/"><code>:CATCH</code></a> block.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditSignedRecords</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditSignedRecords</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCertificate</span><span class="p">,</span><span class="w"> </span><span class="n">aRecords</span><span class="p">,</span><span class="w"> </span><span class="n">aFailedIds</span><span class="p">,</span><span class="w"> </span><span class="n">aErrorIds</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 

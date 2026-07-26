@@ -3606,7 +3606,7 @@
 <li>When you are iterating over a list of property names and reading each one in turn.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">GetInternal</span><span class="p">(</span><span class="n">oTarget</span><span class="p">,</span><span class="w"> </span><span class="n">sPropName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">GetInternal</span><span class="p">(</span><span class="n">oTarget</span><span class="p">,</span><span class="w"> </span><span class="n">sPropName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3685,7 +3685,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="read-a-property-by-name">Read a property by name<a class="headerlink" href="#read-a-property-by-name" title="Permanent link">&para;</a></h3>
 <p>Read a single property from a dynamic object when the property name is known at runtime.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetConfigTimeout</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetConfigTimeout</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oConfig</span><span class="p">,</span><span class="w"> </span><span class="n">sPropName</span><span class="p">,</span><span class="w"> </span><span class="n">nTimeout</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oConfig</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">();</span>
@@ -3703,11 +3703,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetConfigTimeout&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Query timeout: 60
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Query timeout: 60
 </code></pre></div>
 <h3 id="guard-dynamic-reads-with-hasproperty">Guard dynamic reads with <a href="../HasProperty/"><code>HasProperty</code></a><a class="headerlink" href="#guard-dynamic-reads-with-hasproperty" title="Permanent link">&para;</a></h3>
 <p>Check whether each property exists before reading it from a dynamic object.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeSample</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeSample</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oSample</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">,</span><span class="w"> </span><span class="n">vValue</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oSample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">();</span>
@@ -3742,11 +3742,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SummarizeSample&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Sample values: SampleID=LAB-2024-0042, Status=Active, Analyst=JSmith, Priority=&lt;missing&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample values: SampleID=LAB-2024-0042, Status=Active, Analyst=JSmith, Priority=&lt;missing&gt;
 </code></pre></div>
 <h3 id="catch-a-failed-dynamic-lookup">Catch a failed dynamic lookup<a class="headerlink" href="#catch-a-failed-dynamic-lookup" title="Permanent link">&para;</a></h3>
 <p>Handle the runtime error raised when a dynamic object does not contain the requested property.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadOptionalPriority</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadOptionalPriority</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oSample</span><span class="p">,</span><span class="w"> </span><span class="n">sPropName</span><span class="p">,</span><span class="w"> </span><span class="n">vValue</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oSample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">();</span>
@@ -3772,7 +3772,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ReadOptionalPriority&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays when the property is absent:</p>
-<div class="language-text highlight"><pre><span></span><code>Lookup failed: Property not found: Priority.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Lookup failed: Property not found: Priority.
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

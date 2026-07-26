@@ -4250,7 +4250,7 @@
 <li>When you want <a href="../../literals/nil/"><code>NIL</code></a> for zero or negative requested lengths instead of an empty string.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Left</span><span class="p">(</span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="n">nLength</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Left</span><span class="p">(</span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="n">nLength</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4327,7 +4327,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="extract-a-fixed-length-prefix-to-check-against-an-expected-value">Extract a fixed-length prefix to check against an expected value<a class="headerlink" href="#extract-a-fixed-length-prefix-to-check-against-an-expected-value" title="Permanent link">&para;</a></h3>
 <p>Extract the first three characters of a sample ID and compare them to the expected <code>"LAB"</code> prefix. The input <code>"LAB-7829"</code> matches, so the true branch fires.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">sPrefix</span><span class="p">,</span><span class="w"> </span><span class="n">bMatches</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">sPrefix</span><span class="p">,</span><span class="w"> </span><span class="n">bMatches</span><span class="p">;</span>
 
 <span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-7829&quot;</span><span class="p">;</span>
 <span class="n">sPrefix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Left</span><span class="p">(</span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
@@ -4341,7 +4341,7 @@
 </code></pre></div>
 <h3 id="parse-a-fixed-width-record-into-status-code-and-sample-id">Parse a fixed-width record into status code and sample ID<a class="headerlink" href="#parse-a-fixed-width-record-into-status-code-and-sample-id" title="Permanent link">&para;</a></h3>
 <p>Extract the 3-character status code from the start of the record using <code>Left</code>, then read the remaining 11-character sample ID with <a href="../SubStr/"><code>SubStr</code></a>. The record <code>"ACTSAM00012345"</code> produces status <code>"ACT"</code> and sample <code>"SAM00012345"</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseHeader</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseHeader</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sRecord</span><span class="p">,</span><span class="w"> </span><span class="n">sStatusCode</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sRecord</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ACTSAM00012345&quot;</span><span class="p">;</span>
@@ -4358,11 +4358,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseHeader&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Status=ACT, Sample=SAM00012345
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Status=ACT, Sample=SAM00012345
 </code></pre></div>
 <h3 id="truncate-a-caption-to-a-maximum-width-with-an-ellipsis">Truncate a caption to a maximum width with an ellipsis<a class="headerlink" href="#truncate-a-caption-to-a-maximum-width-with-an-ellipsis" title="Permanent link">&para;</a></h3>
 <p>Guard the requested width before appending <code>"..."</code> so the call never concatenates a string with a <a href="../../literals/nil/"><code>NIL</code></a> result from <code>Left</code>. For <code>sCaption = "Hello, World!"</code> and <code>nMaxWidth = 10</code>, the procedure returns <code>"Hello, ..."</code> — the first 7 characters plus the ellipsis, within the 10-character budget.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatCaption</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatCaption</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sCaption</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxWidth</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDisplayCaption</span><span class="p">,</span><span class="w"> </span><span class="n">nPrefixWidth</span><span class="p">;</span>
 

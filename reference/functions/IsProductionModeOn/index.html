@@ -3416,7 +3416,7 @@
 <li>When implementing environment-specific code branches where production configuration requires unique handling.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">IsProductionModeOn</span><span class="p">()</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">IsProductionModeOn</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>This function takes no parameters.</p>
@@ -3446,7 +3446,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="show-a-warning-badge-only-in-production">Show a warning badge only in production<a class="headerlink" href="#show-a-warning-badge-only-in-production" title="Permanent link">&para;</a></h3>
 <p>Display a caution message when the environment is production so users know they are not in a safe sandbox. The message fires only when <code>bIsProduction</code> is <a href="../../literals/true/"><code>.T.</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowProductionBadge</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowProductionBadge</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsProduction</span><span class="p">,</span><span class="w"> </span><span class="n">sBadgeMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bIsProduction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsProductionModeOn</span><span class="p">();</span>
@@ -3462,7 +3462,7 @@
 </code></pre></div>
 <h3 id="suppress-debug-logging-in-production">Suppress debug logging in production<a class="headerlink" href="#suppress-debug-logging-in-production" title="Permanent link">&para;</a></h3>
 <p>Allow detailed trace output only in non-production environments to protect performance and sensitive data. The log entry fires only when <code>bIsProd</code> is <a href="../../literals/false/"><code>.F.</code></a>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogIfNotProduction</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogIfNotProduction</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sModule</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">sLogEntry</span><span class="p">,</span><span class="w"> </span><span class="n">bIsProd</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bIsProd</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsProductionModeOn</span><span class="p">();</span>
@@ -3482,7 +3482,7 @@
 </code></pre></div>
 <h3 id="enforce-role-based-access-in-production">Enforce role-based access in production<a class="headerlink" href="#enforce-role-based-access-in-production" title="Permanent link">&para;</a></h3>
 <p>Apply stricter role validation in production while allowing any user through in non-production. The procedure returns <a href="../../literals/true/"><code>.T.</code></a> if access is granted and <a href="../../literals/false/"><code>.F.</code></a> if it is denied.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateApiEndpoint</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateApiEndpoint</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsProduction</span><span class="p">,</span><span class="w"> </span><span class="n">bAccessGranted</span><span class="p">,</span><span class="w"> </span><span class="n">sEndpoint</span><span class="p">,</span><span class="w"> </span><span class="n">sUserRole</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sRequiredRole</span><span class="p">,</span><span class="w"> </span><span class="n">sValidationMsg</span><span class="p">;</span>
 

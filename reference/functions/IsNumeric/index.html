@@ -3942,7 +3942,7 @@
 <li>When hexadecimal input should be accepted only in specific paths.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">IsNumeric</span><span class="p">(</span><span class="n">sNumber</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bAllowHex</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">IsNumeric</span><span class="p">(</span><span class="n">sNumber</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">bAllowHex</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4014,7 +4014,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="validate-a-text-field-before-conversion">Validate a text field before conversion<a class="headerlink" href="#validate-a-text-field-before-conversion" title="Permanent link">&para;</a></h3>
 <p>Check a user-entered value before converting it to a number. The input <code>"1,234.50"</code> is valid with a thousands separator, so <code>IsNumeric</code> returns <a href="../../literals/true/"><code>.T.</code></a>, the early-return branch is skipped, and <a href="../ToNumeric/"><code>ToNumeric</code></a> converts the string to <code>1234.5</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateNumericInput</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateNumericInput</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">bIsNumeric</span><span class="p">,</span><span class="w"> </span><span class="n">nValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;1,234.50&quot;</span><span class="p">;</span>
@@ -4037,7 +4037,7 @@
 </code></pre></div>
 <h3 id="distinguish-decimal-and-hexadecimal-input">Distinguish decimal and hexadecimal input<a class="headerlink" href="#distinguish-decimal-and-hexadecimal-input" title="Permanent link">&para;</a></h3>
 <p>Check the same value against both decimal and hex modes to route it into the correct conversion path. For <code>"0xFF"</code>, the decimal check fails and the hex check succeeds, so <a href="../ToNumeric/"><code>ToNumeric</code></a> is called with <code>bAllowHex</code> <a href="../../literals/true/"><code>.T.</code></a> and returns <code>255</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseConfigValue</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseConfigValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConfigValue</span><span class="p">,</span><span class="w"> </span><span class="n">bIsDecimal</span><span class="p">,</span><span class="w"> </span><span class="n">bIsHex</span><span class="p">,</span><span class="w"> </span><span class="n">nValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sConfigValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;0xFF&quot;</span><span class="p">;</span>
@@ -4068,7 +4068,7 @@
 </code></pre></div>
 <h3 id="filter-imported-rows-and-collect-invalid-ids-for-review">Filter imported rows and collect invalid IDs for review<a class="headerlink" href="#filter-imported-rows-and-collect-invalid-ids-for-review" title="Permanent link">&para;</a></h3>
 <p>Iterate over a batch of imported rows, use <code>IsNumeric</code> to classify each record ID, and collect failures separately for follow-up. The <code>bAllowHex</code> parameter is forwarded so callers can opt in to hex IDs without changing the validation logic.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CleanImportedSampleData</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CleanImportedSampleData</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aImportedRows</span><span class="p">,</span><span class="w"> </span><span class="n">bAllowHex</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">bAllowHex</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aCleanRows</span><span class="p">,</span><span class="w"> </span><span class="n">aInvalidRows</span><span class="p">,</span><span class="w"> </span><span class="n">sRecordId</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>

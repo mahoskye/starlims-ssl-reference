@@ -3472,7 +3472,7 @@
 <li>When a caller should handle the failure through <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> rather than by checking a return value.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">RaiseError</span><span class="p">(</span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sLocation</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">nErrorCode</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">oInnerException</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">RaiseError</span><span class="p">(</span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sLocation</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">nErrorCode</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">oInnerException</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3553,7 +3553,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="reject-invalid-input">Reject invalid input<a class="headerlink" href="#reject-invalid-input" title="Permanent link">&para;</a></h3>
 <p>Stop processing as soon as a required sample identifier is missing or too short.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateSampleID</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nLength</span><span class="p">,</span><span class="w"> </span><span class="n">sMsg</span><span class="p">;</span>
 
@@ -3575,7 +3575,7 @@
 </code></pre></div>
 <h3 id="wrap-a-lower-level-failure-as-an-inner-exception">Wrap a lower-level failure as an inner exception<a class="headerlink" href="#wrap-a-lower-level-failure-as-an-inner-exception" title="Permanent link">&para;</a></h3>
 <p>Catch a lower-level error, then raise a new one with higher-level context while preserving the original failure as the inner exception.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadSample</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadSample</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;MISSING&quot;</span><span class="p">;</span>
@@ -3605,7 +3605,7 @@
 </code></pre></div>
 <h3 id="inspect-chained-error-details-in-a-central-handler">Inspect chained error details in a central handler<a class="headerlink" href="#inspect-chained-error-details-in-a-central-handler" title="Permanent link">&para;</a></h3>
 <p>Handle a re-raised error centrally and inspect both the top-level error and its inner error.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunBatch</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sLog</span><span class="p">;</span>
 
@@ -3632,7 +3632,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunBatch&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;MISSING&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../ErrorMes/"><code>ErrorMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Message: ProcessSample failed for MISSING
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Message: ProcessSample failed for MISSING
 Operation: ProcessSample
 Code: 5001
 Inner: Sample was not found

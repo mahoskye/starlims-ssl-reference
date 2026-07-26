@@ -4252,7 +4252,7 @@
 <li>When you need to export or log simple table-like data.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">BuildString2</span><span class="p">(</span><span class="n">aTarget</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sLineDelimiter</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sColDelimiter</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">BuildString2</span><span class="p">(</span><span class="n">aTarget</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sLineDelimiter</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sColDelimiter</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4340,7 +4340,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="join-a-small-grid-with-the-default-delimiters">Join a small grid with the default delimiters<a class="headerlink" href="#join-a-small-grid-with-the-default-delimiters" title="Permanent link">&para;</a></h3>
 <p>Uses the default <code>";"</code> row delimiter and <code>","</code> column delimiter to serialize a header-plus-data grid into one string.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowGridAsText</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowGridAsText</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aGrid</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aGrid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{{</span><span class="s2">&quot;Product&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Qty&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Widget&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Gadget&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}};</span>
@@ -4355,11 +4355,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowGridAsText&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Product,Qty;Widget,5;Gadget,3
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Product,Qty;Widget,5;Gadget,3
 </code></pre></div>
 <h3 id="use-custom-row-and-column-delimiters">Use custom row and column delimiters<a class="headerlink" href="#use-custom-row-and-column-delimiters" title="Permanent link">&para;</a></h3>
 <p>Formats three instrument readings for a system that expects one record per line and pipe-separated columns, by passing <code>Chr(13) + Chr(10)</code> as the row delimiter.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportInstrumentRows</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportInstrumentRows</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">sExport</span><span class="p">,</span><span class="w"> </span><span class="n">sLineDelimiter</span><span class="p">,</span><span class="w"> </span><span class="n">sColDelimiter</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
@@ -4382,13 +4382,13 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportInstrumentRows&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>SAM-1001|pH|7.2
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>SAM-1001|pH|7.2
 SAM-1002|Cond|15.8
 SAM-1003|Temp|22.4
 </code></pre></div>
 <h3 id="show-trimming-nil-cells-and-empty-rows">Show trimming, <a href="../../literals/nil/"><code>NIL</code></a> cells, and empty rows<a class="headerlink" href="#show-trimming-nil-cells-and-empty-rows" title="Permanent link">&para;</a></h3>
 <p>Demonstrates trimming, <a href="../../literals/nil/"><code>NIL</code></a> cell handling, and empty-row behavior inherited from <a href="../BuildString/"><code>BuildString</code></a> using a jagged input with a <a href="../../literals/nil/"><code>NIL</code></a> middle cell and an empty row array.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowBuildString2Behavior</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowBuildString2Behavior</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
@@ -4408,7 +4408,7 @@ SAM-1003|Temp|22.4
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowBuildString2Behavior&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>A/NIL/C||D/E
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>A/NIL/C||D/E
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

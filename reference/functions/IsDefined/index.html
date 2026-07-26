@@ -3607,7 +3607,7 @@
 <li>When you need to branch differently depending on whether a setup variable was created.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">IsDefined</span><span class="p">(</span><span class="n">sVarName</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">IsDefined</span><span class="p">(</span><span class="n">sVarName</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3678,7 +3678,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="confirm-a-variable-is-defined-before-reading-it">Confirm a variable is defined before reading it<a class="headerlink" href="#confirm-a-variable-is-defined-before-reading-it" title="Permanent link">&para;</a></h3>
 <p>Check with <code>IsDefined</code> before branching on the variable's value. Because <code>sWorkflowStatus</code> is assigned above the check, the true branch runs and the false branch is shown only for completeness.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckWorkflowStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckWorkflowStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkflowStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">bHasWorkflowStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sWorkflowStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Active&quot;</span><span class="p">;</span>
@@ -3702,7 +3702,7 @@
 </code></pre></div>
 <h3 id="report-which-names-from-a-candidate-list-are-defined">Report which names from a candidate list are defined<a class="headerlink" href="#report-which-names-from-a-candidate-list-are-defined" title="Permanent link">&para;</a></h3>
 <p>Iterate over a list of candidate variable names and build a comma-separated summary of those currently in scope. The single <a href="../UsrMes/"><code>UsrMes</code></a> call at the end shows either the list of available names or a not-defined message.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeAvailableInputs</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeAvailableInputs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aCandidateVars</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sVarName</span><span class="p">,</span><span class="w"> </span><span class="n">sAvailable</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
@@ -3736,11 +3736,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SummarizeAvailableInputs&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">&quot;sCacheKey&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sContextId&quot;</span><span class="p">}});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Available input variables: sCacheKey, sContextId
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Available input variables: sCacheKey, sContextId
 </code></pre></div>
 <h3 id="resolve-the-first-non-empty-variable-from-a-candidate-list">Resolve the first non-empty variable from a candidate list<a class="headerlink" href="#resolve-the-first-non-empty-variable-from-a-candidate-list" title="Permanent link">&para;</a></h3>
 <p>Walk a list of candidate variable names and read the first one that is both defined and non-empty using <a href="../GetByName/"><code>GetByName</code></a>. The <code>IsDefined</code> check prevents <a href="../GetByName/"><code>GetByName</code></a> from raising an error on a missing name.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResolveBatchIdentifier</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResolveBatchIdentifier</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aCandidateVars</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sVarName</span><span class="p">,</span><span class="w"> </span><span class="n">vBatchValue</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">;</span>
 

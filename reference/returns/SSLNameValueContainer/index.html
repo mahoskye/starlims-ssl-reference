@@ -2191,7 +2191,7 @@
 <p>A name/value bag — read or list values from a request's headers, query string, cookies, forms, server variables, or client certificate fields.</p>
 <p>An <code>SSLNameValueContainer</code> is the object returned by six properties on <a href="../SSLRequest/"><code>SSLRequest</code></a>: <code>QueryString</code>, <code>Cookies</code>, <code>Forms</code>, <code>Headers</code>, <code>ServerVariables</code>, and <code>ClientCertificate</code>. Each instance wraps a single name/value collection from the incoming HTTP request. You read individual values by name, list every key, or replace a value.</p>
 <p>Two reading idioms are equivalent for known names:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oContainer</span><span class="p">:</span><span class="nf">Get</span><span class="p">(</span><span class="s2">&quot;SomeName&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">/* explicit method call ;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oContainer</span><span class="p">:</span><span class="nf">Get</span><span class="p">(</span><span class="s2">&quot;SomeName&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">/* explicit method call ;</span>
 <span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oContainer</span><span class="p">:</span><span class="n">SomeName</span><span class="p">;</span><span class="w">          </span><span class="c1">/* expando-style member access ;</span>
 </code></pre></div>
 <p>The expando form is more concise and is the recommended idiom for fixed, known keys (e.g., reading a specific query parameter or header). Use <code>Get</code> when the key is dynamic — the value is in a variable, looped over from <code>AllKeys</code>, etc.</p>
@@ -2310,7 +2310,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="read-one-query-string-value">Read one query-string value<a class="headerlink" href="#read-one-query-string-value" title="Permanent link">&para;</a></h3>
 <p>Reads a single named query parameter from the incoming request.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GreetByName</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GreetByName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oQueryString</span><span class="p">,</span><span class="w"> </span><span class="n">sName</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oQueryString</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">QueryString</span><span class="p">;</span>
@@ -2323,7 +2323,7 @@
 </code></pre></div>
 <h3 id="iterate-every-header">Iterate every header<a class="headerlink" href="#iterate-every-header" title="Permanent link">&para;</a></h3>
 <p>Lists every header on the incoming request, then writes each name/value pair to the response body.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DumpHeaders</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DumpHeaders</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oHeaders</span><span class="p">,</span><span class="w"> </span><span class="n">aKeys</span><span class="p">,</span><span class="w"> </span><span class="n">sKey</span><span class="p">,</span><span class="w"> </span><span class="n">sValue</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oHeaders</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">Headers</span><span class="p">;</span>
@@ -2340,7 +2340,7 @@
 </code></pre></div>
 <h3 id="read-a-cookie-with-a-dynamic-key">Read a cookie with a dynamic key<a class="headerlink" href="#read-a-cookie-with-a-dynamic-key" title="Permanent link">&para;</a></h3>
 <p>Looks up a cookie whose name comes from another piece of state, so the expando form is not appropriate.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadDynamicCookie</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadDynamicCookie</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oCookies</span><span class="p">,</span><span class="w"> </span><span class="n">sCookieName</span><span class="p">,</span><span class="w"> </span><span class="n">sValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sCookieName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;session_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">UserName</span><span class="p">;</span>

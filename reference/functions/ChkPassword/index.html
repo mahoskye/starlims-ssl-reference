@@ -3585,7 +3585,7 @@
 <li>When your script accepts either standard application credentials or <code>DOMAIN\user</code> style input.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">ChkPassword</span><span class="p">([</span><span class="n">sUserName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sPassword</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ChkPassword</span><span class="p">([</span><span class="n">sUserName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sPassword</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3643,7 +3643,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="validate-credentials-from-a-login-form">Validate credentials from a login form<a class="headerlink" href="#validate-credentials-from-a-login-form" title="Permanent link">&para;</a></h3>
 <p>Validates a user name and password passed as procedure parameters and displays an accepted or rejected message based on the result.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateLogin</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateLogin</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
@@ -3664,13 +3664,13 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateLogin&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SecurePass123&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays one of:</p>
-<div class="language-text highlight"><pre><span></span><code>Credentials accepted for jsmith
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Credentials accepted for jsmith
 </code></pre></div>
-<div class="language-text highlight"><pre><span></span><code>Credentials were not accepted for jsmith
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Credentials were not accepted for jsmith
 </code></pre></div>
 <h3 id="re-authenticate-the-current-session-user">Re-authenticate the current session user<a class="headerlink" href="#re-authenticate-the-current-session-user" title="Permanent link">&para;</a></h3>
 <p>Passes <a href="../../literals/nil/"><code>NIL</code></a> for <code>sUserName</code> so <code>ChkPassword</code> uses the current session user from <a href="../GetUserData/"><code>GetUserData</code></a>, and displays the result.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConfirmCurrentUser</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConfirmCurrentUser</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bConfirmed</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">;</span>
 
@@ -3690,13 +3690,13 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ConfirmCurrentUser&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SecurePass123&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays one of:</p>
-<div class="language-text highlight"><pre><span></span><code>Re-authentication succeeded for jsmith
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Re-authentication succeeded for jsmith
 </code></pre></div>
-<div class="language-text highlight"><pre><span></span><code>Re-authentication failed for jsmith
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Re-authentication failed for jsmith
 </code></pre></div>
 <h3 id="accept-domain-qualified-or-application-credentials">Accept domain-qualified or application credentials<a class="headerlink" href="#accept-domain-qualified-or-application-credentials" title="Permanent link">&para;</a></h3>
 <p>Accepts either a <code>DOMAIN\user</code> name or a plain application user name, then calls <a href="../SetUserPassword/"><code>SetUserPassword</code></a> only when the credential check succeeds.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ChangePasswordAfterCheck</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ChangePasswordAfterCheck</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bAuthenticated</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredHash</span><span class="p">;</span>
 
@@ -3723,11 +3723,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ChangePasswordAfterCheck&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;OldPass123&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;NewSecurePass!&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> or <a href="../ErrorMes/"><code>ErrorMes</code></a> displays one of:</p>
-<div class="language-text highlight"><pre><span></span><code>Current credentials were not accepted.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Current credentials were not accepted.
 </code></pre></div>
-<div class="language-text highlight"><pre><span></span><code>Password update did not complete.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Password update did not complete.
 </code></pre></div>
-<div class="language-text highlight"><pre><span></span><code>Password updated successfully for jsmith
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Password updated successfully for jsmith
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

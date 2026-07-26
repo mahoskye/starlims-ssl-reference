@@ -4251,7 +4251,7 @@
 <li>When you want a simpler alternative to <a href="../SubStr/"><code>SubStr</code></a> for trailing extraction.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">Right</span><span class="p">(</span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="n">nLength</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Right</span><span class="p">(</span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="n">nLength</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4330,7 +4330,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="check-a-trailing-suffix">Check a trailing suffix<a class="headerlink" href="#check-a-trailing-suffix" title="Permanent link">&para;</a></h3>
 <p>Use <code>Right</code> to compare the final characters of a sample ID with an expected suffix.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">sSuffix</span><span class="p">,</span><span class="w"> </span><span class="n">bArchived</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">sSuffix</span><span class="p">,</span><span class="w"> </span><span class="n">bArchived</span><span class="p">;</span>
 
 <span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;QC-2024-ARCH&quot;</span><span class="p">;</span>
 <span class="n">sSuffix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Right</span><span class="p">(</span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
@@ -4344,7 +4344,7 @@
 </code></pre></div>
 <h3 id="mask-all-but-the-last-four-characters">Mask all but the last four characters<a class="headerlink" href="#mask-all-but-the-last-four-characters" title="Permanent link">&para;</a></h3>
 <p>Extract the trailing four characters for display while keeping the rest of the value masked.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatMaskedCode</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatMaskedCode</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sUserCode</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMaskedCode</span><span class="p">,</span><span class="w"> </span><span class="n">sLastFour</span><span class="p">;</span>
 
@@ -4363,11 +4363,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FormatMaskedCode&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LIMS-9876&quot;</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Project code: ****9876
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Project code: ****9876
 </code></pre></div>
 <h3 id="parse-fields-from-a-fixed-width-record">Parse fields from a fixed-width record<a class="headerlink" href="#parse-fields-from-a-fixed-width-record" title="Permanent link">&para;</a></h3>
 <p>Read multiple right-aligned fields from the end of a fixed-width record by peeling each segment off the right using <code>Right</code> and <a href="../Left/"><code>Left</code></a> in combination.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseRightAlignedRecord</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseRightAlignedRecord</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sRecord</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sRegionCode</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleNo</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nStatusLen</span><span class="p">,</span><span class="w"> </span><span class="n">nRegionLen</span><span class="p">;</span>
 
@@ -4390,7 +4390,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseRightAlignedRecord&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Sample=000145, Region=EU, Status=OK
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample=000145, Region=EU, Status=OK
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

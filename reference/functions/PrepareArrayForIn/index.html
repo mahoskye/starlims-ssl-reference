@@ -4266,7 +4266,7 @@
 <li>When you are pairing the result with helpers such as <a href="../BuildStringForIn/"><code>BuildStringForIn</code></a> or with positional <code>?</code> placeholders built to match the array length.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">PrepareArrayForIn</span><span class="p">(</span><span class="n">aTarget</span><span class="p">,</span><span class="w"> </span><span class="n">sItemType</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">PrepareArrayForIn</span><span class="p">(</span><span class="n">aTarget</span><span class="p">,</span><span class="w"> </span><span class="n">sItemType</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4345,7 +4345,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="prepare-an-empty-array-for-an-in-filter">Prepare an empty array for an <code>IN (...)</code> filter<a class="headerlink" href="#prepare-an-empty-array-for-an-in-filter" title="Permanent link">&para;</a></h3>
 <p><code>PrepareArrayForIn</code> adds a string sentinel to the empty array so <a href="../BuildStringForIn/"><code>BuildStringForIn</code></a> still produces a valid <code>IN (...)</code> clause that matches no real rows.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildEmptySampleFilter</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildEmptySampleFilter</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIDs</span><span class="p">,</span><span class="w"> </span><span class="n">sInClause</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aSampleIDs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
@@ -4369,7 +4369,7 @@
 </code></pre></div>
 <h3 id="replace-empty-string-elements-in-a-populated-array">Replace empty-string elements in a populated array<a class="headerlink" href="#replace-empty-string-elements-in-a-populated-array" title="Permanent link">&para;</a></h3>
 <p>The array already has elements, so <code>PrepareArrayForIn</code> only replaces the <code>""</code> entry with the string sentinel. The <code>"numeric"</code> type argument has no effect on a populated array.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeExistingFilter</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeExistingFilter</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIDs</span><span class="p">,</span><span class="w"> </span><span class="n">sInClause</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aSampleIDs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SAM-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAM-003&quot;</span><span class="p">};</span>
@@ -4387,7 +4387,7 @@
 </code></pre></div>
 <h3 id="keep-a-parameterized-in-query-valid-when-the-input-array-is-empty">Keep a parameterized <code>IN</code> query valid when the input array is empty<a class="headerlink" href="#keep-a-parameterized-in-query-valid-when-the-input-array-is-empty" title="Permanent link">&para;</a></h3>
 <p>When <code>aOrderIDs</code> arrives empty, <code>PrepareArrayForIn</code> adds a numeric sentinel (<code>-2147483648</code>) so the placeholder list has exactly one <code>?</code>. The resulting query executes but matches no rows.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetOrdersByIDList</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetOrdersByIDList</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aOrderIDs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTemp</span><span class="p">,</span><span class="w"> </span><span class="n">sPlaceholders</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
 

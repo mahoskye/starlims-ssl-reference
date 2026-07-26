@@ -4110,7 +4110,7 @@
 <li>When you need a structured return shape instead of parsing Documentum results manually.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocGetMetadata</span><span class="p">(</span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sAttributes</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocGetMetadata</span><span class="p">(</span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sAttributes</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4226,7 +4226,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="list-all-metadata-name-and-value-pairs">List all metadata name and value pairs<a class="headerlink" href="#list-all-metadata-name-and-value-pairs" title="Permanent link">&para;</a></h3>
 <p>Requests all metadata for a document, checks <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> on an empty result to distinguish a backend failure from an object with no attributes, and prints each name-value pair.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListDocumentMetadata</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListDocumentMetadata</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="n">aMetadata</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sLine</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sObjId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;0900000180001234&quot;</span><span class="p">;</span>
@@ -4267,7 +4267,7 @@
 </code></pre></div>
 <h3 id="request-a-specific-attribute-subset">Request a specific attribute subset<a class="headerlink" href="#request-a-specific-attribute-subset" title="Permanent link">&para;</a></h3>
 <p>Passes a comma-separated attribute list to restrict the result to two fields, then reads each row's attribute name to extract the <code>author</code> and <code>r_creation_date</code> values.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSelectedMetadata</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSelectedMetadata</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="n">sAttrs</span><span class="p">,</span><span class="w"> </span><span class="n">aMetadata</span><span class="p">,</span><span class="w"> </span><span class="n">sAuthor</span><span class="p">,</span><span class="w"> </span><span class="n">sCreatedOn</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sObjId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;0900000180001234&quot;</span><span class="p">;</span>
@@ -4310,7 +4310,7 @@
 </code></pre></div>
 <h3 id="audit-attribute-definitions-in-the-returned-rows">Audit attribute definitions in the returned rows<a class="headerlink" href="#audit-attribute-definitions-in-the-returned-rows" title="Permanent link">&para;</a></h3>
 <p>Fetches all metadata, counts how many attributes are repeating and how many have a declared length greater than 255, and displays a summary line using the type-code and length columns.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditMetadataShape</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditMetadataShape</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sObjId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aMetadata</span><span class="p">,</span><span class="w"> </span><span class="n">nRepeating</span><span class="p">,</span><span class="w"> </span><span class="n">nLongFields</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
 

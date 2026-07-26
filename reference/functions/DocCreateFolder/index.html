@@ -3941,7 +3941,7 @@
   backend defaults.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocCreateFolder</span><span class="p">(</span><span class="n">sParentPath</span><span class="p">,</span><span class="w"> </span><span class="n">sFolderName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sAcl</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocCreateFolder</span><span class="p">(</span><span class="n">sParentPath</span><span class="p">,</span><span class="w"> </span><span class="n">sFolderName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sAcl</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4025,7 +4025,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="create-one-folder-and-verify-the-result">Create one folder and verify the result<a class="headerlink" href="#create-one-folder-and-verify-the-result" title="Permanent link">&para;</a></h3>
 <p>Creates a single folder under a known parent path and checks the Documentum failure state when the return value is empty.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateCustomerCaseFolder</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateCustomerCaseFolder</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sParentPath</span><span class="p">,</span><span class="w"> </span><span class="n">sFolderName</span><span class="p">,</span><span class="w"> </span><span class="n">sCreateResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sParentPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/Cases/CustomerCases&quot;</span><span class="p">;</span>
@@ -4053,7 +4053,7 @@
 </code></pre></div>
 <h3 id="create-several-folders-with-per-folder-acl-values">Create several folders with per-folder ACL values<a class="headerlink" href="#create-several-folders-with-per-folder-acl-values" title="Permanent link">&para;</a></h3>
 <p>Iterates a list of project names, creates each folder under a shared base path with a project-specific ACL, and collects failure objects for any empty results.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SetupProjectFolders</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SetupProjectFolders</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBasePath</span><span class="p">,</span><span class="w"> </span><span class="n">sProjectName</span><span class="p">,</span><span class="w"> </span><span class="n">sAcl</span><span class="p">,</span><span class="w"> </span><span class="n">sCreateResult</span><span class="p">,</span><span class="w"> </span><span class="n">sFolderPath</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aProjects</span><span class="p">,</span><span class="w"> </span><span class="n">aFailures</span><span class="p">,</span><span class="w"> </span><span class="n">oFailure</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
@@ -4096,7 +4096,7 @@
 </code></pre></div>
 <h3 id="validate-inputs-and-handle-both-raised-and-backend-failures">Validate inputs and handle both raised and backend failures<a class="headerlink" href="#validate-inputs-and-handle-both-raised-and-backend-failures" title="Permanent link">&para;</a></h3>
 <p>Guards against blank path or name inputs, wraps the call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle a raised SSL exception, and then inspects the Documentum failure state for an empty result.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateDynamicFolder</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateDynamicFolder</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sParentPath</span><span class="p">,</span><span class="w"> </span><span class="n">sFolderName</span><span class="p">,</span><span class="w"> </span><span class="n">sAcl</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sParentPath</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/TestCabinet&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sFolderName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>

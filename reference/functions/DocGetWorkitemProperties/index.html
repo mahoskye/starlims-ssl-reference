@@ -4108,7 +4108,7 @@
 <li>When you need the IDs of documents attached to a work item package.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocGetWorkitemProperties</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocGetWorkitemProperties</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4206,7 +4206,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="read-the-three-workflow-flags">Read the three workflow flags<a class="headerlink" href="#read-the-three-workflow-flags" title="Permanent link">&para;</a></h3>
 <p>Reads the first three elements of the properties array and displays each as a boolean, showing whether delegation, repeatability, and sign-off are active for the current user.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowWorkitemFlags</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowWorkitemFlags</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">aProps</span><span class="p">,</span><span class="w"> </span><span class="n">bCanDelegate</span><span class="p">,</span><span class="w"> </span><span class="n">bCanRepeat</span><span class="p">,</span><span class="w"> </span><span class="n">bNeedsSignOff</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;0900001280001234&quot;</span><span class="p">;</span>
@@ -4229,7 +4229,7 @@
 </code></pre></div>
 <h3 id="list-linked-document-ids">List linked document IDs<a class="headerlink" href="#list-linked-document-ids" title="Permanent link">&para;</a></h3>
 <p>Checks <a href="../ALen/"><code>ALen</code></a> to detect when no packages are attached, then iterates from position 4 onward to print each linked document ID.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListWorkitemDocuments</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListWorkitemDocuments</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aProps</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
@@ -4253,7 +4253,7 @@
 </code></pre></div>
 <h3 id="route-follow-up-logic-from-the-returned-values">Route follow-up logic from the returned values<a class="headerlink" href="#route-follow-up-logic-from-the-returned-values" title="Permanent link">&para;</a></h3>
 <p>Reads the three boolean flags and the document count, then selects a workflow route based on sign-off, delegation, repeatability, and document presence. Uses <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle work items that are missing or inaccessible.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">EvaluateWorkitemRouting</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">EvaluateWorkitemRouting</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aProps</span><span class="p">,</span><span class="w"> </span><span class="n">bCanDelegate</span><span class="p">,</span><span class="w"> </span><span class="n">bCanRepeat</span><span class="p">,</span><span class="w"> </span><span class="n">bNeedsSignOff</span><span class="p">,</span><span class="w"> </span><span class="n">nDocCount</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sRoute</span><span class="p">;</span>

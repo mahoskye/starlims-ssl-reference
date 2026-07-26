@@ -4250,7 +4250,7 @@
 <li>When matching values that may arrive with inconsistent casing.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">LLower</span><span class="p">(</span><span class="n">sSource</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LLower</span><span class="p">(</span><span class="n">sSource</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4314,7 +4314,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="compare-a-user-provided-login-to-a-stored-username">Compare a user-provided login to a stored username<a class="headerlink" href="#compare-a-user-provided-login-to-a-stored-username" title="Permanent link">&para;</a></h3>
 <p>Lowercase both values before comparing so that <code>"JSmith"</code> matches <code>"jsmith"</code> regardless of how the user typed the name.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateLogin</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateLogin</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredUsername</span><span class="p">,</span><span class="w"> </span><span class="n">sInputLower</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredLower</span><span class="p">,</span><span class="w"> </span><span class="n">bMatch</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;JSmith&quot;</span><span class="p">;</span>
@@ -4334,11 +4334,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateLogin&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Names match: True
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Names match: True
 </code></pre></div>
 <h3 id="validate-a-status-code-regardless-of-input-casing">Validate a status code regardless of input casing<a class="headerlink" href="#validate-a-status-code-regardless-of-input-casing" title="Permanent link">&para;</a></h3>
 <p>Trim and lowercase the incoming status before checking it against a fixed list, so that <code>"Active"</code>, <code>"ACTIVE"</code>, and <code>"active"</code> all pass. Values not in the list are rejected by using the original unmodified input in the message.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateSampleStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateSampleStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatusCode</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sNormalizedStatus</span><span class="p">,</span><span class="w"> </span><span class="n">aValidStatuses</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
 
@@ -4361,7 +4361,7 @@
 </code></pre></div>
 <h3 id="normalize-a-batch-of-codes-to-lowercase">Normalize a batch of codes to lowercase<a class="headerlink" href="#normalize-a-batch-of-codes-to-lowercase" title="Permanent link">&para;</a></h3>
 <p>Trim whitespace and lowercase all entries in an array in a single loop, producing <code>{"abc-01", "def-02", "ghi-03"}</code> from the raw input so it is ready for storage or comparison.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeCodes</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeCodes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRawCodes</span><span class="p">,</span><span class="w"> </span><span class="n">aNormalizedCodes</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRawCodes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot; AbC-01 &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;def-02&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;GHI-03 &quot;</span><span class="p">};</span>

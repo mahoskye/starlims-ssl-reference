@@ -4227,7 +4227,7 @@
 <li>When preparing redirect targets or download links that include spaces or reserved characters.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">UrlEncode</span><span class="p">(</span><span class="n">sData</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">UrlEncode</span><span class="p">(</span><span class="n">sData</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4287,7 +4287,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="add-user-input-to-a-query-string">Add user input to a query string<a class="headerlink" href="#add-user-input-to-a-query-string" title="Permanent link">&para;</a></h3>
 <p>Encode one dynamic value before appending it to a query string. Spaces become <a href="../../operators/plus/"><code>+</code></a> and special characters such as <code>'</code> and <a href="../../operators/and/"><code>&amp;</code></a> become percent-encoded sequences.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSearchUrl</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSearchUrl</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCompanyName</span><span class="p">,</span><span class="w"> </span><span class="n">sEncodedCompany</span><span class="p">,</span><span class="w"> </span><span class="n">sBaseUrl</span><span class="p">,</span><span class="w"> </span><span class="n">sUrl</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sCompanyName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;O&#39;Reilly &amp; Associates&quot;</span><span class="p">;</span>
@@ -4305,11 +4305,11 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildSearchUrl&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>https://example.com/api/search?company=O%27Reilly+%26+Associates
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>https://example.com/api/search?company=O%27Reilly+%26+Associates
 </code></pre></div>
 <h3 id="encode-multiple-query-parameter-values">Encode multiple query parameter values<a class="headerlink" href="#encode-multiple-query-parameter-values" title="Permanent link">&para;</a></h3>
 <p>Encode each user-supplied value separately before building the final URL. Encoding values one at a time prevents accidental double-encoding of the <a href="../../operators/and/"><code>&amp;</code></a> separator.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildOrderLookupUrl</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildOrderLookupUrl</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sOrderNo</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sEncodedOrderNo</span><span class="p">,</span><span class="w"> </span><span class="n">sEncodedStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sUrl</span><span class="p">;</span>
 
@@ -4327,7 +4327,7 @@
 </code></pre></div>
 <h3 id="encode-optional-filters-and-path-segments">Encode optional filters and path segments<a class="headerlink" href="#encode-optional-filters-and-path-segments" title="Permanent link">&para;</a></h3>
 <p>Combine required path segments with an optional query value while preserving <a href="../../literals/nil/"><code>NIL</code></a> behavior for the optional input. When <code>sFilter</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the URL omits the filter parameter entirely.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildDownloadUrl</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildDownloadUrl</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sFolderName</span><span class="p">,</span><span class="w"> </span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sFilter</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFolderSegment</span><span class="p">,</span><span class="w"> </span><span class="n">sFileSegment</span><span class="p">,</span><span class="w"> </span><span class="n">sUrl</span><span class="p">,</span><span class="w"> </span><span class="n">sEncodedFilter</span><span class="p">;</span>
 

@@ -3550,7 +3550,7 @@
 <li>When your workflow needs to inspect <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> after a launch failure.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">RunApp</span><span class="p">(</span><span class="n">sApplication</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sArguments</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">RunApp</span><span class="p">(</span><span class="n">sApplication</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sArguments</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3622,7 +3622,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="run-a-tool-and-wait-for-completion">Run a tool and wait for completion<a class="headerlink" href="#run-a-tool-and-wait-for-completion" title="Permanent link">&para;</a></h3>
 <p>Start a known executable, wait for it to finish, then continue the SSL workflow.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GeneratePdfReport</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GeneratePdfReport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sApp</span><span class="p">,</span><span class="w"> </span><span class="n">sArgs</span><span class="p">,</span><span class="w"> </span><span class="n">bFinished</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sApp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\Tools\DocConverter.exe&quot;</span><span class="p">;</span>
@@ -3643,7 +3643,7 @@
 </code></pre></div>
 <h3 id="report-the-launch-error-after-a-failed-start">Report the launch error after a failed start<a class="headerlink" href="#report-the-launch-error-after-a-failed-start" title="Permanent link">&para;</a></h3>
 <p>Wait for a command-line tool to finish, and surface the last SSL error when the process could not be created.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportAuditData</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportAuditData</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sApp</span><span class="p">,</span><span class="w"> </span><span class="n">sArgs</span><span class="p">,</span><span class="w"> </span><span class="n">bFinished</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sApp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\Program Files\Acme Tools\AuditExport.exe&quot;</span><span class="p">;</span>
@@ -3668,7 +3668,7 @@
 </code></pre></div>
 <h3 id="pass-the-full-command-line-in-sapplication">Pass the full command line in <code>sApplication</code><a class="headerlink" href="#pass-the-full-command-line-in-sapplication" title="Permanent link">&para;</a></h3>
 <p>Omit <code>sArguments</code> and let <code>RunApp</code> split a quoted executable path from the rest of the command line before launching the process.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LaunchQuotedCommand</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LaunchQuotedCommand</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCommand</span><span class="p">,</span><span class="w"> </span><span class="n">bFinished</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sCommand</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">&#39;</span><span class="s2">&quot;C:\Program Files\Acme Tools\Exporter.exe&quot;</span><span class="w"> </span><span class="o">/</span><span class="n">mode</span><span class="w"> </span><span class="n">sync</span><span class="w"> </span><span class="o">/</span><span class="n">batch</span><span class="w"> </span><span class="n">B</span><span class="o">-</span><span class="mi">1042</span><span class="err">&#39;</span><span class="p">;</span>

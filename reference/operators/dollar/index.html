@@ -2727,7 +2727,7 @@ operand is the substring to look for, and the right operand is the string to sea
 <li>When distinguishing from prefix-matching (<a href="../equals/"><code>=</code></a>) is important.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="n">bResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">needle</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">haystack</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">bResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">needle</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">haystack</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="type-behavior">Type behavior<a class="headerlink" href="#type-behavior" title="Permanent link">&para;</a></h2>
 <table>
@@ -2790,7 +2790,7 @@ operand is the substring to look for, and the right operand is the string to sea
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="basic-substring-containment">Basic substring containment<a class="headerlink" href="#basic-substring-containment" title="Permanent link">&para;</a></h3>
 <p>Searches for <code>"quick"</code> inside <code>sText</code>. The substring is present, so <code>bFound</code> is <a href="../../literals/true/"><code>.T.</code></a> and the found branch runs.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckSubstring</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckSubstring</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sText</span><span class="p">,</span><span class="w"> </span><span class="n">sSearch</span><span class="p">,</span><span class="w"> </span><span class="n">bFound</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;The quick brown fox&quot;</span><span class="p">;</span>
@@ -2811,11 +2811,11 @@ operand is the substring to look for, and the right operand is the string to sea
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckSubstring&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Substring found
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Substring found
 </code></pre></div>
 <h3 id="operand-order-and-case-sensitivity">Operand order and case sensitivity<a class="headerlink" href="#operand-order-and-case-sensitivity" title="Permanent link">&para;</a></h3>
 <p>Demonstrates that <code>$</code> requires the search term on the left and that matching is case-sensitive. <code>"sample"</code> (lowercase) does not match even though <code>"Sample"</code> does.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DollarOperandOrder</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DollarOperandOrder</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sHaystack</span><span class="p">,</span><span class="w"> </span><span class="n">sNeedle</span><span class="p">,</span><span class="w"> </span><span class="n">bFound</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sHaystack</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Laboratory Sample Analysis&quot;</span><span class="p">;</span>
@@ -2840,14 +2840,14 @@ operand is the substring to look for, and the right operand is the string to sea
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DollarOperandOrder&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Needle in haystack: .T.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Needle in haystack: .T.
 Haystack in needle: .F.
 Lowercase search: .F.
 Matching case search: .T.
 </code></pre></div>
 <h3 id="converting-a-number-before-searching">Converting a number before searching<a class="headerlink" href="#converting-a-number-before-searching" title="Permanent link">&para;</a></h3>
 <p>Converts <code>nBatchNo</code> to a string with <a href="../../functions/LimsString/"><code>LimsString</code></a> before using <code>$</code>, then catches the error produced when an unconverted object is used as the right operand.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SafeDollarComparison</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SafeDollarComparison</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sText</span><span class="p">,</span><span class="w"> </span><span class="n">nBatchNo</span><span class="p">,</span><span class="w"> </span><span class="n">vValue</span><span class="p">,</span><span class="w"> </span><span class="n">bFound</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Batch 12345 released&quot;</span><span class="p">;</span>
@@ -2874,7 +2874,7 @@ Matching case search: .T.
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SafeDollarComparison&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> first displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Explicit conversion result: .T.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Explicit conversion result: .T.
 </code></pre></div>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>

@@ -4024,7 +4024,7 @@
   ACL creation.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DocCreateACL</span><span class="p">(</span><span class="n">sAclName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sDescription</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aGroups</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocCreateACL</span><span class="p">(</span><span class="n">sAclName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sDescription</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">aGroups</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4103,7 +4103,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="create-an-acl-by-name-only">Create an ACL by name only<a class="headerlink" href="#create-an-acl-by-name-only" title="Permanent link">&para;</a></h3>
 <p>Creates a named ACL with no description or group list and displays either the returned ACL identifier or an error when the result is empty.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateLabDocumentsAcl</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateLabDocumentsAcl</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAclId</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sAclId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocCreateACL</span><span class="p">(</span><span class="s2">&quot;LabDocumentsACL&quot;</span><span class="p">);</span>
@@ -4123,7 +4123,7 @@
 </code></pre></div>
 <h3 id="create-an-acl-with-a-description-and-initial-group-list">Create an ACL with a description and initial group list<a class="headerlink" href="#create-an-acl-with-a-description-and-initial-group-list" title="Permanent link">&para;</a></h3>
 <p>Builds the ACL name and description from a project code parameter, passes an initial group list, and displays the result or an error when the return value is empty.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateProjectAcl</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateProjectAcl</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sProjectCode</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAclName</span><span class="p">,</span><span class="w"> </span><span class="n">sDescription</span><span class="p">,</span><span class="w"> </span><span class="n">sAclId</span><span class="p">,</span><span class="w"> </span><span class="n">aGroups</span><span class="p">;</span>
 
@@ -4150,7 +4150,7 @@
 </code></pre></div>
 <h3 id="validate-inputs-and-inspect-the-backend-failure-state-on-an-empty-result">Validate inputs and inspect the backend failure state on an empty result<a class="headerlink" href="#validate-inputs-and-inspect-the-backend-failure-state-on-an-empty-result" title="Permanent link">&para;</a></h3>
 <p>Guards against an empty ACL name, strips blank group names from the input array, then calls the function and reads the Documentum failure state when the result is empty.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateAclSafely</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateAclSafely</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sAclName</span><span class="p">,</span><span class="w"> </span><span class="n">sDescription</span><span class="p">,</span><span class="w"> </span><span class="n">aGroups</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aCleanGroups</span><span class="p">,</span><span class="w"> </span><span class="n">sAclId</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">,</span><span class="w"> </span><span class="n">sGroup</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>

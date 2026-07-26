@@ -3941,7 +3941,7 @@
 <li>When implementing low-level algorithms that require manipulation of bits within integers, such as cryptography, compression, or protocol handling.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">_AND</span><span class="p">(</span><span class="n">nValue1</span><span class="p">,</span><span class="w"> </span><span class="n">nValue2</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">_AND</span><span class="p">(</span><span class="n">nValue1</span><span class="p">,</span><span class="w"> </span><span class="n">nValue2</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4020,7 +4020,7 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="mask-permission-flags">Mask permission flags<a class="headerlink" href="#mask-permission-flags" title="Permanent link">&para;</a></h3>
 <p>Checks a permission integer where bit 0 is read, bit 1 is write, and bit 2 is delete. Masking <code>nUserPermissions = 5</code> (binary <code>101</code>) against each bit constant shows which permissions are set.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckUserPermission</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckUserPermission</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nUserPermissions</span><span class="p">,</span><span class="w"> </span><span class="n">nReadPermission</span><span class="p">,</span><span class="w"> </span><span class="n">nWritePermission</span><span class="p">,</span><span class="w"> </span><span class="n">nDeletePermission</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bCanRead</span><span class="p">,</span><span class="w"> </span><span class="n">bCanWrite</span><span class="p">,</span><span class="w"> </span><span class="n">bCanDelete</span><span class="p">;</span>
 
@@ -4042,13 +4042,13 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckUserPermission&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>User has Read: .T.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>User has Read: .T.
 User has Write: .F.
 User has Delete: .T.
 </code></pre></div>
 <h3 id="extract-fields-from-a-packed-integer">Extract fields from a packed integer<a class="headerlink" href="#extract-fields-from-a-packed-integer" title="Permanent link">&para;</a></h3>
 <p>Extracts three byte-sized fields from <code>nPackedData = 197631</code> (0x303FF) using byte masks and right-shift. Each mask isolates one byte; the shift moves it to the low position before converting to a readable value.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExtractPackedFields</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExtractPackedFields</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPackedData</span><span class="p">,</span><span class="w"> </span><span class="n">nStatusCode</span><span class="p">,</span><span class="w"> </span><span class="n">nPriority</span><span class="p">,</span><span class="w"> </span><span class="n">nCategory</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sResult</span><span class="p">,</span><span class="w"> </span><span class="n">nMaskLow</span><span class="p">,</span><span class="w"> </span><span class="n">nMaskMid</span><span class="p">,</span><span class="w"> </span><span class="n">nMaskHigh</span><span class="p">;</span>
 
@@ -4073,11 +4073,11 @@ User has Delete: .T.
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExtractPackedFields&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Status: 255 Priority: 3 Category: 3
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Status: 255 Priority: 3 Category: 3
 </code></pre></div>
 <h3 id="decode-protocol-flags-from-a-packet-byte">Decode protocol flags from a packet byte<a class="headerlink" href="#decode-protocol-flags-from-a-packet-byte" title="Permanent link">&para;</a></h3>
 <p>Decodes <code>nPacket = 219</code> (binary <code>11011011</code>) into version (bits 0–2), encryption flag (bit 3), compression flag (bit 4), and priority (bits 5–7). Each mask isolates its field; the priority field is shifted right to normalize it.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DecodeProtocolFlags</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DecodeProtocolFlags</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPacket</span><span class="p">,</span><span class="w"> </span><span class="n">nVersion</span><span class="p">,</span><span class="w"> </span><span class="n">nEncrypted</span><span class="p">,</span><span class="w"> </span><span class="n">nCompressed</span><span class="p">,</span><span class="w"> </span><span class="n">nPriority</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sReport</span><span class="p">;</span>
 
@@ -4101,7 +4101,7 @@ User has Delete: .T.
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DecodeProtocolFlags&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Packet Flags Decoded
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Packet Flags Decoded
 Version: 3
 Encrypted: Yes
 Compressed: Yes

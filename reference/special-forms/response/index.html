@@ -2063,13 +2063,13 @@
 <p>The value is an <a href="../../returns/SSLResponse/"><code>SSLResponse</code></a> — set its properties (<code>ContentType</code>, <code>StatusCode</code>) and call its methods (<code>Write</code>, <code>Redirect</code>, <code>AddHeader</code>, <code>AddCookie</code>, <code>End</code>) to shape the response. When the script is invoked as a web service, the value is the <a href="../../returns/SSLWsResponse/"><code>SSLWsResponse</code></a> subclass, which adds a <code>Value</code> property used to return a structured result instead of writing a body.</p>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
 <p><code>Response</code> has no declaration syntax — it is an ambient identifier the runtime makes available by name. Reference it directly:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="n">Response</span><span class="p">:</span><span class="n">PropertyName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">Response</span><span class="p">:</span><span class="n">PropertyName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
 <span class="n">Response</span><span class="p">:</span><span class="nf">MethodName</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="availability">Availability<a class="headerlink" href="#availability" title="Permanent link">&para;</a></h2>
 <p><code>Response</code> is available <strong>only inside endpoint scripts</strong>. Outside that context — for example, in a script invoked through <code>DoProc</code> from an interactive desktop session — referencing <code>Response</code> raises an undeclared-variable error.</p>
 <p>If your code may run in either context, guard with a <code>:TRY</code> / <code>:CATCH</code> block:</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">&quot;only sent to HTTP callers&quot;</span><span class="p">);</span>
 <span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">/* not running as an endpoint — write to a log or skip ;</span>
@@ -2110,14 +2110,14 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="send-a-json-response-with-an-explicit-status">Send a JSON response with an explicit status<a class="headerlink" href="#send-a-json-response-with-an-explicit-status" title="Permanent link">&para;</a></h3>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SendStatus</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SendStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="n">ContentType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="n">StatusCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span>
 <span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">&quot;{&quot;&quot;status&quot;&quot;:&quot;&quot;ok&quot;&quot;}&quot;</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <h3 id="return-a-structured-value-from-a-web-service-endpoint">Return a structured value from a web-service endpoint<a class="headerlink" href="#return-a-structured-value-from-a-web-service-endpoint" title="Permanent link">&para;</a></h3>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">WebServiceLookup</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">WebServiceLookup</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sId</span><span class="p">,</span><span class="w"> </span><span class="n">oResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">Parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
@@ -2130,7 +2130,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <h3 id="redirect-after-a-side-effect">Redirect after a side effect<a class="headerlink" href="#redirect-after-a-side-effect" title="Permanent link">&para;</a></h3>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SaveAndRedirect</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SaveAndRedirect</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOrderId</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sOrderId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">Forms</span><span class="p">:</span><span class="n">OrderId</span><span class="p">;</span>

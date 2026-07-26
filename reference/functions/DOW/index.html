@@ -4340,7 +4340,7 @@ represents Sunday and <code>7</code> represents Saturday. If the supplied date i
 <li>When you need a stable weekday code for reporting, grouping, or comparisons.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre><span></span><code><span class="nf">DOW</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DOW</span><span class="p">(</span><span class="n">dDate</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4446,7 +4446,7 @@ represents Sunday and <code>7</code> represents Saturday. If the supplied date i
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="get-the-weekday-number-for-a-date">Get the weekday number for a date<a class="headerlink" href="#get-the-weekday-number-for-a-date" title="Permanent link">&para;</a></h3>
 <p>Converts a hardcoded date string to a date value and displays the weekday number returned by <code>DOW</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowWeekdayNumber</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowWeekdayNumber</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dRunDate</span><span class="p">,</span><span class="w"> </span><span class="n">nDayOfWeek</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dRunDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/23/2024&quot;</span><span class="p">);</span>
@@ -4464,11 +4464,11 @@ represents Sunday and <code>7</code> represents Saturday. If the supplied date i
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowWeekdayNumber&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
-<div class="language-text highlight"><pre><span></span><code>Weekday number for 03/23/2024 is 7
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Weekday number for 03/23/2024 is 7
 </code></pre></div>
 <h3 id="guard-against-an-empty-date-before-using-the-weekday-result">Guard against an empty date before using the weekday result<a class="headerlink" href="#guard-against-an-empty-date-before-using-the-weekday-result" title="Permanent link">&para;</a></h3>
 <p>Checks whether <code>DOW</code> returned <code>0</code> (empty date) before branching to a weekday-specific message.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckPlannedDate</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckPlannedDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dPlannedDate</span><span class="p">,</span><span class="w"> </span><span class="n">nDayOfWeek</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dPlannedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
@@ -4489,14 +4489,14 @@ represents Sunday and <code>7</code> represents Saturday. If the supplied date i
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckPlannedDate&quot;</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> displays either:</p>
-<div class="language-text highlight"><pre><span></span><code>Planned date is empty.
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Planned date is empty.
 </code></pre></div>
 <p>or:</p>
-<div class="language-text highlight"><pre><span></span><code>Planned date falls on weekday [n]
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Planned date falls on weekday [n]
 </code></pre></div>
 <h3 id="route-scheduled-runs-based-on-weekday-rules">Route scheduled runs based on weekday rules<a class="headerlink" href="#route-scheduled-runs-based-on-weekday-rules" title="Permanent link">&para;</a></h3>
 <p>Iterates three runs: RUN-001 on a Sunday (04/05/2026, DOW=1), RUN-002 on a Tuesday (04/07/2026, DOW=3), and RUN-003 with no date. Each is routed to a weekend, weekday, or empty-date message based on <code>DOW</code>.</p>
-<div class="language-ssl highlight"><pre><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RouteScheduledRuns</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RouteScheduledRuns</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRuns</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">oRun</span><span class="p">,</span><span class="w"> </span><span class="n">dRunDate</span><span class="p">,</span><span class="w"> </span><span class="n">nDayOfWeek</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRuns</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
