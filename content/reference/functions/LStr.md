@@ -110,7 +110,7 @@ DoProc("LogMeasurements");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Sample 1: 420.5
 Sample 2: NIL
 Sample 3: 18.3
@@ -159,7 +159,7 @@ DoProc("GenerateSampleReport");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 ID      Result  Status
 001001  45.7    PASS
 001002  38.2    FAIL

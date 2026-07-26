@@ -96,7 +96,7 @@ DoProc("ArchiveReportsFolder")
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Archive created: C:\Archives\Q4DataBackup.zip
 ```
 
@@ -125,7 +125,7 @@ DoProc("ArchiveTopLevelPdfFiles")
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 PDF archive created: C:\Archives\CurrentReports.zip
 ```
 

@@ -58,10 +58,10 @@ Use `Rand()` to select one value from an array.
 
 ```ssl
 :PROCEDURE PickRandomCode;
-	:DECLARE aCodes, nIndex, nCount, sCode;
+    :DECLARE aCodes, nIndex, nCount, sCode;
 
-	aCodes := {"Alpha", "Bravo", "Charlie", "Delta"};
-	nCount := ALen(aCodes);
+    aCodes := {"Alpha", "Bravo", "Charlie", "Delta"};
+    nCount := ALen(aCodes);
 
     nIndex := Integer(Rand() * nCount) + 1;
     sCode := aCodes[nIndex];
@@ -87,7 +87,7 @@ Use the same seed twice when you need the same first result again.
 
 ```ssl
 :PROCEDURE CompareSeededValue;
-	:DECLARE nSeed, nFirst, nSecond, bSame, sMessage;
+    :DECLARE nSeed, nFirst, nSecond, bSame, sMessage;
 
     nSeed := 12345;
 
@@ -120,7 +120,7 @@ Seed the generator once and use later `Rand()` calls to advance through that see
 
 ```ssl
 :PROCEDURE BuildRepeatableSequence;
-	:DECLARE nSeed, aValues, nIndex, sMessage;
+    :DECLARE nSeed, aValues, nIndex, sMessage;
 
     nSeed := 250;
     aValues := {};

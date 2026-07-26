@@ -1,6 +1,6 @@
 ---
 title: "ALen"
-summary: "Return the number of elements in an array."
+summary: "Returns the number of elements in an array."
 id: ssl.function.alen
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # ALen
 
-Return the number of elements in an array.
+Returns the number of elements in an array.
 
 `ALen` returns the current element count of `aTarget`. It accepts a single array argument, returns `0` for an empty array, and raises an error when `aTarget` is [`NIL`](../literals/nil.md).
 
@@ -84,7 +84,7 @@ DoProc("ProcessUserSelection");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Processing 2 selected item(s)
 ```
 
@@ -109,7 +109,7 @@ DoProc("ShowPendingSteps");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Step 1: Login
 Step 2: Review
 Step 3: Approve

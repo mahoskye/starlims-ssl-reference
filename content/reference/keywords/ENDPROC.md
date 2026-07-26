@@ -71,7 +71,7 @@ DoProc("ShowLabStatus");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Laboratory status: Operational
 ```
 

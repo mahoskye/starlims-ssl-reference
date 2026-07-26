@@ -84,7 +84,7 @@ DoProc("GetStoredUsername");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Retrieved username: jsmith
 ```
 
@@ -150,7 +150,7 @@ DoProc("RestoreUserPreferences");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 User=jsmith, mode=read-only, page size=25
 ```
 

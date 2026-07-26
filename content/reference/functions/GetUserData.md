@@ -24,7 +24,7 @@ Returns the current session user name as a string.
 ## Syntax
 
 ```ssl
-GetUserData();
+GetUserData()
 ```
 
 ## Parameters

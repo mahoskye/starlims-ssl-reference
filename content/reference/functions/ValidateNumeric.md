@@ -67,20 +67,20 @@ Check a user-entered value before converting it with [`Val`](Val.md). The failur
 
 ```ssl
 :PROCEDURE ValidateNumericInput;
-    :DECLARE sUserInput, bIsValid, nValue;
+	:DECLARE sUserInput, bIsValid, nValue;
 
-    sUserInput := "42.5";
-    bIsValid := ValidateNumeric(sUserInput);
+	sUserInput := "42.5";
+	bIsValid := ValidateNumeric(sUserInput);
 
-    :IF !bIsValid;
-        UsrMes("Enter a valid number.");
-        :RETURN .F.;
-    :ENDIF;
+	:IF !bIsValid;
+		UsrMes("Enter a valid number.");
+		:RETURN .F.;
+	:ENDIF;
 
-    nValue := Val(sUserInput);
-    UsrMes("Accepted value: " + LimsString(nValue));
+	nValue := Val(sUserInput);
+	UsrMes("Accepted value: " + LimsString(nValue));
 
-    :RETURN .T.;
+	:RETURN .T.;
 :ENDPROC;
 
 /* Usage;

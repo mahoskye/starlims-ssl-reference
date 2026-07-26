@@ -105,7 +105,7 @@ DoProc("FormatRecordCount");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 1,234,567
 ```
 

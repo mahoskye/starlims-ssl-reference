@@ -95,7 +95,7 @@ DoProc("ShowWeekdayNumber");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Weekday number for 03/23/2024 is 7
 ```
 

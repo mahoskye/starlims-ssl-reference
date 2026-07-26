@@ -125,9 +125,9 @@ Check both type and whole-number status before doing bitwise work.
     :DECLARE bLeftValid, bRightValid, nResult;
 
     bLeftValid := LimsTypeEx(vLeft) == "NUMERIC"
-			      .AND. Integer(vLeft) == vLeft;
+                  .AND. Integer(vLeft) == vLeft;
     bRightValid := LimsTypeEx(vRight) == "NUMERIC"
-		           .AND. Integer(vRight) == vRight;
+                   .AND. Integer(vRight) == vRight;
 
     :IF !(bLeftValid .AND. bRightValid);
         UsrMes("Both operands must be whole numbers.");

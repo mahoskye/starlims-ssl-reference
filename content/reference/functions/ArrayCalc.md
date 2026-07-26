@@ -135,7 +135,7 @@ DoProc("ShowBatchTotal");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Total is 100
 ```
 
@@ -161,7 +161,7 @@ DoProc("MergeQueues");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Merged queue count: 4
 ```
 
@@ -186,7 +186,7 @@ DoProc("SortDescendingScores");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Highest score: 27
 ```
 

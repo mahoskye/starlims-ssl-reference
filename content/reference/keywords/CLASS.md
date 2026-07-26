@@ -104,7 +104,7 @@ Class definition:
     :DECLARE sDescription;
 
     sDescription := "Sample " + Me:sSampleName + ": "
-			        + LimsString(Me:nResultValue);
+                    + LimsString(Me:nResultValue);
 
     :RETURN sDescription;
 :ENDPROC;
@@ -130,7 +130,7 @@ UsrMes(sSummary);
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Sample SAM-001: 42
 ```
 
@@ -194,7 +194,7 @@ UsrMes(oSample:GetSummary());
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Sample SAM-002 is Logged, result 98.6
 ```
 
@@ -262,7 +262,7 @@ UsrMes(sReport);
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Runs: 4, pass: 3, fail: 1
 ```
 

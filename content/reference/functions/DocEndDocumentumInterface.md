@@ -25,7 +25,7 @@ Ends the current Documentum interface context.
 ## Syntax
 
 ```ssl
-DocEndDocumentumInterface();
+DocEndDocumentumInterface()
 ```
 
 ## Parameters

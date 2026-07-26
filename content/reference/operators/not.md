@@ -83,7 +83,7 @@ Sets `bCanStart` to the opposite of `bIsReady`. With `bIsReady = .F.`, the resul
 	:RETURN bCanStart;
 :ENDPROC;
 
-/* Usage example;
+/* Usage;
 DoProc("CheckReadyState");
 ```
 
@@ -117,7 +117,7 @@ Wraps the compound condition in parentheses so `.NOT.` applies to both flags tog
 	:RETURN .T.;
 :ENDPROC;
 
-/* Usage example;
+/* Usage;
 DoProc("ValidateRelease");
 ```
 
@@ -155,7 +155,7 @@ Uses `.NOT. Empty(sResultText)` to test whether a result text was populated. Wit
 	:RETURN .T.;
 :ENDPROC;
 
-/* Usage example;
+/* Usage;
 DoProc("CheckSampleForApproval");
 ```
 

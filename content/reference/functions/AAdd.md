@@ -104,7 +104,7 @@ DoProc("AddSelectedBatch");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Added batch B-300
 ```
 

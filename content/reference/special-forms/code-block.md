@@ -85,7 +85,7 @@ AEval(aItems, {|sItem| UsrMes("Processing: " + sItem)});
 
 [`UsrMes`](../functions/UsrMes.md) displays (once per element):
 
-```
+```text
 Processing: SAMPLE-001
 Processing: SAMPLE-002
 Processing: SAMPLE-003
@@ -121,7 +121,7 @@ DoProc("FilterHighValues");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Found 5 values above 10
 ```
 

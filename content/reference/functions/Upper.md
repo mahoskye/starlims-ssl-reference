@@ -87,7 +87,7 @@ DoProc("NormalizeCodeForCompare");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Codes match: .T.
 ```
 

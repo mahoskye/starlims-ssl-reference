@@ -24,7 +24,7 @@ Closes an active database connection by name and removes it from the internal re
 ## Syntax
 
 ```ssl
-LimsSqlDisconnect([sConnectionName]);
+LimsSqlDisconnect([sConnectionName])
 ```
 
 ## Parameters

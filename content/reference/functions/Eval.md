@@ -96,7 +96,7 @@ DoProc("EvalCodeBlock");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Adding 25 + 17 = 42
 ```
 
@@ -143,7 +143,7 @@ DoProc("ApplyDiscountRules");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Final price for VIP: 212.5
 ```
 

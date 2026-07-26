@@ -81,13 +81,13 @@ Parses an ISO-style date string by supplying the exact format, then displays the
 
 ```ssl
 :PROCEDURE ParseIsoDate;
-    :DECLARE sDateInput, dParsedDate;
+	:DECLARE sDateInput, dParsedDate;
 
-    sDateInput := "2026-04-11";
+	sDateInput := "2026-04-11";
 
-    dParsedDate := DateFromString(sDateInput, "yyyy-MM-dd");
+	dParsedDate := DateFromString(sDateInput, "yyyy-MM-dd");
 
-    UsrMes("Parsed date: " + DToC(dParsedDate));
+	UsrMes("Parsed date: " + DToC(dParsedDate));
 :ENDPROC;
 
 /* Usage;

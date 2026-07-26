@@ -138,8 +138,8 @@ Combines unit separator (`Chr(31)`) and record separator (`Chr(30)`) control cha
     sField3 := "2024-04-11";
 
     sData := sField1 + sUnitSeparator
-	         + sField2 + sUnitSeparator
-	         + sField3 + sRecordSeparator;
+             + sField2 + sUnitSeparator
+             + sField3 + sRecordSeparator;
 
     sPayload := "TXSEND" + sUnitSeparator + sData;
 

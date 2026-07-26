@@ -117,7 +117,7 @@ DoProc("CheckNamedConnection");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Connection LIMS has 0 open transaction(s).
 ```
 

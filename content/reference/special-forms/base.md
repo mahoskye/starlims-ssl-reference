@@ -29,8 +29,8 @@ Use `Base:MemberName` when a derived class needs the parent implementation or th
 
 ```ssl
 Base:FieldName;
-Base:MethodName(args);
-Base:Constructor(args);
+Base:MethodName(args)
+Base:Constructor(args)
 ```
 
 ## Context rules

@@ -26,7 +26,7 @@ The output file is created with create-new semantics. If a file already exists a
 ## Syntax
 
 ```ssl
-CombineFiles(aFileNames, sOutFile);
+CombineFiles(aFileNames, sOutFile)
 ```
 
 ## Parameters
@@ -133,7 +133,7 @@ Checks each source file for existence first, then merges only the files that are
 
         nCount := ALen(aValidFiles);
         UsrMes("Merged " + LimsString(nCount)
-	            + " files into " + sOutputFile);
+                + " files into " + sOutputFile);
         /* Displays merged file count and output path;
     :ELSE;
         UsrMes("No source files were available to combine");
@@ -161,9 +161,9 @@ Merges the source files in a [`:TRY`](../keywords/TRY.md) block, writes a separa
 
         sManifestFile := sOutFile + ".manifest";
         sManifest := "Combined "
-		            + LimsString(ALen(aFileNames))
-		            + " files into "
-		            + sOutFile;
+                    + LimsString(ALen(aFileNames))
+                    + " files into "
+                    + sOutFile;
 
         WriteText(sManifestFile, sManifest, "N", "N");
 
@@ -179,8 +179,8 @@ Merges the source files in a [`:TRY`](../keywords/TRY.md) block, writes a separa
 
 /* Usage;
 DoProc("MergeFilesWithManifest", {
-	    {"C:/Data/part1.csv", "C:/Data/part2.csv"},
-	    "C:/Data/combined.csv"
+        {"C:/Data/part1.csv", "C:/Data/part2.csv"},
+        "C:/Data/combined.csv"
 });
 ```
 

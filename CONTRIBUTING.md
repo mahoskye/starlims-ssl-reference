@@ -91,7 +91,10 @@ search, and the extracted JSON.
    group, in alphabetical order.
 3. Add a row to the category's `index.md` table and update any counts that
    page states.
-4. Regenerate the metadata JSON (next section).
+4. Regenerate the metadata JSON (next section), and run
+   `python3 tools/lint_content.py` — CI runs it too; it enforces the
+   mechanical conventions (```text output fences, no dangling `:=`,
+   canonical `/* Usage;` trailers, consistent fence indentation per file).
 5. Build and check: CI runs `mkdocs build --strict`, so a page missing from
    the nav or a broken link fails the pull request rather than deploying
    broken.

@@ -125,7 +125,7 @@ Iterate over a mixed list of identifier strings and use `IsGuid` to route each o
     :NEXT;
 
     sReport := "Valid: " + LimsString(ALen(aValidGuids))
-		        + " | Invalid: " + LimsString(ALen(aInvalidIds));
+                + " | Invalid: " + LimsString(ALen(aInvalidIds));
     UsrMes(sReport);
 
     :RETURN aValidGuids;

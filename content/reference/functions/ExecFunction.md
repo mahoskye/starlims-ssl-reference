@@ -90,7 +90,7 @@ DoProc("RunConfiguredReport");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Result: <return value of Reports.OrderSummary>
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: "AFill"
-summary: "Fill an array element range with the same value and return the same array."
+summary: "Fills an array element range with the same value and returns the same array."
 id: ssl.function.afill
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # AFill
 
-Fill an array element range with the same value and return the same array.
+Fills an array element range with the same value and returns the same array.
 
 AFill updates the original array in place. It starts at a 1-based index and writes the supplied value into each selected element. If you omit `nStart`, the fill begins at element `1`. If you omit `nCount`, AFill uses the current array length as the count, so the operation fills from `nStart` through the end of the array.
 

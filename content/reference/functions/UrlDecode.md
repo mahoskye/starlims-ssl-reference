@@ -80,7 +80,7 @@ DoProc("DecodeWebFormInput");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 John Doe & Co
 ```
 
@@ -124,7 +124,7 @@ DoProc("ExtractFileNameFromUrl", {"https://example.com/files?filename=quarterly%
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Decoded file name: quarterly report.pdf
 ```
 

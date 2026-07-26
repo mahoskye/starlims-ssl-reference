@@ -97,7 +97,7 @@ DoProc("Countdown");
 
 [`UsrMes`](../functions/UsrMes.md) displays (one line per iteration, then final):
 
-```
+```text
 Count: 5
 Count: 4
 Count: 3
@@ -136,7 +136,7 @@ DoProc("DemoDecrementAssignment");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Prefix result: 4, Postfix result: 5
 ```
 

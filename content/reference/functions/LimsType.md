@@ -98,7 +98,7 @@ DoProc("CheckVariableType");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Type of sSampleId: C
 ```
 

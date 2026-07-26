@@ -93,7 +93,7 @@ DoProc("CheckSubstring");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Substring found
 ```
 

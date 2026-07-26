@@ -131,7 +131,7 @@ Queries active users for a department passed as a parameter, builds the user arr
     aUsersToAdd := {};
 
     sSQL := "
-	    SELECT user_id
+        SELECT user_id
         FROM hr_users
         WHERE department = ?
           AND status = 'ACTIVE'

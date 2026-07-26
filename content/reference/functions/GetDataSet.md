@@ -106,7 +106,7 @@ DoProc("ExportActiveSamples");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Returned XML length: 1243
 ```
 
@@ -141,7 +141,7 @@ DoProc("ExportSamplesByStatus", {"PENDING"});
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Export complete for status PENDING
 ```
 

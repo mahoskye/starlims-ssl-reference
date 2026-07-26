@@ -163,7 +163,7 @@ Guards against whitelist access denial by wrapping the call in [`:TRY`](../keywo
             sAttrs := aEntries[nIndex, 5];
 
             UsrMes(sName + " | Size: " + LimsString(nSize)
-					+ " | Attr: " + sAttrs);
+                    + " | Attr: " + sAttrs);
             /* Displays one line per returned entry;
         :NEXT;
 

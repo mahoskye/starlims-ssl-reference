@@ -26,24 +26,24 @@ Sends an email through SMTP and returns whether the send succeeded.
 
 ```ssl
 SendLimsEmail(
-    sSMTP,
-    aRecipients,
-    sFromWho,
-    [sSubject],
-    [sMessageBody],
-    [aAttachList],
-    [aCCList],
-    [aBCCList],
-    [sReplyTo],
-    [nPort],
-    [sUName],
-    [sUPass],
-    [bIgnoreErrors],
-    [bUseCDO],
-    [nTimeout],
-    [bUseSSL],
-    [bIsBodyHTML],
-    [sEncryptedData]
+	sSMTP,
+	aRecipients,
+	sFromWho,
+	[sSubject],
+	[sMessageBody],
+	[aAttachList],
+	[aCCList],
+	[aBCCList],
+	[sReplyTo],
+	[nPort],
+	[sUName],
+	[sUPass],
+	[bIgnoreErrors],
+	[bUseCDO],
+	[nTimeout],
+	[bUseSSL],
+	[bIsBodyHTML],
+	[sEncryptedData]
 )
 ```
 

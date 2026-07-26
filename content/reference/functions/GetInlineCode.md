@@ -90,7 +90,7 @@ DoProc("RunGreeting");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Hello from inline code
 ```
 
@@ -123,7 +123,7 @@ DoProc("BuildStatusMessage");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Status: Complete Count: 12
 ```
 

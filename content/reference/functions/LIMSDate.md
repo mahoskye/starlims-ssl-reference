@@ -90,7 +90,7 @@ DoProc("FormatUserDate");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Entered: 03/15/2024 | Displayed: 2024-03-15
 ```
 

@@ -145,7 +145,7 @@ DoProc("LoadOrdersByStatus", {"PENDING"});
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Loaded 12 order rows
 ```
 

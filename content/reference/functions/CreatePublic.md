@@ -86,7 +86,7 @@ DoProc("DemoCreatePublicBasic");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Public value: Queued
 ```
 
@@ -115,7 +115,7 @@ DoProc("DemoCreatePublicDefault");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 The public variable starts as an empty string.
 ```
 
@@ -163,7 +163,7 @@ DoProc("DemoCreatePublicScope");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Initial public value: 1
 Updated public value: 2
 ```

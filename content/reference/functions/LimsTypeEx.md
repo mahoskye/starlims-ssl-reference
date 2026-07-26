@@ -87,7 +87,7 @@ DoProc("ShowValueType");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Value type: STRING
 ```
 

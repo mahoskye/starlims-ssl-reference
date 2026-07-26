@@ -25,7 +25,7 @@ It does not tell you whether an error was present before the call. If you need t
 ## Syntax
 
 ```ssl
-ClearLastSSLError();
+ClearLastSSLError()
 ```
 
 ## Parameters
@@ -91,8 +91,8 @@ Logs the error from a failed SQL update, clears the error state, then retries th
 
     bUpdated := RunSQL("
         UPDATE sample SET
-	        status = ?
-	    WHERE sampleid = ?
+            status = ?
+        WHERE sampleid = ?
     ",, {sStatus, sSampleID});
 
     :IF bUpdated;
@@ -107,8 +107,8 @@ Logs the error from a failed SQL update, clears the error state, then retries th
 
     bUpdated := RunSQL("
         UPDATE sample SET
-	        status = ?
-	    WHERE sampleid = ?
+            status = ?
+        WHERE sampleid = ?
     ",, {sStatus, sSampleID});
 
     :RETURN bUpdated;
@@ -135,8 +135,8 @@ Clears the error state at the start of each loop iteration so a failure on one s
 
         :IF RunSQL("
             UPDATE sample SET
-				status = ?
-			WHERE sampleid = ?
+                status = ?
+            WHERE sampleid = ?
         ",, {"COMPLETE", sSampleID});
             :LOOP;
         :ENDIF;

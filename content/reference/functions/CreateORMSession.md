@@ -74,14 +74,14 @@ Creates an ORM session and assigns a code block to `UpdatingTable` that permits 
 	oOrmSession := CreateORMSession;
 
 	oOrmSession:UpdatingTable := {|sTableName, sConnectionName|
-        Upper(sTableName) == "ORDTASK"
-            .AND. sConnectionName == "LIMS"
-    };
+		Upper(sTableName) == "ORDTASK"
+			.AND. sConnectionName == "LIMS"
+	};
 
 	bUpdated := RunSQL("
-	    UPDATE ordtask SET
-	        status = ?
-	    WHERE task_id = ?
+		UPDATE ordtask SET
+			status = ?
+		WHERE task_id = ?
 	", "LIMS", {sNewStatus, nTaskID});
 
 	:RETURN bUpdated;

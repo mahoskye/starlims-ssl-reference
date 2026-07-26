@@ -89,7 +89,7 @@ DoProc("BuildCommentMarkup");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 <p>Meeting at 3pm &lt;review&gt; &amp; &apos;coffee&apos;</p>
 ```
 
@@ -117,7 +117,7 @@ DoProc("BuildSampleXml");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 <sample id='A&amp;B&lt;42&gt;' status='Ready &quot;now&quot;'></sample>
 ```
 
@@ -149,7 +149,7 @@ DoProc("EncodeNotes");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 true
 ```
 

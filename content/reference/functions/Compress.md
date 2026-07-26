@@ -99,7 +99,7 @@ DoProc("CompressReportText");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Original length: 72
 Compressed length: [value less than 72]
 ```
@@ -136,7 +136,7 @@ DoProc("CreateCompressedPayloadFile");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Compressed file created: [Temp path].zip
 ```
 
@@ -184,7 +184,7 @@ Selects in-memory or file output per payload based on length, then verifies each
         AAdd(aResults, oResult);
 
         UsrMes("Payload " + LimsString(nIndex)
-	            + " stored as " + sMode);
+                + " stored as " + sMode);
     :NEXT;
 
     :RETURN aResults;
@@ -196,7 +196,7 @@ DoProc("PrepareCompressedExports");
 
 [`UsrMes`](UsrMes.md) displays one line per payload:
 
-```
+```text
 Payload 1 stored as MEMORY
 Payload 2 stored as FILE
 Payload 3 stored as FILE

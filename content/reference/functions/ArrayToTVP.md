@@ -1,6 +1,6 @@
 ---
 title: "ArrayToTVP"
-summary: "Convert a one-dimensional array into a table-valued parameter object."
+summary: "Converts a one-dimensional array into a table-valued parameter object."
 id: ssl.function.arraytotvp
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # ArrayToTVP
 
-Convert a one-dimensional array into a table-valued parameter object.
+Converts a one-dimensional array into a table-valued parameter object.
 
 `ArrayToTVP` creates a TVP object from a flat SSL array so it can be passed to
 database code that supports table-valued parameters. The function resolves the
@@ -174,7 +174,7 @@ DoProc("BuildRemoteTVP");
 
 On failure, [`ErrorMes`](ErrorMes.md) displays:
 
-```
+```text
 TVP creation failed: <error message>
 ```
 

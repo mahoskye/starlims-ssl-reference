@@ -83,7 +83,7 @@ DoProc("ShowCurrentSecond");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Current second: <0–59>
 ```
 

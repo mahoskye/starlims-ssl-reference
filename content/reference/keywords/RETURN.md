@@ -111,9 +111,9 @@ sBatchID := "B-1001";
 :ENDIF;
 
 aSamples := SQLExecute("
-    SELECT sample_id
-    FROM sample
-    WHERE batch_id = ?sBatchID?
+	SELECT sample_id
+	FROM sample
+	WHERE batch_id = ?sBatchID?
 ");
 
 :IF ALen(aSamples) == 0;
@@ -138,9 +138,9 @@ Demonstrates that [`:FINALLY`](FINALLY.md) always runs even when `:RETURN` exits
 	:TRY;
 		bCleanupNeeded := .T.;
 		sStatus := LSearch("
-		    SELECT status
-		    FROM batch
-		    WHERE batch_id = ?
+			SELECT status
+			FROM batch
+			WHERE batch_id = ?
 		", "",, {sBatchID});
 
 		:IF Empty(sStatus);

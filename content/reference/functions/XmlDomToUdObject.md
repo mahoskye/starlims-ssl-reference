@@ -102,7 +102,7 @@ DoProc("ReadConfigXml");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 config: SampleApp v2.5
 ```
 
@@ -117,10 +117,10 @@ element.
 
 	sXml := "
 <order>
-    <tests>
-        <test code='pH'>7.1</test>
-        <test code='Cond'>320</test>
-    </tests>
+	<tests>
+		<test code='pH'>7.1</test>
+		<test code='Cond'>320</test>
+	</tests>
 </order>
 ";
 	oOrder := XmlDomToUdObject(sXml);
@@ -148,7 +148,7 @@ DoProc("ReadTestResults");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 pH=7.1, Cond=320
 ```
 

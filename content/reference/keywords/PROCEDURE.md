@@ -23,11 +23,11 @@ Within a standard script procedure body, the conventional order is:
 
 ```ssl
 :PROCEDURE ProcedureName;
-    :PARAMETERS sParam1, sParam2;
-    :DEFAULT sParam2, "";
-    :DECLARE vLocal;
+	:PARAMETERS sParam1, sParam2;
+	:DEFAULT sParam2, "";
+	:DECLARE vLocal;
 
-    /* Procedure logic;
+	/* Procedure logic;
 
 :ENDPROC;
 ```
@@ -53,13 +53,13 @@ Typical complete form in a script:
 
 ```ssl
 :PROCEDURE ProcedureName;
-    :PARAMETERS sParam1[, sParam2, ...];
-    :DEFAULT paramN, defaultValue;
-    :DECLARE vLocal1[, vLocal2, ...];
+	:PARAMETERS sParam1[, sParam2, ...];
+	:DEFAULT paramN, defaultValue;
+	:DECLARE vLocal1[, vLocal2, ...];
 
-    /* Statements;
+	/* Statements;
 
-    :RETURN value;
+	:RETURN value;
 :ENDPROC;
 ```
 

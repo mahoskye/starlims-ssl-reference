@@ -23,27 +23,27 @@ Closes a structured [`:TRY`](TRY.md) block after its [`:CATCH`](CATCH.md) and/or
 
 ```ssl
 :TRY;
-    /* statements;
+	/* statements;
 :CATCH;
-    /* error handling;
+	/* error handling;
 :ENDTRY;
 ```
 
 ```ssl
 :TRY;
-    /* statements;
+	/* statements;
 :FINALLY;
-    /* cleanup;
+	/* cleanup;
 :ENDTRY;
 ```
 
 ```ssl
 :TRY;
-    /* statements;
+	/* statements;
 :CATCH;
-    /* error handling;
+	/* error handling;
 :FINALLY;
-    /* cleanup;
+	/* cleanup;
 :ENDTRY;
 ```
 

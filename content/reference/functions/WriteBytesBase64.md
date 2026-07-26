@@ -76,8 +76,7 @@ This example writes a known base64 string to a file and reports success after th
 	:DECLARE sFileName, sBase64Data;
 
 	sFileName := "C:\\STARLIMS\\Exports\\logo.png";
-	sBase64Data :=
-		"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gRAAAAABJRU5ErkJggg==";
+	sBase64Data := "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gRAAAAABJRU5ErkJggg==";
 
 	WriteBytesBase64(sFileName, sBase64Data);
 
@@ -89,7 +88,7 @@ Call it with `DoProc("SaveLogoImage")`.
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 File written to C:\STARLIMS\Exports\logo.png
 ```
 

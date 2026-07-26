@@ -75,7 +75,7 @@ DoProc("BuildHeaderTemplate");
 
 `UsrMes` displays this output when the current user is `jsmith`:
 
-```
+```text
 Laboratory report
 Prepared for: jsmith
 ```

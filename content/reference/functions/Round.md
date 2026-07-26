@@ -85,7 +85,7 @@ DoProc("FormatMeasurementForReport");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Result: 12.35
 ```
 
@@ -121,7 +121,7 @@ DoProc("CalculateTaxAmount");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Subtotal: 209.93, Tax: 17.32, Total: 227.25
 ```
 

@@ -80,7 +80,7 @@ DoProc("ShowHypotenuse");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Hypotenuse: 5
 ```
 

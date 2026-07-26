@@ -95,7 +95,7 @@ DoProc("ShowLoginGreeting");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Good morning. Current hour: 9
 ```
 

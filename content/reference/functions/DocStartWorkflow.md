@@ -142,7 +142,7 @@ Wraps the start call in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATC
     :TRY;
         aWorkflowInfo := DocStartWorkflow(sWorkflowId, aDocumentIds);
         UsrMes("Started workflow " + aWorkflowInfo[1]);
-		/* Displays the started workflow ID;
+        /* Displays the started workflow ID;
 
         :RETURN aWorkflowInfo;
     :CATCH;

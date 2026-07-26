@@ -98,15 +98,15 @@ Passes a bare identifier string to `ExecUdf`. Because `"sStatus"` matches an exi
 
 ```ssl
 :PROCEDURE ReturnLocalValue;
-	:DECLARE sCode, sStatus, sResult;
+    :DECLARE sCode, sStatus, sResult;
 
-	sStatus := "Logged";
-	sCode := "sStatus";
+    sStatus := "Logged";
+    sCode := "sStatus";
 
-	sResult := ExecUdf(sCode);
+    sResult := ExecUdf(sCode);
 
-	UsrMes("Returned value: " + sResult);
-	:RETURN sResult;
+    UsrMes("Returned value: " + sResult);
+    :RETURN sResult;
 :ENDPROC;
 
 /* Usage;

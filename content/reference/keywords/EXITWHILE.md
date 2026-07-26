@@ -142,7 +142,7 @@ DoProc("FindTargetCell");
 
 [`UsrMes`](../functions/UsrMes.md) displays:
 
-```
+```text
 Row 2, Col 2
 ```
 

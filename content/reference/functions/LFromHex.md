@@ -78,7 +78,7 @@ DoProc("DecodeHexMessage");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Decoded text: Hello
 ```
 

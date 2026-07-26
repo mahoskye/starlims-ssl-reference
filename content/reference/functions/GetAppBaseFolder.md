@@ -78,7 +78,7 @@ DoProc("SetupUserUploadFolder");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Upload folder path: C:\STARLIMS\UserUploads
 ```
 

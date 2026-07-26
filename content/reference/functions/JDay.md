@@ -83,7 +83,7 @@ Pass a date value and display its ordinal position within the year. March 15 is 
     nDayOfYear := JDay(dReceivedDate);
 
     sMessage := DToC(dReceivedDate) + " is day "
-		        + LimsString(nDayOfYear) + " of the year.";
+                + LimsString(nDayOfYear) + " of the year.";
 
     UsrMes(sMessage);
 
@@ -96,7 +96,7 @@ DoProc("ShowSampleJDay");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 03/15/2024 is day 75 of the year.
 ```
 
@@ -122,7 +122,7 @@ DoProc("LogTodayOrdinal");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Today is day 113 of the year.
 ```
 
@@ -160,14 +160,14 @@ Use [`Empty`](Empty.md) to detect invariant dates before calling `JDay`, so the 
         nValidCount := nValidCount + 1;
 
         sMessage := "Record " + LimsString(nIndex) + ": "
-		            + DToC(dPlannedDate) + " -> JDay " + LimsString(nDayOfYear);
+                    + DToC(dPlannedDate) + " -> JDay " + LimsString(nDayOfYear);
         /* Displays record day-of-year;
         UsrMes(sMessage);
     :NEXT;
 
     sMessage := "Processed " + LimsString(nValidCount)
-		        + " dated records and " + LimsString(nEmptyCount)
-		        + " empty records.";
+                + " dated records and " + LimsString(nEmptyCount)
+                + " empty records.";
     /* Displays summary counts;
     UsrMes(sMessage);
 

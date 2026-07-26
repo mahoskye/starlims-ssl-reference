@@ -1,6 +1,6 @@
 ---
 title: "AddToSession"
-summary: "Store a non-object, non-array value in the current session under a string key."
+summary: "Stores a non-object, non-array value in the current session under a string key."
 id: ssl.function.addtosession
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # AddToSession
 
-Store a non-object, non-array value in the current session under a string key.
+Stores a non-object, non-array value in the current session under a string key.
 
 `AddToSession` stores `vValue` under `sKey` in the current session and always returns [`NIL`](../literals/nil.md). The key is required. Strings, numbers, booleans, dates, and other non-object values can be stored directly.
 

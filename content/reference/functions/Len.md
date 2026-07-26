@@ -122,7 +122,7 @@ DoProc("CountDigits");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Digits in 'LAB-2024-001': 7
 ```
 
@@ -153,7 +153,7 @@ DoProc("BuildFixedWidthLine");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 [Sample ID      LAB-7829]
 ```
 

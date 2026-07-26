@@ -89,7 +89,7 @@ DoProc("ResumeWorkflowBasic");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Workflow WF-2024-0042 resumed
 ```
 

@@ -26,7 +26,7 @@ Unlike [`AddToSession`](AddToSession.md) and [`GetFromSession`](GetFromSession.m
 ## Syntax
 
 ```ssl
-ClearSession();
+ClearSession()
 ```
 
 ## Parameters

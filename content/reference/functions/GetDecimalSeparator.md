@@ -77,7 +77,7 @@ DoProc("DisplayDecimalSeparator");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Decimal separator: .
 ```
 

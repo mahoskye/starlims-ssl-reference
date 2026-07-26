@@ -30,14 +30,14 @@ When a numeric argument is supplied, it must be an integer. The optional `bMakeI
 
 ```ssl
 DateFromNumbers(
-    [nYear],
-    [nMonth],
-    [nDay],
-    [nHour],
-    [nMinute],
-    [nSecond],
-    [nMillisecond],
-    [bMakeInvariant]
+	[nYear],
+	[nMonth],
+	[nDay],
+	[nHour],
+	[nMinute],
+	[nSecond],
+	[nMillisecond],
+	[bMakeInvariant]
 )
 ```
 

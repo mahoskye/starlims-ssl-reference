@@ -33,7 +33,7 @@ Use `Me` when code in a class method needs to read or write the current instance
 ```ssl
 Me;
 Me:FieldName;
-Me:MethodName(args);
+Me:MethodName(args)
 ```
 
 ## Context rules

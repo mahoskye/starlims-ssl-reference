@@ -107,7 +107,7 @@ DoProc("ParseSimpleTable");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Rows parsed: 3
 Row 1: Name | Department | Role
 Row 2: Jane Smith | Quality | Analyst
@@ -143,7 +143,7 @@ DoProc("ParseImportedRecords");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Imported records:
 S-1001 -> Logged -> 25.4
 S-1002 -> Pending -> 18.3
@@ -180,7 +180,7 @@ DoProc("ParseRowsWithNotes");
 
 [`UsrMes`](UsrMes.md) displays:
 
-```
+```text
 Sample: S-1001
 Status: Logged
 Notes:
