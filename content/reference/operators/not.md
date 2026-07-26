@@ -1,5 +1,5 @@
 ---
-title: "not"
+title: ".NOT. (not)"
 summary: "Performs boolean negation, returning .T. for .F. and .F. for .T.."
 id: ssl.operator.not
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# not
-
+# .NOT. (not)
 ## What it does
 
 Performs boolean negation, returning [`.T.`](../literals/true.md) for [`.F.`](../literals/false.md) and [`.F.`](../literals/false.md) for [`.T.`](../literals/true.md).

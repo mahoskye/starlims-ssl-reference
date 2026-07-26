@@ -1,5 +1,5 @@
 ---
-title: "shift-left"
+title: "<< (shift-left)"
 summary: "Shifts the bits of one integer number to the left by the number of positions specified by another integer number."
 id: ssl.operator.shift-left
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# shift-left
-
+# << (shift-left)
 ## What it does
 
 Shifts the bits of one integer number to the left by the number of positions specified by another integer number.

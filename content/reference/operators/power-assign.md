@@ -1,5 +1,5 @@
 ---
-title: "power-assign"
+title: "^= (power-assign)"
 summary: "Raises a numeric value to a numeric power and stores the result back into the left side."
 id: ssl.operator.power-assign
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# power-assign
-
+# ^= (power-assign)
 ## What it does
 
 Raises a numeric value to a numeric power and stores the result back into the

@@ -1,5 +1,5 @@
 ---
-title: "decrement"
+title: "-- (decrement)"
 summary: "Decreases a number variable by one, trims trailing spaces in strings, or subtracts days from a date depending on operand type."
 id: ssl.operator.decrement
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# decrement
-
+# -- (decrement)
 ## What it does
 
 Decreases a number variable by one, trims trailing spaces in strings, or subtracts days from a date depending on operand type.

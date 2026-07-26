@@ -1,5 +1,5 @@
 ---
-title: "modulo"
+title: "% (modulo)"
 summary: "Calculates the remainder after dividing one number by another."
 id: ssl.operator.modulo
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# modulo
-
+# % (modulo)
 ## What it does
 
 Calculates the remainder after dividing one number by another.

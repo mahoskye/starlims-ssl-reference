@@ -1,5 +1,5 @@
 ---
-title: "multiply-assign"
+title: "*= (multiply-assign)"
 summary: "Multiplies a numeric value by another numeric value and stores the product back in the left operand."
 id: ssl.operator.multiply-assign
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# multiply-assign
-
+# *= (multiply-assign)
 ## What it does
 
 Multiplies a numeric value by another numeric value and stores the product back in the left operand.

@@ -1,5 +1,5 @@
 ---
-title: "divide"
+title: "/ (divide)"
 summary: "Divides the left number by the right number and returns the result as a number."
 id: ssl.operator.divide
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# divide
-
+# / (divide)
 ## What it does
 
 Divides the left number by the right number and returns the result as a number.

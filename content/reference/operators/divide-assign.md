@@ -1,5 +1,5 @@
 ---
-title: "divide-assign"
+title: "/= (divide-assign)"
 summary: "Divides a numeric value by another numeric value and stores the quotient back in the left operand."
 id: ssl.operator.divide-assign
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# divide-assign
-
+# /= (divide-assign)
 ## What it does
 
 Divides a numeric value by another numeric value and stores the quotient back in the left operand.

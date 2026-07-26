@@ -1,5 +1,5 @@
 ---
-title: "modulo-assign"
+title: "%= (modulo-assign)"
 summary: "Updates a numeric variable, property, or array element in place by applying % and storing the remainder back into the left side."
 id: ssl.operator.modulo-assign
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# modulo-assign
-
+# %= (modulo-assign)
 ## What it does
 
 Updates a numeric variable, property, or array element in place by applying [`%`](modulo.md) and storing the remainder back into the left side.

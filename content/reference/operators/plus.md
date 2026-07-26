@@ -1,5 +1,5 @@
 ---
-title: "plus"
+title: "+ (plus)"
 summary: "Adds numbers, concatenates strings, or adds days to dates depending on operand types."
 id: ssl.operator.plus
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# plus
-
+# + (plus)
 ## What it does
 
 Adds numbers, concatenates strings, or adds days to dates depending on operand types.

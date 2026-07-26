@@ -1,5 +1,5 @@
 ---
-title: "equals"
+title: "= (equals)"
 summary: "Compares two values for equality, using prefix matching for strings, exact matching for numbers, booleans, and dates, and reference equality for arrays and objects."
 id: ssl.operator.equals
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# equals
-
+# = (equals)
 ## What it does
 
 Compares two values for equality, using prefix matching for strings, exact matching for numbers, booleans, and dates, and reference equality for arrays and objects.

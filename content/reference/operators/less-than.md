@@ -1,5 +1,5 @@
 ---
-title: "less-than"
+title: "< (less-than)"
 summary: "Compares two values of the same supported type and returns .T. when the left operand is strictly less than the right operand."
 id: ssl.operator.less-than
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# less-than
-
+# < (less-than)
 ## What it does
 
 Compares two values of the same supported type and returns [`.T.`](../literals/true.md) when the left operand is strictly less than the right operand.

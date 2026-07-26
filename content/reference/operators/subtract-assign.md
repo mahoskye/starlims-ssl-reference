@@ -1,5 +1,5 @@
 ---
-title: "subtract-assign"
+title: "-= (subtract-assign)"
 summary: "Updates a variable, property, or array element in place by applying - and then storing the result back into the left side."
 id: ssl.operator.subtract-assign
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# subtract-assign
-
+# -= (subtract-assign)
 ## What it does
 
 Updates a variable, property, or array element in place by applying [`-`](minus.md) and then storing the result back into the left side.

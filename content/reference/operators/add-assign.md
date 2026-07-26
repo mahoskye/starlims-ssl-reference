@@ -1,5 +1,5 @@
 ---
-title: "add-assign"
+title: "+= (add-assign)"
 summary: "Updates a variable, property, or array element in place by applying + and then storing the result back into the left side."
 id: ssl.operator.add-assign
 element_type: operator
@@ -9,8 +9,7 @@ starlims:
   verified_against: [11]
 ---
 
-# add-assign
-
+# += (add-assign)
 ## What it does
 
 Updates a variable, property, or array element in place by applying [`+`](plus.md) and
