@@ -344,6 +344,8 @@ starlims:
 
 ## Inline Code
 
+Manage *inline code* — SSL snippets stored in the dictionary between [`:BEGININLINECODE`](../keywords/BEGININLINECODE.md) and [`:ENDINLINECODE`](../keywords/ENDINLINECODE.md) markers and executed by name.
+
 | Function | Description |
 |----------|-------------|
 | [DeleteInlineCode](DeleteInlineCode.md) | Removes a named inline code entry from the current execution context if it exists. |

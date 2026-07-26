@@ -8,36 +8,84 @@ starlims:
 
 # Classes
 
-**29 classes** providing structured data access, document management, and system services.
+**29 classes** providing structured data access, document management, and system services, grouped by what they are for.
+
+Every class on this page is **constructed directly** with curly braces — `SSLRegex{"pattern"}`, `Email{}` — and cannot be created with [`CreateUdObject`](../functions/CreateUdObject.md). Objects that you *obtain from a call* rather than construct (the HTTP/SOAP client cluster, endpoint runtime objects) are documented separately under [Obtained Objects](../returns/index.md).
+
+## Tabular data and datasets
+
+Load, inspect, and edit tabular data. A [CDataTable](CDataTable.md) owns rows, columns, and fields — you construct the table and reach the parts through it.
 
 | Class | Description |
 |-------|-------------|
-| [AzureStorage](AzureStorage.md) | Provides unified access to Azure Table Storage and Azure Blob Storage for storing structured data and files. |
-| [BatchSupport](BatchSupport.md) | Provides runtime monitoring of batch processes and system resource usage. |
-| [CDataColumn](CDataColumn.md) | Provides structured metadata for a single data table column, enabling inspection of name, type, data characteristics, and primary key participation. |
-| [CDataColumns](CDataColumns.md) | Provides indexed access to metadata for all columns in a data table, enabling inspection and manipulation of column definitions. |
-| [CDataField](CDataField.md) | Encapsulates access to a single cell value in a data row, enabling safe retrieval, assignment, and conversion between types for robust SSL data workflows. |
-| [CDataRow](CDataRow.md) | Enables direct access and manipulation of a table row’s fields and primary keys within a CDataTable, supporting array-based and field-name lookups. |
-| [CDataTable](CDataTable.md) | Provides data table structure and operations for loading, editing, serializing, and persisting tabular data in SSL, with built-in support for row/column navigation, SQL, and XML. |
-| [Email](Email.md) | Sends, saves, and manages email messages with configurable recipients, attachments, encryption, and SMTP options. |
-| [EnterpriseExporter](EnterpriseExporter.md) | Provides tools for exporting enterprise and system tables to a specified file path, supporting advanced export options and error handling. |
-| [FtpsClient](FtpsClient.md) | Facilitates secure, scriptable file transfers and directory management over FTPS with proxy and TLS support. |
-| [HtmlConverter](HtmlConverter.md) | Converts XFD form XML to HTML form XML and exposes the conversion log. |
-| [PatcherSupport](PatcherSupport.md) | Enables dictionary-level data patching and synchronization by providing methods to compare, extract, and interact with STARLIMS system data tables. |
-| [PdfSupport](PdfSupport.md) | Provides methods to create, modify, secure, and print PDF documents with fine-grained page and permission controls. |
-| [RegSetup](RegSetup.md) | Provides methods to open, query, and close registry keys to interact with the Windows registry from SSL scripts. |
-| [SDMS](SDMS.md) | Enables secure document exchange, retrieval, and management operations with an external SDMS system. |
-| [SDMSDocUploader](SDMSDocUploader.md) | Enables automated upload, association, and revision management of files and metadata in SDMS workflows. |
-| [SQLConnection](SQLConnection.md) | Exposes metadata for a configured database connection returned by `GetConnectionByName`. |
-| [SSLBaseDictionary](SSLBaseDictionary.md) | Enables storage and management of key-value pairs with methods for adding, retrieving, updating, and removing entries. |
-| [SSLCodeProvider](SSLCodeProvider.md) | Provides methods to compile SSL server scripts and data sources, returning detailed error information for validation and debugging. |
-| [SSLDataset](SSLDataset.md) | Enables conversion between dataset structures and commonly used representations such as arrays and XML for data integration and manipulation workflows. |
-| [SSLError](SSLError.md) | Captures and encapsulates errors from SSL runtime operations, providing detailed error messages, error codes, and context for diagnostic and handling purposes. |
-| [SSLExpando](SSLExpando.md) | Provides a flexible, dynamic object that allows adding, retrieving, and serializing arbitrary properties with XML support. |
-| [SSLIntDictionary](SSLIntDictionary.md) | Provides a dictionary for associating values with integer keys, including efficient lookup and management operations. |
-| [SSLRegex](SSLRegex.md) | Enables pattern-based matching and validation of strings using regular expressions with optional case sensitivity control. |
-| [SSLSQLError](SSLSQLError.md) | Provides a structured representation of a database error resulting from an SQL operation, supplying standardized details such as the error message, SQL state, stack trace, code, and affected statement. |
-| [SSLStringDictionary](SSLStringDictionary.md) | Provides a key-value storage for strings with support for case sensitivity and flexible value types. |
-| [Sequence](Sequence.md) | Manages the creation, configuration, and operation of database-backed numeric sequences for generating unique identifiers. |
-| [TablesImport](TablesImport.md) | Imports table data from files in a specified folder and returns them as table objects for use in SSL scripts. |
-| [WebServices](WebServices.md) | Provides factory methods for quickly creating HTTP and SOAP client objects to perform web requests and service interactions. |
+| [CDataTable](CDataTable.md) | Provides an in-memory table object for working with rows, columns, XML, and database persistence from SSL. |
+| [CDataRow](CDataRow.md) | Represents one row in a CDataTable. |
+| [CDataColumns](CDataColumns.md) | Provides access to the column definitions of a CDataTable. |
+| [CDataColumn](CDataColumn.md) | Provides metadata for a single column in a CDataTable. |
+| [CDataField](CDataField.md) | Represents one field in a CDataRow. |
+| [SSLDataset](SSLDataset.md) | Represents dataset results so SSL code can work with query output as an object, convert the first table to an array, export XML, or pass the dataset handle to APIs that expect one. |
+| [TablesImport](TablesImport.md) | Loads one imported table at a time from a folder structure and returns it as a CDataTable. |
+
+## Dictionaries and dynamic objects
+
+Key-value stores with different key types, plus the dynamic property-bag object that [FromJson](../functions/FromJson.md) and [CreateUdObject](../functions/CreateUdObject.md) produce.
+
+| Class | Description |
+|-------|-------------|
+| [SSLBaseDictionary](SSLBaseDictionary.md) | Provides the shared dictionary surface used by SSL dictionary classes such as SSLStringDictionary{} and SSLIntDictionary{}. |
+| [SSLStringDictionary](SSLStringDictionary.md) | Stores values by string key. |
+| [SSLIntDictionary](SSLIntDictionary.md) | Stores values by whole-number keys. |
+| [SSLExpando](SSLExpando.md) | SSLExpando is a built-in object class for storing named values whose shape is decided at runtime. |
+
+## Documents and storage
+
+Create and manage documents and files in external storage systems.
+
+| Class | Description |
+|-------|-------------|
+| [PdfSupport](PdfSupport.md) | Provides methods to create, modify, secure, save, and print PDF documents. |
+| [SDMS](SDMS.md) | Interacts with an external SDMS server to download documents, download Unified XML templates, create an SDMSDocUploader, and generate password hashes for SDMS authentication. |
+| [SDMSDocUploader](SDMSDocUploader.md) | Uploads files into SDMS, attaches uploads to workflow steps, and checks in document revisions. |
+| [AzureStorage](AzureStorage.md) | Provides SSL access to Azure Table Storage and Azure Blob Storage through one class. |
+| [EnterpriseExporter](EnterpriseExporter.md) | Exports tables into a destination folder. |
+
+## Communication
+
+Send email, transfer files, and create web-service clients. The HTTP and SOAP client/response objects that [WebServices](WebServices.md) creates are documented under [Obtained Objects](../returns/index.md).
+
+| Class | Description |
+|-------|-------------|
+| [Email](Email.md) | Composes, loads, saves, sends, or queues email messages with attachments and optional signing or encryption. |
+| [FtpsClient](FtpsClient.md) | Transfers files and manages directories on an FTPS server. |
+| [WebServices](WebServices.md) | Creates client objects for outbound HTTP and SOAP integrations. |
+
+## Errors and diagnostics
+
+Structured error objects. In practice these usually arrive from [GetLastSSLError](../functions/GetLastSSLError.md) and SQL-error accessors rather than being constructed.
+
+| Class | Description |
+|-------|-------------|
+| [SSLError](SSLError.md) | Represents an SSL error and exposes its message, location, code, formatted diagnostic text, and nested SSL error details. |
+| [SSLSQLError](SSLSQLError.md) | Represents the SQL-specific error object returned after a database failure. |
+
+## Text and identifiers
+
+Pattern matching and unique-identifier generation.
+
+| Class | Description |
+|-------|-------------|
+| [SSLRegex](SSLRegex.md) | Matches SSL strings against a stored regular expression pattern. |
+| [Sequence](Sequence.md) | Creates and manages a database sequence for a table field on Oracle or SQL Server. |
+
+## System and platform
+
+Interact with the STARLIMS platform itself — batch monitoring, the dictionary, the Windows registry, connection metadata, script compilation, and form conversion.
+
+| Class | Description |
+|-------|-------------|
+| [BatchSupport](BatchSupport.md) | Provides batch-status checks and memory usage information for the current SSL process. |
+| [PatcherSupport](PatcherSupport.md) | Provides helper methods for collecting package-style dictionary metadata, connecting to another STARLIMS system, and comparing one collected result table to another. |
+| [RegSetup](RegSetup.md) | Provides access to Windows registry values under HKEY_LOCAL_MACHINE. |
+| [SQLConnection](SQLConnection.md) | Represents a configured database connection returned by GetConnectionByName. |
+| [SSLCodeProvider](SSLCodeProvider.md) | Compiles published server scripts and data sources and returns a list of compilation errors. |
+| [HtmlConverter](HtmlConverter.md) | Converts XFD form XML into HTML form XML and exposes the most recent conversion log. |
