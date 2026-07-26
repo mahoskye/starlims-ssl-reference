@@ -17,7 +17,7 @@ Provides explicit access to members on a class's immediate parent type from with
 
 Use `Base:MemberName` when a derived class needs the parent implementation or the parent version of a member instead of the current class version. `Base` always targets the current class's base type, so `Base:MethodName()` calls the parent method directly and `Base:FieldName` reads or writes the parent field rather than the derived one.
 
-`Base` resolves the member lookup against the immediate parent class of the current class. For method calls, the parent method must exist or compilation fails. For field access, the compiler resolves the member against the parent type and warns if it cannot find a matching base member.
+`Base` resolves the member lookup against the immediate parent class of the current class. For method calls, the parent method must exist or compilation fails. For field access, a compile-time warning is raised when no matching base member exists.
 
 ## When to use it
 

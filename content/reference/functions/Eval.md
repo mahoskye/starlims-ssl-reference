@@ -13,7 +13,7 @@ starlims:
 
 Invokes a code block with the supplied arguments and returns the block's result.
 
-Eval is SSL's direct call form for code block values. The compiler lowers `Eval(fnCode, ...)` to a call to the first argument's `eval(...)` method, and code blocks implement that method by invoking their stored lambda with the supplied argument array. In practice, that means Eval does one thing: it takes a code block value, runs it, and returns whatever the block's expression evaluates to.
+Eval is SSL's direct call form for code block values. It does one thing: it takes a code block value, runs the block's stored expression with the supplied arguments, and returns whatever that expression evaluates to.
 
 Eval does not parse or compile SSL source text. If you have SSL source in a string, use a dynamic-code mechanism such as [`ExecUdf`](ExecUdf.md); Eval is only for code block values such as `{|nValue| nValue * 2}` or code blocks returned from other routines. Because Eval simply forwards the arguments to the block, the result can be any SSL value, including another code block.
 

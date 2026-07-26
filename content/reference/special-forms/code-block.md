@@ -15,7 +15,7 @@ starlims:
 
 Defines an anonymous code block with bound variables and a single expression body. A code block can be created at the top level, passed as a function argument, or assigned to a variable for later execution.
 
-A code block uses the form `{|param1, param2| expression}`. The compiler requires at least one bound variable between the pipes. Invoke a code block with [`Eval`](../functions/Eval.md), or pass it to built-ins such as [`AEval`](../functions/AEval.md), [`AEvalA`](../functions/AEvalA.md), and [`AScan`](../functions/AScan.md) that accept code blocks directly. [`LimsTypeEx`](../functions/LimsTypeEx.md) reports the value as `CODEBLOCK`.
+A code block uses the form `{|param1, param2| expression}`. At least one bound variable is required between the pipes. Invoke a code block with [`Eval`](../functions/Eval.md), or pass it to built-ins such as [`AEval`](../functions/AEval.md), [`AEvalA`](../functions/AEvalA.md), and [`AScan`](../functions/AScan.md) that accept code blocks directly. [`LimsTypeEx`](../functions/LimsTypeEx.md) reports the value as `CODEBLOCK`.
 
 At runtime, a code block is a callable value. When invoked, the runtime evaluates the expression body using the supplied arguments plus any referenced values from the surrounding scope captured by reference.
 
@@ -64,7 +64,7 @@ Code blocks cannot appear as the left-hand side of an assignment.
 ## Errors and edge cases
 
 - Code blocks contain a single expression, not multiple statements.
-- The compiler requires at least one bound variable between the pipes.
+- At least one bound variable is required between the pipes; `{|| ...}` is not valid.
 - Comparing code blocks directly is not supported.
 - Executing a code block with missing required parameters results in a runtime error.
 - Outer variables referenced inside a code block are captured by reference. Changes to those variables in the outer scope are visible inside later [`Eval`](../functions/Eval.md) calls.

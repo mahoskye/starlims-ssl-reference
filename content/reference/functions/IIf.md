@@ -61,8 +61,8 @@ IIf(bCondition, vTrueValue, vFalseValue)
 ## Caveats
 
 - `IIf` is a normal function call. Its arguments are evaluated before the function returns either `vTrueValue` or `vFalseValue`.
-- The compiler validates `IIf` calls specially and raises a compile-time error when the call does not contain exactly three arguments.
-- The compiler can warn when the second or third argument is not a constant or a variable name.
+- An `IIf` call must contain exactly three arguments; any other count is a compile-time error.
+- A compile-time warning can be raised when the second or third argument is not a constant or a variable name.
 
 ## Examples
 

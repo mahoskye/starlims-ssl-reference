@@ -58,7 +58,7 @@ SigFig(sStandard, nDigits, nValue)
 !!! failure "Don't"
     - Assume `SigFig` returns a numeric value. It returns formatted text, which can affect later calculations.
     - Pass [`NIL`](../literals/nil.md) for any argument. The function raises an error instead of supplying defaults.
-    - Rely on undocumented standard names. The verified implementation only branches on `FDA`, `EPA`, and `ISO`.
+    - Rely on undocumented standard names. Only `FDA`, `EPA`, and `ISO` are recognized.
     - Use `SigFig` as a drop-in replacement for every ordinary rounding need when plain numeric rounding is sufficient.
 
 ## Caveats

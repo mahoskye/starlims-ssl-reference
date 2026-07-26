@@ -148,7 +148,7 @@ DoProc("ShowFetchCalls");
 
 ### Using PARAMETERS in a data source file
 
-Data source files use the preprocessed inline-default form instead of separate [`:DEFAULT`](DEFAULT.md) statements. Both `sStatus` and `nMaxRows` have inline defaults that the caller can override when invoking the data source.
+Data source files use the inline-default form instead of separate [`:DEFAULT`](DEFAULT.md) statements. Both `sStatus` and `nMaxRows` have inline defaults that the caller can override when invoking the data source.
 
 ```ssl
 :PARAMETERS sStatus := "Logged", nMaxRows := 50;

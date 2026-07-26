@@ -140,7 +140,7 @@ Almost every statement, including comments, must end with `;`. Comments use `/* 
 
 ### Declaration ordering
 
-[`:PARAMETERS`](reference/keywords/PARAMETERS.md) must appear before any other statements in a script or procedure body, and [`:DEFAULT`](reference/keywords/DEFAULT.md) must immediately follow it. [`:INCLUDE`](reference/keywords/INCLUDE.md) is a lexer-level textual inclusion and should appear early. [`:DECLARE`](reference/keywords/DECLARE.md) and [`:PUBLIC`](reference/keywords/PUBLIC.md) can appear anywhere. Recommended order: `:PARAMETERS`, `:DEFAULT`, `:INCLUDE`, `:PUBLIC`, `:DECLARE`. Use one statement per line.
+[`:PARAMETERS`](reference/keywords/PARAMETERS.md) must appear before any other statements in a script or procedure body, and [`:DEFAULT`](reference/keywords/DEFAULT.md) must immediately follow it. [`:INCLUDE`](reference/keywords/INCLUDE.md) textually inserts another script's contents before the code runs and should appear early. [`:DECLARE`](reference/keywords/DECLARE.md) and [`:PUBLIC`](reference/keywords/PUBLIC.md) can appear anywhere. Recommended order: `:PARAMETERS`, `:DEFAULT`, `:INCLUDE`, `:PUBLIC`, `:DECLARE`. Use one statement per line.
 
 Do not put `:DEFAULT` on the same line as `:DECLARE`.
 

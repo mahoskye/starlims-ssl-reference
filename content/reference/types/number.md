@@ -260,7 +260,7 @@ DoProc("AnalyzeMeasurements", {{10, 20, 30}});
 
 ## Caveats
 
-- Member access with `:` forwards to the underlying .NET numeric object when no SSL-side member matches (e.g. `nValue:ToString("F2")`). An unmatched member is legitimate .NET passthrough, not an error — tools must never flag it as an unknown member (style guide `dotnet_member_passthrough`).
+- Member access with `:` forwards to the underlying .NET numeric object when no SSL-side member matches (e.g. `nValue:ToString("F2")`). A member that is not listed on this page can still be valid — it resolves against the .NET object at runtime instead of raising an unknown-member error.
 
 ## Related elements
 

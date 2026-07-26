@@ -64,7 +64,7 @@ FromJson(vValue)
 ## Caveats
 
 - Input JSON objects become [`SSLExpando`](../classes/SSLExpando.md) instances and do not implement all methods of a standard SSL object.
-- Extra whitespace and line breaks are tolerated by the parser, but stray text before or after valid JSON raises an error.
+- Extra whitespace and line breaks in the JSON are tolerated, but stray text before or after valid JSON raises an error.
 
 ## Examples
 
