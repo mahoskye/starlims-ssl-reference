@@ -51,6 +51,7 @@ The `:CATCH` keyword starts the error-handling branch of a [`:TRY`](TRY.md) bloc
 - A `:CATCH` block may be empty, but the preceding [`:TRY`](TRY.md) body must contain at least one statement.
 - `:CATCH` handles all errors from that [`:TRY`](TRY.md) block; you cannot declare multiple typed catches.
 - If the [`:TRY`](TRY.md) block has no `:CATCH`, the error propagates unless another outer handler intercepts it.
+- Do not rely on `:CATCH` running when the procedure also contains a legacy [`:ERROR`](ERROR.md)/[`:RESUME`](RESUME.md) handler — in observed runtime behavior the legacy handler intercepts the error first and `:CATCH` is bypassed. See [Error Handling](../../guides/error-handling.md#do-not-mix-errorresume-with-trycatch).
 - Keywords are case-sensitive and must be written in uppercase.
 
 ## Examples

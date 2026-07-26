@@ -60,6 +60,7 @@ If the procedure includes [`:RESUME`](RESUME.md), the runtime switches to resume
 ## Caveats
 
 - `:ERROR` is legacy scope-based handling for the current procedure or method. It is not a clause inside [`:TRY`](TRY.md).
+- Do not combine `:ERROR` with [`:TRY`](TRY.md)/[`:CATCH`](CATCH.md) in the same procedure. In observed runtime behavior, a legacy `:ERROR` handler can intercept an error raised inside a `:TRY` block before the [`:CATCH`](CATCH.md) clause runs, so the `:CATCH` logic never executes. See [Error Handling](../../guides/error-handling.md#do-not-mix-errorresume-with-trycatch).
 - [`:RESUME`](RESUME.md) changes the flow to resume-mode handling for subsequent statements. Use it only when continuing is safe.
 - If no handled error occurs, the `:ERROR` body is skipped.
 

@@ -12241,6 +12241,7 @@
         "A :CATCH block may be empty, but the preceding :TRY body must contain at least one statement.",
         ":CATCH handles all errors from that :TRY block; you cannot declare multiple typed catches.",
         "If the :TRY block has no :CATCH, the error propagates unless another outer handler intercepts it.",
+        "Do not rely on :CATCH running when the procedure also contains a legacy :ERROR/:RESUME handler — in observed runtime behavior the legacy handler intercepts the error first and :CATCH is bypassed. See Error Handling.",
         "Keywords are case-sensitive and must be written in uppercase."
       ],
       "best_practices": {
@@ -12529,6 +12530,7 @@
       "exceptions": [],
       "caveats": [
         ":ERROR is legacy scope-based handling for the current procedure or method. It is not a clause inside :TRY.",
+        "Do not combine :ERROR with :TRY/:CATCH in the same procedure. In observed runtime behavior, a legacy :ERROR handler can intercept an error raised inside a :TRY block before the :CATCH clause runs, so the :CATCH logic never executes. See Error Handling.",
         ":RESUME changes the flow to resume-mode handling for subsequent statements. Use it only when continuing is safe.",
         "If no handled error occurs, the :ERROR body is skipped."
       ],
@@ -12968,7 +12970,8 @@
       "caveats": [
         ":RESUME must appear in a procedure that also contains an :ERROR handler.",
         ":RESUME does not retry the failing statement. Execution continues with the next statement after the error.",
-        "If later statements keep failing and the handler does not resolve the problem, the procedure can continue producing repeated errors."
+        "If later statements keep failing and the handler does not resolve the problem, the procedure can continue producing repeated errors.",
+        "Do not combine :RESUME with :TRY/:CATCH in the same procedure. In observed runtime behavior the legacy handler intercepts errors raised inside a :TRY block before :CATCH runs, and :RESUME then continues execution after the failed statement — including inside the :TRY body, bypassing the :CATCH logic entirely. See Error Handling."
       ],
       "best_practices": {
         "do": [
@@ -13080,6 +13083,7 @@
         "The :TRY body must contain at least one statement.",
         "A :FINALLY block must also contain at least one statement when present.",
         ":CATCH does not declare an exception variable; retrieve the current error with GetLastSSLError().",
+        "A legacy :ERROR/:RESUME handler in the same procedure can intercept errors raised inside the :TRY body before :CATCH runs — do not mix the two patterns. See Error Handling.",
         "Keywords are case-sensitive and must be written in uppercase."
       ],
       "best_practices": {

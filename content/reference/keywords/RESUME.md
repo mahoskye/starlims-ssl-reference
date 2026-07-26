@@ -58,6 +58,7 @@ If a procedure contains `:RESUME` without an [`:ERROR`](ERROR.md) handler, compi
 - `:RESUME` must appear in a procedure that also contains an [`:ERROR`](ERROR.md) handler.
 - `:RESUME` does not retry the failing statement. Execution continues with the next statement after the error.
 - If later statements keep failing and the handler does not resolve the problem, the procedure can continue producing repeated errors.
+- Do not combine `:RESUME` with [`:TRY`](TRY.md)/[`:CATCH`](CATCH.md) in the same procedure. In observed runtime behavior the legacy handler intercepts errors raised inside a `:TRY` block before [`:CATCH`](CATCH.md) runs, and `:RESUME` then continues execution after the failed statement — including inside the `:TRY` body, bypassing the `:CATCH` logic entirely. See [Error Handling](../../guides/error-handling.md#do-not-mix-errorresume-with-trycatch).
 
 ## Examples
 

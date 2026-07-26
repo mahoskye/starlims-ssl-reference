@@ -88,6 +88,7 @@ The structure must end with [`:ENDTRY;`](ENDTRY.md), and it must include at leas
 - The `:TRY` body must contain at least one statement.
 - A [`:FINALLY`](FINALLY.md) block must also contain at least one statement when present.
 - [`:CATCH`](CATCH.md) does not declare an exception variable; retrieve the current error with [`GetLastSSLError()`](../functions/GetLastSSLError.md).
+- A legacy [`:ERROR`](ERROR.md)/[`:RESUME`](RESUME.md) handler in the same procedure can intercept errors raised inside the `:TRY` body before [`:CATCH`](CATCH.md) runs — do not mix the two patterns. See [Error Handling](../../guides/error-handling.md#do-not-mix-errorresume-with-trycatch).
 - Keywords are case-sensitive and must be written in uppercase.
 
 ## Examples
