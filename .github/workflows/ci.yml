@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Build site (strict — warnings fail)
+        run: mkdocs build --strict
+
+      - name: Verify ssl-element-meta.json is current
+        run: |
+          python3 tools/extract_reference_meta.py
+          git diff --exit-code content/data/ssl-element-meta.json

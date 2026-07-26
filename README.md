@@ -32,6 +32,8 @@ developers can benefit from the notes I've accumulated.
 
 Requires Python 3.9+.
 
+Linux/macOS:
+
 ```bash
 python -m venv .venv
 . .venv/bin/activate
@@ -39,7 +41,21 @@ pip install -r requirements.txt
 mkdocs serve
 ```
 
+Windows (PowerShell):
+
+```powershell
+py -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+mkdocs serve
+```
+
 Then open http://127.0.0.1:8000/.
+
+Note the non-standard layout: documentation pages live in `content/` (not
+`docs/`, which holds build hooks only). See
+[CONTRIBUTING.md](CONTRIBUTING.md) for the page conventions, how to add a
+page, and the metadata-JSON regeneration step that CI enforces.
 
 To build the static site:
 
