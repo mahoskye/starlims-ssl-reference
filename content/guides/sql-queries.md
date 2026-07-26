@@ -30,6 +30,11 @@ sBatch := "B-100";
 aRows := SQLExecute("SELECT sample_id FROM samples WHERE batch = ?sBatch?");
 ```
 
+Two idioms in these examples are worth decoding up front:
+
+- **Adjacent commas** (`,,`) skip an optional middle parameter — here the connection name, so the call uses the default connection. `LSearch("...", "",, {...})` passes the SQL, then a default value, skips the connection name, then passes the bound values.
+- **`?sBatch?`** is [`SQLExecute`](../reference/functions/SQLExecute.md)'s named-parameter form: the engine substitutes the value of the variable `sBatch` from the calling scope. The other functions use positional `?` placeholders with a values array instead. Both are covered in detail [below](#sqlexecute-flexible-execution).
+
 ## Connection names
 
 Most SQL functions accept an optional connection name parameter that identifies which configured database to run the query against. When omitted, the function uses the current default connection.
