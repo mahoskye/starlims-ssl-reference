@@ -1,6 +1,53 @@
 # Getting Started with SSL
 
-The **STARLIMS Scripting Language (SSL)** is the programming language used within the STARLIMS Laboratory Information Management System. This reference documents every function, class, keyword, operator, and type available to SSL developers.
+The **STARLIMS Scripting Language (SSL)** is the programming language used within the STARLIMS Laboratory Information Management System. This reference documents the functions, classes, keywords, operators, and types available to SSL developers.
+
+## Where SSL code lives and how it runs
+
+SSL is STARLIMS's server-side language — the code that does the heavy lifting behind forms, endpoints, and scheduled work. It is a proprietary language in the xBase family (similar in style to FoxPro), and it runs on STARLIMS's .NET-based application server. That .NET foundation shows through in places: built-in values expose .NET members such as `:ToString()` (see the [type pages](reference/types/index.md)), and several functions exist specifically for .NET interop.
+
+### Code is stored in the dictionary, not files
+
+SSL code is not kept as script files on disk — everything lives in the STARLIMS **dictionary database**. The **Designer**, STARLIMS's IDE, loads code from the dictionary and presents it for editing. You will most often find SSL in four places:
+
+- **Application Server Scripts** — server code belonging to a specific application
+- **Global Server Scripts** — shared server code, organized into categories
+- **Application Data Sources** and **Global Data Sources** — data-retrieval code written in SSL, or in SQL with access to some SSL-like objects (see [Data Source Files](guides/data-sources.md))
+
+Because code lives in the dictionary, moving it between systems goes through the **package manager**, which exports code as packages. Many developers also copy a script into an external editor to work on it, then paste it back into Designer.
+
+### Running a script and seeing output
+
+From Designer you can execute a server script directly — the quickest feedback loop while learning. In a real system, the same scripts are invoked from forms, client scripts, endpoints, or other scripts.
+
+Two output channels matter:
+
+- **Return values** — when a script ends with [`:RETURN`](reference/keywords/RETURN.md), the returned value appears in the **console pane** below the code workspace.
+- **Messages and errors** — [`UsrMes`](reference/functions/UsrMes.md), [`InfoMes`](reference/functions/InfoMes.md), [`ErrorMes`](reference/functions/ErrorMes.md), and runtime errors are written to the **server log files**, which are physical files on the application server. In Designer, open the console pane's **Server Logs** tab and select your user name to view your log. You can refresh the view, and you can delete a log file when it gets too big — but a deleted log cannot be recovered.
+
+A first script to try:
+
+```ssl
+:DECLARE sWho;
+sWho := MYUSERNAME;
+UsrMes("Hello from " + sWho);
+:RETURN "Ran as " + sWho;
+```
+
+Run it in Designer: the `:RETURN` value shows in the console pane, and the `UsrMes` line lands in the server log under your user name.
+
+### System-provided variables
+
+The runtime predefines some global variables. The one used throughout this reference is `MYUSERNAME` — a string holding the current user's username. Deployments may expose other predefined globals; this reference only relies on what has been verified.
+
+### How scripts address each other
+
+Server code is addressed with a dotted path of two or three segments — `First.Script` or `First.Script.Procedure`. The first segment names one of two trees in Designer:
+
+- A **server-script category** — a directory under the Server Scripts tab. A script `Auth` in category `API_HELPERS` is addressed as `API_HELPERS.Auth`; its procedure `CheckSession` as `API_HELPERS.Auth.CheckSession`.
+- An **application** — applications live under an application category and contain their own forms, client scripts, server scripts, and data sources. A server script `SomeServerScript` in application `BBUDDLE` is addressed as `BBUDDLE.SomeServerScript`, or `BBUDDLE.SomeServerScript.Helper` for a specific procedure.
+
+The second segment is the script name; the optional third segment is a procedure inside that script. This is the path form that [`ExecFunction`](reference/functions/ExecFunction.md) and three-segment [`DoProc`](reference/functions/DoProc.md) take — see [Calling procedures](#calling-procedures) below.
 
 ## How to read this reference
 
@@ -105,7 +152,9 @@ Custom SSL procedures **cannot** be called with bare `Name()` syntax. Use:
 - [`ExecFunction`](reference/functions/ExecFunction.md)`("Category.Script", {args})` — call another script's entry point.
 - [`ExecFunction`](reference/functions/ExecFunction.md)`("Category.Script.ProcName", {args})` — call a specific procedure in another file.
 
-Inside a [`:CLASS`](reference/keywords/CLASS.md), use `Me:Method()` and `Base:Method()` for sibling and inherited calls. `DoProc` is a compile-time error inside class methods.
+The dotted path is the addressing form described in [How scripts address each other](#how-scripts-address-each-other) — the first segment is a server-script category or an application name.
+
+Inside a [`:CLASS`](reference/keywords/CLASS.md), use [`Me:`](reference/special-forms/me.md)`Method()` to call a method on the same object and [`Base:`](reference/special-forms/base.md)`Method()` to call the parent class's implementation. `DoProc` is a compile-time error inside class methods.
 
 Built-in functions (e.g., [`Len`](reference/functions/Len.md), [`ALen`](reference/functions/ALen.md)) are called directly with normal syntax. Omit trailing optional parameters rather than passing empty values: `GetDataSet(sQuery)` not `GetDataSet(sQuery, {})`. For skipped middle parameters, use adjacent commas: `DoProc("MyProc", {p1,,p3})`.
 

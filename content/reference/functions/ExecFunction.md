@@ -33,7 +33,7 @@ ExecFunction(sName, [aParameters])
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `sName` | [string](../types/string.md) | yes | — | The name of the function or method to execute. May include a namespace path (e.g., `"ServerScript.ClassName.MethodName"`). |
+| `sName` | [string](../types/string.md) | yes | — | The name of the function or method to execute. Accepts a dotted path of two or three segments — `"Category.ScriptName"` or `"Category.ScriptName.ProcName"` — where the first segment is a server-script category or an application name. |
 | `aParameters` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | An array of parameters to pass to the specified function or method when executed. |
 
 ## Returns

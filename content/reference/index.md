@@ -29,4 +29,4 @@ Each element page includes:
 - [Operators](operators/index.md) — 32 operators with precedence table
 - [Types](types/index.md) — 8 core SSL types
 - [Literals](literals/index.md) — 3 literal values
-- [Special Forms](special-forms/index.md) — 8 language constructs (including the `Request` and `Response` ambients)
+- [Special Forms](special-forms/index.md) — 8 language constructs (including `Request` and `Response`, the objects the runtime provides by name inside endpoint scripts)
