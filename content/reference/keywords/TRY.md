@@ -115,7 +115,7 @@ Uses `:TRY` and [`:CATCH`](CATCH.md) to prevent a missing or unreadable file fro
 DoProc("OpenConfigFile");
 ```
 
-On success, `UsrMes` displays the first 50 characters of the file. On failure, it displays the error text stored in `sStatus`.
+On success, `UsrMes` logs the first 50 characters of the file. On failure, it logs the error text stored in `sStatus`.
 
 ### Pairing CATCH and FINALLY for cleanup
 
@@ -157,7 +157,7 @@ Shows how `:TRY`, [`:CATCH`](CATCH.md), and [`:FINALLY`](FINALLY.md) work togeth
 DoProc("ProcessWithLock");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Processing failed: Processing failed due to invalid sample state
@@ -165,7 +165,7 @@ Processing failed: Processing failed due to invalid sample state
 
 ### Handling multiple failure paths in one CATCH block
 
-Uses one `:TRY` block for a multi-step operation, then branches inside the single [`:CATCH`](CATCH.md) block SSL supports. [`:FINALLY`](FINALLY.md) always displays the outcome regardless of success or failure. With `sBatchID` set to `"B-1001"` and both the load and update succeeding, the final message confirms processing.
+Uses one `:TRY` block for a multi-step operation, then branches inside the single [`:CATCH`](CATCH.md) block SSL supports. [`:FINALLY`](FINALLY.md) always logs the outcome regardless of success or failure. With `sBatchID` set to `"B-1001"` and both the load and update succeeding, the final message confirms processing.
 
 ```ssl
 :PROCEDURE ProcessBatchRecords;

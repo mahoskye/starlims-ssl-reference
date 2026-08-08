@@ -89,7 +89,7 @@ Uses .NET's static `String.Format` to build a formatted message. The receiver `s
 DoProc("BuildGreeting");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Hello world
@@ -142,7 +142,7 @@ Reads the first character of `"STARLIMS"` using 1-based indexing. `sWord[1]` ret
 DoProc("GetFirstLetter");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 First letter: S
@@ -206,7 +206,7 @@ Normalizes whitespace-only input to a fallback string, then serializes the resul
 DoProc("BuildCommentPayload");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 "No comment provided"

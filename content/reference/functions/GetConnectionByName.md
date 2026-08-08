@@ -77,7 +77,7 @@ Retrieve a named connection and confirm the retrieval succeeded. Pass a configur
 DoProc("GetConnectionExample");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Database: LIMSDB

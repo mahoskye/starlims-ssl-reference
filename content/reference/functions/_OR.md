@@ -84,7 +84,7 @@ Combine two simple flag values into one mask.
 DoProc("CombineFlags");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 3
@@ -104,11 +104,11 @@ Set selected bits in an existing packed value.
     nUpdatedFlags := _OR(nCurrentFlags, nMask);
 
     UsrMes("Original flags: " + LimsString(nCurrentFlags));
-    /* Displays: Original flags: 1;
+    /* Logs: Original flags: 1;
     UsrMes("Mask: " + LimsString(nMask));
-    /* Displays: Mask: 6;
+    /* Logs: Mask: 6;
     UsrMes("Updated flags: " + LimsString(nUpdatedFlags));
-    /* Displays: Updated flags: 7;
+    /* Logs: Updated flags: 7;
 :ENDPROC;
 
 /* Usage;
@@ -137,7 +137,7 @@ Check both type and whole-number status before doing bitwise work.
     nResult := _OR(vLeft, vRight);
 
     UsrMes("Result: " + LimsString(nResult));
-    /* Displays: bitwise OR result on success;
+    /* Logs: bitwise OR result on success;
 :ENDPROC;
 
 /* Usage;

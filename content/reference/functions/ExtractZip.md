@@ -88,7 +88,7 @@ Extract the full archive into a working directory.
 DoProc("ExtractZipBasic");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Archive extracted: C:\Data\Extracted
@@ -115,7 +115,7 @@ Extract only archived file paths that end in `.csv`.
 DoProc("ExtractCsvFiles");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 CSV files extracted: C:\Imports\CsvOnly
@@ -138,12 +138,12 @@ Handle password-protected extraction and report failures from the archive, passw
 		ExtractZip(sZipPath, sExtractDir, sFileFilter, sPassword);
 
 		UsrMes("Secure archive extracted: " + sExtractDir);
-		/* Displays on success: extraction confirmation;
+		/* Logs on success: extraction confirmation;
 
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes("Archive extraction failed: " + oErr:Description);
-		/* Displays on failure: extraction failed;
+		/* Logs on failure: extraction failed;
 	:ENDTRY;
 :ENDPROC;
 

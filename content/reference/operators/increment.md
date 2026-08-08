@@ -84,7 +84,7 @@ Increments `nCount` on each of five iterations using postfix `++`. The `nIndex` 
 DoProc("IncrementCounter");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays (one line per iteration):
+[`UsrMes`](../functions/UsrMes.md) logs (one line per iteration):
 
 ```text
 Iteration 1 complete
@@ -123,7 +123,7 @@ Shows that postfix `++` assigns the original value before incrementing, while pr
 DoProc("DemoIncrementForms");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Postfix captured: 5, nCounter after postfix: 6

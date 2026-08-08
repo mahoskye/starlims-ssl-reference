@@ -88,7 +88,7 @@ DeleteFromFtp(
 
 ### Delete a processed file from an FTP drop
 
-Removes one known file from an FTP server after a workflow step finishes and displays whether the delete succeeded.
+Removes one known file from an FTP server after a workflow step finishes and logs whether the delete succeeded.
 
 ```ssl
 :PROCEDURE RemoveProcessedReport;
@@ -156,7 +156,7 @@ Uses the SFTP path with key-based authentication and catches connection setup fa
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("SFTP setup failed: " + oErr:Description);
-        /* Displays on setup error: SFTP setup failed;
+        /* Logs on setup error: SFTP setup failed;
         :RETURN .F.;
     :ENDTRY;
 :ENDPROC;
@@ -210,7 +210,7 @@ Iterates a list of expected files, deletes those that exist on the FTP server, a
 
     :FOR nIndex := 1 :TO ALen(aRemaining);
         UsrMes("Remaining file: " + aRemaining[nIndex]);
-        /* Displays one remaining filename per line;
+        /* Logs one remaining filename per line;
     :NEXT;
 
     :RETURN .F.;

@@ -95,7 +95,7 @@ Uses the default `";"` row delimiter and `","` column delimiter to serialize a h
 DoProc("ShowGridAsText");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Product,Qty;Widget,5;Gadget,3
@@ -129,7 +129,7 @@ Formats three instrument readings for a system that expects one record per line 
 DoProc("ExportInstrumentRows");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 SAM-1001|pH|7.2
@@ -162,7 +162,7 @@ Demonstrates trimming, [`NIL`](../literals/nil.md) cell handling, and empty-row 
 DoProc("ShowBuildString2Behavior");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 A/NIL/C||D/E

@@ -91,7 +91,7 @@ Searches for `"quick"` inside `sText`. The substring is present, so `bFound` is 
 DoProc("CheckSubstring");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Substring found
@@ -127,7 +127,7 @@ Demonstrates that `$` requires the search term on the left and that matching is 
 DoProc("DollarOperandOrder");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Needle in haystack: .T.
@@ -157,7 +157,7 @@ Converts `nBatchNo` to a string with [`LimsString`](../functions/LimsString.md) 
         UsrMes("Unexpected result: " + LimsString(bFound));
     :CATCH;
         oErr := GetLastSSLError();
-        /* Displays on failure with runtime error details;
+        /* Logs on failure with runtime error details;
         UsrMes("Comparison failed: " + oErr:Description);
     :ENDTRY;
 
@@ -168,7 +168,7 @@ Converts `nBatchNo` to a string with [`LimsString`](../functions/LimsString.md) 
 DoProc("SafeDollarComparison");
 ```
 
-`UsrMes` first displays:
+`UsrMes` first logs:
 
 ```text
 Explicit conversion result: .T.

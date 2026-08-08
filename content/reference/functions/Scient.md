@@ -75,7 +75,7 @@ Display one measurement in scientific notation.
 DoProc("DisplayMeasurementScientific");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Measurement in scientific notation: 0.325E-6
@@ -105,7 +105,7 @@ Format several numeric values before building an export payload.
 DoProc("ExportMeasurementsToFlatFile");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Export line: RESULT<TAB>0.4523E-4<TAB>1.256E6<TAB>0.34E-2
@@ -141,7 +141,7 @@ Build a multi-line export string that includes positive, zero, and negative valu
 DoProc("BuildScientificExport");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 1,1256000,1.256E6

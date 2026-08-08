@@ -69,7 +69,7 @@ DocDelegateWorkitem(sWorkitemId, sTargetUser)
 
 ### Delegate a work item and check the boolean result
 
-Delegates a work item to a named user and displays success or failure based on the boolean return value.
+Delegates a work item to a named user and logs success or failure based on the boolean return value.
 
 ```ssl
 :PROCEDURE DelegateSingleWorkitem;

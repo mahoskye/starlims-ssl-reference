@@ -79,7 +79,7 @@ Calls `AddNameDelimiters` twice, once for the table name and once for the column
 DoProc("BuildSelectStatement");
 ```
 
-[`UsrMes`](UsrMes.md) displays (SQL Server example):
+[`UsrMes`](UsrMes.md) logs (SQL Server example):
 
 ```text
 SELECT [sample_id] FROM [samples]
@@ -102,7 +102,7 @@ Omits `sDSN` so that no delimiter characters are applied; the function returns t
 DoProc("ShowDefaultDelimiterBehavior");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Delimited name: status

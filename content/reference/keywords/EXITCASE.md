@@ -88,7 +88,7 @@ Use `:EXITCASE;` inside a [`:BEGINCASE`](BEGINCASE.md) block when a matching bra
 DoProc("GetSamplePriority", {"HIGH"});
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Sample priority: Process within 24 hours
@@ -126,7 +126,7 @@ Each branch uses `:EXITCASE;` so only one category applies. With `nResultValue` 
 DoProc("ClassifyResult", {80});
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Warning

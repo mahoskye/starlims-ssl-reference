@@ -98,7 +98,7 @@ Checks whether two status strings differ. `"PENDING" != "COMPLETE"` is [`.T.`](.
 DoProc("CheckStatusChange");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Status changed from PENDING to COMPLETE
@@ -140,7 +140,7 @@ Checks runtime types first when a comparison may receive mixed values. With both
 DoProc("CheckReplicateMismatch");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Replicate count differs
@@ -179,7 +179,7 @@ Shows that `!=` on two object variables indicates different instances even when 
 DoProc("CheckSettingsDifference");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Objects are different instances but have the same status

@@ -78,10 +78,10 @@ Calls `DocRemoveAllUsersFromGroup` with a hardcoded group name and reports succe
 
     :IF bCleared;
         UsrMes("Cleared group " + sGroupName);
-        /* Displays cleared group name;
+        /* Logs cleared group name;
     :ELSE;
         ErrorMes("Failed to clear group " + sGroupName);
-        /* Displays clear failure with group name;
+        /* Logs clear failure with group name;
     :ENDIF;
 :ENDPROC;
 
@@ -104,10 +104,10 @@ Builds the group name from a project code, clears the group, reports the outcome
 
     :IF bCleared;
         UsrMes("Reset group " + sGroupName);
-        /* Displays reset group name;
+        /* Logs reset group name;
     :ELSE;
         ErrorMes("Could not reset group " + sGroupName);
-        /* Displays reset failure with group name;
+        /* Logs reset failure with group name;
     :ENDIF;
 
     :RETURN bCleared;
@@ -140,10 +140,10 @@ Iterates a list of group names, records the outcome of each clear operation in a
 
         :IF bCleared;
             UsrMes("Cleared group " + sGroupName);
-            /* Displays cleared group name;
+            /* Logs cleared group name;
         :ELSE;
             ErrorMes("Failed to clear group " + sGroupName);
-            /* Displays clear failure with group name;
+            /* Logs clear failure with group name;
         :ENDIF;
     :NEXT;
 

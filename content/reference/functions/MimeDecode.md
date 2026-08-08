@@ -79,7 +79,7 @@ Encode a string with [`MimeEncode`](MimeEncode.md), then recover the original te
 DoProc("DecodeEncodedText");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Decoded: Q1 Summary: Sales up 12%; Margin stable
@@ -121,9 +121,9 @@ Process an array of MIME-encoded strings, accumulate failures, and return a summ
     oBatchResult:Errors := aErrors;
 
     :IF ALen(aErrors) > 0;
-        UsrMes("Batch completed with " + LimsString(nFailed) + " error(s)"); /* Displays failure summary;
+        UsrMes("Batch completed with " + LimsString(nFailed) + " error(s)"); /* Logs failure summary;
     :ELSE;
-        UsrMes("Batch completed: " + LimsString(nProcessed) + " records decoded"); /* Displays success summary;
+        UsrMes("Batch completed: " + LimsString(nProcessed) + " records decoded"); /* Logs success summary;
     :ENDIF;
 
     :RETURN oBatchResult;

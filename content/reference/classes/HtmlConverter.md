@@ -110,7 +110,7 @@ This example converts XFD XML that is already available to the script and then c
 DoProc("ConvertFormToHtml", {sXfdXml, sXfdGuid, sHtmlGuid});
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 <simplified log text>
@@ -132,12 +132,12 @@ This example sets `OptionsXml` before conversion and reads the full log after th
 		sHtmlXml := oConverter:Convert(sXfdXml, sXfdGuid, sHtmlGuid);
 
 		:IF .NOT. Empty(oConverter:Log);
-			/* Displays: conversion log text;
+			/* Logs: conversion log text;
 			UsrMes(oConverter:Log);
 		:ENDIF;
 	:CATCH;
 		oErr := GetLastSSLError();
-		/* Displays on failure: conversion error;
+		/* Logs on failure: conversion error;
 		ErrorMes("Conversion Error", oErr:Description);
 		:RETURN "";
 	:ENDTRY;

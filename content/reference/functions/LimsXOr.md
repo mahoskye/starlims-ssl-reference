@@ -82,7 +82,7 @@ Use XOR with a mask to flip one bit in an integer value.
 DoProc("ToggleFlagBit");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Original flags: 5
@@ -120,7 +120,7 @@ Compare two integer flag values and report the positions that differ.
 DoProc("ListChangedBits");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Changed bit positions: {3}
@@ -151,7 +151,7 @@ XOR is reversible: applying the same key twice restores the original value.
 DoProc("EncodeAndRestore");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Original: 123

@@ -93,7 +93,7 @@ Use `SigFig` to produce the string that will be shown in a report line.
 DoProc("FormatReportedValue");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Reported value: <rounded value>
@@ -124,7 +124,7 @@ Loop through several requests so the same input pattern can be handled with diff
         sRounded := SigFig(sStandard, nDigits, nValue);
         sLine := sStandard + ": " + sRounded;
 
-        UsrMes(sLine);  /* Displays: <standard>: <rounded value>;
+        UsrMes(sLine);  /* Logs: <standard>: <rounded value>;
     :NEXT;
 :ENDPROC;
 

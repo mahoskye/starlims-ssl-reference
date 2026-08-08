@@ -78,7 +78,7 @@ Removes leading and trailing spaces from an input string and shows the cleaned r
 DoProc("CleanSearchInput");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 [copper sample]
@@ -99,8 +99,8 @@ Trims each element in an array of imported codes, removing stray padding spaces 
 		AAdd(aCleanCodes, AllTrim(aCodes[nIndex]));
 	:NEXT;
 
-	UsrMes(aCleanCodes[1]);  /* Displays: LAB-001;
-	UsrMes(aCleanCodes[2]);  /* Displays: LAB-002;
+	UsrMes(aCleanCodes[1]);  /* Logs: LAB-001;
+	UsrMes(aCleanCodes[2]);  /* Logs: LAB-002;
 :ENDPROC;
 
 /* Usage;
@@ -126,7 +126,7 @@ Calls `AllTrim` inline inside the [`:IF`](../keywords/IF.md) condition so that s
 DoProc("MatchDepartment");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Department matched.

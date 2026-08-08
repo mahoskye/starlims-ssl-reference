@@ -83,13 +83,13 @@ Queries released documents with a 10-row cap, checks for a failed call before it
         aResults := DocSearchUsingDql(sDql, 10);
 
         :IF ALen(aResults) == 0 .AND. DocCommandFailed();
-            /* Displays on failure: Document search failed;
+            /* Logs on failure: Document search failed;
             ErrorMes("Document search failed: " + DocGetErrorMessage());
             :RETURN {};
         :ENDIF;
 
         :FOR nIndex := 1 :TO ALen(aResults);
-            /* Displays each document name;
+            /* Logs each document name;
             UsrMes(aResults[nIndex, 2]);
         :NEXT;
 
@@ -120,7 +120,7 @@ Fetches three columns from documents in a specific folder path and assembles eac
         aSummary := {};
 
         :IF ALen(aResults) == 0 .AND. DocCommandFailed();
-            /* Displays on failure: Unable to read document summary;
+            /* Logs on failure: Unable to read document summary;
             ErrorMes("Unable to read document summary: " + DocGetErrorMessage());
             :RETURN {};
         :ENDIF;
@@ -157,7 +157,7 @@ Shows that when `RETURN_TOP` is already in the DQL text, `nResultSetSize` has no
 
         :IF ALen(aResults) == 0 .AND. DocCommandFailed();
             sError := DocGetErrorMessage();
-            /* Displays on failure: Protocol search failed;
+            /* Logs on failure: Protocol search failed;
             ErrorMes("Protocol search failed: " + sError);
             :RETURN {};
         :ENDIF;

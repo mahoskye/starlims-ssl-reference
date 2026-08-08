@@ -90,7 +90,7 @@ Run a query and write the results to a file. The empty-string return value signa
     :IF Empty(sResult);
         UsrMes("XML export completed: " + sFile);
     :ELSE;
-        ErrorMes(sResult);  /* Displays on failure: export error details;
+        ErrorMes(sResult);  /* Logs on failure: export error details;
     :ENDIF;
 :ENDPROC;
 
@@ -123,11 +123,11 @@ Target a named database and wrap the call in [`:TRY`](../keywords/TRY.md) / [`:C
             :RETURN .T.;
         :ENDIF;
 
-        ErrorMes(sResult);  /* Displays on failure: export error details;
+        ErrorMes(sResult);  /* Logs on failure: export error details;
         :RETURN .F.;
     :CATCH;
         oErr := GetLastSSLError();
-        ErrorMes(oErr:Description);  /* Displays on failure: argument error details;
+        ErrorMes(oErr:Description);  /* Logs on failure: argument error details;
         :RETURN .F.;
     :ENDTRY;
 :ENDPROC;

@@ -87,7 +87,7 @@ Call `IsGuid` on a single input string and branch on the result to confirm wheth
 DoProc("ValidateGuidInput");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Valid GUID: 3F2504E0-4F89-11D3-9A0C-0305E82C3301
@@ -135,7 +135,7 @@ Iterate over a mixed list of identifier strings and use `IsGuid` to route each o
 DoProc("FilterValidGuids");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Valid: 4 | Invalid: 3
@@ -170,7 +170,7 @@ When `IsGuid` receives a value from an external source that may be [`NIL`](../li
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("GUID validation failed: " + oErr:Description);
-        /* Displays on failure: GUID validation failed;
+        /* Logs on failure: GUID validation failed;
         :RETURN .F.;
     :ENDTRY;
 :ENDPROC;

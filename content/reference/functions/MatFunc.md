@@ -89,7 +89,7 @@ Use `MatFunc` when the operation name is already known in a variable.
 DoProc("ShowAbsoluteValue");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 ABS(-42) = 42
@@ -111,7 +111,7 @@ Check the requested name before calling `MatFunc` so unsupported values are reje
 
     :IF AScan(aSupportedFuncs, sRequestedFunc) = 0;
         UsrMes("Unsupported operation: " + sRequestedFunc);
-        /* Displays unsupported operation message;
+        /* Logs unsupported operation message;
         :RETURN;
     :ENDIF;
 
@@ -121,7 +121,7 @@ Check the requested name before calling `MatFunc` so unsupported values are reje
         sRequestedFunc + "(" + LimsString(nInputValue) + ") = "
         + LimsString(nResult)
     );
-    /* Displays selected operation result;
+    /* Logs selected operation result;
 :ENDPROC;
 
 /* Usage;
@@ -173,7 +173,7 @@ Handle multiple requested operations, keep successful results, and record failur
 
     sSummary := "Processed " + LimsString(ALen(aResults)) + " math job(s)";
     UsrMes(sSummary);
-    /* Displays batch summary;
+    /* Logs batch summary;
 
     :RETURN aResults;
 :ENDPROC;

@@ -79,7 +79,7 @@ Fetch both the user and server UTC offsets and log their difference. Both values
 DoProc("CompareTimeZones");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 User offset: -300 minutes, server offset: 0 minutes, difference: -300 minutes
@@ -131,7 +131,7 @@ Shift a fixed UTC time (14:30) into the user's local time using the minute-based
 DoProc("ShowLocalCutoffTime");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Local cutoff time: 09:30

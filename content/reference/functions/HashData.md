@@ -132,7 +132,7 @@ Catch the runtime error when the requested algorithm is not supported.
     :CATCH;
         oErr := GetLastSSLError();
         UsrMes("Hashing failed: " + oErr:Description);
-        /* Displays on failure: hashing failed with the runtime error;
+        /* Logs on failure: hashing failed with the runtime error;
 
         :RETURN "";
     :ENDTRY;

@@ -84,7 +84,7 @@ Creates a single folder under a known parent path and checks the Documentum fail
     :IF Empty(sCreateResult);
         :IF DocCommandFailed();
             ErrorMes("Folder creation failed: " + DocGetErrorMessage());
-            /* Displays on command failure: folder creation failed;
+            /* Logs on command failure: folder creation failed;
         :ELSE;
             ErrorMes("Folder creation did not return a result string");
         :ENDIF;
@@ -92,7 +92,7 @@ Creates a single folder under a known parent path and checks the Documentum fail
     :ENDIF;
 
     UsrMes("Folder created: " + sCreateResult);
-    /* Displays: created folder path;
+    /* Logs: created folder path;
 
     :RETURN sCreateResult;
 :ENDPROC;
@@ -133,12 +133,12 @@ Iterates a list of project names, creates each folder under a shared base path w
 
         sFolderPath := sBasePath + "/" + sProjectName;
         UsrMes("Created folder: " + sFolderPath);
-        /* Displays per success: created folder path;
+        /* Logs per success: created folder path;
     :NEXT;
 
     :IF ALen(aFailures) > 0;
         ErrorMes("Some folders were not created: " + LimsString(ALen(aFailures)));
-        /* Displays when some failed: folder creation summary;
+        /* Logs when some failed: folder creation summary;
     :ENDIF;
 
     :RETURN aFailures;
@@ -170,14 +170,14 @@ Guards against blank path or name inputs, wraps the call in [`:TRY`](../keywords
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("DocCreateFolder raised an error: " + oErr:Description);
-        /* Displays when NIL is passed: DocCreateFolder raised an error;
+        /* Logs when NIL is passed: DocCreateFolder raised an error;
         :RETURN "";
     :ENDTRY;
 
     :IF Empty(sCreateResult);
         :IF DocCommandFailed();
             ErrorMes("DocCreateFolder failed: " + DocGetErrorMessage());
-            /* Displays on command failure: DocCreateFolder failed;
+            /* Logs on command failure: DocCreateFolder failed;
         :ELSE;
             ErrorMes("DocCreateFolder returned an empty result string");
         :ENDIF;
@@ -185,7 +185,7 @@ Guards against blank path or name inputs, wraps the call in [`:TRY`](../keywords
     :ENDIF;
 
     UsrMes("Folder created successfully: " + sCreateResult);
-    /* Displays: created folder result;
+    /* Logs: created folder result;
 
     :RETURN sCreateResult;
 :ENDPROC;

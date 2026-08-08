@@ -203,11 +203,11 @@ Combine a path-based write operation with metadata checks and error handling.
 		UsrMes(
 			"Copied " + sFileName + " with size " + LimsString(nBytes)
 		);
-		/* Displays copied file details;
+		/* Logs copied file details;
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes("FileSupport error: " + oErr:Description);
-		/* Displays on failure: FileSupport error;
+		/* Logs on failure: FileSupport error;
 		:RETURN .F.;
 	:ENDTRY;
 

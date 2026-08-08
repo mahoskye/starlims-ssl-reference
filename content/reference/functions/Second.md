@@ -81,7 +81,7 @@ Retrieve the current timestamp and extract its seconds component. The output var
 DoProc("ShowCurrentSecond");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Current second: <0–59>

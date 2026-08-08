@@ -74,7 +74,7 @@ DoProc(sProcedureName, [aArguments])
 
 ### Call a local procedure by name
 
-Dispatches to two local procedures by name: one that logs a message and one that maps a status code to a description string, then prints the returned description.
+Dispatches to two local procedures by name: one that logs a message and one that maps a status code to a description string, then logs the returned description.
 
 ```ssl
 :PROCEDURE CallProcedureDynamically;
@@ -87,7 +87,7 @@ Dispatches to two local procedures by name: one that logs a message and one that
 	sResult := DoProc("GetStatusText", {200});
 
 	UsrMes(LimsString(sResult));
-	/* Displays returned status text;
+	/* Logs returned status text;
 :ENDPROC;
 
 
@@ -98,7 +98,7 @@ Dispatches to two local procedures by name: one that logs a message and one that
 	sLogEntry := "[" + sLevel + "] " + sMessage;
 
 	UsrMes(sLogEntry);
-	/* Displays the formatted log entry;
+	/* Logs the formatted log entry;
 :ENDPROC;
 
 
@@ -185,7 +185,7 @@ Builds a three-segment procedure name at runtime and dispatches to it using `DoP
 DoProc("SubmitConfiguredStep", {"ProcessSample", "S-001", "jsmith"});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Dispatched: Workflow.SampleActions.ProcessSample

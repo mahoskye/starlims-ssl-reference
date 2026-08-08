@@ -194,7 +194,7 @@ Builds an Oracle sequence object with a prefix, redirects it to a named database
     :IF .NOT. oSeq:Exists;
         oSeq:Create();
         UsrMes("Created sequence " + oSeq:SequenceName + " in HISTORYDB");
-        /* Displays the created sequence name and target database;
+        /* Logs the created sequence name and target database;
     :ENDIF;
 :ENDPROC;
 

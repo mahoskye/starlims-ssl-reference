@@ -260,7 +260,7 @@ This example demonstrates loading a table with `GetTable()`, filtering rows usin
 	oRow := aRows[1];
 	sSampleId := oRow:GetField("sample_id"):Value;
 
-/* Displays matching sample id when a pending row exists;
+/* Logs matching sample id when a pending row exists;
 	UsrMes("First pending sample: " + sSampleId);
 :ENDPROC;
 
@@ -292,7 +292,7 @@ This example demonstrates assigning a primary key with `AddPK()`, updating a fie
 DoProc("CompletePendingRows");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Completed rows were saved

@@ -66,7 +66,7 @@ Decompress(sSource, [bFromFile])
 
 ### Restore text from an in-memory compressed value
 
-Compresses a string to memory with [`Compress`](Compress.md), then restores the original text with `Decompress` and displays the result.
+Compresses a string to memory with [`Compress`](Compress.md), then restores the original text with `Decompress` and logs the result.
 
 ```ssl
 :PROCEDURE RestoreCompressedText;
@@ -86,7 +86,7 @@ Compresses a string to memory with [`Compress`](Compress.md), then restores the 
 DoProc("RestoreCompressedText");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Restored text: Batch 24018|Status=Released|Reviewer=jsmith
@@ -111,7 +111,7 @@ Compresses a multi-line string to a temporary file using [`Compress`](Compress.m
 
     :IF sRestored == sPayload;
         UsrMes("Restored file payload from: " + sCompressedPath);
-        /* Displays restored file path on success;
+        /* Logs restored file path on success;
     :ELSE;
         ErrorMes("Restored file content did not match the original text");
     :ENDIF;
@@ -160,7 +160,7 @@ Iterates over a mixed batch of compressed payloads, some stored in memory and so
 
         AAdd(aRestored, sRestored);
         UsrMes("Restored payload " + LimsString(nIndex));
-        /* Displays each restored payload number;
+        /* Logs each restored payload number;
     :NEXT;
 
     :RETURN aRestored;

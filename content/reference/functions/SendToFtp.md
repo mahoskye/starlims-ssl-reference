@@ -199,7 +199,7 @@ Call `SendToFtp` inside a loop and stop the workflow as soon as one upload fails
 
 		:IF .NOT. bUploaded;
 			ErrorMes("Outbound upload failed for " + aUploads[nIndex, 2]);
-			/* Displays on failure: outbound upload message;
+			/* Logs on failure: outbound upload message;
 			:RETURN .F.;
 		:ENDIF;
 	:NEXT;

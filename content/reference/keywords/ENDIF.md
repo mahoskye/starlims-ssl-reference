@@ -64,7 +64,7 @@ Terminates an [`:IF`](IF.md) block, with or without an [`:ELSE`](ELSE.md) branch
 DoProc("CheckTemperature");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Temperature is normal
@@ -94,7 +94,7 @@ Temperature is normal
 DoProc("ClassifyResult", {85});
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Review

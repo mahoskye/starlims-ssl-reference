@@ -148,7 +148,7 @@ Write a new value to a field and then read it back from the same row.
 DoProc("UpdateStatusField");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Updated status: Complete
@@ -181,7 +181,7 @@ Read a binary field to a file path, then write updated contents back from a diff
 DoProc("CopyBinaryField");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays (the filename is derived from the binary content hash):
+[`UsrMes`](../functions/UsrMes.md) logs (the filename is derived from the binary content hash):
 
 ```text
 Binary field exported to: C:/Import/a3f2b1c4d5e6f7890123456789abcdef.bin
@@ -205,7 +205,7 @@ Use the helper when you need the current field rendered as a SQL literal.
 		UsrMes(sWhere);
 	:ELSE;
 		sWhere := "sample_id = " + oField:GetSqlFormattedValue();
-		/* Displays: generated WHERE clause;
+		/* Logs: generated WHERE clause;
 		UsrMes(sWhere);
 	:ENDIF;
 

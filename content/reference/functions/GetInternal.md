@@ -88,7 +88,7 @@ Read a single property from a dynamic object when the property name is known at 
 DoProc("GetConfigTimeout");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Query timeout: 60
@@ -134,7 +134,7 @@ Check whether each property exists before reading it from a dynamic object.
 DoProc("SummarizeSample");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Sample values: SampleID=LAB-2024-0042, Status=Active, Analyst=JSmith, Priority=<missing>
@@ -171,7 +171,7 @@ Handle the runtime error raised when a dynamic object does not contain the reque
 DoProc("ReadOptionalPriority");
 ```
 
-[`UsrMes`](UsrMes.md) displays when the property is absent:
+[`UsrMes`](UsrMes.md) logs when the property is absent:
 
 ```text
 Lookup failed: Property not found: Priority.

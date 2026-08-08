@@ -160,7 +160,7 @@ Enable error ignoring for a best-effort `UPDATE`, then restore the previous sett
             oErr := GetLastSQLError();
 
             :IF oErr != NIL;
-                /* Displays on failure: Optional update failed;
+                /* Logs on failure: Optional update failed;
                 UsrMes(
                     "Optional update failed: " + oErr:Description
                 );

@@ -111,11 +111,11 @@ Execute a parameterized `SELECT` using named `?varName?` substitution and receiv
 	aTasks := SQLExecute(sSQL);
 
 	UsrMes("Found " + LimsString(ALen(aTasks)) + " row(s)");
-	/* Displays row count;
+	/* Logs row count;
 
 	:FOR nIndex := 1 :TO ALen(aTasks);
 		UsrMes(aTasks[nIndex, 1] + " - " + aTasks[nIndex, 2]);
-		/* Displays task row;
+		/* Logs task row;
 	:NEXT;
 :ENDPROC;
 
@@ -149,11 +149,11 @@ Execute an `UPDATE` statement and check the boolean return value; use [`:TRY`](.
 		:ENDIF;
 
 		UsrMes("Rows affected: " + LimsString(LimsRecordsAffected()));
-		/* Displays affected-row count;
+		/* Logs affected-row count;
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes(oErr:Description);
-		/* Displays on failure: database error;
+		/* Logs on failure: database error;
 		:RETURN .F.;
 	:ENDTRY;
 
@@ -193,14 +193,14 @@ Request a dataset object instead of an array, then traverse its rows using the .
 	nCount := oRows:GetProperty("Count");
 
 	UsrMes("Batch " + sBatch + ": " + LimsString(nCount) + " sample(s)");
-	/* Displays batch sample count;
+	/* Logs batch sample count;
 
 	:FOR nIndex := 0 :TO nCount - 1;
 		oRow := oRows[nIndex];
 		sSampleId := oRow["sample_id"];
 		sStatus := oRow["status"];
 		UsrMes(sSampleId + " - " + sStatus);
-		/* Displays sample status;
+		/* Logs sample status;
 	:NEXT;
 :ENDPROC;
 

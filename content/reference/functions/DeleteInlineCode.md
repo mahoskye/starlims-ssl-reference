@@ -84,8 +84,8 @@ Retrieves the inline code source with [`GetInlineCode`](GetInlineCode.md) before
     sSavedCode := GetInlineCode(sCodeName, {});
     bDeleted := DeleteInlineCode(sCodeName);
 
-    UsrMes("Deleted inline code: " + LimsString(bDeleted));  /* Displays deletion status;
-    UsrMes("Saved text length: " + LimsString(Len(sSavedCode)));  /* Displays saved text length;
+    UsrMes("Deleted inline code: " + LimsString(bDeleted));  /* Logs deletion status;
+    UsrMes("Saved text length: " + LimsString(Len(sSavedCode)));  /* Logs saved text length;
 
     :RETURN bDeleted;
 :ENDPROC;
@@ -124,9 +124,9 @@ Removes the previous definition before registering a replacement under the same 
 
     sCurrentCode := GetInlineCode(sCodeName, {});
 
-    UsrMes("Previous template removed: " + LimsString(bDeleted));  /* Displays deletion status;
+    UsrMes("Previous template removed: " + LimsString(bDeleted));  /* Logs deletion status;
     UsrMes("Current inline code:");
-    UsrMes(sCurrentCode);  /* Displays updated inline code text;
+    UsrMes(sCurrentCode);  /* Logs updated inline code text;
 
     :RETURN .T.;
 :ENDPROC;

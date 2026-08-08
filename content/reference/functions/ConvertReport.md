@@ -65,7 +65,7 @@ ConvertReport(sFile)
 
 ### Convert a single report and continue on success
 
-Calls `ConvertReport` directly in an [`:IF`](../keywords/IF.md) condition and displays a confirmation message when the call returns [`.T.`](../literals/true.md).
+Calls `ConvertReport` directly in an [`:IF`](../keywords/IF.md) condition and logs a confirmation message when the call returns [`.T.`](../literals/true.md).
 
 ```ssl
 :PROCEDURE ConvertReportExample;
@@ -100,7 +100,7 @@ Wraps the call in `:TRY/:CATCH` so a failed conversion is reported via the error
 		sErrMsg := "ConvertReport failed for " + sFile + ": "
 					+ oErr:Description;
 		UsrMes(sErrMsg);
-		/* Displays on failure: conversion failure summary;
+		/* Logs on failure: conversion failure summary;
 	:ENDTRY;
 :ENDPROC;
 
@@ -110,7 +110,7 @@ DoProc("HandleMissingReport");
 
 ### Batch convert reports and aggregate failures
 
-Converts four report files, keeps processing after failures, counts both outcomes, and displays one summary at the end.
+Converts four report files, keeps processing after failures, counts both outcomes, and logs one summary at the end.
 
 ```ssl
 :PROCEDURE BatchConvertReports;
@@ -135,14 +135,14 @@ Converts four report files, keeps processing after failures, counts both outcome
 			ConvertReport(sFilePath);
 			nSuccessCount += 1;
 			UsrMes("Converted: " + sFilePath);
-			/* Displays one line for each successful conversion;
+			/* Logs one line for each successful conversion;
 		:CATCH;
 			nFailCount += 1;
 			oErr := GetLastSSLError();
 			sLogMessage := "Failed to convert " + sFilePath + ": "
 							+ oErr:Description;
 			UsrMes(sLogMessage);
-			/* Displays one line for each failed conversion;
+			/* Logs one line for each failed conversion;
 		:ENDTRY;
 	:NEXT;
 
@@ -150,7 +150,7 @@ Converts four report files, keeps processing after failures, counts both outcome
 						+ LimsString(nSuccessCount) + " succeeded, "
 						+ LimsString(nFailCount) + " failed";
 	InfoMes(sResultSummary);
-	/* Displays batch totals;
+	/* Logs batch totals;
 
 	:RETURN nSuccessCount;
 :ENDPROC;

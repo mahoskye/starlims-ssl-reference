@@ -195,7 +195,7 @@ Demonstrates that `Get` raises an error for a column name that does not exist. U
 DoProc("HandleMissingColumn");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Column: [missing_column] does not exist.

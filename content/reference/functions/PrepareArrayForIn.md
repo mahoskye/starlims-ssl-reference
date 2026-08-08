@@ -91,7 +91,7 @@ PrepareArrayForIn(aTarget, sItemType)
 	    WHERE sampleid IN
 	" + sInClause;
 
-	/* Displays the SQL statement with one sentinel value in the IN clause;
+	/* Logs the SQL statement with one sentinel value in the IN clause;
 	UsrMes(sSQL);
 
 	:RETURN sInClause;
@@ -113,7 +113,7 @@ The array already has elements, so `PrepareArrayForIn` only replaces the `""` en
 	PrepareArrayForIn(aSampleIDs, "numeric");
 
 	sInClause := BuildStringForIn(aSampleIDs);
-	/* Displays the IN clause with the empty string replaced by the sentinel;
+	/* Logs the IN clause with the empty string replaced by the sentinel;
 	UsrMes(sInClause);
 
 	:RETURN aSampleIDs;

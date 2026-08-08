@@ -127,7 +127,7 @@ Apply stricter role validation in production while allowing any user through in 
 		sValidationMsg := "Access granted in non-production environment";
 	:ENDIF;
 
-	UsrMes(sValidationMsg);  /* Displays access result;
+	UsrMes(sValidationMsg);  /* Logs access result;
 
 	:RETURN bAccessGranted;
 :ENDPROC;

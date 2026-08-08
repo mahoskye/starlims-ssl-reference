@@ -140,7 +140,7 @@ Process a list of files, encode each one, and return an array of payload objects
 		:CATCH;
 			oErr := GetLastSSLError();
 			UsrMes("Skipped file " + sFileName + ": " + oErr:Description);
-			/* Displays on failure: skipped file error;
+			/* Logs on failure: skipped file error;
 		:ENDTRY;
 	:NEXT;
 

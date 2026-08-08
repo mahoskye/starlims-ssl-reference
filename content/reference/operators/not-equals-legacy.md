@@ -98,7 +98,7 @@ Checks whether two status strings differ. `"PENDING" <> "COMPLETE"` is [`.T.`](.
 DoProc("CheckStatusChange");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Status changed from PENDING to COMPLETE
@@ -140,7 +140,7 @@ Checks runtime types first when a legacy comparison may receive mixed values. Wi
 DoProc("CheckReplicateMismatch");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Replicate count differs
@@ -168,10 +168,10 @@ Shows that `<>` treats two separate arrays as different objects even when they h
     :NEXT;
 
     sMessage := "Reference differs: " + LimsString(bRefDifferent);
-    UsrMes(sMessage); /* Displays reference-difference result;
+    UsrMes(sMessage); /* Logs reference-difference result;
 
     sMessage := "Element values differ: " + LimsString(bValueDifferent);
-    UsrMes(sMessage); /* Displays element-difference result;
+    UsrMes(sMessage); /* Logs element-difference result;
 
     :RETURN bRefDifferent;
 :ENDPROC;

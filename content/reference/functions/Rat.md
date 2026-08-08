@@ -83,7 +83,7 @@ Locate the last period in a file name before extracting the extension.
     :IF nDotPos > 0;
         sExtension := SubStr(sFileName, nDotPos + 1);
         UsrMes("Extension: " + sExtension);
-        /* Displays the extracted extension;
+        /* Logs the extracted extension;
     :ELSE;
         UsrMes("No extension found");
     :ENDIF;
@@ -113,9 +113,9 @@ Use the last slash to separate a path into its directory and trailing file name.
     :ENDIF;
 
     UsrMes("Directory: " + sDirectory);
-    /* Displays the directory portion;
+    /* Logs the directory portion;
     UsrMes("File: " + sFileName);
-    /* Displays the trailing file name;
+    /* Logs the trailing file name;
 :ENDPROC;
 
 /* Usage;
@@ -155,11 +155,11 @@ Use `Rat()` twice to split a fully qualified procedure reference into category, 
     :ENDIF;
 
     UsrMes("Category: " + sCategory);
-    /* Displays the category segment when present;
+    /* Logs the category segment when present;
     UsrMes("Script: " + sScript);
-    /* Displays the script segment;
+    /* Logs the script segment;
     UsrMes("Procedure: " + sProcedure);
-    /* Displays the procedure segment when present;
+    /* Logs the procedure segment when present;
 :ENDPROC;
 
 /* Usage;

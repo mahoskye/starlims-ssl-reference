@@ -103,7 +103,7 @@ Uses .NET's single-argument `ToString(sFormat)` overload with the `"N0"` standar
 DoProc("FormatRecordCount");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 1,234,567
@@ -148,13 +148,13 @@ Computes area, perimeter, ratio, and squared width for a 10 x 5 rectangle, then 
     nSquared := nWidth ^ 2;
 
     InfoMes("Area: " + LimsString(nArea));
-    /* Displays: Area: 50;
+    /* Logs: Area: 50;
     InfoMes("Perimeter: " + LimsString(nPerimeter));
-    /* Displays: Perimeter: 30;
+    /* Logs: Perimeter: 30;
     InfoMes("Ratio: " + LimsString(nRatio));
-    /* Displays: Ratio: 2;
+    /* Logs: Ratio: 2;
     InfoMes("Width squared: " + LimsString(nSquared));
-    /* Displays: Width squared: 100;
+    /* Logs: Width squared: 100;
 
     :IF nArea == 50;
         InfoMes("Area check passed");
@@ -194,13 +194,13 @@ Validates that the values are integer-valued before using shifts and bitwise bui
     /* 6 XOR 2 = 4;
 
     InfoMes("Shifted: " + nShifted:ToString(".", ","));
-    /* Displays: Shifted: 12;
+    /* Logs: Shifted: 12;
     InfoMes("Masked: " + nMasked:ToString(".", ","));
-    /* Displays: Masked: 2;
+    /* Logs: Masked: 2;
     InfoMes("Combined: " + nCombined:ToString(".", ","));
-    /* Displays: Combined: 14;
+    /* Logs: Combined: 14;
     InfoMes("Toggled: " + nToggled:ToString(".", ","));
-    /* Displays: Toggled: 4;
+    /* Logs: Toggled: 4;
 
     :RETURN nCombined;
 :ENDPROC;

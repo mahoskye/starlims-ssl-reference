@@ -97,7 +97,7 @@ Enables SQL injection detection on a named connection and reports whether detect
 DoProc("EnableDetection");
 ```
 
-`UsrMes` displays one of:
+`UsrMes` logs one of:
 
 ```text
 SQL injection detection was already enabled for LABDATA
@@ -125,12 +125,12 @@ Disables SQL injection detection before running a controlled query, then restore
         aRows := SQLExecute(sSQL, sConnectionName);
 
         UsrMes("Rows returned: " + LimsString(ALen(aRows)));
-        /* Displays: Rows returned: N;
+        /* Logs: Rows returned: N;
 
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("Controlled query failed: " + oErr:Description);
-        /* Displays on failure: Controlled query failed;
+        /* Logs on failure: Controlled query failed;
 
     :FINALLY;
         DetectSqlInjections(bPreviousState, sConnectionName);
@@ -168,7 +168,7 @@ Enables SQL injection detection on each connection in a list and tracks which on
 DoProc("NormalizeDetectionSettings");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Connections changed: 3

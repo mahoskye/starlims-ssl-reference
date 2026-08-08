@@ -58,7 +58,7 @@ The `:CATCH` keyword starts the error-handling branch of a [`:TRY`](TRY.md) bloc
 
 ### Catch a runtime error and show the error text
 
-Use `:CATCH` to intercept a failed query and display the error description. Either the query succeeds and [`UsrMes`](../functions/UsrMes.md) shows the row count, or `:CATCH` runs and reports the failure message.
+Use `:CATCH` to intercept a failed query and log the error description. Either the query succeeds and [`UsrMes`](../functions/UsrMes.md) logs the row count, or `:CATCH` runs and reports the failure message.
 
 ```ssl
 :PROCEDURE ConnectToSamples;
@@ -76,13 +76,13 @@ Use `:CATCH` to intercept a failed query and display the error description. Eith
 	:TRY;
 		aRows := SQLExecute(sSQL);
 		UsrMes("Loaded " + LimsString(ALen(aRows)) + " row(s).");
-		/* Displays loaded row count;
+		/* Logs loaded row count;
 
 	:CATCH;
 		oErr := GetLastSSLError();
 		sErrMsg := "Sample query failed: " + oErr:Description;
 		UsrMes(sErrMsg);
-		/* Displays query failure message;
+		/* Logs query failure message;
 
 	:ENDTRY;
 :ENDPROC;
@@ -124,7 +124,7 @@ Use a [`:BEGINCASE`](BEGINCASE.md) inside `:CATCH` to route different error code
 		:FOR nIndex := 1 :TO ALen(aResults);
 			sLogMessage := "Processing row " + LimsString(nIndex);
 			UsrMes(sLogMessage);
-			/* Displays current row being processed;
+			/* Logs current row being processed;
 
 			:IF Empty(aResults[nIndex, 1]);
 				RaiseError("Empty result value at row " + LimsString(nIndex));
@@ -141,19 +141,19 @@ Use a [`:BEGINCASE`](BEGINCASE.md) inside `:CATCH` to route different error code
 			bValidationError := .T.;
 			sLogMessage := "Validation failed: " + oErr:Description;
 			UsrMes(sLogMessage);
-			/* Displays validation failure message;
+			/* Logs validation failure message;
 			:EXITCASE;
 		:CASE oErr:Code == 208;
 			bDbError := .T.;
 			sLogMessage := "Database error in query: " + oErr:Operation;
 			ErrorMes(sLogMessage);
-			/* Displays database failure message;
+			/* Logs database failure message;
 			:EXITCASE;
 		:OTHERWISE;
 			sLogMessage := "Unexpected error (" + LimsString(oErr:Code) + "): "
 				+ oErr:Description;
 			ErrorMes(sLogMessage);
-			/* Displays unexpected failure message;
+			/* Logs unexpected failure message;
 			:EXITCASE;
 		:ENDCASE;
 
@@ -162,7 +162,7 @@ Use a [`:BEGINCASE`](BEGINCASE.md) inside `:CATCH` to route different error code
 	:FINALLY;
 		:IF bSuccess;
 			UsrMes("Processing completed successfully. Total: " + LimsString(nTotal));
-			/* Displays completion total;
+			/* Logs completion total;
 		:ELSE;
 			:IF bValidationError;
 				UsrMes("Please review data and resubmit.");

@@ -81,7 +81,7 @@ Stores a username string under a named key so that later steps in the same sessi
 DoProc("SaveLoginName");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 User name saved to session.
@@ -110,7 +110,7 @@ Converts a user-defined object to an XML string with [`ToXml`](ToXml.md) before 
 DoProc("SaveAnalysisContext");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Serialized analysis context stored as XML.

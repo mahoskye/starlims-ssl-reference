@@ -75,7 +75,7 @@ Demonstrate how to use the work path folder to save a temporary export or interm
 DoProc("SaveTempExport");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Temporary export saved to: C:\STARLIMS\Work\temp_export_001.txt
@@ -97,13 +97,13 @@ Check that the work path is non-empty and verify whether a specific file is pres
 	:ENDIF;
 
 	InfoMes("Work path is: " + sWorkPath);
-	/* Displays the configured work path;
+	/* Logs the configured work path;
 
 	sTestFile := sWorkPath + "\config.xml";
 
 	:IF FileSupport(sTestFile, "CHECK");
 		InfoMes("Config file exists at: " + sTestFile);
-		/* Displays when the config file exists;
+		/* Logs when the config file exists;
 	:ELSE;
 		InfoMes("Config file not found (normal for new installs)");
 	:ENDIF;

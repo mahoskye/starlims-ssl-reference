@@ -72,7 +72,7 @@ Show the active group separator in a user message.
 DoProc("DisplayGroupSeparator");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Group separator: [,]
@@ -103,7 +103,7 @@ Compare a text value against the active separator before further processing.
 DoProc("UsesCurrentGroupSeparator", {"1,234,567"});
 ```
 
-When called with `"1,234,567"`, [`UsrMes`](UsrMes.md) displays:
+When called with `"1,234,567"`, [`UsrMes`](UsrMes.md) logs:
 
 ```text
 Value uses the current group separator: 1,234,567

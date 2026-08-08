@@ -78,7 +78,7 @@ Shifts 5 left by 3 positions, equivalent to 5 × 2³ = 40.
 DoProc("MultiplyByPowerOfTwo");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 5 << 3 = 40
@@ -109,7 +109,7 @@ Creates a mask for bit position 4 (`1 << 3 = 8`), then sets that bit in `nFlags`
 DoProc("SetPermissionFlag");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Flags=5, Mask=8, Updated=13
@@ -141,7 +141,7 @@ Shifts the high byte left by 8 positions and adds the low byte to build a 16-bit
 DoProc("PackBytes", {3, 15});
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Packed value: 783

@@ -94,7 +94,7 @@ Search `"ABC-12345"` for a dash. `LimsAt` returns `0` when nothing is found and 
 DoProc("FindDashPosition");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Sample ID: ABC-12345
@@ -128,7 +128,7 @@ Use the first match's position as the offset for the second `LimsAt` call. In `"
 DoProc("FindSecondSlash");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 First slash: 7
@@ -170,7 +170,7 @@ Locate the `OWNER=` label with `LimsAt`, use [`Len`](Len.md) to calculate the va
 DoProc("ExtractOwnerValue");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Owner: JSMITH

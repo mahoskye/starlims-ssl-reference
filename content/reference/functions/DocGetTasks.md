@@ -87,14 +87,14 @@ Queries Documentum for all tasks matching a specific workflow ID and prints each
 
     :IF ALen(aTasks) == 0;
         UsrMes("No tasks found for workflow " + sWorkflowId);
-        /* Displays when empty: No tasks found for workflow;
+        /* Logs when empty: No tasks found for workflow;
 
         :RETURN aTasks;
     :ENDIF;
 
     :FOR nIndex := 1 :TO ALen(aTasks);
         UsrMes(aTasks[nIndex, 3]);
-        /* Displays per task: task name;
+        /* Logs per task: task name;
     :NEXT;
 
     :RETURN aTasks;
@@ -118,7 +118,7 @@ Calls `DocGetTasks` with a workflow ID and distinguishes a backend failure (empt
     :IF ALen(aTasks) == 0 .AND. DocCommandFailed();
         sError := DocGetErrorMessage();
         ErrorMes("Task lookup failed: " + sError);
-        /* Displays on failure: Task lookup failed;
+        /* Logs on failure: Task lookup failed;
 
         :RETURN {};
     :ENDIF;
@@ -143,7 +143,7 @@ Fetches all inbox tasks by passing [`NIL`](../literals/nil.md) as the filter, th
 
     :IF ALen(aTasks) == 0 .AND. DocCommandFailed();
         ErrorMes("Unable to retrieve tasks: " + DocGetErrorMessage());
-        /* Displays on failure: Unable to retrieve tasks;
+        /* Logs on failure: Unable to retrieve tasks;
 
         :RETURN {};
     :ENDIF;

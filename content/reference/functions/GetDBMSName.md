@@ -64,7 +64,7 @@ GetDBMSName(sConnectionName)
 
 ### Get the platform name for a connection
 
-Calls `GetDBMSName` with an explicit connection name and displays the result in a message.
+Calls `GetDBMSName` with an explicit connection name and logs the result in a message.
 
 ```ssl
 :PROCEDURE ShowDatabaseType;
@@ -79,7 +79,7 @@ Calls `GetDBMSName` with an explicit connection name and displays the result in 
 DoProc("ShowDatabaseType");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 DBMS: SQL
@@ -137,11 +137,11 @@ Iterates every connection returned by [`GetConnectionStrings`](GetConnectionStri
 		:TRY;
 			sDBMSName := GetDBMSName(sConnName);
 			UsrMes(sConnName + ": " + sDBMSName);
-			/* Displays the connection name and DBMS platform;
+			/* Logs the connection name and DBMS platform;
 		:CATCH;
 			oErr := GetLastSSLError();
 			UsrMes(sConnName + ": ERROR - " + oErr:Description);
-			/* Displays an error for an unresolved connection;
+			/* Logs an error for an unresolved connection;
 		:ENDTRY;
 	:NEXT;
 :ENDPROC;

@@ -78,7 +78,7 @@ Shifts 64 right by 2 positions, equivalent to 64 ÷ 2² = 16.
 DoProc("DivideByPowerOfTwo");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 64 >> 2 = 16
@@ -105,7 +105,7 @@ Shifts -64 right by 2 positions. The result is -16 (sign is preserved).
 DoProc("ShiftNegativeValue");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 -64 >> 2 = -16
@@ -137,7 +137,7 @@ Shifts the desired bits into the low positions, then masks the extracted field. 
 DoProc("ExtractPriority", {112});
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Priority bits: 7

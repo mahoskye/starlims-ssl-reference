@@ -71,7 +71,7 @@ Read the current session user name and include it in a user-facing message.
 DoProc("ShowCurrentUser");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Current user: jsmith

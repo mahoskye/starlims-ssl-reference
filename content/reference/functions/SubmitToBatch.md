@@ -88,7 +88,7 @@ Submit a small block of SSL code and keep the returned batch ID.
 
     sBatchId := SubmitToBatch(sCode);
     UsrMes("Submitted batch job: " + sBatchId);
-    /* Displays submitted batch ID;
+    /* Logs submitted batch ID;
 
     :RETURN sBatchId;
 :ENDPROC;
@@ -117,7 +117,7 @@ Submit code that expects positional parameters and route it explicitly through q
 
     sBatchId := SubmitToBatch(sCode, {"SAM-00042", "Audit"}, "queue");
     UsrMes("Queued sample audit as batch " + sBatchId);
-    /* Displays queued batch ID;
+    /* Logs queued batch ID;
 
     :RETURN sBatchId;
 :ENDPROC;
@@ -158,7 +158,7 @@ Pass both `Parameters` and `Caption` through the object form, while supplying ex
     );
 
     UsrMes("Submitted labeled batch " + sBatchId);
-    /* Displays submitted labeled batch ID;
+    /* Logs submitted labeled batch ID;
 
     :RETURN sBatchId;
 :ENDPROC;

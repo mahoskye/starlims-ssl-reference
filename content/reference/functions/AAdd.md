@@ -102,7 +102,7 @@ Appends one batch ID to an existing array and stores the return value of `AAdd` 
 DoProc("AddSelectedBatch");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Added batch B-300

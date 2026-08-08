@@ -86,7 +86,7 @@ Grants access when either `bIsAdmin` or `bHasOverride` is [`.T.`](../literals/tr
 DoProc("CheckAccessPermission");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Access granted
@@ -121,7 +121,7 @@ Considers a sample found when it appears in either the current results or the ar
 DoProc("CheckSamplePresence");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Sample DEMO-001 was found
@@ -163,7 +163,7 @@ Places the local boolean check on the left so the archive query runs only when t
 DoProc("AllowProcessing");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays (`bIsReadyNow` is [`.T.`](../literals/true.md), so the [`LSearch`](../functions/LSearch.md) is never executed):
+[`UsrMes`](../functions/UsrMes.md) logs (`bIsReadyNow` is [`.T.`](../literals/true.md), so the [`LSearch`](../functions/LSearch.md) is never executed):
 
 ```text
 Processing can continue

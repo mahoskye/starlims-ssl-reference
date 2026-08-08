@@ -76,7 +76,7 @@ Retrieves a short list of settings in one call and iterates over the results, pr
 
 	:FOR nIndex := 1 :TO ALen(aNames);
 		sLine := aNames[nIndex] + " = " + LimsString(aValues[nIndex]);
-		UsrMes(sLine);  /* Displays each name/value pair;
+		UsrMes(sLine);  /* Logs each name/value pair;
 	:NEXT;
 :ENDPROC;
 
@@ -104,7 +104,7 @@ Scans the result array while preserving input order, collects names whose return
 
 	:IF ALen(aMissing) > 0;
 		UsrMes("Missing settings: " + BuildString(aMissing,,, ", "));
-		/* Displays the missing setting names;
+		/* Logs the missing setting names;
 		:RETURN .F.;
 	:ENDIF;
 
@@ -160,7 +160,7 @@ Retrieves four settings at once and type-checks each one individually, returning
 		+ LimsString(nTimeout)
 		+ ", AuditEnabled=" + LimsString(bAuditEnabled)
 	);
-	/* Displays the validated runtime option values;
+	/* Logs the validated runtime option values;
 
 	:RETURN .T.;
 :ENDPROC;

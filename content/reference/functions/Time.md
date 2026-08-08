@@ -48,7 +48,7 @@ This function takes no parameters.
 !!! failure "Don't"
     - Assume the returned string always uses one fixed format. If the configured time format changes, the returned string changes with it.
     - Use `Time()` when you need a date-time value for calculations or elapsed-time logic.
-    - Call `Time()` repeatedly inside one logical action if all displayed messages should show the same time.
+    - Call `Time()` repeatedly inside one logical action if all logged messages should show the same time.
 
 ## Caveats
 
@@ -70,10 +70,10 @@ Call `Time()` once and store the result so both the user message and the audit e
     sUserMsg := "Review started for " + sSampleID + " at " + sStartTime;
     sAuditMsg := "AUDIT " + sSampleID + " START " + sStartTime;
 
-    /* Displays current review start message;
+    /* Logs current review start message;
     UsrMes(sUserMsg);
 
-    /* Displays current audit start entry;
+    /* Logs current audit start entry;
     InfoMes(sAuditMsg);
 
     :RETURN sStartTime;
@@ -105,7 +105,7 @@ Combine the date from [`Today`](Today.md) with the time from `Time()` to form a 
 DoProc("ShowLabelPrintedStamp");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Label printed on 04/23/2026 at 14:30:00

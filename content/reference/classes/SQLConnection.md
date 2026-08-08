@@ -62,7 +62,7 @@ Represents a configured database connection returned by [`GetConnectionByName`](
 
 ### Inspect a configured connection
 
-Retrieves a configured connection and displays non-sensitive metadata.
+Retrieves a configured connection and logs non-sensitive metadata.
 
 ```ssl
 :PROCEDURE ShowConnectionInfo;

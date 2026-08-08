@@ -128,7 +128,7 @@ sSummary := oAnalyzer:GetDescription();
 UsrMes(sSummary);
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Sample SAM-001: 42
@@ -192,7 +192,7 @@ oSample := CreateUdObject("Samples.QcSample", {"SAM-002", "Logged", 98.6});
 UsrMes(oSample:GetSummary());
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Sample SAM-002 is Logged, result 98.6
@@ -260,7 +260,7 @@ sReport := oTracker:LoadAndReport({95, 102, 88, 110}, 90);
 UsrMes(sReport);
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Runs: 4, pass: 3, fail: 1

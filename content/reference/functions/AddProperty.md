@@ -78,9 +78,9 @@ Creates a user-defined object, adds a single property, and shows that the proper
 	oSample := CreateUdObject();
 	AddProperty(oSample, "sample_id");
 
-	UsrMes(oSample:sample_id);  /* Displays: empty string;
+	UsrMes(oSample:sample_id);  /* Logs: empty string;
 	oSample:sample_id := "S-1001";
-	UsrMes(oSample:sample_id);  /* Displays: S-1001;
+	UsrMes(oSample:sample_id);  /* Logs: S-1001;
 :ENDPROC;
 
 /* Usage;
@@ -110,7 +110,7 @@ Passes an array of names to add all three properties in a single call, then assi
 DoProc("PrepareImportObject");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Pending

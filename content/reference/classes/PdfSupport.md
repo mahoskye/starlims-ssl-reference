@@ -240,7 +240,7 @@ Imports a JPEG as a new PDF page, then calls `SetTextStyle` to switch to bold gr
 DoProc("AddTextOverlayToImage");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Image exported to PDF with text overlay
@@ -288,7 +288,7 @@ Merges a header image, all pages from an existing PDF, and a footer image into o
 DoProc("AssembleSecureMultiSourcePdf");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays (page count depends on merged sources):
+[`UsrMes`](../functions/UsrMes.md) logs (page count depends on merged sources):
 
 ```text
 Assembled PDF has 5 pages and is print-protected
@@ -325,7 +325,7 @@ Opens an existing PDF, draws a title on page 1, then applies `Protect`, which se
     :CATCH;
         oErr := GetLastSSLError();
         UsrMes("Print failed: " + oErr:Description);
-        /* Displays on failure: Print failed;
+        /* Logs on failure: Print failed;
     :ENDTRY;
 :ENDPROC;
 

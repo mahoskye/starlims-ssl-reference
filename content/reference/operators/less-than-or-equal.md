@@ -90,7 +90,7 @@ Checks whether `nCurrentTemp` stays at or below `nSafeLimit`. With 8.5 <= 10.0, 
 DoProc("CheckMaximumTemperature");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Temperature is within the safe limit: 8.5
@@ -123,7 +123,7 @@ Checks whether `dEntryDate` falls on or before `dCutoff`. With 03/28/2024 <= 03/
 DoProc("CheckDateCutoff");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Entry date is within the cutoff period: 03/28/2024
@@ -156,7 +156,7 @@ Uses `<=` on strings to check whether a batch key sorts before or at the process
 DoProc("CheckBatchBoundary");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Batch is within the processing boundary: BATCH-042

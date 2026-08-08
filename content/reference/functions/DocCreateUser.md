@@ -83,7 +83,7 @@ DocCreateUser(
 
 ### Create a user with required credentials only
 
-Creates a Documentum user account with only a login name and password and displays the returned identifier or an error when the result is empty.
+Creates a Documentum user account with only a login name and password and logs the returned identifier or an error when the result is empty.
 
 ```ssl
 :PROCEDURE CreateBasicUser;
@@ -100,7 +100,7 @@ Creates a Documentum user account with only a login name and password and displa
     :ENDIF;
 
     UsrMes("Created user ID: " + sUserId);
-    /* Displays the created user ID on success;
+    /* Logs the created user ID on success;
 
     :RETURN sUserId;
 :ENDPROC;
@@ -142,12 +142,12 @@ Creates a full user account by passing all eight arguments: login name, password
         ErrorMes(
             "User creation returned an empty identifier for " + sLoginName
         );
-        /* Displays a failure message for the requested login;
+        /* Logs a failure message for the requested login;
         :RETURN "";
     :ENDIF;
 
     UsrMes("Created user " + sUserName + " with ID " + sUserId);
-    /* Displays the created user name and ID on success;
+    /* Logs the created user name and ID on success;
 
     :RETURN sUserId;
 :ENDPROC;
@@ -175,22 +175,22 @@ Wraps the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md
                 "DocCreateUser returned an empty identifier for "
                 + sLoginName
             );
-            /* Displays a failure message when no identifier is returned;
+            /* Logs a failure message when no identifier is returned;
             :RETURN "";
         :ENDIF;
 
         UsrMes("Created user ID: " + sUserId);
-        /* Displays the created user ID on success;
+        /* Logs the created user ID on success;
         :RETURN sUserId;
     :CATCH;
         oErr := GetLastSSLError();
 
         :IF Empty(oErr);
             ErrorMes("DocCreateUser failed for " + sLoginName);
-            /* Displays a generic failure message for the login;
+            /* Logs a generic failure message for the login;
         :ELSE;
             ErrorMes("DocCreateUser failed: " + oErr:Description);
-            /* Displays the failure details returned by SSL;
+            /* Logs the failure details returned by SSL;
         :ENDIF;
 
         :RETURN "";

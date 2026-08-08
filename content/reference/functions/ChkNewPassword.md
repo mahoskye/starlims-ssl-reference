@@ -65,7 +65,7 @@ ChkNewPassword(sPassword, vPrevPasswords)
 
 ### Check an array of previous passwords
 
-Checks a proposed password against an in-memory array of prior passwords. Because `"Str0ngP@ssw0rd!"` appears as the second history entry, the function returns [`.F.`](../literals/false.md) and the rejection message is displayed.
+Checks a proposed password against an in-memory array of prior passwords. Because `"Str0ngP@ssw0rd!"` appears as the second history entry, the function returns [`.F.`](../literals/false.md) and the rejection message is logged.
 
 ```ssl
 :PROCEDURE CheckPasswordHistory;
@@ -95,7 +95,7 @@ Checks a proposed password against an in-memory array of prior passwords. Becaus
 DoProc("CheckPasswordHistory");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Password rejected. Choose a password you have not used before.
@@ -129,7 +129,7 @@ Passes a comma-separated history string as the second argument, showing the alte
 DoProc("CheckPasswordHistoryString");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Password was already used. Choose a different value.

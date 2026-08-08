@@ -93,7 +93,7 @@ Call `Hour` on the current timestamp and use its value to select a time-of-day g
 DoProc("ShowLoginGreeting");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Good morning. Current hour: 9

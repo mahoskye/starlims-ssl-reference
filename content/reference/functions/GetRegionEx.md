@@ -79,11 +79,11 @@ Retrieves a named region without any token substitution, wrapping the call in [`
 	:TRY;
 		sResult := GetRegionEx("InvoiceHeader");
 		UsrMes(sResult);
-		/* Displays the InvoiceHeader region text;
+		/* Logs the InvoiceHeader region text;
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes(oErr:Description);
-		/* Displays on error: missing region message;
+		/* Logs on error: missing region message;
 		:RETURN "";
 	:ENDTRY;
 
@@ -116,7 +116,7 @@ Retrieves a template region and replaces `{CUSTOMER}` and `{DATE}` placeholders 
 DoProc("BuildInvoiceHeader");
 ```
 
-[`UsrMes`](UsrMes.md) displays this output when `InvoiceTemplate` = `"Invoice for {CUSTOMER} dated {DATE}"`:
+[`UsrMes`](UsrMes.md) logs this output when `InvoiceTemplate` = `"Invoice for {CUSTOMER} dated {DATE}"`:
 
 ```text
 Invoice for Acme Corp dated 23/04/2026
@@ -137,11 +137,11 @@ Passes a caller-supplied local region map as `oLocalRegions` so that the local m
 	:TRY;
 		sRegionText := GetRegionEx("ImportTemplate", aSrc, aDst, oLocalRegions);
 		UsrMes(sRegionText);
-		/* Displays the resolved import template text;
+		/* Logs the resolved import template text;
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes("ResolveImportRegion failed: " + oErr:Description);
-		/* Displays on error: import lookup failed;
+		/* Logs on error: import lookup failed;
 		:RETURN "";
 	:ENDTRY;
 

@@ -97,7 +97,7 @@ Reduces a numeric value in place without repeating the left operand. Starting fr
 DoProc("ReduceInventory");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Remaining quantity: 21
@@ -125,7 +125,7 @@ Uses `-=` to remove trailing spaces from the left string before appending the su
 DoProc("BuildDisplayLabel");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Display label: [SampleReview]
@@ -158,7 +158,7 @@ Shows two uses in sequence: `dReminderDate -= 3` moves the date back 3 days, whi
 DoProc("CalculateDaysUntilDue");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Reminder date: 03/12/2024, days until due: 5

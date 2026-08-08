@@ -109,7 +109,7 @@ Extract the trailing four characters for display while keeping the rest of the v
 DoProc("FormatMaskedCode", {"LIMS-9876"});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Project code: ****9876
@@ -143,7 +143,7 @@ Read multiple right-aligned fields from the end of a fixed-width record by peeli
 DoProc("ParseRightAlignedRecord");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Sample=000145, Region=EU, Status=OK

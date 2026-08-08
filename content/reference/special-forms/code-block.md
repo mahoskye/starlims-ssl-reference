@@ -83,7 +83,7 @@ aItems := {"SAMPLE-001", "SAMPLE-002", "SAMPLE-003"};
 AEval(aItems, {|sItem| UsrMes("Processing: " + sItem)});
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays (once per element):
+[`UsrMes`](../functions/UsrMes.md) logs (once per element):
 
 ```text
 Processing: SAMPLE-001
@@ -119,7 +119,7 @@ Assigns a filter condition to a variable and uses [`Eval`](../functions/Eval.md)
 DoProc("FilterHighValues");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Found 5 values above 10
@@ -137,11 +137,11 @@ Shows that a code block captures its surrounding scope by reference. When `nBase
 
     fnAdd := {|nX| nX + nBase};
 
-    UsrMes(LimsString(Eval(fnAdd, 5)));  /* Displays with nBase = 10;
+    UsrMes(LimsString(Eval(fnAdd, 5)));  /* Logs with nBase = 10;
 
     nBase := 100;
 
-    UsrMes(LimsString(Eval(fnAdd, 5)));  /* Displays with nBase = 100;
+    UsrMes(LimsString(Eval(fnAdd, 5)));  /* Logs with nBase = 100;
 :ENDPROC;
 
 /* Usage;

@@ -143,7 +143,7 @@ Use the SFTP path, pass the port explicitly, and handle setup failures separatel
 	:CATCH;
 		oErr := GetLastSSLError();
 		UsrMes("SFTP setup failed: " + oErr:Description);
-		/* Displays on failure: setup error details;
+		/* Logs on failure: setup error details;
 		:RETURN .F.;
 	:ENDTRY;
 
@@ -210,7 +210,7 @@ Create a set of partner folders, keep processing after ordinary [`.F.`](../liter
 
 	:FOR nIndex := 1 :TO ALen(aFailures);
 		UsrMes(aFailures[nIndex]);
-		/* Displays one failure entry per line;
+		/* Logs one failure entry per line;
 	:NEXT;
 
 	:RETURN .F.;

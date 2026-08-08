@@ -90,7 +90,7 @@ Call a data source with no arguments and iterate over the returned array to disp
 
     :FOR nIndex := 1 :TO ALen(aStatuses);
         UsrMes("Status: " + LimsString(aStatuses[nIndex, 1]));
-        /* Displays: Status: <value>;
+        /* Logs: Status: <value>;
     :NEXT;
 
     :RETURN aStatuses;
@@ -121,7 +121,7 @@ Execute a data source with a filter parameter, keep the result as an [`SSLDatase
     :ENDIF;
 
     UsrMes("Loaded " + LimsString(ALen(aRows)) + " sample rows");
-    /* Displays: Loaded <n> sample rows;
+    /* Logs: Loaded <n> sample rows;
 
     :RETURN oDataset;
 :ENDPROC;
@@ -154,7 +154,7 @@ Pass a GUID string as the data source name and request XML output. The GUID is r
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes(oErr:Description);
-        /* Displays on failure: error description;
+        /* Logs on failure: error description;
         :RETURN "";
     :ENDTRY;
 :ENDPROC;

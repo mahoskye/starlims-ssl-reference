@@ -169,7 +169,7 @@ Sets `LogFilePath` to create a trace file for the run, then calls `ConnectToExte
 		UsrMes("Connection failed.");
 
 		:IF .NOT. Empty(oPatcher:InternalErrors);
-			/* Displays internal error details on failure;
+			/* Logs internal error details on failure;
 			UsrMes(oPatcher:InternalErrors);
 		:ENDIF;
 	:ENDIF;

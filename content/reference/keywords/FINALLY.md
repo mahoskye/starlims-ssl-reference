@@ -115,7 +115,7 @@ Uses `:FINALLY` to reset a flag that must always be cleared, even when the batch
     :CATCH;
         oErr := GetLastSSLError();
         sStatus := "Batch load failed: " + oErr:Description;
-        UsrMes(sStatus);  /* Displays batch load failure on error;
+        UsrMes(sStatus);  /* Logs batch load failure on error;
 
     :FINALLY;
         :IF bCleanupNeeded;

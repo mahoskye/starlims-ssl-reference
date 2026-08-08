@@ -139,7 +139,7 @@ Send a simple notification using the default parameters: plain text, no attachme
 DoProc("SendNotificationEmail");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Email was not sent.
@@ -203,7 +203,7 @@ Send an HTML-formatted report with a PDF attachment over TLS, using an explicit 
 DoProc("SendTestReportEmail");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Test report email sent successfully.

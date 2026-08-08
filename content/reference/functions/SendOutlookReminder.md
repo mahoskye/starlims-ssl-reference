@@ -151,7 +151,7 @@ Send a calendar invitation for a one-hour meeting to a single attendee using pla
 DoProc("SendSingleReminder");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Reminder sent: <T or F>
@@ -210,7 +210,7 @@ Pass comma-separated name and email strings to send a single invitation to three
 DoProc("SendTeamReminder");
 ```
 
-[`UsrMes`](UsrMes.md) displays on failure:
+[`UsrMes`](UsrMes.md) logs on failure:
 
 ```text
 Meeting request was not sent.
@@ -271,7 +271,7 @@ Pass `bIgnoreErrors` as [`.F.`](../literals/false.md) so any validation or deliv
 DoProc("SendCriticalReminder");
 ```
 
-[`ErrorMes`](ErrorMes.md) displays on failure:
+[`ErrorMes`](ErrorMes.md) logs on failure:
 
 ```text
 Reminder send failed: <error description>

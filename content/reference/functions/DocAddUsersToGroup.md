@@ -66,7 +66,7 @@ DocAddUsersToGroup(sGroupName, aUsers)
 
 ### Add a set of users to an existing group
 
-Passes a hard-coded list of user names to a named group and displays whether the operation succeeded.
+Passes a hard-coded list of user names to a named group and logs whether the operation succeeded.
 
 ```ssl
 :PROCEDURE AddNewHiresToLabUsers;
@@ -107,7 +107,7 @@ Constructs a Documentum group name from a project code passed as a procedure par
         UsrMes("Updated group " + sGroupName);
     :ELSE;
         ErrorMes("Failed to update group " + sGroupName);
-        /* Displays on failure: Failed to update group name;
+        /* Logs on failure: Failed to update group name;
     :ENDIF;
 
     :RETURN bAdded;
@@ -150,10 +150,10 @@ Queries active users for a department passed as a parameter, builds the user arr
             "Added " + LimsString(ALen(aUsersToAdd)) +
             " users to " + sGroupName
         );
-        /* Displays: Added count and group name;
+        /* Logs: Added count and group name;
     :ELSE;
         ErrorMes("Failed to update group " + sGroupName);
-        /* Displays on failure: Failed to update group name;
+        /* Logs on failure: Failed to update group name;
     :ENDIF;
 
     :RETURN bAdded;

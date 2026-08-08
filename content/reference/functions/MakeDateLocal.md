@@ -99,7 +99,7 @@ Mark a date invariant, then switch it back to local with `MakeDateLocal`. Both [
 DoProc("DemoteDateToLocal");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 The date starts as invariant.
@@ -133,7 +133,7 @@ Mark columns 2 and 3 as invariant, then immediately switch them back to local us
 DoProc("LocalizeOrderDates");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Selected date columns were updated in place.
@@ -141,7 +141,7 @@ Selected date columns were updated in place.
 
 ### Handle a non-date value in a targeted column
 
-Target column 2 which holds a status string rather than a date. `MakeDateLocal` raises an error that is caught and displayed.
+Target column 2 which holds a status string rather than a date. `MakeDateLocal` raises an error that is caught and logged.
 
 ```ssl
 :PROCEDURE TryLocalizeInvalidColumn;
@@ -166,7 +166,7 @@ Target column 2 which holds a status string rather than a date. `MakeDateLocal` 
 DoProc("TryLocalizeInvalidColumn");
 ```
 
-[`ErrorMes`](ErrorMes.md) displays:
+[`ErrorMes`](ErrorMes.md) logs:
 
 ```text
 Column: 2 doesn't contain date values.

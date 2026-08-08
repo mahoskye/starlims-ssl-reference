@@ -64,7 +64,7 @@ Because `:NEXT;` is the required [`:FOR`](FOR.md) terminator, omitting it or pla
 
 ### Closing a simple counted loop
 
-Shows the standard [`:FOR`](FOR.md) `... :NEXT` structure. With `nLimit` set to `5`, five messages are printed.
+Shows the standard [`:FOR`](FOR.md) `... :NEXT` structure. With `nLimit` set to `5`, five messages are logged.
 
 ```ssl
 :PROCEDURE CountSamples;
@@ -82,7 +82,7 @@ Shows the standard [`:FOR`](FOR.md) `... :NEXT` structure. With `nLimit` set to 
 DoProc("CountSamples");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Processing sample iteration 1
@@ -94,7 +94,7 @@ Processing sample iteration 5
 
 ### Running follow-up work after the loop ends
 
-Demonstrates that statements after `:NEXT;` run once, after all loop iterations complete. The summary message is printed after the loop builds all three IDs.
+Demonstrates that statements after `:NEXT;` run once, after all loop iterations complete. The summary message is logged after the loop builds all three IDs.
 
 ```ssl
 :PROCEDURE BuildSampleList;
@@ -116,7 +116,7 @@ Demonstrates that statements after `:NEXT;` run once, after all loop iterations 
 DoProc("BuildSampleList");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Created 3 sample IDs

@@ -110,7 +110,7 @@ Runs a query with [`GetSSLDataset`](../functions/GetSSLDataset.md), converts the
 			+ aRows[nIndex, 2] + " / "
 			+ aRows[nIndex, 3]
 		);
-		/* Displays pending task row;
+		/* Logs pending task row;
 	:NEXT;
 :ENDPROC;
 
@@ -135,7 +135,7 @@ Uses the two-argument constructor to wrap an existing dataset handle from [`RunD
 		+ LimsString(Len(sXml))
 		+ " characters"
 	);
-	/* Displays XML payload length;
+	/* Logs XML payload length;
 :ENDPROC;
 
 /* Usage;

@@ -111,7 +111,7 @@ Run a background utility without showing its window and surface the last SSL err
 		oErr := GetLastSSLError();
 		ErrorMes(
 			"Barcode print launch failed: " + oErr:Description
-		);  /* Displays on failure: last SSL error message;
+		);  /* Logs on failure: last SSL error message;
 	:ENDIF;
 
 	:RETURN bStarted;

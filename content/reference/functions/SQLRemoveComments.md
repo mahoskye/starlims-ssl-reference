@@ -92,7 +92,7 @@ Pass SQL containing both a `/* ... */` block comment and a [`--`](../operators/d
     sCleaned := SQLRemoveComments(sSQL);
 
     UsrMes(sCleaned);
-    /* Displays cleaned SQL text;
+    /* Logs cleaned SQL text;
 
     :RETURN sCleaned;
 :ENDPROC;
@@ -120,7 +120,7 @@ Verify that [`--`](../operators/decrement.md) and `/* ... */` sequences inside s
     sCleanSQL := SQLRemoveComments(sRawSQL);
 
     UsrMes(sCleanSQL);
-    /* Displays cleaned SQL text with quoted literals preserved;
+    /* Logs cleaned SQL text with quoted literals preserved;
 
     :RETURN sCleanSQL;
 :ENDPROC;
@@ -149,7 +149,7 @@ Confirm that a `/*+ ... */` optimizer hint is kept while a regular block comment
     sCleanSQL := SQLRemoveComments(sRawSQL);
 
     UsrMes(sCleanSQL);
-    /* Displays cleaned SQL text with the optimizer hint preserved;
+    /* Logs cleaned SQL text with the optimizer hint preserved;
 
     :RETURN sCleanSQL;
 :ENDPROC;

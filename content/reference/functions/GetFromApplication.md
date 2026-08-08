@@ -72,7 +72,7 @@ GetFromApplication(sKey)
 
 ### Display the connected users list
 
-Retrieves the connected users string and displays it when the current session mode supports the lookup.
+Retrieves the connected users string and logs it when the current session mode supports the lookup.
 
 ```ssl
 :PROCEDURE ShowConnectedUsers;
@@ -84,7 +84,7 @@ Retrieves the connected users string and displays it when the current session mo
         UsrMes("No connected users were returned.");
     :ELSE;
         UsrMes("Connected users: " + sUsers);
-        /* Displays: connected users with the current list;
+        /* Logs: connected users with the current list;
     :ENDIF;
 
     :RETURN sUsers;
@@ -121,7 +121,7 @@ Guards the call so the function is only invoked with its one supported key, retu
         sMessage := "Connected users: " + sUsers;
     :ENDIF;
 
-    UsrMes(sMessage); /* Displays: status for the lookup result;
+    UsrMes(sMessage); /* Logs: status for the lookup result;
 
     :RETURN sUsers;
 :ENDPROC;
@@ -154,12 +154,12 @@ Wraps the lookup in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md
         sReport := "Connected users at " + DToC(Today()) + " " + LimsTime();
         sReport := sReport + Chr(13) + Chr(10) + sUsers;
 
-        UsrMes(sReport); /* Displays: connected users with a timestamp;
+        UsrMes(sReport); /* Logs: connected users with a timestamp;
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes(
             "Connected-user audit failed: " + oErr:Description
-        ); /* Displays on failure: connected-user audit failed;
+        ); /* Logs on failure: connected-user audit failed;
         :RETURN "";
     :ENDTRY;
 

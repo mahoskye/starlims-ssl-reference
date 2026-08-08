@@ -74,7 +74,7 @@ Shows how `:OTHERWISE` handles a status string that matches none of the listed [
         :EXITCASE;
     :OTHERWISE;
         sMessage := "Document status is not recognized: " + sStatus;
-        UsrMes(sMessage);  /* Displays fallback status for unmatched input;
+        UsrMes(sMessage);  /* Logs fallback status for unmatched input;
         :EXITCASE;
     :ENDCASE;
 :ENDPROC;
@@ -112,7 +112,7 @@ Routes workflow tasks to a specialized team based on task type. With `oTask:Type
         DoProc("NotifySupportTeam", {oTask});
         sLogMsg := "Task type " + sTaskType + " was routed to general support";
         UsrMes(sLogMsg);
-        /* Displays fallback routing message for unmatched task types;
+        /* Logs fallback routing message for unmatched task types;
         :EXITCASE;
     :ENDCASE;
 
@@ -154,7 +154,7 @@ Resolves a release action from role, workflow stage, and override flag. With `sU
         sAction := "ESCALATE";
         sAuditMsg := "Unhandled role/stage combination: " + sUserRole + "/" + sStage;
         UsrMes(sAuditMsg);
-        /* Displays escalation message for an unmatched role and stage;
+        /* Logs escalation message for an unmatched role and stage;
         :EXITCASE;
     :ENDCASE;
 

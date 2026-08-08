@@ -107,7 +107,7 @@ Fetches all attributes for the `dm_document` type and prints each attribute's na
 DoProc("ListTypeAttributes");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 No attributes returned for dm_document
@@ -116,7 +116,7 @@ No attributes returned for dm_document
 
 ### Separate repeating and single-value attributes
 
-Counts how many attributes are single-value and how many are repeating for a caller-supplied type name, then displays a summary line.
+Counts how many attributes are single-value and how many are repeating for a caller-supplied type name, then logs a summary line.
 
 ```ssl
 :PROCEDURE SummarizeTypeAttributes;
@@ -152,7 +152,7 @@ Counts how many attributes are single-value and how many are repeating for a cal
 DoProc("SummarizeTypeAttributes", {"dm_document"});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Type [type name] has [n] single-value attributes and [n] repeating attributes

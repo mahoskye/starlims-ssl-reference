@@ -88,7 +88,7 @@ Retrieves a named inline code block as a string, then executes it with [`ExecUdf
 DoProc("RunGreeting");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Hello from inline code
@@ -121,7 +121,7 @@ Passes variable names in `aVariables` so the function embeds their current value
 DoProc("BuildStatusMessage");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Status: Complete Count: 12

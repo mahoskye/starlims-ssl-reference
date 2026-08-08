@@ -91,7 +91,7 @@ Checks a permission integer where bit 0 is read, bit 1 is write, and bit 2 is de
 DoProc("CheckUserPermission");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 User has Read: .T.
@@ -129,7 +129,7 @@ Extracts three byte-sized fields from `nPackedData = 197631` (0x303FF) using byt
 DoProc("ExtractPackedFields");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Status: 255 Priority: 3 Category: 3
@@ -164,7 +164,7 @@ Decodes `nPacket = 219` (binary `11011011`) into version (bits 0–2), encryptio
 DoProc("DecodeProtocolFlags");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Packet Flags Decoded

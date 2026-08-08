@@ -332,11 +332,11 @@ Establishes a full `Connect` -> `Login` -> `Secure` session in explicit TLS mode
 	:TRY;
 		sResult := oFtps:Connect("ftp.example.com", 21, "Explicit");
 		UsrMes("Connect: " + sResult);
-		/* Displays: connect response text;
+		/* Logs: connect response text;
 
 		sResult := oFtps:Login("reports_user", "secure_password", "");
 		UsrMes("Login: " + sResult);
-		/* Displays: login response text;
+		/* Logs: login response text;
 
 		oFtps:Secure();
 
@@ -354,11 +354,11 @@ Establishes a full `Connect` -> `Login` -> `Secure` session in explicit TLS mode
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes("FTPS Error", oErr:Description);
-		/* Displays on failure: FTPS error details;
+		/* Logs on failure: FTPS error details;
 	:FINALLY;
 		sResult := oFtps:Disconnect();
 		UsrMes("Disconnect: " + sResult);
-		/* Displays: disconnect response text;
+		/* Logs: disconnect response text;
 	:ENDTRY;
 :ENDPROC;
 
@@ -394,7 +394,7 @@ Reads a remote directory with `GetDirFromFtps`, prints each entry's name, size, 
 				sLine := sLine + aEntries[nIndex, 4] + " | ";
 				sLine := sLine + aEntries[nIndex, 5];
 				UsrMes(sLine);
-				/* Displays: one directory entry;
+				/* Logs: one directory entry;
 			:NEXT;
 		:ENDIF;
 
@@ -408,7 +408,7 @@ Reads a remote directory with `GetDirFromFtps`, prints each entry's name, size, 
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes("FTPS Error", oErr:Description);
-		/* Displays on failure: FTPS error details;
+		/* Logs on failure: FTPS error details;
 	:FINALLY;
 		sResult := oFtps:Disconnect();
 	:ENDTRY;
@@ -458,7 +458,7 @@ Calls `SetTlsParameters` before `Connect` to specify a cipher suite, expected co
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes("FTPS Error", oErr:Description);
-		/* Displays on failure: FTPS error details;
+		/* Logs on failure: FTPS error details;
 	:FINALLY;
 		sResult := oFtps:Disconnect();
 	:ENDTRY;

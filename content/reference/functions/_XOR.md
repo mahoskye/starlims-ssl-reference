@@ -85,7 +85,7 @@ Toggle one permission bit by XORing with a mask.
 DoProc("TogglePermissionFlag");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Original permissions: 5
@@ -126,7 +126,7 @@ Compare an original flag set to an updated one and isolate the changed bits. `_X
 DoProc("FindChangedFlags");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Changed flags: 6
@@ -167,7 +167,7 @@ Accumulate an XOR checksum across multiple values and compare it to an expected 
 DoProc("VerifyXorChecksum");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Computed checksum: 136

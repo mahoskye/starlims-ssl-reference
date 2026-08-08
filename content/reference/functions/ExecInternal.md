@@ -110,7 +110,7 @@ Builds a user-defined object, then invokes a method named at runtime rather than
 DoProc("ShowSerializedObject");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 <serialized XML representation of oRecord>
@@ -142,7 +142,7 @@ Calls two different methods on the same object in sequence: first `SetProperty` 
 DoProc("UpdateAndReadProperty");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Priority: 2
@@ -196,7 +196,7 @@ Usage:
 DoProc("DemoRunObjectAction");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Status: Complete

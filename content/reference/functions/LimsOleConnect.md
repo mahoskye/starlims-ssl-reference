@@ -77,7 +77,7 @@ Create an Excel automation object, read a property, and release it.
     oExcel:Visible := .T.;
 
     sStatus := "Excel version: " + LimsString(oExcel:Version);
-    UsrMes(sStatus); /* Displays the Excel version;
+    UsrMes(sStatus); /* Logs the Excel version;
 
     EndLimsOleConnect(oExcel);
 :ENDPROC;
@@ -100,11 +100,11 @@ Try to start Excel, report failures, and always release the object.
         oExcel := LimsOleConnect("Excel.Application");
         oExcel:Visible := .F.;
         sStatus := "Connected to Excel version " + LimsString(oExcel:Version);
-        UsrMes(sStatus); /* Displays the Excel version when the connection succeeds;
+        UsrMes(sStatus); /* Logs the Excel version when the connection succeeds;
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("Unable to create automation object: " + oErr:Description);
-        /* Displays the failure reason;
+        /* Logs the failure reason;
     :FINALLY;
         EndLimsOleConnect(oExcel);
     :ENDTRY;

@@ -94,7 +94,7 @@ Uses .NET's `AddMonths(nMonths)` method to compute a date three months after a s
 DoProc("ComputeReviewDate");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 04/30/2026
@@ -148,7 +148,7 @@ Checks for an empty date before continuing. `CToD("")` returns an empty date, so
 DoProc("ValidateRequiredDate");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Required date is missing
@@ -216,7 +216,7 @@ Clones the current date twice, marks one as invariant and one as local, then ser
 DoProc("ShowDateJsonModes");
 ```
 
-[`InfoMes`](../functions/InfoMes.md) displays (values vary by current date and time zone):
+[`InfoMes`](../functions/InfoMes.md) logs (values vary by current date and time zone):
 
 ```text
 Invariant JSON: "2026-04-23T14:30:00"

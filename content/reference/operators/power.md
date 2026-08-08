@@ -86,7 +86,7 @@ Computes the cube of 5. 5 ^ 3 = 125.
 DoProc("CalculateCube");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 The cube of 5 is 125.
@@ -134,7 +134,7 @@ Shows `81 ^ 0.5 = 9` (square root) and `10 ^ -1 = 0.1` (reciprocal). The [`:TRY`
     :CATCH;
         oErr := GetLastSSLError();
         UsrMes("Power failed: " + oErr:Description);
-        /* Displays on failure: Power failed;
+        /* Logs on failure: Power failed;
     :ENDTRY;
 
     :RETURN nSquareRoot;

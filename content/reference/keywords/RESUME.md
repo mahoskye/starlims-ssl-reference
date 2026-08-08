@@ -77,7 +77,7 @@ Uses `:RESUME` so a failed [`RunSQL`](../functions/RunSQL.md) call does not stop
     :ERROR;
         oErr := GetLastSSLError();
         UsrMes("Update failed for " + sSampleID + ": " + oErr:Description);
-        /* Displays the failure message when RunSQL errors;
+        /* Logs the failure message when RunSQL errors;
     :RESUME;
 
     RunSQL(sSQL,, {sStatus, sSampleID});
@@ -104,7 +104,7 @@ Logs each bad record and continues processing the rest of the array. With `{"SMP
         oErr := GetLastSSLError();
         sLogMsg := "Validation failed for " + sSampleID + ": " + oErr:Description;
         UsrMes(sLogMsg);
-        /* Displays the failure message for the rejected record;
+        /* Logs the failure message for the rejected record;
         nFailed += 1;
     :RESUME;
 
@@ -122,7 +122,7 @@ Logs each bad record and continues processing the rest of the array. With `{"SMP
         "Validation complete. Passed: " + LimsString(nValidated) + ", Failed: " +
         LimsString(nFailed)
     );
-    /* Displays the final pass and fail totals;
+    /* Logs the final pass and fail totals;
 
     :RETURN nValidated;
 :ENDPROC;

@@ -125,7 +125,7 @@ This example loops through a table's columns and reports the metadata exposed by
 DoProc("DisplayColumnInfo");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays (one line per column; actual names and types depend on the table):
+[`UsrMes`](../functions/UsrMes.md) logs (one line per column; actual names and types depend on the table):
 
 ```text
 user_id | SQL_INTEGER | Len=10 | PK
@@ -166,7 +166,7 @@ This example retrieves one column by name, updates the writable metadata, and lo
 DoProc("UpdateColumnMetadata");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Updated username to user_name with length 80

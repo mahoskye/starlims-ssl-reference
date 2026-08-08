@@ -80,7 +80,7 @@ Encode one dynamic value before appending it to a query string. Spaces become [`
 DoProc("BuildSearchUrl");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 https://example.com/api/search?company=O%27Reilly+%26+Associates

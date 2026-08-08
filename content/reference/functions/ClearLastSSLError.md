@@ -57,7 +57,7 @@ This function has no parameters.
 
 ### Clear the error after logging it
 
-Reads the current SSL error, displays its description, then clears the state so later error checks start fresh.
+Reads the current SSL error, logs its description, then clears the state so later error checks start fresh.
 
 ```ssl
 :PROCEDURE HandleAndClearSslError;
@@ -70,7 +70,7 @@ Reads the current SSL error, displays its description, then clears the state so 
     :ENDIF;
 
     UsrMes("Handled SSL error: " + oErr:Description);
-    /* Displays the handled error description;
+    /* Logs the handled error description;
     ClearLastSSLError();
 
     :RETURN .T.;
@@ -101,7 +101,7 @@ Logs the error from a failed SQL update, clears the error state, then retries th
 
     oErr := GetLastSSLError();
     UsrMes("First update failed: " + oErr:Description);
-    /* Displays the first failure description;
+    /* Logs the first failure description;
 
     ClearLastSSLError();
 

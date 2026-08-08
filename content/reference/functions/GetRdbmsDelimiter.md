@@ -91,7 +91,7 @@ Retrieves the opening and closing delimiter characters for the given DSN and wra
 DoProc("BuildDelimitedIdentifier", {"LIMSDB", "orders"});
 ```
 
-[`UsrMes`](UsrMes.md) displays (SQL Server DSN, `sName` = `"orders"`):
+[`UsrMes`](UsrMes.md) logs (SQL Server DSN, `sName` = `"orders"`):
 
 ```text
 Delimited identifier: [orders]
@@ -126,7 +126,7 @@ Guards against an unsupported DSN by checking for an empty delimiter before buil
 DoProc("BuildSelectStatement", {"LIMSDB"});
 ```
 
-`UsrMes` displays one of:
+`UsrMes` logs one of:
 
 ```text
 No delimiter mapping is available for this DSN

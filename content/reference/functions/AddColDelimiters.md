@@ -78,7 +78,7 @@ Adds table qualification and database-specific delimiters to each column name in
 DoProc("BuildQualifiedColumns");
 ```
 
-[`UsrMes`](UsrMes.md) displays (SQL Server example):
+[`UsrMes`](UsrMes.md) logs (SQL Server example):
 
 ```text
 [samples].[sample_id]
@@ -107,7 +107,7 @@ Qualifies the column array in place, then joins the result into a SELECT list us
 DoProc("BuildSelectList");
 ```
 
-[`UsrMes`](UsrMes.md) displays (SQL Server example):
+[`UsrMes`](UsrMes.md) logs (SQL Server example):
 
 ```text
 SELECT [samples].[sample_id], [samples].[analysis_date], [samples].[status_code] FROM samples
@@ -134,7 +134,7 @@ Passes [`NIL`](../literals/nil.md) for `sDSN` so that no delimiter characters ar
 DoProc("BuildPlainQualifiedColumns");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 results.sample_id

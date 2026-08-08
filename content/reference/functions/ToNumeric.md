@@ -82,7 +82,7 @@ Convert a known-good numeric string and use the result in a message. This shows 
 DoProc("ParseUserInput");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Parsed value: 42.5
@@ -117,7 +117,7 @@ Pass `bAllowHex` as [`.T.`](../literals/true.md) only in code paths that explici
 DoProc("ParseNumericInput", {"0xFF"});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Input 0xFF parsed as hexadecimal: 255
@@ -145,7 +145,7 @@ Wrap the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md)
             "Could not convert '" + sImportedValue + "': "
             + oErr:Description
         );
-        /* Displays on failure: conversion error;
+        /* Logs on failure: conversion error;
 
         :RETURN 0;
     :ENDTRY;

@@ -100,7 +100,7 @@ Parse a simple XML document and read attribute values from the first child.
 DoProc("ReadConfigXml");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 config: SampleApp v2.5
@@ -146,7 +146,7 @@ element.
 DoProc("ReadTestResults");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 pH=7.1, Cond=320
@@ -178,7 +178,7 @@ Compare the default behavior with `bPreserveWhitespace` enabled for an element w
 DoProc("PreservePadding");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Default padding length: 0

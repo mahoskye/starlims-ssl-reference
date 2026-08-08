@@ -57,7 +57,7 @@ This function takes no parameters.
 
 ### Check whether a login attempt was recorded as a failure
 
-Calls `DocCommandFailed` immediately after a login attempt to detect a recorded Documentum failure, then displays either an error message or a success message.
+Calls `DocCommandFailed` immediately after a login attempt to detect a recorded Documentum failure, then logs either an error message or a success message.
 
 ```ssl
 :PROCEDURE CheckDocumentumLogin;
@@ -75,7 +75,7 @@ Calls `DocCommandFailed` immediately after a login attempt to detect a recorded 
 
         :IF bFailed;
             ErrorMes("Documentum login failed: " + DocGetErrorMessage());
-            /* Displays on failure: Documentum login failed;
+            /* Logs on failure: Documentum login failed;
         :ELSE;
             UsrMes("Documentum login succeeded");
         :ENDIF;
@@ -103,7 +103,7 @@ Cancels checkout for a document id passed as a parameter and returns [`.F.`](../
     :TRY;
         :IF .NOT. DocLoginToDocumentum("Repository1", "analyst", "secret");
             ErrorMes("Login failed: " + DocGetErrorMessage());
-            /* Displays on failure: Login failed;
+            /* Logs on failure: Login failed;
 
             :RETURN .F.;
         :ENDIF;
@@ -115,7 +115,7 @@ Cancels checkout for a document id passed as a parameter and returns [`.F.`](../
                 "Cancel checkout failed for " + sDocumentId + ": "
                 + DocGetErrorMessage()
             );
-            /* Displays on failure: Cancel checkout failed;
+            /* Logs on failure: Cancel checkout failed;
 
             :RETURN .F.;
         :ENDIF;
@@ -146,7 +146,7 @@ Iterates a list of document IDs, attempts checkout for each one, captures any re
     :TRY;
         :IF .NOT. DocLoginToDocumentum("Repository1", "analyst", "secret");
             ErrorMes("Login failed: " + DocGetErrorMessage());
-            /* Displays on failure: Login failed;
+            /* Logs on failure: Login failed;
 
             :RETURN {};
         :ENDIF;

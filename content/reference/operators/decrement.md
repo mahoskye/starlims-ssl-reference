@@ -71,7 +71,7 @@ variable--
 
 ### Counting down with decrement
 
-Decrements `nCount` by one on each iteration using postfix `--`. The loop runs five times and displays each value before decrement takes effect.
+Decrements `nCount` by one on each iteration using postfix `--`. The loop runs five times and logs each value before decrement takes effect.
 
 ```ssl
 :PROCEDURE Countdown;
@@ -95,7 +95,7 @@ Decrements `nCount` by one on each iteration using postfix `--`. The loop runs f
 DoProc("Countdown");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays (one line per iteration, then final):
+[`UsrMes`](../functions/UsrMes.md) logs (one line per iteration, then final):
 
 ```text
 Count: 5
@@ -134,7 +134,7 @@ Shows the difference between prefix and postfix `--`. Prefix decrement returns t
 DoProc("DemoDecrementAssignment");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Prefix result: 4, Postfix result: 5

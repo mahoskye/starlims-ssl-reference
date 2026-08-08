@@ -106,7 +106,7 @@ Retrieve a directory listing and read the file name from the first column of eac
     :FOR nIndex := 1 :TO ALen(aDirRows);
         sFileName := aDirRows[nIndex, 1];
         UsrMes(LimsString(nIndex) + ": " + LimsString(sFileName));
-        /* Displays one line per file;
+        /* Logs one line per file;
     :NEXT;
 :ENDPROC;
 
@@ -128,7 +128,7 @@ Capture the original working directory, switch to a target folder, then restore 
     bChanged := DosSupport("CD", sTargetDir, .T.);
     :IF !bChanged;
         ErrorMes("Failed to change directory to: " + sTargetDir);
-        /* Displays on failure;
+        /* Logs on failure;
         :RETURN .F.;
     :ENDIF;
 

@@ -65,7 +65,7 @@ ClientEndOfDay(dDate)
 
 ### Build an inclusive upper bound for a user-selected day
 
-Converts a user-selected date to the end of the client-local day and displays the resulting date-time value.
+Converts a user-selected date to the end of the client-local day and logs the resulting date-time value.
 
 ```ssl
 :PROCEDURE GetClientDayCutoff;
@@ -84,7 +84,7 @@ Converts a user-selected date to the end of the client-local day and displays th
 DoProc("GetClientDayCutoff", {CToD("04/23/2026")});
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Client end of day: [date at 23:59:59.997]
@@ -145,7 +145,7 @@ Computes both the client and server end-of-day for the same input date and repor
 DoProc("CompareDayCutoffs", {CToD("04/23/2026")});
 ```
 
-`UsrMes` displays one of:
+`UsrMes` logs one of:
 
 ```text
 Client end: [date], Server end: [date] (same cutoff)

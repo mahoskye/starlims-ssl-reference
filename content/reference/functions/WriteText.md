@@ -85,7 +85,7 @@ Write a short message to a file, replacing any previous content.
 
     WriteText(sFileName, "Run started successfully");
     UsrMes("Saved run note to: " + sFileName);
-    /* Displays saved file path;
+    /* Logs saved file path;
 :ENDPROC;
 
 /* Usage;
@@ -127,11 +127,11 @@ Create a multi-line export in a specific encoding and report any write failure. 
     :TRY;
         WriteText(sFileName, sContent,, "N", "ASCII");
         UsrMes("Legacy export created: " + sFileName);
-        /* Displays created file path;
+        /* Logs created file path;
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("WriteText failed: " + oErr:Description);
-        /* Displays write failure details;
+        /* Logs write failure details;
     :ENDTRY;
 :ENDPROC;
 

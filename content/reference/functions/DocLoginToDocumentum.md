@@ -87,12 +87,12 @@ Initializes the Documentum context, attempts a login, and uses [`:TRY`](../keywo
 
         :IF .NOT. bLoggedIn;
             ErrorMes("Documentum login failed: " + DocGetErrorMessage());
-            /* Displays on failure;
+            /* Logs on failure;
             :RETURN .F.;
         :ENDIF;
 
         UsrMes("Connected to " + sDocBase);
-        /* Displays on success;
+        /* Logs on success;
 
         :RETURN .T.;
     :FINALLY;
@@ -139,7 +139,7 @@ Reads both the boolean return value and [`DocCommandFailed`](DocCommandFailed.md
 DoProc("CheckDocumentumLoginFailure");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Login failed: <Documentum error message>
@@ -166,12 +166,12 @@ Connects to two different repositories in sequence by ending and reinitializing 
 
         :IF .NOT. bLoggedIn;
             ErrorMes("First login failed: " + DocGetErrorMessage());
-            /* Displays after first failure;
+            /* Logs after first failure;
             :RETURN .F.;
         :ENDIF;
 
         UsrMes("Connected to " + sFirstBase);
-        /* Displays after first login;
+        /* Logs after first login;
 
         DocEndDocumentumInterface();
         DocInitDocumentumInterface();
@@ -180,12 +180,12 @@ Connects to two different repositories in sequence by ending and reinitializing 
 
         :IF .NOT. bLoggedIn;
             ErrorMes("Second login failed: " + DocGetErrorMessage());
-            /* Displays after second failure;
+            /* Logs after second failure;
             :RETURN .F.;
         :ENDIF;
 
         UsrMes("Connected to " + sSecondBase);
-        /* Displays after second login;
+        /* Logs after second login;
 
         :RETURN .T.;
     :FINALLY;

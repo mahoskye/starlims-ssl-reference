@@ -85,7 +85,7 @@ Grants access only when both `bIsLoggedIn` and `bIsActive` are [`.T.`](../litera
 DoProc("CheckAccess");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Access granted
@@ -121,7 +121,7 @@ Short-circuits on the left side when `oSample` is [`NIL`](../literals/nil.md). B
 DoProc("SafePropertyAccess");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Status: Unknown or missing

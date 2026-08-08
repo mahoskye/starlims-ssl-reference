@@ -82,7 +82,7 @@ Parses a three-table join query and iterates over the returned array, showing th
     :IF ALen(aTables) > 0;
         :FOR nIndex := 1 :TO ALen(aTables);
             UsrMes("Matched table: " + aTables[nIndex]);
-            /* Displays matched table names;
+            /* Logs matched table names;
         :NEXT;
     :ELSE;
         UsrMes("No tables matched the SQL text");
@@ -114,11 +114,11 @@ Extracts all table names from the incoming SQL and checks each one against an al
     :FOR nIndex := 1 :TO ALen(aTables);
         :IF AScan(aAllowed, Lower(aTables[nIndex])) == 0;
             UsrMes("Disallowed table in query: " + aTables[nIndex]);
-            /* Displays each disallowed table name;
+            /* Logs each disallowed table name;
             bValid := .F.;
         :ELSE;
             UsrMes("Allowed table: " + aTables[nIndex]);
-            /* Displays each allowed table name;
+            /* Logs each allowed table name;
         :ENDIF;
     :NEXT;
 

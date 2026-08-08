@@ -138,7 +138,7 @@ Constructs an `SDMS` instance with explicit credentials, then calls `DownloadOri
 		UsrMes("Downloaded " + sDocId + " to " + sFilePath);
 	:ELSE;
 		UsrMes("Download failed: " + oSdms:ErrorMessage);
-		/* Displays on failure: download failed message;
+		/* Logs on failure: download failed message;
 	:ENDIF;
 :ENDPROC;
 
@@ -173,7 +173,7 @@ Downloads a template by numeric ID, then checks `IsSessionExpired` on failure to
 			UsrMes("Template download failed because the session expired");
 		:ELSE;
 			UsrMes("Template download failed: " + oSdms:ErrorMessage);
-			/* Displays on failure: template download failed message;
+			/* Logs on failure: template download failed message;
 		:ENDIF;
 	:ENDIF;
 :ENDPROC;

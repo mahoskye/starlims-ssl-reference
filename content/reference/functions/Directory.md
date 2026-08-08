@@ -76,7 +76,7 @@ Each row contains these values:
 
 ### List visible text files
 
-Lists all visible `.txt` files in a folder and displays each file name from the returned array.
+Lists all visible `.txt` files in a folder and logs each file name from the returned array.
 
 ```ssl
 :PROCEDURE ShowTextFiles;
@@ -93,7 +93,7 @@ Lists all visible `.txt` files in a folder and displays each file name from the 
     :FOR nIndex := 1 :TO ALen(aEntries);
         sName := aEntries[nIndex, 1];
         UsrMes("File: " + sName);
-        /* Displays one line per matching file;
+        /* Logs one line per matching file;
     :NEXT;
 
     :RETURN aEntries;
@@ -129,7 +129,7 @@ Retrieves hidden entries and directories by passing `"DH"` as the attribute filt
         :ENDIF;
 
         UsrMes(sKind + ": " + sName + " (" + sAttrs + ")");
-        /* Displays one line per matching entry;
+        /* Logs one line per matching entry;
     :NEXT;
 
     :RETURN aEntries;
@@ -141,7 +141,7 @@ DoProc("AuditHiddenEntries");
 
 ### Handle denied access and inspect metadata
 
-Guards against whitelist access denial by wrapping the call in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md), then displays the name, size, and attribute string for each returned entry.
+Guards against whitelist access denial by wrapping the call in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md), then logs the name, size, and attribute string for each returned entry.
 
 ```ssl
 :PROCEDURE InspectImportDrop;
@@ -164,13 +164,13 @@ Guards against whitelist access denial by wrapping the call in [`:TRY`](../keywo
 
             UsrMes(sName + " | Size: " + LimsString(nSize)
                     + " | Attr: " + sAttrs);
-            /* Displays one line per returned entry;
+            /* Logs one line per returned entry;
         :NEXT;
 
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("Directory access failed: " + oErr:Description);
-        /* Displays on failure: directory access failed;
+        /* Logs on failure: directory access failed;
         :RETURN .F.;
     :ENDTRY;
 

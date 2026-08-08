@@ -67,7 +67,7 @@ DocCreateACL(sAclName, [sDescription], [aGroups])
 
 ### Create an ACL by name only
 
-Creates a named ACL with no description or group list and displays either the returned ACL identifier or an error when the result is empty.
+Creates a named ACL with no description or group list and logs either the returned ACL identifier or an error when the result is empty.
 
 ```ssl
 :PROCEDURE CreateLabDocumentsAcl;
@@ -79,7 +79,7 @@ Creates a named ACL with no description or group list and displays either the re
         ErrorMes("DocCreateACL returned an empty result");
     :ELSE;
         UsrMes("Created ACL: " + sAclId);
-        /* Displays: Created ACL with returned identifier;
+        /* Logs: Created ACL with returned identifier;
     :ENDIF;
 
     :RETURN sAclId;
@@ -91,7 +91,7 @@ DoProc("CreateLabDocumentsAcl");
 
 ### Create an ACL with a description and initial group list
 
-Builds the ACL name and description from a project code parameter, passes an initial group list, and displays the result or an error when the return value is empty.
+Builds the ACL name and description from a project code parameter, passes an initial group list, and logs the result or an error when the return value is empty.
 
 ```ssl
 :PROCEDURE CreateProjectAcl;
@@ -106,12 +106,12 @@ Builds the ACL name and description from a project code parameter, passes an ini
 
     :IF Empty(sAclId);
         ErrorMes("Failed to create ACL for " + sProjectCode);
-        /* Displays on failure: Failed to create ACL for the project;
+        /* Logs on failure: Failed to create ACL for the project;
         :RETURN "";
     :ENDIF;
 
     UsrMes("Created ACL: " + sAclId);
-    /* Displays: Created ACL with returned identifier;
+    /* Logs: Created ACL with returned identifier;
 
     :RETURN sAclId;
 :ENDPROC;
@@ -156,7 +156,7 @@ Guards against an empty ACL name, strips blank group names from the input array,
         :IF DocCommandFailed();
             sErrMsg := DocGetErrorMessage();
             ErrorMes("Documentum ACL creation failed: " + sErrMsg);
-            /* Displays on failure: Documentum ACL creation failed;
+            /* Logs on failure: Documentum ACL creation failed;
         :ELSE;
             ErrorMes("Documentum ACL creation returned an empty result");
         :ENDIF;

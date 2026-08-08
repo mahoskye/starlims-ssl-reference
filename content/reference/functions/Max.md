@@ -81,7 +81,7 @@ Use `Max` to keep the larger of two numeric results.
 DoProc("SelectTopScore");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Top score: 92.3
@@ -109,7 +109,7 @@ Use `Max` to keep the most recent date before continuing processing.
 DoProc("GetLatestReviewDate");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Latest review date: 04/02/2026
@@ -137,7 +137,7 @@ Use `Max` after deriving two candidate keys and keep the greater one for the nex
 DoProc("SelectPreferredKey", {"ALPHA", "BETA"});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Chosen key: BETA

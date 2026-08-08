@@ -230,7 +230,7 @@ Iterates a list of three documents and imports each one, collecting per-file fai
                 AAdd(aFailures, sMessage);
             :ELSE;
                 UsrMes("Imported " + aRow[1] + ": " + sImportResult);
-                /* Displays per success: Imported file path and result;
+                /* Logs per success: Imported file path and result;
             :ENDIF;
         :NEXT;
 

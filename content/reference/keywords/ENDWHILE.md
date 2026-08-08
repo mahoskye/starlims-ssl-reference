@@ -66,7 +66,7 @@ Statements after `:ENDWHILE;` run only after the loop finishes.
 
 ### Closing a countdown loop
 
-`:ENDWHILE;` marks the end of the loop body. On each iteration the counter is decremented and a message displays; when `nCount` reaches `0` the loop exits and `"Done"` prints.
+`:ENDWHILE;` marks the end of the loop body. On each iteration the counter is decremented and a message is logged; when `nCount` reaches `0` the loop exits and `"Done"` is logged.
 
 ```ssl
 :PROCEDURE Countdown;
@@ -77,7 +77,7 @@ Statements after `:ENDWHILE;` run only after the loop finishes.
     :WHILE nCount > 0;
         sMessage := "Countdown: " + LimsString(nCount);
         UsrMes(sMessage);
-        /* Displays countdown values while nCount is greater than zero;
+        /* Logs countdown values while nCount is greater than zero;
         nCount := nCount - 1;
     :ENDWHILE;
 

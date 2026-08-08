@@ -84,7 +84,7 @@ Initializes `bValidationEnabled` to `.T.` and enters the conditional body becaus
 DoProc("ProcessWithValidation");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Validation enabled — processing LAB-2024-0042
@@ -92,7 +92,7 @@ Validation enabled — processing LAB-2024-0042
 
 ### Loop with a boolean sentinel
 
-Starts `bAllValid` at `.T.` and flips it to [`.F.`](false.md) on the first empty sample ID. With three non-empty IDs, the flag stays `.T.` and the all-valid message displays.
+Starts `bAllValid` at `.T.` and flips it to [`.F.`](false.md) on the first empty sample ID. With three non-empty IDs, the flag stays `.T.` and the all-valid message is logged.
 
 ```ssl
 :PROCEDURE ValidateBatch;

@@ -78,7 +78,7 @@ Divides `nCompleted` by `nTotal` to get the proportion. With 18 out of 24, the r
 DoProc("ShowCompletionRate");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Completion rate: 0.75
@@ -113,7 +113,7 @@ Validates the divisor type and checks it is non-zero before dividing. With `nSam
 DoProc("SafeAverage");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Average mass: 7

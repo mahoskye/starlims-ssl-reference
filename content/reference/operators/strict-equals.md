@@ -100,7 +100,7 @@ DoProc("CheckExactStatus")
 ;
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Status does not match exactly
@@ -130,7 +130,7 @@ Checks runtime types first when a comparison may receive mixed values. With `vLe
     UsrMes(sMessage);
 
     UsrMes("Match result: " + LimsString(bMatch));
-    /* Displays the boolean result;
+    /* Logs the boolean result;
 
     :RETURN bMatch;
 :ENDPROC;

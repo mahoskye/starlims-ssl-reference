@@ -104,7 +104,7 @@ Executes a parameterless query on the default connection and reports the length 
 DoProc("ExportActiveSamples");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Returned XML length: 1243
@@ -139,7 +139,7 @@ Passes a status value through a `?` placeholder, disables schema and null-as-bla
 DoProc("ExportSamplesByStatus", {"PENDING"});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Export complete for status PENDING
@@ -180,7 +180,7 @@ Passes a date parameter and an invariant-date column index array, wrapping the c
 DoProc("ExportReportDataset", {CToD("03/01/2024")});
 ```
 
-On failure, [`ErrorMes`](ErrorMes.md) displays a message beginning with:
+On failure, [`ErrorMes`](ErrorMes.md) logs a message beginning with:
 
 ```text
 GetDataSet failed: ...

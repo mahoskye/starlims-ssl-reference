@@ -76,7 +76,7 @@ If the work item has no linked documents, the array length is `3`.
 
 ### Read the three workflow flags
 
-Reads the first three elements of the properties array and displays each as a boolean, showing whether delegation, repeatability, and sign-off are active for the current user.
+Reads the first three elements of the properties array and logs each as a boolean, showing whether delegation, repeatability, and sign-off are active for the current user.
 
 ```ssl
 :PROCEDURE ShowWorkitemFlags;
@@ -90,11 +90,11 @@ Reads the first three elements of the properties array and displays each as a bo
     bNeedsSignOff := aProps[3];
 
     UsrMes("Delegatable: " + LimsString(bCanDelegate));
-    /* Displays delegation state;
+    /* Logs delegation state;
     UsrMes("Repeatable: " + LimsString(bCanRepeat));
-    /* Displays repeatable state;
+    /* Logs repeatable state;
     UsrMes("Sign-off required: " + LimsString(bNeedsSignOff));
-    /* Displays sign-off state;
+    /* Logs sign-off state;
 :ENDPROC;
 
 /* Usage;
@@ -114,14 +114,14 @@ Checks [`ALen`](ALen.md) to detect when no packages are attached, then iterates 
 
     :IF ALen(aProps) == 3;
         UsrMes("No linked documents for work item " + sWorkitemId);
-        /* Displays when no documents are linked;
+        /* Logs when no documents are linked;
 
         :RETURN;
     :ENDIF;
 
     :FOR nIndex := 4 :TO ALen(aProps);
         UsrMes("Document ID: " + aProps[nIndex]);
-        /* Displays each linked document ID;
+        /* Logs each linked document ID;
     :NEXT;
 :ENDPROC;
 
@@ -163,7 +163,7 @@ Reads the three boolean flags and the document count, then selects a workflow ro
         :ENDCASE;
 
         UsrMes("Selected route: " + sRoute);
-        /* Displays the selected route;
+        /* Logs the selected route;
 
         :RETURN sRoute;
     :CATCH;

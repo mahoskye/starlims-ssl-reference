@@ -85,7 +85,7 @@ Creates a seven-element array pre-sized for a week's worth of daily sales totals
 DoProc("InitDailySalesTotals");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Created array with 7 elements
@@ -117,7 +117,7 @@ Creates a 4×3 array, assigns values into the first two rows, then reads back th
 DoProc("BuildProductSalesTable");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Rows: 4

@@ -65,7 +65,7 @@ ClientStartOfDay(dDate)
 
 ### Normalize a user-selected date to the client-local day start
 
-Converts a user-selected date to the start of the client-local day and displays the resulting boundary timestamp.
+Converts a user-selected date to the start of the client-local day and logs the resulting boundary timestamp.
 
 ```ssl
 :PROCEDURE NormalizeClientFilterDate;
@@ -84,7 +84,7 @@ Converts a user-selected date to the start of the client-local day and displays 
 DoProc("NormalizeClientFilterDate", {CToD("04/23/2026")});
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Client day starts at: [date at 00:00:00.000]
@@ -147,7 +147,7 @@ Computes both the client and server start-of-day for the same input date and rep
 DoProc("CompareDayBoundaries", {CToD("04/23/2026")});
 ```
 
-`UsrMes` displays one of:
+`UsrMes` logs one of:
 
 ```text
 Client start: [date], Server start: [date] (same day boundary)

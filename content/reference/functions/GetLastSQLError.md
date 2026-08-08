@@ -42,7 +42,7 @@ This function takes no parameters.
 !!! success "Do"
     - Call `GetLastSQLError()` immediately after the failing database operation or inside the matching [`:CATCH`](../keywords/CATCH.md) block.
     - Check for [`NIL`](../literals/nil.md) before reading properties from the returned object.
-    - Use [`FormatSqlErrorMessage`](FormatSqlErrorMessage.md) when you need a display-ready message, and inspect `SQLState`, `GenCode`, or `Sql` when you need structured diagnostics.
+    - Use [`FormatSqlErrorMessage`](FormatSqlErrorMessage.md) when you need a human-readable message, and inspect `SQLState`, `GenCode`, or `Sql` when you need structured diagnostics.
 
 !!! failure "Don't"
     - Assume a value is always returned. A later database call may leave you with [`NIL`](../literals/nil.md) or a different SQL error state.
@@ -58,7 +58,7 @@ This function takes no parameters.
 
 ### Read the SQL error inside [`:CATCH`](../keywords/CATCH.md)
 
-Runs a [`RunSQL`](RunSQL.md) call that references a non-existent column, catches the failure in [`:CATCH`](../keywords/CATCH.md), reads the error object, and displays the description with [`ErrorMes`](ErrorMes.md).
+Runs a [`RunSQL`](RunSQL.md) call that references a non-existent column, catches the failure in [`:CATCH`](../keywords/CATCH.md), reads the error object, and logs the description with [`ErrorMes`](ErrorMes.md).
 
 ```ssl
 :PROCEDURE ShowLastSqlError;

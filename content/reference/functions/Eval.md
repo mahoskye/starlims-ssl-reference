@@ -94,7 +94,7 @@ Call a simple arithmetic code block defined with `{|n1, n2| n1 + n2}` and get th
 DoProc("EvalCodeBlock");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Adding 25 + 17 = 42
@@ -141,7 +141,7 @@ Choose between several pricing rule code blocks based on a customer tier and app
 DoProc("ApplyDiscountRules");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Final price for VIP: 212.5

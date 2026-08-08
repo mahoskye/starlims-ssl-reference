@@ -90,7 +90,7 @@ Mark a converted date as invariant, then verify the result with [`IsInvariantDat
 DoProc("NormalizeUserSubmittedDate");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Invariant kind applied: True
@@ -117,7 +117,7 @@ Mark column 2 (the date column) as invariant in each row and confirm the change 
             "Row " + LimsString(nIndex) + " date is invariant: " +
             LimsString(IsInvariantDate(aInvariantRows[nIndex, 2]))
         );
-        /* Displays each row status;
+        /* Logs each row status;
     :NEXT;
 
     :RETURN aInvariantRows;
@@ -150,7 +150,7 @@ Pass `aColumns` as an array of column indexes to mark both date columns (positio
             ", reported=" +
             LimsString(IsInvariantDate(aPreparedRows[nIndex, 3]))
         );
-        /* Displays each audit row status;
+        /* Logs each audit row status;
     :NEXT;
 
     :RETURN aPreparedRows;

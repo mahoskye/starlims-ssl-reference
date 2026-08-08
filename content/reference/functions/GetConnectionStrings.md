@@ -59,7 +59,7 @@ Iterate the returned array and print each connection name. The loop runs once pe
     aConnections := GetConnectionStrings();
 
     :FOR nIndex := 1 :TO ALen(aConnections);
-        UsrMes(aConnections[nIndex, 1]); /* Displays each connection name;
+        UsrMes(aConnections[nIndex, 1]); /* Logs each connection name;
     :NEXT;
 :ENDPROC;
 
@@ -81,7 +81,7 @@ Search the connection list for a specific name and display its provider when fou
 
     :FOR nIndex := 1 :TO ALen(aConnections);
         :IF aConnections[nIndex, 1] == sTarget;
-            UsrMes("Provider: " + aConnections[nIndex, 2]); /* Displays the matching provider;
+            UsrMes("Provider: " + aConnections[nIndex, 2]); /* Logs the matching provider;
             :RETURN .T.;
         :ENDIF;
     :NEXT;

@@ -72,7 +72,7 @@ nAbsValue := Abs(nInput);
 UsrMes("Absolute value is: " + LimsString(nAbsValue));
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Absolute value is: 125
@@ -101,7 +101,7 @@ Shows how `Abs` helps accumulate total movement when positive and negative delta
 DoProc("SumTotalMovement");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Total movement: 36
@@ -121,7 +121,7 @@ Uses `Abs` in a quality-check pattern where only the magnitude of the deviation 
 	:IF nDifference <= nAllowedDiff;
 		UsrMes("Result is within tolerance");
 	:ELSE;
-		/* Displays on failure: deviation exceeds the allowed tolerance;
+		/* Logs on failure: deviation exceeds the allowed tolerance;
 		UsrMes(
 			"Deviation "
 			+ LimsString(nDifference)

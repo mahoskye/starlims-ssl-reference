@@ -72,7 +72,7 @@ DOW(dDate)
 
 ### Get the weekday number for a date
 
-Converts a hardcoded date string to a date value and displays the weekday number returned by `DOW`.
+Converts a hardcoded date string to a date value and logs the weekday number returned by `DOW`.
 
 ```ssl
 :PROCEDURE ShowWeekdayNumber;
@@ -93,7 +93,7 @@ Converts a hardcoded date string to a date value and displays the weekday number
 DoProc("ShowWeekdayNumber");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Weekday number for 03/23/2024 is 7
@@ -125,7 +125,7 @@ Checks whether `DOW` returned `0` (empty date) before branching to a weekday-spe
 DoProc("CheckPlannedDate");
 ```
 
-`UsrMes` displays either:
+`UsrMes` logs either:
 
 ```text
 Planned date is empty.
@@ -159,19 +159,19 @@ Iterates three runs: RUN-001 on a Sunday (04/05/2026, DOW=1), RUN-002 on a Tuesd
 		:BEGINCASE;
 		:CASE nDayOfWeek == 0;
 			sMessage := oRun:runId + " has no scheduled date.";
-			/* Displays empty-date message;
+			/* Logs empty-date message;
 			UsrMes(sMessage);
 			:EXITCASE;
 		:CASE nDayOfWeek == 1 .OR. nDayOfWeek == 7;
 			sMessage := oRun:runId + " is scheduled on a weekend ("
 						+ LimsString(nDayOfWeek) + ").";
-			/* Displays weekend message;
+			/* Logs weekend message;
 			UsrMes(sMessage);
 			:EXITCASE;
 		:OTHERWISE;
 			sMessage := oRun:runId + " is scheduled on a weekday ("
 						+ LimsString(nDayOfWeek) + ").";
-			/* Displays weekday message;
+			/* Logs weekday message;
 			UsrMes(sMessage);
 			:EXITCASE;
 		:ENDCASE;

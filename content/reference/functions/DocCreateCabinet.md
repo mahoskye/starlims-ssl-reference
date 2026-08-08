@@ -81,7 +81,7 @@ Creates a cabinet using only the required name argument and checks the Documentu
 	:IF Empty(sCreateResult);
 		:IF DocCommandFailed();
 			ErrorMes("Cabinet creation failed: " + DocGetErrorMessage());
-			/* Displays on command failure;
+			/* Logs on command failure;
 		:ELSE;
 			ErrorMes("Cabinet creation did not return a result string");
 		:ENDIF;
@@ -160,14 +160,14 @@ Guards against a blank cabinet name, passes all three arguments (name, type, ACL
 		sCreateResult := DocCreateCabinet(sCabinetName, sCabinetType, sAcl);
 	:CATCH;
 		oErr := GetLastSSLError();
-		ErrorMes("DocCreateCabinet raised an error: " + oErr:Description); /* Displays when NIL is passed;
+		ErrorMes("DocCreateCabinet raised an error: " + oErr:Description); /* Logs when NIL is passed;
 		:RETURN "";
 	:ENDTRY;
 
 	:IF Empty(sCreateResult);
 		:IF DocCommandFailed();
 			ErrorMes("DocCreateCabinet failed: " + DocGetErrorMessage());
-			/* Displays on command failure;
+			/* Logs on command failure;
 		:ELSE;
 			ErrorMes("DocCreateCabinet returned an empty result string");
 		:ENDIF;

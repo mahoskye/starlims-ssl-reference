@@ -94,7 +94,7 @@ DoProc("ArchiveReportsFolder")
 ;
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Archive created: C:\Archives\Q4DataBackup.zip
@@ -123,7 +123,7 @@ DoProc("ArchiveTopLevelPdfFiles")
 ;
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 PDF archive created: C:\Archives\CurrentReports.zip
@@ -148,7 +148,7 @@ Creates a password-protected archive while skipping the optional `sFileFilter` a
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("Secure export failed: " + oErr:Description);
-        /* Displays on failure: Secure export failed;
+        /* Logs on failure: Secure export failed;
     :ENDTRY;
 :ENDPROC;
 

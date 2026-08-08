@@ -77,7 +77,7 @@ Convert a numeric result to scientific notation without passing the optional pre
 DoProc("FormatMeasuredValue");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Concentration: 3.15E-004 mol/L
@@ -109,7 +109,7 @@ Format several values with the same precision and concatenate them into an expor
 DoProc("BuildScientificExportLine");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Export line: RESULTS<TAB>4.560E-005<TAB>1.234E-004<TAB>5.679E+006
@@ -152,7 +152,7 @@ Check that the precision input is numeric and an integer before passing it to `T
 DoProc("FormatWithRequestedPrecision");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Formatted value: 1.5200E-006

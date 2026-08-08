@@ -79,7 +79,7 @@ Show the version string for a specific file and display it to the user.
 DoProc("ShowDllVersion");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 C:\Windows\System32\shell32.dll version: 6.1.7601.23537
@@ -102,7 +102,7 @@ Check whether a deployed file matches the version your script expects.
         :RETURN .T.;
     :ENDIF;
 
-    /* Displays on mismatch: version mismatch message;
+    /* Logs on mismatch: version mismatch message;
     UsrMes(
         "Version mismatch for " + sFileName + ": expected "
         + sExpectedVersion + ", got " + sActualVersion

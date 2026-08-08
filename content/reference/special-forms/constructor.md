@@ -129,7 +129,7 @@ sMessage := "Count: " + LimsString(oCounter:GetCount());
 UsrMes(sMessage);
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Count: 2
@@ -179,7 +179,7 @@ oSample := CreateUdObject("Sample", {"S-002"});
 UsrMes(oSample:GetSummary());
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 S-001 (ACTIVE)
@@ -234,7 +234,7 @@ oCounter := CreateUdObject("AuditCounter", {"Batch A"});
 UsrMes(oCounter:GetSummary());
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Batch A: 10

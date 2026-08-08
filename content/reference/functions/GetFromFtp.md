@@ -103,10 +103,10 @@ Downloads a file from a named FTP directory to an explicit local path and report
 
     :IF bDownloaded;
         UsrMes("Downloaded " + sRemoteFile + " to " + sLocalFile);
-        /* Displays the downloaded file path;
+        /* Logs the downloaded file path;
     :ELSE;
         ErrorMes("Download failed for " + sRemoteFile);
-        /* Displays the failed file name;
+        /* Logs the failed file name;
     :ENDIF;
 
     :RETURN bDownloaded;
@@ -151,7 +151,7 @@ Uses SFTP with a private key file for authentication, targets port 22, and repor
 
         :IF .NOT. Empty(oErr);
             ErrorMes("SFTP download failed: " + oErr:Description);
-            /* Displays the SSL error description;
+            /* Logs the SSL error description;
         :ELSE;
             ErrorMes("SFTP download failed.");
         :ENDIF;
@@ -195,7 +195,7 @@ Omits the local file name so the function saves under the remote name and wraps 
 
             :IF .NOT. Empty(oErr);
                 ErrorMes("Transfer failed: " + oErr:Description);
-                /* Displays the SSL error description;
+                /* Logs the SSL error description;
             :ELSE;
                 ErrorMes("Transfer failed without an SSL error object.");
             :ENDIF;
@@ -205,7 +205,7 @@ Omits the local file name so the function saves under the remote name and wraps 
 
         :IF .NOT. Empty(oErr);
             ErrorMes("Invalid call to GetFromFtp: " + oErr:Description);
-            /* Displays the validation error description;
+            /* Logs the validation error description;
         :ELSE;
             ErrorMes("Invalid call to GetFromFtp.");
         :ENDIF;

@@ -86,7 +86,7 @@ Repeatedly doubles `nCounter` by multiplying it in place. The value before each 
 DoProc("DoubleLoopCounter");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Counter values: 1 2 4 8 16 32 
@@ -119,7 +119,7 @@ Applies a calibration factor to each element of `aReadings` in place, then accum
 DoProc("ScaleMeasurements");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Scaled sum: 12.159

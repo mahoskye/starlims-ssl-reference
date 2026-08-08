@@ -57,7 +57,7 @@ This function takes no parameters.
 
 ### List available printers for user selection
 
-Gets the current printer list and displays each name, or shows a no-printer message when the array is empty.
+Gets the current printer list and logs each name, or logs a no-printer message when the array is empty.
 
 ```ssl
 :PROCEDURE ShowPrinterList;
@@ -76,7 +76,7 @@ Gets the current printer list and displays each name, or shows a no-printer mess
 		sPrinterList += "- " + aPrinters[nIndex] + Chr(13) + Chr(10);
 	:NEXT;
 
-	UsrMes(sPrinterList);  /* Displays available printer names;
+	UsrMes(sPrinterList);  /* Logs available printer names;
 
 	:RETURN aPrinters;
 :ENDPROC;
@@ -99,12 +99,12 @@ Uses [`AScan`](AScan.md) to check whether a required printer name appears in the
 
 	:IF nPos > 0;
 		UsrMes("Printer is available: " + sRequiredPrinter);
-		/* Displays when found;
+		/* Logs when found;
 		:RETURN .T.;
 	:ENDIF;
 
 	UsrMes("Printer is not installed: " + sRequiredPrinter);
-	/* Displays when absent;
+	/* Logs when absent;
 	:RETURN .F.;
 :ENDPROC;
 

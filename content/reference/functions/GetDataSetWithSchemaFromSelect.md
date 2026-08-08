@@ -105,7 +105,7 @@ Executes a parameterless query on the default connection and reports the length 
 DoProc("ExportActiveSamples");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Returned XML length: 2187

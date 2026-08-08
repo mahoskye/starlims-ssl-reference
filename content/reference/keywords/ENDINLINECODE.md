@@ -82,7 +82,7 @@ Defines a named inline block that calculates a price, closes it with `:ENDINLINE
 DoProc("CalculateTotalPrice");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Total price: 100

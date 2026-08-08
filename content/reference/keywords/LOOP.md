@@ -89,7 +89,7 @@ Processes only non-empty sample IDs and skips blank entries using `:LOOP`. With 
 DoProc("ProcessValidSamples");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Valid sample count: 4
@@ -139,7 +139,7 @@ Uses `:LOOP` twice: once to skip blanks and once to skip duplicates already coll
 DoProc("CollectUniqueSamples");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Unique sample count: 3

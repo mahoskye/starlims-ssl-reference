@@ -124,7 +124,7 @@ Use `LDAPAuthEX` as an authentication check by leaving `sAuthAttribName` empty. 
 DoProc("AuthenticateOnly");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 LDAP authentication succeeded for jsmith
@@ -168,7 +168,7 @@ Request a single attribute after successful authentication.
 DoProc("AuthenticateAndReadMail");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Authenticated mail address: jsmith@example.com
@@ -207,11 +207,11 @@ Use SSL, a narrower search base, and explicit exception handling when the search
         );
 
         UsrMes("Authenticated attribute values: " + sAttribValues);
-        /* Displays authenticated attribute values on success;
+        /* Logs authenticated attribute values on success;
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("LDAP authentication failed: " + oErr:Description);
-        /* Displays authentication failure details;
+        /* Logs authentication failure details;
     :ENDTRY;
 :ENDPROC;
 

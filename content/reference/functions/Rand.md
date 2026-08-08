@@ -73,7 +73,7 @@ Use `Rand()` to select one value from an array.
 DoProc("PickRandomCode");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Selected code: Charlie
@@ -106,7 +106,7 @@ Use the same seed twice when you need the same first result again.
 DoProc("CompareSeededValue");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 First: <seeded_value>, Second: <seeded_value>, Same value: T
@@ -142,7 +142,7 @@ Seed the generator once and use later `Rand()` calls to advance through that see
 DoProc("BuildRepeatableSequence");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Sequence: <first_value>, <second_value>, <third_value>

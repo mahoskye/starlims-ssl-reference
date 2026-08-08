@@ -91,7 +91,7 @@ Builds an XML dataset from three hard-coded lab result rows, passing explicit co
 DoProc("BuildResultDataset");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 <?xml version="1.0"?><DATASET><TABLE><sample_id>LAB-001</sample_id><test_code>pH</test_code><result_value>7.1</result_value></TABLE><TABLE><sample_id>LAB-002</sample_id><test_code>pH</test_code><result_value>6.9</result_value></TABLE><TABLE><sample_id>LAB-003</sample_id><test_code>pH</test_code><result_value>7.3</result_value></TABLE></DATASET>
@@ -121,7 +121,7 @@ Omits `aArrayFields` so the function generates `Field1`, `Field2`, `Field3` auto
 DoProc("BuildAnonymousDataset");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Generated 2 rows

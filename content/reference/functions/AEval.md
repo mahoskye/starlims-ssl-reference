@@ -85,7 +85,7 @@ Passes a code block to `AEval` that calls [`UsrMes`](UsrMes.md) for each sample 
 DoProc("LogSamples");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Processing SAMP-001
@@ -116,7 +116,7 @@ Supplies `nStart` and `nCount` to limit iteration to elements 3 and 4 (the two `
 DoProc("LogReviewQueue");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Queue status: REVIEW

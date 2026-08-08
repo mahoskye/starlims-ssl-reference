@@ -89,7 +89,7 @@ Compares `nUserInput` against `nMinimumThreshold`. With 75 > 50, the result is [
 DoProc("CheckMinimumThreshold");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Input exceeds the minimum threshold
@@ -122,7 +122,7 @@ Compares a current date against a deadline. With 04/20/2026 > 04/15/2026, `bOver
 DoProc("CheckDeadline");
 ```
 
-[`InfoMes`](../functions/InfoMes.md) displays:
+[`InfoMes`](../functions/InfoMes.md) logs:
 
 ```text
 The item is overdue. Deadline: 04/15/2026
@@ -155,7 +155,7 @@ Uses `>` to test whether one batch key sorts after another. `"BATCH-200"` is lex
 DoProc("CompareBatchKeys");
 ```
 
-[`InfoMes`](../functions/InfoMes.md) displays:
+[`InfoMes`](../functions/InfoMes.md) logs:
 
 ```text
 Batch BATCH-200 is after the boundary

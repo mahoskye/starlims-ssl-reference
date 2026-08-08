@@ -89,7 +89,7 @@ Use the required arguments only and let the function apply its default algorithm
     :ENDIF;
 
     UsrMes("Encrypted value created");
-    /* Displays: Encrypted value created;
+    /* Logs: Encrypted value created;
 
     :RETURN sEncrypted;
 :ENDPROC;
@@ -115,7 +115,7 @@ Pass an explicit algorithm and key length when an existing integration expects f
 
     :IF Empty(sEncrypted);
         ErrorMes("Payload encryption failed");
-        /* Displays on failure: Payload encryption failed;
+        /* Logs on failure: Payload encryption failed;
         :RETURN "";
     :ENDIF;
 
@@ -153,7 +153,7 @@ Encrypt several values with shared settings, then verify one of them by decrypti
 
     :IF !(sVerify == sPatientID);
         ErrorMes("Round-trip verification failed");
-        /* Displays on failure: Round-trip verification failed;
+        /* Logs on failure: Round-trip verification failed;
         :RETURN NIL;
     :ENDIF;
 

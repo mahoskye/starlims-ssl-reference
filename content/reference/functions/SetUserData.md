@@ -84,7 +84,7 @@ Use `SetUserData` and then confirm the change with [`GetUserData`](GetUserData.m
 DoProc("ShowCurrentUser");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Current user: jsmith

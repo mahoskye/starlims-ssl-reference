@@ -80,14 +80,14 @@ Uses one shared legacy handler to catch any failure in the remaining procedure b
     :ERROR;
         oErr := GetLastSSLError();
         ErrorMes("Configuration load failed: " + oErr:Description);
-        /* Displays on failure: configuration load failed;
+        /* Logs on failure: configuration load failed;
 
     /* If ReadText fails, control jumps to the handler;
     sContent := ReadText(sFilePath);
 
     /* Only runs when the file was read successfully;
     UsrMes("File loaded successfully: " + sContent);
-    /* Displays on success: loaded file contents;
+    /* Logs on success: loaded file contents;
 
     :RETURN sContent;
 :ENDPROC;
@@ -113,7 +113,7 @@ Uses [`:RESUME`](RESUME.md) so a batch loop can continue after logging a recover
         oErr := GetLastSSLError();
         nFailed := nFailed + 1;
         UsrMes("Skipping sample " + sSampleID + ": " + oErr:Description);
-        /* Displays on failure: skipping the current sample;
+        /* Logs on failure: skipping the current sample;
     :RESUME;
 
     :FOR nIndex := 1 :TO ALen(aSampleIDs);
@@ -131,7 +131,7 @@ Uses [`:RESUME`](RESUME.md) so a batch loop can continue after logging a recover
         "Imported " + LimsString(nImported)
         + " samples. Failed: " + LimsString(nFailed)
     );
-    /* Displays a summary of imported and failed records;
+    /* Logs a summary of imported and failed records;
 
     :RETURN nImported;
 :ENDPROC;

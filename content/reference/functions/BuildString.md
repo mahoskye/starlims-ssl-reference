@@ -100,7 +100,7 @@ Uses the default comma delimiter to create one display string from three status 
 DoProc("ShowStatusList");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Logged,Complete,Pending
@@ -126,7 +126,7 @@ Selects elements 2 and 3 from a four-element array and joins only those with a p
 DoProc("BuildAuditPreview");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 pH | Logged
@@ -145,8 +145,8 @@ Demonstrates that [`NIL`](../literals/nil.md) elements become the literal text [
 	sWithNil := BuildString(aValues, 1, 3, "/");
 	sClamped := BuildString(aValues, 99, 1, "/");
 
-	UsrMes(sWithNil);  /* Displays: A/NIL/C;
-	UsrMes(sClamped);  /* Displays: C;
+	UsrMes(sWithNil);  /* Logs: A/NIL/C;
+	UsrMes(sClamped);  /* Logs: C;
 
 	:RETURN sClamped;
 :ENDPROC;

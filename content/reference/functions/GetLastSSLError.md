@@ -117,7 +117,7 @@ Capture and log comprehensive error details after any SSL exception to support d
 			sLogMessage := sLogMessage + "Operation: " + oErr:Operation + Chr(10);
 			sLogMessage := sLogMessage + "Code: " + LimsString(oErr:Code) + Chr(10);
 			sLogMessage := sLogMessage + oErr:FullDescription;
-			ErrorMes(sLogMessage); /* Displays error details for debugging;
+			ErrorMes(sLogMessage); /* Logs error details for debugging;
 		:ENDIF;
 
 		ClearLastSSLError();
@@ -172,7 +172,7 @@ Inspect nested error information to diagnose compound or wrapped failures.
 				oInner := oInner:InnerException;
 			:ENDWHILE;
 
-			ErrorMes(sChain); /* Displays nested error details;
+			ErrorMes(sChain); /* Logs nested error details;
 		:ENDIF;
 	:ENDTRY;
 :ENDPROC;

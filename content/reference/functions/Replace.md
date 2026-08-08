@@ -129,7 +129,7 @@ Build a final message by applying several case-insensitive replacements in seque
 DoProc("BuildAlertMessage");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 sample S-10025 requires review on 2026-04-19

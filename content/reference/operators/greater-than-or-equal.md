@@ -85,7 +85,7 @@ Checks whether `nScore` meets or exceeds `nMinPassing`. With 72 >= 70, the compa
 DoProc("CheckPassingScore");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Student passed with a score of 72
@@ -127,7 +127,7 @@ Includes log dates that fall on or after `dReferenceDate`. The cutoff is 01/15/2
 DoProc("FilterActivityLogs");
 ```
 
-`UsrMes` displays one line per matching log, then the total:
+`UsrMes` logs one line per matching log, then the total:
 
 ```text
 Included log 2 dated 01/15/2024
@@ -161,7 +161,7 @@ Uses string ordering to check whether a batch ID is at or after a boundary. `"BA
 DoProc("CheckBatchBoundary");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Batch BATCH-200 is at or after the boundary

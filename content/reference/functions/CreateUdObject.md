@@ -109,7 +109,7 @@ Creates an empty dynamic object using the no-argument form and assigns three pro
 DoProc("BuildSampleContext");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 LAB-0042 / Pending / 2
@@ -144,7 +144,7 @@ Creates a dynamic object from a runtime-assembled list of property definitions. 
 DoProc("BuildImportRow");
 ```
 
-[`UsrMes`](UsrMes.md) displays (username varies by session):
+[`UsrMes`](UsrMes.md) logs (username varies by session):
 
 ```text
 LAB-0105 reviewed by jsmith (3 replicates)
@@ -193,7 +193,7 @@ Usage:
 DoProc("CreateSampleTicket");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 LAB-0042 priority 2

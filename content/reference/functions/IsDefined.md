@@ -83,10 +83,10 @@ Check with `IsDefined` before branching on the variable's value. Because `sWorkf
     /* Use the variable only after confirming it exists;
     :IF bHasWorkflowStatus;
         sMessage := "Workflow status is: " + sWorkflowStatus;
-        UsrMes(sMessage);  /* Displays: Workflow status is: Active;
+        UsrMes(sMessage);  /* Logs: Workflow status is: Active;
     :ELSE;
         sMessage := "Workflow status variable not defined";
-        UsrMes(sMessage);  /* Displays: Workflow status variable not defined;
+        UsrMes(sMessage);  /* Logs: Workflow status variable not defined;
     :ENDIF;
 
     :RETURN;
@@ -98,7 +98,7 @@ DoProc("CheckWorkflowStatus");
 
 ### Report which names from a candidate list are defined
 
-Iterate over a list of candidate variable names and build a comma-separated summary of those currently in scope. The single [`UsrMes`](UsrMes.md) call at the end shows either the list of available names or a not-defined message.
+Iterate over a list of candidate variable names and build a comma-separated summary of those currently in scope. The single [`UsrMes`](UsrMes.md) call at the end logs either the list of available names or a not-defined message.
 
 ```ssl
 :PROCEDURE SummarizeAvailableInputs;
@@ -135,7 +135,7 @@ Iterate over a list of candidate variable names and build a comma-separated summ
 DoProc("SummarizeAvailableInputs", {{"sCacheKey", "sContextId"}});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Available input variables: sCacheKey, sContextId
@@ -172,7 +172,7 @@ Walk a list of candidate variable names and read the first one that is both defi
     :ENDIF;
 
     UsrMes("Using batch identifier: " + sBatchId);
-    /* Displays selected batch identifier;
+    /* Logs selected batch identifier;
 
     :RETURN .T.;
 :ENDPROC;

@@ -74,7 +74,7 @@ Change the decimal separator to a comma and keep the old value so it can be rest
 	sPreviousSep := SetDecimalSeparator(",");
 	sCurrentSep := GetDecimalSeparator();
 
-	UsrMes("Previous separator: " + sPreviousSep);  /* Displays previous separator value;
+	UsrMes("Previous separator: " + sPreviousSep);  /* Logs previous separator value;
 	UsrMes("Current separator: " + sCurrentSep);
 :ENDPROC;
 
@@ -96,7 +96,7 @@ Switch the separator for a short operation, then restore the prior setting.
 	UsrMes(sMessage);
 
 	SetDecimalSeparator(sPreviousSep);
-	UsrMes("Restored separator: " + GetDecimalSeparator());  /* Displays restored separator value;
+	UsrMes("Restored separator: " + GetDecimalSeparator());  /* Logs restored separator value;
 :ENDPROC;
 
 /* Usage;
@@ -116,17 +116,17 @@ Use [`:TRY`](../keywords/TRY.md) and [`:FINALLY`](../keywords/FINALLY.md) so the
 
 	:TRY;
 		UsrMes("Processing with separator: " + GetDecimalSeparator());
-		/* Displays current separator value during processing;
+		/* Logs current separator value during processing;
 	:CATCH;
 		oErr := GetLastSSLError();
 		UsrMes("Processing failed: " + oErr:Description);
-		/* Displays on failure: processing failed;
+		/* Logs on failure: processing failed;
 	:FINALLY;
 		SetDecimalSeparator(sPreviousSep);
 	:ENDTRY;
 
 	UsrMes("Restored separator: " + GetDecimalSeparator());
-	/* Displays restored separator value;
+	/* Logs restored separator value;
 :ENDPROC;
 
 /* Usage;

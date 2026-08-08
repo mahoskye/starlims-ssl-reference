@@ -70,7 +70,7 @@ Calls `DocGetCabinets()`, exits early when the result is empty, then prints each
 
     :FOR nIndex := 1 :TO ALen(aCabinets);
         sCabinetName := aCabinets[nIndex];
-        UsrMes("Cabinet: " + sCabinetName); /* Displays each cabinet name;
+        UsrMes("Cabinet: " + sCabinetName); /* Logs each cabinet name;
     :NEXT;
 :ENDPROC;
 
@@ -100,7 +100,7 @@ Searches the cabinet list for a case-insensitive match against a configured name
 
     :IF DocCommandFailed();
         ErrorMes("Documentum lookup failed: " + DocGetErrorMessage());
-        /* Displays on command failure: lookup failed;
+        /* Logs on command failure: lookup failed;
         :RETURN .F.;
     :ENDIF;
 
@@ -124,7 +124,7 @@ Fetches the live cabinet list, checks [`DocCommandFailed`](DocCommandFailed.md) 
 
     :IF DocCommandFailed();
         ErrorMes("Unable to retrieve cabinets: " + DocGetErrorMessage());
-        /* Displays on command failure: cabinet retrieval failed;
+        /* Logs on command failure: cabinet retrieval failed;
         :RETURN {};
     :ENDIF;
 

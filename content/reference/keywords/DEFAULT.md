@@ -92,7 +92,7 @@ DoProc("FormatSampleLabel", {"S-001"})
 ;
 ```
 
-[`InfoMes`](../functions/InfoMes.md) displays:
+[`InfoMes`](../functions/InfoMes.md) logs:
 
 ```text
 Sample S-001
@@ -129,7 +129,7 @@ Use multiple `:DEFAULT` lines so callers can omit new trailing arguments. `ShowD
     aDefaultRows := DoProc("FetchSampleRows", {"LAB-2024-0042"});
     aCustomRows := DoProc("FetchSampleRows", {"LAB-2024-0042", "Complete", 10});
 
-    /* Displays row counts for the default and custom calls;
+    /* Logs row counts for the default and custom calls;
     InfoMes("Default call returned " + LimsString(ALen(aDefaultRows)) + " row(s)");
     InfoMes("Custom call returned " + LimsString(ALen(aCustomRows)) + " row(s)");
 :ENDPROC;
@@ -173,7 +173,7 @@ Default values can be expressions. Here `MYUSERNAME` and [`Today()`](../function
 
     aRows := SQLExecute(sSQL);
     sMessage := "Returned " + LimsString(ALen(aRows)) + " task row(s) for " + sOwner;
-    /* Displays the returned row count for the selected owner;
+    /* Logs the returned row count for the selected owner;
     InfoMes(sMessage);
 
     :RETURN aRows;

@@ -75,7 +75,7 @@ Drain the current outbox queue and report whether all messages were delivered or
     :ENDIF;
 
     UsrMes(sMessage);
-    /* Displays success or failure status;
+    /* Logs success or failure status;
 
     :RETURN bAllSent;
 :ENDPROC;

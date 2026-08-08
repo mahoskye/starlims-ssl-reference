@@ -79,7 +79,7 @@ Submit a small SSL block and keep the returned batch ID for later tracking.
     sBatchId := SubmitToBatchEx(sCode);
 
     UsrMes("Submitted batch job: " + sBatchId);
-    /* Displays batch ID on success;
+    /* Logs batch ID on success;
 
     :RETURN sBatchId;
 :ENDPROC;
@@ -119,21 +119,21 @@ which submissions succeeded.
         UsrMes("Daily KPIs submission was skipped or failed");
     :ELSE;
         UsrMes("Queued daily KPIs as batch " + sBatchId1);
-        /* Displays batch ID on success;
+        /* Logs batch ID on success;
     :ENDIF;
 
     :IF Empty(sBatchId2);
         UsrMes("Monthly rollup submission was skipped or failed");
     :ELSE;
         UsrMes("Queued monthly rollup as batch " + sBatchId2);
-        /* Displays batch ID on success;
+        /* Logs batch ID on success;
     :ENDIF;
 
     :IF Empty(sBatchId3);
         UsrMes("Lab audit submission was skipped or failed");
     :ELSE;
         UsrMes("Queued lab audit as batch " + sBatchId3);
-        /* Displays batch ID on success;
+        /* Logs batch ID on success;
     :ENDIF;
 
     :RETURN sBatchId1;

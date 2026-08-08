@@ -83,7 +83,7 @@ Take any date value and return a version stamped to `00:00:00` on the same calen
 DoProc("GetServerDayStart", {DateFromNumbers(2026, 4, 15)});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Server day start: <04/15/2026 00:00:00>
@@ -134,10 +134,10 @@ Compute both the server and client start-of-day boundaries for the same input an
         + ", Client start: " + LimsString(dClientStart);
 
     :IF dServerStart == dClientStart;
-        /* Displays same-boundary summary with both start times;
+        /* Logs same-boundary summary with both start times;
         UsrMes(sSummary + " (same day boundary)");
     :ELSE;
-        /* Displays different-boundary summary with both start times;
+        /* Logs different-boundary summary with both start times;
         UsrMes(sSummary + " (different day boundary)");
     :ENDIF;
 

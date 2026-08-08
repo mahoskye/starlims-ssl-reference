@@ -88,7 +88,7 @@ Call `LimsSetCounter` with a table, field name, and an additional field/value pa
 DoProc("InsertSampleWithAutoID");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Created sample ID: <n>
@@ -119,9 +119,9 @@ Pass different `sPrefix` values to maintain independent counter streams for the 
 	nNextBeta := LimsSetCounter(sTableName, sFieldName, sProjectBeta, aFields, aValuesBeta);
 
 	UsrMes("Generated: " + sProjectAlpha + LimsString(nNextAlpha));
-	/* Displays generated ALPHA key;
+	/* Logs generated ALPHA key;
 	UsrMes("Generated: " + sProjectBeta + LimsString(nNextBeta));
-	/* Displays generated BETA key;
+	/* Logs generated BETA key;
 :ENDPROC;
 
 /* Usage;
@@ -155,11 +155,11 @@ Wrap `LimsSetCounter` in a [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords
 
 		sSubmissionID := sPrefix + LimsString(nCounter);
 		UsrMes("Submission created: " + sSubmissionID);
-		/* Displays created submission ID;
+		/* Logs created submission ID;
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes("Failed to create submission: " + oErr:Description);
-		/* Displays on failure: submission creation failed;
+		/* Logs on failure: submission creation failed;
 		:RETURN .F.;
 	:ENDTRY;
 

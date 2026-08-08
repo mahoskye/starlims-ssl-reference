@@ -101,7 +101,7 @@ Compares `sStatus` against `"Log"` using prefix matching. Because `"Logged"` sta
 DoProc("CheckLoggedStatus");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Status starts with Log
@@ -134,7 +134,7 @@ Uses `=` for numeric equality. With both `nExpected` and `nActual` set to 3, the
 DoProc("CheckReplicateCount");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Replicate count matches
@@ -166,8 +166,8 @@ Checks runtime types before applying `=` to avoid invalid-operand errors. With `
         :ENDIF;
     :ENDIF;
 
-    UsrMes(sMessage);  /* Displays the selected status message;
-    UsrMes("Match result: " + LimsString(bMatch));  /* Displays the match result;
+    UsrMes(sMessage);  /* Logs the selected status message;
+    UsrMes("Match result: " + LimsString(bMatch));  /* Logs the match result;
 
     :RETURN bMatch;
 :ENDPROC;
@@ -176,7 +176,7 @@ Checks runtime types before applying `=` to avoid invalid-operand errors. With `
 DoProc("SafeLooseEquality");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Skipped: operands have different types

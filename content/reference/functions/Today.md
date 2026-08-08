@@ -83,7 +83,7 @@ Check whether a record is due today. The due date is set to a specific past date
 DoProc("CheckDueToday");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 The record is not due today
@@ -124,7 +124,7 @@ Capture the current date once and reuse it as a named [`SQLExecute`](SQLExecute.
 DoProc("GetTodaySamples");
 ```
 
-`UsrMes` displays one of:
+`UsrMes` logs one of:
 
 ```text
 Found <n> sample(s) for <date>
@@ -167,7 +167,7 @@ step uses the same date.
 DoProc("StampReviewDate");
 ```
 
-`UsrMes` displays one of:
+`UsrMes` logs one of:
 
 ```text
 Sample S-1001 reviewed on <date>

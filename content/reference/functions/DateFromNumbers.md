@@ -88,7 +88,7 @@ DateFromNumbers(
 
 ### Build a date from year, month, and day values
 
-Constructs a date from three separate numeric variables and displays the result. The time components default to `00:00:00.000`.
+Constructs a date from three separate numeric variables and logs the result. The time components default to `00:00:00.000`.
 
 ```ssl
 :PROCEDURE BuildSampleDate;
@@ -109,7 +109,7 @@ Constructs a date from three separate numeric variables and displays the result.
 DoProc("BuildSampleDate");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Sample date constructed: 11/15/2024
@@ -134,7 +134,7 @@ Passes all seven numeric components including milliseconds to construct a full t
 DoProc("BuildRunTimestamp");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Run timestamp: 04/18/2026
@@ -170,7 +170,7 @@ Passes [`.T.`](../literals/true.md) for `bMakeInvariant` and skips the time comp
 DoProc("BuildInvariantReviewDate");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Review date created as invariant

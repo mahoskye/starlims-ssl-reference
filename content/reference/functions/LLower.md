@@ -87,7 +87,7 @@ Lowercase both values before comparing so that `"JSmith"` matches `"jsmith"` reg
 DoProc("ValidateLogin");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Names match: True

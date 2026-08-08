@@ -98,7 +98,7 @@ Wraps a single SQL update in the standard TRY/FINALLY transaction pattern, using
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("Update failed: " + oErr:Description);
-        /* Displays on failure: update failed;
+        /* Logs on failure: update failed;
 
     :FINALLY;
         :IF bStarted;
@@ -148,7 +148,7 @@ Passes `sConnName` to target a specific connection, then updates an order and al
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("Transaction failed: " + oErr:Description);
-        /* Displays on failure: transaction failed;
+        /* Logs on failure: transaction failed;
 
     :FINALLY;
         :IF bStarted;
@@ -214,7 +214,7 @@ Passes `"Serializable"` as the isolation level to prevent other transactions fro
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("Closeout audit failed: " + oErr:Description);
-        /* Displays on failure: closeout audit failed;
+        /* Logs on failure: closeout audit failed;
 
     :FINALLY;
         :IF bStarted;

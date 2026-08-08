@@ -101,7 +101,7 @@ Skip `aFieldList` and `sConnectionName` using adjacent commas, then pass the par
 
     :FOR nIndex := 1 :TO ALen(aRows);
         UsrMes("Sample " + aRows[nIndex, 1] + " is " + aRows[nIndex, 2]);
-        /* Displays one line per row with the sample ID and status;
+        /* Logs one line per row with the sample ID and status;
     :NEXT;
 
     :RETURN aRows;
@@ -135,7 +135,7 @@ Pass [`.F.`](../literals/false.md) for `bNullAsBlank` so that database `NULL` no
             UsrMes("Sample " + aRows[nIndex, 1] + " has no note");
         :ELSE;
             UsrMes("Sample " + aRows[nIndex, 1] + " note: " + vNote);
-            /* Displays the note text for rows that have one;
+            /* Logs the note text for rows that have one;
         :ENDIF;
     :NEXT;
 
@@ -167,7 +167,7 @@ Pass column index `2` in `aInvariantCols` so the `received_date` column is retur
     :FOR nIndex := 1 :TO ALen(aRows);
         dReceived := aRows[nIndex, 2];
         UsrMes("Sample " + aRows[nIndex, 1] + " received on " + DToC(dReceived));
-        /* Displays one line per row with the received date;
+        /* Logs one line per row with the received date;
     :NEXT;
 
     :RETURN aRows;

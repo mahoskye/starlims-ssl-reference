@@ -81,7 +81,7 @@ DoProc("ShowOrderStatus");
 DoProc("ShowOrderStatus", {"ORD-1001"});
 ```
 
-`UsrMes` displays, in order:
+`UsrMes` logs, in order:
 
 ```text
 Order number is required
@@ -123,7 +123,7 @@ DoProc("BuildLabel", {"Report", "("});
 DoProc("BuildLabel", {"Report", "(", ")"});
 ```
 
-`UsrMes` displays, in order:
+`UsrMes` logs, in order:
 
 ```text
 [Report]

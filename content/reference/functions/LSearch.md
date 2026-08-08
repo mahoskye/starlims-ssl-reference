@@ -151,13 +151,13 @@ Use [`NIL`](../literals/nil.md) as the fallback so that a missing approval date 
         UsrMes(
             "Invoice " + sInvoiceID + " was approved on " + DToC(dApprovalDate)
         );
-        /* Displays approval date;
+        /* Logs approval date;
 
         :RETURN dApprovalDate;
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("Approval lookup failed: " + oErr:Description);
-        /* Displays on failure: approval lookup failed;
+        /* Logs on failure: approval lookup failed;
         :RETURN NIL;
     :ENDTRY;
 :ENDPROC;

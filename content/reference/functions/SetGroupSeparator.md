@@ -83,7 +83,7 @@ Switch the separator for a bulk import, then restore the original setting when d
 	SetGroupSeparator(sImportSep);
 	sLogMessage := "Switched group separator from " + sOriginalSep + " to " + sImportSep + " for import";
 	UsrMes(sLogMessage);
-	/* Displays import separator change;
+	/* Logs import separator change;
 
 	:FOR nIndex := 1 :TO ALen(aImportData);
 		sFormattedValue := aImportData[nIndex];
@@ -92,13 +92,13 @@ Switch the separator for a bulk import, then restore the original setting when d
 		sLogMessage := "Row " + LimsString(nIndex) + ": imported " + sFormattedValue + " = "
 			+ LimsString(nSampleValue);
 		UsrMes(sLogMessage);
-		/* Displays imported row details;
+		/* Logs imported row details;
 	:NEXT;
 
 	SetGroupSeparator(sOriginalSep);
 	sLogMessage := "Restored original group separator: " + sOriginalSep;
 	UsrMes(sLogMessage);
-	/* Displays restored separator;
+	/* Logs restored separator;
 
 	:RETURN nTotalProcessed;
 :ENDPROC;
@@ -139,20 +139,20 @@ Change group and decimal separator together during a localization update, with r
 			sFormatMessage := "Localization updated for user " + sUserID + " to " + sRegion
 				+ " region";
 			InfoMes(sFormatMessage);
-			/* Displays localization update status;
+			/* Logs localization update status;
 		:ELSE;
 			sFormatMessage := "Failed to update localization for user " + sUserID;
 			ErrorMes(sFormatMessage);
-			/* Displays localization failure;
+			/* Logs localization failure;
 		:ENDIF;
 
 		sFormatMessage := "Active separators - Group: " + GetGroupSeparator() + " Decimal: "
 			+ GetDecimalSeparator();
 		InfoMes(sFormatMessage);
-		/* Displays active separator values;
+		/* Logs active separator values;
 	:CATCH;
 		ErrorMes("Localization update failed: " + GetLastSSLError():Description);
-		/* Displays localization failure reason;
+		/* Logs localization failure reason;
 		SetGroupSeparator(sCurrentGroup);
 		SetDecimalSeparator(sCurrentDecimal);
 	:FINALLY;

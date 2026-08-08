@@ -98,7 +98,7 @@ Upload a single file to the `DOCUMENT_FILE` column of a specific sample row. Wra
         UsrMes("Document uploaded successfully");
     :CATCH;
         oErr := GetLastSSLError();
-        /* Displays on failure: UpdLong failed with the SSL error description;
+        /* Logs on failure: UpdLong failed with the SSL error description;
         ErrorMes("UpdLong failed: " + oErr:Description);
     :ENDTRY;
 :ENDPROC;
@@ -140,18 +140,18 @@ Iterate over a list of asset IDs and upload a matching image file for each one. 
         :TRY;
             UpdLong(sConnectionName, sTableName, sColumnName, sWhereCond, sFilePath);
             nUpdated := nUpdated + 1;
-            /* Displays the updated asset tag on success;
+            /* Logs the updated asset tag on success;
             UsrMes("Updated image for asset: " + sAssetTag);
         :CATCH;
             oErr := GetLastSSLError();
             sErrorMsg := "Error updating asset " + sAssetTag + ": " + oErr:Description;
-            /* Displays the asset tag and SSL error description on failure;
+            /* Logs the asset tag and SSL error description on failure;
             ErrorMes(sErrorMsg);
             nFailed := nFailed + 1;
         :ENDTRY;
     :NEXT;
 
-    /* Displays final updated and failed counts;
+    /* Logs final updated and failed counts;
     UsrMes("Bulk update complete. Updated: " + LimsString(nUpdated) + ", Failed: " + LimsString(nFailed));
 
     :RETURN nUpdated;
@@ -206,7 +206,7 @@ Copy an external file to a local temp path, update the long column inside a tran
         :ENDIF;
 
         oErr := GetLastSSLError();
-        /* Displays on failure: Import failed with the SSL error description;
+        /* Logs on failure: Import failed with the SSL error description;
         ErrorMes("Import failed: " + oErr:Description);
 
         :RETURN .F.;

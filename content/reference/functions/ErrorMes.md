@@ -79,7 +79,7 @@ Log a simple validation error and keep the returned message string.
 DoProc("ValidateResult", {"S-001", ""});
 ```
 
-`ErrorMes` displays:
+`ErrorMes` logs:
 
 ```text
 Validation Failed: Sample S-001 is missing a result value
@@ -115,7 +115,7 @@ Capture the runtime error text in a [`:CATCH`](../keywords/CATCH.md) block and w
 DoProc("SaveResult", {"S-001", "Positive"});
 ```
 
-`ErrorMes` displays:
+`ErrorMes` logs:
 
 ```text
 SaveResult failed: Sample S-001: <error description>
@@ -158,7 +158,7 @@ Use `ErrorMes` for a critical batch failure where the transaction is rolled back
 DoProc("ApproveBatch", {"BATCH-001", {"S-001", "S-002"}});
 ```
 
-`ErrorMes` displays:
+`ErrorMes` logs:
 
 ```text
 Batch approval failed: BATCH-001 rolled back: <error description>

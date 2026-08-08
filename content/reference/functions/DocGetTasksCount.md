@@ -66,7 +66,7 @@ This function takes no parameters.
 
 ### Show current inbox workload to user
 
-Logs in to Documentum, reads the inbox task count, checks for the `-1` failure sentinel, and displays the current pending task count.
+Logs in to Documentum, reads the inbox task count, checks for the `-1` failure sentinel, and logs the current pending task count.
 
 ```ssl
 :PROCEDURE ShowDashboardTaskCount;
@@ -77,7 +77,7 @@ Logs in to Documentum, reads the inbox task count, checks for the `-1` failure s
     :TRY;
         :IF .NOT. DocLoginToDocumentum("Repository", "analyst", "secret");
             ErrorMes("Documentum login failed: " + DocGetErrorMessage());
-            /* Displays on login failure;
+            /* Logs on login failure;
             :RETURN;
         :ENDIF;
 
@@ -85,12 +85,12 @@ Logs in to Documentum, reads the inbox task count, checks for the `-1` failure s
 
         :IF nTaskCount == -1;
             ErrorMes("Could not read inbox count: " + DocGetErrorMessage());
-            /* Displays on count failure;
+            /* Logs on count failure;
             :RETURN;
         :ENDIF;
 
         UsrMes("Current pending tasks: " + LimsString(nTaskCount));
-        /* Displays current pending task count;
+        /* Logs current pending task count;
 
     :FINALLY;
         DocEndDocumentumInterface();
@@ -113,7 +113,7 @@ Reads the inbox count and branches on three distinct cases: a failed call (retur
 
     :IF nTaskCount == -1;
         ErrorMes("Inbox count lookup failed: " + DocGetErrorMessage());
-        /* Displays on failure;
+        /* Logs on failure;
         :RETURN .F.;
     :ENDIF;
 
@@ -123,7 +123,7 @@ Reads the inbox count and branches on three distinct cases: a failed call (retur
     :ENDIF;
 
     UsrMes("Processing " + LimsString(nTaskCount) + " Documentum tasks");
-    /* Displays task count before processing;
+    /* Logs task count before processing;
     :RETURN .T.;
 :ENDPROC;
 

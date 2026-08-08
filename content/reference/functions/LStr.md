@@ -75,7 +75,7 @@ Passing [`NIL`](../literals/nil.md) directly to `LStr` returns the four-characte
 DoProc("DemonstrateLStr");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Missing: NIL
@@ -108,7 +108,7 @@ Loop over an array of measurements and convert each entry with `LStr` so that [`
 DoProc("LogMeasurements");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Sample 1: 420.5
@@ -157,7 +157,7 @@ Use `LStr` to convert numeric results to strings and [`StrZero`](StrZero.md) to 
 DoProc("GenerateSampleReport");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 ID      Result  Status

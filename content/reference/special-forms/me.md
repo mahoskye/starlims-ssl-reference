@@ -101,7 +101,7 @@ oCalc := CreateUdObject("OrderCalculator", {5, 12});
 oCalc:CalculateTotal();
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Total: 60
@@ -121,11 +121,11 @@ Class script:
 	:IF Me:IsValid();
 		Me:sStatus := "PROCESSED";
 		UsrMes(Me:sSampleId + " processed successfully");
-		/* Displays the success message for the sample ID;
+		/* Logs the success message for the sample ID;
 	:ELSE;
 		Me:sStatus := "FAILED";
 		UsrMes(Me:sSampleId + " failed validation");
-		/* Displays the failure message for the sample ID;
+		/* Logs the failure message for the sample ID;
 	:ENDIF;
 :ENDPROC;
 
@@ -157,7 +157,7 @@ oSample:Process();
 UsrMes("Status: " + oSample:GetStatus());
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Status: PROCESSED
@@ -202,7 +202,7 @@ oEntry:UpdateValue("5");
 UsrMes(oEntry:GetDisplay());
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 MaxRetries = 5

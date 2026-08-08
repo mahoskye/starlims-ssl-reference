@@ -84,7 +84,7 @@ Display invoice numbers as zero-padded 8-character strings for consistent visual
 DoProc("FormatInvoiceCode");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Invoice code: 00004528
@@ -115,7 +115,7 @@ Export a numeric result with a fixed total width and three decimal places.
 DoProc("FormatMeasurementForExport");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 LAB-2024-0042,000012.377

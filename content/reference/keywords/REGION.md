@@ -73,7 +73,7 @@ region body text
 
 ### Store and retrieve a simple text block
 
-Defines a region inside a procedure, retrieves its text with [`GetRegion`](../functions/GetRegion.md), and displays the result. The region body becomes the displayed message.
+Defines a region inside a procedure, retrieves its text with [`GetRegion`](../functions/GetRegion.md), and logs the result. The region body becomes the logged message.
 
 ```ssl
 :PROCEDURE ShowWelcomeBanner;
@@ -93,7 +93,7 @@ Welcome to the quality control workspace
 DoProc("ShowWelcomeBanner");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Welcome to the quality control workspace
@@ -124,7 +124,7 @@ User {USER} signed in on {DATE}
 DoProc("BuildLoginNotice");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 User jsmith signed in on 04/23/2026
@@ -132,7 +132,7 @@ User jsmith signed in on 04/23/2026
 
 ### Choose between multiple stored templates
 
-Selects one of two region templates at runtime based on a status parameter. With `sStatus` set to `"COMPLETE"`, the complete-message region is retrieved and displayed.
+Selects one of two region templates at runtime based on a status parameter. With `sStatus` set to `"COMPLETE"`, the complete-message region is retrieved and logged.
 
 ```ssl
 :PROCEDURE BuildStatusMessage;
@@ -164,7 +164,7 @@ The sample review is complete
 DoProc("BuildStatusMessage", {"COMPLETE"});
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 The sample review is complete

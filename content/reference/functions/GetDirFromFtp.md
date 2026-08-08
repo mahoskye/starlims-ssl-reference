@@ -132,7 +132,7 @@ Use the FTP path with the default wildcard to inspect a drop folder.
 
     :FOR nIndex := 1 :TO ALen(aEntries);
         aEntry := aEntries[nIndex];
-        /* Displays each entry name and type;
+        /* Logs each entry name and type;
         UsrMes(aEntry[1] + " (" + aEntry[5] + ")");
     :NEXT;
 
@@ -182,7 +182,7 @@ Use the SFTP path, keep `sFilePattern` empty, and handle connection or login err
 
     :CATCH;
         oErr := GetLastSSLError();
-        /* Displays on failure with error details;
+        /* Logs on failure with error details;
         ErrorMes("SFTP listing failed: " + oErr:Description);
         :RETURN .F.;
     :ENDTRY;
@@ -194,7 +194,7 @@ Use the SFTP path, keep `sFilePattern` empty, and handle connection or login err
 
     :FOR nIndex := 1 :TO ALen(aEntries);
         aEntry := aEntries[nIndex];
-        /* Displays each entry name and size;
+        /* Logs each entry name and size;
         UsrMes(aEntry[1] + " size=" + LimsString(aEntry[2]));
     :NEXT;
 
@@ -249,9 +249,9 @@ Inspect the entry layout and branch on the attributes column so later logic can 
         :ENDIF;
     :NEXT;
 
-    /* Displays the file count;
+    /* Logs the file count;
     UsrMes("Files found: " + LimsString(ALen(aFiles)));
-    /* Displays the directory count;
+    /* Logs the directory count;
     UsrMes("Directories found: " + LimsString(ALen(aDirectories)));
 
     :RETURN {aFiles, aDirectories};

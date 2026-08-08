@@ -134,7 +134,7 @@ Checks each source file for existence first, then merges only the files that are
         nCount := ALen(aValidFiles);
         UsrMes("Merged " + LimsString(nCount)
                 + " files into " + sOutputFile);
-        /* Displays merged file count and output path;
+        /* Logs merged file count and output path;
     :ELSE;
         UsrMes("No source files were available to combine");
     :ENDIF;
@@ -171,7 +171,7 @@ Merges the source files in a [`:TRY`](../keywords/TRY.md) block, writes a separa
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("CombineFiles failed: " + oErr:Description);
-        /* Displays combine failure details;
+        /* Logs combine failure details;
     :ENDTRY;
 
     :RETURN bSuccess;

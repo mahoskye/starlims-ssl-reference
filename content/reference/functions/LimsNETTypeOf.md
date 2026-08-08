@@ -77,7 +77,7 @@ oType := LimsNETTypeOf(sTypeName);
 UsrMes("Resolved type: " + LimsString(oType:FullName));
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Resolved type: System.String
@@ -98,7 +98,7 @@ UsrMes("Resolved type name: " + sTypeLabel);
 UsrMes("Full name: " + LimsString(oType:FullName));
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Resolved type name: StringBuilder

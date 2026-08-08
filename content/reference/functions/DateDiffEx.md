@@ -92,7 +92,7 @@ Computes the interval between a submission time and an approval time, then reads
 DoProc("ShowApprovalInterval");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Approval time: 6 hours and 15 minutes
@@ -151,7 +151,7 @@ Computes the elapsed interval between a receipt time and a completion time three
 DoProc("SummarizeTurnaround");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Turnaround time: 3 days, 3 hours, 35 minutes

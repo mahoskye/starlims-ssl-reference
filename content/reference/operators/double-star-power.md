@@ -77,7 +77,7 @@ Raises `nBase` to the power of 2. With `nBase = 7`, the result is 49.
 DoProc("CalculateSquare");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 The square of 7 is 49
@@ -114,7 +114,7 @@ Shows how the default right-associative grouping of `2 ** 3 ** 2` gives 512 (= 2
 DoProc("ChainExponentDemo");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Default grouping: 512
@@ -146,7 +146,7 @@ Uses a negative exponent (`-1`) for the reciprocal and a fractional exponent (`0
 DoProc("PowerAdvancedDemo");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 4 ** -1 = 0.25

@@ -77,7 +77,7 @@ Read the server's current UTC offset and display it. The value reflects any acti
 DoProc("ShowServerOffset");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Server UTC offset: <±N> minute(s)
@@ -97,7 +97,7 @@ Read both offsets in one procedure and report whether the server and the current
     sMessage := "Server offset: " + LimsString(nServerOffset)
         + ", user offset: " + LimsString(nUserOffset);
     UsrMes(sMessage);
-    /* Displays current offsets;
+    /* Logs current offsets;
 
     :IF nServerOffset != nUserOffset;
         UsrMes("Server-local and user-local times may differ");

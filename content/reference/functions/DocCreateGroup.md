@@ -65,7 +65,7 @@ DocCreateGroup(sGroupName, [sDescription])
 
 ### Create one group with only the required argument
 
-Creates a Documentum group using just the required name and displays either the returned group identifier or a message when the result is empty.
+Creates a Documentum group using just the required name and logs either the returned group identifier or a message when the result is empty.
 
 ```ssl
 :PROCEDURE CreateProjectGroup;
@@ -78,7 +78,7 @@ Creates a Documentum group using just the required name and displays either the 
         :RETURN "";
     :ENDIF;
 
-    /* Displays created group ID;
+    /* Logs created group ID;
     UsrMes("Created Documentum group: " + sGroupID);
     :RETURN sGroupID;
 :ENDPROC;
@@ -131,14 +131,14 @@ Creates a group with a description, then reads the Documentum error message imme
     sGroupID := DocCreateGroup(sGroupName, sGroupDesc);
 
     :IF .NOT. Empty(sGroupID);
-        /* Displays created group ID;
+        /* Logs created group ID;
         UsrMes("Group created successfully: " + sGroupID);
         :RETURN sGroupID;
     :ENDIF;
 
     :IF DocCommandFailed();
         sErrMsg := DocGetErrorMessage();
-        /* Displays on failure: group create failed;
+        /* Logs on failure: group create failed;
         ErrorMes("Group create failed: " + sErrMsg);
     :ENDIF;
 

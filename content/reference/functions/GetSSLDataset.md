@@ -101,7 +101,7 @@ Runs a simple SELECT against the default connection, converts the result to an a
 
 	:FOR nIndex := 1 :TO ALen(aRows);
 		UsrMes(aRows[nIndex, 1] + " / " + aRows[nIndex, 2] + " / " + aRows[nIndex, 3]);
-		/* Displays one row per active sample;
+		/* Logs one row per active sample;
 	:NEXT;
 
 	:RETURN ALen(aRows);
@@ -143,7 +143,7 @@ Passes a bound `:status` parameter and assigns the stable table name `orders_by_
 DoProc("LoadOrdersByStatus", {"PENDING"});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Loaded 12 order rows
@@ -179,7 +179,7 @@ Sets `bNullAsBlank` to [`.F.`](../literals/false.md) so database nulls stay dist
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes("GetSSLDataset failed: " + oErr:Description);
-		/* Displays on failure: GetSSLDataset failed;
+		/* Logs on failure: GetSSLDataset failed;
 		:RETURN "";
 	:ENDTRY;
 :ENDPROC;

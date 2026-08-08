@@ -85,7 +85,7 @@ Computes the arithmetic difference of 100 and 30.
 DoProc("SubtractNumbers");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 100 minus 30 equals 70
@@ -113,7 +113,7 @@ Shows that `-` trims trailing spaces from the left operand before appending the 
 DoProc("TrimAndJoinStrings");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Joined: [SampleAnalysis]
@@ -144,7 +144,7 @@ Moves `dDueDate` back by 3 days to get a reminder date, then calculates the numb
 DoProc("CalculateDateDifference");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Reminder date: 03/12/2024, days until due: 5

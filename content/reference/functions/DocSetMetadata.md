@@ -86,7 +86,7 @@ Sets a single `status` attribute on a known document and reports success or fail
         :IF bSuccess;
             UsrMes("Document metadata updated for " + sObjId);
         :ELSE;
-            /* Displays on failure: metadata update failed;
+            /* Logs on failure: metadata update failed;
             UsrMes("Metadata update failed: " + DocGetErrorMessage());
         :ENDIF;
 
@@ -122,7 +122,7 @@ Updates three fields at once and uses [`DocCommandFailed`](DocCommandFailed.md) 
 
         :IF .NOT. bSuccess;
             :IF DocCommandFailed();
-                /* Displays on failure: metadata update failed;
+                /* Logs on failure: metadata update failed;
                 UsrMes("Metadata update failed: " + DocGetErrorMessage());
             :ENDIF;
 
@@ -166,7 +166,7 @@ Builds the attribute array based on an approval flag, adding approval date and f
         bSuccess := DocSetMetadata(sObjId, aAttributes);
 
         :IF .NOT. bSuccess .AND. DocCommandFailed();
-            /* Displays on failure: review metadata sync failed;
+            /* Logs on failure: review metadata sync failed;
             UsrMes("Review metadata sync failed: " + DocGetErrorMessage());
         :ENDIF;
 

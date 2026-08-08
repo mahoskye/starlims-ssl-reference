@@ -89,7 +89,7 @@ infers `<string>` as the element tag.
 DoProc("ExportStatus");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 <?xml version='1.0' ?>
@@ -116,7 +116,7 @@ Pass `"double"` as `sTypeName` to tag the array elements explicitly so the XML c
 DoProc("ExportResults");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 <?xml version='1.0' ?>

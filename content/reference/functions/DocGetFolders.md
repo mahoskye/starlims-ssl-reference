@@ -92,14 +92,14 @@ Queries a folder for immediate children and prints each folder name, exiting ear
 
     :IF nCount == 0;
         UsrMes("No child folders found in " + sParentPath);
-        /* Displays when empty: No child folders found;
+        /* Logs when empty: No child folders found;
 
         :RETURN aFolders;
     :ENDIF;
 
     :FOR nIndex := 1 :TO nCount;
         UsrMes(aFolders[nIndex, 2]);
-        /* Displays per folder: folder name;
+        /* Logs per folder: folder name;
     :NEXT;
 
     :RETURN aFolders;
@@ -144,13 +144,13 @@ Checks that three required child folders exist under a path, distinguishing a fa
             "Missing required folders under " + sParentPath + ": "
             + BuildString(aMissingFolders)
         );
-        /* Displays when folders are missing: Missing required folders;
+        /* Logs when folders are missing: Missing required folders;
 
         :RETURN .F.;
     :ENDIF;
 
     UsrMes("All required child folders are present under " + sParentPath);
-    /* Displays when all present: All required child folders are present;
+    /* Logs when all present: All required child folders are present;
 
     :RETURN .T.;
 :ENDPROC;
@@ -159,7 +159,7 @@ Checks that three required child folders exist under a path, distinguishing a fa
 DoProc("ValidateRequiredFolders");
 ```
 
-In the failure path, `ErrorMes` displays:
+In the failure path, `ErrorMes` logs:
 
 ```text
 Unable to retrieve child folders: <repository error>

@@ -69,7 +69,7 @@ DocDeleteCabinet(sCabinetId, [bDeepDelete])
 
 ### Delete one cabinet using the default recursive behavior
 
-Deletes a cabinet by ID using the default deep-delete mode and displays either a success message or the Documentum error when the call returns [`.F.`](../literals/false.md).
+Deletes a cabinet by ID using the default deep-delete mode and logs either a success message or the Documentum error when the call returns [`.F.`](../literals/false.md).
 
 ```ssl
 :PROCEDURE DeleteObsoleteCabinet;
@@ -82,7 +82,7 @@ Deletes a cabinet by ID using the default deep-delete mode and displays either a
 	:IF .NOT. bDeleted;
 		:IF DocCommandFailed();
 			ErrorMes("Cabinet delete failed: " + DocGetErrorMessage());
-			/* Displays on failure: cabinet delete failed;
+			/* Logs on failure: cabinet delete failed;
 		:ENDIF;
 
 		:RETURN .F.;
@@ -99,7 +99,7 @@ DoProc("DeleteObsoleteCabinet", {"ARCHIVE_2020"});
 
 ### Pass [`.F.`](../literals/false.md) for `bDeepDelete` to use the non-default delete mode
 
-Passes [`.F.`](../literals/false.md) for `bDeepDelete` to use non-recursive delete mode, then displays either a success message or the Documentum error when the call fails.
+Passes [`.F.`](../literals/false.md) for `bDeepDelete` to use non-recursive delete mode, then logs either a success message or the Documentum error when the call fails.
 
 ```ssl
 :PROCEDURE DeleteEmptyCabinetOnly;
@@ -116,7 +116,7 @@ Passes [`.F.`](../literals/false.md) for `bDeepDelete` to use non-recursive dele
 	:IF DocCommandFailed();
 		sErrMsg := DocGetErrorMessage();
 		ErrorMes("Cabinet delete failed: " + sErrMsg);
-		/* Displays on failure: cabinet delete failed;
+		/* Logs on failure: cabinet delete failed;
 	:ENDIF;
 
 	:RETURN .F.;

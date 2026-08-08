@@ -64,7 +64,7 @@ GetFromSession(sKey)
 
 ### Retrieve a simple session value
 
-Fetches a value previously stored in the session under a known key and displays it; uses [`LimsString`](LimsString.md) to safely convert the session value to a string for concatenation.
+Fetches a value previously stored in the session under a known key and logs it; uses [`LimsString`](LimsString.md) to safely convert the session value to a string for concatenation.
 
 ```ssl
 :PROCEDURE GetStoredUsername;
@@ -82,7 +82,7 @@ Fetches a value previously stored in the session under a known key and displays 
 DoProc("GetStoredUsername");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Retrieved username: jsmith
@@ -148,7 +148,7 @@ Reads multiple keys in one procedure, substitutes defaults for any that are miss
 DoProc("RestoreUserPreferences");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 User=jsmith, mode=read-only, page size=25

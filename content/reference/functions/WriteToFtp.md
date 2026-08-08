@@ -210,7 +210,7 @@ Loop through several SFTP targets, collect transfer failures, and also handle th
 
     :IF nFailures > 0;
         UsrMes(sFailureLog);
-        /* Displays failure details;
+        /* Logs failure details;
     :ENDIF;
 
     :RETURN nFailures == 0;

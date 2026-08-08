@@ -92,7 +92,7 @@ Pass quoted string literals as both branch arguments. Because the branch express
 DoProc("GetApprovalLabel");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Approved

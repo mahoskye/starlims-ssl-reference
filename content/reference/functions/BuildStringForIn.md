@@ -84,7 +84,7 @@ Converts a small array of sample IDs into one quoted list ready to append to a S
 DoProc("ShowSampleFilter");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 ('SAM-2024-001','SAM-2024-002','SAM-2024-003')

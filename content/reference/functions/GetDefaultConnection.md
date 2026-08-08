@@ -79,7 +79,7 @@ Captures the current default connection name, temporarily switches to a differen
 DoProc("UseTemporaryConnection");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Using connection: Reporting

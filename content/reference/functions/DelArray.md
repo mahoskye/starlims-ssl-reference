@@ -63,7 +63,7 @@ DelArray(aTarget, nIndex)
 
 ### Remove an item by index
 
-Displays the array contents before and after removing the element at a given index, showing how later elements shift left.
+Logs the array contents before and after removing the element at a given index, showing how later elements shift left.
 
 ```ssl
 :PROCEDURE RemoveArrayElement;
@@ -83,7 +83,7 @@ Displays the array contents before and after removing the element at a given ind
 :ENDPROC;
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Array before deletion: Red,Green,Blue,Yellow
@@ -118,7 +118,7 @@ Iterates in reverse order to safely remove all entries except a target value, co
 :ENDPROC;
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Processed: SAMPLE-005,SAMPLE-004,SAMPLE-002,SAMPLE-001
@@ -154,7 +154,7 @@ Removes multiple elements by supplying positions in descending order so that eac
 :ENDPROC;
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Removed 3 entries. Remaining: Alpha,Gamma

@@ -70,7 +70,7 @@ Compress(sSource, [bToFile])
 
 ### Compress text in memory
 
-Compresses a multi-line report string and displays both the original and compressed lengths to show the size reduction.
+Compresses a multi-line report string and logs both the original and compressed lengths to show the size reduction.
 
 ```ssl
 :PROCEDURE CompressReportText;
@@ -97,7 +97,7 @@ Compresses a multi-line report string and displays both the original and compres
 DoProc("CompressReportText");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Original length: 72
@@ -134,7 +134,7 @@ Passes `bToFile := .T.` to write compressed bytes to a generated temp file, then
 DoProc("CreateCompressedPayloadFile");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Compressed file created: [Temp path].zip
@@ -194,7 +194,7 @@ Selects in-memory or file output per payload based on length, then verifies each
 DoProc("PrepareCompressedExports");
 ```
 
-[`UsrMes`](UsrMes.md) displays one line per payload:
+[`UsrMes`](UsrMes.md) logs one line per payload:
 
 ```text
 Payload 1 stored as MEMORY

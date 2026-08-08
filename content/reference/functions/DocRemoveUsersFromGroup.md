@@ -139,10 +139,10 @@ Applies the same user list removal to each group in a list, records each per-gro
 
         :IF bRemoved;
             UsrMes("Updated group " + sGroupName);
-            /* Displays updated group name on success;
+            /* Logs updated group name on success;
         :ELSE;
             ErrorMes("Failed to update group " + sGroupName);
-            /* Displays failed group name on failure;
+            /* Logs failed group name on failure;
         :ENDIF;
     :NEXT;
 
