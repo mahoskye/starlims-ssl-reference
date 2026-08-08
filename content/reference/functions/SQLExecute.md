@@ -176,7 +176,8 @@ Request a dataset object instead of an array, then traverse its rows using the .
 	:DECLARE sSampleId, sStatus;
 
 	:IF Empty(sBatch);
-		RaiseError("Batch ID is required");
+		UsrMes("ExportBatchAsJson: batch ID is required");
+		:RETURN;
 	:ENDIF;
 
 	sSQL := "

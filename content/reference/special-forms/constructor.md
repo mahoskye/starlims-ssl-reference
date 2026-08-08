@@ -177,6 +177,14 @@ UsrMes(oSample:GetSummary());
 
 oSample := CreateUdObject("Sample", {"S-002"});
 UsrMes(oSample:GetSummary());
+
+/* The constructor raises on bad input, so guard creation with :TRY / :CATCH;
+:TRY;
+    oSample := CreateUdObject("Sample", {""});
+:CATCH;
+    UsrMes("Rejected: " + GetLastSSLError():Description);
+    ClearLastSSLError();
+:ENDTRY;
 ```
 
 `UsrMes` logs:
@@ -184,6 +192,7 @@ UsrMes(oSample:GetSummary());
 ```text
 S-001 (ACTIVE)
 S-002 (PENDING)
+Rejected: Sample ID is required
 ```
 
 ### Derived constructor with automatic base initialization

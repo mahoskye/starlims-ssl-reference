@@ -26,7 +26,7 @@ SSL provides two error handling models: the modern **structured** model ([`:TRY`
 - Only **one** [`:CATCH`](../reference/keywords/CATCH.md) block is allowed (no multi-catch)
 - [`:FINALLY`](../reference/keywords/FINALLY.md) always executes, even after [`:RETURN`](../reference/keywords/RETURN.md) inside [`:TRY`](../reference/keywords/TRY.md) or [`:CATCH`](../reference/keywords/CATCH.md)
 - Use [`GetLastSSLError`](../reference/functions/GetLastSSLError.md) inside [`:CATCH`](../reference/keywords/CATCH.md) to retrieve the error object, then access `:Description` or `:FullDescription` for the message text
-- Use [`RaiseError`](../reference/functions/RaiseError.md) to throw a custom error
+- Use [`RaiseError`](../reference/functions/RaiseError.md) to throw a custom error — place it directly inside the [`:TRY`](../reference/keywords/TRY.md) block whose [`:CATCH`](../reference/keywords/CATCH.md) handles it, never inside a [`:CATCH`](../reference/keywords/CATCH.md), and never where nothing catches it (an uncaught error surfaces to the end user as a server error)
 - [`:RETURN`](../reference/keywords/RETURN.md), [`:EXITFOR`](../reference/keywords/EXITFOR.md), [`:EXITWHILE`](../reference/keywords/EXITWHILE.md), and [`:LOOP`](../reference/keywords/LOOP.md) inside a [`:FINALLY`](../reference/keywords/FINALLY.md) block are **compile-time errors** — keep cleanup code linear and let it fall through
 
 ### Common patterns
