@@ -58,9 +58,11 @@ ExecFunction(sName, [aParameters])
     - Allow untrusted input to determine the function name or arguments without validation.
     - Omit the second argument or provide a non-array value when the target expects arguments.
     - Assume all calls will succeed or ignore errors from dynamic invocation.
+    - Use `ExecFunction` to run a class file or call a class method — create the object with [`CreateUdObject`](CreateUdObject.md) and call the method on the instance.
 
 ## Caveats
 
+- A class file is not a runnable target: it has no script entry point, so a two-segment path naming a class file fails at runtime, and a three-segment path does not invoke its methods. Create the object with [`CreateUdObject`](CreateUdObject.md) and call the method on the instance instead.
 - If the function name is misspelled, empty, or references a non-existent target, a runtime error is thrown with little context.
 - All type validation is deferred to the time of invocation, so incorrect argument types or counts are only caught at runtime.
 
