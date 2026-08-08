@@ -113,7 +113,7 @@ Executes a parameterless query on the default connection using all default outpu
 DoProc("ExportActiveSamples");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Returned XML length: 1243
@@ -183,7 +183,7 @@ Suppresses the XML header, assigns a custom table name, enables null-as-blank, a
 DoProc("ExportAuditFragment", {CToD("03/01/2024")});
 ```
 
-`ErrorMes` displays on failure:
+`ErrorMes` logs on failure:
 
 ```text
 GetDataSetXMLFromSelect failed: <database error description>

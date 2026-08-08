@@ -70,7 +70,7 @@ DocCompleteWorkitem(sWorkitemId, [sSignOffUser], [sSignOffPass], [sSignOffReason
 
 ### Complete a single work item after logging in
 
-Logs in to Documentum, completes one work item by ID, and displays whether the operation succeeded.
+Logs in to Documentum, completes one work item by ID, and logs whether the operation succeeded.
 
 ```ssl
 :PROCEDURE CompleteBasicWorkitem;

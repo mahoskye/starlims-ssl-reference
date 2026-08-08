@@ -80,7 +80,7 @@ Create a variable with [`CreateLocal`](CreateLocal.md), then retrieve it by name
 DoProc("GetUserVariable");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Value of sUserName is: Alice
@@ -120,7 +120,7 @@ Set up several named session variables, then retrieve them by name in a loop and
 DoProc("CollectSessionValues");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Session Audit Report
@@ -161,7 +161,7 @@ Create several session variables of different types, then retrieve each by name 
 DoProc("InspectSessionState");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 sCurrentUser = jsmith (STRING)

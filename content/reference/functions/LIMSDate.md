@@ -88,7 +88,7 @@ Call `LIMSDate` with a date string and an explicit format to see both the input 
 DoProc("FormatUserDate");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Entered: 03/15/2024 | Displayed: 2024-03-15
@@ -127,7 +127,7 @@ Process a batch of legacy date strings where some entries are blank or unparseab
 DoProc("FormatLegacyDates");
 ```
 
-`UsrMes` displays one line per record, for example:
+`UsrMes` logs one line per record, for example:
 
 ```text
 Sample: SAM001 | Imported: 1998/03/15
@@ -173,7 +173,7 @@ Show that a format containing `MMM` is normalized to `dd-MMM-yyyy` regardless of
 DoProc("FormatReportDates");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Report Generated: 11-Apr-2026

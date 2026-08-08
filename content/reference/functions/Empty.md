@@ -86,7 +86,7 @@ Use `Empty()` to reject a note that is empty or contains only whitespace.
 DoProc("ValidateSampleNote");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Sample LAB-2024-0042 requires a note before saving
@@ -126,7 +126,7 @@ Filter out values that SSL treats as empty, including [`NIL`](../literals/nil.md
 DoProc("FilterMeaningfulValues");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Kept 4 of 9 input values

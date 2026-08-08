@@ -87,7 +87,7 @@ Encode user-supplied text before placing it inside a markup string, so that spec
 DoProc("BuildCommentMarkup");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 <p>Meeting at 3pm &lt;review&gt; &amp; &apos;coffee&apos;</p>
@@ -115,7 +115,7 @@ Encode each attribute value inline while composing an XML element string, so tha
 DoProc("BuildSampleXml");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 <sample id='A&amp;B&lt;42&gt;' status='Ready &quot;now&quot;'></sample>
@@ -147,7 +147,7 @@ Encode an array containing a mix of strings and a [`NIL`](../literals/nil.md) en
 DoProc("EncodeNotes");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 true

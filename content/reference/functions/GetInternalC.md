@@ -98,7 +98,7 @@ Read a nested value from a two-dimensional array.
 DoProc("ReadMatrixValue");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Selected value: B1
@@ -135,7 +135,7 @@ Use the same nested structure to return either an entire sub-array or one final 
 DoProc("ReadBatchMetrics");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Batch-001 metrics: released=12, pending=3
@@ -172,7 +172,7 @@ Handle a runtime error from a deeper lookup when the requested path does not exi
 DoProc("ReadOptionalMetric");
 ```
 
-[`UsrMes`](UsrMes.md) displays a runtime-specific failure message, such as:
+[`UsrMes`](UsrMes.md) logs a runtime-specific failure message, such as:
 
 ```text
 Lookup failed: Subscript out of range

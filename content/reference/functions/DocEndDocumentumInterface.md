@@ -57,7 +57,7 @@ This function takes no parameters.
 
 ### End a session after one Documentum operation
 
-Logs in, checks whether a document exists, displays the result, and then calls `DocEndDocumentumInterface` to close the session, including in the login-failure path.
+Logs in, checks whether a document exists, logs the result, and then calls `DocEndDocumentumInterface` to close the session, including in the login-failure path.
 
 ```ssl
 :PROCEDURE CheckDocumentAndClose;
@@ -72,7 +72,7 @@ Logs in, checks whether a document exists, displays the result, and then calls `
 
     :IF .NOT. DocLoginToDocumentum(sDocBase, sUser, sPassword);
         ErrorMes("Documentum login failed: " + DocGetErrorMessage());
-        /* Displays on login failure;
+        /* Logs on login failure;
         DocEndDocumentumInterface();
 
         :RETURN;
@@ -110,7 +110,7 @@ Places `DocEndDocumentumInterface` in a [`:FINALLY`](../keywords/FINALLY.md) blo
 
     :IF .NOT. DocLoginToDocumentum(sDocBase, sUser, sPassword);
         ErrorMes("Documentum login failed: " + DocGetErrorMessage());
-        /* Displays on login failure;
+        /* Logs on login failure;
         DocEndDocumentumInterface();
 
         :RETURN;
@@ -124,7 +124,7 @@ Places `DocEndDocumentumInterface` in a [`:FINALLY`](../keywords/FINALLY.md) blo
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("Documentum export failed: " + oErr:Description);
-        /* Displays on export failure;
+        /* Logs on export failure;
 
     :FINALLY;
         DocEndDocumentumInterface();

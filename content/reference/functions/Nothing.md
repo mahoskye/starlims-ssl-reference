@@ -78,7 +78,7 @@ Treat a form value of `"0"` as missing instead of as a real answer.
         UsrMes("Response is required");
     :ELSE;
         UsrMes("Response recorded: " + sUserResponse);
-        /* Displays recorded response with submitted value;
+        /* Logs recorded response with submitted value;
     :ENDIF;
 
     :RETURN bIsMissing;

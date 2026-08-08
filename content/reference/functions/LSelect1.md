@@ -99,7 +99,7 @@ Query all samples ordered by ID. When the result is empty, report it and return 
         sSampleName := aSamples[nIndex, 2];
         sStatus := aSamples[nIndex, 3];
         UsrMes("Sample: " + sSampleID + " | Name: " + sSampleName + " | Status: " + sStatus);
-        /* Displays one line per row;
+        /* Logs one line per row;
     :NEXT;
 
     :RETURN aSamples;
@@ -149,7 +149,7 @@ Accumulate `?` placeholders and matching values into `aParams` as filters are ap
 
     nRowCount := ALen(aResults);
     UsrMes("Found " + LimsString(nRowCount) + " sample(s)");
-    /* Displays the matched row count;
+    /* Logs the matched row count;
 
     :FOR nIndex := 1 :TO nRowCount;
         sOutput := "Sample: " + LimsString(aResults[nIndex, 1])
@@ -157,7 +157,7 @@ Accumulate `?` placeholders and matching values into `aParams` as filters are ap
             + " | Status: " + LimsString(aResults[nIndex, 3])
             + " | Dept: " + LimsString(aResults[nIndex, 4]);
         UsrMes(sOutput);
-        /* Displays one matching row per line;
+        /* Logs one matching row per line;
     :NEXT;
 
     :RETURN aResults;
@@ -206,7 +206,7 @@ Pass column indexes in `aInvariantDateCols` to prevent timezone adjustment on th
             + " | Result: " + DToC(dResultDate)
             + " | Status: " + sStatus;
         UsrMes(sOutput);
-        /* Displays one dated row per line;
+        /* Logs one dated row per line;
     :NEXT;
 
     :RETURN aResults;

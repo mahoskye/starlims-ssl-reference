@@ -383,7 +383,7 @@ Create a table if needed, build a single entity, and insert it.
 DoProc("CreateCustomerRecord");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Inserted customer CUST001 into Customers
@@ -454,24 +454,24 @@ Manage a blob container, upload files, then use both blob retrieval patterns.
 		:TRY;
 			oAzure:PutBlob(sContainerName, sLocalPath, sBlobName);
 			UsrMes("Uploaded " + sBlobName);
-			/* Displays the uploaded blob name;
+			/* Logs the uploaded blob name;
 		:CATCH;
 			oErr := GetLastSSLError();
 			ErrorMes(
 				"UPLOAD ERROR",
 				"Upload failed for " + sBlobName + ": " + oErr:Description
 			);
-			/* Displays upload failure details;
+			/* Logs upload failure details;
 		:ENDTRY;
 	:NEXT;
 
 	sDownloadedPath := oAzure:GetBlob(sContainerName, "report.txt");
 	UsrMes("Downloaded report to " + sDownloadedPath);
-	/* Displays the downloaded file path;
+	/* Logs the downloaded file path;
 
 	sBlobText := oAzure:ReadBlobAsText(sContainerName, "invoice.txt");
 	UsrMes("Invoice text length: " + LimsString(Len(sBlobText)));
-	/* Displays the invoice text length;
+	/* Logs the invoice text length;
 
 	oAzure:DeleteContainer(sContainerName);
 :ENDPROC;

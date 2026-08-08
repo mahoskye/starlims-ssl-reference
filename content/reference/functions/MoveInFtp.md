@@ -214,7 +214,7 @@ Move a file over SFTP with key-based authentication, retry on failure, and then 
             oErr := GetLastSSLError();
             sMessage := "SFTP move attempt " + LimsString(nAttempt)
                 + " failed: " + oErr:Description;
-            UsrMes(sMessage);  /* Displays on failure: retry message;
+            UsrMes(sMessage);  /* Logs on failure: retry message;
             nAttempt += 1;
         :ENDTRY;
     :ENDWHILE;

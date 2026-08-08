@@ -78,7 +78,7 @@ DoProc("ShowCurrentSeconds")
 ;
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Current time of day: <0–86399> seconds since midnight
@@ -113,7 +113,7 @@ DoProc("MeasureElapsedSeconds")
 ;
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Elapsed time: <n> second(s)

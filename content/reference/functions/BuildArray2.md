@@ -105,7 +105,7 @@ Uses the default `";"` row delimiter and `","` column delimiter to parse a semic
 DoProc("ParseSimpleTable");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Rows parsed: 3
@@ -141,7 +141,7 @@ Passes `"##"` as the row separator and `"|"` as the column separator to parse an
 DoProc("ParseImportedRecords");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Imported records:
@@ -178,7 +178,7 @@ Sets `bCrlfOk := .T.` so that the CR/LF inside the first row's notes column is n
 DoProc("ParseRowsWithNotes");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Sample: S-1001

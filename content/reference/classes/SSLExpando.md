@@ -148,7 +148,7 @@ Creates an `SSLExpando`, assigns `XmlType` and three dynamic properties, then re
 	UsrMes("Dynamic property count: " + LimsString(ALen(aProps)));
 
 	sXml := oPayload:ToString();
-	UsrMes(sXml);  /* Displays XML with root element SampleRecord;
+	UsrMes(sXml);  /* Logs XML with root element SampleRecord;
 :ENDPROC;
 
 /* Usage;

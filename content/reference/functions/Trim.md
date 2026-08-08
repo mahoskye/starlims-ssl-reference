@@ -86,7 +86,7 @@ Remove trailing spaces from a username before storage. The conditional check con
 DoProc("CleanUsername");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Username trimmed for storage: 9 chars
@@ -125,7 +125,7 @@ Trim trailing whitespace from each element of an imported log array and collect 
 DoProc("NormalizeLogLines");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Normalized 4 log lines

@@ -148,7 +148,7 @@ Searches for revised documents under a configurable path with a result cap, pars
         UsrMes(
             "Document: " + LimsString(aRows[nIndex, 2])
             + ", Version: " + LimsString(aRows[nIndex, 7])
-        );  /* Displays each row with document name and version;
+        );  /* Logs each row with document name and version;
     :NEXT;
 
     :RETURN ALen(aRows);

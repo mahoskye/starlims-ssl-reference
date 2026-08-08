@@ -63,7 +63,7 @@ DocPauseWorkflow(sWorkflowId)
 
 ### Pause an ongoing workflow for review
 
-Calls `DocPauseWorkflow` and builds a result message from the boolean return, then displays it. On success the message confirms the pause; on failure it reports which workflow could not be paused.
+Calls `DocPauseWorkflow` and builds a result message from the boolean return, then logs it. On success the message confirms the pause; on failure it reports which workflow could not be paused.
 
 ```ssl
 :PROCEDURE PauseWorkflowForReview;
@@ -85,13 +85,13 @@ Calls `DocPauseWorkflow` and builds a result message from the boolean return, th
 DoProc("PauseWorkflowForReview");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Workflow WF-2024-0042 paused for review
 ```
 
-On failure, `UsrMes` displays:
+On failure, `UsrMes` logs:
 
 ```text
 Failed to pause workflow WF-2024-0042
@@ -125,7 +125,7 @@ Guards the pause call behind a `bReviewRequired` flag so the workflow is only ha
 DoProc("PauseWorkflowIfReviewRequired", {"WF-2024-0042", .T.});
 ```
 
-[`UsrMes`](UsrMes.md) displays either `Workflow WF-2024-0042 paused for review` or `Workflow WF-2024-0042 could not be paused`.
+[`UsrMes`](UsrMes.md) logs either `Workflow WF-2024-0042 paused for review` or `Workflow WF-2024-0042 could not be paused`.
 
 ### Pause multiple workflows and collect the results
 
@@ -165,10 +165,10 @@ Iterates a list of workflow IDs, records each result into a summary object, and 
 			"Paused " + LimsString(nPaused) + " workflows. Failed: " +
 			LimsString(nFailed)
 		);
-		/* Displays when some workflows fail: pause summary;
+		/* Logs when some workflows fail: pause summary;
 	:ELSE;
 		UsrMes("Paused " + LimsString(nPaused) + " workflows");
-		/* Displays when all workflows pause: pause summary;
+		/* Logs when all workflows pause: pause summary;
 	:ENDIF;
 
 	:RETURN oSummary;

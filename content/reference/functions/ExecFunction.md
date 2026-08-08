@@ -88,7 +88,7 @@ Calls a function whose name is determined at runtime, passing a date-range argum
 DoProc("RunConfiguredReport");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Result: <return value of Reports.OrderSummary>

@@ -96,7 +96,7 @@ Compares `bFlag:ToString()` against [`LimsString`](../functions/LimsString.md) t
 DoProc("CompareBooleanFormats");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Via .NET ToString(): True
@@ -150,7 +150,7 @@ Tracks two readiness flags and combines them with `.AND.`. Both must be [`.T.`](
 DoProc("CheckSampleStatus");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Ready for review
@@ -222,7 +222,7 @@ Packs three boolean flags into a JSON object using [`ToJson()`](../functions/ToJ
 DoProc("RoundTripBooleanFlags");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 State restored correctly

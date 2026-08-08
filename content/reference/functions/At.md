@@ -82,7 +82,7 @@ nCommaPos := At(",", sCsv);
 UsrMes("First comma position: " + LimsString(nCommaPos));
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 First comma position: 7
@@ -110,7 +110,7 @@ Converts the source string to uppercase first, then searches for the uppercase t
 DoProc("CheckUrgentTag");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 URGENT found at position 18
@@ -131,11 +131,11 @@ Uses `At` for the first separator and [`LimsAt`](LimsAt.md) for the second and t
     nThirdSlash := LimsAt("/", sPath, nSecondSlash + 1);
 
     UsrMes("First slash: " + LimsString(nFirstSlash));
-    /* Displays: First slash: 7;
+    /* Logs: First slash: 7;
     UsrMes("Second slash: " + LimsString(nSecondSlash));
-    /* Displays: Second slash: 12;
+    /* Logs: Second slash: 12;
     UsrMes("Third slash: " + LimsString(nThirdSlash));
-    /* Displays: Third slash: 21;
+    /* Logs: Third slash: 21;
 :ENDPROC;
 
 DoProc("LocatePathSeparators");

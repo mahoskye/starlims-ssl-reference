@@ -77,7 +77,7 @@ Pass a known-valid uppercase hex string to get the decimal representation. `"1A7
 DoProc("ConvertHexValue");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Decimal value: 6783
@@ -95,14 +95,14 @@ Trim whitespace and convert to uppercase before validating with [`IsHex`](IsHex.
     sHexValue := Upper(AllTrim(sInput));
 
     :IF Empty(sHexValue) .OR. !IsHex(sHexValue);
-        /* Displays invalid-input message with the original value;
+        /* Logs invalid-input message with the original value;
         UsrMes("Input is not a valid hexadecimal value: " + sInput);
         :RETURN "";
     :ENDIF;
 
     sDecimalValue := LHex2Dec(sHexValue);
 
-    /* Displays the normalized hex value and converted decimal value;
+    /* Logs the normalized hex value and converted decimal value;
     UsrMes("Converted " + sHexValue + " to " + sDecimalValue);
 
     :RETURN sDecimalValue;
@@ -135,11 +135,11 @@ Process a list of incoming hex values, trimming and normalizing each one before 
         AAdd(aDecimalValues, LHex2Dec(sHexValue));
     :NEXT;
 
-    /* Displays the number of successfully converted values;
+    /* Logs the number of successfully converted values;
     UsrMes("Converted values: " + LimsString(ALen(aDecimalValues)));
 
     :IF ALen(aInvalidValues) > 0;
-        /* Displays the number of skipped invalid values;
+        /* Logs the number of skipped invalid values;
         UsrMes("Skipped invalid values: " + LimsString(ALen(aInvalidValues)));
     :ENDIF;
 

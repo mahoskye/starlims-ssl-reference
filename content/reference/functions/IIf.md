@@ -86,7 +86,7 @@ Select a status label for display based on a boolean flag, showing the most dire
 DoProc("GetApprovalStatus");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Approved

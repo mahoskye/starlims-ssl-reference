@@ -85,7 +85,7 @@ Replaces `nValue` with the remainder of dividing it by 7. `23 % 7 = 2`.
 DoProc("ReduceToRemainder");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Remainder of 23 divided by 7 is 2
@@ -126,7 +126,7 @@ Uses a zero-based slot offset incremented with `%=` to wrap around a 5-slot buff
 DoProc("ProcessCircularSlots");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays (one line per slot):
+[`UsrMes`](../functions/UsrMes.md) logs (one line per slot):
 
 ```text
 Slot 1: Write 6
@@ -163,7 +163,7 @@ Shows that `%=` with a negative left operand produces a negative remainder. Afte
 DoProc("NormalizeNegativeOffset");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Normalized offset: 3

@@ -63,7 +63,7 @@ ValidateNumeric(sNumber)
 
 ### Validate a text field before conversion
 
-Check a user-entered value before converting it with [`Val`](Val.md). The failure branch displays a prompt; the success branch displays the converted numeric value.
+Check a user-entered value before converting it with [`Val`](Val.md). The failure branch logs a prompt; the success branch logs the converted numeric value.
 
 ```ssl
 :PROCEDURE ValidateNumericInput;
@@ -87,7 +87,7 @@ Check a user-entered value before converting it with [`Val`](Val.md). The failur
 DoProc("ValidateNumericInput");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Accepted value: 42.5
@@ -107,9 +107,9 @@ Compose a number string from the active decimal and group separators and validat
 	bIsValid := ValidateNumeric(sCandidate);
 
 	UsrMes("Candidate: " + sCandidate);
-	/* Displays the constructed candidate string;
+	/* Logs the constructed candidate string;
 	UsrMes("Valid under current settings: " + LimsString(bIsValid));
-	/* Displays whether the candidate is valid;
+	/* Logs whether the candidate is valid;
 
 	:RETURN bIsValid;
 :ENDPROC;
@@ -151,7 +151,7 @@ Validate a batch of imported string values and accumulate the ones that fail int
 DoProc("ReviewImportedValues");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Valid values: 3

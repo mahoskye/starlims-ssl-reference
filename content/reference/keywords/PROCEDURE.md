@@ -128,7 +128,7 @@ Defines a small reusable helper and calls it with [`DoProc`](../functions/DoProc
 DoProc("ShowTotal");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Total: 12
@@ -173,7 +173,7 @@ Demonstrates optional trailing parameters with [`:DEFAULT`](DEFAULT.md). With `s
 DoProc("ShowStatusExamples");
 ```
 
-[`InfoMes`](../functions/InfoMes.md) displays:
+[`InfoMes`](../functions/InfoMes.md) logs:
 
 ```text
 Sample S-1001 is Logged and ready for review
@@ -212,7 +212,7 @@ Shows how `/*@private;` restricts a helper to the current script while leaving t
 DoProc("ProcessStatusList", {{"  Pending  ", "in progress", "COMPLETE"}});
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Processed 3 statuses

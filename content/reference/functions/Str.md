@@ -86,7 +86,7 @@ Show a simple conversion, then trim the leading spaces for display.
 DoProc("ShowSampleCount");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Raw field: [        42]
@@ -117,7 +117,7 @@ Use explicit width and decimals so numeric columns line up consistently.
 DoProc("BuildReportLine");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Sample      Result   Average
@@ -150,13 +150,13 @@ Check for the asterisk overflow result before writing fixed-width numeric text.
 DoProc("ExportReading");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 READING=123456.79
 ```
 
-If the value does not fit the requested width, [`ErrorMes`](ErrorMes.md) displays `Reading does not fit in the export field` and the procedure returns `.F.`.
+If the value does not fit the requested width, [`ErrorMes`](ErrorMes.md) logs `Reading does not fit in the export field` and the procedure returns `.F.`.
 
 ## Related
 

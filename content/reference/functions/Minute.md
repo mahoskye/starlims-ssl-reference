@@ -84,7 +84,7 @@ Usage
 DoProc("ShowCurrentMinute");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Current minute: 42

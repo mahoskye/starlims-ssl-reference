@@ -81,7 +81,7 @@ GetNETDataSet(sCommandString, [sConnectionName], [aValues], [sTableName], [bRetu
 
 ### Return dataset XML with the defaults
 
-Runs a query against the default connection with no parameters and displays the length of the returned XML string.
+Runs a query against the default connection with no parameters and logs the length of the returned XML string.
 
 ```ssl
 :PROCEDURE ExportOpenSamples;
@@ -105,7 +105,7 @@ Runs a query against the default connection with no parameters and displays the 
 DoProc("ExportOpenSamples");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Returned XML length: 547
@@ -173,13 +173,13 @@ Sets `bReturnXml` to [`.F.`](../literals/false.md) to get a [`netobject`](../typ
 DoProc("LoadSamplesAsObject", {"A"});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Returned type: System.Data.DataSet
 ```
 
-On failure, [`ErrorMes`](ErrorMes.md) displays a message beginning with:
+On failure, [`ErrorMes`](ErrorMes.md) logs a message beginning with:
 
 ```text
 GetNETDataSet failed: ...

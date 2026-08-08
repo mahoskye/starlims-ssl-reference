@@ -58,7 +58,7 @@ LimsSqlDisconnect([sConnectionName])
 
 ### Disconnect after a read operation
 
-Connect to a named database, query a sample, and then disconnect explicitly. A warning is shown if the disconnect fails.
+Connect to a named database, query a sample, and then disconnect explicitly. a warning is logged if the disconnect fails.
 
 ```ssl
 :PROCEDURE FetchSampleData;
@@ -77,14 +77,14 @@ Connect to a named database, query a sample, and then disconnect explicitly. A w
 		, {sSampleID});
 
 	:IF ALen(aResults) > 0;
-		/* Displays fetched sample name;
+		/* Logs fetched sample name;
 		UsrMes("Fetched: " + LimsString(aResults[1, 1]));
 	:ENDIF;
 
 	bDisconnected := LimsSqlDisconnect(sConnName);
 
 	:IF !bDisconnected;
-		/* Displays on failure: disconnect failed;
+		/* Logs on failure: disconnect failed;
 		UsrMes("Failed to disconnect from " + sConnName);
 	:ENDIF;
 
@@ -124,14 +124,14 @@ Use [`:FINALLY`](../keywords/FINALLY.md) to guarantee that the named connection 
 			RaiseError("No sample found with ID: " + sSampleID);
 		:ENDIF;
 
-		/* Displays sample name and status;
+		/* Logs sample name and status;
 		UsrMes(
 			"Sample: " + LimsString(aResults[1, 1]) +
 			" Status: " + LimsString(aResults[1, 2])
 		);
 	:CATCH;
 		oErr := GetLastSSLError();
-		/* Displays on failure: processing error;
+		/* Logs on failure: processing error;
 		ErrorMes("Error processing sample: " + oErr:Description);
 		:RETURN .F.;
 	:FINALLY;
@@ -167,7 +167,7 @@ Retrieve all registered connection names and disconnect each one whose name star
 		:ENDIF;
 	:NEXT;
 
-	/* Displays cleared connection count;
+	/* Logs cleared connection count;
 	UsrMes("Temp connections cleared: " + LimsString(nCleaned));
 	:RETURN nCleaned;
 :ENDPROC;

@@ -108,7 +108,7 @@ Use [`:FINALLY`](../keywords/FINALLY.md) to guarantee the original connection is
         UsrMes("Returned XML length: " + LimsString(Len(sOrdersXml)));
     :CATCH;
         oErr := GetLastSSLError();
-        ErrorMes(oErr:Description);  /* Displays on failure: database error;
+        ErrorMes(oErr:Description);  /* Logs on failure: database error;
     :FINALLY;
         SetDefaultConnection(sOriginalConnection);
     :ENDTRY;
@@ -146,7 +146,7 @@ Loop over a list of connection names, run the same count query against each, the
         :NEXT;
     :CATCH;
         oErr := GetLastSSLError();
-        ErrorMes(oErr:Description);  /* Displays on failure: database error;
+        ErrorMes(oErr:Description);  /* Logs on failure: database error;
     :FINALLY;
         SetDefaultConnection(sOriginalConnection);
     :ENDTRY;

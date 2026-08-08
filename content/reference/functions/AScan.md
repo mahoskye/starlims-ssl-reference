@@ -85,7 +85,7 @@ Searches for `"REJ"` as a prefix, which matches `"REJECTED"` at position 3 becau
 DoProc("FindStatus");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Matching status found at position 3
@@ -110,7 +110,7 @@ Passes a code block that tests for even numbers; `AScan` returns the position of
 DoProc("FindFirstEven");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 First even number is at position 3

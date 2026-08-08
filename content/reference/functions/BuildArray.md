@@ -88,7 +88,7 @@ Splits a comma-delimited status string into individual values and joins them bac
 DoProc("ParseStatusList");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Statuses: [Logged] [Complete] [Pending]
@@ -119,7 +119,7 @@ Splits a pipe-delimited string with surrounding spaces, using `bTrimSpaces` to c
 DoProc("ParseSampleFilter");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Parsed sample IDs:
@@ -157,7 +157,7 @@ Passes `bCrlfOk := .T.` so that CR/LF characters inside each section are kept in
 DoProc("ParseTemplateSections");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Section count: 2

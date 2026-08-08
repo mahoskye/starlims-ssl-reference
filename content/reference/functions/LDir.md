@@ -89,12 +89,12 @@ Retrieve the names of all `.txt` files in an explicit folder.
     UsrMes(
         "Found " + LimsString(nCount) + " text files in " + sFolder
     );
-    /* Displays file count for the selected folder;
+    /* Logs file count for the selected folder;
 
     :FOR nIndex := 1 :TO nCount;
         sFile := aFiles[nIndex];
         UsrMes(sFile);
-        /* Displays one matching file name per iteration;
+        /* Logs one matching file name per iteration;
     :NEXT;
 
     :RETURN aFiles;
@@ -119,7 +119,7 @@ Include directory names as well as regular files when scanning a staging folder.
     :FOR nIndex := 1 :TO ALen(aEntries);
         sName := aEntries[nIndex];
         UsrMes(sName);
-        /* Displays one file or folder name per iteration;
+        /* Logs one file or folder name per iteration;
     :NEXT;
 
     :RETURN aEntries;
@@ -167,7 +167,7 @@ Verify that the expected import package is present before continuing.
         sMessage := "Import validation failed. Missing required file types: " + BuildString(aMissing,,, ", ");
 
         ErrorMes(sMessage);
-        /* Displays import validation failure details;
+        /* Logs import validation failure details;
 
         oResult := CreateUdObject({
             {"Valid", .F.},
@@ -183,7 +183,7 @@ Verify that the expected import package is present before continuing.
         sMessage := sMessage + " CTL files.";
 
         InfoMes(sMessage);
-        /* Displays import validation success details;
+        /* Logs import validation success details;
 
         oResult := CreateUdObject({
             {"Valid", .T.},

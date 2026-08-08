@@ -93,7 +93,7 @@ Shows the minimum call form using only the two required parameters: the workitem
 DoProc("RepeatWorkitemBasic");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Repeated workitem WI-2024-00423
@@ -139,7 +139,7 @@ Shows the full five-argument call form, passing signoff credentials and a reason
 DoProc("RepeatWorkitemWithSignoff");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Repeated WI-2024-00847 with signoff context

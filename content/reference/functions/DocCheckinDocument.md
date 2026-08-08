@@ -169,7 +169,7 @@ DoProc("CheckinDocumentReplaceContent");
 
 ### Perform a major-version check-in and capture the result or error
 
-Checks in a document with `bMajorVersion` set to [`.T.`](../literals/true.md) and a version label string, captures any Documentum error message, and displays the outcome.
+Checks in a document with `bMajorVersion` set to [`.T.`](../literals/true.md) and a version label string, captures any Documentum error message, and logs the outcome.
 
 ```ssl
 :PROCEDURE CheckinDocumentMajorRevision;

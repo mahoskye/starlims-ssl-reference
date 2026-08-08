@@ -79,10 +79,10 @@ Calls `GetTransactionsCount` without arguments to inspect the default connection
             "There are " + LimsString(nTranCount) + " open transaction(s) "
             + "on the default connection."
         );
-        /* Displays when transactions are open;
+        /* Logs when transactions are open;
     :ELSE;
         UsrMes("There are no open transactions on the default connection.");
-        /* Displays when no transactions are open;
+        /* Logs when no transactions are open;
     :ENDIF;
 
     :RETURN nTranCount;
@@ -94,7 +94,7 @@ DoProc("CheckDefaultTransactionCount");
 
 ### Check a named connection
 
-Passes an explicit connection name and displays the current open transaction count for that connection.
+Passes an explicit connection name and logs the current open transaction count for that connection.
 
 ```ssl
 :PROCEDURE CheckNamedConnection;
@@ -115,7 +115,7 @@ Passes an explicit connection name and displays the current open transaction cou
 DoProc("CheckNamedConnection");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Connection LIMS has 0 open transaction(s).
@@ -160,7 +160,7 @@ Records the transaction depth before the update, opens a new transaction only wh
         :ENDIF;
 
         ErrorMes("Update failed: " + oErr:Description);
-        /* Displays on failure: Update failed;
+        /* Logs on failure: Update failed;
         :RETURN .F.;
     :ENDTRY;
 

@@ -102,7 +102,7 @@ Replace a single matrix cell by supplying two index arguments.
 DoProc("UpdateMatrixCell");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Updated value: Released
@@ -133,7 +133,7 @@ Write through a three-step path where one element contains another array.
 DoProc("UpdateBatchMetric");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Batch-001 pending count: 4
@@ -177,7 +177,7 @@ Read a four-step path, update it only when needed, and catch a bad lookup or ass
 DoProc("ApproveNestedResult");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 A

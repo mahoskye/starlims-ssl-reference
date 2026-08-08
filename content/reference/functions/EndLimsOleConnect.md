@@ -75,7 +75,7 @@ Create an automation object, use it, and then release it explicitly.
 DoProc("ShowExcelVersion");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Excel version: <version>
@@ -101,11 +101,11 @@ Release the automation object even when later work raises an error.
         oExcel:ActiveWorkbook:SaveAs(sWorkbookPath);
 
         UsrMes("Workbook saved to " + sWorkbookPath);
-        /* Displays saved workbook path;
+        /* Logs saved workbook path;
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("OLE export failed: " + oErr:Description);
-        /* Displays on failure: OLE export failed;
+        /* Logs on failure: OLE export failed;
     :FINALLY;
         EndLimsOleConnect(oExcel);
     :ENDTRY;

@@ -81,7 +81,7 @@ Uses a sample encrypted value representing a stored profile setting, decrypts it
         :RETURN "";
     :ENDIF;
 
-    UsrMes("Decrypted email: " + sEmail); /* Displays decrypted email value;
+    UsrMes("Decrypted email: " + sEmail); /* Logs decrypted email value;
 
     :RETURN sEmail;
 :ENDPROC;

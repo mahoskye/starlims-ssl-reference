@@ -91,7 +91,7 @@ DoProc("CheckReadyState");
 ;
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Sample can start
@@ -126,7 +126,7 @@ DoProc("ValidateRelease");
 ;
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Sample LAB-2024-0042 is not ready for release

@@ -66,7 +66,7 @@ DocStopWorkflow(sWorkflowId)
 
 ### Stop one workflow
 
-Initializes the Documentum interface, stops a single workflow by ID, and displays a success or failure message.
+Initializes the Documentum interface, stops a single workflow by ID, and logs a success or failure message.
 
 ```ssl
 :PROCEDURE StopOneWorkflow;
@@ -80,10 +80,10 @@ Initializes the Documentum interface, stops a single workflow by ID, and display
 
     :IF bStopped;
         UsrMes("Stopped workflow " + sWorkflowId);
-        /* Displays the stopped workflow ID;
+        /* Logs the stopped workflow ID;
     :ELSE;
         UsrMes("Could not stop workflow " + sWorkflowId);
-        /* Displays the workflow ID on failure;
+        /* Logs the workflow ID on failure;
     :ENDIF;
 
     DocEndDocumentumInterface();
@@ -107,7 +107,7 @@ Logs in to Documentum before stopping, then reads the error message from [`DocCo
 
     :IF .NOT. DocLoginToDocumentum("Repository", "doc_user", "secret");
         ErrorMes("Documentum login failed: " + DocGetErrorMessage());
-        /* Displays the login error;
+        /* Logs the login error;
         DocEndDocumentumInterface();
 
         :RETURN;
@@ -117,7 +117,7 @@ Logs in to Documentum before stopping, then reads the error message from [`DocCo
 
     :IF bStopped;
         UsrMes("Stopped workflow " + sWorkflowId);
-        /* Displays the stopped workflow ID;
+        /* Logs the stopped workflow ID;
     :ELSE;
         sErrMsg := "";
 
@@ -126,7 +126,7 @@ Logs in to Documentum before stopping, then reads the error message from [`DocCo
         :ENDIF;
 
         ErrorMes("Failed to stop workflow " + sWorkflowId + ": " + sErrMsg);
-        /* Displays the workflow ID and error on failure;
+        /* Logs the workflow ID and error on failure;
     :ENDIF;
 
     DocEndDocumentumInterface();
@@ -138,7 +138,7 @@ DoProc("StopWorkflowWithMessage");
 
 ### Stop a list of workflows and continue on failures
 
-Iterates a workflow ID array, stopping each one and collecting failure IDs, with an option to exit early on first failure. Displays a final count of stopped and failed workflows.
+Iterates a workflow ID array, stopping each one and collecting failure IDs, with an option to exit early on first failure. Logs a final count of stopped and failed workflows.
 
 ```ssl
 :PROCEDURE StopWorkflowBatch;
@@ -162,7 +162,7 @@ Iterates a workflow ID array, stopping each one and collecting failure IDs, with
 
     :IF .NOT. DocLoginToDocumentum("Repository", "doc_user", "secret");
         ErrorMes("Documentum login failed: " + DocGetErrorMessage());
-        /* Displays the login error;
+        /* Logs the login error;
         DocEndDocumentumInterface();
 
         :RETURN 0;
@@ -175,7 +175,7 @@ Iterates a workflow ID array, stopping each one and collecting failure IDs, with
         :IF DocStopWorkflow(sWorkflowId);
             nStopped += 1;
             UsrMes("Stopped workflow " + sWorkflowId);
-            /* Displays each stopped workflow ID;
+            /* Logs each stopped workflow ID;
         :ELSE;
             nFailed += 1;
             AAdd(aFailedIds, sWorkflowId);
@@ -185,7 +185,7 @@ Iterates a workflow ID array, stopping each one and collecting failure IDs, with
             :ENDIF;
 
             ErrorMes("Failed to stop workflow " + sWorkflowId + ": " + sErrMsg);
-            /* Displays the workflow ID and error on failure;
+            /* Logs the workflow ID and error on failure;
 
             :IF .NOT. bContinueOnError;
                 :EXITFOR;
@@ -197,11 +197,11 @@ Iterates a workflow ID array, stopping each one and collecting failure IDs, with
         "Stopped: " + LimsString(nStopped)
         + ", Failed: " + LimsString(nFailed)
     );
-    /* Displays the final stopped and failed counts;
+    /* Logs the final stopped and failed counts;
 
     :IF ALen(aFailedIds) > 0;
         UsrMes("Failed workflow IDs collected: " + LimsString(ALen(aFailedIds)));
-        /* Displays the number of failed workflow IDs collected;
+        /* Logs the number of failed workflow IDs collected;
     :ENDIF;
 
     DocEndDocumentumInterface();

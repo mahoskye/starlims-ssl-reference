@@ -91,7 +91,7 @@ CheckOnFtp(
 
 ### Check whether a single FTP file is ready
 
-Uses the default FTP path to check a daily report file and displays a message depending on whether the file is found.
+Uses the default FTP path to check a daily report file and logs a message depending on whether the file is found.
 
 ```ssl
 :PROCEDURE VerifyReportFile;
@@ -158,7 +158,7 @@ Connects to a partner SFTP server using a private key and handles connection or 
     :CATCH;
         oError := GetLastSSLError();
         ErrorMes("SFTP availability check failed: " + oError:Description);
-        /* Displays on failure: SFTP availability check failed;
+        /* Logs on failure: SFTP availability check failed;
         :RETURN .F.;
     :ENDTRY;
 
@@ -220,7 +220,7 @@ Checks three expected files on an FTP server, collects any missing filenames, an
 
     :FOR nIndex := 1 :TO ALen(aMissingFiles);
         UsrMes("Missing file: " + aMissingFiles[nIndex]);
-        /* Displays one missing filename per line;
+        /* Logs one missing filename per line;
     :NEXT;
 
     :RETURN .F.;

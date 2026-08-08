@@ -65,7 +65,7 @@ DToC(dDate)
 
 ### Display a date value in a user message
 
-Converts a date value to a string and displays it in a user message.
+Converts a date value to a string and logs it in a user message.
 
 ```ssl
 :PROCEDURE ShowLoggedDate;
@@ -81,7 +81,7 @@ Converts a date value to a string and displays it in a user message.
 DoProc("ShowLoggedDate");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Logged on 03/15/2024

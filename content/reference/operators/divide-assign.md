@@ -74,7 +74,7 @@ Computes an average by dividing `nTotal` by the sample count using `/=`. With fo
 DoProc("CalculateAverage");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Average: 30
@@ -97,11 +97,11 @@ Checks that the divisor is numeric and non-zero before applying `/=`. With `vDiv
 		nDuration /= vDivisor;
 		sMessage := "Minutes: " + LimsString(nDuration);
 		UsrMes(sMessage);
-		/* Displays converted duration in minutes;
+		/* Logs converted duration in minutes;
 	:ELSE;
 		sMessage := "Cannot divide: divisor is " + sType;
 		UsrMes(sMessage);
-		/* Displays failure details for an invalid divisor;
+		/* Logs failure details for an invalid divisor;
 	:ENDIF;
 
 	vDivisor := "hours";
@@ -112,7 +112,7 @@ Checks that the divisor is numeric and non-zero before applying `/=`. With `vDiv
 	:ELSE;
 		sMessage := "Skipped: divisor is " + sType;
 		UsrMes(sMessage);
-		/* Displays skip details for a non-numeric divisor;
+		/* Logs skip details for a non-numeric divisor;
 	:ENDIF;
 
 	:RETURN nDuration;

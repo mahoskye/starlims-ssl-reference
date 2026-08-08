@@ -76,7 +76,7 @@ Use the application's base folder to store user-uploaded files.
 DoProc("SetupUserUploadFolder");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Upload folder path: C:\STARLIMS\UserUploads

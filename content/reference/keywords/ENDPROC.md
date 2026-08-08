@@ -53,7 +53,7 @@ The `:ENDPROC` keyword closes a procedure that started with [`:PROCEDURE`](PROCE
 
 ### Closing a procedure after normal execution
 
-`:ENDPROC;` closes the procedure after all statements have run. The procedure builds a status message and displays it before reaching its natural end.
+`:ENDPROC;` closes the procedure after all statements have run. The procedure builds a status message and logs it before reaching its natural end.
 
 ```ssl
 :PROCEDURE ShowLabStatus;
@@ -69,7 +69,7 @@ The `:ENDPROC` keyword closes a procedure that started with [`:PROCEDURE`](PROCE
 DoProc("ShowLabStatus");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Laboratory status: Operational

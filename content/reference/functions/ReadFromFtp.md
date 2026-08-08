@@ -110,7 +110,7 @@ Retrieve a short status file and stop if nothing was returned.
 	sStatus := Upper(AllTrim(Left(sFileContent, 10)));
 
 	InfoMes("Retrieved FTP status: " + sStatus);
-	/* Displays status prefix;
+	/* Logs status prefix;
 
 	:RETURN .T.;
 :ENDPROC;
@@ -204,7 +204,7 @@ Switch to the SFTP branch, use a private key, and handle setup or transfer failu
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes("SFTP read failed: " + oErr:Description);
-		/* Displays on failure: SFTP read failed;
+		/* Logs on failure: SFTP read failed;
 		:RETURN "";
 	:ENDTRY;
 

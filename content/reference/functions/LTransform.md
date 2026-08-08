@@ -74,7 +74,7 @@ Format a single numeric result for display. `LTransform(1234.5, "9999.00")` repl
 DoProc("ShowFormattedResult");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Formatted result: [1234.50]
@@ -110,7 +110,7 @@ Use the same picture string so multiple numeric values line up consistently. Lea
 DoProc("ShowAlignedValues");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 [  12.50]
@@ -157,7 +157,7 @@ Guard mixed input so numbers are formatted with `LTransform` and other values ke
 DoProc("FormatMixedValues");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 1250.50 | Pending |  |   -7.00

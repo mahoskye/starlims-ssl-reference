@@ -83,7 +83,7 @@ Check a user-entered value before converting it to a number. The input `"1,234.5
 
     nValue := ToNumeric(sUserInput);
     UsrMes("Accepted value: " + LimsString(nValue));
-    /* Displays converted numeric value on success;
+    /* Logs converted numeric value on success;
 
     :RETURN .T.;
 :ENDPROC;
@@ -107,14 +107,14 @@ Check the same value against both decimal and hex modes to route it into the cor
     :IF bIsDecimal;
         nValue := ToNumeric(sConfigValue);
         UsrMes("Decimal value: " + LimsString(nValue));
-        /* Displays parsed decimal value;
+        /* Logs parsed decimal value;
         :RETURN nValue;
     :ENDIF;
 
     :IF bIsHex;
         nValue := ToNumeric(sConfigValue, .T.);
         UsrMes("Hex value: " + LimsString(nValue));
-        /* Displays parsed hexadecimal value;
+        /* Logs parsed hexadecimal value;
         :RETURN nValue;
     :ENDIF;
 
@@ -151,9 +151,9 @@ Iterate over a batch of imported rows, use `IsNumeric` to classify each record I
     :NEXT;
 
     UsrMes("Valid rows: " + LimsString(ALen(aCleanRows)));
-    /* Displays valid row count;
+    /* Logs valid row count;
     UsrMes("Invalid rows: " + LimsString(ALen(aInvalidRows)));
-    /* Displays invalid row count;
+    /* Logs invalid row count;
 
     :RETURN aCleanRows;
 :ENDPROC;

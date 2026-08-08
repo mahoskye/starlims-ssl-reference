@@ -69,7 +69,7 @@ The keyword does not stand alone and is not used in script code outside a class 
 
 ### Creating a derived class for shared validation logic
 
-Reuses a parent method from a child class. With `sSampleId` set to `""`, the validation fails and the error message is displayed.
+Reuses a parent method from a child class. With `sSampleId` set to `""`, the validation fails and the error message is logged.
 
 Base class script:
 
@@ -138,7 +138,7 @@ Usage:
 DoProc("RunValidation");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 SampleID is required
@@ -202,7 +202,7 @@ Usage:
 DoProc("ShowReportHeader");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Report: Environmental Compliance | Standard: EPA-2018 | Limit: 50 ppm
@@ -307,7 +307,7 @@ Usage:
     :FOR nOuter := 1 :TO ALen(aWorkflows);
         oWorkflow := aWorkflows[nOuter];
         UsrMes("Running workflow: " + oWorkflow:GetName());
-        /* Displays the current workflow name;
+        /* Logs the current workflow name;
 
         :FOR nInner := 1 :TO 5;
             sStatus := oWorkflow:Execute();
@@ -319,7 +319,7 @@ Usage:
         :NEXT;
 
         UsrMes("Final status: " + oWorkflow:GetStatus());
-        /* Displays the final workflow status;
+        /* Logs the final workflow status;
     :NEXT;
 
     :RETURN .T.;

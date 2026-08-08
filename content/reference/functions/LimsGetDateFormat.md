@@ -71,7 +71,7 @@ Call `LimsGetDateFormat` to retrieve the configured format and display it as par
 DoProc("ShowDateFormatPrompt");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Enter date using format: MM/dd/yyyy
@@ -105,12 +105,12 @@ Validate and parse a batch of imported date strings against the live global form
 			AAdd(aParsedDates, dParsed);
 			sLogMsg := "Row " + LimsString(nIndex) + ": " + sDateCol + " parsed as " + DToC(
 				dParsed);
-			InfoMes(sLogMsg);  /* Displays: parsed row details;
+			InfoMes(sLogMsg);  /* Logs: parsed row details;
 		:ELSE;
 			AAdd(aParsedDates, CToD(""));
 			sLogMsg := "Row " + LimsString(nIndex) + ": Invalid date '" + sDateCol + "' for format "
 				+ sDateFormat;
-			ErrorMes(sLogMsg);  /* Displays on failure: invalid date;
+			ErrorMes(sLogMsg);  /* Logs on failure: invalid date;
 		:ENDIF;
 	:NEXT;
 

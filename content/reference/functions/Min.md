@@ -85,7 +85,7 @@ Pick the earlier of two scheduled dates for a user event.
 DoProc("GetEarlierEventDate");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Earlier event date: 03/10/2026
@@ -112,7 +112,7 @@ Use `Min` to keep the smaller of two measured values before recording a result.
 DoProc("SelectLowerReading", {42.5, 38.7});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Lower reading: 38.7
@@ -140,7 +140,7 @@ Normalize two candidate labels, then keep the lower-sorting one as a stable key.
 DoProc("GetCanonicalName", {"ALPHA", "BETA"});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Canonical key: ALPHA

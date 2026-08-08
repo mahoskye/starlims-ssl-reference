@@ -109,7 +109,7 @@ Loads a lookup table from an import folder and reports either the row count or t
         :ELSE;
             UsrMes(
                 "Unable to load table " + sTableName + ": " + sError
-            ); /* Displays on failure: table load error;
+            ); /* Logs on failure: table load error;
         :ENDIF;
 
         :RETURN NIL;
@@ -118,7 +118,7 @@ Loads a lookup table from an import folder and reports either the row count or t
     UsrMes(
         "Loaded " + sTableName + " with "
         + LimsString(oTable:RowsCount) + " rows"
-    ); /* Displays loaded row count;
+    ); /* Logs loaded row count;
 
     :RETURN oTable;
 :ENDPROC;

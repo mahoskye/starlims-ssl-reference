@@ -78,7 +78,7 @@ Decode a single URL-encoded value before displaying it.
 DoProc("DecodeWebFormInput");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 John Doe & Co
@@ -122,7 +122,7 @@ Extract an encoded query parameter from a full URL, guard against a missing inpu
 DoProc("ExtractFileNameFromUrl", {"https://example.com/files?filename=quarterly%20report.pdf"});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Decoded file name: quarterly report.pdf

@@ -96,7 +96,7 @@ Define a named inline block, retrieve it with [`GetInlineCode`](../functions/Get
 DoProc("RunGreeting");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Hello from inline code
@@ -128,7 +128,7 @@ Pass local variable names to [`GetInlineCode`](../functions/GetInlineCode.md) so
 DoProc("BuildStatusMessage");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Status: Logged, Count: 3

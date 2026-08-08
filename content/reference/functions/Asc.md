@@ -82,7 +82,7 @@ Reads the code for `"M"` and tests whether it falls in the uppercase ASCII range
 DoProc("ValidateUppercaseLetter");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Uppercase letter detected.
@@ -113,7 +113,7 @@ Iterates each character in `"ABC"` with [`SubStr`](SubStr.md), calls `Asc` on ea
 DoProc("ConvertForExternalExport");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 65,66,67

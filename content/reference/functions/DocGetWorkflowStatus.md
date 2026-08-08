@@ -71,7 +71,7 @@ DocGetWorkflowStatus(sWorkflowId)
 
 ### Display the current workflow status
 
-Fetches the current status of a workflow and displays it, using a default workflow ID when none is supplied.
+Fetches the current status of a workflow and logs it, using a default workflow ID when none is supplied.
 
 ```ssl
 :PROCEDURE ShowWorkflowStatus;
@@ -88,7 +88,7 @@ Fetches the current status of a workflow and displays it, using a default workfl
 DoProc("ShowWorkflowStatus");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Workflow WF-12345 status: Running

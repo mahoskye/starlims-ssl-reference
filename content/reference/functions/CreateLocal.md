@@ -83,7 +83,7 @@ Creates a local variable using a name stored in another variable, then reads it 
 DoProc("DemoCreateLocalBasic");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Local value: Queued
@@ -112,7 +112,7 @@ Calls `CreateLocal` without a second argument so the new variable is initialized
 DoProc("DemoCreateLocalDefault");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 The local starts as an empty string.
@@ -150,7 +150,7 @@ Two procedures each create a local variable with the same name. The inner proced
 DoProc("DemoCreateLocalOuter");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Outer before nested call: outer

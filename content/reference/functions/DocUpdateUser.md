@@ -67,7 +67,7 @@ DocUpdateUser(sLoginName, sPassword, [sUserName], [sEMail], [sDefaultFolder], [s
 
 ### Update a user's display name and email
 
-Passes only the required credentials plus display name and email, then displays the backend result string.
+Passes only the required credentials plus display name and email, then logs the backend result string.
 
 ```ssl
 :PROCEDURE UpdateUserContact;
@@ -86,7 +86,7 @@ Passes only the required credentials plus display name and email, then displays 
     :ENDIF;
 
     UsrMes(sResult);
-    /* Displays backend result message on success;
+    /* Logs backend result message on success;
 
     :RETURN sResult;
 :ENDPROC;
@@ -124,7 +124,7 @@ Skips the `sUserName` and `sEMail` positions using adjacent commas so that only 
     :ENDIF;
 
     UsrMes(sResult);
-    /* Displays backend result message on success;
+    /* Logs backend result message on success;
 
     :RETURN sResult;
 :ENDPROC;
@@ -169,7 +169,7 @@ Passes all eight arguments and wraps the call in [`:TRY`](../keywords/TRY.md)/[`
         :ENDIF;
 
         UsrMes(sResult);
-        /* Displays backend result message on success;
+        /* Logs backend result message on success;
 
         :RETURN sResult;
     :CATCH;
@@ -179,7 +179,7 @@ Passes all eight arguments and wraps the call in [`:TRY`](../keywords/TRY.md)/[`
             ErrorMes("DocUpdateUser failed for " + sLoginName);
         :ELSE;
             ErrorMes("DocUpdateUser failed: " + oErr:Description);
-            /* Displays failure details when available;
+            /* Logs failure details when available;
         :ENDIF;
 
         :RETURN "";

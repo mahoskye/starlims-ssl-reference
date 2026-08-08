@@ -84,7 +84,7 @@ After `:ENDTRY;`, execution resumes with the next statement unless control flow 
 
 ### Closing a TRY/CATCH block and continuing afterward
 
-`:ENDTRY;` closes the error-handling structure so execution continues with the next statement. When the file read succeeds, a success message displays; when it fails, the [`:CATCH`](CATCH.md) block handles the error. In both cases, the statement after `:ENDTRY;` runs.
+`:ENDTRY;` closes the error-handling structure so execution continues with the next statement. When the file read succeeds, a success message is logged; when it fails, the [`:CATCH`](CATCH.md) block handles the error. In both cases, the statement after `:ENDTRY;` runs.
 
 ```ssl
 :PROCEDURE LoadConfigFile;
@@ -98,7 +98,7 @@ After `:ENDTRY;`, execution resumes with the next statement unless control flow 
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes("Unable to load configuration file: " + oErr:Description);
-		/* Displays on failure: unable to load the configuration file;
+		/* Logs on failure: unable to load the configuration file;
 
 	:ENDTRY;
 

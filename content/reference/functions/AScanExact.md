@@ -85,7 +85,7 @@ Searches for `"APP"` exactly in an array that also contains `"APPROVED"`. Unlike
 DoProc("FindStatusExact");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Exact match found at position 1
@@ -109,7 +109,7 @@ Scans an array for the first [`NIL`](../literals/nil.md) element by passing [`NI
 DoProc("FindFirstNilValue");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 First NIL value is at position 2

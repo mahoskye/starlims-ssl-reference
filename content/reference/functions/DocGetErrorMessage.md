@@ -58,7 +58,7 @@ This function takes no parameters.
 
 ### Show the login failure message
 
-Attempts a Documentum login with bad credentials, reads the error message when the login returns [`.F.`](../literals/false.md), and displays it to the user.
+Attempts a Documentum login with bad credentials, reads the error message when the login returns [`.F.`](../literals/false.md), and logs it.
 
 ```ssl
 :PROCEDURE ShowDocLoginError;
@@ -71,7 +71,7 @@ Attempts a Documentum login with bad credentials, reads the error message when t
 	:IF .NOT. bLoggedIn;
 		sErrMsg := DocGetErrorMessage();
 		UsrMes("Documentum login failed: " + sErrMsg);
-		/* Displays login failure details;
+		/* Logs login failure details;
 	:ENDIF;
 
 	DocEndDocumentumInterface();
@@ -94,7 +94,7 @@ Stores the error message immediately after a failed import so the value is prese
 	:TRY;
 		:IF .NOT. DocLoginToDocumentum("Repository", "lims_user", "secret");
 			ErrorMes("Login failed: " + DocGetErrorMessage());
-			/* Displays login failure details;
+			/* Logs login failure details;
 			:RETURN;
 		:ENDIF;
 
@@ -110,12 +110,12 @@ Stores the error message immediately after a failed import so the value is prese
 		:IF DocCommandFailed();
 			sErrMsg := DocGetErrorMessage();
 			ErrorMes("Import failed: " + sErrMsg);
-			/* Displays import failure details;
+			/* Logs import failure details;
 			:RETURN;
 		:ENDIF;
 
 		UsrMes("Imported document ID: " + sDocId);
-		/* Displays imported document ID;
+		/* Logs imported document ID;
 	:FINALLY;
 		DocEndDocumentumInterface();
 	:ENDTRY;
@@ -168,10 +168,10 @@ Encapsulates the [`DocCommandFailed`](DocCommandFailed.md) flag and `DocGetError
 
 		:IF oStatus:failed;
 			ErrorMes("Import failed: " + oStatus:errorMessage);
-			/* Displays import failure details;
+			/* Logs import failure details;
 		:ELSE;
 			UsrMes("Imported document ID: " + sDocId);
-			/* Displays imported document ID;
+			/* Logs imported document ID;
 		:ENDIF;
 	:FINALLY;
 		DocEndDocumentumInterface();

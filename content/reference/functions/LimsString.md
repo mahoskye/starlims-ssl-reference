@@ -72,7 +72,7 @@ Convert a possibly missing value to text without special-case branching. When `v
 DoProc("ShowOptionalResult");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Current result: NIL
@@ -108,7 +108,7 @@ Iterate over an array containing a string, a number, [`NIL`](../literals/nil.md)
 DoProc("BuildSummaryLine");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Summary: Batch-1042 | 27.5 | NIL | True

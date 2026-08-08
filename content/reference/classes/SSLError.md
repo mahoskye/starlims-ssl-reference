@@ -79,7 +79,7 @@ Wraps an exception object as an `SSLError`. In normal SSL code, use [`GetLastSSL
 
 ### Inspecting the last SSL error
 
-Uses [`GetLastSSLError()`](../functions/GetLastSSLError.md) inside [`:CATCH`](../keywords/CATCH.md) to read the message, operation, and code from the captured error object, then displays them as a single formatted string.
+Uses [`GetLastSSLError()`](../functions/GetLastSSLError.md) inside [`:CATCH`](../keywords/CATCH.md) to read the message, operation, and code from the captured error object, then logs them as a single formatted string.
 
 ```ssl
 :PROCEDURE ShowErrorSummary;
@@ -102,7 +102,7 @@ Uses [`GetLastSSLError()`](../functions/GetLastSSLError.md) inside [`:CATCH`](..
         sMsg := sMsg + Chr(13) + Chr(10)
             + "Code: " + LimsString(oErr:Code);
 
-        /* Displays the captured error summary;
+        /* Logs the captured error summary;
         UsrMes(sMsg);
     :ENDTRY;
 :ENDPROC;
@@ -138,7 +138,7 @@ Uses a nested [`:TRY`](../keywords/TRY.md) to raise a first error, then raises a
                 + "Root cause: " + oErr:InnerException:Description;
         :ENDIF;
 
-        /* Displays the formatted error report;
+        /* Logs the formatted error report;
         UsrMes(sReport);
     :ENDTRY;
 :ENDPROC;

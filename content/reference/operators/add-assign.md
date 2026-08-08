@@ -99,7 +99,7 @@ Adds five values from an array into `nTotal` using `+=`. The loop runs five iter
 DoProc("AccumulateTotal");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Total: 120
@@ -134,7 +134,7 @@ Assembles a final message from six fragments using `+=` to append each piece in 
 DoProc("BuildStatusMessage");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Sample 12345 - Active (42 items)
@@ -142,7 +142,7 @@ Sample 12345 - Active (42 items)
 
 ### Scheduling follow-up dates
 
-Advances `dFollowUp` by seven days on each of four iterations using `+=`, then displays the resulting dates starting from 01/15/2024 with a seven-day interval.
+Advances `dFollowUp` by seven days on each of four iterations using `+=`, then logs the resulting dates starting from 01/15/2024 with a seven-day interval.
 
 ```ssl
 :PROCEDURE ScheduleFollowUps;
@@ -173,7 +173,7 @@ Advances `dFollowUp` by seven days on each of four iterations using `+=`, then d
 DoProc("ScheduleFollowUps");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays (one line per iteration):
+[`UsrMes`](../functions/UsrMes.md) logs (one line per iteration):
 
 ```text
 Follow-up #1: 01/22/2024

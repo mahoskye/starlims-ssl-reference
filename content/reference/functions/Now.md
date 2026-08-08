@@ -76,7 +76,7 @@ Call `Now()` once and store the result before displaying it. The exact timestamp
 DoProc("LogTimestamp");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Event recorded at 04/23/2026 14:30:00
@@ -95,14 +95,14 @@ Capture the start time, do work, then capture the end time and pass both to [`Da
 	dStart := Now();
 
 	UsrMes("Starting work at " + LimsString(dStart));
-	/* Displays the current start timestamp;
+	/* Logs the current start timestamp;
 
 	dEnd := Now();
 	nElapsedSeconds := DateDiff(dStart, dEnd, "ss");
 
 	sMessage := "Elapsed seconds: " + LimsString(nElapsedSeconds);
 	UsrMes(sMessage);
-	/* Displays the elapsed seconds;
+	/* Logs the elapsed seconds;
 
 	:RETURN nElapsedSeconds;
 :ENDPROC;
@@ -145,7 +145,7 @@ Capture `Now()` once so both the SQL update and the confirmation message use the
 DoProc("StampReleasedSamples");
 ```
 
-`UsrMes` displays either:
+`UsrMes` logs either:
 
 ```text
 Sample released at 04/23/2026 14:30:00

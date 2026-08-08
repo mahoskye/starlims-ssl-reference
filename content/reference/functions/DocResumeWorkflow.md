@@ -87,7 +87,7 @@ Fetches a workflow by ID, branches on the boolean result to build an outcome mes
 DoProc("ResumeWorkflowBasic");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Workflow WF-2024-0042 resumed
@@ -111,14 +111,14 @@ Checks the current workflow status with [`DocGetWorkflowStatus`](DocGetWorkflowS
         bResumed := DocResumeWorkflow(sWorkflowId);
 
         :IF bResumed;
-            /* Displays on successful resume from paused state;
+            /* Logs on successful resume from paused state;
             UsrMes("Workflow " + sWorkflowId + " resumed from paused state");
         :ELSE;
-            /* Displays on failed resume from paused state;
+            /* Logs on failed resume from paused state;
             UsrMes("Workflow " + sWorkflowId + " was paused but did not resume");
         :ENDIF;
     :ELSE;
-        /* Displays the current workflow status;
+        /* Logs the current workflow status;
         UsrMes("Workflow " + sWorkflowId + " is currently " + sStatus);
     :ENDIF;
 
@@ -131,7 +131,7 @@ DoProc("ResumePausedWorkflowOnly", {"WF-2024-0042"});
 
 ### Resume multiple workflows and collect results
 
-Iterates a list of workflow IDs, skips empty entries, and collects each resume outcome into a summary object, then displays a single count line for resumed, failed, and skipped workflows.
+Iterates a list of workflow IDs, skips empty entries, and collects each resume outcome into a summary object, then logs a single count line for resumed, failed, and skipped workflows.
 
 ```ssl
 :PROCEDURE ResumeWorkflowBatch;
@@ -165,7 +165,7 @@ Iterates a list of workflow IDs, skips empty entries, and collects each resume o
         + " workflow(s), failed " + LimsString(ALen(oSummary:failedIds))
         + ", skipped " + LimsString(ALen(oSummary:skippedIds));
 
-    /* Displays workflow counts;
+    /* Logs workflow counts;
     UsrMes(sMessage);
 
     :RETURN oSummary;

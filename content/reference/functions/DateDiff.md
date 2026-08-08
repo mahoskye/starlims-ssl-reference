@@ -86,7 +86,7 @@ DateDiff(dStartDate, dEndDate, [sDatepart])
 
 ### Count the whole days since a sample was logged
 
-Computes the elapsed days between a fixed log date and today using the default `day` unit, then displays the result.
+Computes the elapsed days between a fixed log date and today using the default `day` unit, then logs the result.
 
 ```ssl
 :PROCEDURE GetSampleAgeDays;
@@ -106,7 +106,7 @@ Computes the elapsed days between a fixed log date and today using the default `
 DoProc("GetSampleAgeDays");
 ```
 
-[`UsrMes`](UsrMes.md) displays (output depends on the current date):
+[`UsrMes`](UsrMes.md) logs (output depends on the current date):
 
 ```text
 Sample age in days: 38
@@ -114,7 +114,7 @@ Sample age in days: 38
 
 ### Validate a 48-hour hold time between two timestamps
 
-Computes elapsed hours between two fixed timestamps using the `hour` unit, then checks whether the hold time meets the 48-hour minimum and displays the appropriate status.
+Computes elapsed hours between two fixed timestamps using the `hour` unit, then checks whether the hold time meets the 48-hour minimum and logs the appropriate status.
 
 ```ssl
 :PROCEDURE ValidateHoldTime;
@@ -140,7 +140,7 @@ Computes elapsed hours between two fixed timestamps using the `hour` unit, then 
 DoProc("ValidateHoldTime");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Hold time met: 49 hours
@@ -172,7 +172,7 @@ Computes both the calendar month gap and the calendar year span between two date
 DoProc("SummarizeRenewalGap");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Renewal is 15 calendar months after start and spans 2 calendar years

@@ -76,7 +76,7 @@ Call `LFromHex` with a known-valid hex string to recover the original text. The 
 DoProc("DecodeHexMessage");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Decoded text: Hello
@@ -107,11 +107,11 @@ Use [`IsHex`](IsHex.md) to filter a batch before calling `LFromHex`, so only wel
 
 	sMessage := "Decoded values: " + LimsString(ALen(aDecoded));
 	UsrMes(sMessage);
-	/* Displays decoded count;
+	/* Logs decoded count;
 
 	:IF ALen(aInvalid) > 0;
 		UsrMes("Skipped invalid hex values: " + LimsString(ALen(aInvalid)));
-		/* Displays skipped invalid count;
+		/* Logs skipped invalid count;
 	:ENDIF;
 
 	:RETURN aDecoded;

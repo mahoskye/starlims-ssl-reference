@@ -216,7 +216,7 @@ Wrap the call in `:TRY;` to catch the unconditional validation errors and inspec
 		);
 	:CATCH;
 		oErr := GetLastSSLError();
-		/* Displays on failure: queue failed;
+		/* Logs on failure: queue failed;
 		ErrorMes("Queue failed: " + oErr:Description);
 	:ENDTRY;
 

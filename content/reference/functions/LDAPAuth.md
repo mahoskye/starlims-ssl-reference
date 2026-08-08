@@ -94,7 +94,7 @@ Authenticate a user with the default LDAP port and treat an empty result as succ
 		:RETURN .F.;
 	:CATCH;
 		oErr := GetLastSSLError();
-		/* Displays on failure: LDAP authentication failed;
+		/* Logs on failure: LDAP authentication failed;
 		UsrMes("LDAP authentication failed: " + oErr:Description);
 		:RETURN .F.;
 	:ENDTRY;
@@ -127,7 +127,7 @@ Authenticate over SSL/TLS by supplying both the LDAPS port and the `bSecure` fla
 		:RETURN .F.;
 	:CATCH;
 		oErr := GetLastSSLError();
-		/* Displays on failure: Secure LDAP authentication failed;
+		/* Logs on failure: Secure LDAP authentication failed;
 		UsrMes("Secure LDAP authentication failed: " + oErr:Description);
 		:RETURN .F.;
 	:ENDTRY;
@@ -162,7 +162,7 @@ Validate required inputs up front and request NTLM authentication explicitly.
 		:RETURN .F.;
 	:CATCH;
 		oErr := GetLastSSLError();
-		/* Displays on failure: NTLM LDAP authentication failed;
+		/* Logs on failure: NTLM LDAP authentication failed;
 		UsrMes("NTLM LDAP authentication failed: " + oErr:Description);
 		:RETURN .F.;
 	:ENDTRY;

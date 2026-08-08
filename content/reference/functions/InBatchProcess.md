@@ -98,7 +98,7 @@ Execute the work immediately when already in batch; submit it to a new batch job
         sCode := "InfoMes('Running audit work inside batch context');";
         sBatchId := SubmitToBatchEx(sCode);
 
-        /* Displays submitted batch ID;
+        /* Logs submitted batch ID;
         UsrMes("Submitted audit work to batch: " + sBatchId);
     :ENDIF;
 

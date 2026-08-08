@@ -84,7 +84,7 @@ Stores `Chr(10)` in a variable and uses it to place a line feed between two line
 DoProc("InsertNewlineCharacter");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 This is the first line.
@@ -115,7 +115,7 @@ Assigns `Chr(9)` to a named variable once and reuses it as the tab delimiter whi
 DoProc("BuildTabDelimitedList");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 12	34	56	78	90
@@ -150,7 +150,7 @@ Combines unit separator (`Chr(31)`) and record separator (`Chr(30)`) control cha
 DoProc("EmbedProtocolControlCodes");
 ```
 
-[`UsrMes`](UsrMes.md) displays (with `<US>` = `Chr(31)` and `<RS>` = `Chr(30)`):
+[`UsrMes`](UsrMes.md) logs (with `<US>` = `Chr(31)` and `<RS>` = `Chr(30)`):
 
 ```text
 Payload with protocol control codes: TXSEND<US>Sample123<US>Pending<US>2024-04-11<RS>

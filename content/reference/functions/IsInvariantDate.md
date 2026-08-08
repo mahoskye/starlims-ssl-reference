@@ -64,7 +64,7 @@ IsInvariantDate(dDate)
 
 ### Block a workflow when the review date is invariant
 
-Call `IsInvariantDate` on a date produced by [`CToD`](CToD.md) with an empty string. An empty date string yields an invariant date, so the [`:IF`](../keywords/IF.md) branch fires and [`ErrorMes`](ErrorMes.md) blocks the workflow. If a proper date were supplied, the [`:ELSE`](../keywords/ELSE.md) branch would fire and [`InfoMes`](InfoMes.md) would display the approval message.
+Call `IsInvariantDate` on a date produced by [`CToD`](CToD.md) with an empty string. An empty date string yields an invariant date, so the [`:IF`](../keywords/IF.md) branch fires and [`ErrorMes`](ErrorMes.md) logs the rejection. If a proper date were supplied, the [`:ELSE`](../keywords/ELSE.md) branch would fire and [`InfoMes`](InfoMes.md) would log the approval message.
 
 ```ssl
 :PROCEDURE CheckReviewDateInvariant;

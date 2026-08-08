@@ -81,7 +81,7 @@ Capture and log a formatted error message after a SQL operation fails.
 DoProc("DisplaySqlErrorExample");
 ```
 
-`ErrorMes` displays:
+`ErrorMes` logs:
 
 ```text
 The formatted SQL error message returned by GetLastSQLError

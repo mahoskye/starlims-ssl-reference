@@ -79,7 +79,7 @@ Reads a text setting and branches on whether it is empty, displaying a message i
 	:ENDIF;
 
 	UsrMes("Reports will be written to " + sOutputPath);
-	/* Displays configured output path;
+	/* Logs configured output path;
 :ENDPROC;
 
 /* Usage;
@@ -152,7 +152,7 @@ Uses [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) and [`:BEGINC
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes("Failed to read " + sSettingName + ": " + oErr:Description);
-		/* Displays read failure details;
+		/* Logs read failure details;
 	:ENDTRY;
 
 	:RETURN nTimeout;

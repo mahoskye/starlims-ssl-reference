@@ -85,7 +85,7 @@ Use `LimsTypeEx` to report the type of a single value. The string `"Sample Text"
 DoProc("ShowValueType");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Value type: STRING
@@ -136,7 +136,7 @@ DoProc("DescribeValues");
 
 ### Reject unexpected input types before numeric logic
 
-Check each parameter's type before performing numeric addition. If either argument is not numeric, an error is shown and [`NIL`](../literals/nil.md) is returned.
+Check each parameter's type before performing numeric addition. If either argument is not numeric, an error is logged and [`NIL`](../literals/nil.md) is returned.
 
 ```ssl
 :PROCEDURE AddMeasuredValue;

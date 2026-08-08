@@ -66,7 +66,7 @@ CMonth(dDate)
 
 ### Display a month name for a date value
 
-Converts a specific date to a month name and displays it in a message. March 15, 2024 produces `"March"`.
+Converts a specific date to a month name and logs it in a message. March 15, 2024 produces `"March"`.
 
 ```ssl
 :PROCEDURE ShowReceiveMonth;
@@ -84,7 +84,7 @@ Converts a specific date to a month name and displays it in a message. March 15,
 DoProc("ShowReceiveMonth");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Sample received in March

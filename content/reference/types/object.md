@@ -121,7 +121,7 @@ Creates a dynamic object with [`CreateLocal()`](../functions/CreateLocal.md), as
 DoProc("BuildReviewContext");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 LAB-0042 / Pending / 2
@@ -161,7 +161,7 @@ Checks for an optional `reviewComment` property, adds it when missing, clones th
 DoProc("PrepareApprovalPayload");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Fields tracked: 3
@@ -200,7 +200,7 @@ Sets `XmlType`, serializes the object to XML, and restores it into a new dynamic
 DoProc("RoundTripObjectXml");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Restored root: SamplePayload

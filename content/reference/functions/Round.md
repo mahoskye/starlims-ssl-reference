@@ -83,7 +83,7 @@ Format a measurement value for display in a report, ensuring only two decimals a
 DoProc("FormatMeasurementForReport");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Result: 12.35
@@ -119,7 +119,7 @@ Round monetary amounts for tax calculations, requiring rounding away from zero o
 DoProc("CalculateTaxAmount");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Subtotal: 209.93, Tax: 17.32, Total: 227.25
@@ -153,11 +153,11 @@ Aggregate thousands of floating-point results where unbiased rounding is critica
     nBiasedDrift := Abs(nRawSum - nBiasedSum);
 
     sResult := "Unbiased aggregation drift: " + LimsString(nUnbiasedDrift);
-    /* Displays an unbiased drift value;
+    /* Logs an unbiased drift value;
     UsrMes(sResult);
 
     sResult := "Biased aggregation drift: " + LimsString(nBiasedDrift);
-    /* Displays a larger drift value;
+    /* Logs a larger drift value;
     UsrMes(sResult);
 
     :RETURN nUnbiasedSum;

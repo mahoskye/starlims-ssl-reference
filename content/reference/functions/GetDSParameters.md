@@ -92,7 +92,7 @@ Retrieves the parameter array for a data source and builds a comma-separated lis
 DoProc("ListDataSourceParams");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Parameters for Analysis.SampleResults: SampleId, StartDate, EndDate
@@ -124,7 +124,7 @@ Compares the caller-supplied parameter keys against the expected parameters for 
 	:ENDIF;
 
 	:IF ! bParamValid;
-		/* Displays on failure: validation errors;
+		/* Logs on failure: validation errors;
 		ErrorMes("Parameter validation failed. " + sErrorMsg);
 		:RETURN NIL;
 	:ENDIF;

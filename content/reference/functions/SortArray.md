@@ -79,10 +79,10 @@ Capture the original element order with [`BuildString`](BuildString.md), sort nu
     sAfter := BuildString(aNumbers, 1, ALen(aNumbers), ", ");
 
     UsrMes("Before: " + sBefore);
-    /* Displays original order;
+    /* Logs original order;
 
     UsrMes("After: " + sAfter);
-    /* Displays sorted order;
+    /* Logs sorted order;
 
     :RETURN aNumbers;
 :ENDPROC;
@@ -129,7 +129,7 @@ Sort an array of UDO objects by a numeric property using a two-argument code blo
 DoProc("DemoPrioritySort");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Sorted by priority: Alpha (1), Beta (2), Gamma (3)
@@ -161,7 +161,7 @@ Sort an array of rows by a primary key (priority) and a secondary key (sequence)
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes(oErr:Description);
-        /* Displays on failure: SSL error description;
+        /* Logs on failure: SSL error description;
         :RETURN .F.;
     :ENDTRY;
 
@@ -187,7 +187,7 @@ Sort an array of rows by a primary key (priority) and a secondary key (sequence)
 DoProc("DemoMultiKeySort");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Sorted tasks: S-103-P1-S20 | S-101-P1-S30 | S-102-P2-S10 | S-100-P2-S15

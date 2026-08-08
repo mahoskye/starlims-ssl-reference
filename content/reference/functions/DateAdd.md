@@ -68,7 +68,7 @@ DateAdd(dDate, nNumber, [sDatepart])
 
 ### Add days to a start date to calculate a due date
 
-Adds seven days to a fixed start date using the default `day` interval and displays the start and due dates.
+Adds seven days to a fixed start date using the default `day` interval and logs the start and due dates.
 
 ```ssl
 :PROCEDURE CalculateTaskDueDate;
@@ -89,7 +89,7 @@ Adds seven days to a fixed start date using the default `day` interval and displ
 DoProc("CalculateTaskDueDate");
 ```
 
-[`UsrMes`](UsrMes.md) displays (assuming MM/DD/YYYY date format):
+[`UsrMes`](UsrMes.md) logs (assuming MM/DD/YYYY date format):
 
 ```text
 Task started on 01/15/2024 and is due on 01/22/2024
@@ -97,7 +97,7 @@ Task started on 01/15/2024 and is due on 01/22/2024
 
 ### Add a year to a registration date and report renewal status
 
-Adds one year to a fixed registration date using the `year` interval, then compares the resulting expiry date to today and displays the appropriate renewal status message.
+Adds one year to a fixed registration date using the `year` interval, then compares the resulting expiry date to today and logs the appropriate renewal status message.
 
 ```ssl
 :PROCEDURE ComputeLicenseRenewal;
@@ -117,18 +117,18 @@ Adds one year to a fixed registration date using the `year` interval, then compa
 		sMessage := "License issued on " + sRegDate
 					+ " expires in " + LimsString(Integer(nDaysUntilExpiry))
 					+ " days on " + sExpiryDate;
-		/* Displays days remaining until expiry;
+		/* Logs days remaining until expiry;
 		UsrMes(sMessage);
 	:ELSE;
 		:IF nDaysUntilExpiry <= 0;
 			sMessage := "License issued on " + sRegDate
 						+ " expired on " + sExpiryDate;
-			/* Displays the expired license date;
+			/* Logs the expired license date;
 			UsrMes(sMessage);
 		:ELSE;
 			sMessage := "License issued on " + sRegDate
 						+ " remains active until " + sExpiryDate;
-			/* Displays the active license expiry date;
+			/* Logs the active license expiry date;
 			UsrMes(sMessage);
 		:ENDIF;
 	:ENDIF;

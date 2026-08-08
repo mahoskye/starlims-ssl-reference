@@ -87,7 +87,7 @@ Convert clean numeric text and use the result in a calculation.
 DoProc("ConvertSimpleValue");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Doubled value: 85
@@ -113,7 +113,7 @@ Use `Val` when the number comes first and descriptive text follows. Everything a
 DoProc("ParseMeasuredResult");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Numeric result: 12.5
@@ -144,7 +144,7 @@ Pass `bRequireWholeValue = .T.` to require that the entire string be numeric (us
 DoProc("ImportQuantityField", {"100.0", .F.});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Imported quantity: 100

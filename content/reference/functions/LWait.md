@@ -123,7 +123,7 @@ Add a pause between endpoint calls to avoid exceeding rate limits. The delay is 
 		sEndpoint := aEndpoints[nIndex];
 		sLogMsg := "Calling endpoint " + LimsString(nIndex) + " of " + LimsString(nCount)
 			+ ": " + sEndpoint;
-		UsrMes(sLogMsg);  /* Displays endpoint progress;
+		UsrMes(sLogMsg);  /* Logs endpoint progress;
 
 		:TRY;
 			ExecFunction(sEndpoint);
@@ -133,7 +133,7 @@ Add a pause between endpoint calls to avoid exceeding rate limits. The delay is 
 		:ENDTRY;
 
 		sLogMsg := "Endpoint " + sEndpoint + " returned: " + sStatus;
-		UsrMes(sLogMsg);  /* Displays the current endpoint result;
+		UsrMes(sLogMsg);  /* Logs the current endpoint result;
 
 		:IF nIndex < nCount;
 			sLogMsg := "Waiting " + LimsString(nDelaySeconds) + " seconds before next request";

@@ -69,7 +69,7 @@ DateToString(dDate, [sFormat])
 
 ### Format a timestamp using the default pattern
 
-Formats the current timestamp using the default `MM/dd/yyyy HH:mm:ss` pattern and displays the result. The output varies with the current time.
+Formats the current timestamp using the default `MM/dd/yyyy HH:mm:ss` pattern and logs the result. The output varies with the current time.
 
 ```ssl
 :PROCEDURE ShowRunTimestamp;
@@ -86,7 +86,7 @@ Formats the current timestamp using the default `MM/dd/yyyy HH:mm:ss` pattern an
 DoProc("ShowRunTimestamp");
 ```
 
-[`UsrMes`](UsrMes.md) displays (output depends on the current time):
+[`UsrMes`](UsrMes.md) logs (output depends on the current time):
 
 ```text
 Run completed at 04/23/2026 14:30:00

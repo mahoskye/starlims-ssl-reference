@@ -81,10 +81,10 @@ Wraps the lookup in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md
 
     :TRY;
         sBanner := GetRegion("WelcomeBanner");
-        /* Displays the stored region text;
+        /* Logs the stored region text;
         UsrMes(sBanner);
     :CATCH;
-        /* Displays the missing-region error text;
+        /* Logs the missing-region error text;
         ErrorMes(GetLastSSLError():Description);
         :RETURN "";
     :ENDTRY;

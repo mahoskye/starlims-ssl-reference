@@ -96,7 +96,7 @@ Pass the variable name as a string literal. `LimsType("sSampleId")` looks up `sS
 DoProc("CheckVariableType");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Type of sSampleId: C
@@ -124,7 +124,7 @@ Check whether an optional parameter was passed and has the expected type. `LimsT
 	:ENDIF;
 
 	UsrMes("Processing: " + vInput);
-	/* Displays provided input;
+	/* Logs provided input;
 	:RETURN .T.;
 :ENDPROC;
 

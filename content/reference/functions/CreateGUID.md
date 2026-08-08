@@ -57,7 +57,7 @@ This function takes no parameters.
 
 ### Assign a GUID to a new record
 
-Generates a GUID, assigns it to a new object, and displays the value. The GUID value differs on every call.
+Generates a GUID, assigns it to a new object, and logs the value. The GUID value differs on every call.
 
 ```ssl
 :PROCEDURE PrepareOrderRecord;
@@ -69,7 +69,7 @@ Generates a GUID, assigns it to a new object, and displays the value. The GUID v
 	oOrder:orderId := sOrderId;
 
 	UsrMes("Prepared order record with ID: " + sOrderId);
-	/* Displays the prepared order ID;
+	/* Logs the prepared order ID;
 
 	:RETURN oOrder;
 :ENDPROC;
@@ -90,15 +90,15 @@ Generates one GUID and uses it in three separate messages so related work can be
 
 	sMessage := "Received request " + sRequestId;
 	UsrMes(sMessage);
-	/* Displays the request ID;
+	/* Logs the request ID;
 
 	sMessage := "Queued inventory update for " + sRequestId;
 	UsrMes(sMessage);
-	/* Displays the inventory queue ID;
+	/* Logs the inventory queue ID;
 
 	sMessage := "Queued laboratory work for " + sRequestId;
 	UsrMes(sMessage);
-	/* Displays the laboratory queue ID;
+	/* Logs the laboratory queue ID;
 :ENDPROC;
 
 /* Usage;
@@ -139,7 +139,7 @@ Generates one batch GUID shared across all rows and one unique row GUID per item
 	sLogEntry := "Prepared batch " + sBatchId + " with "
 				 + LimsString(nPrepared) + " import rows";
 	UsrMes(sLogEntry);
-	/* Displays the prepared batch summary;
+	/* Logs the prepared batch summary;
 
 	:RETURN oImportBatch;
 :ENDPROC;
@@ -166,13 +166,13 @@ Generates one batch GUID shared across all rows and one unique row GUID per item
 
 		:IF !bInserted;
 			ErrorMes("Failed to insert import row: " + oRow:rowId);
-			/* Displays an insert failure with the row ID;
+			/* Logs an insert failure with the row ID;
 		:ENDIF;
 	:NEXT;
 
 	UsrMes("Saved " + LimsString(nRowCount) + " import rows for batch "
 			+ oBatch:batchId);
-	/* Displays the saved batch summary;
+	/* Logs the saved batch summary;
 :ENDPROC;
 
 /* Usage;

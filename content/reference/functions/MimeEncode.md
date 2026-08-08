@@ -80,7 +80,7 @@ Encode a plain string and keep the encoded value for later use.
 DoProc("EncodeNote");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Encoded note: <MIME-encoded string>
@@ -99,9 +99,9 @@ Round-trip a message through `MimeEncode` and [`MimeDecode`](MimeDecode.md).
 	sDecodedComment := MimeDecode(sEncodedComment);
 
 	UsrMes("Original: " + sComment);
-	/* Displays: original round-tripped text;
+	/* Logs: original round-tripped text;
 	UsrMes("Decoded: " + sDecodedComment);
-	/* Displays: decoded round-tripped text;
+	/* Logs: decoded round-tripped text;
 :ENDPROC;
 
 /* Usage;
@@ -140,7 +140,7 @@ Encode several strings before placing them into an outbound payload.
 DoProc("BuildEncodedPayload");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Payload ready: <three MIME-encoded strings joined by |>

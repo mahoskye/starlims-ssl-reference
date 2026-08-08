@@ -62,7 +62,7 @@ GetDBMSProviderName(sConnectionName)
 
 ### Get the provider identifier for a connection
 
-Calls the function with an explicit connection name and displays the returned uppercase provider identifier.
+Calls the function with an explicit connection name and logs the returned uppercase provider identifier.
 
 ```ssl
 :PROCEDURE ShowProviderName;
@@ -77,7 +77,7 @@ Calls the function with an explicit connection name and displays the returned up
 DoProc("ShowProviderName");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Provider: SQLSERVER

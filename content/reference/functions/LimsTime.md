@@ -70,8 +70,8 @@ Capture `LimsTime()` once at the start of a step and reuse the value in both the
 	sUserMsg := "Review started for " + sSampleID + " at " + sTime;
 	sAuditMsg := "AUDIT " + sSampleID + " START " + sTime;
 
-	UsrMes(sUserMsg);  /* Displays review start time;
-	InfoMes(sAuditMsg);  /* Displays matching audit time;
+	UsrMes(sUserMsg);  /* Logs review start time;
+	InfoMes(sAuditMsg);  /* Logs matching audit time;
 
 	:RETURN sTime;
 :ENDPROC;
@@ -96,7 +96,7 @@ Pair [`Today()`](Today.md) and `LimsTime()` to build a full timestamp label for 
 	:ENDIF;
 
 	sStamp := "Printed on " + DToC(dPrinted) + " at " + sPrintedTime;
-	UsrMes(sStamp);  /* Displays printed date and time stamp;
+	UsrMes(sStamp);  /* Logs printed date and time stamp;
 
 	:RETURN sStamp;
 :ENDPROC;

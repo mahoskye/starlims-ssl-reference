@@ -75,7 +75,7 @@ Display the current decimal separator in a user-facing message.
 DoProc("DisplayDecimalSeparator");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Decimal separator: .
@@ -96,7 +96,7 @@ Check whether a numeric text value uses the currently configured decimal separat
 	bHasDecimalSep := sDecimalSep $ sRawInput;
 
 	:IF bHasDecimalSep;
-		/* Displays the matching-input message;
+		/* Logs the matching-input message;
 		UsrMes("Input uses the current decimal separator: " + sRawInput);
 	:ELSE;
 		:IF sDecimalSep == "," .AND. bHasPeriod;
@@ -130,9 +130,9 @@ Capture the current separator, switch it temporarily, then restore the original 
 	sCurrentSep := GetDecimalSeparator();
 	nSepCode := GetDecimalSep();
 
-	UsrMes("Previous: " + sPreviousSep);  /* Displays Previous: .;
-	UsrMes("Current: " + sCurrentSep);  /* Displays Current: ,;
-	UsrMes("Current code: " + LimsString(nSepCode));  /* Displays Current code: 44;
+	UsrMes("Previous: " + sPreviousSep);  /* Logs Previous: .;
+	UsrMes("Current: " + sCurrentSep);  /* Logs Current: ,;
+	UsrMes("Current code: " + LimsString(nSepCode));  /* Logs Current code: 44;
 
 	SetDecimalSeparator(sOriginalSep);
 :ENDPROC;

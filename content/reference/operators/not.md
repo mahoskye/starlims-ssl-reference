@@ -87,7 +87,7 @@ Sets `bCanStart` to the opposite of `bIsReady`. With `bIsReady = .F.`, the resul
 DoProc("CheckReadyState");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Sample can start
@@ -121,7 +121,7 @@ Wraps the compound condition in parentheses so `.NOT.` applies to both flags tog
 DoProc("ValidateRelease");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Sample LAB-2024-0042 is not ready for release
@@ -159,7 +159,7 @@ Uses `.NOT. Empty(sResultText)` to test whether a result text was populated. Wit
 DoProc("CheckSampleForApproval");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Sample LAB-2024-0042 is ready for approval

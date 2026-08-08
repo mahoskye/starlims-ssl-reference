@@ -119,7 +119,7 @@ Catch malformed certificate or signature data separately from a normal mismatch.
 
     :CATCH;
         oErr := GetLastSSLError();
-        ErrorMes("Partner message could not be verified: " + oErr:Description);  /* Displays a verification error;
+        ErrorMes("Partner message could not be verified: " + oErr:Description);  /* Logs a verification error;
 
         :RETURN .F.;
     :ENDTRY;
@@ -162,7 +162,7 @@ Loop through a batch of signed records, track mismatches, and capture malformed 
         :CATCH;
             oErr := GetLastSSLError();
             AAdd(aErrorIds, aRecords[nIndex, 1]);
-            UsrMes("Record " + aRecords[nIndex, 1] + " raised an error: " + oErr:Description);  /* Displays the record error;
+            UsrMes("Record " + aRecords[nIndex, 1] + " raised an error: " + oErr:Description);  /* Logs the record error;
         :ENDTRY;
     :NEXT;
 

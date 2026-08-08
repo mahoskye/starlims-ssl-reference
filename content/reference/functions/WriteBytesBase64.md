@@ -86,7 +86,7 @@ This example writes a known base64 string to a file and reports success after th
 
 Call it with `DoProc("SaveLogoImage")`.
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 File written to C:\STARLIMS\Exports\logo.png
@@ -116,7 +116,7 @@ Write the file, then read it back with [`ReadBytesBase64`](ReadBytesBase64.md) t
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes("Failed to write file: " + oErr:Description);
-		/* Displays on failure: write failed;
+		/* Logs on failure: write failed;
 	:ENDTRY;
 :ENDPROC;
 ```

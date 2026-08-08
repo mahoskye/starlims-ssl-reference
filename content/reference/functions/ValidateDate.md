@@ -78,10 +78,10 @@ Pass [`.F.`](../literals/false.md) as the second argument to enable strict `yyyy
 
     :IF bValid;
         UsrMes("Import date is valid: " + sImportDate);
-        /* Displays a valid import-date status;
+        /* Logs a valid import-date status;
     :ELSE;
         UsrMes("Import date is invalid: " + sImportDate);
-        /* Displays an invalid import-date status;
+        /* Logs an invalid import-date status;
     :ENDIF;
 :ENDPROC;
 
@@ -143,14 +143,14 @@ Choose the validation mode based on the source field: `SYSTEM` rows use strict `
             nInvalidCount := nInvalidCount + 1;
             sMessage := sSource + " row has an invalid date: " + sDateText;
             UsrMes(sMessage);
-            /* Displays an invalid-row message;
+            /* Logs an invalid-row message;
         :ENDIF;
     :NEXT;
 
     sMessage := "Valid rows: " + LimsString(nValidCount)
         + ", invalid rows: " + LimsString(nInvalidCount);
     UsrMes(sMessage);
-    /* Displays the validation totals;
+    /* Logs the validation totals;
 :ENDPROC;
 
 /* Usage;

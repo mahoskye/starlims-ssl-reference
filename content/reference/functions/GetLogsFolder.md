@@ -74,7 +74,7 @@ Use the returned folder path directly when constructing a full file name.
 DoProc("ShowLogFilePath");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Log file path: C:\Logs\session.log
@@ -101,7 +101,7 @@ Use the returned folder path with [`Directory`](Directory.md) to count existing 
 DoProc("CountLogFiles");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Log files found: 3

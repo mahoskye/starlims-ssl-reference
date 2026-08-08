@@ -98,7 +98,7 @@ Read a fixed-width prefix from the start of a sample ID.
 DoProc("GetSampleCategory");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 ENV-2024-0042 maps to category Environmental
@@ -122,7 +122,7 @@ Extract the last three status characters without first calculating the string le
 DoProc("GetStatusSuffix");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Suffix: WED
@@ -154,7 +154,7 @@ Locate a delimiter, then return everything after it by omitting `nLength`.
 DoProc("GetBatchNumber");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Batch segment: 2048-17

@@ -111,7 +111,7 @@ Executes a parameterless query on a named connection and reports the length of t
 DoProc("ExportActiveSamples");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Returned XML length: 1243
@@ -172,7 +172,7 @@ Passes a date parameter and an invariant-date column index array, wrapping the c
 		:RETURN sXml;
 	:CATCH;
 		oErr := GetLastSSLError();
-		/* Displays on failure: Import failed;
+		/* Logs on failure: Import failed;
 		ErrorMes("GetDataSetEx failed: " + oErr:Description);
 		:RETURN "";
 	:ENDTRY;

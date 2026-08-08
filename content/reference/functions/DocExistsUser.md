@@ -66,7 +66,7 @@ DocExistsUser(sLoginName, sUserName)
 
 ### Check one user before continuing
 
-Calls `DocExistsUser` with hardcoded login and user names and displays whether the user was found in Documentum.
+Calls `DocExistsUser` with hardcoded login and user names and logs whether the user was found in Documentum.
 
 ```ssl
 :PROCEDURE ValidateApprover;
@@ -79,10 +79,10 @@ Calls `DocExistsUser` with hardcoded login and user names and displays whether t
 
     :IF bExists;
         UsrMes("Approver is available in Documentum: " + sUserName);
-        /* Displays when found;
+        /* Logs when found;
     :ELSE;
         UsrMes("Approver was not found in Documentum: " + sUserName);
-        /* Displays when not found;
+        /* Logs when not found;
     :ENDIF;
 
     :RETURN bExists;

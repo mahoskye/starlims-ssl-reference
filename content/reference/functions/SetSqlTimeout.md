@@ -85,7 +85,7 @@ Save the previous timeout, extend it for a slow query, then restore the original
 		");
 
 		UsrMes("Loaded " + LimsString(ALen(aOrders)) + " recent orders");
-		/* Displays loaded recent orders count;
+		/* Logs loaded recent orders count;
 	:FINALLY;
 		SetSqlTimeout(nPrevTimeout);
 	:ENDTRY;
@@ -160,7 +160,7 @@ Set different timeouts on two named connections, query each, then restore both o
 			"Operational rows: " + LimsString(aOpsRows[1, 1])
 			+ ", archive rows: " + LimsString(aArchiveRows[1, 1])
 		);
-		/* Displays operational and archive row counts;
+		/* Logs operational and archive row counts;
 	:FINALLY;
 		SetSqlTimeout(nArchivePrevTimeout, "ARCHIVE");
 		SetSqlTimeout(nOpsPrevTimeout, "LIMS");

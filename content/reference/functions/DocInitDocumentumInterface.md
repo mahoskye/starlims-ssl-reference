@@ -73,7 +73,7 @@ Shows the minimum setup pattern: initializes the Documentum context, attempts a 
 
     :IF .NOT. bLoggedIn;
         ErrorMes("Documentum login failed: " + DocGetErrorMessage());
-        /* Displays on failure: login failed with an error message;
+        /* Logs on failure: login failed with an error message;
         DocEndDocumentumInterface();
 
         :RETURN;
@@ -107,7 +107,7 @@ Demonstrates reconnecting to a second repository by calling `DocInitDocumentumIn
 
     :IF .NOT. bLoggedIn;
         ErrorMes("Initial login failed: " + DocGetErrorMessage());
-        /* Displays on failure: first login failed with an error message;
+        /* Logs on failure: first login failed with an error message;
         DocEndDocumentumInterface();
 
         :RETURN;
@@ -123,7 +123,7 @@ Demonstrates reconnecting to a second repository by calling `DocInitDocumentumIn
 
     :IF .NOT. bLoggedIn;
         ErrorMes("Second login failed: " + DocGetErrorMessage());
-        /* Displays on failure: second login failed with an error message;
+        /* Logs on failure: second login failed with an error message;
         DocEndDocumentumInterface();
 
         :RETURN;

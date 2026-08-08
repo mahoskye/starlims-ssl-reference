@@ -97,7 +97,7 @@ Round one value for display and treat the result as text.
 DoProc("FormatReportedValue");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Reported value: <rounded value>
@@ -128,7 +128,7 @@ Run the same input through each supported standard so a review script can show t
 		sRounded := StdRound(sStandard, nDigits, nValue);
 		sLine := sStandard + ": " + sRounded;
 
-		UsrMes(sLine);  /* Displays one line for the current standard;
+		UsrMes(sLine);  /* Logs one line for the current standard;
 	:NEXT;
 :ENDPROC;
 
@@ -156,7 +156,7 @@ Keep the original fixed-width `ISO` string for export logic, but derive a trimme
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes("BuildIsoExportValue failed: " + oErr:Description);
-		/* Displays on failure: BuildIsoExportValue failed;
+		/* Logs on failure: BuildIsoExportValue failed;
 
 		:RETURN "";
 	:ENDTRY;

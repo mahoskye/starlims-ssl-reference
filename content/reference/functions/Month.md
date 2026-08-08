@@ -82,7 +82,7 @@ Extract the month from a known date and display it. `CToD("03/15/2024")` falls i
 DoProc("GetReceiveMonth");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Received in month 3
@@ -102,9 +102,9 @@ Received in month 3
     :IF nMonth == 0;
         UsrMes(
             "No month is available because the date is empty"
-        );  /* Displays the empty-date message;
+        );  /* Logs the empty-date message;
     :ELSE;
-        UsrMes("Review month is " + LimsString(nMonth));  /* Displays the month number when present;
+        UsrMes("Review month is " + LimsString(nMonth));  /* Logs the month number when present;
     :ENDIF;
 
     :RETURN nMonth;
@@ -158,7 +158,7 @@ Use the defaults (`nTargetMonth = 3`, `nTargetYear = 2024`) to filter four sampl
 DoProc("FilterRunsByMonthYear");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Found 2 run(s) for 3/2024

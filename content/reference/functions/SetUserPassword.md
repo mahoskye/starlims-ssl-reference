@@ -81,12 +81,12 @@ Update one user and confirm that the function returned a stored hash.
 
 	:IF Empty(sStoredHash);
 		ErrorMes("Password update did not complete for " + sUserName);
-		/* Displays on failure: password update did not complete;
+		/* Logs on failure: password update did not complete;
 		:RETURN "";
 	:ENDIF;
 
 	UsrMes("Password updated for " + sUserName);
-	/* Displays on success: password updated;
+	/* Logs on success: password updated;
 
 	:RETURN sStoredHash;
 :ENDPROC;
@@ -119,7 +119,7 @@ Require the current password to be correct before storing the new one.
 	:ENDIF;
 
 	UsrMes("Password updated successfully for " + sUserName);
-	/* Displays on success: password updated successfully;
+	/* Logs on success: password updated successfully;
 
 	:RETURN sStoredHash;
 :ENDPROC;
@@ -154,7 +154,7 @@ Process multiple requested resets, skipping values that already appear in each u
 
 		:IF !ChkNewPassword(sNewPassword, aPrevPasswords);
 			UsrMes("Skipped " + sUserName + " because the password was used before.");
-			/* Displays when skipped: password was used before;
+			/* Logs when skipped: password was used before;
 			:LOOP;
 		:ENDIF;
 
@@ -162,12 +162,12 @@ Process multiple requested resets, skipping values that already appear in each u
 
 		:IF Empty(sStoredHash);
 			ErrorMes("Password update did not complete for " + sUserName);
-			/* Displays on failure: password update did not complete;
+			/* Logs on failure: password update did not complete;
 			:LOOP;
 		:ENDIF;
 
 		UsrMes("Password updated for " + sUserName);
-		/* Displays on success: password updated;
+		/* Logs on success: password updated;
 	:NEXT;
 :ENDPROC;
 

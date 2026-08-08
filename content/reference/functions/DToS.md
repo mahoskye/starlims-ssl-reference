@@ -65,7 +65,7 @@ DToS(dDate)
 
 ### Build a fixed-format date key for export or sorting
 
-Converts a date to an 8-character `yyyyMMdd` key and displays it.
+Converts a date to an 8-character `yyyyMMdd` key and logs it.
 
 ```ssl
 :PROCEDURE BuildSampleDateKey;
@@ -81,7 +81,7 @@ Converts a date to an 8-character `yyyyMMdd` key and displays it.
 DoProc("BuildSampleDateKey");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Sample date key: 20240315

@@ -91,7 +91,7 @@ Iterates from 1 to 10 using `:TO 10` as the inclusive upper bound. Each iteratio
 DoProc("CountToTen");
 ```
 
-`UsrMes` displays one line per iteration:
+`UsrMes` logs one line per iteration:
 
 ```text
 Step 1
@@ -122,7 +122,7 @@ Sets the `:TO` value from the array length so the loop processes every element. 
 DoProc("ProcessSampleBatch");
 ```
 
-`UsrMes` displays one line per iteration:
+`UsrMes` logs one line per iteration:
 
 ```text
 Processing S-1001
@@ -153,7 +153,7 @@ Pairs `:TO` with [`:STEP`](STEP.md) `-1` to count downward from 5 to the inclusi
 DoProc("BuildCountdown");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Countdown: 5 items

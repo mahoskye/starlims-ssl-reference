@@ -72,7 +72,7 @@ Exits the [`:WHILE`](WHILE.md) loop as soon as a missing sample ID is detected. 
         :IF Empty(sSampleID);
             bCriticalError := .T.;
             sErrorMsg := "Sample ID is required at position " + LimsString(nIndex);
-            ErrorMes(sErrorMsg);  /* Displays on failure: missing sample ID message;
+            ErrorMes(sErrorMsg);  /* Logs on failure: missing sample ID message;
             :EXITWHILE;
         :ENDIF;
 
@@ -140,7 +140,7 @@ DoProc("ValidateSampleBatch");
 DoProc("FindTargetCell");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Row 2, Col 2

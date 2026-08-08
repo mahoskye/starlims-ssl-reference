@@ -80,7 +80,7 @@ Turn an SSLError value from a [`:CATCH`](../keywords/CATCH.md) block into a read
 DoProc("LogCaughtError");
 ```
 
-`ErrorMes` displays a dialog with caption `Query failed` and the formatted SQL error message text.
+`ErrorMes` logs a message with caption `Query failed` and the formatted SQL error message text.
 
 ### Handle a return value of unknown type
 
@@ -99,7 +99,7 @@ Format a result that may be an SSLError object or a plain value — the function
 DoProc("ReportServiceResult", {oErr});
 ```
 
-`ErrorMes` displays a dialog with caption `Service error` and the formatted message string.
+`ErrorMes` logs a message with caption `Service error` and the formatted message string.
 
 ## Related
 

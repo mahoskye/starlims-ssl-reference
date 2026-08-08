@@ -99,7 +99,7 @@ Collects all even numbers from 2 to `nLimit` using `:STEP 2`. With `nLimit` set 
 DoProc("CountByTwos");
 ```
 
-[`InfoMes`](../functions/InfoMes.md) displays:
+[`InfoMes`](../functions/InfoMes.md) logs:
 
 ```text
 Found 5 even numbers up to 10
@@ -129,7 +129,7 @@ Builds a countdown array from 5 to 1 using `:STEP -1`. With five iterations in d
 DoProc("BuildCountdown");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Countdown length: 5
@@ -162,7 +162,7 @@ Validates the step before entering the loop to prevent an infinite loop when the
 DoProc("CollectPositions", {1, 10, 0});
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Step must not be zero

@@ -80,7 +80,7 @@ Guards against a missing property before attempting to read it, then adds the pr
     :IF !HasProperty(oUserProfile, "Email");
         sNotificationText := "Notification cannot be sent because Email is missing.";
         UsrMes(sNotificationText);
-        /* Displays missing-email message;
+        /* Logs missing-email message;
     :ENDIF;
 
     AddProperty(oUserProfile, "Email");
@@ -89,7 +89,7 @@ Guards against a missing property before attempting to read it, then adds the pr
     :IF HasProperty(oUserProfile, "Email");
         sNotificationText := "Sending notification to " + oUserProfile:Email;
         UsrMes(sNotificationText);
-        /* Displays email notification message;
+        /* Logs email notification message;
     :ENDIF;
 
     :RETURN .T.;
@@ -140,7 +140,7 @@ Iterates over several properties, updating only those that exist on the object. 
 DoProc("UpdateSampleFields");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Fields updated: 2

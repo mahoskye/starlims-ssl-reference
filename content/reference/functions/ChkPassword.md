@@ -64,7 +64,7 @@ ChkPassword([sUserName], [sPassword])
 
 ### Validate credentials from a login form
 
-Validates a user name and password passed as procedure parameters and displays an accepted or rejected message based on the result.
+Validates a user name and password passed as procedure parameters and logs an accepted or rejected message based on the result.
 
 ```ssl
 :PROCEDURE ValidateLogin;
@@ -88,7 +88,7 @@ Validates a user name and password passed as procedure parameters and displays a
 DoProc("ValidateLogin", {"jsmith", "SecurePass123"});
 ```
 
-[`UsrMes`](UsrMes.md) displays one of:
+[`UsrMes`](UsrMes.md) logs one of:
 
 ```text
 Credentials accepted for jsmith
@@ -100,7 +100,7 @@ Credentials were not accepted for jsmith
 
 ### Re-authenticate the current session user
 
-Passes [`NIL`](../literals/nil.md) for `sUserName` so `ChkPassword` uses the current session user from [`GetUserData`](GetUserData.md), and displays the result.
+Passes [`NIL`](../literals/nil.md) for `sUserName` so `ChkPassword` uses the current session user from [`GetUserData`](GetUserData.md), and logs the result.
 
 ```ssl
 :PROCEDURE ConfirmCurrentUser;
@@ -123,7 +123,7 @@ Passes [`NIL`](../literals/nil.md) for `sUserName` so `ChkPassword` uses the cur
 DoProc("ConfirmCurrentUser", {"SecurePass123"});
 ```
 
-[`UsrMes`](UsrMes.md) displays one of:
+[`UsrMes`](UsrMes.md) logs one of:
 
 ```text
 Re-authentication succeeded for jsmith
@@ -165,7 +165,7 @@ Accepts either a `DOMAIN\user` name or a plain application user name, then calls
 DoProc("ChangePasswordAfterCheck", {"jsmith", "OldPass123", "NewSecurePass!"});
 ```
 
-[`UsrMes`](UsrMes.md) or [`ErrorMes`](ErrorMes.md) displays one of:
+[`UsrMes`](UsrMes.md) or [`ErrorMes`](ErrorMes.md) logs one of:
 
 ```text
 Current credentials were not accepted.

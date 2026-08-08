@@ -100,7 +100,7 @@ Use [`GetLastSQLError()`](../functions/GetLastSQLError.md) inside [`:CATCH`](../
 		sMsg += Chr(13) + Chr(10) + "GenCode: " + LimsString(oErr:GenCode);
 		sMsg += Chr(13) + Chr(10) + "SQL: " + oErr:Sql;
 
-		UsrMes(sMsg); /* Displays SQL error details on failure;
+		UsrMes(sMsg); /* Logs SQL error details on failure;
 	:ENDTRY;
 :ENDPROC;
 

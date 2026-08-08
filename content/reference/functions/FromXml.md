@@ -94,7 +94,7 @@ Pass a type-tagged XML string directly to recover the original SSL value.
 DoProc("ParseXmlInteger");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Parsed value: 42
@@ -123,7 +123,7 @@ Use [`ToXml`](ToXml.md) to serialize an array and `FromXml` to restore it, verif
 DoProc("RoundTripArray");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 10
@@ -153,7 +153,7 @@ Catch and report the error when the XML contains an unrecognized tag name.
 DoProc("ParseXmlWithErrorHandling");
 ```
 
-[`ErrorMes`](ErrorMes.md) displays:
+[`ErrorMes`](ErrorMes.md) logs:
 
 ```text
 Parse failed: Unknown tag <person> in XML structure!

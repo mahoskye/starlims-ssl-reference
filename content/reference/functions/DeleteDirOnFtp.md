@@ -84,7 +84,7 @@ DeleteDirOnFtp(
 
 ### Delete an empty FTP archive folder
 
-Removes a completed archive folder from an FTP server and displays whether the delete succeeded or was rejected.
+Removes a completed archive folder from an FTP server and logs whether the delete succeeded or was rejected.
 
 ```ssl
 :PROCEDURE RemoveArchiveFolder;
@@ -99,10 +99,10 @@ Removes a completed archive folder from an FTP server and displays whether the d
 
     :IF bDeleted;
         UsrMes("Archive folder removed: " + sRemoteDir);
-        /* Displays the removed folder path;
+        /* Logs the removed folder path;
     :ELSE;
         UsrMes("Archive folder could not be removed: " + sRemoteDir);
-        /* Displays the folder that could not be removed;
+        /* Logs the folder that could not be removed;
     :ENDIF;
 
     :RETURN bDeleted;
@@ -140,16 +140,16 @@ Uses SFTP key authentication to delete a drop folder, handling connection setup 
 
         :IF bDeleted;
             UsrMes("SFTP folder removed: " + sRemoteDir);
-            /* Displays the removed SFTP folder path;
+            /* Logs the removed SFTP folder path;
         :ELSE;
             UsrMes("SFTP folder could not be removed: " + sRemoteDir);
-            /* Displays the rejected SFTP folder path;
+            /* Logs the rejected SFTP folder path;
         :ENDIF;
 
     :CATCH;
         oErr := GetLastSSLError();
         UsrMes("SFTP setup failed: " + oErr:Description);
-        /* Displays the setup failure details;
+        /* Logs the setup failure details;
         :RETURN .F.;
     :ENDTRY;
 
@@ -187,7 +187,7 @@ Verifies the remote folder is empty with [`GetDirFromFtp`](GetDirFromFtp.md) bef
                 "Remote folder is not empty. Leaving it in place: "
                 + sRemoteDir
             );
-            /* Displays the non-empty folder path;
+            /* Logs the non-empty folder path;
             :RETURN .F.;
         :ENDIF;
 
@@ -195,19 +195,19 @@ Verifies the remote folder is empty with [`GetDirFromFtp`](GetDirFromFtp.md) bef
 
         :IF .NOT. bDeleted;
             UsrMes("Remote folder delete failed: " + sRemoteDir);
-            /* Displays the folder that failed to delete;
+            /* Logs the folder that failed to delete;
             :RETURN .F.;
         :ENDIF;
 
     :CATCH;
         oErr := GetLastSSLError();
         UsrMes("Remote folder cleanup failed: " + oErr:Description);
-        /* Displays the cleanup failure details;
+        /* Logs the cleanup failure details;
         :RETURN .F.;
     :ENDTRY;
 
     UsrMes("Remote folder cleanup complete: " + sRemoteDir);
-    /* Displays the cleaned folder path;
+    /* Logs the cleaned folder path;
 
     :RETURN .T.;
 :ENDPROC;

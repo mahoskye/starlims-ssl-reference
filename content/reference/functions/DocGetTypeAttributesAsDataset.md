@@ -64,7 +64,7 @@ Returns `""` when the underlying Documentum call does not return a dataset.
 
 ### Retrieve attributes for a known type
 
-Initializes Documentum, fetches the attribute dataset for `dm_document`, and displays it when the call succeeds and returns a non-empty result.
+Initializes Documentum, fetches the attribute dataset for `dm_document`, and logs it when the call succeeds and returns a non-empty result.
 
 ```ssl
 :PROCEDURE ShowTypeAttributes;
@@ -86,7 +86,7 @@ Initializes Documentum, fetches the attribute dataset for `dm_document`, and dis
 DoProc("ShowTypeAttributes");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Attributes for dm_document:
@@ -109,7 +109,7 @@ Retrieves the attribute dataset for a caller-supplied type name, distinguishing 
     :IF DocCommandFailed();
         sErrMsg := DocGetErrorMessage();
         UsrMes("Unable to load type attributes: " + sErrMsg);
-        /* Displays on failure: Unable to load type attributes;
+        /* Logs on failure: Unable to load type attributes;
         DocEndDocumentumInterface();
         :RETURN "";
     :ENDIF;
@@ -143,7 +143,7 @@ Calls `DocGetTypeAttributesAsDataset` twice to retrieve source and target type d
     :IF DocCommandFailed();
         sErrMsg := DocGetErrorMessage();
         UsrMes("Failed to read source type attributes: " + sErrMsg);
-        /* Displays on source failure: Failed to read source type attributes;
+        /* Logs on source failure: Failed to read source type attributes;
         DocEndDocumentumInterface();
         :RETURN .F.;
     :ENDIF;
@@ -153,7 +153,7 @@ Calls `DocGetTypeAttributesAsDataset` twice to retrieve source and target type d
     :IF DocCommandFailed();
         sErrMsg := DocGetErrorMessage();
         UsrMes("Failed to read target type attributes: " + sErrMsg);
-        /* Displays on target failure: Failed to read target type attributes;
+        /* Logs on target failure: Failed to read target type attributes;
         DocEndDocumentumInterface();
         :RETURN .F.;
     :ENDIF;

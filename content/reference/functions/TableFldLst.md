@@ -86,7 +86,7 @@ Call `TableFldLst` with an explicit connection name and use the returned array l
     aFieldNames := TableFldLst(sConnectionName, sTableName);
 
     UsrMes("sample has " + LimsString(ALen(aFieldNames)) + " fields");
-    /* Displays: sample has <n> fields;
+    /* Logs: sample has <n> fields;
 
     :RETURN aFieldNames;
 :ENDPROC;
@@ -136,7 +136,7 @@ Wrap the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md)
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("Unable to read audit_log fields: " + oErr:Description);
-        /* Displays on failure: audit_log read failed;
+        /* Logs on failure: audit_log read failed;
 
         :RETURN {};
     :ENDTRY;

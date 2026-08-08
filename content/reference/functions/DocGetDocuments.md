@@ -93,14 +93,14 @@ Calls `DocGetDocuments` without a type filter to list all `dm_document` entries 
 
 	:IF nCount == 0;
 		UsrMes("No documents found in " + sFolderPath);
-		/* Displays when the folder is empty;
+		/* Logs when the folder is empty;
 
 		:RETURN aDocuments;
 	:ENDIF;
 
 	:FOR nIndex := 1 :TO nCount;
 		UsrMes(aDocuments[nIndex, 2]);
-		/* Displays each document name;
+		/* Logs each document name;
 	:NEXT;
 
 	:RETURN aDocuments;
@@ -125,7 +125,7 @@ Passes an explicit document type to `DocGetDocuments` and prints the ID, name, a
 
 	:IF nCount == 0;
 		UsrMes("No matching documents found in " + sFolderPath);
-		/* Displays when no matching documents are found;
+		/* Logs when no matching documents are found;
 
 		:RETURN aDocuments;
 	:ENDIF;
@@ -135,7 +135,7 @@ Passes an explicit document type to `DocGetDocuments` and prints the ID, name, a
 					+ aDocuments[nIndex, 2] + " | "
 					+ aDocuments[nIndex, 4];
 		UsrMes(sMessage);
-		/* Displays the ID, name, and content type;
+		/* Logs the ID, name, and content type;
 	:NEXT;
 
 	:RETURN aDocuments;
@@ -147,7 +147,7 @@ DoProc("GetTypedDocuments");
 
 ### Group results by checkout status
 
-Fetches documents from a folder and counts how many are checked in, checked out, or locked, then displays a summary line.
+Fetches documents from a folder and counts how many are checked in, checked out, or locked, then logs a summary line.
 
 ```ssl
 :PROCEDURE SummarizeDocumentStatuses;
@@ -163,7 +163,7 @@ Fetches documents from a folder and counts how many are checked in, checked out,
 
 	:IF nCount == 0;
 		UsrMes("No matching documents found in " + sFolderPath);
-		/* Displays when no matching documents are found;
+		/* Logs when no matching documents are found;
 
 		:RETURN aDocuments;
 	:ENDIF;
@@ -189,7 +189,7 @@ Fetches documents from a folder and counts how many are checked in, checked out,
 				+ ", checkedout: " + LimsString(nCheckedOut)
 				+ ", locked: " + LimsString(nLocked);
 	UsrMes(sSummary);
-	/* Displays the total and status counts;
+	/* Logs the total and status counts;
 
 	:RETURN aDocuments;
 :ENDPROC;

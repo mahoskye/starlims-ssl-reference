@@ -87,7 +87,7 @@ Compares `nReading` against `nMinimum`. With 12 < 15, the result is [`.T.`](../l
 DoProc("CheckMinimumThreshold");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Reading is below the minimum threshold
@@ -120,7 +120,7 @@ Compares two dates. With 03/28/2024 < 03/31/2024, the result is [`.T.`](../liter
 DoProc("CheckDateCutoff");
 ```
 
-[`InfoMes`](../functions/InfoMes.md) displays:
+[`InfoMes`](../functions/InfoMes.md) logs:
 
 ```text
 Sample date is before the cutoff: 03/28/2024
@@ -155,7 +155,7 @@ Uses [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) when operan
 DoProc("CompareDynamicValues");
 ```
 
-[`InfoMes`](../functions/InfoMes.md) displays an error message. The exact description varies by runtime:
+[`InfoMes`](../functions/InfoMes.md) logs an error message. The exact description varies by runtime:
 
 ```text
 Comparison failed: <runtime error description>

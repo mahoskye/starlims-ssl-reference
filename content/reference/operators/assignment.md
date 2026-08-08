@@ -75,7 +75,7 @@ aItems[2] := "Updated";
 
 ### Assigning a calculation result
 
-Stores the computed total in `nSubtotal` using `:=` and displays it.
+Stores the computed total in `nSubtotal` using `:=` and logs it.
 
 ```ssl
 :PROCEDURE CalculateOrderTotal;
@@ -95,7 +95,7 @@ Stores the computed total in `nSubtotal` using `:=` and displays it.
 DoProc("CalculateOrderTotal");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Subtotal: 89.85
@@ -116,9 +116,9 @@ Updates `oTask:Status` via property assignment and `aSteps[3]` via index assignm
     aSteps[3] := "Reviewed";
 
     UsrMes("Task status: " + oTask:Status);
-    /* Displays the updated task status;
+    /* Logs the updated task status;
     UsrMes("Final step: " + aSteps[3]);
-    /* Displays the updated final step;
+    /* Logs the updated final step;
 
     :RETURN oTask:Status;
 :ENDPROC;
@@ -143,9 +143,9 @@ Uses one chained assignment to set both `sPrimary` and `sSecondary` to the same 
     aAlias[2] := "Reviewed";
 
     UsrMes("Primary: " + sPrimary + ", Secondary: " + sSecondary);
-    /* Displays both assigned status values;
+    /* Logs both assigned status values;
     UsrMes("Original second item: " + aOriginal[2]);
-    /* Displays the shared second array item;
+    /* Logs the shared second array item;
 
     :RETURN aOriginal[2];
 :ENDPROC;

@@ -61,7 +61,7 @@ DOY(dDate)
 
 ### Get the day-of-year for a date
 
-Converts a date string, calls `DOY`, and displays the day-of-year number with the formatted date.
+Converts a date string, calls `DOY`, and logs the day-of-year number with the formatted date.
 
 ```ssl
 :PROCEDURE ShowDayOfYear;
@@ -83,7 +83,7 @@ Converts a date string, calls `DOY`, and displays the day-of-year number with th
 DoProc("ShowDayOfYear");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 03/15/2024 is day 75 of the year.
@@ -101,7 +101,7 @@ Uses [`Empty`](Empty.md) to detect an empty date before calling `DOY`, avoiding 
 
 	:IF Empty(dPlannedDate);
 		UsrMes("Planned date is empty. Skip DOY until a real date is available.");
-		/* Displays when the planned date is empty;
+		/* Logs when the planned date is empty;
 		:RETURN 0;
 	:ENDIF;
 
@@ -111,7 +111,7 @@ Uses [`Empty`](Empty.md) to detect an empty date before calling `DOY`, avoiding 
 				+ LimsString(nDayOfYear) + " of the year.";
 
 	UsrMes(sMessage);
-	/* Displays the planned date and its day-of-year;
+	/* Logs the planned date and its day-of-year;
 
 	:RETURN nDayOfYear;
 :ENDPROC;
@@ -148,7 +148,7 @@ Iterates five dates spanning both a regular and a leap year, displaying the day-
 		:ENDIF;
 
 		UsrMes(sMessage);
-		/* Displays one line per date;
+		/* Logs one line per date;
 	:NEXT;
 
 	:RETURN ALen(aDates);

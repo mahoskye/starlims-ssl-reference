@@ -160,19 +160,19 @@ Wrap `LimsSqlConnect` in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CAT
 
         :IF !bConnected;
             UsrMes("Connection name is not available: " + sConnectionName);
-            /* Displays when the connection name is unavailable;
+            /* Logs when the connection name is unavailable;
             :RETURN .F.;
         :ENDIF;
 
         :IF IsDBConnected(sConnectionName);
             UsrMes("Connection registered successfully: " + sConnectionName);
-            /* Displays when registration succeeds;
+            /* Logs when registration succeeds;
         :ENDIF;
 
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("Connection registration failed: " + oErr:Description);
-        /* Displays on failure: connection registration failed;
+        /* Logs on failure: connection registration failed;
         :RETURN .F.;
     :ENDTRY;
 

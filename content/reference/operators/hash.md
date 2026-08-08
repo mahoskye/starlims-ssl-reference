@@ -93,7 +93,7 @@ Sets `bMismatch` to [`.T.`](../literals/true.md) when `nMeasured` and `nExpected
 DoProc("CompareTwoNumbers");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Values differ? YES
@@ -115,7 +115,7 @@ Shows that `#` on two distinct arrays always returns [`.T.`](../literals/true.md
     bChanged := aPrevious # aCurrent;
     sResult := "Reference differs? " + IIf(bChanged, "YES", "NO");
     UsrMes(sResult);
-    /* Displays: Reference differs? YES;
+    /* Logs: Reference differs? YES;
 
     /* Element-wise walk: contents are equal;
     bAnyDiffer := .F.;
@@ -133,7 +133,7 @@ Shows that `#` on two distinct arrays always returns [`.T.`](../literals/true.md
 
     sResult := "Any element differs? " + IIf(bAnyDiffer, "YES", "NO");
     UsrMes(sResult);
-    /* Displays: Any element differs? NO;
+    /* Logs: Any element differs? NO;
 
     /* Mutate one element and re-check;
     aCurrent[2] := "LAB-099";
@@ -147,7 +147,7 @@ Shows that `#` on two distinct arrays always returns [`.T.`](../literals/true.md
 
     sResult := "Any element differs after edit? " + IIf(bAnyDiffer, "YES", "NO");
     UsrMes(sResult);
-    /* Displays: Any element differs after edit? YES;
+    /* Logs: Any element differs after edit? YES;
 
     :RETURN bAnyDiffer;
 :ENDPROC;

@@ -107,7 +107,7 @@ Extract the 3-character status code from the start of the record using `Left`, t
 DoProc("ParseHeader");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Status=ACT, Sample=SAM00012345

@@ -90,7 +90,7 @@ Use the default behavior to get the first exact substring match.
 DoProc("FindFirstComma");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 First comma found at position 6
@@ -114,7 +114,7 @@ Use occurrence mode explicitly when you need the Nth match rather than the first
         :RETURN 0;
     :ENDIF;
 
-    UsrMes("Second marker starts at position " + LimsString(nPos));  /* Displays sample second marker position;
+    UsrMes("Second marker starts at position " + LimsString(nPos));  /* Logs sample second marker position;
 
     :RETURN nPos;
 :ENDPROC;
@@ -140,8 +140,8 @@ Use start-position mode to continue searching after a known result without recou
 
     nSecondPipe := StrSrch("|", sHeader, nFirstPipe + 1, .T.);
 
-    UsrMes("First pipe: " + LimsString(nFirstPipe));  /* Displays sample first pipe position;
-    UsrMes("Second pipe: " + LimsString(nSecondPipe));  /* Displays sample second pipe position;
+    UsrMes("First pipe: " + LimsString(nFirstPipe));  /* Logs sample first pipe position;
+    UsrMes("Second pipe: " + LimsString(nSecondPipe));  /* Logs sample second pipe position;
 
     :RETURN nSecondPipe;
 :ENDPROC;

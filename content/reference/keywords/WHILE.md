@@ -110,7 +110,7 @@ Reads simulated input, continuing only while the source returns non-empty, non-`
 DoProc("ProcessUserInputs");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Processed 4 inputs
@@ -153,7 +153,7 @@ Applies Newton's method to approximate a square root, looping until successive e
 DoProc("DemonstrateIteration");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays twice:
+[`UsrMes`](../functions/UsrMes.md) logs twice:
 
 ```text
 Square root of 50 = 7.07...
@@ -228,7 +228,7 @@ Scans a 4×3 sample grid to find `"SAMPLE-003"`, exiting the inner loop with [`:
 DoProc("ProcessSampleMatrix");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Row 1 scanned. Row 2 scanned. Target found at row 3, col 1.

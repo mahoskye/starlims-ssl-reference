@@ -83,7 +83,7 @@ Each ASCII character in `"ABC-12345"` is encoded as two uppercase hex digits and
 DoProc("EncodeSampleId");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Hex value: 4142432D3132333435
@@ -113,7 +113,7 @@ Positive 255 produces a zero-padded 8-character string. Negative `-9847` is mapp
 DoProc("ShowLegacyIdsAsHex");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Current ID hex: 000000FF
@@ -154,7 +154,7 @@ Call `LToHex` with an empty string, a whole number, and a non-integer to observe
 DoProc("ValidateHexInput");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Whole-number hex: 00000400

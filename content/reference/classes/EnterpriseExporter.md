@@ -110,7 +110,7 @@ Passes a named table list in default mode. Because `DoExport()` does not report 
 	:IF bSuccess;
 		UsrMes("Export run completed. Review the log file for per-table results.");
 	:ELSE;
-		/* Displays on failure: final exporter message;
+		/* Logs on failure: final exporter message;
 		UsrMes("Export failed: " + oExporter:ErrorMsg);
 	:ENDIF;
 
@@ -138,7 +138,7 @@ Sets `IsEnterpriseOnly` and passes a table entry array where each entry's second
 	bSuccess := oExporter:DoExport();
 
 	:IF .NOT. bSuccess;
-		/* Displays on failure: final exporter message;
+		/* Logs on failure: final exporter message;
 		UsrMes("Enterprise-only export failed: " + oExporter:ErrorMsg);
 	:ENDIF;
 
@@ -177,7 +177,7 @@ ORDER BY sample_id
 	bSuccess := oExporter:DoExport();
 
 	:IF .NOT. bSuccess;
-		/* Displays on failure: final exporter message;
+		/* Logs on failure: final exporter message;
 		UsrMes("SQL-mode export failed: " + oExporter:ErrorMsg);
 	:ENDIF;
 

@@ -85,7 +85,7 @@ sBasePath := "C:\STARLIMS\Config";
 
     sMessage := "Base path is: " + sBasePath;
     UsrMes(sMessage);
-    /* Displays the configured base path;
+    /* Logs the configured base path;
 :ENDPROC;
 
 :PROCEDURE CheckConfig;
@@ -120,7 +120,7 @@ Shows that `:PUBLIC` can appear in normal procedure flow and still create shared
     sCurrentOrderNo := sOrderNo;
     bWorkflowReady := .T.;
     UsrMes("Workflow initialized for order " + sCurrentOrderNo);
-    /* Displays the initialized order number;
+    /* Logs the initialized order number;
 :ENDPROC;
 
 :PROCEDURE RunWorkflow;
@@ -133,7 +133,7 @@ Shows that `:PUBLIC` can appear in normal procedure flow and still create shared
 
     sMessage := "Running workflow for order " + sCurrentOrderNo;
     UsrMes(sMessage);
-    /* Displays the active workflow order;
+    /* Logs the active workflow order;
 
     :RETURN .T.;
 :ENDPROC;

@@ -105,11 +105,11 @@ Use the built-in default filter and handle lookup failures explicitly.
             sBaseDn
         );
 
-        /* Displays the resolved distinguished name;
+        /* Logs the resolved distinguished name;
         UsrMes("Found DN: " + sUserDn);
     :CATCH;
         oErr := GetLastSSLError();
-        /* Displays the lookup failure reason;
+        /* Logs the lookup failure reason;
         ErrorMes("LDAP lookup failed: " + oErr:Description);
     :ENDTRY;
 :ENDPROC;
@@ -144,7 +144,7 @@ Supply a custom filter pattern when the account name is stored in a different at
 
 Call with `DoProc("GetUserDnBySamAccountName")`.
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Found DN: <distinguished name>
@@ -185,15 +185,15 @@ Use `SearchLDAPUser` as the lookup step in a larger workflow, then persist the r
         ",, {sUserDn, sSearchUserName});
 
         :IF bUpdated;
-            /* Displays the successful update target;
+            /* Logs the successful update target;
             UsrMes("Stored LDAP DN for " + sSearchUserName);
         :ELSE;
-            /* Displays the user name that could not be stored;
+            /* Logs the user name that could not be stored;
             ErrorMes("Could not store LDAP DN for " + sSearchUserName);
         :ENDIF;
     :CATCH;
         oErr := GetLastSSLError();
-        /* Displays the workflow failure reason;
+        /* Logs the workflow failure reason;
         ErrorMes("LDAP workflow failed: " + oErr:Description);
     :ENDTRY;
 :ENDPROC;

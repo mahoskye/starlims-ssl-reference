@@ -91,7 +91,7 @@ nResult := DoProc("CalculateTotalWithTax", {25, 4});
 UsrMes(LimsString(nResult));
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 108
@@ -125,7 +125,7 @@ aSamples := SQLExecute("
 
 ### Return from TRY or CATCH while FINALLY still cleans up
 
-Demonstrates that [`:FINALLY`](FINALLY.md) always runs even when `:RETURN` exits from [`:TRY`](TRY.md) or [`:CATCH`](CATCH.md). Regardless of which branch returns, the cleanup message displays.
+Demonstrates that [`:FINALLY`](FINALLY.md) always runs even when `:RETURN` exits from [`:TRY`](TRY.md) or [`:CATCH`](CATCH.md). Regardless of which branch returns, the cleanup message is logged.
 
 ```ssl
 :PROCEDURE LoadBatchStatus;
@@ -166,7 +166,7 @@ Demonstrates that [`:FINALLY`](FINALLY.md) always runs even when `:RETURN` exits
 DoProc("LoadBatchStatus", {"B-1001"});
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays before the procedure returns:
+[`UsrMes`](../functions/UsrMes.md) logs before the procedure returns:
 
 ```text
 Batch status lookup finished

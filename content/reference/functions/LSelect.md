@@ -101,7 +101,7 @@ Skip `aFieldList` and `sConnectionName` with adjacent commas, then pass the valu
 
 	:FOR nIndex := 1 :TO ALen(aRows);
 		UsrMes("Sample " + LimsString(aRows[nIndex, 1]) + " is " + LimsString(aRows[nIndex, 2]));
-		/* Displays one line per returned row;
+		/* Logs one line per returned row;
 	:NEXT;
 
 	:RETURN aRows;
@@ -163,10 +163,10 @@ Pass [`.F.`](../literals/false.md) for `bNullAsBlank` and name both date columns
 
 		:IF dClosedDate = NIL;
 			UsrMes("Audit " + LimsString(aRows[nIndex, 1]) + " is still open");
-			/* Displays when no closed date is returned;
+			/* Logs when no closed date is returned;
 		:ELSE;
 			UsrMes("Audit " + LimsString(aRows[nIndex, 1]) + " closed on " + DToC(dClosedDate));
-			/* Displays the audit close date;
+			/* Logs the audit close date;
 		:ENDIF;
 	:NEXT;
 

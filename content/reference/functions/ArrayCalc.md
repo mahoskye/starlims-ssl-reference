@@ -133,7 +133,7 @@ Passes the `"SUM"` operation code to add all four numeric elements and returns t
 DoProc("ShowBatchTotal");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Total is 100
@@ -159,7 +159,7 @@ Uses the `"MERGE"` operation to append all elements from `aIncoming` to `aPendin
 DoProc("MergeQueues");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Merged queue count: 4
@@ -184,7 +184,7 @@ Passes a comparison block as `vValue` to `"SORT"` that returns a positive number
 DoProc("SortDescendingScores");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Highest score: 27

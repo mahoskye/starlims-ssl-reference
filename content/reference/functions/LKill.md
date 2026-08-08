@@ -84,7 +84,7 @@ Create a public variable, confirm it exists, remove it, then confirm it no longe
 DoProc("DemoLKillBasic");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Defined before delete: True
@@ -121,7 +121,7 @@ Remove an old public value so the next step can create the shared variable again
 DoProc("DemoLKillReset");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Old value: 5
@@ -168,7 +168,7 @@ Track multiple public-variable names in an array and remove each one during a sh
 DoProc("DemoLKillBatchCleanup");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 All shared filters removed: True

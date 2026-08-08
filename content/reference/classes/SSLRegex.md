@@ -141,7 +141,7 @@ Constructs a case-insensitive regex for `pass` by passing [`.F.`](../literals/fa
 DoProc("FindPassingResultText");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 A passing result was found in the text
@@ -169,7 +169,7 @@ Passes a 1-based `nStartAt` position to skip the `Prefix Batch:` header and matc
 DoProc("MatchBatchNumberAfterPrefix");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 The batch number has the expected format

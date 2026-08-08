@@ -69,7 +69,7 @@ ExtractCol(aTarget, nColumn)
 
 ### Extract a single field from every record
 
-Extracts the first column (user ID) from a set of user records and displays each extracted value. This pattern isolates one field from all rows without iterating over the source array manually.
+Extracts the first column (user ID) from a set of user records and logs each extracted value. This pattern isolates one field from all rows without iterating over the source array manually.
 
 ```ssl
 :PROCEDURE ExtractUserIDs;
@@ -95,7 +95,7 @@ Extracts the first column (user ID) from a set of user records and displays each
 DoProc("ExtractUserIDs");
 ```
 
-[`UsrMes`](UsrMes.md) displays one value per iteration:
+[`UsrMes`](UsrMes.md) logs one value per iteration:
 
 ```text
 U001
@@ -141,7 +141,7 @@ Extracts the third column (order total) from each row and accumulates the values
 DoProc("SumOrderTotals");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Processed 5 orders totaling 812.5

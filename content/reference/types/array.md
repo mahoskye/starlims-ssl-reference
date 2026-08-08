@@ -94,7 +94,7 @@ Reads .NET's `Length` property on the underlying `System.Object[]` through the `
 DoProc("ShowArrayLength");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Length: 3
@@ -158,7 +158,7 @@ Starts with an empty array, appends three sample IDs, then reads them back in or
 DoProc("CollectSampleIds");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays once per element:
+[`UsrMes`](../functions/UsrMes.md) logs once per element:
 
 ```text
 Queued sample S-1001
@@ -198,7 +198,7 @@ Inserts a new row, updates two values in existing rows by index, then removes a 
 DoProc("PrepareResultRows");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 First row status: Reviewed
@@ -234,7 +234,7 @@ Creates an independent snapshot with `clone()`, appends a test to the snapshot's
 DoProc("BuildAuditSnapshot");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Original tests: 2

@@ -168,14 +168,14 @@ Adds two entries keyed by numeric ID, then retrieves a value with `GetValue`, ch
 
 sStatus := oStatusById:GetValue(1001, "Missing");
 	UsrMes("Status for 1001: " + sStatus);
-	/* Displays stored status for key 1001;
+	/* Logs stored status for key 1001;
 
 	bFound := oStatusById:Contains(1002);
 	UsrMes("1002 exists: " + LimsString(bFound));
-	/* Displays whether key 1002 exists;
+	/* Logs whether key 1002 exists;
 
 	UsrMes("Entry count: " + LimsString(oStatusById:Count));
-	/* Displays current entry count;
+	/* Logs current entry count;
 :ENDPROC;
 ```
 
@@ -196,7 +196,7 @@ Creates a dictionary with an initial capacity hint, adds one result entry, then 
 	:IF oLookup:Exists;
 		sMessage := "Result 5010: " + LimsString(oLookup:Value);
 		UsrMes(sMessage);
-		/* Displays stored result for key 5010;
+		/* Logs stored result for key 5010;
 	:ENDIF;
 
 	oLookup := oResults:TryGetValue(9999);

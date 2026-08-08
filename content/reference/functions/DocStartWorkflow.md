@@ -76,7 +76,7 @@ DocStartWorkflow(sWorkflowId, [aDocumentIds], [sPackageName])
 
 ### Start a workflow without documents
 
-Starts a simple workflow by ID without document attachments and displays the created workflow instance ID.
+Starts a simple workflow by ID without document attachments and logs the created workflow instance ID.
 
 ```ssl
 :PROCEDURE StartSimpleWorkflow;
@@ -95,7 +95,7 @@ Starts a simple workflow by ID without document attachments and displays the cre
 DoProc("StartSimpleWorkflow");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Started workflow [created workflow ID]
@@ -119,7 +119,7 @@ Passes a document ID array and a package name when starting, then reads the perf
 
     :IF .NOT. Empty(aPerformers);
         :FOR nIndex := 1 :TO ALen(aPerformers);
-            UsrMes("Assigned to " + aPerformers[nIndex]);  /* Displays one message per performer;
+            UsrMes("Assigned to " + aPerformers[nIndex]);  /* Logs one message per performer;
         :NEXT;
     :ENDIF;
 
@@ -142,13 +142,13 @@ Wraps the start call in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATC
     :TRY;
         aWorkflowInfo := DocStartWorkflow(sWorkflowId, aDocumentIds);
         UsrMes("Started workflow " + aWorkflowInfo[1]);
-        /* Displays the started workflow ID;
+        /* Logs the started workflow ID;
 
         :RETURN aWorkflowInfo;
     :CATCH;
         oError := GetLastSSLError();
         ErrorMes("Unable to start workflow: " + oError:Description);
-        /* Displays the failure reason;
+        /* Logs the failure reason;
 
         :RETURN {};
     :ENDTRY;

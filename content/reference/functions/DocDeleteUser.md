@@ -63,7 +63,7 @@ DocDeleteUser(sLoginName)
 
 ### Delete one user by login name and check the result
 
-Calls `DocDeleteUser` with a hardcoded login name and displays a success or failure message based on the boolean return value.
+Calls `DocDeleteUser` with a hardcoded login name and logs a success or failure message based on the boolean return value.
 
 ```ssl
 :PROCEDURE DeleteDocUser;
@@ -114,7 +114,7 @@ Validates that `sLoginName` is non-empty before calling the function, then wraps
             ErrorMes("DocDeleteUser failed for " + sLoginName);
         :ELSE;
             ErrorMes("DocDeleteUser failed: " + oErr:Description);
-            /* Displays on failure with backend details;
+            /* Logs on failure with backend details;
         :ENDIF;
 
         :RETURN .F.;

@@ -69,7 +69,7 @@ ExecUdf(sCode, [aArgs], [bCacheCode])
 
 ### Evaluate a simple expression string
 
-Passes an arithmetic expression as a string to `ExecUdf` and displays the numeric result. Because the string does not end with `;`, the runtime wraps it as `:RETURN 2 + 3 * 4;` and returns `14`.
+Passes an arithmetic expression as a string to `ExecUdf` and logs the numeric result. Because the string does not end with `;`, the runtime wraps it as `:RETURN 2 + 3 * 4;` and returns `14`.
 
 ```ssl
 :PROCEDURE RunDynamicExpression;
@@ -86,7 +86,7 @@ Passes an arithmetic expression as a string to `ExecUdf` and displays the numeri
 DoProc("RunDynamicExpression");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Calculated value: 14
@@ -113,7 +113,7 @@ Passes a bare identifier string to `ExecUdf`. Because `"sStatus"` matches an exi
 DoProc("ReturnLocalValue");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Returned value: Logged
@@ -161,7 +161,7 @@ Runs the same dynamic code block five times without caching, then five times wit
 DoProc("CompareCachedExecution");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Uncached total: 25250 | Cached total: 25250

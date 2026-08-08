@@ -119,7 +119,7 @@ Create an object and call instance methods on it.
 DoProc("BuildStringWithNET");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Hello SSL interop
@@ -147,10 +147,10 @@ Pass a by-reference placeholder in the constructor argument array and then read 
 
         UsrMes("Object created successfully");
         UsrMes("Updated output value: " + LimsString(nOutput));
-        /* Displays updated output value on success;
+        /* Logs updated output value on success;
     :CATCH;
         ErrorMes(GetLastSSLError():Description);
-        /* Displays failure details;
+        /* Logs failure details;
     :ENDTRY;
 :ENDPROC;
 

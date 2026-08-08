@@ -72,7 +72,7 @@ Without [`:EXITCASE;`](EXITCASE.md), a matched branch does not automatically sto
 
 ### Condition-based notification
 
-Choose one notification path by ending each branch with [`:EXITCASE;`](EXITCASE.md). With `nResultValue` set to `85`, the warning branch matches and the notification message is displayed.
+Choose one notification path by ending each branch with [`:EXITCASE;`](EXITCASE.md). With `nResultValue` set to `85`, the warning branch matches and the notification message is logged.
 
 ```ssl
 :PROCEDURE NotifyAnalysisStatus;
@@ -117,7 +117,7 @@ Choose one notification path by ending each branch with [`:EXITCASE;`](EXITCASE.
 DoProc("NotifyAnalysisStatus");
 ```
 
-[`InfoMes`](../functions/InfoMes.md) displays:
+[`InfoMes`](../functions/InfoMes.md) logs:
 
 ```text
 WARNING: LAB-2024-0042 is approaching the threshold limit
@@ -173,7 +173,7 @@ Ordered conditions ensure the first matching business rule wins. With `nBasePric
 DoProc("CalculateDynamicPrice", {100, "RETAIL", 1500, .T.});
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Price: 100 -> 70 via Contract Volume Discount

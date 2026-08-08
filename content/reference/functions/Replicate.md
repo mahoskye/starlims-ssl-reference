@@ -73,9 +73,9 @@ Repeat a short pattern and show the result with its length.
     sResult := Replicate(sPattern, nCount);
 
     UsrMes("Pattern: " + sResult);
-    /* Displays: Pattern: -*--*--*--*--*-;
+    /* Logs: Pattern: -*--*--*--*--*-;
     UsrMes("Length: " + LimsString(Len(sResult)));
-    /* Displays: Length: 15;
+    /* Logs: Length: 15;
 :ENDPROC;
 
 /* Usage;
@@ -104,7 +104,7 @@ Build a separator line and surround a title with it.
 DoProc("DisplaySeparator");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 ----------------------------------------

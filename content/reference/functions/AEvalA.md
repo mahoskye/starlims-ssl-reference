@@ -87,7 +87,7 @@ Trims whitespace and uppercases each sample ID string in place using a single `A
 DoProc("NormalizeSampleIDs");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 SAMP-001, SAMP-002, SAMP-003
@@ -114,7 +114,7 @@ Supplies `nStart` and `nCount` to update only elements 3 and 4 with a prefix, le
 DoProc("FlagReviewResults");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 IN REVIEW: REVIEW | IN REVIEW: REVIEW | APPROVED

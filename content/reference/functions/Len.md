@@ -90,7 +90,7 @@ Check a password string against an 8-character minimum and show the outcome. `"S
 DoProc("ValidatePasswordLength");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Password is valid. Length: 11
@@ -120,7 +120,7 @@ Use `Len` as the upper bound of a [`:FOR`](../keywords/FOR.md) loop to walk each
 DoProc("CountDigits");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Digits in 'LAB-2024-001': 7
@@ -151,7 +151,7 @@ Use `Len` to calculate the number of spaces needed to extend `"Sample ID"` (9 ch
 DoProc("BuildFixedWidthLine");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 [Sample ID      LAB-7829]

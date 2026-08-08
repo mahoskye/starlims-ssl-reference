@@ -83,10 +83,10 @@ Read a UTF-8 text file and return the full contents.
 
     :IF Empty(sConfigData);
         UsrMes("Configuration file is empty: " + sConfigPath);
-        /* Displays when the file is empty;
+        /* Logs when the file is empty;
     :ELSE;
         UsrMes("Loaded " + LimsString(Len(sConfigData)) + " characters");
-        /* Displays the loaded character count;
+        /* Logs the loaded character count;
     :ENDIF;
 
     :RETURN sConfigData;
@@ -111,7 +111,7 @@ Read only the first part of a file and specify a non-default encoding.
         UsrMes("The file is empty");
     :ELSE;
         UsrMes(sPreview);
-        /* Displays the file preview;
+        /* Logs the file preview;
     :ENDIF;
 
     :RETURN sPreview;
@@ -137,12 +137,12 @@ Wrap the read in structured error handling so you can report file or access prob
 
         :IF !Empty(sHeader);
             UsrMes(sHeader);
-            /* Displays the header preview;
+            /* Logs the header preview;
         :ENDIF;
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("ReadText failed: " + oErr:Description);
-        /* Displays on failure;
+        /* Logs on failure;
         sHeader := "";
     :ENDTRY;
 

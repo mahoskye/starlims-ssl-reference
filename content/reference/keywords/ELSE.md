@@ -88,7 +88,7 @@ Within a full conditional block:
 DoProc("ValidateSampleStatus");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Sample failed validation and requires review

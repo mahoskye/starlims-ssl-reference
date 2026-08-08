@@ -131,7 +131,7 @@ nTotal := oCalc:GetTotal();
 UsrMes("Total: " + LimsString(nTotal));
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Added 5
@@ -201,7 +201,7 @@ oEmployee := CreateUdObject("EmployeeRecord", {"Alice Adams", "A. Adams", "Chemi
 oEmployee:ShowNames();
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Badge name: A. Adams

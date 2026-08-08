@@ -81,7 +81,7 @@ Show the direct result of applying `_NOT` to a whole number.
 DoProc("ShowInvertedMask");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Original mask: 12
@@ -110,7 +110,7 @@ Use `_NOT` to invert a clear-mask before applying [`_AND`](_AND.md).
 DoProc("ClearSelectedFlags");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Original flags: 29
@@ -144,7 +144,7 @@ Invert one mask once, then reuse it while updating a list of packed flag values.
 DoProc("ClearArchiveBitFromBatch");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Original first value: 29

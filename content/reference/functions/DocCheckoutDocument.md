@@ -68,7 +68,7 @@ DocCheckoutDocument(sDocumentId)
 
 ### Check out one document and keep the returned local file path
 
-Logs in to Documentum, checks out a single document by ID, and displays either the local checkout file path or the command failure message.
+Logs in to Documentum, checks out a single document by ID, and logs either the local checkout file path or the command failure message.
 
 ```ssl
 :PROCEDURE CheckoutDocumentBasic;
@@ -87,7 +87,7 @@ Logs in to Documentum, checks out a single document by ID, and displays either t
         bLoggedIn := DocLoginToDocumentum(sDocBase, sUser, sPassword);
 
         :IF .NOT. bLoggedIn;
-            ErrorMes("Documentum login failed: " + DocGetErrorMessage()); /* Displays login failure details;
+            ErrorMes("Documentum login failed: " + DocGetErrorMessage()); /* Logs login failure details;
 
             :RETURN "";
         :ENDIF;
@@ -95,12 +95,12 @@ Logs in to Documentum, checks out a single document by ID, and displays either t
         sCheckoutPath := DocCheckoutDocument(sDocumentId);
 
         :IF DocCommandFailed();
-            ErrorMes("Checkout failed: " + DocGetErrorMessage()); /* Displays checkout failure details;
+            ErrorMes("Checkout failed: " + DocGetErrorMessage()); /* Logs checkout failure details;
 
             :RETURN "";
         :ENDIF;
 
-        UsrMes("Checkout file path: " + sCheckoutPath); /* Displays the local checkout path;
+        UsrMes("Checkout file path: " + sCheckoutPath); /* Logs the local checkout path;
 
         :RETURN sCheckoutPath;
 
@@ -181,7 +181,7 @@ Checks out a list of document IDs, collects a failure object for each one that d
 
         :IF .NOT. bLoggedIn;
             ErrorMes("Documentum login failed: " + DocGetErrorMessage());
-            /* Displays login failure details;
+            /* Logs login failure details;
 
             :RETURN oBatchResult;
         :ENDIF;
@@ -204,7 +204,7 @@ Checks out a list of document IDs, collects a failure object for each one that d
             UsrMes(
                 "One or more document checkouts failed. Count: "
                 + LimsString(ALen(aFailures))
-            ); /* Displays the checkout failure count;
+            ); /* Logs the checkout failure count;
         :ENDIF;
 
         oBatchResult:checkoutPaths := aCheckoutPaths;

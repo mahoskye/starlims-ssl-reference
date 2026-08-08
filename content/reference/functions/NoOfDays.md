@@ -98,7 +98,7 @@ NoOfDays(dDate)
 DoProc("ValidateDayOfMonth");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Day 31 exceeds the 29 days in February.
@@ -134,7 +134,7 @@ Get the last valid day of `dInputDate`'s month using [`DateFromNumbers`](DateFro
 DoProc("GetMonthEndDate", {CToD("03/15/2024")});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Month end is 03/31/2024
@@ -177,7 +177,7 @@ Iterate over four period dates and print each month's length. February periods r
 DoProc("ReviewReportingPeriods");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 January 2024 has 31 days.

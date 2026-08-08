@@ -78,7 +78,7 @@ Use `Sqrt` in a direct formula where the squared value is known to be non-negati
 DoProc("ShowHypotenuse");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Hypotenuse: 5
@@ -109,7 +109,7 @@ Validate the input first when a negative value would produce `NaN` that you do n
 DoProc("SafeSquareRoot", {9});
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Square root: 3

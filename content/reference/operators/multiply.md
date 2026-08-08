@@ -78,7 +78,7 @@ Multiplies `nLength` by `nWidth` to get the area. 12.5 × 8.3 = 103.75.
 DoProc("CalcRectangleArea");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Rectangle area: 103.75
@@ -109,7 +109,7 @@ Uses multiplication twice: once for the subtotal and once for the discount. The 
 DoProc("CalcLineTotal");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Line total: 79.65

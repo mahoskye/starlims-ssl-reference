@@ -87,7 +87,7 @@ Normalize two values before checking whether they match exactly.
 DoProc("MatchUserName");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Names match: .T.
@@ -109,10 +109,10 @@ Clean a user-entered status value before validating it against an allowed list.
 
 	:IF bIsValid;
 		UsrMes("Status accepted: " + sNormalizedStatus);
-		/* Displays accepted status;
+		/* Logs accepted status;
 	:ELSE;
 		UsrMes("Invalid status: " + sStatusCode);
-		/* Displays rejected status;
+		/* Logs rejected status;
 	:ENDIF;
 
 	:RETURN bIsValid;

@@ -205,7 +205,7 @@ Shows the basic `Email{}` pattern: set all required properties, call `Send()`, a
 	:IF bSent;
 		UsrMes("Notification email sent.");
 	:ELSE;
-		/* Displays on failure: notification email failed;
+		/* Logs on failure: notification email failed;
 		UsrMes("Notification email failed: " 
 				+ oEmail:Exception:Description);
 	:ENDIF;
@@ -249,7 +249,7 @@ Uses `Email{.F.}` so failures raise exceptions, then wraps the operation in [`:T
 		:IF bQueued;
 			UsrMes("Signed report queued for delivery.");
 		:ELSE;
-			/* Displays on failure: email queueing failed;
+			/* Logs on failure: email queueing failed;
 			UsrMes("Email queueing failed: " 
 					+ oEmail:Exception:Description);
 		:ENDIF;
@@ -258,7 +258,7 @@ Uses `Email{.F.}` so failures raise exceptions, then wraps the operation in [`:T
 
 	:CATCH;
 		oErr := GetLastSSLError();
-		/* Displays on failure: email queueing failed;
+		/* Logs on failure: email queueing failed;
 		UsrMes("Email queueing failed: " + oErr:Description);
 
 		:RETURN .F.;

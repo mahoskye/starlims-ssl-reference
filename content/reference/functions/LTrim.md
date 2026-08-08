@@ -81,7 +81,7 @@ Trim accidental leading spaces from a code value before display. The brackets in
 DoProc("NormalizeSampleCode");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 [QC-1042]

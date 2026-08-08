@@ -92,7 +92,7 @@ Converts a JSON number array to an SSL array and accumulates the total.
 DoProc("ParseJsonNumberArray");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Total of temperature readings: 414
@@ -114,11 +114,11 @@ Parses a nested JSON configuration object and reads properties from the resultin
 	nPort := oDatabase:port;
 
 	sResult := "Host: " + sHost + ", Port: " + LimsString(nPort);
-	UsrMes(sResult);  /* Displays database host and port;
+	UsrMes(sResult);  /* Logs database host and port;
 
 	:IF oConfig:IsProperty("timeout");
 		sResult := "Timeout is set to " + LimsString(oConfig:timeout);
-		UsrMes(sResult);  /* Displays timeout value;
+		UsrMes(sResult);  /* Logs timeout value;
 	:ENDIF;
 
 	:RETURN oConfig;

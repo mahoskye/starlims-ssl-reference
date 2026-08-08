@@ -77,7 +77,7 @@ DateFromString(sDateAsString, [vFormat], [bUseLocalCulture], [bMakeInvariant])
 
 ### Parse a date with one explicit format
 
-Parses an ISO-style date string by supplying the exact format, then displays the result using the current SSL date format.
+Parses an ISO-style date string by supplying the exact format, then logs the result using the current SSL date format.
 
 ```ssl
 :PROCEDURE ParseIsoDate;
@@ -94,7 +94,7 @@ Parses an ISO-style date string by supplying the exact format, then displays the
 DoProc("ParseIsoDate");
 ```
 
-[`UsrMes`](UsrMes.md) displays (assuming MM/DD/YYYY date format):
+[`UsrMes`](UsrMes.md) logs (assuming MM/DD/YYYY date format):
 
 ```text
 Parsed date: 04/11/2026
@@ -118,7 +118,7 @@ Parses an imported date field that may arrive in one of several approved formats
 	:CATCH;
 		oErr := GetLastSSLError();
 		UsrMes("Could not parse imported date: " + oErr:Description);
-		/* Displays on failure: Could not parse imported date;
+		/* Logs on failure: Could not parse imported date;
 	:ENDTRY;
 :ENDPROC;
 
@@ -143,7 +143,7 @@ Passes [`.T.`](../literals/true.md) for both `bUseLocalCulture` and `bMakeInvari
 	:CATCH;
 		oErr := GetLastSSLError();
 		UsrMes("Date input is invalid: " + oErr:Description);
-		/* Displays on failure: Date input is invalid;
+		/* Logs on failure: Date input is invalid;
 	:ENDTRY;
 :ENDPROC;
 

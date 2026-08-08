@@ -79,7 +79,7 @@ Compute the age as a year difference and check whether it meets a minimum. The o
 			+ " meets minimum requirement of "
 			+ LimsString(nMinAge)
 			+ "."
-		); /* Displays when eligible: eligibility message;
+		); /* Logs when eligible: eligibility message;
 	:ELSE;
 		bIsEligible := .F.;
 		UsrMes(
@@ -88,7 +88,7 @@ Compute the age as a year difference and check whether it meets a minimum. The o
 			+ " does not meet minimum requirement of "
 			+ LimsString(nMinAge)
 			+ "."
-		); /* Displays when ineligible: eligibility message;
+		); /* Logs when ineligible: eligibility message;
 	:ENDIF;
 
 	:RETURN bIsEligible;
@@ -153,7 +153,7 @@ Extract the year from each date and accumulate counts per year in a [`SSLStringD
 DoProc("CountEventsByYear");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Event Summary by Year:
@@ -211,7 +211,7 @@ Combine `Year()` and [`Month`](Month.md) to select only rows that match both the
 DoProc("FilterRecordsByYearMonth");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Found 2 record(s) for 3/2024

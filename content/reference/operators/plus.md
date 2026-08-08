@@ -87,7 +87,7 @@ Computes the total by adding two number values. 150 + 75 = 225.
 DoProc("CalculateSum");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Total charge: 225
@@ -114,7 +114,7 @@ Joins `sFirstName` and `sLastName` with a space between them.
 DoProc("ConcatUserNames");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Jane Smith
@@ -141,7 +141,7 @@ Calculates a due date by adding 14 days to a start date. `01/15/2024 + 14` yield
 DoProc("CalculateDueDate");
 ```
 
-`UsrMes` displays:
+`UsrMes` logs:
 
 ```text
 Due date: 01/29/2024

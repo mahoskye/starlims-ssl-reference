@@ -102,7 +102,7 @@ Builds an XML dataset from three hard-coded rows with explicit column names, hea
 DoProc("BuildSampleResultsXml");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 <?xml version="1.0" standalone="yes" ?>
@@ -164,7 +164,7 @@ Passes an empty row array with schema enabled to generate an XML dataset that co
 DoProc("BuildImportTemplateXml");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 <?xml version="1.0" standalone="yes" ?>

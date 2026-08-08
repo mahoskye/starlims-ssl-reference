@@ -93,7 +93,7 @@ Runs the loop body for each integer from `1` to `5`, printing a count message on
 DoProc("CountToFive");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Count is 1
@@ -129,7 +129,7 @@ Count is 5
 DoProc("ListEvenNumbers");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Even numbers up to 10: 2, 4, 6, 8, 10
@@ -179,7 +179,7 @@ A negative [`:STEP`](STEP.md) counts downward; [`:EXITFOR`](EXITFOR.md) stops th
 DoProc("FindPrioritySample");
 ```
 
-[`InfoMes`](../functions/InfoMes.md) displays:
+[`InfoMes`](../functions/InfoMes.md) logs:
 
 ```text
 Critical sample found at position 2

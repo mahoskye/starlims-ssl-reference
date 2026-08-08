@@ -68,7 +68,7 @@ Sets a day-first date format and then reads back the stored value with [`LimsGet
 	sCurrentFormat := LimsGetDateFormat();
 	sTodayText := DToC(Today());
 
-	/* Displays current stored format and today's date in day-first format;
+	/* Logs current stored format and today's date in day-first format;
 	UsrMes("Current format: " + sCurrentFormat);
 	UsrMes("Today: " + sTodayText);
 :ENDPROC;
@@ -92,7 +92,7 @@ Saves the current format, switches to an ISO-style pattern inside a [`:TRY`](../
 
 		sExportDate := DToC(Today());
 
-		/* Displays export date in ISO-style format;
+		/* Logs export date in ISO-style format;
 		UsrMes("Export date: " + sExportDate);
 	:FINALLY;
 		DateFormat(sOriginalFormat);

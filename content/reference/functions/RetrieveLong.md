@@ -104,14 +104,14 @@ Fetch a single BLOB column, write it to disk, and confirm the file was actually 
                 "Exported attachment to " + sOutputFilePath +
                 " (" + LimsString(nBytes) + " bytes)"
             );
-            /* Displays on success: exported attachment with byte count;
+            /* Logs on success: exported attachment with byte count;
         :ELSE;
             UsrMes("No binary data was written for attachment ATT12345");
         :ENDIF;
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("RetrieveLong failed: " + oErr:Description);
-        /* Displays on failure: RetrieveLong failed;
+        /* Logs on failure: RetrieveLong failed;
     :ENDTRY;
 :ENDPROC;
 ```
@@ -168,7 +168,7 @@ Query for a list of IDs and export each matching BLOB to a separate file, tracki
         :CATCH;
             oErr := GetLastSSLError();
             ErrorMes("Failed to export report " + sReportId + ": " + oErr:Description);
-            /* Displays on failure: failed to export report;
+            /* Logs on failure: failed to export report;
         :ENDTRY;
     :NEXT;
 
@@ -176,7 +176,7 @@ Query for a list of IDs and export each matching BLOB to a separate file, tracki
         "Report export complete. Written: " + LimsString(nWritten) +
         ", skipped: " + LimsString(nSkipped)
     );
-    /* Displays: report export summary;
+    /* Logs: report export summary;
 :ENDPROC;
 ```
 

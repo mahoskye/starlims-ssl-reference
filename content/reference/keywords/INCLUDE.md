@@ -86,7 +86,7 @@ sSampleId := gcDefaultSampleId;
 UsrMes("Processing sample " + sSampleId);
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Processing sample <gcDefaultSampleId>
@@ -126,7 +126,7 @@ sMessage := DoProc("BuildBatchAuditMessage", {sBatchId});
 InfoMes(sMessage);
 ```
 
-[`InfoMes`](../functions/InfoMes.md) displays:
+[`InfoMes`](../functions/InfoMes.md) logs:
 
 ```text
 <batch audit message>

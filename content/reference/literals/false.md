@@ -88,7 +88,7 @@ Initializes `bIsActive` to `.F.` and branches on it. Since the flag is false, th
 DoProc("ValidateRecord");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Inactive — skipping

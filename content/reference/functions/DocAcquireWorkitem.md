@@ -65,7 +65,7 @@ DocAcquireWorkitem(sWorkitemId)
 
 ### Acquire a work item after logging in to Documentum
 
-Logs in to a Documentum repository, acquires a specific work item, and displays whether the acquisition succeeded.
+Logs in to a Documentum repository, acquires a specific work item, and logs whether the acquisition succeeded.
 
 ```ssl
 :PROCEDURE AcquireWorkitemForProcessing;

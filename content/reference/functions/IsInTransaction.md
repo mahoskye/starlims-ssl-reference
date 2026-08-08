@@ -112,7 +112,7 @@ Pass an explicit connection name and wrap the call in [`:TRY`](../keywords/TRY.m
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes("Transaction check failed: " + oErr:Description);
-		/* Displays on failure: transaction check failed;
+		/* Logs on failure: transaction check failed;
 		:RETURN .F.;
 	:ENDTRY;
 :ENDPROC;

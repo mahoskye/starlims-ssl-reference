@@ -106,7 +106,7 @@ Wait for a command-line tool to finish, and surface the last SSL error when the 
 		UsrMes("Audit export finished");
 	:ELSE;
 		oErr := GetLastSSLError();
-		/* Displays on failure: startup error;
+		/* Logs on failure: startup error;
 		ErrorMes(
 			"Audit export could not be started: " + oErr:Description
 		);

@@ -93,7 +93,7 @@ Opens a transaction on the default connection, runs an update, and commits it. T
 
     :CATCH;
         oErr := GetLastSSLError();
-        /* Displays on failure: update failed;
+        /* Logs on failure: update failed;
         ErrorMes("Update failed: " + oErr:Description);
 
     :FINALLY;
@@ -145,7 +145,7 @@ Opens a transaction on a named connection and validates that no open tasks remai
 
     :CATCH;
         oErr := GetLastSSLError();
-        /* Displays on failure: batch update failed;
+        /* Logs on failure: batch update failed;
         ErrorMes("Batch update failed: " + oErr:Description);
 
     :FINALLY;
@@ -200,7 +200,7 @@ Opens an outer transaction for a batch update and an inner transaction for the a
 
         :CATCH;
             oErr := GetLastSSLError();
-            /* Displays on failure: audit write failed;
+            /* Logs on failure: audit write failed;
             ErrorMes("Audit write failed: " + oErr:Description);
 
         :FINALLY;
@@ -217,7 +217,7 @@ Opens an outer transaction for a batch update and an inner transaction for the a
 
     :CATCH;
         oErr := GetLastSSLError();
-        /* Displays on failure: save batch and audit failed;
+        /* Logs on failure: save batch and audit failed;
         ErrorMes("SaveBatchAndAudit failed: " + oErr:Description);
 
     :FINALLY;

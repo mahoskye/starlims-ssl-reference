@@ -83,7 +83,7 @@ Take any date value and return a version stamped to `23:59:59.997` on the same c
 DoProc("GetServerCutoff", {DateFromNumbers(2026, 4, 15)});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Server cutoff: <04/15/2026 23:59:59>
@@ -146,7 +146,7 @@ Compute both the server and client end-of-day boundaries for the same input and 
 DoProc("CompareDayCutoffs", {DateFromNumbers(2026, 4, 15)});
 ```
 
-`UsrMes` displays one of:
+`UsrMes` logs one of:
 
 ```text
 Server end: [date], Client end: [date] (same cutoff)

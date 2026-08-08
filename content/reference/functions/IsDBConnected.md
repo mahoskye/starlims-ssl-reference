@@ -81,7 +81,7 @@ Check the default connection before executing a query, and exit early with a mes
 
     aResults := SQLExecute("SELECT COUNT(*) FROM sample");
     UsrMes("Sample count: " + LimsString(aResults[1, 1]));
-    /* Displays the sample count when the query succeeds;
+    /* Logs the sample count when the query succeeds;
 
     :RETURN .T.;
 :ENDPROC;
@@ -111,7 +111,7 @@ Iterate over a list of connection names and report each one's availability. Pass
         :ENDIF;
 
         UsrMes(sStatusMessage);
-        /* Displays each connection's availability;
+        /* Logs each connection's availability;
     :NEXT;
 :ENDPROC;
 
@@ -142,7 +142,7 @@ Wrap the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md)
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("Connection lookup failed: " + oErr:Description);
-        /* Displays a failure message when the lookup raises an error;
+        /* Logs a failure message when the lookup raises an error;
         :RETURN .F.;
     :ENDTRY;
 :ENDPROC;

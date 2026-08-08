@@ -99,7 +99,7 @@ Pass an optional value through `MakeNETObject` and branch on whether the result 
 DoProc("ConvertOptionalValue", {"Sample 1001"});
 ```
 
-`UsrMes` displays one of:
+`UsrMes` logs one of:
 
 ```text
 No value was supplied for .NET interop

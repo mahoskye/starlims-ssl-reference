@@ -82,7 +82,7 @@ Reads the element count with `ALen` and guards against processing an empty selec
 DoProc("ProcessUserSelection");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Processing 2 selected item(s)
@@ -107,7 +107,7 @@ Passes `ALen` directly to the [`:FOR`](../keywords/FOR.md) upper bound so the lo
 DoProc("ShowPendingSteps");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Step 1: Login

@@ -85,7 +85,7 @@ Declare all working variables before the procedure uses them. With the hardcoded
 DoProc("InitializeSampleRecord");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Sample LAB-2024-0042 - Calcium Carbonate Test registered with result 98.6
@@ -159,7 +159,7 @@ sMessage := sMessage + " result";
 UsrMes(sMessage);
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Tracked sample LAB-2024-0042 with 1 result

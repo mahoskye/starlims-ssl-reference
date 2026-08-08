@@ -69,7 +69,7 @@ Label targets are resolved within the current procedure or script. Forward refer
 
 ### Jump to a shared recovery section
 
-Uses [`Branch`](../functions/Branch.md)`()` to redirect control to a label later in the same procedure. With `sSampleID` set to `"A1"`, whose length is less than 5, the branch fires and the recovery message displays.
+Uses [`Branch`](../functions/Branch.md)`()` to redirect control to a label later in the same procedure. With `sSampleID` set to `"A1"`, whose length is less than 5, the branch fires and the recovery message is logged.
 
 ```ssl
 :PROCEDURE ProcessSample;
@@ -93,7 +93,7 @@ Uses [`Branch`](../functions/Branch.md)`()` to redirect control to a label later
 
 Run with `DoProc("ProcessSample")`.
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Sample ID is too short: A1
@@ -101,7 +101,7 @@ Sample ID is too short: A1
 
 ### Use a mashed label target
 
-Mashed labels omit the space after `:LABEL`, so [`Branch`](../functions/Branch.md)`()` must use that exact stored text. With `sMode` set to `"SKIP"`, the branch fires and the skip message displays.
+Mashed labels omit the space after `:LABEL`, so [`Branch`](../functions/Branch.md)`()` must use that exact stored text. With `sMode` set to `"SKIP"`, the branch fires and the skip message is logged.
 
 ```ssl
 :PROCEDURE RouteMode;
@@ -125,7 +125,7 @@ Mashed labels omit the space after `:LABEL`, so [`Branch`](../functions/Branch.m
 
 Run with `DoProc("RouteMode")`.
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Processing was skipped

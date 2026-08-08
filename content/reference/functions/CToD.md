@@ -85,7 +85,7 @@ Parses a date string using the current date format and checks whether the result
 DoProc("ParseSingleDate");
 ```
 
-[`UsrMes`](UsrMes.md) displays (assuming MM/DD/YYYY date format):
+[`UsrMes`](UsrMes.md) logs (assuming MM/DD/YYYY date format):
 
 ```text
 Parsed date: 03/15/2024
@@ -93,7 +93,7 @@ Parsed date: 03/15/2024
 
 ### Validate a batch of imported date strings
 
-Parses a batch of date strings, accumulates the valid ones in an array, and displays a count of valid and invalid entries.
+Parses a batch of date strings, accumulates the valid ones in an array, and logs a count of valid and invalid entries.
 
 ```ssl
 :PROCEDURE ValidateImportedDates;
@@ -127,7 +127,7 @@ Parses a batch of date strings, accumulates the valid ones in an array, and disp
 DoProc("ValidateImportedDates");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Valid: 3, Invalid: 1
@@ -165,7 +165,7 @@ Resolves a cutoff date from a text parameter, returning early with separate mess
 DoProc("ResolveCutoffDate", {"03/15/2024"});
 ```
 
-`UsrMes` displays on success:
+`UsrMes` logs on success:
 
 ```text
 Using cutoff date: 03/15/2024

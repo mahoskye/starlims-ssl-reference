@@ -103,10 +103,10 @@ Trim whitespace and convert to uppercase before calling `IsHex`, so that values 
 
     :IF bIsValidHex;
         UsrMes("Normalized value is valid: " + sHexValue);
-        /* Displays normalized valid message;
+        /* Logs normalized valid message;
     :ELSE;
         UsrMes("Normalized value is not valid hex: " + sHexValue);
-        /* Displays normalized invalid message;
+        /* Logs normalized invalid message;
     :ENDIF;
 
     :RETURN bIsValidHex;

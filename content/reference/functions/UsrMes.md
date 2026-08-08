@@ -20,7 +20,7 @@ If `vCaption` is empty, the function uses `****User message****` as the caption.
 ## When to use
 
 - When you want to log a custom user message with metadata for auditing or debugging.
-- When you want the formatted log text back for later display or reuse.
+- When you want the formatted log text back for later reuse.
 - When a message should respect the normal user-message logging setting.
 - When you want a non-error message instead of a forced error log entry.
 
@@ -87,7 +87,7 @@ When the second argument is omitted, `UsrMes` uses `****User message****` as the
 	sLoggedText := UsrMes("Instrument maintenance completed");
 
 	:IF !Empty(sLoggedText);
-		InfoMes("Last user message", sLoggedText); /* Displays returned log text;
+		InfoMes("Last user message", sLoggedText); /* Logs returned log text;
 	:ENDIF;
 :ENDPROC;
 
@@ -97,7 +97,7 @@ DoProc("LogSingleTextMessage");
 
 ### Build a multi-line audit-style message
 
-Build the message body from dynamic fields first, then log it and return the formatted entry for downstream use. The returned string is suitable for displaying in a second dialog or writing to an external log.
+Build the message body from dynamic fields first, then log it and return the formatted entry for downstream use. The returned string is suitable for reuse or for writing to an external log.
 
 ```ssl
 :PROCEDURE LogAuditEvent;

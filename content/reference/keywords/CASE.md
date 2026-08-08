@@ -103,7 +103,7 @@ Route an input value to a different calculation branch based on multiple logical
 DoProc("CalculateSampleResult");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Standard sample passed QC with result: 82.5
@@ -145,14 +145,14 @@ Dispatch a sample through different processing paths based on its status string.
         :EXITCASE;
     :OTHERWISE;
         ErrorMes("Unexpected status " + sStatus + " for sample " + sSampleID);
-        /* Displays an error for an unexpected status;
+        /* Logs an error for an unexpected status;
         nResult := -1;
         :EXITCASE;
     :ENDCASE;
 
     :IF nResult > 0;
         InfoMes(sMessage);
-        /* Displays the branch-specific status message;
+        /* Logs the branch-specific status message;
     :ENDIF;
 
     :RETURN nResult;

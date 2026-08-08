@@ -92,7 +92,7 @@ Defines a multiplication code block and runs it with [`Eval`](../functions/Eval.
 DoProc("DemoCodeBlock");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 3 x 7 = 21

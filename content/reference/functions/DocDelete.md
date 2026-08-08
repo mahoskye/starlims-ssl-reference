@@ -68,7 +68,7 @@ DocDelete(sObjId, [bAllVersions])
 
 ### Delete all versions using the default behavior
 
-Deletes all versions of a document using the default `bAllVersions` behavior and displays either a success message or the Documentum error when the call returns [`.F.`](../literals/false.md).
+Deletes all versions of a document using the default `bAllVersions` behavior and logs either a success message or the Documentum error when the call returns [`.F.`](../literals/false.md).
 
 ```ssl
 :PROCEDURE DeleteArchivedDocument;

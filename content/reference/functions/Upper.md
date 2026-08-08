@@ -85,7 +85,7 @@ Ensure user-provided codes match expected values regardless of case. [`LimsStrin
 DoProc("NormalizeCodeForCompare");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Codes match: .T.

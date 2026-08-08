@@ -78,7 +78,7 @@ Round one calculated score before presenting it to the user.
 DoProc("ShowRoundedScore");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Rounded score: 3.5
@@ -112,7 +112,7 @@ Round each reading to a half-point, then calculate the average of the rounded va
 DoProc("AverageRoundedRatings");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Average rounded rating: 4

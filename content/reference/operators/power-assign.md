@@ -99,7 +99,7 @@ Repeatedly squares `nValue` with `^= 2`. Starting from 2: 4, 16, 256, 65536.
 DoProc("BuildPowerSeries");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Squared in place: 4, 16, 256, 65536
@@ -135,7 +135,7 @@ Applies a different exponent to each element: 2^3=8, 3^2=9, 4^2=16.
 DoProc("ReweightReadings");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Adjusted readings: 8, 9, 16

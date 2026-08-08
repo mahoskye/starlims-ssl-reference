@@ -70,7 +70,7 @@ DocDeleteFolder(sFolderId, [bDeepDelete])
 
 ### Delete one folder using the default recursive behavior
 
-Deletes a folder using the default deep-delete mode, captures any Documentum error message when the call returns [`.F.`](../literals/false.md), and displays the result.
+Deletes a folder using the default deep-delete mode, captures any Documentum error message when the call returns [`.F.`](../literals/false.md), and logs the result.
 
 ```ssl
 :PROCEDURE DeleteArchiveFolder;
@@ -84,7 +84,7 @@ Deletes a folder using the default deep-delete mode, captures any Documentum err
         :IF DocCommandFailed();
             sErrMsg := DocGetErrorMessage();
             ErrorMes("Folder delete failed: " + sErrMsg);
-            /* Displays folder delete failure details;
+            /* Logs folder delete failure details;
         :ELSE;
             ErrorMes("Folder delete failed");
         :ENDIF;
@@ -93,7 +93,7 @@ Deletes a folder using the default deep-delete mode, captures any Documentum err
     :ENDIF;
 
     UsrMes("Folder deleted: " + sFolderId);
-    /* Displays deleted folder ID;
+    /* Logs deleted folder ID;
 
     :RETURN .T.;
 :ENDPROC;
@@ -115,7 +115,7 @@ Passes [`.F.`](../literals/false.md) for `bDeepDelete` to reject non-empty folde
 
     :IF bDeleted;
         UsrMes("Empty folder deleted: " + sFolderId);
-        /* Displays deleted folder ID;
+        /* Logs deleted folder ID;
         :RETURN .T.;
     :ENDIF;
 
@@ -127,12 +127,12 @@ Passes [`.F.`](../literals/false.md) for `bDeepDelete` to reject non-empty folde
 
     :IF sErrMsg == "Failed: Folder is not empty";
         UsrMes("Skipped non-empty folder: " + sFolderId);
-        /* Displays skipped folder ID when not empty;
+        /* Logs skipped folder ID when not empty;
         :RETURN .F.;
     :ENDIF;
 
     ErrorMes("Folder delete failed: " + sErrMsg);
-    /* Displays folder delete failure details;
+    /* Logs folder delete failure details;
 
     :RETURN .F.;
 :ENDPROC;

@@ -117,7 +117,7 @@ Handles both the true and false outcomes in a single conditional block. With `nT
 DoProc("CalculateAverage", {150, 5});
 ```
 
-With `nCount` set to `5`, [`InfoMes`](../functions/InfoMes.md) displays:
+With `nCount` set to `5`, [`InfoMes`](../functions/InfoMes.md) logs:
 
 ```text
 Average calculated: 30

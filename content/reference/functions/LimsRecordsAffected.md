@@ -56,7 +56,7 @@ This function takes no parameters.
 
 ### Check update success after an inventory adjustment
 
-Call `LimsRecordsAffected` immediately after an UPDATE to verify that exactly one row was modified. When the expected count matches, the success message fires; otherwise, a warning is shown.
+Call `LimsRecordsAffected` immediately after an UPDATE to verify that exactly one row was modified. When the expected count matches, the success message fires; otherwise, a warning is logged.
 
 ```ssl
 :PROCEDURE AdjustInventoryCount;
@@ -88,7 +88,7 @@ Call `LimsRecordsAffected` immediately after an UPDATE to verify that exactly on
 DoProc("AdjustInventoryCount");
 ```
 
-`UsrMes` displays on success:
+`UsrMes` logs on success:
 
 ```text
 Inventory adjusted: 1 record updated for INV-2024-0042
@@ -113,11 +113,11 @@ Use `LimsRecordsAffected` inside a [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../ke
 			, {sCutoff});
 		nDeleted := LimsRecordsAffected();
 		UsrMes("Bulk cleanup removed " + LimsString(nDeleted) + " records");
-		/* Displays: Bulk cleanup removed records;
+		/* Logs: Bulk cleanup removed records;
 	:CATCH;
 		oErr := GetLastSSLError();
 		ErrorMes("Deletion audit failed: " + oErr:Description);
-		/* Displays on failure: deletion audit failed;
+		/* Logs on failure: deletion audit failed;
 	:ENDTRY;
 :ENDPROC;
 

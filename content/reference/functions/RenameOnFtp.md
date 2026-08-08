@@ -108,10 +108,10 @@ Rename one file in place after a workflow step completes.
     );
 
     :IF bRenamed;
-        /* Displays the old and new file names;
+        /* Logs the old and new file names;
         UsrMes("Renamed " + sOldName + " to " + sNewName);
     :ELSE;
-        /* Displays the source file name on failure;
+        /* Logs the source file name on failure;
         ErrorMes("Could not rename " + sOldName);
     :ENDIF;
 
@@ -161,7 +161,7 @@ Verify the source file exists before attempting the rename and handle a normal f
     );
 
     :IF .NOT. bRenamed;
-        /* Displays the file name when the rename fails;
+        /* Logs the file name when the rename fails;
         ErrorMes("Rename failed for " + sOldName);
         :RETURN .F.;
     :ENDIF;
@@ -208,7 +208,7 @@ Use the SFTP path, handle raised connection or authentication errors, and then c
 
     :CATCH;
         oErr := GetLastSSLError();
-        /* Displays the SFTP client failure;
+        /* Logs the SFTP client failure;
         ErrorMes("SFTP rename failed: " + oErr:Description);
         :RETURN .F.;
     :ENDTRY;

@@ -91,7 +91,7 @@ Stops iterating through an array after the first active sample is found. With th
 DoProc("FindFirstActiveSample");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Found Batch B (ID 1002)
@@ -138,7 +138,7 @@ Found Batch B (ID 1002)
 DoProc("FindSampleInGrid");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Target: SMP-005 -> Row 2, Col 2

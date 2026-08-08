@@ -88,7 +88,7 @@ Use `:ENDCASE;` to terminate a CASE structure and continue execution with the ne
 DoProc("GetSampleStatusLabel");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Status: In Review

@@ -83,7 +83,7 @@ SSL or SQL data source file:
 
 ### Declaring parameters for a procedure
 
-Names the two values the caller passes in. With `sSampleID` set to `"S-1001"` and `sLabCode` set to `"LAB-A"`, the procedure builds and displays the combined message.
+Names the two values the caller passes in. With `sSampleID` set to `"S-1001"` and `sLabCode` set to `"LAB-A"`, the procedure builds and logs the combined message.
 
 ```ssl
 :PROCEDURE DisplaySampleInfo;
@@ -101,7 +101,7 @@ Names the two values the caller passes in. With `sSampleID` set to `"S-1001"` an
 DoProc("DisplaySampleInfo", {"S-1001", "LAB-A"});
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Processing sample S-1001 in laboratory LAB-A

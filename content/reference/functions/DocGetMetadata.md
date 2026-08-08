@@ -99,10 +99,10 @@ Requests all metadata for a document, checks [`DocCommandFailed`](DocCommandFail
 		:IF nCount == 0;
 			:IF DocCommandFailed();
 				UsrMes("Metadata lookup failed: " + DocGetErrorMessage());
-				/* Displays on command failure;
+				/* Logs on command failure;
 			:ELSE;
 				UsrMes("No metadata returned for " + sObjId);
-				/* Displays when metadata is empty;
+				/* Logs when metadata is empty;
 			:ENDIF;
 
 			:RETURN aMetadata;
@@ -112,7 +112,7 @@ Requests all metadata for a document, checks [`DocCommandFailed`](DocCommandFail
 			sLine := aMetadata[nIndex, 1] + " = "
 					 + LimsString(aMetadata[nIndex, 2]);
 			UsrMes(sLine);
-			/* Displays each attribute name and value;
+			/* Logs each attribute name and value;
 		:NEXT;
 
 		:RETURN aMetadata;
@@ -158,9 +158,9 @@ Passes a comma-separated attribute list to restrict the result to two fields, th
 		:NEXT;
 
 		UsrMes("Author: " + sAuthor);
-		/* Displays the selected author;
+		/* Logs the selected author;
 		UsrMes("Created: " + sCreatedOn);
-		/* Displays the creation date;
+		/* Logs the creation date;
 
 		:RETURN aMetadata;
 	:FINALLY;
@@ -174,7 +174,7 @@ DoProc("GetSelectedMetadata");
 
 ### Audit attribute definitions in the returned rows
 
-Fetches all metadata, counts how many attributes are repeating and how many have a declared length greater than 255, and displays a summary line using the type-code and length columns.
+Fetches all metadata, counts how many attributes are repeating and how many have a declared length greater than 255, and logs a summary line using the type-code and length columns.
 
 ```ssl
 :PROCEDURE AuditMetadataShape;
@@ -207,7 +207,7 @@ Fetches all metadata, counts how many attributes are repeating and how many have
 					+ ", repeating: " + LimsString(nRepeating)
 					+ ", length > 255: " + LimsString(nLongFields);
 		UsrMes(sSummary);
-		/* Displays attribute summary counts;
+		/* Logs attribute summary counts;
 
 		:RETURN aMetadata;
 	:FINALLY;

@@ -172,7 +172,7 @@ Passes a named connection to direct the TVP at a non-default database, and wraps
 DoProc("BuildRemoteTVP");
 ```
 
-On failure, [`ErrorMes`](ErrorMes.md) displays:
+On failure, [`ErrorMes`](ErrorMes.md) logs:
 
 ```text
 TVP creation failed: <error message>

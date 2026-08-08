@@ -85,7 +85,7 @@ Convert encoded comparison text into a readable message.
 DoProc("ShowDecodedMessage");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Formula requires x < 100 & y > 0
@@ -93,7 +93,7 @@ Formula requires x < 100 & y > 0
 
 ### Decode a list of encoded values
 
-Process multiple encoded strings, showing that only the five supported entity sequences are decoded. The third entry uses `&plusmn;`, which is not a supported entity, so it is returned unchanged and [`UsrMes`](UsrMes.md) displays `Value &plusmn; limit`.
+Process multiple encoded strings, showing that only the five supported entity sequences are decoded. The third entry uses `&plusmn;`, which is not a supported entity, so it is returned unchanged and [`UsrMes`](UsrMes.md) logs `Value &plusmn; limit`.
 
 ```ssl
 :PROCEDURE DecodeMessages;
@@ -123,7 +123,7 @@ Process multiple encoded strings, showing that only the five supported entity se
 DoProc("DecodeMessages");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Sample <A>

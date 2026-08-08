@@ -77,7 +77,7 @@ If no documents match, the function returns an empty array.
 
 ### Search for a keyword in all documents
 
-Searches all `dm_document` content for a keyword, counts the matches, and displays the total.
+Searches all `dm_document` content for a keyword, counts the matches, and logs the total.
 
 ```ssl
 :PROCEDURE SearchPoliciesByKeyword;
@@ -101,7 +101,7 @@ Searches all `dm_document` content for a keyword, counts the matches, and displa
 DoProc("SearchPoliciesByKeyword");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Found [n] documents containing compliance
@@ -123,12 +123,12 @@ Scopes the search to a specific folder path with a result cap, then lists each m
     nCount := ALen(aResults);
     sMsg := LimsString(nCount) + " documents found in " + sLocation + " folder";
 
-    /* Displays: count summary;
+    /* Logs: count summary;
     InfoMes(sMsg);
 
     :IF nCount > 0;
         :FOR nIndex := 1 :TO nCount;
-            /* Displays: matching document name;
+            /* Logs: matching document name;
             UsrMes(aResults[nIndex, 2]);
         :NEXT;
     :ELSE;
@@ -142,7 +142,7 @@ DoProc("SearchEngineeringSafetyDocs");
 
 ### Collect object IDs for a bounded review queue
 
-Searches for documents matching a phrase under a quality folder with a 50-row cap, collects the object IDs, and displays the queue size.
+Searches for documents matching a phrase under a quality folder with a 50-row cap, collects the object IDs, and logs the queue size.
 
 ```ssl
 :PROCEDURE BuildComplianceReviewQueue;
@@ -171,7 +171,7 @@ Searches for documents matching a phrase under a quality folder with a 50-row ca
 DoProc("BuildComplianceReviewQueue");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Queued [n] documents for compliance review

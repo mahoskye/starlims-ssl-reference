@@ -64,7 +64,7 @@ Day(dDate)
 
 ### Extract the day-of-month from a date value
 
-Extracts the day component from a fixed date and displays the numeric result.
+Extracts the day component from a fixed date and logs the numeric result.
 
 ```ssl
 :PROCEDURE GetDueDateDay;
@@ -83,7 +83,7 @@ Extracts the day component from a fixed date and displays the numeric result.
 DoProc("GetDueDateDay");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Due date is on day 15
@@ -104,7 +104,7 @@ Passes an empty date string to [`CToD`](CToD.md) to produce an empty date, then 
         UsrMes("No calendar day is available because the date is empty");
     :ELSE;
         UsrMes("Recorded day is " + LimsString(nDay));
-        /* Displays the recorded day when valid;
+        /* Logs the recorded day when valid;
     :ENDIF;
 
     :RETURN nDay;
@@ -116,7 +116,7 @@ DoProc("CheckDateDayValue");
 
 ### Filter records that fall on a target day of the month
 
-Iterates over an array of run records and collects those whose date falls on a target day-of-month, then displays the count of matches.
+Iterates over an array of run records and collects those whose date falls on a target day-of-month, then logs the count of matches.
 
 ```ssl
 :PROCEDURE FilterRunsByDayOfMonth;
@@ -141,7 +141,7 @@ Iterates over an array of run records and collects those whose date falls on a t
 
     UsrMes("Found " + LimsString(ALen(aMatches))
            + " runs on day " + LimsString(nTargetDay));
-    /* Displays the number of matching runs;
+    /* Logs the number of matching runs;
 
     :RETURN aMatches;
 :ENDPROC;

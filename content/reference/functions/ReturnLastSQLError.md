@@ -41,7 +41,7 @@ This function takes no parameters.
 !!! success "Do"
     - Call `ReturnLastSQLError()` immediately after the failing database operation or inside the matching [`:CATCH`](../keywords/CATCH.md) block.
     - Check for [`NIL`](../literals/nil.md) before reading properties from the returned object.
-    - Use [`FormatSqlErrorMessage`](FormatSqlErrorMessage.md) when you need a display-ready string, and inspect members such as `Description`, `SQLState`, `GenCode`, or `Sql` when you need structured diagnostics.
+    - Use [`FormatSqlErrorMessage`](FormatSqlErrorMessage.md) when you need a human-readable string, and inspect members such as `Description`, `SQLState`, `GenCode`, or `Sql` when you need structured diagnostics.
 
 !!! failure "Don't"
     - Assume a value is always returned. A later database call may leave you with [`NIL`](../literals/nil.md) or a different SQL error state.
@@ -80,7 +80,7 @@ Attempt a database write that references a non-existent column, then retrieve an
 :ENDPROC;
 ```
 
-`ErrorMes` displays:
+`ErrorMes` logs:
 
 ```text
 Database update failed: <SQL error description>

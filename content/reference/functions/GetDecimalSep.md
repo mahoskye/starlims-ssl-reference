@@ -70,7 +70,7 @@ Retrieve the separator as a numeric code, then convert it to a displayable chara
 DoProc("ShowDecimalSeparator");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Decimal separator code: 46 character: .
@@ -98,7 +98,7 @@ Convert a locale-formatted numeric string to a `.`-based form before further pro
 DoProc("NormalizeNumericText", {"3,14"});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Normalized value: 3.14
@@ -129,7 +129,7 @@ Use [`SetDecimalSeparator`](SetDecimalSeparator.md) to change the current separa
 DoProc("VerifyDecimalSeparatorApis");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Code: 44 character: , string API: ,

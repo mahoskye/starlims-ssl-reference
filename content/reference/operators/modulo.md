@@ -84,7 +84,7 @@ Computes 10 % 3. The remainder is 1 because 10 = 3 x 3 + 1.
 DoProc("CalculateRemainder");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Remainder of 10 divided by 3 is 1
@@ -113,7 +113,7 @@ Wraps offset -1 into a 5-slot window. `((-1 % 5) + 5) % 5` normalizes the negati
 DoProc("NormalizeWrapOffset");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Wrapped slot index: 5
@@ -153,7 +153,7 @@ Guards against a non-numeric divisor and a zero divisor before applying `%`. Wit
 DoProc("SafeModulo");
 ```
 
-[`UsrMes`](../functions/UsrMes.md) displays:
+[`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
 Remainder: 1

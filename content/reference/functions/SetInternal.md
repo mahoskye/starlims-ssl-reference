@@ -87,7 +87,7 @@ Update a property when the member name is stored in a variable.
 DoProc("UpdateSampleStatus");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Status: Released
@@ -134,7 +134,7 @@ Loop through field definitions and assign each value by property name.
 DoProc("ApplySampleUpdates");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Sample LAB-2024-0042: status=Approved, priority=2, assigned to=JSMITH

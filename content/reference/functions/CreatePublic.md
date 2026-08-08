@@ -84,7 +84,7 @@ Creates a public variable using a name stored in another variable, then reads it
 DoProc("DemoCreatePublicBasic");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Public value: Queued
@@ -113,7 +113,7 @@ Calls `CreatePublic` without a second argument so the new variable is initialize
 DoProc("DemoCreatePublicDefault");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 The public variable starts as an empty string.
@@ -161,7 +161,7 @@ Two helper procedures initialize and increment a shared public variable by name.
 DoProc("DemoCreatePublicScope");
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Initial public value: 1

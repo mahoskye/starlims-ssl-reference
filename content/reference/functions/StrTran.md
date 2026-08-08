@@ -122,7 +122,7 @@ Build a final message by applying several literal, case-sensitive substitutions.
 	sMessage := StrTran(sMessage, "{status}", "Released");
 	sMessage := StrTran(sMessage, "{user}", MYUSERNAME);
 
-	UsrMes(sMessage); /* Displays the final message with the current user name;
+	UsrMes(sMessage); /* Logs the final message with the current user name;
 :ENDPROC;
 
 /* Usage;

@@ -79,7 +79,7 @@ sMessage := "Original: " + LimsString(nPrice)
 UsrMes(sMessage);
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Original: 99.95, Integer: 99
@@ -102,7 +102,7 @@ sMessage := "Original: " + LimsString(nRawValue)
 UsrMes(sMessage);
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Original: -2.7, Integer: -2
@@ -129,7 +129,7 @@ Validate user-supplied text with [`IsNumeric`](IsNumeric.md) before converting i
 DoProc("SubmitWholeNumber", {"3.7"});
 ```
 
-[`UsrMes`](UsrMes.md) displays:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 Submitting whole-number value: 3
