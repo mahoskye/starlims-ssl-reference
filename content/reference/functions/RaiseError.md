@@ -155,7 +155,7 @@ Handle a re-raised error centrally and inspect both the top-level error and its 
 DoProc("RunBatch", {"MISSING"});
 ```
 
-[`ErrorMes`](ErrorMes.md) writes to the server log:
+[`ErrorMes`](ErrorMes.md) logs:
 
 ```text
 Message: ProcessSample failed for MISSING
