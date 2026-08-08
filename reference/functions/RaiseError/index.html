@@ -1807,10 +1807,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-context-with-an-inner-error-then-handle-the-chain-at-the-boundary" class="md-nav__link">
+  <a href="#raise-inside-the-try-block-that-handles-it" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Add context with an inner error, then handle the chain at the boundary
+        Raise inside the :TRY block that handles it
       
     </span>
   </a>
@@ -3304,10 +3304,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-context-with-an-inner-error-then-handle-the-chain-at-the-boundary" class="md-nav__link">
+  <a href="#raise-inside-the-try-block-that-handles-it" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Add context with an inner error, then handle the chain at the boundary
+        Raise inside the :TRY block that handles it
       
     </span>
   </a>
@@ -3442,12 +3442,11 @@
 <h1 id="raiseerror">RaiseError<a class="headerlink" href="#raiseerror" title="Permanent link">&para;</a></h1>
 <p>Raises an SSL runtime error using the supplied message and optional location, error code, and inner error.</p>
 <p><code>RaiseError</code> validates <code>sMessage</code> and then throws immediately. The resulting <a href="../../classes/SSLError/"><code>SSLError</code></a> exposes <code>sLocation</code> as <code>:Operation</code> and <code>nErrorCode</code> as <code>:Code</code> when caught. When <code>oInnerException</code> is provided, it becomes the inner exception of the raised error.</p>
-<p>When <code>RaiseError</code> executes inside a <a href="../../keywords/TRY/"><code>:TRY</code></a> block, the remaining statements in that block are skipped and control transfers to <a href="../../keywords/CATCH/"><code>:CATCH</code></a>, where <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> retrieves the raised error. Execution then continues normally after <a href="../../keywords/ENDTRY/"><code>:ENDTRY</code></a>, and the script returns as usual. An uncaught error propagates up the call stack instead; if no caller catches it, the invocation fails and the end user sees a server error. Every <code>RaiseError</code> therefore needs a <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> boundary somewhere up the call stack — raising without one turns a routine failure, such as an invalid sample ID, into a crash.</p>
+<p>When <code>RaiseError</code> executes inside a <a href="../../keywords/TRY/"><code>:TRY</code></a> block, the remaining statements in that block are skipped and control transfers to <a href="../../keywords/CATCH/"><code>:CATCH</code></a>, where <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> retrieves the raised error. Execution then continues normally after <a href="../../keywords/ENDTRY/"><code>:ENDTRY</code></a>, and the script returns as usual. An uncaught error propagates up the call stack instead; if no caller catches it, the invocation fails and the end user sees a server error. Every <code>RaiseError</code> therefore needs a <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> boundary — or a legacy <a href="../../keywords/ERROR/"><code>:ERROR</code></a> / <a href="../../keywords/RESUME/"><code>:RESUME</code></a> handler — somewhere up the call stack; raising without one turns a routine failure, such as an invalid sample ID, into a crash. The preferred placement is directly inside the <a href="../../keywords/TRY/"><code>:TRY</code></a> block whose <a href="../../keywords/CATCH/"><code>:CATCH</code></a> handles it, so the raise can never escape.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When validation fails and the current operation must stop immediately.</li>
 <li>When you want a caught error to include a specific operation name or numeric code.</li>
-<li>When you are wrapping a lower-level failure and want to preserve it as an inner error.</li>
 <li>When a caller should handle the failure through <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> rather than by checking a return value.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
@@ -3516,26 +3515,27 @@
 <div class="admonition success">
 <p class="admonition-title">Do</p>
 <ul>
+<li>Place <code>RaiseError</code> directly inside the <a href="../../keywords/TRY/"><code>:TRY</code></a> block whose <a href="../../keywords/CATCH/"><code>:CATCH</code></a> handles it, so the raise can never escape.</li>
 <li>Catch every raised error at an entry-point boundary with <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a>, so failures come back as logged messages and return values instead of server errors.</li>
+<li>Mark raise-only helper procedures <a href="../../special-forms/access-modifiers/"><code>/*@private;</code></a> so they cannot be invoked without the entry point that catches them.</li>
 <li>Raise clear messages that explain what failed and why.</li>
 <li>Supply <code>sLocation</code> and <code>nErrorCode</code> when callers or logs need to identify the failing operation precisely.</li>
-<li>Re-raise caught errors with <code>oInnerException</code> when you need to add context without losing the original failure.</li>
 </ul>
 </div>
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
+<li>Call <code>RaiseError</code> inside <a href="../../keywords/CATCH/"><code>:CATCH</code></a> — the error handler must never become the thing that crashes.</li>
 <li>Let a raised error escape the outermost procedure — an uncaught error fails the invocation and surfaces as a server error to the end user.</li>
-<li>Re-raise inside <a href="../../keywords/CATCH/"><code>:CATCH</code></a> unless a caller above is known to catch it; otherwise the error handler itself becomes the crash.</li>
 <li>Use <code>RaiseError</code> for routine status reporting or non-fatal branching, because it stops normal execution.</li>
 <li>Pass vague messages such as <code>"failed"</code> or <code>"error"</code>, because they make diagnosis harder after the error is caught.</li>
-<li>Drop the original error when wrapping a failure, because that removes useful details from the error chain.</li>
 </ul>
 </div>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="raise-a-validation-failure-and-handle-it-gracefully">Raise a validation failure and handle it gracefully<a class="headerlink" href="#raise-a-validation-failure-and-handle-it-gracefully" title="Permanent link">&para;</a></h3>
-<p><code>ValidateSampleID</code> raises as soon as the input is unusable; <code>CheckSampleID</code> — the procedure callers actually invoke — catches the error and turns it into a plain return value. The raised error never escapes, so a bad sample ID produces a rejection message, not a server error.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateSampleID</span><span class="p">;</span>
+<p><code>ValidateSampleID</code> raises as soon as the input is unusable; <code>CheckSampleID</code> — the only public entry point — catches the error and turns it into a plain return value. A raise-only helper like this is a last resort: when you do write one, mark it <a href="../../special-forms/access-modifiers/"><code>/*@private;</code></a> so external callers cannot invoke it directly and bypass the boundary that catches its errors.</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="c1">/*@private;</span>
+<span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nLength</span><span class="p">,</span><span class="w"> </span><span class="n">sMsg</span><span class="p">;</span>
 
@@ -3575,64 +3575,36 @@
 <p>Returns:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>{.F., &quot;Sample ID must be at least 5 characters. Length: 3&quot;}
 </code></pre></div>
-<h3 id="add-context-with-an-inner-error-then-handle-the-chain-at-the-boundary">Add context with an inner error, then handle the chain at the boundary<a class="headerlink" href="#add-context-with-an-inner-error-then-handle-the-chain-at-the-boundary" title="Permanent link">&para;</a></h3>
-<p><code>ProcessSample</code> catches the low-level failure and re-raises it with higher-level context, preserving the original as the inner exception. That re-raise is safe only because <code>RunBatch</code> — the entry point — catches everything, logs the full chain, and returns normally. If <code>ProcessSample</code> were invoked directly, nothing would catch the re-raised error and the invocation would fail.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadSample</span><span class="p">;</span>
+<h3 id="raise-inside-the-try-block-that-handles-it">Raise inside the :TRY block that handles it<a class="headerlink" href="#raise-inside-the-try-block-that-handles-it" title="Permanent link">&para;</a></h3>
+<p>The preferred placement for <code>RaiseError</code> is directly inside a <a href="../../keywords/TRY/"><code>:TRY</code></a> block whose <a href="../../keywords/CATCH/"><code>:CATCH</code></a> is right there to absorb it. The raise cannot escape, the statements it skips are visible at a glance, and the procedure always returns normally.</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessSample</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;MISSING&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">&quot;Sample was not found&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LoadSample&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2001</span><span class="p">);</span>
-<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-<span class="k">:ENDPROC</span><span class="p">;</span>
-
-<span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessSample</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LoadSample&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sSampleID</span><span class="p">});</span>
-<span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
-<span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">RaiseError</span><span class="p">(</span>
-<span class="w">            </span><span class="s2">&quot;ProcessSample failed for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;ProcessSample&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="mi">5001</span><span class="p">,</span>
-<span class="w">            </span><span class="n">oErr</span>
-<span class="w">        </span><span class="p">);</span>
-<span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
-<span class="k">:ENDPROC</span><span class="p">;</span>
-
-<span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunBatch</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sLog</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ProcessSample&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sSampleID</span><span class="p">});</span>
-<span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
-<span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-
-<span class="w">        </span><span class="n">sLog</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Message: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sLog</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sLog</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Operation: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Operation</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sLog</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sLog</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Code: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oErr</span><span class="p">:</span><span class="n">Code</span><span class="p">);</span>
-
-<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">oErr</span><span class="p">:</span><span class="n">InnerException</span><span class="p">);</span>
-<span class="w">            </span><span class="n">sLog</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sLog</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Inner: &quot;</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">InnerException</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;MISSING&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">&quot;Sample was not found&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ProcessSample&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2001</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">sLog</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">/* Skipped when the raise fires;</span>
+<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Processed &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
+<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Skipped [&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oErr</span><span class="p">:</span><span class="n">Code</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;] &quot;</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">ClearLastSSLError</span><span class="p">();</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunBatch&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;MISSING&quot;</span><span class="p">});</span>
+<span class="k">:RETURN</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ProcessSample&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;MISSING&quot;</span><span class="p">});</span>
 </code></pre></div>
-<p><a href="../ErrorMes/"><code>ErrorMes</code></a> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>Message: ProcessSample failed for MISSING
-Operation: ProcessSample
-Code: 5001
-Inner: Sample was not found
+<p>Returns:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Skipped [2001] Sample was not found
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3663,7 +3635,7 @@ Inner: Sample was not found
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 01:44:26 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 02:05:57 UTC">August 8, 2026</span>
   </span>
 
     
