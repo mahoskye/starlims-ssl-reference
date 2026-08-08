@@ -49,6 +49,8 @@ Server code is addressed with a dotted path of two or three segments — `First.
 
 The second segment is the script name; the optional third segment is a procedure inside that script. This is the path form that [`ExecFunction`](reference/functions/ExecFunction.md) and three-segment [`DoProc`](reference/functions/DoProc.md) take — see [Calling procedures](#calling-procedures) below.
 
+The two trees share a single namespace: Designer refuses to create a server-script category with the same name as an existing application, so the first segment of a dotted path is never ambiguous.
+
 ## How to read this reference
 
 Each element page follows a consistent structure:
