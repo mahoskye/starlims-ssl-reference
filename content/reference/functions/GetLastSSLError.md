@@ -20,7 +20,7 @@ Use it after a failed operation, typically inside [`:CATCH`](../keywords/CATCH.m
 ## When to use
 
 - When implementing robust error handling that inspects the details of the last SSL failure before taking action.
-- When logging or displaying user-friendly error information after operations that might fail.
+- When logging user-friendly error information after operations that might fail.
 - When developing automated diagnostics or error reporting features that need the full context of recent SSL errors.
 - When you need to determine if an error occurred since the last reset and respond accordingly.
 
@@ -48,7 +48,7 @@ This function takes no parameters.
 !!! failure "Don't"
     - Assume the function creates a default error object when no error exists. It returns [`NIL`](../literals/nil.md).
     - Keep reusing the same stored error after you have finished handling it.
-    - Show raw diagnostic detail to end users unless that level of detail is appropriate for the situation.
+    - Pass raw diagnostic detail through to end users unless that level of detail is appropriate for the situation.
 
 ## Caveats
 
@@ -56,9 +56,9 @@ This function takes no parameters.
 
 ## Examples
 
-### Display an error message after a save fails
+### Log an error message after a save fails
 
-Show a message to a user if saving a record fails, using details from the last error.
+Log a message when saving a record fails, using details from the last error.
 
 ```ssl
 :PROCEDURE SaveSampleRecord;
@@ -85,6 +85,8 @@ Show a message to a user if saving a record fails, using details from the last e
 			sErrMsg := "Save failed: " + oErr:Description;
 			ErrorMes(sErrMsg);
 		:ENDIF;
+
+		ClearLastSSLError();
 	:ENDTRY;
 :ENDPROC;
 
@@ -106,8 +108,7 @@ Capture and log comprehensive error details after any SSL exception to support d
 		RaiseError(
 			"Validation failed for input " + sInput,
 			"LogFailureDetails",
-			1001,
-			NIL
+			1001
 		);
 	:CATCH;
 		oErr := GetLastSSLError();
@@ -141,8 +142,7 @@ Inspect nested error information to diagnose compound or wrapped failures.
 			RaiseError(
 				"Connection timeout after 30 seconds",
 				"Database.ADODB",
-				20001,
-				NIL
+				20001
 			);
 		:CATCH;
 			oErr := GetLastSSLError();
@@ -174,6 +174,8 @@ Inspect nested error information to diagnose compound or wrapped failures.
 
 			ErrorMes(sChain); /* Logs nested error details;
 		:ENDIF;
+
+		ClearLastSSLError();
 	:ENDTRY;
 :ENDPROC;
 
