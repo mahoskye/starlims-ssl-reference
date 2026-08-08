@@ -3688,10 +3688,10 @@
 <span class="w">    </span><span class="c1">/* Use the variable only after confirming it exists;</span>
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bHasWorkflowStatus</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Workflow status is: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowStatus</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Displays: Workflow status is: Active;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs: Workflow status is: Active;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Workflow status variable not defined&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Displays: Workflow status variable not defined;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs: Workflow status variable not defined;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="p">;</span>
@@ -3701,7 +3701,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckWorkflowStatus&quot;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="report-which-names-from-a-candidate-list-are-defined">Report which names from a candidate list are defined<a class="headerlink" href="#report-which-names-from-a-candidate-list-are-defined" title="Permanent link">&para;</a></h3>
-<p>Iterate over a list of candidate variable names and build a comma-separated summary of those currently in scope. The single <a href="../UsrMes/"><code>UsrMes</code></a> call at the end shows either the list of available names or a not-defined message.</p>
+<p>Iterate over a list of candidate variable names and build a comma-separated summary of those currently in scope. The single <a href="../UsrMes/"><code>UsrMes</code></a> call at the end logs either the list of available names or a not-defined message.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeAvailableInputs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aCandidateVars</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sVarName</span><span class="p">,</span><span class="w"> </span><span class="n">sAvailable</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
@@ -3735,7 +3735,7 @@
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SummarizeAvailableInputs&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">&quot;sCacheKey&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sContextId&quot;</span><span class="p">}});</span>
 </code></pre></div>
-<p><a href="../UsrMes/"><code>UsrMes</code></a> displays:</p>
+<p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Available input variables: sCacheKey, sContextId
 </code></pre></div>
 <h3 id="resolve-the-first-non-empty-variable-from-a-candidate-list">Resolve the first non-empty variable from a candidate list<a class="headerlink" href="#resolve-the-first-non-empty-variable-from-a-candidate-list" title="Permanent link">&para;</a></h3>
@@ -3766,7 +3766,7 @@
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Using batch identifier: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">/* Displays selected batch identifier;</span>
+<span class="w">    </span><span class="c1">/* Logs selected batch identifier;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -3806,7 +3806,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 30, 2026 23:34:03 UTC">April 30, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
   </span>
 
     

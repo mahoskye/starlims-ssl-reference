@@ -3464,6 +3464,7 @@
 <h1 id="raiseerror">RaiseError<a class="headerlink" href="#raiseerror" title="Permanent link">&para;</a></h1>
 <p>Raises an SSL runtime error using the supplied message and optional location, error code, and inner error.</p>
 <p><code>RaiseError</code> validates <code>sMessage</code> and then throws immediately. The resulting <a href="../../classes/SSLError/"><code>SSLError</code></a> exposes <code>sLocation</code> as <code>:Operation</code> and <code>nErrorCode</code> as <code>:Code</code> when caught. When <code>oInnerException</code> is provided, it becomes the inner exception of the raised error.</p>
+<p>When <code>RaiseError</code> executes inside a <a href="../../keywords/TRY/"><code>:TRY</code></a> block, the remaining statements in that block are skipped and control transfers to <a href="../../keywords/CATCH/"><code>:CATCH</code></a>, where <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> retrieves the raised error. Execution then continues normally after <a href="../../keywords/ENDTRY/"><code>:ENDTRY</code></a>, and the script returns as usual. An uncaught error propagates up the call stack instead; if no caller catches it, the current invocation fails.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When validation fails and the current operation must stop immediately.</li>
@@ -3529,7 +3530,7 @@
 <tbody>
 <tr>
 <td><code>sMessage</code> is <a href="../../literals/nil/"><code>NIL</code></a>.</td>
-<td><code>Error message cannot be null.</code></td>
+<td><code>RaiseError(): error message cannot be null.</code></td>
 </tr>
 </tbody>
 </table>
@@ -3570,8 +3571,8 @@
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
-<span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateSampleID&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SAM-001&quot;</span><span class="p">});</span>
+<span class="c1">/* Usage: raises error 1002 -- the caller must catch it, or the invocation fails;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateSampleID&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SAM&quot;</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="wrap-a-lower-level-failure-as-an-inner-exception">Wrap a lower-level failure as an inner exception<a class="headerlink" href="#wrap-a-lower-level-failure-as-an-inner-exception" title="Permanent link">&para;</a></h3>
 <p>Catch a lower-level error, then raise a new one with higher-level context while preserving the original failure as the inner exception.</p>
@@ -3600,8 +3601,8 @@
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
-<span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ProcessSample&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SAM-001&quot;</span><span class="p">});</span>
+<span class="c1">/* Usage: re-raises with context -- catch it as shown in the next example;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ProcessSample&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;MISSING&quot;</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="inspect-chained-error-details-in-a-central-handler">Inspect chained error details in a central handler<a class="headerlink" href="#inspect-chained-error-details-in-a-central-handler" title="Permanent link">&para;</a></h3>
 <p>Handle a re-raised error centrally and inspect both the top-level error and its inner error.</p>
@@ -3631,7 +3632,7 @@
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunBatch&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;MISSING&quot;</span><span class="p">});</span>
 </code></pre></div>
-<p><a href="../ErrorMes/"><code>ErrorMes</code></a> displays:</p>
+<p><a href="../ErrorMes/"><code>ErrorMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Message: ProcessSample failed for MISSING
 Operation: ProcessSample
 Code: 5001
@@ -3666,7 +3667,7 @@ Inner: Sample was not found
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 30, 2026 23:34:03 UTC">April 30, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:28 UTC">August 8, 2026</span>
   </span>
 
     

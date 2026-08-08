@@ -3740,7 +3740,7 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="delete-an-empty-ftp-archive-folder">Delete an empty FTP archive folder<a class="headerlink" href="#delete-an-empty-ftp-archive-folder" title="Permanent link">&para;</a></h3>
-<p>Removes a completed archive folder from an FTP server and displays whether the delete succeeded or was rejected.</p>
+<p>Removes a completed archive folder from an FTP server and logs whether the delete succeeded or was rejected.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RemoveArchiveFolder</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sServer</span><span class="p">,</span><span class="w"> </span><span class="n">sRemoteDir</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">bDeleted</span><span class="p">;</span>
 
@@ -3753,10 +3753,10 @@
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bDeleted</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Archive folder removed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRemoteDir</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">/* Displays the removed folder path;</span>
+<span class="w">        </span><span class="c1">/* Logs the removed folder path;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Archive folder could not be removed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRemoteDir</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">/* Displays the folder that could not be removed;</span>
+<span class="w">        </span><span class="c1">/* Logs the folder that could not be removed;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bDeleted</span><span class="p">;</span>
@@ -3790,16 +3790,16 @@
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bDeleted</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;SFTP folder removed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRemoteDir</span><span class="p">);</span>
-<span class="w">            </span><span class="c1">/* Displays the removed SFTP folder path;</span>
+<span class="w">            </span><span class="c1">/* Logs the removed SFTP folder path;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;SFTP folder could not be removed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRemoteDir</span><span class="p">);</span>
-<span class="w">            </span><span class="c1">/* Displays the rejected SFTP folder path;</span>
+<span class="w">            </span><span class="c1">/* Logs the rejected SFTP folder path;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;SFTP setup failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">/* Displays the setup failure details;</span>
+<span class="w">        </span><span class="c1">/* Logs the setup failure details;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
@@ -3833,7 +3833,7 @@
 <span class="w">                </span><span class="s2">&quot;Remote folder is not empty. Leaving it in place: &quot;</span>
 <span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="n">sRemoteDir</span>
 <span class="w">            </span><span class="p">);</span>
-<span class="w">            </span><span class="c1">/* Displays the non-empty folder path;</span>
+<span class="w">            </span><span class="c1">/* Logs the non-empty folder path;</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3841,19 +3841,19 @@
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bDeleted</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Remote folder delete failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRemoteDir</span><span class="p">);</span>
-<span class="w">            </span><span class="c1">/* Displays the folder that failed to delete;</span>
+<span class="w">            </span><span class="c1">/* Logs the folder that failed to delete;</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Remote folder cleanup failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">/* Displays the cleanup failure details;</span>
+<span class="w">        </span><span class="c1">/* Logs the cleanup failure details;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Remote folder cleanup complete: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRemoteDir</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">/* Displays the cleaned folder path;</span>
+<span class="w">    </span><span class="c1">/* Logs the cleaned folder path;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -3889,7 +3889,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 30, 2026 23:34:03 UTC">April 30, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
   </span>
 
     

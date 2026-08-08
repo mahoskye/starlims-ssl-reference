@@ -4151,7 +4151,7 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="create-a-user-with-required-credentials-only">Create a user with required credentials only<a class="headerlink" href="#create-a-user-with-required-credentials-only" title="Permanent link">&para;</a></h3>
-<p>Creates a Documentum user account with only a login name and password and displays the returned identifier or an error when the result is empty.</p>
+<p>Creates a Documentum user account with only a login name and password and logs the returned identifier or an error when the result is empty.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateBasicUser</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sUserId</span><span class="p">;</span>
 
@@ -4166,7 +4166,7 @@
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Created user ID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserId</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">/* Displays the created user ID on success;</span>
+<span class="w">    </span><span class="c1">/* Logs the created user ID on success;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sUserId</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -4204,12 +4204,12 @@
 <span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span>
 <span class="w">            </span><span class="s2">&quot;User creation returned an empty identifier for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLoginName</span>
 <span class="w">        </span><span class="p">);</span>
-<span class="w">        </span><span class="c1">/* Displays a failure message for the requested login;</span>
+<span class="w">        </span><span class="c1">/* Logs a failure message for the requested login;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Created user &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; with ID &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserId</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">/* Displays the created user name and ID on success;</span>
+<span class="w">    </span><span class="c1">/* Logs the created user name and ID on success;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sUserId</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -4233,22 +4233,22 @@
 <span class="w">                </span><span class="s2">&quot;DocCreateUser returned an empty identifier for &quot;</span>
 <span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="n">sLoginName</span>
 <span class="w">            </span><span class="p">);</span>
-<span class="w">            </span><span class="c1">/* Displays a failure message when no identifier is returned;</span>
+<span class="w">            </span><span class="c1">/* Logs a failure message when no identifier is returned;</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Created user ID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserId</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">/* Displays the created user ID on success;</span>
+<span class="w">        </span><span class="c1">/* Logs the created user ID on success;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sUserId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">oErr</span><span class="p">);</span>
 <span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;DocCreateUser failed for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">);</span>
-<span class="w">            </span><span class="c1">/* Displays a generic failure message for the login;</span>
+<span class="w">            </span><span class="c1">/* Logs a generic failure message for the login;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;DocCreateUser failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
-<span class="w">            </span><span class="c1">/* Displays the failure details returned by SSL;</span>
+<span class="w">            </span><span class="c1">/* Logs the failure details returned by SSL;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
@@ -4287,7 +4287,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 30, 2026 23:34:03 UTC">April 30, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
   </span>
 
     
