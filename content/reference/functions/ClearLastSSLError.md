@@ -82,34 +82,43 @@ DoProc("HandleAndClearSslError");
 
 ### Reset before a retry
 
-Logs the error from a failed SQL update, clears the error state, then retries the same operation once so the second attempt is not tainted by the first failure.
+Catches the error from a failed SQL update, logs it, clears the error state, then retries the same operation once in its own [`:TRY`](../keywords/TRY.md) so the second attempt starts clean.
 
 ```ssl
 :PROCEDURE RetryStatusUpdate;
     :PARAMETERS sSampleID, sStatus;
     :DECLARE bUpdated, oErr;
 
-    bUpdated := RunSQL("
-        UPDATE sample SET
-            status = ?
-        WHERE sampleid = ?
-    ",, {sStatus, sSampleID});
+    bUpdated := .F.;
+
+    :TRY;
+        bUpdated := RunSQL("
+            UPDATE sample SET
+                status = ?
+            WHERE sampleid = ?
+        ",, {sStatus, sSampleID});
+    :CATCH;
+        oErr := GetLastSSLError();
+        UsrMes("First update failed: " + oErr:Description);
+        /* Logs the first failure description;
+        ClearLastSSLError();
+    :ENDTRY;
 
     :IF bUpdated;
         :RETURN .T.;
     :ENDIF;
 
-    oErr := GetLastSSLError();
-    UsrMes("First update failed: " + oErr:Description);
-    /* Logs the first failure description;
-
-    ClearLastSSLError();
-
-    bUpdated := RunSQL("
-        UPDATE sample SET
-            status = ?
-        WHERE sampleid = ?
-    ",, {sStatus, sSampleID});
+    :TRY;
+        bUpdated := RunSQL("
+            UPDATE sample SET
+                status = ?
+            WHERE sampleid = ?
+        ",, {sStatus, sSampleID});
+    :CATCH;
+        oErr := GetLastSSLError();
+        UsrMes("Retry failed: " + oErr:Description);
+        ClearLastSSLError();
+    :ENDTRY;
 
     :RETURN bUpdated;
 :ENDPROC;
@@ -120,7 +129,7 @@ DoProc("RetryStatusUpdate", {"SAMP-001", "APPROVED"});
 
 ### Batch work with per-item error resets
 
-Clears the error state at the start of each loop iteration so a failure on one sample cannot contaminate the error check for the next sample.
+Handles each sample in its own [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) and clears the error state after recording a failure, so one sample's error cannot contaminate the check for the next.
 
 ```ssl
 :PROCEDURE ProcessQueuedSamples;
@@ -131,18 +140,18 @@ Clears the error state at the start of each loop iteration so a failure on one s
 
     :FOR nIndex := 1 :TO ALen(aSampleIDs);
         sSampleID := aSampleIDs[nIndex];
-        ClearLastSSLError();
 
-        :IF RunSQL("
-            UPDATE sample SET
-                status = ?
-            WHERE sampleid = ?
-        ",, {"COMPLETE", sSampleID});
-            :LOOP;
-        :ENDIF;
-
-        oErr := GetLastSSLError();
-        AAdd(aFailed, {sSampleID, oErr:Description});
+        :TRY;
+            RunSQL("
+                UPDATE sample SET
+                    status = ?
+                WHERE sampleid = ?
+            ",, {"COMPLETE", sSampleID});
+        :CATCH;
+            oErr := GetLastSSLError();
+            AAdd(aFailed, {sSampleID, oErr:Description});
+            ClearLastSSLError();
+        :ENDTRY;
     :NEXT;
 
     :RETURN aFailed;
