@@ -45,7 +45,7 @@ The runtime predefines some global variables. The one used throughout this refer
 Server code is addressed with a dotted path of two or three segments — `First.Script` or `First.Script.Procedure`. The first segment names one of two trees in Designer:
 
 - A **server-script category** — a directory under the Server Scripts tab. A script `Auth` in category `API_HELPERS` is addressed as `API_HELPERS.Auth`; its procedure `CheckSession` as `API_HELPERS.Auth.CheckSession`.
-- An **application** — applications live under an application category and contain their own forms, client scripts, server scripts, and data sources. A server script `SomeServerScript` in application `BBUDDLE` is addressed as `BBUDDLE.SomeServerScript`, or `BBUDDLE.SomeServerScript.Helper` for a specific procedure.
+- An **application** — applications live under an application category and contain their own forms, client scripts, server scripts, and data sources. A server script `SomeServerScript` in application `TESTAPP` is addressed as `TESTAPP.SomeServerScript`, or `TESTAPP.SomeServerScript.Helper` for a specific procedure.
 
 The second segment is the script name; the optional third segment is a procedure inside that script. This is the path form that [`ExecFunction`](reference/functions/ExecFunction.md) and three-segment [`DoProc`](reference/functions/DoProc.md) take — see [Calling procedures](#calling-procedures) below.
 
