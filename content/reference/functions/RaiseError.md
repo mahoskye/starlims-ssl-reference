@@ -15,6 +15,8 @@ Raises an SSL runtime error using the supplied message and optional location, er
 
 `RaiseError` validates `sMessage` and then throws immediately. The resulting [`SSLError`](../classes/SSLError.md) exposes `sLocation` as `:Operation` and `nErrorCode` as `:Code` when caught. When `oInnerException` is provided, it becomes the inner exception of the raised error.
 
+When `RaiseError` executes inside a [`:TRY`](../keywords/TRY.md) block, the remaining statements in that block are skipped and control transfers to [`:CATCH`](../keywords/CATCH.md), where [`GetLastSSLError`](GetLastSSLError.md) retrieves the raised error. Execution then continues normally after [`:ENDTRY`](../keywords/ENDTRY.md), and the script returns as usual. An uncaught error propagates up the call stack instead; if no caller catches it, the current invocation fails.
+
 ## When to use
 
 - When validation fails and the current operation must stop immediately.
@@ -45,7 +47,7 @@ RaiseError(sMessage, [sLocation], [nErrorCode], [oInnerException])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sMessage` is [`NIL`](../literals/nil.md). | `Error message cannot be null.` |
+| `sMessage` is [`NIL`](../literals/nil.md). | `RaiseError(): error message cannot be null.` |
 
 ## Best practices
 
@@ -83,8 +85,8 @@ Stop processing as soon as a required sample identifier is missing or too short.
 	:ENDIF;
 :ENDPROC;
 
-/* Usage;
-DoProc("ValidateSampleID", {"SAM-001"});
+/* Usage: raises error 1002 -- the caller must catch it, or the invocation fails;
+DoProc("ValidateSampleID", {"SAM"});
 ```
 
 ### Wrap a lower-level failure as an inner exception
@@ -117,8 +119,8 @@ Catch a lower-level error, then raise a new one with higher-level context while 
 	:ENDTRY;
 :ENDPROC;
 
-/* Usage;
-DoProc("ProcessSample", {"SAM-001"});
+/* Usage: re-raises with context -- catch it as shown in the next example;
+DoProc("ProcessSample", {"MISSING"});
 ```
 
 ### Inspect chained error details in a central handler
@@ -153,7 +155,7 @@ Handle a re-raised error centrally and inspect both the top-level error and its 
 DoProc("RunBatch", {"MISSING"});
 ```
 
-[`ErrorMes`](ErrorMes.md) displays:
+[`ErrorMes`](ErrorMes.md) writes to the server log:
 
 ```text
 Message: ProcessSample failed for MISSING
