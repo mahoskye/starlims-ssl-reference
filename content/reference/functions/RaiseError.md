@@ -15,13 +15,12 @@ Raises an SSL runtime error using the supplied message and optional location, er
 
 `RaiseError` validates `sMessage` and then throws immediately. The resulting [`SSLError`](../classes/SSLError.md) exposes `sLocation` as `:Operation` and `nErrorCode` as `:Code` when caught. When `oInnerException` is provided, it becomes the inner exception of the raised error.
 
-When `RaiseError` executes inside a [`:TRY`](../keywords/TRY.md) block, the remaining statements in that block are skipped and control transfers to [`:CATCH`](../keywords/CATCH.md), where [`GetLastSSLError`](GetLastSSLError.md) retrieves the raised error. Execution then continues normally after [`:ENDTRY`](../keywords/ENDTRY.md), and the script returns as usual. An uncaught error propagates up the call stack instead; if no caller catches it, the invocation fails and the end user sees a server error. Every `RaiseError` therefore needs a [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) boundary somewhere up the call stack — raising without one turns a routine failure, such as an invalid sample ID, into a crash.
+When `RaiseError` executes inside a [`:TRY`](../keywords/TRY.md) block, the remaining statements in that block are skipped and control transfers to [`:CATCH`](../keywords/CATCH.md), where [`GetLastSSLError`](GetLastSSLError.md) retrieves the raised error. Execution then continues normally after [`:ENDTRY`](../keywords/ENDTRY.md), and the script returns as usual. An uncaught error propagates up the call stack instead; if no caller catches it, the invocation fails and the end user sees a server error. Every `RaiseError` therefore needs a [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) boundary — or a legacy [`:ERROR`](../keywords/ERROR.md) / [`:RESUME`](../keywords/RESUME.md) handler — somewhere up the call stack; raising without one turns a routine failure, such as an invalid sample ID, into a crash. The preferred placement is directly inside the [`:TRY`](../keywords/TRY.md) block whose [`:CATCH`](../keywords/CATCH.md) handles it, so the raise can never escape.
 
 ## When to use
 
 - When validation fails and the current operation must stop immediately.
 - When you want a caught error to include a specific operation name or numeric code.
-- When you are wrapping a lower-level failure and want to preserve it as an inner error.
 - When a caller should handle the failure through [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) rather than by checking a return value.
 
 ## Syntax
@@ -52,25 +51,26 @@ RaiseError(sMessage, [sLocation], [nErrorCode], [oInnerException])
 ## Best practices
 
 !!! success "Do"
+    - Place `RaiseError` directly inside the [`:TRY`](../keywords/TRY.md) block whose [`:CATCH`](../keywords/CATCH.md) handles it, so the raise can never escape.
     - Catch every raised error at an entry-point boundary with [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md), so failures come back as logged messages and return values instead of server errors.
+    - Mark raise-only helper procedures [`/*@private;`](../special-forms/access-modifiers.md) so they cannot be invoked without the entry point that catches them.
     - Raise clear messages that explain what failed and why.
     - Supply `sLocation` and `nErrorCode` when callers or logs need to identify the failing operation precisely.
-    - Re-raise caught errors with `oInnerException` when you need to add context without losing the original failure.
 
 !!! failure "Don't"
+    - Call `RaiseError` inside [`:CATCH`](../keywords/CATCH.md) — the error handler must never become the thing that crashes.
     - Let a raised error escape the outermost procedure — an uncaught error fails the invocation and surfaces as a server error to the end user.
-    - Re-raise inside [`:CATCH`](../keywords/CATCH.md) unless a caller above is known to catch it; otherwise the error handler itself becomes the crash.
     - Use `RaiseError` for routine status reporting or non-fatal branching, because it stops normal execution.
     - Pass vague messages such as `"failed"` or `"error"`, because they make diagnosis harder after the error is caught.
-    - Drop the original error when wrapping a failure, because that removes useful details from the error chain.
 
 ## Examples
 
 ### Raise a validation failure and handle it gracefully
 
-`ValidateSampleID` raises as soon as the input is unusable; `CheckSampleID` — the procedure callers actually invoke — catches the error and turns it into a plain return value. The raised error never escapes, so a bad sample ID produces a rejection message, not a server error.
+`ValidateSampleID` raises as soon as the input is unusable; `CheckSampleID` — the only public entry point — catches the error and turns it into a plain return value. A raise-only helper like this is a last resort: when you do write one, mark it [`/*@private;`](../special-forms/access-modifiers.md) so external callers cannot invoke it directly and bypass the boundary that catches its errors.
 
 ```ssl
+/*@private;
 :PROCEDURE ValidateSampleID;
 	:PARAMETERS sSampleID;
 	:DECLARE nLength, sMsg;
@@ -115,70 +115,42 @@ Returns:
 {.F., "Sample ID must be at least 5 characters. Length: 3"}
 ```
 
-### Add context with an inner error, then handle the chain at the boundary
+### Raise inside the :TRY block that handles it
 
-`ProcessSample` catches the low-level failure and re-raises it with higher-level context, preserving the original as the inner exception. That re-raise is safe only because `RunBatch` — the entry point — catches everything, logs the full chain, and returns normally. If `ProcessSample` were invoked directly, nothing would catch the re-raised error and the invocation would fail.
+The preferred placement for `RaiseError` is directly inside a [`:TRY`](../keywords/TRY.md) block whose [`:CATCH`](../keywords/CATCH.md) is right there to absorb it. The raise cannot escape, the statements it skips are visible at a glance, and the procedure always returns normally.
 
 ```ssl
-:PROCEDURE LoadSample;
-	:PARAMETERS sSampleID;
-
-	:IF sSampleID == "MISSING";
-		RaiseError("Sample was not found", "LoadSample", 2001);
-	:ENDIF;
-:ENDPROC;
-
 :PROCEDURE ProcessSample;
 	:PARAMETERS sSampleID;
-	:DECLARE oErr;
+	:DECLARE oErr, sStatus;
+
+	sStatus := "";
 
 	:TRY;
-		DoProc("LoadSample", {sSampleID});
-	:CATCH;
-		oErr := GetLastSSLError();
-		RaiseError(
-			"ProcessSample failed for " + sSampleID,
-			"ProcessSample",
-			5001,
-			oErr
-		);
-	:ENDTRY;
-:ENDPROC;
-
-:PROCEDURE RunBatch;
-	:PARAMETERS sSampleID;
-	:DECLARE oErr, sLog;
-
-	:TRY;
-		DoProc("ProcessSample", {sSampleID});
-	:CATCH;
-		oErr := GetLastSSLError();
-
-		sLog := "Message: " + oErr:Description + Chr(10);
-		sLog := sLog + "Operation: " + oErr:Operation + Chr(10);
-		sLog := sLog + "Code: " + LimsString(oErr:Code);
-
-		:IF ! Empty(oErr:InnerException);
-			sLog := sLog + Chr(10) + "Inner: "
-			+ oErr:InnerException:Description;
+		:IF sSampleID == "MISSING";
+			RaiseError("Sample was not found", "ProcessSample", 2001);
 		:ENDIF;
 
-		ErrorMes(sLog);
+		/* Skipped when the raise fires;
+		sStatus := "Processed " + sSampleID;
+	:CATCH;
+		oErr := GetLastSSLError();
+		sStatus := "Skipped [" + LimsString(oErr:Code) + "] "
+		+ oErr:Description;
 		ClearLastSSLError();
 	:ENDTRY;
+
+	:RETURN sStatus;
 :ENDPROC;
 
 /* Usage;
-DoProc("RunBatch", {"MISSING"});
+:RETURN DoProc("ProcessSample", {"MISSING"});
 ```
 
-[`ErrorMes`](ErrorMes.md) logs:
+Returns:
 
 ```text
-Message: ProcessSample failed for MISSING
-Operation: ProcessSample
-Code: 5001
-Inner: Sample was not found
+Skipped [2001] Sample was not found
 ```
 
 ## Related

@@ -8463,17 +8463,17 @@
       "caveats": [],
       "best_practices": {
         "do": [
+          "Place RaiseError directly inside the :TRY block whose :CATCH handles it, so the raise can never escape.",
           "Catch every raised error at an entry-point boundary with :TRY / :CATCH, so failures come back as logged messages and return values instead of server errors.",
+          "Mark raise-only helper procedures /*@private; so they cannot be invoked without the entry point that catches them.",
           "Raise clear messages that explain what failed and why.",
-          "Supply sLocation and nErrorCode when callers or logs need to identify the failing operation precisely.",
-          "Re-raise caught errors with oInnerException when you need to add context without losing the original failure."
+          "Supply sLocation and nErrorCode when callers or logs need to identify the failing operation precisely."
         ],
         "dont": [
+          "Call RaiseError inside :CATCH — the error handler must never become the thing that crashes.",
           "Let a raised error escape the outermost procedure — an uncaught error fails the invocation and surfaces as a server error to the end user.",
-          "Re-raise inside :CATCH unless a caller above is known to catch it; otherwise the error handler itself becomes the crash.",
           "Use RaiseError for routine status reporting or non-fatal branching, because it stops normal execution.",
-          "Pass vague messages such as \"failed\" or \"error\", because they make diagnosis harder after the error is caught.",
-          "Drop the original error when wrapping a failure, because that removes useful details from the error chain."
+          "Pass vague messages such as \"failed\" or \"error\", because they make diagnosis harder after the error is caught."
         ]
       }
     },
