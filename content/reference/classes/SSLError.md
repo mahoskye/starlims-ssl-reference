@@ -112,23 +112,25 @@ DoProc("ShowErrorSummary");
 
 ### Working with nested errors
 
-Uses a nested [`:TRY`](../keywords/TRY.md) to raise a first error, then raises a second error that wraps it via [`GetLastSSLError()`](../functions/GetLastSSLError.md). The outer [`:CATCH`](../keywords/CATCH.md) reads `FullDescription` for the top-level diagnostic text and appends the inner cause description when `InnerException` is populated.
+Uses a nested [`:TRY`](../keywords/TRY.md) to raise and capture a first error, then — back in the outer [`:TRY`](../keywords/TRY.md) body, never inside a [`:CATCH`](../keywords/CATCH.md) — raises a second error that wraps the captured one. The outer [`:CATCH`](../keywords/CATCH.md) reads `FullDescription` for the top-level diagnostic text and appends the inner cause description when `InnerException` is populated.
 
 ```ssl
 :PROCEDURE ShowNestedError;
-    :DECLARE oErr, sReport;
+    :DECLARE oInnerErr, oErr, sReport;
 
     :TRY;
         :TRY;
             RaiseError("Result row is locked", "LoadResult", 2201);
         :CATCH;
-            RaiseError(
-                "Could not complete sample release",
-                "ReleaseSample",
-                2202,
-                GetLastSSLError()
-            );
+            oInnerErr := GetLastSSLError();
         :ENDTRY;
+
+        RaiseError(
+            "Could not complete sample release",
+            "ReleaseSample",
+            2202,
+            oInnerErr
+        );
     :CATCH;
         oErr := GetLastSSLError();
         sReport := oErr:FullDescription;
