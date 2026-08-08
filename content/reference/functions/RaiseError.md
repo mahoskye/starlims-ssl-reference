@@ -15,7 +15,7 @@ Raises an SSL runtime error using the supplied message and optional location, er
 
 `RaiseError` validates `sMessage` and then throws immediately. The resulting [`SSLError`](../classes/SSLError.md) exposes `sLocation` as `:Operation` and `nErrorCode` as `:Code` when caught. When `oInnerException` is provided, it becomes the inner exception of the raised error.
 
-When `RaiseError` executes inside a [`:TRY`](../keywords/TRY.md) block, the remaining statements in that block are skipped and control transfers to [`:CATCH`](../keywords/CATCH.md), where [`GetLastSSLError`](GetLastSSLError.md) retrieves the raised error. Execution then continues normally after [`:ENDTRY`](../keywords/ENDTRY.md), and the script returns as usual. An uncaught error propagates up the call stack instead; if no caller catches it, the current invocation fails.
+When `RaiseError` executes inside a [`:TRY`](../keywords/TRY.md) block, the remaining statements in that block are skipped and control transfers to [`:CATCH`](../keywords/CATCH.md), where [`GetLastSSLError`](GetLastSSLError.md) retrieves the raised error. Execution then continues normally after [`:ENDTRY`](../keywords/ENDTRY.md), and the script returns as usual. An uncaught error propagates up the call stack instead; if no caller catches it, the invocation fails and the end user sees a server error. Every `RaiseError` therefore needs a [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) boundary somewhere up the call stack — raising without one turns a routine failure, such as an invalid sample ID, into a crash.
 
 ## When to use
 
@@ -52,20 +52,23 @@ RaiseError(sMessage, [sLocation], [nErrorCode], [oInnerException])
 ## Best practices
 
 !!! success "Do"
+    - Catch every raised error at an entry-point boundary with [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md), so failures come back as logged messages and return values instead of server errors.
     - Raise clear messages that explain what failed and why.
     - Supply `sLocation` and `nErrorCode` when callers or logs need to identify the failing operation precisely.
     - Re-raise caught errors with `oInnerException` when you need to add context without losing the original failure.
 
 !!! failure "Don't"
+    - Let a raised error escape the outermost procedure — an uncaught error fails the invocation and surfaces as a server error to the end user.
+    - Re-raise inside [`:CATCH`](../keywords/CATCH.md) unless a caller above is known to catch it; otherwise the error handler itself becomes the crash.
     - Use `RaiseError` for routine status reporting or non-fatal branching, because it stops normal execution.
     - Pass vague messages such as `"failed"` or `"error"`, because they make diagnosis harder after the error is caught.
     - Drop the original error when wrapping a failure, because that removes useful details from the error chain.
 
 ## Examples
 
-### Reject invalid input
+### Raise a validation failure and handle it gracefully
 
-Stop processing as soon as a required sample identifier is missing or too short.
+`ValidateSampleID` raises as soon as the input is unusable; `CheckSampleID` — the procedure callers actually invoke — catches the error and turns it into a plain return value. The raised error never escapes, so a bad sample ID produces a rejection message, not a server error.
 
 ```ssl
 :PROCEDURE ValidateSampleID;
@@ -85,13 +88,36 @@ Stop processing as soon as a required sample identifier is missing or too short.
 	:ENDIF;
 :ENDPROC;
 
-/* Usage: raises error 1002 -- the caller must catch it, or the invocation fails;
-DoProc("ValidateSampleID", {"SAM"});
+:PROCEDURE CheckSampleID;
+	:PARAMETERS sSampleID;
+	:DECLARE oErr, sReason;
+
+	sReason := "";
+
+	:TRY;
+		DoProc("ValidateSampleID", {sSampleID});
+	:CATCH;
+		oErr := GetLastSSLError();
+		sReason := oErr:Description;
+		ClearLastSSLError();
+	:ENDTRY;
+
+	:RETURN {Empty(sReason), sReason};
+:ENDPROC;
+
+/* Usage;
+:RETURN DoProc("CheckSampleID", {"SAM"});
 ```
 
-### Wrap a lower-level failure as an inner exception
+Returns:
 
-Catch a lower-level error, then raise a new one with higher-level context while preserving the original failure as the inner exception.
+```text
+{.F., "Sample ID must be at least 5 characters. Length: 3"}
+```
+
+### Add context with an inner error, then handle the chain at the boundary
+
+`ProcessSample` catches the low-level failure and re-raises it with higher-level context, preserving the original as the inner exception. That re-raise is safe only because `RunBatch` — the entry point — catches everything, logs the full chain, and returns normally. If `ProcessSample` were invoked directly, nothing would catch the re-raised error and the invocation would fail.
 
 ```ssl
 :PROCEDURE LoadSample;
@@ -119,15 +145,6 @@ Catch a lower-level error, then raise a new one with higher-level context while 
 	:ENDTRY;
 :ENDPROC;
 
-/* Usage: re-raises with context -- catch it as shown in the next example;
-DoProc("ProcessSample", {"MISSING"});
-```
-
-### Inspect chained error details in a central handler
-
-Handle a re-raised error centrally and inspect both the top-level error and its inner error.
-
-```ssl
 :PROCEDURE RunBatch;
 	:PARAMETERS sSampleID;
 	:DECLARE oErr, sLog;
