@@ -35,7 +35,7 @@ When a variable is referenced, lookup proceeds in this order:
 2. **Caller scopes** — up the call stack
 3. **Public variables** — declared with [`:PUBLIC`](../reference/keywords/PUBLIC.md)
 
-Reading a caller's variable works but generates a warning. Always declare variables locally.
+Reading a caller's variable works but generates a warning. Writing to one does not warn at all — an assignment to a name the current scope never declared can silently overwrite a caller's variable. Always declare variables locally; see [Variable Scope](variable-scope.md) for the full model.
 
 Re-declaring an existing variable with [`:DECLARE`](../reference/keywords/DECLARE.md) is silently ignored — no error is thrown and the existing value is preserved.
 

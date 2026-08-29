@@ -19,6 +19,8 @@ The `:DECLARE` keyword adds one or more names to the current scope. In script, p
 
 `:DECLARE` creates storage for each listed name the first time that name is declared in the current runtime scope. The runtime initializes a new declared variable to the empty string, not [`NIL`](../literals/nil.md). Re-declaring the same name is accepted and does not reset the existing runtime value, so a repeated declaration is usually harmless at runtime but still poor style because it obscures where the variable was introduced.
 
+Declaring a name is what makes it private to the current scope. SSL resolves an undeclared name outward — current scope, then caller scopes, then public variables — so a routine that assigns to a name it never declared can read and overwrite a caller's variable of the same name. Declaring the name stops that search in the current scope, giving the routine its own variable and leaving the caller's untouched. See [Variable Scope](../../guides/variable-scope.md).
+
 ## When to use
 
 - When defining local working variables for a procedure, method, or script.
@@ -46,17 +48,19 @@ The `:DECLARE` keyword adds one or more names to the current scope. In script, p
 ## Best practices
 
 !!! success "Do"
-    - Declare variables before their first use.
+    - Declare variables before their first use, including [`:FOR`](FOR.md) loop counters.
+    - Declare every name a script uses when that script may be called by another script. The callee's declaration is what protects the caller's variables.
     - Group related declarations near the start of a routine when that improves readability.
     - Use clear Hungarian-style names for local variables in examples and new code.
 
 !!! failure "Don't"
-    - Rely on assignment to introduce a variable. SSL expects names to be declared before use.
+    - Rely on assignment to introduce a variable. SSL expects names to be declared before use, and an assignment to an undeclared name can land on a caller's variable instead of creating a new one.
     - Re-declare the same name casually. SSL accepts it, but repeated declarations make scope harder to follow.
     - Scatter declarations through unrelated logic just because the language permits it. Use later declarations only when they genuinely improve clarity.
 
 ## Caveats
 
+- A name the current scope never declares is not private to it. Assignments to that name resolve outward to caller scopes and can silently overwrite a caller's variable — see [Variable Scope](../../guides/variable-scope.md).
 - `:DECLARE` does not assign a custom initial value. If you need one, declare the name and then assign it on a later statement.
 - All colon-prefixed keywords are case-sensitive, so write `:DECLARE` in uppercase.
 
@@ -170,3 +174,4 @@ Tracked sample LAB-2024-0042 with 1 result
 - [`DEFAULT`](DEFAULT.md)
 - [`PUBLIC`](PUBLIC.md)
 - [`PARAMETERS`](PARAMETERS.md)
+- [Variable Scope](../../guides/variable-scope.md)

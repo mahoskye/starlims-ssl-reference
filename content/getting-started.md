@@ -190,6 +190,7 @@ The [`=`](reference/operators/equals.md) operator on strings does **prefix match
 
 - Browse the [SSL Reference](reference/index.md) for specific elements
 - Read the [Type System](guides/type-system.md) guide for coercion rules
+- Read [Variable Scope](guides/variable-scope.md) before writing a script that calls another script
 - See [Error Handling](guides/error-handling.md) for exception patterns
 - Review [Naming Conventions](guides/naming-conventions.md) for Hungarian prefixes and casing
 - Read [Data Source Files](guides/data-sources.md) if you write SSL or SQL data sources

@@ -2452,6 +2452,7 @@
       ],
       "caveats": [
         "DoProc is a compile-time error inside class methods — every name form is rejected, not just same-class calls. Use Me:MethodName() or Base:MethodName() instead.",
+        "The called procedure does not get an isolated set of variables. Names it never declares resolve outward into the calling scope, so an undeclared assignment in the procedure can overwrite a caller variable of the same name. See Variable Scope.",
         "One-segment names are resolved case-insensitively in the current script.",
         "Three-segment names are passed into the executor path instead of local method lookup."
       ],
@@ -4187,6 +4188,7 @@
       ],
       "caveats": [
         "A class file is not a runnable target: it has no script entry point, so a two-segment path naming a class file fails at runtime, and a three-segment path does not invoke its methods. Create the object with CreateUdObject and call the method on the instance instead.",
+        "The called target does not get an isolated set of variables. Names it never declares resolve outward into this scope, so an undeclared assignment in the target — a :FOR counter especially — can overwrite a variable of the same name here. See Variable Scope.",
         "If the function name is misspelled, empty, or references a non-existent target, a runtime error is thrown with little context.",
         "All type validation is deferred to the time of invocation, so incorrect argument types or counts are only caught at runtime."
       ],
@@ -4200,7 +4202,8 @@
           "Allow untrusted input to determine the function name or arguments without validation.",
           "Omit the second argument or provide a non-array value when the target expects arguments.",
           "Assume all calls will succeed or ignore errors from dynamic invocation.",
-          "Use ExecFunction to run a class file or call a class method — create the object with CreateUdObject and call the method on the instance."
+          "Use ExecFunction to run a class file or call a class method — create the object with CreateUdObject and call the method on the instance.",
+          "Assume the called target cannot touch your variables. A target that leaves names undeclared can read and overwrite variables in this scope."
         ]
       }
     },
@@ -12298,17 +12301,19 @@
       "source_path": "content/reference/keywords/DECLARE.md",
       "exceptions": [],
       "caveats": [
+        "A name the current scope never declares is not private to it. Assignments to that name resolve outward to caller scopes and can silently overwrite a caller's variable — see Variable Scope.",
         ":DECLARE does not assign a custom initial value. If you need one, declare the name and then assign it on a later statement.",
         "All colon-prefixed keywords are case-sensitive, so write :DECLARE in uppercase."
       ],
       "best_practices": {
         "do": [
-          "Declare variables before their first use.",
+          "Declare variables before their first use, including :FOR loop counters.",
+          "Declare every name a script uses when that script may be called by another script. The callee's declaration is what protects the caller's variables.",
           "Group related declarations near the start of a routine when that improves readability.",
           "Use clear Hungarian-style names for local variables in examples and new code."
         ],
         "dont": [
-          "Rely on assignment to introduce a variable. SSL expects names to be declared before use.",
+          "Rely on assignment to introduce a variable. SSL expects names to be declared before use, and an assignment to an undeclared name can land on a caller's variable instead of creating a new one.",
           "Re-declare the same name casually. SSL accepts it, but repeated declarations make scope harder to follow.",
           "Scatter declarations through unrelated logic just because the language permits it. Use later declarations only when they genuinely improve clarity."
         ]
@@ -12665,6 +12670,7 @@
       "source_path": "content/reference/keywords/FOR.md",
       "exceptions": [],
       "caveats": [
+        "An undeclared loop variable is not private to the loop. If a caller uses the same name undeclared, the loop drives the caller's variable, which can make the caller's own loop exit after a single pass with no error reported — see Variable Scope.",
         "Leaving out the required closing :NEXT; causes a parse error.",
         ":EXITFOR; outside a :FOR loop causes a compile-time error with the message Found :EXITFOR outside :FOR.",
         "The start, limit, and step values must be numeric at runtime.",
@@ -12673,6 +12679,8 @@
       ],
       "best_practices": {
         "do": [
+          "Declare the loop variable with :DECLARE in the routine that runs the loop.",
+          "Prefer a script-specific counter name over a bare i or j in scripts that call other scripts.",
           "Use :STEP only when you need an increment other than the default 1.",
           "Use distinct loop variables in nested loops so the control flow stays readable."
         ],
@@ -12921,6 +12929,7 @@
       "exceptions": [],
       "caveats": [
         ":PUBLIC is valid in script and procedure statement flow. It is not a class field declaration.",
+        ":PUBLIC is not what makes a name visible to a called routine — callees can already resolve a caller's variables by walking the call stack. What :PUBLIC adds is a name reachable regardless of stack position, and a declaration that states the sharing was intended. See Variable Scope.",
         "Public variables start as the empty string \"\", not NIL.",
         "Colon-prefixed keywords are case-sensitive, so write :PUBLIC in uppercase."
       ],
@@ -13197,6 +13206,7 @@
       "caveats": [
         "Invalid targets raise a compile-time error: Assignment: invalid left-hand side ....",
         "Assigning to an undeclared variable can raise the runtime error Variable [name] is undefined!.",
+        "An undeclared target is resolved outward — current scope, then caller scopes, then public variables — so the assignment can overwrite a caller's variable rather than create a new one. See Variable Scope.",
         "Compound operators such as add-assign (+=), subtract-assign (-=), multiply-assign (*=), divide-assign (/=), modulo-assign (%=), and power-assign (^=) are separate operators that combine an operation with assignment."
       ],
       "best_practices": {
@@ -13206,7 +13216,7 @@
           "Use chained assignment only when every target should receive the exact same value."
         ],
         "dont": [
-          "Assign to undeclared variables and assume SSL will always create them for you. In normal code, undeclared targets can raise a runtime error.",
+          "Assign to undeclared variables and assume SSL will always create them for you. In normal code, undeclared targets can raise a runtime error, and where they do not, the write can land on a caller's variable instead.",
           "Hide important state changes inside dense expressions when a standalone assignment would be clearer.",
           "Assume aCopy := aOriginal; creates an independent array or object. Both names can still refer to the same underlying value."
         ]

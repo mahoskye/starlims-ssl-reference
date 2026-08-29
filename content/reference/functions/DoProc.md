@@ -67,6 +67,7 @@ DoProc(sProcedureName, [aArguments])
 ## Caveats
 
 - `DoProc` is a compile-time error inside class methods — every name form is rejected, not just same-class calls. Use `Me:MethodName()` or `Base:MethodName()` instead.
+- The called procedure does not get an isolated set of variables. Names it never declares resolve outward into the calling scope, so an undeclared assignment in the procedure can overwrite a caller variable of the same name. See [Variable Scope](../../guides/variable-scope.md).
 - One-segment names are resolved case-insensitively in the current script.
 - Three-segment names are passed into the executor path instead of local method lookup.
 
@@ -198,3 +199,4 @@ Dispatched: Workflow.SampleActions.ProcessSample
 - [`ExecUdf`](ExecUdf.md)
 - [`string`](../types/string.md)
 - [`array`](../types/array.md)
+- [Variable Scope](../../guides/variable-scope.md)

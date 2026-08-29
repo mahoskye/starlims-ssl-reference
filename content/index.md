@@ -19,6 +19,7 @@ An unofficial reference for the **STARLIMS Scripting Language (SSL)** as impleme
 
 - [Getting Started](getting-started.md) — orientation for new SSL developers
 - [Type System](guides/type-system.md) — types, coercion rules, and null semantics
+- [Variable Scope](guides/variable-scope.md) — name resolution up the call stack, and why undeclared names collide
 - [Error Handling](guides/error-handling.md) — structured and legacy error handling patterns
 - [Working with SQL](guides/sql-queries.md) — parameterized queries, IN clauses, and choosing the right SQL function
 - [SQL & Transactions](guides/sql-transactions.md) — transaction control, nesting, isolation levels, and error handling
