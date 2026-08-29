@@ -21,7 +21,7 @@ Variable names start with a single-letter prefix indicating their type, followed
 
 **Exceptions:**
 
-- Loop counters may use single letters: `i`, `j`, `k`, `x`, `y`, `z`
+- Loop counters may use single letters: `i`, `j`, `k`, `x`, `y`, `z` — but only when declared, and prefer a script-specific name in a script that calls other scripts, because an undeclared `i` can collide with a caller's counter (see [Variable Scope](variable-scope.md))
 - Constants use `UPPER_SNAKE_CASE` (no Hungarian prefix)
 - The literals [`NIL`](../reference/literals/nil.md), [`.T.`](../reference/literals/true.md), and [`.F.`](../reference/literals/false.md) are language tokens, not identifiers
 - Preserve established acronym casing from surrounding code or external schema names

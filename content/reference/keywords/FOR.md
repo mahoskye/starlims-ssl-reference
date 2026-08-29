@@ -17,6 +17,8 @@ The `:FOR` keyword defines a counted loop. It initializes a numeric loop variabl
 
 The limit expression and optional step expression are evaluated once before the loop starts. Changing the variables used in those expressions inside the loop body does not change the current loop's bounds.
 
+The loop variable must be declared in the routine that runs the loop. A `:FOR` header assigns to its loop variable, and SSL resolves an undeclared name outward to caller scopes — so a `:FOR` loop over an undeclared counter can drive a caller's variable of the same name instead of its own. See [Variable Scope](../../guides/variable-scope.md).
+
 ## Behavior
 
 `:FOR` runs in this order:
@@ -58,6 +60,8 @@ When the step is zero or positive, the loop continues while the current value is
 ## Best practices
 
 !!! success "Do"
+    - Declare the loop variable with [`:DECLARE`](DECLARE.md) in the routine that runs the loop.
+    - Prefer a script-specific counter name over a bare `i` or `j` in scripts that call other scripts.
     - Use [`:STEP`](STEP.md) only when you need an increment other than the default `1`.
     - Use distinct loop variables in nested loops so the control flow stays readable.
 
@@ -67,6 +71,7 @@ When the step is zero or positive, the loop continues while the current value is
 
 ## Caveats
 
+- An undeclared loop variable is not private to the loop. If a caller uses the same name undeclared, the loop drives the caller's variable, which can make the caller's own loop exit after a single pass with no error reported — see [Variable Scope](../../guides/variable-scope.md).
 - Leaving out the required closing [`:NEXT`](NEXT.md)`;` causes a parse error.
 - [`:EXITFOR`](EXITFOR.md)`;` outside a `:FOR` loop causes a compile-time error with the message `Found :EXITFOR outside :FOR`.
 - The start, limit, and step values must be numeric at runtime.
@@ -191,3 +196,5 @@ Critical sample found at position 2
 - [`TO`](TO.md)
 - [`STEP`](STEP.md)
 - [`EXITFOR`](EXITFOR.md)
+- [`DECLARE`](DECLARE.md)
+- [Variable Scope](../../guides/variable-scope.md)
