@@ -59,10 +59,12 @@ ExecFunction(sName, [aParameters])
     - Omit the second argument or provide a non-array value when the target expects arguments.
     - Assume all calls will succeed or ignore errors from dynamic invocation.
     - Use `ExecFunction` to run a class file or call a class method — create the object with [`CreateUdObject`](CreateUdObject.md) and call the method on the instance.
+    - Assume the called target cannot touch your variables. A target that leaves names undeclared can read and overwrite variables in this scope.
 
 ## Caveats
 
 - A class file is not a runnable target: it has no script entry point, so a two-segment path naming a class file fails at runtime, and a three-segment path does not invoke its methods. Create the object with [`CreateUdObject`](CreateUdObject.md) and call the method on the instance instead.
+- The called target does not get an isolated set of variables. Names it never declares resolve outward into this scope, so an undeclared assignment in the target — a [`:FOR`](../keywords/FOR.md) counter especially — can overwrite a variable of the same name here. See [Variable Scope](../../guides/variable-scope.md).
 - If the function name is misspelled, empty, or references a non-existent target, a runtime error is thrown with little context.
 - All type validation is deferred to the time of invocation, so incorrect argument types or counts are only caught at runtime.
 
@@ -159,3 +161,4 @@ DoProc("RunAutomatedChain");
 - [`PrmCount`](PrmCount.md)
 - [`string`](../types/string.md)
 - [`array`](../types/array.md)
+- [Variable Scope](../../guides/variable-scope.md)

@@ -26,6 +26,8 @@ Key runtime behavior:
 - `:PUBLIC` is a regular statement, so SSL permits it in normal statement flow instead of requiring it at the top of the script.
 - Public variables remain available until the current program context clears
   them.
+- Public variables are resolved **last**, after the current scope and any caller
+  scopes, so a same-named variable nearer on the call stack wins.
 
 ## When to use
 
@@ -66,6 +68,10 @@ Key runtime behavior:
 
 - `:PUBLIC` is valid in script and procedure statement flow. It is not a class
   field declaration.
+- `:PUBLIC` is not what makes a name visible to a called routine — callees can
+  already resolve a caller's variables by walking the call stack. What `:PUBLIC`
+  adds is a name reachable regardless of stack position, and a declaration that
+  states the sharing was intended. See [Variable Scope](../../guides/variable-scope.md).
 - Public variables start as the empty string `""`, not [`NIL`](../literals/nil.md).
 - Colon-prefixed keywords are case-sensitive, so write `:PUBLIC` in uppercase.
 
@@ -147,3 +153,4 @@ DoProc("RunWorkflow");
 
 - [`DECLARE`](DECLARE.md)
 - [`PARAMETERS`](PARAMETERS.md)
+- [Variable Scope](../../guides/variable-scope.md)
