@@ -510,7 +510,7 @@ Manage *inline code* — SSL snippets stored in the dictionary between [`:BEGINI
 | [ClearSession](ClearSession.md) | Removes all values and resets state in the current session context. |
 | [CreateLocal](CreateLocal.md) | Assigns a value to a local variable identified by any input, with scope limited to the current runtime session. |
 | [CreatePublic](CreatePublic.md) | Creates or updates a public variable that can be accessed by name across different program modules. |
-| [GetByName](GetByName.md) | Retrieves the value of a variable by name from local or public storage. |
+| [GetByName](GetByName.md) | Retrieves the value of a variable by name from the current scope, a caller scope, or public storage. |
 | [GetFromApplication](GetFromApplication.md) | Returns a comma-separated list of connected usernames when given the key 'STARLIMSUSERS' in CUSTOM session mode, or `NIL`/empty for other conditions. |
 | [GetFromSession](GetFromSession.md) | Retrieves the value associated with a specified key from the current user session. |
 | [GetSetting](GetSetting.md) | Retrieves the value of a named application or environment setting. |

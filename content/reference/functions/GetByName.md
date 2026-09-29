@@ -1,6 +1,6 @@
 ---
 title: "GetByName"
-summary: "Retrieves the value of a variable by name from local or public storage."
+summary: "Retrieves the value of a variable by name from the current scope, a caller scope, or public storage."
 id: ssl.function.getbyname
 element_type: function
 doc_status: published
@@ -11,9 +11,9 @@ starlims:
 
 # GetByName
 
-Retrieves the value of a variable by name from local or public storage.
+Retrieves the value of a variable by name from the current scope, a caller scope, or public storage.
 
-Returns the value associated with the specified variable name from the current SSL local or public scope. The name is case-sensitive and must be non-empty. If the variable does not exist, the runtime raises an error. Use this function when the variable name is only known at runtime — for static references, access the variable directly or use [`SetByName`](SetByName.md).
+Returns the value of the named variable, found the same way as a bare read of that name: the current scope first, then the scopes of the calling procedures, then public variables. The name is case-sensitive and must be non-empty. If the variable does not exist, the runtime raises an error. Use this function when the variable name is only known at runtime — for static references, access the variable directly or use [`SetByName`](SetByName.md).
 
 ## When to use
 

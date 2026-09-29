@@ -23,8 +23,8 @@ in this order:
 The search stops at the first match. This applies to **writes as well as reads**
 — an assignment does not automatically create a variable in the current scope.
 
-Reading a caller's variable works but generates a warning. Writing to one does
-not announce itself at all.
+Reading a caller's variable works but generates a warning. Writing to one raises
+no error at run time: the caller's value simply changes.
 
 ## Declaring is what makes a name private
 
@@ -143,9 +143,12 @@ stable, specific names — anything on the call stack can overwrite them.
 ## Class fields
 
 [`:DECLARE`](../reference/keywords/DECLARE.md) in a class body declares class
-fields rather than locals. Inside a method, a bare identifier always resolves as
-a local or [`:PARAMETERS`](../reference/keywords/PARAMETERS.md) entry — never as
-a class field of the same name. Qualify field access with
+fields rather than locals. Inside a method, a bare identifier never refers to a
+class field of the same name. It follows the normal lookup above: a local or
+[`:PARAMETERS`](../reference/keywords/PARAMETERS.md) entry, then caller scopes,
+then publics. Reading a field by its bare name, with nothing else of that name in
+reach, raises `Variable [nCount] is undefined!`, and assigning to it leaves the
+field unchanged. Qualify field access with
 [`Me:`](../reference/special-forms/me.md), or
 [`Base:`](../reference/special-forms/base.md) for an inherited parent field.
 
@@ -155,7 +158,7 @@ When the name itself is data, these functions follow the same resolution order:
 
 | Function | Purpose |
 |----------|---------|
-| [`GetByName`](../reference/functions/GetByName.md) | Read a variable by name from local or public storage |
+| [`GetByName`](../reference/functions/GetByName.md) | Read a variable by name, found the same way as a bare read — current scope, then caller scopes, then publics |
 | [`SetByName`](../reference/functions/SetByName.md) | Write by name — may update a **caller's** variable rather than create a local |
 | [`CreateLocal`](../reference/functions/CreateLocal.md) | Create or overwrite a name in the current scope |
 | [`CreatePublic`](../reference/functions/CreatePublic.md) | Create or overwrite a public variable |
@@ -180,7 +183,7 @@ walks out to caller scopes and publics before deciding to create anything.
 - Use [`:PUBLIC`](../reference/keywords/PUBLIC.md) only for state that must
   genuinely cross scopes, never for routine-local working values
 - Qualify class fields with [`Me:`](../reference/special-forms/me.md) inside
-  methods; a bare identifier there is always a local
+  methods; a bare identifier there never refers to a field
 
 ## Related
 
