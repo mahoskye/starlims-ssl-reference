@@ -244,7 +244,7 @@ Snapshot tests: 3
 
 ## Caveats
 
-- Member access with `:` forwards to the underlying .NET list object when no SSL-side member matches (e.g. `aValues:Count`). A member that is not listed on this page can still be valid — it resolves against the .NET object at runtime instead of raising an unknown-member error.
+- Member access with `:` forwards to the underlying .NET list object when no SSL-side member matches (e.g. `aValues:Count`). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
 
 ## Related elements
 
