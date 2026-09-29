@@ -149,7 +149,7 @@ Days: 30
 | `sFmt:Format("{0}{1}{2}{3}", {"a", "b", "c", "d"})` | `abcd` |
 | `sFmt:Format("{0:N2}", {1234.5})` | `1,234.50` |
 
-The text of the value you call `Format` on is not used. Only the pattern argument shapes the result. That is why the usual convention is an empty receiver named for its job:
+The pattern is always the first argument. By convention, `Format` is called on an empty string held in a variable named for its job:
 
 ```ssl
 :PROCEDURE ShowProgress;
