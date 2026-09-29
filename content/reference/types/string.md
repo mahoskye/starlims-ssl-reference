@@ -65,9 +65,9 @@ sBracketed := [text value];
 
 ## Calling .NET `String` methods
 
-In addition to the SSL-defined members above, any public method or property on .NET's `System.String` is callable on a `string` value with the `:` method-call syntax. The runtime forwards `sValue:Name(args)` to the underlying .NET string by name, so the surface is effectively the full `System.String` API. Static methods such as `String.Format` and `String.Join` are reachable through the same syntax; for a static call the receiver is only used to locate the type.
+In addition to the SSL-defined members above, any public method or property on .NET's `System.String` is callable on a `string` value with the `:` method-call syntax. The runtime forwards `sValue:Name(args)` to the underlying .NET string by name. Not every member form is reachable: `sValue:Split(",")` raises `Invalid method: Split`, so verify a member before relying on it. Static methods such as `String.Format` and `String.Join` are reachable through the same syntax; for a static call the receiver is only used to locate the type.
 
-This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer SSL-native string functions ([`Replace`](../functions/Replace.md), [`Upper`](../functions/Upper.md), [`Lower`](../functions/Lower.md), [`SubStr`](../functions/SubStr.md), and similar) for portability, and reserve direct .NET calls for behavior the SSL library does not cover.
+This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer SSL-native string functions ([`Replace`](../functions/Replace.md), [`Upper`](../functions/Upper.md), [`Lower`](../functions/Lower.md), [`SubStr`](../functions/SubStr.md), and similar) for portability, and reserve direct .NET calls for behavior the SSL library does not cover. See [Native Members on SSL Values](../../guides/native-members.md) for the members verified on STARLIMS v11 and how to check others.
 
 ### Example: calling `String.Format` through a string value
 

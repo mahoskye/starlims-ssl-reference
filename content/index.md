@@ -24,6 +24,7 @@ An unofficial reference for the **STARLIMS Scripting Language (SSL)** as impleme
 - [SQL & Transactions](guides/sql-transactions.md) — transaction control, nesting, isolation levels, and error handling
 - [Naming Conventions](guides/naming-conventions.md) — Hungarian prefixes, casing rules, and constants
 - [Data Source Files](guides/data-sources.md) — SSL and SQL data source syntax and directives
+- [Native Members](guides/native-members.md) — colon member calls on SSL values, 0-based positions, and the verified member list
 
 ## About this reference
 

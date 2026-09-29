@@ -60,13 +60,13 @@ dParsed := CToD("04/15/2026");
 
 ## Calling .NET `DateTime` methods
 
-In addition to the SSL-defined members above, any public method or property on .NET's `System.DateTime` is callable on a non-empty `date` value with the `:` method-call syntax. The runtime forwards `dValue:Name(args)` to the underlying .NET date by name, so the surface is effectively the full `System.DateTime` API.
+In addition to the SSL-defined members above, any public method or property on .NET's `System.DateTime` is callable on a non-empty `date` value with the `:` method-call syntax. The runtime forwards `dValue:Name(args)` to the underlying .NET date by name.
 
 This is particularly useful for arithmetic that SSL's [`+`](../operators/plus.md) and [`-`](../operators/minus.md) operators do not cover, since those only add or subtract whole-day offsets. `System.DateTime` offers month-aware and year-aware arithmetic — for example `AddMonths(n)`, `AddYears(n)`, `AddHours(n)`, `AddMinutes(n)` — and component accessors such as `Year`, `Month`, `Day`, `DayOfWeek`, and `DayOfYear`.
 
 Empty dates cannot be dispatched through this passthrough. The underlying .NET value of an empty date is `null`, and calling a method on it raises a null-reference error. Always guard with [`Empty`](../functions/Empty.md) before reaching for .NET members.
 
-This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined date members and SSL-native date functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover.
+This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined date members and SSL-native date functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover. See [Native Members on SSL Values](../../guides/native-members.md) for the members verified on STARLIMS v11 and how to check others.
 
 ### Example: month-aware date arithmetic
 

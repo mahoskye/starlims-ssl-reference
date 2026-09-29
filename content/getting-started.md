@@ -4,7 +4,7 @@ The **STARLIMS Scripting Language (SSL)** is the programming language used withi
 
 ## Where SSL code lives and how it runs
 
-SSL is STARLIMS's server-side language — the code that does the heavy lifting behind forms, endpoints, and scheduled work. It is a proprietary language in the xBase family (similar in style to FoxPro), and it runs on STARLIMS's .NET-based application server. That .NET foundation shows through in places: built-in values expose .NET members such as `:ToString()` (see the [type pages](reference/types/index.md)), and several functions exist specifically for .NET interop.
+SSL is STARLIMS's server-side language — the code that does the heavy lifting behind forms, endpoints, and scheduled work. It is a proprietary language in the xBase family (similar in style to FoxPro), and it runs on STARLIMS's .NET-based application server. That .NET foundation shows through in places: built-in values expose .NET members such as `:ToString()` (see [Native Members](guides/native-members.md) and the [type pages](reference/types/index.md)), and several functions exist specifically for .NET interop.
 
 ### Code is stored in the dictionary, not files
 

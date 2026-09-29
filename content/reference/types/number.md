@@ -81,7 +81,7 @@ The .NET type that backs a `number` depends on the current value: integer-valued
 
 Static numeric helpers that live on other .NET types — for example, `System.Math.Sqrt` or `System.Math.Round` — are not reachable through this dispatch, because `Math` is not the value's type. Use the SSL function library for those operations.
 
-This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined number members and SSL-native math functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover.
+This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined number members and SSL-native math functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover. See [Native Members on SSL Values](../../guides/native-members.md) for the members verified on STARLIMS v11 and how to check others.
 
 ### Example: formatting a number with grouped digits
 
