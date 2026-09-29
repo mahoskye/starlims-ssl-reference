@@ -16,7 +16,7 @@
         <link rel="prev" href="../naming-conventions/">
       
       
-        <link rel="next" href="../../reference/">
+        <link rel="next" href="../native-members/">
       
       
         
@@ -448,6 +448,8 @@
       
         
       
+        
+      
     
     
     
@@ -753,13 +755,41 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sql-data-source-directives" class="md-nav__link">
+  <a href="#starlims-mode-data-sources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SQL data source directives
+        STARLIMS-mode data sources
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-mode-data-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL-mode data sources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SQL-mode data sources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Directives
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -778,6 +808,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../native-members/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native Members
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -939,13 +997,41 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sql-data-source-directives" class="md-nav__link">
+  <a href="#starlims-mode-data-sources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SQL data source directives
+        STARLIMS-mode data sources
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-mode-data-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL-mode data sources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SQL-mode data sources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Directives
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1034,57 +1120,86 @@
 
 
 <h1 id="data-source-files">Data Source Files<a class="headerlink" href="#data-source-files" title="Permanent link">&para;</a></h1>
-<p>STARLIMS has three kinds of executable SSL files: <strong>server scripts</strong>, <strong>SSL data sources</strong>, and <strong>SQL data sources</strong>. Data source files use parameter syntax and directives that don't appear in ordinary scripts. If you are writing an ordinary script, follow the rules in <a href="../../getting-started/">Getting Started</a>. The rest of this page covers data source files specifically.</p>
+<p>A <strong>data source</strong> is a named, parameterized piece of data-retrieval code that callers run with <a href="../../reference/functions/RunDS/"><code>RunDS</code></a>. A data source runs in one of two modes:</p>
+<ul>
+<li><strong>STARLIMS mode</strong>: the body is SSL. Whatever the body returns with <a href="../../reference/keywords/RETURN/"><code>:RETURN</code></a> is the data source's result. These are sometimes called SSL data sources.</li>
+<li><strong>SQL mode</strong>: the body is a SQL query in your database's dialect, preceded by optional directives and a <code>:PARAMETERS</code> line. The examples on this page use T-SQL (MS SQL Server). The query's rows are the result. These are sometimes called SQL data sources.</li>
+</ul>
+<p>The mode belongs to the data source: you create or configure a data source in one mode or the other, and the body must match it. SSL features such as <code>:RETURN</code> and <a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a> work only in STARLIMS mode. A SQL-mode body is a query, not SSL.</p>
+<p>Data sources use parameter syntax and directives that don't appear in ordinary scripts. If you are writing an ordinary script, follow the rules in <a href="../../getting-started/">Getting Started</a>. The rest of this page covers data sources specifically.</p>
 <h2 id="file-types-at-a-glance">File types at a glance<a class="headerlink" href="#file-types-at-a-glance" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>File type</th>
+<th>Body</th>
 <th>Parameter syntax</th>
-<th>Notes</th>
+<th>Result</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Server script</strong></td>
+<td>SSL</td>
 <td><code>:PARAMETERS p1, p2;</code> + <a href="../../reference/keywords/DEFAULT/"><code>:DEFAULT</code></a> lines</td>
-<td>Standard SSL — all grammar rules apply</td>
+<td>Whatever the script returns</td>
 </tr>
 <tr>
-<td><strong>SSL data source</strong></td>
+<td><strong>Data source, STARLIMS mode</strong></td>
+<td>SSL</td>
 <td><code>:PARAMETERS p1 := val1, p2 := val2;</code></td>
-<td>Inline defaults; standard script layout rules do not apply</td>
+<td>Whatever the body <code>:RETURN</code>s</td>
 </tr>
 <tr>
-<td><strong>SQL data source</strong></td>
-<td><code>:PARAMETERS p1 := val1, p2 := val2;</code> plus directives</td>
-<td>Resolved at runtime through <a href="../../reference/functions/GetSSLDataset/"><code>GetSSLDataset</code></a></td>
+<td><strong>Data source, SQL mode</strong></td>
+<td>Directives, then a SQL query</td>
+<td><code>:PARAMETERS p1 := val1, p2 := val2;</code>, referenced in the query as <code>@p1</code></td>
+<td>The query's rows</td>
 </tr>
 </tbody>
 </table>
 <h2 id="inline-parameter-defaults">Inline parameter defaults<a class="headerlink" href="#inline-parameter-defaults" title="Permanent link">&para;</a></h2>
-<p>In SSL and SQL data source files, <a href="../../reference/keywords/PARAMETERS/"><code>:PARAMETERS</code></a> uses inline <code>:=</code> assignment for defaults — there is <strong>no</strong> separate <a href="../../reference/keywords/DEFAULT/"><code>:DEFAULT</code></a> statement:</p>
+<p>In data sources of either mode, <a href="../../reference/keywords/PARAMETERS/"><code>:PARAMETERS</code></a> uses inline <code>:=</code> assignment for defaults — there is <strong>no</strong> separate <a href="../../reference/keywords/DEFAULT/"><code>:DEFAULT</code></a> statement:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
 </code></pre></div>
 <p><strong>Rules:</strong></p>
 <ul>
 <li>Every parameter <strong>must</strong> have a default value.</li>
-<li><code>:PARAMETERS;</code> with no parameters is an error.</li>
+<li><code>:PARAMETERS;</code> with no parameters is an error. A data source that takes no parameters leaves the <code>:PARAMETERS</code> line out.</li>
 <li>Do <strong>not</strong> use <code>:DEFAULT</code> lines in data sources — defaults are inline only.</li>
-<li>Standard script layout rules do not apply.</li>
+<li>The inline-default form is what sets a STARLIMS-mode data source apart from a server script. The same <code>:PARAMETERS</code> line is not valid in a server script.</li>
 </ul>
-<h2 id="sql-data-source-directives">SQL data source directives<a class="headerlink" href="#sql-data-source-directives" title="Permanent link">&para;</a></h2>
-<p>SQL data source files accept additional directives that are not SSL keywords and are valid only in this file type:</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="p">:</span><span class="n">DSN</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">connectionName</span><span class="p">;</span>
-<span class="p">:</span><span class="n">TABLENAME</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">tableName</span><span class="p">;</span>
-<span class="p">:</span><span class="n">NULLASBLANK</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">true</span><span class="p">;</span>
-<span class="p">:</span><span class="n">INVARIANTDATECOLUMNS</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">col1</span><span class="p">,</span><span class="w"> </span><span class="n">col2</span><span class="p">;</span>
-<span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w"> </span><span class="n">nLimit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+<h2 id="starlims-mode-data-sources">STARLIMS-mode data sources<a class="headerlink" href="#starlims-mode-data-sources" title="Permanent link">&para;</a></h2>
+<p>In STARLIMS mode the body is ordinary SSL. It can declare variables, define <a href="../../reference/keywords/PROCEDURE/"><code>:PROCEDURE</code></a> blocks and call them with <a href="../../reference/functions/DoProc/"><code>DoProc</code></a>, and run queries with <a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a>, which marks parameters as <code>?name?</code>:</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Logged"</span><span class="p">,</span><span class="w"> </span><span class="n">sFromId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
-<span class="n">SELECT</span><span class="w"> </span><span class="o">*</span>
-<span class="n">FROM</span><span class="w"> </span><span class="n">sample</span>
-<span class="n">WHERE</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">?</span><span class="n">sStatus</span><span class="err">?</span>
+<span class="k">:RETURN</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">"</span>
+<span class="s2">    SELECT sample_id, status, logdate</span>
+<span class="s2">    FROM sample</span>
+<span class="s2">    WHERE status = ?sStatus?</span>
+<span class="s2">        AND sample_id &gt;= ?sFromId?</span>
+<span class="s2">    ORDER BY sample_id</span>
+<span class="s2">"</span><span class="p">);</span>
 </code></pre></div>
+<p>This data source returns the matching rows as an array of rows, and <a href="../../reference/functions/RunDS/"><code>RunDS</code></a> passes that array back to the caller. <a href="../../reference/keywords/PARAMETERS/#using-parameters-in-a-data-source-file"><code>PARAMETERS</code></a> has another example.</p>
+<p><code>RunDS</code>'s return-type argument (<code>"ssldataset"</code>, <code>"xml"</code>, and so on) converts only an <a href="../../reference/classes/SSLDataset/"><code>SSLDataset</code></a> result. Any other value, including the array above, comes back unchanged whatever return type the caller asks for. If callers need those return types, have the body return an <code>SSLDataset</code>, for example from <a href="../../reference/functions/GetSSLDataset/"><code>GetSSLDataset</code></a>.</p>
+<h2 id="sql-mode-data-sources">SQL-mode data sources<a class="headerlink" href="#sql-mode-data-sources" title="Permanent link">&para;</a></h2>
+<p>A SQL-mode data source is a SQL query. Parameters from the <code>:PARAMETERS</code> line are referenced as <code>@name</code>. The <code>?name?</code> markers used by <code>SQLExecute</code> do not work here. Directives come before the query:</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="p">:</span><span class="n">DSN</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">DATABASE</span><span class="p">;</span>
+<span class="p">:</span><span class="n">TABLENAME</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sample</span><span class="p">;</span>
+<span class="p">:</span><span class="n">NULLASBLANK</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">true</span><span class="p">;</span>
+<span class="p">:</span><span class="n">INVARIANTDATECOLUMNS</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">logdate</span><span class="p">;</span>
+<span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Logged"</span><span class="p">,</span><span class="w"> </span><span class="n">sFromId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
+
+<span class="n">SELECT</span><span class="w"> </span><span class="n">sample_id</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">logdate</span>
+<span class="n">FROM</span><span class="w"> </span><span class="n">sample</span>
+<span class="n">WHERE</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">@</span><span class="n">sStatus</span>
+<span class="w">    </span><span class="n">AND</span><span class="w"> </span><span class="n">sample_id</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="err">@</span><span class="n">sFromId</span>
+<span class="n">ORDER</span><span class="w"> </span><span class="n">BY</span><span class="w"> </span><span class="n">sample_id</span>
+</code></pre></div>
+<p>It takes the same parameters and applies the same filter as the STARLIMS-mode example above, so both are called the same way. <code>RunDS</code> returns the rows as an array unless the caller asks for another return type.</p>
+<h3 id="directives">Directives<a class="headerlink" href="#directives" title="Permanent link">&para;</a></h3>
+<p>The directives are not SSL keywords. Their names are case-sensitive, so write them in uppercase: a lowercase <code>:nullasblank</code> line is ignored.</p>
 <table>
 <thead>
 <tr>
@@ -1103,7 +1218,7 @@
 </tr>
 <tr>
 <td><code>:NULLASBLANK := true;</code></td>
-<td>Controls null-to-blank conversion</td>
+<td>Controls null-to-blank conversion. Write <code>true</code> or <code>false</code>.</td>
 </tr>
 <tr>
 <td><code>:INVARIANTDATECOLUMNS := col1, col2;</code></td>
@@ -1111,6 +1226,12 @@
 </tr>
 </tbody>
 </table>
+<p><strong><code>:NULLASBLANK</code></strong> takes the words <code>true</code> or <code>false</code>, matched case-insensitively (<code>TRUE</code> and <code>False</code> work too). With <code>true</code>, a <code>NULL</code> column value comes back as a blank value of the column's type, such as <code>""</code> for text and <code>0</code> for a number. With <code>false</code>, it comes back as <a href="../../reference/literals/nil/"><code>NIL</code></a>. When the directive is absent, null-to-blank is on.</p>
+<div class="admonition warning">
+<p class="admonition-title"><code>.T.</code> and <code>.F.</code> do nothing here</p>
+<p><code>:NULLASBLANK</code> does not accept the SSL boolean literals. <code>:NULLASBLANK := .F.;</code> raises no error, but it is ignored, so null-to-blank stays on and <code>NULL</code> values still come back blank. Write <code>:NULLASBLANK := false;</code> to get <code>NIL</code> for <code>NULL</code> values.</p>
+</div>
+<p><strong><code>:INVARIANTDATECOLUMNS</code></strong> takes bare column names separated by commas, such as <code>:INVARIANTDATECOLUMNS := logdate, releasedate;</code>. Do not quote the names: a quoted name raises no error, but the quotes are kept as part of the name, so it matches no column.</p>
 <h2 id="calling-data-sources">Calling data sources<a class="headerlink" href="#calling-data-sources" title="Permanent link">&para;</a></h2>
 <p>Data sources are invoked at runtime via <a href="../../reference/functions/RunDS/"><code>RunDS</code></a>:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oResult</span><span class="p">,</span><span class="w"> </span><span class="n">oDs</span><span class="p">;</span>
@@ -1119,12 +1240,13 @@
 <span class="n">oResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunDS</span><span class="p">(</span><span class="s2">"Category.DataSourceName"</span><span class="p">);</span>
 
 <span class="c1">/* Call with parameter overrides, in :PARAMETERS order;</span>
-<span class="n">oResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunDS</span><span class="p">(</span><span class="s2">"Category.DataSourceName"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"P"</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">});</span>
+<span class="n">oResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunDS</span><span class="p">(</span><span class="s2">"Category.DataSourceName"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Released"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S-1000"</span><span class="p">});</span>
 
 <span class="c1">/* Return as an SSLDataset object;</span>
 <span class="n">oDs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunDS</span><span class="p">(</span><span class="s2">"Category.DataSourceName"</span><span class="p">,,</span><span class="w"> </span><span class="s2">"ssldataset"</span><span class="p">);</span>
 </code></pre></div>
-<p>Parameter values bind by <strong>position</strong>, in the order the data source declares them in <code>:PARAMETERS</code>; names are not matched. For the directive example above, <code>{"P", 25}</code> sets <code>sStatus</code> to <code>"P"</code> and <code>nLimit</code> to <code>25</code>. Trailing values you leave out keep their inline defaults, and values beyond the declared parameters are silently ignored. Passing <code>{name, value}</code> pairs does not work: each pair is bound whole to one parameter.</p>
+<p>Parameter values bind by <strong>position</strong>, in the order the data source declares them in <code>:PARAMETERS</code>; names are not matched. For the examples above, <code>{"Released", "S-1000"}</code> sets <code>sStatus</code> to <code>"Released"</code> and <code>sFromId</code> to <code>"S-1000"</code>. Trailing values you leave out keep their inline defaults, and values beyond the declared parameters are silently ignored. Passing <code>{name, value}</code> pairs does not work: each pair is bound whole to one parameter.</p>
+<p>The return-type argument in the last call converts only an <code>SSLDataset</code> result. A STARLIMS-mode data source that returns an array still returns that array (see <a href="#starlims-mode-data-sources">STARLIMS-mode data sources</a>).</p>
 <p>Use <a href="../../reference/functions/GetDSParameters/"><code>GetDSParameters</code></a> to get a data source's parameter names in declaration order, which is the order <code>RunDS</code> binds them.</p>
 
 
@@ -1146,7 +1268,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 01:00:10 UTC">September 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 16:47:05 UTC">September 29, 2026</span>
   </span>
 
     

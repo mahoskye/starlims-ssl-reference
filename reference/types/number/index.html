@@ -446,6 +446,8 @@
       
         
       
+        
+      
     
     
     
@@ -2348,7 +2350,7 @@
 <p>In addition to the SSL-defined members above, any public method or property on the underlying .NET numeric type is callable on a <code>number</code> value with the <code>:</code> method-call syntax. The runtime forwards <code>nValue:Name(args)</code> to that .NET value by name.</p>
 <p>The .NET type that backs a <code>number</code> depends on the current value: integer-valued numbers within the 32-bit signed integer range present as <code>System.Int32</code>, and all other numeric values present as <code>System.Double</code>. As a result, the available member set varies with the value. Members common to both types — for example, <code>CompareTo(other)</code>, <code>Equals(other)</code>, and <code>ToString(sFormat)</code> with a .NET format string — work for any numeric value. Type-specific members only resolve when the value happens to match that type, so guard with <code>IsInt</code> if needed.</p>
 <p>Static numeric helpers that live on other .NET types — for example, <code>System.Math.Sqrt</code> or <code>System.Math.Round</code> — are not reachable through this dispatch, because <code>Math</code> is not the value's type. Use the SSL function library for those operations.</p>
-<p>This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined number members and SSL-native math functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover.</p>
+<p>This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined number members and SSL-native math functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover. See <a href="../../../guides/native-members/">Native Members on SSL Values</a> for the members verified on STARLIMS v11 and how to check others.</p>
 <h3 id="example-formatting-a-number-with-grouped-digits">Example: formatting a number with grouped digits<a class="headerlink" href="#example-formatting-a-number-with-grouped-digits" title="Permanent link">&para;</a></h3>
 <p>Uses .NET's single-argument <code>ToString(sFormat)</code> overload with the <code>"N0"</code> standard format string to render a large integer with thousands separators. SSL's own <code>ToString()</code> and <code>ToString(sDecimal, sGroup)</code> overloads are unaffected; the single-argument form resolves to the .NET method on the backing numeric type and uses the current culture's separators.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatRecordCount</span><span class="p">;</span>
@@ -2539,7 +2541,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 16:46:16 UTC">September 29, 2026</span>
   </span>
 
     

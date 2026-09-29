@@ -446,6 +446,8 @@
       
         
       
+        
+      
     
     
     
@@ -1213,10 +1215,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#guard-a-commit-with-a-transaction-state-check" class="md-nav__link">
+  <a href="#require-the-callers-transaction-before-a-dependent-write" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Guard a commit with a transaction state check
+        Require the caller's transaction before a dependent write
       
     </span>
   </a>
@@ -3641,10 +3643,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#guard-a-commit-with-a-transaction-state-check" class="md-nav__link">
+  <a href="#require-the-callers-transaction-before-a-dependent-write" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Guard a commit with a transaction state check
+        Require the caller's transaction before a dependent write
       
     </span>
   </a>
@@ -3872,7 +3874,7 @@
 <p class="admonition-title">Do</p>
 <ul>
 <li>Pass explicit, known-good connection names when checking transaction state.</li>
-<li>Confirm a transaction is active before issuing commit or rollback commands.</li>
+<li>Use a <code>bStarted</code> flag set from <a href="../BeginLimsTransaction/"><code>BeginLimsTransaction</code></a>, not <code>IsInTransaction</code>, to decide whether your code should end a transaction.</li>
 <li>Use with <a href="../BeginLimsTransaction/"><code>BeginLimsTransaction</code></a> and <a href="../EndLimsTransaction/"><code>EndLimsTransaction</code></a> for end-to-end transaction management.</li>
 </ul>
 </div>
@@ -3881,6 +3883,7 @@
 <ul>
 <li>Pass user-supplied or dynamic connection names without validating them first. Invalid names raise errors.</li>
 <li>Use this function as a transaction manager or depth counter. It checks boolean state only.</li>
+<li>Treat <a href="../../literals/true/"><code>.T.</code></a> as proof that your code began the transaction. A helper that ends the transaction after this check ends its caller's transaction.</li>
 <li>Assume the function returns <a href="../../literals/false/"><code>.F.</code></a> for unknown connections. It raises an error instead.</li>
 </ul>
 </div>
@@ -3890,28 +3893,36 @@
 <li><code>vConnection</code> can be a connection name or a <a href="../../classes/SQLConnection/"><code>SQLConnection</code></a> object returned by <a href="../GetConnectionByName/"><code>GetConnectionByName</code></a>.</li>
 <li>Passing an unknown connection name raises an error rather than returning <a href="../../literals/false/"><code>.F.</code></a>.</li>
 <li>If the internal database collection is unavailable, an error is raised and the function does not return a value.</li>
-<li>Only tests direct transaction state for the specified connection — does not account for nested or distributed transactions.</li>
+<li>Returns <a href="../../literals/true/"><code>.T.</code></a> for any open transaction on the connection, including one a caller began and at any nesting depth. It cannot tell a routine whether it owns the transaction, and it does not report the nesting depth; use <a href="../GetTransactionsCount/"><code>GetTransactionsCount</code></a> for that.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<h3 id="guard-a-commit-with-a-transaction-state-check">Guard a commit with a transaction state check<a class="headerlink" href="#guard-a-commit-with-a-transaction-state-check" title="Permanent link">&para;</a></h3>
-<p>Check the default connection before committing. If a transaction is active, the procedure commits it and reports success; otherwise it reports that no transaction is open.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CommitIfActive</span><span class="p">;</span>
+<h3 id="require-the-callers-transaction-before-a-dependent-write">Require the caller's transaction before a dependent write<a class="headerlink" href="#require-the-callers-transaction-before-a-dependent-write" title="Permanent link">&para;</a></h3>
+<p>A helper that writes an audit row only when a caller already has a transaction open, so the row commits or rolls back with the caller's work. The helper did not begin that transaction, so it does not end it.</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">WriteAuditEntry</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bInTrans</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bInTrans</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsInTransaction</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bInTrans</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">EndLimsTransaction</span><span class="p">(</span><span class="s2">"MyTransaction"</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Transaction committed successfully"</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">RunSQL</span><span class="p">(</span>
+<span class="w">            </span><span class="s2">"INSERT INTO audit_log (sample_id, action) VALUES (?, ?)"</span><span class="p">,,</span>
+<span class="w">            </span><span class="p">{</span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="s2">"STATUS_CHANGE"</span><span class="p">}</span>
+<span class="w">        </span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Audit entry added to the open transaction"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No active transaction to commit"</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No open transaction, audit entry not written"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
+<span class="w">    </span><span class="c1">/* The caller began the transaction, so the caller ends it;</span>
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bInTrans</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CommitIfActive"</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"WriteAuditEntry"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-001"</span><span class="p">});</span>
+</code></pre></div>
+<p>Called with no transaction open, <a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>No open transaction, audit entry not written
 </code></pre></div>
 <h3 id="check-a-named-connection-with-error-handling">Check a named connection with error handling<a class="headerlink" href="#check-a-named-connection-with-error-handling" title="Permanent link">&para;</a></h3>
 <p>Pass an explicit connection name and wrap the call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle unknown connection errors gracefully. The catch block retrieves the error with <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> and logs it via <a href="../ErrorMes/"><code>ErrorMes</code></a>.</p>
@@ -3969,7 +3980,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 16:51:50 UTC">September 29, 2026</span>
   </span>
 
     

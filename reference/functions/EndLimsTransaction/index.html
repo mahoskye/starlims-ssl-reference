@@ -446,6 +446,8 @@
       
         
       
+        
+      
     
     
     
@@ -3839,6 +3841,7 @@
 <p>Ends a LIMS transaction on the default connection or on a named connection.</p>
 <p>Use <code>EndLimsTransaction</code> to close a transaction scope started with <a href="../BeginLimsTransaction/"><code>BeginLimsTransaction</code></a>. If <code>sConnectionName</code> is omitted or empty, the function uses the default LIMS connection. If <code>bCommit</code> is omitted, it defaults to <a href="../../literals/true/"><code>.T.</code></a>.</p>
 <p>Each call decreases the transaction depth for that connection. On the outermost transaction, <a href="../../literals/true/"><code>.T.</code></a> commits and <a href="../../literals/false/"><code>.F.</code></a> rolls back. If an inner transaction was rolled back, a later outermost commit raises an error instead of committing.</p>
+<p>With no transaction open, <code>EndLimsTransaction</code> returns <a href="../../literals/true/"><code>.T.</code></a> and raises nothing. It also does not check which routine began the open transaction: a helper that calls it without having begun a transaction ends its caller's transaction, and with <code>bCommit</code> omitted, commits it. Track the transactions your code begins with a <code>bStarted</code> flag and end only those.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need to explicitly commit completed work.</li>
@@ -3877,7 +3880,7 @@
 </tbody>
 </table>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
-<p><strong><a href="../../types/boolean/">boolean</a></strong> — <a href="../../literals/true/"><code>.T.</code></a> when the transaction scope ends successfully. Raises an exception on failure rather than returning <a href="../../literals/false/"><code>.F.</code></a>.</p>
+<p><strong><a href="../../types/boolean/">boolean</a></strong> — <a href="../../literals/true/"><code>.T.</code></a> when the transaction scope ends successfully, and also when no transaction is open. Raises an exception on failure rather than returning <a href="../../literals/false/"><code>.F.</code></a>.</p>
 <h2 id="exceptions">Exceptions<a class="headerlink" href="#exceptions" title="Permanent link">&para;</a></h2>
 <table data-ssl-table="exceptions"><colgroup><col><col></colgroup>
 <thead>
@@ -3906,6 +3909,7 @@
 <p class="admonition-title">Do</p>
 <ul>
 <li>Call <code>EndLimsTransaction</code> exactly once for every successful <a href="../BeginLimsTransaction/"><code>BeginLimsTransaction</code></a> call.</li>
+<li>Set a <code>bStarted</code> flag from <a href="../BeginLimsTransaction/"><code>BeginLimsTransaction</code></a> and end the transaction only when that flag is <a href="../../literals/true/"><code>.T.</code></a>.</li>
 <li>Keep a <code>bCommit</code> flag that only becomes <a href="../../literals/true/"><code>.T.</code></a> after all transactional work succeeds.</li>
 <li>Use the same <code>sConnectionName</code> that started the transaction when you are working on a named connection.</li>
 <li>Roll back the outer transaction when an inner transaction on the same connection rolls back.</li>
@@ -3917,12 +3921,16 @@
 <li>Assume the function returns <a href="../../literals/false/"><code>.F.</code></a> for a missing connection or failed close; those paths raise errors.</li>
 <li>Mix connection names between <a href="../BeginLimsTransaction/"><code>BeginLimsTransaction</code></a> and <code>EndLimsTransaction</code> calls.</li>
 <li>Commit in <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> before the protected work has finished successfully.</li>
+<li>Call a bare <code>EndLimsTransaction()</code> in cleanup code. With <code>bCommit</code> omitted it commits, including on the failure path.</li>
+<li>Call <code>EndLimsTransaction</code> from code that did not begin the transaction. It ends the caller's transaction, and an <a href="../IsInTransaction/"><code>IsInTransaction</code></a> check does not prevent this.</li>
 <li>Ignore nested rollback state and still try to commit the outermost transaction.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li>To pass <code>bCommit</code> while using the default connection, skip <code>sConnectionName</code> with <code>EndLimsTransaction(, bCommit)</code>.</li>
+<li>With no transaction open, the call returns <a href="../../literals/true/"><code>.T.</code></a> without raising, so an unbalanced call goes unnoticed.</li>
+<li><a href="../IsInTransaction/"><code>IsInTransaction</code></a> returns <a href="../../literals/true/"><code>.T.</code></a> for a transaction a caller began, so it cannot tell your code whether it owns the open transaction.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="commit-work-on-the-default-connection">Commit work on the default connection<a class="headerlink" href="#commit-work-on-the-default-connection" title="Permanent link">&para;</a></h3>
@@ -4106,7 +4114,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 16:51:50 UTC">September 29, 2026</span>
   </span>
 
     

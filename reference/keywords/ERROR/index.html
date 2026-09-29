@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Defines a legacy error handler for the statements that follow it in the current procedure or method.">
+        <meta name="description" content="Starts a legacy error handler at the end of a procedure that handles failures in the statements before it.">
       
       
       
@@ -431,6 +431,8 @@
   
     
     
+      
+        
       
         
       
@@ -1589,10 +1591,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#resuming-after-per-record-failures" class="md-nav__link">
+  <a href="#a-handler-placed-first-protects-nothing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resuming after per-record failures
+        A handler placed first protects nothing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continuing-after-a-failed-read-with-resume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Continuing after a failed read with :RESUME
       
     </span>
   </a>
@@ -2722,10 +2735,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#resuming-after-per-record-failures" class="md-nav__link">
+  <a href="#a-handler-placed-first-protects-nothing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resuming after per-record failures
+        A handler placed first protects nothing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continuing-after-a-failed-read-with-resume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Continuing after a failed read with :RESUME
       
     </span>
   </a>
@@ -2840,23 +2864,29 @@
 
 
 <h1 id="error">ERROR<a class="headerlink" href="#error" title="Permanent link">&para;</a></h1>
-<p>Defines a legacy error handler for the statements that follow it in the current procedure or method.</p>
-<p><code>:ERROR</code> starts the legacy scope-based error-handling pattern. Its body must contain at least one statement, and it handles runtime errors raised by subsequent statements in the same scope. When used together with <a href="../RESUME/"><code>:RESUME</code></a>, execution can continue after a handled failure. Without <a href="../RESUME/"><code>:RESUME</code></a>, the handler still runs, but execution does not resume statement-by-statement.</p>
+<p>Starts a legacy error handler at the end of a procedure that handles failures in the statements before it.</p>
+<p><code>:ERROR;</code> starts the last section of a procedure, which runs to <a href="../ENDPROC/"><code>:ENDPROC</code></a>. The statements before <code>:ERROR</code> are the protected region. The statements after it are the handler body, which runs only when a protected statement fails. The handler body must contain at least one statement.</p>
+<p>Without <a href="../RESUME/"><code>:RESUME</code></a>, the first failure runs the handler and the procedure ends. With <a href="../RESUME/"><code>:RESUME</code></a> at the end of the handler, every failing statement runs the handler and execution continues with the next statement.</p>
 <p>Use <code>:ERROR</code> primarily when maintaining older SSL code that already relies on the <code>:ERROR</code> / <a href="../RESUME/"><code>:RESUME</code></a> pattern. For new code, prefer structured <a href="../TRY/"><code>:TRY</code></a> / <a href="../CATCH/"><code>:CATCH</code></a> / <a href="../FINALLY/"><code>:FINALLY</code></a> blocks.</p>
 <h2 id="behavior">Behavior<a class="headerlink" href="#behavior" title="Permanent link">&para;</a></h2>
-<p><code>:ERROR</code> applies to the subsequent statements in the current scope, not to a <a href="../TRY/"><code>:TRY</code></a> block.</p>
-<p>If a handled statement fails, the <code>:ERROR</code> body runs. Use <a href="../../functions/GetLastSSLError/"><code>GetLastSSLError()</code></a> inside the handler to retrieve the current error object and read properties such as <code>:Description</code>.</p>
-<p>If the procedure includes <a href="../RESUME/"><code>:RESUME</code></a>, the runtime switches to resume-mode handling so execution can continue after a failing statement. If there is no <a href="../RESUME/"><code>:RESUME</code></a>, the handler still catches the error, but the procedure does not continue in that statement-by-statement recovery mode.</p>
+<p><strong>Placement.</strong> <code>:ERROR</code> protects the statements that come before it in the same procedure. The statements after it are handler code, not protected code: they run only when an earlier statement fails. A handler placed first therefore protects nothing, and the code after it never runs on the success path. When no error occurs, execution never enters the handler body, and a procedure that reaches <code>:ERROR</code> without a <a href="../RETURN/"><code>:RETURN</code></a> returns an empty string.</p>
+<p><strong>Without <a href="../RESUME/"><code>:RESUME</code></a>.</strong> The first failing statement skips the rest of the protected region and runs the handler. The procedure then ends and returns whatever the handler returns, or <code>""</code> if the handler has no <a href="../RETURN/"><code>:RETURN</code></a>. A <a href="../TRY/"><code>:TRY</code></a> block in the protected region keeps its own <a href="../CATCH/"><code>:CATCH</code></a>: errors raised inside the <code>:TRY</code> body go to that <code>:CATCH</code>, not to the legacy handler.</p>
+<p><strong>With <a href="../RESUME/"><code>:RESUME</code></a>.</strong> Every failing statement in the protected region runs the handler, and execution then continues with the statement after the one that failed. This includes statements inside a <a href="../TRY/"><code>:TRY</code></a> body: in observed runtime behavior the legacy handler takes the error, <a href="../CATCH/"><code>:CATCH</code></a> does not run, and the rest of the <code>:TRY</code> body keeps running.</p>
+<p>Use <a href="../../functions/GetLastSSLError/"><code>GetLastSSLError()</code></a> inside the handler to retrieve the current error object and read properties such as <code>:Description</code>.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When maintaining legacy procedures that already use <code>:ERROR</code> / <a href="../RESUME/"><code>:RESUME</code></a>.</li>
-<li>When you need one shared handler for the remaining statements in the current scope.</li>
+<li>When one shared handler at the end of a procedure should cover every statement before it.</li>
 <li>When recoverable failures should be logged or corrected before optionally continuing with <a href="../RESUME/"><code>:RESUME</code></a>.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:ERROR</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcName</span><span class="p">;</span>
+<span class="w">    </span><span class="n">protected_statements</span><span class="p">;</span>
+<span class="k">:ERROR</span><span class="p">;</span>
+<span class="w">    </span><span class="n">handler_statements</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
-<p><code>:ERROR</code> is followed by one or more handler statements. In practice it is usually paired with <code>:RESUME;</code> later in the same handler block when the procedure should continue after an error.</p>
+<p><code>:ERROR;</code> is followed by one or more handler statements, which run to <a href="../ENDPROC/"><code>:ENDPROC</code></a>. Add <code>:RESUME;</code> as the last handler statement when the procedure should continue after each failure.</p>
 <h2 id="keyword-group">Keyword group<a class="headerlink" href="#keyword-group" title="Permanent link">&para;</a></h2>
 <p><strong>Group:</strong> Error Handling
 <strong>Role:</strong> handler</p>
@@ -2865,7 +2895,8 @@
 <p class="admonition-title">Do</p>
 <ul>
 <li>Use <code>:ERROR</code> only for legacy handler flows that genuinely need <code>:ERROR</code> / <a href="../RESUME/"><code>:RESUME</code></a>.</li>
-<li>Put the <code>:ERROR</code> block before the statements it is meant to protect.</li>
+<li>Put <code>:ERROR</code> after the statements it is meant to protect, as the last section of the procedure.</li>
+<li>End the protected region with a <a href="../RETURN/"><code>:RETURN</code></a> so the success path returns its own value, and give the handler its own <a href="../RETURN/"><code>:RETURN</code></a> when callers need a failure value.</li>
 <li>Use <a href="../../functions/GetLastSSLError/"><code>GetLastSSLError()</code></a> and <code>oErr:Description</code> inside the handler when you need a readable error message.</li>
 <li>Prefer <a href="../TRY/"><code>:TRY</code></a> / <a href="../CATCH/"><code>:CATCH</code></a> / <a href="../FINALLY/"><code>:FINALLY</code></a> for new code.</li>
 </ul>
@@ -2873,84 +2904,95 @@
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
+<li>Put <code>:ERROR</code> before the statements you want to protect. Those statements become handler code and run only when an error occurs.</li>
 <li>Describe <code>:ERROR</code> as part of <a href="../TRY/"><code>:TRY</code></a> / <a href="../CATCH/"><code>:CATCH</code></a> / <a href="../FINALLY/"><code>:FINALLY</code></a>. It is a separate legacy mechanism.</li>
 <li>Use <code>:ERROR</code> for new structured exception-handling examples when <a href="../TRY/"><code>:TRY</code></a> / <a href="../CATCH/"><code>:CATCH</code></a> would be clearer.</li>
-<li>Assume <a href="../RESUME/"><code>:RESUME</code></a> is optional when the procedure is meant to continue after failures. Without it, the handler does not provide resume-mode recovery.</li>
+<li>Add <a href="../RESUME/"><code>:RESUME</code></a> to a procedure that also contains <a href="../TRY/"><code>:TRY</code></a> / <a href="../CATCH/"><code>:CATCH</code></a>. In resume mode the legacy handler takes errors from the <code>:TRY</code> body and <code>:CATCH</code> never runs.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>:ERROR</code> is legacy scope-based handling for the current procedure or method. It is not a clause inside <a href="../TRY/"><code>:TRY</code></a>.</li>
-<li>Do not combine <code>:ERROR</code> with <a href="../TRY/"><code>:TRY</code></a>/<a href="../CATCH/"><code>:CATCH</code></a> in the same procedure. In observed runtime behavior, a legacy <code>:ERROR</code> handler can intercept an error raised inside a <code>:TRY</code> block before the <a href="../CATCH/"><code>:CATCH</code></a> clause runs, so the <code>:CATCH</code> logic never executes. See <a href="../../../guides/error-handling/#do-not-mix-errorresume-with-trycatch">Error Handling</a>.</li>
-<li><a href="../RESUME/"><code>:RESUME</code></a> changes the flow to resume-mode handling for subsequent statements. Use it only when continuing is safe.</li>
-<li>If no handled error occurs, the <code>:ERROR</code> body is skipped.</li>
+<li><code>:ERROR</code> is legacy handling for the statements before it in the current procedure. It is not a clause inside <a href="../TRY/"><code>:TRY</code></a>.</li>
+<li>The handler runs to <a href="../ENDPROC/"><code>:ENDPROC</code></a>. Statements placed after <code>:ERROR</code> never run on the success path.</li>
+<li>Without <a href="../RESUME/"><code>:RESUME</code></a>, a <a href="../TRY/"><code>:TRY</code></a> block in the protected region keeps its own <a href="../CATCH/"><code>:CATCH</code></a>.</li>
+<li>With <a href="../RESUME/"><code>:RESUME</code></a>, the legacy handler takes errors raised inside a <a href="../TRY/"><code>:TRY</code></a> body before <a href="../CATCH/"><code>:CATCH</code></a> can run, and execution continues inside the <code>:TRY</code> body at the next statement. Do not combine resume mode with <a href="../TRY/"><code>:TRY</code></a>/<a href="../CATCH/"><code>:CATCH</code></a> in the same procedure. See <a href="../../../guides/error-handling/#do-not-mix-errorresume-with-trycatch">Error Handling</a>.</li>
+<li>If no error occurs, the handler body is skipped.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="logging-a-failure-and-stopping-the-procedure">Logging a failure and stopping the procedure<a class="headerlink" href="#logging-a-failure-and-stopping-the-procedure" title="Permanent link">&para;</a></h3>
-<p>Uses one shared legacy handler to catch any failure in the remaining procedure body. If <a href="../../functions/ReadText/"><code>ReadText</code></a> fails, the handler logs the error via <a href="../../functions/ErrorMes/"><code>ErrorMes</code></a>. If it succeeds, the file content is reported via <a href="../../functions/UsrMes/"><code>UsrMes</code></a>.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadConfiguration</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">sContent</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
+<p>The protected region checks a result and approves it. When the check raises an error, the rest of the protected region is skipped, the handler logs the reason, and the procedure returns <a href="../../literals/false/"><code>.F.</code></a> from the handler.</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ApproveResult</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">nResult</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"config/settings.txt"</span><span class="p">;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Checking "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">/* Handle any later failure in this procedure;</span>
-<span class="w">    </span><span class="k">:ERROR</span><span class="p">;</span>
-<span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Configuration load failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">/* Logs on failure: configuration load failed;</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nResult</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">"Result cannot be negative"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">/* If ReadText fails, control jumps to the handler;</span>
-<span class="w">    </span><span class="n">sContent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ReadText</span><span class="p">(</span><span class="n">sFilePath</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">/* Skipped when the check fails;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Approved "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">);</span>
 
-<span class="w">    </span><span class="c1">/* Only runs when the file was read successfully;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"File loaded successfully: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sContent</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">/* Logs on success: loaded file contents;</span>
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
+<span class="k">:ERROR</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">/* Runs only when a statement above fails;</span>
+<span class="w">    </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Approval failed for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sContent</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LoadConfiguration"</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ApproveResult"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-1002"</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">4</span><span class="p">});</span>
 </code></pre></div>
-<h3 id="resuming-after-per-record-failures">Resuming after per-record failures<a class="headerlink" href="#resuming-after-per-record-failures" title="Permanent link">&para;</a></h3>
-<p>Uses <a href="../RESUME/"><code>:RESUME</code></a> so a batch loop can continue after logging a recoverable error for a single record. With the input <code>{"S-001", "BAD", "S-003"}</code>, the <code>"BAD"</code> record triggers the error handler and increments the failure count; the other records are processed normally.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportResults</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aSampleIDs</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">nImported</span><span class="p">,</span><span class="w"> </span><span class="n">nFailed</span><span class="p">;</span>
+<p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Checking S-1002
+Approval failed for S-1002: Result cannot be negative
+</code></pre></div>
+<p>With a result of <code>12.5</code> instead, the handler is skipped, <code>UsrMes</code> logs <code>Checking S-1002</code> and <code>Approved S-1002</code>, and the procedure returns <a href="../../literals/true/"><code>.T.</code></a>.</p>
+<h3 id="a-handler-placed-first-protects-nothing">A handler placed first protects nothing<a class="headerlink" href="#a-handler-placed-first-protects-nothing" title="Permanent link">&para;</a></h3>
+<p>This shape looks like it guards the lines below <code>:ERROR</code>, but those lines are handler code. No error occurs before <code>:ERROR</code>, so the handler never runs: nothing is logged and the procedure returns an empty string, not <code>"finished"</code>.</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">HandlerFirst</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">nImported</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="n">nFailed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"start"</span><span class="p">;</span>
+<span class="k">:ERROR</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">/* Handler code, not a protected region;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"This line runs only after an earlier failure"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"finished"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c1">/* Log the failure and continue with the next statement;</span>
-<span class="w">    </span><span class="k">:ERROR</span><span class="p">;</span>
-<span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="n">nFailed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nFailed</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Skipping sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">/* Logs on failure: skipping the current sample;</span>
-<span class="w">    </span><span class="k">:RESUME</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aSampleIDs</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aSampleIDs</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
-
-<span class="w">        </span><span class="c1">/* Simulate a failing record in the batch;</span>
-<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BAD"</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">"Sample is not valid for import"</span><span class="p">);</span>
-<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-
-<span class="w">        </span><span class="n">nImported</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nImported</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
-
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span>
-<span class="w">        </span><span class="s2">"Imported "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nImported</span><span class="p">)</span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">" samples. Failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFailed</span><span class="p">)</span>
-<span class="w">    </span><span class="p">);</span>
-<span class="w">    </span><span class="c1">/* Logs a summary of imported and failed records;</span>
-
-<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nImported</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ImportResults"</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"BAD"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S-003"</span><span class="p">}});</span>
+<span class="k">:RETURN</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"HandlerFirst"</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="continuing-after-a-failed-read-with-resume">Continuing after a failed read with :RESUME<a class="headerlink" href="#continuing-after-a-failed-read-with-resume" title="Permanent link">&para;</a></h3>
+<p>Uses <a href="../RESUME/"><code>:RESUME</code></a> so each failed <a href="../../functions/ReadText/"><code>ReadText</code></a> call keeps its default value and the procedure goes on to the next line. When <code>settings/footer.txt</code> does not exist, the handler runs once, <code>sFooter</code> keeps its default, and execution continues with the summary line, which reports one missing file.</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadDisplaySettings</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTitle</span><span class="p">,</span><span class="w"> </span><span class="n">sFooter</span><span class="p">,</span><span class="w"> </span><span class="n">nMissing</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">sTitle</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample Register"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFooter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nMissing</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">/* A failed read runs the handler, then the next line runs;</span>
+<span class="w">    </span><span class="n">sTitle</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ReadText</span><span class="p">(</span><span class="s2">"settings/title.txt"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sFooter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ReadText</span><span class="p">(</span><span class="s2">"settings/footer.txt"</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Settings loaded, missing files: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nMissing</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="p">{</span><span class="n">sTitle</span><span class="p">,</span><span class="w"> </span><span class="n">sFooter</span><span class="p">};</span>
+<span class="k">:ERROR</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
+<span class="w">    </span><span class="n">nMissing</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Keeping a default value: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="k">:RESUME</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LoadDisplaySettings"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2980,7 +3022,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 16:47:34 UTC">September 29, 2026</span>
   </span>
 
     

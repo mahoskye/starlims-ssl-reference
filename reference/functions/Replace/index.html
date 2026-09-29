@@ -446,6 +446,8 @@
       
         
       
+        
+      
     
     
     
@@ -4243,7 +4245,7 @@
 
 <h1 id="replace">Replace<a class="headerlink" href="#replace" title="Permanent link">&para;</a></h1>
 <p>Replaces all occurrences of a specified substring within a string with another substring and returns the resulting string.</p>
-<p>Returns a new string in which every non-overlapping occurrence of <code>searchFor</code> inside <code>source</code> is replaced by <code>replaceWith</code>.</p>
+<p>Returns a new string in which every occurrence of <code>searchFor</code> inside <code>source</code> is replaced by <code>replaceWith</code>. If <code>searchFor</code> matches again starting inside a previous match, as <code>"aa"</code> does in <code>"aaa"</code>, an error is raised instead (see <a href="#caveats">Caveats</a>).</p>
 <p>Matching is <strong>case-insensitive</strong>. A search for <code>"abc"</code> matches <code>"abc"</code>, <code>"ABC"</code>, <code>"aBc"</code>, and other case variants. If any argument (<code>source</code>, <code>searchFor</code>, or <code>replaceWith</code>) is <a href="../../literals/nil/"><code>NIL</code></a>, an error is raised. If <code>searchFor</code> is empty, the function returns <code>source</code> unchanged.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4313,6 +4315,10 @@
 <td><code>replaceWith</code> is <a href="../../literals/nil/"><code>NIL</code></a>.</td>
 <td><code>Argument replaceWith cannot be null.</code></td>
 </tr>
+<tr>
+<td><code>searchFor</code> matches again starting inside a previous match, such as <code>Replace("aaa", "aa", "X")</code>.</td>
+<td><code>Value must be positive.</code> followed by <code>Parameter name: count</code> on a second line</td>
+</tr>
 </tbody>
 </table>
 <h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
@@ -4332,11 +4338,13 @@
 <li>Use <code>Replace()</code> when letter case must be part of the match criteria.</li>
 <li>Expect only the first occurrence to change. <code>Replace()</code> replaces all matches.</li>
 <li>Expect an empty <code>searchFor</code> to insert text between characters. It returns the source unchanged.</li>
+<li>Pass a <code>searchFor</code> that can match again inside its own previous match, such as <code>"aa"</code> against <code>"aaa"</code>. <code>Replace()</code> raises an error instead of replacing.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>replaceWith</code> is inserted exactly as provided; the original match casing is not preserved.</li>
+<li>When <code>searchFor</code> matches again starting inside a previous match, <code>Replace()</code> raises an error instead of returning a string. For example, <code>Replace("aaa", "aa", "X")</code> raises <code>Value must be positive.</code> followed by <code>Parameter name: count</code> on a second line. Check the data or guard the call with <a href="../../keywords/TRY/"><code>:TRY</code></a> when <code>searchFor</code> could overlap itself in <code>source</code>.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="replace-spaces-with-underscores-in-a-filename">Replace spaces with underscores in a filename<a class="headerlink" href="#replace-spaces-with-underscores-in-a-filename" title="Permanent link">&para;</a></h3>
@@ -4368,6 +4376,10 @@
 
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"NormalizeStatusText"</span><span class="p">);</span>
+</code></pre></div>
+<p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Before: Pending, PENDING, pending
+After: Ready, Ready, Ready
 </code></pre></div>
 <h3 id="apply-several-replacements-to-a-template">Apply several replacements to a template<a class="headerlink" href="#apply-several-replacements-to-a-template" title="Permanent link">&para;</a></h3>
 <p>Build a final message by applying several case-insensitive replacements in sequence.</p>
@@ -4415,7 +4427,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 16:43:31 UTC">September 29, 2026</span>
   </span>
 
     

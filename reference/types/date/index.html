@@ -446,6 +446,8 @@
       
         
       
+        
+      
     
     
     
@@ -2248,10 +2250,10 @@
 </tbody>
 </table>
 <h2 id="calling-net-datetime-methods">Calling .NET <code>DateTime</code> methods<a class="headerlink" href="#calling-net-datetime-methods" title="Permanent link">&para;</a></h2>
-<p>In addition to the SSL-defined members above, any public method or property on .NET's <code>System.DateTime</code> is callable on a non-empty <code>date</code> value with the <code>:</code> method-call syntax. The runtime forwards <code>dValue:Name(args)</code> to the underlying .NET date by name, so the surface is effectively the full <code>System.DateTime</code> API.</p>
+<p>In addition to the SSL-defined members above, any public method or property on .NET's <code>System.DateTime</code> is callable on a non-empty <code>date</code> value with the <code>:</code> method-call syntax. The runtime forwards <code>dValue:Name(args)</code> to the underlying .NET date by name.</p>
 <p>This is particularly useful for arithmetic that SSL's <a href="../../operators/plus/"><code>+</code></a> and <a href="../../operators/minus/"><code>-</code></a> operators do not cover, since those only add or subtract whole-day offsets. <code>System.DateTime</code> offers month-aware and year-aware arithmetic — for example <code>AddMonths(n)</code>, <code>AddYears(n)</code>, <code>AddHours(n)</code>, <code>AddMinutes(n)</code> — and component accessors such as <code>Year</code>, <code>Month</code>, <code>Day</code>, <code>DayOfWeek</code>, and <code>DayOfYear</code>.</p>
 <p>Empty dates cannot be dispatched through this passthrough. The underlying .NET value of an empty date is <code>null</code>, and calling a method on it raises a null-reference error. Always guard with <a href="../../functions/Empty/"><code>Empty</code></a> before reaching for .NET members.</p>
-<p>This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined date members and SSL-native date functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover.</p>
+<p>This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined date members and SSL-native date functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover. See <a href="../../../guides/native-members/">Native Members on SSL Values</a> for the members verified on STARLIMS v11 and how to check others.</p>
 <h3 id="example-month-aware-date-arithmetic">Example: month-aware date arithmetic<a class="headerlink" href="#example-month-aware-date-arithmetic" title="Permanent link">&para;</a></h3>
 <p>Uses .NET's <code>AddMonths(nMonths)</code> method to compute a date three months after a start date. SSL's <a href="../../operators/plus/"><code>+</code></a> operator only adds whole-day offsets, so month-aware arithmetic — which correctly handles end-of-month and leap-year edge cases — is only available through this passthrough.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ComputeReviewDate</span><span class="p">;</span>
@@ -2415,7 +2417,7 @@ Local JSON: "2026-04-23T14:30:00+05:00"
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 16:46:16 UTC">September 29, 2026</span>
   </span>
 
     
