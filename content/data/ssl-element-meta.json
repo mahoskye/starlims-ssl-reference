@@ -7781,7 +7781,7 @@
       "exceptions": [
         {
           "trigger": "sParam is NIL.",
-          "message": "Null argument."
+          "message": "A null-argument error whose second line reads Parameter name: param."
         },
         {
           "trigger": "sParam is not a string.",
@@ -9980,7 +9980,8 @@
       "caveats": [
         "The setting remains in effect for later SQL work until you change it again.",
         "This setting works together with IgnoreSqlErrors. With both at their starting value of .T., a failing RunSQL raises. It returns .F. only when this flag is .F. and IgnoreSqlErrors is .T.. If IgnoreSqlErrors is .F., failures raise whatever this flag is set to.",
-        "After a .F. return, the error is in GetLastSQLError. Nothing is stored for GetLastSSLError."
+        "After a .F. return, the error is in GetLastSQLError. Nothing is stored for GetLastSSLError.",
+        "The flag does not change how LSearch fails: a failing LSearch raises even while this flag is .F., rather than returning its default value. Wrap LSearch in :TRY / :CATCH."
       ],
       "best_practices": {
         "do": [
