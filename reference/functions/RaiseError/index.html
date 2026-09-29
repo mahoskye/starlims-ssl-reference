@@ -1788,6 +1788,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#caveats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caveats
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3285,6 +3296,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#caveats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caveats
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3446,7 +3468,7 @@
 <h1 id="raiseerror">RaiseError<a class="headerlink" href="#raiseerror" title="Permanent link">&para;</a></h1>
 <p>Raises an SSL runtime error using the supplied message and optional location, error code, and inner error.</p>
 <p><code>RaiseError</code> validates <code>sMessage</code> and then throws immediately. The resulting <a href="../../classes/SSLError/"><code>SSLError</code></a> exposes <code>sLocation</code> as <code>:Operation</code> and <code>nErrorCode</code> as <code>:Code</code> when caught. When <code>oInnerException</code> is provided, it becomes the inner exception of the raised error.</p>
-<p>When <code>RaiseError</code> executes inside a <a href="../../keywords/TRY/"><code>:TRY</code></a> block, the remaining statements in that block are skipped and control transfers to <a href="../../keywords/CATCH/"><code>:CATCH</code></a>, where <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> retrieves the raised error. Execution then continues normally after <a href="../../keywords/ENDTRY/"><code>:ENDTRY</code></a>, and the script returns as usual. An uncaught error propagates up the call stack instead; if no caller catches it, the invocation fails and the end user sees a server error. Every <code>RaiseError</code> therefore needs a <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> boundary — or a legacy <a href="../../keywords/ERROR/"><code>:ERROR</code></a> / <a href="../../keywords/RESUME/"><code>:RESUME</code></a> handler — somewhere up the call stack; raising without one turns a routine failure, such as an invalid sample ID, into a crash. The preferred placement is directly inside the <a href="../../keywords/TRY/"><code>:TRY</code></a> block whose <a href="../../keywords/CATCH/"><code>:CATCH</code></a> handles it, so the raise can never escape.</p>
+<p>When <code>RaiseError</code> executes inside a <a href="../../keywords/TRY/"><code>:TRY</code></a> block, the remaining statements in that block are skipped and control transfers to <a href="../../keywords/CATCH/"><code>:CATCH</code></a>, where <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> retrieves the raised error. Execution then continues normally after <a href="../../keywords/ENDTRY/"><code>:ENDTRY</code></a>, and the script returns as usual. The exception is a procedure that also has a legacy <a href="../../keywords/ERROR/"><code>:ERROR</code></a> handler ending in <a href="../../keywords/RESUME/"><code>:RESUME</code></a>: there the legacy handler takes the error, <code>:CATCH</code> does not run, and execution continues with the statement after the <code>RaiseError</code> inside the <code>:TRY</code> block. An uncaught error propagates up the call stack instead; if no caller catches it, the invocation fails and the end user sees a server error. Every <code>RaiseError</code> therefore needs a <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> boundary — or a legacy <a href="../../keywords/ERROR/"><code>:ERROR</code></a> / <a href="../../keywords/RESUME/"><code>:RESUME</code></a> handler — somewhere up the call stack; raising without one turns a routine failure, such as an invalid sample ID, into a crash. The preferred placement is directly inside the <a href="../../keywords/TRY/"><code>:TRY</code></a> block whose <a href="../../keywords/CATCH/"><code>:CATCH</code></a> handles it, so the raise can never escape.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When validation fails and the current operation must stop immediately.</li>
@@ -3535,6 +3557,10 @@
 <li>Pass vague messages such as <code>"failed"</code> or <code>"error"</code>, because they make diagnosis harder after the error is caught.</li>
 </ul>
 </div>
+<h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
+<ul>
+<li>In a procedure whose <a href="../../keywords/ERROR/"><code>:ERROR</code></a> handler ends with <a href="../../keywords/RESUME/"><code>:RESUME</code></a>, a raise inside <a href="../../keywords/TRY/"><code>:TRY</code></a> goes to the legacy handler instead of <a href="../../keywords/CATCH/"><code>:CATCH</code></a>, and the <code>:TRY</code> block keeps running after the raise. Do not combine the two in one procedure.</li>
+</ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="raise-a-validation-failure-and-handle-it-gracefully">Raise a validation failure and handle it gracefully<a class="headerlink" href="#raise-a-validation-failure-and-handle-it-gracefully" title="Permanent link">&para;</a></h3>
 <p><code>ValidateSampleID</code> raises as soon as the input is unusable; <code>CheckSampleID</code> — the only public entry point — catches the error and turns it into a plain return value. A raise-only helper like this is a last resort: when you do write one, mark it <a href="../../special-forms/access-modifiers/"><code>/*@private;</code></a> so external callers cannot invoke it directly and bypass the boundary that catches its errors.</p>
@@ -3639,7 +3665,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 02:05:57 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 17:28:55 UTC">September 29, 2026</span>
   </span>
 
     
