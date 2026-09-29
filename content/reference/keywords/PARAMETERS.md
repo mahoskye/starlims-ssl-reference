@@ -119,11 +119,10 @@ In standard SSL, `:PARAMETERS` comes first and any optional trailing values are 
     :DECLARE sSQL, aRows;
 
     sSQL := "
-        SELECT sample_id, status, result_value
+        SELECT TOP (?nMaxRows?) sample_id, status, result_value
         FROM sample_result
         WHERE sample_id = ?sSampleID?
           AND status = ?sStatus?
-          AND ROWNUM <= ?nMaxRows?
         ORDER BY sample_id
     ";
 
@@ -154,10 +153,9 @@ Data source files use the inline-default form instead of separate [`:DEFAULT`](D
 :PARAMETERS sStatus := "Logged", nMaxRows := 50;
 
 :RETURN SQLExecute("
-            SELECT sample_id, status
+            SELECT TOP (?nMaxRows?) sample_id, status
             FROM sample
             WHERE status = ?sStatus?
-              AND ROWNUM <= ?nMaxRows?
             ORDER BY sample_id
         ");
 ```

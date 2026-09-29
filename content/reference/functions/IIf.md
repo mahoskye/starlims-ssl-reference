@@ -102,7 +102,7 @@ Build a SQL filter clause dynamically by selecting between two pre-prepared filt
 
     bLoggedOnly := .T.;
     sStatusFilter := "status = 'Logged'";
-    sDateFilter := "logdate >= SYSDATE - 7";
+    sDateFilter := "logdate >= DATEADD(day, -7, GETDATE())";
 
     sSQL := "
         SELECT sampleid, status, logdate

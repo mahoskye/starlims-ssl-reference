@@ -194,7 +194,7 @@ Uses one `:TRY` block for a multi-step operation, then branches inside the singl
         bUpdatedBatch := RunSQL("
             UPDATE batches SET
                 processed = ?,
-                processed_on = SYSDATE
+                processed_on = GETDATE()
             WHERE batch_id = ?
         ",, {1, sBatchID});
 

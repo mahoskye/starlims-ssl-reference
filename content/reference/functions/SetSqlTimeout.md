@@ -111,7 +111,7 @@ Extend the timeout on a named connection before a long update, then restore it i
 		bUpdated := RunSQL("
 		    UPDATE archive_jobs SET
 		        status = ?,
-		        completed_date = SYSDATE
+		        completed_date = GETDATE()
 		    WHERE status = ?
 		      AND completed_date IS NULL
 		",
