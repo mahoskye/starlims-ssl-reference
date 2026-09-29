@@ -225,7 +225,7 @@ Local JSON: "2026-04-23T14:30:00+05:00"
 
 ## Caveats
 
-- Member access with `:` forwards to the underlying .NET DateTime object when no SSL-side member matches (e.g. `dValue:AddMonths(2)`). A member that is not listed on this page can still be valid — it resolves against the .NET object at runtime instead of raising an unknown-member error.
+- Member access with `:` forwards to the underlying .NET DateTime object when no SSL-side member matches (e.g. `dValue:AddMonths(2)`). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
 
 ## Related elements
 
