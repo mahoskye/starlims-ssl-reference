@@ -57,38 +57,34 @@ ShowSqlErrors(bEnable)
 - The setting remains in effect for later SQL work until you change it again.
 - This setting works together with [`IgnoreSqlErrors`](IgnoreSqlErrors.md). With both at their starting value of [`.T.`](../literals/true.md), a failing [`RunSQL`](RunSQL.md) raises. It returns [`.F.`](../literals/false.md) only when this flag is [`.F.`](../literals/false.md) and `IgnoreSqlErrors` is [`.T.`](../literals/true.md). If `IgnoreSqlErrors` is [`.F.`](../literals/false.md), failures raise whatever this flag is set to.
 - After a [`.F.`](../literals/false.md) return, the error is in [`GetLastSQLError`](GetLastSQLError.md). Nothing is stored for [`GetLastSSLError`](GetLastSSLError.md).
+- The flag does not change how [`LSearch`](LSearch.md) fails: a failing `LSearch` raises even while this flag is [`.F.`](../literals/false.md), rather than returning its default value. Wrap `LSearch` in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md).
 
 ## Examples
 
-### Restore the previous setting after a lookup
+### Make one statement raise whatever the caller set
 
-Enable SQL error display for a single lookup, then restore the previous setting in [`:FINALLY`](../keywords/FINALLY.md) so callers are not affected.
+A caller may have turned SQL error display off to get [`.F.`](../literals/false.md) returns. This procedure needs its update to raise on failure so its own [`:CATCH`](../keywords/CATCH.md) can report it, so it turns display on for the one statement and restores the caller's setting in [`:FINALLY`](../keywords/FINALLY.md).
 
 ```ssl
-:PROCEDURE LookupSampleStatus;
+:PROCEDURE ReleaseSample;
 	:PARAMETERS sSampleId;
-	:DECLARE bPrevShow, sSql, sStatus;
+	:DECLARE bPrevShow, oErr;
 
 	bPrevShow := ShowSqlErrors(.T.);
 
 	:TRY;
-		sSql := "
-		    SELECT status
-		    FROM sample
-		    WHERE sampleid = ?
-		";
-		sStatus := LSearch(sSql, "",, {sSampleId});
-
-		:IF !Empty(sStatus);
-			UsrMes("Sample status: " + sStatus);
-		:ENDIF;
+		RunSQL("UPDATE sample SET status = 'Released' WHERE sampleid = ?",, {sSampleId});
+		UsrMes("Released " + sSampleId);
+	:CATCH;
+		oErr := GetLastSSLError();
+		ErrorMes("Release failed for " + sSampleId, oErr:Description);
 	:FINALLY;
 		ShowSqlErrors(bPrevShow);
 	:ENDTRY;
 :ENDPROC;
 
 /* Usage;
-DoProc("LookupSampleStatus", {"S-2024-001"});
+DoProc("ReleaseSample", {"S-2024-001"});
 ```
 
 ### Coordinate SQL error display with IgnoreSqlErrors

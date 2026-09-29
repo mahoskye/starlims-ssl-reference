@@ -56,7 +56,7 @@ LimsType(sParam)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sParam` is [`NIL`](../literals/nil.md). | `Null argument.` |
+| `sParam` is [`NIL`](../literals/nil.md). | A null-argument error whose second line reads `Parameter name: param`. |
 | `sParam` is not a string. | `The argument for function LimsType must be a string.` |
 | `sParam` names a variable that holds [`NIL`](../literals/nil.md), including an omitted [`:PARAMETERS`](../keywords/PARAMETERS.md) argument. | `Object reference not set to an instance of an object.` |
 
