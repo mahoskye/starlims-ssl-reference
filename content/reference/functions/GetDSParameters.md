@@ -36,7 +36,7 @@ GetDSParameters(sDsName)
 
 ## Returns
 
-**[array](../types/array.md)** — An array of parameter key strings for the specified data source.
+**[array](../types/array.md)** — An array of parameter key strings for the specified data source, in declaration order. This is the order in which [`RunDS`](RunDS.md) binds the values in its `aParameters` array.
 
 ## Exceptions
 

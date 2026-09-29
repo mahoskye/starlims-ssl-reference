@@ -56,11 +56,13 @@ Data sources are invoked at runtime via [`RunDS`](../reference/functions/RunDS.m
 /* Call with default parameters;
 oResult := RunDS("Category.DataSourceName");
 
-/* Call with parameter overrides — array of {name, value} pairs;
-oResult := RunDS("Category.DataSourceName", {{"sStatus", "P"}, {"nLimit", 25}});
+/* Call with parameter overrides, in :PARAMETERS order;
+oResult := RunDS("Category.DataSourceName", {"P", 25});
 
 /* Return as an SSLDataset object;
 oDs := RunDS("Category.DataSourceName",, "ssldataset");
 ```
 
-Use [`GetDSParameters`](../reference/functions/GetDSParameters.md) to introspect a data source's parameter metadata at runtime.
+Parameter values bind by **position**, in the order the data source declares them in `:PARAMETERS`; names are not matched. For the directive example above, `{"P", 25}` sets `sStatus` to `"P"` and `nLimit` to `25`. Trailing values you leave out keep their inline defaults, and values beyond the declared parameters are silently ignored. Passing `{name, value}` pairs does not work: each pair is bound whole to one parameter.
+
+Use [`GetDSParameters`](../reference/functions/GetDSParameters.md) to get a data source's parameter names in declaration order, which is the order `RunDS` binds them.
