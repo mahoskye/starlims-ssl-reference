@@ -14030,7 +14030,8 @@
       "source_path": "content/reference/types/array.md",
       "exceptions": [],
       "caveats": [
-        "Member access with : forwards to the underlying .NET list object when no SSL-side member matches (e.g. aValues:Count). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as Run-time error: Invalid method: Split. Check a member before relying on it; see Native Members.",
+        "Arrays have no Count property: aValues:Count raises Run-time error: Invalid property: Count. Use ALen or aValues:Length.",
+        "Member access with : forwards to the underlying .NET list object when no SSL-side member matches (e.g. aValues:Length). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as Run-time error: Invalid method: Split. Check a member before relying on it; see Native Members.",
         "aValues[1] is the first element. aValues[0] is invalid.",
         "Invalid positions for RemoveAt, InsertAt, or index access raise runtime errors.",
         "Arrays can hold mixed value types, so validate or normalize element types before doing arithmetic or exact comparisons.",
@@ -14040,7 +14041,7 @@
       "best_practices": {
         "do": [
           "Use 1-based loops such as :FOR nIndex := 1 :TO ALen(aValues); when iterating arrays.",
-          "Check IsEmpty() or Count before indexing when the array may be empty.",
+          "Check Empty or ALen before indexing when the array may be empty.",
           "Use clone() before changing a copied array when the original must remain unchanged."
         ],
         "dont": [

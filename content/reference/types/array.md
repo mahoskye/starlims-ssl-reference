@@ -17,7 +17,7 @@ Represents ordered, 1-based collections of SSL values, including nested arrays.
 
 The `array` type stores values in positional order. Arrays are 1-based, so the first element is `aValues[1]`, not `aValues[0]`. Arrays can contain mixed value types, including strings, numbers, objects, [`NIL`](../literals/nil.md), and other arrays.
 
-For display purposes, arrays render in brace syntax such as `{"A",2,NIL}`. [`Empty`](../functions/Empty.md) returns [`.T.`](../literals/true.md) only when the array has no top-level elements, and `Count` returns the number of top-level elements.
+For display purposes, arrays render in brace syntax such as `{"A",2,NIL}`. [`Empty`](../functions/Empty.md) returns [`.T.`](../literals/true.md) only when the array has no top-level elements, and [`ALen`](../functions/ALen.md) returns the number of top-level elements.
 
 Use arrays when values need to stay in a defined order, when you need positional access such as `aRows[1]` or `aRows[nIndex][2]`, when a function returns tabular data or a list of items, or when you need to collect or reshape values while the script runs.
 
@@ -59,7 +59,6 @@ Arrays support identity comparison operators. Arithmetic and relational operator
 | `clone` | Method | none | `array` | Returns a deep copy of the array and its contained values. |
 | `GetList` | Method | none | `any` | Returns the array contents in list form for APIs that expose list-style access. |
 | `value` | Property | — | `any` | Gets or replaces the full array contents. |
-| `Count` | Property | — | [`number`](number.md) | Returns the number of top-level elements. |
 
 ## Calling .NET `Array` methods
 
@@ -76,7 +75,7 @@ This passthrough is an interop convenience, not part of the SSL language surface
 
 ### Example: reading the underlying `Array.Length` property
 
-Reads .NET's `Length` property on the underlying `System.Object[]` through the `:` dispatch. The result matches what SSL exposes through the `Count` property and [`ALen`](../functions/ALen.md), so this is primarily a demonstration that the dispatch works on `array` values rather than a recommended pattern.
+Reads .NET's `Length` property on the underlying `System.Object[]` through the `:` dispatch. The result matches [`ALen`](../functions/ALen.md), so this is primarily a demonstration that the dispatch works on `array` values rather than a recommended pattern.
 
 ```ssl
 :PROCEDURE ShowArrayLength;
@@ -115,7 +114,7 @@ Index expressions must evaluate to an integer. If the index expression is not an
 
 !!! success "Do"
     - Use 1-based loops such as `:FOR nIndex := 1 :TO ALen(aValues);` when iterating arrays.
-    - Check `IsEmpty()` or `Count` before indexing when the array may be empty.
+    - Check [`Empty`](../functions/Empty.md) or [`ALen`](../functions/ALen.md) before indexing when the array may be empty.
     - Use `clone()` before changing a copied array when the original must remain unchanged.
 
 !!! failure "Don't"
@@ -189,7 +188,7 @@ Inserts a new row, updates two values in existing rows by index, then removes a 
     aRow := aResults[1];
 
     UsrMes("First row status: " + aRow[2]);
-    UsrMes("Remaining rows: " + LimsString(aResults:Count));
+    UsrMes("Remaining rows: " + LimsString(ALen(aResults)));
 
     :RETURN aResults;
 :ENDPROC;
@@ -223,8 +222,8 @@ Creates an independent snapshot with `clone()`, appends a test to the snapshot's
 
     sJson := aSnapshot:ToJson();
 
-    UsrMes("Original tests: " + LimsString(aOriginal[1][2]:Count));
-    UsrMes("Snapshot tests: " + LimsString(aSnapshot[1][2]:Count));
+    UsrMes("Original tests: " + LimsString(ALen(aOriginal[1][2])));
+    UsrMes("Snapshot tests: " + LimsString(ALen(aSnapshot[1][2])));
     UsrMes(sJson);
 
     :RETURN aSnapshot;
@@ -244,7 +243,8 @@ Snapshot tests: 3
 
 ## Caveats
 
-- Member access with `:` forwards to the underlying .NET list object when no SSL-side member matches (e.g. `aValues:Count`). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
+- Arrays have no `Count` property: `aValues:Count` raises `Run-time error: Invalid property: Count`. Use [`ALen`](../functions/ALen.md) or `aValues:Length`.
+- Member access with `:` forwards to the underlying .NET list object when no SSL-side member matches (e.g. `aValues:Length`). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
 
 ## Related elements
 
