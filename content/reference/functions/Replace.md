@@ -13,7 +13,7 @@ starlims:
 
 Replaces all occurrences of a specified substring within a string with another substring and returns the resulting string.
 
-Returns a new string in which every non-overlapping occurrence of `searchFor` inside `source` is replaced by `replaceWith`.
+Returns a new string in which every occurrence of `searchFor` inside `source` is replaced by `replaceWith`. If `searchFor` matches again starting inside a previous match, as `"aa"` does in `"aaa"`, an error is raised instead (see [Caveats](#caveats)).
 
 Matching is **case-insensitive**. A search for `"abc"` matches `"abc"`, `"ABC"`, `"aBc"`, and other case variants. If any argument (`source`, `searchFor`, or `replaceWith`) is [`NIL`](../literals/nil.md), an error is raised. If `searchFor` is empty, the function returns `source` unchanged.
 
@@ -49,6 +49,7 @@ Replace(source, searchFor, replaceWith)
 | `source` is [`NIL`](../literals/nil.md). | `Argument source cannot be null.` |
 | `searchFor` is [`NIL`](../literals/nil.md). | `Argument searchFor cannot be null.` |
 | `replaceWith` is [`NIL`](../literals/nil.md). | `Argument replaceWith cannot be null.` |
+| `searchFor` matches again starting inside a previous match, such as `Replace("aaa", "aa", "X")`. | `Value must be positive.` followed by `Parameter name: count` on a second line |
 
 ## Best practices
 
@@ -63,10 +64,12 @@ Replace(source, searchFor, replaceWith)
     - Use `Replace()` when letter case must be part of the match criteria.
     - Expect only the first occurrence to change. `Replace()` replaces all matches.
     - Expect an empty `searchFor` to insert text between characters. It returns the source unchanged.
+    - Pass a `searchFor` that can match again inside its own previous match, such as `"aa"` against `"aaa"`. `Replace()` raises an error instead of replacing.
 
 ## Caveats
 
 - `replaceWith` is inserted exactly as provided; the original match casing is not preserved.
+- When `searchFor` matches again starting inside a previous match, `Replace()` raises an error instead of returning a string. For example, `Replace("aaa", "aa", "X")` raises `Value must be positive.` followed by `Parameter name: count` on a second line. Check the data or guard the call with [`:TRY`](../keywords/TRY.md) when `searchFor` could overlap itself in `source`.
 
 ## Examples
 
@@ -106,6 +109,13 @@ Show that `Replace()` matches the search text without regard to letter case.
 
 /* Usage;
 DoProc("NormalizeStatusText");
+```
+
+[`UsrMes`](UsrMes.md) logs:
+
+```text
+Before: Pending, PENDING, pending
+After: Ready, Ready, Ready
 ```
 
 ### Apply several replacements to a template

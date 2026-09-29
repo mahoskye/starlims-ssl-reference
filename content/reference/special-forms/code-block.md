@@ -148,6 +148,13 @@ Shows that a code block captures its surrounding scope by reference. When `nBase
 DoProc("CaptureDemo");
 ```
 
+[`UsrMes`](../functions/UsrMes.md) logs:
+
+```text
+15
+105
+```
+
 ## Related elements
 
 - [`AEval`](../functions/AEval.md)

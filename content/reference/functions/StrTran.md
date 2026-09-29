@@ -108,6 +108,13 @@ Demonstrate that `StrTran()` only replaces exact-case matches. `"OPEN"` is left 
 DoProc("NormalizeStatusLine");
 ```
 
+[`UsrMes`](UsrMes.md) logs:
+
+```text
+Before: Open OPEN Opened
+After: Closed OPEN Closeded
+```
+
 ### Apply several exact replacements to a template
 
 Build a final message by applying several literal, case-sensitive substitutions.
