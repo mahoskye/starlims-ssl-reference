@@ -14,7 +14,7 @@
       "returns": 12
     },
     "with_exceptions": 263,
-    "with_caveats": 400,
+    "with_caveats": 401,
     "with_best_practices": 458
   },
   "elements": [
@@ -8480,7 +8480,9 @@
           "message": "RaiseError(): error message cannot be null."
         }
       ],
-      "caveats": [],
+      "caveats": [
+        "In a procedure whose :ERROR handler ends with :RESUME, a raise inside :TRY goes to the legacy handler instead of :CATCH, and the :TRY block keeps running after the raise. Do not combine the two in one procedure."
+      ],
       "best_practices": {
         "do": [
           "Place RaiseError directly inside the :TRY block whose :CATCH handles it, so the raise can never escape.",

@@ -15,7 +15,7 @@ Raises an SSL runtime error using the supplied message and optional location, er
 
 `RaiseError` validates `sMessage` and then throws immediately. The resulting [`SSLError`](../classes/SSLError.md) exposes `sLocation` as `:Operation` and `nErrorCode` as `:Code` when caught. When `oInnerException` is provided, it becomes the inner exception of the raised error.
 
-When `RaiseError` executes inside a [`:TRY`](../keywords/TRY.md) block, the remaining statements in that block are skipped and control transfers to [`:CATCH`](../keywords/CATCH.md), where [`GetLastSSLError`](GetLastSSLError.md) retrieves the raised error. Execution then continues normally after [`:ENDTRY`](../keywords/ENDTRY.md), and the script returns as usual. An uncaught error propagates up the call stack instead; if no caller catches it, the invocation fails and the end user sees a server error. Every `RaiseError` therefore needs a [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) boundary — or a legacy [`:ERROR`](../keywords/ERROR.md) / [`:RESUME`](../keywords/RESUME.md) handler — somewhere up the call stack; raising without one turns a routine failure, such as an invalid sample ID, into a crash. The preferred placement is directly inside the [`:TRY`](../keywords/TRY.md) block whose [`:CATCH`](../keywords/CATCH.md) handles it, so the raise can never escape.
+When `RaiseError` executes inside a [`:TRY`](../keywords/TRY.md) block, the remaining statements in that block are skipped and control transfers to [`:CATCH`](../keywords/CATCH.md), where [`GetLastSSLError`](GetLastSSLError.md) retrieves the raised error. Execution then continues normally after [`:ENDTRY`](../keywords/ENDTRY.md), and the script returns as usual. The exception is a procedure that also has a legacy [`:ERROR`](../keywords/ERROR.md) handler ending in [`:RESUME`](../keywords/RESUME.md): there the legacy handler takes the error, `:CATCH` does not run, and execution continues with the statement after the `RaiseError` inside the `:TRY` block. An uncaught error propagates up the call stack instead; if no caller catches it, the invocation fails and the end user sees a server error. Every `RaiseError` therefore needs a [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) boundary — or a legacy [`:ERROR`](../keywords/ERROR.md) / [`:RESUME`](../keywords/RESUME.md) handler — somewhere up the call stack; raising without one turns a routine failure, such as an invalid sample ID, into a crash. The preferred placement is directly inside the [`:TRY`](../keywords/TRY.md) block whose [`:CATCH`](../keywords/CATCH.md) handles it, so the raise can never escape.
 
 ## When to use
 
@@ -62,6 +62,10 @@ RaiseError(sMessage, [sLocation], [nErrorCode], [oInnerException])
     - Let a raised error escape the outermost procedure — an uncaught error fails the invocation and surfaces as a server error to the end user.
     - Use `RaiseError` for routine status reporting or non-fatal branching, because it stops normal execution.
     - Pass vague messages such as `"failed"` or `"error"`, because they make diagnosis harder after the error is caught.
+
+## Caveats
+
+- In a procedure whose [`:ERROR`](../keywords/ERROR.md) handler ends with [`:RESUME`](../keywords/RESUME.md), a raise inside [`:TRY`](../keywords/TRY.md) goes to the legacy handler instead of [`:CATCH`](../keywords/CATCH.md), and the `:TRY` block keeps running after the raise. Do not combine the two in one procedure.
 
 ## Examples
 
