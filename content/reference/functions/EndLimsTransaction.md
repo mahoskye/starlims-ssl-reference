@@ -17,6 +17,8 @@ Use `EndLimsTransaction` to close a transaction scope started with [`BeginLimsTr
 
 Each call decreases the transaction depth for that connection. On the outermost transaction, [`.T.`](../literals/true.md) commits and [`.F.`](../literals/false.md) rolls back. If an inner transaction was rolled back, a later outermost commit raises an error instead of committing.
 
+With no transaction open, `EndLimsTransaction` returns [`.T.`](../literals/true.md) and raises nothing. It also does not check which routine began the open transaction: a helper that calls it without having begun a transaction ends its caller's transaction, and with `bCommit` omitted, commits it. Track the transactions your code begins with a `bStarted` flag and end only those.
+
 ## When to use
 
 - When you need to explicitly commit completed work.
@@ -38,7 +40,7 @@ EndLimsTransaction([sConnectionName], [bCommit])
 
 ## Returns
 
-**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the transaction scope ends successfully. Raises an exception on failure rather than returning [`.F.`](../literals/false.md).
+**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the transaction scope ends successfully, and also when no transaction is open. Raises an exception on failure rather than returning [`.F.`](../literals/false.md).
 
 ## Exceptions
 
@@ -52,6 +54,7 @@ EndLimsTransaction([sConnectionName], [bCommit])
 
 !!! success "Do"
     - Call `EndLimsTransaction` exactly once for every successful [`BeginLimsTransaction`](BeginLimsTransaction.md) call.
+    - Set a `bStarted` flag from [`BeginLimsTransaction`](BeginLimsTransaction.md) and end the transaction only when that flag is [`.T.`](../literals/true.md).
     - Keep a `bCommit` flag that only becomes [`.T.`](../literals/true.md) after all transactional work succeeds.
     - Use the same `sConnectionName` that started the transaction when you are working on a named connection.
     - Roll back the outer transaction when an inner transaction on the same connection rolls back.
@@ -60,11 +63,15 @@ EndLimsTransaction([sConnectionName], [bCommit])
     - Assume the function returns [`.F.`](../literals/false.md) for a missing connection or failed close; those paths raise errors.
     - Mix connection names between [`BeginLimsTransaction`](BeginLimsTransaction.md) and `EndLimsTransaction` calls.
     - Commit in [`:FINALLY`](../keywords/FINALLY.md) before the protected work has finished successfully.
+    - Call a bare `EndLimsTransaction()` in cleanup code. With `bCommit` omitted it commits, including on the failure path.
+    - Call `EndLimsTransaction` from code that did not begin the transaction. It ends the caller's transaction, and an [`IsInTransaction`](IsInTransaction.md) check does not prevent this.
     - Ignore nested rollback state and still try to commit the outermost transaction.
 
 ## Caveats
 
 - To pass `bCommit` while using the default connection, skip `sConnectionName` with `EndLimsTransaction(, bCommit)`.
+- With no transaction open, the call returns [`.T.`](../literals/true.md) without raising, so an unbalanced call goes unnoticed.
+- [`IsInTransaction`](IsInTransaction.md) returns [`.T.`](../literals/true.md) for a transaction a caller began, so it cannot tell your code whether it owns the open transaction.
 
 ## Examples
 

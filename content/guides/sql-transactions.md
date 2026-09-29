@@ -6,14 +6,15 @@ SSL provides explicit transaction control for database operations. Understanding
 
 ### Starting and ending transactions
 
-Place [`BeginLimsTransaction`](../reference/functions/BeginLimsTransaction.md) inside the [`:TRY`](../reference/keywords/TRY.md) block so that a connection failure is caught cleanly. Use [`IsInTransaction`](../reference/functions/IsInTransaction.md) in [`:FINALLY`](../reference/keywords/FINALLY.md) to avoid calling [`EndLimsTransaction`](../reference/functions/EndLimsTransaction.md) on a transaction that never started.
+Place [`BeginLimsTransaction`](../reference/functions/BeginLimsTransaction.md) inside the [`:TRY`](../reference/keywords/TRY.md) block so that a connection failure is caught cleanly. Store its return value in a `bStarted` flag and check that flag in [`:FINALLY`](../reference/keywords/FINALLY.md), so the code calls [`EndLimsTransaction`](../reference/functions/EndLimsTransaction.md) only for a transaction it began.
 
 ```ssl
-:DECLARE bCommit, oError;
+:DECLARE bStarted, bCommit, oError;
+bStarted := .F.;
 bCommit := .F.;
 
 :TRY;
-    BeginLimsTransaction();
+    bStarted := BeginLimsTransaction();
 
     RunSQL("INSERT INTO samples (sample_id, status) VALUES ('S-001', 'A')");
     RunSQL("UPDATE batch SET sample_count = sample_count + 1");
@@ -23,14 +24,17 @@ bCommit := .F.;
     oError := GetLastSSLError();
     ErrorMes("DB ERROR", "Transaction failed: " + oError:Description);
 :FINALLY;
-    :IF IsInTransaction();
+    :IF bStarted;
         EndLimsTransaction(, bCommit);
     :ENDIF;
 :ENDTRY;
 ```
 
 !!! tip "Why BeginLimsTransaction belongs inside :TRY"
-    If [`BeginLimsTransaction`](../reference/functions/BeginLimsTransaction.md) throws (connection failure, DAL error), the [`:CATCH`](../reference/keywords/CATCH.md) handles it gracefully. If it were outside [`:TRY`](../reference/keywords/TRY.md), the [`:FINALLY`](../reference/keywords/FINALLY.md) would try to end a transaction that never started — causing a second error.
+    If [`BeginLimsTransaction`](../reference/functions/BeginLimsTransaction.md) raises an error, for example on a connection failure, the [`:CATCH`](../reference/keywords/CATCH.md) handles it and `bStarted` stays [`.F.`](../reference/literals/false.md), so the [`:FINALLY`](../reference/keywords/FINALLY.md) does not try to end anything.
+
+!!! warning "End only a transaction you began"
+    [`EndLimsTransaction`](../reference/functions/EndLimsTransaction.md) does not raise an error when there is nothing for it to end: with no transaction open, it returns [`.T.`](../reference/literals/true.md) silently. The real danger is ending a transaction your routine did not begin. When a caller has a transaction open, a helper that never began one but calls `EndLimsTransaction()` in its [`:FINALLY`](../reference/keywords/FINALLY.md) ends the **caller's** transaction and, with `bCommit` omitted, commits it. The caller's later rollback then has nothing to roll back. An [`IsInTransaction`](../reference/functions/IsInTransaction.md) check in the helper does not prevent this, because it returns [`.T.`](../reference/literals/true.md) for the caller's transaction too. Track ownership with a `bStarted` flag set from [`BeginLimsTransaction`](../reference/functions/BeginLimsTransaction.md), and pass `bCommit` explicitly.
 
 | Function | Purpose |
 |----------|---------|
@@ -123,12 +127,13 @@ When an inner `EndLimsTransaction(, .F.)` is called:
 ```ssl
 :PROCEDURE ProcessBatchWithSteps;
     :PARAMETERS aBatchItems;
-    :DECLARE nIndex, bAllSucceeded, oError;
+    :DECLARE nIndex, bStarted, bAllSucceeded, oError;
 
+    bStarted := .F.;
     bAllSucceeded := .T.;
 
     :TRY;
-        BeginLimsTransaction();
+        bStarted := BeginLimsTransaction();
 
         :FOR nIndex := 1 :TO ALen(aBatchItems);
             :TRY;
@@ -145,7 +150,7 @@ When an inner `EndLimsTransaction(, .F.)` is called:
         ErrorMes("ERROR", "Batch processing failed: " + oError:Description);
         bAllSucceeded := .F.;
     :FINALLY;
-        :IF IsInTransaction();
+        :IF bStarted;
             EndLimsTransaction(, bAllSucceeded);
         :ENDIF;
     :ENDTRY;
@@ -254,12 +259,13 @@ This pattern covers the common case — a procedure that modifies data with prop
 ```ssl
 :PROCEDURE UpdateSampleStatus;
     :PARAMETERS sSampleId, sNewStatus;
-    :DECLARE bCommit, oError;
+    :DECLARE bStarted, bCommit, oError;
 
+    bStarted := .F.;
     bCommit := .F.;
 
     :TRY;
-        BeginLimsTransaction();
+        bStarted := BeginLimsTransaction();
 
         RunSQL("
             UPDATE samples SET status = ? WHERE sample_id = ?
@@ -275,7 +281,7 @@ This pattern covers the common case — a procedure that modifies data with prop
         oError := GetLastSSLError();
         ErrorMes("DB ERROR", "Failed to update " + sSampleId + ": " + oError:Description);
     :FINALLY;
-        :IF IsInTransaction();
+        :IF bStarted;
             EndLimsTransaction(, bCommit);
         :ENDIF;
     :ENDTRY;
@@ -287,7 +293,7 @@ Key points:
 - [`BeginLimsTransaction`](../reference/functions/BeginLimsTransaction.md) inside [`:TRY`](../reference/keywords/TRY.md) so connection failures are caught
 - `bCommit` starts as [`.F.`](../reference/literals/false.md) — defaults to rollback if anything goes wrong
 - Set `bCommit := .T.` only after all operations succeed
-- [`IsInTransaction`](../reference/functions/IsInTransaction.md) guard in [`:FINALLY`](../reference/keywords/FINALLY.md) prevents errors when the transaction never started
+- `bStarted` guard in [`:FINALLY`](../reference/keywords/FINALLY.md) ends only the transaction this procedure began, never a caller's
 - [`EndLimsTransaction`](../reference/functions/EndLimsTransaction.md) in [`:FINALLY`](../reference/keywords/FINALLY.md) ensures the transaction always closes
 - [`:CATCH`](../reference/keywords/CATCH.md) logs the error with [`ErrorMes`](../reference/functions/ErrorMes.md) so it's never silenced
 - Omit the first argument to use the default connection

@@ -48,12 +48,13 @@ IsInTransaction([vConnection])
 
 !!! success "Do"
     - Pass explicit, known-good connection names when checking transaction state.
-    - Confirm a transaction is active before issuing commit or rollback commands.
+    - Use a `bStarted` flag set from [`BeginLimsTransaction`](BeginLimsTransaction.md), not `IsInTransaction`, to decide whether your code should end a transaction.
     - Use with [`BeginLimsTransaction`](BeginLimsTransaction.md) and [`EndLimsTransaction`](EndLimsTransaction.md) for end-to-end transaction management.
 
 !!! failure "Don't"
     - Pass user-supplied or dynamic connection names without validating them first. Invalid names raise errors.
     - Use this function as a transaction manager or depth counter. It checks boolean state only.
+    - Treat [`.T.`](../literals/true.md) as proof that your code began the transaction. A helper that ends the transaction after this check ends its caller's transaction.
     - Assume the function returns [`.F.`](../literals/false.md) for unknown connections. It raises an error instead.
 
 ## Caveats
@@ -62,32 +63,43 @@ IsInTransaction([vConnection])
 - `vConnection` can be a connection name or a [`SQLConnection`](../classes/SQLConnection.md) object returned by [`GetConnectionByName`](GetConnectionByName.md).
 - Passing an unknown connection name raises an error rather than returning [`.F.`](../literals/false.md).
 - If the internal database collection is unavailable, an error is raised and the function does not return a value.
-- Only tests direct transaction state for the specified connection — does not account for nested or distributed transactions.
+- Returns [`.T.`](../literals/true.md) for any open transaction on the connection, including one a caller began and at any nesting depth. It cannot tell a routine whether it owns the transaction, and it does not report the nesting depth; use [`GetTransactionsCount`](GetTransactionsCount.md) for that.
 
 ## Examples
 
-### Guard a commit with a transaction state check
+### Require the caller's transaction before a dependent write
 
-Check the default connection before committing. If a transaction is active, the procedure commits it and reports success; otherwise it reports that no transaction is open.
+A helper that writes an audit row only when a caller already has a transaction open, so the row commits or rolls back with the caller's work. The helper did not begin that transaction, so it does not end it.
 
 ```ssl
-:PROCEDURE CommitIfActive;
+:PROCEDURE WriteAuditEntry;
+	:PARAMETERS sSampleID;
 	:DECLARE bInTrans;
 
 	bInTrans := IsInTransaction();
 
 	:IF bInTrans;
-		EndLimsTransaction("MyTransaction", .T.);
-		UsrMes("Transaction committed successfully");
+		RunSQL(
+			"INSERT INTO audit_log (sample_id, action) VALUES (?, ?)",,
+			{sSampleID, "STATUS_CHANGE"}
+		);
+		UsrMes("Audit entry added to the open transaction");
 	:ELSE;
-		UsrMes("No active transaction to commit");
+		UsrMes("No open transaction, audit entry not written");
 	:ENDIF;
 
+	/* The caller began the transaction, so the caller ends it;
 	:RETURN bInTrans;
 :ENDPROC;
 
 /* Usage;
-DoProc("CommitIfActive");
+DoProc("WriteAuditEntry", {"S-001"});
+```
+
+Called with no transaction open, [`UsrMes`](UsrMes.md) logs:
+
+```text
+No open transaction, audit entry not written
 ```
 
 ### Check a named connection with error handling
