@@ -89,6 +89,7 @@ Jumps to `LABEL SKIP_PROCESS_STEPS` when validation fails, bypassing the registr
     :RETURN .F.;
 :ENDPROC;
 
+/* Usage;
 DoProc("SkipStepsIfValidationFails");
 ```
 
@@ -129,6 +130,7 @@ Builds the branch target string dynamically based on `sMode` and shows that the 
     :RETURN "REVIEW";
 :ENDPROC;
 
+/* Usage;
 DoProc("RouteWorkflow");
 ```
 
@@ -166,6 +168,7 @@ Uses `Branch` inside a [`:TRY`](../keywords/TRY.md) block to jump to a shared cl
     :RETURN .F.;
 :ENDPROC;
 
+/* Usage;
 DoProc("SaveBatch");
 ```
 

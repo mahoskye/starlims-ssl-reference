@@ -90,9 +90,7 @@ Retrieves the connected users string and logs it when the current session mode s
     :RETURN sUsers;
 :ENDPROC;
 
-/*
-Usage
-;
+/* Usage;
 DoProc("ShowConnectedUsers");
 ```
 
@@ -126,9 +124,7 @@ Guards the call so the function is only invoked with its one supported key, retu
     :RETURN sUsers;
 :ENDPROC;
 
-/*
-Usage
-;
+/* Usage;
 DoProc("LookupConnectedUsers", {"STARLIMSUSERS"});
 ```
 
@@ -166,9 +162,7 @@ Wraps the lookup in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md
     :RETURN sReport;
 :ENDPROC;
 
-/*
-Usage
-;
+/* Usage;
 DoProc("AuditConnectedUsers");
 ```
 

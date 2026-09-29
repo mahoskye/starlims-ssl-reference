@@ -88,7 +88,6 @@ Assigns the negation of `bIsReady` to `bCanStart`. With `bIsReady` set to [`.F.`
 
 /* Usage;
 DoProc("CheckReadyState");
-;
 ```
 
 [`UsrMes`](../functions/UsrMes.md) logs:
@@ -123,7 +122,6 @@ Wraps the entire `.AND.` expression in parentheses so [`!`](not.md) inverts the 
 
 /* Usage;
 DoProc("ValidateRelease");
-;
 ```
 
 [`UsrMes`](../functions/UsrMes.md) logs:

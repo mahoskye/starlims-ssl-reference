@@ -81,7 +81,7 @@ Creates a `WebServices` factory instance and calls `CreateHttpClient()` to obtai
     :RETURN oHttpClient;
 :ENDPROC;
 
-/* Run the procedure;
+/* Usage;
 DoProc("BuildHttpClient");
 ```
 
@@ -105,7 +105,7 @@ Creates the factory and selects between `CreateSoapClient()` and `CreateHttpClie
     :RETURN oClient;
 :ENDPROC;
 
-/* Run the procedure;
+/* Usage;
 DoProc("CreateIntegrationClient", {.T.});
 ```
 

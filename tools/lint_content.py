@@ -8,7 +8,10 @@ so CI can stop them from drifting again:
 2. No dangling ``:=`` at end of line inside ```ssl fences (orphaned string
    literals on the next line).
 3. Usage-trailer comments use the canonical ``/* Usage;`` form (the
-   descriptive ``/* Usage: ...;`` form is allowed).
+   descriptive ``/* Usage: ...;`` form is allowed). Any ```ssl block that
+   calls ``DoProc``/``ExecFunction`` after its last ``:ENDPROC;`` must open
+   that trailer with a single-line ``/* Usage;`` comment, with no bare
+   ``/*`` or lone ``;`` lines, so multi-line and prose variants are caught.
 4. A file's ```ssl fences indent consistently — tabs or spaces, not both.
 5. Reference-page frontmatter carries no vestigial ``category:``/``tags:``.
 
@@ -28,12 +31,29 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 CONTENT = REPO_ROOT / "content"
 
 FENCE_OPEN = re.compile(r"^```([a-zA-Z0-9_-]*)[ \t]*$")
-BAD_TRAILER = re.compile(r"^/\* (?:Usage example|Example call);", re.M)
+BAD_TRAILER = re.compile(
+    r"^/\* (?:Usage example|Example call|Run the procedure|Call the procedure[^;]*);", re.M
+)
+CANON_TRAILER = re.compile(r"^/\* Usage(?:: [^;\n]+)?;\n")
+TRAILER_CALL = re.compile(r"\b(?:DoProc|ExecFunction)\(")
+TRAILER_JUNK = re.compile(r"^\s*;\s*$|^\s*/\*\s*$", re.M)
 DANGLING_ASSIGN = re.compile(r":=[ \t]*$")
 
 
 def ssl_blocks(text: str) -> list[str]:
     return re.findall(r"^```ssl[ \t]*\n(.*?)^```", text, re.M | re.S)
+
+
+def trailer_problem(block: str) -> str | None:
+    """Return the offending trailer text if a block's usage trailer is non-canonical."""
+    if ":ENDPROC;" not in block:
+        return None
+    tail = block[block.rindex(":ENDPROC;") + len(":ENDPROC;"):].strip()
+    if not TRAILER_CALL.search(tail):
+        return None
+    if CANON_TRAILER.match(tail + "\n") and not TRAILER_JUNK.search(tail):
+        return None
+    return tail.split("\n", 1)[0]
 
 
 def main() -> int:
@@ -65,6 +85,12 @@ def main() -> int:
         # 3. non-canonical usage trailers
         for m in BAD_TRAILER.finditer(text):
             problems.append(f"{rel}: non-canonical usage trailer {m.group(0)!r} (use '/* Usage;')")
+        for block in ssl_blocks(text):
+            first = trailer_problem(block)
+            if first is not None:
+                problems.append(
+                    f"{rel}: usage trailer starting {first!r} is not a single-line '/* Usage;' comment"
+                )
 
         # 4. mixed indentation within the file's ssl fences
         tabs = spaces = 0

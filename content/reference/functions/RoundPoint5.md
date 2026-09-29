@@ -74,7 +74,7 @@ Round one calculated score before presenting it to the user.
 	:RETURN nRoundedScore;
 :ENDPROC;
 
-/* Call the procedure;
+/* Usage;
 DoProc("ShowRoundedScore");
 ```
 
@@ -108,7 +108,7 @@ Round each reading to a half-point, then calculate the average of the rounded va
 	:RETURN nAverage;
 :ENDPROC;
 
-/* Call the procedure;
+/* Usage;
 DoProc("AverageRoundedRatings");
 ```
 

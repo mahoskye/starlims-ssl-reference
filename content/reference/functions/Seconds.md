@@ -72,10 +72,8 @@ Read the current time of day as a whole-seconds count and display it. The output
     :RETURN nCurrentSeconds;
 :ENDPROC;
 
-/*
-Usage:
-DoProc("ShowCurrentSeconds")
-;
+/* Usage;
+DoProc("ShowCurrentSeconds");
 ```
 
 [`UsrMes`](UsrMes.md) logs:
@@ -107,10 +105,8 @@ Capture a start and end value, handle the midnight-rollover edge case, and displ
     :RETURN nElapsedSeconds;
 :ENDPROC;
 
-/*
-Usage:
-DoProc("MeasureElapsedSeconds")
-;
+/* Usage;
+DoProc("MeasureElapsedSeconds");
 ```
 
 [`UsrMes`](UsrMes.md) logs:
@@ -144,10 +140,8 @@ Compare the current seconds value against a window that spans midnight to determ
     :RETURN bInWindow;
 :ENDPROC;
 
-/*
-Usage:
-DoProc("IsInProcessingWindow")
-;
+/* Usage;
+DoProc("IsInProcessingWindow");
 ```
 
 ## Related

@@ -91,6 +91,7 @@ Call `TableFldLst` with an explicit connection name and use the returned array l
     :RETURN aFieldNames;
 :ENDPROC;
 
+/* Usage;
 DoProc("ShowSampleFields");
 ```
 
@@ -118,6 +119,7 @@ Pass [`NIL`](../literals/nil.md) for the connection to use the default, then sca
     :RETURN aMissingFields;
 :ENDPROC;
 
+/* Usage;
 DoProc("GetMissingSampleFields");
 ```
 
@@ -142,6 +144,7 @@ Wrap the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md)
     :ENDTRY;
 :ENDPROC;
 
+/* Usage;
 DoProc("TryLoadAuditFields");
 ```
 

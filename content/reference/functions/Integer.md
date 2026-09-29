@@ -126,6 +126,7 @@ Validate user-supplied text with [`IsNumeric`](IsNumeric.md) before converting i
 	UsrMes("Submitting whole-number value: " + LimsString(nConvertedValue));
 :ENDPROC;
 
+/* Usage;
 DoProc("SubmitWholeNumber", {"3.7"});
 ```
 

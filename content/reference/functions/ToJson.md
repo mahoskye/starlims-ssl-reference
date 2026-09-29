@@ -93,10 +93,8 @@ Build a small dynamic object and serialize it to JSON. The output includes the o
 	:RETURN sJson;
 :ENDPROC;
 
-/*
-Usage
-DoProc("BuildSampleJson")
-;
+/* Usage;
+DoProc("BuildSampleJson");
 ```
 
 Expected JSON:
@@ -132,10 +130,8 @@ Build a nested payload with a child object, an array, a date, and a number, then
 	:RETURN sJson;
 :ENDPROC;
 
-/*
-Usage
-DoProc("BuildOrderPayload")
-;
+/* Usage;
+DoProc("BuildOrderPayload");
 ```
 
 ### Handle values that may not be serializable
@@ -158,10 +154,8 @@ Wrap `ToJson` in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md)
 	:ENDTRY;
 :ENDPROC;
 
-/*
-Usage
-DoProc("SerializeSafely", {CreateUdObject()})
-;
+/* Usage;
+DoProc("SerializeSafely", {CreateUdObject()});
 ```
 
 ## Related

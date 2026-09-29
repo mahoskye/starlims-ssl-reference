@@ -107,6 +107,7 @@ Uses [`GetLastSSLError()`](../functions/GetLastSSLError.md) inside [`:CATCH`](..
     :ENDTRY;
 :ENDPROC;
 
+/* Usage;
 DoProc("ShowErrorSummary");
 ```
 
@@ -145,6 +146,7 @@ Uses a nested [`:TRY`](../keywords/TRY.md) to raise and capture a first error, t
     :ENDTRY;
 :ENDPROC;
 
+/* Usage;
 DoProc("ShowNestedError");
 ```
 

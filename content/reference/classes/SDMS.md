@@ -142,6 +142,7 @@ Constructs an `SDMS` instance with explicit credentials, then calls `DownloadOri
 	:ENDIF;
 :ENDPROC;
 
+/* Usage;
 DoProc("DownloadOriginalFromSdms");
 ```
 
@@ -178,6 +179,7 @@ Downloads a template by numeric ID, then checks `IsSessionExpired` on failure to
 	:ENDIF;
 :ENDPROC;
 
+/* Usage;
 DoProc("DownloadUxmlTemplate");
 ```
 

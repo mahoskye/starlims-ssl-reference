@@ -103,10 +103,8 @@ Upload a single file to the `DOCUMENT_FILE` column of a specific sample row. Wra
     :ENDTRY;
 :ENDPROC;
 
-/*
-Usage:
-DoProc("UploadScannedDocument")
-;
+/* Usage;
+DoProc("UploadScannedDocument");
 ```
 
 ### Bulk update asset images with per-item error handling
@@ -157,10 +155,8 @@ Iterate over a list of asset IDs and upload a matching image file for each one. 
     :RETURN nUpdated;
 :ENDPROC;
 
-/*
-Usage:
-DoProc("BulkUpdateAssetImages")
-;
+/* Usage;
+DoProc("BulkUpdateAssetImages");
 ```
 
 ### Update inside a transaction with temp file cleanup
@@ -219,10 +215,8 @@ Copy an external file to a local temp path, update the long column inside a tran
     :RETURN .T.;
 :ENDPROC;
 
-/*
-Usage:
-DoProc("ImportExternalFileToLongColumn")
-;
+/* Usage;
+DoProc("ImportExternalFileToLongColumn");
 ```
 
 ## Related

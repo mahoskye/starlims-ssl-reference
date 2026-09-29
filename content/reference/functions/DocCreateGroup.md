@@ -83,6 +83,7 @@ Creates a Documentum group using just the required name and logs either the retu
     :RETURN sGroupID;
 :ENDPROC;
 
+/* Usage;
 DoProc("CreateProjectGroup");
 ```
 
@@ -115,6 +116,7 @@ Iterates a list of name-and-description pairs, creates each group, and collects 
     :RETURN aFailed;
 :ENDPROC;
 
+/* Usage;
 DoProc("CreateDepartmentGroups");
 ```
 
@@ -145,6 +147,7 @@ Creates a group with a description, then reads the Documentum error message imme
     :RETURN "";
 :ENDPROC;
 
+/* Usage;
 DoProc("ProvisionProjectTeam");
 ```
 

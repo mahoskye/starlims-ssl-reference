@@ -86,10 +86,8 @@ Use one `:DEFAULT` line to make a trailing parameter optional. With only `sSampl
     :RETURN sLabel;
 :ENDPROC;
 
-/*
-Usage:
-DoProc("FormatSampleLabel", {"S-001"})
-;
+/* Usage;
+DoProc("FormatSampleLabel", {"S-001"});
 ```
 
 [`InfoMes`](../functions/InfoMes.md) logs:
@@ -134,10 +132,8 @@ Use multiple `:DEFAULT` lines so callers can omit new trailing arguments. `ShowD
     InfoMes("Custom call returned " + LimsString(ALen(aCustomRows)) + " row(s)");
 :ENDPROC;
 
-/*
-Usage:
-DoProc("ShowDefaultedCalls")
-;
+/* Usage;
+DoProc("ShowDefaultedCalls");
 ```
 
 ### Combining expression defaults with branch-specific logic
@@ -179,10 +175,8 @@ Default values can be expressions. Here `MYUSERNAME` and [`Today()`](../function
     :RETURN aRows;
 :ENDPROC;
 
-/*
-Usage:
-DoProc("SummarizeUserQueue")
-;
+/* Usage;
+DoProc("SummarizeUserQueue");
 ```
 
 ## Related

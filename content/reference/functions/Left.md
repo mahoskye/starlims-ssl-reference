@@ -103,7 +103,7 @@ Extract the 3-character status code from the start of the record using `Left`, t
 	:RETURN sSummary;
 :ENDPROC;
 
-/* Call the procedure to run the example;
+/* Usage;
 DoProc("ParseHeader");
 ```
 
@@ -136,7 +136,7 @@ Guard the requested width before appending `"..."` so the call never concatenate
 	:RETURN sDisplayCaption;
 :ENDPROC;
 
-/* Call the procedure to run the example;
+/* Usage;
 DoProc("FormatCaption", {"Hello, World!", 10});
 ```
 

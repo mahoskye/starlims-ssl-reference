@@ -104,6 +104,7 @@ Use [`GetLastSQLError()`](../functions/GetLastSQLError.md) inside [`:CATCH`](../
 	:ENDTRY;
 :ENDPROC;
 
+/* Usage;
 DoProc("ShowLastSqlError");
 ```
 
@@ -143,6 +144,7 @@ Use [`ReturnLastSQLError()`](../functions/ReturnLastSQLError.md) when you want t
 	:RETURN NIL;
 :ENDPROC;
 
+/* Usage;
 DoProc("BuildSqlErrorReport");
 ```
 

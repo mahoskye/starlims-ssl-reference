@@ -112,6 +112,7 @@ Uses `:TRY` and [`:CATCH`](CATCH.md) to prevent a missing or unreadable file fro
     :RETURN sStatus;
 :ENDPROC;
 
+/* Usage;
 DoProc("OpenConfigFile");
 ```
 
@@ -154,6 +155,7 @@ Shows how `:TRY`, [`:CATCH`](CATCH.md), and [`:FINALLY`](FINALLY.md) work togeth
     :RETURN sStatus;
 :ENDPROC;
 
+/* Usage;
 DoProc("ProcessWithLock");
 ```
 
@@ -225,6 +227,7 @@ Uses one `:TRY` block for a multi-step operation, then branches inside the singl
     :RETURN sStatusMessage;
 :ENDPROC;
 
+/* Usage;
 DoProc("ProcessBatchRecords", {"B-1001"});
 ```
 

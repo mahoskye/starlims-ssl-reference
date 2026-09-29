@@ -98,9 +98,7 @@ Call a data source with no arguments and iterate over the returned array to disp
     :RETURN aStatuses;
 :ENDPROC;
 
-/*
-Example call
-;
+/* Usage;
 DoProc("LoadActiveStatuses");
 ```
 
@@ -128,9 +126,7 @@ Execute a data source with a filter parameter, keep the result as an [`SSLDatase
     :RETURN oDataset;
 :ENDPROC;
 
-/*
-Example call
-;
+/* Usage;
 DoProc("LoadSamplesByStatus", {"Logged"});
 ```
 
@@ -161,9 +157,7 @@ Pass a GUID string as the data source name and request XML output. The GUID is r
     :ENDTRY;
 :ENDPROC;
 
-/*
-Example call
-;
+/* Usage;
 DoProc("ExportAuditDataXml", {"a1b2c3d4-e5f6-7890-abcd-ef1234567890"});
 ```
 

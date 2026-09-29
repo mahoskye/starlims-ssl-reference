@@ -114,9 +114,8 @@ Upload a local report file to a named remote file on a standard FTP server.
 	:RETURN .F.;
 :ENDPROC;
 
-/*
-Run with DoProc("UploadDailyReport")
-;
+/* Usage;
+DoProc("UploadDailyReport");
 ```
 
 ### Upload by SFTP and let the remote name default
@@ -159,9 +158,8 @@ Use SFTP with a private key and let the function reuse the local file name by le
 	:RETURN .T.;
 :ENDPROC;
 
-/*
-Run with DoProc("UploadInstrumentResult")
-;
+/* Usage;
+DoProc("UploadInstrumentResult");
 ```
 
 ### Stop a multi-file workflow on the first failed upload
@@ -209,9 +207,8 @@ Call `SendToFtp` inside a loop and stop the workflow as soon as one upload fails
 	:RETURN .T.;
 :ENDPROC;
 
-/*
-Run with DoProc("PublishOutboundFiles")
-;
+/* Usage;
+DoProc("PublishOutboundFiles");
 ```
 
 ## Related

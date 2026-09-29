@@ -77,6 +77,7 @@ Use `PrmCount()` at the start of a procedure to verify that the caller supplied 
 	:RETURN .T.;
 :ENDPROC;
 
+/* Usage;
 DoProc("ShowOrderStatus");
 DoProc("ShowOrderStatus", {"ORD-1001"});
 ```
@@ -118,6 +119,7 @@ Count the supplied arguments first, then fill in optional values only when the c
 	:RETURN sResult;
 :ENDPROC;
 
+/* Usage;
 DoProc("BuildLabel", {"Report"});
 DoProc("BuildLabel", {"Report", "("});
 DoProc("BuildLabel", {"Report", "(", ")"});
