@@ -92,6 +92,7 @@ If `nStartAt` contains a fractional value, SSL rounds it to the nearest whole nu
 ## Caveats
 
 - Passing `nStartAt` beyond the end of the string does not raise an error; matching starts at the end of the input.
+- `^` still anchors at the start of the whole string, not at `nStartAt`. `SSLRegex{"^AB-[0-9]{4}"}:IsMatch("Prefix Batch:AB-1042", 14)` returns [`.F.`](../literals/false.md) even though position 14 is where `AB-1042` begins.
 
 ## Examples
 
@@ -149,30 +150,35 @@ A passing result was found in the text
 
 ### Start matching from a specific position
 
-Passes a 1-based `nStartAt` position to skip the `Prefix Batch:` header and match only the batch number portion of the string.
+Skips a header that contains an older batch number, then checks whether the rest of the line holds a well-formed one. Computing `nStartAt` from the header's length keeps the position correct if the header text changes. The two calls disagree because the only match lies before the start position.
 
 ```ssl
-:PROCEDURE MatchBatchNumberAfterPrefix;
-	:DECLARE oRegex, sText, bMatched;
+:PROCEDURE CheckBatchAfterHeader;
+	:DECLARE oRegex, sHeader, sText, nStartAt, bAnywhere, bAfterHeader;
 
-	sText := "Prefix Batch:AB-1042";
-	oRegex := SSLRegex{"AB-[0-9]{4}$"};
+	sHeader := "Supersedes AB-1041 | ";
+	sText := sHeader + "Batch AB-10";
+	nStartAt := Len(sHeader) + 1;
+	oRegex := SSLRegex{"AB-[0-9]{4}"};
 
-	bMatched := oRegex:IsMatch(sText, 14);
+	bAnywhere := oRegex:IsMatch(sText);
+	bAfterHeader := oRegex:IsMatch(sText, nStartAt);
 
-	:IF bMatched;
-		UsrMes("The batch number has the expected format");
-	:ENDIF;
+	UsrMes("Match anywhere: " + LimsString(bAnywhere));
+	UsrMes("Match after header: " + LimsString(bAfterHeader));
+
+	:RETURN bAfterHeader;
 :ENDPROC;
 
 /* Usage;
-DoProc("MatchBatchNumberAfterPrefix");
+DoProc("CheckBatchAfterHeader");
 ```
 
 `UsrMes` logs:
 
 ```text
-The batch number has the expected format
+Match anywhere: .T.
+Match after header: .F.
 ```
 
 ## Related
