@@ -1525,8 +1525,8 @@
       "source_path": "content/reference/functions/CreateLocal.md",
       "exceptions": [
         {
-          "trigger": "sVarName is NIL.",
-          "message": "Argument sVarName cannot be null."
+          "trigger": "sVarName is omitted, as in CreateLocal(), or is NIL.",
+          "message": "Argument varName cannot be null. CreateLocal(). followed by Parameter name: varName` on a second line"
         },
         {
           "trigger": "sVarName is not a string.",
@@ -1545,7 +1545,8 @@
         "dont": [
           "Pass a number, array, object, or NIL as sVarName.",
           "Use CreateLocal for values that must be shared outside the current local scope. Use CreatePublic for that.",
-          "Assume omitting vVarValue makes the function return an empty string. It initializes the local to \"\", but the call itself does not return that value."
+          "Assume omitting vVarValue makes the function return an empty string. It initializes the local to \"\", but the call itself does not return that value.",
+          "Call CreateLocal() with no arguments to create an object. It raises Argument varName cannot be null. instead. Use CreateUdObject() for a dynamic object."
         ]
       }
     },
@@ -14195,13 +14196,14 @@
         "do": [
           "Use colon member access such as oContext:sampleId for normal reads and writes on dynamic objects.",
           "Check IsProperty() before reading optional members that may not exist.",
-          "Use clone() before changing a copied dynamic object when the original must stay unchanged.",
+          "Use clone() before changing a copied dynamic object's top-level properties when the original must stay unchanged.",
           "Set XmlType before Serialize() when the XML root name matters to downstream code."
         ],
         "dont": [
           "Assume missing properties return an empty value. Reading an unknown property raises an error.",
           "Treat object members like array indexes. Objects do not support direct indexing of their own properties.",
-          "Assume every object value supports clone() in the same way. The reliable deep-clone behavior is on dynamic objects created with CreateLocal() or CreateUdObject().",
+          "Rely on clone() for a deep copy. On dynamic objects created with CreateUdObject(), it copies only the top-level properties, so a nested array or object changed through the copy also changes in the original. Do not assume other object values support clone() the same way.",
+          "Call CreateLocal() to create an object. It creates a local variable by name, and with no arguments it raises an error.",
           "Set XmlType to a non-string value. That raises an error."
         ]
       }

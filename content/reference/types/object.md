@@ -15,7 +15,7 @@ starlims:
 
 Represents SSL object values, including dynamic objects and class instances.
 
-The `object` type covers SSL values with named members. In day-to-day SSL code, this includes dynamic objects created with [`CreateLocal`](../functions/CreateLocal.md) as well as instances returned from user-defined or built-in classes.
+The `object` type covers SSL values with named members. In day-to-day SSL code, this includes dynamic objects created with [`CreateUdObject`](../functions/CreateUdObject.md) as well as instances of user-defined or built-in classes.
 
 Dynamic objects are useful when the set of properties is not fixed ahead of time. You can create an empty object, assign members later, or initialize it from a property-definition array. On dynamic objects, member access works naturally with colon syntax such as `oMeta:sampleId` and `oMeta:status := "Logged"`. The same operations are also available through methods such as `GetProperty()`, `SetProperty()`, and `IsProperty()`.
 
@@ -25,17 +25,20 @@ The special `XmlType` property controls the root element name used by `Serialize
 
 ## Creating values
 
-Dynamic objects are created with [`CreateLocal`](../functions/CreateLocal.md) (empty) or [`CreateUdObject`](../functions/CreateUdObject.md) (with initialization):
+Dynamic objects are created with [`CreateUdObject`](../functions/CreateUdObject.md). Call it with no arguments for an empty object and assign properties afterward, or pass a property-definition array to create the properties up front:
 
 ```ssl
-oEmpty := CreateLocal();
+oEmpty := CreateUdObject();
+oEmpty:sampleId := "LAB-0042";
 oInit := CreateUdObject({{"sampleId", "LAB-0042"}, {"status", "Pending"}});
 ```
+
+The result is an [`SSLExpando`](../classes/SSLExpando.md). [`CreateLocal`](../functions/CreateLocal.md) does not create objects: it creates a local variable by name, and `CreateLocal()` with no arguments raises an error.
 
 | Attribute | Value |
 |---|---|
 | Runtime type | `OBJECT` |
-| Common construction | [`CreateLocal()`](../functions/CreateLocal.md) |
+| Empty construction | [`CreateUdObject()`](../functions/CreateUdObject.md) |
 | Initialized construction | `CreateUdObject({{"prop", value}})` |
 
 ## Operators
@@ -63,7 +66,7 @@ Objects support identity comparison operators. Arithmetic and relational operato
 | `IsEmpty()` | Method | none | [`boolean`](boolean.md) | Always returns [`.F.`](../literals/false.md) for object values. |
 | `IsMethod(sName)` | Method | `sName` ([`string`](string.md)) | [`boolean`](boolean.md) | Returns [`.T.`](../literals/true.md) when the named method is callable on the object. |
 | `InvokeMethod(sName, [aArgs])` | Method | `sName` ([`string`](string.md)), `aArgs` ([`array`](array.md) or [`NIL`](../literals/nil.md)) | `any` | Calls a method by name using dynamic dispatch. |
-| `clone()` | Method | none | `object` | Returns a deep copy for dynamic objects created with [`CreateLocal()`](../functions/CreateLocal.md) or [`CreateUdObject()`](../functions/CreateUdObject.md). |
+| `clone()` | Method | none | `object` | On dynamic objects created with [`CreateUdObject()`](../functions/CreateUdObject.md), returns a new object with the same `XmlType` and dynamic properties. Only the top-level properties are copied. Nested arrays and objects are shared with the original. |
 | `ToString()` | Method | none | [`string`](string.md) | On dynamic objects, returns the serialized XML text. |
 | `Destroy()` | Method | none | none | Runs object cleanup logic. The base implementation does nothing. |
 
@@ -79,13 +82,14 @@ Objects support identity comparison operators. Arithmetic and relational operato
 !!! success "Do"
     - Use colon member access such as `oContext:sampleId` for normal reads and writes on dynamic objects.
     - Check `IsProperty()` before reading optional members that may not exist.
-    - Use `clone()` before changing a copied dynamic object when the original must stay unchanged.
+    - Use `clone()` before changing a copied dynamic object's top-level properties when the original must stay unchanged.
     - Set `XmlType` before `Serialize()` when the XML root name matters to downstream code.
 
 !!! failure "Don't"
     - Assume missing properties return an empty value. Reading an unknown property raises an error.
     - Treat object members like array indexes. Objects do not support direct indexing of their own properties.
-    - Assume every `object` value supports `clone()` in the same way. The reliable deep-clone behavior is on dynamic objects created with [`CreateLocal()`](../functions/CreateLocal.md) or [`CreateUdObject()`](../functions/CreateUdObject.md).
+    - Rely on `clone()` for a deep copy. On dynamic objects created with [`CreateUdObject()`](../functions/CreateUdObject.md), it copies only the top-level properties, so a nested array or object changed through the copy also changes in the original. Do not assume other object values support `clone()` the same way.
+    - Call [`CreateLocal()`](../functions/CreateLocal.md) to create an object. It creates a local variable by name, and with no arguments it raises an error.
     - Set `XmlType` to a non-string value. That raises an error.
 
 ## Errors and edge cases
@@ -98,13 +102,13 @@ Objects support identity comparison operators. Arithmetic and relational operato
 
 ### Creating and reading a dynamic object
 
-Creates a dynamic object with [`CreateLocal()`](../functions/CreateLocal.md), assigns three named members, and reads them back to build a summary string.
+Creates an empty dynamic object with [`CreateUdObject()`](../functions/CreateUdObject.md), assigns three named members, and reads them back to build a summary string.
 
 ```ssl
 :PROCEDURE BuildReviewContext;
     :DECLARE oContext, sSummary;
 
-    oContext := CreateLocal();
+    oContext := CreateUdObject();
 
     oContext:sampleId := "LAB-0042";
     oContext:status := "Pending";
@@ -186,7 +190,7 @@ Sets `XmlType`, serializes the object to XML, and restores it into a new dynamic
 
     sXml := oPayload:Serialize();
 
-    oRestored := CreateLocal();
+    oRestored := CreateUdObject();
     oRestored:Deserialize(sXml);
     aTests := oRestored:tests;
 
@@ -210,7 +214,6 @@ First test: pH
 ## Related elements
 
 - [`CreateUdObject`](../functions/CreateUdObject.md)
-- [`CreateLocal`](../functions/CreateLocal.md)
 - [`SSLExpando`](../classes/SSLExpando.md)
 - [`array`](array.md)
 - [`netobject`](netobject.md)

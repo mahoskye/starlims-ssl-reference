@@ -145,10 +145,10 @@ Shows that `==` returns [`.T.`](../literals/true.md) when two variables point to
 :PROCEDURE CompareObjectReferences;
     :DECLARE oFirst, oSecond, oAlias, bSameRef, bDifferentRef;
 
-    oFirst := CreateLocal();
+    oFirst := CreateUdObject();
     oFirst:sampleId := "S-1001";
 
-    oSecond := CreateLocal();
+    oSecond := CreateUdObject();
     oSecond:sampleId := "S-1001";
 
     oAlias := oFirst;

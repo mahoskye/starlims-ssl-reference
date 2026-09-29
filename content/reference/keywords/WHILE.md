@@ -184,7 +184,7 @@ Scans a 4×3 sample grid to find `"SAMPLE-003"`, exiting the inner loop with [`:
     nTargetCol := 0;
     sLog := "";
 
-    oResult := CreateLocal();
+    oResult := CreateUdObject();
     oResult:status := "Not Found";
     oResult:target := sTarget;
 

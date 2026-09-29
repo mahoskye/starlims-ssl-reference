@@ -128,7 +128,7 @@ Shows how `:TRY`, [`:CATCH`](CATCH.md), and [`:FINALLY`](FINALLY.md) work togeth
 
     bLockAcquired := .F.;
     sStatus := "Starting";
-    oLock := CreateLocal();
+    oLock := CreateUdObject();
     oLock:isLocked := .F.;
 
     :TRY;
