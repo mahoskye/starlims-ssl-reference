@@ -1478,7 +1478,7 @@
 </div>
 <h2 id="sql-error-handling">SQL error handling<a class="headerlink" href="#sql-error-handling" title="Permanent link">&para;</a></h2>
 <h3 id="runsql-behavior-on-failure">RunSQL behavior on failure<a class="headerlink" href="#runsql-behavior-on-failure" title="Permanent link">&para;</a></h3>
-<p><a href="../../reference/functions/RunSQL/"><code>RunSQL</code></a> catches database exceptions internally. What happens depends on two global flags:</p>
+<p>What happens when a <a href="../../reference/functions/RunSQL/"><code>RunSQL</code></a> statement fails depends on two global flags. Both start at <a href="../../reference/literals/true/"><code>.T.</code></a>, so by default a failing statement raises:</p>
 <table>
 <thead>
 <tr>
@@ -1489,45 +1489,47 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../../reference/literals/false/"><code>.F.</code></a> (default)</td>
-<td>—</td>
-<td>Exception propagates to caller</td>
-</tr>
-<tr>
-<td><a href="../../reference/literals/true/"><code>.T.</code></a></td>
-<td><a href="../../reference/literals/true/"><code>.T.</code></a></td>
-<td>Fatal errors still propagate; non-fatal returns <a href="../../reference/literals/false/"><code>.F.</code></a></td>
+<td><a href="../../reference/literals/true/"><code>.T.</code></a> (default)</td>
+<td><a href="../../reference/literals/true/"><code>.T.</code></a> (default)</td>
+<td>The failure raises. Handle it with <a href="../../reference/keywords/TRY/"><code>:TRY</code></a> / <a href="../../reference/keywords/CATCH/"><code>:CATCH</code></a>.</td>
 </tr>
 <tr>
 <td><a href="../../reference/literals/true/"><code>.T.</code></a></td>
 <td><a href="../../reference/literals/false/"><code>.F.</code></a></td>
-<td>All errors return <a href="../../reference/literals/false/"><code>.F.</code></a> silently</td>
+<td><code>RunSQL</code> returns <a href="../../reference/literals/false/"><code>.F.</code></a>. The error is available from <a href="../../reference/functions/GetLastSQLError/"><code>GetLastSQLError</code></a>. Nothing is stored for <a href="../../reference/functions/GetLastSSLError/"><code>GetLastSSLError</code></a>.</td>
+</tr>
+<tr>
+<td><a href="../../reference/literals/false/"><code>.F.</code></a></td>
+<td>either</td>
+<td>The failure raises, whatever <code>ShowSqlErrors</code> is set to.</td>
 </tr>
 </tbody>
 </table>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">bOk</span><span class="p">;</span>
+<p><code>ShowSqlErrors</code> is the flag that decides: setting only <code>IgnoreSqlErrors(.T.)</code> changes nothing, because it is already on. To get a <a href="../../reference/literals/false/"><code>.F.</code></a> return instead of an error, turn <code>ShowSqlErrors</code> off. Set <code>IgnoreSqlErrors(.T.)</code> as well, in case a caller turned it off. Save both previous values and restore them when the block ends:</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">bOk</span><span class="p">,</span><span class="w"> </span><span class="n">bPrevIgnore</span><span class="p">,</span><span class="w"> </span><span class="n">bPrevShow</span><span class="p">,</span><span class="w"> </span><span class="n">oSqlErr</span><span class="p">;</span>
 
-<span class="c1">/* Suppress non-fatal SQL errors for a batch operation;</span>
-<span class="nf">IgnoreSqlErrors</span><span class="p">(</span><span class="kc">.T.</span><span class="p">);</span>
-<span class="nf">ShowSqlErrors</span><span class="p">(</span><span class="kc">.F.</span><span class="p">);</span>
+<span class="c1">/* Make failing statements return .F. for a batch operation;</span>
+<span class="n">bPrevIgnore</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IgnoreSqlErrors</span><span class="p">(</span><span class="kc">.T.</span><span class="p">);</span>
+<span class="n">bPrevShow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ShowSqlErrors</span><span class="p">(</span><span class="kc">.F.</span><span class="p">);</span>
 
 <span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aStatements</span><span class="p">);</span>
 <span class="w">        </span><span class="n">bOk</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">aStatements</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bOk</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"SQL"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Statement "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" failed silently"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">oSqlErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSQLError</span><span class="p">();</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"SQL"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Statement "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSqlErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 <span class="k">:FINALLY</span><span class="p">;</span>
-<span class="w">    </span><span class="c1">/* Always restore defaults;</span>
-<span class="w">    </span><span class="nf">IgnoreSqlErrors</span><span class="p">(</span><span class="kc">.F.</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">ShowSqlErrors</span><span class="p">(</span><span class="kc">.T.</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">/* Restore the values saved above;</span>
+<span class="w">    </span><span class="nf">ShowSqlErrors</span><span class="p">(</span><span class="n">bPrevShow</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">IgnoreSqlErrors</span><span class="p">(</span><span class="n">bPrevIgnore</span><span class="p">);</span>
 <span class="k">:ENDTRY</span><span class="p">;</span>
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Always restore error flags in :FINALLY</p>
-<p><a href="../../reference/functions/IgnoreSqlErrors/"><code>IgnoreSqlErrors</code></a> and <a href="../../reference/functions/ShowSqlErrors/"><code>ShowSqlErrors</code></a> are global state. If you suppress errors, always restore the defaults in a <a href="../../reference/keywords/FINALLY/"><code>:FINALLY</code></a> block to avoid masking failures in subsequent code.</p>
+<p><a href="../../reference/functions/IgnoreSqlErrors/"><code>IgnoreSqlErrors</code></a> and <a href="../../reference/functions/ShowSqlErrors/"><code>ShowSqlErrors</code></a> are global state. If you change them, save the previous values and restore them in a <a href="../../reference/keywords/FINALLY/"><code>:FINALLY</code></a> block. Restoring hard-coded values instead can switch off a setting a caller relied on, and leaving <code>ShowSqlErrors</code> off masks failures in subsequent code.</p>
 </div>
 <h3 id="sqlexecute-with-auto-rollback">SQLExecute with auto-rollback<a class="headerlink" href="#sqlexecute-with-auto-rollback" title="Permanent link">&para;</a></h3>
 <p><a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a> has a <code>bRollbackExistingTransaction</code> parameter. When <a href="../../reference/literals/true/"><code>.T.</code></a> and the SQL fails, it automatically calls <a href="../../reference/functions/EndLimsTransaction/"><code>EndLimsTransaction</code></a>(, .F.) on the current connection:</p>

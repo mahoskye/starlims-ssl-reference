@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Sets the SQL error display flag and returns the previous setting.">
+        <meta name="description" content="Sets the SQL error display flag, which decides whether a failing RunSQL raises, and returns the previous setting.">
       
       
       
@@ -4214,10 +4214,12 @@
 
 
 <h1 id="showsqlerrors">ShowSqlErrors<a class="headerlink" href="#showsqlerrors" title="Permanent link">&para;</a></h1>
-<p>Sets the SQL error display flag and returns the previous setting.</p>
+<p>Sets the SQL error display flag, which decides whether a failing RunSQL raises, and returns the previous setting.</p>
 <p><code>ShowSqlErrors(bEnable)</code> updates the current SQL error display setting to the boolean value you pass and returns the value that was in effect before the change. This makes it useful for temporary changes around a specific block of database work where you want to restore the earlier behavior afterward.</p>
+<p>The flag starts at <a href="../../literals/true/"><code>.T.</code></a>. While it is <a href="../../literals/true/"><code>.T.</code></a>, a failing <a href="../RunSQL/"><code>RunSQL</code></a> raises an error, even though <a href="../IgnoreSqlErrors/"><code>IgnoreSqlErrors</code></a> is also <a href="../../literals/true/"><code>.T.</code></a> by default. Set it to <a href="../../literals/false/"><code>.F.</code></a> and, as long as <code>IgnoreSqlErrors</code> is still <a href="../../literals/true/"><code>.T.</code></a>, <code>RunSQL</code> returns <a href="../../literals/false/"><code>.F.</code></a> instead, with the error details in <a href="../GetLastSQLError/"><code>GetLastSQLError</code></a>.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
+<li>When a best-effort block should get <a href="../../literals/false/"><code>.F.</code></a> back from a failing <a href="../RunSQL/"><code>RunSQL</code></a> instead of an error.</li>
 <li>When you want to temporarily enable SQL error display while diagnosing a database problem.</li>
 <li>When you need to restore the earlier SQL error display setting after a small, controlled section of work.</li>
 <li>When you are coordinating SQL error display with <a href="../IgnoreSqlErrors/"><code>IgnoreSqlErrors</code></a> in maintenance or troubleshooting flows.</li>
@@ -4242,7 +4244,7 @@
 <td><a href="../../types/boolean/">boolean</a></td>
 <td>yes</td>
 <td>—</td>
-<td><a href="../../literals/true/"><code>.T.</code></a> enables SQL error display. <a href="../../literals/false/"><code>.F.</code></a> disables it.</td>
+<td><a href="../../literals/true/"><code>.T.</code></a> (the starting value) enables SQL error display, so a failing <a href="../RunSQL/"><code>RunSQL</code></a> raises. <a href="../../literals/false/"><code>.F.</code></a> disables it, so a failing <code>RunSQL</code> returns <a href="../../literals/false/"><code>.F.</code></a> while <a href="../IgnoreSqlErrors/"><code>IgnoreSqlErrors</code></a> is <a href="../../literals/true/"><code>.T.</code></a>.</td>
 </tr>
 </tbody>
 </table>
@@ -4268,7 +4270,8 @@
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The setting remains in effect for later SQL work until you change it again.</li>
-<li>This setting can affect behavior together with <a href="../IgnoreSqlErrors/"><code>IgnoreSqlErrors</code></a>. Fatal SQL errors can still be raised when SQL error suppression is enabled if SQL error display is also enabled.</li>
+<li>This setting works together with <a href="../IgnoreSqlErrors/"><code>IgnoreSqlErrors</code></a>. With both at their starting value of <a href="../../literals/true/"><code>.T.</code></a>, a failing <a href="../RunSQL/"><code>RunSQL</code></a> raises. It returns <a href="../../literals/false/"><code>.F.</code></a> only when this flag is <a href="../../literals/false/"><code>.F.</code></a> and <code>IgnoreSqlErrors</code> is <a href="../../literals/true/"><code>.T.</code></a>. If <code>IgnoreSqlErrors</code> is <a href="../../literals/false/"><code>.F.</code></a>, failures raise whatever this flag is set to.</li>
+<li>After a <a href="../../literals/false/"><code>.F.</code></a> return, the error is in <a href="../GetLastSQLError/"><code>GetLastSQLError</code></a>. Nothing is stored for <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a>.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="restore-the-previous-setting-after-a-lookup">Restore the previous setting after a lookup<a class="headerlink" href="#restore-the-previous-setting-after-a-lookup" title="Permanent link">&para;</a></h3>
@@ -4299,7 +4302,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LookupSampleStatus"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-2024-001"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="coordinate-sql-error-display-with-ignoresqlerrors">Coordinate SQL error display with IgnoreSqlErrors<a class="headerlink" href="#coordinate-sql-error-display-with-ignoresqlerrors" title="Permanent link">&para;</a></h3>
-<p>Suppress both SQL errors and SQL error display together for a cleanup operation, then restore both original settings in <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a>.</p>
+<p>Turn SQL error display off, with suppression on, so a failing cleanup statement returns <a href="../../literals/false/"><code>.F.</code></a> instead of raising. Then restore both original settings in <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunQuietCleanup</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bPrevIgnore</span><span class="p">,</span><span class="w"> </span><span class="n">bPrevShow</span><span class="p">,</span><span class="w"> </span><span class="n">dCutoff</span><span class="p">,</span><span class="w"> </span><span class="n">sDeleteSql</span><span class="p">;</span>
 
@@ -4348,7 +4351,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 26, 2026 05:33:26 UTC">July 26, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 16:48:52 UTC">September 29, 2026</span>
   </span>
 
     

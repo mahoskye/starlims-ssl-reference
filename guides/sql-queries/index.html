@@ -1586,25 +1586,40 @@
 <h3 id="building-in-clauses">Building IN clauses<a class="headerlink" href="#building-in-clauses" title="Permanent link">&para;</a></h3>
 <p>SQL <code>IN (...)</code> clauses need special handling because you can't use a single <code>?</code> for a list of values. SSL provides two helpers:</p>
 <h4 id="preparearrayforin">PrepareArrayForIn<a class="headerlink" href="#preparearrayforin" title="Permanent link">&para;</a></h4>
-<p>Sanitizes an array for use with a parameterized <code>IN</code> clause. It modifies the array in place — replacing empty string elements with a sentinel value that matches nothing, and appending a typed sentinel for empty arrays so the query stays syntactically valid.</p>
+<p>Sanitizes an array for use with a parameterized <code>IN</code> clause. It modifies the array you pass in place, so there is nothing to assign: each empty-string element is replaced with a string sentinel that matches nothing, and an empty array gains one sentinel of the requested type:</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIds</span><span class="p">,</span><span class="w"> </span><span class="n">aOrderIds</span><span class="p">;</span>
+
+<span class="c1">/* A populated array with a blank entry, for example from an empty form field;</span>
+<span class="n">aSampleIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="s2">"S-003"</span><span class="p">};</span>
+<span class="nf">PrepareArrayForIn</span><span class="p">(</span><span class="n">aSampleIds</span><span class="p">,</span><span class="w"> </span><span class="s2">"string"</span><span class="p">);</span>
+<span class="nf">UsrMes</span><span class="p">(</span><span class="n">aSampleIds</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+
+<span class="c1">/* An empty array;</span>
+<span class="n">aOrderIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
+<span class="nf">PrepareArrayForIn</span><span class="p">(</span><span class="n">aOrderIds</span><span class="p">,</span><span class="w"> </span><span class="s2">"numeric"</span><span class="p">);</span>
+<span class="nf">UsrMes</span><span class="p">(</span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aOrderIds</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" element: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aOrderIds</span><span class="p">[</span><span class="mi">1</span><span class="p">]));</span>
+</code></pre></div>
+<p><code>UsrMes</code> logs:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>C7082BA7C83D38CAE98421BE494753931F8B52A8
+1 element: -2147483648
+</code></pre></div>
+<p>The sentinel is what keeps an <code>IN (...)</code> query valid on MS SQL Server. Without it, an empty array would give you no placeholders and the statement would end in <code>IN ()</code>, which is a syntax error. After <code>PrepareArrayForIn</code>, the array always has at least one element, so the placeholder list has at least one <code>?</code>. The sentinel value matches no real row, so the query runs and returns no rows. Replacing <code>""</code> works the same way: a blank entry can no longer match rows whose column holds an empty string.</p>
+<p>Build the placeholder list from the prepared array:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIds</span><span class="p">,</span><span class="w"> </span><span class="n">sTemp</span><span class="p">,</span><span class="w"> </span><span class="n">sPlaceholders</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
 
-<span class="c1">/* Build the array of values to match;</span>
-<span class="n">aSampleIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S-002"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S-003"</span><span class="p">};</span>
-
-<span class="c1">/* Prepare the array — replaces empty strings with sentinels;</span>
+<span class="c1">/* The list to match, which may arrive empty;</span>
+<span class="n">aSampleIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 <span class="nf">PrepareArrayForIn</span><span class="p">(</span><span class="n">aSampleIds</span><span class="p">,</span><span class="w"> </span><span class="s2">"string"</span><span class="p">);</span>
-<span class="c1">/* Array is now: {"S-001", "S-002", "S-003"} (unchanged, no empties);</span>
 
-<span class="c1">/* Build matching ? placeholders: ?,?,?;</span>
+<span class="c1">/* One ? per element, so at least one;</span>
 <span class="n">sTemp</span><span class="w">         </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">"?,"</span><span class="p">,</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aSampleIds</span><span class="p">));</span>
 <span class="n">sPlaceholders</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Left</span><span class="p">(</span><span class="n">sTemp</span><span class="p">,</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">sTemp</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
-<span class="c1">/* sPlaceholders = "?,?,?";</span>
 
 <span class="c1">/* Use with parameterized query;</span>
 <span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SELECT sample_id, status FROM samples"</span><span class="p">;</span>
 <span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSQL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" WHERE sample_id IN ("</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPlaceholders</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">")"</span><span class="p">;</span>
 
+<span class="c1">/* Runs as WHERE sample_id IN (?) and returns no rows;</span>
 <span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="n">aSampleIds</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../reference/functions/PrepareArrayForIn/"><code>PrepareArrayForIn</code></a> returns the array (modified in place). The second parameter controls the sentinel type for empty arrays:</p>
@@ -1698,13 +1713,15 @@
 </code></pre></div>
 <p>If the query returns no rows, <a href="../../reference/functions/LSelect1/"><code>LSelect1</code></a> returns an empty array. Always check with <a href="../../reference/functions/ALen/"><code>ALen</code></a> before iterating.</p>
 <h3 id="runsql-execute-statements">RunSQL — execute statements<a class="headerlink" href="#runsql-execute-statements" title="Permanent link">&para;</a></h3>
-<p>Returns <a href="../../reference/literals/true/"><code>.T.</code></a> on success. Error behavior depends on <a href="../../reference/functions/IgnoreSqlErrors/"><code>IgnoreSqlErrors</code></a> and <a href="../../reference/functions/ShowSqlErrors/"><code>ShowSqlErrors</code></a> flags (see <a href="../sql-transactions/#sql-error-handling">SQL &amp; Transactions guide</a>).</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bOk</span><span class="p">;</span>
+<p>Returns <a href="../../reference/literals/true/"><code>.T.</code></a> on success. Error behavior depends on the <a href="../../reference/functions/IgnoreSqlErrors/"><code>IgnoreSqlErrors</code></a> and <a href="../../reference/functions/ShowSqlErrors/"><code>ShowSqlErrors</code></a> flags (see <a href="../sql-transactions/#sql-error-handling">SQL &amp; Transactions guide</a>). Under their starting values a failing statement raises instead of returning <a href="../../reference/literals/false/"><code>.F.</code></a>, so handle failures with <a href="../../reference/keywords/TRY/"><code>:TRY</code></a> / <a href="../../reference/keywords/CATCH/"><code>:CATCH</code></a>:</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="n">bOk</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">"INSERT INTO audit_log (action, ts) VALUES (?, ?)"</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LOGIN"</span><span class="p">,</span><span class="w"> </span><span class="nf">DToS</span><span class="p">(</span><span class="nf">Now</span><span class="p">())});</span>
-<span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bOk</span><span class="p">;</span>
-<span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Audit log insert failed"</span><span class="p">);</span>
-<span class="k">:ENDIF</span><span class="p">;</span>
+<span class="k">:TRY</span><span class="p">;</span>
+<span class="w">    </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">"INSERT INTO audit_log (action, ts) VALUES (?, ?)"</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LOGIN"</span><span class="p">,</span><span class="w"> </span><span class="nf">DToS</span><span class="p">(</span><span class="nf">Now</span><span class="p">())});</span>
+<span class="k">:CATCH</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
+<span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Audit log insert failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="k">:ENDTRY</span><span class="p">;</span>
 </code></pre></div>
 <h3 id="getdataset-xml-output">GetDataSet — XML output<a class="headerlink" href="#getdataset-xml-output" title="Permanent link">&para;</a></h3>
 <p>Returns a SELECT result as an XML string. Useful when passing data to external systems or storing structured output:</p>
@@ -1790,15 +1807,22 @@
 </code></pre></div>
 <p>See the <a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code> reference</a> for a full example of traversing a dataset result.</p>
 <h2 id="sql-injection-protection">SQL injection protection<a class="headerlink" href="#sql-injection-protection" title="Permanent link">&para;</a></h2>
-<p>SSL includes a <a href="../../reference/functions/DetectSqlInjections/"><code>DetectSqlInjections</code></a> function that can be enabled per connection to detect suspicious patterns:</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="c1">/* Enable injection detection on the default connection;</span>
-<span class="nf">DetectSqlInjections</span><span class="p">(</span><span class="kc">.T.</span><span class="p">);</span>
+<p>SSL can check the SQL text sent on a connection for suspicious patterns, such as comments and misplaced semicolons. <a href="../../reference/functions/DetectSqlInjections/"><code>DetectSqlInjections</code></a> turns that check on or off per connection and returns the previous state. Detection is on by default. If a block of code depends on it, save the previous state, make sure detection is on, and restore the saved state when the block ends. Don't finish with <code>DetectSqlInjections(.F.)</code>: detection was already on, so that would switch off a protection the rest of the code relies on:</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bPrev</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="c1">/* Your queries run with detection active;</span>
-<span class="nf">RunSQL</span><span class="p">(</span><span class="n">sUserSuppliedSQL</span><span class="p">);</span>
+<span class="c1">/* Detection is on by default, make sure it stays on for this block;</span>
+<span class="n">bPrev</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DetectSqlInjections</span><span class="p">(</span><span class="kc">.T.</span><span class="p">);</span>
 
-<span class="c1">/* Disable when done;</span>
-<span class="nf">DetectSqlInjections</span><span class="p">(</span><span class="kc">.F.</span><span class="p">);</span>
+<span class="k">:TRY</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">/* User input travels as a bound value, never as SQL text;</span>
+<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="s2">"SELECT sample_id, status FROM samples WHERE sample_id = ?"</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sUserSampleId</span><span class="p">});</span>
+<span class="k">:CATCH</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
+<span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Sample lookup failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="k">:FINALLY</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">/* Restore the state the caller had;</span>
+<span class="w">    </span><span class="nf">DetectSqlInjections</span><span class="p">(</span><span class="n">bPrev</span><span class="p">);</span>
+<span class="k">:ENDTRY</span><span class="p">;</span>
 </code></pre></div>
 <p>However, <strong>parameterized queries are the primary defense</strong>. <a href="../../reference/functions/DetectSqlInjections/"><code>DetectSqlInjections</code></a> is a secondary safeguard, not a replacement for proper parameter binding.</p>
 
@@ -1821,7 +1845,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 01:00:10 UTC">September 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 16:51:33 UTC">September 29, 2026</span>
   </span>
 
     

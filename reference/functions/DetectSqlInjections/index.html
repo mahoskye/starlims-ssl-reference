@@ -4260,7 +4260,7 @@
 <h1 id="detectsqlinjections">DetectSqlInjections<a class="headerlink" href="#detectsqlinjections" title="Permanent link">&para;</a></h1>
 <p>Enables or disables SQL injection detection for a database connection and returns the previous setting.</p>
 <p><code>DetectSqlInjections</code> changes the SQL injection detection flag on a specific database connection and returns the flag's earlier value. Pass <a href="../../literals/true/"><code>.T.</code></a> to enable detection or <a href="../../literals/false/"><code>.F.</code></a> to disable it. If <code>sConnectionName</code> is omitted, empty, or not a string, the function targets the current default connection. If <code>bEnable</code> is not a boolean value, the function treats it as enabled.</p>
-<p>The change applies immediately to the selected connection. The return value is the prior state, which makes it useful for temporary changes that need to be restored later.</p>
+<p>Detection is on by default. The change applies immediately to the selected connection. The return value is the prior state, which makes it useful for temporary changes that need to be restored later: restore the saved value rather than passing a hard-coded <a href="../../literals/false/"><code>.F.</code></a>, which would switch off detection that was on before your code ran.</p>
 <p>When detection is enabled, later SQL sent through that connection is checked for SQL comments and misplaced semicolons. <code>CREATE ...</code> statements are excluded from that semicolon check.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4322,6 +4322,7 @@
 <ul>
 <li>Pass an explicit <a href="../../literals/true/"><code>.T.</code></a> or <a href="../../literals/false/"><code>.F.</code></a> for <code>bEnable</code>.</li>
 <li>Store the returned value when you plan to restore the original setting later.</li>
+<li>Restore that saved value when the block ends, typically in <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a>.</li>
 <li>Pass a specific <code>sConnectionName</code> when a script should not depend on the current default connection.</li>
 </ul>
 </div>
@@ -4331,6 +4332,7 @@
 <li>Rely on non-boolean values for <code>bEnable</code>. They are treated as enabled, which can hide mistakes.</li>
 <li>Pass an unvalidated or unintended connection name in security-sensitive code.</li>
 <li>Assume the return value is the new state. It reports the previous state only.</li>
+<li>End a block with <code>DetectSqlInjections(.F.)</code> to "undo" an earlier <code>DetectSqlInjections(.T.)</code>. Detection is on by default, so this switches it off for all later SQL on that connection.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
@@ -4425,8 +4427,8 @@ SQL injection detection is now enabled for LABDATA
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"NormalizeDetectionSettings"</span><span class="p">);</span>
 </code></pre></div>
-<p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>Connections changed: 3
+<p><a href="../UsrMes/"><code>UsrMes</code></a> logs the number of connections where detection had been switched off. Detection is on by default, so when no code has changed it:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Connections changed: 0
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4456,7 +4458,7 @@ SQL injection detection is now enabled for LABDATA
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 16:51:33 UTC">September 29, 2026</span>
   </span>
 
     
