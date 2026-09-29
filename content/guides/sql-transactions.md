@@ -251,25 +251,26 @@ bPrevShow := ShowSqlErrors(.F.);
 !!! warning "Always restore error flags in :FINALLY"
     [`IgnoreSqlErrors`](../reference/functions/IgnoreSqlErrors.md) and [`ShowSqlErrors`](../reference/functions/ShowSqlErrors.md) are global state. If you change them, save the previous values and restore them in a [`:FINALLY`](../reference/keywords/FINALLY.md) block. Restoring hard-coded values instead can switch off a setting a caller relied on, and leaving `ShowSqlErrors` off masks failures in subsequent code.
 
-### SQLExecute with auto-rollback
+### SQLExecute and bRollbackExistingTransaction
 
-[`SQLExecute`](../reference/functions/SQLExecute.md) has a `bRollbackExistingTransaction` parameter. When [`.T.`](../reference/literals/true.md) and the SQL fails, it automatically calls [`EndLimsTransaction`](../reference/functions/EndLimsTransaction.md)(, .F.) on the current connection:
+[`SQLExecute`](../reference/functions/SQLExecute.md) has a `bRollbackExistingTransaction` parameter for non-`SELECT` statements. Don't rely on it to close your transaction: in Designer, after a failed `UPDATE` inside a transaction, [`IsInTransaction`](../reference/functions/IsInTransaction.md) is still [`.T.`](../reference/literals/true.md) whether the argument is [`.T.`](../reference/literals/true.md) or [`.F.`](../reference/literals/false.md). End the transaction in [`:FINALLY`](../reference/keywords/FINALLY.md), exactly as for any other failure:
 
 ```ssl
-:DECLARE sResult, oError;
+:DECLARE bStarted, bCommit, bUpdated, oError;
+bStarted := .F.;
+bCommit := .F.;
 
 :TRY;
-    BeginLimsTransaction();
+    bStarted := BeginLimsTransaction();
 
-    /* If this fails and rollbackExistingTransaction is .T.,
-    /* the transaction is automatically rolled back;
-    sResult := SQLExecute(sSQL,, .T.,,, "dataset");
+    bUpdated := SQLExecute(sSQL,, .T.);
+    bCommit := .T.;
 :CATCH;
     oError := GetLastSSLError();
     ErrorMes("SQL ERROR", oError:Description);
 :FINALLY;
-    :IF IsInTransaction();
-        EndLimsTransaction(, .F.);   /* safe — already rolled back if failed;
+    :IF bStarted;
+        EndLimsTransaction(, bCommit);   /* the failed call left the transaction open;
     :ENDIF;
 :ENDTRY;
 ```
