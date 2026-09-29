@@ -444,6 +444,8 @@
       
         
       
+        
+      
     
     
     
@@ -2781,7 +2783,7 @@
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
-<li>Assign to undeclared variables and assume SSL will always create them for you. In normal code, undeclared targets can raise a runtime error.</li>
+<li>Assign to undeclared variables and assume SSL will always create them for you. In normal code, undeclared targets can raise a runtime error, and where they do not, the write can land on a caller's variable instead.</li>
 <li>Hide important state changes inside dense expressions when a standalone assignment would be clearer.</li>
 <li>Assume <code>aCopy := aOriginal;</code> creates an independent array or object. Both names can still refer to the same underlying value.</li>
 </ul>
@@ -2790,6 +2792,7 @@
 <ul>
 <li>Invalid targets raise a compile-time error: <code>Assignment: invalid left-hand side ...</code>.</li>
 <li>Assigning to an undeclared variable can raise the runtime error <code>Variable [name] is undefined!</code>.</li>
+<li>An undeclared target is resolved outward — current scope, then caller scopes, then public variables — so the assignment can overwrite a caller's variable rather than create a new one. See <a href="../../../guides/variable-scope/">Variable Scope</a>.</li>
 <li>Compound operators such as <a href="../add-assign/"><code>add-assign</code></a> (<a href="../add-assign/"><code>+=</code></a>), <a href="../subtract-assign/"><code>subtract-assign</code></a> (<a href="../subtract-assign/"><code>-=</code></a>), <a href="../multiply-assign/"><code>multiply-assign</code></a> (<a href="../multiply-assign/"><code>*=</code></a>), <a href="../divide-assign/"><code>divide-assign</code></a> (<a href="../divide-assign/"><code>/=</code></a>), <a href="../modulo-assign/"><code>modulo-assign</code></a> (<a href="../modulo-assign/"><code>%=</code></a>), and <a href="../power-assign/"><code>power-assign</code></a> (<a href="../power-assign/"><code>^=</code></a>) are separate operators that combine an operation with assignment.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
@@ -2889,7 +2892,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 29, 2026 08:08:38 UTC">August 29, 2026</span>
   </span>
 
     

@@ -444,6 +444,8 @@
       
         
       
+        
+      
     
     
     
@@ -2886,6 +2888,7 @@
 <p>The <code>:DECLARE</code> keyword adds one or more names to the current scope. In script, procedure, and method bodies, it declares local variables. In a class body, it declares class fields. The declared names are comma-separated identifiers, and each newly created variable starts with the empty string <code>""</code> as its initial value. <code>:DECLARE</code> is a regular statement, so SSL allows it anywhere a statement is valid, although many teams still group declarations near the top of a routine for readability.</p>
 <h2 id="behavior">Behavior<a class="headerlink" href="#behavior" title="Permanent link">&para;</a></h2>
 <p><code>:DECLARE</code> creates storage for each listed name the first time that name is declared in the current runtime scope. The runtime initializes a new declared variable to the empty string, not <a href="../../literals/nil/"><code>NIL</code></a>. Re-declaring the same name is accepted and does not reset the existing runtime value, so a repeated declaration is usually harmless at runtime but still poor style because it obscures where the variable was introduced.</p>
+<p>Declaring a name is what makes it private to the current scope. SSL resolves an undeclared name outward — current scope, then caller scopes, then public variables — so a routine that assigns to a name it never declared can read and overwrite a caller's variable of the same name. Declaring the name stops that search in the current scope, giving the routine its own variable and leaving the caller's untouched. See <a href="../../../guides/variable-scope/">Variable Scope</a>.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When defining local working variables for a procedure, method, or script.</li>
@@ -2922,7 +2925,8 @@
 <div class="admonition success">
 <p class="admonition-title">Do</p>
 <ul>
-<li>Declare variables before their first use.</li>
+<li>Declare variables before their first use, including <a href="../FOR/"><code>:FOR</code></a> loop counters.</li>
+<li>Declare every name a script uses when that script may be called by another script. The callee's declaration is what protects the caller's variables.</li>
 <li>Group related declarations near the start of a routine when that improves readability.</li>
 <li>Use clear Hungarian-style names for local variables in examples and new code.</li>
 </ul>
@@ -2930,13 +2934,14 @@
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
-<li>Rely on assignment to introduce a variable. SSL expects names to be declared before use.</li>
+<li>Rely on assignment to introduce a variable. SSL expects names to be declared before use, and an assignment to an undeclared name can land on a caller's variable instead of creating a new one.</li>
 <li>Re-declare the same name casually. SSL accepts it, but repeated declarations make scope harder to follow.</li>
 <li>Scatter declarations through unrelated logic just because the language permits it. Use later declarations only when they genuinely improve clarity.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
+<li>A name the current scope never declares is not private to it. Assignments to that name resolve outward to caller scopes and can silently overwrite a caller's variable — see <a href="../../../guides/variable-scope/">Variable Scope</a>.</li>
 <li><code>:DECLARE</code> does not assign a custom initial value. If you need one, declare the name and then assign it on a later statement.</li>
 <li>All colon-prefixed keywords are case-sensitive, so write <code>:DECLARE</code> in uppercase.</li>
 </ul>
@@ -3027,6 +3032,7 @@
 <li><a href="../DEFAULT/"><code>DEFAULT</code></a></li>
 <li><a href="../PUBLIC/"><code>PUBLIC</code></a></li>
 <li><a href="../PARAMETERS/"><code>PARAMETERS</code></a></li>
+<li><a href="../../../guides/variable-scope/">Variable Scope</a></li>
 </ul>
 
 
@@ -3048,7 +3054,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 29, 2026 08:08:38 UTC">August 29, 2026</span>
   </span>
 
     
