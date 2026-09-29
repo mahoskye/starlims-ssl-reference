@@ -4126,23 +4126,24 @@
       "id": "ssl.function.errormes",
       "element_type": "function",
       "title": "ErrorMes",
-      "summary": "Logs an error message and returns the resulting message string.",
+      "summary": "Writes an error message to the server log, even when user-message logging is disabled, and returns the formatted log entry.",
       "doc_status": "published",
       "source_path": "content/reference/functions/ErrorMes.md",
       "exceptions": [],
       "caveats": [
-        "Additional formatting details are not documented, so rely on the returned string and the fact that the message is written."
+        "The returned string is the whole log entry, not just the text you passed. Keep your own copy of the message text if later code needs it on its own."
       ],
       "best_practices": {
         "do": [
-          "Pass clear string values for the caption and detail text.",
-          "Use ErrorMes for failures that must be written even when normal user-message logging is not enough.",
+          "Pass a short, stable caption and the detail text as two arguments when you want to find the entry by caption in the server log.",
+          "Use the one-argument form for a quick message when the default ****User message**** caption is acceptable.",
+          "Use ErrorMes for failures that must be written even when normal user-message logging is disabled.",
           "In :CATCH blocks, log the :Description value from GetLastSSLError so the stored message contains the runtime error text."
         ],
         "dont": [
           "Use ErrorMes for routine status updates or non-critical notices. Prefer UsrMes or InfoMes for non-error messaging.",
           "Pass arrays or objects unless their string form is exactly what you want recorded.",
-          "Rely on undocumented formatting details beyond the fact that it behaves like UsrMes with forced writing enabled."
+          "Parse fields out of the returned header. The user, time, version, script location, and process fields vary between calls and environments."
         ]
       }
     },
@@ -10798,7 +10799,7 @@
       "source_path": "content/reference/functions/UsrMes.md",
       "exceptions": [],
       "caveats": [
-        "The returned string contains both the formatted caption line and the message body, separated by blank lines."
+        "The returned string contains the formatted header line, which ends with the caption, then the message body on the next line, followed by trailing blank lines."
       ],
       "best_practices": {
         "do": [
