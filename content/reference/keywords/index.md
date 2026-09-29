@@ -63,7 +63,7 @@ starlims:
 |---------|-------------|
 | [:CATCH](CATCH.md) | Handles errors raised in the immediately preceding `:TRY` block. |
 | [:ENDTRY](ENDTRY.md) | Closes a structured `:TRY` block after its `:CATCH` and/or `:FINALLY` sections. |
-| [:ERROR](ERROR.md) | Defines a legacy error handler for the statements that follow it in the current procedure or method. |
+| [:ERROR](ERROR.md) | Starts a legacy error handler at the end of a procedure that handles failures in the statements before it. |
 | [:FINALLY](FINALLY.md) | Starts the cleanup section of a `:TRY` block and always runs after the protected work completes. |
 | [:RESUME](RESUME.md) | Continues execution after a legacy `:ERROR` handler, starting with the statement after the one that failed. |
 | [:TRY](TRY.md) | Starts a protected block that can transfer control to `:CATCH`, `:FINALLY`, or both when errors occur. |

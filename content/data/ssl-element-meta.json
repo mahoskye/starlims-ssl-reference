@@ -12249,7 +12249,7 @@
         "A :CATCH block may be empty, but the preceding :TRY body must contain at least one statement.",
         ":CATCH handles all errors from that :TRY block; you cannot declare multiple typed catches.",
         "If the :TRY block has no :CATCH, the error propagates unless another outer handler intercepts it.",
-        "Do not rely on :CATCH running when the procedure also contains a legacy :ERROR/:RESUME handler — in observed runtime behavior the legacy handler intercepts the error first and :CATCH is bypassed. See Error Handling.",
+        "Do not rely on :CATCH running when the procedure also contains a legacy :ERROR handler that ends with :RESUME. In observed runtime behavior the legacy handler takes the error, :CATCH is bypassed, and the :TRY body continues at the statement after the one that failed. Without :RESUME, :CATCH handles the error as usual. See Error Handling.",
         "Keywords are case-sensitive and must be written in uppercase."
       ],
       "best_practices": {
@@ -12532,27 +12532,30 @@
       "id": "ssl.keyword.error",
       "element_type": "keyword",
       "title": "ERROR",
-      "summary": "Defines a legacy error handler for the statements that follow it in the current procedure or method.",
+      "summary": "Starts a legacy error handler at the end of a procedure that handles failures in the statements before it.",
       "doc_status": "published",
       "source_path": "content/reference/keywords/ERROR.md",
       "exceptions": [],
       "caveats": [
-        ":ERROR is legacy scope-based handling for the current procedure or method. It is not a clause inside :TRY.",
-        "Do not combine :ERROR with :TRY/:CATCH in the same procedure. In observed runtime behavior, a legacy :ERROR handler can intercept an error raised inside a :TRY block before the :CATCH clause runs, so the :CATCH logic never executes. See Error Handling.",
-        ":RESUME changes the flow to resume-mode handling for subsequent statements. Use it only when continuing is safe.",
-        "If no handled error occurs, the :ERROR body is skipped."
+        ":ERROR is legacy handling for the statements before it in the current procedure. It is not a clause inside :TRY.",
+        "The handler runs to :ENDPROC. Statements placed after :ERROR never run on the success path.",
+        "Without :RESUME, a :TRY block in the protected region keeps its own :CATCH.",
+        "With :RESUME, the legacy handler takes errors raised inside a :TRY body before :CATCH can run, and execution continues inside the :TRY body at the next statement. Do not combine resume mode with :TRY/:CATCH in the same procedure. See Error Handling.",
+        "If no error occurs, the handler body is skipped."
       ],
       "best_practices": {
         "do": [
           "Use :ERROR only for legacy handler flows that genuinely need :ERROR / :RESUME.",
-          "Put the :ERROR block before the statements it is meant to protect.",
+          "Put :ERROR after the statements it is meant to protect, as the last section of the procedure.",
+          "End the protected region with a :RETURN so the success path returns its own value, and give the handler its own :RETURN when callers need a failure value.",
           "Use GetLastSSLError() and oErr:Description inside the handler when you need a readable error message.",
           "Prefer :TRY / :CATCH / :FINALLY for new code."
         ],
         "dont": [
+          "Put :ERROR before the statements you want to protect. Those statements become handler code and run only when an error occurs.",
           "Describe :ERROR as part of :TRY / :CATCH / :FINALLY. It is a separate legacy mechanism.",
           "Use :ERROR for new structured exception-handling examples when :TRY / :CATCH would be clearer.",
-          "Assume :RESUME is optional when the procedure is meant to continue after failures. Without it, the handler does not provide resume-mode recovery."
+          "Add :RESUME to a procedure that also contains :TRY / :CATCH. In resume mode the legacy handler takes errors from the :TRY body and :CATCH never runs."
         ]
       }
     },
@@ -12977,20 +12980,22 @@
       "exceptions": [],
       "caveats": [
         ":RESUME must appear in a procedure that also contains an :ERROR handler.",
-        ":RESUME does not retry the failing statement. Execution continues with the next statement after the error.",
+        ":RESUME does not retry the failing statement. Execution continues with the next statement after the error. A failed assignment leaves its variable unchanged, so later statements see the old value.",
         "If later statements keep failing and the handler does not resolve the problem, the procedure can continue producing repeated errors.",
-        "Do not combine :RESUME with :TRY/:CATCH in the same procedure. In observed runtime behavior the legacy handler intercepts errors raised inside a :TRY block before :CATCH runs, and :RESUME then continues execution after the failed statement — including inside the :TRY body, bypassing the :CATCH logic entirely. See Error Handling."
+        "Do not combine :RESUME with :TRY/:CATCH in the same procedure. In observed runtime behavior the legacy handler takes errors raised inside a :TRY body, :CATCH never runs, and execution continues inside the :TRY body at the statement after the one that failed. See Error Handling."
       ],
       "best_practices": {
         "do": [
           "Use :RESUME only when the failure is expected and later statements can still run safely.",
+          "Place the :ERROR handler after the statements it protects, and end the handler with :RESUME.",
           "Keep the :ERROR handler focused on logging, cleanup, or lightweight recovery before :RESUME takes effect.",
           "Prefer :TRY / :CATCH / :FINALLY in new code when you only need to protect a specific block."
         ],
         "dont": [
           "Use :RESUME for unknown or non-recoverable errors because that can hide real failures and keep the procedure running in a bad state.",
           "Use :RESUME without an :ERROR handler because the procedure will not compile.",
-          "Place :RESUME in :CATCH or :FINALLY blocks because it belongs only to the legacy :ERROR pattern."
+          "Place :RESUME in :CATCH or :FINALLY blocks because it belongs only to the legacy :ERROR pattern.",
+          "Use :RESUME in a procedure that also contains :TRY / :CATCH. The legacy handler takes the errors meant for :CATCH."
         ]
       }
     },
@@ -13091,7 +13096,7 @@
         "The :TRY body must contain at least one statement.",
         "A :FINALLY block must also contain at least one statement when present.",
         ":CATCH does not declare an exception variable; retrieve the current error with GetLastSSLError().",
-        "A legacy :ERROR/:RESUME handler in the same procedure can intercept errors raised inside the :TRY body before :CATCH runs — do not mix the two patterns. See Error Handling.",
+        "If the same procedure has a legacy :ERROR handler that ends with :RESUME, that handler takes errors raised inside the :TRY body: :CATCH does not run, and the :TRY body continues at the statement after the one that failed. Without :RESUME, the :TRY keeps its own :CATCH. Do not mix resume mode with :TRY/:CATCH. See Error Handling.",
         "Keywords are case-sensitive and must be written in uppercase."
       ],
       "best_practices": {

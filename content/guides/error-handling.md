@@ -111,17 +111,23 @@ Use [`ErrorMes`](../reference/functions/ErrorMes.md) instead of [`UsrMes`](../re
 !!! warning "Legacy pattern — use :TRY/:CATCH for new code"
     The [`:ERROR`](../reference/keywords/ERROR.md) / [`:RESUME`](../reference/keywords/RESUME.md) pattern predates structured exception handling. It is supported for backward compatibility but should not be used in new procedures.
 
+In both forms, `:ERROR;` starts the last section of the procedure, which runs to [`:ENDPROC`](../reference/keywords/ENDPROC.md). The statements **before** `:ERROR` are protected. The statements after it are the handler body, which runs only when a protected statement fails. A handler placed first protects nothing: the code after it runs only as handler code.
+
+In the examples below, `RiskyOperationA`, `RiskyOperationB`, `RiskyOperationC`, and `RiskyOperation` stand for local procedures in the same script that can raise an error.
+
 ### Legacy pattern with :RESUME
 
-When [`:RESUME`](../reference/keywords/RESUME.md) is present inside the [`:ERROR`](../reference/keywords/ERROR.md) block, **each statement** is protected individually. If a statement fails, the [`:ERROR`](../reference/keywords/ERROR.md) handler runs, then [`:RESUME`](../reference/keywords/RESUME.md) continues execution at the **next** statement after the one that failed.
+When [`:RESUME`](../reference/keywords/RESUME.md) ends the [`:ERROR`](../reference/keywords/ERROR.md) handler, **each statement** before `:ERROR` is protected individually. If a statement fails, the handler runs, then [`:RESUME`](../reference/keywords/RESUME.md) continues execution at the **next** statement after the one that failed.
 
 ```ssl
 :PROCEDURE LegacyResumeExample;
     :DECLARE sResult;
+
     /* Each statement below is individually protected;
-    sResult := RiskyOperationA();
-    sResult := RiskyOperationB();
-    sResult := RiskyOperationC();
+    sResult := DoProc("RiskyOperationA");
+    sResult := DoProc("RiskyOperationB");
+    sResult := DoProc("RiskyOperationC");
+
     :RETURN sResult;
 :ERROR;
     /* Runs for whichever statement failed;
@@ -130,69 +136,90 @@ When [`:RESUME`](../reference/keywords/RESUME.md) is present inside the [`:ERROR
 :ENDPROC;
 ```
 
-If `RiskyOperationA()` fails, the [`:ERROR`](../reference/keywords/ERROR.md) handler runs, [`:RESUME`](../reference/keywords/RESUME.md) continues at `RiskyOperationB()`, and so on. Every statement gets a chance to run.
+If `RiskyOperationA` fails, the handler runs, [`:RESUME`](../reference/keywords/RESUME.md) continues with the `RiskyOperationB` call, and so on. Every statement gets a chance to run, and the procedure reaches its own [`:RETURN`](../reference/keywords/RETURN.md). A failed call leaves `sResult` unchanged.
 
 ### Legacy pattern without :RESUME
 
-Without [`:RESUME`](../reference/keywords/RESUME.md), the entire procedure body is wrapped in a single try/catch. After the [`:ERROR`](../reference/keywords/ERROR.md) handler runs, execution falls through to [`:ENDPROC`](../reference/keywords/ENDPROC.md) — there is no resumption.
+Without [`:RESUME`](../reference/keywords/RESUME.md), the statements before `:ERROR` are protected as one region. The first failure skips the rest of them, the handler runs, and the procedure ends. There is no resumption: the procedure returns whatever the handler returns, or an empty string when the handler has no [`:RETURN`](../reference/keywords/RETURN.md).
 
 ```ssl
 :PROCEDURE LegacyNoResumeExample;
     :DECLARE sResult;
-    sResult := RiskyOperation();
+
+    sResult := DoProc("RiskyOperation");
+
     :RETURN sResult;
 :ERROR;
-    /* Runs on any failure; procedure ends after this block;
+    /* Runs on any failure, then the procedure ends;
     ErrorMes("ERROR", "Operation failed");
 :ENDPROC;
 ```
 
 ### Do not mix :ERROR/:RESUME with :TRY/:CATCH
 
-!!! danger "A legacy :ERROR handler can hijack errors from a :TRY block"
-    Avoid mixing legacy [`:ERROR`](../reference/keywords/ERROR.md)/[`:RESUME`](../reference/keywords/RESUME.md) handling with [`:TRY`](../reference/keywords/TRY.md)/[`:CATCH`](../reference/keywords/CATCH.md) in the same procedure unless the runtime behavior has been deliberately tested. A legacy `:ERROR` handler may intercept errors raised inside a `:TRY` block **before** the `:CATCH` clause runs. If `:RESUME` is used, execution may continue after the failed statement — including inside the `:TRY` body.
+!!! danger "With :RESUME, a legacy :ERROR handler takes errors from a :TRY block"
+    When a procedure's [`:ERROR`](../reference/keywords/ERROR.md) handler ends with [`:RESUME`](../reference/keywords/RESUME.md), an error raised inside a [`:TRY`](../reference/keywords/TRY.md) body goes to the legacy handler, not to [`:CATCH`](../reference/keywords/CATCH.md). Execution then continues **inside** the `:TRY` body at the statement after the one that failed. Do not use `:RESUME` in a procedure that contains `:TRY`/`:CATCH`.
 
-In observed runtime behavior, when a procedure contains both a `:TRY`/`:CATCH` block and a trailing `:ERROR`/`:RESUME` handler:
+In observed runtime behavior, when a procedure contains a `:TRY`/`:CATCH` block and a trailing `:ERROR` handler:
 
-- The legacy `:ERROR` handler fires for an error raised inside the `:TRY` body.
-- The `:CATCH` block does **not** fire.
-- `:RESUME` continues execution at the statement **after** the one that failed — inside the `:TRY` body.
-- The procedure can reach its normal success path and return a success value after a handled failure.
+- **With `:RESUME`:** the legacy handler runs for an error raised inside the `:TRY` body, and the `:CATCH` block does **not** run. `:RESUME` continues at the statement **after** the one that failed, inside the `:TRY` body. The procedure can reach its normal success path and return a success value after a handled failure.
+- **Without `:RESUME`:** the `:TRY` keeps its own `:CATCH`. The error goes to `:CATCH`, execution continues after [`:ENDTRY`](../reference/keywords/ENDTRY.md), and the legacy handler is not involved.
+
+This procedure records which lines run:
 
 ```ssl
 :PROCEDURE MixedHandlingExample;
+    :DECLARE sTrail;
+
+    sTrail := "start";
+
     :TRY;
-        RaiseError("Raised inside TRY block.", "MixedHandlingExample");
-        UsrMes("Runs anyway");  /* :RESUME continues here, inside the TRY body;
+        RaiseError("Raised inside TRY block.");
+        /* :RESUME continues here, inside the TRY body;
+        sTrail := sTrail + " > after raise in TRY";
     :CATCH;
-        ErrorMes("CATCH", GetLastSSLError():Description);  /* never fires;
+        /* Never runs while the handler ends with :RESUME;
+        sTrail := sTrail + " > CATCH";
     :ENDTRY;
 
-    UsrMes("Reached the success path");  /* runs;
+    sTrail := sTrail + " > after ENDTRY";
 
-    :RETURN .T.;
+    :RETURN "finished: " + sTrail;
 :ERROR;
-    ErrorMes("LEGACY", GetLastSSLError():Description);  /* fires instead of :CATCH;
+    /* Runs instead of :CATCH;
+    sTrail := sTrail + " > legacy handler";
 :RESUME;
 :ENDPROC;
+
+/* Usage;
+:RETURN DoProc("MixedHandlingExample");
 ```
 
-This matters because cleanup, retry, or failure-return logic inside `:CATCH` may never execute, and code after a failed statement may run in a partially invalid state. In practice:
+Returns:
+
+```text
+finished: start > legacy handler > after raise in TRY > after ENDTRY
+```
+
+Remove the `:RESUME;` line and the same procedure returns `finished: start > CATCH > after ENDTRY`: `:CATCH` handles the error and the rest of the `:TRY` body is skipped.
+
+This matters because, in resume mode, cleanup, retry, or failure-return logic inside `:CATCH` never executes, and code after a failed statement runs in a partially invalid state. In practice:
 
 - Prefer [`:TRY`](../reference/keywords/TRY.md)/[`:CATCH`](../reference/keywords/CATCH.md) for new code.
-- Do not combine `:ERROR`/`:RESUME` with `:TRY`/`:CATCH` in the same procedure unless required for a legacy compatibility scenario.
+- Do not add `:RESUME` to a procedure that contains `:TRY`/`:CATCH`.
+- Without `:RESUME`, each `:TRY` keeps its own `:CATCH`, but two error models in one procedure are harder to follow. Keep them apart where you can.
 - If legacy handling is unavoidable, isolate it in a small wrapper procedure and document the expected control flow.
-- Do not rely on `:CATCH` running when the procedure also contains `:ERROR`/`:RESUME`.
+- Do not rely on `:CATCH` running when the procedure also contains an `:ERROR` handler that ends with `:RESUME`.
 - Treat `:RESUME` as hazardous: it can continue execution after a failed statement left variables or resources in a partially initialized state.
 
 ### Key differences from structured handling
 
 | Feature | [`:TRY`](../reference/keywords/TRY.md)/[`:CATCH`](../reference/keywords/CATCH.md) | [`:ERROR`](../reference/keywords/ERROR.md)/[`:RESUME`](../reference/keywords/RESUME.md) |
 |---------|-------------|----------------|
-| Scope | Block-level | Procedure-level |
+| Scope | Block-level | Statements before [`:ERROR`](../reference/keywords/ERROR.md) in the same procedure |
 | Multiple handlers | One [`:CATCH`](../reference/keywords/CATCH.md) per [`:TRY`](../reference/keywords/TRY.md) | One [`:ERROR`](../reference/keywords/ERROR.md) per procedure |
 | Cleanup guarantee | [`:FINALLY`](../reference/keywords/FINALLY.md) always runs | No equivalent |
-| Resume point | After [`:ENDTRY`](../reference/keywords/ENDTRY.md) | After the failing statement |
+| Resume point | After [`:ENDTRY`](../reference/keywords/ENDTRY.md) | With [`:RESUME`](../reference/keywords/RESUME.md), the statement after the failing one; without it, the procedure ends after the handler |
 | Nesting | Supported | Not supported |
 | Recommended | Yes | No (legacy only) |
 
