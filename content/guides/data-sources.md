@@ -53,6 +53,8 @@ WHERE status = ?sStatus?
 Data sources are invoked at runtime via [`RunDS`](../reference/functions/RunDS.md):
 
 ```ssl
+:DECLARE oResult, oDs;
+
 /* Call with default parameters;
 oResult := RunDS("Category.DataSourceName");
 
