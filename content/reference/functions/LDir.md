@@ -102,7 +102,6 @@ Retrieve the names of all `.txt` files in an explicit folder.
 
 /* Usage;
 DoProc("ListTextFiles");
-;
 ```
 
 ### Include subfolders in the results
@@ -127,7 +126,6 @@ Include directory names as well as regular files when scanning a staging folder.
 
 /* Usage;
 DoProc("ListStagingEntries");
-;
 ```
 
 ### Verify mandatory files before import
@@ -198,7 +196,6 @@ Verify that the expected import package is present before continuing.
 
 /* Usage;
 DoProc("ValidateImportFiles");
-;
 ```
 
 ## Related

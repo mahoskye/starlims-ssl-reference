@@ -85,6 +85,7 @@ Uses `:RESUME` so a failed [`RunSQL`](../functions/RunSQL.md) call does not stop
     InfoMes("Legacy procedure continued after the handled error");
 :ENDPROC;
 
+/* Usage;
 DoProc("UpdateSampleStatus_Legacy");
 ```
 
@@ -127,6 +128,7 @@ Logs each bad record and continues processing the rest of the array. With `{"SMP
     :RETURN nValidated;
 :ENDPROC;
 
+/* Usage;
 DoProc("ValidateSampleRecords", {{"SMP-001", "INVALID", "SMP-002"}});
 ```
 

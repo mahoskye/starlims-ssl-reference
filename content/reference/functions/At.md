@@ -107,6 +107,7 @@ Converts the source string to uppercase first, then searches for the uppercase t
     :ENDIF;
 :ENDPROC;
 
+/* Usage;
 DoProc("CheckUrgentTag");
 ```
 
@@ -138,6 +139,7 @@ Uses `At` for the first separator and [`LimsAt`](LimsAt.md) for the second and t
     /* Logs: Third slash: 21;
 :ENDPROC;
 
+/* Usage;
 DoProc("LocatePathSeparators");
 ```
 

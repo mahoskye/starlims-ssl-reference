@@ -86,6 +86,7 @@ Processes only non-empty sample IDs and skips blank entries using `:LOOP`. With 
     :RETURN aValidSamples;
 :ENDPROC;
 
+/* Usage;
 DoProc("ProcessValidSamples");
 ```
 
@@ -136,6 +137,7 @@ Uses `:LOOP` twice: once to skip blanks and once to skip duplicates already coll
     :RETURN aUniqueSamples;
 :ENDPROC;
 
+/* Usage;
 DoProc("CollectUniqueSamples");
 ```
 

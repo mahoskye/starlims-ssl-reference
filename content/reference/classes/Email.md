@@ -213,7 +213,7 @@ Shows the basic `Email{}` pattern: set all required properties, call `Send()`, a
 	:RETURN bSent;
 :ENDPROC;
 
-/* Run the procedure;
+/* Usage;
 DoProc("SendNotificationEmail");
 ```
 
@@ -265,7 +265,7 @@ Uses `Email{.F.}` so failures raise exceptions, then wraps the operation in [`:T
 	:ENDTRY;
 :ENDPROC;
 
-/* Run the procedure;
+/* Usage;
 DoProc("QueueSignedReport");
 ```
 

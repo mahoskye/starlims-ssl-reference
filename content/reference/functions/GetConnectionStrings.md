@@ -63,9 +63,8 @@ Iterate the returned array and print each connection name. The loop runs once pe
     :NEXT;
 :ENDPROC;
 
-/* Usage:
+/* Usage;
 DoProc("ListConnectionNames");
-;
 ```
 
 ### Find a connection entry by name
@@ -89,9 +88,8 @@ Search the connection list for a specific name and display its provider when fou
     :RETURN .F.;
 :ENDPROC;
 
-/* Usage:
+/* Usage;
 DoProc("FindConnection", {"LIMS"});
-;
 ```
 
 ## Related

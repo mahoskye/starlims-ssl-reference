@@ -78,9 +78,7 @@ Get the current system time with [`Now`](Now.md) and extract the minute componen
 	:RETURN nMinute;
 :ENDPROC;
 
-/*
-Usage
-;
+/* Usage;
 DoProc("ShowCurrentMinute");
 ```
 
@@ -122,9 +120,7 @@ Build a 60-slot counter array and increment each slot by the minute component of
 	:RETURN aMinuteCounts;
 :ENDPROC;
 
-/*
-Usage
-;
+/* Usage;
 DoProc("CountEventsByMinute");
 ```
 
@@ -158,9 +154,7 @@ Classify each request as `ESCALATE` when its timestamp falls at minute 55 or lat
 	:RETURN aStatuses;
 :ENDPROC;
 
-/*
-Usage
-;
+/* Usage;
 DoProc("ClassifyRequestsByMinute");
 ```
 

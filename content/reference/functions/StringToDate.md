@@ -91,6 +91,7 @@ Parse a user-supplied date string against a fixed pattern and use an empty-date 
 	:RETURN .T.;
 :ENDPROC;
 
+/* Usage;
 DoProc("ValidateSampleDate");
 ```
 
@@ -130,6 +131,7 @@ Loop over rows from a CSV-style import, attempt to parse each date string, and c
 	:RETURN aAccepted;
 :ENDPROC;
 
+/* Usage;
 DoProc("ImportSampleDatesFromCSV");
 ```
 
@@ -188,6 +190,7 @@ Dispatch to the correct format string based on each row's source system, then pa
 	:RETURN aNormalized;
 :ENDPROC;
 
+/* Usage;
 DoProc("NormalizeIncomingDates");
 ```
 

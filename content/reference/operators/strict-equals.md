@@ -94,10 +94,8 @@ Shows that `==` requires an exact match. `"Logged" == "Log"` is [`.F.`](../liter
     :RETURN bMatch;
 :ENDPROC;
 
-/*
-Usage:
-DoProc("CheckExactStatus")
-;
+/* Usage;
+DoProc("CheckExactStatus");
 ```
 
 [`UsrMes`](../functions/UsrMes.md) logs:
@@ -135,10 +133,8 @@ Checks runtime types first when a comparison may receive mixed values. With `vLe
     :RETURN bMatch;
 :ENDPROC;
 
-/*
-Usage:
-DoProc("CompareDynamicValues")
-;
+/* Usage;
+DoProc("CompareDynamicValues");
 ```
 
 ### Checking reference equality for objects
@@ -170,10 +166,8 @@ Shows that `==` returns [`.T.`](../literals/true.md) when two variables point to
     :RETURN bSameRef;
 :ENDPROC;
 
-/*
-Usage:
-DoProc("CompareObjectReferences")
-;
+/* Usage;
+DoProc("CompareObjectReferences");
 ```
 
 ## Related elements

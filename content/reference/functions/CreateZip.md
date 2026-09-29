@@ -88,10 +88,8 @@ Archives a folder and all of its subfolders into a single ZIP file using the def
     UsrMes("Archive created: " + sZipFile);
 :ENDPROC;
 
-/*
-Usage:
-DoProc("ArchiveReportsFolder")
-;
+/* Usage;
+DoProc("ArchiveReportsFolder");
 ```
 
 [`UsrMes`](UsrMes.md) logs:
@@ -117,10 +115,8 @@ Disables recursion and passes a regular-expression filter so only files whose fu
     UsrMes("PDF archive created: " + sZipFile);
 :ENDPROC;
 
-/*
-Usage:
-DoProc("ArchiveTopLevelPdfFiles")
-;
+/* Usage;
+DoProc("ArchiveTopLevelPdfFiles");
 ```
 
 [`UsrMes`](UsrMes.md) logs:
@@ -152,10 +148,8 @@ Creates a password-protected archive while skipping the optional `sFileFilter` a
     :ENDTRY;
 :ENDPROC;
 
-/*
-Usage:
-DoProc("CreateSecureExport")
-;
+/* Usage;
+DoProc("CreateSecureExport");
 ```
 
 ## Related

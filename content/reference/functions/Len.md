@@ -87,6 +87,7 @@ Check a password string against an 8-character minimum and show the outcome. `"S
 	:RETURN bIsValid;
 :ENDPROC;
 
+/* Usage;
 DoProc("ValidatePasswordLength");
 ```
 
@@ -117,6 +118,7 @@ Use `Len` as the upper bound of a [`:FOR`](../keywords/FOR.md) loop to walk each
 	UsrMes("Digits in '" + sValue + "': " + LimsString(nDigitCount));
 :ENDPROC;
 
+/* Usage;
 DoProc("CountDigits");
 ```
 
@@ -148,6 +150,7 @@ Use `Len` to calculate the number of spaces needed to extend `"Sample ID"` (9 ch
 	UsrMes("[" + sLine + "]");
 :ENDPROC;
 
+/* Usage;
 DoProc("BuildFixedWidthLine");
 ```
 

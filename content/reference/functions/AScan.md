@@ -82,6 +82,7 @@ Searches for `"REJ"` as a prefix, which matches `"REJECTED"` at position 3 becau
 	UsrMes("Matching status found at position " + LimsString(nPosition));
 :ENDPROC;
 
+/* Usage;
 DoProc("FindStatus");
 ```
 
@@ -107,6 +108,7 @@ Passes a code block that tests for even numbers; `AScan` returns the position of
 	UsrMes("First even number is at position " + LimsString(nIndex));
 :ENDPROC;
 
+/* Usage;
 DoProc("FindFirstEven");
 ```
 
