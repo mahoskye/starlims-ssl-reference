@@ -55,7 +55,7 @@ UsrMes(vCaption, [vMessage])
 
 ## Caveats
 
-- The returned string contains both the formatted caption line and the message body, separated by blank lines.
+- The returned string contains the formatted header line, which ends with the caption, then the message body on the next line, followed by trailing blank lines.
 
 ## Examples
 
