@@ -32,7 +32,7 @@ RunDS(sDataSourceName, [aParameters], [vReturnType])
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `sDataSourceName` | [string](../types/string.md) | yes | — | The data source to execute. A regular name is passed through as written. A GUID string is resolved to a data source name before execution. |
-| `aParameters` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Optional array of argument values for the target data source. If supplied, it must be an array. |
+| `aParameters` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Optional array of argument values for the target data source, bound by position in the order its `:PARAMETERS` declares them. If supplied, it must be an array. |
 | `vReturnType` | [boolean](../types/boolean.md) or [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Controls how an [`SSLDataset`](../classes/SSLDataset.md) result is returned. [`.T.`](../literals/true.md) maps to XML, [`.F.`](../literals/false.md) maps to array, and strings are matched case-insensitively after trimming. Omitting the argument returns an array. |
 
 ## Returns
@@ -64,10 +64,11 @@ RunDS(sDataSourceName, [aParameters], [vReturnType])
     - Pass a string data source name or GUID and validate external input before calling `RunDS`.
     - Pass arguments as an [array](../types/array.md) when the data source expects parameters.
     - Specify `vReturnType` explicitly when callers depend on XML, a dataset handle, or an [`SSLDataset`](../classes/SSLDataset.md).
-    - Use [`GetDSParameters`](GetDSParameters.md) when you need to inspect the published parameter list before building the argument array.
+    - Use [`GetDSParameters`](GetDSParameters.md) when you need the declared parameter names in the order `aParameters` binds them.
 
 !!! failure "Don't"
     - Pass a scalar, object, or other non-array value as `aParameters`. `RunDS` rejects it immediately.
+    - Pass `{name, value}` pairs in `aParameters`. Names are not matched; each pair is bound whole to one parameter.
     - Assume every data source result is converted. Conversion rules only apply when the data source returned an [`SSLDataset`](../classes/SSLDataset.md).
     - Rely on unknown `vReturnType` strings to preserve the original result format. For [`SSLDataset`](../classes/SSLDataset.md) results, unrecognized strings fall back to an array.
 
@@ -75,6 +76,7 @@ RunDS(sDataSourceName, [aParameters], [vReturnType])
 
 - `RunDS` trims the incoming data source name before execution.
 - String `vReturnType` values are lowercased and trimmed before matching.
+- `aParameters` values beyond the parameters the data source declares are silently ignored, and declared parameters you leave out keep their inline defaults.
 
 ## Examples
 

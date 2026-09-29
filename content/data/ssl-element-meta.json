@@ -9012,17 +9012,19 @@
       ],
       "caveats": [
         "RunDS trims the incoming data source name before execution.",
-        "String vReturnType values are lowercased and trimmed before matching."
+        "String vReturnType values are lowercased and trimmed before matching.",
+        "aParameters values beyond the parameters the data source declares are silently ignored, and declared parameters you leave out keep their inline defaults."
       ],
       "best_practices": {
         "do": [
           "Pass a string data source name or GUID and validate external input before calling RunDS.",
           "Pass arguments as an array when the data source expects parameters.",
           "Specify vReturnType explicitly when callers depend on XML, a dataset handle, or an SSLDataset.",
-          "Use GetDSParameters when you need to inspect the published parameter list before building the argument array."
+          "Use GetDSParameters when you need the declared parameter names in the order aParameters binds them."
         ],
         "dont": [
           "Pass a scalar, object, or other non-array value as aParameters. RunDS rejects it immediately.",
+          "Pass {name, value} pairs in aParameters. Names are not matched; each pair is bound whole to one parameter.",
           "Assume every data source result is converted. Conversion rules only apply when the data source returned an SSLDataset.",
           "Rely on unknown vReturnType strings to preserve the original result format. For SSLDataset results, unrecognized strings fall back to an array."
         ]
