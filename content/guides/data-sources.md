@@ -3,7 +3,7 @@
 A **data source** is a named, parameterized piece of data-retrieval code that callers run with [`RunDS`](../reference/functions/RunDS.md). A data source runs in one of two modes:
 
 - **STARLIMS mode**: the body is SSL. Whatever the body returns with [`:RETURN`](../reference/keywords/RETURN.md) is the data source's result. These are sometimes called SSL data sources.
-- **SQL mode**: the body is a SQL query (T-SQL on MS SQL Server), preceded by optional directives and a `:PARAMETERS` line. The query's rows are the result. These are sometimes called SQL data sources.
+- **SQL mode**: the body is a SQL query in your database's dialect, preceded by optional directives and a `:PARAMETERS` line. The examples on this page use T-SQL (MS SQL Server). The query's rows are the result. These are sometimes called SQL data sources.
 
 The mode belongs to the data source: you create or configure a data source in one mode or the other, and the body must match it. SSL features such as `:RETURN` and [`SQLExecute`](../reference/functions/SQLExecute.md) work only in STARLIMS mode. A SQL-mode body is a query, not SSL.
 
@@ -15,7 +15,7 @@ Data sources use parameter syntax and directives that don't appear in ordinary s
 |-----------|------|------------------|--------|
 | **Server script** | SSL | `:PARAMETERS p1, p2;` + [`:DEFAULT`](../reference/keywords/DEFAULT.md) lines | Whatever the script returns |
 | **Data source, STARLIMS mode** | SSL | `:PARAMETERS p1 := val1, p2 := val2;` | Whatever the body `:RETURN`s |
-| **Data source, SQL mode** | Directives, then a T-SQL query | `:PARAMETERS p1 := val1, p2 := val2;`, referenced in the query as `@p1` | The query's rows |
+| **Data source, SQL mode** | Directives, then a SQL query | `:PARAMETERS p1 := val1, p2 := val2;`, referenced in the query as `@p1` | The query's rows |
 
 ## Inline parameter defaults
 
@@ -54,7 +54,7 @@ This data source returns the matching rows as an array of rows, and [`RunDS`](..
 
 ## SQL-mode data sources
 
-A SQL-mode data source is a T-SQL query. Parameters from the `:PARAMETERS` line are referenced as `@name`. The `?name?` markers used by `SQLExecute` do not work here. Directives come before the query:
+A SQL-mode data source is a SQL query. Parameters from the `:PARAMETERS` line are referenced as `@name`. The `?name?` markers used by `SQLExecute` do not work here. Directives come before the query:
 
 ```ssl
 :DSN := DATABASE;
