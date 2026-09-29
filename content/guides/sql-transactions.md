@@ -61,25 +61,34 @@ EndLimsTransaction(, .F.);    /* rollback on default connection;
 
 ## Nested transactions
 
-SSL supports nested [`BeginLimsTransaction`](../reference/functions/BeginLimsTransaction.md) calls. The engine uses a **reference-counting** model — only the **outermost** Begin/End pair actually starts and commits or rolls back the database transaction. Inner calls increment and decrement a counter.
+SSL supports nested [`BeginLimsTransaction`](../reference/functions/BeginLimsTransaction.md) calls. Transactions are **reference-counted**: only the **outermost** Begin/End pair actually starts and commits or rolls back the database transaction. Inner calls increment and decrement a counter. Each level needs its own End, so the example tracks both levels: after a failure between the inner Begin and End, two levels are still open.
 
 ```ssl
-:DECLARE oError;
+:DECLARE bOuter, bInner, bCommit, oError;
+bOuter := .F.;
+bInner := .F.;
+bCommit := .F.;
 
 :TRY;
-    BeginLimsTransaction();          /* count = 1, DB transaction starts;
+    bOuter := BeginLimsTransaction();    /* count = 1, DB transaction starts;
 
-    BeginLimsTransaction();          /* count = 2, no new DB transaction;
+    bInner := BeginLimsTransaction();    /* count = 2, no new DB transaction;
     RunSQL(sInnerSQL);
-    EndLimsTransaction(, .T.);       /* count = 1, nothing committed yet;
+    EndLimsTransaction(, .T.);           /* count = 1, nothing committed yet;
+    bInner := .F.;
 
     RunSQL(sOuterSQL);
+    bCommit := .T.;
 :CATCH;
     oError := GetLastSSLError();
     ErrorMes("ERROR", oError:Description);
 :FINALLY;
-    :IF IsInTransaction();
-        EndLimsTransaction(, bCommit);  /* count = 0, commits or rolls back;
+    :IF bInner;
+        EndLimsTransaction(, .F.);       /* inner level still open after a failure;
+    :ENDIF;
+
+    :IF bOuter;
+        EndLimsTransaction(, bCommit);   /* count = 0, commits or rolls back;
     :ENDIF;
 :ENDTRY;
 ```
@@ -89,27 +98,37 @@ SSL supports nested [`BeginLimsTransaction`](../reference/functions/BeginLimsTra
 This is the most critical behavior to understand: **if any inner transaction is rolled back, the outer transaction cannot commit**.
 
 ```ssl
-:DECLARE oError;
+:DECLARE bOuter, bInner, oError;
+bOuter := .F.;
+bInner := .F.;
 
 :TRY;
-    BeginLimsTransaction();
+    bOuter := BeginLimsTransaction();
 
-    BeginLimsTransaction();
+    bInner := BeginLimsTransaction();
     RunSQL(sInsertSQL);
-    EndLimsTransaction(, .F.);       /* inner rollback — sets poison flag;
+    EndLimsTransaction(, .F.);           /* inner rollback, sets the poison flag;
+    bInner := .F.;
 
     RunSQL(sUpdateSQL);
 
-    EndLimsTransaction(, .T.);       /* Throws: cannot-commit exception;
+    bOuter := .F.;
+    EndLimsTransaction(, .T.);           /* raises the cannot-commit error and rolls back;
 :CATCH;
     oError := GetLastSSLError();
     ErrorMes("ERROR", oError:Description);
 :FINALLY;
-    :IF IsInTransaction();
+    :IF bInner;
+        EndLimsTransaction(, .F.);
+    :ENDIF;
+
+    :IF bOuter;
         EndLimsTransaction(, .F.);
     :ENDIF;
 :ENDTRY;
 ```
+
+The outermost `EndLimsTransaction(, .T.)` finishes the outer level whether it commits or raises, so `bOuter` is cleared just before it and `:FINALLY` does not end the level a second time.
 
 When an inner `EndLimsTransaction(, .F.)` is called:
 
