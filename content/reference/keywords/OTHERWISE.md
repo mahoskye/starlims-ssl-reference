@@ -123,7 +123,7 @@ Routes workflow tasks to a specialized team based on task type. With `oTask:Type
 
 /* Usage;
 :DECLARE oTask;
-oTask := CreateLocal();
+oTask := CreateUdObject();
 oTask:Type := "PATHOLOGY";
 DoProc("RouteWorkflowTask", {oTask});
 ```

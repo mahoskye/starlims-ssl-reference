@@ -11,8 +11,8 @@ SSL has eight core value types plus NIL (the absence of a value). Every variable
 | [boolean](../reference/types/boolean.md) | [`.T.`](../reference/literals/true.md), [`.F.`](../reference/literals/false.md) | [`.F.`](../reference/literals/false.md) is empty, [`.T.`](../reference/literals/true.md) is not | `"L"` | `"LOGIC"` |
 | [date](../reference/types/date.md) | No literal; use [`Today()`](../reference/functions/Today.md) | Null date is empty | `"D"` | `"DATE"` |
 | [array](../reference/types/array.md) | `{1, 2, 3}` | Empty array `{}` is empty | `"A"` | `"ARRAY"` |
-| [object](../reference/types/object.md) | [`CreateLocal()`](../reference/functions/CreateLocal.md) | Always non-empty | `"O"` | `"OBJECT"` |
-| expando ([`SSLExpando`](../reference/classes/SSLExpando.md)) | [`CreateUdObject()`](../reference/functions/CreateUdObject.md) | Always non-empty | `"B"` | `"OBJECT"` |
+| [object](../reference/types/object.md) (class instance) | [`CreateUdObject("ClassName")`](../reference/functions/CreateUdObject.md) for a user-defined class, `Email{}` for a built-in class | Always non-empty | `"O"` | `"OBJECT"` |
+| dynamic object ([`SSLExpando`](../reference/classes/SSLExpando.md)) | [`CreateUdObject()`](../reference/functions/CreateUdObject.md) or `CreateUdObject({{"prop", value}})` | Always non-empty | `"B"` | `"OBJECT"` |
 | [codeblock](../reference/types/codeblock.md) | `{|param| expression}` | Never empty once created | `"UI"` | `"CODEBLOCK"` |
 | [netobject](../reference/types/netobject.md) | [`MakeNETObject(...)`](../reference/functions/MakeNETObject.md) | Empty only when the wrapped reference is null | `"O"` | `"OBJECT"` |
 | [`NIL`](../reference/literals/nil.md) | [`NIL`](../reference/literals/nil.md) | Always empty | `"U"` for the literal expression `"NIL"` only; see [Type checking](#type-checking) | `"NIL"` |
@@ -44,7 +44,7 @@ Re-declaring an existing variable with [`:DECLARE`](../reference/keywords/DECLAR
 
 | Function | Purpose |
 |----------|---------|
-| [`LimsType`](../reference/functions/LimsType.md)(sName) | Takes a **string** holding a variable name or expression, such as `LimsType("sMyVar")`, and returns a type code: `"C"`, `"N"`, `"A"`, `"D"`, `"L"`, `"B"` (expando), `"O"`, `"U"` (undeclared name, or the literal expression `"NIL"`), `"UE"` (evaluation error), or `"UI"` (unrecognized, such as a code block). A non-string argument raises an error. |
+| [`LimsType`](../reference/functions/LimsType.md)(sName) | Takes a **string** holding a variable name or expression, such as `LimsType("sMyVar")`, and returns a type code: `"C"`, `"N"`, `"A"`, `"D"`, `"L"`, `"B"` (dynamic object, `SSLExpando`), `"O"`, `"U"` (undeclared name, or the literal expression `"NIL"`), `"UE"` (evaluation error), or `"UI"` (unrecognized, such as a code block). A non-string argument raises an error. |
 | [`LimsTypeEx`](../reference/functions/LimsTypeEx.md)(x) | Extended type info (returns full type name like `"NUMERIC"`, `"STRING"`, etc.) |
 | [`IsNumeric`](../reference/functions/IsNumeric.md)(x) | True if value is numeric or numeric string |
 | [`Empty`](../reference/functions/Empty.md)(x) | True if value is empty for its type |

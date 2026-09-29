@@ -42,7 +42,7 @@ CreateLocal(sVarName, [vVarValue])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sVarName` is [`NIL`](../literals/nil.md). | `Argument sVarName cannot be null.` |
+| `sVarName` is omitted, as in `CreateLocal()`, or is [`NIL`](../literals/nil.md). | `Argument varName cannot be null. CreateLocal().` followed by `Parameter name: varName` on a second line |
 | `sVarName` is not a string. | `Argument sVarName must be a string.` |
 
 ## Best practices
@@ -56,6 +56,7 @@ CreateLocal(sVarName, [vVarValue])
     - Pass a number, array, object, or [`NIL`](../literals/nil.md) as `sVarName`.
     - Use `CreateLocal` for values that must be shared outside the current local scope. Use [`CreatePublic`](CreatePublic.md) for that.
     - Assume omitting `vVarValue` makes the function return an empty string. It initializes the local to `""`, but the call itself does not return that value.
+    - Call `CreateLocal()` with no arguments to create an object. It raises `Argument varName cannot be null.` instead. Use [`CreateUdObject()`](CreateUdObject.md) for a dynamic object.
 
 ## Caveats
 
@@ -161,6 +162,7 @@ Outer after nested call: outer
 ## Related
 
 - [`CreatePublic`](CreatePublic.md)
+- [`CreateUdObject`](CreateUdObject.md)
 - [`GetByName`](GetByName.md)
 - [`IsDefined`](IsDefined.md)
 - [`SetByName`](SetByName.md)

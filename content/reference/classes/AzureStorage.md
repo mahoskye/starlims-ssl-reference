@@ -366,7 +366,7 @@ Create a table if needed, build a single entity, and insert it.
 
 	oAzure:CreateTable(sTableName);
 
-	oCustomer := CreateLocal();
+	oCustomer := CreateUdObject();
 	oCustomer:PartitionKey := "CUSTOMER";
 	oCustomer:RowKey := "CUST001";
 	oCustomer:CompanyName := "Acme Corp";
@@ -401,7 +401,7 @@ Use an equality-based filter with `SelectEntities()`, then update one returned e
 	sTableName := "ProductInventory";
 	oAzure := AzureStorage{"InventoryConnection"};
 
-	oFilter := CreateLocal();
+	oFilter := CreateUdObject();
 	oFilter:Status := "LOW";
 	oFilter:Warehouse := {"MAIN", "BACKUP"};
 
@@ -482,7 +482,7 @@ DoProc("ManageDocumentStorage");
 
 ## Related
 
-- [`CreateLocal`](../functions/CreateLocal.md)
+- [`CreateUdObject`](../functions/CreateUdObject.md)
 - [`GetLastSSLError`](../functions/GetLastSSLError.md)
 - [`SSLExpando`](SSLExpando.md)
 - [`SSLError`](SSLError.md)

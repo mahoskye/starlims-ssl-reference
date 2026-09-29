@@ -150,7 +150,7 @@ Converts `nBatchNo` to a string with [`LimsString`](../functions/LimsString.md) 
     bFound := LimsString(nBatchNo) $ sText;
     UsrMes("Explicit conversion result: " + LimsString(bFound));
 
-    vValue := CreateLocal();
+    vValue := CreateUdObject();
 
     :TRY;
         bFound := "Batch" $ vValue;

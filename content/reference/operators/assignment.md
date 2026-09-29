@@ -110,7 +110,7 @@ Updates `oTask:Status` via property assignment and `aSteps[3]` via index assignm
 :PROCEDURE UpdateTaskState;
     :DECLARE oTask, aSteps;
 
-    oTask := CreateLocal();
+    oTask := CreateUdObject();
     aSteps := {"Queued", "Running", "Pending Review"};
 
     oTask:Status := "Running";

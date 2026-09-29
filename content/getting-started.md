@@ -187,7 +187,7 @@ The [`=`](reference/operators/equals.md) operator on strings does **prefix match
 | [`boolean`](reference/types/boolean.md) | [`.T.`](reference/literals/true.md), [`.F.`](reference/literals/false.md) | True/false values |
 | [`date`](reference/types/date.md) | [`Today()`](reference/functions/Today.md) | Calendar dates |
 | [`array`](reference/types/array.md) | `{1, 2, 3}` | Ordered collections, 1-based indexing |
-| [`object`](reference/types/object.md) | [`CreateLocal()`](reference/functions/CreateLocal.md) | Dynamic property bags |
+| [`object`](reference/types/object.md) | [`CreateUdObject()`](reference/functions/CreateUdObject.md) | Dynamic property bags |
 | [`NIL`](reference/literals/nil.md) | [`NIL`](reference/literals/nil.md) | Absence of value |
 
 ## Next steps
