@@ -121,27 +121,49 @@ SQL `IN (...)` clauses need special handling because you can't use a single `?` 
 
 #### PrepareArrayForIn
 
-Sanitizes an array for use with a parameterized `IN` clause. It modifies the array in place — replacing empty string elements with a sentinel value that matches nothing, and appending a typed sentinel for empty arrays so the query stays syntactically valid.
+Sanitizes an array for use with a parameterized `IN` clause. It modifies the array you pass in place, so there is nothing to assign: each empty-string element is replaced with a string sentinel that matches nothing, and an empty array gains one sentinel of the requested type:
+
+```ssl
+:DECLARE aSampleIds, aOrderIds;
+
+/* A populated array with a blank entry, for example from an empty form field;
+aSampleIds := {"S-001", "", "S-003"};
+PrepareArrayForIn(aSampleIds, "string");
+UsrMes(aSampleIds[2]);
+
+/* An empty array;
+aOrderIds := {};
+PrepareArrayForIn(aOrderIds, "numeric");
+UsrMes(LimsString(ALen(aOrderIds)) + " element: " + LimsString(aOrderIds[1]));
+```
+
+`UsrMes` logs:
+
+```text
+C7082BA7C83D38CAE98421BE494753931F8B52A8
+1 element: -2147483648
+```
+
+The sentinel is what keeps an `IN (...)` query valid on MS SQL Server. Without it, an empty array would give you no placeholders and the statement would end in `IN ()`, which is a syntax error. After `PrepareArrayForIn`, the array always has at least one element, so the placeholder list has at least one `?`. The sentinel value matches no real row, so the query runs and returns no rows. Replacing `""` works the same way: a blank entry can no longer match rows whose column holds an empty string.
+
+Build the placeholder list from the prepared array:
 
 ```ssl
 :DECLARE aSampleIds, sTemp, sPlaceholders, sSQL, aResults;
 
-/* Build the array of values to match;
-aSampleIds := {"S-001", "S-002", "S-003"};
-
-/* Prepare the array — replaces empty strings with sentinels;
+/* The list to match, which may arrive empty;
+aSampleIds := {};
 PrepareArrayForIn(aSampleIds, "string");
-/* Array is now: {"S-001", "S-002", "S-003"} (unchanged, no empties);
 
-/* Build matching ? placeholders: ?,?,?;
+/* One ? per element, so at least one;
 sTemp         := Replicate("?,", ALen(aSampleIds));
 sPlaceholders := Left(sTemp, Len(sTemp) - 1);
-/* sPlaceholders = "?,?,?";
 
 /* Use with parameterized query;
 sSQL := "SELECT sample_id, status FROM samples";
 sSQL := sSQL + " WHERE sample_id IN (" + sPlaceholders + ")";
 
+/* Runs as WHERE sample_id IN (?) and returns no rows;
 aResults := LSelect1(sSQL,, aSampleIds);
 ```
 
@@ -342,17 +364,24 @@ See the [`SQLExecute` reference](../reference/functions/SQLExecute.md) for a ful
 
 ## SQL injection protection
 
-SSL includes a [`DetectSqlInjections`](../reference/functions/DetectSqlInjections.md) function that can be enabled per connection to detect suspicious patterns:
+SSL can check the SQL text sent on a connection for suspicious patterns, such as comments and misplaced semicolons. [`DetectSqlInjections`](../reference/functions/DetectSqlInjections.md) turns that check on or off per connection and returns the previous state. Detection is on by default. If a block of code depends on it, save the previous state, make sure detection is on, and restore the saved state when the block ends. Don't finish with `DetectSqlInjections(.F.)`: detection was already on, so that would switch off a protection the rest of the code relies on:
 
 ```ssl
-/* Enable injection detection on the default connection;
-DetectSqlInjections(.T.);
+:DECLARE bPrev, aRows, oErr;
 
-/* Your queries run with detection active;
-RunSQL(sUserSuppliedSQL);
+/* Detection is on by default, make sure it stays on for this block;
+bPrev := DetectSqlInjections(.T.);
 
-/* Disable when done;
-DetectSqlInjections(.F.);
+:TRY;
+    /* User input travels as a bound value, never as SQL text;
+    aRows := LSelect1("SELECT sample_id, status FROM samples WHERE sample_id = ?",, {sUserSampleId});
+:CATCH;
+    oErr := GetLastSSLError();
+    ErrorMes("Sample lookup failed: " + oErr:Description);
+:FINALLY;
+    /* Restore the state the caller had;
+    DetectSqlInjections(bPrev);
+:ENDTRY;
 ```
 
 However, **parameterized queries are the primary defense**. [`DetectSqlInjections`](../reference/functions/DetectSqlInjections.md) is a secondary safeguard, not a replacement for proper parameter binding.

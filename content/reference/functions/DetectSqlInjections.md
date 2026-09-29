@@ -15,7 +15,7 @@ Enables or disables SQL injection detection for a database connection and return
 
 `DetectSqlInjections` changes the SQL injection detection flag on a specific database connection and returns the flag's earlier value. Pass [`.T.`](../literals/true.md) to enable detection or [`.F.`](../literals/false.md) to disable it. If `sConnectionName` is omitted, empty, or not a string, the function targets the current default connection. If `bEnable` is not a boolean value, the function treats it as enabled.
 
-The change applies immediately to the selected connection. The return value is the prior state, which makes it useful for temporary changes that need to be restored later.
+Detection is on by default. The change applies immediately to the selected connection. The return value is the prior state, which makes it useful for temporary changes that need to be restored later: restore the saved value rather than passing a hard-coded [`.F.`](../literals/false.md), which would switch off detection that was on before your code ran.
 
 When detection is enabled, later SQL sent through that connection is checked for SQL comments and misplaced semicolons. `CREATE ...` statements are excluded from that semicolon check.
 
@@ -53,12 +53,14 @@ DetectSqlInjections(bEnable, [sConnectionName])
 !!! success "Do"
     - Pass an explicit [`.T.`](../literals/true.md) or [`.F.`](../literals/false.md) for `bEnable`.
     - Store the returned value when you plan to restore the original setting later.
+    - Restore that saved value when the block ends, typically in [`:FINALLY`](../keywords/FINALLY.md).
     - Pass a specific `sConnectionName` when a script should not depend on the current default connection.
 
 !!! failure "Don't"
     - Rely on non-boolean values for `bEnable`. They are treated as enabled, which can hide mistakes.
     - Pass an unvalidated or unintended connection name in security-sensitive code.
     - Assume the return value is the new state. It reports the previous state only.
+    - End a block with `DetectSqlInjections(.F.)` to "undo" an earlier `DetectSqlInjections(.T.)`. Detection is on by default, so this switches it off for all later SQL on that connection.
 
 ## Caveats
 
@@ -168,10 +170,10 @@ Enables SQL injection detection on each connection in a list and tracks which on
 DoProc("NormalizeDetectionSettings");
 ```
 
-[`UsrMes`](UsrMes.md) logs:
+[`UsrMes`](UsrMes.md) logs the number of connections where detection had been switched off. Detection is on by default, so when no code has changed it:
 
 ```text
-Connections changed: 3
+Connections changed: 0
 ```
 
 ## Related

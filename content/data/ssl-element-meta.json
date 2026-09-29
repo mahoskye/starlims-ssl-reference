@@ -2387,12 +2387,14 @@
         "do": [
           "Pass an explicit .T. or .F. for bEnable.",
           "Store the returned value when you plan to restore the original setting later.",
+          "Restore that saved value when the block ends, typically in :FINALLY.",
           "Pass a specific sConnectionName when a script should not depend on the current default connection."
         ],
         "dont": [
           "Rely on non-boolean values for bEnable. They are treated as enabled, which can hide mistakes.",
           "Pass an unvalidated or unintended connection name in security-sensitive code.",
-          "Assume the return value is the new state. It reports the previous state only."
+          "Assume the return value is the new state. It reports the previous state only.",
+          "End a block with DetectSqlInjections(.F.) to \"undo\" an earlier DetectSqlInjections(.T.). Detection is on by default, so this switches it off for all later SQL on that connection."
         ]
       }
     },
