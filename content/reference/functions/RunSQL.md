@@ -15,7 +15,7 @@ Executes a SQL statement and returns whether execution completed without an unca
 
 `RunSQL` is the non-query database helper for SQL that changes data or schema. It executes the SQL text on the specified connection, or on the default connection when `sConnectionName` is omitted. Use positional `?` placeholders in the SQL text and pass the corresponding values in `aValues`.
 
-The function returns [`.T.`](../literals/true.md) when execution succeeds. If SQL error ignoring is enabled, `RunSQL` can return [`.F.`](../literals/false.md) instead of raising for a handled SQL error. When that happens, inspect [`GetLastSQLError`](GetLastSQLError.md) for details. `RunSQL` does not return rows; use [`LSearch`](LSearch.md), [`LSelect`](LSelect.md), [`LSelect1`](LSelect1.md), [`LSelectC`](LSelectC.md), or [`SQLExecute`](SQLExecute.md) when you need query results.
+The function returns [`.T.`](../literals/true.md) when execution succeeds. What happens on failure depends on two global flags, [`IgnoreSqlErrors`](IgnoreSqlErrors.md) and [`ShowSqlErrors`](ShowSqlErrors.md), which both start at [`.T.`](../literals/true.md). SQL error ignoring is therefore on by default, and `ShowSqlErrors` decides the outcome: while it is [`.T.`](../literals/true.md), a failing statement raises an error that you handle with [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md). Only when `ShowSqlErrors` is [`.F.`](../literals/false.md) (and ignoring is still on) does `RunSQL` return [`.F.`](../literals/false.md) instead. The error details are then available from [`GetLastSQLError`](GetLastSQLError.md), not [`GetLastSSLError`](GetLastSSLError.md). `RunSQL` does not return rows; use [`LSearch`](LSearch.md), [`LSelect`](LSelect.md), [`LSelect1`](LSelect1.md), [`LSelectC`](LSelectC.md), or [`SQLExecute`](SQLExecute.md) when you need query results.
 
 ## When to use
 
@@ -40,7 +40,7 @@ RunSQL(sCommandString, [sConnectionName], [aValues])
 
 ## Returns
 
-**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the statement executes successfully; [`.F.`](../literals/false.md) when a handled SQL error occurs while SQL error ignoring is enabled (check [`GetLastSQLError`](GetLastSQLError.md) for details).
+**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the statement executes successfully; [`.F.`](../literals/false.md) when the statement fails while [`ShowSqlErrors`](ShowSqlErrors.md) is [`.F.`](../literals/false.md) and [`IgnoreSqlErrors`](IgnoreSqlErrors.md) is [`.T.`](../literals/true.md) (check [`GetLastSQLError`](GetLastSQLError.md) for details). Under the default settings a failure raises instead of returning [`.F.`](../literals/false.md).
 
 ## Exceptions
 
@@ -56,13 +56,15 @@ RunSQL(sCommandString, [sConnectionName], [aValues])
 
 !!! success "Do"
     - Use positional `?` placeholders with `aValues` instead of building values directly into SQL text.
-    - Check the boolean result when your script enables SQL error ignoring.
+    - Wrap the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) to handle failures under the default settings.
+    - Check the boolean result only when your script has turned [`ShowSqlErrors`](ShowSqlErrors.md) off, and restore the saved flag values in [`:FINALLY`](../keywords/FINALLY.md).
     - Use [`LimsRecordsAffected`](LimsRecordsAffected.md) after a successful call when row-count validation matters.
     - Use a transaction when several `RunSQL` calls must succeed or fail together.
 
 !!! failure "Don't"
     - Use `?varName?` syntax with `RunSQL`; that form is for [`SQLExecute`](SQLExecute.md) only.
     - Use `RunSQL` for `SELECT` result retrieval; it does not return rows.
+    - Treat a [`.F.`](../literals/false.md) result as the failure signal under the default settings. A failing statement raises before the check runs.
     - Pass a multidimensional array to `aValues`.
     - Concatenate unchecked input into SQL text when a positional parameter will do the job safely.
 
@@ -70,17 +72,18 @@ RunSQL(sCommandString, [sConnectionName], [aValues])
 
 - `aValues` must line up with the positional `?` placeholders in order.
 - A single third argument such as `sValue` is accepted, but arrays are clearer once more than one parameter is involved.
-- Some SQL errors can still raise even with error ignoring enabled.
+- `IgnoreSqlErrors(.T.)` on its own does not stop a failure from raising, because ignoring is already on by default. `ShowSqlErrors(.F.)` is the setting that makes `RunSQL` return [`.F.`](../literals/false.md).
+- Setting `IgnoreSqlErrors(.F.)` makes failures raise whatever `ShowSqlErrors` is set to.
 
 ## Examples
 
 ### Insert one audit row with positional parameters
 
-Use `?` placeholders to pass three bound values to an `INSERT` statement, avoiding string concatenation entirely.
+Use `?` placeholders to pass three bound values to an `INSERT` statement, avoiding string concatenation entirely. A failed insert raises, so [`:CATCH`](../keywords/CATCH.md) logs it and the procedure returns [`.F.`](../literals/false.md).
 
 ```ssl
 :PROCEDURE InsertAuditEntry;
-    :DECLARE sSQL, sUserName, sAction, sRecordID, bSuccess;
+    :DECLARE sSQL, sUserName, sAction, sRecordID, bSuccess, oErr;
 
     sUserName := "JSMITH";
     sAction := "SAMPLE_APPROVED";
@@ -91,11 +94,18 @@ Use `?` placeholders to pass three bound values to an `INSERT` statement, avoidi
             user_name, action, record_id, log_date
         )
         VALUES (
-            ?, ?, ?, SYSDATE
+            ?, ?, ?, GETDATE()
         )
     ";
 
-    bSuccess := RunSQL(sSQL,, {sUserName, sAction, sRecordID});
+    :TRY;
+        RunSQL(sSQL,, {sUserName, sAction, sRecordID});
+        bSuccess := .T.;
+    :CATCH;
+        oErr := GetLastSSLError();
+        ErrorMes("Audit insert failed: " + oErr:Description);
+        bSuccess := .F.;
+    :ENDTRY;
 
     :RETURN bSuccess;
 :ENDPROC;
@@ -106,27 +116,28 @@ DoProc("InsertAuditEntry");
 
 ### Update one row and verify rows affected
 
-Run an `UPDATE` on a named connection and call [`LimsRecordsAffected`](LimsRecordsAffected.md) to confirm the row was actually found and changed.
+Run an `UPDATE` on a named connection and call [`LimsRecordsAffected`](LimsRecordsAffected.md) to confirm the row was actually found and changed. A failed update is logged in [`:CATCH`](../keywords/CATCH.md) and returns [`.F.`](../literals/false.md).
 
 ```ssl
 :PROCEDURE ReleaseSample;
     :PARAMETERS sSampleID;
-    :DECLARE sSQL, bSuccess, nRows;
+    :DECLARE sSQL, nRows, oErr;
 
     sSQL := "
         UPDATE sample SET
             status = ?,
-            released_date = SYSDATE
+            released_date = GETDATE()
         WHERE sample_id = ?
     ";
 
-    bSuccess := RunSQL(sSQL, "DATABASE", {"RELEASED", sSampleID});
-
-    :IF !bSuccess;
+    :TRY;
+        RunSQL(sSQL, "DATABASE", {"RELEASED", sSampleID});
+        nRows := LimsRecordsAffected();
+    :CATCH;
+        oErr := GetLastSSLError();
+        ErrorMes("Sample release failed: " + oErr:Description);
         :RETURN .F.;
-    :ENDIF;
-
-    nRows := LimsRecordsAffected();
+    :ENDTRY;
 
     :RETURN nRows > 0;
 :ENDPROC;
@@ -135,9 +146,9 @@ Run an `UPDATE` on a named connection and call [`LimsRecordsAffected`](LimsRecor
 DoProc("ReleaseSample", {"SAM-2024-0042"});
 ```
 
-### Ignore SQL errors temporarily and inspect the stored error
+### Return .F. on failure temporarily and inspect the stored error
 
-Enable error ignoring for a best-effort `UPDATE`, then restore the previous settings and surface the stored SQL error if the statement failed.
+Turn [`ShowSqlErrors`](ShowSqlErrors.md) off (keeping [`IgnoreSqlErrors`](IgnoreSqlErrors.md) on) so a best-effort `UPDATE` returns [`.F.`](../literals/false.md) instead of raising, then restore the previous settings and surface the stored SQL error if the statement failed.
 
 ```ssl
 :PROCEDURE TryOptionalUpdate;

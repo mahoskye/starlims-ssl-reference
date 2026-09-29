@@ -6185,9 +6185,9 @@
       "exceptions": [],
       "caveats": [
         "The setting remains in effect for later SQL operations until you change it again.",
-        "If you forget to restore the previous value, unrelated SQL work later in the same execution flow may continue with suppression still enabled.",
+        "If you forget to restore the previous value, unrelated SQL work later in the same execution flow runs with a setting it did not expect.",
         "SQL error suppression is not a substitute for validation, transaction control, or explicit post-operation checks.",
-        "This setting works together with ShowSqlErrors; some SQL errors classified as fatal may still be raised when SQL error display is enabled."
+        "Suppression takes effect only while ShowSqlErrors is .F.. With ShowSqlErrors at its starting value of .T., a failing RunSQL raises whatever this flag is set to."
       ],
       "best_practices": {
         "do": [
@@ -6198,7 +6198,8 @@
         "dont": [
           "Leave SQL error suppression enabled longer than necessary because later SQL failures can be hidden.",
           "Use this as a default error-handling strategy because it can mask real database problems.",
-          "Change this flag without considering ShowSqlErrors when you need predictable SQL error visibility."
+          "Expect IgnoreSqlErrors(.T.) alone to stop a failing RunSQL from raising. It is already on by default. ShowSqlErrors is the flag that decides.",
+          "Restore a hard-coded value instead of the saved one. A caller may have set the flag differently."
         ]
       }
     },
@@ -9083,18 +9084,21 @@
       "caveats": [
         "aValues must line up with the positional ? placeholders in order.",
         "A single third argument such as sValue is accepted, but arrays are clearer once more than one parameter is involved.",
-        "Some SQL errors can still raise even with error ignoring enabled."
+        "IgnoreSqlErrors(.T.) on its own does not stop a failure from raising, because ignoring is already on by default. ShowSqlErrors(.F.) is the setting that makes RunSQL return .F..",
+        "Setting IgnoreSqlErrors(.F.) makes failures raise whatever ShowSqlErrors is set to."
       ],
       "best_practices": {
         "do": [
           "Use positional ? placeholders with aValues instead of building values directly into SQL text.",
-          "Check the boolean result when your script enables SQL error ignoring.",
+          "Wrap the call in :TRY / :CATCH to handle failures under the default settings.",
+          "Check the boolean result only when your script has turned ShowSqlErrors off, and restore the saved flag values in :FINALLY.",
           "Use LimsRecordsAffected after a successful call when row-count validation matters.",
           "Use a transaction when several RunSQL calls must succeed or fail together."
         ],
         "dont": [
           "Use ?varName? syntax with RunSQL; that form is for SQLExecute only.",
           "Use RunSQL for SELECT result retrieval; it does not return rows.",
+          "Treat a .F. result as the failure signal under the default settings. A failing statement raises before the check runs.",
           "Pass a multidimensional array to aValues.",
           "Concatenate unchecked input into SQL text when a positional parameter will do the job safely."
         ]
@@ -9965,13 +9969,14 @@
       "id": "ssl.function.showsqlerrors",
       "element_type": "function",
       "title": "ShowSqlErrors",
-      "summary": "Sets the SQL error display flag and returns the previous setting.",
+      "summary": "Sets the SQL error display flag, which decides whether a failing RunSQL raises, and returns the previous setting.",
       "doc_status": "published",
       "source_path": "content/reference/functions/ShowSqlErrors.md",
       "exceptions": [],
       "caveats": [
         "The setting remains in effect for later SQL work until you change it again.",
-        "This setting can affect behavior together with IgnoreSqlErrors. Fatal SQL errors can still be raised when SQL error suppression is enabled if SQL error display is also enabled."
+        "This setting works together with IgnoreSqlErrors. With both at their starting value of .T., a failing RunSQL raises. It returns .F. only when this flag is .F. and IgnoreSqlErrors is .T.. If IgnoreSqlErrors is .F., failures raise whatever this flag is set to.",
+        "After a .F. return, the error is in GetLastSQLError. Nothing is stored for GetLastSSLError."
       ],
       "best_practices": {
         "do": [

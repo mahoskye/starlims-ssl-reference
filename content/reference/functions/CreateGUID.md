@@ -147,12 +147,13 @@ Generates one batch GUID shared across all rows and one unique row GUID per item
 :PROCEDURE SaveImportRows;
 	:PARAMETERS nCount;
 	:DEFAULT nCount, 100;
-	:DECLARE oBatch, aRows, sSQL, bInserted, oRow;
-	:DECLARE nIndex, nRowCount;
+	:DECLARE oBatch, aRows, sSQL, oRow, oErr;
+	:DECLARE nIndex, nRowCount, nSaved;
 
 	oBatch := DoProc("PrepareImportRows", {nCount});
 	aRows := oBatch:rows;
 	nRowCount := Len(aRows);
+	nSaved := 0;
 
 	sSQL := "
 			INSERT INTO import_queue (batch_id, row_id, ROW_NUMBER)
@@ -162,16 +163,19 @@ Generates one batch GUID shared across all rows and one unique row GUID per item
 	:FOR nIndex := 1 :TO nRowCount;
 		oRow := aRows[nIndex];
 
-		bInserted := RunSQL(sSQL,, {oRow:batchId, oRow:rowId, oRow:rowNumber});
-
-		:IF !bInserted;
-			ErrorMes("Failed to insert import row: " + oRow:rowId);
-			/* Logs an insert failure with the row ID;
-		:ENDIF;
+		:TRY;
+			RunSQL(sSQL,, {oRow:batchId, oRow:rowId, oRow:rowNumber});
+			nSaved += 1;
+		:CATCH;
+			oErr := GetLastSSLError();
+			ErrorMes("Failed to insert import row " + oRow:rowId + ": "
+					+ oErr:Description);
+			/* Logs an insert failure with the row ID and the reason;
+		:ENDTRY;
 	:NEXT;
 
-	UsrMes("Saved " + LimsString(nRowCount) + " import rows for batch "
-			+ oBatch:batchId);
+	UsrMes("Saved " + LimsString(nSaved) + " of " + LimsString(nRowCount)
+			+ " import rows for batch " + oBatch:batchId);
 	/* Logs the saved batch summary;
 :ENDPROC;
 

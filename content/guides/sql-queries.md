@@ -239,15 +239,17 @@ If the query returns no rows, [`LSelect1`](../reference/functions/LSelect1.md) r
 
 ### RunSQL — execute statements
 
-Returns [`.T.`](../reference/literals/true.md) on success. Error behavior depends on [`IgnoreSqlErrors`](../reference/functions/IgnoreSqlErrors.md) and [`ShowSqlErrors`](../reference/functions/ShowSqlErrors.md) flags (see [SQL & Transactions guide](sql-transactions.md#sql-error-handling)).
+Returns [`.T.`](../reference/literals/true.md) on success. Error behavior depends on the [`IgnoreSqlErrors`](../reference/functions/IgnoreSqlErrors.md) and [`ShowSqlErrors`](../reference/functions/ShowSqlErrors.md) flags (see [SQL & Transactions guide](sql-transactions.md#sql-error-handling)). Under their starting values a failing statement raises instead of returning [`.F.`](../reference/literals/false.md), so handle failures with [`:TRY`](../reference/keywords/TRY.md) / [`:CATCH`](../reference/keywords/CATCH.md):
 
 ```ssl
-:DECLARE bOk;
+:DECLARE oErr;
 
-bOk := RunSQL("INSERT INTO audit_log (action, ts) VALUES (?, ?)",, {"LOGIN", DToS(Now())});
-:IF !bOk;
-    ErrorMes("Audit log insert failed");
-:ENDIF;
+:TRY;
+    RunSQL("INSERT INTO audit_log (action, ts) VALUES (?, ?)",, {"LOGIN", DToS(Now())});
+:CATCH;
+    oErr := GetLastSSLError();
+    ErrorMes("Audit log insert failed: " + oErr:Description);
+:ENDTRY;
 ```
 
 ### GetDataSet — XML output

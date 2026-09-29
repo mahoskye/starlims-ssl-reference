@@ -138,10 +138,11 @@ step uses the same date.
 
 ```ssl
 :PROCEDURE StampReviewDate;
-	:DECLARE dReviewDate, sSQL, bUpdated, sSampleID, sMessage;
+	:DECLARE dReviewDate, sSQL, bUpdated, sSampleID, sMessage, oErr;
 
 	dReviewDate := Today();
 	sSampleID := "S-1001";
+	bUpdated := .F.;
 
 	sSQL := "
 	    UPDATE sample SET
@@ -150,13 +151,15 @@ step uses the same date.
 	    WHERE sample_id = ?
 	";
 
-	bUpdated := RunSQL(sSQL,, {dReviewDate, "Reviewed", sSampleID});
-
-	:IF bUpdated;
+	:TRY;
+		RunSQL(sSQL,, {dReviewDate, "Reviewed", sSampleID});
+		bUpdated := .T.;
 		sMessage := "Sample " + sSampleID + " reviewed on " + DToC(dReviewDate);
-	:ELSE;
-		sMessage := "Review update failed for sample " + sSampleID;
-	:ENDIF;
+	:CATCH;
+		oErr := GetLastSSLError();
+		sMessage := "Review update failed for sample " + sSampleID + ": "
+			+ oErr:Description;
+	:ENDTRY;
 
 	UsrMes(sMessage);
 
@@ -171,7 +174,7 @@ DoProc("StampReviewDate");
 
 ```text
 Sample S-1001 reviewed on <date>
-Review update failed for sample S-1001
+Review update failed for sample S-1001: <database error>
 ```
 
 ## Related

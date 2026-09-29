@@ -134,7 +134,7 @@ starlims:
 | [PrepareArrayForIn](PrepareArrayForIn.md) | Fills an array's missing or empty entries with type-appropriate default values in place. |
 | [RetrieveLong](RetrieveLong.md) | Retrieves large binary or text data from a database column and writes it to a file. |
 | [ReturnLastSQLError](ReturnLastSQLError.md) | Retrieves the most recent SQL error that occurred during a database operation. |
-| [ShowSqlErrors](ShowSqlErrors.md) | Alters the application-wide setting that determines whether SQL errors are visibly displayed to users. |
+| [ShowSqlErrors](ShowSqlErrors.md) | Sets the SQL error display flag, which decides whether a failing RunSQL raises, and returns the previous setting. |
 | [SQLRemoveComments](SQLRemoveComments.md) | Removes all comments from an SQL statement, returning the cleaned result. |
 | [UpdLong](UpdLong.md) | Updates a large field value in a database table from the contents of a file, using search criteria for row selection. |
 | [XmlExportSql](XmlExportSql.md) | Exports SQL query results to an XML file on disk, returning an empty string on success or an error message if failed. |

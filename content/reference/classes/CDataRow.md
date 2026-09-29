@@ -175,12 +175,12 @@ DoProc("AddSampleRow", {oTable, "S-001", "Logged"});
 
 ### Save a row with the table SQL helpers
 
-Pairs `ToArrayForInsert()` or `ToArrayForUpdate()` with the matching SQL string from the table. Both helpers produce arrays whose column ordering matches what the table SQL methods generate, making them safe to pass directly to [`RunSQL`](../functions/RunSQL.md).
+Pairs `ToArrayForInsert()` or `ToArrayForUpdate()` with the matching SQL string from the table. Both helpers produce arrays whose column ordering matches what the table SQL methods generate, making them safe to pass directly to [`RunSQL`](../functions/RunSQL.md). A failed statement raises, so [`:CATCH`](../keywords/CATCH.md) logs it and the procedure returns [`.F.`](../literals/false.md).
 
 ```ssl
 :PROCEDURE SaveRow;
 	:PARAMETERS oTable, oRow, bInsert;
-	:DECLARE sSQL, aParams, bSuccess;
+	:DECLARE sSQL, aParams, bSuccess, oErr;
 
 	:IF bInsert;
 		sSQL := oTable:GetInsertSql();
@@ -190,7 +190,14 @@ Pairs `ToArrayForInsert()` or `ToArrayForUpdate()` with the matching SQL string 
 		aParams := oRow:ToArrayForUpdate();
 	:ENDIF;
 
-	bSuccess := RunSQL(sSQL,, aParams);
+	:TRY;
+		RunSQL(sSQL,, aParams);
+		bSuccess := .T.;
+	:CATCH;
+		oErr := GetLastSSLError();
+		ErrorMes("Row save failed: " + oErr:Description);
+		bSuccess := .F.;
+	:ENDTRY;
 
 	:RETURN bSuccess;
 :ENDPROC;

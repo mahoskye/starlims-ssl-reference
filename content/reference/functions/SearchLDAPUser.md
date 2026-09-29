@@ -158,7 +158,7 @@ Use `SearchLDAPUser` as the lookup step in a larger workflow, then persist the r
 :PROCEDURE ResolveAndStoreUserDn;
     :PARAMETERS sSearchUserName;
     :DECLARE sLdapHost, nLdapPort, sBindUserName, sBindUserPassword;
-    :DECLARE sBaseDn, sUserDn, oErr, bUpdated;
+    :DECLARE sBaseDn, sUserDn, oErr;
 
     sLdapHost := "ldap.example.com";
     nLdapPort := 389;
@@ -178,22 +178,17 @@ Use `SearchLDAPUser` as the lookup step in a larger workflow, then persist the r
             .F.
         );
 
-        bUpdated := RunSQL("
+        RunSQL("
             UPDATE lims_user_profile SET
                 ldap_dn = ?
             WHERE username = ?
         ",, {sUserDn, sSearchUserName});
 
-        :IF bUpdated;
-            /* Logs the successful update target;
-            UsrMes("Stored LDAP DN for " + sSearchUserName);
-        :ELSE;
-            /* Logs the user name that could not be stored;
-            ErrorMes("Could not store LDAP DN for " + sSearchUserName);
-        :ENDIF;
+        /* Logs the successful update target;
+        UsrMes("Stored LDAP DN for " + sSearchUserName);
     :CATCH;
         oErr := GetLastSSLError();
-        /* Logs the workflow failure reason;
+        /* Logs the workflow failure reason, a failed lookup or a failed update;
         ErrorMes("LDAP workflow failed: " + oErr:Description);
     :ENDTRY;
 :ENDPROC;

@@ -64,25 +64,32 @@ This function takes no parameters.
 
 ### Control table updates with UpdatingTable
 
-Creates an ORM session and assigns a code block to `UpdatingTable` that permits updates only on the `ORDTASK` table through the `LIMS` connection. The [`RunSQL`](RunSQL.md) call triggers the check, which allows or blocks the update based on the table and connection name.
+Creates an ORM session and assigns a code block to `UpdatingTable` that permits updates only on the `ORDTASK` table through the `LIMS` connection. The [`RunSQL`](RunSQL.md) call triggers the check, which allows or blocks the update based on the table and connection name. A blocked update raises, so [`:CATCH`](../keywords/CATCH.md) logs the reason and the procedure returns [`.F.`](../literals/false.md).
 
 ```ssl
 :PROCEDURE UpdateAllowedTable;
 	:PARAMETERS nTaskID, sNewStatus;
-	:DECLARE oOrmSession, bUpdated;
+	:DECLARE oOrmSession, bUpdated, oErr;
 
-	oOrmSession := CreateORMSession;
+	oOrmSession := CreateORMSession();
 
 	oOrmSession:UpdatingTable := {|sTableName, sConnectionName|
 		Upper(sTableName) == "ORDTASK"
 			.AND. sConnectionName == "LIMS"
 	};
 
-	bUpdated := RunSQL("
-		UPDATE ordtask SET
-			status = ?
-		WHERE task_id = ?
-	", "LIMS", {sNewStatus, nTaskID});
+	:TRY;
+		RunSQL("
+			UPDATE ordtask SET
+				status = ?
+			WHERE task_id = ?
+		", "LIMS", {sNewStatus, nTaskID});
+		bUpdated := .T.;
+	:CATCH;
+		oErr := GetLastSSLError();
+		ErrorMes("Task update failed: " + oErr:Description);
+		bUpdated := .F.;
+	:ENDTRY;
 
 	:RETURN bUpdated;
 :ENDPROC;
