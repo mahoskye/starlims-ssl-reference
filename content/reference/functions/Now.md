@@ -113,14 +113,15 @@ DoProc("MeasureElapsedTime");
 
 ### Use one captured timestamp across a SQL update and follow-up message
 
-Capture `Now()` once so both the SQL update and the confirmation message use the same timestamp. The message reflects whether the update succeeded.
+Capture `Now()` once so both the SQL update and the confirmation message use the same timestamp. The message reflects whether the update succeeded: a failed update raises, and [`:CATCH`](../keywords/CATCH.md) records the reason.
 
 ```ssl
 :PROCEDURE StampReleasedSamples;
-	:DECLARE dReleasedAt, sSQL, bSuccess, sMessage, sStatus;
+	:DECLARE dReleasedAt, sSQL, bSuccess, sMessage, sStatus, oErr;
 
 	dReleasedAt := Now();
 	sStatus := "Released";
+	bSuccess := .F.;
 	sSQL := "
 	    UPDATE sample SET
 	        released_at = ?,
@@ -128,13 +129,14 @@ Capture `Now()` once so both the SQL update and the confirmation message use the
 	    WHERE sample_id = ?
 	";
 
-	bSuccess := RunSQL(sSQL,, {dReleasedAt, sStatus, "S-1001"});
-
-	:IF bSuccess;
+	:TRY;
+		RunSQL(sSQL,, {dReleasedAt, sStatus, "S-1001"});
+		bSuccess := .T.;
 		sMessage := "Sample released at " + LimsString(dReleasedAt);
-	:ELSE;
-		sMessage := "Sample release update failed";
-	:ENDIF;
+	:CATCH;
+		oErr := GetLastSSLError();
+		sMessage := "Sample release update failed: " + oErr:Description;
+	:ENDTRY;
 
 	UsrMes(sMessage);
 
@@ -154,7 +156,7 @@ Sample released at 04/23/2026 14:30:00
 or:
 
 ```text
-Sample release update failed
+Sample release update failed: <database error>
 ```
 
 ## Related

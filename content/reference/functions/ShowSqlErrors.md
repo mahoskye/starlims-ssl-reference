@@ -1,6 +1,6 @@
 ---
 title: "ShowSqlErrors"
-summary: "Sets the SQL error display flag and returns the previous setting."
+summary: "Sets the SQL error display flag, which decides whether a failing RunSQL raises, and returns the previous setting."
 id: ssl.function.showsqlerrors
 element_type: function
 doc_status: published
@@ -11,12 +11,15 @@ starlims:
 
 # ShowSqlErrors
 
-Sets the SQL error display flag and returns the previous setting.
+Sets the SQL error display flag, which decides whether a failing RunSQL raises, and returns the previous setting.
 
 `ShowSqlErrors(bEnable)` updates the current SQL error display setting to the boolean value you pass and returns the value that was in effect before the change. This makes it useful for temporary changes around a specific block of database work where you want to restore the earlier behavior afterward.
 
+The flag starts at [`.T.`](../literals/true.md). While it is [`.T.`](../literals/true.md), a failing [`RunSQL`](RunSQL.md) raises an error, even though [`IgnoreSqlErrors`](IgnoreSqlErrors.md) is also [`.T.`](../literals/true.md) by default. Set it to [`.F.`](../literals/false.md) and, as long as `IgnoreSqlErrors` is still [`.T.`](../literals/true.md), `RunSQL` returns [`.F.`](../literals/false.md) instead, with the error details in [`GetLastSQLError`](GetLastSQLError.md).
+
 ## When to use
 
+- When a best-effort block should get [`.F.`](../literals/false.md) back from a failing [`RunSQL`](RunSQL.md) instead of an error.
 - When you want to temporarily enable SQL error display while diagnosing a database problem.
 - When you need to restore the earlier SQL error display setting after a small, controlled section of work.
 - When you are coordinating SQL error display with [`IgnoreSqlErrors`](IgnoreSqlErrors.md) in maintenance or troubleshooting flows.
@@ -31,7 +34,7 @@ ShowSqlErrors(bEnable)
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bEnable` | [boolean](../types/boolean.md) | yes | — | [`.T.`](../literals/true.md) enables SQL error display. [`.F.`](../literals/false.md) disables it. |
+| `bEnable` | [boolean](../types/boolean.md) | yes | — | [`.T.`](../literals/true.md) (the starting value) enables SQL error display, so a failing [`RunSQL`](RunSQL.md) raises. [`.F.`](../literals/false.md) disables it, so a failing `RunSQL` returns [`.F.`](../literals/false.md) while [`IgnoreSqlErrors`](IgnoreSqlErrors.md) is [`.T.`](../literals/true.md). |
 
 ## Returns
 
@@ -52,7 +55,8 @@ ShowSqlErrors(bEnable)
 ## Caveats
 
 - The setting remains in effect for later SQL work until you change it again.
-- This setting can affect behavior together with [`IgnoreSqlErrors`](IgnoreSqlErrors.md). Fatal SQL errors can still be raised when SQL error suppression is enabled if SQL error display is also enabled.
+- This setting works together with [`IgnoreSqlErrors`](IgnoreSqlErrors.md). With both at their starting value of [`.T.`](../literals/true.md), a failing [`RunSQL`](RunSQL.md) raises. It returns [`.F.`](../literals/false.md) only when this flag is [`.F.`](../literals/false.md) and `IgnoreSqlErrors` is [`.T.`](../literals/true.md). If `IgnoreSqlErrors` is [`.F.`](../literals/false.md), failures raise whatever this flag is set to.
+- After a [`.F.`](../literals/false.md) return, the error is in [`GetLastSQLError`](GetLastSQLError.md). Nothing is stored for [`GetLastSSLError`](GetLastSSLError.md).
 
 ## Examples
 
@@ -89,7 +93,7 @@ DoProc("LookupSampleStatus", {"S-2024-001"});
 
 ### Coordinate SQL error display with IgnoreSqlErrors
 
-Suppress both SQL errors and SQL error display together for a cleanup operation, then restore both original settings in [`:FINALLY`](../keywords/FINALLY.md).
+Turn SQL error display off, with suppression on, so a failing cleanup statement returns [`.F.`](../literals/false.md) instead of raising. Then restore both original settings in [`:FINALLY`](../keywords/FINALLY.md).
 
 ```ssl
 :PROCEDURE RunQuietCleanup;

@@ -85,16 +85,14 @@ sBase64Data := ReadBytesBase64(sFileName);
 
 ### Store a PDF as base64 in a table
 
-Read a PDF file, then save the encoded content with a positional-parameter SQL update.
+Read a PDF file, then save the encoded content with a positional-parameter SQL update. A failed file read or update is handled in [`:CATCH`](../keywords/CATCH.md).
 
 ```ssl
 :PROCEDURE StorePdfBase64;
 	:PARAMETERS sPdfPath, sSampleID;
 	:DEFAULT sPdfPath, "C:\Exports\sample_document.pdf";
 	:DEFAULT sSampleID, "S000123";
-	:DECLARE sPdfBase64, sSQL, bUpdated;
-
-	sPdfBase64 := ReadBytesBase64(sPdfPath);
+	:DECLARE sPdfBase64, sSQL, oErr;
 
 	sSQL := "
 	    UPDATE sample_table SET
@@ -102,13 +100,15 @@ Read a PDF file, then save the encoded content with a positional-parameter SQL u
 	    WHERE sample_id = ?
 	";
 
-	bUpdated := RunSQL(sSQL,, {sPdfBase64, sSampleID});
-
-	:IF bUpdated;
+	:TRY;
+		sPdfBase64 := ReadBytesBase64(sPdfPath);
+		RunSQL(sSQL,, {sPdfBase64, sSampleID});
 		UsrMes("Stored encoded PDF for sample " + sSampleID);
-	:ELSE;
-		ErrorMes("Database update failed for sample " + sSampleID);
-	:ENDIF;
+	:CATCH;
+		oErr := GetLastSSLError();
+		ErrorMes("Could not store the PDF for sample " + sSampleID + ": "
+			+ oErr:Description);
+	:ENDTRY;
 :ENDPROC;
 
 /* Usage;

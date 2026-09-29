@@ -191,38 +191,41 @@ Supported values (case-insensitive):
 
 ### RunSQL behavior on failure
 
-[`RunSQL`](../reference/functions/RunSQL.md) catches database exceptions internally. What happens depends on two global flags:
+What happens when a [`RunSQL`](../reference/functions/RunSQL.md) statement fails depends on two global flags. Both start at [`.T.`](../reference/literals/true.md), so by default a failing statement raises:
 
 | [`IgnoreSqlErrors`](../reference/functions/IgnoreSqlErrors.md) | [`ShowSqlErrors`](../reference/functions/ShowSqlErrors.md) | Behavior |
 |-------------------|-----------------|----------|
-| [`.F.`](../reference/literals/false.md) (default) | — | Exception propagates to caller |
-| [`.T.`](../reference/literals/true.md) | [`.T.`](../reference/literals/true.md) | Fatal errors still propagate; non-fatal returns [`.F.`](../reference/literals/false.md) |
-| [`.T.`](../reference/literals/true.md) | [`.F.`](../reference/literals/false.md) | All errors return [`.F.`](../reference/literals/false.md) silently |
+| [`.T.`](../reference/literals/true.md) (default) | [`.T.`](../reference/literals/true.md) (default) | The failure raises. Handle it with [`:TRY`](../reference/keywords/TRY.md) / [`:CATCH`](../reference/keywords/CATCH.md). |
+| [`.T.`](../reference/literals/true.md) | [`.F.`](../reference/literals/false.md) | `RunSQL` returns [`.F.`](../reference/literals/false.md). The error is available from [`GetLastSQLError`](../reference/functions/GetLastSQLError.md). Nothing is stored for [`GetLastSSLError`](../reference/functions/GetLastSSLError.md). |
+| [`.F.`](../reference/literals/false.md) | either | The failure raises, whatever `ShowSqlErrors` is set to. |
+
+`ShowSqlErrors` is the flag that decides: setting only `IgnoreSqlErrors(.T.)` changes nothing, because it is already on. To get a [`.F.`](../reference/literals/false.md) return instead of an error, turn `ShowSqlErrors` off. Set `IgnoreSqlErrors(.T.)` as well, in case a caller turned it off. Save both previous values and restore them when the block ends:
 
 ```ssl
-:DECLARE nIndex, bOk;
+:DECLARE nIndex, bOk, bPrevIgnore, bPrevShow, oSqlErr;
 
-/* Suppress non-fatal SQL errors for a batch operation;
-IgnoreSqlErrors(.T.);
-ShowSqlErrors(.F.);
+/* Make failing statements return .F. for a batch operation;
+bPrevIgnore := IgnoreSqlErrors(.T.);
+bPrevShow := ShowSqlErrors(.F.);
 
 :TRY;
     :FOR nIndex := 1 :TO ALen(aStatements);
         bOk := RunSQL(aStatements[nIndex]);
 
         :IF !bOk;
-            ErrorMes("SQL", "Statement " + LimsString(nIndex) + " failed silently");
+            oSqlErr := GetLastSQLError();
+            ErrorMes("SQL", "Statement " + LimsString(nIndex) + " failed: " + oSqlErr:Description);
         :ENDIF;
     :NEXT;
 :FINALLY;
-    /* Always restore defaults;
-    IgnoreSqlErrors(.F.);
-    ShowSqlErrors(.T.);
+    /* Restore the values saved above;
+    ShowSqlErrors(bPrevShow);
+    IgnoreSqlErrors(bPrevIgnore);
 :ENDTRY;
 ```
 
 !!! warning "Always restore error flags in :FINALLY"
-    [`IgnoreSqlErrors`](../reference/functions/IgnoreSqlErrors.md) and [`ShowSqlErrors`](../reference/functions/ShowSqlErrors.md) are global state. If you suppress errors, always restore the defaults in a [`:FINALLY`](../reference/keywords/FINALLY.md) block to avoid masking failures in subsequent code.
+    [`IgnoreSqlErrors`](../reference/functions/IgnoreSqlErrors.md) and [`ShowSqlErrors`](../reference/functions/ShowSqlErrors.md) are global state. If you change them, save the previous values and restore them in a [`:FINALLY`](../reference/keywords/FINALLY.md) block. Restoring hard-coded values instead can switch off a setting a caller relied on, and leaving `ShowSqlErrors` off masks failures in subsequent code.
 
 ### SQLExecute with auto-rollback
 

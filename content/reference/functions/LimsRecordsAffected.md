@@ -56,30 +56,35 @@ This function takes no parameters.
 
 ### Check update success after an inventory adjustment
 
-Call `LimsRecordsAffected` immediately after an UPDATE to verify that exactly one row was modified. When the expected count matches, the success message fires; otherwise, a warning is logged.
+Call `LimsRecordsAffected` immediately after an UPDATE to verify that exactly one row was modified. When the expected count matches, the success message fires; otherwise, a warning is logged. If the UPDATE itself fails, [`:CATCH`](../keywords/CATCH.md) logs the reason instead.
 
 ```ssl
 :PROCEDURE AdjustInventoryCount;
-	:DECLARE sItemID, nExpected, nUpdated, bSuccess, sMessage;
+	:DECLARE sItemID, nExpected, nUpdated, sMessage, oErr;
 
 	sItemID := "INV-2024-0042";
 	nExpected := 1;
 
-	bSuccess := RunSQL("
-	    UPDATE inventory SET
-	        quantity = quantity + 10
-	    WHERE item_id = ?
-	",
-		, {sItemID});
-	nUpdated := LimsRecordsAffected();
+	:TRY;
+		RunSQL("
+		    UPDATE inventory SET
+		        quantity = quantity + 10
+		    WHERE item_id = ?
+		",
+			, {sItemID});
+		nUpdated := LimsRecordsAffected();
 
-	:IF bSuccess .AND. nUpdated == nExpected;
-		sMessage := "Inventory adjusted: " + LimsString(nUpdated) + " record updated for "
-			+ sItemID;
-	:ELSE;
-		sMessage := "Warning: Expected " + LimsString(nExpected) + " update but got " + LimsString(
-			nUpdated);
-	:ENDIF;
+		:IF nUpdated == nExpected;
+			sMessage := "Inventory adjusted: " + LimsString(nUpdated) + " record updated for "
+				+ sItemID;
+		:ELSE;
+			sMessage := "Warning: Expected " + LimsString(nExpected) + " update but got "
+				+ LimsString(nUpdated);
+		:ENDIF;
+	:CATCH;
+		oErr := GetLastSSLError();
+		sMessage := "Inventory adjustment failed: " + oErr:Description;
+	:ENDTRY;
 
 	UsrMes(sMessage);
 :ENDPROC;
