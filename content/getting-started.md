@@ -53,10 +53,10 @@ The two trees share a single namespace: Designer refuses to create a server-scri
 
 ## How to read this reference
 
-Each element page follows a consistent structure:
+Element pages share a common layout. Every page opens with a one-sentence summary and a description of its behavior and edge cases, then uses the sections below. Not every page has all of them: an element that takes no arguments has no Parameters section, and one that cannot fail has no Exceptions section.
 
-- **Summary** — one-sentence purpose
-- **Description** — detailed behavioral explanation with edge cases
+- **When to use** — the situations the element is meant for
+- **Syntax** — the call signature or statement form
 - **Parameters** — name, type, required/optional, defaults
 - **Returns** — type and description of the return value
 - **Exceptions** — conditions that cause errors, with exact messages
@@ -64,6 +64,8 @@ Each element page follows a consistent structure:
 - **Caveats** — gotchas and non-obvious behavior
 - **Examples** — representative SSL code
 - **Related** — links to related elements
+
+Operator, type, literal, and most special-form pages follow the same pattern with a slightly different vocabulary: **When to use it**, **Notes for daily SSL work**, **Errors and edge cases**, and **Related elements**.
 
 ## SSL basics
 
@@ -94,9 +96,9 @@ These are top-level statements — in a procedure body they would be indented.
 ### Error handling
 
 ```ssl
-:DECLARE oResult;
+:DECLARE aRows;
 :TRY;
-    oResult := RunSQL("SELECT * FROM samples");
+    aRows := LSelect1("SELECT sample_id, status FROM samples WHERE status = ?",, {"Logged"});
 :CATCH;
     UsrMes("Query failed: " + GetLastSSLError():Description);
 :FINALLY;
@@ -136,7 +138,7 @@ A few rules are non-obvious and worth internalizing before writing any SSL.
 Almost every statement, including comments, must end with `;`. Comments use `/* ...;` and **terminate at the first `;`**. Embedding a semicolon inside comment text closes the comment early — the remaining text becomes executable code.
 
 ```ssl
-/* Don't do this; the rest after the colon becomes code;
+/* Don't do this; the rest after the semicolon becomes code;
 /* Safe — no semicolons inside the comment text;
 ```
 
