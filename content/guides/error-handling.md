@@ -7,20 +7,31 @@ SSL provides two error handling models: the modern **structured** model ([`:TRY`
 ### Basic pattern
 
 ```ssl
-:DECLARE oResult, oError;
+:DECLARE bStarted, bCommit, oError;
+
+bStarted := .F.;
+bCommit := .F.;
 
 :TRY;
     /* Code that might fail;
-    oResult := RunSQL(sQuery);
+    bStarted := BeginLimsTransaction();
+    bCommit := RunSQL(
+        "UPDATE sample SET status = ? WHERE sample_id = ?",,
+        {sStatus, sSampleID}
+    );
 :CATCH;
-    /* Error recovery;
+    /* Error recovery, the transaction rolls back;
     oError := GetLastSSLError();
-    UsrMes("Query failed: " + oError:Description);
+    UsrMes("Update failed: " + oError:Description);
 :FINALLY;
-    /* Always runs — cleanup;
-    EndLimsTransaction();
+    /* Always runs, ends only the transaction this code began;
+    :IF bStarted;
+        EndLimsTransaction(, bCommit);
+    :ENDIF;
 :ENDTRY;
 ```
+
+`bCommit` holds the [`RunSQL`](../reference/functions/RunSQL.md) result, so it is [`.T.`](../reference/literals/true.md) only when the update succeeds. When the update raises an error, `bCommit` stays [`.F.`](../reference/literals/false.md) and [`EndLimsTransaction`](../reference/functions/EndLimsTransaction.md) rolls back. `bStarted` makes the [`:FINALLY`](../reference/keywords/FINALLY.md) end only a transaction this code began. An [`IsInTransaction`](../reference/functions/IsInTransaction.md) check is not enough, because it is also [`.T.`](../reference/literals/true.md) when a caller's transaction is open. See [SQL and Transaction Management](sql-transactions.md).
 
 ### Rules
 
@@ -68,15 +79,23 @@ Use [`ErrorMes`](../reference/functions/ErrorMes.md) instead of [`UsrMes`](../re
 
 #### Try-finally for resource cleanup
 
+[`:FINALLY`](../reference/keywords/FINALLY.md) runs whether the [`:TRY`](../reference/keywords/TRY.md) body succeeds or fails, so it is the place to undo a temporary change. Here a slow update gets a longer SQL timeout, and [`:FINALLY`](../reference/keywords/FINALLY.md) restores the previous value. With no [`:CATCH`](../reference/keywords/CATCH.md), an error from the update still reaches the caller after the timeout is restored.
+
 ```ssl
+:DECLARE nPreviousTimeout;
+
+/* Give the slow update more time, keep the old value to restore;
+nPreviousTimeout := SetSqlTimeout(300);
+
 :TRY;
-    BeginLimsTransaction();
-    RunSQL(sInsertSQL);
-    RunSQL(sUpdateSQL);
+    RunSQL("UPDATE sample SET archived = 'Y' WHERE logged_on < ?",, {dCutoff});
 :FINALLY;
-    EndLimsTransaction();
+    /* Always runs, so the longer timeout never leaks into later work;
+    SetSqlTimeout(nPreviousTimeout);
 :ENDTRY;
 ```
+
+Do not end a transaction in [`:FINALLY`](../reference/keywords/FINALLY.md) with a bare `EndLimsTransaction()`. With `bCommit` omitted it **commits**, so the failure path keeps the work that should have rolled back. If this code did not begin a transaction, the call ends whatever transaction is open, including the caller's. Use the `bStarted` / `bCommit` pattern from the [Basic pattern](#basic-pattern) instead.
 
 #### Nested try blocks
 

@@ -4097,11 +4097,14 @@
         }
       ],
       "caveats": [
-        "To pass bCommit while using the default connection, skip sConnectionName with EndLimsTransaction(, bCommit)."
+        "To pass bCommit while using the default connection, skip sConnectionName with EndLimsTransaction(, bCommit).",
+        "With no transaction open, the call returns .T. without raising, so an unbalanced call goes unnoticed.",
+        "IsInTransaction returns .T. for a transaction a caller began, so it cannot tell your code whether it owns the open transaction."
       ],
       "best_practices": {
         "do": [
           "Call EndLimsTransaction exactly once for every successful BeginLimsTransaction call.",
+          "Set a bStarted flag from BeginLimsTransaction and end the transaction only when that flag is .T..",
           "Keep a bCommit flag that only becomes .T. after all transactional work succeeds.",
           "Use the same sConnectionName that started the transaction when you are working on a named connection.",
           "Roll back the outer transaction when an inner transaction on the same connection rolls back."
@@ -4110,6 +4113,8 @@
           "Assume the function returns .F. for a missing connection or failed close; those paths raise errors.",
           "Mix connection names between BeginLimsTransaction and EndLimsTransaction calls.",
           "Commit in :FINALLY before the protected work has finished successfully.",
+          "Call a bare EndLimsTransaction() in cleanup code. With bCommit omitted it commits, including on the failure path.",
+          "Call EndLimsTransaction from code that did not begin the transaction. It ends the caller's transaction, and an IsInTransaction check does not prevent this.",
           "Ignore nested rollback state and still try to commit the outermost transaction."
         ]
       }
@@ -6425,17 +6430,18 @@
         "vConnection can be a connection name or a SQLConnection object returned by GetConnectionByName.",
         "Passing an unknown connection name raises an error rather than returning .F..",
         "If the internal database collection is unavailable, an error is raised and the function does not return a value.",
-        "Only tests direct transaction state for the specified connection — does not account for nested or distributed transactions."
+        "Returns .T. for any open transaction on the connection, including one a caller began and at any nesting depth. It cannot tell a routine whether it owns the transaction, and it does not report the nesting depth; use GetTransactionsCount for that."
       ],
       "best_practices": {
         "do": [
           "Pass explicit, known-good connection names when checking transaction state.",
-          "Confirm a transaction is active before issuing commit or rollback commands.",
+          "Use a bStarted flag set from BeginLimsTransaction, not IsInTransaction, to decide whether your code should end a transaction.",
           "Use with BeginLimsTransaction and EndLimsTransaction for end-to-end transaction management."
         ],
         "dont": [
           "Pass user-supplied or dynamic connection names without validating them first. Invalid names raise errors.",
           "Use this function as a transaction manager or depth counter. It checks boolean state only.",
+          "Treat .T. as proof that your code began the transaction. A helper that ends the transaction after this check ends its caller's transaction.",
           "Assume the function returns .F. for unknown connections. It raises an error instead."
         ]
       }
