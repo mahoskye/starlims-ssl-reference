@@ -13,6 +13,8 @@ SSL provides several functions for executing SQL against the LIMS database. Choo
 | [`SQLExecute`](../reference/functions/SQLExecute.md) | Named-parameter queries; configurable return type | Array, XML string, or dataset object |
 
 ```ssl
+:DECLARE sName, aResults, sXml, sBatch, aRows;
+
 /* Single value;
 sName := LSearch("SELECT name FROM users WHERE user_id = ?", "",, {"USR001"});
 
@@ -42,6 +44,8 @@ Most SQL functions accept an optional connection name parameter that identifies 
 The connection name is the key registered in the system's database configuration. You can discover available names at runtime with [`GetConnectionStrings`](../reference/functions/GetConnectionStrings.md), which returns a 2D array where column 1 is the connection name, column 2 is the provider, and column 3 is the full connection string.
 
 ```ssl
+:DECLARE aConns, nIndex, aRows, sDefault;
+
 /* See what connections are available;
 aConns := GetConnectionStrings();
 :FOR nIndex := 1 :TO ALen(aConns);
@@ -69,6 +73,8 @@ All SQL functions support parameterized queries using the `?` placeholder. This 
 Place a `?` in your SQL wherever a value should go, then pass the values as an array as the last argument. The engine replaces each `?` with a database-appropriate parameter (e.g., `@param1` for SQL Server, `:param1` for Oracle) and binds the values safely.
 
 ```ssl
+:DECLARE sSQL, aResults;
+
 /* Parameterized — safe;
 sSQL := "SELECT * FROM samples WHERE batch_id = ? AND status = ?";
 aResults := LSelect1(sSQL,, {"B-100", "A"});
@@ -86,6 +92,8 @@ The values are **bound as parameters**, not interpolated into the SQL string. Th
 The number of `?` placeholders must match the number of elements in the values array. A mismatch throws a "Parameters count mismatch" error. Each `?` is positional — there are no named parameters, so if you need the same value in multiple places, you must pass it multiple times.
 
 ```ssl
+:DECLARE sSQL;
+
 /* Correct: 2 placeholders, 2 values;
 RunSQL("UPDATE t SET a = ? WHERE b = ?",, {sNewValue, sKeyValue});
 
@@ -174,6 +182,8 @@ aResults := LSelect1(sSQL);
 The alternative to parameterized queries is building the SQL string with concatenation and [`LimsString`](../reference/functions/LimsString.md):
 
 ```ssl
+:DECLARE sSQL, aResults;
+
 /* String concatenation — avoid when possible;
 sSQL := "SELECT * FROM samples WHERE batch_id = " + LimsString(sBatchId);
 sSQL := sSQL + " AND status = " + LimsString(sStatus);
@@ -196,6 +206,8 @@ aResults := LSelect1(sSQL);
 Returns the first column of the first row, or a default value if no rows match:
 
 ```ssl
+:DECLARE sStatus, nCount;
+
 /* Get a single value with a fallback default;
 sStatus := LSearch("SELECT status FROM samples WHERE sample_id = ?", "UNKNOWN",, {"S-001"});
 
@@ -210,6 +222,8 @@ The second parameter is the default returned when the query finds no rows. This 
 Returns a 2D array where rows are the first dimension and columns are the second:
 
 ```ssl
+:DECLARE aResults, nIndex, sSampleId, sStatus, sPriority;
+
 aResults := LSelect1("SELECT sample_id, status, priority FROM samples WHERE batch = ?",, {"B-100"});
 
 /* Access: aResults[row, column];
@@ -228,6 +242,8 @@ If the query returns no rows, [`LSelect1`](../reference/functions/LSelect1.md) r
 Returns [`.T.`](../reference/literals/true.md) on success. Error behavior depends on [`IgnoreSqlErrors`](../reference/functions/IgnoreSqlErrors.md) and [`ShowSqlErrors`](../reference/functions/ShowSqlErrors.md) flags (see [SQL & Transactions guide](sql-transactions.md#sql-error-handling)).
 
 ```ssl
+:DECLARE bOk;
+
 bOk := RunSQL("INSERT INTO audit_log (action, ts) VALUES (?, ?)",, {"LOGIN", DToS(Now())});
 :IF !bOk;
     ErrorMes("Audit log insert failed");
@@ -239,6 +255,8 @@ bOk := RunSQL("INSERT INTO audit_log (action, ts) VALUES (?, ?)",, {"LOGIN", DTo
 Returns a SELECT result as an XML string. Useful when passing data to external systems or storing structured output:
 
 ```ssl
+:DECLARE sXml;
+
 sXml := GetDataSet("SELECT sample_id, status FROM samples WHERE batch = ?",, {"B-100"});
 ```
 
@@ -251,6 +269,8 @@ sXml := GetDataSet("SELECT sample_id, status FROM samples WHERE batch = ?",, {"B
 Instead of passing a separate values array, you embed variable names directly in the SQL using `?varName?` syntax. The engine substitutes the current value of each named variable from the calling scope at execution time:
 
 ```ssl
+:DECLARE sBatch, sStatus, aRows;
+
 sBatch := "B-100";
 sStatus := "A";
 
@@ -267,6 +287,8 @@ No values array is needed — the variable names in the SQL string are resolved 
 When a `?varName?` placeholder refers to a local array variable, [`SQLExecute`](../reference/functions/SQLExecute.md) automatically expands it into a matching set of positional placeholders. A three-element array becomes `?,?,?` inline:
 
 ```ssl
+:DECLARE aStatusCodes, aRows;
+
 aStatusCodes := {"A", "P", "C"};
 
 aRows := SQLExecute("
@@ -282,6 +304,8 @@ This is the cleanest way to build a dynamic `IN` clause with [`SQLExecute`](../r
     The array must be declared and assigned as a local variable in the calling scope. Passing a UDObject property directly (e.g. `?oFilter:StatusCodes?`) causes a runtime error. Copy the property to a local variable first:
 
     ```ssl
+    :DECLARE aStatusCodes, aRows;
+
     aStatusCodes := oFilter:StatusCodes;
     aRows := SQLExecute("SELECT * FROM samples WHERE status IN (?aStatusCodes?)");
     ```
@@ -297,6 +321,8 @@ The sixth parameter controls what [`SQLExecute`](../reference/functions/SQLExecu
 | `"dataset"` | [`netobject`](../reference/types/netobject.md) wrapping a .NET `DataSet` |
 
 ```ssl
+:DECLARE aRows, sXml, oDs, bOk;
+
 /* Default — returns array;
 aRows := SQLExecute("SELECT sample_id, status FROM samples WHERE batch = ?sBatch?");
 

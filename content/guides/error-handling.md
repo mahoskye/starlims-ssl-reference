@@ -7,6 +7,8 @@ SSL provides two error handling models: the modern **structured** model ([`:TRY`
 ### Basic pattern
 
 ```ssl
+:DECLARE oResult, oError;
+
 :TRY;
     /* Code that might fail;
     oResult := RunSQL(sQuery);
@@ -34,6 +36,8 @@ SSL provides two error handling models: the modern **structured** model ([`:TRY`
 #### Try-catch with logging
 
 ```ssl
+:DECLARE oError;
+
 :TRY;
     DocCheckoutDocument(sDocId);
 :CATCH;
@@ -47,6 +51,8 @@ SSL provides two error handling models: the modern **structured** model ([`:TRY`
 Use [`ErrorMes`](../reference/functions/ErrorMes.md) instead of [`UsrMes`](../reference/functions/UsrMes.md) when an error **must** be logged regardless of server configuration. [`UsrMes`](../reference/functions/UsrMes.md) can be silenced on production servers, but [`ErrorMes`](../reference/functions/ErrorMes.md) always writes.
 
 ```ssl
+:DECLARE oError;
+
 :TRY;
     RunSQL(sDeleteSQL);
 :CATCH;
@@ -75,6 +81,8 @@ Use [`ErrorMes`](../reference/functions/ErrorMes.md) instead of [`UsrMes`](../re
 #### Nested try blocks
 
 ```ssl
+:DECLARE oConnection;
+
 :TRY;
     :TRY;
         oConnection := LimsNETConnect(sAssembly);

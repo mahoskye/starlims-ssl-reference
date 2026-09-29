@@ -60,6 +60,8 @@ EndLimsTransaction(, .F.);    /* rollback on default connection;
 SSL supports nested [`BeginLimsTransaction`](../reference/functions/BeginLimsTransaction.md) calls. The engine uses a **reference-counting** model — only the **outermost** Begin/End pair actually starts and commits or rolls back the database transaction. Inner calls increment and decrement a counter.
 
 ```ssl
+:DECLARE oError;
+
 :TRY;
     BeginLimsTransaction();          /* count = 1, DB transaction starts;
 
@@ -83,6 +85,8 @@ SSL supports nested [`BeginLimsTransaction`](../reference/functions/BeginLimsTra
 This is the most critical behavior to understand: **if any inner transaction is rolled back, the outer transaction cannot commit**.
 
 ```ssl
+:DECLARE oError;
+
 :TRY;
     BeginLimsTransaction();
 
@@ -196,6 +200,8 @@ Supported values (case-insensitive):
 | [`.T.`](../reference/literals/true.md) | [`.F.`](../reference/literals/false.md) | All errors return [`.F.`](../reference/literals/false.md) silently |
 
 ```ssl
+:DECLARE nIndex, bOk;
+
 /* Suppress non-fatal SQL errors for a batch operation;
 IgnoreSqlErrors(.T.);
 ShowSqlErrors(.F.);
@@ -223,6 +229,8 @@ ShowSqlErrors(.F.);
 [`SQLExecute`](../reference/functions/SQLExecute.md) has a `bRollbackExistingTransaction` parameter. When [`.T.`](../reference/literals/true.md) and the SQL fails, it automatically calls [`EndLimsTransaction`](../reference/functions/EndLimsTransaction.md)(, .F.) on the current connection:
 
 ```ssl
+:DECLARE sResult, oError;
+
 :TRY;
     BeginLimsTransaction();
 

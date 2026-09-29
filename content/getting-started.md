@@ -81,6 +81,8 @@ These are top-level statements — in a procedure body they would be indented.
 ### Control flow
 
 ```ssl
+:DECLARE nIndex;
+
 :IF nCount > 0;
     UsrMes("Processing " + LimsString(nCount) + " items");
 :ELSE;
