@@ -34,7 +34,7 @@ SQLExecute(sCommandString, [sConnectionName], [bRollbackExistingTransaction], [b
 |------|------|----------|---------|-------------|
 | `sCommandString` | [string](../types/string.md) | yes | — | SQL to execute. Must be a non-empty string. |
 | `sConnectionName` | [string](../types/string.md) | no | current default connection | Connection name to run the SQL against. |
-| `bRollbackExistingTransaction` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | For non-`SELECT` statements, rolls back the current transaction when execution fails and this argument is [`.T.`](../literals/true.md). |
+| `bRollbackExistingTransaction` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Applies to non-`SELECT` statements. Whatever its value, a failed statement leaves an open transaction open; see [Caveats](#caveats). |
 | `bNullAsBlank` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) for returned `SELECT` results | Controls null-to-blank handling when materializing `SELECT` results. |
 | `aInvariantDateCols` | [array](../types/array.md) | no | omitted | Array of date column positions to treat as invariant when materializing `SELECT` results. |
 | `vReturnType` | [boolean](../types/boolean.md) or [string](../types/string.md) | no | `"array"` | When the prepared SQL begins with `SELECT`: [`.F.`](../literals/false.md) or non-`xml`/non-`dataset` strings return an array, [`.T.`](../literals/true.md) or `"xml"` returns XML text, and the exact string `"dataset"` returns a dataset object. Ignored for other statements. |
@@ -87,6 +87,7 @@ For other statements, `SQLExecute` returns a boolean success value.
 
 ## Caveats
 
+- After a non-`SELECT` statement fails inside a transaction, the transaction is still open ([`IsInTransaction`](IsInTransaction.md) returns [`.T.`](../literals/true.md)), whether `bRollbackExistingTransaction` is [`.T.`](../literals/true.md) or [`.F.`](../literals/false.md). The code that began the transaction must still end it with [`EndLimsTransaction`](EndLimsTransaction.md).
 - Returning large result sets as arrays, XML, or dataset objects can increase memory use.
 
 ## Examples
