@@ -95,20 +95,21 @@ Check whether a numeric text value uses the currently configured decimal separat
 	bHasPeriod := "." $ sRawInput;
 	bHasDecimalSep := sDecimalSep $ sRawInput;
 
-	:IF bHasDecimalSep;
+	:BEGINCASE;
+	:CASE bHasDecimalSep;
 		/* Logs the matching-input message;
 		UsrMes("Input uses the current decimal separator: " + sRawInput);
-	:ELSE;
-		:IF sDecimalSep == "," .AND. bHasPeriod;
-			UsrMes("Input uses '.' but the current decimal separator is ','.");
-		:ELSE;
-			:IF sDecimalSep == "." .AND. bHasComma;
-				UsrMes("Input uses ',' but the current decimal separator is '.'.");
-			:ELSE;
-				UsrMes("Input does not contain a decimal separator.");
-			:ENDIF;
-		:ENDIF;
-	:ENDIF;
+		:EXITCASE;
+	:CASE sDecimalSep == "," .AND. bHasPeriod;
+		UsrMes("Input uses '.' but the current decimal separator is ','.");
+		:EXITCASE;
+	:CASE sDecimalSep == "." .AND. bHasComma;
+		UsrMes("Input uses ',' but the current decimal separator is '.'.");
+		:EXITCASE;
+	:OTHERWISE;
+		UsrMes("Input does not contain a decimal separator.");
+		:EXITCASE;
+	:ENDCASE;
 
 	:RETURN bHasDecimalSep;
 :ENDPROC;

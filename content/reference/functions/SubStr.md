@@ -73,21 +73,22 @@ Read a fixed-width prefix from the start of a sample ID.
 	:DECLARE sSampleID, sCategory, sPrefix;
 
 	sSampleID := "ENV-2024-0042";
-	sPrefix := SubStr(sSampleID, 0, 3);
+	sPrefix := SubStr(sSampleID, 1, 3);
 
-	:IF sPrefix == "ENV";
+	:BEGINCASE;
+	:CASE sPrefix == "ENV";
 		sCategory := "Environmental";
-	:ELSE;
-		:IF sPrefix == "BIO";
-			sCategory := "Biological";
-		:ELSE;
-			:IF sPrefix == "CHE";
-				sCategory := "Chemical";
-			:ELSE;
-				sCategory := "Unknown";
-			:ENDIF;
-		:ENDIF;
-	:ENDIF;
+		:EXITCASE;
+	:CASE sPrefix == "BIO";
+		sCategory := "Biological";
+		:EXITCASE;
+	:CASE sPrefix == "CHE";
+		sCategory := "Chemical";
+		:EXITCASE;
+	:OTHERWISE;
+		sCategory := "Unknown";
+		:EXITCASE;
+	:ENDCASE;
 
 	UsrMes(sSampleID + " maps to category " + sCategory);
 
