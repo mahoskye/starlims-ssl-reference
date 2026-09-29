@@ -8731,10 +8731,15 @@
         {
           "trigger": "replaceWith is NIL.",
           "message": "Argument replaceWith cannot be null."
+        },
+        {
+          "trigger": "searchFor matches again starting inside a previous match, such as Replace(\"aaa\", \"aa\", \"X\").",
+          "message": "Value must be positive. followed by Parameter name: count` on a second line"
         }
       ],
       "caveats": [
-        "replaceWith is inserted exactly as provided; the original match casing is not preserved."
+        "replaceWith is inserted exactly as provided; the original match casing is not preserved.",
+        "When searchFor matches again starting inside a previous match, Replace() raises an error instead of returning a string. For example, Replace(\"aaa\", \"aa\", \"X\") raises Value must be positive. followed by Parameter name: count on a second line. Check the data or guard the call with :TRY when searchFor could overlap itself in source."
       ],
       "best_practices": {
         "do": [
@@ -8747,7 +8752,8 @@
           "Pass NIL for any argument. Replace() raises an error for NIL inputs.",
           "Use Replace() when letter case must be part of the match criteria.",
           "Expect only the first occurrence to change. Replace() replaces all matches.",
-          "Expect an empty searchFor to insert text between characters. It returns the source unchanged."
+          "Expect an empty searchFor to insert text between characters. It returns the source unchanged.",
+          "Pass a searchFor that can match again inside its own previous match, such as \"aa\" against \"aaa\". Replace() raises an error instead of replacing."
         ]
       }
     },
