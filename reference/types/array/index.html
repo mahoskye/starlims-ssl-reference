@@ -2127,7 +2127,7 @@
 <h2 id="what-it-is">What it is<a class="headerlink" href="#what-it-is" title="Permanent link">&para;</a></h2>
 <p>Represents ordered, 1-based collections of SSL values, including nested arrays.</p>
 <p>The <code>array</code> type stores values in positional order. Arrays are 1-based, so the first element is <code>aValues[1]</code>, not <code>aValues[0]</code>. Arrays can contain mixed value types, including strings, numbers, objects, <a href="../../literals/nil/"><code>NIL</code></a>, and other arrays.</p>
-<p>For display purposes, arrays render in brace syntax such as <code>{"A",2,NIL}</code>. <a href="../../functions/Empty/"><code>Empty</code></a> returns <a href="../../literals/true/"><code>.T.</code></a> only when the array has no top-level elements, and <code>Count</code> returns the number of top-level elements.</p>
+<p>For display purposes, arrays render in brace syntax such as <code>{"A",2,NIL}</code>. <a href="../../functions/Empty/"><code>Empty</code></a> returns <a href="../../literals/true/"><code>.T.</code></a> only when the array has no top-level elements, and <a href="../../functions/ALen/"><code>ALen</code></a> returns the number of top-level elements.</p>
 <p>Use arrays when values need to stay in a defined order, when you need positional access such as <code>aRows[1]</code> or <code>aRows[nIndex][2]</code>, when a function returns tabular data or a list of items, or when you need to collect or reshape values while the script runs.</p>
 <h2 id="creating-values">Creating values<a class="headerlink" href="#creating-values" title="Permanent link">&para;</a></h2>
 <p>Arrays are commonly created with literal syntax such as <code>{1, 2, 3}</code> or nested forms such as <code>{{"A", 1}, {"B", 2}}</code>. You can also start with an empty array and append elements.</p>
@@ -2258,13 +2258,6 @@
 <td><code>any</code></td>
 <td>Gets or replaces the full array contents.</td>
 </tr>
-<tr>
-<td><code>Count</code></td>
-<td>Property</td>
-<td>—</td>
-<td><a href="../number/"><code>number</code></a></td>
-<td>Returns the number of top-level elements.</td>
-</tr>
 </tbody>
 </table>
 <h2 id="calling-net-array-methods">Calling .NET <code>Array</code> methods<a class="headerlink" href="#calling-net-array-methods" title="Permanent link">&para;</a></h2>
@@ -2277,7 +2270,7 @@
 <p>Prefer SSL-native array functions (<a href="../../functions/ALen/"><code>ALen</code></a>, <a href="../../functions/AScan/"><code>AScan</code></a>, <a href="../../functions/SortArray/"><code>SortArray</code></a>, <a href="../../functions/AAdd/"><code>AAdd</code></a>) and the SSL-defined members for portability and readability. Reach for the .NET passthrough only when you need a specific <code>System.Array</code> operation that the SSL library does not cover.</p>
 <p>This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete.</p>
 <h3 id="example-reading-the-underlying-arraylength-property">Example: reading the underlying <code>Array.Length</code> property<a class="headerlink" href="#example-reading-the-underlying-arraylength-property" title="Permanent link">&para;</a></h3>
-<p>Reads .NET's <code>Length</code> property on the underlying <code>System.Object[]</code> through the <code>:</code> dispatch. The result matches what SSL exposes through the <code>Count</code> property and <a href="../../functions/ALen/"><code>ALen</code></a>, so this is primarily a demonstration that the dispatch works on <code>array</code> values rather than a recommended pattern.</p>
+<p>Reads .NET's <code>Length</code> property on the underlying <code>System.Object[]</code> through the <code>:</code> dispatch. The result matches <a href="../../functions/ALen/"><code>ALen</code></a>, so this is primarily a demonstration that the dispatch works on <code>array</code> values rather than a recommended pattern.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowArrayLength</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSamples</span><span class="p">,</span><span class="w"> </span><span class="n">nLength</span><span class="p">;</span>
 
@@ -2328,7 +2321,7 @@
 <p class="admonition-title">Do</p>
 <ul>
 <li>Use 1-based loops such as <code>:FOR nIndex := 1 :TO ALen(aValues);</code> when iterating arrays.</li>
-<li>Check <code>IsEmpty()</code> or <code>Count</code> before indexing when the array may be empty.</li>
+<li>Check <a href="../../functions/Empty/"><code>Empty</code></a> or <a href="../../functions/ALen/"><code>ALen</code></a> before indexing when the array may be empty.</li>
 <li>Use <code>clone()</code> before changing a copied array when the original must remain unchanged.</li>
 </ul>
 </div>
@@ -2395,7 +2388,7 @@ Queued sample S-1003
 <span class="w">    </span><span class="n">aRow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aResults</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"First row status: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aRow</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Remaining rows: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aResults</span><span class="p">:</span><span class="n">Count</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Remaining rows: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aResults</span><span class="p">)));</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -2422,8 +2415,8 @@ Remaining rows: 2
 
 <span class="w">    </span><span class="n">sJson</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aSnapshot</span><span class="p">:</span><span class="nf">ToJson</span><span class="p">();</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Original tests: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aOriginal</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]:</span><span class="n">Count</span><span class="p">));</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Snapshot tests: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aSnapshot</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]:</span><span class="n">Count</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Original tests: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aOriginal</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Snapshot tests: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aSnapshot</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])));</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sJson</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aSnapshot</span><span class="p">;</span>
@@ -2439,7 +2432,8 @@ Snapshot tests: 3
 </code></pre></div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Member access with <code>:</code> forwards to the underlying .NET list object when no SSL-side member matches (e.g. <code>aValues:Count</code>). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as <code>Run-time error: Invalid method: Split</code>. Check a member before relying on it; see <a href="../../../guides/native-members/">Native Members</a>.</li>
+<li>Arrays have no <code>Count</code> property: <code>aValues:Count</code> raises <code>Run-time error: Invalid property: Count</code>. Use <a href="../../functions/ALen/"><code>ALen</code></a> or <code>aValues:Length</code>.</li>
+<li>Member access with <code>:</code> forwards to the underlying .NET list object when no SSL-side member matches (e.g. <code>aValues:Length</code>). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as <code>Run-time error: Invalid method: Split</code>. Check a member before relying on it; see <a href="../../../guides/native-members/">Native Members</a>.</li>
 </ul>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2468,7 +2462,7 @@ Snapshot tests: 3
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 17:32:13 UTC">September 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 22:00:30 UTC">September 29, 2026</span>
   </span>
 
     
