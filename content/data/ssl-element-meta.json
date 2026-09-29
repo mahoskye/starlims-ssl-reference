@@ -7777,11 +7777,16 @@
         {
           "trigger": "sParam is not a string.",
           "message": "The argument for function LimsType must be a string."
+        },
+        {
+          "trigger": "sParam names a variable that holds NIL, including an omitted :PARAMETERS argument.",
+          "message": "Object reference not set to an instance of an object."
         }
       ],
       "caveats": [
         "Evaluating expressions may have side effects if the expression calls functions or modifies state.",
-        "The function executes code to resolve the value; avoid passing untrusted input."
+        "The function executes code to resolve the value; avoid passing untrusted input.",
+        "Naming a variable that holds NIL raises an error rather than returning \"U\". When a variable may hold NIL, check for it first with LimsTypeEx(vValue) == \"NIL\", or use LimsTypeEx instead, which accepts NIL."
       ],
       "best_practices": {
         "do": [
@@ -7792,7 +7797,8 @@
         "dont": [
           "Pass the value itself rather than a string. LimsType requires a string argument.",
           "Assume evaluation of an expression is side-effect-free. The function executes the expression to obtain a result.",
-          "Pass non-string types (numbers, arrays, objects) as the argument — they raise an error."
+          "Pass non-string types (numbers, arrays, objects) as the argument — they raise an error.",
+          "Read \"U\" as \"this parameter was not passed\". An omitted parameter holds NIL, and LimsType raises for a variable that holds NIL."
         ]
       }
     },
