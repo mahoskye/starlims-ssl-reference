@@ -108,11 +108,10 @@ Use multiple `:DEFAULT` lines so callers can omit new trailing arguments. `ShowD
     :DECLARE sSQL, aRows;
 
     sSQL := "
-        SELECT sample_id, status, result_value
+        SELECT TOP (?nMaxRows?) sample_id, status, result_value
         FROM sample_result
         WHERE sample_id = ?sSampleID?
           AND status = ?sStatus?
-          AND ROWNUM <= ?nMaxRows?
         ORDER BY sample_id
     ";
 
