@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Logs an error message and returns the resulting message string.">
+        <meta name="description" content="Writes an error message to the server log, even when user-message logging is disabled, and returns the formatted log entry.">
       
       
       
@@ -1660,6 +1660,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#log-a-single-message" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log a single message
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#log-a-validation-failure" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3308,6 +3319,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#log-a-single-message" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log a single message
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#log-a-validation-failure" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3466,16 +3488,17 @@
 
 
 <h1 id="errormes">ErrorMes<a class="headerlink" href="#errormes" title="Permanent link">&para;</a></h1>
-<p>Logs an error message and returns the resulting message string.</p>
-<p><code>ErrorMes</code> converts both arguments to strings and passes them to the same message path as <a href="../UsrMes/"><code>UsrMes</code></a>, but with forced writing enabled. Use it when a failure message must be persisted even if regular user-message logging is disabled.</p>
+<p>Writes an error message to the server log, even when user-message logging is disabled, and returns the formatted log entry.</p>
+<p><code>ErrorMes</code> takes a caption and an optional message and formats them the same way as <a href="../UsrMes/"><code>UsrMes</code></a>: a header line of runtime context that ends with the caption, then the message on the next line. Unlike <a href="../UsrMes/"><code>UsrMes</code></a>, it always writes the entry, so use it when a failure message must be persisted even if regular user-message logging is disabled.</p>
+<p>With one argument, <code>ErrorMes(sText)</code> logs <code>sText</code> as the message and uses <code>****User message****</code> as the caption. With two arguments, <code>ErrorMes(sCaption, sMessage)</code> puts <code>sCaption</code> where <code>****User message****</code> would be and logs <code>sMessage</code> on the next line. Both arguments are converted to strings.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
-<li>When a failure or exception must always be written through the message system.</li>
-<li>When you want the same two-part caption/message pattern as <a href="../UsrMes/"><code>UsrMes</code></a>, but with forced logging.</li>
-<li>When you still want the resulting message string returned to your code.</li>
+<li>When a failure or exception must always be written to the server log.</li>
+<li>When you want the same caption-and-message pattern as <a href="../UsrMes/"><code>UsrMes</code></a>, but with forced logging.</li>
+<li>When you still want the formatted log entry returned to your code.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">vCaption</span><span class="p">,</span><span class="w"> </span><span class="n">vMessage</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">vCaption</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">vMessage</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3494,25 +3517,30 @@
 <td>any</td>
 <td>yes</td>
 <td>—</td>
-<td>Caption or lead text for the error message.</td>
+<td>Caption text. When <code>vMessage</code> is omitted or empty, this value is logged as the message and the caption is <code>****User message****</code>.</td>
 </tr>
 <tr>
 <td><code>vMessage</code></td>
 <td>any</td>
-<td>yes</td>
-<td>—</td>
-<td>Message body or detail text.</td>
+<td>no</td>
+<td><a href="../../literals/nil/"><code>NIL</code></a></td>
+<td>Message body, written on the line after the header.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
-<p><strong><a href="../../types/string/">string</a></strong> — The string returned by the underlying message routine after the error message is processed.</p>
+<p><strong><a href="../../types/string/">string</a></strong> — The full formatted log entry, the same text written to the server log. The entry starts with a header line of slash-separated fields: the current user, the date as <code>yyyymmdd</code>, the time, the product version, the script location with its line number, and the server process and machine, ending with the caption. The message follows on the next line, and the entry ends with trailing blank lines. Because <code>ErrorMes</code> always writes, it does not return the empty string that <a href="../UsrMes/"><code>UsrMes</code></a> returns when user-message logging is disabled.</p>
+<p>For a one-argument call such as <code>ErrorMes("Result upload failed")</code>, the entry has this shape:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>&lt;user&gt; / &lt;yyyymmdd&gt; / &lt;hh:mm:ss&gt; / &lt;version&gt; / ServerScript.&lt;category&gt;.&lt;script&gt;.&lt;procedure&gt;() line: &lt;n&gt; / &lt;process&gt; on &lt;server&gt; / ****User message****
+Result upload failed
+</code></pre></div>
 <h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <div class="admonition success">
 <p class="admonition-title">Do</p>
 <ul>
-<li>Pass clear string values for the caption and detail text.</li>
-<li>Use <code>ErrorMes</code> for failures that must be written even when normal user-message logging is not enough.</li>
+<li>Pass a short, stable caption and the detail text as two arguments when you want to find the entry by caption in the server log.</li>
+<li>Use the one-argument form for a quick message when the default <code>****User message****</code> caption is acceptable.</li>
+<li>Use <code>ErrorMes</code> for failures that must be written even when normal user-message logging is disabled.</li>
 <li>In <a href="../../keywords/CATCH/"><code>:CATCH</code></a> blocks, log the <code>:Description</code> value from <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> so the stored message contains the runtime error text.</li>
 </ul>
 </div>
@@ -3521,16 +3549,37 @@
 <ul>
 <li>Use <code>ErrorMes</code> for routine status updates or non-critical notices. Prefer <a href="../UsrMes/"><code>UsrMes</code></a> or <a href="../InfoMes/"><code>InfoMes</code></a> for non-error messaging.</li>
 <li>Pass arrays or objects unless their string form is exactly what you want recorded.</li>
-<li>Rely on undocumented formatting details beyond the fact that it behaves like <a href="../UsrMes/"><code>UsrMes</code></a> with forced writing enabled.</li>
+<li>Parse fields out of the returned header. The user, time, version, script location, and process fields vary between calls and environments.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Additional formatting details are not documented, so rely on the returned string and the fact that the message is written.</li>
+<li>The returned string is the whole log entry, not just the text you passed. Keep your own copy of the message text if later code needs it on its own.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="log-a-single-message">Log a single message<a class="headerlink" href="#log-a-single-message" title="Permanent link">&para;</a></h3>
+<p>Pass one argument when the default caption is enough. The text is logged on the line after the header, and the caption is <code>****User message****</code>.</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckInstrument</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sInstrumentID</span><span class="p">,</span><span class="w"> </span><span class="n">bOnline</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bOnline</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Instrument "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInstrumentID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" is offline"</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckInstrument"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"HPLC-02"</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">});</span>
+</code></pre></div>
+<p><code>ErrorMes</code> logs:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>&lt;user&gt; / &lt;date&gt; / &lt;time&gt; / … / ****User message****
+Instrument HPLC-02 is offline
+</code></pre></div>
 <h3 id="log-a-validation-failure">Log a validation failure<a class="headerlink" href="#log-a-validation-failure" title="Permanent link">&para;</a></h3>
-<p>Log a simple validation error and keep the returned message string.</p>
+<p>Log a validation error with its own caption and return the formatted log entry.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateResult</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">sLogged</span><span class="p">;</span>
@@ -3549,7 +3598,8 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateResult"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">});</span>
 </code></pre></div>
 <p><code>ErrorMes</code> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>Validation Failed: Sample S-001 is missing a result value
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>&lt;user&gt; / &lt;date&gt; / &lt;time&gt; / … / Validation Failed
+Sample S-001 is missing a result value
 </code></pre></div>
 <h3 id="log-a-caught-exception">Log a caught exception<a class="headerlink" href="#log-a-caught-exception" title="Permanent link">&para;</a></h3>
 <p>Capture the runtime error text in a <a href="../../keywords/CATCH/"><code>:CATCH</code></a> block and write it with a stable caption.</p>
@@ -3578,7 +3628,8 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SaveResult"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Positive"</span><span class="p">});</span>
 </code></pre></div>
 <p><code>ErrorMes</code> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>SaveResult failed: Sample S-001: &lt;error description&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>&lt;user&gt; / &lt;date&gt; / &lt;time&gt; / … / SaveResult failed
+Sample S-001: &lt;error description&gt;
 </code></pre></div>
 <h3 id="log-a-transaction-rollback">Log a transaction rollback<a class="headerlink" href="#log-a-transaction-rollback" title="Permanent link">&para;</a></h3>
 <p>Use <code>ErrorMes</code> for a critical batch failure where the transaction is rolled back and the failure must be recorded.</p>
@@ -3614,7 +3665,8 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ApproveBatch"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"BATCH-001"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S-002"</span><span class="p">}});</span>
 </code></pre></div>
 <p><code>ErrorMes</code> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>Batch approval failed: BATCH-001 rolled back: &lt;error description&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>&lt;user&gt; / &lt;date&gt; / &lt;time&gt; / … / Batch approval failed
+Batch BATCH-001 rolled back: &lt;error description&gt;
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3642,7 +3694,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 22:01:09 UTC">September 29, 2026</span>
   </span>
 
     
