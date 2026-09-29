@@ -3641,14 +3641,14 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bApproved</span><span class="p">,</span><span class="w"> </span><span class="n">sLabel</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bApproved</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LCase</span><span class="p">(</span><span class="n">bApproved</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="s2">&quot;Approved&quot;</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="s2">&quot;Pending Review&quot;</span><span class="err">&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LCase</span><span class="p">(</span><span class="n">bApproved</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="s2">"Approved"</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="s2">"Pending Review"</span><span class="err">'</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLabel</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sLabel</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetApprovalLabel&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetApprovalLabel"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Approved
@@ -3659,8 +3659,8 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bNeedsReview</span><span class="p">,</span><span class="w"> </span><span class="n">sBaseCode</span><span class="p">,</span><span class="w"> </span><span class="n">sSuffix</span><span class="p">,</span><span class="w"> </span><span class="n">sFinalCode</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bNeedsReview</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sBaseCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-2026-001&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSuffix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LCase</span><span class="p">(</span><span class="n">bNeedsReview</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="s2">&quot;-R&quot;</span><span class="err">&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sBaseCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LAB-2026-001"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSuffix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LCase</span><span class="p">(</span><span class="n">bNeedsReview</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="s2">"-R"</span><span class="err">'</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">sFinalCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sBaseCode</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSuffix</span><span class="p">;</span>
 
@@ -3668,7 +3668,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildSampleCode&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSampleCode"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="return-a-non-string-value-from-a-variable-expression">Return a non-string value from a variable expression<a class="headerlink" href="#return-a-non-string-value-from-a-variable-expression" title="Permanent link">&para;</a></h3>
 <p>Pass variable names (without quotes) as the branch expressions to have <code>LCase</code> return the value of whichever variable is selected. With <code>bUseOverride</code> set to <a href="../../literals/true/"><code>.T.</code></a>, the expression <code>"nOverrideLimit"</code> is evaluated and <code>nEffectiveLimit</code> receives <code>25</code>.</p>
@@ -3679,13 +3679,13 @@
 <span class="w">    </span><span class="n">nDefaultLimit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nOverrideLimit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">nEffectiveLimit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LCase</span><span class="p">(</span><span class="n">bUseOverride</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;nOverrideLimit&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;nDefaultLimit&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nEffectiveLimit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LCase</span><span class="p">(</span><span class="n">bUseOverride</span><span class="p">,</span><span class="w"> </span><span class="s2">"nOverrideLimit"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nDefaultLimit"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nEffectiveLimit</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetEffectiveLimit&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetEffectiveLimit"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

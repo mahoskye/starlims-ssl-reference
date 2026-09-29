@@ -4290,11 +4290,11 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSearchUrl</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCompanyName</span><span class="p">,</span><span class="w"> </span><span class="n">sEncodedCompany</span><span class="p">,</span><span class="w"> </span><span class="n">sBaseUrl</span><span class="p">,</span><span class="w"> </span><span class="n">sUrl</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sCompanyName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;O&#39;Reilly &amp; Associates&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sBaseUrl</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;https://example.com/api/search&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCompanyName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"O'Reilly &amp; Associates"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBaseUrl</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"https://example.com/api/search"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sEncodedCompany</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">UrlEncode</span><span class="p">(</span><span class="n">sCompanyName</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sUrl</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sBaseUrl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;?company=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEncodedCompany</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUrl</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sBaseUrl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"?company="</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEncodedCompany</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sUrl</span><span class="p">);</span>
 
@@ -4302,7 +4302,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildSearchUrl&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSearchUrl"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>https://example.com/api/search?company=O%27Reilly+%26+Associates
@@ -4316,14 +4316,14 @@
 <span class="w">    </span><span class="n">sEncodedOrderNo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">UrlEncode</span><span class="p">(</span><span class="n">sOrderNo</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sEncodedStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">UrlEncode</span><span class="p">(</span><span class="n">sStatus</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sUrl</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;https://example.com/orders?ordno=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEncodedOrderNo</span>
-<span class="w">    </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;&amp;status=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEncodedStatus</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUrl</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"https://example.com/orders?ordno="</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEncodedOrderNo</span>
+<span class="w">    </span><span class="o">+</span><span class="w"> </span><span class="s2">"&amp;status="</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEncodedStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sUrl</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildOrderLookupUrl&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;ORD-2024-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PENDING REVIEW&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildOrderLookupUrl"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"ORD-2024-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"PENDING REVIEW"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="encode-optional-filters-and-path-segments">Encode optional filters and path segments<a class="headerlink" href="#encode-optional-filters-and-path-segments" title="Permanent link">&para;</a></h3>
 <p>Combine required path segments with an optional query value while preserving <a href="../../literals/nil/"><code>NIL</code></a> behavior for the optional input. When <code>sFilter</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the URL omits the filter parameter entirely.</p>
@@ -4334,18 +4334,18 @@
 <span class="w">    </span><span class="n">sFolderSegment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">UrlEncode</span><span class="p">(</span><span class="n">sFolderName</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sFileSegment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">UrlEncode</span><span class="p">(</span><span class="n">sFileName</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sUrl</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;https://example.com/files/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFolderSegment</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileSegment</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUrl</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"https://example.com/files/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFolderSegment</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileSegment</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="p">(</span><span class="n">sFilter</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">NIL</span><span class="p">);</span>
 <span class="w">        </span><span class="n">sEncodedFilter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">UrlEncode</span><span class="p">(</span><span class="n">sFilter</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sUrl</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;?filter=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEncodedFilter</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sUrl</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">"?filter="</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEncodedFilter</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sUrl</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildDownloadUrl&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Reports&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;annual summary.pdf&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;2024&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildDownloadUrl"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Reports"</span><span class="p">,</span><span class="w"> </span><span class="s2">"annual summary.pdf"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2024"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

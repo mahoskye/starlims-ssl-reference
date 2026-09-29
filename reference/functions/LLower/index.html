@@ -4317,21 +4317,21 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateLogin</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredUsername</span><span class="p">,</span><span class="w"> </span><span class="n">sInputLower</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredLower</span><span class="p">,</span><span class="w"> </span><span class="n">bMatch</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;JSmith&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sStoredUsername</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"JSmith"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sStoredUsername</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"jsmith"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sInputLower</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LLower</span><span class="p">(</span><span class="n">sUserInput</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sStoredLower</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LLower</span><span class="p">(</span><span class="n">sStoredUsername</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">bMatch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sInputLower</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sStoredLower</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Names match: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bMatch</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Names match: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bMatch</span><span class="p">));</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bMatch</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateLogin&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateLogin"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Names match: True
@@ -4343,28 +4343,28 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sNormalizedStatus</span><span class="p">,</span><span class="w"> </span><span class="n">aValidStatuses</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sNormalizedStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LLower</span><span class="p">(</span><span class="nf">AllTrim</span><span class="p">(</span><span class="n">sStatusCode</span><span class="p">));</span>
-<span class="w">    </span><span class="n">aValidStatuses</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;pending&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;closed&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aValidStatuses</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"active"</span><span class="p">,</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w"> </span><span class="s2">"closed"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">bIsValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">AScan</span><span class="p">(</span><span class="n">aValidStatuses</span><span class="p">,</span><span class="w"> </span><span class="n">sNormalizedStatus</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Status accepted: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sNormalizedStatus</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Status accepted: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sNormalizedStatus</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Invalid status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatusCode</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Invalid status: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatusCode</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateSampleStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Active&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateSampleStatus"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Active"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="normalize-a-batch-of-codes-to-lowercase">Normalize a batch of codes to lowercase<a class="headerlink" href="#normalize-a-batch-of-codes-to-lowercase" title="Permanent link">&para;</a></h3>
 <p>Trim whitespace and lowercase all entries in an array in a single loop, producing <code>{"abc-01", "def-02", "ghi-03"}</code> from the raw input so it is ready for storage or comparison.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeCodes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRawCodes</span><span class="p">,</span><span class="w"> </span><span class="n">aNormalizedCodes</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aRawCodes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot; AbC-01 &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;def-02&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;GHI-03 &quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aRawCodes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">" AbC-01 "</span><span class="p">,</span><span class="w"> </span><span class="s2">"def-02"</span><span class="p">,</span><span class="w"> </span><span class="s2">"GHI-03 "</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aNormalizedCodes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRawCodes</span><span class="p">);</span>
@@ -4375,7 +4375,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NormalizeCodes&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"NormalizeCodes"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

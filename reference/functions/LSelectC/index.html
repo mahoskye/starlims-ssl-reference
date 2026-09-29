@@ -4172,17 +4172,17 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetOpenSamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, status</span>
 <span class="s2">        FROM sample</span>
 <span class="s2">        WHERE status = ?</span>
 <span class="s2">        ORDER BY sample_id</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelectC</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,,{</span><span class="s2">&quot;Open&quot;</span><span class="p">});</span>
+<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelectC</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,,{</span><span class="s2">"Open"</span><span class="p">});</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" is "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]);</span>
 <span class="w">        </span><span class="c1">/* Logs one line per row with the sample ID and status;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
@@ -4190,29 +4190,29 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetOpenSamples&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetOpenSamples"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="preserve-database-null-values-as-nil">Preserve database NULL values as NIL<a class="headerlink" href="#preserve-database-null-values-as-nil" title="Permanent link">&para;</a></h3>
 <p>Pass <a href="../../literals/false/"><code>.F.</code></a> for <code>bNullAsBlank</code> so that database <code>NULL</code> notes are surfaced as <a href="../../literals/nil/"><code>NIL</code></a> rather than an empty string, allowing an explicit check on each row.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSamplesWithOptionalNotes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">vNote</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, notes</span>
 <span class="s2">        FROM sample</span>
 <span class="s2">        WHERE status = ?</span>
 <span class="s2">        ORDER BY sample_id</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelectC</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,,{</span><span class="s2">&quot;Pending&quot;</span><span class="p">},</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelectC</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,,{</span><span class="s2">"Pending"</span><span class="p">},</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">);</span>
 <span class="w">        </span><span class="n">vNote</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">vNote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; has no note&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" has no note"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; note: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vNote</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" note: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vNote</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs the note text for rows that have one;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
@@ -4221,26 +4221,26 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetSamplesWithOptionalNotes&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetSamplesWithOptionalNotes"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="keep-selected-date-columns-invariant">Keep selected date columns invariant<a class="headerlink" href="#keep-selected-date-columns-invariant" title="Permanent link">&para;</a></h3>
 <p>Pass column index <code>2</code> in <code>aInvariantCols</code> so the <code>received_date</code> column is returned without timezone adjustment.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSamplesForDateReview</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">aInvariantCols</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">dReceived</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, received_date, status</span>
 <span class="s2">        FROM sample</span>
 <span class="s2">        WHERE status = ?</span>
 <span class="s2">        ORDER BY received_date</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aInvariantCols</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">2</span><span class="p">};</span>
-<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelectC</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,,{</span><span class="s2">&quot;Logged&quot;</span><span class="p">},</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="n">aInvariantCols</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelectC</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,,{</span><span class="s2">"Logged"</span><span class="p">},</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="n">aInvariantCols</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">);</span>
 <span class="w">        </span><span class="n">dReceived</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; received on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dReceived</span><span class="p">));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" received on "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dReceived</span><span class="p">));</span>
 <span class="w">        </span><span class="c1">/* Logs one line per row with the received date;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
@@ -4248,7 +4248,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetSamplesForDateReview&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetSamplesForDateReview"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

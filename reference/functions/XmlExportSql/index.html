@@ -4343,24 +4343,24 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportSampleResultsToXml</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">sFile</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSql</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSql</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, sample_name, status</span>
 <span class="s2">        FROM sample</span>
-<span class="s2">        WHERE status = &#39;A&#39;</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\temp\sample_data.xml&quot;</span><span class="p">;</span>
+<span class="s2">        WHERE status = 'A'</span>
+<span class="s2">    "</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\temp\sample_data.xml"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">XmlExportSql</span><span class="p">(</span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">sFile</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;XML export completed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFile</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"XML export completed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFile</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs on failure: export error details;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportSampleResultsToXml&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExportSampleResultsToXml"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="export-to-a-specific-database-with-error-handling">Export to a specific database with error handling<a class="headerlink" href="#export-to-a-specific-database-with-error-handling" title="Permanent link">&para;</a></h3>
 <p>Target a named database and wrap the call in <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> to distinguish between argument errors (which throw) and runtime failures (which return an error string). Checking the return value before the <a href="../../keywords/ENDTRY/"><code>:ENDTRY</code></a> handles the runtime case.</p>
@@ -4368,19 +4368,19 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sOutputFile</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">sDb</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDb</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LIMBDATA&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSql</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sDb</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LIMBDATA"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSql</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, sample_name, status, received_date</span>
 <span class="s2">        FROM sample</span>
-<span class="s2">        WHERE status = &#39;A&#39;</span>
+<span class="s2">        WHERE status = 'A'</span>
 <span class="s2">        ORDER BY sample_id</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">XmlExportSql</span><span class="p">(</span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputFile</span><span class="p">,</span><span class="w"> </span><span class="n">sDb</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Archive export completed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOutputFile</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Archive export completed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOutputFile</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4394,7 +4394,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportSamplesForArchive&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;C:\temp\archive.xml&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExportSamplesForArchive"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"C:\temp\archive.xml"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

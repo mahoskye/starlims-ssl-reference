@@ -4432,17 +4432,17 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetDueDateDay</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">,</span><span class="w"> </span><span class="n">nDay</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">dDueDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/15/2026&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dDueDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/15/2026"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">nDay</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Day</span><span class="p">(</span><span class="n">dDueDate</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Due date is on day &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDay</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Due date is on day "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDay</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nDay</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetDueDateDay&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetDueDateDay"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Due date is on day 15
@@ -4452,13 +4452,13 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckDateDayValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dSampleDate</span><span class="p">,</span><span class="w"> </span><span class="n">nDay</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">dSampleDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dSampleDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">""</span><span class="p">);</span>
 <span class="w">    </span><span class="n">nDay</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Day</span><span class="p">(</span><span class="n">dSampleDate</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nDay</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No calendar day is available because the date is empty&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No calendar day is available because the date is empty"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Recorded day is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDay</span><span class="p">));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Recorded day is "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDay</span><span class="p">));</span>
 <span class="w">        </span><span class="c1">/* Logs the recorded day when valid;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4466,7 +4466,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckDateDayValue&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckDateDayValue"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="filter-records-that-fall-on-a-target-day-of-the-month">Filter records that fall on a target day of the month<a class="headerlink" href="#filter-records-that-fall-on-a-target-day-of-the-month" title="Permanent link">&para;</a></h3>
 <p>Iterates over an array of run records and collects those whose date falls on a target day-of-month, then logs the count of matches.</p>
@@ -4476,9 +4476,9 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRuns</span><span class="p">,</span><span class="w"> </span><span class="n">aMatches</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">dRunDate</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRuns</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;RUN-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/15/2026&quot;</span><span class="p">)},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;RUN-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/18/2026&quot;</span><span class="p">)},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;RUN-003&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/15/2026&quot;</span><span class="p">)}</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"RUN-001"</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/15/2026"</span><span class="p">)},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"RUN-002"</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/18/2026"</span><span class="p">)},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"RUN-003"</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"04/15/2026"</span><span class="p">)}</span>
 <span class="w">    </span><span class="p">};</span>
 <span class="w">    </span><span class="n">aMatches</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
@@ -4490,15 +4490,15 @@
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Found &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aMatches</span><span class="p">))</span>
-<span class="w">           </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; runs on day &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nTargetDay</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Found "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aMatches</span><span class="p">))</span>
+<span class="w">           </span><span class="o">+</span><span class="w"> </span><span class="s2">" runs on day "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nTargetDay</span><span class="p">));</span>
 <span class="w">    </span><span class="c1">/* Logs the number of matching runs;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aMatches</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FilterRunsByDayOfMonth&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">15</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FilterRunsByDayOfMonth"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">15</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

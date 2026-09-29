@@ -4296,18 +4296,18 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CleanUsername</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUsername</span><span class="p">,</span><span class="w"> </span><span class="n">sCleanUsername</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUsername</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;johnsmith   &quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUsername</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"johnsmith   "</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sCleanUsername</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Trim</span><span class="p">(</span><span class="n">sUsername</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sCleanUsername</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">sUsername</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Username trimmed for storage: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Len</span><span class="p">(</span><span class="n">sCleanUsername</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; chars&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Username trimmed for storage: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Len</span><span class="p">(</span><span class="n">sCleanUsername</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" chars"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sCleanUsername</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CleanUsername&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CleanUsername"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Username trimmed for storage: 9 chars
@@ -4318,10 +4318,10 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRawLogLines</span><span class="p">,</span><span class="w"> </span><span class="n">aCleanLines</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sLine</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRawLogLines</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="s2">&quot;2026-04-11 14:32:01  INFO     Processing request    &quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;2026-04-11 14:32:02  DEBUG    Connection opened     &quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;2026-04-11 14:32:03  WARN     Retry attempt 1       &quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;2026-04-11 14:32:04  ERROR    Operation failed      &quot;</span>
+<span class="w">        </span><span class="s2">"2026-04-11 14:32:01  INFO     Processing request    "</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"2026-04-11 14:32:02  DEBUG    Connection opened     "</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"2026-04-11 14:32:03  WARN     Retry attempt 1       "</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"2026-04-11 14:32:04  ERROR    Operation failed      "</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">aCleanLines</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
@@ -4333,13 +4333,13 @@
 <span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aCleanLines</span><span class="p">,</span><span class="w"> </span><span class="n">sLine</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Normalized &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; log lines&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Normalized "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" log lines"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aCleanLines</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NormalizeLogLines&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"NormalizeLogLines"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Normalized 4 log lines

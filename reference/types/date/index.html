@@ -2105,7 +2105,7 @@
 <p>SSL has no date literal. Create date values with functions that return dates.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">dToday</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>
 <span class="n">dNow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Now</span><span class="p">();</span>
-<span class="n">dParsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/15/2026&quot;</span><span class="p">);</span>
+<span class="n">dParsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"04/15/2026"</span><span class="p">);</span>
 </code></pre></div>
 <ul>
 <li><strong>Runtime type:</strong> <code>DATE</code></li>
@@ -2255,22 +2255,22 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ComputeReviewDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dReviewDate</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">dStartDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/31/2026&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dStartDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"01/31/2026"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">dStartDate</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Start date is required&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Start date is required"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dReviewDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dStartDate</span><span class="p">:</span><span class="nf">AddMonths</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">dReviewDate</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;MM/dd/yyyy&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">dReviewDate</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">"MM/dd/yyyy"</span><span class="p">));</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">dReviewDate</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ComputeReviewDate&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ComputeReviewDate"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>04/30/2026
@@ -2306,21 +2306,21 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateRequiredDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dSubmittedDate</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">dSubmittedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dSubmittedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">""</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">dSubmittedDate</span><span class="p">:</span><span class="nf">IsEmpty</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Required date is missing&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Required date is missing"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Date received: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dSubmittedDate</span><span class="p">:</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Date received: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dSubmittedDate</span><span class="p">:</span><span class="nf">ToString</span><span class="p">();</span>
 <span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateRequiredDate&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateRequiredDate"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Required date is missing
@@ -2332,27 +2332,27 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nDaysRemaining</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dToday</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>
-<span class="w">    </span><span class="n">dStartDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/01/2026&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dStartDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"04/01/2026"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">dDueDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dStartDate</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">14</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">dDueDate</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dToday</span><span class="p">;</span>
 <span class="w">        </span><span class="n">nDaysRemaining</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dToday</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Task is overdue by &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDaysRemaining</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; days&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Task is overdue by "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDaysRemaining</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" days"</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="n">nDaysRemaining</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dDueDate</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dToday</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Task is due in &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDaysRemaining</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; days&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Task is due in "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDaysRemaining</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" days"</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Due date: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">&quot;YYYY-MM-DD&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Due date: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">"YYYY-MM-DD"</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckTaskDueDate&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckTaskDueDate"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="controlling-json-serialization-output">Controlling JSON serialization output<a class="headerlink" href="#controlling-json-serialization-output" title="Permanent link">&para;</a></h3>
 <p>Clones the current date twice, marks one as invariant and one as local, then serializes both to show how the output format differs. Output includes the current timestamp and varies each time the example runs.</p>
@@ -2370,18 +2370,18 @@
 <span class="w">    </span><span class="n">dLocalDate</span><span class="p">:</span><span class="nf">MakeLocal</span><span class="p">();</span>
 <span class="w">    </span><span class="n">sLocalJson</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dLocalDate</span><span class="p">:</span><span class="nf">ToJson</span><span class="p">();</span>
 
-<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Invariant JSON: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInvariantJson</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Local JSON: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLocalJson</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Invariant JSON: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInvariantJson</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Local JSON: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLocalJson</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDateJsonModes&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowDateJsonModes"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/InfoMes/"><code>InfoMes</code></a> logs (values vary by current date and time zone):</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>Invariant JSON: &quot;2026-04-23T14:30:00&quot;
-Local JSON: &quot;2026-04-23T14:30:00+05:00&quot;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Invariant JSON: "2026-04-23T14:30:00"
+Local JSON: "2026-04-23T14:30:00+05:00"
 </code></pre></div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>

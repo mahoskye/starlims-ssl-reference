@@ -2191,7 +2191,7 @@
 <p>A name/value bag — read or list values from a request's headers, query string, cookies, forms, server variables, or client certificate fields.</p>
 <p>An <code>SSLNameValueContainer</code> is the object returned by six properties on <a href="../SSLRequest/"><code>SSLRequest</code></a>: <code>QueryString</code>, <code>Cookies</code>, <code>Forms</code>, <code>Headers</code>, <code>ServerVariables</code>, and <code>ClientCertificate</code>. Each instance wraps a single name/value collection from the incoming HTTP request. You read individual values by name, list every key, or replace a value.</p>
 <p>Two reading idioms are equivalent for known names:</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oContainer</span><span class="p">:</span><span class="nf">Get</span><span class="p">(</span><span class="s2">&quot;SomeName&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">/* explicit method call ;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oContainer</span><span class="p">:</span><span class="nf">Get</span><span class="p">(</span><span class="s2">"SomeName"</span><span class="p">);</span><span class="w">   </span><span class="c1">/* explicit method call ;</span>
 <span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oContainer</span><span class="p">:</span><span class="n">SomeName</span><span class="p">;</span><span class="w">          </span><span class="c1">/* expando-style member access ;</span>
 </code></pre></div>
 <p>The expando form is more concise and is the recommended idiom for fixed, known keys (e.g., reading a specific query parameter or header). Use <code>Get</code> when the key is dynamic — the value is in a variable, looped over from <code>AllKeys</code>, etc.</p>
@@ -2316,7 +2316,7 @@
 <span class="w">    </span><span class="n">oQueryString</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">QueryString</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oQueryString</span><span class="p">:</span><span class="n">Name</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">&quot;Hello, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sName</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">"Hello, "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sName</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage: GET /MyEndpoint?Name=Alice ;</span>
@@ -2332,7 +2332,7 @@
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">aKeys</span><span class="p">);</span>
 <span class="w">        </span><span class="n">sKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aKeys</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 <span class="w">        </span><span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHeaders</span><span class="p">:</span><span class="nf">Get</span><span class="p">(</span><span class="n">sKey</span><span class="p">);</span>
-<span class="w">        </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="n">sKey</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sValue</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
+<span class="w">        </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="n">sKey</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sValue</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
@@ -2343,14 +2343,14 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadDynamicCookie</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oCookies</span><span class="p">,</span><span class="w"> </span><span class="n">sCookieName</span><span class="p">,</span><span class="w"> </span><span class="n">sValue</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sCookieName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;session_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">UserName</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCookieName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"session_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">UserName</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oCookies</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Request</span><span class="p">:</span><span class="n">Cookies</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oCookies</span><span class="p">:</span><span class="nf">Get</span><span class="p">(</span><span class="n">sCookieName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sValue</span><span class="p">);</span>
-<span class="w">        </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">&quot;No cookie set for this user&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">"No cookie set for this user"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">&quot;Found cookie: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sValue</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">"Found cookie: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sValue</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>

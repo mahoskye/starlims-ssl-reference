@@ -4420,39 +4420,39 @@ When <code>bUseDateFormat</code> is omitted, <a href="../../literals/nil/"><code
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateImportDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sImportDate</span><span class="p">,</span><span class="w"> </span><span class="n">bValid</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sImportDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;20240315&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sImportDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"20240315"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ValidateDate</span><span class="p">(</span><span class="n">sImportDate</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bValid</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Import date is valid: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sImportDate</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Import date is valid: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sImportDate</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs a valid import-date status;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Import date is invalid: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sImportDate</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Import date is invalid: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sImportDate</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs an invalid import-date status;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateImportDate&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateImportDate"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="validate-input-in-the-current-date-format">Validate input in the current date format<a class="headerlink" href="#validate-input-in-the-current-date-format" title="Permanent link">&para;</a></h3>
 <p>Omit the second argument to validate user-entered text against the runtime's configured date format.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateEnteredDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sEnteredDate</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sEnteredDate</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sEnteredDate</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bValid</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ValidateDate</span><span class="p">(</span><span class="n">sEnteredDate</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bValid</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Entered date is valid&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Entered date is valid"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Entered date is not valid for the current date format&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Entered date is not valid for the current date format"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateEnteredDate&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;04/23/2026&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateEnteredDate"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"04/23/2026"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="apply-mode-specific-validation-to-rows-from-different-sources">Apply mode-specific validation to rows from different sources<a class="headerlink" href="#apply-mode-specific-validation-to-rows-from-different-sources" title="Permanent link">&para;</a></h3>
 <p>Choose the validation mode based on the source field: <code>SYSTEM</code> rows use strict <code>yyyyMMdd</code> mode; <code>USER</code> rows use the current date format. The second SYSTEM row (<code>"20240230"</code>) fails because February 30 is not a real date.</p>
@@ -4461,9 +4461,9 @@ When <code>bUseDateFormat</code> is omitted, <a href="../../literals/nil/"><code
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nValidCount</span><span class="p">,</span><span class="w"> </span><span class="n">nInvalidCount</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;20240419&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;20240230&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;USER&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="nf">Today</span><span class="p">())}</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"SYSTEM"</span><span class="p">,</span><span class="w"> </span><span class="s2">"20240419"</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"SYSTEM"</span><span class="p">,</span><span class="w"> </span><span class="s2">"20240230"</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"USER"</span><span class="p">,</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="nf">Today</span><span class="p">())}</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">nValidCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
@@ -4472,7 +4472,7 @@ When <code>bUseDateFormat</code> is omitted, <a href="../../literals/nil/"><code
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">);</span>
 <span class="w">        </span><span class="n">sSource</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
 <span class="w">        </span><span class="n">sDateText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span>
-<span class="w">        </span><span class="n">bUseDateFormat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="p">(</span><span class="n">sSource</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">bUseDateFormat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="p">(</span><span class="n">sSource</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"SYSTEM"</span><span class="p">);</span>
 
 <span class="w">        </span><span class="n">bValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ValidateDate</span><span class="p">(</span><span class="n">sDateText</span><span class="p">,</span><span class="w"> </span><span class="n">bUseDateFormat</span><span class="p">);</span>
 
@@ -4480,20 +4480,20 @@ When <code>bUseDateFormat</code> is omitted, <a href="../../literals/nil/"><code
 <span class="w">            </span><span class="n">nValidCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nValidCount</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">            </span><span class="n">nInvalidCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nInvalidCount</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSource</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; row has an invalid date: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDateText</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSource</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" row has an invalid date: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDateText</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs an invalid-row message;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Valid rows: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nValidCount</span><span class="p">)</span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, invalid rows: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nInvalidCount</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Valid rows: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nValidCount</span><span class="p">)</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">", invalid rows: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nInvalidCount</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the validation totals;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ReviewIncomingDates&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReviewIncomingDates"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

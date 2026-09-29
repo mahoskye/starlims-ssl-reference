@@ -4103,19 +4103,19 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RemoveOneUser</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aUsers</span><span class="p">,</span><span class="w"> </span><span class="n">bRemoved</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aUsers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aUsers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"jsmith"</span><span class="p">};</span>
 
-<span class="w">    </span><span class="n">bRemoved</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocRemoveUsersFromGroup</span><span class="p">(</span><span class="s2">&quot;QC_Analysts&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">aUsers</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bRemoved</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocRemoveUsersFromGroup</span><span class="p">(</span><span class="s2">"QC_Analysts"</span><span class="p">,</span><span class="w"> </span><span class="n">aUsers</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bRemoved</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Removed user from QC_Analysts&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Removed user from QC_Analysts"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Failed to update QC_Analysts&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Failed to update QC_Analysts"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RemoveOneUser&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RemoveOneUser"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="remove-a-validated-user-list-from-one-project-group">Remove a validated user list from one project group<a class="headerlink" href="#remove-a-validated-user-list-from-one-project-group" title="Permanent link">&para;</a></h3>
 <p>Constructs a group name from a project code, removes the supplied user list, reports the outcome, and returns the boolean so the caller can react to a failure.</p>
@@ -4123,21 +4123,21 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sProjectCode</span><span class="p">,</span><span class="w"> </span><span class="n">aUsersToRemove</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sGroupName</span><span class="p">,</span><span class="w"> </span><span class="n">bRemoved</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sGroupName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;PRJ_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sProjectCode</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;_TEAM&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sGroupName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"PRJ_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sProjectCode</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"_TEAM"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bRemoved</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocRemoveUsersFromGroup</span><span class="p">(</span><span class="n">sGroupName</span><span class="p">,</span><span class="w"> </span><span class="n">aUsersToRemove</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bRemoved</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Updated group &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGroupName</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Updated group "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGroupName</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Could not update group &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGroupName</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Could not update group "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGroupName</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bRemoved</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RemoveProjectUsers&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;ALPHA&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">}});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RemoveProjectUsers"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"ALPHA"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"jsmith"</span><span class="p">}});</span>
 </code></pre></div>
 <h3 id="remove-users-from-several-groups-and-capture-per-group-results">Remove users from several groups and capture per-group results<a class="headerlink" href="#remove-users-from-several-groups-and-capture-per-group-results" title="Permanent link">&para;</a></h3>
 <p>Applies the same user list removal to each group in a list, records each per-group result in a <a href="../CreateUdObject/"><code>CreateUdObject</code></a>, and returns the full result array.</p>
@@ -4159,10 +4159,10 @@
 <span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">oResult</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bRemoved</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Updated group &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGroupName</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Updated group "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGroupName</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs updated group name on success;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Failed to update group &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGroupName</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Failed to update group "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGroupName</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs failed group name on failure;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
@@ -4171,7 +4171,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RemoveUsersFromGroups&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">&quot;QC_Analysts&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;QA_Team&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">}});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RemoveUsersFromGroups"</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">"QC_Analysts"</span><span class="p">,</span><span class="w"> </span><span class="s2">"QA_Team"</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">"jsmith"</span><span class="p">}});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

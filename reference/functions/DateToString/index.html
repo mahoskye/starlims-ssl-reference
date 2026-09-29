@@ -4449,11 +4449,11 @@
 
 <span class="w">    </span><span class="n">sRunAt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateToString</span><span class="p">(</span><span class="n">dRunAt</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Run completed at &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRunAt</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Run completed at "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRunAt</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowRunTimestamp&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowRunTimestamp"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs (output depends on the current time):</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Run completed at 04/23/2026 14:30:00
@@ -4464,14 +4464,14 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">dReceivedDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sExportDate</span><span class="p">,</span><span class="w"> </span><span class="n">sRow</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sExportDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateToString</span><span class="p">(</span><span class="n">dReceivedDate</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;yyyy-MM-dd&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sRow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExportDate</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sExportDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateToString</span><span class="p">(</span><span class="n">dReceivedDate</span><span class="p">,</span><span class="w"> </span><span class="s2">"yyyy-MM-dd"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sRow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">","</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExportDate</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sRow</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildExportRow&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LAB-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/23/2026&quot;</span><span class="p">)});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildExportRow"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LAB-001"</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"04/23/2026"</span><span class="p">)});</span>
 </code></pre></div>
 <h3 id="build-versioned-file-names-using-multiple-date-patterns">Build versioned file names using multiple date patterns<a class="headerlink" href="#build-versioned-file-names-using-multiple-date-patterns" title="Permanent link">&para;</a></h3>
 <p>Calls <code>DateToString</code> twice with different format patterns, once for the folder date component and once for the timestamp-based filename suffix, to construct a versioned archive path.</p>
@@ -4481,17 +4481,17 @@
 
 <span class="w">    </span><span class="n">dCreatedAt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Now</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">sFolderDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateToString</span><span class="p">(</span><span class="n">dCreatedAt</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;yyyyMMdd&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sStamp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateToString</span><span class="p">(</span><span class="n">dCreatedAt</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;yyyyMMdd_HHmmss&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sFolderDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateToString</span><span class="p">(</span><span class="n">dCreatedAt</span><span class="p">,</span><span class="w"> </span><span class="s2">"yyyyMMdd"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sStamp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateToString</span><span class="p">(</span><span class="n">dCreatedAt</span><span class="p">,</span><span class="w"> </span><span class="s2">"yyyyMMdd_HHmmss"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sBaseName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStamp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;.txt&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;archive/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFolderDate</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sBaseName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStamp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">".txt"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"archive/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFolderDate</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sPath</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildArchivePath&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LabReport&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildArchivePath"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LabReport"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

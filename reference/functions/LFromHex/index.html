@@ -3759,14 +3759,14 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DecodeHexMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sHexInput</span><span class="p">,</span><span class="w"> </span><span class="n">sDecodedText</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sHexInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;48656C6C6F&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sHexInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"48656C6C6F"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sDecodedText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LFromHex</span><span class="p">(</span><span class="n">sHexInput</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Decoded text: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDecodedText</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Decoded text: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDecodedText</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DecodeHexMessage&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DecodeHexMessage"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Decoded text: Hello
@@ -3776,7 +3776,7 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DecodeHexBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aInput</span><span class="p">,</span><span class="w"> </span><span class="n">aDecoded</span><span class="p">,</span><span class="w"> </span><span class="n">aInvalid</span><span class="p">,</span><span class="w"> </span><span class="n">sHex</span><span class="p">,</span><span class="w"> </span><span class="n">sDecoded</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;48656C6C6F&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;4D61686F&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;XYZ123&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;414243&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"48656C6C6F"</span><span class="p">,</span><span class="w"> </span><span class="s2">"4D61686F"</span><span class="p">,</span><span class="w"> </span><span class="s2">"XYZ123"</span><span class="p">,</span><span class="w"> </span><span class="s2">"414243"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aDecoded</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 <span class="w">    </span><span class="n">aInvalid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
@@ -3791,12 +3791,12 @@
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Decoded values: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aDecoded</span><span class="p">));</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Decoded values: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aDecoded</span><span class="p">));</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs decoded count;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aInvalid</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Skipped invalid hex values: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aInvalid</span><span class="p">)));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Skipped invalid hex values: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aInvalid</span><span class="p">)));</span>
 <span class="w">        </span><span class="c1">/* Logs skipped invalid count;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3804,28 +3804,28 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DecodeHexBatch&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DecodeHexBatch"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="round-trip-text-through-hex-encoding-and-decoding">Round-trip text through hex encoding and decoding<a class="headerlink" href="#round-trip-text-through-hex-encoding-and-decoding" title="Permanent link">&para;</a></h3>
 <p>Encode with <a href="../LToHex/"><code>LToHex</code></a> and immediately decode with <code>LFromHex</code> to confirm the full round-trip restores the original value. Because <code>"Batch-1042"</code> encodes and decodes correctly, the success branch fires.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">VerifyHexRoundTrip</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOriginalText</span><span class="p">,</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">,</span><span class="w"> </span><span class="n">sDecodedText</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sOriginalText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Batch-1042&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOriginalText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Batch-1042"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sHexValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LToHex</span><span class="p">(</span><span class="n">sOriginalText</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sDecodedText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LFromHex</span><span class="p">(</span><span class="n">sHexValue</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sDecodedText</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sOriginalText</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Round-trip decode succeeded&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Round-trip decode succeeded"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Round-trip decode failed&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Round-trip decode failed"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sDecodedText</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sOriginalText</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;VerifyHexRoundTrip&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"VerifyHexRoundTrip"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

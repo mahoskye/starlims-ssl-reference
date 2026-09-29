@@ -2431,14 +2431,14 @@
 <span class="w">    </span><span class="n">oWebServices</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">WebServices</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oHttpClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateHttpClient</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetResponse</span><span class="p">(</span><span class="s2">&quot;https://lims-instruments.example/api/settings&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetResponse</span><span class="p">(</span><span class="s2">"https://lims-instruments.example/api/settings"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oResponse</span><span class="p">:</span><span class="nf">GetValueAsString</span><span class="p">();</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Settings: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBody</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Settings: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBody</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LoadInstrumentSettings&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LoadInstrumentSettings"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="inspect-headers-before-consuming-the-body">Inspect headers before consuming the body<a class="headerlink" href="#inspect-headers-before-consuming-the-body" title="Permanent link">&para;</a></h3>
 <p>Reads <code>Content-Type</code> to decide whether to parse the body as XML or treat it as plain text.</p>
@@ -2448,20 +2448,20 @@
 <span class="w">    </span><span class="n">oWebServices</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">WebServices</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oHttpClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateHttpClient</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetResponse</span><span class="p">(</span><span class="s2">&quot;https://lims-data.example/api/sample/SAMP-001&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetResponse</span><span class="p">(</span><span class="s2">"https://lims-data.example/api/sample/SAMP-001"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oResponse</span><span class="p">:</span><span class="n">ContentType</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="s2">&quot;xml&quot;</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">sType</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="s2">"xml"</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">sType</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oResponse</span><span class="p">:</span><span class="nf">GetValueAsXmlDom</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;XML response received&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"XML response received"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oResponse</span><span class="p">:</span><span class="nf">GetValueAsString</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Text response: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sText</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Text response: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sText</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ReadFlexibleResponse&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReadFlexibleResponse"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="save-a-binary-response-to-a-file">Save a binary response to a file<a class="headerlink" href="#save-a-binary-response-to-a-file" title="Permanent link">&para;</a></h3>
 <p>Downloads a binary report and writes it to a known path.</p>
@@ -2471,14 +2471,14 @@
 <span class="w">    </span><span class="n">oWebServices</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">WebServices</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oHttpClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateHttpClient</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetResponse</span><span class="p">(</span><span class="s2">&quot;https://reports.example/batch/B-1042.pdf&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sSavedPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oResponse</span><span class="p">:</span><span class="nf">SaveValueToFile</span><span class="p">(</span><span class="s2">&quot;C:\Lims\Inbox\B-1042.pdf&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetResponse</span><span class="p">(</span><span class="s2">"https://reports.example/batch/B-1042.pdf"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sSavedPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oResponse</span><span class="p">:</span><span class="nf">SaveValueToFile</span><span class="p">(</span><span class="s2">"C:\Lims\Inbox\B-1042.pdf"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Saved to: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSavedPath</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Saved to: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSavedPath</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DownloadReportPdf&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DownloadReportPdf"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

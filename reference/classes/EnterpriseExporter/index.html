@@ -2835,48 +2835,48 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportSelectedTables</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aTables</span><span class="p">,</span><span class="w"> </span><span class="n">oExporter</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aTables</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;users&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;roles&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;permissions&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">oExporter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">EnterpriseExporter</span><span class="p">{</span><span class="n">aTables</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;C:/Exports/EnterpriseData&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">oExporter</span><span class="p">:</span><span class="n">LogFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/Exports/EnterpriseData/export.log&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aTables</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"users"</span><span class="p">,</span><span class="w"> </span><span class="s2">"roles"</span><span class="p">,</span><span class="w"> </span><span class="s2">"permissions"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oExporter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">EnterpriseExporter</span><span class="p">{</span><span class="n">aTables</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="s2">"C:/Exports/EnterpriseData"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oExporter</span><span class="p">:</span><span class="n">LogFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:/Exports/EnterpriseData/export.log"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oExporter</span><span class="p">:</span><span class="nf">DoExport</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Export run completed. Review the log file for per-table results.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Export run completed. Review the log file for per-table results."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: final exporter message;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Export failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oExporter</span><span class="p">:</span><span class="n">ErrorMsg</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Export failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oExporter</span><span class="p">:</span><span class="n">ErrorMsg</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportSelectedTables&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExportSelectedTables"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="export-in-enterprise-only-mode-with-a-custom-source">Export in enterprise-only mode with a custom source<a class="headerlink" href="#export-in-enterprise-only-mode-with-a-custom-source" title="Permanent link">&para;</a></h3>
 <p>Sets <code>IsEnterpriseOnly</code> and passes a table entry array where each entry's second value is the <code>FROM</code> source for the generated <code>SELECT</code>. Here <code>enterprise_users_view</code> replaces the default table name as the source for the <code>users</code> output.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportEnterpriseOnlyTable</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aTables</span><span class="p">,</span><span class="w"> </span><span class="n">oExporter</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aTables</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{{</span><span class="s2">&quot;users&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;enterprise_users_view&quot;</span><span class="p">}};</span>
+<span class="w">    </span><span class="n">aTables</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{{</span><span class="s2">"users"</span><span class="p">,</span><span class="w"> </span><span class="s2">"enterprise_users_view"</span><span class="p">}};</span>
 
-<span class="w">    </span><span class="n">oExporter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">EnterpriseExporter</span><span class="p">{</span><span class="n">aTables</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;C:/Exports/EnterpriseOnly&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oExporter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">EnterpriseExporter</span><span class="p">{</span><span class="n">aTables</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="s2">"C:/Exports/EnterpriseOnly"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">oExporter</span><span class="p">:</span><span class="n">IsEnterpriseOnly</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oExporter</span><span class="p">:</span><span class="n">LogFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/Exports/EnterpriseOnly/export.log&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oExporter</span><span class="p">:</span><span class="n">LogFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:/Exports/EnterpriseOnly/export.log"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oExporter</span><span class="p">:</span><span class="nf">DoExport</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: final exporter message;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Enterprise-only export failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oExporter</span><span class="p">:</span><span class="n">ErrorMsg</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Enterprise-only export failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oExporter</span><span class="p">:</span><span class="n">ErrorMsg</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportEnterpriseOnlyTable&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExportEnterpriseOnlyTable"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="export-in-sql-mode-with-date-handling-options">Export in SQL mode with date handling options<a class="headerlink" href="#export-in-sql-mode-with-date-handling-options" title="Permanent link">&para;</a></h3>
 <p>Sets <code>FromSQL</code> and supplies a full SQL statement as the second value in each table entry. <code>NullAsBlank</code> converts exported <code>NULL</code> values to blank strings, and <code>InvariantDateColumns</code> ensures <code>reported_on</code> and <code>approved_on</code> are written in a locale-independent format.</p>
@@ -2884,34 +2884,34 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aTables</span><span class="p">,</span><span class="w"> </span><span class="n">aDateCols</span><span class="p">,</span><span class="w"> </span><span class="n">oExporter</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aTables</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{{</span>
-<span class="w">        </span><span class="s2">&quot;analysis_results&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="s2">"analysis_results"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"</span>
 <span class="s2">SELECT sample_id, result_value, reported_on, approved_on</span>
 <span class="s2">FROM analysis_results</span>
 <span class="s2">WHERE approved_on IS NOT NULL</span>
 <span class="s2">ORDER BY sample_id</span>
-<span class="s2">&quot;</span>
+<span class="s2">"</span>
 <span class="w">    </span><span class="p">}};</span>
-<span class="w">    </span><span class="n">aDateCols</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;reported_on&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;approved_on&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aDateCols</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"reported_on"</span><span class="p">,</span><span class="w"> </span><span class="s2">"approved_on"</span><span class="p">};</span>
 
-<span class="w">    </span><span class="n">oExporter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">EnterpriseExporter</span><span class="p">{</span><span class="n">aTables</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;C:/Exports/SqlMode&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oExporter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">EnterpriseExporter</span><span class="p">{</span><span class="n">aTables</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="s2">"C:/Exports/SqlMode"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">oExporter</span><span class="p">:</span><span class="n">FromSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oExporter</span><span class="p">:</span><span class="n">NullAsBlank</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oExporter</span><span class="p">:</span><span class="n">InvariantDateColumns</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aDateCols</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oExporter</span><span class="p">:</span><span class="n">LogFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/Exports/SqlMode/export.log&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oExporter</span><span class="p">:</span><span class="n">LogFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:/Exports/SqlMode/export.log"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oExporter</span><span class="p">:</span><span class="nf">DoExport</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: final exporter message;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;SQL-mode export failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oExporter</span><span class="p">:</span><span class="n">ErrorMsg</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"SQL-mode export failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oExporter</span><span class="p">:</span><span class="n">ErrorMsg</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportWithSQLMode&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExportWithSQLMode"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

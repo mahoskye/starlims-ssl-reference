@@ -2886,12 +2886,12 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateSampleStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;REJECTED&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"REJECTED"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;APPROVED&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample passed validation&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"APPROVED"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample passed validation"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample failed validation and requires review&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample failed validation and requires review"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
@@ -2900,7 +2900,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateSampleStatus&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateSampleStatus"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample failed validation and requires review
@@ -2911,13 +2911,13 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sDefaultStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDefaultStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;PENDING&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDefaultStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">        SELECT status</span>
 <span class="s2">        FROM samples</span>
 <span class="s2">        WHERE sample_id = ?</span>
-<span class="s2">    &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sSampleID</span><span class="p">});</span>
+<span class="s2">    "</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sSampleID</span><span class="p">});</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="nf">Empty</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
 <span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
@@ -2929,7 +2929,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetSampleStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;S-001&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetSampleStatus"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-001"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

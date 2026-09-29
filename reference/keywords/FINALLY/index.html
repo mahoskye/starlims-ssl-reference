@@ -2885,34 +2885,34 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">bCleanupNeeded</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bCleanupNeeded</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Starting&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Starting"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="c1">/* Mark temporary state that must always be cleared;</span>
 <span class="w">        </span><span class="n">bCleanupNeeded</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Loading batch&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Loading batch"</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            SELECT sample_id</span>
 <span class="s2">            FROM sample</span>
 <span class="s2">            WHERE batch_id = ?sBatchID?</span>
-<span class="s2">        &quot;</span><span class="p">);</span>
+<span class="s2">        "</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">&quot;No samples found for batch &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">"No samples found for batch "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Loaded &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; sample(s)&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Loaded "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" sample(s)"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Batch load failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Batch load failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sStatus</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs batch load failure on error;</span>
 
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bCleanupNeeded</span><span class="p">;</span>
 <span class="w">            </span><span class="n">bCleanupNeeded</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Cleanup complete&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Cleanup complete"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
@@ -2921,7 +2921,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ProcessBatch&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;BATCH-001&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ProcessBatch"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"BATCH-001"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

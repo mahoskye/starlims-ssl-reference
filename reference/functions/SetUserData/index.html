@@ -3675,15 +3675,15 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowCurrentUser</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentUser</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"jsmith"</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">SetUserData</span><span class="p">(</span><span class="n">sUserName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">sCurrentUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetUserData</span><span class="p">();</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Current user: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentUser</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Current user: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentUser</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowCurrentUser&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowCurrentUser"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Current user: jsmith
@@ -3694,19 +3694,19 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOriginalUser</span><span class="p">,</span><span class="w"> </span><span class="n">sReviewUser</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sOriginalUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetUserData</span><span class="p">();</span>
-<span class="w">    </span><span class="n">sReviewUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;REVIEWER&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sReviewUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"REVIEWER"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">SetUserData</span><span class="p">(</span><span class="n">sReviewUser</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Running as: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">GetUserData</span><span class="p">());</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Review work completed&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Running as: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">GetUserData</span><span class="p">());</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Review work completed"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">SetUserData</span><span class="p">(</span><span class="n">sOriginalUser</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunAsReviewer&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RunAsReviewer"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="validate-a-candidate-value-before-switching">Validate a candidate value before switching<a class="headerlink" href="#validate-a-candidate-value-before-switching" title="Permanent link">&para;</a></h3>
 <p>Check the input first so the function is called only with a non-empty string.</p>
@@ -3715,7 +3715,7 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOriginalUser</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sRequestedUser</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;A user name is required&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"A user name is required"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3723,14 +3723,14 @@
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">SetUserData</span><span class="p">(</span><span class="n">sRequestedUser</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Active user: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">GetUserData</span><span class="p">());</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Active user: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">GetUserData</span><span class="p">());</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">SetUserData</span><span class="p">(</span><span class="n">sOriginalUser</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ApplyRequestedUser&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ApplyRequestedUser"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"jsmith"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

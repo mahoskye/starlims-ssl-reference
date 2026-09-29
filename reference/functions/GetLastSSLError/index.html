@@ -3507,24 +3507,24 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SAMPLE-2024-001&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SAMPLE-2024-001"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"A"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        UPDATE sample SET</span>
 <span class="s2">            status = ?</span>
 <span class="s2">        WHERE sampleid = ?</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">});</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Record saved successfully&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Record saved successfully"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">oErr</span><span class="p">);</span>
-<span class="w">            </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Save failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Save failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3533,28 +3533,28 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SaveSampleRecord&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SaveSampleRecord"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="log-comprehensive-error-details-for-debugging">Log comprehensive error details for debugging<a class="headerlink" href="#log-comprehensive-error-details-for-debugging" title="Permanent link">&para;</a></h3>
 <p>Capture and log comprehensive error details after any SSL exception to support debugging.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogFailureDetails</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sInput</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sLogMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;bad-value&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"bad-value"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">RaiseError</span><span class="p">(</span>
-<span class="w">            </span><span class="s2">&quot;Validation failed for input &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInput</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;LogFailureDetails&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"Validation failed for input "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInput</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"LogFailureDetails"</span><span class="p">,</span>
 <span class="w">            </span><span class="mi">1001</span>
 <span class="w">        </span><span class="p">);</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">oErr</span><span class="p">);</span>
-<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Message: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Operation: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Operation</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Code: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oErr</span><span class="p">:</span><span class="n">Code</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Message: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"Operation: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Operation</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"Code: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oErr</span><span class="p">:</span><span class="n">Code</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 <span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">FullDescription</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">sLogMessage</span><span class="p">);</span><span class="w"> </span><span class="c1">/* Logs error details for debugging;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -3564,7 +3564,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LogFailureDetails&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LogFailureDetails"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="inspect-a-chain-of-inner-exceptions">Inspect a chain of inner exceptions<a class="headerlink" href="#inspect-a-chain-of-inner-exceptions" title="Permanent link">&para;</a></h3>
 <p>Inspect nested error information to diagnose compound or wrapped failures.</p>
@@ -3574,8 +3574,8 @@
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">RaiseError</span><span class="p">(</span>
-<span class="w">                </span><span class="s2">&quot;Connection timeout after 30 seconds&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="s2">&quot;Database.ADODB&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">"Connection timeout after 30 seconds"</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">"Database.ADODB"</span><span class="p">,</span>
 <span class="w">                </span><span class="mi">20001</span>
 <span class="w">            </span><span class="p">);</span>
 <span class="w">        </span><span class="k">:CATCH</span><span class="p">;</span>
@@ -3583,8 +3583,8 @@
 <span class="w">        </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
 <span class="w">        </span><span class="nf">RaiseError</span><span class="p">(</span>
-<span class="w">            </span><span class="s2">&quot;Data retrieval failed&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;DataLayer.GetSamples&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"Data retrieval failed"</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"DataLayer.GetSamples"</span><span class="p">,</span>
 <span class="w">            </span><span class="mi">10001</span><span class="p">,</span>
 <span class="w">            </span><span class="n">oErr</span>
 <span class="w">        </span><span class="p">);</span>
@@ -3593,14 +3593,14 @@
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">oErr</span><span class="p">);</span>
 <span class="w">            </span><span class="n">nDepth</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sChain</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Top error: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="w">            </span><span class="n">sChain</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sChain</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Operation: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Operation</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">            </span><span class="n">sChain</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Top error: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">            </span><span class="n">sChain</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sChain</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"Operation: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Operation</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 
 <span class="w">            </span><span class="n">oInner</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">InnerException</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:WHILE</span><span class="w"> </span><span class="err">!</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">oInner</span><span class="p">);</span>
 <span class="w">                </span><span class="n">nDepth</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nDepth</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">                </span><span class="n">sChain</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sChain</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Level &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDepth</span><span class="p">);</span>
-<span class="w">                </span><span class="n">sChain</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sChain</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: [&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oInner</span><span class="p">:</span><span class="n">Code</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;] &quot;</span><span class="p">;</span>
+<span class="w">                </span><span class="n">sChain</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sChain</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"Level "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDepth</span><span class="p">);</span>
+<span class="w">                </span><span class="n">sChain</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sChain</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": ["</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oInner</span><span class="p">:</span><span class="n">Code</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"] "</span><span class="p">;</span>
 <span class="w">                </span><span class="n">sChain</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sChain</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oInner</span><span class="p">:</span><span class="n">Description</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 
 <span class="w">                </span><span class="n">oInner</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oInner</span><span class="p">:</span><span class="n">InnerException</span><span class="p">;</span>
@@ -3614,7 +3614,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;InspectErrorChain&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"InspectErrorChain"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -2889,26 +2889,26 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadConfiguration</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">sContent</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;config/settings.txt&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"config/settings.txt"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">/* Handle any later failure in this procedure;</span>
 <span class="w">    </span><span class="k">:ERROR</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Configuration load failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Configuration load failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: configuration load failed;</span>
 
 <span class="w">    </span><span class="c1">/* If ReadText fails, control jumps to the handler;</span>
 <span class="w">    </span><span class="n">sContent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ReadText</span><span class="p">(</span><span class="n">sFilePath</span><span class="p">);</span>
 
 <span class="w">    </span><span class="c1">/* Only runs when the file was read successfully;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;File loaded successfully: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sContent</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"File loaded successfully: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sContent</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs on success: loaded file contents;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sContent</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LoadConfiguration&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LoadConfiguration"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="resuming-after-per-record-failures">Resuming after per-record failures<a class="headerlink" href="#resuming-after-per-record-failures" title="Permanent link">&para;</a></h3>
 <p>Uses <a href="../RESUME/"><code>:RESUME</code></a> so a batch loop can continue after logging a recoverable error for a single record. With the input <code>{"S-001", "BAD", "S-003"}</code>, the <code>"BAD"</code> record triggers the error handler and increments the failure count; the other records are processed normally.</p>
@@ -2923,7 +2923,7 @@
 <span class="w">    </span><span class="k">:ERROR</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="n">nFailed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nFailed</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Skipping sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Skipping sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: skipping the current sample;</span>
 <span class="w">    </span><span class="k">:RESUME</span><span class="p">;</span>
 
@@ -2931,16 +2931,16 @@
 <span class="w">        </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aSampleIDs</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
 
 <span class="w">        </span><span class="c1">/* Simulate a failing record in the batch;</span>
-<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;BAD&quot;</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">&quot;Sample is not valid for import&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"BAD"</span><span class="p">;</span>
+<span class="w">            </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">"Sample is not valid for import"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="n">nImported</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nImported</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span>
-<span class="w">        </span><span class="s2">&quot;Imported &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nImported</span><span class="p">)</span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; samples. Failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFailed</span><span class="p">)</span>
+<span class="w">        </span><span class="s2">"Imported "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nImported</span><span class="p">)</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">" samples. Failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFailed</span><span class="p">)</span>
 <span class="w">    </span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs a summary of imported and failed records;</span>
 
@@ -2948,7 +2948,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ImportResults&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">&quot;S-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;BAD&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S-003&quot;</span><span class="p">}});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ImportResults"</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"BAD"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S-003"</span><span class="p">}});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -3619,11 +3619,11 @@
 
 <span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetUserData</span><span class="p">();</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Current user: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Current user: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowCurrentUser&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowCurrentUser"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Current user: jsmith
@@ -3636,17 +3636,17 @@
 <span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetUserData</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sUserName</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;This action requires a current user context.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"This action requires a current user context."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Running as user: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Running as user: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateCurrentUser&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateCurrentUser"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="save-and-restore-user-context">Save and restore user context<a class="headerlink" href="#save-and-restore-user-context" title="Permanent link">&para;</a></h3>
 <p>Preserve the original user name before a temporary context switch, then restore it in <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a>.</p>
@@ -3658,17 +3658,17 @@
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">SetUserData</span><span class="p">(</span><span class="n">sServiceUser</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Temporary user context: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">GetUserData</span><span class="p">());</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Temporary user context: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">GetUserData</span><span class="p">());</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">SetUserData</span><span class="p">(</span><span class="n">sOriginalUser</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Restored user context: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">GetUserData</span><span class="p">());</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Restored user context: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">GetUserData</span><span class="p">());</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunAsServiceUser&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;svc_account&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RunAsServiceUser"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"svc_account"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

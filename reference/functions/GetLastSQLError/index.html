@@ -4279,16 +4279,16 @@
 <span class="w">    </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            UPDATE ordtask SET</span>
 <span class="s2">                missing_column = ?</span>
 <span class="s2">            WHERE ordno = ?</span>
-<span class="s2">        &quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Released&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ORD-100045&quot;</span><span class="p">});</span>
+<span class="s2">        "</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Released"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ORD-100045"</span><span class="p">});</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oSqlErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSQLError</span><span class="p">();</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="nf">Empty</span><span class="p">(</span><span class="n">oSqlErr</span><span class="p">);</span>
-<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Database update failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSqlErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Database update failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSqlErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
@@ -4297,21 +4297,21 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowLastSqlError&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowLastSqlError"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="return-structured-diagnostics-for-support-code">Return structured diagnostics for support code<a class="headerlink" href="#return-structured-diagnostics-for-support-code" title="Permanent link">&para;</a></h3>
 <p>Extracts individual <a href="../../classes/SSLSQLError/"><code>SSLSQLError</code></a> properties after a failed <a href="../SQLExecute/"><code>SQLExecute</code></a> call and packs them into a diagnostic object, returning <a href="../../literals/nil/"><code>NIL</code></a> when no error object is available.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSqlDiagnostic</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOrdNo</span><span class="p">,</span><span class="w"> </span><span class="n">oSqlErr</span><span class="p">,</span><span class="w"> </span><span class="n">oDiag</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sOrdNo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ORD-100045&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOrdNo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ORD-100045"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            SELECT missing_column</span>
 <span class="s2">            FROM ordtask</span>
 <span class="s2">            WHERE ordno = ?sOrdNo?</span>
-<span class="s2">        &quot;</span><span class="p">);</span>
+<span class="s2">        "</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oSqlErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSQLError</span><span class="p">();</span>
 
@@ -4332,21 +4332,21 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildSqlDiagnostic&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSqlDiagnostic"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="combine-a-formatted-message-with-raw-sql-diagnostics">Combine a formatted message with raw SQL diagnostics<a class="headerlink" href="#combine-a-formatted-message-with-raw-sql-diagnostics" title="Permanent link">&para;</a></h3>
 <p>Uses <a href="../FormatSqlErrorMessage/"><code>FormatSqlErrorMessage</code></a> for a user-facing string alongside raw properties (<code>SQLState</code>, <code>GenCode</code>, <code>Sql</code>, <code>ErrorStackTrace</code>) packed into a support ticket object.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CaptureSqlFailureForSupport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOrdNo</span><span class="p">,</span><span class="w"> </span><span class="n">oSqlErr</span><span class="p">,</span><span class="w"> </span><span class="n">oTicket</span><span class="p">,</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sOrdNo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ORD-100045&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOrdNo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ORD-100045"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            SELECT missing_column</span>
 <span class="s2">            FROM ordtask</span>
 <span class="s2">            WHERE ordno = ?sOrdNo?</span>
-<span class="s2">        &quot;</span><span class="p">);</span>
+<span class="s2">        "</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oSqlErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSQLError</span><span class="p">();</span>
 
@@ -4370,7 +4370,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CaptureSqlFailureForSupport&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CaptureSqlFailureForSupport"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

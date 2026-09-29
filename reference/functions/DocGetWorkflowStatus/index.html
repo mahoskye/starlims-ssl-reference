@@ -4186,16 +4186,16 @@
 <p>Fetches the current status of a workflow and logs it, using a default workflow ID when none is supplied.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowWorkflowStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WF-12345&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="s2">"WF-12345"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetWorkflowStatus</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" status: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowWorkflowStatus&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowWorkflowStatus"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Workflow WF-12345 status: Running
@@ -4204,62 +4204,62 @@
 <p>Branches on the documented status values, with a fallback for unknown and empty results.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">HandleWorkflowStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WF-12345&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="s2">"WF-12345"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetWorkflowStatus</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Running&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow is still in progress.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Running"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow is still in progress."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Dormant&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow is dormant.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Dormant"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow is dormant."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Paused&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow is paused and may need attention.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Paused"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow is paused and may need attention."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Finished&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow is finished.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Finished"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow is finished."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Terminated&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow was terminated.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Terminated"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow was terminated."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow returned status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow returned status: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;HandleWorkflowStatus&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"HandleWorkflowStatus"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="distinguish-a-failed-lookup-from-a-finished-workflow">Distinguish a failed lookup from a finished workflow<a class="headerlink" href="#distinguish-a-failed-lookup-from-a-finished-workflow" title="Permanent link">&para;</a></h3>
 <p>Reads the workflow status and separates three outcomes: a failed lookup (empty string), a finished or no-longer-existing workflow, and an active workflow in any other state.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckWorkflowStatusSafe</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WF-12345&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="s2">"WF-12345"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sDocError</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetWorkflowStatus</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sDocError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum status lookup failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDocError</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Documentum status lookup failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDocError</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Finished&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow is finished or no longer exists.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Finished"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow is finished or no longer exists."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow status: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckWorkflowStatusSafe&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckWorkflowStatusSafe"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

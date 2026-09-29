@@ -2834,14 +2834,14 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckStatusChange</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStoredStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentStatus</span><span class="p">,</span><span class="w"> </span><span class="n">bChanged</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sStoredStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;PENDING&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sCurrentStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;COMPLETE&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sStoredStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCurrentStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"COMPLETE"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bChanged</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sStoredStatus</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">sCurrentStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bChanged</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Status changed from &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStoredStatus</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentStatus</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Status changed from "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStoredStatus</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Status did not change&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Status did not change"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
@@ -2850,7 +2850,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckStatusChange&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckStatusChange"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Status changed from PENDING to COMPLETE
@@ -2867,16 +2867,16 @@
 <span class="w">    </span><span class="n">sActualType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsTypeEx</span><span class="p">(</span><span class="n">nActual</span><span class="p">);</span>
 <span class="w">    </span><span class="n">bMismatch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sExpectedType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;NUMERIC&quot;</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">sActualType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;NUMERIC&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sExpectedType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"NUMERIC"</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">sActualType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"NUMERIC"</span><span class="p">;</span>
 <span class="w">        </span><span class="n">bMismatch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nActual</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">nExpected</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bMismatch</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Replicate count differs&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Replicate count differs"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Replicate count matches&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Replicate count matches"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Comparison skipped because both values are not numeric&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Comparison skipped because both values are not numeric"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
@@ -2885,7 +2885,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckReplicateMismatch&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckReplicateMismatch"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Replicate count differs
@@ -2895,19 +2895,19 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckSettingsDifference</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oBaseline</span><span class="p">,</span><span class="w"> </span><span class="n">oCandidate</span><span class="p">,</span><span class="w"> </span><span class="n">bRefDiff</span><span class="p">,</span><span class="w"> </span><span class="n">bStatusDiff</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oBaseline</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">({{</span><span class="s2">&quot;status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ACTIVE&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">}});</span>
-<span class="w">    </span><span class="n">oCandidate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">({{</span><span class="s2">&quot;status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ACTIVE&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">}});</span>
+<span class="w">    </span><span class="n">oBaseline</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">({{</span><span class="s2">"status"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">"priority"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">}});</span>
+<span class="w">    </span><span class="n">oCandidate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">({{</span><span class="s2">"status"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">"priority"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">}});</span>
 
 <span class="w">    </span><span class="n">bRefDiff</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oBaseline</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">oCandidate</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bStatusDiff</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oBaseline</span><span class="p">:</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">oCandidate</span><span class="p">:</span><span class="n">status</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bRefDiff</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="err">!</span><span class="n">bStatusDiff</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Objects are different instances but have the same status&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Objects are different instances but have the same status"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bRefDiff</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">bStatusDiff</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Objects are different instances and their status differs&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Objects are different instances and their status differs"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Both variables refer to the same object instance&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Both variables refer to the same object instance"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -2917,7 +2917,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckSettingsDifference&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckSettingsDifference"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Objects are different instances but have the same status

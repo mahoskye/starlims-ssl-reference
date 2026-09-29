@@ -3880,18 +3880,18 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RestoreCompressedText</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOriginal</span><span class="p">,</span><span class="w"> </span><span class="n">sCompressed</span><span class="p">,</span><span class="w"> </span><span class="n">sRestored</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sOriginal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Batch 24018|Status=Released|Reviewer=jsmith&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOriginal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Batch 24018|Status=Released|Reviewer=jsmith"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sCompressed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Compress</span><span class="p">(</span><span class="n">sOriginal</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">sRestored</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Decompress</span><span class="p">(</span><span class="n">sCompressed</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Restored text: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRestored</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Restored text: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRestored</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sRestored</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RestoreCompressedText&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RestoreCompressedText"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Restored text: Batch 24018|Status=Released|Reviewer=jsmith
@@ -3901,27 +3901,27 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RestoreCompressedFile</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sCompressedPath</span><span class="p">,</span><span class="w"> </span><span class="n">sRestored</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Order=4711&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPayload</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Sample=S-000245&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPayload</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Status=Logged&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPayload</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;Reviewer=jsmith&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Order=4711"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPayload</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"Sample=S-000245"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPayload</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"Status=Logged"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPayload</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"Reviewer=jsmith"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sCompressedPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Compress</span><span class="p">(</span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">sRestored</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Decompress</span><span class="p">(</span><span class="n">sCompressedPath</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sRestored</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sPayload</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Restored file payload from: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCompressedPath</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Restored file payload from: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCompressedPath</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs restored file path on success;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Restored file content did not match the original text&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Restored file content did not match the original text"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sRestored</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RestoreCompressedFile&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RestoreCompressedFile"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="restore-a-mixed-batch-of-in-memory-and-file-based-values">Restore a mixed batch of in-memory and file-based values<a class="headerlink" href="#restore-a-mixed-batch-of-in-memory-and-file-based-values" title="Permanent link">&para;</a></h3>
 <p>Iterates over a mixed batch of compressed payloads, some stored in memory and some as file paths, and restores each using the appropriate <code>Decompress</code> call.</p>
@@ -3934,15 +3934,15 @@
 <span class="w">    </span><span class="n">aFromFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 <span class="w">    </span><span class="n">aRestored</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
-<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Short payload for API transfer&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Short payload for API transfer"</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aInputs</span><span class="p">,</span><span class="w"> </span><span class="nf">Compress</span><span class="p">(</span><span class="n">sPayload</span><span class="p">));</span>
 <span class="w">    </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aFromFile</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Long payload &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">&quot;ABC123&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Long payload "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">"ABC123"</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aInputs</span><span class="p">,</span><span class="w"> </span><span class="nf">Compress</span><span class="p">(</span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">));</span>
 <span class="w">    </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aFromFile</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Audit payload &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">&quot;ZX&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Audit payload "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">"ZX"</span><span class="p">,</span><span class="w"> </span><span class="mi">80</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aInputs</span><span class="p">,</span><span class="w"> </span><span class="nf">Compress</span><span class="p">(</span><span class="n">sPayload</span><span class="p">));</span>
 <span class="w">    </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aFromFile</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
 
@@ -3956,7 +3956,7 @@
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aRestored</span><span class="p">,</span><span class="w"> </span><span class="n">sRestored</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Restored payload &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Restored payload "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">));</span>
 <span class="w">        </span><span class="c1">/* Logs each restored payload number;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
@@ -3964,7 +3964,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RestoreMixedCompressedBatch&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RestoreMixedCompressedBatch"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

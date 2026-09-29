@@ -3761,12 +3761,12 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sServer</span><span class="p">,</span><span class="w"> </span><span class="n">sSourceDir</span><span class="p">,</span><span class="w"> </span><span class="n">sTargetDir</span><span class="p">,</span><span class="w"> </span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bMoved</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ftp.labserver.local&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSourceDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/incoming&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sTargetDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/processed&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LB20240415_001.pdf&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;labupload&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SecureP@ss&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ftp.labserver.local"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSourceDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/incoming"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTargetDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/processed"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LB20240415_001.pdf"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"labupload"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SecureP@ss"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bMoved</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">MoveInFtp</span><span class="p">(</span>
 <span class="w">        </span><span class="n">sServer</span><span class="p">,</span>
@@ -3779,31 +3779,31 @@
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bMoved</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Moved &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetDir</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Moved "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetDir</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Could not move &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetDir</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Could not move "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetDir</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;MoveLabReportToProcessed&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"MoveLabReportToProcessed"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="rename-a-scanned-document-during-workflow-reorganization">Rename a scanned document during workflow reorganization<a class="headerlink" href="#rename-a-scanned-document-during-workflow-reorganization" title="Permanent link">&para;</a></h3>
 <p>Move a file from one directory to another and apply a new file name in the process.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ArchiveScannedDocument</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sServerName</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sServerName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ftp.acme-lims.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;limsftp&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sServerName</span><span class="p">,</span><span class="w"> </span><span class="s2">"ftp.acme-lims.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="s2">"limsftp"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSourceDir</span><span class="p">,</span><span class="w"> </span><span class="n">sArchiveDir</span><span class="p">,</span><span class="w"> </span><span class="n">sOriginalFile</span><span class="p">,</span><span class="w"> </span><span class="n">sNewFile</span><span class="p">,</span><span class="w"> </span><span class="n">sRefNumber</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bMoved</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSourceDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/incoming/scans&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sArchiveDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/archived/documents&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sOriginalFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;scan_2024_q1_001.pdf&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRefNumber</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;REV-2024-042&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSourceDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/incoming/scans"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sArchiveDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/archived/documents"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOriginalFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"scan_2024_q1_001.pdf"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRefNumber</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"REV-2024-042"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sNewFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;contract_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRefNumber</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;_signed.pdf&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sNewFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"contract_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRefNumber</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"_signed.pdf"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bMoved</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">MoveInFtp</span><span class="p">(</span>
 <span class="w">        </span><span class="n">sServerName</span><span class="p">,</span>
@@ -3816,16 +3816,16 @@
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bMoved</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Archived &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOriginalFile</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; as &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sNewFile</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Archived "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOriginalFile</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" as "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sNewFile</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Could not archive &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOriginalFile</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; as &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sNewFile</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Could not archive "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOriginalFile</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" as "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sNewFile</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bMoved</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ArchiveScannedDocument&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ArchiveScannedDocument"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="retry-an-sftp-move-and-verify-the-destination-file">Retry an SFTP move and verify the destination file<a class="headerlink" href="#retry-an-sftp-move-and-verify-the-destination-file" title="Permanent link">&para;</a></h3>
 <p>Move a file over SFTP with key-based authentication, retry on failure, and then confirm the destination file exists.</p>
@@ -3835,16 +3835,16 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPort</span><span class="p">,</span><span class="w"> </span><span class="n">nAttempt</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxAttempts</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsSFTP</span><span class="p">,</span><span class="w"> </span><span class="n">bMoved</span><span class="p">,</span><span class="w"> </span><span class="n">bTargetExists</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ftp.instrument.lab.local&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;archiver&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;KeyPassphrase&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFromDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/instrument/output&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sToDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/archive/2024&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFileFrom</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sample_run_2024-04-11.csv&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFileTo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sample_run_2024-04-11.csv&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ftp.instrument.lab.local"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"archiver"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"KeyPassphrase"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFromDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/instrument/output"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sToDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/archive/2024"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFileFrom</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"sample_run_2024-04-11.csv"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFileTo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"sample_run_2024-04-11.csv"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nPort</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">22</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bIsSFTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPrivateKeyFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/etc/ssh/keys/archiver_key&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPrivateKeyFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/etc/ssh/keys/archiver_key"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nMaxAttempts</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nAttempt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
@@ -3863,7 +3863,7 @@
 <span class="w">                </span><span class="n">sUser</span><span class="p">,</span>
 <span class="w">                </span><span class="n">sPassword</span><span class="p">,</span>
 <span class="w">                </span><span class="n">nPort</span><span class="p">,</span>
-<span class="w">                </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">""</span><span class="p">,</span>
 <span class="w">                </span><span class="n">bIsSFTP</span><span class="p">,</span>
 <span class="w">                </span><span class="n">sPrivateKeyFile</span>
 <span class="w">            </span><span class="p">);</span>
@@ -3873,8 +3873,8 @@
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">            </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SFTP move attempt &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nAttempt</span><span class="p">)</span>
-<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SFTP move attempt "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nAttempt</span><span class="p">)</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">" failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs on failure: retry message;</span>
 <span class="w">            </span><span class="n">nAttempt</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDTRY</span><span class="p">;</span>
@@ -3888,22 +3888,22 @@
 <span class="w">            </span><span class="n">sUser</span><span class="p">,</span>
 <span class="w">            </span><span class="n">sPassword</span><span class="p">,</span>
 <span class="w">            </span><span class="n">nPort</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">""</span><span class="p">,</span>
 <span class="w">            </span><span class="n">bIsSFTP</span><span class="p">,</span>
 <span class="w">            </span><span class="n">sPrivateKeyFile</span>
 <span class="w">        </span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bTargetExists</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Moved &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileFrom</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sToDir</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileTo</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Moved "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileFrom</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sToDir</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileTo</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span>
-<span class="w">                </span><span class="s2">&quot;Move returned true, but the destination file was not confirmed.&quot;</span>
+<span class="w">                </span><span class="s2">"Move returned true, but the destination file was not confirmed."</span>
 <span class="w">            </span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span>
-<span class="w">            </span><span class="s2">&quot;Could not move &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileFrom</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; after &quot;</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nMaxAttempts</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; attempts.&quot;</span>
+<span class="w">            </span><span class="s2">"Could not move "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileFrom</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" after "</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nMaxAttempts</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" attempts."</span>
 <span class="w">        </span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3911,7 +3911,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ArchiveInstrumentOutput&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ArchiveInstrumentOutput"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

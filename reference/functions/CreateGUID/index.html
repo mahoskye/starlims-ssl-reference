@@ -4267,14 +4267,14 @@
 
 <span class="w">    </span><span class="n">oOrder</span><span class="p">:</span><span class="n">orderId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sOrderId</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Prepared order record with ID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOrderId</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Prepared order record with ID: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOrderId</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the prepared order ID;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oOrder</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PrepareOrderRecord&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"PrepareOrderRecord"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="reuse-one-correlation-id-across-steps">Reuse one correlation ID across steps<a class="headerlink" href="#reuse-one-correlation-id-across-steps" title="Permanent link">&para;</a></h3>
 <p>Generates one GUID and uses it in three separate messages so related work can be correlated by the same ID. All three lines show the same GUID, and the value differs on every call.</p>
@@ -4283,21 +4283,21 @@
 
 <span class="w">    </span><span class="n">sRequestId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateGUID</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Received request &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRequestId</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Received request "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRequestId</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the request ID;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Queued inventory update for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRequestId</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Queued inventory update for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRequestId</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the inventory queue ID;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Queued laboratory work for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRequestId</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Queued laboratory work for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRequestId</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the laboratory queue ID;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LogRequestAcrossSteps&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LogRequestAcrossSteps"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="assign-batch-and-row-ids-during-import">Assign batch and row IDs during import<a class="headerlink" href="#assign-batch-and-row-ids-during-import" title="Permanent link">&para;</a></h3>
 <p>Generates one batch GUID shared across all rows and one unique row GUID per item, then saves each row with both identifiers.</p>
@@ -4327,8 +4327,8 @@
 <span class="w">    </span><span class="n">oImportBatch</span><span class="p">:</span><span class="n">count</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nPrepared</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oImportBatch</span><span class="p">:</span><span class="n">createdDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">sLogEntry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Prepared batch &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; with &quot;</span>
-<span class="w">                 </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nPrepared</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; import rows&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sLogEntry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Prepared batch "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" with "</span>
+<span class="w">                 </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nPrepared</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" import rows"</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLogEntry</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the prepared batch summary;</span>
 
@@ -4341,14 +4341,14 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oBatch</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">bInserted</span><span class="p">,</span><span class="w"> </span><span class="n">oRow</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nRowCount</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oBatch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PrepareImportRows&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">nCount</span><span class="p">});</span>
+<span class="w">    </span><span class="n">oBatch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"PrepareImportRows"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">nCount</span><span class="p">});</span>
 <span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oBatch</span><span class="p">:</span><span class="n">rows</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nRowCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">aRows</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">            INSERT INTO import_queue (batch_id, row_id, ROW_NUMBER)</span>
 <span class="s2">            VALUES (?, ?, ?)</span>
-<span class="s2">        &quot;</span><span class="p">;</span>
+<span class="s2">        "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="n">nRowCount</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oRow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
@@ -4356,18 +4356,18 @@
 <span class="w">        </span><span class="n">bInserted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">oRow</span><span class="p">:</span><span class="n">batchId</span><span class="p">,</span><span class="w"> </span><span class="n">oRow</span><span class="p">:</span><span class="n">rowId</span><span class="p">,</span><span class="w"> </span><span class="n">oRow</span><span class="p">:</span><span class="n">rowNumber</span><span class="p">});</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bInserted</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Failed to insert import row: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oRow</span><span class="p">:</span><span class="n">rowId</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Failed to insert import row: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oRow</span><span class="p">:</span><span class="n">rowId</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs an insert failure with the row ID;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Saved &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nRowCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; import rows for batch &quot;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Saved "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nRowCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" import rows for batch "</span>
 <span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="n">oBatch</span><span class="p">:</span><span class="n">batchId</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the saved batch summary;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SaveImportRows&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">100</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SaveImportRows"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">100</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

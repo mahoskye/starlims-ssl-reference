@@ -3946,9 +3946,9 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoginToDocumentum</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Repository1&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;doc_user&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Repository1"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"doc_user"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
@@ -3956,12 +3956,12 @@
 <span class="w">        </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Documentum login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">            </span><span class="c1">/* Logs on failure;</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Connected to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Connected to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on success;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
@@ -3971,7 +3971,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LoginToDocumentum&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LoginToDocumentum"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="capture-the-recorded-failure-state">Capture the recorded failure state<a class="headerlink" href="#capture-the-recorded-failure-state" title="Permanent link">&para;</a></h3>
 <p>Reads both the boolean return value and <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> after a failed login, showing that the two signals can be checked together to confirm the failure.</p>
@@ -3979,9 +3979,9 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">,</span><span class="w"> </span><span class="n">bFailed</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Repository1&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;baduser&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;badpass&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Repository1"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"baduser"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"badpass"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
@@ -3991,7 +3991,7 @@
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">bFailed</span><span class="p">;</span>
 <span class="w">            </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4002,7 +4002,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckDocumentumLoginFailure&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckDocumentumLoginFailure"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Login failed: &lt;Documentum error message&gt;
@@ -4013,10 +4013,10 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFirstBase</span><span class="p">,</span><span class="w"> </span><span class="n">sSecondBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sFirstBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Repository1&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSecondBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Repository2&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;doc_user&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFirstBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Repository1"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSecondBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Repository2"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"doc_user"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
@@ -4024,12 +4024,12 @@
 <span class="w">        </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="n">sFirstBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;First login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"First login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">            </span><span class="c1">/* Logs after first failure;</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Connected to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFirstBase</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Connected to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFirstBase</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs after first login;</span>
 
 <span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
@@ -4038,12 +4038,12 @@
 <span class="w">        </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="n">sSecondBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Second login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Second login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">            </span><span class="c1">/* Logs after second failure;</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Connected to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSecondBase</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Connected to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSecondBase</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs after second login;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
@@ -4053,7 +4053,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SwitchDocumentumRepository&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SwitchDocumentumRepository"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

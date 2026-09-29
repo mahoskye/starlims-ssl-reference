@@ -4216,11 +4216,11 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">sDocumentId</span><span class="p">,</span><span class="w"> </span><span class="n">sCheckedInId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;QualityRepository&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;doc_user&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\\Docs\\QA_Report.pdf&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sDocumentId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;DOC-2024-001&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"QualityRepository"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"doc_user"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\\Docs\\QA_Report.pdf"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDocumentId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"DOC-2024-001"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
@@ -4229,14 +4229,14 @@
 <span class="w">        </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Documentum login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">            </span><span class="n">sCheckedInId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocCheckinDocument</span><span class="p">(</span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">sDocumentId</span><span class="p">);</span>
 
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<span class="w">                </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Check-in failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">                </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Check-in failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">            </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Checked-in object ID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCheckedInId</span><span class="p">);</span>
+<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Checked-in object ID: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCheckedInId</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
@@ -4245,7 +4245,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckinDocumentBasic&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckinDocumentBasic"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="replace-document-content-and-apply-a-version-label">Replace document content and apply a version label<a class="headerlink" href="#replace-document-content-and-apply-a-version-label" title="Permanent link">&para;</a></h3>
 <p>Checks in a revised document with <code>bReplaceContent</code> set to <a href="../../literals/true/"><code>.T.</code></a> and a specific version label, then reports the resulting object ID or any command failure.</p>
@@ -4254,12 +4254,12 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">sDocumentId</span><span class="p">,</span><span class="w"> </span><span class="n">sVersion</span><span class="p">,</span><span class="w"> </span><span class="n">sCheckedInId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bReplaceContent</span><span class="p">,</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;QualityRepository&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;doc_user&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\\Docs\\Spec_Report_v2.docx&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sDocumentId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;DOC-2024-0042&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sVersion</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;2.1&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"QualityRepository"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"doc_user"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\\Docs\\Spec_Report_v2.docx"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDocumentId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"DOC-2024-0042"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sVersion</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"2.1"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bReplaceContent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 
@@ -4269,7 +4269,7 @@
 <span class="w">        </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Documentum login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">            </span><span class="n">sCheckedInId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocCheckinDocument</span><span class="p">(</span>
 <span class="w">                </span><span class="n">sFilePath</span><span class="p">,</span>
@@ -4279,9 +4279,9 @@
 <span class="w">            </span><span class="p">);</span>
 
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<span class="w">                </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Replacement check-in failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">                </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Replacement check-in failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">            </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Replacement check-in object ID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCheckedInId</span><span class="p">);</span>
+<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Replacement check-in object ID: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCheckedInId</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
@@ -4290,7 +4290,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckinDocumentReplaceContent&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckinDocumentReplaceContent"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="perform-a-major-version-check-in-and-capture-the-result-or-error">Perform a major-version check-in and capture the result or error<a class="headerlink" href="#perform-a-major-version-check-in-and-capture-the-result-or-error" title="Permanent link">&para;</a></h3>
 <p>Checks in a document with <code>bMajorVersion</code> set to <a href="../../literals/true/"><code>.T.</code></a> and a version label string, captures any Documentum error message, and logs the outcome.</p>
@@ -4299,16 +4299,16 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">sDocumentId</span><span class="p">,</span><span class="w"> </span><span class="n">sVersion</span><span class="p">,</span><span class="w"> </span><span class="n">sCheckedInId</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bReplaceContent</span><span class="p">,</span><span class="w"> </span><span class="n">bMajorVersion</span><span class="p">,</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;QualityRepository&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;doc_user&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\\Docs\\QCP-2024-001.pdf&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sDocumentId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;DOC-2024-00042&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sVersion</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;3.0&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"QualityRepository"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"doc_user"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\\Docs\\QCP-2024-001.pdf"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDocumentId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"DOC-2024-00042"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sVersion</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"3.0"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bReplaceContent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bMajorVersion</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
@@ -4316,7 +4316,7 @@
 <span class="w">        </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Documentum login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">            </span><span class="n">sCheckedInId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocCheckinDocument</span><span class="p">(</span>
 <span class="w">                </span><span class="n">sFilePath</span><span class="p">,</span>
@@ -4328,9 +4328,9 @@
 
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
 <span class="w">                </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
-<span class="w">                </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Major revision check-in failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
+<span class="w">                </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Major revision check-in failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Major revision object ID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCheckedInId</span><span class="p">);</span>
+<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Major revision object ID: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCheckedInId</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
@@ -4339,7 +4339,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckinDocumentMajorRevision&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckinDocumentMajorRevision"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

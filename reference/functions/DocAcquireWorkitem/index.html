@@ -4176,17 +4176,17 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AcquireWorkitemForProcessing</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">,</span><span class="w"> </span><span class="n">bAcquired</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Repository1&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;analyst&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WI-2024-00147&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Repository1"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"analyst"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"WI-2024-00147"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
 <span class="w">    </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Documentum login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -4194,9 +4194,9 @@
 <span class="w">    </span><span class="n">bAcquired</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocAcquireWorkitem</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bAcquired</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Work item &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; acquired successfully&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Work item "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" acquired successfully"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Could not acquire work item &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Could not acquire work item "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
@@ -4205,7 +4205,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AcquireWorkitemForProcessing&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AcquireWorkitemForProcessing"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="capture-the-documentum-error-message-immediately-after-a-failed-acquisition">Capture the Documentum error message immediately after a failed acquisition<a class="headerlink" href="#capture-the-documentum-error-message-immediately-after-a-failed-acquisition" title="Permanent link">&para;</a></h3>
 <p>Accepts the work item identifier as a procedure parameter, attempts acquisition, and builds a diagnostic error message by appending the Documentum error description when <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> reports a failure.</p>
@@ -4213,16 +4213,16 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">,</span><span class="w"> </span><span class="n">bAcquired</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Repository1&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;analyst&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Repository1"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"analyst"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
 <span class="w">    </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Documentum login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -4230,10 +4230,10 @@
 <span class="w">    </span><span class="n">bAcquired</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocAcquireWorkitem</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bAcquired</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Work item &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; could not be acquired&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Work item "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" could not be acquired"</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<span class="w">            </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
+<span class="w">            </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">sErrMsg</span><span class="p">);</span>
@@ -4245,7 +4245,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AcquireWorkitemWithDiagnostics&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;WI-2024-00147&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AcquireWorkitemWithDiagnostics"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"WI-2024-00147"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="acquire-multiple-work-items-and-collect-each-failure-message-before-the-next-call">Acquire multiple work items and collect each failure message before the next call<a class="headerlink" href="#acquire-multiple-work-items-and-collect-each-failure-message-before-the-next-call" title="Permanent link">&para;</a></h3>
 <p>Iterates a list of work item identifiers, acquires each one, and collects failure messages immediately after each failed attempt — before the next acquisition replaces the Documentum error state.</p>
@@ -4253,10 +4253,10 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">aWorkitemIds</span><span class="p">,</span><span class="w"> </span><span class="n">aFailures</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">,</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">,</span><span class="w"> </span><span class="n">bAcquired</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Repository1&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;analyst&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aWorkitemIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;WI-2024-00147&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WI-2024-00148&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WI-2024-00149&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Repository1"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"analyst"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aWorkitemIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"WI-2024-00147"</span><span class="p">,</span><span class="w"> </span><span class="s2">"WI-2024-00148"</span><span class="p">,</span><span class="w"> </span><span class="s2">"WI-2024-00149"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aFailures</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
@@ -4264,7 +4264,7 @@
 <span class="w">    </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Documentum login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="p">{};</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -4277,7 +4277,7 @@
 <span class="w">            </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">;</span>
 
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<span class="w">                </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
+<span class="w">                </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aFailures</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
@@ -4290,7 +4290,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AcquireWorkitemsInBatch&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AcquireWorkitemsInBatch"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

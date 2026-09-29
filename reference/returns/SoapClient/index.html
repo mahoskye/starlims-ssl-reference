@@ -2554,17 +2554,17 @@
 <span class="w">    </span><span class="n">oWebServices</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">WebServices</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oSoapClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateSoapClient</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">UseWebService</span><span class="p">(</span><span class="s2">&quot;https://lims-soap.example/Samples?wsdl&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Configuration failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Error</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">UseWebService</span><span class="p">(</span><span class="s2">"https://lims-soap.example/Samples?wsdl"</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Configuration failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Error</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">Add</span><span class="p">(</span><span class="s2">&quot;&lt;string&gt;SAMP-001&lt;/string&gt;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">Add</span><span class="p">(</span><span class="s2">"&lt;string&gt;SAMP-001&lt;/string&gt;"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">CallWebService</span><span class="p">(</span><span class="s2">&quot;LookupSample&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">CallWebService</span><span class="p">(</span><span class="s2">"LookupSample"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Call failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Error</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Call failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Error</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -2573,7 +2573,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LookupSampleViaSoap&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LookupSampleViaSoap"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="authenticate-with-explicit-credentials-and-a-longer-timeout">Authenticate with explicit credentials and a longer timeout<a class="headerlink" href="#authenticate-with-explicit-credentials-and-a-longer-timeout" title="Permanent link">&para;</a></h3>
 <p>Uses <code>UseWebServiceWithCredentials</code> and bumps <code>TimeOut</code> to 60 seconds for a slow service.</p>
@@ -2584,27 +2584,27 @@
 <span class="w">    </span><span class="n">oSoapClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateSoapClient</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">UseWebServiceWithCredentials</span><span class="p">(</span><span class="w"> </span><span class="p">;</span>
-<span class="w">            </span><span class="s2">&quot;https://secure-soap.example/Reports?wsdl&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">;</span>
-<span class="w">            </span><span class="s2">&quot;LIMSDOMAIN\\reports_user&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">;</span>
-<span class="w">            </span><span class="s2">&quot;********&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Auth/config failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Error</span><span class="p">);</span>
+<span class="w">            </span><span class="s2">"https://secure-soap.example/Reports?wsdl"</span><span class="p">,</span><span class="w"> </span><span class="p">;</span>
+<span class="w">            </span><span class="s2">"LIMSDOMAIN\\reports_user"</span><span class="p">,</span><span class="w"> </span><span class="p">;</span>
+<span class="w">            </span><span class="s2">"********"</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Auth/config failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Error</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">TimeOut</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">60000</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">Add</span><span class="p">(</span><span class="s2">&quot;&lt;string&gt;2026-05-01&lt;/string&gt;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">Add</span><span class="p">(</span><span class="s2">"&lt;string&gt;2026-05-01&lt;/string&gt;"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">CallWebService</span><span class="p">(</span><span class="s2">&quot;DailySummary&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">CallWebService</span><span class="p">(</span><span class="s2">"DailySummary"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Call failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Error</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Call failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Error</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">oResponse</span><span class="p">:</span><span class="n">Xml</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;InvokeSecureSoapMethod&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"InvokeSecureSoapMethod"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="reuse-one-client-for-several-calls">Reuse one client for several calls<a class="headerlink" href="#reuse-one-client-for-several-calls" title="Permanent link">&para;</a></h3>
 <p>Clears <code>Parameters</code> between calls so the second invocation does not inherit the first one's inputs.</p>
@@ -2614,28 +2614,28 @@
 <span class="w">    </span><span class="n">oWebServices</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">WebServices</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oSoapClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateSoapClient</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">UseWebService</span><span class="p">(</span><span class="s2">&quot;https://lims-soap.example/Samples?wsdl&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Configuration failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Error</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">UseWebService</span><span class="p">(</span><span class="s2">"https://lims-soap.example/Samples?wsdl"</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Configuration failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Error</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SAMP-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAMP-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAMP-003&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"SAMP-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SAMP-002"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SAMP-003"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">aIds</span><span class="p">);</span>
 <span class="w">        </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">Clear</span><span class="p">();</span>
-<span class="w">        </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">Add</span><span class="p">(</span><span class="s2">&quot;&lt;string&gt;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aIds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;&lt;/string&gt;&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">Add</span><span class="p">(</span><span class="s2">"&lt;string&gt;"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aIds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"&lt;/string&gt;"</span><span class="p">);</span>
 
-<span class="w">        </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">CallWebService</span><span class="p">(</span><span class="s2">&quot;LookupSample&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">CallWebService</span><span class="p">(</span><span class="s2">"LookupSample"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">oResponse</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">aIds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; =&gt; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oResponse</span><span class="p">:</span><span class="n">Xml</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">aIds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" =&gt; "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oResponse</span><span class="p">:</span><span class="n">Xml</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">aIds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Error</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">aIds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Error</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LookupSeveralSamples&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LookupSeveralSamples"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

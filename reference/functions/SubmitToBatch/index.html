@@ -3506,47 +3506,47 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SubmitSimpleBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        :DECLARE sStatus;</span>
-<span class="s2">        sStatus := &#39;Queued&#39;;</span>
+<span class="s2">        sStatus := 'Queued';</span>
 
 <span class="s2">        :RETURN sStatus;</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubmitToBatch</span><span class="p">(</span><span class="n">sCode</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Submitted batch job: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Submitted batch job: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs submitted batch ID;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SubmitSimpleBatch&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SubmitSimpleBatch"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="pass-positional-parameters-and-choose-queue-mode">Pass positional parameters and choose queue mode<a class="headerlink" href="#pass-positional-parameters-and-choose-queue-mode" title="Permanent link">&para;</a></h3>
 <p>Submit code that expects positional parameters and route it explicitly through queue mode.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">QueueSampleAudit</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        :PARAMETERS sSampleId, sAction;</span>
 <span class="s2">        :DECLARE sMessage;</span>
 
-<span class="s2">        sMessage := sAction + &#39;: &#39; + sSampleId;</span>
+<span class="s2">        sMessage := sAction + ': ' + sSampleId;</span>
 <span class="s2">        InfoMes(sMessage);</span>
 
 <span class="s2">        :RETURN sMessage;</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubmitToBatch</span><span class="p">(</span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SAM-00042&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Audit&quot;</span><span class="p">},</span><span class="w"> </span><span class="s2">&quot;queue&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Queued sample audit as batch &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubmitToBatch</span><span class="p">(</span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"SAM-00042"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Audit"</span><span class="p">},</span><span class="w"> </span><span class="s2">"queue"</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Queued sample audit as batch "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs queued batch ID;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;QueueSampleAudit&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"QueueSampleAudit"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="use-a-caption-object-and-alternate-credentials">Use a caption object and alternate credentials<a class="headerlink" href="#use-a-caption-object-and-alternate-credentials" title="Permanent link">&para;</a></h3>
 <p>Pass both <code>Parameters</code> and <code>Caption</code> through the object form, while supplying explicit credentials for the batch run.</p>
@@ -3554,36 +3554,36 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">,</span><span class="w"> </span><span class="n">oBatchArgs</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        :PARAMETERS sSampleId, sAction;</span>
 <span class="s2">        :DECLARE sLog;</span>
 
-<span class="s2">        sLog := sAction + &#39; for &#39; + sSampleId;</span>
+<span class="s2">        sLog := sAction + ' for ' + sSampleId;</span>
 <span class="s2">        InfoMes(sLog);</span>
 
 <span class="s2">        :RETURN sLog;</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oBatchArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">();</span>
-<span class="w">    </span><span class="n">oBatchArgs</span><span class="p">:</span><span class="n">Parameters</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SAM-10425&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Release&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">oBatchArgs</span><span class="p">:</span><span class="n">Caption</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Nightly release follow-up&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oBatchArgs</span><span class="p">:</span><span class="n">Parameters</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"SAM-10425"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Release"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oBatchArgs</span><span class="p">:</span><span class="n">Caption</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Nightly release follow-up"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubmitToBatch</span><span class="p">(</span>
 <span class="w">        </span><span class="n">sCode</span><span class="p">,</span>
 <span class="w">        </span><span class="n">oBatchArgs</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;external&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"external"</span><span class="p">,</span>
 <span class="w">        </span><span class="n">sUserName</span><span class="p">,</span>
 <span class="w">        </span><span class="n">sPassword</span>
 <span class="w">    </span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Submitted labeled batch &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Submitted labeled batch "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs submitted labeled batch ID;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SubmitLabeledBatch&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;svc_batch&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;password&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SubmitLabeledBatch"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"svc_batch"</span><span class="p">,</span><span class="w"> </span><span class="s2">"password"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

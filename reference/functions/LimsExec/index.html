@@ -3633,38 +3633,38 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LaunchAuditExport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sApp</span><span class="p">,</span><span class="w"> </span><span class="n">sArgs</span><span class="p">,</span><span class="w"> </span><span class="n">bStarted</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sApp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\Tools\AuditExport.exe&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/user admin /period quarterly&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sApp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Tools\AuditExport.exe"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/user admin /period quarterly"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bStarted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsExec</span><span class="p">(</span><span class="n">sApp</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="n">sArgs</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bStarted</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Audit export was started&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Audit export was started"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Audit export could not be started&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Audit export could not be started"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bStarted</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LaunchAuditExport&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LaunchAuditExport"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="launch-silently-and-report-the-startup-error">Launch silently and report the startup error<a class="headerlink" href="#launch-silently-and-report-the-startup-error" title="Permanent link">&para;</a></h3>
 <p>Run a background utility without showing its window and surface the last SSL error when startup fails.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PrintBarcodeLabel</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sApp</span><span class="p">,</span><span class="w"> </span><span class="n">sArgs</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">bStarted</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sApp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\Program Files\BarcodePrint\LabelPrinter.exe&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/silent /label &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LAB-2024-0042"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sApp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Program Files\BarcodePrint\LabelPrinter.exe"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/silent /label "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bStarted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsExec</span><span class="p">(</span><span class="n">sApp</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="n">sArgs</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bStarted</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Barcode print job was submitted for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Barcode print job was submitted for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span>
-<span class="w">            </span><span class="s2">&quot;Barcode print launch failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span>
+<span class="w">            </span><span class="s2">"Barcode print launch failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span>
 <span class="w">        </span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs on failure: last SSL error message;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3672,25 +3672,25 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PrintBarcodeLabel&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"PrintBarcodeLabel"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="pass-the-full-command-line-in-sapplication">Pass the full command line in <code>sApplication</code><a class="headerlink" href="#pass-the-full-command-line-in-sapplication" title="Permanent link">&para;</a></h3>
 <p>Omit <code>sArguments</code> and let <code>LimsExec</code> split a quoted executable path from the rest of the command line.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LaunchQuotedCommand</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCommand</span><span class="p">,</span><span class="w"> </span><span class="n">bStarted</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sCommand</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">&#39;</span><span class="s2">&quot;C:\Program Files\Acme Tools\Exporter.exe&quot;</span><span class="w"> </span><span class="o">/</span><span class="n">mode</span><span class="w"> </span><span class="n">silent</span><span class="w"> </span><span class="o">/</span><span class="n">batch</span><span class="w"> </span><span class="n">B</span><span class="o">-</span><span class="mi">1042</span><span class="err">&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCommand</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">'</span><span class="s2">"C:\Program Files\Acme Tools\Exporter.exe"</span><span class="w"> </span><span class="o">/</span><span class="n">mode</span><span class="w"> </span><span class="n">silent</span><span class="w"> </span><span class="o">/</span><span class="n">batch</span><span class="w"> </span><span class="n">B</span><span class="o">-</span><span class="mi">1042</span><span class="err">'</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bStarted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsExec</span><span class="p">(</span><span class="n">sCommand</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bStarted</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Exporter launch failed&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Exporter launch failed"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bStarted</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LaunchQuotedCommand&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LaunchQuotedCommand"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

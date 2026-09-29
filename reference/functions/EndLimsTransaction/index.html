@@ -3935,18 +3935,18 @@
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">bStarted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">BeginLimsTransaction</span><span class="p">();</span>
 
-<span class="w">        </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            UPDATE sample SET</span>
 <span class="s2">                status = ?</span>
 <span class="s2">            WHERE sampleid = ?</span>
-<span class="s2">        &quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">});</span>
+<span class="s2">        "</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">});</span>
 
 <span class="w">        </span><span class="n">bCommit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: update failed;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Update failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Update failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bStarted</span><span class="p">;</span>
@@ -3958,7 +3958,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;UpdateSampleStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;S-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Active&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"UpdateSampleStatus"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Active"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="roll-back-a-named-transaction-on-validation-failure">Roll back a named transaction on validation failure<a class="headerlink" href="#roll-back-a-named-transaction-on-validation-failure" title="Permanent link">&para;</a></h3>
 <p>Opens a transaction on a named connection and validates that no open tasks remain before updating the batch status. If validation fails, <a href="../RaiseError/"><code>RaiseError</code></a> triggers the <a href="../../keywords/CATCH/"><code>:CATCH</code></a> block and <code>bCommit</code> stays <a href="../../literals/false/"><code>.F.</code></a>, causing the transaction to roll back in <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a>.</p>
@@ -3972,29 +3972,29 @@
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">bStarted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">BeginLimsTransaction</span><span class="p">(</span><span class="n">sConnName</span><span class="p">);</span>
 
-<span class="w">        </span><span class="n">nOpenTasks</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="n">nOpenTasks</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            SELECT COUNT(*)</span>
 <span class="s2">            FROM batch_task</span>
 <span class="s2">            WHERE batchid = ?</span>
 <span class="s2">              AND status = ?</span>
-<span class="s2">        &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sBatchID</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Open&quot;</span><span class="p">});</span>
+<span class="s2">        "</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sBatchID</span><span class="p">,</span><span class="w"> </span><span class="s2">"Open"</span><span class="p">});</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nOpenTasks</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">&quot;The batch still has open tasks&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">"The batch still has open tasks"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            UPDATE batch SET</span>
 <span class="s2">                status = ?</span>
 <span class="s2">            WHERE batchid = ?</span>
-<span class="s2">        &quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">});</span>
+<span class="s2">        "</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">});</span>
 
 <span class="w">        </span><span class="n">bCommit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: batch update failed;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Batch update failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Batch update failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bStarted</span><span class="p">;</span>
@@ -4006,7 +4006,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ApplyBatchStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;MyConn&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;BATCH-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Closed&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ApplyBatchStatus"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"MyConn"</span><span class="p">,</span><span class="w"> </span><span class="s2">"BATCH-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Closed"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="handle-nested-transaction-scopes-on-one-connection">Handle nested transaction scopes on one connection<a class="headerlink" href="#handle-nested-transaction-scopes-on-one-connection" title="Permanent link">&para;</a></h3>
 <p>Opens an outer transaction for a batch update and an inner transaction for the audit log write. If the inner transaction rolls back, <a href="../RaiseError/"><code>RaiseError</code></a> propagates the failure to the outer <a href="../../keywords/CATCH/"><code>:CATCH</code></a>, which rolls back the outer transaction too.</p>
@@ -4022,30 +4022,30 @@
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">bOuterStarted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">BeginLimsTransaction</span><span class="p">(</span><span class="n">sConnName</span><span class="p">);</span>
 
-<span class="w">        </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            UPDATE batch SET</span>
 <span class="s2">                status = ?</span>
 <span class="s2">            WHERE batchid = ?</span>
-<span class="s2">        &quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Closed&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">});</span>
+<span class="s2">        "</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Closed"</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">});</span>
 
 <span class="w">        </span><span class="n">bInnerStarted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">BeginLimsTransaction</span><span class="p">(</span><span class="n">sConnName</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">                INSERT INTO audit_log (</span>
 <span class="s2">                    event_name, event_ref</span>
 <span class="s2">                )</span>
 <span class="s2">                VALUES (</span>
 <span class="s2">                    ?, ?</span>
 <span class="s2">                )</span>
-<span class="s2">            &quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;BATCH_CLOSEOUT&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">});</span>
+<span class="s2">            "</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">"BATCH_CLOSEOUT"</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">});</span>
 
 <span class="w">            </span><span class="n">bInnerCommit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">            </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">            </span><span class="c1">/* Logs on failure: audit write failed;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Audit write failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Audit write failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="n">bInnerStarted</span><span class="p">;</span>
@@ -4054,7 +4054,7 @@
 <span class="w">        </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bInnerCommit</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">&quot;The audit step failed, so the outer transaction must roll back&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">"The audit step failed, so the outer transaction must roll back"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="n">bOuterCommit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
@@ -4062,7 +4062,7 @@
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: save batch and audit failed;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;SaveBatchAndAudit failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"SaveBatchAndAudit failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bOuterStarted</span><span class="p">;</span>
@@ -4074,7 +4074,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SaveBatchAndAudit&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;MyConn&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;BATCH-001&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SaveBatchAndAudit"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"MyConn"</span><span class="p">,</span><span class="w"> </span><span class="s2">"BATCH-001"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

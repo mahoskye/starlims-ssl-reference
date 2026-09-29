@@ -4142,18 +4142,18 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">InsertAuditEntry</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sAction</span><span class="p">,</span><span class="w"> </span><span class="n">sRecordID</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;JSMITH&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sAction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SAMPLE_APPROVED&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRecordID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SAM-2024-0042&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"JSMITH"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sAction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SAMPLE_APPROVED"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRecordID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SAM-2024-0042"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        INSERT INTO audit_log (</span>
 <span class="s2">            user_name, action, record_id, log_date</span>
 <span class="s2">        )</span>
 <span class="s2">        VALUES (</span>
 <span class="s2">            ?, ?, ?, SYSDATE</span>
 <span class="s2">        )</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sAction</span><span class="p">,</span><span class="w"> </span><span class="n">sRecordID</span><span class="p">});</span>
 
@@ -4161,7 +4161,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;InsertAuditEntry&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"InsertAuditEntry"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="update-one-row-and-verify-rows-affected">Update one row and verify rows affected<a class="headerlink" href="#update-one-row-and-verify-rows-affected" title="Permanent link">&para;</a></h3>
 <p>Run an <code>UPDATE</code> on a named connection and call <a href="../LimsRecordsAffected/"><code>LimsRecordsAffected</code></a> to confirm the row was actually found and changed.</p>
@@ -4169,14 +4169,14 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">,</span><span class="w"> </span><span class="n">nRows</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        UPDATE sample SET</span>
 <span class="s2">            status = ?,</span>
 <span class="s2">            released_date = SYSDATE</span>
 <span class="s2">        WHERE sample_id = ?</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;DATABASE&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;RELEASED&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">});</span>
+<span class="w">    </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="s2">"DATABASE"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"RELEASED"</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">});</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bSuccess</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
@@ -4188,7 +4188,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ReleaseSample&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SAM-2024-0042&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReleaseSample"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"SAM-2024-0042"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="ignore-sql-errors-temporarily-and-inspect-the-stored-error">Ignore SQL errors temporarily and inspect the stored error<a class="headerlink" href="#ignore-sql-errors-temporarily-and-inspect-the-stored-error" title="Permanent link">&para;</a></h3>
 <p>Enable error ignoring for a best-effort <code>UPDATE</code>, then restore the previous settings and surface the stored SQL error if the statement failed.</p>
@@ -4196,17 +4196,17 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">,</span><span class="w"> </span><span class="n">bPrevIgnore</span><span class="p">,</span><span class="w"> </span><span class="n">bPrevShow</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        UPDATE sample SET</span>
 <span class="s2">            optional_flag = ?</span>
 <span class="s2">        WHERE sample_id = ?</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bPrevIgnore</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IgnoreSqlErrors</span><span class="p">(</span><span class="kc">.T.</span><span class="p">);</span>
 <span class="w">    </span><span class="n">bPrevShow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ShowSqlErrors</span><span class="p">(</span><span class="kc">.F.</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">});</span>
+<span class="w">        </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Y"</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">});</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bSuccess</span><span class="p">;</span>
 <span class="w">            </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSQLError</span><span class="p">();</span>
@@ -4214,7 +4214,7 @@
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="n">oErr</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
 <span class="w">                </span><span class="c1">/* Logs on failure: Optional update failed;</span>
 <span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span>
-<span class="w">                    </span><span class="s2">&quot;Optional update failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span>
+<span class="w">                    </span><span class="s2">"Optional update failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span>
 <span class="w">                </span><span class="p">);</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -4227,7 +4227,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;TryOptionalUpdate&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SAM-2024-0042&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"TryOptionalUpdate"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"SAM-2024-0042"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -2816,14 +2816,14 @@
 <span class="w">    </span><span class="n">nExpected</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bMismatch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nMeasured</span><span class="w"> </span><span class="o">#</span><span class="w"> </span><span class="n">nExpected</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Values differ? &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">IIf</span><span class="p">(</span><span class="n">bMismatch</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;YES&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;NO&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Values differ? "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">IIf</span><span class="p">(</span><span class="n">bMismatch</span><span class="p">,</span><span class="w"> </span><span class="s2">"YES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"NO"</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bMismatch</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompareTwoNumbers&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CompareTwoNumbers"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Values differ? YES
@@ -2834,12 +2834,12 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aPrevious</span><span class="p">,</span><span class="w"> </span><span class="n">aCurrent</span><span class="p">,</span><span class="w"> </span><span class="n">bChanged</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nLen</span><span class="p">,</span><span class="w"> </span><span class="n">bAnyDiffer</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aPrevious</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LAB-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-003&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">aCurrent</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LAB-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-003&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aPrevious</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"LAB-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-002"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-003"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aCurrent</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"LAB-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-002"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-003"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="c1">/* Reference inequality: two distinct arrays, so # is .T.;</span>
 <span class="w">    </span><span class="n">bChanged</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aPrevious</span><span class="w"> </span><span class="o">#</span><span class="w"> </span><span class="n">aCurrent</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Reference differs? &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">IIf</span><span class="p">(</span><span class="n">bChanged</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;YES&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;NO&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Reference differs? "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">IIf</span><span class="p">(</span><span class="n">bChanged</span><span class="p">,</span><span class="w"> </span><span class="s2">"YES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"NO"</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs: Reference differs? YES;</span>
 
@@ -2857,12 +2857,12 @@
 <span class="w">        </span><span class="k">:NEXT</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Any element differs? &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">IIf</span><span class="p">(</span><span class="n">bAnyDiffer</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;YES&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;NO&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Any element differs? "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">IIf</span><span class="p">(</span><span class="n">bAnyDiffer</span><span class="p">,</span><span class="w"> </span><span class="s2">"YES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"NO"</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs: Any element differs? NO;</span>
 
 <span class="w">    </span><span class="c1">/* Mutate one element and re-check;</span>
-<span class="w">    </span><span class="n">aCurrent</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-099&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aCurrent</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LAB-099"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bAnyDiffer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aPrevious</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">aPrevious</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]</span><span class="w"> </span><span class="o">#</span><span class="w"> </span><span class="n">aCurrent</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
@@ -2871,7 +2871,7 @@
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Any element differs after edit? &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">IIf</span><span class="p">(</span><span class="n">bAnyDiffer</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;YES&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;NO&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Any element differs after edit? "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">IIf</span><span class="p">(</span><span class="n">bAnyDiffer</span><span class="p">,</span><span class="w"> </span><span class="s2">"YES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"NO"</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs: Any element differs after edit? YES;</span>
 
@@ -2879,7 +2879,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DetectArrayDifference&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DetectArrayDifference"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>

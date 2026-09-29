@@ -4336,11 +4336,11 @@
 <span class="w">    </span><span class="n">nInvoiceNum</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">4528</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sInvoiceCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrZero</span><span class="p">(</span><span class="n">nInvoiceNum</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Invoice code: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInvoiceCode</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Invoice code: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInvoiceCode</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FormatInvoiceCode&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FormatInvoiceCode"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Invoice code: 00004528
@@ -4353,10 +4353,10 @@
 <span class="w">    </span><span class="n">nMeasurement</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">12.37658</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nLength</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nDecimals</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LAB-2024-0042"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sFormatted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrZero</span><span class="p">(</span><span class="n">nMeasurement</span><span class="p">,</span><span class="w"> </span><span class="n">nLength</span><span class="p">,</span><span class="w"> </span><span class="n">nDecimals</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sOutputLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOutputLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">","</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sOutputLine</span><span class="p">);</span>
 
@@ -4364,7 +4364,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FormatMeasurementForExport&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FormatMeasurementForExport"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>LAB-2024-0042,000012.377
@@ -4378,23 +4378,23 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">,</span><span class="w"> </span><span class="n">sOverflow</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sFormatted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrZero</span><span class="p">(</span><span class="n">nValue</span><span class="p">,</span><span class="w"> </span><span class="n">nWidth</span><span class="p">,</span><span class="w"> </span><span class="n">nDecimals</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sOverflow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nWidth</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sOverflow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">"*"</span><span class="p">,</span><span class="w"> </span><span class="n">nWidth</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sFormatted</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sOverflow</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span>
-<span class="w">            </span><span class="s2">&quot;Formatted value overflowed width &quot;</span>
+<span class="w">            </span><span class="s2">"Formatted value overflowed width "</span>
 <span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nWidth</span><span class="p">)</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; for value &quot;</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">" for value "</span>
 <span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nValue</span><span class="p">)</span>
 <span class="w">        </span><span class="p">);</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FormatResultValue&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mf">123456.78</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FormatResultValue"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mf">123456.78</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -3452,14 +3452,14 @@
 <span class="w">    </span><span class="n">aPrinters</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetPrinters</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aPrinters</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No printers are currently installed.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No printers are currently installed."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aPrinters</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sPrinterList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Available printers:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sPrinterList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Available printers:"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aPrinters</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sPrinterList</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;- &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aPrinters</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sPrinterList</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">"- "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aPrinters</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sPrinterList</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs available printer names;</span>
@@ -3468,7 +3468,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowPrinterList&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowPrinterList"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="validate-printer-presence-before-a-printer-dependent-task">Validate printer presence before a printer-dependent task<a class="headerlink" href="#validate-printer-presence-before-a-printer-dependent-task" title="Permanent link">&para;</a></h3>
 <p>Uses <a href="../AScan/"><code>AScan</code></a> to check whether a required printer name appears in the returned list, returning <a href="../../literals/true/"><code>.T.</code></a> or <a href="../../literals/false/"><code>.F.</code></a> accordingly.</p>
@@ -3480,18 +3480,18 @@
 <span class="w">    </span><span class="n">nPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">AScan</span><span class="p">(</span><span class="n">aPrinters</span><span class="p">,</span><span class="w"> </span><span class="n">sRequiredPrinter</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nPos</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Printer is available: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRequiredPrinter</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Printer is available: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRequiredPrinter</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs when found;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Printer is not installed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRequiredPrinter</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Printer is not installed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRequiredPrinter</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs when absent;</span>
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateRequiredPrinter&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;HP LaserJet Pro M404dn&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateRequiredPrinter"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"HP LaserJet Pro M404dn"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="compare-printer-snapshots-after-configuration-changes">Compare printer snapshots after configuration changes<a class="headerlink" href="#compare-printer-snapshots-after-configuration-changes" title="Permanent link">&para;</a></h3>
 <p>Captures the printer list before and after a configuration step, then computes which printers were added or removed by checking each snapshot against the other.</p>
@@ -3531,7 +3531,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ComparePrinterSnapshots&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ComparePrinterSnapshots"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

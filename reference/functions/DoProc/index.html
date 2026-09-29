@@ -3641,11 +3641,11 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CallProcedureDynamically</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sProcName</span><span class="p">,</span><span class="w"> </span><span class="n">aArgs</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sProcName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LogMessage&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Sample analysis complete&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;INFO&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sProcName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LogMessage"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"Sample analysis complete"</span><span class="p">,</span><span class="w"> </span><span class="s2">"INFO"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="nf">DoProc</span><span class="p">(</span><span class="n">sProcName</span><span class="p">,</span><span class="w"> </span><span class="n">aArgs</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetStatusText&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">200</span><span class="p">});</span>
+<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetStatusText"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">200</span><span class="p">});</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sResult</span><span class="p">));</span>
 <span class="w">    </span><span class="c1">/* Logs returned status text;</span>
@@ -3656,7 +3656,7 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">sLevel</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLogEntry</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sLogEntry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;[&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLevel</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;] &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sLogEntry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"["</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLevel</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"] "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLogEntry</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the formatted log entry;</span>
@@ -3669,13 +3669,13 @@
 
 <span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">nCode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sDescription</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Success&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sDescription</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">nCode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">404</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sDescription</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Not Found&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sDescription</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Not Found"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sDescription</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Unknown Status&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sDescription</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Unknown Status"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
 
@@ -3683,7 +3683,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CallProcedureDynamically&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CallProcedureDynamically"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="use-a-runtime-selected-local-procedure">Use a runtime-selected local procedure<a class="headerlink" href="#use-a-runtime-selected-local-procedure" title="Permanent link">&para;</a></h3>
 <p>Selects one of two handler procedures based on a boolean flag and dispatches to it at runtime, showing how the same call site routes to different behavior.</p>
@@ -3691,10 +3691,10 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">bIsError</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTarget</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sTarget</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ShowInfoMessage&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTarget</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ShowInfoMessage"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsError</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sTarget</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ShowErrorMessage&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sTarget</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ShowErrorMessage"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DoProc</span><span class="p">(</span><span class="n">sTarget</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sMessage</span><span class="p">});</span>
@@ -3706,18 +3706,18 @@
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowInfoMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;INFO: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sMessage</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"INFO: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sMessage</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowErrorMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;ERROR: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sMessage</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"ERROR: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sMessage</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RouteStatusMessage&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Something failed&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RouteStatusMessage"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="s2">"Something failed"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="dispatch-to-an-external-procedure-path">Dispatch to an external procedure path<a class="headerlink" href="#dispatch-to-an-external-procedure-path" title="Permanent link">&para;</a></h3>
 <p>Builds a three-segment procedure name at runtime and dispatches to it using <code>DoProc</code>, demonstrating the external executor path.</p>
@@ -3725,17 +3725,17 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStepName</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sProcName</span><span class="p">,</span><span class="w"> </span><span class="n">vResult</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sProcName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Workflow.SampleActions.&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStepName</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sProcName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Workflow.SampleActions."</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStepName</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">vResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="n">sProcName</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">});</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Dispatched: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProcName</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Dispatched: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProcName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">vResult</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SubmitConfiguredStep&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;ProcessSample&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SubmitConfiguredStep"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"ProcessSample"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"jsmith"</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Dispatched: Workflow.SampleActions.ProcessSample

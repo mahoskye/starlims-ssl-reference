@@ -3818,14 +3818,14 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckVariableType</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">sTypeCode</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SMP-2024-001&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sTypeCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsType</span><span class="p">(</span><span class="s2">&quot;sSampleId&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SMP-2024-001"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTypeCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsType</span><span class="p">(</span><span class="s2">"sSampleId"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Type of sSampleId: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeCode</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Type of sSampleId: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeCode</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckVariableType&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckVariableType"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Type of sSampleId: C
@@ -3836,25 +3836,25 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">vInput</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeCode</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sTypeCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsType</span><span class="p">(</span><span class="s2">&quot;vInput&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sTypeCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsType</span><span class="p">(</span><span class="s2">"vInput"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sTypeCode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;U&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No input provided — skipping&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sTypeCode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"U"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No input provided — skipping"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sTypeCode</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">&quot;C&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Expected string but got: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeCode</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sTypeCode</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"C"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Expected string but got: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeCode</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Processing: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vInput</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Processing: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vInput</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs provided input;</span>
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ProcessInput&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SMP-2024-001&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ProcessInput"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"SMP-2024-001"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -1285,13 +1285,15 @@
 <p>SSL provides two error handling models: the modern <strong>structured</strong> model (<a href="../../reference/keywords/TRY/"><code>:TRY</code></a> / <a href="../../reference/keywords/CATCH/"><code>:CATCH</code></a> / <a href="../../reference/keywords/FINALLY/"><code>:FINALLY</code></a>) and the <strong>legacy</strong> model (<a href="../../reference/keywords/ERROR/"><code>:ERROR</code></a> / <a href="../../reference/keywords/RESUME/"><code>:RESUME</code></a>). New code should use structured handling exclusively.</p>
 <h2 id="structured-error-handling">Structured error handling<a class="headerlink" href="#structured-error-handling" title="Permanent link">&para;</a></h2>
 <h3 id="basic-pattern">Basic pattern<a class="headerlink" href="#basic-pattern" title="Permanent link">&para;</a></h3>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oResult</span><span class="p">,</span><span class="w"> </span><span class="n">oError</span><span class="p">;</span>
+
+<span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">/* Code that might fail;</span>
 <span class="w">    </span><span class="n">oResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sQuery</span><span class="p">);</span>
 <span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">/* Error recovery;</span>
 <span class="w">    </span><span class="n">oError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Query failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Query failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">/* Always runs — cleanup;</span>
 <span class="w">    </span><span class="nf">EndLimsTransaction</span><span class="p">();</span>
@@ -1308,20 +1310,24 @@
 </ul>
 <h3 id="common-patterns">Common patterns<a class="headerlink" href="#common-patterns" title="Permanent link">&para;</a></h3>
 <h4 id="try-catch-with-logging">Try-catch with logging<a class="headerlink" href="#try-catch-with-logging" title="Permanent link">&para;</a></h4>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oError</span><span class="p">;</span>
+
+<span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">DocCheckoutDocument</span><span class="p">(</span><span class="n">sDocId</span><span class="p">);</span>
 <span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Checkout&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Failed for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDocId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Checkout"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Failed for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDocId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="k">:ENDTRY</span><span class="p">;</span>
 </code></pre></div>
 <h4 id="try-catch-with-critical-error-reporting">Try-catch with critical error reporting<a class="headerlink" href="#try-catch-with-critical-error-reporting" title="Permanent link">&para;</a></h4>
 <p>Use <a href="../../reference/functions/ErrorMes/"><code>ErrorMes</code></a> instead of <a href="../../reference/functions/UsrMes/"><code>UsrMes</code></a> when an error <strong>must</strong> be logged regardless of server configuration. <a href="../../reference/functions/UsrMes/"><code>UsrMes</code></a> can be silenced on production servers, but <a href="../../reference/functions/ErrorMes/"><code>ErrorMes</code></a> always writes.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oError</span><span class="p">;</span>
+
+<span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sDeleteSQL</span><span class="p">);</span>
 <span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;CRITICAL&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Data deletion failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"CRITICAL"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Data deletion failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="k">:ENDTRY</span><span class="p">;</span>
 </code></pre></div>
 <div class="admonition tip">
@@ -1342,16 +1348,18 @@
 <span class="k">:ENDTRY</span><span class="p">;</span>
 </code></pre></div>
 <h4 id="nested-try-blocks">Nested try blocks<a class="headerlink" href="#nested-try-blocks" title="Permanent link">&para;</a></h4>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oConnection</span><span class="p">;</span>
+
+<span class="k">:TRY</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oConnection</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(</span><span class="n">sAssembly</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Assembly load failed, trying fallback&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Assembly load failed, trying fallback"</span><span class="p">);</span>
 <span class="w">        </span><span class="n">oConnection</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(</span><span class="n">sFallback</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">/* Continue with oConnection;</span>
 <span class="k">:CATCH</span><span class="p">;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;All connection attempts failed&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"All connection attempts failed"</span><span class="p">);</span>
 <span class="k">:ENDTRY</span><span class="p">;</span>
 </code></pre></div>
 <h2 id="error-inspection-functions">Error inspection functions<a class="headerlink" href="#error-inspection-functions" title="Permanent link">&para;</a></h2>
@@ -1401,7 +1409,7 @@
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 <span class="k">:ERROR</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">/* Runs for whichever statement failed;</span>
-<span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;WARN&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;A step failed, continuing&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"WARN"</span><span class="p">,</span><span class="w"> </span><span class="s2">"A step failed, continuing"</span><span class="p">);</span>
 <span class="k">:RESUME</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
@@ -1414,7 +1422,7 @@
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 <span class="k">:ERROR</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">/* Runs on any failure;</span><span class="w"> </span><span class="n">procedure</span><span class="w"> </span><span class="n">ends</span><span class="w"> </span><span class="n">after</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">block</span><span class="p">;</span>
-<span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;ERROR&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Operation failed&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"ERROR"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Operation failed"</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <h3 id="do-not-mix-errorresume-with-trycatch">Do not mix :ERROR/:RESUME with :TRY/:CATCH<a class="headerlink" href="#do-not-mix-errorresume-with-trycatch" title="Permanent link">&para;</a></h3>
@@ -1431,17 +1439,17 @@
 </ul>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">MixedHandlingExample</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">&quot;Raised inside TRY block.&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MixedHandlingExample&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Runs anyway&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">/* :RESUME continues here, inside the TRY body;</span>
+<span class="w">        </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">"Raised inside TRY block."</span><span class="p">,</span><span class="w"> </span><span class="s2">"MixedHandlingExample"</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Runs anyway"</span><span class="p">);</span><span class="w">  </span><span class="c1">/* :RESUME continues here, inside the TRY body;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;CATCH&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">():</span><span class="n">Description</span><span class="p">);</span><span class="w">  </span><span class="c1">/* never fires;</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"CATCH"</span><span class="p">,</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">():</span><span class="n">Description</span><span class="p">);</span><span class="w">  </span><span class="c1">/* never fires;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Reached the success path&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">/* runs;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Reached the success path"</span><span class="p">);</span><span class="w">  </span><span class="c1">/* runs;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ERROR</span><span class="p">;</span>
-<span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;LEGACY&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">():</span><span class="n">Description</span><span class="p">);</span><span class="w">  </span><span class="c1">/* fires instead of :CATCH;</span>
+<span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"LEGACY"</span><span class="p">,</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">():</span><span class="n">Description</span><span class="p">);</span><span class="w">  </span><span class="c1">/* fires instead of :CATCH;</span>
 <span class="k">:RESUME</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
@@ -1553,7 +1561,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 02:15:32 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 01:00:10 UTC">September 29, 2026</span>
   </span>
 
     

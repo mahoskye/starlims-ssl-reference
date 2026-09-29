@@ -1917,19 +1917,19 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">/* :DECLARE initializes to empty string, not NIL;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;After DECLARE — is empty: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Empty</span><span class="p">(</span><span class="n">sValue</span><span class="p">)));</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;After DECLARE — is NIL: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"After DECLARE — is empty: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Empty</span><span class="p">(</span><span class="n">sValue</span><span class="p">)));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"After DECLARE — is NIL: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">));</span>
 
 <span class="w">    </span><span class="n">sValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;After NIL assign — is empty: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Empty</span><span class="p">(</span><span class="n">sValue</span><span class="p">)));</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;After NIL assign — is NIL: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"After NIL assign — is empty: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Empty</span><span class="p">(</span><span class="n">sValue</span><span class="p">)));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"After NIL assign — is NIL: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">));</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sValue</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DemonstrateNilVsEmpty&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DemonstrateNilVsEmpty"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="using-nil-as-a-lookup-sentinel">Using NIL as a lookup sentinel<a class="headerlink" href="#using-nil-as-a-lookup-sentinel" title="Permanent link">&para;</a></h3>
 <p>Passes <code>NIL</code> as the default to <a href="../../functions/LSearch/"><code>LSearch</code></a> so the procedure can distinguish "no row found" from an empty result. With <code>"S-999"</code> absent from the database, <code>FindSample</code> returns <code>NIL</code>, and both the direct comparison and <a href="../../functions/Empty/"><code>Empty</code></a><code>()</code> check confirm the absence.</p>
@@ -1937,9 +1937,9 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sName</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">        SELECT sample_name FROM sample WHERE sample_id = ?</span>
-<span class="s2">    &quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">NIL</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sSampleID</span><span class="p">});</span>
+<span class="s2">    "</span><span class="p">,</span><span class="w"> </span><span class="kc">NIL</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sSampleID</span><span class="p">});</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sName</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -1947,23 +1947,23 @@
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckSampleLookup</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FindSample&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;S-999&quot;</span><span class="p">});</span>
+<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FindSample"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-999"</span><span class="p">});</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sResult</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sample not found&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Sample not found"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Found: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sResult</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Found: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sResult</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No result (from Empty check)&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No result (from Empty check)"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckSampleLookup&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckSampleLookup"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>

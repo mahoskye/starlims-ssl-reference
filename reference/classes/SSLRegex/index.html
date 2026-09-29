@@ -2867,6 +2867,7 @@
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Passing <code>nStartAt</code> beyond the end of the string does not raise an error; matching starts at the end of the input.</li>
+<li><code>^</code> still anchors at the start of the whole string, not at <code>nStartAt</code>. <code>SSLRegex{"^AB-[0-9]{4}"}:IsMatch("Prefix Batch:AB-1042", 14)</code> returns <a href="../../literals/false/"><code>.F.</code></a> even though position 14 is where <code>AB-1042</code> begins.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="validate-a-sample-identifier">Validate a sample identifier<a class="headerlink" href="#validate-a-sample-identifier" title="Permanent link">&para;</a></h3>
@@ -2874,62 +2875,67 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateSampleIdFormat</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oRegex</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-12345&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oRegex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLRegex</span><span class="p">{</span><span class="s2">&quot;^LAB-[0-9]{5}$&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LAB-12345"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oRegex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLRegex</span><span class="p">{</span><span class="s2">"^LAB-[0-9]{5}$"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">bIsValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRegex</span><span class="p">:</span><span class="nf">IsMatch</span><span class="p">(</span><span class="n">sSampleID</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sample ID format is valid&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Sample ID format is valid"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sample ID format is not valid&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Sample ID format is not valid"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateSampleIdFormat&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateSampleIdFormat"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="ignore-case-when-checking-a-result-code">Ignore case when checking a result code<a class="headerlink" href="#ignore-case-when-checking-a-result-code" title="Permanent link">&para;</a></h3>
 <p>Constructs a case-insensitive regex for <code>pass</code> by passing <a href="../../literals/false/"><code>.F.</code></a> as the second argument, then confirms the pattern matches mixed-case text.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindPassingResultText</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oRegex</span><span class="p">,</span><span class="w"> </span><span class="n">sResultText</span><span class="p">,</span><span class="w"> </span><span class="n">bMatched</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sResultText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Final status: PaSs&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oRegex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLRegex</span><span class="p">{</span><span class="s2">&quot;pass&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sResultText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Final status: PaSs"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oRegex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLRegex</span><span class="p">{</span><span class="s2">"pass"</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">bMatched</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRegex</span><span class="p">:</span><span class="nf">IsMatch</span><span class="p">(</span><span class="n">sResultText</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bMatched</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;A passing result was found in the text&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"A passing result was found in the text"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FindPassingResultText&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FindPassingResultText"</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>A passing result was found in the text
 </code></pre></div>
 <h3 id="start-matching-from-a-specific-position">Start matching from a specific position<a class="headerlink" href="#start-matching-from-a-specific-position" title="Permanent link">&para;</a></h3>
-<p>Passes a 1-based <code>nStartAt</code> position to skip the <code>Prefix Batch:</code> header and match only the batch number portion of the string.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">MatchBatchNumberAfterPrefix</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oRegex</span><span class="p">,</span><span class="w"> </span><span class="n">sText</span><span class="p">,</span><span class="w"> </span><span class="n">bMatched</span><span class="p">;</span>
+<p>Skips a header that contains an older batch number, then checks whether the rest of the line holds a well-formed one. Computing <code>nStartAt</code> from the header's length keeps the position correct if the header text changes. The two calls disagree because the only match lies before the start position.</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckBatchAfterHeader</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oRegex</span><span class="p">,</span><span class="w"> </span><span class="n">sHeader</span><span class="p">,</span><span class="w"> </span><span class="n">sText</span><span class="p">,</span><span class="w"> </span><span class="n">nStartAt</span><span class="p">,</span><span class="w"> </span><span class="n">bAnywhere</span><span class="p">,</span><span class="w"> </span><span class="n">bAfterHeader</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Prefix Batch:AB-1042&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oRegex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLRegex</span><span class="p">{</span><span class="s2">&quot;AB-[0-9]{4}$&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sHeader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Supersedes AB-1041 | "</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sHeader</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"Batch AB-10"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nStartAt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">sHeader</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oRegex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLRegex</span><span class="p">{</span><span class="s2">"AB-[0-9]{4}"</span><span class="p">};</span>
 
-<span class="w">    </span><span class="n">bMatched</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRegex</span><span class="p">:</span><span class="nf">IsMatch</span><span class="p">(</span><span class="n">sText</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bAnywhere</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRegex</span><span class="p">:</span><span class="nf">IsMatch</span><span class="p">(</span><span class="n">sText</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bAfterHeader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRegex</span><span class="p">:</span><span class="nf">IsMatch</span><span class="p">(</span><span class="n">sText</span><span class="p">,</span><span class="w"> </span><span class="n">nStartAt</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bMatched</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;The batch number has the expected format&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Match anywhere: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bAnywhere</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Match after header: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bAfterHeader</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bAfterHeader</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;MatchBatchNumberAfterPrefix&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckBatchAfterHeader"</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>The batch number has the expected format
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Match anywhere: .T.
+Match after header: .F.
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2958,7 +2964,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 00:57:50 UTC">September 29, 2026</span>
   </span>
 
     

@@ -3938,47 +3938,47 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListUploadFiles</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUploadPath</span><span class="p">,</span><span class="w"> </span><span class="n">aDirRows</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sFileName</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUploadPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\STARLIMS\Uploads&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUploadPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\STARLIMS\Uploads"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aDirRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DosSupport</span><span class="p">(</span><span class="s2">&quot;DIR&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sUploadPath</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aDirRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DosSupport</span><span class="p">(</span><span class="s2">"DIR"</span><span class="p">,</span><span class="w"> </span><span class="n">sUploadPath</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Files in upload directory: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aDirRows</span><span class="p">)));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Files in upload directory: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aDirRows</span><span class="p">)));</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aDirRows</span><span class="p">);</span>
 <span class="w">        </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aDirRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sFileName</span><span class="p">));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sFileName</span><span class="p">));</span>
 <span class="w">        </span><span class="c1">/* Logs one line per file;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ListUploadFiles&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ListUploadFiles"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="change-the-working-directory-for-a-file-import-operation">Change the working directory for a file import operation<a class="headerlink" href="#change-the-working-directory-for-a-file-import-operation" title="Permanent link">&para;</a></h3>
 <p>Capture the original working directory, switch to a target folder, then restore it.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ChangeDirectoryForImport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOriginalDir</span><span class="p">,</span><span class="w"> </span><span class="n">sTargetDir</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentDir</span><span class="p">,</span><span class="w"> </span><span class="n">bChanged</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sOriginalDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DosSupport</span><span class="p">(</span><span class="s2">&quot;WORK&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sTargetDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\Data\Imports&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOriginalDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DosSupport</span><span class="p">(</span><span class="s2">"WORK"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sTargetDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Data\Imports"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">bChanged</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DosSupport</span><span class="p">(</span><span class="s2">&quot;CD&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sTargetDir</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bChanged</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DosSupport</span><span class="p">(</span><span class="s2">"CD"</span><span class="p">,</span><span class="w"> </span><span class="n">sTargetDir</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bChanged</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Failed to change directory to: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetDir</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Failed to change directory to: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetDir</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sCurrentDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DosSupport</span><span class="p">(</span><span class="s2">&quot;WORKDIR&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Current import directory: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentDir</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sCurrentDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DosSupport</span><span class="p">(</span><span class="s2">"WORKDIR"</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Current import directory: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentDir</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">DosSupport</span><span class="p">(</span><span class="s2">&quot;CD&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sOriginalDir</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">DosSupport</span><span class="p">(</span><span class="s2">"CD"</span><span class="p">,</span><span class="w"> </span><span class="n">sOriginalDir</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ChangeDirectoryForImport&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ChangeDirectoryForImport"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

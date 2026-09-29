@@ -3949,22 +3949,22 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SearchPoliciesByKeyword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSearchKeyword</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">nResultCount</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSearchKeyword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;compliance&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSearchKeyword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"compliance"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocSearchFullText</span><span class="p">(</span><span class="n">sSearchKeyword</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">nResultCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aResults</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span>
-<span class="w">        </span><span class="s2">&quot;Found &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nResultCount</span><span class="p">)</span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; documents containing &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSearchKeyword</span>
+<span class="w">        </span><span class="s2">"Found "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nResultCount</span><span class="p">)</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">" documents containing "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSearchKeyword</span>
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SearchPoliciesByKeyword&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SearchPoliciesByKeyword"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Found [n] documents containing compliance
@@ -3974,13 +3974,13 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SearchEngineeringSafetyDocs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">sSearchText</span><span class="p">,</span><span class="w"> </span><span class="n">sLocation</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxResults</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">,</span><span class="w"> </span><span class="n">sMsg</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSearchText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;safety&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sLocation</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/Documents/Engineering&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSearchText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"safety"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sLocation</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/Documents/Engineering"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nMaxResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocSearchFullText</span><span class="p">(</span><span class="n">sSearchText</span><span class="p">,</span><span class="w"> </span><span class="n">sLocation</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxResults</span><span class="p">);</span>
 <span class="w">    </span><span class="n">nCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aResults</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; documents found in &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLocation</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; folder&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" documents found in "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLocation</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" folder"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">/* Logs: count summary;</span>
 <span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sMsg</span><span class="p">);</span>
@@ -3991,20 +3991,20 @@
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]);</span>
 <span class="w">        </span><span class="k">:NEXT</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No safety-related documents found in the Engineering folder&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No safety-related documents found in the Engineering folder"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SearchEngineeringSafetyDocs&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SearchEngineeringSafetyDocs"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="collect-object-ids-for-a-bounded-review-queue">Collect object IDs for a bounded review queue<a class="headerlink" href="#collect-object-ids-for-a-bounded-review-queue" title="Permanent link">&para;</a></h3>
 <p>Searches for documents matching a phrase under a quality folder with a 50-row cap, collects the object IDs, and logs the queue size.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildComplianceReviewQueue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSearchText</span><span class="p">,</span><span class="w"> </span><span class="n">sStartLocation</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxResults</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">aObjectIds</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSearchText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;retention policy&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sStartLocation</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/Documents/Quality&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSearchText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"retention policy"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sStartLocation</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/Documents/Quality"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nMaxResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocSearchFullText</span><span class="p">(</span><span class="n">sSearchText</span><span class="p">,</span><span class="w"> </span><span class="n">sStartLocation</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxResults</span><span class="p">);</span>
@@ -4015,15 +4015,15 @@
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span>
-<span class="w">        </span><span class="s2">&quot;Queued &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aObjectIds</span><span class="p">))</span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; documents for compliance review&quot;</span>
+<span class="w">        </span><span class="s2">"Queued "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aObjectIds</span><span class="p">))</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">" documents for compliance review"</span>
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aObjectIds</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildComplianceReviewQueue&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildComplianceReviewQueue"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Queued [n] documents for compliance review

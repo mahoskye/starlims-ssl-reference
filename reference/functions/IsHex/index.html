@@ -4319,15 +4319,15 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateHexCode</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;A3F7&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"A3F7"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bIsValidHex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsHex</span><span class="p">(</span><span class="n">sUserInput</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Valid uppercase hex value&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Valid uppercase hex value"</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sStatus</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Value contains non-hex characters&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Value contains non-hex characters"</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sStatus</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -4344,10 +4344,10 @@
 <span class="w">    </span><span class="n">bIsValidHex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsHex</span><span class="p">(</span><span class="n">sHexValue</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Normalized value is valid: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Normalized value is valid: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs normalized valid message;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Normalized value is not valid hex: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Normalized value is not valid hex: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs normalized invalid message;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4360,7 +4360,7 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertValidHexBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRawValues</span><span class="p">,</span><span class="w"> </span><span class="n">aDecimalValues</span><span class="p">,</span><span class="w"> </span><span class="n">sHexValue</span><span class="p">,</span><span class="w"> </span><span class="n">nDecimalValue</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aRawValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;1A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;FF&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ab&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x10&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;7B&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aRawValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"1A"</span><span class="p">,</span><span class="w"> </span><span class="s2">"FF"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ab"</span><span class="p">,</span><span class="w"> </span><span class="s2">"0x10"</span><span class="p">,</span><span class="w"> </span><span class="s2">"7B"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aDecimalValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRawValues</span><span class="p">);</span>

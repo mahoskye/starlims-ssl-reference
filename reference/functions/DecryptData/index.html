@@ -3680,23 +3680,23 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDecryptedEmail</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sEncryptedEmail</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sEmail</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SecureP@ssw0rd&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sEncryptedEmail</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">EncryptData</span><span class="p">(</span><span class="s2">&quot;alex@example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;3DES&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;128&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;BASE64&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SecureP@ssw0rd"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sEncryptedEmail</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">EncryptData</span><span class="p">(</span><span class="s2">"alex@example.com"</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="s2">"3DES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"128"</span><span class="p">,</span><span class="w"> </span><span class="s2">"BASE64"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">sEmail</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DecryptData</span><span class="p">(</span><span class="n">sEncryptedEmail</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sEmail</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Email could not be decrypted&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Email could not be decrypted"</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Decrypted email: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEmail</span><span class="p">);</span><span class="w"> </span><span class="c1">/* Logs decrypted email value;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Decrypted email: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEmail</span><span class="p">);</span><span class="w"> </span><span class="c1">/* Logs decrypted email value;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sEmail</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDecryptedEmail&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowDecryptedEmail"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="validate-required-input-and-handle-failure">Validate required input and handle failure<a class="headerlink" href="#validate-required-input-and-handle-failure" title="Permanent link">&para;</a></h3>
 <p>Guards against an empty password before calling <code>DecryptData</code>, then handles the empty-string result that indicates a wrong password or unreadable ciphertext.</p>
@@ -3705,15 +3705,15 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sNote</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sPassword</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Cannot decrypt note because the password is empty&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Cannot decrypt note because the password is empty"</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sNote</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DecryptData</span><span class="p">(</span><span class="n">sEncryptedNote</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sNote</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;The note could not be decrypted with the supplied password&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"The note could not be decrypted with the supplied password"</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sNote</span><span class="p">;</span>
@@ -3721,8 +3721,8 @@
 
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span>
-<span class="w">    </span><span class="s2">&quot;ReadSecretNote&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="p">{</span><span class="nf">EncryptData</span><span class="p">(</span><span class="s2">&quot;example note&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SecureP@ssw0rd&quot;</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;SecureP@ssw0rd&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="s2">"ReadSecretNote"</span><span class="p">,</span>
+<span class="w">    </span><span class="p">{</span><span class="nf">EncryptData</span><span class="p">(</span><span class="s2">"example note"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SecureP@ssw0rd"</span><span class="p">),</span><span class="w"> </span><span class="s2">"SecureP@ssw0rd"</span><span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
 <h3 id="round-trip-verification-with-encryptdata">Round-trip verification with EncryptData<a class="headerlink" href="#round-trip-verification-with-encryptdata" title="Permanent link">&para;</a></h3>
@@ -3731,26 +3731,26 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPlainText</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sEncrypted</span><span class="p">,</span><span class="w"> </span><span class="n">sDecrypted</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bMatches</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sPlainText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Server=LAB01|User=api_user|Mode=readonly&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;MySecureP@ssw0rd&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPlainText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Server=LAB01|User=api_user|Mode=readonly"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"MySecureP@ssw0rd"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sEncrypted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">EncryptData</span><span class="p">(</span><span class="n">sPlainText</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;3DES&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;128&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;BASE64&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sEncrypted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">EncryptData</span><span class="p">(</span><span class="n">sPlainText</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="s2">"3DES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"128"</span><span class="p">,</span><span class="w"> </span><span class="s2">"BASE64"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sDecrypted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DecryptData</span><span class="p">(</span><span class="n">sEncrypted</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">bMatches</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sDecrypted</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sPlainText</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bMatches</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Encrypted setting verification failed&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Encrypted setting verification failed"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Encrypted setting verified successfully&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Encrypted setting verified successfully"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;VerifyEncryptedSetting&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"VerifyEncryptedSetting"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

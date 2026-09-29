@@ -4502,18 +4502,18 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSampleAgeDays</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dLoggedOn</span><span class="p">,</span><span class="w"> </span><span class="n">dToday</span><span class="p">,</span><span class="w"> </span><span class="n">nAgeDays</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">dLoggedOn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/15/2026&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dLoggedOn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/15/2026"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">dToday</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>
 
 <span class="w">    </span><span class="n">nAgeDays</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateDiff</span><span class="p">(</span><span class="n">dLoggedOn</span><span class="p">,</span><span class="w"> </span><span class="n">dToday</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sample age in days: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nAgeDays</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Sample age in days: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nAgeDays</span><span class="p">));</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nAgeDays</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetSampleAgeDays&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetSampleAgeDays"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs (output depends on the current date):</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample age in days: 38
@@ -4526,12 +4526,12 @@
 <span class="w">    </span><span class="n">dReceivedAt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 <span class="w">    </span><span class="n">dReleasedAt</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">nHoldHours</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateDiff</span><span class="p">(</span><span class="n">dReceivedAt</span><span class="p">,</span><span class="w"> </span><span class="n">dReleasedAt</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;hour&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nHoldHours</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateDiff</span><span class="p">(</span><span class="n">dReceivedAt</span><span class="p">,</span><span class="w"> </span><span class="n">dReleasedAt</span><span class="p">,</span><span class="w"> </span><span class="s2">"hour"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nHoldHours</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">48</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Hold time met: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nHoldHours</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; hours&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Hold time met: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nHoldHours</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" hours"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Hold time not met: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nHoldHours</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; hours&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Hold time not met: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nHoldHours</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" hours"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
@@ -4540,7 +4540,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateHoldTime&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateHoldTime"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Hold time met: 49 hours
@@ -4553,11 +4553,11 @@
 <span class="w">    </span><span class="n">dStartDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 <span class="w">    </span><span class="n">dRenewalDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">nMonthGap</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateDiff</span><span class="p">(</span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dRenewalDate</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;month&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">nYearGap</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateDiff</span><span class="p">(</span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dRenewalDate</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;year&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nMonthGap</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateDiff</span><span class="p">(</span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dRenewalDate</span><span class="p">,</span><span class="w"> </span><span class="s2">"month"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nYearGap</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateDiff</span><span class="p">(</span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dRenewalDate</span><span class="p">,</span><span class="w"> </span><span class="s2">"year"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Renewal is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nMonthGap</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; calendar months after start&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; and spans &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nYearGap</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; calendar years&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Renewal is "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nMonthGap</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" calendar months after start"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" and spans "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nYearGap</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" calendar years"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSummary</span><span class="p">);</span>
 
@@ -4565,7 +4565,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SummarizeRenewalGap&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SummarizeRenewalGap"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Renewal is 15 calendar months after start and spans 2 calendar years

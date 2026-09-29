@@ -4160,15 +4160,15 @@
 <span class="w">    </span><span class="n">bCancelled</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocCancelCheckout</span><span class="p">(</span><span class="n">sDocumentId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bCancelled</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Cancel checkout call completed for document: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDocumentId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Cancel checkout call completed for document: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDocumentId</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Cancel checkout failed for document: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDocumentId</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Cancel checkout failed for document: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDocumentId</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
@@ -4177,14 +4177,14 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CancelCheckoutWithDiagnostics&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;DOC-001&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CancelCheckoutWithDiagnostics"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"DOC-001"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="cancel-checkout-for-multiple-documents-and-collect-failures">Cancel checkout for multiple documents and collect failures<a class="headerlink" href="#cancel-checkout-for-multiple-documents-and-collect-failures" title="Permanent link">&para;</a></h3>
 <p>Iterates a list of document ids, cancels checkout for each one, and collects failure messages, with Documentum diagnostics appended when available, before continuing to the next document.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CancelCheckoutBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aDocumentIds</span><span class="p">,</span><span class="w"> </span><span class="n">aFailedDocs</span><span class="p">,</span><span class="w"> </span><span class="n">sDocumentId</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aDocumentIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;DOC-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;DOC-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;DOC-003&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aDocumentIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"DOC-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"DOC-002"</span><span class="p">,</span><span class="w"> </span><span class="s2">"DOC-003"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aFailedDocs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aDocumentIds</span><span class="p">);</span>
@@ -4194,7 +4194,7 @@
 <span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sDocumentId</span><span class="p">;</span>
 
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<span class="w">                </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
+<span class="w">                </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aFailedDocs</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">);</span>
@@ -4202,18 +4202,18 @@
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFailedDocs</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Some documents could not be released from checkout&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Some documents could not be released from checkout"</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aFailedDocs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;All cancel checkout calls completed successfully&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"All cancel checkout calls completed successfully"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="p">{};</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CancelCheckoutBatch&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CancelCheckoutBatch"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

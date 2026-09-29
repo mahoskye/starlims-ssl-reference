@@ -4230,17 +4230,17 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">StartSimpleWorkflow</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">aWorkflowInfo</span><span class="p">,</span><span class="w"> </span><span class="n">sStartedId</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;QCReview&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"QCReview"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">aWorkflowInfo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocStartWorkflow</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sStartedId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aWorkflowInfo</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Started workflow &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStartedId</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Started workflow "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStartedId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aWorkflowInfo</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;StartSimpleWorkflow&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"StartSimpleWorkflow"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Started workflow [created workflow ID]
@@ -4251,16 +4251,16 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">aDocumentIds</span><span class="p">,</span><span class="w"> </span><span class="n">sPackageName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aWorkflowInfo</span><span class="p">,</span><span class="w"> </span><span class="n">aPerformers</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;QCReview&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aDocumentIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;0900000180001234&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0900000180001235&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">sPackageName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ReviewDocs&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"QCReview"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aDocumentIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"0900000180001234"</span><span class="p">,</span><span class="w"> </span><span class="s2">"0900000180001235"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sPackageName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ReviewDocs"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aWorkflowInfo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocStartWorkflow</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">aDocumentIds</span><span class="p">,</span><span class="w"> </span><span class="n">sPackageName</span><span class="p">);</span>
 <span class="w">    </span><span class="n">aPerformers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aWorkflowInfo</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">aPerformers</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aPerformers</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Assigned to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aPerformers</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]);</span><span class="w">  </span><span class="c1">/* Logs one message per performer;</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Assigned to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aPerformers</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]);</span><span class="w">  </span><span class="c1">/* Logs one message per performer;</span>
 <span class="w">        </span><span class="k">:NEXT</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4268,7 +4268,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;StartWorkflowWithDocuments&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"StartWorkflowWithDocuments"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="start-a-workflow-with-error-handling">Start a workflow with error handling<a class="headerlink" href="#start-a-workflow-with-error-handling" title="Permanent link">&para;</a></h3>
 <p>Wraps the start call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle workflow exceptions, using <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> to extract the error description on failure.</p>
@@ -4278,13 +4278,13 @@
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">aWorkflowInfo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocStartWorkflow</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">aDocumentIds</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Started workflow &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aWorkflowInfo</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Started workflow "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aWorkflowInfo</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 <span class="w">        </span><span class="c1">/* Logs the started workflow ID;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aWorkflowInfo</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Unable to start workflow: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Unable to start workflow: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs the failure reason;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="p">{};</span>
@@ -4292,7 +4292,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;StartWorkflowSafe&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;QCReview&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;0900000180001234&quot;</span><span class="p">}});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"StartWorkflowSafe"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"QCReview"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"0900000180001234"</span><span class="p">}});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -2070,7 +2070,7 @@
 <p><code>Response</code> is available <strong>only inside endpoint scripts</strong>. Outside that context — for example, in a script invoked through <code>DoProc</code> from an interactive desktop session — referencing <code>Response</code> raises an undeclared-variable error.</p>
 <p>If your code may run in either context, guard with a <code>:TRY</code> / <code>:CATCH</code> block:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">&quot;only sent to HTTP callers&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">"only sent to HTTP callers"</span><span class="p">);</span>
 <span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">/* not running as an endpoint — write to a log or skip ;</span>
 <span class="k">:ENDTRY</span><span class="p">;</span>
@@ -2111,9 +2111,9 @@
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="send-a-json-response-with-an-explicit-status">Send a JSON response with an explicit status<a class="headerlink" href="#send-a-json-response-with-an-explicit-status" title="Permanent link">&para;</a></h3>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SendStatus</span><span class="p">;</span>
-<span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="n">ContentType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="n">ContentType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"application/json"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="n">StatusCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span>
-<span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">&quot;{&quot;&quot;status&quot;&quot;:&quot;&quot;ok&quot;&quot;}&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="nf">Write</span><span class="p">(</span><span class="s2">"{""status"":""ok""}"</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <h3 id="return-a-structured-value-from-a-web-service-endpoint">Return a structured value from a web-service endpoint<a class="headerlink" href="#return-a-structured-value-from-a-web-service-endpoint" title="Permanent link">&para;</a></h3>
@@ -2137,7 +2137,7 @@
 
 <span class="w">    </span><span class="c1">/* ... persist the order ... ;</span>
 
-<span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="nf">Redirect</span><span class="p">(</span><span class="s2">&quot;/Orders/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOrderId</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Response</span><span class="p">:</span><span class="nf">Redirect</span><span class="p">(</span><span class="s2">"/Orders/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOrderId</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>

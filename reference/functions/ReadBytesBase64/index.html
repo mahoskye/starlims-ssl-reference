@@ -3875,42 +3875,42 @@
 <p>Read a file into a base64 string and report the payload length.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sBase64Data</span><span class="p">;</span>
 
-<span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\Exports\label.png&quot;</span><span class="p">;</span>
+<span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Exports\label.png"</span><span class="p">;</span>
 <span class="n">sBase64Data</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ReadBytesBase64</span><span class="p">(</span><span class="n">sFileName</span><span class="p">);</span>
 
 <span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sBase64Data</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;No data was read from &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"No data was read from "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="p">);</span>
 <span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Base64 length: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Len</span><span class="p">(</span><span class="n">sBase64Data</span><span class="p">)));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Base64 length: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Len</span><span class="p">(</span><span class="n">sBase64Data</span><span class="p">)));</span>
 <span class="k">:ENDIF</span><span class="p">;</span>
 </code></pre></div>
 <h3 id="store-a-pdf-as-base64-in-a-table">Store a PDF as base64 in a table<a class="headerlink" href="#store-a-pdf-as-base64-in-a-table" title="Permanent link">&para;</a></h3>
 <p>Read a PDF file, then save the encoded content with a positional-parameter SQL update.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">StorePdfBase64</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sPdfPath</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sPdfPath</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;C:\Exports\sample_document.pdf&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S000123&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sPdfPath</span><span class="p">,</span><span class="w"> </span><span class="s2">"C:\Exports\sample_document.pdf"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="s2">"S000123"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPdfBase64</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sPdfBase64</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ReadBytesBase64</span><span class="p">(</span><span class="n">sPdfPath</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        UPDATE sample_table SET</span>
 <span class="s2">            pdf_content_base64 = ?</span>
 <span class="s2">        WHERE sample_id = ?</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bUpdated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sPdfBase64</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">});</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Stored encoded PDF for sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Stored encoded PDF for sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Database update failed for sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Database update failed for sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;StorePdfBase64&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"StorePdfBase64"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="build-attachment-payload-objects-with-error-handling">Build attachment payload objects with error handling<a class="headerlink" href="#build-attachment-payload-objects-with-error-handling" title="Permanent link">&para;</a></h3>
 <p>Process a list of files, encode each one, and return an array of payload objects that can be passed to another integration layer.</p>
@@ -3933,7 +3933,7 @@
 <span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aPayloads</span><span class="p">,</span><span class="w"> </span><span class="n">oPayload</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">            </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Skipped file &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Skipped file "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs on failure: skipped file error;</span>
 <span class="w">        </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
@@ -3942,7 +3942,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildAttachmentPayloads&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">&quot;C:\Exports\label.png&quot;</span><span class="p">}});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildAttachmentPayloads"</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">"C:\Exports\label.png"</span><span class="p">}});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

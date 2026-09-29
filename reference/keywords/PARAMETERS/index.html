@@ -2970,15 +2970,15 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sLabCode</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Processing sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; in laboratory &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLabCode</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Processing sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" in laboratory "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLabCode</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DisplaySampleInfo&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;S-1001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-A&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DisplaySampleInfo"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-1001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-A"</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Processing sample S-1001 in laboratory LAB-A
@@ -2987,18 +2987,18 @@
 <p>In standard SSL, <code>:PARAMETERS</code> comes first and any optional trailing values are added with separate <a href="../DEFAULT/"><code>:DEFAULT</code></a> lines immediately after it. The first call omits <code>sStatus</code> and <code>nMaxRows</code> (both use their defaults); the second call overrides both. Row counts depend on the database.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FetchSampleRows</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxRows</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">"Logged"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">nMaxRows</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, status, result_value</span>
 <span class="s2">        FROM sample_result</span>
 <span class="s2">        WHERE sample_id = ?sSampleID?</span>
 <span class="s2">          AND status = ?sStatus?</span>
 <span class="s2">          AND ROWNUM &lt;= ?nMaxRows?</span>
 <span class="s2">        ORDER BY sample_id</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="n">sSQL</span><span class="p">);</span>
 
@@ -3008,27 +3008,27 @@
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowFetchCalls</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aDefaultRows</span><span class="p">,</span><span class="w"> </span><span class="n">aCustomRows</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aDefaultRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FetchSampleRows&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">});</span>
-<span class="w">    </span><span class="n">aCustomRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FetchSampleRows&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Complete&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">});</span>
+<span class="w">    </span><span class="n">aDefaultRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FetchSampleRows"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LAB-2024-0042"</span><span class="p">});</span>
+<span class="w">    </span><span class="n">aCustomRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FetchSampleRows"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LAB-2024-0042"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Complete"</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">});</span>
 
-<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Default call returned &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aDefaultRows</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; row(s)&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Custom call returned &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCustomRows</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; row(s)&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Default call returned "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aDefaultRows</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" row(s)"</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Custom call returned "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCustomRows</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" row(s)"</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowFetchCalls&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowFetchCalls"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="using-parameters-in-a-data-source-file">Using PARAMETERS in a data source file<a class="headerlink" href="#using-parameters-in-a-data-source-file" title="Permanent link">&para;</a></h3>
 <p>Data source files use the inline-default form instead of separate <a href="../DEFAULT/"><code>:DEFAULT</code></a> statements. Both <code>sStatus</code> and <code>nMaxRows</code> have inline defaults that the caller can override when invoking the data source.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Logged"</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
 
-<span class="k">:RETURN</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="k">:RETURN</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            SELECT sample_id, status</span>
 <span class="s2">            FROM sample</span>
 <span class="s2">            WHERE status = ?sStatus?</span>
 <span class="s2">              AND ROWNUM &lt;= ?nMaxRows?</span>
 <span class="s2">            ORDER BY sample_id</span>
-<span class="s2">        &quot;</span><span class="p">);</span>
+<span class="s2">        "</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -2979,14 +2979,14 @@
 <span class="n">Welcome</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">quality</span><span class="w"> </span><span class="n">control</span><span class="w"> </span><span class="n">workspace</span>
 <span class="k">:ENDREGION</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sBanner</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="s2">&quot;WelcomeBanner&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sBanner</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="s2">"WelcomeBanner"</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sBanner</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sBanner</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowWelcomeBanner&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowWelcomeBanner"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Welcome to the quality control workspace
@@ -3000,17 +3000,17 @@
 <span class="n">User</span><span class="w"> </span><span class="p">{</span><span class="n">USER</span><span class="p">}</span><span class="w"> </span><span class="n">signed</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="p">{</span><span class="n">DATE</span><span class="p">}</span>
 <span class="k">:ENDREGION</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aSource</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;{USER}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;{DATE}&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aSource</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"{USER}"</span><span class="p">,</span><span class="w"> </span><span class="s2">"{DATE}"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aDestination</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="n">MYUSERNAME</span><span class="p">,</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="nf">Today</span><span class="p">())};</span>
 
-<span class="w">    </span><span class="n">sNotice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="s2">&quot;LoginNotice&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">aSource</span><span class="p">,</span><span class="w"> </span><span class="n">aDestination</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sNotice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="s2">"LoginNotice"</span><span class="p">,</span><span class="w"> </span><span class="n">aSource</span><span class="p">,</span><span class="w"> </span><span class="n">aDestination</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sNotice</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sNotice</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildLoginNotice&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildLoginNotice"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>User jsmith signed in on 04/23/2026
@@ -3019,7 +3019,7 @@
 <p>Selects one of two region templates at runtime based on a status parameter. With <code>sStatus</code> set to <code>"COMPLETE"</code>, the complete-message region is retrieved and logged.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildStatusMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PENDING&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">sRegionName</span><span class="p">;</span>
 
 <span class="k">:REGION</span><span class="w"> </span><span class="n">PendingMessage</span><span class="p">;</span>
@@ -3030,10 +3030,10 @@
 <span class="n">The</span><span class="w"> </span><span class="n">sample</span><span class="w"> </span><span class="n">review</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">complete</span>
 <span class="k">:ENDREGION</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sRegionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;PendingMessage&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRegionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"PendingMessage"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sStatus</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;COMPLETE&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sRegionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CompleteMessage&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sStatus</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"COMPLETE"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sRegionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"CompleteMessage"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="n">sRegionName</span><span class="p">);</span>
@@ -3043,7 +3043,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildStatusMessage&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;COMPLETE&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildStatusMessage"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"COMPLETE"</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>The sample review is complete
@@ -3052,12 +3052,12 @@
 <p>The captured body is raw text, so a region can hold a JSON (or SQL, or any other) template whose <code>$Name$</code> placeholders are filled by <a href="../../functions/GetRegion/"><code>GetRegion</code></a> at retrieval time.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sJson</span><span class="p">;</span>
 
-<span class="n">sJson</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="s2">&quot;TestJSON&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;$RunID$&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;$CustomerName$&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bill Smith&quot;</span><span class="p">});</span>
+<span class="n">sJson</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRegion</span><span class="p">(</span><span class="s2">"TestJSON"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"$RunID$"</span><span class="p">,</span><span class="w"> </span><span class="s2">"$CustomerName$"</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="s2">"Bill Smith"</span><span class="p">});</span>
 
 <span class="k">:REGION</span><span class="w"> </span><span class="n">TestJSON</span><span class="p">;</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="s2">&quot;run_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$RunID$&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="s2">&quot;customer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;$CustomerName$&quot;</span>
+<span class="w">    </span><span class="s2">"run_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$RunID$"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"customer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$CustomerName$"</span>
 <span class="p">}</span>
 <span class="k">:ENDREGION</span><span class="p">;</span>
 </code></pre></div>

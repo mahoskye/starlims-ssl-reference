@@ -3696,24 +3696,24 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">VerifySignedPayload</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCertificate</span><span class="p">,</span><span class="w"> </span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sSignature</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sCertificate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtestcertificate&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ORDER|2026-04-19|ACME-1001|APPROVED&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSignature</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;MEUCIQCexamplebase64signaturevalue&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCertificate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtestcertificate"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ORDER|2026-04-19|ACME-1001|APPROVED"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSignature</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"MEUCIQCexamplebase64signaturevalue"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bIsValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">VerifySignature</span><span class="p">(</span><span class="n">sCertificate</span><span class="p">,</span><span class="w"> </span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sSignature</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Signature is valid&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Signature is valid"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Signature did not match the payload&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Signature did not match the payload"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;VerifySignedPayload&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"VerifySignedPayload"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="handle-malformed-partner-input">Handle malformed partner input<a class="headerlink" href="#handle-malformed-partner-input" title="Permanent link">&para;</a></h3>
 <p>Catch malformed certificate or signature data separately from a normal mismatch. A <a href="../../literals/false/"><code>.F.</code></a> result from a well-formed input is handled without a <a href="../../keywords/CATCH/"><code>:CATCH</code></a>; an exception from bad input is handled in the <a href="../../keywords/CATCH/"><code>:CATCH</code></a> block.</p>
@@ -3725,24 +3725,24 @@
 <span class="w">        </span><span class="n">bIsValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">VerifySignature</span><span class="p">(</span><span class="n">sCertificate</span><span class="p">,</span><span class="w"> </span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sSignature</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Partner message verified&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Partner message verified"</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Partner message signature did not match&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Partner message signature did not match"</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Partner message could not be verified: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs a verification error;</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Partner message could not be verified: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs a verification error;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidatePartnerMessage&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;MIIBIjANBgkq...&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ORDER|2026-04-19|ACME-1001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MEUCIQCexample...&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidatePartnerMessage"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"MIIBIjANBgkq..."</span><span class="p">,</span><span class="w"> </span><span class="s2">"ORDER|2026-04-19|ACME-1001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"MEUCIQCexample..."</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="verify-multiple-signed-records-in-one-pass">Verify multiple signed records in one pass<a class="headerlink" href="#verify-multiple-signed-records-in-one-pass" title="Permanent link">&para;</a></h3>
 <p>Loop through a batch of signed records, track mismatches, and capture malformed records separately. The third record uses <code>"not-base64"</code> as its signature, which raises an error that lands in the <a href="../../keywords/CATCH/"><code>:CATCH</code></a> block.</p>
@@ -3750,11 +3750,11 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCertificate</span><span class="p">,</span><span class="w"> </span><span class="n">aRecords</span><span class="p">,</span><span class="w"> </span><span class="n">aFailedIds</span><span class="p">,</span><span class="w"> </span><span class="n">aErrorIds</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sCertificate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtestcertificate&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCertificate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtestcertificate"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">aRecords</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;REC-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;alpha|100&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MEQCIFirstExampleSignature&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;REC-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;beta|200&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MEQCSecondExampleSignature&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;REC-003&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;gamma|300&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;not-base64&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"REC-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"alpha|100"</span><span class="p">,</span><span class="w"> </span><span class="s2">"MEQCIFirstExampleSignature"</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"REC-002"</span><span class="p">,</span><span class="w"> </span><span class="s2">"beta|200"</span><span class="p">,</span><span class="w"> </span><span class="s2">"MEQCSecondExampleSignature"</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"REC-003"</span><span class="p">,</span><span class="w"> </span><span class="s2">"gamma|300"</span><span class="p">,</span><span class="w"> </span><span class="s2">"not-base64"</span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 <span class="w">    </span><span class="n">aFailedIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 <span class="w">    </span><span class="n">aErrorIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
@@ -3774,23 +3774,23 @@
 <span class="w">        </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">            </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aErrorIds</span><span class="p">,</span><span class="w"> </span><span class="n">aRecords</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]);</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Record &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aRecords</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; raised an error: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs the record error;</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Record "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aRecords</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" raised an error: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs the record error;</span>
 <span class="w">        </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFailedIds</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Signature mismatches: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFailedIds</span><span class="p">)));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Signature mismatches: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFailedIds</span><span class="p">)));</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aErrorIds</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Malformed records: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aErrorIds</span><span class="p">)));</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Malformed records: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aErrorIds</span><span class="p">)));</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFailedIds</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aErrorIds</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AuditSignedRecords&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AuditSignedRecords"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

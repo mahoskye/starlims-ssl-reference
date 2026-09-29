@@ -4311,9 +4311,9 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildCommentMarkup</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sComment</span><span class="p">,</span><span class="w"> </span><span class="n">sEncodedComment</span><span class="p">,</span><span class="w"> </span><span class="n">sHtml</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sComment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Meeting at 3pm &lt;review&gt; &amp; &#39;coffee&#39;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sComment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Meeting at 3pm &lt;review&gt; &amp; 'coffee'"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sEncodedComment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">HtmlEncode</span><span class="p">(</span><span class="n">sComment</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sHtml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&lt;p&gt;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEncodedComment</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;&lt;/p&gt;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sHtml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"&lt;p&gt;"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEncodedComment</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"&lt;/p&gt;"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sHtml</span><span class="p">);</span>
 
@@ -4321,7 +4321,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildCommentMarkup&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildCommentMarkup"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>&lt;p&gt;Meeting at 3pm &amp;lt;review&amp;gt; &amp;amp; &amp;apos;coffee&amp;apos;&lt;/p&gt;
@@ -4331,10 +4331,10 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSampleXml</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;A&amp;B&lt;42&gt;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">&#39;</span><span class="n">Ready</span><span class="w"> </span><span class="s2">&quot;now&quot;</span><span class="err">&#39;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&lt;sample id=&#39;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">HtmlEncode</span><span class="p">(</span><span class="n">sSampleId</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;&#39; status=&#39;&quot;</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="nf">HtmlEncode</span><span class="p">(</span><span class="n">sStatus</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;&#39;&gt;&lt;/sample&gt;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"A&amp;B&lt;42&gt;"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">'</span><span class="n">Ready</span><span class="w"> </span><span class="s2">"now"</span><span class="err">'</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"&lt;sample id='"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">HtmlEncode</span><span class="p">(</span><span class="n">sSampleId</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"' status='"</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="nf">HtmlEncode</span><span class="p">(</span><span class="n">sStatus</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"'&gt;&lt;/sample&gt;"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sXml</span><span class="p">);</span>
 
@@ -4342,10 +4342,10 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildSampleXml&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSampleXml"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>&lt;sample id=&#39;A&amp;amp;B&amp;lt;42&amp;gt;&#39; status=&#39;Ready &amp;quot;now&amp;quot;&#39;&gt;&lt;/sample&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>&lt;sample id='A&amp;amp;B&amp;lt;42&amp;gt;' status='Ready &amp;quot;now&amp;quot;'&gt;&lt;/sample&gt;
 </code></pre></div>
 <h3 id="encode-a-batch-of-values-including-nil-entries">Encode a batch of values including NIL entries<a class="headerlink" href="#encode-a-batch-of-values-including-nil-entries" title="Permanent link">&para;</a></h3>
 <p>Encode an array containing a mix of strings and a <a href="../../literals/nil/"><code>NIL</code></a> entry, showing that <code>HtmlEncode</code> passes <a href="../../literals/nil/"><code>NIL</code></a> through unchanged while encoding all other values. After the loop, <code>aEncodedNotes[1]</code> holds <code>&amp;lt;alpha&amp;gt;</code>, entry 2 remains <a href="../../literals/nil/"><code>NIL</code></a>, <code>aEncodedNotes[3]</code> holds <code>Tom &amp;amp; Jerry</code>, and <code>aEncodedNotes[4]</code> holds <code>She said &amp;quot;go&amp;quot;</code>. The <a href="../UsrMes/"><code>UsrMes</code></a> call confirms that the <a href="../../literals/nil/"><code>NIL</code></a> entry was preserved.</p>
@@ -4353,7 +4353,7 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aNotes</span><span class="p">,</span><span class="w"> </span><span class="n">aEncodedNotes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">vEncoded</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aNotes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;&lt;alpha&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Tom &amp; Jerry&quot;</span><span class="p">,</span><span class="w"> </span><span class="err">&#39;</span><span class="n">She</span><span class="w"> </span><span class="n">said</span><span class="w"> </span><span class="s2">&quot;go&quot;</span><span class="err">&#39;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aNotes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"&lt;alpha&gt;"</span><span class="p">,</span><span class="w"> </span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="s2">"Tom &amp; Jerry"</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="n">She</span><span class="w"> </span><span class="n">said</span><span class="w"> </span><span class="s2">"go"</span><span class="err">'</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aEncodedNotes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aNotes</span><span class="p">);</span>
@@ -4367,7 +4367,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;EncodeNotes&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"EncodeNotes"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>true

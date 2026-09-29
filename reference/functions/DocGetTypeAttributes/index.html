@@ -4224,16 +4224,16 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListTypeAttributes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">aAttrs</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sLine</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;dm_document&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"dm_document"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">aAttrs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetTypeAttributes</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aAttrs</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No attributes returned for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No attributes returned for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aAttrs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aAttrs</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aAttrs</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; - &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aAttrs</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">];</span>
+<span class="w">        </span><span class="n">sLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aAttrs</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" - "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aAttrs</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">];</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLine</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
@@ -4241,7 +4241,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ListTypeAttributes&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ListTypeAttributes"</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>No attributes returned for dm_document
@@ -4269,17 +4269,17 @@
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Type &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeName</span>
-<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; has &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSingle</span><span class="p">)</span>
-<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; single-value attributes and &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nRepeating</span><span class="p">)</span>
-<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; repeating attributes&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Type "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeName</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">" has "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSingle</span><span class="p">)</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">" single-value attributes and "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nRepeating</span><span class="p">)</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">" repeating attributes"</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSummary</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aAttrs</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SummarizeTypeAttributes&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;dm_document&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SummarizeTypeAttributes"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"dm_document"</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Type [type name] has [n] single-value attributes and [n] repeating attributes
@@ -4294,7 +4294,7 @@
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Documentum login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="p">{};</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4303,16 +4303,16 @@
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aAttrs</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
 <span class="w">                </span><span class="n">sError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
-<span class="w">                </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Type attribute lookup failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sError</span><span class="p">);</span>
+<span class="w">                </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Type attribute lookup failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sError</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No attributes returned for type &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">);</span>
+<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No attributes returned for type "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aAttrs</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aAttrs</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">aAttrs</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; type=&quot;</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">aAttrs</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" type="</span>
 <span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aAttrs</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]));</span>
 <span class="w">        </span><span class="k">:NEXT</span><span class="p">;</span>
 
@@ -4323,7 +4323,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AuditTypeDefinition&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;ProductionDB&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;doc_user&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dm_document&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AuditTypeDefinition"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"ProductionDB"</span><span class="p">,</span><span class="w"> </span><span class="s2">"doc_user"</span><span class="p">,</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">,</span><span class="w"> </span><span class="s2">"dm_document"</span><span class="p">});</span>
 </code></pre></div>
 <p>Possible output:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Documentum login failed: [Documentum error]

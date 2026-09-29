@@ -2731,18 +2731,18 @@
 
 <span class="w">    </span><span class="n">oWebServices</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">WebServices</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oSoapClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateSoapClient</span><span class="p">();</span>
-<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">UseWebService</span><span class="p">(</span><span class="s2">&quot;https://lims-soap.example/Samples?wsdl&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">UseWebService</span><span class="p">(</span><span class="s2">"https://lims-soap.example/Samples?wsdl"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">Add</span><span class="p">(</span><span class="s2">&quot;&lt;string&gt;SAMP-001&lt;/string&gt;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">Add</span><span class="p">(</span><span class="s2">"&lt;string&gt;SAMP-001&lt;/string&gt;"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">CallWebService</span><span class="p">(</span><span class="s2">&quot;LookupSample&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">CallWebService</span><span class="p">(</span><span class="s2">"LookupSample"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oResponse</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">oResponse</span><span class="p">:</span><span class="n">Xml</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LookupByPrimitiveParam&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LookupByPrimitiveParam"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="build-a-custom-dto-from-the-wsdl">Build a custom DTO from the WSDL<a class="headerlink" href="#build-a-custom-dto-from-the-wsdl" title="Permanent link">&para;</a></h3>
 <p>Uses <code>CreateCustomType</code> to instantiate a DTO defined by the service, populates fields, and passes it to <code>AddParameter</code>.</p>
@@ -2751,27 +2751,27 @@
 
 <span class="w">    </span><span class="n">oWebServices</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">WebServices</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oSoapClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateSoapClient</span><span class="p">();</span>
-<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">UseWebService</span><span class="p">(</span><span class="s2">&quot;https://orders-soap.example/Orders?wsdl&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">UseWebService</span><span class="p">(</span><span class="s2">"https://orders-soap.example/Orders?wsdl"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">oOrder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">CreateCustomType</span><span class="p">(</span><span class="s2">&quot;OrderRequest&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oOrder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">CreateCustomType</span><span class="p">(</span><span class="s2">"OrderRequest"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oOrder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Custom type unavailable: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Error</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Custom type unavailable: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Error</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oOrder</span><span class="p">:</span><span class="n">OrderId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ORD-2026-0500&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oOrder</span><span class="p">:</span><span class="n">OrderId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ORD-2026-0500"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oOrder</span><span class="p">:</span><span class="n">Quantity</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">AddParameter</span><span class="p">(</span><span class="n">oOrder</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">CallWebService</span><span class="p">(</span><span class="s2">&quot;SubmitOrder&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">CallWebService</span><span class="p">(</span><span class="s2">"SubmitOrder"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oResponse</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Submitted: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oResponse</span><span class="p">:</span><span class="n">Xml</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Submitted: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oResponse</span><span class="p">:</span><span class="n">Xml</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SubmitOrderViaCustomDto&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SubmitOrderViaCustomDto"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="read-a-by-reference-output-parameter">Read a by-reference output parameter<a class="headerlink" href="#read-a-by-reference-output-parameter" title="Permanent link">&para;</a></h3>
 <p>Flags one parameter as by-reference, invokes the method, then reads the modified value back from the response.</p>
@@ -2780,20 +2780,20 @@
 
 <span class="w">    </span><span class="n">oWebServices</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">WebServices</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oSoapClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateSoapClient</span><span class="p">();</span>
-<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">UseWebService</span><span class="p">(</span><span class="s2">&quot;https://lims-soap.example/Samples?wsdl&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">UseWebService</span><span class="p">(</span><span class="s2">"https://lims-soap.example/Samples?wsdl"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">Add</span><span class="p">(</span><span class="s2">&quot;&lt;string&gt;SAMP-001&lt;/string&gt;&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">AddByRef</span><span class="p">(</span><span class="s2">&quot;&lt;string&gt;&lt;/string&gt;&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">/* output parameter — service fills it in;</span>
+<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">Add</span><span class="p">(</span><span class="s2">"&lt;string&gt;SAMP-001&lt;/string&gt;"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Parameters</span><span class="p">:</span><span class="nf">AddByRef</span><span class="p">(</span><span class="s2">"&lt;string&gt;&lt;/string&gt;"</span><span class="p">);</span><span class="w">  </span><span class="c1">/* output parameter — service fills it in;</span>
 
-<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">CallWebService</span><span class="p">(</span><span class="s2">&quot;LookupSampleWithStatus&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">CallWebService</span><span class="p">(</span><span class="s2">"LookupSampleWithStatus"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oResponse</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sRefXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oResponse</span><span class="p">:</span><span class="n">XmlByRef</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;By-ref output: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRefXml</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"By-ref output: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRefXml</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LookupAndReadByRef&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LookupAndReadByRef"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

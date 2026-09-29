@@ -3866,12 +3866,12 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SaveLogoImage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sBase64Data</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\\STARLIMS\\Exports\\logo.png&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sBase64Data</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gRAAAAABJRU5ErkJggg==&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\\STARLIMS\\Exports\\logo.png"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBase64Data</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gRAAAAABJRU5ErkJggg=="</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">WriteBytesBase64</span><span class="p">(</span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sBase64Data</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;File written to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"File written to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Call it with <code>DoProc("SaveLogoImage")</code>.</p>
@@ -3883,8 +3883,8 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SaveAndVerifyDocument</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sBase64Data</span><span class="p">,</span><span class="w"> </span><span class="n">sSavedBase64</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\\STARLIMS\\Exports\\payload.bin&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sBase64Data</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;AAECAwQ=&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\\STARLIMS\\Exports\\payload.bin"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBase64Data</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"AAECAwQ="</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">WriteBytesBase64</span><span class="p">(</span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sBase64Data</span><span class="p">);</span>
@@ -3892,13 +3892,13 @@
 <span class="w">        </span><span class="n">sSavedBase64</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ReadBytesBase64</span><span class="p">(</span><span class="n">sFileName</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">sSavedBase64</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sBase64Data</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Document written and verified&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Document written and verified"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Document verification failed after write&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Document verification failed after write"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Failed to write file: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Failed to write file: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: write failed;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>

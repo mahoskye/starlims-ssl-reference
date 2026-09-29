@@ -3791,17 +3791,17 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkPath</span><span class="p">,</span><span class="w"> </span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">nData</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sWorkPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetAppWorkPathFolder</span><span class="p">();</span>
-<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;temp_export_001.txt&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"temp_export_001.txt"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sWorkPath</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nData</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">WriteText</span><span class="p">(</span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nData</span><span class="p">),</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Temporary export saved to: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Temporary export saved to: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SaveTempExport&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SaveTempExport"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Temporary export saved to: C:\STARLIMS\Work\temp_export_001.txt
@@ -3814,27 +3814,27 @@
 <span class="w">    </span><span class="n">sWorkPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetAppWorkPathFolder</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sWorkPath</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Work path is empty - cannot proceed&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Work path is empty - cannot proceed"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Work path is: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkPath</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Work path is: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkPath</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the configured work path;</span>
 
-<span class="w">    </span><span class="n">sTestFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sWorkPath</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;\config.xml&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTestFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sWorkPath</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"\config.xml"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">FileSupport</span><span class="p">(</span><span class="n">sTestFile</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;CHECK&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Config file exists at: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTestFile</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">FileSupport</span><span class="p">(</span><span class="n">sTestFile</span><span class="p">,</span><span class="w"> </span><span class="s2">"CHECK"</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Config file exists at: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTestFile</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs when the config file exists;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Config file not found (normal for new installs)&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Config file not found (normal for new installs)"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateWorkPathForFileOps&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateWorkPathForFileOps"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

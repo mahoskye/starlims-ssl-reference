@@ -1214,8 +1214,8 @@
 <p>A first script to try:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWho</span><span class="p">;</span>
 <span class="n">sWho</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">MYUSERNAME</span><span class="p">;</span>
-<span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Hello from &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWho</span><span class="p">);</span>
-<span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;Ran as &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWho</span><span class="p">;</span>
+<span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Hello from "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWho</span><span class="p">);</span>
+<span class="k">:RETURN</span><span class="w"> </span><span class="s2">"Ran as "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWho</span><span class="p">;</span>
 </code></pre></div>
 <p>Run it in Designer: the <code>:RETURN</code> value shows in the console pane, and the <code>UsrMes</code> line lands in the server log under your user name.</p>
 <h3 id="system-provided-variables">System-provided variables<a class="headerlink" href="#system-provided-variables" title="Permanent link">&para;</a></h3>
@@ -1229,10 +1229,10 @@
 <p>The second segment is the script name; the optional third segment is a procedure inside that script. This is the path form that <a href="../reference/functions/ExecFunction/"><code>ExecFunction</code></a> and three-segment <a href="../reference/functions/DoProc/"><code>DoProc</code></a> take — see <a href="#calling-procedures">Calling procedures</a> below.</p>
 <p>The two trees share a single namespace: Designer refuses to create a server-script category with the same name as an existing application, so the first segment of a dotted path is never ambiguous.</p>
 <h2 id="how-to-read-this-reference">How to read this reference<a class="headerlink" href="#how-to-read-this-reference" title="Permanent link">&para;</a></h2>
-<p>Each element page follows a consistent structure:</p>
+<p>Element pages share a common layout. Every page opens with a one-sentence summary and a description of its behavior and edge cases, then uses the sections below. Not every page has all of them: an element that takes no arguments has no Parameters section, and one that cannot fail has no Exceptions section.</p>
 <ul>
-<li><strong>Summary</strong> — one-sentence purpose</li>
-<li><strong>Description</strong> — detailed behavioral explanation with edge cases</li>
+<li><strong>When to use</strong> — the situations the element is meant for</li>
+<li><strong>Syntax</strong> — the call signature or statement form</li>
 <li><strong>Parameters</strong> — name, type, required/optional, defaults</li>
 <li><strong>Returns</strong> — type and description of the return value</li>
 <li><strong>Exceptions</strong> — conditions that cause errors, with exact messages</li>
@@ -1241,32 +1241,35 @@
 <li><strong>Examples</strong> — representative SSL code</li>
 <li><strong>Related</strong> — links to related elements</li>
 </ul>
+<p>Operator, type, literal, and most special-form pages follow the same pattern with a slightly different vocabulary: <strong>When to use it</strong>, <strong>Notes for daily SSL work</strong>, <strong>Errors and edge cases</strong>, and <strong>Related elements</strong>.</p>
 <h2 id="ssl-basics">SSL basics<a class="headerlink" href="#ssl-basics" title="Permanent link">&para;</a></h2>
 <h3 id="variables-and-declarations">Variables and declarations<a class="headerlink" href="#variables-and-declarations" title="Permanent link">&para;</a></h3>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sName</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">,</span><span class="w"> </span><span class="n">aItems</span><span class="p">;</span>
-<span class="n">sName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample-001&quot;</span><span class="p">;</span>
+<span class="n">sName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample-001"</span><span class="p">;</span>
 <span class="n">nCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
-<span class="n">aItems</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;B&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;C&quot;</span><span class="p">};</span>
+<span class="n">aItems</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"A"</span><span class="p">,</span><span class="w"> </span><span class="s2">"B"</span><span class="p">,</span><span class="w"> </span><span class="s2">"C"</span><span class="p">};</span>
 </code></pre></div>
 <p>These are top-level statements — in a procedure body they would be indented.</p>
 <h3 id="control-flow">Control flow<a class="headerlink" href="#control-flow" title="Permanent link">&para;</a></h3>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:IF</span><span class="w"> </span><span class="n">nCount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Processing &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; items&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
+
+<span class="k">:IF</span><span class="w"> </span><span class="n">nCount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Processing "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" items"</span><span class="p">);</span>
 <span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No items to process&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No items to process"</span><span class="p">);</span>
 <span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aItems</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">aItems</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]);</span>
 <span class="k">:NEXT</span><span class="p">;</span>
 </code></pre></div>
 <h3 id="error-handling">Error handling<a class="headerlink" href="#error-handling" title="Permanent link">&para;</a></h3>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oResult</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRows</span><span class="p">;</span>
 <span class="k">:TRY</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM samples&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="s2">"SELECT sample_id, status FROM samples WHERE status = ?"</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Logged"</span><span class="p">});</span>
 <span class="k">:CATCH</span><span class="p">;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Query failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">():</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Query failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">():</span><span class="n">Description</span><span class="p">);</span>
 <span class="k">:FINALLY</span><span class="p">;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Query attempt finished&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Query attempt finished"</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* :FINALLY runs whether the query succeeded or failed;</span>
 <span class="k">:ENDTRY</span><span class="p">;</span>
 </code></pre></div>
@@ -1292,7 +1295,7 @@
 </ul>
 <h3 id="semicolons-in-comments">Semicolons in comments<a class="headerlink" href="#semicolons-in-comments" title="Permanent link">&para;</a></h3>
 <p>Almost every statement, including comments, must end with <code>;</code>. Comments use <code>/* ...;</code> and <strong>terminate at the first <code>;</code></strong>. Embedding a semicolon inside comment text closes the comment early — the remaining text becomes executable code.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="c1">/* Don&#39;t do this;</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">rest</span><span class="w"> </span><span class="n">after</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">colon</span><span class="w"> </span><span class="n">becomes</span><span class="w"> </span><span class="n">code</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="c1">/* Don't do this;</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">rest</span><span class="w"> </span><span class="n">after</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">semicolon</span><span class="w"> </span><span class="n">becomes</span><span class="w"> </span><span class="n">code</span><span class="p">;</span>
 <span class="c1">/* Safe — no semicolons inside the comment text;</span>
 </code></pre></div>
 <h3 id="declaration-ordering">Declaration ordering<a class="headerlink" href="#declaration-ordering" title="Permanent link">&para;</a></h3>
@@ -1393,7 +1396,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 01:14:15 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 01:00:10 UTC">September 29, 2026</span>
   </span>
 
     

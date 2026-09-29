@@ -3756,11 +3756,11 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">VerifyReportFile</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sServer</span><span class="p">,</span><span class="w"> </span><span class="n">sRemoteDir</span><span class="p">,</span><span class="w"> </span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">bFileExists</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ftp.reports.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/daily_reports&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Q4_Report_2026.pdf&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;report_reader&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SecurePass123&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ftp.reports.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/daily_reports"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Q4_Report_2026.pdf"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"report_reader"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SecurePass123"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bFileExists</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CheckOnFtp</span><span class="p">(</span>
 <span class="w">        </span><span class="n">sServer</span><span class="p">,</span>
@@ -3771,14 +3771,14 @@
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bFileExists</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Report file is available.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Report file is available."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Report file is not available yet.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Report file is not available yet."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;VerifyReportFile&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"VerifyReportFile"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="check-an-sftp-drop-with-a-private-key">Check an SFTP drop with a private key<a class="headerlink" href="#check-an-sftp-drop-with-a-private-key" title="Permanent link">&para;</a></h3>
 <p>Connects to a partner SFTP server using a private key and handles connection or login failures explicitly in a <a href="../../keywords/CATCH/"><code>:CATCH</code></a> block, since SFTP setup errors raise rather than return <a href="../../literals/false/"><code>.F.</code></a>.</p>
@@ -3788,15 +3788,15 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsSFTP</span><span class="p">,</span><span class="w"> </span><span class="n">bFileExists</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oError</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sftp.partner.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/incoming/data&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;analysis_data.csv&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;automation_user&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassphrase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;KeyPassphrase123&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"sftp.partner.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/incoming/data"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"analysis_data.csv"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"automation_user"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassphrase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"KeyPassphrase123"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nPort</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">22</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sProxy</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bIsSFTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPrivateKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/etc/ssh/automation_key.ppk&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPrivateKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/etc/ssh/automation_key.ppk"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">bFileExists</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CheckOnFtp</span><span class="p">(</span>
@@ -3812,22 +3812,22 @@
 <span class="w">        </span><span class="p">);</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;SFTP availability check failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"SFTP availability check failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: SFTP availability check failed;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bFileExists</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Partner file is ready for download.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Partner file is ready for download."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Partner file is not available yet.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Partner file is not available yet."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckPartnerDrop&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckPartnerDrop"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="verify-a-full-batch-before-starting-processing">Verify a full batch before starting processing<a class="headerlink" href="#verify-a-full-batch-before-starting-processing" title="Permanent link">&para;</a></h3>
 <p>Checks three expected files on an FTP server, collects any missing filenames, and reports them before stopping the batch if any are absent.</p>
@@ -3836,15 +3836,15 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aExpectedFiles</span><span class="p">,</span><span class="w"> </span><span class="n">aMissingFiles</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">bAllPresent</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ftp.batch.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/incoming/batch&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;batch_reader&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BatchPass123&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ftp.batch.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/incoming/batch"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"batch_reader"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"BatchPass123"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aExpectedFiles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="s2">&quot;orders_20260418.csv&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;tests_20260418.csv&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;results_20260418.csv&quot;</span>
+<span class="w">        </span><span class="s2">"orders_20260418.csv"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"tests_20260418.csv"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"results_20260418.csv"</span>
 <span class="w">    </span><span class="p">};</span>
 <span class="w">    </span><span class="n">aMissingFiles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 <span class="w">    </span><span class="n">bAllPresent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
@@ -3863,14 +3863,14 @@
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bAllPresent</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;All expected batch files are present.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"All expected batch files are present."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;One or more expected batch files are missing.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"One or more expected batch files are missing."</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aMissingFiles</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Missing file: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aMissingFiles</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Missing file: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aMissingFiles</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]);</span>
 <span class="w">        </span><span class="c1">/* Logs one missing filename per line;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
@@ -3878,7 +3878,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;VerifyBatchFiles&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"VerifyBatchFiles"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

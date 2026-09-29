@@ -4343,15 +4343,15 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">EnableDetection</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">bPreviousState</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LABDATA&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LABDATA"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bPreviousState</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DetectSqlInjections</span><span class="p">(</span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bPreviousState</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SQL injection detection was already enabled for &quot;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SQL injection detection was already enabled for "</span>
 <span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SQL injection detection is now enabled for &quot;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SQL injection detection is now enabled for "</span>
 <span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4359,7 +4359,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;EnableDetection&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"EnableDetection"</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs one of:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>SQL injection detection was already enabled for LABDATA
@@ -4370,24 +4370,24 @@ SQL injection detection is now enabled for LABDATA
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunControlledQuery</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">bPreviousState</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LABDATA&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LABDATA"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bPreviousState</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DetectSqlInjections</span><span class="p">(</span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">                SELECT sampleid, status</span>
 <span class="s2">                FROM sample</span>
-<span class="s2">                WHERE status = &#39;A&#39;</span>
-<span class="s2">            &quot;</span><span class="p">;</span>
+<span class="s2">                WHERE status = 'A'</span>
+<span class="s2">            "</span><span class="p">;</span>
 
 <span class="w">        </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">);</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Rows returned: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">)));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Rows returned: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">)));</span>
 <span class="w">        </span><span class="c1">/* Logs: Rows returned: N;</span>
 
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Controlled query failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Controlled query failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: Controlled query failed;</span>
 
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
@@ -4396,14 +4396,14 @@ SQL injection detection is now enabled for LABDATA
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunControlledQuery&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RunControlledQuery"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="normalize-detection-across-multiple-connections">Normalize detection across multiple connections<a class="headerlink" href="#normalize-detection-across-multiple-connections" title="Permanent link">&para;</a></h3>
 <p>Enables SQL injection detection on each connection in a list and tracks which ones were changed from their previous state.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeDetectionSettings</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aConnections</span><span class="p">,</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">aChanged</span><span class="p">,</span><span class="w"> </span><span class="n">bPreviousState</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aConnections</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LIMS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LABDATA&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;REPORTING&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aConnections</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"LIMS"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LABDATA"</span><span class="p">,</span><span class="w"> </span><span class="s2">"REPORTING"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aChanged</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aConnections</span><span class="p">);</span>
@@ -4415,11 +4415,11 @@ SQL injection detection is now enabled for LABDATA
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Connections changed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aChanged</span><span class="p">)));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Connections changed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aChanged</span><span class="p">)));</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NormalizeDetectionSettings&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"NormalizeDetectionSettings"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Connections changed: 3

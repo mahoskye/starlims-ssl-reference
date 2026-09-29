@@ -2973,26 +2973,26 @@
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bBlank</span><span class="p">;</span>
 
-<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="nf">SetField</span><span class="p">(</span><span class="s2">&quot;SampleID&quot;</span><span class="p">,</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleId</span><span class="p">);</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="nf">SetField</span><span class="p">(</span><span class="s2">"SampleID"</span><span class="p">,</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleId</span><span class="p">);</span>
 <span class="w">    </span><span class="n">bBlank</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="nf">IsBlank</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bBlank</span><span class="p">;</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;SampleID is required&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">"SampleID is required"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="bp">Constructor</span><span class="p">;</span>
-<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Usage:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunValidation</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oVal</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oVal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">&quot;SampleValidator&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">oVal</span><span class="p">:</span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oVal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">"SampleValidator"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oVal</span><span class="p">:</span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oVal</span><span class="p">:</span><span class="nf">ValidateId</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="nf">Empty</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
@@ -3003,7 +3003,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunValidation&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RunValidation"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>SampleID is required
@@ -3015,11 +3015,11 @@
 <span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTitle</span><span class="p">;</span>
 
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetHeader</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;Report: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sTitle</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">"Report: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sTitle</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="bp">Constructor</span><span class="p">;</span>
-<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sTitle</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Generic Report&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sTitle</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Generic Report"</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Derived class script:</p>
@@ -3032,28 +3032,28 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sHeader</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sHeader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">Base</span><span class="p">:</span><span class="nf">GetHeader</span><span class="p">();</span>
-<span class="w">    </span><span class="n">sHeader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sHeader</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; | Standard: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sRegStandard</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sHeader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sHeader</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; | Limit: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="bp">Me</span><span class="p">:</span><span class="n">nContaminantLimit</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; ppm&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sHeader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sHeader</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" | Standard: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sRegStandard</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sHeader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sHeader</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" | Limit: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="bp">Me</span><span class="p">:</span><span class="n">nContaminantLimit</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" ppm"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sHeader</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="bp">Constructor</span><span class="p">;</span>
-<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sTitle</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Environmental Compliance&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sTitle</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Environmental Compliance"</span><span class="p">;</span>
 <span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">nContaminantLimit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
-<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sRegStandard</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;EPA-2018&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sRegStandard</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"EPA-2018"</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Usage:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowReportHeader</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oReport</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">&quot;EnvReport&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">"EnvReport"</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">oReport</span><span class="p">:</span><span class="nf">GetHeader</span><span class="p">());</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowReportHeader&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowReportHeader"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Report: Environmental Compliance | Standard: EPA-2018 | Limit: 50 ppm
@@ -3077,8 +3077,8 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="bp">Constructor</span><span class="p">;</span>
-<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sWorkflowName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Base Workflow&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Initialized&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sWorkflowName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Base Workflow"</span><span class="p">;</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Initialized"</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>First derived class script:</p>
@@ -3091,21 +3091,21 @@
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">nCurrentStep</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="bp">Me</span><span class="p">:</span><span class="n">aApprovers</span><span class="p">);</span>
 <span class="w">        </span><span class="n">sApprover</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">aApprovers</span><span class="p">[</span><span class="bp">Me</span><span class="p">:</span><span class="n">nCurrentStep</span><span class="p">];</span>
-<span class="w">        </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Awaiting &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sApprover</span><span class="p">;</span>
+<span class="w">        </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Awaiting "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sApprover</span><span class="p">;</span>
 <span class="w">        </span><span class="bp">Me</span><span class="p">:</span><span class="n">nCurrentStep</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;All approvals received&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"All approvals received"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="bp">Constructor</span><span class="p">;</span>
-<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sWorkflowName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Approval Workflow&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">aApprovers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Supervisor&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Manager&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Director&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sWorkflowName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Approval Workflow"</span><span class="p">;</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">aApprovers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"Supervisor"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Manager"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Director"</span><span class="p">};</span>
 <span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">nCurrentStep</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Pending approval&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Pending approval"</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Second derived class script:</p>
@@ -3117,19 +3117,19 @@
 <span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">nSentCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">nSentCount</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
-<span class="w">        </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;All notifications sent&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"All notifications sent"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sending notification &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="bp">Me</span><span class="p">:</span><span class="n">nSentCount</span><span class="p">);</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sending notification "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="bp">Me</span><span class="p">:</span><span class="n">nSentCount</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="bp">Constructor</span><span class="p">;</span>
-<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sWorkflowName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Notification Workflow&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sWorkflowName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Notification Workflow"</span><span class="p">;</span>
 <span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">nSentCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Pending notification&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Pending notification"</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Usage:</p>
@@ -3137,25 +3137,25 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oWorkflow</span><span class="p">,</span><span class="w"> </span><span class="n">aWorkflows</span><span class="p">,</span><span class="w"> </span><span class="n">nOuter</span><span class="p">,</span><span class="w"> </span><span class="n">nInner</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aWorkflows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">&quot;ApprovalWorkflow&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">&quot;NotificationWorkflow&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">"ApprovalWorkflow"</span><span class="p">),</span>
+<span class="w">        </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">"NotificationWorkflow"</span><span class="p">)</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nOuter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aWorkflows</span><span class="p">);</span>
 <span class="w">        </span><span class="n">oWorkflow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aWorkflows</span><span class="p">[</span><span class="n">nOuter</span><span class="p">];</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Running workflow: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oWorkflow</span><span class="p">:</span><span class="nf">GetName</span><span class="p">());</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Running workflow: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oWorkflow</span><span class="p">:</span><span class="nf">GetName</span><span class="p">());</span>
 <span class="w">        </span><span class="c1">/* Logs the current workflow name;</span>
 
 <span class="w">        </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nInner</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 <span class="w">            </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWorkflow</span><span class="p">:</span><span class="nf">Execute</span><span class="p">();</span>
 
-<span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;All approvals received&quot;</span>
-<span class="w">                </span><span class="ow">.OR.</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;All notifications sent&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"All approvals received"</span>
+<span class="w">                </span><span class="ow">.OR.</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"All notifications sent"</span><span class="p">;</span>
 <span class="w">                </span><span class="k">:EXITFOR</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Final status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oWorkflow</span><span class="p">:</span><span class="nf">GetStatus</span><span class="p">());</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Final status: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oWorkflow</span><span class="p">:</span><span class="nf">GetStatus</span><span class="p">());</span>
 <span class="w">        </span><span class="c1">/* Logs the final workflow status;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
@@ -3163,7 +3163,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunPolymorphicWorkflow&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RunPolymorphicWorkflow"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

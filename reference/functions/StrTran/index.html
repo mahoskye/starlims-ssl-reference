@@ -4337,49 +4337,49 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CleanPhoneNumber</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPhoneWithDashes</span><span class="p">,</span><span class="w"> </span><span class="n">sPhoneClean</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sPhoneWithDashes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;555-123-4567&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPhoneClean</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrTran</span><span class="p">(</span><span class="n">sPhoneWithDashes</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;-&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sPhoneWithDashes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"555-123-4567"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPhoneClean</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrTran</span><span class="p">(</span><span class="n">sPhoneWithDashes</span><span class="p">,</span><span class="w"> </span><span class="s2">"-"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Original: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPhoneWithDashes</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Cleaned: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPhoneClean</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Original: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPhoneWithDashes</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Cleaned: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPhoneClean</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sPhoneClean</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CleanPhoneNumber&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CleanPhoneNumber"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="replace-a-status-code-token-without-changing-other-casing">Replace a status code token without changing other casing<a class="headerlink" href="#replace-a-status-code-token-without-changing-other-casing" title="Permanent link">&para;</a></h3>
 <p>Demonstrate that <code>StrTran()</code> only replaces exact-case matches. <code>"OPEN"</code> is left alone because the match is case-sensitive; <code>"Open"</code> inside <code>"Opened"</code> is replaced as well because the search finds every occurrence.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeStatusLine</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStatusLine</span><span class="p">,</span><span class="w"> </span><span class="n">sNormalized</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sStatusLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Open OPEN Opened&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sNormalized</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrTran</span><span class="p">(</span><span class="n">sStatusLine</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Open&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Closed&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sStatusLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Open OPEN Opened"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sNormalized</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrTran</span><span class="p">(</span><span class="n">sStatusLine</span><span class="p">,</span><span class="w"> </span><span class="s2">"Open"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Closed"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Before: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatusLine</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;After: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sNormalized</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Before: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatusLine</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"After: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sNormalized</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NormalizeStatusLine&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"NormalizeStatusLine"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="apply-several-exact-replacements-to-a-template">Apply several exact replacements to a template<a class="headerlink" href="#apply-several-exact-replacements-to-a-template" title="Permanent link">&para;</a></h3>
 <p>Build a final message by applying several literal, case-sensitive substitutions.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSampleMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTemplate</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sTemplate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample {id} moved to {status} by {user}&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTemplate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample {id} moved to {status} by {user}"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrTran</span><span class="p">(</span><span class="n">sTemplate</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;{id}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S-1025&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrTran</span><span class="p">(</span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;{status}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Released&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrTran</span><span class="p">(</span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;{user}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">MYUSERNAME</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrTran</span><span class="p">(</span><span class="n">sTemplate</span><span class="p">,</span><span class="w"> </span><span class="s2">"{id}"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S-1025"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrTran</span><span class="p">(</span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="s2">"{status}"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Released"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrTran</span><span class="p">(</span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="s2">"{user}"</span><span class="p">,</span><span class="w"> </span><span class="n">MYUSERNAME</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span><span class="w"> </span><span class="c1">/* Logs the final message with the current user name;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildSampleMessage&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSampleMessage"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -4269,7 +4269,7 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DecodeWebFormInput</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sEncodedForm</span><span class="p">,</span><span class="w"> </span><span class="n">sDecodedForm</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sEncodedForm</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;John%20Doe%20%26%20Co&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sEncodedForm</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"John%20Doe%20%26%20Co"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sDecodedForm</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">UrlDecode</span><span class="p">(</span><span class="n">sEncodedForm</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sDecodedForm</span><span class="p">);</span>
@@ -4278,7 +4278,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DecodeWebFormInput&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DecodeWebFormInput"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>John Doe &amp; Co
@@ -4293,14 +4293,14 @@
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">nParamStart</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">At</span><span class="p">(</span><span class="s2">&quot;filename=&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sDownloadUrl</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nParamStart</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">At</span><span class="p">(</span><span class="s2">"filename="</span><span class="p">,</span><span class="w"> </span><span class="n">sDownloadUrl</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nParamStart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sQueryString</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubStr</span><span class="p">(</span><span class="n">sDownloadUrl</span><span class="p">,</span><span class="w"> </span><span class="n">nParamStart</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">9</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">nAmpersand</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">At</span><span class="p">(</span><span class="s2">&quot;&amp;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sQueryString</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nAmpersand</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">At</span><span class="p">(</span><span class="s2">"&amp;"</span><span class="p">,</span><span class="w"> </span><span class="n">sQueryString</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nAmpersand</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Left</span><span class="p">(</span><span class="n">sQueryString</span><span class="p">,</span><span class="w"> </span><span class="n">nAmpersand</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
@@ -4309,13 +4309,13 @@
 
 <span class="w">    </span><span class="n">sDecodedName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">UrlDecode</span><span class="p">(</span><span class="n">sFileName</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Decoded file name: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDecodedName</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Decoded file name: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDecodedName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sDecodedName</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExtractFileNameFromUrl&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;https://example.com/files?filename=quarterly%20report.pdf&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExtractFileNameFromUrl"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"https://example.com/files?filename=quarterly%20report.pdf"</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Decoded file name: quarterly report.pdf

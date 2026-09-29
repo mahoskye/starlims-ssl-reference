@@ -4428,20 +4428,20 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseSingleDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDateText</span><span class="p">,</span><span class="w"> </span><span class="n">dParsedDate</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDateText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;03/15/2024&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDateText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"03/15/2024"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">dParsedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="n">sDateText</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">dParsedDate</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;The date text is invalid&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"The date text is invalid"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Parsed date: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dParsedDate</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Parsed date: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dParsedDate</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseSingleDate&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ParseSingleDate"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs (assuming MM/DD/YYYY date format):</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Parsed date: 03/15/2024
@@ -4452,7 +4452,7 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aDateText</span><span class="p">,</span><span class="w"> </span><span class="n">aValidDates</span><span class="p">,</span><span class="w"> </span><span class="n">dParsedDate</span><span class="p">,</span><span class="w"> </span><span class="n">sDateText</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nValidCount</span><span class="p">,</span><span class="w"> </span><span class="n">nInvalidCount</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aDateText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;03/15/2024&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;03/18/2024&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;not-a-date&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;04/01/2024&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aDateText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"03/15/2024"</span><span class="p">,</span><span class="w"> </span><span class="s2">"03/18/2024"</span><span class="p">,</span><span class="w"> </span><span class="s2">"not-a-date"</span><span class="p">,</span><span class="w"> </span><span class="s2">"04/01/2024"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aValidDates</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 <span class="w">    </span><span class="n">nValidCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nInvalidCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
@@ -4469,14 +4469,14 @@
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Valid: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nValidCount</span><span class="p">)</span>
-<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, Invalid: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nInvalidCount</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Valid: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nValidCount</span><span class="p">)</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">", Invalid: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nInvalidCount</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSummary</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateImportedDates&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateImportedDates"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Valid: 3, Invalid: 1
@@ -4485,29 +4485,29 @@
 <p>Resolves a cutoff date from a text parameter, returning early with separate messages for empty input and unparseable text, and displaying the formatted date when the input is valid.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResolveCutoffDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sCutoffText</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sCutoffText</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sCutoffText</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dCutoffDate</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sCutoffText</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No cutoff date was provided&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No cutoff date was provided"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dCutoffDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="n">sCutoffText</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">dCutoffDate</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Cutoff date must match the current date format&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Cutoff date must match the current date format"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Using cutoff date: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dCutoffDate</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Using cutoff date: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dCutoffDate</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sStatus</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ResolveCutoffDate&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;03/15/2024&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ResolveCutoffDate"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"03/15/2024"</span><span class="p">});</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs on success:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Using cutoff date: 03/15/2024

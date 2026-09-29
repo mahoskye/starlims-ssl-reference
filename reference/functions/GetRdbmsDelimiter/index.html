@@ -4324,11 +4324,11 @@
 <span class="w">    </span><span class="n">sClose</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRdbmsDelimiter</span><span class="p">(</span><span class="n">sDSN</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sIdentifier</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sOpen</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sClose</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Delimited identifier: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sIdentifier</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Delimited identifier: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sIdentifier</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildDelimitedIdentifier&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LIMSDB&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;orders&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildDelimitedIdentifier"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LIMSDB"</span><span class="p">,</span><span class="w"> </span><span class="s2">"orders"</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs (SQL Server DSN, <code>sName</code> = <code>"orders"</code>):</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Delimited identifier: [orders]
@@ -4343,20 +4343,20 @@
 <span class="w">    </span><span class="n">sClose</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetRdbmsDelimiter</span><span class="p">(</span><span class="n">sDSN</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sOpen</span><span class="p">)</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sClose</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No delimiter mapping is available for this DSN&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No delimiter mapping is available for this DSN"</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sOpen</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;orders&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sClose</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sColumn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sOpen</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;orderdate&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sClose</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SELECT &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sColumn</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; FROM &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTable</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sOpen</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"orders"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sClose</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sColumn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sOpen</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"orderdate"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sClose</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SELECT "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sColumn</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" FROM "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTable</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSQL</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sSQL</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildSelectStatement&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LIMSDB&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSelectStatement"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LIMSDB"</span><span class="p">});</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs one of:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>No delimiter mapping is available for this DSN

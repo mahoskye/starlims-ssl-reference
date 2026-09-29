@@ -4337,12 +4337,12 @@
 <span class="w">    </span><span class="n">sRawText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Str</span><span class="p">(</span><span class="n">nCount</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sDisplayText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LTrim</span><span class="p">(</span><span class="n">sRawText</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Raw field: [&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRawText</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;]&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Trimmed value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDisplayText</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Raw field: ["</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRawText</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"]"</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Trimmed value: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDisplayText</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowSampleCount&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowSampleCount"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Raw field: [        42]
@@ -4353,20 +4353,20 @@ Trimmed value: 42
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildReportLine</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">nResult</span><span class="p">,</span><span class="w"> </span><span class="n">nAverage</span><span class="p">,</span><span class="w"> </span><span class="n">sLine</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;S-1024&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"S-1024"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">7.2</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nAverage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">12.3456</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">sSampleID</span><span class="p">))</span>
+<span class="w">    </span><span class="n">sLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">sSampleID</span><span class="p">))</span>
 <span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="nf">Str</span><span class="p">(</span><span class="n">nResult</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 <span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="nf">Str</span><span class="p">(</span><span class="n">nAverage</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sample      Result   Average&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Sample      Result   Average"</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLine</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildReportLine&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildReportLine"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample      Result   Average
@@ -4380,19 +4380,19 @@ S-1024        7.20    12.346
 <span class="w">    </span><span class="n">nReading</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">123456.789</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sFormatted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Str</span><span class="p">(</span><span class="n">nReading</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sFormatted</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Reading does not fit in the export field&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sFormatted</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">"*"</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Reading does not fit in the export field"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;READING=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"READING="</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sOutput</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportReading&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExportReading"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>READING=123456.79

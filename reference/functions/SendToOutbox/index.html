@@ -3582,23 +3582,23 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">QueueBasicEmail</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRecipients</span><span class="p">,</span><span class="w"> </span><span class="n">bQueued</span><span class="p">,</span><span class="w"> </span><span class="n">sFromWho</span><span class="p">,</span><span class="w"> </span><span class="n">sMessageBody</span><span class="p">,</span><span class="w"> </span><span class="n">sSMTP</span><span class="p">,</span><span class="w"> </span><span class="n">sSubject</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSMTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;smtp.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aRecipients</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;user@example.com&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">sFromWho</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;noreply@example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSubject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample ready&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sMessageBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Your sample is ready for review.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSMTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"smtp.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aRecipients</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"user@example.com"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sFromWho</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"noreply@example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSubject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample ready"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessageBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Your sample is ready for review."</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bQueued</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SendToOutbox</span><span class="p">(</span><span class="n">sSMTP</span><span class="p">,</span><span class="w"> </span><span class="n">aRecipients</span><span class="p">,</span><span class="w"> </span><span class="n">sFromWho</span><span class="p">,</span><span class="w"> </span><span class="n">sSubject</span><span class="p">,</span><span class="w"> </span><span class="n">sMessageBody</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bQueued</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Email was queued.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Email was queued."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Email was not queued.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Email was not queued."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;QueueBasicEmail&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"QueueBasicEmail"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="queue-an-html-email-with-attachments-and-ccbcc">Queue an HTML email with attachments and CC/BCC<a class="headerlink" href="#queue-an-html-email-with-attachments-and-ccbcc" title="Permanent link">&para;</a></h3>
 <p>Queue an HTML message with a PDF attachment, CC and BCC recipients, and SMTP authentication. The message is stored for later batch delivery.</p>
@@ -3606,17 +3606,17 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aAttachList</span><span class="p">,</span><span class="w"> </span><span class="n">aBCCList</span><span class="p">,</span><span class="w"> </span><span class="n">aCCList</span><span class="p">,</span><span class="w"> </span><span class="n">aRecipients</span><span class="p">,</span><span class="w"> </span><span class="n">bQueued</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBody</span><span class="p">,</span><span class="w"> </span><span class="n">sFromWho</span><span class="p">,</span><span class="w"> </span><span class="n">sReplyTo</span><span class="p">,</span><span class="w"> </span><span class="n">sSMTP</span><span class="p">,</span><span class="w"> </span><span class="n">sSubject</span><span class="p">,</span><span class="w"> </span><span class="n">sUName</span><span class="p">,</span><span class="w"> </span><span class="n">sUPass</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSMTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;smtp.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aRecipients</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;primary@example.com&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">sFromWho</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;qa@example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSubject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Certificate package&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&lt;p&gt;Your certificate package is attached.&lt;/p&gt;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aAttachList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;C:\\Reports\\Certificate.pdf&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">aCCList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;supervisor@example.com&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">aBCCList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;audit@example.com&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">sReplyTo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;support@example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;smtp-user&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;smtp-password&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSMTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"smtp.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aRecipients</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"primary@example.com"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sFromWho</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"qa@example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSubject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Certificate package"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"&lt;p&gt;Your certificate package is attached.&lt;/p&gt;"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aAttachList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"C:\\Reports\\Certificate.pdf"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aCCList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"supervisor@example.com"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aBCCList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"audit@example.com"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sReplyTo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"support@example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"smtp-user"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"smtp-password"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bQueued</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SendToOutbox</span><span class="p">(</span>
 <span class="w">        </span><span class="n">sSMTP</span><span class="p">,</span>
@@ -3637,12 +3637,12 @@
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bQueued</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;HTML email was queued.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"HTML email was queued."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;QueueHtmlEmail&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"QueueHtmlEmail"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="raise-and-handle-validation-errors-explicitly">Raise and handle validation errors explicitly<a class="headerlink" href="#raise-and-handle-validation-errors-explicitly" title="Permanent link">&para;</a></h3>
 <p>Wrap the call in <code>:TRY;</code> to catch the unconditional validation errors and inspect the failure with <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a>.</p>
@@ -3650,17 +3650,17 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aAttachList</span><span class="p">,</span><span class="w"> </span><span class="n">aBCCList</span><span class="p">,</span><span class="w"> </span><span class="n">aCCList</span><span class="p">,</span><span class="w"> </span><span class="n">aRecipients</span><span class="p">,</span><span class="w"> </span><span class="n">bQueued</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBody</span><span class="p">,</span><span class="w"> </span><span class="n">sFromWho</span><span class="p">,</span><span class="w"> </span><span class="n">sReplyTo</span><span class="p">,</span><span class="w"> </span><span class="n">sSMTP</span><span class="p">,</span><span class="w"> </span><span class="n">sSubject</span><span class="p">,</span><span class="w"> </span><span class="n">sUName</span><span class="p">,</span><span class="w"> </span><span class="n">sUPass</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSMTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;smtp.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aRecipients</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;manager@example.com&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">sFromWho</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;workflow@example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSubject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Approval required&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;A record is waiting for approval.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSMTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"smtp.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aRecipients</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"manager@example.com"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sFromWho</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"workflow@example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSubject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Approval required"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"A record is waiting for approval."</span><span class="p">;</span>
 <span class="w">    </span><span class="n">aAttachList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 <span class="w">    </span><span class="n">aCCList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 <span class="w">    </span><span class="n">aBCCList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
-<span class="w">    </span><span class="n">sReplyTo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sReplyTo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bQueued</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
@@ -3682,16 +3682,16 @@
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: queue failed;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Queue failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Queue failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bQueued</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Approval email was queued.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Approval email was queued."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;QueueEmailFailFast&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"QueueEmailFailFast"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

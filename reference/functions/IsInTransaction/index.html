@@ -3899,17 +3899,17 @@
 <span class="w">    </span><span class="n">bInTrans</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsInTransaction</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bInTrans</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">EndLimsTransaction</span><span class="p">(</span><span class="s2">&quot;MyTransaction&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Transaction committed successfully&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">EndLimsTransaction</span><span class="p">(</span><span class="s2">"MyTransaction"</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Transaction committed successfully"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No active transaction to commit&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No active transaction to commit"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bInTrans</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CommitIfActive&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CommitIfActive"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="check-a-named-connection-with-error-handling">Check a named connection with error handling<a class="headerlink" href="#check-a-named-connection-with-error-handling" title="Permanent link">&para;</a></h3>
 <p>Pass an explicit connection name and wrap the call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle unknown connection errors gracefully. The catch block retrieves the error with <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> and logs it via <a href="../ErrorMes/"><code>ErrorMes</code></a>.</p>
@@ -3921,22 +3921,22 @@
 <span class="w">        </span><span class="n">bInTransaction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsInTransaction</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bInTransaction</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; has an active transaction&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" has an active transaction"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; has no active transaction&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" has no active transaction"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bInTransaction</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Transaction check failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Transaction check failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: transaction check failed;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckNamedConnectionTransaction&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LIMS_PROD&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckNamedConnectionTransaction"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LIMS_PROD"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

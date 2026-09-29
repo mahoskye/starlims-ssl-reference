@@ -3613,8 +3613,8 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowExcelVersion</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oExcel</span><span class="p">,</span><span class="w"> </span><span class="n">sVersion</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oExcel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsOleConnect</span><span class="p">(</span><span class="s2">&quot;Excel.Application&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sVersion</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Excel version: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oExcel</span><span class="p">:</span><span class="n">Version</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oExcel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsOleConnect</span><span class="p">(</span><span class="s2">"Excel.Application"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sVersion</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Excel version: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oExcel</span><span class="p">:</span><span class="n">Version</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sVersion</span><span class="p">);</span>
 
@@ -3622,7 +3622,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowExcelVersion&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowExcelVersion"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Excel version: &lt;version&gt;
@@ -3633,20 +3633,20 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportWithOleCleanup</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oExcel</span><span class="p">,</span><span class="w"> </span><span class="n">sWorkbookPath</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sWorkbookPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\\Temp\\results.xlsx&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sWorkbookPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\\Temp\\results.xlsx"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oExcel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">oExcel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsOleConnect</span><span class="p">(</span><span class="s2">&quot;Excel.Application&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">oExcel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsOleConnect</span><span class="p">(</span><span class="s2">"Excel.Application"</span><span class="p">);</span>
 <span class="w">        </span><span class="n">oExcel</span><span class="p">:</span><span class="n">Visible</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oExcel</span><span class="p">:</span><span class="n">Workbooks</span><span class="p">:</span><span class="nf">Add</span><span class="p">();</span>
 <span class="w">        </span><span class="n">oExcel</span><span class="p">:</span><span class="n">ActiveWorkbook</span><span class="p">:</span><span class="nf">SaveAs</span><span class="p">(</span><span class="n">sWorkbookPath</span><span class="p">);</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workbook saved to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkbookPath</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workbook saved to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkbookPath</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs saved workbook path;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;OLE export failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"OLE export failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: OLE export failed;</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">EndLimsOleConnect</span><span class="p">(</span><span class="n">oExcel</span><span class="p">);</span>
@@ -3654,7 +3654,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportWithOleCleanup&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExportWithOleCleanup"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

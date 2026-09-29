@@ -4028,28 +4028,28 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateCustomerCaseFolder</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sParentPath</span><span class="p">,</span><span class="w"> </span><span class="n">sFolderName</span><span class="p">,</span><span class="w"> </span><span class="n">sCreateResult</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sParentPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/Cases/CustomerCases&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFolderName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CASE-2024-00142&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sParentPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/Cases/CustomerCases"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFolderName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"CASE-2024-00142"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sCreateResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocCreateFolder</span><span class="p">(</span><span class="n">sParentPath</span><span class="p">,</span><span class="w"> </span><span class="n">sFolderName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sCreateResult</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Folder creation failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Folder creation failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">            </span><span class="c1">/* Logs on command failure: folder creation failed;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Folder creation did not return a result string&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Folder creation did not return a result string"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Folder created: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCreateResult</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Folder created: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCreateResult</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs: created folder path;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sCreateResult</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CreateCustomerCaseFolder&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CreateCustomerCaseFolder"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="create-several-folders-with-per-folder-acl-values">Create several folders with per-folder ACL values<a class="headerlink" href="#create-several-folders-with-per-folder-acl-values" title="Permanent link">&para;</a></h3>
 <p>Iterates a list of project names, creates each folder under a shared base path with a project-specific ACL, and collects failure objects for any empty results.</p>
@@ -4057,13 +4057,13 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBasePath</span><span class="p">,</span><span class="w"> </span><span class="n">sProjectName</span><span class="p">,</span><span class="w"> </span><span class="n">sAcl</span><span class="p">,</span><span class="w"> </span><span class="n">sCreateResult</span><span class="p">,</span><span class="w"> </span><span class="n">sFolderPath</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aProjects</span><span class="p">,</span><span class="w"> </span><span class="n">aFailures</span><span class="p">,</span><span class="w"> </span><span class="n">oFailure</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sBasePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/Projects&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aProjects</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Alpha&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Beta&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Gamma&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sBasePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/Projects"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aProjects</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"Alpha"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Beta"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Gamma"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aFailures</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aProjects</span><span class="p">);</span>
 <span class="w">        </span><span class="n">sProjectName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aProjects</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
-<span class="w">        </span><span class="n">sAcl</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Project_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProjectName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;_ACL&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sAcl</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Project_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProjectName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"_ACL"</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sCreateResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocCreateFolder</span><span class="p">(</span><span class="n">sBasePath</span><span class="p">,</span><span class="w"> </span><span class="n">sProjectName</span><span class="p">,</span><span class="w"> </span><span class="n">sAcl</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sCreateResult</span><span class="p">);</span>
@@ -4072,19 +4072,19 @@
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
 <span class="w">                </span><span class="n">oFailure</span><span class="p">:</span><span class="n">errorMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
 <span class="w">            </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">                </span><span class="n">oFailure</span><span class="p">:</span><span class="n">errorMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Folder creation returned an empty result string&quot;</span><span class="p">;</span>
+<span class="w">                </span><span class="n">oFailure</span><span class="p">:</span><span class="n">errorMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Folder creation returned an empty result string"</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aFailures</span><span class="p">,</span><span class="w"> </span><span class="n">oFailure</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:LOOP</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">sFolderPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sBasePath</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProjectName</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Created folder: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFolderPath</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sFolderPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sBasePath</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProjectName</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Created folder: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFolderPath</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs per success: created folder path;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFailures</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Some folders were not created: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFailures</span><span class="p">)));</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Some folders were not created: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFailures</span><span class="p">)));</span>
 <span class="w">        </span><span class="c1">/* Logs when some failed: folder creation summary;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4092,49 +4092,49 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SetupProjectFolders&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SetupProjectFolders"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="validate-inputs-and-handle-both-raised-and-backend-failures">Validate inputs and handle both raised and backend failures<a class="headerlink" href="#validate-inputs-and-handle-both-raised-and-backend-failures" title="Permanent link">&para;</a></h3>
 <p>Guards against blank path or name inputs, wraps the call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle a raised SSL exception, and then inspects the Documentum failure state for an empty result.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateDynamicFolder</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sParentPath</span><span class="p">,</span><span class="w"> </span><span class="n">sFolderName</span><span class="p">,</span><span class="w"> </span><span class="n">sAcl</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sParentPath</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/TestCabinet&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sFolderName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sAcl</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sParentPath</span><span class="p">,</span><span class="w"> </span><span class="s2">"/TestCabinet"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sFolderName</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sAcl</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sCreateResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sParentPath</span><span class="p">)</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sFolderName</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Folder path and folder name are required&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Folder path and folder name are required"</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sCreateResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocCreateFolder</span><span class="p">(</span><span class="n">sParentPath</span><span class="p">,</span><span class="w"> </span><span class="n">sFolderName</span><span class="p">,</span><span class="w"> </span><span class="n">sAcl</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;DocCreateFolder raised an error: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"DocCreateFolder raised an error: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs when NIL is passed: DocCreateFolder raised an error;</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sCreateResult</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;DocCreateFolder failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"DocCreateFolder failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">            </span><span class="c1">/* Logs on command failure: DocCreateFolder failed;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;DocCreateFolder returned an empty result string&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"DocCreateFolder returned an empty result string"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Folder created successfully: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCreateResult</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Folder created successfully: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCreateResult</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs: created folder result;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sCreateResult</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CreateDynamicFolder&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;/Projects&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;CASE-2024-00142&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LabACL&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CreateDynamicFolder"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"/Projects"</span><span class="p">,</span><span class="w"> </span><span class="s2">"CASE-2024-00142"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LabACL"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

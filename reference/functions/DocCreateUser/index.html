@@ -4155,24 +4155,24 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateBasicUser</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sUserId</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sLoginName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SecureP@ss123&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sLoginName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"jsmith"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SecureP@ss123"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUserId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocCreateUser</span><span class="p">(</span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sUserId</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;DocCreateUser did not return a user identifier&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"DocCreateUser did not return a user identifier"</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Created user ID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserId</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Created user ID: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserId</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the created user ID on success;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sUserId</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CreateBasicUser&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CreateBasicUser"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="create-a-user-with-profile-and-access-settings">Create a user with profile and access settings<a class="headerlink" href="#create-a-user-with-profile-and-access-settings" title="Permanent link">&para;</a></h3>
 <p>Creates a full user account by passing all eight arguments: login name, password, display name, email, default folder, group, permission set, and privilege level.</p>
@@ -4180,13 +4180,13 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sEmail</span><span class="p">,</span><span class="w"> </span><span class="n">sDefaultFolder</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sGroupName</span><span class="p">,</span><span class="w"> </span><span class="n">sPermissionSet</span><span class="p">,</span><span class="w"> </span><span class="n">nUserPrivileges</span><span class="p">,</span><span class="w"> </span><span class="n">sUserId</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sLoginName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;labtech_jsmith&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SecureP@ss123&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;John Smith&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sEmail</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;j.smith@lab.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sDefaultFolder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/Laboratory/Technicians&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sGroupName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LabTechnicians&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPermissionSet</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;TechnicianReadWrite&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sLoginName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"labtech_jsmith"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SecureP@ss123"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"John Smith"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sEmail</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"j.smith@lab.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDefaultFolder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/Laboratory/Technicians"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sGroupName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LabTechnicians"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPermissionSet</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"TechnicianReadWrite"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nUserPrivileges</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUserId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocCreateUser</span><span class="p">(</span>
@@ -4202,61 +4202,61 @@
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sUserId</span><span class="p">);</span>
 <span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span>
-<span class="w">            </span><span class="s2">&quot;User creation returned an empty identifier for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLoginName</span>
+<span class="w">            </span><span class="s2">"User creation returned an empty identifier for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLoginName</span>
 <span class="w">        </span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs a failure message for the requested login;</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Created user &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; with ID &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserId</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Created user "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" with ID "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserId</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the created user name and ID on success;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sUserId</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CreateLabTechUser&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CreateLabTechUser"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="catch-null-argument-errors-and-check-for-an-empty-result">Catch null-argument errors and check for an empty result<a class="headerlink" href="#catch-null-argument-errors-and-check-for-an-empty-result" title="Permanent link">&para;</a></h3>
 <p>Wraps the call in <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle a <a href="../../literals/nil/"><code>NIL</code></a>-argument exception and also guards against an empty identifier result to cover both failure paths.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateUserWithHandling</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sUserId</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sLoginName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;testuser&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SecureP@ss123&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sLoginName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"testuser"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SecureP@ss123"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sUserId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocCreateUser</span><span class="p">(</span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sUserId</span><span class="p">);</span>
 <span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span>
-<span class="w">                </span><span class="s2">&quot;DocCreateUser returned an empty identifier for &quot;</span>
+<span class="w">                </span><span class="s2">"DocCreateUser returned an empty identifier for "</span>
 <span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="n">sLoginName</span>
 <span class="w">            </span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs a failure message when no identifier is returned;</span>
-<span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Created user ID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Created user ID: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserId</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs the created user ID on success;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sUserId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">oErr</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;DocCreateUser failed for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"DocCreateUser failed for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs a generic failure message for the login;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;DocCreateUser failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"DocCreateUser failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs the failure details returned by SSL;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CreateUserWithHandling&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CreateUserWithHandling"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

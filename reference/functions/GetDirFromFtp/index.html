@@ -3798,11 +3798,11 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aEntries</span><span class="p">,</span><span class="w"> </span><span class="n">aEntry</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ftp.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/incoming&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPattern</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;batch_reader&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BatchPass123&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ftp.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/incoming"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPattern</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"*"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"batch_reader"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"BatchPass123"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aEntries</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDirFromFtp</span><span class="p">(</span>
 <span class="w">        </span><span class="n">sServer</span><span class="p">,</span>
@@ -3813,14 +3813,14 @@
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">aEntries</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Could not retrieve the FTP listing.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Could not retrieve the FTP listing."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aEntries</span><span class="p">);</span>
 <span class="w">        </span><span class="n">aEntry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aEntries</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
 <span class="w">        </span><span class="c1">/* Logs each entry name and type;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">aEntry</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; (&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aEntry</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;)&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">aEntry</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" ("</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aEntry</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">")"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
@@ -3837,13 +3837,13 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aEntries</span><span class="p">,</span><span class="w"> </span><span class="n">aEntry</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sftp.partner.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/outbound/results&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;partner_user&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassphrase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;KeyPassphrase123&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"sftp.partner.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/outbound/results"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"partner_user"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassphrase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"KeyPassphrase123"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sProxy</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPrivateKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/secure/keys/partner_key.ppk&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFilePattern</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPrivateKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/secure/keys/partner_key.ppk"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFilePattern</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nPort</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">22</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bIsSFTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bUsePassive</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
@@ -3865,19 +3865,19 @@
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="c1">/* Logs on failure with error details;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;SFTP listing failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"SFTP listing failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">aEntries</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;The SFTP server returned no listing.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"The SFTP server returned no listing."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aEntries</span><span class="p">);</span>
 <span class="w">        </span><span class="n">aEntry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aEntries</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
 <span class="w">        </span><span class="c1">/* Logs each entry name and size;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">aEntry</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; size=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aEntry</span><span class="p">[</span><span class="mi">2</span><span class="p">]));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">aEntry</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" size="</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aEntry</span><span class="p">[</span><span class="mi">2</span><span class="p">]));</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
@@ -3891,11 +3891,11 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aEntries</span><span class="p">,</span><span class="w"> </span><span class="n">aEntry</span><span class="p">,</span><span class="w"> </span><span class="n">aFiles</span><span class="p">,</span><span class="w"> </span><span class="n">aDirectories</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ftp.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/release&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPattern</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;*&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;release_reader&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ReleasePass123&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ftp.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/release"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPattern</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"*"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"release_reader"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ReleasePass123"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aEntries</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDirFromFtp</span><span class="p">(</span>
 <span class="w">        </span><span class="n">sServer</span><span class="p">,</span>
@@ -3909,7 +3909,7 @@
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">aEntries</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Remote listing failed.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Remote listing failed."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3919,7 +3919,7 @@
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aEntries</span><span class="p">);</span>
 <span class="w">        </span><span class="n">aEntry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aEntries</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
 
-<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">aEntry</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;D&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">aEntry</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"D"</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aDirectories</span><span class="p">,</span><span class="w"> </span><span class="n">aEntry</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aFiles</span><span class="p">,</span><span class="w"> </span><span class="n">aEntry</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
@@ -3927,9 +3927,9 @@
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">/* Logs the file count;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Files found: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFiles</span><span class="p">)));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Files found: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFiles</span><span class="p">)));</span>
 <span class="w">    </span><span class="c1">/* Logs the directory count;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Directories found: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aDirectories</span><span class="p">)));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Directories found: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aDirectories</span><span class="p">)));</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="p">{</span><span class="n">aFiles</span><span class="p">,</span><span class="w"> </span><span class="n">aDirectories</span><span class="p">};</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>

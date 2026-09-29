@@ -3756,12 +3756,12 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLdapHost</span><span class="p">,</span><span class="w"> </span><span class="n">nLdapPort</span><span class="p">,</span><span class="w"> </span><span class="n">sBindUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sBindUserPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSearchUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sBaseDn</span><span class="p">,</span><span class="w"> </span><span class="n">sUserDn</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sLdapHost</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ldap.example.com&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sLdapHost</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ldap.example.com"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nLdapPort</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">389</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sBindUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;svc_ldap_lookup&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sBindUserPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SecretPassword&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSearchUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sBaseDn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;OU=Users,DC=example,DC=com&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBindUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"svc_ldap_lookup"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBindUserPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SecretPassword"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSearchUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"jsmith"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBaseDn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"OU=Users,DC=example,DC=com"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sUserDn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SearchLDAPUser</span><span class="p">(</span>
@@ -3774,11 +3774,11 @@
 <span class="w">        </span><span class="p">);</span>
 
 <span class="w">        </span><span class="c1">/* Logs the resolved distinguished name;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Found DN: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserDn</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Found DN: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserDn</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="c1">/* Logs the lookup failure reason;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;LDAP lookup failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"LDAP lookup failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
@@ -3788,20 +3788,20 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetUserDnBySamAccountName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserDn</span><span class="p">,</span><span class="w"> </span><span class="n">sFilter</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sFilter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;(&amp;(objectClass=user)(sAMAccountName={0}))&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFilter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"(&amp;(objectClass=user)(sAMAccountName={0}))"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUserDn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SearchLDAPUser</span><span class="p">(</span>
-<span class="w">        </span><span class="s2">&quot;ldap.example.com&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ldap.example.com"</span><span class="p">,</span>
 <span class="w">        </span><span class="mi">389</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;svc_ldap_lookup&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;SecretPassword&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;OU=Users,DC=example,DC=com&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"svc_ldap_lookup"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"SecretPassword"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"jsmith"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"OU=Users,DC=example,DC=com"</span><span class="p">,</span>
 <span class="w">        </span><span class="n">sFilter</span><span class="p">,</span>
 <span class="w">        </span><span class="kc">.F.</span>
 <span class="w">    </span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Found DN: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserDn</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Found DN: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserDn</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Call with <code>DoProc("GetUserDnBySamAccountName")</code>.</p>
@@ -3815,11 +3815,11 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLdapHost</span><span class="p">,</span><span class="w"> </span><span class="n">nLdapPort</span><span class="p">,</span><span class="w"> </span><span class="n">sBindUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sBindUserPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBaseDn</span><span class="p">,</span><span class="w"> </span><span class="n">sUserDn</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sLdapHost</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ldap.example.com&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sLdapHost</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ldap.example.com"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nLdapPort</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">389</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sBindUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;svc_ldap_lookup&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sBindUserPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SecretPassword&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sBaseDn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;OU=Users,DC=example,DC=com&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBindUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"svc_ldap_lookup"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBindUserPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SecretPassword"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBaseDn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"OU=Users,DC=example,DC=com"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sUserDn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SearchLDAPUser</span><span class="p">(</span>
@@ -3829,27 +3829,27 @@
 <span class="w">            </span><span class="n">sBindUserPassword</span><span class="p">,</span>
 <span class="w">            </span><span class="n">sSearchUserName</span><span class="p">,</span>
 <span class="w">            </span><span class="n">sBaseDn</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;(&amp;(objectClass=user)(sAMAccountName={0}))&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"(&amp;(objectClass=user)(sAMAccountName={0}))"</span><span class="p">,</span>
 <span class="w">            </span><span class="kc">.F.</span>
 <span class="w">        </span><span class="p">);</span>
 
-<span class="w">        </span><span class="n">bUpdated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="n">bUpdated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            UPDATE lims_user_profile SET</span>
 <span class="s2">                ldap_dn = ?</span>
 <span class="s2">            WHERE username = ?</span>
-<span class="s2">        &quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sUserDn</span><span class="p">,</span><span class="w"> </span><span class="n">sSearchUserName</span><span class="p">});</span>
+<span class="s2">        "</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sUserDn</span><span class="p">,</span><span class="w"> </span><span class="n">sSearchUserName</span><span class="p">});</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">;</span>
 <span class="w">            </span><span class="c1">/* Logs the successful update target;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Stored LDAP DN for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSearchUserName</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Stored LDAP DN for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSearchUserName</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">            </span><span class="c1">/* Logs the user name that could not be stored;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Could not store LDAP DN for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSearchUserName</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Could not store LDAP DN for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSearchUserName</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="c1">/* Logs the workflow failure reason;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;LDAP workflow failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"LDAP workflow failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>

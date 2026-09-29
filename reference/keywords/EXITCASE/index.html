@@ -2859,31 +2859,31 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPriority</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sPriority</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPriority</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;CRITICAL&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sPriority</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Immediate attention required&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"CRITICAL"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sPriority</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Immediate attention required"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;HIGH&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sPriority</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Process within 24 hours&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"HIGH"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sPriority</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Process within 24 hours"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;STANDARD&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sPriority</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Queue for normal processing&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"STANDARD"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sPriority</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Queue for normal processing"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sPriority</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Manual review required&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sPriority</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Manual review required"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample priority: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPriority</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample priority: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPriority</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sPriority</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetSamplePriority&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;HIGH&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetSamplePriority"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"HIGH"</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample priority: Process within 24 hours
@@ -2894,17 +2894,17 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">nResultValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCategory</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sCategory</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCategory</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">nResultValue</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sCategory</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Critical&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sCategory</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Critical"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">nResultValue</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">75</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sCategory</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Warning&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sCategory</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Warning"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sCategory</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Normal&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sCategory</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Normal"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
 
@@ -2914,7 +2914,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ClassifyResult&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">80</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ClassifyResult"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">80</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Warning

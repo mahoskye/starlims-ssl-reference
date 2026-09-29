@@ -4233,7 +4233,7 @@
 
 <span class="w">    </span><span class="n">vResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Current result: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">vResult</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Current result: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">vResult</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 
@@ -4241,7 +4241,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowOptionalResult&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowOptionalResult"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Current result: NIL
@@ -4251,26 +4251,26 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSummaryLine</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">,</span><span class="w"> </span><span class="n">vValue</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Batch-1042&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">27.5</span><span class="p">,</span><span class="w"> </span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">};</span>
-<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"Batch-1042"</span><span class="p">,</span><span class="w"> </span><span class="mf">27.5</span><span class="p">,</span><span class="w"> </span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aValues</span><span class="p">);</span>
 <span class="w">        </span><span class="n">vValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aValues</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" | "</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">vValue</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Summary: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSummary</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Summary: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSummary</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildSummaryLine&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSummaryLine"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Summary: Batch-1042 | 27.5 | NIL | True

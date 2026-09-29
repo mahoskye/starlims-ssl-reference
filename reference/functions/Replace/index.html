@@ -4342,47 +4342,47 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">MakeFilenameSafe</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOriginalName</span><span class="p">,</span><span class="w"> </span><span class="n">sSafeName</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sOriginalName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample Report Q1 2024&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSafeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replace</span><span class="p">(</span><span class="n">sOriginalName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sOriginalName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample Report Q1 2024"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSafeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replace</span><span class="p">(</span><span class="n">sOriginalName</span><span class="p">,</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span><span class="w"> </span><span class="s2">"_"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Original: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOriginalName</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Safe name: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSafeName</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Original: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOriginalName</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Safe name: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSafeName</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;MakeFilenameSafe&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"MakeFilenameSafe"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="replace-a-token-regardless-of-its-casing">Replace a token regardless of its casing<a class="headerlink" href="#replace-a-token-regardless-of-its-casing" title="Permanent link">&para;</a></h3>
 <p>Show that <code>Replace()</code> matches the search text without regard to letter case.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeStatusText</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStatusLine</span><span class="p">,</span><span class="w"> </span><span class="n">sNormalized</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sStatusLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Pending, PENDING, pending&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sNormalized</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replace</span><span class="p">(</span><span class="n">sStatusLine</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;pending&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Ready&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sStatusLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Pending, PENDING, pending"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sNormalized</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replace</span><span class="p">(</span><span class="n">sStatusLine</span><span class="p">,</span><span class="w"> </span><span class="s2">"pending"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Ready"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Before: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatusLine</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;After: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sNormalized</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Before: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatusLine</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"After: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sNormalized</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NormalizeStatusText&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"NormalizeStatusText"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="apply-several-replacements-to-a-template">Apply several replacements to a template<a class="headerlink" href="#apply-several-replacements-to-a-template" title="Permanent link">&para;</a></h3>
 <p>Build a final message by applying several case-insensitive replacements in sequence.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildAlertMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTemplate</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sTemplate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sample {id} failed on {DATE}&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTemplate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"sample {id} failed on {DATE}"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replace</span><span class="p">(</span><span class="n">sTemplate</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;{id}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;S-10025&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replace</span><span class="p">(</span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;{date}&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;2026-04-19&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replace</span><span class="p">(</span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;failed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;requires review&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replace</span><span class="p">(</span><span class="n">sTemplate</span><span class="p">,</span><span class="w"> </span><span class="s2">"{id}"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S-10025"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replace</span><span class="p">(</span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="s2">"{date}"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2026-04-19"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replace</span><span class="p">(</span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="s2">"failed"</span><span class="p">,</span><span class="w"> </span><span class="s2">"requires review"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildAlertMessage&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildAlertMessage"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>sample S-10025 requires review on 2026-04-19

@@ -4172,17 +4172,17 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetOpenSamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, status</span>
 <span class="s2">        FROM sample</span>
 <span class="s2">        WHERE status = ?</span>
 <span class="s2">        ORDER BY sample_id</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Open&quot;</span><span class="p">});</span>
+<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Open"</span><span class="p">});</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" is "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]));</span>
 <span class="w">        </span><span class="c1">/* Logs one line per returned row;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
@@ -4190,31 +4190,31 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetOpenSamples&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetOpenSamples"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="filter-by-status-and-date-on-a-named-connection">Filter by status and date on a named connection<a class="headerlink" href="#filter-by-status-and-date-on-a-named-connection" title="Permanent link">&para;</a></h3>
 <p>Filter by two parameters on a named connection. The procedure returns the result array without messaging — the caller decides what to do with it.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetRecentSamplesByStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">dCutoff</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">"Logged"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">dCutoff</span><span class="p">,</span><span class="w"> </span><span class="nf">Today</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, status, received_date</span>
 <span class="s2">        FROM sample</span>
 <span class="s2">        WHERE status = ?</span>
 <span class="s2">          AND received_date &gt;= ?</span>
 <span class="s2">        ORDER BY received_date DESC</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="s2">&quot;DATABASE&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">dCutoff</span><span class="p">});</span>
+<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="s2">"DATABASE"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">dCutoff</span><span class="p">});</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aRows</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetRecentSamplesByStatus&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetRecentSamplesByStatus"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="preserve-database-nulls-and-mark-invariant-date-columns">Preserve database NULLs and mark invariant date columns<a class="headerlink" href="#preserve-database-nulls-and-mark-invariant-date-columns" title="Permanent link">&para;</a></h3>
 <p>Pass <a href="../../literals/false/"><code>.F.</code></a> for <code>bNullAsBlank</code> and name both date columns in <code>aInvariantDateCols</code> so that <code>NULL</code> closed dates come back as <a href="../../literals/nil/"><code>NIL</code></a> and both dates bypass timezone conversion.</p>
@@ -4222,24 +4222,24 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dEndDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">dClosedDate</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT audit_id, opened_date, closed_date</span>
 <span class="s2">        FROM audit_log</span>
 <span class="s2">        WHERE opened_date &gt;= ?</span>
 <span class="s2">          AND opened_date &lt; ?</span>
 <span class="s2">        ORDER BY opened_date</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="s2">&quot;DATABASE&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dEndDate</span><span class="p">},</span><span class="w"> </span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;opened_date&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;closed_date&quot;</span><span class="p">});</span>
+<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="s2">"DATABASE"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dEndDate</span><span class="p">},</span><span class="w"> </span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"opened_date"</span><span class="p">,</span><span class="w"> </span><span class="s2">"closed_date"</span><span class="p">});</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">);</span>
 <span class="w">        </span><span class="n">dClosedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">];</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">dClosedDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Audit &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is still open&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Audit "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" is still open"</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs when no closed date is returned;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Audit &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; closed on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dClosedDate</span><span class="p">));</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Audit "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aRows</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" closed on "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dClosedDate</span><span class="p">));</span>
 <span class="w">            </span><span class="c1">/* Logs the audit close date;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
@@ -4248,7 +4248,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetAuditWindow&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">Today</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nf">Today</span><span class="p">()});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetAuditWindow"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">Today</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nf">Today</span><span class="p">()});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

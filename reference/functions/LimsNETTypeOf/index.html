@@ -3792,10 +3792,10 @@
 <p>Use one of the built-in aliases and inspect the resolved full name. The alias <code>"string"</code> expands to <code>System.String</code>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">oType</span><span class="p">;</span>
 
-<span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">;</span>
+<span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"string"</span><span class="p">;</span>
 <span class="n">oType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">);</span>
 
-<span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Resolved type: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">FullName</span><span class="p">));</span>
+<span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Resolved type: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">FullName</span><span class="p">));</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Resolved type: System.String
@@ -3804,12 +3804,12 @@
 <p>Use the full name when you want an exact type instead of relying on an alias. <code>"System.Text.StringBuilder"</code> resolves to a type with short name <code>StringBuilder</code>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">oType</span><span class="p">,</span><span class="w"> </span><span class="n">sTypeLabel</span><span class="p">;</span>
 
-<span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;System.Text.StringBuilder&quot;</span><span class="p">;</span>
+<span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"System.Text.StringBuilder"</span><span class="p">;</span>
 <span class="n">oType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">);</span>
 <span class="n">sTypeLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">Name</span><span class="p">);</span>
 
-<span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Resolved type name: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeLabel</span><span class="p">);</span>
-<span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Full name: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">FullName</span><span class="p">));</span>
+<span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Resolved type name: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeLabel</span><span class="p">);</span>
+<span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Full name: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">FullName</span><span class="p">));</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Resolved type name: StringBuilder
@@ -3819,17 +3819,17 @@ Full name: System.Text.StringBuilder
 <p>Guard user-supplied input, then catch lookup failures so the script can report a useful message. Because <code>"CustomLib.Models.FooBar"</code> is a non-empty string but an unknown type, the <a href="../../keywords/TRY/"><code>:TRY</code></a> fires and the <a href="../../keywords/CATCH/"><code>:CATCH</code></a> branch reports the error.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">oType</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CustomLib.Models.FooBar&quot;</span><span class="p">;</span>
+<span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"CustomLib.Models.FooBar"</span><span class="p">;</span>
 
-<span class="k">:IF</span><span class="w"> </span><span class="nf">LimsTypeEx</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">&quot;STRING&quot;</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="nf">AllTrim</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">));</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Type name must be a non-empty string.&quot;</span><span class="p">);</span>
+<span class="k">:IF</span><span class="w"> </span><span class="nf">LimsTypeEx</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"STRING"</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="nf">AllTrim</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Type name must be a non-empty string."</span><span class="p">);</span>
 <span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Resolved type: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">FullName</span><span class="p">));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Resolved type: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oType</span><span class="p">:</span><span class="n">FullName</span><span class="p">));</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Could not resolve type: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Could not resolve type: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDIF</span><span class="p">;</span>
 </code></pre></div>

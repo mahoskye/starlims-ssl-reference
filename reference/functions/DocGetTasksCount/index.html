@@ -4122,8 +4122,8 @@ If the underlying Documentum call fails, the function returns <code>-1</code>.</
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">&quot;Repository&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;analyst&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">"Repository"</span><span class="p">,</span><span class="w"> </span><span class="s2">"analyst"</span><span class="p">,</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Documentum login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">            </span><span class="c1">/* Logs on login failure;</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -4131,12 +4131,12 @@ If the underlying Documentum call fails, the function returns <code>-1</code>.</
 <span class="w">        </span><span class="n">nTaskCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetTasksCount</span><span class="p">();</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nTaskCount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Could not read inbox count: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Could not read inbox count: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">            </span><span class="c1">/* Logs on count failure;</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Current pending tasks: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nTaskCount</span><span class="p">));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Current pending tasks: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nTaskCount</span><span class="p">));</span>
 <span class="w">        </span><span class="c1">/* Logs current pending task count;</span>
 
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
@@ -4145,7 +4145,7 @@ If the underlying Documentum call fails, the function returns <code>-1</code>.</
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDashboardTaskCount&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowDashboardTaskCount"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="branch-workflow-behavior-on-count-vs-failure">Branch workflow behavior on count vs failure<a class="headerlink" href="#branch-workflow-behavior-on-count-vs-failure" title="Permanent link">&para;</a></h3>
 <p>Reads the inbox count and branches on three distinct cases: a failed call (returns <code>-1</code>), an empty inbox, and a non-empty inbox, returning <a href="../../literals/true/"><code>.T.</code></a> only when there are tasks to process.</p>
@@ -4155,23 +4155,23 @@ If the underlying Documentum call fails, the function returns <code>-1</code>.</
 <span class="w">    </span><span class="n">nTaskCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetTasksCount</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nTaskCount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Inbox count lookup failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Inbox count lookup failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="c1">/* Logs on failure;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nTaskCount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No Documentum inbox tasks are waiting&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No Documentum inbox tasks are waiting"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Processing &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nTaskCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; Documentum tasks&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Processing "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nTaskCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" Documentum tasks"</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs task count before processing;</span>
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckInboxBeforeWork&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckInboxBeforeWork"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

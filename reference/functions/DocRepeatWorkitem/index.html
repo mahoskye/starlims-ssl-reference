@@ -4185,22 +4185,22 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aUsers</span><span class="p">,</span><span class="w"> </span><span class="n">bRepeated</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WI-2024-00423&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aUsers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mwilliams&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"WI-2024-00423"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aUsers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"jsmith"</span><span class="p">,</span><span class="w"> </span><span class="s2">"mwilliams"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">bRepeated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocRepeatWorkitem</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">aUsers</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bRepeated</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Repeated workitem &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Repeated workitem "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Could not repeat workitem &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Could not repeat workitem "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RepeatWorkitemBasic&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RepeatWorkitemBasic"</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Repeated workitem WI-2024-00423
@@ -4213,11 +4213,11 @@ Could not repeat workitem WI-2024-00423
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">bRepeated</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aUsers</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WI-2024-00847&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aUsers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mwilson&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">sSignOffUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;supervisor01&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSignOffPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;S3cur3P@ss&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSignOffReason</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Return this step for corrected data review&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"WI-2024-00847"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aUsers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"jsmith"</span><span class="p">,</span><span class="w"> </span><span class="s2">"mwilson"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sSignOffUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"supervisor01"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSignOffPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"S3cur3P@ss"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSignOffReason</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Return this step for corrected data review"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bRepeated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocRepeatWorkitem</span><span class="p">(</span>
 <span class="w">        </span><span class="n">sWorkitemId</span><span class="p">,</span>
@@ -4228,9 +4228,9 @@ Could not repeat workitem WI-2024-00423
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bRepeated</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Repeated &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; with signoff context&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Repeated "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" with signoff context"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Repeat request failed for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Repeat request failed for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
@@ -4239,7 +4239,7 @@ Could not repeat workitem WI-2024-00423
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RepeatWorkitemWithSignoff&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RepeatWorkitemWithSignoff"</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Repeated WI-2024-00847 with signoff context

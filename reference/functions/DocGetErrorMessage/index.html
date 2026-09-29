@@ -3842,11 +3842,11 @@
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">&quot;Repository&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;baduser&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;badpass&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">"Repository"</span><span class="p">,</span><span class="w"> </span><span class="s2">"baduser"</span><span class="p">,</span><span class="w"> </span><span class="s2">"badpass"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Documentum login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Documentum login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs login failure details;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3854,7 +3854,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDocLoginError&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowDocLoginError"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="capture-an-import-error-before-the-next-call">Capture an import error before the next call<a class="headerlink" href="#capture-an-import-error-before-the-next-call" title="Permanent link">&para;</a></h3>
 <p>Stores the error message immediately after a failed import so the value is preserved before any subsequent Documentum call could overwrite the error state.</p>
@@ -3864,29 +3864,29 @@
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">&quot;Repository&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;lims_user&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">"Repository"</span><span class="p">,</span><span class="w"> </span><span class="s2">"lims_user"</span><span class="p">,</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">            </span><span class="c1">/* Logs login failure details;</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="n">sDocId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocImportDocument</span><span class="p">(</span>
-<span class="w">            </span><span class="s2">&quot;C:\\Docs\\Result.pdf&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;/Standard/Reports/2024&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;Result.pdf&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;PDF&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;&quot;</span>
+<span class="w">            </span><span class="s2">"C:\\Docs\\Result.pdf"</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"/Standard/Reports/2024"</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"Result.pdf"</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"PDF"</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">""</span>
 <span class="w">        </span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
 <span class="w">            </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Import failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Import failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs import failure details;</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Imported document ID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDocId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Imported document ID: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDocId</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs imported document ID;</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
@@ -3894,7 +3894,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ImportWithLoggedError&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ImportWithLoggedError"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="return-both-failure-state-and-message-from-a-helper">Return both failure state and message from a helper<a class="headerlink" href="#return-both-failure-state-and-message-from-a-helper" title="Permanent link">&para;</a></h3>
 <p>Encapsulates the <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> flag and <code>DocGetErrorMessage</code> result in a helper procedure that returns a result object, keeping the calling procedure clean.</p>
@@ -3903,7 +3903,7 @@
 
 <span class="w">    </span><span class="n">oStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">();</span>
 <span class="w">    </span><span class="n">oStatus</span><span class="p">:</span><span class="n">failed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<span class="w">    </span><span class="n">oStatus</span><span class="p">:</span><span class="n">errorMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oStatus</span><span class="p">:</span><span class="n">errorMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oStatus</span><span class="p">:</span><span class="n">failed</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oStatus</span><span class="p">:</span><span class="n">errorMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
@@ -3918,27 +3918,27 @@
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">&quot;Repository&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;lims_user&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">"Repository"</span><span class="p">,</span><span class="w"> </span><span class="s2">"lims_user"</span><span class="p">,</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="n">sDocId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocImportDocument</span><span class="p">(</span>
-<span class="w">            </span><span class="s2">&quot;C:\\Docs\\Result.pdf&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;/Standard/Reports/2024&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;Result.pdf&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;PDF&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;&quot;</span>
+<span class="w">            </span><span class="s2">"C:\\Docs\\Result.pdf"</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"/Standard/Reports/2024"</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"Result.pdf"</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"PDF"</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">""</span>
 <span class="w">        </span><span class="p">);</span>
 
-<span class="w">        </span><span class="n">oStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ReadImportStatus&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">oStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReadImportStatus"</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">oStatus</span><span class="p">:</span><span class="n">failed</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Import failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oStatus</span><span class="p">:</span><span class="n">errorMessage</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Import failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oStatus</span><span class="p">:</span><span class="n">errorMessage</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs import failure details;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Imported document ID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDocId</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Imported document ID: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDocId</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs imported document ID;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
@@ -3947,7 +3947,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ImportDocumentWithStatus&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ImportDocumentWithStatus"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

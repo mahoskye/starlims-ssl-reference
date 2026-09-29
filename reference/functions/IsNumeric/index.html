@@ -4017,54 +4017,54 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateNumericInput</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">bIsNumeric</span><span class="p">,</span><span class="w"> </span><span class="n">nValue</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;1,234.50&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"1,234.50"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bIsNumeric</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsNumeric</span><span class="p">(</span><span class="n">sUserInput</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bIsNumeric</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Enter a valid number.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Enter a valid number."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ToNumeric</span><span class="p">(</span><span class="n">sUserInput</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Accepted value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nValue</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Accepted value: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nValue</span><span class="p">));</span>
 <span class="w">    </span><span class="c1">/* Logs converted numeric value on success;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateNumericInput&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateNumericInput"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="distinguish-decimal-and-hexadecimal-input">Distinguish decimal and hexadecimal input<a class="headerlink" href="#distinguish-decimal-and-hexadecimal-input" title="Permanent link">&para;</a></h3>
 <p>Check the same value against both decimal and hex modes to route it into the correct conversion path. For <code>"0xFF"</code>, the decimal check fails and the hex check succeeds, so <a href="../ToNumeric/"><code>ToNumeric</code></a> is called with <code>bAllowHex</code> <a href="../../literals/true/"><code>.T.</code></a> and returns <code>255</code>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseConfigValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConfigValue</span><span class="p">,</span><span class="w"> </span><span class="n">bIsDecimal</span><span class="p">,</span><span class="w"> </span><span class="n">bIsHex</span><span class="p">,</span><span class="w"> </span><span class="n">nValue</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sConfigValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;0xFF&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sConfigValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"0xFF"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bIsDecimal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsNumeric</span><span class="p">(</span><span class="n">sConfigValue</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
 <span class="w">    </span><span class="n">bIsHex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsNumeric</span><span class="p">(</span><span class="n">sConfigValue</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsDecimal</span><span class="p">;</span>
 <span class="w">        </span><span class="n">nValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ToNumeric</span><span class="p">(</span><span class="n">sConfigValue</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Decimal value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nValue</span><span class="p">));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Decimal value: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nValue</span><span class="p">));</span>
 <span class="w">        </span><span class="c1">/* Logs parsed decimal value;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsHex</span><span class="p">;</span>
 <span class="w">        </span><span class="n">nValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ToNumeric</span><span class="p">(</span><span class="n">sConfigValue</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Hex value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nValue</span><span class="p">));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Hex value: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nValue</span><span class="p">));</span>
 <span class="w">        </span><span class="c1">/* Logs parsed hexadecimal value;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Config value is not numeric.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Config value is not numeric."</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseConfigValue&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ParseConfigValue"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="filter-imported-rows-and-collect-invalid-ids-for-review">Filter imported rows and collect invalid IDs for review<a class="headerlink" href="#filter-imported-rows-and-collect-invalid-ids-for-review" title="Permanent link">&para;</a></h3>
 <p>Iterate over a batch of imported rows, use <code>IsNumeric</code> to classify each record ID, and collect failures separately for follow-up. The <code>bAllowHex</code> parameter is forwarded so callers can opt in to hex IDs without changing the validation logic.</p>
@@ -4086,16 +4086,16 @@
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Valid rows: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCleanRows</span><span class="p">)));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Valid rows: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCleanRows</span><span class="p">)));</span>
 <span class="w">    </span><span class="c1">/* Logs valid row count;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Invalid rows: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aInvalidRows</span><span class="p">)));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Invalid rows: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aInvalidRows</span><span class="p">)));</span>
 <span class="w">    </span><span class="c1">/* Logs invalid row count;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aCleanRows</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CleanImportedSampleData&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{{</span><span class="s2">&quot;001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Sample A&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;0xFF&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Sample B&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;bad_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Sample C&quot;</span><span class="p">}},</span><span class="w"> </span><span class="kc">.T.</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CleanImportedSampleData"</span><span class="p">,</span><span class="w"> </span><span class="p">{{{</span><span class="s2">"001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Sample A"</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">"0xFF"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Sample B"</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">"bad_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Sample C"</span><span class="p">}},</span><span class="w"> </span><span class="kc">.T.</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

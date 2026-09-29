@@ -3442,44 +3442,44 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindPendingRows</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oImport</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">oRow</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="s2">&quot;C:/Import&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="nf">GetTable</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oTable</span><span class="p">:</span><span class="nf">Select</span><span class="p">({</span><span class="s2">&quot;status&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{{</span><span class="s2">&quot;Pending&quot;</span><span class="p">}});</span>
+<span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="s2">"C:/Import"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="nf">GetTable</span><span class="p">(</span><span class="s2">"sample"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oTable</span><span class="p">:</span><span class="nf">Select</span><span class="p">({</span><span class="s2">"status"</span><span class="p">},</span><span class="w"> </span><span class="p">{{</span><span class="s2">"Pending"</span><span class="p">}});</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No pending rows found&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No pending rows found"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oRow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aRows</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-<span class="w">    </span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRow</span><span class="p">:</span><span class="nf">GetField</span><span class="p">(</span><span class="s2">&quot;sample_id&quot;</span><span class="p">):</span><span class="n">Value</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRow</span><span class="p">:</span><span class="nf">GetField</span><span class="p">(</span><span class="s2">"sample_id"</span><span class="p">):</span><span class="n">Value</span><span class="p">;</span>
 
 <span class="c1">/* Logs matching sample id when a pending row exists;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;First pending sample: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"First pending sample: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FindPendingRows&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FindPendingRows"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="update-matching-rows-and-persist-them">Update matching rows and persist them<a class="headerlink" href="#update-matching-rows-and-persist-them" title="Permanent link">&para;</a></h3>
 <p>This example demonstrates assigning a primary key with <code>AddPK()</code>, updating a field across matching rows using <code>UpdateField()</code>, then persisting only those updated rows to the database with <code>SaveToDb()</code>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompletePendingRows</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oImport</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">bSaved</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="s2">&quot;C:/Import&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="nf">GetTable</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="s2">"C:/Import"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="nf">GetTable</span><span class="p">(</span><span class="s2">"sample"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">oTable</span><span class="p">:</span><span class="nf">AddPK</span><span class="p">(</span><span class="s2">&quot;sample_id&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">oTable</span><span class="p">:</span><span class="nf">UpdateField</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Complete&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Pending&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">bSaved</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oTable</span><span class="p">:</span><span class="nf">SaveToDb</span><span class="p">(</span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{{</span><span class="s2">&quot;Complete&quot;</span><span class="p">}});</span>
+<span class="w">    </span><span class="n">oTable</span><span class="p">:</span><span class="nf">AddPK</span><span class="p">(</span><span class="s2">"sample_id"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oTable</span><span class="p">:</span><span class="nf">UpdateField</span><span class="p">(</span><span class="s2">"status"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Complete"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Pending"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bSaved</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oTable</span><span class="p">:</span><span class="nf">SaveToDb</span><span class="p">(</span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"status"</span><span class="p">},</span><span class="w"> </span><span class="p">{{</span><span class="s2">"Complete"</span><span class="p">}});</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bSaved</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Completed rows were saved&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Completed rows were saved"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompletePendingRows&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CompletePendingRows"</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Completed rows were saved

@@ -2470,18 +2470,18 @@
 <span class="w">    </span><span class="n">oWebServices</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">WebServices</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oHttpClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateHttpClient</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">oRequest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">CreateHttpRequest</span><span class="p">(</span><span class="s2">&quot;https://notifier.example/api/batch&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">Method</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">ContentType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">Accept</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">SetContent</span><span class="p">(</span><span class="s2">&quot;{&quot;&quot;batch&quot;&quot;:&quot;&quot;B-1042&quot;&quot;,&quot;&quot;status&quot;&quot;:&quot;&quot;complete&quot;&quot;}&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">CreateHttpRequest</span><span class="p">(</span><span class="s2">"https://notifier.example/api/batch"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">Method</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"POST"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">ContentType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"application/json"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">Accept</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"application/json"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">SetContent</span><span class="p">(</span><span class="s2">"{""batch"":""B-1042"",""status"":""complete""}"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetResponse</span><span class="p">(</span><span class="n">oRequest</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">oResponse</span><span class="p">:</span><span class="nf">GetValueAsString</span><span class="p">());</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NotifyBatchComplete&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"NotifyBatchComplete"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="add-a-custom-auth-header-and-a-longer-timeout">Add a custom auth header and a longer timeout<a class="headerlink" href="#add-a-custom-auth-header-and-a-longer-timeout" title="Permanent link">&para;</a></h3>
 <p>Adds an <code>Authorization</code> header and gives the request 60 seconds before timing out.</p>
@@ -2491,17 +2491,17 @@
 <span class="w">    </span><span class="n">oWebServices</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">WebServices</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oHttpClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateHttpClient</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">oRequest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">CreateHttpRequest</span><span class="p">(</span><span class="s2">&quot;https://lims-data.example/api/v2/samples/recent&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">AddHeader</span><span class="p">(</span><span class="s2">&quot;Authorization&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bearer abcdef0123456789&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">CreateHttpRequest</span><span class="p">(</span><span class="s2">"https://lims-data.example/api/v2/samples/recent"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">AddHeader</span><span class="p">(</span><span class="s2">"Authorization"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Bearer abcdef0123456789"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">Timeout</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">60000</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">Accept</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">Accept</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"application/json"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetText</span><span class="p">(</span><span class="n">oRequest</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sBody</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FetchWithBearer&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FetchWithBearer"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="upload-a-file-as-the-request-body">Upload a file as the request body<a class="headerlink" href="#upload-a-file-as-the-request-body" title="Permanent link">&para;</a></h3>
 <p>Uses <code>SetContentFromFile</code> to send a binary file as a <code>PUT</code> request body.</p>
@@ -2511,17 +2511,17 @@
 <span class="w">    </span><span class="n">oWebServices</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">WebServices</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oHttpClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateHttpClient</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">oRequest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">CreateHttpRequest</span><span class="p">(</span><span class="s2">&quot;https://archive.example/api/results/B-1042&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">Method</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;PUT&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">ContentType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;application/zip&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">SetContentFromFile</span><span class="p">(</span><span class="s2">&quot;C:\Lims\Outbox\B-1042.zip&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">CreateHttpRequest</span><span class="p">(</span><span class="s2">"https://archive.example/api/results/B-1042"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">Method</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"PUT"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">ContentType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"application/zip"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">SetContentFromFile</span><span class="p">(</span><span class="s2">"C:\Lims\Outbox\B-1042.zip"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetResponse</span><span class="p">(</span><span class="n">oRequest</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Server responded: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oResponse</span><span class="p">:</span><span class="nf">GetValueAsString</span><span class="p">());</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Server responded: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oResponse</span><span class="p">:</span><span class="nf">GetValueAsString</span><span class="p">());</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;UploadResultArchive&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"UploadResultArchive"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

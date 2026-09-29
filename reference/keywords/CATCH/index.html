@@ -2862,23 +2862,23 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConnectToSamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;S-1001&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"S-1001"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, status</span>
 <span class="s2">        FROM sample</span>
 <span class="s2">        WHERE sample_id = ?sSampleID?</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="c1">/* Handle a failed query and report the error to the user;</span>
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="n">sSQL</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Loaded &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; row(s).&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Loaded "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" row(s)."</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs loaded row count;</span>
 
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample query failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample query failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs query failure message;</span>
 
@@ -2886,7 +2886,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ConnectToSamples&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ConnectToSamples"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="branch-on-error-type-and-use-finally-for-shared-cleanup">Branch on error type and use FINALLY for shared cleanup<a class="headerlink" href="#branch-on-error-type-and-use-finally-for-shared-cleanup" title="Permanent link">&para;</a></h3>
 <p>Use a <a href="../BEGINCASE/"><code>:BEGINCASE</code></a> inside <code>:CATCH</code> to route different error codes to different handlers. <a href="../FINALLY/"><code>:FINALLY</code></a> runs unconditionally to report the final outcome.</p>
@@ -2895,33 +2895,33 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nTotal</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">,</span><span class="w"> </span><span class="n">bValidationError</span><span class="p">,</span><span class="w"> </span><span class="n">bDbError</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LAB-2024-0042"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nTotal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bValidationError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bDbError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT result_value</span>
 <span class="s2">        FROM sample_result</span>
 <span class="s2">        WHERE sample_id = ?sSampleID?</span>
 <span class="s2">        ORDER BY result_no</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="n">sSQL</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aResults</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">&quot;No sample found with ID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">"No sample found with ID: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aResults</span><span class="p">);</span>
-<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Processing row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">);</span>
+<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Processing row "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">);</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLogMessage</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs current row being processed;</span>
 
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]);</span>
-<span class="w">                </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">&quot;Empty result value at row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">));</span>
+<span class="w">                </span><span class="nf">RaiseError</span><span class="p">(</span><span class="s2">"Empty result value at row "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">));</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">            </span><span class="n">nTotal</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
@@ -2933,18 +2933,18 @@
 <span class="w">        </span><span class="k">:BEGINCASE</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:CASE</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Code</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">207</span><span class="p">;</span>
 <span class="w">            </span><span class="n">bValidationError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Validation failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Validation failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLogMessage</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs validation failure message;</span>
 <span class="w">            </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:CASE</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Code</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">208</span><span class="p">;</span>
 <span class="w">            </span><span class="n">bDbError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Database error in query: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Operation</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Database error in query: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Operation</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">sLogMessage</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs database failure message;</span>
 <span class="w">            </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Unexpected error (&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oErr</span><span class="p">:</span><span class="n">Code</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;): &quot;</span>
+<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Unexpected error ("</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oErr</span><span class="p">:</span><span class="n">Code</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"): "</span>
 <span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">sLogMessage</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs unexpected failure message;</span>
@@ -2955,14 +2955,14 @@
 
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Processing completed successfully. Total: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nTotal</span><span class="p">));</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Processing completed successfully. Total: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nTotal</span><span class="p">));</span>
 <span class="w">            </span><span class="c1">/* Logs completion total;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="n">bValidationError</span><span class="p">;</span>
-<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Please review data and resubmit.&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Please review data and resubmit."</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="n">bDbError</span><span class="p">;</span>
-<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Database error occurred. Contact system administrator.&quot;</span><span class="p">);</span>
+<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Database error occurred. Contact system administrator."</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -2972,7 +2972,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ProcessSampleData&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ProcessSampleData"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

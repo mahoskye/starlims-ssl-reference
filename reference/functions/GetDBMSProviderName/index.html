@@ -4080,13 +4080,13 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowProviderName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sProviderName</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sProviderName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDBMSProviderName</span><span class="p">(</span><span class="s2">&quot;LIMS&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sProviderName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDBMSProviderName</span><span class="p">(</span><span class="s2">"LIMS"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Provider: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProviderName</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Provider: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProviderName</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowProviderName&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowProviderName"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Provider: SQLSERVER
@@ -4099,15 +4099,15 @@
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sProviderName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDBMSProviderName</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Provider: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProviderName</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Provider: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProviderName</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sProviderName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetProviderSafe&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LIMS&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetProviderSafe"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LIMS"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="branch-logic-by-provider-identifier">Branch logic by provider identifier<a class="headerlink" href="#branch-logic-by-provider-identifier" title="Permanent link">&para;</a></h3>
 <p>Uses the returned identifier to select a provider-specific integration strategy, falling back to <code>"GENERIC"</code> when the connection is not found.</p>
@@ -4118,21 +4118,21 @@
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sProvider</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDBMSProviderName</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;GENERIC&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">"GENERIC"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sProvider</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;ORACLE&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sStrategy</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ORACLE_SPECIFIC&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sProvider</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"ORACLE"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sStrategy</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ORACLE_SPECIFIC"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sProvider</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;SQLSERVER&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sStrategy</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;MSSQL_SPECIFIC&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sProvider</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"SQLSERVER"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sStrategy</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"MSSQL_SPECIFIC"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sProvider</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;POSTGRESQL&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sStrategy</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;POSTGRES_SPECIFIC&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sProvider</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"POSTGRESQL"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sStrategy</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"POSTGRES_SPECIFIC"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sStrategy</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;GENERIC&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sStrategy</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"GENERIC"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
 
@@ -4140,7 +4140,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AdaptIntegrationByProvider&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;REPORTING&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AdaptIntegrationByProvider"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"REPORTING"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

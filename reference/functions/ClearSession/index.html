@@ -3633,51 +3633,51 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">HandleUserLogout</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserID</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredUserID</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUserID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;JSMITH&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"JSMITH"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">AddToSession</span><span class="p">(</span><span class="s2">&quot;UserID&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sUserID</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">AddToSession</span><span class="p">(</span><span class="s2">&quot;CurrentView&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PendingWork&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">AddToSession</span><span class="p">(</span><span class="s2">"UserID"</span><span class="p">,</span><span class="w"> </span><span class="n">sUserID</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">AddToSession</span><span class="p">(</span><span class="s2">"CurrentView"</span><span class="p">,</span><span class="w"> </span><span class="s2">"PendingWork"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">ClearSession</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">sStoredUserID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFromSession</span><span class="p">(</span><span class="s2">&quot;UserID&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sStoredUserID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFromSession</span><span class="p">(</span><span class="s2">"UserID"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sStoredUserID</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Session cleared during logout.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Session cleared during logout."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Session still contains UserID.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Session still contains UserID."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;HandleUserLogout&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"HandleUserLogout"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="reset-session-before-rebuilding-workflow-state">Reset session before rebuilding workflow state<a class="headerlink" href="#reset-session-before-rebuilding-workflow-state" title="Permanent link">&para;</a></h3>
 <p>Clears stale session values from a previous workflow step, then stores a fresh set of values for the next step.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RestartOrderReview</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOrderNo</span><span class="p">,</span><span class="w"> </span><span class="n">sReviewMode</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredReviewMode</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sOrderNo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WO-2024-0891&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sReviewMode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;PENDING_REVIEW&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOrderNo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"WO-2024-0891"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sReviewMode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"PENDING_REVIEW"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">AddToSession</span><span class="p">(</span><span class="s2">&quot;OrderNo&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sOrderNo</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">AddToSession</span><span class="p">(</span><span class="s2">&quot;ReviewMode&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;IN_PROGRESS&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">AddToSession</span><span class="p">(</span><span class="s2">&quot;SelectedTab&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;History&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">AddToSession</span><span class="p">(</span><span class="s2">"OrderNo"</span><span class="p">,</span><span class="w"> </span><span class="n">sOrderNo</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">AddToSession</span><span class="p">(</span><span class="s2">"ReviewMode"</span><span class="p">,</span><span class="w"> </span><span class="s2">"IN_PROGRESS"</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">AddToSession</span><span class="p">(</span><span class="s2">"SelectedTab"</span><span class="p">,</span><span class="w"> </span><span class="s2">"History"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">ClearSession</span><span class="p">();</span>
 
-<span class="w">    </span><span class="nf">AddToSession</span><span class="p">(</span><span class="s2">&quot;OrderNo&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sOrderNo</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">AddToSession</span><span class="p">(</span><span class="s2">&quot;ReviewMode&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sReviewMode</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">AddToSession</span><span class="p">(</span><span class="s2">"OrderNo"</span><span class="p">,</span><span class="w"> </span><span class="n">sOrderNo</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">AddToSession</span><span class="p">(</span><span class="s2">"ReviewMode"</span><span class="p">,</span><span class="w"> </span><span class="n">sReviewMode</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sStoredReviewMode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFromSession</span><span class="p">(</span><span class="s2">&quot;ReviewMode&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sStoredReviewMode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFromSession</span><span class="p">(</span><span class="s2">"ReviewMode"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStoredReviewMode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;PENDING_REVIEW&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Order review restarted with a clean session.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStoredReviewMode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"PENDING_REVIEW"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Order review restarted with a clean session."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RestartOrderReview&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RestartOrderReview"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

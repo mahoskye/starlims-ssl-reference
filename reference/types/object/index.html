@@ -2051,7 +2051,7 @@
 <h2 id="creating-values">Creating values<a class="headerlink" href="#creating-values" title="Permanent link">&para;</a></h2>
 <p>Dynamic objects are created with <a href="../../functions/CreateLocal/"><code>CreateLocal</code></a> (empty) or <a href="../../functions/CreateUdObject/"><code>CreateUdObject</code></a> (with initialization):</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">oEmpty</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateLocal</span><span class="p">();</span>
-<span class="n">oInit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">({{</span><span class="s2">&quot;sampleId&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-0042&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Pending&quot;</span><span class="p">}});</span>
+<span class="n">oInit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">({{</span><span class="s2">"sampleId"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-0042"</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">"status"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Pending"</span><span class="p">}});</span>
 </code></pre></div>
 <table>
 <thead>
@@ -2272,19 +2272,19 @@
 
 <span class="w">    </span><span class="n">oContext</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateLocal</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">oContext</span><span class="p">:</span><span class="n">sampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-0042&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oContext</span><span class="p">:</span><span class="n">status</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Pending&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oContext</span><span class="p">:</span><span class="n">sampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LAB-0042"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oContext</span><span class="p">:</span><span class="n">status</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Pending"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oContext</span><span class="p">:</span><span class="n">priority</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oContext</span><span class="p">:</span><span class="n">sampleId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; / &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oContext</span><span class="p">:</span><span class="n">status</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; / &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oContext</span><span class="p">:</span><span class="n">priority</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oContext</span><span class="p">:</span><span class="n">sampleId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" / "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oContext</span><span class="p">:</span><span class="n">status</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" / "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oContext</span><span class="p">:</span><span class="n">priority</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSummary</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oContext</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildReviewContext&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildReviewContext"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>LAB-0042 / Pending / 2
@@ -2295,29 +2295,29 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPayload</span><span class="p">,</span><span class="w"> </span><span class="n">oSnapshot</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">({</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;sampleId&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-0042&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"sampleId"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-0042"</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"status"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Logged"</span><span class="p">}</span>
 <span class="w">    </span><span class="p">});</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">oPayload</span><span class="p">:</span><span class="nf">IsProperty</span><span class="p">(</span><span class="s2">&quot;reviewComment&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">AddProperty</span><span class="p">(</span><span class="s2">&quot;reviewComment&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">oPayload</span><span class="p">:</span><span class="nf">IsProperty</span><span class="p">(</span><span class="s2">"reviewComment"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">AddProperty</span><span class="p">(</span><span class="s2">"reviewComment"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="n">reviewComment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Ready for approval&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="n">reviewComment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Ready for approval"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oSnapshot</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">clone</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="n">status</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Approved&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="n">status</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Approved"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">GetDynPropList</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Fields tracked: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFields</span><span class="p">));</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Fields tracked: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFields</span><span class="p">));</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Snapshot status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSnapshot</span><span class="p">:</span><span class="n">status</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Snapshot status: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSnapshot</span><span class="p">:</span><span class="n">status</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oPayload</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PrepareApprovalPayload&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"PrepareApprovalPayload"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Fields tracked: 3
@@ -2329,12 +2329,12 @@ Snapshot status: Logged
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPayload</span><span class="p">,</span><span class="w"> </span><span class="n">oRestored</span><span class="p">,</span><span class="w"> </span><span class="n">aTests</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">({</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;sampleId&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-0042&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;tests&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;pH&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Conductivity&quot;</span><span class="p">}},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;released&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">}</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"sampleId"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-0042"</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"tests"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"pH"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Conductivity"</span><span class="p">}},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"released"</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">}</span>
 <span class="w">    </span><span class="p">});</span>
 
-<span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="n">XmlType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SamplePayload&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="n">XmlType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SamplePayload"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">Serialize</span><span class="p">();</span>
 
@@ -2342,14 +2342,14 @@ Snapshot status: Logged
 <span class="w">    </span><span class="n">oRestored</span><span class="p">:</span><span class="nf">Deserialize</span><span class="p">(</span><span class="n">sXml</span><span class="p">);</span>
 <span class="w">    </span><span class="n">aTests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRestored</span><span class="p">:</span><span class="n">tests</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Restored root: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oRestored</span><span class="p">:</span><span class="n">XmlType</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;First test: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aTests</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Restored root: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oRestored</span><span class="p">:</span><span class="n">XmlType</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"First test: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aTests</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oRestored</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RoundTripObjectXml&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RoundTripObjectXml"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Restored root: SamplePayload

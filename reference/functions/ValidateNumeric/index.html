@@ -3984,22 +3984,22 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateNumericInput</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">,</span><span class="w"> </span><span class="n">nValue</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;42.5&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"42.5"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bIsValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ValidateNumeric</span><span class="p">(</span><span class="n">sUserInput</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bIsValid</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Enter a valid number.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Enter a valid number."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Val</span><span class="p">(</span><span class="n">sUserInput</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Accepted value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nValue</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Accepted value: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nValue</span><span class="p">));</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateNumericInput&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateNumericInput"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Accepted value: 42.5
@@ -4011,19 +4011,19 @@
 
 <span class="w">    </span><span class="n">sDecimalSep</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDecimalSeparator</span><span class="p">();</span>
 <span class="w">    </span><span class="n">sGroupSep</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetGroupSeparator</span><span class="p">();</span>
-<span class="w">    </span><span class="n">sCandidate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGroupSep</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;234&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDecimalSep</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;56&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCandidate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"1"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGroupSep</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"234"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDecimalSep</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"56"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bIsValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ValidateNumeric</span><span class="p">(</span><span class="n">sCandidate</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Candidate: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCandidate</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Candidate: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCandidate</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the constructed candidate string;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Valid under current settings: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bIsValid</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Valid under current settings: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bIsValid</span><span class="p">));</span>
 <span class="w">    </span><span class="c1">/* Logs whether the candidate is valid;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateUsingCurrentSeparators&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateUsingCurrentSeparators"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="filter-imported-values-and-collect-invalid-rows">Filter imported values and collect invalid rows<a class="headerlink" href="#filter-imported-values-and-collect-invalid-rows" title="Permanent link">&para;</a></h3>
 <p>Validate a batch of imported string values and accumulate the ones that fail into a separate array for review. The expected output uses the sample data above where <code>"INVALID"</code> is the only non-numeric value.</p>
@@ -4031,7 +4031,7 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleRows</span><span class="p">,</span><span class="w"> </span><span class="n">aValidValues</span><span class="p">,</span><span class="w"> </span><span class="n">aInvalidRows</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sValue</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aSampleRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;100.50&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;202.75&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;INVALID&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;45.00&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aSampleRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"100.50"</span><span class="p">,</span><span class="w"> </span><span class="s2">"202.75"</span><span class="p">,</span><span class="w"> </span><span class="s2">"INVALID"</span><span class="p">,</span><span class="w"> </span><span class="s2">"45.00"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aValidValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 <span class="w">    </span><span class="n">aInvalidRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
@@ -4045,14 +4045,14 @@
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Valid values: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aValidValues</span><span class="p">)));</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Invalid rows: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aInvalidRows</span><span class="p">)));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Valid values: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aValidValues</span><span class="p">)));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Invalid rows: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aInvalidRows</span><span class="p">)));</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aInvalidRows</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ReviewImportedValues&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReviewImportedValues"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Valid values: 3

@@ -3607,21 +3607,21 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SendNotificationEmail</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSMTP</span><span class="p">,</span><span class="w"> </span><span class="n">aRecipients</span><span class="p">,</span><span class="w"> </span><span class="n">sFromWho</span><span class="p">,</span><span class="w"> </span><span class="n">sSubject</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">bSent</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSMTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;mail.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aRecipients</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;analyst@example.com&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">sFromWho</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;noreply@example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSubject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample Analysis Complete&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Your sample has been processed and results are available.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSMTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"mail.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aRecipients</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"analyst@example.com"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sFromWho</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"noreply@example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSubject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample Analysis Complete"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Your sample has been processed and results are available."</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bSent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SendLimsEmail</span><span class="p">(</span><span class="n">sSMTP</span><span class="p">,</span><span class="w"> </span><span class="n">aRecipients</span><span class="p">,</span><span class="w"> </span><span class="n">sFromWho</span><span class="p">,</span><span class="w"> </span><span class="n">sSubject</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bSent</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Email was not sent.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Email was not sent."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SendNotificationEmail&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SendNotificationEmail"</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Email was not sent.
@@ -3633,24 +3633,24 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aAttachments</span><span class="p">,</span><span class="w"> </span><span class="n">aCCList</span><span class="p">,</span><span class="w"> </span><span class="n">aBCCList</span><span class="p">,</span><span class="w"> </span><span class="n">sReplyTo</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPort</span><span class="p">,</span><span class="w"> </span><span class="n">sUName</span><span class="p">,</span><span class="w"> </span><span class="n">sUPass</span><span class="p">,</span><span class="w"> </span><span class="n">bSent</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSMTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;smtp.lab.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aRecipients</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;analyst1@lab.example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;analyst2@lab.example.com&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">sFromWho</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;automation@lab.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSubject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Automated Test Report&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSMTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"smtp.lab.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aRecipients</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"analyst1@lab.example.com"</span><span class="p">,</span><span class="w"> </span><span class="s2">"analyst2@lab.example.com"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sFromWho</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"automation@lab.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSubject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Automated Test Report"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sReplyTo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;noreply@lab.example.com&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sReplyTo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"noreply@lab.example.com"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nPort</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">587</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;automation_user&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;smtp_password&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"automation_user"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"smtp_password"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aAttachments</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;C:\\Reports\\TestResults_001.pdf&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">aCCList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;manager@lab.example.com&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aAttachments</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"C:\\Reports\\TestResults_001.pdf"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aCCList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"manager@lab.example.com"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aBCCList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
-<span class="w">    </span><span class="n">sHtmlBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&lt;html&gt;&lt;body&gt;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sHtmlBody</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;&lt;h2&gt;Automated Test Report&lt;/h2&gt;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sHtmlBody</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;&lt;p&gt;The latest report is attached.&lt;/p&gt;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sHtmlBody</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;&lt;/body&gt;&lt;/html&gt;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sHtmlBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"&lt;html&gt;&lt;body&gt;"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sHtmlBody</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">"&lt;h2&gt;Automated Test Report&lt;/h2&gt;"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sHtmlBody</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">"&lt;p&gt;The latest report is attached.&lt;/p&gt;"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sHtmlBody</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">"&lt;/body&gt;&lt;/html&gt;"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bSent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SendLimsEmail</span><span class="p">(</span>
 <span class="w">        </span><span class="n">sSMTP</span><span class="p">,</span>
@@ -3673,12 +3673,12 @@
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bSent</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Test report email sent successfully.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Test report email sent successfully."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SendTestReportEmail&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SendTestReportEmail"</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Test report email sent successfully.

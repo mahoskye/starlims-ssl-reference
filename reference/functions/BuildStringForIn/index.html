@@ -4278,7 +4278,7 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowSampleFilter</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIDs</span><span class="p">,</span><span class="w"> </span><span class="n">sInClause</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aSampleIDs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SAM-2024-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAM-2024-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAM-2024-003&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aSampleIDs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"SAM-2024-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SAM-2024-002"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SAM-2024-003"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">sInClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">BuildStringForIn</span><span class="p">(</span><span class="n">aSampleIDs</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sInClause</span><span class="p">);</span>
@@ -4287,23 +4287,23 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowSampleFilter&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowSampleFilter"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>(&#39;SAM-2024-001&#39;,&#39;SAM-2024-002&#39;,&#39;SAM-2024-003&#39;)
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>('SAM-2024-001','SAM-2024-002','SAM-2024-003')
 </code></pre></div>
 <h3 id="filter-a-query-on-names-that-contain-apostrophes">Filter a query on names that contain apostrophes<a class="headerlink" href="#filter-a-query-on-names-that-contain-apostrophes" title="Permanent link">&para;</a></h3>
 <p>Passes names that include apostrophes to <code>BuildStringForIn</code> and embeds the result directly in a SQL <code>WHERE</code> clause. The apostrophe in <code>"Bob O'Brien"</code> is doubled automatically.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FetchSamplesBySampler</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSamplerNames</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aSamplerNames</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Alice Johnson&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Bob O&#39;Brien&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Carol White&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aSamplerNames</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"Alice Johnson"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Bob O'Brien"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Carol White"</span><span class="p">};</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sampleid, samplename, sampler</span>
 <span class="s2">        FROM sample</span>
 <span class="s2">        WHERE sampler IN</span>
-<span class="s2">    &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">BuildStringForIn</span><span class="p">(</span><span class="n">aSamplerNames</span><span class="p">);</span>
+<span class="s2">    "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">BuildStringForIn</span><span class="p">(</span><span class="n">aSamplerNames</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="n">sSQL</span><span class="p">);</span>
 
@@ -4311,7 +4311,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FetchSamplesBySampler&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FetchSamplesBySampler"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

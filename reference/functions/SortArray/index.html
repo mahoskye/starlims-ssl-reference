@@ -3770,21 +3770,21 @@
 
 <span class="w">    </span><span class="n">aNumbers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">87</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">29</span><span class="p">};</span>
 
-<span class="w">    </span><span class="n">sBefore</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aNumbers</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aNumbers</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;, &quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sBefore</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aNumbers</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aNumbers</span><span class="p">),</span><span class="w"> </span><span class="s2">", "</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">SortArray</span><span class="p">(</span><span class="n">aNumbers</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sAfter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aNumbers</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aNumbers</span><span class="p">),</span><span class="w"> </span><span class="s2">&quot;, &quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sAfter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aNumbers</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aNumbers</span><span class="p">),</span><span class="w"> </span><span class="s2">", "</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Before: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBefore</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Before: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBefore</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs original order;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;After: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sAfter</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"After: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sAfter</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs sorted order;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aNumbers</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DemoNumericSort&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DemoNumericSort"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="sort-objects-with-a-custom-comparator">Sort objects with a custom comparator<a class="headerlink" href="#sort-objects-with-a-custom-comparator" title="Permanent link">&para;</a></h3>
 <p>Sort an array of UDO objects by a numeric property using a two-argument code block as the comparator.</p>
@@ -3792,33 +3792,33 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSamples</span><span class="p">,</span><span class="w"> </span><span class="n">fnByPriority</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">oSample</span><span class="p">,</span><span class="w"> </span><span class="n">sOutput</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aSamples</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nf">CreateUdObject</span><span class="p">({{</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Gamma&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}}),</span>
-<span class="w">        </span><span class="nf">CreateUdObject</span><span class="p">({{</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Alpha&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">}}),</span>
-<span class="w">        </span><span class="nf">CreateUdObject</span><span class="p">({{</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Beta&quot;</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">}})</span>
+<span class="w">        </span><span class="nf">CreateUdObject</span><span class="p">({{</span><span class="s2">"name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Gamma"</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">"priority"</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">}}),</span>
+<span class="w">        </span><span class="nf">CreateUdObject</span><span class="p">({{</span><span class="s2">"name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Alpha"</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">"priority"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">}}),</span>
+<span class="w">        </span><span class="nf">CreateUdObject</span><span class="p">({{</span><span class="s2">"name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Beta"</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">"priority"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">}})</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">fnByPriority</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="err">|</span><span class="n">oLeft</span><span class="p">,</span><span class="w"> </span><span class="n">oRight</span><span class="err">|</span><span class="w"> </span><span class="n">oLeft</span><span class="p">:</span><span class="n">priority</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">oRight</span><span class="p">:</span><span class="n">priority</span><span class="p">};</span>
 
 <span class="w">    </span><span class="nf">SortArray</span><span class="p">(</span><span class="n">aSamples</span><span class="p">,</span><span class="w"> </span><span class="n">fnByPriority</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aSamples</span><span class="p">);</span>
 <span class="w">        </span><span class="n">oSample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aSamples</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sOutput</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;, &quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sOutput</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">", "</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">sOutput</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">oSample</span><span class="p">:</span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; (&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oSample</span><span class="p">:</span><span class="n">priority</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;)&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sOutput</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">oSample</span><span class="p">:</span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" ("</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oSample</span><span class="p">:</span><span class="n">priority</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">")"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sorted by priority: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOutput</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Sorted by priority: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOutput</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aSamples</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DemoPrioritySort&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DemoPrioritySort"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Sorted by priority: Alpha (1), Beta (2), Gamma (3)
@@ -3829,10 +3829,10 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aTasks</span><span class="p">,</span><span class="w"> </span><span class="n">fnByPriorityThenSeq</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">aTask</span><span class="p">,</span><span class="w"> </span><span class="n">sOutput</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aTasks</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;S-100&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;S-101&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;S-102&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;S-103&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">}</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"S-100"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"S-101"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"S-102"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"S-103"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">fnByPriorityThenSeq</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="err">|</span><span class="n">aLeft</span><span class="p">,</span><span class="w"> </span><span class="n">aRight</span><span class="err">|</span><span class="w"> </span><span class="nf">IIf</span><span class="p">(;</span>
@@ -3850,26 +3850,26 @@
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aTasks</span><span class="p">);</span>
 <span class="w">        </span><span class="n">aTask</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aTasks</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sOutput</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; | &quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sOutput</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">" | "</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">sOutput</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">aTask</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;-P&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aTask</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;-S&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aTask</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">sOutput</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">aTask</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"-P"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aTask</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">"-S"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aTask</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sorted tasks: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOutput</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Sorted tasks: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOutput</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aTasks</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DemoMultiKeySort&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DemoMultiKeySort"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Sorted tasks: S-103-P1-S20 | S-101-P1-S30 | S-102-P2-S10 | S-100-P2-S15

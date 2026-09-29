@@ -4332,20 +4332,20 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExtractFileExtension</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sExtension</span><span class="p">,</span><span class="w"> </span><span class="n">nDotPos</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;report_Q4_2024.pdf&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">nDotPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Rat</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sFileName</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"report_Q4_2024.pdf"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nDotPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Rat</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span><span class="w"> </span><span class="n">sFileName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nDotPos</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sExtension</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubStr</span><span class="p">(</span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">nDotPos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Extension: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExtension</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Extension: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExtension</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs the extracted extension;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No extension found&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No extension found"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExtractFileExtension&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExtractFileExtension"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="split-the-last-path-segment">Split the last path segment<a class="headerlink" href="#split-the-last-path-segment" title="Permanent link">&para;</a></h3>
 <p>Use the last slash to separate a path into its directory and trailing file name.</p>
@@ -4353,24 +4353,24 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sPath</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDirectory</span><span class="p">,</span><span class="w"> </span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">nSlashPos</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">nSlashPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Rat</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sPath</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nSlashPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Rat</span><span class="p">(</span><span class="s2">"/"</span><span class="p">,</span><span class="w"> </span><span class="n">sPath</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nSlashPos</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sDirectory</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Left</span><span class="p">(</span><span class="n">sPath</span><span class="p">,</span><span class="w"> </span><span class="n">nSlashPos</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 <span class="w">        </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubStr</span><span class="p">(</span><span class="n">sPath</span><span class="p">,</span><span class="w"> </span><span class="n">nSlashPos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sDirectory</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sDirectory</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPath</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Directory: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDirectory</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Directory: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDirectory</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the directory portion;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;File: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"File: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the trailing file name;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SplitPath&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;/home/user/reports/quarterly.xlsx&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SplitPath"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"/home/user/reports/quarterly.xlsx"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="parse-a-categoryscriptprocedure-name">Parse a <code>Category.Script.Procedure</code> name<a class="headerlink" href="#parse-a-categoryscriptprocedure-name" title="Permanent link">&para;</a></h3>
 <p>Use <code>Rat()</code> twice to split a fully qualified procedure reference into category, script, and procedure parts.</p>
@@ -4379,38 +4379,38 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCategory</span><span class="p">,</span><span class="w"> </span><span class="n">sScript</span><span class="p">,</span><span class="w"> </span><span class="n">sProcedure</span><span class="p">,</span><span class="w"> </span><span class="n">sScriptPart</span><span class="p">,</span><span class="w"> </span><span class="n">nLastDotPos</span><span class="p">,</span>
 <span class="w">        </span><span class="n">nPrevDotPos</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sCategory</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sScript</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sProcedure</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCategory</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sScript</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sProcedure</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">nLastDotPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Rat</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sQualifiedName</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nLastDotPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Rat</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span><span class="w"> </span><span class="n">sQualifiedName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nLastDotPos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sScript</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sQualifiedName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sProcedure</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubStr</span><span class="p">(</span><span class="n">sQualifiedName</span><span class="p">,</span><span class="w"> </span><span class="n">nLastDotPos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 <span class="w">        </span><span class="n">sScriptPart</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Left</span><span class="p">(</span><span class="n">sQualifiedName</span><span class="p">,</span><span class="w"> </span><span class="n">nLastDotPos</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
-<span class="w">        </span><span class="n">nPrevDotPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Rat</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sScriptPart</span><span class="p">);</span>
+<span class="w">        </span><span class="n">nPrevDotPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Rat</span><span class="p">(</span><span class="s2">"."</span><span class="p">,</span><span class="w"> </span><span class="n">sScriptPart</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nPrevDotPos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">            </span><span class="n">sScript</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sQualifiedName</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sProcedure</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sProcedure</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">            </span><span class="n">sCategory</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Left</span><span class="p">(</span><span class="n">sScriptPart</span><span class="p">,</span><span class="w"> </span><span class="n">nPrevDotPos</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 <span class="w">            </span><span class="n">sScript</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubStr</span><span class="p">(</span><span class="n">sScriptPart</span><span class="p">,</span><span class="w"> </span><span class="n">nPrevDotPos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Category: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCategory</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Category: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCategory</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the category segment when present;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Script: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sScript</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Script: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sScript</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the script segment;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Procedure: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProcedure</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Procedure: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProcedure</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the procedure segment when present;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseQualifiedName&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;System.Reports.GenerateMonthly&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ParseQualifiedName"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"System.Reports.GenerateMonthly"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

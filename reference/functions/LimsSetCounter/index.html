@@ -4333,18 +4333,18 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">InsertSampleWithAutoID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nNewSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;sample_name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;status_id&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;QC-Batch-047&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"sample_name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"status_id"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"QC-Batch-047"</span><span class="p">,</span><span class="w"> </span><span class="s2">"A"</span><span class="p">};</span>
 
-<span class="w">    </span><span class="n">nNewSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsSetCounter</span><span class="p">(</span><span class="s2">&quot;SAMPLES&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sample_id&quot;</span><span class="p">,,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nNewSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsSetCounter</span><span class="p">(</span><span class="s2">"SAMPLES"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample_id"</span><span class="p">,,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Created sample ID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nNewSampleID</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Created sample ID: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nNewSampleID</span><span class="p">));</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nNewSampleID</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;InsertSampleWithAutoID&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"InsertSampleWithAutoID"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Created sample ID: &lt;n&gt;
@@ -4356,12 +4356,12 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sProjectAlpha</span><span class="p">,</span><span class="w"> </span><span class="n">sProjectBeta</span><span class="p">,</span><span class="w"> </span><span class="n">aValuesAlpha</span><span class="p">,</span><span class="w"> </span><span class="n">aValuesBeta</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nNextAlpha</span><span class="p">,</span><span class="w"> </span><span class="n">nNextBeta</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WORKLIST&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFieldName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WORK_ID&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;PROJECT_CODE&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"WORKLIST"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFieldName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"WORK_ID"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"PROJECT_CODE"</span><span class="p">};</span>
 
-<span class="w">    </span><span class="n">sProjectAlpha</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ALPHA&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sProjectBeta</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BETA&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sProjectAlpha</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ALPHA"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sProjectBeta</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"BETA"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aValuesAlpha</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="n">sProjectAlpha</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aValuesBeta</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="n">sProjectBeta</span><span class="p">};</span>
@@ -4370,14 +4370,14 @@
 <span class="w">        </span><span class="n">aValuesAlpha</span><span class="p">);</span>
 <span class="w">    </span><span class="n">nNextBeta</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsSetCounter</span><span class="p">(</span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="n">sProjectBeta</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">aValuesBeta</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Generated: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProjectAlpha</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nNextAlpha</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Generated: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProjectAlpha</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nNextAlpha</span><span class="p">));</span>
 <span class="w">    </span><span class="c1">/* Logs generated ALPHA key;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Generated: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProjectBeta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nNextBeta</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Generated: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sProjectBeta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nNextBeta</span><span class="p">));</span>
 <span class="w">    </span><span class="c1">/* Logs generated BETA key;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GenerateProjectSamples&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GenerateProjectSamples"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="insert-a-full-row-with-error-handling">Insert a full row with error handling<a class="headerlink" href="#insert-a-full-row-with-error-handling" title="Permanent link">&para;</a></h3>
 <p>Wrap <code>LimsSetCounter</code> in a <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> block and check for a <code>0</code> return to handle both counter failure and database errors.</p>
@@ -4385,28 +4385,28 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="n">sPrefix</span><span class="p">,</span><span class="w"> </span><span class="n">sSubmissionID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">nCounter</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">dSubmitDate</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SUBMISSIONS&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFieldName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SUBMISSION_ID&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPrefix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SUB&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SUBMISSIONS"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFieldName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SUBMISSION_ID"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPrefix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SUB"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">dSubmitDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SUBMITTER&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB_CODE&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;STATUS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SUBMIT_DATE&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;JSmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;P&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">dSubmitDate</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"SUBMITTER"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB_CODE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"STATUS"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SUBMIT_DATE"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"JSmith"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-A"</span><span class="p">,</span><span class="w"> </span><span class="s2">"P"</span><span class="p">,</span><span class="w"> </span><span class="n">dSubmitDate</span><span class="p">};</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">nCounter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsSetCounter</span><span class="p">(</span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="n">sPrefix</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nCounter</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Submission was not created&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Submission was not created"</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="n">sSubmissionID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPrefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCounter</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Submission created: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSubmissionID</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Submission created: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSubmissionID</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs created submission ID;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Failed to create submission: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Failed to create submission: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: submission creation failed;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
@@ -4415,7 +4415,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;InsertComplexSubmission&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"InsertComplexSubmission"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

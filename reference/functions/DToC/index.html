@@ -4433,14 +4433,14 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowLoggedDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dLoggedDate</span><span class="p">,</span><span class="w"> </span><span class="n">sLoggedDate</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">dLoggedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/15/2024&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dLoggedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/15/2024"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sLoggedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dLoggedDate</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Logged on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLoggedDate</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Logged on "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLoggedDate</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowLoggedDate&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowLoggedDate"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Logged on 03/15/2024
@@ -4454,15 +4454,15 @@
 
 <span class="w">    </span><span class="n">sReleaseDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dReleaseDate</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sReleaseDate</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;  /  /    &quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sReleaseDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;[Not specified]&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sReleaseDate</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"  /  /    "</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sReleaseDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"[Not specified]"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sReleaseDate</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetReleaseDateText&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/15/2024&quot;</span><span class="p">)});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetReleaseDateText"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/15/2024"</span><span class="p">)});</span>
 </code></pre></div>
 <h3 id="format-multiple-date-fields-for-report-output">Format multiple date fields for report output<a class="headerlink" href="#format-multiple-date-fields-for-report-output" title="Permanent link">&para;</a></h3>
 <p>Converts received and released date columns for a batch of samples, replacing any empty released date with <code>[Pending]</code> before building the summary lines.</p>
@@ -4478,12 +4478,12 @@
 <span class="w">        </span><span class="n">sReceivedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">aSamples</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]);</span>
 <span class="w">        </span><span class="n">sReleasedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">aSamples</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]);</span>
 
-<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">sReleasedDate</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;  /  /    &quot;</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sReleasedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;[Pending]&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">sReleasedDate</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"  /  /    "</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sReleasedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"[Pending]"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">sLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; | Received: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sReceivedDate</span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; | Released: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sReleasedDate</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" | Received: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sReceivedDate</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">" | Released: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sReleasedDate</span><span class="p">;</span>
 
 <span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aLines</span><span class="p">,</span><span class="w"> </span><span class="n">sLine</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
@@ -4492,7 +4492,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildSampleDateSummary&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{{</span><span class="s2">&quot;S-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/15/2024&quot;</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/16/2024&quot;</span><span class="p">)}}});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSampleDateSummary"</span><span class="p">,</span><span class="w"> </span><span class="p">{{{</span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/15/2024"</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/16/2024"</span><span class="p">)}}});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

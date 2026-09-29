@@ -4174,13 +4174,13 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResumeWorkflowBasic</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">bResumed</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WF-2024-0042&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"WF-2024-0042"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bResumed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocResumeWorkflow</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bResumed</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Workflow &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; resumed&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Workflow "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" resumed"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Workflow &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; could not be resumed&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Workflow "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" could not be resumed"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
@@ -4189,7 +4189,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ResumeWorkflowBasic&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ResumeWorkflowBasic"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Workflow WF-2024-0042 resumed
@@ -4204,26 +4204,26 @@
 <span class="w">    </span><span class="n">bResumed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetWorkflowStatus</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Paused&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Paused"</span><span class="p">;</span>
 <span class="w">        </span><span class="n">bResumed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocResumeWorkflow</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bResumed</span><span class="p">;</span>
 <span class="w">            </span><span class="c1">/* Logs on successful resume from paused state;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; resumed from paused state&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" resumed from paused state"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">            </span><span class="c1">/* Logs on failed resume from paused state;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; was paused but did not resume&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" was paused but did not resume"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="c1">/* Logs the current workflow status;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is currently &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" is currently "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bResumed</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ResumePausedWorkflowOnly&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;WF-2024-0042&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ResumePausedWorkflowOnly"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"WF-2024-0042"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="resume-multiple-workflows-and-collect-results">Resume multiple workflows and collect results<a class="headerlink" href="#resume-multiple-workflows-and-collect-results" title="Permanent link">&para;</a></h3>
 <p>Iterates a list of workflow IDs, skips empty entries, and collects each resume outcome into a summary object, then logs a single count line for resumed, failed, and skipped workflows.</p>
@@ -4254,9 +4254,9 @@
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Resumed &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">oSummary</span><span class="p">:</span><span class="n">resumedIds</span><span class="p">))</span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; workflow(s), failed &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">oSummary</span><span class="p">:</span><span class="n">failedIds</span><span class="p">))</span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, skipped &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">oSummary</span><span class="p">:</span><span class="n">skippedIds</span><span class="p">));</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Resumed "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">oSummary</span><span class="p">:</span><span class="n">resumedIds</span><span class="p">))</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">" workflow(s), failed "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">oSummary</span><span class="p">:</span><span class="n">failedIds</span><span class="p">))</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">", skipped "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">oSummary</span><span class="p">:</span><span class="n">skippedIds</span><span class="p">));</span>
 
 <span class="w">    </span><span class="c1">/* Logs workflow counts;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
@@ -4265,7 +4265,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ResumeWorkflowBatch&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">&quot;WF-2024-0042&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WF-2024-0043&quot;</span><span class="p">}});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ResumeWorkflowBatch"</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">"WF-2024-0042"</span><span class="p">,</span><span class="w"> </span><span class="s2">"WF-2024-0043"</span><span class="p">}});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

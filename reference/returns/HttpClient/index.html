@@ -2523,13 +2523,13 @@
 <span class="w">    </span><span class="n">oWebServices</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">WebServices</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oHttpClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateHttpClient</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">sBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetText</span><span class="p">(</span><span class="s2">&quot;https://lims-instruments.example/api/status&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetText</span><span class="p">(</span><span class="s2">"https://lims-instruments.example/api/status"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sBody</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FetchInstrumentStatus&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FetchInstrumentStatus"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="build-a-configured-request-and-send-it">Build a configured request and send it<a class="headerlink" href="#build-a-configured-request-and-send-it" title="Permanent link">&para;</a></h3>
 <p>Creates an <code>HttpRequest</code>, sets the method and an <code>Accept</code> header, sends it, then reads the response body.</p>
@@ -2539,11 +2539,11 @@
 <span class="w">    </span><span class="n">oWebServices</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">WebServices</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oHttpClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateHttpClient</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">oRequest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">CreateHttpRequest</span><span class="p">(</span><span class="s2">&quot;https://notifier.example/api/batch&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">Method</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">ContentType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">Accept</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;application/json&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">SetContent</span><span class="p">(</span><span class="s2">&quot;{&quot;&quot;batch&quot;&quot;:&quot;&quot;B-1042&quot;&quot;,&quot;&quot;status&quot;&quot;:&quot;&quot;complete&quot;&quot;}&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">CreateHttpRequest</span><span class="p">(</span><span class="s2">"https://notifier.example/api/batch"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">Method</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"POST"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">ContentType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"application/json"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">Accept</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"application/json"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">SetContent</span><span class="p">(</span><span class="s2">"{""batch"":""B-1042"",""status"":""complete""}"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">oResponse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetResponse</span><span class="p">(</span><span class="n">oRequest</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oResponse</span><span class="p">:</span><span class="nf">GetValueAsString</span><span class="p">();</span>
@@ -2552,7 +2552,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PostBatchNotification&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"PostBatchNotification"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="inspect-the-servers-response-after-a-failed-call">Inspect the server's response after a failed call<a class="headerlink" href="#inspect-the-servers-response-after-a-failed-call" title="Permanent link">&para;</a></h3>
 <p>Catches a failure and reads the server's error body via <code>GetLastServerException</code>.</p>
@@ -2563,18 +2563,18 @@
 <span class="w">    </span><span class="n">oHttpClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateHttpClient</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetText</span><span class="p">(</span><span class="s2">&quot;https://lims-instruments.example/api/status&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetText</span><span class="p">(</span><span class="s2">"https://lims-instruments.example/api/status"</span><span class="p">);</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sBody</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetLastServerException</span><span class="p">();</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">oError</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Status &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Status</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; — &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">MessageDetails</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Status "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Status</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" — "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">MessageDetails</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;TryFetchAndReport&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"TryFetchAndReport"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

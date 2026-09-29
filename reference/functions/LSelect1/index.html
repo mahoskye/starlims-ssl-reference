@@ -4153,16 +4153,16 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FetchSampleRecordsForGrid</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aSamples</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleName</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, sample_name, status</span>
 <span class="s2">        FROM sample</span>
 <span class="s2">        ORDER BY sample_id</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aSamples</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="n">sSQL</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aSamples</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No samples were found&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No samples were found"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aSamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4170,7 +4170,7 @@
 <span class="w">        </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aSamples</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
 <span class="w">        </span><span class="n">sSampleName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aSamples</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span>
 <span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aSamples</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">];</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sample: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; | Name: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; | Status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Sample: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" | Name: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" | Status: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs one line per row;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
@@ -4178,52 +4178,52 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FetchSampleRecordsForGrid&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FetchSampleRecordsForGrid"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="build-a-dynamic-where-clause-with-parameter-binding">Build a dynamic WHERE clause with parameter binding<a class="headerlink" href="#build-a-dynamic-where-clause-with-parameter-binding" title="Permanent link">&para;</a></h3>
 <p>Accumulate <code>?</code> placeholders and matching values into <code>aParams</code> as filters are applied, then pass <code>aParams</code> to <code>LSelect1</code> with a skipped connection argument.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">QuerySamplesByStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatusFilter</span><span class="p">,</span><span class="w"> </span><span class="n">sDepartmentFilter</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatusFilter</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ALL&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sDepartmentFilter</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ALL&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatusFilter</span><span class="p">,</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sDepartmentFilter</span><span class="p">,</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aParams</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nRowCount</span><span class="p">,</span><span class="w"> </span><span class="n">sOutput</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aParams</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, sample_name, status, department, received_date</span>
 <span class="s2">        FROM sample</span>
 <span class="s2">        WHERE 1 = 1</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStatusFilter</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">&quot;ALL&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSQL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; AND status = ?&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStatusFilter</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSQL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" AND status = ?"</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aParams</span><span class="p">,</span><span class="w"> </span><span class="n">sStatusFilter</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sDepartmentFilter</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">&quot;ALL&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSQL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; AND department = ?&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sDepartmentFilter</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSQL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" AND department = ?"</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aParams</span><span class="p">,</span><span class="w"> </span><span class="n">sDepartmentFilter</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSQL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; ORDER BY received_date DESC&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSQL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" ORDER BY received_date DESC"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="n">aParams</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aResults</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No samples matched the selected filters&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No samples matched the selected filters"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nRowCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aResults</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Found &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nRowCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; sample(s)&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Found "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nRowCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" sample(s)"</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the matched row count;</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="n">nRowCount</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; | Name: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">])</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; | Status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; | Dept: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]);</span>
+<span class="w">        </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">" | Name: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">])</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">" | Status: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">" | Dept: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]);</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sOutput</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs one matching row per line;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
@@ -4232,7 +4232,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;QuerySamplesByStatus&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"QuerySamplesByStatus"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="preserve-date-columns-without-timezone-conversion">Preserve date columns without timezone conversion<a class="headerlink" href="#preserve-date-columns-without-timezone-conversion" title="Permanent link">&para;</a></h3>
 <p>Pass column indexes in <code>aInvariantDateCols</code> to prevent timezone adjustment on the <code>create_date</code> and <code>result_date</code> columns.</p>
@@ -4243,20 +4243,20 @@
 
 <span class="w">    </span><span class="n">aInvariantCols</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">};</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, create_date, result_date, status</span>
 <span class="s2">        FROM sample</span>
-<span class="s2">        WHERE status IN (&#39;P&#39;, &#39;R&#39;)</span>
+<span class="s2">        WHERE status IN ('P', 'R')</span>
 <span class="s2">          AND create_date &gt;= ?</span>
 <span class="s2">        ORDER BY create_date</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;DATABASE&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">dStartDate</span><span class="p">},</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="n">aInvariantCols</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="s2">"DATABASE"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">dStartDate</span><span class="p">},</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="n">aInvariantCols</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">nRowCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aResults</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nRowCount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No dated samples were found&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No dated samples were found"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4265,10 +4265,10 @@
 <span class="w">        </span><span class="n">dCreateDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span>
 <span class="w">        </span><span class="n">dResultDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">];</span>
 <span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aResults</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">];</span>
-<span class="w">        </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sSampleID</span><span class="p">)</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; | Created: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dCreateDate</span><span class="p">)</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; | Result: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dResultDate</span><span class="p">)</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; | Status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sSampleID</span><span class="p">)</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">" | Created: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dCreateDate</span><span class="p">)</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">" | Result: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dResultDate</span><span class="p">)</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">" | Status: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sOutput</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs one dated row per line;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
@@ -4277,7 +4277,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetSamplesWithInvariantDates&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">Today</span><span class="p">()});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetSamplesWithInvariantDates"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">Today</span><span class="p">()});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

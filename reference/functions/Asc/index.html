@@ -4271,16 +4271,16 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateUppercaseLetter</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">nCode</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;M&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"M"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Asc</span><span class="p">(</span><span class="n">sUserInput</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nCode</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">65</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">nCode</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">90</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Uppercase letter detected.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Uppercase letter detected."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateUppercaseLetter&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateUppercaseLetter"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Uppercase letter detected.
@@ -4290,12 +4290,12 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertForExternalExport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sInput</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sOutput</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ABC&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ABC"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">sInput</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sOutput</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;,&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sOutput</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">","</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sOutput</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Asc</span><span class="p">(</span><span class="nf">SubStr</span><span class="p">(</span><span class="n">sInput</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)));</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
@@ -4304,7 +4304,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ConvertForExternalExport&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ConvertForExternalExport"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>65,66,67

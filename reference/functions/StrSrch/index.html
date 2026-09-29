@@ -4350,14 +4350,14 @@ When <code>flag</code> is omitted or <a href="../../literals/false/"><code>.F.</
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindFirstComma</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCsvLine</span><span class="p">,</span><span class="w"> </span><span class="n">nCommaPos</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sCsvLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Smith,John,1990-05-15,Active&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">nCommaPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrSrch</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sCsvLine</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sCsvLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Smith,John,1990-05-15,Active"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nCommaPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrSrch</span><span class="p">(</span><span class="s2">","</span><span class="p">,</span><span class="w"> </span><span class="n">sCsvLine</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;First comma found at position &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCommaPos</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"First comma found at position "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCommaPos</span><span class="p">));</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FindFirstComma&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FindFirstComma"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>First comma found at position 6
@@ -4367,46 +4367,46 @@ When <code>flag</code> is omitted or <a href="../../literals/false/"><code>.F.</
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindSecondMarker</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sText</span><span class="p">,</span><span class="w"> </span><span class="n">sMarker</span><span class="p">,</span><span class="w"> </span><span class="n">nPos</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Batch=Q1|Batch=Q2|Batch=Q3&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sMarker</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Batch=&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Batch=Q1|Batch=Q2|Batch=Q3"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMarker</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Batch="</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nPos</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrSrch</span><span class="p">(</span><span class="n">sMarker</span><span class="p">,</span><span class="w"> </span><span class="n">sText</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nPos</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Second marker not found&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Second marker not found"</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Second marker starts at position &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nPos</span><span class="p">));</span><span class="w">  </span><span class="c1">/* Logs sample second marker position;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Second marker starts at position "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nPos</span><span class="p">));</span><span class="w">  </span><span class="c1">/* Logs sample second marker position;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nPos</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FindSecondMarker&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FindSecondMarker"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="resume-searching-after-an-earlier-match">Resume searching after an earlier match<a class="headerlink" href="#resume-searching-after-an-earlier-match" title="Permanent link">&para;</a></h3>
 <p>Use start-position mode to continue searching after a known result without recounting occurrences.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindNextPipe</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sHeader</span><span class="p">,</span><span class="w"> </span><span class="n">nFirstPipe</span><span class="p">,</span><span class="w"> </span><span class="n">nSecondPipe</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sHeader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;STATUS=Logged|OWNER=JSMITH|BATCH=LAB-2026-0042&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">nFirstPipe</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrSrch</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sHeader</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sHeader</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"STATUS=Logged|OWNER=JSMITH|BATCH=LAB-2026-0042"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nFirstPipe</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrSrch</span><span class="p">(</span><span class="s2">"|"</span><span class="p">,</span><span class="w"> </span><span class="n">sHeader</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nFirstPipe</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">nSecondPipe</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrSrch</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sHeader</span><span class="p">,</span><span class="w"> </span><span class="n">nFirstPipe</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nSecondPipe</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StrSrch</span><span class="p">(</span><span class="s2">"|"</span><span class="p">,</span><span class="w"> </span><span class="n">sHeader</span><span class="p">,</span><span class="w"> </span><span class="n">nFirstPipe</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;First pipe: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFirstPipe</span><span class="p">));</span><span class="w">  </span><span class="c1">/* Logs sample first pipe position;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Second pipe: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSecondPipe</span><span class="p">));</span><span class="w">  </span><span class="c1">/* Logs sample second pipe position;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"First pipe: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFirstPipe</span><span class="p">));</span><span class="w">  </span><span class="c1">/* Logs sample first pipe position;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Second pipe: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSecondPipe</span><span class="p">));</span><span class="w">  </span><span class="c1">/* Logs sample second pipe position;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nSecondPipe</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FindNextPipe&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FindNextPipe"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

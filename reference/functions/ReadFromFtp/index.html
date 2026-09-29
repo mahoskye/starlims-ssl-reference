@@ -3752,11 +3752,11 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sServer</span><span class="p">,</span><span class="w"> </span><span class="n">sRemoteDir</span><span class="p">,</span><span class="w"> </span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFileContent</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;instrumentftp.lab.local&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/exports/status&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;status.txt&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;instrument_reader&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;read_only_pass&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"instrumentftp.lab.local"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/exports/status"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"status.txt"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"instrument_reader"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"read_only_pass"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sFileContent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ReadFromFtp</span><span class="p">(</span>
 <span class="w">        </span><span class="n">sServer</span><span class="p">,</span>
@@ -3768,20 +3768,20 @@
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sFileContent</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No status file was returned.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No status file was returned."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="nf">AllTrim</span><span class="p">(</span><span class="nf">Left</span><span class="p">(</span><span class="n">sFileContent</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)));</span>
 
-<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Retrieved FTP status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Retrieved FTP status: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs status prefix;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ReadStatusFile&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReadStatusFile"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="limit-an-ftp-read-before-parsing-a-header-row">Limit an FTP read before parsing a header row<a class="headerlink" href="#limit-an-ftp-read-before-parsing-a-header-row" title="Permanent link">&para;</a></h3>
 <p>Use <code>nMaxSize</code> to limit an FTP read, then extract just the first line for lightweight validation.</p>
@@ -3790,11 +3790,11 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFileContent</span><span class="p">,</span><span class="w"> </span><span class="n">sHeaderLine</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nMaxSize</span><span class="p">,</span><span class="w"> </span><span class="n">nLineEnd</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ftp.analytical-lab.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/logs/transfers&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;transfer_log_2024.txt&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;lab_reader&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;P@ssw0rd&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ftp.analytical-lab.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/logs/transfers"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"transfer_log_2024.txt"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"lab_reader"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"P@ssw0rd"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nMaxSize</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">32768</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sFileContent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ReadFromFtp</span><span class="p">(</span>
@@ -3807,8 +3807,8 @@
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sFileContent</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;The transfer log could not be read.&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"The transfer log could not be read."</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nLineEnd</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">At</span><span class="p">(</span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w"> </span><span class="n">sFileContent</span><span class="p">);</span>
@@ -3823,7 +3823,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ReadTransferHeader&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReadTransferHeader"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="read-from-sftp-with-a-private-key">Read from SFTP with a private key<a class="headerlink" href="#read-from-sftp-with-a-private-key" title="Permanent link">&para;</a></h3>
 <p>Switch to the SFTP branch, use a private key, and handle setup or transfer failures.</p>
@@ -3832,12 +3832,12 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sKeyPassphrase</span><span class="p">,</span><span class="w"> </span><span class="n">sPrivateKey</span><span class="p">,</span><span class="w"> </span><span class="n">sContent</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPort</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sftp.partner.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/inbound/manifests&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;shipment_manifest.txt&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;startransfer&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sKeyPassphrase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;key_passphrase&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPrivateKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/secure/keys/partner_sftp_key.pem&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"sftp.partner.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/inbound/manifests"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"shipment_manifest.txt"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"startransfer"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sKeyPassphrase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"key_passphrase"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPrivateKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/secure/keys/partner_sftp_key.pem"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nPort</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">22</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
@@ -3855,21 +3855,21 @@
 <span class="w">        </span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sContent</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;The partner manifest could not be read from SFTP.&quot;</span><span class="p">);</span>
-<span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"The partner manifest could not be read from SFTP."</span><span class="p">);</span>
+<span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;SFTP read failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"SFTP read failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: SFTP read failed;</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sContent</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetPartnerManifest&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetPartnerManifest"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

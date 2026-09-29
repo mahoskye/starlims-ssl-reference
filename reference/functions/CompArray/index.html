@@ -3771,42 +3771,42 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareStatusLists</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aExpected</span><span class="p">,</span><span class="w"> </span><span class="n">aActual</span><span class="p">,</span><span class="w"> </span><span class="n">bMatches</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aExpected</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Logged&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Released&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Approved&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">aActual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Logged&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Released&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Approved&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aExpected</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"Logged"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Released"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Approved"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aActual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"Logged"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Released"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Approved"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">bMatches</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CompArray</span><span class="p">(</span><span class="n">aExpected</span><span class="p">,</span><span class="w"> </span><span class="n">aActual</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bMatches</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Statuses match.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Statuses match."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Statuses do not match.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Statuses do not match."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bMatches</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompareStatusLists&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CompareStatusLists"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="detect-a-type-mismatch-in-matching-positions">Detect a type mismatch in matching positions<a class="headerlink" href="#detect-a-type-mismatch-in-matching-positions" title="Permanent link">&para;</a></h3>
 <p>Shows that <code>"1001"</code> (string) and <code>1001</code> (number) are not equal even though they represent the same numeric value, because <code>CompArray</code> requires matching types at each position.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareTypedValues</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aExpected</span><span class="p">,</span><span class="w"> </span><span class="n">aActual</span><span class="p">,</span><span class="w"> </span><span class="n">bMatches</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aExpected</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;1001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;QC&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">};</span>
-<span class="w">    </span><span class="n">aActual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">1001</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;QC&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aExpected</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"1001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"QC"</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aActual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">1001</span><span class="p">,</span><span class="w"> </span><span class="s2">"QC"</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">bMatches</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CompArray</span><span class="p">(</span><span class="n">aExpected</span><span class="p">,</span><span class="w"> </span><span class="n">aActual</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bMatches</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Arrays differ because the first elements are different types.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Arrays differ because the first elements are different types."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bMatches</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompareTypedValues&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CompareTypedValues"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="verify-nested-configuration-arrays-after-transformation">Verify nested configuration arrays after transformation<a class="headerlink" href="#verify-nested-configuration-arrays-after-transformation" title="Permanent link">&para;</a></h3>
 <p>Verifies that a transformation preserved a deeply nested configuration array by comparing the original and result structures recursively.</p>
@@ -3814,30 +3814,30 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aOriginalConfig</span><span class="p">,</span><span class="w"> </span><span class="n">aTransformedConfig</span><span class="p">,</span><span class="w"> </span><span class="n">bMatches</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aOriginalConfig</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;Instrument&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;GC-MS-001&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;Limits&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">5.0</span><span class="p">}},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;Flags&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">}}</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"Instrument"</span><span class="p">,</span><span class="w"> </span><span class="s2">"GC-MS-001"</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"Limits"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">5.0</span><span class="p">}},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"Flags"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">}}</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">aTransformedConfig</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;Instrument&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;GC-MS-001&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;Limits&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">5.0</span><span class="p">}},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;Flags&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">}}</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"Instrument"</span><span class="p">,</span><span class="w"> </span><span class="s2">"GC-MS-001"</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"Limits"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">5.0</span><span class="p">}},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"Flags"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">}}</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">bMatches</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CompArray</span><span class="p">(</span><span class="n">aOriginalConfig</span><span class="p">,</span><span class="w"> </span><span class="n">aTransformedConfig</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bMatches</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Transformation preserved the nested configuration.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Transformation preserved the nested configuration."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Transformation changed the nested configuration.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Transformation changed the nested configuration."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bMatches</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateConfigTransform&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateConfigTransform"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

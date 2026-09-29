@@ -4166,22 +4166,22 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportActiveSamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSql</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSql</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, sample_name, status</span>
 <span class="s2">        FROM sample</span>
-<span class="s2">        WHERE status = &#39;A&#39;</span>
+<span class="s2">        WHERE status = 'A'</span>
 <span class="s2">        ORDER BY sample_id</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSet</span><span class="p">(</span><span class="n">sSql</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Returned XML length: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Len</span><span class="p">(</span><span class="n">sXml</span><span class="p">)));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Returned XML length: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Len</span><span class="p">(</span><span class="n">sXml</span><span class="p">)));</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportActiveSamples&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExportActiveSamples"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Returned XML length: 1243
@@ -4190,26 +4190,26 @@
 <p>Passes a status value through a <code>?</code> placeholder, disables schema and null-as-blank output, and assigns an explicit table name to the returned XML.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportSamplesByStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">"A"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSql</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSql</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, sample_name, status, received_date</span>
 <span class="s2">        FROM sample</span>
 <span class="s2">        WHERE status = ?</span>
 <span class="s2">        ORDER BY received_date DESC</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="n">sStatus</span><span class="p">};</span>
-<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSet</span><span class="p">(</span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sample_results&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSet</span><span class="p">(</span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample_results"</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Export complete for status &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Export complete for status "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportSamplesByStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;PENDING&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExportSamplesByStatus"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"PENDING"</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Export complete for status PENDING
@@ -4218,32 +4218,32 @@
 <p>Passes a date parameter and an invariant-date column index array, wrapping the call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> so a query failure is reported without propagating the exception.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportReportDataset</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">dStartDate</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/01/2024&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"01/01/2024"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">aInvariantDateCols</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSql</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSql</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, sample_name, status, created_date, released_date</span>
 <span class="s2">        FROM sample</span>
 <span class="s2">        WHERE released_date &gt;= ?</span>
 <span class="s2">        ORDER BY released_date</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="n">dStartDate</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aInvariantDateCols</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSet</span><span class="p">(</span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sample_report&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSet</span><span class="p">(</span><span class="n">sSql</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample_report"</span><span class="p">,</span>
 <span class="w">                           </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="n">aInvariantDateCols</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;GetDataSet failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"GetDataSet failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportReportDataset&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/01/2024&quot;</span><span class="p">)});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExportReportDataset"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/01/2024"</span><span class="p">)});</span>
 </code></pre></div>
 <p>On failure, <a href="../ErrorMes/"><code>ErrorMes</code></a> logs a message beginning with:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>GetDataSet failed: ...

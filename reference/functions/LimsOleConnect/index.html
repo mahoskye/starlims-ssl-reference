@@ -3653,17 +3653,17 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AutomateExcel</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oExcel</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oExcel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsOleConnect</span><span class="p">(</span><span class="s2">&quot;Excel.Application&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oExcel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsOleConnect</span><span class="p">(</span><span class="s2">"Excel.Application"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">oExcel</span><span class="p">:</span><span class="n">Visible</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Excel version: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oExcel</span><span class="p">:</span><span class="n">Version</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Excel version: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oExcel</span><span class="p">:</span><span class="n">Version</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sStatus</span><span class="p">);</span><span class="w"> </span><span class="c1">/* Logs the Excel version;</span>
 
 <span class="w">    </span><span class="nf">EndLimsOleConnect</span><span class="p">(</span><span class="n">oExcel</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AutomateExcel&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AutomateExcel"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="handle-connection-failure-with-guaranteed-cleanup">Handle connection failure with guaranteed cleanup<a class="headerlink" href="#handle-connection-failure-with-guaranteed-cleanup" title="Permanent link">&para;</a></h3>
 <p>Try to start Excel, report failures, and always release the object.</p>
@@ -3673,13 +3673,13 @@
 <span class="w">    </span><span class="n">oExcel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">oExcel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsOleConnect</span><span class="p">(</span><span class="s2">&quot;Excel.Application&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">oExcel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsOleConnect</span><span class="p">(</span><span class="s2">"Excel.Application"</span><span class="p">);</span>
 <span class="w">        </span><span class="n">oExcel</span><span class="p">:</span><span class="n">Visible</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Connected to Excel version &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oExcel</span><span class="p">:</span><span class="n">Version</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Connected to Excel version "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oExcel</span><span class="p">:</span><span class="n">Version</span><span class="p">);</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sStatus</span><span class="p">);</span><span class="w"> </span><span class="c1">/* Logs the Excel version when the connection succeeds;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Unable to create automation object: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Unable to create automation object: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs the failure reason;</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">EndLimsOleConnect</span><span class="p">(</span><span class="n">oExcel</span><span class="p">);</span>
@@ -3687,7 +3687,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;OpenExcelSafely&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"OpenExcelSafely"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

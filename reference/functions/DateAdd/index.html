@@ -4435,19 +4435,19 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CalculateTaskDueDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">,</span><span class="w"> </span><span class="n">nDaysToAdd</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">dStartDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/15/2024&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dStartDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"01/15/2024"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">nDaysToAdd</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dDueDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateAdd</span><span class="p">(</span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">nDaysToAdd</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Task started on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dStartDate</span><span class="p">)</span>
-<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; and is due on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dDueDate</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Task started on "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dStartDate</span><span class="p">)</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">" and is due on "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dDueDate</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CalculateTaskDueDate&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CalculateTaskDueDate"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs (assuming MM/DD/YYYY date format):</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Task started on 01/15/2024 and is due on 01/22/2024
@@ -4458,30 +4458,30 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dRegDate</span><span class="p">,</span><span class="w"> </span><span class="n">dExpiry</span><span class="p">,</span><span class="w"> </span><span class="n">dToday</span><span class="p">,</span><span class="w"> </span><span class="n">nDaysUntilExpiry</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">sRegDate</span><span class="p">,</span><span class="w"> </span><span class="n">sExpiryDate</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">dRegDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/15/2023&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dRegDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/15/2023"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">dToday</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">dExpiry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateAdd</span><span class="p">(</span><span class="n">dRegDate</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;year&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dExpiry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateAdd</span><span class="p">(</span><span class="n">dRegDate</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s2">"year"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">nDaysUntilExpiry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dExpiry</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">dToday</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sRegDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dRegDate</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sExpiryDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dExpiry</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nDaysUntilExpiry</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">nDaysUntilExpiry</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;License issued on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRegDate</span>
-<span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; expires in &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Integer</span><span class="p">(</span><span class="n">nDaysUntilExpiry</span><span class="p">))</span>
-<span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; days on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExpiryDate</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"License issued on "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRegDate</span>
+<span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="s2">" expires in "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Integer</span><span class="p">(</span><span class="n">nDaysUntilExpiry</span><span class="p">))</span>
+<span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="s2">" days on "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExpiryDate</span><span class="p">;</span>
 <span class="w">        </span><span class="c1">/* Logs days remaining until expiry;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nDaysUntilExpiry</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;License issued on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRegDate</span>
-<span class="w">                        </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; expired on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExpiryDate</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"License issued on "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRegDate</span>
+<span class="w">                        </span><span class="o">+</span><span class="w"> </span><span class="s2">" expired on "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExpiryDate</span><span class="p">;</span>
 <span class="w">            </span><span class="c1">/* Logs the expired license date;</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;License issued on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRegDate</span>
-<span class="w">                        </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; remains active until &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExpiryDate</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"License issued on "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRegDate</span>
+<span class="w">                        </span><span class="o">+</span><span class="w"> </span><span class="s2">" remains active until "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExpiryDate</span><span class="p">;</span>
 <span class="w">            </span><span class="c1">/* Logs the active license expiry date;</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -4491,7 +4491,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ComputeLicenseRenewal&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ComputeLicenseRenewal"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

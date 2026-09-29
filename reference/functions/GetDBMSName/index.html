@@ -4082,13 +4082,13 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDatabaseType</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDBMSName</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDBMSName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDBMSName</span><span class="p">(</span><span class="s2">&quot;LIMSDB&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sDBMSName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDBMSName</span><span class="p">(</span><span class="s2">"LIMSDB"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;DBMS: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDBMSName</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"DBMS: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDBMSName</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDatabaseType&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowDatabaseType"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>DBMS: SQL
@@ -4102,28 +4102,28 @@
 <span class="w">    </span><span class="n">sDBMSName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDBMSName</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sDBMSName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;SQL&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sLimitClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;TOP 10&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sDateFunction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;GETDATE()&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sDBMSName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"SQL"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sLimitClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"TOP 10"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sDateFunction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"GETDATE()"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sDBMSName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;ORACLE&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sLimitClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ROWNUM &lt;= 10&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sDateFunction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SYSDATE&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sDBMSName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"ORACLE"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sLimitClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ROWNUM &lt;= 10"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sDateFunction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SYSDATE"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sLimitClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;1 = 1&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sDateFunction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CURRENT_DATE&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sLimitClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"1 = 1"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sDateFunction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"CURRENT_DATE"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sQuery</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SELECT sample_id FROM samples WHERE &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLimitClause</span>
-<span class="w">              </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; AND created_date &gt; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDateFunction</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sQuery</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SELECT sample_id FROM samples WHERE "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLimitClause</span>
+<span class="w">              </span><span class="o">+</span><span class="w"> </span><span class="s2">" AND created_date &gt; "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDateFunction</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sQuery</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildQueryByDBMS&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;REPORTING&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildQueryByDBMS"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"REPORTING"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="audit-all-configured-connections-for-their-platform">Audit all configured connections for their platform<a class="headerlink" href="#audit-all-configured-connections-for-their-platform" title="Permanent link">&para;</a></h3>
 <p>Iterates every connection returned by <a href="../GetConnectionStrings/"><code>GetConnectionStrings</code></a>, calls <code>GetDBMSName</code> for each, and reports the platform or an error message when a connection cannot be resolved.</p>
@@ -4137,18 +4137,18 @@
 
 <span class="w">        </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">            </span><span class="n">sDBMSName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDBMSName</span><span class="p">(</span><span class="n">sConnName</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sConnName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDBMSName</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sConnName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDBMSName</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs the connection name and DBMS platform;</span>
 <span class="w">        </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">            </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sConnName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: ERROR - &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sConnName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": ERROR - "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs an error for an unresolved connection;</span>
 <span class="w">        </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AuditDatabasePlatforms&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AuditDatabasePlatforms"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

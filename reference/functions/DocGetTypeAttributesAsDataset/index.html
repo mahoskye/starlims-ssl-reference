@@ -4177,18 +4177,18 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;dm_document&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"dm_document"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sAttrs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetTypeAttributesAsDataset</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">()</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sAttrs</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Attributes for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sAttrs</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Attributes for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">":"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sAttrs</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowTypeAttributes&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowTypeAttributes"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Attributes for dm_document:
@@ -4206,14 +4206,14 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
 <span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Unable to load type attributes: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Unable to load type attributes: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: Unable to load type attributes;</span>
 <span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sAttrs</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No attribute dataset was returned for type &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No attribute dataset was returned for type "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
@@ -4222,7 +4222,7 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LoadTypeAttributes&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;dm_document&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LoadTypeAttributes"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"dm_document"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="compare-two-type-definitions-before-a-mapping-step">Compare two type definitions before a mapping step<a class="headerlink" href="#compare-two-type-definitions-before-a-mapping-step" title="Permanent link">&para;</a></h3>
 <p>Calls <code>DocGetTypeAttributesAsDataset</code> twice to retrieve source and target type definitions, returning <a href="../../literals/true/"><code>.T.</code></a> only when both calls succeed and the resulting datasets are identical.</p>
@@ -4236,7 +4236,7 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
 <span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Failed to read source type attributes: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Failed to read source type attributes: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on source failure: Failed to read source type attributes;</span>
 <span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
@@ -4246,14 +4246,14 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
 <span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Failed to read target type attributes: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Failed to read target type attributes: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on target failure: Failed to read target type attributes;</span>
 <span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sSourceAttrs</span><span class="p">)</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sTargetAttrs</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;One or both type definitions returned no dataset text&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"One or both type definitions returned no dataset text"</span><span class="p">);</span>
 <span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -4264,7 +4264,7 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompareTypeDefinitions&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;dm_document&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dm_sysobject&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CompareTypeDefinitions"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"dm_document"</span><span class="p">,</span><span class="w"> </span><span class="s2">"dm_sysobject"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

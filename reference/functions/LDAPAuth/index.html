@@ -3731,7 +3731,7 @@
 <span class="w">        </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LDAPAuth</span><span class="p">(</span><span class="n">sLdapHost</span><span class="p">,,</span><span class="n">sUserName</span><span class="p">,</span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;LDAP authentication succeeded&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"LDAP authentication succeeded"</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3739,13 +3739,13 @@
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: LDAP authentication failed;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;LDAP authentication failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"LDAP authentication failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateLdapUser&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;ldap.example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;user-secret&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateLdapUser"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"ldap.example.com"</span><span class="p">,</span><span class="w"> </span><span class="s2">"jsmith"</span><span class="p">,</span><span class="w"> </span><span class="s2">"user-secret"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="use-ldaps-on-a-custom-port">Use LDAPS on a custom port<a class="headerlink" href="#use-ldaps-on-a-custom-port" title="Permanent link">&para;</a></h3>
 <p>Authenticate over SSL/TLS by supplying both the LDAPS port and the <code>bSecure</code> flag.</p>
@@ -3753,14 +3753,14 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLdapHost</span><span class="p">,</span><span class="w"> </span><span class="n">nLdapPort</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sLdapHost</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ldap.corp.example.com&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sLdapHost</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ldap.corp.example.com"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nLdapPort</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">636</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LDAPAuth</span><span class="p">(</span><span class="n">sLdapHost</span><span class="p">,</span><span class="w"> </span><span class="n">nLdapPort</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,,</span><span class="kc">.T.</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Secure LDAP authentication succeeded&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Secure LDAP authentication succeeded"</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3768,13 +3768,13 @@
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: Secure LDAP authentication failed;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Secure LDAP authentication failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Secure LDAP authentication failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateSecureLdapUser&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;user-secret&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateSecureLdapUser"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"jsmith"</span><span class="p">,</span><span class="w"> </span><span class="s2">"user-secret"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="authenticate-with-ntlm-mode-and-explicit-input-checks">Authenticate with NTLM mode and explicit input checks<a class="headerlink" href="#authenticate-with-ntlm-mode-and-explicit-input-checks" title="Permanent link">&para;</a></h3>
 <p>Validate required inputs up front and request NTLM authentication explicitly.</p>
@@ -3783,15 +3783,15 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sResult</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sLdapHost</span><span class="p">)</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sUserName</span><span class="p">)</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sPassword</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;LDAP host, user name, and password are required&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"LDAP host, user name, and password are required"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LDAPAuth</span><span class="p">(</span><span class="n">sLdapHost</span><span class="p">,,</span><span class="n">sUserName</span><span class="p">,</span><span class="n">sPassword</span><span class="p">,</span><span class="s2">&quot;ntlm&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LDAPAuth</span><span class="p">(</span><span class="n">sLdapHost</span><span class="p">,,</span><span class="n">sUserName</span><span class="p">,</span><span class="n">sPassword</span><span class="p">,</span><span class="s2">"ntlm"</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;NTLM LDAP authentication succeeded&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"NTLM LDAP authentication succeeded"</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3799,13 +3799,13 @@
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: NTLM LDAP authentication failed;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;NTLM LDAP authentication failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"NTLM LDAP authentication failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateNtlmLdapUser&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;ldap.corp.example.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;user-secret&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateNtlmLdapUser"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"ldap.corp.example.com"</span><span class="p">,</span><span class="w"> </span><span class="s2">"jsmith"</span><span class="p">,</span><span class="w"> </span><span class="s2">"user-secret"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

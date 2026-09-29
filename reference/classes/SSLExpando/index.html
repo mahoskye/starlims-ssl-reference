@@ -2974,25 +2974,25 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPayload</span><span class="p">,</span><span class="w"> </span><span class="n">aProps</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLExpando</span><span class="p">{};</span>
-<span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="n">XmlType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SampleRecord&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="n">XmlType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SampleRecord"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">&quot;SampleID&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-2026-0042&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">&quot;Status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">&quot;ResultValue&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">98.6</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">"SampleID"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-2026-0042"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">"Status"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Logged"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">"ResultValue"</span><span class="p">,</span><span class="w"> </span><span class="mf">98.6</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">IsProperty</span><span class="p">(</span><span class="s2">&quot;Status&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">GetProperty</span><span class="p">(</span><span class="s2">&quot;Status&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">IsProperty</span><span class="p">(</span><span class="s2">"Status"</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Status: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">GetProperty</span><span class="p">(</span><span class="s2">"Status"</span><span class="p">));</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aProps</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">GetPropList</span><span class="p">();</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Dynamic property count: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aProps</span><span class="p">)));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Dynamic property count: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aProps</span><span class="p">)));</span>
 
 <span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">ToString</span><span class="p">();</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sXml</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs XML with root element SampleRecord;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildSamplePayload&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSamplePayload"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="clone-before-branching">Clone before branching<a class="headerlink" href="#clone-before-branching" title="Permanent link">&para;</a></h3>
 <p>Creates an <code>SSLExpando</code> for a release request, clones it twice into separate objects, then changes the <code>Decision</code> property on each clone independently to show that <code>clone()</code> makes a separate property bag.</p>
@@ -3000,23 +3000,23 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oRequest</span><span class="p">,</span><span class="w"> </span><span class="n">oReviewCopy</span><span class="p">,</span><span class="w"> </span><span class="n">oReleaseCopy</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oRequest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLExpando</span><span class="p">{};</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">XmlType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ReleaseRequest&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">&quot;SampleID&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-2026-0042&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">&quot;Decision&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Pending&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">XmlType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ReleaseRequest"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">"SampleID"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-2026-0042"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">"Decision"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Pending"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">oReviewCopy</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">clone</span><span class="p">();</span>
 <span class="w">    </span><span class="n">oReleaseCopy</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">clone</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">oReviewCopy</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">&quot;Decision&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Review&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">oReleaseCopy</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">&quot;Decision&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Release&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oReviewCopy</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">"Decision"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Review"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oReleaseCopy</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">"Decision"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Release"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Original: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">GetProperty</span><span class="p">(</span><span class="s2">&quot;Decision&quot;</span><span class="p">));</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Review copy: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oReviewCopy</span><span class="p">:</span><span class="nf">GetProperty</span><span class="p">(</span><span class="s2">&quot;Decision&quot;</span><span class="p">));</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Release copy: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oReleaseCopy</span><span class="p">:</span><span class="nf">GetProperty</span><span class="p">(</span><span class="s2">&quot;Decision&quot;</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Original: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">GetProperty</span><span class="p">(</span><span class="s2">"Decision"</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Review copy: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oReviewCopy</span><span class="p">:</span><span class="nf">GetProperty</span><span class="p">(</span><span class="s2">"Decision"</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Release copy: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oReleaseCopy</span><span class="p">:</span><span class="nf">GetProperty</span><span class="p">(</span><span class="s2">"Decision"</span><span class="p">));</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CloneRequestState&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CloneRequestState"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

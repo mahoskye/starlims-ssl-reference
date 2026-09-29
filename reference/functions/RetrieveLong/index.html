@@ -4366,11 +4366,11 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sColumnName</span><span class="p">,</span><span class="w"> </span><span class="n">sWhereCondition</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOutputFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">nBytes</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LIMS&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;attachments&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sColumnName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;pdf_blob&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sWhereCondition</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;attachmentid = &#39;ATT12345&#39;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sOutputFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\STARLIMS\Exports\ATT12345.pdf&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LIMS"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"attachments"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sColumnName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"pdf_blob"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sWhereCondition</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"attachmentid = 'ATT12345'"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOutputFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\STARLIMS\Exports\ATT12345.pdf"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">RetrieveLong</span><span class="p">(</span>
@@ -4382,25 +4382,25 @@
 <span class="w">            </span><span class="kc">.F.</span>
 <span class="w">        </span><span class="p">);</span>
 
-<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">FileSupport</span><span class="p">(</span><span class="n">sOutputFilePath</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;EXISTS&quot;</span><span class="p">);</span>
-<span class="w">            </span><span class="n">nBytes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">FileSupport</span><span class="p">(</span><span class="n">sOutputFilePath</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SIZE&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">FileSupport</span><span class="p">(</span><span class="n">sOutputFilePath</span><span class="p">,</span><span class="w"> </span><span class="s2">"EXISTS"</span><span class="p">);</span>
+<span class="w">            </span><span class="n">nBytes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">FileSupport</span><span class="p">(</span><span class="n">sOutputFilePath</span><span class="p">,</span><span class="w"> </span><span class="s2">"SIZE"</span><span class="p">);</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span>
-<span class="w">                </span><span class="s2">&quot;Exported attachment to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOutputFilePath</span><span class="w"> </span><span class="o">+</span>
-<span class="w">                </span><span class="s2">&quot; (&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nBytes</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; bytes)&quot;</span>
+<span class="w">                </span><span class="s2">"Exported attachment to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOutputFilePath</span><span class="w"> </span><span class="o">+</span>
+<span class="w">                </span><span class="s2">" ("</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nBytes</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" bytes)"</span>
 <span class="w">            </span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs on success: exported attachment with byte count;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No binary data was written for attachment ATT12345&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No binary data was written for attachment ATT12345"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;RetrieveLong failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"RetrieveLong failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: RetrieveLong failed;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Run with:</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportAttachmentPdf&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExportAttachmentPdf"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="batch-export-approved-report-files">Batch-export approved report files<a class="headerlink" href="#batch-export-approved-report-files" title="Permanent link">&para;</a></h3>
 <p>Query for a list of IDs and export each matching BLOB to a separate file, tracking how many were written versus skipped.</p>
@@ -4409,23 +4409,23 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sReportId</span><span class="p">,</span><span class="w"> </span><span class="n">sWhereCondition</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputFilePath</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nWritten</span><span class="p">,</span><span class="w"> </span><span class="n">nSkipped</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LIMS&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;report_archive&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sColumnName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;report_blob&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LIMS"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"report_archive"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sColumnName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"report_blob"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nWritten</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nSkipped</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aReportIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;SELECT report_id FROM report_archive WHERE status = &#39;APPROVED&#39;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aReportIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">"SELECT report_id FROM report_archive WHERE status = 'APPROVED'"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">aReportIds</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No approved reports were found&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No approved reports were found"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aReportIds</span><span class="p">);</span>
 <span class="w">        </span><span class="n">sReportId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aReportIds</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]);</span>
-<span class="w">        </span><span class="n">sWhereCondition</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;report_id = &#39;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sReportId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;&#39;&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sOutputFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\STARLIMS\Exports\&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sReportId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;.pdf&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sWhereCondition</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"report_id = '"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sReportId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"'"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sOutputFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\STARLIMS\Exports\"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sReportId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">".pdf"</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">RetrieveLong</span><span class="p">(</span>
@@ -4437,27 +4437,27 @@
 <span class="w">                </span><span class="kc">.F.</span>
 <span class="w">            </span><span class="p">);</span>
 
-<span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">FileSupport</span><span class="p">(</span><span class="n">sOutputFilePath</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;EXISTS&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="nf">FileSupport</span><span class="p">(</span><span class="n">sOutputFilePath</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SIZE&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">FileSupport</span><span class="p">(</span><span class="n">sOutputFilePath</span><span class="p">,</span><span class="w"> </span><span class="s2">"EXISTS"</span><span class="p">)</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="nf">FileSupport</span><span class="p">(</span><span class="n">sOutputFilePath</span><span class="p">,</span><span class="w"> </span><span class="s2">"SIZE"</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">                </span><span class="n">nWritten</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">                </span><span class="n">nSkipped</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">            </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Failed to export report &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sReportId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Failed to export report "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sReportId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs on failure: failed to export report;</span>
 <span class="w">        </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span>
-<span class="w">        </span><span class="s2">&quot;Report export complete. Written: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nWritten</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">        </span><span class="s2">&quot;, skipped: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSkipped</span><span class="p">)</span>
+<span class="w">        </span><span class="s2">"Report export complete. Written: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nWritten</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">        </span><span class="s2">", skipped: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSkipped</span><span class="p">)</span>
 <span class="w">    </span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs: report export summary;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Run with:</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportApprovedReports&quot;</span><span class="p">);</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExportApprovedReports"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

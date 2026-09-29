@@ -4085,18 +4085,18 @@
 
 <span class="w">    </span><span class="n">sOriginalConnection</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDefaultConnection</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">sPreviousConnection</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetDefaultConnection</span><span class="p">(</span><span class="s2">&quot;Reporting&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sPreviousConnection</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetDefaultConnection</span><span class="p">(</span><span class="s2">"Reporting"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sCurrentConnection</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDefaultConnection</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sCurrentConnection</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Reporting&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Previous default: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPreviousConnection</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sCurrentConnection</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Reporting"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Previous default: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPreviousConnection</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">SetDefaultConnection</span><span class="p">(</span><span class="n">sOriginalConnection</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;UseReportingConnection&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"UseReportingConnection"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="run-a-query-on-a-temporary-default-connection-using-finally">Run a query on a temporary default connection using <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a><a class="headerlink" href="#run-a-query-on-a-temporary-default-connection-using-finally" title="Permanent link">&para;</a></h3>
 <p>Use <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> to guarantee the original connection is restored even when the query raises an exception.</p>
@@ -4106,14 +4106,14 @@
 <span class="w">    </span><span class="n">sOriginalConnection</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDefaultConnection</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">SetDefaultConnection</span><span class="p">(</span><span class="s2">&quot;Reporting&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">SetDefaultConnection</span><span class="p">(</span><span class="s2">"Reporting"</span><span class="p">);</span>
 
-<span class="w">        </span><span class="n">sOrdersXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSet</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="n">sOrdersXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSet</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            SELECT ordno, status</span>
 <span class="s2">            FROM orders</span>
-<span class="s2">            WHERE status = &#39;Logged&#39;</span>
-<span class="s2">        &quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Returned XML length: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Len</span><span class="p">(</span><span class="n">sOrdersXml</span><span class="p">)));</span>
+<span class="s2">            WHERE status = 'Logged'</span>
+<span class="s2">        "</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Returned XML length: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Len</span><span class="p">(</span><span class="n">sOrdersXml</span><span class="p">)));</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs on failure: database error;</span>
@@ -4123,7 +4123,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LoadLoggedOrders&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LoadLoggedOrders"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="iterate-over-multiple-connections-and-restore-the-original">Iterate over multiple connections and restore the original<a class="headerlink" href="#iterate-over-multiple-connections-and-restore-the-original" title="Permanent link">&para;</a></h3>
 <p>Loop over a list of connection names, run the same count query against each, then restore the original connection in <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a>.</p>
@@ -4131,7 +4131,7 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aConnections</span><span class="p">,</span><span class="w"> </span><span class="n">sOriginalConnection</span><span class="p">,</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPendingCount</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aConnections</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LAB_A&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB_B&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB_C&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aConnections</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"LAB_A"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB_B"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB_C"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">sOriginalConnection</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDefaultConnection</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
@@ -4139,14 +4139,14 @@
 <span class="w">            </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aConnections</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
 <span class="w">            </span><span class="nf">SetDefaultConnection</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">);</span>
 
-<span class="w">            </span><span class="n">nPendingCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="n">nPendingCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">                SELECT COUNT(*)</span>
 <span class="s2">                FROM ordtask</span>
 <span class="s2">                WHERE status = ?</span>
-<span class="s2">            &quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="mi">0</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Pending&quot;</span><span class="p">});</span>
+<span class="s2">            "</span><span class="p">,</span>
+<span class="w">                </span><span class="mi">0</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Pending"</span><span class="p">});</span>
 
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nPendingCount</span><span class="p">));</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nPendingCount</span><span class="p">));</span>
 <span class="w">        </span><span class="k">:NEXT</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
@@ -4157,7 +4157,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ReportPendingTasksByConnection&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReportPendingTasksByConnection"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

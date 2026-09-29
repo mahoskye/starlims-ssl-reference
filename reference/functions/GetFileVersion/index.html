@@ -3868,14 +3868,14 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDllVersion</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sVersion</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\\Windows\\System32\\shell32.dll&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\\Windows\\System32\\shell32.dll"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sVersion</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFileVersion</span><span class="p">(</span><span class="n">sFileName</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sFileName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; version: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sVersion</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sFileName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" version: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sVersion</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDllVersion&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowDllVersion"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>C:\Windows\System32\shell32.dll version: 6.1.7601.23537
@@ -3885,25 +3885,25 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckExpectedVersion</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sExpectedVersion</span><span class="p">,</span><span class="w"> </span><span class="n">sActualVersion</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetAppBaseFolder</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;starlims.exe&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sExpectedVersion</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;11.0.0.0&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFileName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetAppBaseFolder</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"starlims.exe"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sExpectedVersion</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"11.0.0.0"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sActualVersion</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFileVersion</span><span class="p">(</span><span class="n">sFileName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sActualVersion</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sExpectedVersion</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Version check passed for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Version check passed for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">/* Logs on mismatch: version mismatch message;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span>
-<span class="w">        </span><span class="s2">&quot;Version mismatch for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: expected &quot;</span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="n">sExpectedVersion</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, got &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sActualVersion</span>
+<span class="w">        </span><span class="s2">"Version mismatch for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": expected "</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="n">sExpectedVersion</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">", got "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sActualVersion</span>
 <span class="w">    </span><span class="p">);</span>
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckExpectedVersion&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckExpectedVersion"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="audit-several-files-with-error-handling">Audit several files with error handling<a class="headerlink" href="#audit-several-files-with-error-handling" title="Permanent link">&para;</a></h3>
 <p>Collect version information for multiple files and continue even if one lookup fails.</p>
@@ -3911,9 +3911,9 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFileNames</span><span class="p">,</span><span class="w"> </span><span class="n">aReport</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sVersion</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aFileNames</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nf">GetAppBaseFolder</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;starlims.exe&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nf">GetAppBaseFolder</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;lims.dll&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;C:\\Windows\\System32\\shell32.dll&quot;</span>
+<span class="w">        </span><span class="nf">GetAppBaseFolder</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"starlims.exe"</span><span class="p">,</span>
+<span class="w">        </span><span class="nf">GetAppBaseFolder</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"lims.dll"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"C:\\Windows\\System32\\shell32.dll"</span>
 <span class="w">    </span><span class="p">};</span>
 <span class="w">    </span><span class="n">aReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
@@ -3922,10 +3922,10 @@
 
 <span class="w">        </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">            </span><span class="n">sVersion</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFileVersion</span><span class="p">(</span><span class="n">sFileName</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aReport</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sVersion</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span><span class="p">});</span>
+<span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aReport</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sVersion</span><span class="p">,</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">});</span>
 <span class="w">        </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">            </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aReport</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ERROR&quot;</span><span class="p">});</span>
+<span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aReport</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">,</span><span class="w"> </span><span class="s2">"ERROR"</span><span class="p">});</span>
 <span class="w">        </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
@@ -3933,7 +3933,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AuditFileVersions&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AuditFileVersions"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

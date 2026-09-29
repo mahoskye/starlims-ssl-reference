@@ -4229,7 +4229,7 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListDocumentMetadata</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="n">aMetadata</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sLine</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sObjId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;0900000180001234&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sObjId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"0900000180001234"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
@@ -4239,10 +4239,10 @@
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nCount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Metadata lookup failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Metadata lookup failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">                </span><span class="c1">/* Logs on command failure;</span>
 <span class="w">            </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No metadata returned for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
+<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No metadata returned for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
 <span class="w">                </span><span class="c1">/* Logs when metadata is empty;</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4250,7 +4250,7 @@
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aMetadata</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; = &quot;</span>
+<span class="w">            </span><span class="n">sLine</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aMetadata</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" = "</span>
 <span class="w">                     </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aMetadata</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]);</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLine</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs each attribute name and value;</span>
@@ -4263,17 +4263,17 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ListDocumentMetadata&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ListDocumentMetadata"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="request-a-specific-attribute-subset">Request a specific attribute subset<a class="headerlink" href="#request-a-specific-attribute-subset" title="Permanent link">&para;</a></h3>
 <p>Passes a comma-separated attribute list to restrict the result to two fields, then reads each row's attribute name to extract the <code>author</code> and <code>r_creation_date</code> values.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSelectedMetadata</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="n">sAttrs</span><span class="p">,</span><span class="w"> </span><span class="n">aMetadata</span><span class="p">,</span><span class="w"> </span><span class="n">sAuthor</span><span class="p">,</span><span class="w"> </span><span class="n">sCreatedOn</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sObjId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;0900000180001234&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sAttrs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;author,r_creation_date&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sAuthor</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sCreatedOn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sObjId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"0900000180001234"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sAttrs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"author,r_creation_date"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sAuthor</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCreatedOn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
@@ -4285,18 +4285,18 @@
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aMetadata</span><span class="p">);</span>
-<span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">aMetadata</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;AUTHOR&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">aMetadata</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"AUTHOR"</span><span class="p">;</span>
 <span class="w">                </span><span class="n">sAuthor</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aMetadata</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]);</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">aMetadata</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;R_CREATION_DATE&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">aMetadata</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"R_CREATION_DATE"</span><span class="p">;</span>
 <span class="w">                </span><span class="n">sCreatedOn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aMetadata</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]);</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Author: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sAuthor</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Author: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sAuthor</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs the selected author;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Created: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCreatedOn</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Created: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCreatedOn</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs the creation date;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aMetadata</span><span class="p">;</span>
@@ -4306,7 +4306,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetSelectedMetadata&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetSelectedMetadata"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="audit-attribute-definitions-in-the-returned-rows">Audit attribute definitions in the returned rows<a class="headerlink" href="#audit-attribute-definitions-in-the-returned-rows" title="Permanent link">&para;</a></h3>
 <p>Fetches all metadata, counts how many attributes are repeating and how many have a declared length greater than 255, and logs a summary line using the type-code and length columns.</p>
@@ -4336,9 +4336,9 @@
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Attributes: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aMetadata</span><span class="p">))</span>
-<span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, repeating: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nRepeating</span><span class="p">)</span>
-<span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, length &gt; 255: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nLongFields</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Attributes: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aMetadata</span><span class="p">))</span>
+<span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="s2">", repeating: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nRepeating</span><span class="p">)</span>
+<span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="s2">", length &gt; 255: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nLongFields</span><span class="p">);</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSummary</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs attribute summary counts;</span>
 
@@ -4349,7 +4349,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AuditMetadataShape&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;0900000180001234&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AuditMetadataShape"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"0900000180001234"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

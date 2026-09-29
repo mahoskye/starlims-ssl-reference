@@ -4199,17 +4199,17 @@ sign-off values. If <code>sWorkitemId</code> is <a href="../../literals/nil/"><c
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompleteBasicWorkitem</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">,</span><span class="w"> </span><span class="n">bCompleted</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Repository1&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;analyst&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WI-2024-00142&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDocBase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Repository1"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"analyst"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"WI-2024-00142"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
 <span class="w">    </span><span class="n">bLoggedIn</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="n">sDocBase</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bLoggedIn</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Documentum login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Documentum login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -4217,9 +4217,9 @@ sign-off values. If <code>sWorkitemId</code> is <a href="../../literals/nil/"><c
 <span class="w">    </span><span class="n">bCompleted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocCompleteWorkitem</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bCompleted</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Work item &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; completed successfully&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Work item "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" completed successfully"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Could not complete work item &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Could not complete work item "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
@@ -4228,7 +4228,7 @@ sign-off values. If <code>sWorkitemId</code> is <a href="../../literals/nil/"><c
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompleteBasicWorkitem&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CompleteBasicWorkitem"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="complete-a-work-item-with-sign-off-and-inspect-the-failure-message-on-error">Complete a work item with sign-off and inspect the failure message on error<a class="headerlink" href="#complete-a-work-item-with-sign-off-and-inspect-the-failure-message-on-error" title="Permanent link">&para;</a></h3>
 <p>Completes a work item with all four sign-off arguments, then reads the Documentum error message to build a specific failure description when the operation returns <a href="../../literals/false/"><code>.F.</code></a>.</p>
@@ -4236,10 +4236,10 @@ sign-off values. If <code>sWorkitemId</code> is <a href="../../literals/nil/"><c
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">sSignOffUser</span><span class="p">,</span><span class="w"> </span><span class="n">sSignOffPass</span><span class="p">,</span><span class="w"> </span><span class="n">sSignOffReason</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bCompleted</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WI-2024-00142&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSignOffUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSignOffPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;P@ssw0rd!&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSignOffReason</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Approved for release&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"WI-2024-00142"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSignOffUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"jsmith"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSignOffPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"P@ssw0rd!"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSignOffReason</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Approved for release"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bCompleted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocCompleteWorkitem</span><span class="p">(</span>
 <span class="w">        </span><span class="n">sWorkitemId</span><span class="p">,</span>
@@ -4249,23 +4249,23 @@ sign-off values. If <code>sWorkitemId</code> is <a href="../../literals/nil/"><c
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bCompleted</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Work item &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; completed with sign-off&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Work item "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" completed with sign-off"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">()</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sErrMsg</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Completion failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Completion failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Completion failed for work item &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Completion failed for work item "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompleteRegulatedWorkitem&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CompleteRegulatedWorkitem"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="complete-a-batch-of-work-items-and-stop-on-the-first-failure">Complete a batch of work items and stop on the first failure<a class="headerlink" href="#complete-a-batch-of-work-items-and-stop-on-the-first-failure" title="Permanent link">&para;</a></h3>
 <p>Accepts a work item ID array and sign-off values as parameters, validates each ID is non-blank, and halts the batch immediately on the first failed completion with a specific or generic error message.</p>
@@ -4277,7 +4277,7 @@ sign-off values. If <code>sWorkitemId</code> is <a href="../../literals/nil/"><c
 <span class="w">        </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aWorkitemIds</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Work item IDs must not be blank&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Work item IDs must not be blank"</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4292,24 +4292,24 @@ sign-off values. If <code>sWorkitemId</code> is <a href="../../literals/nil/"><c
 <span class="w">            </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
 
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">()</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sErrMsg</span><span class="p">);</span>
-<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Failed to complete &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
+<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Failed to complete "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Failed to complete &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">);</span>
+<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Failed to complete "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;All work items completed successfully&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"All work items completed successfully"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span>
-<span class="w">    </span><span class="s2">&quot;CompleteWorkitemBatch&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="p">{{</span><span class="s2">&quot;WI-2024-00142&quot;</span><span class="p">},</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;P@ssw0rd!&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Approved for release&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="s2">"CompleteWorkitemBatch"</span><span class="p">,</span>
+<span class="w">    </span><span class="p">{{</span><span class="s2">"WI-2024-00142"</span><span class="p">},</span><span class="w"> </span><span class="s2">"jsmith"</span><span class="p">,</span><span class="w"> </span><span class="s2">"P@ssw0rd!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Approved for release"</span><span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>

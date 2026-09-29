@@ -4188,8 +4188,8 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateDocumentStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="n">aAttributes</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sObjId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;0900001680000b3f&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aAttributes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{{</span><span class="s2">&quot;status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Final&quot;</span><span class="p">}};</span>
+<span class="w">    </span><span class="n">sObjId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"0900001680000b3f"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aAttributes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{{</span><span class="s2">"status"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Final"</span><span class="p">}};</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
@@ -4197,10 +4197,10 @@
 <span class="w">        </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocSetMetadata</span><span class="p">(</span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="n">aAttributes</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Document metadata updated for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Document metadata updated for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">            </span><span class="c1">/* Logs on failure: metadata update failed;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Metadata update failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Metadata update failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
@@ -4210,18 +4210,18 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;UpdateDocumentStatus&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"UpdateDocumentStatus"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="update-several-fields-and-inspect-the-failure-state">Update several fields and inspect the failure state<a class="headerlink" href="#update-several-fields-and-inspect-the-failure-state" title="Permanent link">&para;</a></h3>
 <p>Updates three fields at once and uses <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> to confirm a backend failure before reading the error message.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateDocumentProfile</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="n">aAttributes</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sObjId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;090000128000efad&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sObjId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"090000128000efad"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">aAttributes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;author&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Marie Curie&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;category&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Chemistry&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Approved&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"author"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Marie Curie"</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"category"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Chemistry"</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"status"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Approved"</span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
@@ -4232,13 +4232,13 @@
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
 <span class="w">                </span><span class="c1">/* Logs on failure: metadata update failed;</span>
-<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Metadata update failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Metadata update failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Profile metadata updated for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Profile metadata updated for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
@@ -4246,7 +4246,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;UpdateDocumentProfile&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"UpdateDocumentProfile"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="build-a-conditional-metadata-payload-at-runtime">Build a conditional metadata payload at runtime<a class="headerlink" href="#build-a-conditional-metadata-payload-at-runtime" title="Permanent link">&para;</a></h3>
 <p>Builds the attribute array based on an approval flag, adding approval date and flag fields when approved and a rejection flag when not, then submits the whole set in one call.</p>
@@ -4254,15 +4254,15 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="n">sReviewedBy</span><span class="p">,</span><span class="w"> </span><span class="n">bApproved</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aAttributes</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">,</span><span class="w"> </span><span class="n">sApprovedDate</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aAttributes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{{</span><span class="s2">&quot;reviewed_by&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sReviewedBy</span><span class="p">}};</span>
+<span class="w">    </span><span class="n">aAttributes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{{</span><span class="s2">"reviewed_by"</span><span class="p">,</span><span class="w"> </span><span class="n">sReviewedBy</span><span class="p">}};</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bApproved</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sApprovedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="nf">Today</span><span class="p">());</span>
 
-<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aAttributes</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;approved_flag&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Y&quot;</span><span class="p">});</span>
-<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aAttributes</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;approved_date&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sApprovedDate</span><span class="p">});</span>
+<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aAttributes</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"approved_flag"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Y"</span><span class="p">});</span>
+<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aAttributes</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"approved_date"</span><span class="p">,</span><span class="w"> </span><span class="n">sApprovedDate</span><span class="p">});</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aAttributes</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;approved_flag&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;N&quot;</span><span class="p">});</span>
+<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aAttributes</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"approved_flag"</span><span class="p">,</span><span class="w"> </span><span class="s2">"N"</span><span class="p">});</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
@@ -4272,7 +4272,7 @@
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bSuccess</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
 <span class="w">            </span><span class="c1">/* Logs on failure: review metadata sync failed;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Review metadata sync failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Review metadata sync failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
@@ -4282,7 +4282,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SyncReviewMetadata&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;0900001680000b3f&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;jdoe&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SyncReviewMetadata"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"0900001680000b3f"</span><span class="p">,</span><span class="w"> </span><span class="s2">"jdoe"</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

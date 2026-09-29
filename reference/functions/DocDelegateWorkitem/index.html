@@ -4189,22 +4189,22 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DelegateSingleWorkitem</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">sTargetUser</span><span class="p">,</span><span class="w"> </span><span class="n">bDelegated</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WI-2024-00142&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sTargetUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"WI-2024-00142"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTargetUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"jsmith"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bDelegated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocDelegateWorkitem</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">sTargetUser</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bDelegated</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Work item &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; delegated to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetUser</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Work item "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" delegated to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetUser</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Could not delegate work item &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Could not delegate work item "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bDelegated</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DelegateSingleWorkitem&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DelegateSingleWorkitem"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="validate-inputs-and-return-a-structured-result-with-any-documentum-message">Validate inputs and return a structured result with any Documentum message<a class="headerlink" href="#validate-inputs-and-return-a-structured-result-with-any-documentum-message" title="Permanent link">&para;</a></h3>
 <p>Validates that both required values are non-empty before calling the function, then returns a result object carrying the success flag and any Documentum error message.</p>
@@ -4214,26 +4214,26 @@
 
 <span class="w">    </span><span class="n">oResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">();</span>
 <span class="w">    </span><span class="n">oResult</span><span class="p">:</span><span class="n">success</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">);</span>
-<span class="w">        </span><span class="n">oResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;A work item ID is required&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"A work item ID is required"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oResult</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sTargetUser</span><span class="p">);</span>
-<span class="w">        </span><span class="n">oResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;A target user is required&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"A target user is required"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oResult</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oResult</span><span class="p">:</span><span class="n">success</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocDelegateWorkitem</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">sTargetUser</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oResult</span><span class="p">:</span><span class="n">success</span><span class="p">;</span>
-<span class="w">        </span><span class="n">oResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Delegation succeeded&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Delegation succeeded"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oResult</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Delegation failed&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Delegation failed"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
 <span class="w">        </span><span class="n">oResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
@@ -4243,7 +4243,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;TryDelegateWorkitem&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;WI-2024-00142&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"TryDelegateWorkitem"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"WI-2024-00142"</span><span class="p">,</span><span class="w"> </span><span class="s2">"jsmith"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="delegate-a-batch-of-work-items-and-collect-per-item-outcomes">Delegate a batch of work items and collect per-item outcomes<a class="headerlink" href="#delegate-a-batch-of-work-items-and-collect-per-item-outcomes" title="Permanent link">&para;</a></h3>
 <p>Iterates a work item ID array parameter, skips any blank IDs, delegates each valid item to the target user, and returns an array of result objects with the outcome and any Documentum message for each item.</p>
@@ -4254,7 +4254,7 @@
 <span class="w">    </span><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sTargetUser</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;A target user is required before batch delegation&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"A target user is required before batch delegation"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4263,10 +4263,10 @@
 <span class="w">        </span><span class="n">oItemResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">();</span>
 <span class="w">        </span><span class="n">oItemResult</span><span class="p">:</span><span class="n">workitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oItemResult</span><span class="p">:</span><span class="n">success</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<span class="w">        </span><span class="n">oItemResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oItemResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">);</span>
-<span class="w">            </span><span class="n">oItemResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Skipped empty work item ID&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">oItemResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Skipped empty work item ID"</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">oItemResult</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:LOOP</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -4274,9 +4274,9 @@
 <span class="w">        </span><span class="n">oItemResult</span><span class="p">:</span><span class="n">success</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocDelegateWorkitem</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">sTargetUser</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">oItemResult</span><span class="p">:</span><span class="n">success</span><span class="p">;</span>
-<span class="w">            </span><span class="n">oItemResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Delegated successfully&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">oItemResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Delegated successfully"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="n">oItemResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Delegation failed&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">oItemResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Delegation failed"</span><span class="p">;</span>
 
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
 <span class="w">                </span><span class="n">oItemResult</span><span class="p">:</span><span class="n">message</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
@@ -4291,8 +4291,8 @@
 
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span>
-<span class="w">    </span><span class="s2">&quot;DelegateWorkitemBatch&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="p">{{</span><span class="s2">&quot;WI-2024-00142&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WI-2024-00143&quot;</span><span class="p">},</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="s2">"DelegateWorkitemBatch"</span><span class="p">,</span>
+<span class="w">    </span><span class="p">{{</span><span class="s2">"WI-2024-00142"</span><span class="p">,</span><span class="w"> </span><span class="s2">"WI-2024-00143"</span><span class="p">},</span><span class="w"> </span><span class="s2">"jsmith"</span><span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>

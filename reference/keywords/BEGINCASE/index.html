@@ -2916,35 +2916,35 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NotifyAnalysisStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sNotifyMessage</span><span class="p">,</span><span class="w"> </span><span class="n">oEmail</span><span class="p">,</span><span class="w"> </span><span class="n">nResultValue</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LAB-2024-0042"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nResultValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">85</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oEmail</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Email</span><span class="p">{};</span>
 
 <span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">nResultValue</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sNotifyMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CRITICAL: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; exceeded the safe threshold&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">oEmail</span><span class="p">:</span><span class="n">Subject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Critical Alert - Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sNotifyMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"CRITICAL: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">" exceeded the safe threshold"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oEmail</span><span class="p">:</span><span class="n">Subject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Critical Alert - Sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">nResultValue</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">75</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sNotifyMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WARNING: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is approaching the threshold limit&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">oEmail</span><span class="p">:</span><span class="n">Subject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Warning Alert - Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sNotifyMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"WARNING: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">" is approaching the threshold limit"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oEmail</span><span class="p">:</span><span class="n">Subject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Warning Alert - Sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">nResultValue</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sNotifyMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;NOTICE: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is within the acceptable range&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">oEmail</span><span class="p">:</span><span class="n">Subject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Normal Status - Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sNotifyMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"NOTICE: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">" is within the acceptable range"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oEmail</span><span class="p">:</span><span class="n">Subject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Normal Status - Sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sNotifyMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;INFO: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is below the typical range&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">oEmail</span><span class="p">:</span><span class="n">Subject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Information - Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sNotifyMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"INFO: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">" is below the typical range"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">oEmail</span><span class="p">:</span><span class="n">Subject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Information - Sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oEmail</span><span class="p">:</span><span class="n">Body</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sNotifyMessage</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oEmail</span><span class="p">:</span><span class="n">To</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;labmanager@example.com&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oEmail</span><span class="p">:</span><span class="n">To</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"labmanager@example.com"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sNotifyMessage</span><span class="p">);</span>
 
@@ -2952,7 +2952,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NotifyAnalysisStatus&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"NotifyAnalysisStatus"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/InfoMes/"><code>InfoMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>WARNING: LAB-2024-0042 is approaching the threshold limit
@@ -2961,39 +2961,39 @@
 <p>Ordered conditions ensure the first matching business rule wins. With <code>nBasePrice</code> of <code>100</code>, a contract order of <code>1500</code> units triggers the contract volume discount.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CalculateDynamicPrice</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">nBasePrice</span><span class="p">,</span><span class="w"> </span><span class="n">sCustomerType</span><span class="p">,</span><span class="w"> </span><span class="n">nOrderVolume</span><span class="p">,</span><span class="w"> </span><span class="n">bHasContract</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sCustomerType</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RETAIL&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sCustomerType</span><span class="p">,</span><span class="w"> </span><span class="s2">"RETAIL"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">nOrderVolume</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">bHasContract</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nFinalPrice</span><span class="p">,</span><span class="w"> </span><span class="n">sFormulaUsed</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nFinalPrice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nBasePrice</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFormulaUsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Base Price&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFormulaUsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Base Price"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">bHasContract</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">nOrderVolume</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
 <span class="w">        </span><span class="n">nFinalPrice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nBasePrice</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.70</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sFormulaUsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Contract Volume Discount&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sFormulaUsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Contract Volume Discount"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sCustomerType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;WHOLESALE&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sCustomerType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"WHOLESALE"</span><span class="p">;</span>
 <span class="w">        </span><span class="n">nFinalPrice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nBasePrice</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.80</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sFormulaUsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Wholesale Rate&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sFormulaUsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Wholesale Rate"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sCustomerType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;DISTRIBUTOR&quot;</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">nOrderVolume</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sCustomerType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"DISTRIBUTOR"</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">nOrderVolume</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">500</span><span class="p">;</span>
 <span class="w">        </span><span class="n">nFinalPrice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nBasePrice</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.85</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sFormulaUsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Distributor Volume Rate&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sFormulaUsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Distributor Volume Rate"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">nOrderVolume</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2000</span><span class="p">;</span>
 <span class="w">        </span><span class="n">nFinalPrice</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nBasePrice</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.90</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sFormulaUsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;High Volume Discount&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sFormulaUsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"High Volume Discount"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sFormulaUsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Standard Pricing&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sFormulaUsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Standard Pricing"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Price: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nBasePrice</span><span class="p">)</span>
-<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; -&gt; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFinalPrice</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; via &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFormulaUsed</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Price: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nBasePrice</span><span class="p">)</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">" -&gt; "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFinalPrice</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">" via "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFormulaUsed</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 
@@ -3001,7 +3001,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CalculateDynamicPrice&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;RETAIL&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CalculateDynamicPrice"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="s2">"RETAIL"</span><span class="p">,</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Price: 100 -&gt; 70 via Contract Volume Discount
@@ -3019,16 +3019,16 @@
 
 <span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">bRushOrder</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aActions</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Print priority label&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aActions</span><span class="p">,</span><span class="w"> </span><span class="s2">"Print priority label"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">bColdChain</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aActions</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Pack with temperature control&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aActions</span><span class="p">,</span><span class="w"> </span><span class="s2">"Pack with temperature control"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">bInternational</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aActions</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Attach customs paperwork&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aActions</span><span class="p">,</span><span class="w"> </span><span class="s2">"Attach customs paperwork"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aActions</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Standard packaging only&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aActions</span><span class="p">,</span><span class="w"> </span><span class="s2">"Standard packaging only"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
 
@@ -3036,7 +3036,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildShipmentActions&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildShipmentActions"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">});</span>
 </code></pre></div>
 <p>In this example, a shipment that is both rush and cold-chain adds only the priority-label action because the first matching branch exits the block. If any <a href="../CASE/"><code>:CASE</code></a> body runs, <a href="../OTHERWISE/"><code>:OTHERWISE;</code></a> is skipped.</p>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>

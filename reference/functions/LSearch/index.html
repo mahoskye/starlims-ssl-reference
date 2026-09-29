@@ -4156,17 +4156,17 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">        SELECT status</span>
 <span class="s2">        FROM sample</span>
 <span class="s2">        WHERE sample_id = ?</span>
-<span class="s2">    &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Unknown&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;DATABASE&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sSampleID</span><span class="p">});</span>
+<span class="s2">    "</span><span class="p">,</span><span class="w"> </span><span class="s2">"Unknown"</span><span class="p">,</span><span class="w"> </span><span class="s2">"DATABASE"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sSampleID</span><span class="p">});</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetSampleStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SMP-001&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetSampleStatus"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"SMP-001"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="use-a-numeric-fallback-with-count">Use a numeric fallback with COUNT(*)<a class="headerlink" href="#use-a-numeric-fallback-with-count" title="Permanent link">&para;</a></h3>
 <p>Count open tasks for a sample. If no tasks match the filter, <code>LSearch</code> returns <code>0</code> rather than <a href="../../literals/nil/"><code>NIL</code></a> or an empty result.</p>
@@ -4174,18 +4174,18 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nTaskCount</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">nTaskCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">nTaskCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">        SELECT COUNT(*)</span>
 <span class="s2">        FROM ordtask</span>
 <span class="s2">        WHERE sample_id = ?</span>
 <span class="s2">          AND status = ?</span>
-<span class="s2">    &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;DATABASE&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Open&quot;</span><span class="p">});</span>
+<span class="s2">    "</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"DATABASE"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="s2">"Open"</span><span class="p">});</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nTaskCount</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetOpenTaskCount&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SMP-001&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetOpenTaskCount"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"SMP-001"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="use-nil-to-distinguish-a-missing-date-from-a-real-one">Use <a href="../../literals/nil/"><code>NIL</code></a> to distinguish a missing date from a real one<a class="headerlink" href="#use-nil-to-distinguish-a-missing-date-from-a-real-one" title="Permanent link">&para;</a></h3>
 <p>Use <a href="../../literals/nil/"><code>NIL</code></a> as the fallback so that a missing approval date is distinguishable from a genuine date value. After the query, a <a href="../../literals/nil/"><code>NIL</code></a> result means the invoice has not yet been approved.</p>
@@ -4194,34 +4194,34 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dApprovalDate</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">dApprovalDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="n">dApprovalDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            SELECT approved_date</span>
 <span class="s2">            FROM financial_approvals</span>
 <span class="s2">            WHERE invoice_id = ?</span>
 <span class="s2">              AND status = ?</span>
-<span class="s2">        &quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;DATABASE&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sInvoiceID</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">});</span>
+<span class="s2">        "</span><span class="p">,</span><span class="w"> </span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="s2">"DATABASE"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sInvoiceID</span><span class="p">,</span><span class="w"> </span><span class="s2">"A"</span><span class="p">});</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">dApprovalDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Invoice &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInvoiceID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; has not been approved yet&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Invoice "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInvoiceID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" has not been approved yet"</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span>
-<span class="w">            </span><span class="s2">&quot;Invoice &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInvoiceID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; was approved on &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dApprovalDate</span><span class="p">)</span>
+<span class="w">            </span><span class="s2">"Invoice "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInvoiceID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" was approved on "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dApprovalDate</span><span class="p">)</span>
 <span class="w">        </span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs approval date;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">dApprovalDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Approval lookup failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Approval lookup failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: approval lookup failed;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowApprovalDate&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;INV-001&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowApprovalDate"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"INV-001"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

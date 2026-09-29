@@ -4176,17 +4176,17 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">StopOneWorkflow</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">bStopped</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WF-2024-00142&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"WF-2024-00142"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
 <span class="w">    </span><span class="n">bStopped</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocStopWorkflow</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bStopped</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Stopped workflow &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Stopped workflow "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs the stopped workflow ID;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Could not stop workflow &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Could not stop workflow "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs the workflow ID on failure;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4194,19 +4194,19 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;StopOneWorkflow&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"StopOneWorkflow"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="read-the-documentum-error-after-a-failed-stop">Read the Documentum error after a failed stop<a class="headerlink" href="#read-the-documentum-error-after-a-failed-stop" title="Permanent link">&para;</a></h3>
 <p>Logs in to Documentum before stopping, then reads the error message from <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> when the stop returns <a href="../../literals/false/"><code>.F.</code></a>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">StopWorkflowWithMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">,</span><span class="w"> </span><span class="n">bStopped</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;WF-2024-00142&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"WF-2024-00142"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">&quot;Repository&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;doc_user&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">"Repository"</span><span class="p">,</span><span class="w"> </span><span class="s2">"doc_user"</span><span class="p">,</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Documentum login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="c1">/* Logs the login error;</span>
 <span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 
@@ -4216,16 +4216,16 @@
 <span class="w">    </span><span class="n">bStopped</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocStopWorkflow</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bStopped</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Stopped workflow &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Stopped workflow "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs the stopped workflow ID;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
 <span class="w">            </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Failed to stop workflow &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Failed to stop workflow "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs the workflow ID and error on failure;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4233,7 +4233,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;StopWorkflowWithMessage&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"StopWorkflowWithMessage"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="stop-a-list-of-workflows-and-continue-on-failures">Stop a list of workflows and continue on failures<a class="headerlink" href="#stop-a-list-of-workflows-and-continue-on-failures" title="Permanent link">&para;</a></h3>
 <p>Iterates a workflow ID array, stopping each one and collecting failure IDs, with an option to exit early on first failure. Logs a final count of stopped and failed workflows.</p>
@@ -4249,15 +4249,15 @@
 <span class="w">    </span><span class="n">aFailedIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nCount</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No workflows supplied&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No workflows supplied"</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">&quot;Repository&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;doc_user&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;secret&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum login failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocLoginToDocumentum</span><span class="p">(</span><span class="s2">"Repository"</span><span class="p">,</span><span class="w"> </span><span class="s2">"doc_user"</span><span class="p">,</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Documentum login failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="c1">/* Logs the login error;</span>
 <span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 
@@ -4266,11 +4266,11 @@
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aWorkflowIds</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
-<span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocStopWorkflow</span><span class="p">(</span><span class="n">sWorkflowId</span><span class="p">);</span>
 <span class="w">            </span><span class="n">nStopped</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Stopped workflow &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Stopped workflow "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs each stopped workflow ID;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">            </span><span class="n">nFailed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
@@ -4280,7 +4280,7 @@
 <span class="w">                </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Failed to stop workflow &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Failed to stop workflow "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkflowId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs the workflow ID and error on failure;</span>
 
 <span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bContinueOnError</span><span class="p">;</span>
@@ -4290,13 +4290,13 @@
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span>
-<span class="w">        </span><span class="s2">&quot;Stopped: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nStopped</span><span class="p">)</span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, Failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFailed</span><span class="p">)</span>
+<span class="w">        </span><span class="s2">"Stopped: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nStopped</span><span class="p">)</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">", Failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFailed</span><span class="p">)</span>
 <span class="w">    </span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the final stopped and failed counts;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFailedIds</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Failed workflow IDs collected: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFailedIds</span><span class="p">)));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Failed workflow IDs collected: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFailedIds</span><span class="p">)));</span>
 <span class="w">        </span><span class="c1">/* Logs the number of failed workflow IDs collected;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4306,7 +4306,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;StopWorkflowBatch&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">&quot;WF-2024-00142&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;WF-2024-00143&quot;</span><span class="p">},</span><span class="w"> </span><span class="kc">.T.</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"StopWorkflowBatch"</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">"WF-2024-00142"</span><span class="p">,</span><span class="w"> </span><span class="s2">"WF-2024-00143"</span><span class="p">},</span><span class="w"> </span><span class="kc">.T.</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

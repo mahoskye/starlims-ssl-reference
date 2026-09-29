@@ -2845,43 +2845,43 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadUserNameField</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oImport</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">oRow</span><span class="p">,</span><span class="w"> </span><span class="n">oField</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="s2">&quot;C:/Import&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="nf">GetTable</span><span class="p">(</span><span class="s2">&quot;limsusers&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="s2">"C:/Import"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="nf">GetTable</span><span class="p">(</span><span class="s2">"limsusers"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">oRow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oTable</span><span class="p">:</span><span class="n">Rows</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-<span class="w">    </span><span class="n">oField</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRow</span><span class="p">:</span><span class="nf">GetField</span><span class="p">(</span><span class="s2">&quot;user_name&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oField</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRow</span><span class="p">:</span><span class="nf">GetField</span><span class="p">(</span><span class="s2">"user_name"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oField</span><span class="p">:</span><span class="n">IsNull</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;user_name is null&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"user_name is null"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oField</span><span class="p">:</span><span class="nf">ToString</span><span class="p">();</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;User name: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"User name: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sUserName</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ReadUserNameField&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReadUserNameField"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="update-a-field-value-in-a-row">Update a field value in a row<a class="headerlink" href="#update-a-field-value-in-a-row" title="Permanent link">&para;</a></h3>
 <p>Write a new value to a field and then read it back from the same row.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateStatusField</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oImport</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">oRow</span><span class="p">,</span><span class="w"> </span><span class="n">oField</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="s2">&quot;C:/Import&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="nf">GetTable</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="s2">"C:/Import"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="nf">GetTable</span><span class="p">(</span><span class="s2">"sample"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">oRow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oTable</span><span class="p">:</span><span class="n">Rows</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-<span class="w">    </span><span class="n">oField</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRow</span><span class="p">:</span><span class="nf">GetField</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oField</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRow</span><span class="p">:</span><span class="nf">GetField</span><span class="p">(</span><span class="s2">"status"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">oField</span><span class="p">:</span><span class="n">Value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Complete&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oField</span><span class="p">:</span><span class="n">Value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Complete"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Updated status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oField</span><span class="p">:</span><span class="nf">ToString</span><span class="p">());</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Updated status: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oField</span><span class="p">:</span><span class="nf">ToString</span><span class="p">());</span>
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oField</span><span class="p">:</span><span class="n">Value</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;UpdateStatusField&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"UpdateStatusField"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Updated status: Complete
@@ -2892,22 +2892,22 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oImport</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">oRow</span><span class="p">,</span><span class="w"> </span><span class="n">oField</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sExportedFile</span><span class="p">,</span><span class="w"> </span><span class="n">sReplacementFile</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="s2">&quot;C:/Import&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="nf">GetTable</span><span class="p">(</span><span class="s2">&quot;attachments&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="s2">"C:/Import"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="nf">GetTable</span><span class="p">(</span><span class="s2">"attachments"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">oRow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oTable</span><span class="p">:</span><span class="n">Rows</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-<span class="w">    </span><span class="n">oField</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRow</span><span class="p">:</span><span class="nf">GetField</span><span class="p">(</span><span class="s2">&quot;attachment_blob&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oField</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRow</span><span class="p">:</span><span class="nf">GetField</span><span class="p">(</span><span class="s2">"attachment_blob"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">sExportedFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oField</span><span class="p">:</span><span class="n">Value</span><span class="p">;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Binary field exported to: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExportedFile</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Binary field exported to: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExportedFile</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sReplacementFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/Import/replacement.bin&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sReplacementFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:/Import/replacement.bin"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oField</span><span class="p">:</span><span class="n">Value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sReplacementFile</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oField</span><span class="p">:</span><span class="n">Value</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CopyBinaryField&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CopyBinaryField"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs (the filename is derived from the binary content hash):</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Binary field exported to: C:/Import/a3f2b1c4d5e6f7890123456789abcdef.bin
@@ -2917,16 +2917,16 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildFilterFromField</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oImport</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">oRow</span><span class="p">,</span><span class="w"> </span><span class="n">oField</span><span class="p">,</span><span class="w"> </span><span class="n">sWhere</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="s2">&quot;C:/Import&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="nf">GetTable</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="s2">"C:/Import"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="nf">GetTable</span><span class="p">(</span><span class="s2">"sample"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">oRow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oTable</span><span class="p">:</span><span class="n">Rows</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-<span class="w">    </span><span class="n">oField</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRow</span><span class="p">:</span><span class="nf">GetField</span><span class="p">(</span><span class="s2">&quot;sample_id&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oField</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRow</span><span class="p">:</span><span class="nf">GetField</span><span class="p">(</span><span class="s2">"sample_id"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">oField</span><span class="p">:</span><span class="n">IsNull</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sWhere</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sample_id IS NULL&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sWhere</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"sample_id IS NULL"</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sWhere</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sWhere</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sample_id = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oField</span><span class="p">:</span><span class="nf">GetSqlFormattedValue</span><span class="p">();</span>
+<span class="w">        </span><span class="n">sWhere</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"sample_id = "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oField</span><span class="p">:</span><span class="nf">GetSqlFormattedValue</span><span class="p">();</span>
 <span class="w">        </span><span class="c1">/* Logs: generated WHERE clause;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sWhere</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -2935,7 +2935,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildFilterFromField&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildFilterFromField"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

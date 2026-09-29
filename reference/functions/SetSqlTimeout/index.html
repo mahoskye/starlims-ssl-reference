@@ -4094,14 +4094,14 @@
 <span class="w">    </span><span class="n">nPrevTimeout</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetSqlTimeout</span><span class="p">(</span><span class="mi">90</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">aOrders</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="n">aOrders</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            SELECT ordno, status, logdate</span>
 <span class="s2">            FROM orders</span>
 <span class="s2">            WHERE logdate &gt;= ?dCutoff?</span>
 <span class="s2">            ORDER BY logdate DESC</span>
-<span class="s2">        &quot;</span><span class="p">);</span>
+<span class="s2">        "</span><span class="p">);</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Loaded &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aOrders</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; recent orders&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Loaded "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aOrders</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" recent orders"</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs loaded recent orders count;</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">SetSqlTimeout</span><span class="p">(</span><span class="n">nPrevTimeout</span><span class="p">);</span>
@@ -4109,29 +4109,29 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LoadRecentOrders&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LoadRecentOrders"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="apply-a-timeout-to-a-specific-named-connection">Apply a timeout to a specific named connection<a class="headerlink" href="#apply-a-timeout-to-a-specific-named-connection" title="Permanent link">&para;</a></h3>
 <p>Extend the timeout on a named connection before a long update, then restore it in <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> regardless of whether the update succeeds.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RefreshArchiveSummary</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnection</span><span class="p">,</span><span class="w"> </span><span class="n">nPrevTimeout</span><span class="p">,</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sConnection</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ARCHIVE&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sConnection</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ARCHIVE"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bUpdated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nPrevTimeout</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetSqlTimeout</span><span class="p">(</span><span class="mi">180</span><span class="p">,</span><span class="w"> </span><span class="n">sConnection</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">bUpdated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="n">bUpdated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            UPDATE archive_jobs SET</span>
 <span class="s2">                status = ?,</span>
 <span class="s2">                completed_date = SYSDATE</span>
 <span class="s2">            WHERE status = ?</span>
 <span class="s2">              AND completed_date IS NULL</span>
-<span class="s2">        &quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="n">sConnection</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Complete&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Running&quot;</span><span class="p">});</span>
+<span class="s2">        "</span><span class="p">,</span>
+<span class="w">            </span><span class="n">sConnection</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Complete"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Running"</span><span class="p">});</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Archive summary refresh completed&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Archive summary refresh completed"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">SetSqlTimeout</span><span class="p">(</span><span class="n">nPrevTimeout</span><span class="p">,</span><span class="w"> </span><span class="n">sConnection</span><span class="p">);</span>
@@ -4139,7 +4139,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RefreshArchiveSummary&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RefreshArchiveSummary"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="save-and-restore-timeouts-independently-across-two-connections">Save and restore timeouts independently across two connections<a class="headerlink" href="#save-and-restore-timeouts-independently-across-two-connections" title="Permanent link">&para;</a></h3>
 <p>Set different timeouts on two named connections, query each, then restore both original values in <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> in reverse order.</p>
@@ -4147,37 +4147,37 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nOpsPrevTimeout</span><span class="p">,</span><span class="w"> </span><span class="n">nArchivePrevTimeout</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aOpsRows</span><span class="p">,</span><span class="w"> </span><span class="n">aArchiveRows</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">nOpsPrevTimeout</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetSqlTimeout</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LIMS&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">nArchivePrevTimeout</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetSqlTimeout</span><span class="p">(</span><span class="mi">180</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ARCHIVE&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nOpsPrevTimeout</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetSqlTimeout</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="s2">"LIMS"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nArchivePrevTimeout</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetSqlTimeout</span><span class="p">(</span><span class="mi">180</span><span class="p">,</span><span class="w"> </span><span class="s2">"ARCHIVE"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">aOpsRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="n">aOpsRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            SELECT COUNT(*) AS row_count</span>
 <span class="s2">            FROM orders</span>
-<span class="s2">            WHERE status = &#39;Logged&#39;</span>
-<span class="s2">        &quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;LIMS&quot;</span><span class="p">);</span>
+<span class="s2">            WHERE status = 'Logged'</span>
+<span class="s2">        "</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"LIMS"</span><span class="p">);</span>
 
-<span class="w">        </span><span class="n">aArchiveRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="n">aArchiveRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            SELECT COUNT(*) AS row_count</span>
 <span class="s2">            FROM orders_archive</span>
-<span class="s2">            WHERE archived_flag = &#39;Y&#39;</span>
-<span class="s2">        &quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;ARCHIVE&quot;</span><span class="p">);</span>
+<span class="s2">            WHERE archived_flag = 'Y'</span>
+<span class="s2">        "</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"ARCHIVE"</span><span class="p">);</span>
 
 <span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span>
-<span class="w">            </span><span class="s2">&quot;Operational rows: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aOpsRows</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, archive rows: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aArchiveRows</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span>
+<span class="w">            </span><span class="s2">"Operational rows: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aOpsRows</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">", archive rows: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">aArchiveRows</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span>
 <span class="w">        </span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs operational and archive row counts;</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">SetSqlTimeout</span><span class="p">(</span><span class="n">nArchivePrevTimeout</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ARCHIVE&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">SetSqlTimeout</span><span class="p">(</span><span class="n">nOpsPrevTimeout</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LIMS&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">SetSqlTimeout</span><span class="p">(</span><span class="n">nArchivePrevTimeout</span><span class="p">,</span><span class="w"> </span><span class="s2">"ARCHIVE"</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">SetSqlTimeout</span><span class="p">(</span><span class="n">nOpsPrevTimeout</span><span class="p">,</span><span class="w"> </span><span class="s2">"LIMS"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompareOperationalAndArchiveCounts&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CompareOperationalAndArchiveCounts"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

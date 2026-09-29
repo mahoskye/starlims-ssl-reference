@@ -3682,25 +3682,25 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResetSingleUserPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredHash</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;jsmith&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sNewPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;N3wP@ss2024!&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"jsmith"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sNewPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"N3wP@ss2024!"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sStoredHash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetUserPassword</span><span class="p">(</span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sStoredHash</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Password update did not complete for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Password update did not complete for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: password update did not complete;</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Password updated for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Password updated for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs on success: password updated;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sStoredHash</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ResetSingleUserPassword&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ResetSingleUserPassword"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="re-authenticate-before-changing-a-password">Re-authenticate before changing a password<a class="headerlink" href="#re-authenticate-before-changing-a-password" title="Permanent link">&para;</a></h3>
 <p>Require the current password to be correct before storing the new one.</p>
@@ -3711,25 +3711,25 @@
 <span class="w">    </span><span class="n">bAuthenticated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ChkPassword</span><span class="p">(</span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentPassword</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="n">bAuthenticated</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Current credentials were not accepted.&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Current credentials were not accepted."</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sStoredHash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetUserPassword</span><span class="p">(</span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sStoredHash</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Password update did not complete.&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Password update did not complete."</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Password updated successfully for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Password updated successfully for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs on success: password updated successfully;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sStoredHash</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ChangePasswordAfterCheck&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;CurrentPass!&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;NewPass2026!&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ChangePasswordAfterCheck"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"jsmith"</span><span class="p">,</span><span class="w"> </span><span class="s2">"CurrentPass!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"NewPass2026!"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="apply-password-history-checks-in-a-reset-loop">Apply password-history checks in a reset loop<a class="headerlink" href="#apply-password-history-checks-in-a-reset-loop" title="Permanent link">&para;</a></h3>
 <p>Process multiple requested resets, skipping values that already appear in each user's stored password history.</p>
@@ -3738,13 +3738,13 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredHash</span><span class="p">,</span><span class="w"> </span><span class="n">aPrevPasswords</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aResetRequests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;TempPass2026!&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;adoe&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SpringReset88#&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"jsmith"</span><span class="p">,</span><span class="w"> </span><span class="s2">"TempPass2026!"</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"adoe"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SpringReset88#"</span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">aHistoryByUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;jsmith&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Winter2025!&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Fall2025!&quot;</span><span class="p">}},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;adoe&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Legacy!23&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Older!77&quot;</span><span class="p">}}</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"jsmith"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Winter2025!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Fall2025!"</span><span class="p">}},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"adoe"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Legacy!23"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Older!77"</span><span class="p">}}</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aResetRequests</span><span class="p">);</span>
@@ -3753,7 +3753,7 @@
 <span class="w">        </span><span class="n">aPrevPasswords</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aHistoryByUser</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="nf">ChkNewPassword</span><span class="p">(</span><span class="n">sNewPassword</span><span class="p">,</span><span class="w"> </span><span class="n">aPrevPasswords</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Skipped &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; because the password was used before.&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Skipped "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" because the password was used before."</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs when skipped: password was used before;</span>
 <span class="w">            </span><span class="k">:LOOP</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -3761,18 +3761,18 @@
 <span class="w">        </span><span class="n">sStoredHash</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetUserPassword</span><span class="p">(</span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sStoredHash</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Password update did not complete for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Password update did not complete for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs on failure: password update did not complete;</span>
 <span class="w">            </span><span class="k">:LOOP</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Password updated for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Password updated for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on success: password updated;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ResetPasswordsWithHistoryCheck&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ResetPasswordsWithHistoryCheck"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -3761,12 +3761,12 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sServer</span><span class="p">,</span><span class="w"> </span><span class="n">sRemoteDir</span><span class="p">,</span><span class="w"> </span><span class="n">sOldName</span><span class="p">,</span><span class="w"> </span><span class="n">sNewName</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bRenamed</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ftp.lab.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/incoming/results&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sOldName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;batch_1027.tmp&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sNewName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;batch_1027.ready&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;labupload&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SecurePass123&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ftp.lab.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/incoming/results"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOldName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"batch_1027.tmp"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sNewName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"batch_1027.ready"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"labupload"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SecurePass123"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bRenamed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RenameOnFtp</span><span class="p">(</span>
 <span class="w">        </span><span class="n">sServer</span><span class="p">,</span>
@@ -3779,17 +3779,17 @@
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bRenamed</span><span class="p">;</span>
 <span class="w">        </span><span class="c1">/* Logs the old and new file names;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Renamed &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOldName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sNewName</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Renamed "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOldName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sNewName</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="c1">/* Logs the source file name on failure;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Could not rename &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOldName</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Could not rename "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOldName</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bRenamed</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RenameProcessedFile&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RenameProcessedFile"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="check-for-the-original-file-before-renaming">Check for the original file before renaming<a class="headerlink" href="#check-for-the-original-file-before-renaming" title="Permanent link">&para;</a></h3>
 <p>Verify the source file exists before attempting the rename and handle a normal failure result separately.</p>
@@ -3797,12 +3797,12 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sServer</span><span class="p">,</span><span class="w"> </span><span class="n">sRemoteDir</span><span class="p">,</span><span class="w"> </span><span class="n">sOldName</span><span class="p">,</span><span class="w"> </span><span class="n">sNewName</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bExists</span><span class="p">,</span><span class="w"> </span><span class="n">bRenamed</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ftp.partner.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/dropzone/outbound&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sOldName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;shipment_20260419.csv&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sNewName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;shipment_20260419.archived.csv&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;partneruser&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;PartnerPass456&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ftp.partner.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/dropzone/outbound"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOldName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"shipment_20260419.csv"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sNewName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"shipment_20260419.archived.csv"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"partneruser"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"PartnerPass456"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bExists</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CheckOnFtp</span><span class="p">(</span>
 <span class="w">        </span><span class="n">sServer</span><span class="p">,</span>
@@ -3813,7 +3813,7 @@
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bExists</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Source file is not available for rename.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Source file is not available for rename."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3828,7 +3828,7 @@
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bRenamed</span><span class="p">;</span>
 <span class="w">        </span><span class="c1">/* Logs the file name when the rename fails;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Rename failed for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOldName</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Rename failed for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOldName</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3836,7 +3836,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ArchivePartnerDrop&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ArchivePartnerDrop"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="rename-over-sftp-with-key-based-authentication-and-verify-the-result">Rename over SFTP with key-based authentication and verify the result<a class="headerlink" href="#rename-over-sftp-with-key-based-authentication-and-verify-the-result" title="Permanent link">&para;</a></h3>
 <p>Use the SFTP path, handle raised connection or authentication errors, and then confirm the renamed file exists.</p>
@@ -3846,13 +3846,13 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPort</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsSFTP</span><span class="p">,</span><span class="w"> </span><span class="n">bRenamed</span><span class="p">,</span><span class="w"> </span><span class="n">bVerified</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sftp.instrument.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/runs/completed&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sOldName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;run_20260419_01.pending&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sNewName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;run_20260419_01.ready&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;instrumentbot&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassphrase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;KeyPassphrase789&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPrivateKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/etc/ssl/keys/instrumentbot.ppk&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"sftp.instrument.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/runs/completed"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOldName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"run_20260419_01.pending"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sNewName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"run_20260419_01.ready"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"instrumentbot"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassphrase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"KeyPassphrase789"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPrivateKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/etc/ssl/keys/instrumentbot.ppk"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nPort</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">22</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bIsSFTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 
@@ -3871,12 +3871,12 @@
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="c1">/* Logs the SFTP client failure;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;SFTP rename failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"SFTP rename failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bRenamed</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Remote rename did not complete.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Remote rename did not complete."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3891,7 +3891,7 @@
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bVerified</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Rename succeeded but the new file name could not be verified.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Rename succeeded but the new file name could not be verified."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3899,7 +3899,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PromoteInstrumentFile&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"PromoteInstrumentFile"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -3696,12 +3696,12 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadConfigXml</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sXml</span><span class="p">,</span><span class="w"> </span><span class="n">oConfig</span><span class="p">,</span><span class="w"> </span><span class="n">sAppName</span><span class="p">,</span><span class="w"> </span><span class="n">sVersion</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&lt;config&gt;&lt;application name=&#39;SampleApp&#39; version=&#39;2.5&#39;/&gt;&lt;/config&gt;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"&lt;config&gt;&lt;application name='SampleApp' version='2.5'/&gt;&lt;/config&gt;"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oConfig</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">XmlDomToUdObject</span><span class="p">(</span><span class="n">sXml</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">sAppName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oConfig</span><span class="p">:</span><span class="n">application</span><span class="p">:</span><span class="n">name</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sVersion</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oConfig</span><span class="p">:</span><span class="n">application</span><span class="p">:</span><span class="n">version</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oConfig</span><span class="p">:</span><span class="n">XmlType</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sAppName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; v&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sVersion</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oConfig</span><span class="p">:</span><span class="n">XmlType</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sAppName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" v"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sVersion</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 
@@ -3709,7 +3709,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ReadConfigXml&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReadConfigXml"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>config: SampleApp v2.5
@@ -3720,26 +3720,26 @@ element.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadTestResults</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sXml</span><span class="p">,</span><span class="w"> </span><span class="n">oOrder</span><span class="p">,</span><span class="w"> </span><span class="n">aTests</span><span class="p">,</span><span class="w"> </span><span class="n">oTest</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">&lt;order&gt;</span>
 <span class="s2">    &lt;tests&gt;</span>
-<span class="s2">        &lt;test code=&#39;pH&#39;&gt;7.1&lt;/test&gt;</span>
-<span class="s2">        &lt;test code=&#39;Cond&#39;&gt;320&lt;/test&gt;</span>
+<span class="s2">        &lt;test code='pH'&gt;7.1&lt;/test&gt;</span>
+<span class="s2">        &lt;test code='Cond'&gt;320&lt;/test&gt;</span>
 <span class="s2">    &lt;/tests&gt;</span>
 <span class="s2">&lt;/order&gt;</span>
-<span class="s2">&quot;</span><span class="p">;</span>
+<span class="s2">"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oOrder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">XmlDomToUdObject</span><span class="p">(</span><span class="n">sXml</span><span class="p">);</span>
 <span class="w">    </span><span class="n">aTests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oOrder</span><span class="p">:</span><span class="n">tests</span><span class="p">:</span><span class="n">testCollection</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aTests</span><span class="p">);</span>
 <span class="w">        </span><span class="n">oTest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aTests</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="nf">Empty</span><span class="p">(</span><span class="n">sSummary</span><span class="p">);</span>
-<span class="w">            </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, &quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">", "</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oTest</span><span class="p">:</span><span class="n">code</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oTest</span><span class="p">:</span><span class="n">Value</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oTest</span><span class="p">:</span><span class="n">code</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"="</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oTest</span><span class="p">:</span><span class="n">Value</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSummary</span><span class="p">);</span>
@@ -3748,7 +3748,7 @@ element.</p>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ReadTestResults&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReadTestResults"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>pH=7.1, Cond=320
@@ -3758,7 +3758,7 @@ element.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PreservePadding</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sXml</span><span class="p">,</span><span class="w"> </span><span class="n">oDefault</span><span class="p">,</span><span class="w"> </span><span class="n">oExact</span><span class="p">,</span><span class="w"> </span><span class="n">nDefaultLen</span><span class="p">,</span><span class="w"> </span><span class="n">nExactLen</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&lt;token&gt;&lt;padding&gt;   &lt;/padding&gt;&lt;value&gt;ABC&lt;/value&gt;&lt;/token&gt;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"&lt;token&gt;&lt;padding&gt;   &lt;/padding&gt;&lt;value&gt;ABC&lt;/value&gt;&lt;/token&gt;"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oDefault</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">XmlDomToUdObject</span><span class="p">(</span><span class="n">sXml</span><span class="p">);</span>
 <span class="w">    </span><span class="n">oExact</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">XmlDomToUdObject</span><span class="p">(</span><span class="n">sXml</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
@@ -3766,14 +3766,14 @@ element.</p>
 <span class="w">    </span><span class="n">nDefaultLen</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">oDefault</span><span class="p">:</span><span class="n">padding</span><span class="p">:</span><span class="n">Value</span><span class="p">);</span>
 <span class="w">    </span><span class="n">nExactLen</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">oExact</span><span class="p">:</span><span class="n">padding</span><span class="p">:</span><span class="n">Value</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Default padding length: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDefaultLen</span><span class="p">));</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Preserved padding length: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nExactLen</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Default padding length: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDefaultLen</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Preserved padding length: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nExactLen</span><span class="p">));</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oExact</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PreservePadding&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"PreservePadding"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Default padding length: 0

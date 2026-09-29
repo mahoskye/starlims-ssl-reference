@@ -3954,13 +3954,13 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sGroupSep</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sGroupSep</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetGroupSeparator</span><span class="p">();</span>
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Group separator: [&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGroupSep</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;]&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Group separator: ["</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGroupSep</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"]"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DisplayGroupSeparator&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DisplayGroupSeparator"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Group separator: [,]
@@ -3975,16 +3975,16 @@
 <span class="w">    </span><span class="n">bUsesCurrentSep</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sGroupSep</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="n">sFormattedValue</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bUsesCurrentSep</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Value uses the current group separator: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFormattedValue</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Value uses the current group separator: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFormattedValue</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Value does not use the current group separator.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Value does not use the current group separator."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bUsesCurrentSep</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;UsesCurrentGroupSeparator&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;1,234,567&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"UsesCurrentGroupSeparator"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"1,234,567"</span><span class="p">});</span>
 </code></pre></div>
 <p>When called with <code>"1,234,567"</code>, <a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Value uses the current group separator: 1,234,567
@@ -3995,17 +3995,17 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOriginalSep</span><span class="p">,</span><span class="w"> </span><span class="n">sPreviousSep</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentSep</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sOriginalSep</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetGroupSeparator</span><span class="p">();</span>
-<span class="w">    </span><span class="n">sPreviousSep</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetGroupSeparator</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sPreviousSep</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SetGroupSeparator</span><span class="p">(</span><span class="s2">"."</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sCurrentSep</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetGroupSeparator</span><span class="p">();</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Previous: [&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPreviousSep</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;]&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Current: [&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentSep</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;]&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Previous: ["</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPreviousSep</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"]"</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Current: ["</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentSep</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"]"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">SetGroupSeparator</span><span class="p">(</span><span class="n">sOriginalSep</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RestoreGroupSeparator&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RestoreGroupSeparator"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

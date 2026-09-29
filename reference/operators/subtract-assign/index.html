@@ -2812,14 +2812,14 @@
 
 <span class="w">    </span><span class="n">nOnHand</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">nIssued</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Remaining quantity: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nOnHand</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Remaining quantity: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nOnHand</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nOnHand</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ReduceInventory&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReduceInventory"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Remaining quantity: 21
@@ -2829,18 +2829,18 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildDisplayLabel</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLabel</span><span class="p">,</span><span class="w"> </span><span class="n">sSuffix</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample   &quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sSuffix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Review&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample   "</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSuffix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Review"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sLabel</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">sSuffix</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Display label: [&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLabel</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;]&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Display label: ["</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLabel</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"]"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sLabel</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildDisplayLabel&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildDisplayLabel"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Display label: [SampleReview]
@@ -2850,23 +2850,23 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CalculateDaysUntilDue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">,</span><span class="w"> </span><span class="n">dToday</span><span class="p">,</span><span class="w"> </span><span class="n">dReminderDate</span><span class="p">,</span><span class="w"> </span><span class="n">nDaysUntilDue</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">dDueDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/15/2024&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">dToday</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/10/2024&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dDueDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/15/2024"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dToday</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/10/2024"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">dReminderDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nDaysUntilDue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dReminderDate</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nDaysUntilDue</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">dToday</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Reminder date: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dReminderDate</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">        </span><span class="s2">&quot;, days until due: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDaysUntilDue</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Reminder date: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dReminderDate</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">        </span><span class="s2">", days until due: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDaysUntilDue</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nDaysUntilDue</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CalculateDaysUntilDue&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CalculateDaysUntilDue"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Reminder date: 03/12/2024, days until due: 5

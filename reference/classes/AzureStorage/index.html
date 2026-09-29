@@ -3765,26 +3765,26 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateCustomerRecord</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oAzure</span><span class="p">,</span><span class="w"> </span><span class="n">oCustomer</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Customers&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oAzure</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">AzureStorage</span><span class="p">{</span><span class="s2">&quot;AzureStorage&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Customers"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oAzure</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">AzureStorage</span><span class="p">{</span><span class="s2">"AzureStorage"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">CreateTable</span><span class="p">(</span><span class="n">sTableName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">oCustomer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateLocal</span><span class="p">();</span>
-<span class="w">    </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">PartitionKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CUSTOMER&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">RowKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;CUST001&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">CompanyName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Acme Corp&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">ContactName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Jane Smith&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">Phone</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;555-1234&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">PartitionKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"CUSTOMER"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">RowKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"CUST001"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">CompanyName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Acme Corp"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">ContactName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Jane Smith"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">Phone</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"555-1234"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">InsertEntity</span><span class="p">(</span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">oCustomer</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Inserted customer &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">RowKey</span><span class="w"> </span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; into &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Inserted customer "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oCustomer</span><span class="p">:</span><span class="n">RowKey</span><span class="w"> </span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">" into "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CreateCustomerRecord&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CreateCustomerRecord"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Inserted customer CUST001 into Customers
@@ -3795,37 +3795,37 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oAzure</span><span class="p">,</span><span class="w"> </span><span class="n">oFilter</span><span class="p">,</span><span class="w"> </span><span class="n">aProducts</span><span class="p">,</span><span class="w"> </span><span class="n">oProduct</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ProductInventory&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oAzure</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">AzureStorage</span><span class="p">{</span><span class="s2">&quot;InventoryConnection&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ProductInventory"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oAzure</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">AzureStorage</span><span class="p">{</span><span class="s2">"InventoryConnection"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">oFilter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateLocal</span><span class="p">();</span>
-<span class="w">    </span><span class="n">oFilter</span><span class="p">:</span><span class="n">Status</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LOW&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oFilter</span><span class="p">:</span><span class="n">Warehouse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;MAIN&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;BACKUP&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oFilter</span><span class="p">:</span><span class="n">Status</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LOW"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oFilter</span><span class="p">:</span><span class="n">Warehouse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"MAIN"</span><span class="p">,</span><span class="w"> </span><span class="s2">"BACKUP"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">aProducts</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">SelectEntities</span><span class="p">(</span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">oFilter</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aProducts</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No low-stock products matched the filter&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No low-stock products matched the filter"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oProduct</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aProducts</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-<span class="w">    </span><span class="n">oProduct</span><span class="p">:</span><span class="n">Status</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;RESTOCKED&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oProduct</span><span class="p">:</span><span class="n">RestockNote</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Updated from SSL example&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oProduct</span><span class="p">:</span><span class="n">Status</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"RESTOCKED"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oProduct</span><span class="p">:</span><span class="n">RestockNote</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Updated from SSL example"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bUpdated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">UpdateEntity</span><span class="p">(</span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">oProduct</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Updated product &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oProduct</span><span class="p">:</span><span class="n">RowKey</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Updated product "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oProduct</span><span class="p">:</span><span class="n">RowKey</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;The selected product was no longer available for update&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"The selected product was no longer available for update"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RestockProducts&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RestockProducts"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="upload-files-download-a-copy-and-read-a-blob-as-text">Upload files, download a copy, and read a blob as text<a class="headerlink" href="#upload-files-download-a-copy-and-read-a-blob-as-text" title="Permanent link">&para;</a></h3>
 <p>Manage a blob container, upload files, then use both blob retrieval patterns.</p>
@@ -3833,44 +3833,44 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oAzure</span><span class="p">,</span><span class="w"> </span><span class="n">aFiles</span><span class="p">,</span><span class="w"> </span><span class="n">sContainerName</span><span class="p">,</span><span class="w"> </span><span class="n">sLocalPath</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBlobName</span><span class="p">,</span><span class="w"> </span><span class="n">sDownloadedPath</span><span class="p">,</span><span class="w"> </span><span class="n">sBlobText</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oAzure</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">AzureStorage</span><span class="p">{</span><span class="s2">&quot;myaccount&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mysecretkey&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">};</span>
-<span class="w">    </span><span class="n">sContainerName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;documents&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oAzure</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">AzureStorage</span><span class="p">{</span><span class="s2">"myaccount"</span><span class="p">,</span><span class="w"> </span><span class="s2">"mysecretkey"</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sContainerName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"documents"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">CreateContainer</span><span class="p">(</span><span class="n">sContainerName</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">aFiles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;report.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;invoice.txt&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aFiles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"report.txt"</span><span class="p">,</span><span class="w"> </span><span class="s2">"invoice.txt"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFiles</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sLocalPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\\Temp\\&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aFiles</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
+<span class="w">        </span><span class="n">sLocalPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\\Temp\\"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aFiles</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
 <span class="w">        </span><span class="n">sBlobName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aFiles</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
 
 <span class="w">        </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">            </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">PutBlob</span><span class="p">(</span><span class="n">sContainerName</span><span class="p">,</span><span class="w"> </span><span class="n">sLocalPath</span><span class="p">,</span><span class="w"> </span><span class="n">sBlobName</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Uploaded &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBlobName</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Uploaded "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBlobName</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs the uploaded blob name;</span>
 <span class="w">        </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">            </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span>
-<span class="w">                </span><span class="s2">&quot;UPLOAD ERROR&quot;</span><span class="p">,</span>
-<span class="w">                </span><span class="s2">&quot;Upload failed for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBlobName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span>
+<span class="w">                </span><span class="s2">"UPLOAD ERROR"</span><span class="p">,</span>
+<span class="w">                </span><span class="s2">"Upload failed for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBlobName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span>
 <span class="w">            </span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs upload failure details;</span>
 <span class="w">        </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDownloadedPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">GetBlob</span><span class="p">(</span><span class="n">sContainerName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;report.txt&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Downloaded report to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDownloadedPath</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sDownloadedPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">GetBlob</span><span class="p">(</span><span class="n">sContainerName</span><span class="p">,</span><span class="w"> </span><span class="s2">"report.txt"</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Downloaded report to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDownloadedPath</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the downloaded file path;</span>
 
-<span class="w">    </span><span class="n">sBlobText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">ReadBlobAsText</span><span class="p">(</span><span class="n">sContainerName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;invoice.txt&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Invoice text length: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Len</span><span class="p">(</span><span class="n">sBlobText</span><span class="p">)));</span>
+<span class="w">    </span><span class="n">sBlobText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">ReadBlobAsText</span><span class="p">(</span><span class="n">sContainerName</span><span class="p">,</span><span class="w"> </span><span class="s2">"invoice.txt"</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Invoice text length: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">Len</span><span class="p">(</span><span class="n">sBlobText</span><span class="p">)));</span>
 <span class="w">    </span><span class="c1">/* Logs the invoice text length;</span>
 
 <span class="w">    </span><span class="n">oAzure</span><span class="p">:</span><span class="nf">DeleteContainer</span><span class="p">(</span><span class="n">sContainerName</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ManageDocumentStorage&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ManageDocumentStorage"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

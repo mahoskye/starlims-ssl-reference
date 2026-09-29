@@ -2933,7 +2933,7 @@
 <p>Within a standard script procedure body, the conventional order is:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcedureName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sParam1</span><span class="p">,</span><span class="w"> </span><span class="n">sParam2</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sParam2</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sParam2</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">vLocal</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">/* Procedure logic;</span>
@@ -3026,14 +3026,14 @@
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowTotal</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nTotal</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">nTotal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CalculateTotal&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">});</span>
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Total: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nTotal</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nTotal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CalculateTotal"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">});</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Total: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nTotal</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowTotal&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowTotal"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Total: 12
@@ -3042,18 +3042,18 @@
 <p>Demonstrates optional trailing parameters with <a href="../DEFAULT/"><code>:DEFAULT</code></a>. With <code>sStatus</code> defaulting to <code>"Logged"</code> and <code>bIncludePrefix</code> defaulting to <a href="../../literals/true/"><code>.T.</code></a>, the first call produces the full prefixed message; the second call overrides both defaults.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildStatusMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">bIncludePrefix</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">"Logged"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">bIncludePrefix</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" is "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIncludePrefix</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; and ready for review&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Logged"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" and ready for review"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
@@ -3063,15 +3063,15 @@
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowStatusExamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDefaultMsg</span><span class="p">,</span><span class="w"> </span><span class="n">sCustomMsg</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDefaultMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildStatusMessage&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;S-1001&quot;</span><span class="p">});</span>
-<span class="w">    </span><span class="n">sCustomMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildStatusMessage&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;S-1002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Complete&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">});</span>
+<span class="w">    </span><span class="n">sDefaultMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildStatusMessage"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-1001"</span><span class="p">});</span>
+<span class="w">    </span><span class="n">sCustomMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildStatusMessage"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-1002"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Complete"</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">});</span>
 
 <span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sDefaultMsg</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sCustomMsg</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowStatusExamples&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowStatusExamples"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/InfoMes/"><code>InfoMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample S-1001 is Logged and ready for review
@@ -3094,16 +3094,16 @@ S-1002 is Complete
 <span class="w">    </span><span class="n">aNormalized</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aStatuses</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aNormalized</span><span class="p">,</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NormalizeStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">aStatuses</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]}));</span>
+<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aNormalized</span><span class="p">,</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"NormalizeStatus"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">aStatuses</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]}));</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Processed &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aNormalized</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; statuses&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Processed "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aNormalized</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" statuses"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aNormalized</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ProcessStatusList&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">&quot;  Pending  &quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;in progress&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;COMPLETE&quot;</span><span class="p">}});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ProcessStatusList"</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">"  Pending  "</span><span class="p">,</span><span class="w"> </span><span class="s2">"in progress"</span><span class="p">,</span><span class="w"> </span><span class="s2">"COMPLETE"</span><span class="p">}});</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Processed 3 statuses

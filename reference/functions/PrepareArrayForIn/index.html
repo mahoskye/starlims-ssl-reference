@@ -4349,14 +4349,14 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIDs</span><span class="p">,</span><span class="w"> </span><span class="n">sInClause</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aSampleIDs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
-<span class="w">    </span><span class="nf">PrepareArrayForIn</span><span class="p">(</span><span class="n">aSampleIDs</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">PrepareArrayForIn</span><span class="p">(</span><span class="n">aSampleIDs</span><span class="p">,</span><span class="w"> </span><span class="s2">"string"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">sInClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">BuildStringForIn</span><span class="p">(</span><span class="n">aSampleIDs</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sampleid, samplename</span>
 <span class="s2">        FROM sample</span>
 <span class="s2">        WHERE sampleid IN</span>
-<span class="s2">    &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInClause</span><span class="p">;</span>
+<span class="s2">    "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInClause</span><span class="p">;</span>
 
 <span class="w">    </span><span class="c1">/* Logs the SQL statement with one sentinel value in the IN clause;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSQL</span><span class="p">);</span>
@@ -4365,15 +4365,15 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildEmptySampleFilter&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildEmptySampleFilter"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="replace-empty-string-elements-in-a-populated-array">Replace empty-string elements in a populated array<a class="headerlink" href="#replace-empty-string-elements-in-a-populated-array" title="Permanent link">&para;</a></h3>
 <p>The array already has elements, so <code>PrepareArrayForIn</code> only replaces the <code>""</code> entry with the string sentinel. The <code>"numeric"</code> type argument has no effect on a populated array.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeExistingFilter</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIDs</span><span class="p">,</span><span class="w"> </span><span class="n">sInClause</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aSampleIDs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SAM-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAM-003&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="nf">PrepareArrayForIn</span><span class="p">(</span><span class="n">aSampleIDs</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;numeric&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aSampleIDs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"SAM-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="s2">"SAM-003"</span><span class="p">};</span>
+<span class="w">    </span><span class="nf">PrepareArrayForIn</span><span class="p">(</span><span class="n">aSampleIDs</span><span class="p">,</span><span class="w"> </span><span class="s2">"numeric"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">sInClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">BuildStringForIn</span><span class="p">(</span><span class="n">aSampleIDs</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the IN clause with the empty string replaced by the sentinel;</span>
@@ -4383,7 +4383,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;NormalizeExistingFilter&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"NormalizeExistingFilter"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="keep-a-parameterized-in-query-valid-when-the-input-array-is-empty">Keep a parameterized <code>IN</code> query valid when the input array is empty<a class="headerlink" href="#keep-a-parameterized-in-query-valid-when-the-input-array-is-empty" title="Permanent link">&para;</a></h3>
 <p>When <code>aOrderIDs</code> arrives empty, <code>PrepareArrayForIn</code> adds a numeric sentinel (<code>-2147483648</code>) so the placeholder list has exactly one <code>?</code>. The resulting query executes but matches no rows.</p>
@@ -4391,16 +4391,16 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aOrderIDs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTemp</span><span class="p">,</span><span class="w"> </span><span class="n">sPlaceholders</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">PrepareArrayForIn</span><span class="p">(</span><span class="n">aOrderIDs</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;numeric&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sTemp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">&quot;?,&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aOrderIDs</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">PrepareArrayForIn</span><span class="p">(</span><span class="n">aOrderIDs</span><span class="p">,</span><span class="w"> </span><span class="s2">"numeric"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sTemp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">"?,"</span><span class="p">,</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aOrderIDs</span><span class="p">));</span>
 <span class="w">    </span><span class="n">sPlaceholders</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Left</span><span class="p">(</span><span class="n">sTemp</span><span class="p">,</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="n">sTemp</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT orderid, ordno, status</span>
 <span class="s2">        FROM orders</span>
 <span class="s2">        WHERE orderid IN (</span>
-<span class="s2">    &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPlaceholders</span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;)&quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sPlaceholders</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">")"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="n">aOrderIDs</span><span class="p">);</span>
 
@@ -4408,7 +4408,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetOrdersByIDList&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="mi">1001</span><span class="p">,</span><span class="w"> </span><span class="mi">1002</span><span class="p">}});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetOrdersByIDList"</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="mi">1001</span><span class="p">,</span><span class="w"> </span><span class="mi">1002</span><span class="p">}});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

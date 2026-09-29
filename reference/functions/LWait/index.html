@@ -3486,26 +3486,26 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">WaitForFileAccess</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">nWaitSeconds</span><span class="p">,</span><span class="w"> </span><span class="n">bFileExists</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\Temp\AnalysisReport.txt&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Temp\AnalysisReport.txt"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nWaitSeconds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Report generation started&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Report generation started"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">LWait</span><span class="p">(</span><span class="n">nWaitSeconds</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">bFileExists</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">FileSupport</span><span class="p">(</span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;EXISTS&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bFileExists</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">FileSupport</span><span class="p">(</span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="s2">"EXISTS"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bFileExists</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;File is ready for processing&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"File is ready for processing"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;File not found after waiting&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"File not found after waiting"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bFileExists</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;WaitForFileAccess&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"WaitForFileAccess"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="throttle-api-calls-in-a-scheduled-batch">Throttle API calls in a scheduled batch<a class="headerlink" href="#throttle-api-calls-in-a-scheduled-batch" title="Permanent link">&para;</a></h3>
 <p>Add a pause between endpoint calls to avoid exceeding rate limits. The delay is skipped after the last endpoint so the procedure does not wait unnecessarily.</p>
@@ -3514,48 +3514,48 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sLogMsg</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aEndpoints</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="s2">&quot;Analysis.SubmitBatch&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;Analysis.GetResults&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;Inventory.CheckStock&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;Users.SyncDirectory&quot;</span>
+<span class="w">        </span><span class="s2">"Analysis.SubmitBatch"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"Analysis.GetResults"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"Inventory.CheckStock"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"Users.SyncDirectory"</span>
 <span class="w">    </span><span class="p">};</span>
 <span class="w">    </span><span class="n">nRateLimit</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nDelaySeconds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aEndpoints</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Processing &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; endpoints with rate limit of &quot;</span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nRateLimit</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; calls per minute&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Processing "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" endpoints with rate limit of "</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nRateLimit</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" calls per minute"</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLogMsg</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sEndpoint</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aEndpoints</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
-<span class="w">        </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Calling endpoint &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; of &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCount</span><span class="p">)</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEndpoint</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Calling endpoint "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" of "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCount</span><span class="p">)</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEndpoint</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLogMsg</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs endpoint progress;</span>
 
 <span class="w">        </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">ExecFunction</span><span class="p">(</span><span class="n">sEndpoint</span><span class="p">);</span>
-<span class="w">            </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Success&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:CATCH</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Failed&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Failed"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Endpoint &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEndpoint</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; returned: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Endpoint "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sEndpoint</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" returned: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLogMsg</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs the current endpoint result;</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Waiting &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDelaySeconds</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; seconds before next request&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Waiting "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDelaySeconds</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" seconds before next request"</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLogMsg</span><span class="p">);</span>
 <span class="w">            </span><span class="nf">LWait</span><span class="p">(</span><span class="n">nDelaySeconds</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;All &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; API calls completed&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"All "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" API calls completed"</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLogMsg</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ThrottleApiCalls&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ThrottleApiCalls"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -2183,18 +2183,18 @@
 <span class="w">    </span><span class="n">oHttpClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateHttpClient</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetText</span><span class="p">(</span><span class="s2">&quot;https://lims-instruments.example/api/status&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;OK: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBody</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetText</span><span class="p">(</span><span class="s2">"https://lims-instruments.example/api/status"</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"OK: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBody</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetLastServerException</span><span class="p">();</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">oError</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Failed (&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Status</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;): &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">MessageDetails</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Failed ("</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Status</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"): "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">MessageDetails</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;TryFetchOrLog&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"TryFetchOrLog"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="branch-on-the-failure-mode">Branch on the failure mode<a class="headerlink" href="#branch-on-the-failure-mode" title="Permanent link">&para;</a></h3>
 <p>Distinguishes a transient timeout from a protocol-level failure to choose between retrying and giving up.</p>
@@ -2206,24 +2206,24 @@
 <span class="w">    </span><span class="n">bShouldRetry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetText</span><span class="p">(</span><span class="s2">&quot;https://lims-data.example/api/v2/samples/recent&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Result: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBody</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetText</span><span class="p">(</span><span class="s2">"https://lims-data.example/api/v2/samples/recent"</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Result: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBody</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oHttpClient</span><span class="p">:</span><span class="nf">GetLastServerException</span><span class="p">();</span>
-<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">oError</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">NIL</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Timeout&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">oError</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">NIL</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Timeout"</span><span class="p">;</span>
 <span class="w">            </span><span class="n">bShouldRetry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Permanent failure: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Message</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Permanent failure: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oError</span><span class="p">:</span><span class="n">Message</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bShouldRetry</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Will retry after a backoff&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Will retry after a backoff"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FetchWithRetryOnTimeout&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FetchWithRetryOnTimeout"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

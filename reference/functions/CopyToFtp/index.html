@@ -3769,27 +3769,27 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sServer</span><span class="p">,</span><span class="w"> </span><span class="n">sRemoteDir</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sContent</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFileNames</span><span class="p">,</span><span class="w"> </span><span class="n">bResult</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ftp.reports.lab.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/shared/reports&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;report_uploader&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;demo-password&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ftp.reports.lab.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/shared/reports"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"report_uploader"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"demo-password"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aFileNames</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;weekly_summary.csv&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">sContent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;S001,Passed&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">aFileNames</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"weekly_summary.csv"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sContent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"S001,Passed"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">bResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CopyToFtp</span><span class="p">(</span><span class="n">sServer</span><span class="p">,</span><span class="w"> </span><span class="n">sRemoteDir</span><span class="p">,</span><span class="w"> </span><span class="n">aFileNames</span><span class="p">,</span><span class="w"> </span><span class="n">sContent</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bResult</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Report line appended successfully&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Report line appended successfully"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Upload failed&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Upload failed"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bResult</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;UploadReportLine&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"UploadReportLine"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="append-the-same-content-to-multiple-sftp-files">Append the same content to multiple SFTP files<a class="headerlink" href="#append-the-same-content-to-multiple-sftp-files" title="Permanent link">&para;</a></h3>
 <p>Sends the same manifest text to three remote files in one SFTP call, using a private key and port 22.</p>
@@ -3798,15 +3798,15 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPrivateKeyPath</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRemoteFiles</span><span class="p">,</span><span class="w"> </span><span class="n">bSuccess</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sftp.example.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/incoming/manifests&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;lims_feed&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;demo-passphrase&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPrivateKeyPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/keys/partner_feed.ppk&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sManifest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;batch=20260418&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="w">                 </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;status=ready&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"sftp.example.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/incoming/manifests"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"lims_feed"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"demo-passphrase"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPrivateKeyPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:/keys/partner_feed.ppk"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sManifest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"batch=20260418"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="w">                 </span><span class="o">+</span><span class="w"> </span><span class="s2">"status=ready"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">aRemoteFiles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;manifest_a.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;manifest_b.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;manifest_c.txt&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aRemoteFiles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"manifest_a.txt"</span><span class="p">,</span><span class="w"> </span><span class="s2">"manifest_b.txt"</span><span class="p">,</span><span class="w"> </span><span class="s2">"manifest_c.txt"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CopyToFtp</span><span class="p">(</span>
 <span class="w">        </span><span class="n">sServer</span><span class="p">,</span>
@@ -3825,7 +3825,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AppendManifestToSftpFiles&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AppendManifestToSftpFiles"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="stop-processing-when-the-batch-upload-fails">Stop processing when the batch upload fails<a class="headerlink" href="#stop-processing-when-the-batch-upload-fails" title="Permanent link">&para;</a></h3>
 <p>Checks the return value after uploading three date-stamped files and stops the workflow with an error message if any upload fails.</p>
@@ -3835,19 +3835,19 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRemoteFiles</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bUploaded</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ftp.partnerlab.com&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;/incoming/daily&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;nightly_feed&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;demo-password&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sServer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ftp.partnerlab.com"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sRemoteDir</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/incoming/daily"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"nightly_feed"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"demo-password"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sExportDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToS</span><span class="p">(</span><span class="nf">Today</span><span class="p">());</span>
 
 <span class="w">    </span><span class="n">aRemoteFiles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="s2">&quot;orders_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExportDate</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;.txt&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;results_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExportDate</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;.txt&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;manifest_&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExportDate</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;.txt&quot;</span>
+<span class="w">        </span><span class="s2">"orders_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExportDate</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">".txt"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"results_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExportDate</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">".txt"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"manifest_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExportDate</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">".txt"</span>
 <span class="w">    </span><span class="p">};</span>
 
-<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;export_date=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExportDate</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"export_date="</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExportDate</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">bUploaded</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CopyToFtp</span><span class="p">(</span>
 <span class="w">        </span><span class="n">sServer</span><span class="p">,</span>
@@ -3862,17 +3862,17 @@
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bUploaded</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Nightly feed upload failed&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Nightly feed upload failed"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Nightly feed upload completed&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Nightly feed upload completed"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PublishNightlyFeed&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"PublishNightlyFeed"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

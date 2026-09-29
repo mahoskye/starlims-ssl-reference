@@ -4209,23 +4209,23 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowWorkitemFlags</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">aProps</span><span class="p">,</span><span class="w"> </span><span class="n">bCanDelegate</span><span class="p">,</span><span class="w"> </span><span class="n">bCanRepeat</span><span class="p">,</span><span class="w"> </span><span class="n">bNeedsSignOff</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;0900001280001234&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sWorkitemId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"0900001280001234"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">aProps</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetWorkitemProperties</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">bCanDelegate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aProps</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
 <span class="w">    </span><span class="n">bCanRepeat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aProps</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
 <span class="w">    </span><span class="n">bNeedsSignOff</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aProps</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Delegatable: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bCanDelegate</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Delegatable: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bCanDelegate</span><span class="p">));</span>
 <span class="w">    </span><span class="c1">/* Logs delegation state;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Repeatable: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bCanRepeat</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Repeatable: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bCanRepeat</span><span class="p">));</span>
 <span class="w">    </span><span class="c1">/* Logs repeatable state;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Sign-off required: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bNeedsSignOff</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Sign-off required: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bNeedsSignOff</span><span class="p">));</span>
 <span class="w">    </span><span class="c1">/* Logs sign-off state;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowWorkitemFlags&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowWorkitemFlags"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="list-linked-document-ids">List linked document IDs<a class="headerlink" href="#list-linked-document-ids" title="Permanent link">&para;</a></h3>
 <p>Checks <a href="../ALen/"><code>ALen</code></a> to detect when no packages are attached, then iterates from position 4 onward to print each linked document ID.</p>
@@ -4236,20 +4236,20 @@
 <span class="w">    </span><span class="n">aProps</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetWorkitemProperties</span><span class="p">(</span><span class="n">sWorkitemId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aProps</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No linked documents for work item &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No linked documents for work item "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs when no documents are linked;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aProps</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Document ID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aProps</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Document ID: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aProps</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]);</span>
 <span class="w">        </span><span class="c1">/* Logs each linked document ID;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ListWorkitemDocuments&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;0900001280001234&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ListWorkitemDocuments"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"0900001280001234"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="route-follow-up-logic-from-the-returned-values">Route follow-up logic from the returned values<a class="headerlink" href="#route-follow-up-logic-from-the-returned-values" title="Permanent link">&para;</a></h3>
 <p>Reads the three boolean flags and the document count, then selects a workflow route based on sign-off, delegation, repeatability, and document presence. Uses <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle work items that are missing or inaccessible.</p>
@@ -4268,32 +4268,32 @@
 
 <span class="w">        </span><span class="k">:BEGINCASE</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:CASE</span><span class="w"> </span><span class="n">bNeedsSignOff</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sRoute</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;SignOffReview&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sRoute</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SignOffReview"</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:CASE</span><span class="w"> </span><span class="n">bCanDelegate</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">nDocCount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sRoute</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;DelegateWithDocuments&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sRoute</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"DelegateWithDocuments"</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:CASE</span><span class="w"> </span><span class="n">bCanRepeat</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sRoute</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;RepeatStep&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sRoute</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"RepeatStep"</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sRoute</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;StandardProcessing&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sRoute</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"StandardProcessing"</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDCASE</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Selected route: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRoute</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Selected route: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRoute</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs the selected route;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sRoute</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Unable to read work item properties&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Unable to read work item properties"</span><span class="p">);</span>
 
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;EvaluateWorkitemRouting&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;0900001280001234&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"EvaluateWorkitemRouting"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"0900001280001234"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

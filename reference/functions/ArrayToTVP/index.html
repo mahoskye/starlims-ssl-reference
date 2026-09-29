@@ -4405,35 +4405,35 @@ target database from <code>sConnectionName</code> when that argument is a string
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aOrderIds</span><span class="p">,</span><span class="w"> </span><span class="n">oTVP</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aOrderIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">1001</span><span class="p">,</span><span class="w"> </span><span class="mi">1002</span><span class="p">,</span><span class="w"> </span><span class="mi">1003</span><span class="p">};</span>
-<span class="w">    </span><span class="n">oTVP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ArrayToTVP</span><span class="p">(</span><span class="n">aOrderIds</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;INT&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oTVP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ArrayToTVP</span><span class="p">(</span><span class="n">aOrderIds</span><span class="p">,</span><span class="w"> </span><span class="s2">"INT"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">oTVP</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;TVP was not created&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"TVP was not created"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Integer TVP created&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Integer TVP created"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildIntegerTVP&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildIntegerTVP"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="let-the-function-infer-a-string-tvp">Let the function infer a string TVP<a class="headerlink" href="#let-the-function-infer-a-string-tvp" title="Permanent link">&para;</a></h3>
 <p>Omits the type hint so the function infers string behavior from the array contents. A <a href="../../literals/nil/"><code>NIL</code></a> element is accepted as long as the non-<a href="../../literals/nil/"><code>NIL</code></a> elements are all strings.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildStringTVP</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIds</span><span class="p">,</span><span class="w"> </span><span class="n">oTVP</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aSampleIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SMP-0001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SMP-0002&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SMP-0004&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aSampleIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"SMP-0001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SMP-0002"</span><span class="p">,</span><span class="w"> </span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="s2">"SMP-0004"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">oTVP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ArrayToTVP</span><span class="p">(</span><span class="n">aSampleIds</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">oTVP</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;String TVP was not created&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"String TVP was not created"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;String TVP created for sample IDs&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"String TVP created for sample IDs"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildStringTVP&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildStringTVP"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="target-a-specific-connection-and-catch-errors">Target a specific connection and catch errors<a class="headerlink" href="#target-a-specific-connection-and-catch-errors" title="Permanent link">&para;</a></h3>
 <p>Passes a named connection to direct the TVP at a non-default database, and wraps the call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle resolution failures.</p>
@@ -4443,17 +4443,17 @@ target database from <code>sConnectionName</code> when that argument is a string
 <span class="w">    </span><span class="n">aIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="mi">2001</span><span class="p">,</span><span class="w"> </span><span class="mi">2002</span><span class="p">,</span><span class="w"> </span><span class="mi">2003</span><span class="p">};</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">oTVP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ArrayToTVP</span><span class="p">(</span><span class="n">aIds</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;INT&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LABDATA&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Remote TVP created&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">oTVP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ArrayToTVP</span><span class="p">(</span><span class="n">aIds</span><span class="p">,</span><span class="w"> </span><span class="s2">"INT"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LABDATA"</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Remote TVP created"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;TVP creation failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"TVP creation failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildRemoteTVP&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildRemoteTVP"</span><span class="p">);</span>
 </code></pre></div>
 <p>On failure, <a href="../ErrorMes/"><code>ErrorMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>TVP creation failed: &lt;error message&gt;

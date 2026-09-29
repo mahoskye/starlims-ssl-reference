@@ -2787,8 +2787,8 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadSampleTypes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFolder</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">oImport</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">sError</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sFolder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:/STARLIMS/Import/LookupTables&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sampletypes&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFolder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:/STARLIMS/Import/LookupTables"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"sampletypes"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="n">sFolder</span><span class="p">};</span>
 <span class="w">    </span><span class="n">oImport</span><span class="p">:</span><span class="n">IncludeORIGREC</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
@@ -2799,10 +2799,10 @@
 <span class="w">        </span><span class="n">sError</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oImport</span><span class="p">:</span><span class="n">ErrMsg</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sError</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Unable to load table &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Unable to load table "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span>
-<span class="w">                </span><span class="s2">&quot;Unable to load table &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sError</span>
+<span class="w">                </span><span class="s2">"Unable to load table "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sError</span>
 <span class="w">            </span><span class="p">);</span><span class="w"> </span><span class="c1">/* Logs on failure: table load error;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -2810,15 +2810,15 @@
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span>
-<span class="w">        </span><span class="s2">&quot;Loaded &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; with &quot;</span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oTable</span><span class="p">:</span><span class="n">RowsCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; rows&quot;</span>
+<span class="w">        </span><span class="s2">"Loaded "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" with "</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oTable</span><span class="p">:</span><span class="n">RowsCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" rows"</span>
 <span class="w">    </span><span class="p">);</span><span class="w"> </span><span class="c1">/* Logs loaded row count;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oTable</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LoadSampleTypes&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LoadSampleTypes"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

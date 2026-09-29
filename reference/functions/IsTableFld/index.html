@@ -3960,44 +3960,44 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSamplesWithOptionalDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="n">aSamples</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;sample&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFieldName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;received_date&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LAB"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"sample"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFieldName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"received_date"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="nf">IsTableFld</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;received_date is not available in sample&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"received_date is not available in sample"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="p">{};</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aSamples</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">aSamples</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, received_date</span>
 <span class="s2">        FROM sample</span>
-<span class="s2">    &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">);</span>
+<span class="s2">    "</span><span class="p">,</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aSamples</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetSamplesWithOptionalDate&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetSamplesWithOptionalDate"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="use-the-default-connection-explicitly">Use the default connection explicitly<a class="headerlink" href="#use-the-default-connection-explicitly" title="Permanent link">&para;</a></h3>
 <p>Pass <a href="../../literals/nil/"><code>NIL</code></a> as the connection name to target the default database connection. The two <a href="../UsrMes/"><code>UsrMes</code></a> calls are mutually exclusive; only one fires depending on whether the field is found.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckAuditCommentField</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bHasComment</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">bHasComment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsTableFld</span><span class="p">(</span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;audit_log&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;comment_text&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bHasComment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsTableFld</span><span class="p">(</span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="s2">"audit_log"</span><span class="p">,</span><span class="w"> </span><span class="s2">"comment_text"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bHasComment</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;comment_text is available in the default connection&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"comment_text is available in the default connection"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;comment_text is not available in the default connection&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"comment_text is not available in the default connection"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckAuditCommentField&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckAuditCommentField"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="validate-several-required-fields-before-processing">Validate several required fields before processing<a class="headerlink" href="#validate-several-required-fields-before-processing" title="Permanent link">&para;</a></h3>
 <p>Collect the names of any required fields that are absent from the <code>result</code> table, then block the export if any are missing. <code>GetMissingResultFields</code> builds the list; <code>StartResultExport</code> calls it and reports an error when the list is non-empty.</p>
@@ -4005,8 +4005,8 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRequiredFields</span><span class="p">,</span><span class="w"> </span><span class="n">aMissingFields</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sFieldName</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;result&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aRequiredFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;result_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sample_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;approved_by&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"result"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aRequiredFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"result_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"status"</span><span class="p">,</span><span class="w"> </span><span class="s2">"approved_by"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aMissingFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRequiredFields</span><span class="p">);</span>
@@ -4023,10 +4023,10 @@
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">StartResultExport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aMissingFields</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aMissingFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetMissingResultFields&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LAB&quot;</span><span class="p">});</span>
+<span class="w">    </span><span class="n">aMissingFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetMissingResultFields"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LAB"</span><span class="p">});</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aMissingFields</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;result is missing one or more required fields&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"result is missing one or more required fields"</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -4035,7 +4035,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;StartResultExport&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"StartResultExport"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

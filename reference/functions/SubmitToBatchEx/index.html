@@ -3449,24 +3449,24 @@ submitted job. If <code>sCode</code> is <a href="../../literals/nil/"><code>NIL<
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SubmitDataForBatchProcessing</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sCode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        :DECLARE sStatus;</span>
-<span class="s2">        sStatus := &#39;Queued from SubmitToBatchEx&#39;;</span>
+<span class="s2">        sStatus := 'Queued from SubmitToBatchEx';</span>
 
 <span class="s2">        InfoMes(sStatus);</span>
 <span class="s2">        :RETURN sStatus;</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubmitToBatchEx</span><span class="p">(</span><span class="n">sCode</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Submitted batch job: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Submitted batch job: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs batch ID on success;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SubmitDataForBatchProcessing&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SubmitDataForBatchProcessing"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="queue-independent-background-jobs-and-validate-each-id">Queue independent background jobs and validate each ID<a class="headerlink" href="#queue-independent-background-jobs-and-validate-each-id" title="Permanent link">&para;</a></h3>
 <p>Submit several jobs separately so each one gets its own batch ID, then check
@@ -3475,41 +3475,41 @@ which submissions succeeded.</p>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode1</span><span class="p">,</span><span class="w"> </span><span class="n">sCode2</span><span class="p">,</span><span class="w"> </span><span class="n">sCode3</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBatchId1</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchId2</span><span class="p">,</span><span class="w"> </span><span class="n">sBatchId3</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sCode1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
-<span class="s2">        InfoMes(&#39;Refresh daily KPIs&#39;);</span>
-<span class="s2">        :RETURN &#39;Daily&#39;;</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sCode2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
-<span class="s2">        InfoMes(&#39;Refresh monthly rollup&#39;);</span>
-<span class="s2">        :RETURN &#39;Monthly&#39;;</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sCode3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
-<span class="s2">        InfoMes(&#39;Refresh lab audit&#39;);</span>
-<span class="s2">        :RETURN &#39;Audit&#39;;</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCode1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
+<span class="s2">        InfoMes('Refresh daily KPIs');</span>
+<span class="s2">        :RETURN 'Daily';</span>
+<span class="s2">    "</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCode2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
+<span class="s2">        InfoMes('Refresh monthly rollup');</span>
+<span class="s2">        :RETURN 'Monthly';</span>
+<span class="s2">    "</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCode3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
+<span class="s2">        InfoMes('Refresh lab audit');</span>
+<span class="s2">        :RETURN 'Audit';</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sBatchId1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubmitToBatchEx</span><span class="p">(</span><span class="n">sCode1</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sBatchId2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubmitToBatchEx</span><span class="p">(</span><span class="n">sCode2</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sBatchId3</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SubmitToBatchEx</span><span class="p">(</span><span class="n">sCode3</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sBatchId1</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Daily KPIs submission was skipped or failed&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Daily KPIs submission was skipped or failed"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Queued daily KPIs as batch &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId1</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Queued daily KPIs as batch "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId1</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs batch ID on success;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sBatchId2</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Monthly rollup submission was skipped or failed&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Monthly rollup submission was skipped or failed"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Queued monthly rollup as batch &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId2</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Queued monthly rollup as batch "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId2</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs batch ID on success;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sBatchId3</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Lab audit submission was skipped or failed&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Lab audit submission was skipped or failed"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Queued lab audit as batch &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId3</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Queued lab audit as batch "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId3</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs batch ID on success;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3517,7 +3517,7 @@ which submissions succeeded.</p>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;QueueNightlyRefreshes&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"QueueNightlyRefreshes"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

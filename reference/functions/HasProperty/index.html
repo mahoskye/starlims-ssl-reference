@@ -3663,20 +3663,20 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oUserProfile</span><span class="p">,</span><span class="w"> </span><span class="n">sNotificationText</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oUserProfile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">();</span>
-<span class="w">    </span><span class="n">oUserProfile</span><span class="p">:</span><span class="n">Name</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Jane Analyst&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oUserProfile</span><span class="p">:</span><span class="n">Department</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Quality Control&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oUserProfile</span><span class="p">:</span><span class="n">Name</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Jane Analyst"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oUserProfile</span><span class="p">:</span><span class="n">Department</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Quality Control"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="nf">HasProperty</span><span class="p">(</span><span class="n">oUserProfile</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Email&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sNotificationText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Notification cannot be sent because Email is missing.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="nf">HasProperty</span><span class="p">(</span><span class="n">oUserProfile</span><span class="p">,</span><span class="w"> </span><span class="s2">"Email"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sNotificationText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Notification cannot be sent because Email is missing."</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sNotificationText</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs missing-email message;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">AddProperty</span><span class="p">(</span><span class="n">oUserProfile</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Email&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">oUserProfile</span><span class="p">:</span><span class="n">Email</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;jane.analyst@lab.example.com&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nf">AddProperty</span><span class="p">(</span><span class="n">oUserProfile</span><span class="p">,</span><span class="w"> </span><span class="s2">"Email"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oUserProfile</span><span class="p">:</span><span class="n">Email</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"jane.analyst@lab.example.com"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">HasProperty</span><span class="p">(</span><span class="n">oUserProfile</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Email&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sNotificationText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sending notification to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oUserProfile</span><span class="p">:</span><span class="n">Email</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">HasProperty</span><span class="p">(</span><span class="n">oUserProfile</span><span class="p">,</span><span class="w"> </span><span class="s2">"Email"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sNotificationText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sending notification to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oUserProfile</span><span class="p">:</span><span class="n">Email</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sNotificationText</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs email notification message;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -3685,44 +3685,44 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;SendUserNotification&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SendUserNotification"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="update-fields-conditionally-based-on-property-presence">Update fields conditionally based on property presence<a class="headerlink" href="#update-fields-conditionally-based-on-property-presence" title="Permanent link">&para;</a></h3>
 <p>Iterates over several properties, updating only those that exist on the object. <code>LastModified</code> was never added, so its branch is skipped and only two fields are logged as updated.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateSampleFields</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oSample</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">aUpdatedFields</span><span class="p">,</span><span class="w"> </span><span class="n">sLog</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ACTIVE&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">aUpdatedFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">    </span><span class="n">oSample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">();</span>
-<span class="w">    </span><span class="nf">AddProperty</span><span class="p">(</span><span class="n">oSample</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SampleID&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Status&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Notes&quot;</span><span class="p">});</span>
-<span class="w">    </span><span class="n">oSample</span><span class="p">:</span><span class="n">SampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oSample</span><span class="p">:</span><span class="n">Notes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Initial review complete&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nf">AddProperty</span><span class="p">(</span><span class="n">oSample</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"SampleID"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Status"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Notes"</span><span class="p">});</span>
+<span class="w">    </span><span class="n">oSample</span><span class="p">:</span><span class="n">SampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LAB-2024-0042"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">oSample</span><span class="p">:</span><span class="n">Notes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Initial review complete"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">HasProperty</span><span class="p">(</span><span class="n">oSample</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Status&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">HasProperty</span><span class="p">(</span><span class="n">oSample</span><span class="p">,</span><span class="w"> </span><span class="s2">"Status"</span><span class="p">);</span>
 <span class="w">        </span><span class="n">oSample</span><span class="p">:</span><span class="n">Status</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aUpdatedFields</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Status&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aUpdatedFields</span><span class="p">,</span><span class="w"> </span><span class="s2">"Status"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">HasProperty</span><span class="p">(</span><span class="n">oSample</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Notes&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="n">oSample</span><span class="p">:</span><span class="n">Notes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Updated via batch process&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aUpdatedFields</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Notes&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">HasProperty</span><span class="p">(</span><span class="n">oSample</span><span class="p">,</span><span class="w"> </span><span class="s2">"Notes"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">oSample</span><span class="p">:</span><span class="n">Notes</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Updated via batch process"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aUpdatedFields</span><span class="p">,</span><span class="w"> </span><span class="s2">"Notes"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">HasProperty</span><span class="p">(</span><span class="n">oSample</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LastModified&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">HasProperty</span><span class="p">(</span><span class="n">oSample</span><span class="p">,</span><span class="w"> </span><span class="s2">"LastModified"</span><span class="p">);</span>
 <span class="w">        </span><span class="n">oSample</span><span class="p">:</span><span class="n">LastModified</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Today</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aUpdatedFields</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LastModified&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aUpdatedFields</span><span class="p">,</span><span class="w"> </span><span class="s2">"LastModified"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sLog</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Fields updated: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aUpdatedFields</span><span class="p">));</span>
+<span class="w">    </span><span class="n">sLog</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Fields updated: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aUpdatedFields</span><span class="p">));</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLog</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aUpdatedFields</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;UpdateSampleFields&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"UpdateSampleFields"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Fields updated: 2

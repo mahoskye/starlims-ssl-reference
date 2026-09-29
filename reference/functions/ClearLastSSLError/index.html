@@ -3512,7 +3512,7 @@ It does not tell you whether an error was present before the call. If you need t
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Handled SSL error: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Handled SSL error: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the handled error description;</span>
 <span class="w">    </span><span class="nf">ClearLastSSLError</span><span class="p">();</span>
 
@@ -3520,7 +3520,7 @@ It does not tell you whether an error was present before the call. If you need t
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;HandleAndClearSslError&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"HandleAndClearSslError"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="reset-before-a-retry">Reset before a retry<a class="headerlink" href="#reset-before-a-retry" title="Permanent link">&para;</a></h3>
 <p>Catches the error from a failed SQL update, logs it, clears the error state, then retries the same operation once in its own <a href="../../keywords/TRY/"><code>:TRY</code></a> so the second attempt starts clean.</p>
@@ -3531,14 +3531,14 @@ It does not tell you whether an error was present before the call. If you need t
 <span class="w">    </span><span class="n">bUpdated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">bUpdated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="n">bUpdated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            UPDATE sample SET</span>
 <span class="s2">                status = ?</span>
 <span class="s2">            WHERE sampleid = ?</span>
-<span class="s2">        &quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">});</span>
+<span class="s2">        "</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">});</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;First update failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"First update failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs the first failure description;</span>
 <span class="w">        </span><span class="nf">ClearLastSSLError</span><span class="p">();</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
@@ -3548,14 +3548,14 @@ It does not tell you whether an error was present before the call. If you need t
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">bUpdated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="n">bUpdated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">            UPDATE sample SET</span>
 <span class="s2">                status = ?</span>
 <span class="s2">            WHERE sampleid = ?</span>
-<span class="s2">        &quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">});</span>
+<span class="s2">        "</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">});</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Retry failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Retry failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="nf">ClearLastSSLError</span><span class="p">();</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
@@ -3563,25 +3563,25 @@ It does not tell you whether an error was present before the call. If you need t
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RetryStatusUpdate&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SAMP-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;APPROVED&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RetryStatusUpdate"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"SAMP-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"APPROVED"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="batch-work-with-per-item-error-resets">Batch work with per-item error resets<a class="headerlink" href="#batch-work-with-per-item-error-resets" title="Permanent link">&para;</a></h3>
 <p>Handles each sample in its own <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> and clears the error state after recording a failure, so one sample's error cannot contaminate the check for the next.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessQueuedSamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIDs</span><span class="p">,</span><span class="w"> </span><span class="n">aFailed</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aSampleIDs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;SAM-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAM-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAM-003&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aSampleIDs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"SAM-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SAM-002"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SAM-003"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aFailed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aSampleIDs</span><span class="p">);</span>
 <span class="w">        </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aSampleIDs</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
 
 <span class="w">        </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">                UPDATE sample SET</span>
 <span class="s2">                    status = ?</span>
 <span class="s2">                WHERE sampleid = ?</span>
-<span class="s2">            &quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;COMPLETE&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">});</span>
+<span class="s2">            "</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">"COMPLETE"</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">});</span>
 <span class="w">        </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">            </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aFailed</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">});</span>
@@ -3593,7 +3593,7 @@ It does not tell you whether an error was present before the call. If you need t
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ProcessQueuedSamples&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ProcessQueuedSamples"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

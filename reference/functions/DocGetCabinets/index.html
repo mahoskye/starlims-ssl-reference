@@ -3953,18 +3953,18 @@
 <span class="w">    </span><span class="n">aCabinets</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetCabinets</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCabinets</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No cabinets were returned.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No cabinets were returned."</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCabinets</span><span class="p">);</span>
 <span class="w">        </span><span class="n">sCabinetName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aCabinets</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Cabinet: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCabinetName</span><span class="p">);</span><span class="w"> </span><span class="c1">/* Logs each cabinet name;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Cabinet: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCabinetName</span><span class="p">);</span><span class="w"> </span><span class="c1">/* Logs each cabinet name;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ListCabinetNames&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ListCabinetNames"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="validate-a-configured-cabinet-name">Validate a configured cabinet name<a class="headerlink" href="#validate-a-configured-cabinet-name" title="Permanent link">&para;</a></h3>
 <p>Searches the cabinet list for a case-insensitive match against a configured name, then checks <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> on a negative result to distinguish a backend failure from a genuinely missing cabinet.</p>
@@ -3979,22 +3979,22 @@
 <span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bExists</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Cabinet is available: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetCabinet</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Cabinet is available: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetCabinet</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum lookup failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Documentum lookup failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="c1">/* Logs on command failure: lookup failed;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Cabinet was not found: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetCabinet</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Cabinet was not found: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTargetCabinet</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateCabinetName&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;QA_Reports&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateCabinetName"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"QA_Reports"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="reconcile-cabinets-against-a-control-table">Reconcile cabinets against a control table<a class="headerlink" href="#reconcile-cabinets-against-a-control-table" title="Permanent link">&para;</a></h3>
 <p>Fetches the live cabinet list, checks <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> immediately, then compares against configured cabinet names from a control table and inserts an audit row for each cabinet that is missing in Documentum.</p>
@@ -4004,16 +4004,16 @@
 <span class="w">    </span><span class="n">aCabinets</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetCabinets</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Unable to retrieve cabinets: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Unable to retrieve cabinets: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="c1">/* Logs on command failure: cabinet retrieval failed;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="p">{};</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aConfigured</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="s2">&quot;SELECT cabinet_name</span>
+<span class="w">    </span><span class="n">aConfigured</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="s2">"SELECT cabinet_name</span>
 <span class="s2">        FROM doc_cabinet_config</span>
 <span class="s2">        WHERE active_flag = ?</span>
 <span class="s2">        ORDER BY cabinet_name</span>
-<span class="s2">    &quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;Y&quot;</span><span class="p">});</span>
+<span class="s2">    "</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Y"</span><span class="p">});</span>
 <span class="w">    </span><span class="n">aMissing</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aConfigured</span><span class="p">);</span>
@@ -4022,14 +4022,14 @@
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">AScan</span><span class="p">(</span><span class="n">aCabinets</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="err">|</span><span class="n">sName</span><span class="err">|</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sName</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sCabinetName</span><span class="p">)})</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aMissing</span><span class="p">,</span><span class="w"> </span><span class="n">sCabinetName</span><span class="p">);</span>
 
-<span class="w">            </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nf">RunSQL</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">                INSERT INTO doc_cabinet_audit (</span>
 <span class="s2">                    cabinet_name, status</span>
 <span class="s2">                )</span>
 <span class="s2">                VALUES (</span>
 <span class="s2">                    ?, ?</span>
 <span class="s2">                )</span>
-<span class="s2">            &quot;</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sCabinetName</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Missing in Documentum&quot;</span><span class="p">});</span>
+<span class="s2">            "</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">sCabinetName</span><span class="p">,</span><span class="w"> </span><span class="s2">"Missing in Documentum"</span><span class="p">});</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
@@ -4037,7 +4037,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;AuditConfiguredCabinets&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AuditConfiguredCabinets"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

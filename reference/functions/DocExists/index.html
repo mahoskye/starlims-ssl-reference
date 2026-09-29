@@ -4157,7 +4157,7 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DeleteIfDocumentExists</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="n">bExists</span><span class="p">,</span><span class="w"> </span><span class="n">bDeleted</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sObjId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;0900000180001234&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sObjId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"0900000180001234"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
@@ -4165,18 +4165,18 @@
 <span class="w">        </span><span class="n">bExists</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocExists</span><span class="p">(</span><span class="n">sObjId</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bExists</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Document was not found: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Document was not found: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="n">bDeleted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocDelete</span><span class="p">(</span><span class="n">sObjId</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bDeleted</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Delete request did not succeed for: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Delete request did not succeed for: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Document deleted: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Document deleted: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
@@ -4185,7 +4185,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DeleteIfDocumentExists&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DeleteIfDocumentExists"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="distinguish-not-found-from-documentum-failure">Distinguish not found from Documentum failure<a class="headerlink" href="#distinguish-not-found-from-documentum-failure" title="Permanent link">&para;</a></h3>
 <p>Checks <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> after a <a href="../../literals/false/"><code>.F.</code></a> result to tell apart a genuine missing document from a Documentum command failure, displaying a different message for each case.</p>
@@ -4199,17 +4199,17 @@
 <span class="w">        </span><span class="n">bExists</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocExists</span><span class="p">(</span><span class="n">sObjId</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bExists</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Document is available: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Document is available: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
 <span class="w">            </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Documentum check failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Documentum check failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Document was not found: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Document was not found: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
@@ -4218,7 +4218,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckDocumentStatus&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;0900000180001234&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckDocumentStatus"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"0900000180001234"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

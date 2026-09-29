@@ -2834,14 +2834,14 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckStatusChange</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStoredStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentStatus</span><span class="p">,</span><span class="w"> </span><span class="n">bChanged</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sStoredStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;PENDING&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sCurrentStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;COMPLETE&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sStoredStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCurrentStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"COMPLETE"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bChanged</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sStoredStatus</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">sCurrentStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bChanged</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Status changed from &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStoredStatus</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentStatus</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Status changed from "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStoredStatus</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Status did not change&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Status did not change"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
@@ -2850,7 +2850,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckStatusChange&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckStatusChange"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Status changed from PENDING to COMPLETE
@@ -2867,16 +2867,16 @@
 <span class="w">    </span><span class="n">sActualType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsTypeEx</span><span class="p">(</span><span class="n">nActual</span><span class="p">);</span>
 <span class="w">    </span><span class="n">bMismatch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sExpectedType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;NUMERIC&quot;</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">sActualType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;NUMERIC&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sExpectedType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"NUMERIC"</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">sActualType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"NUMERIC"</span><span class="p">;</span>
 <span class="w">        </span><span class="n">bMismatch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nActual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">nExpected</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bMismatch</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Replicate count differs&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Replicate count differs"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Replicate count matches&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Replicate count matches"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Skipped comparison because both values must be numeric&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Skipped comparison because both values must be numeric"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
@@ -2885,7 +2885,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckReplicateMismatch&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckReplicateMismatch"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Replicate count differs
@@ -2896,8 +2896,8 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aPrevious</span><span class="p">,</span><span class="w"> </span><span class="n">aCurrent</span><span class="p">,</span><span class="w"> </span><span class="n">bRefDifferent</span><span class="p">,</span><span class="w"> </span><span class="n">bValueDifferent</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aPrevious</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LAB-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-003&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">aCurrent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LAB-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;LAB-003&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aPrevious</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"LAB-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-002"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-003"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aCurrent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"LAB-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-002"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-003"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">bRefDifferent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aPrevious</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">aCurrent</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bValueDifferent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 
@@ -2908,17 +2908,17 @@
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Reference differs: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bRefDifferent</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Reference differs: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bRefDifferent</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span><span class="w"> </span><span class="c1">/* Logs reference-difference result;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Element values differ: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bValueDifferent</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Element values differ: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">bValueDifferent</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span><span class="w"> </span><span class="c1">/* Logs element-difference result;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bRefDifferent</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompareSnapshots&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CompareSnapshots"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>

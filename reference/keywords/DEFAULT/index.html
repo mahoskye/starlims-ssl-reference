@@ -2960,7 +2960,7 @@
 <span class="w">    </span><span class="n">sLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIncludePrefix</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLabel</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLabel</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sLabel</span><span class="p">);</span>
@@ -2968,10 +2968,8 @@
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sLabel</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
-<span class="c1">/*</span>
-<span class="c1">Usage:</span>
-<span class="c1">DoProc(&quot;FormatSampleLabel&quot;, {&quot;S-001&quot;})</span>
-<span class="c1">;</span>
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FormatSampleLabel"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-001"</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../../functions/InfoMes/"><code>InfoMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample S-001
@@ -2980,18 +2978,18 @@
 <p>Use multiple <code>:DEFAULT</code> lines so callers can omit new trailing arguments. <code>ShowDefaultedCalls</code> demonstrates both a minimal call and a fully specified call. The row counts depend on the database contents.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FetchSampleRows</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxRows</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Logged&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">"Logged"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">nMaxRows</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sample_id, status, result_value</span>
 <span class="s2">        FROM sample_result</span>
 <span class="s2">        WHERE sample_id = ?sSampleID?</span>
 <span class="s2">          AND status = ?sStatus?</span>
 <span class="s2">          AND ROWNUM &lt;= ?nMaxRows?</span>
 <span class="s2">        ORDER BY sample_id</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="n">sSQL</span><span class="p">);</span>
 
@@ -3001,18 +2999,16 @@
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDefaultedCalls</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aDefaultRows</span><span class="p">,</span><span class="w"> </span><span class="n">aCustomRows</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aDefaultRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FetchSampleRows&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">});</span>
-<span class="w">    </span><span class="n">aCustomRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FetchSampleRows&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;LAB-2024-0042&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Complete&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">});</span>
+<span class="w">    </span><span class="n">aDefaultRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FetchSampleRows"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LAB-2024-0042"</span><span class="p">});</span>
+<span class="w">    </span><span class="n">aCustomRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FetchSampleRows"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LAB-2024-0042"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Complete"</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">});</span>
 
 <span class="w">    </span><span class="c1">/* Logs row counts for the default and custom calls;</span>
-<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Default call returned &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aDefaultRows</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; row(s)&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Custom call returned &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCustomRows</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; row(s)&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Default call returned "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aDefaultRows</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" row(s)"</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Custom call returned "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCustomRows</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" row(s)"</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
-<span class="c1">/*</span>
-<span class="c1">Usage:</span>
-<span class="c1">DoProc(&quot;ShowDefaultedCalls&quot;)</span>
-<span class="c1">;</span>
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowDefaultedCalls"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="combining-expression-defaults-with-branch-specific-logic">Combining expression defaults with branch-specific logic<a class="headerlink" href="#combining-expression-defaults-with-branch-specific-logic" title="Permanent link">&para;</a></h3>
 <p>Default values can be expressions. Here <code>MYUSERNAME</code> and <a href="../../functions/Today/"><code>Today()</code></a> provide automatic context. The routine then branches on <code>bIncludeClosed</code> to build the appropriate query.</p>
@@ -3024,36 +3020,34 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIncludeClosed</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">            SELECT task_id, status</span>
 <span class="s2">            FROM task_queue</span>
 <span class="s2">            WHERE owner = ?sOwner?</span>
 <span class="s2">              AND run_date &lt;= ?dRunDate?</span>
 <span class="s2">            ORDER BY task_id</span>
-<span class="s2">        &quot;</span><span class="p">;</span>
+<span class="s2">        "</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">            SELECT task_id, status</span>
 <span class="s2">            FROM task_queue</span>
 <span class="s2">            WHERE owner = ?sOwner?</span>
 <span class="s2">              AND run_date &lt;= ?dRunDate?</span>
-<span class="s2">              AND status != &#39;Closed&#39;</span>
+<span class="s2">              AND status != 'Closed'</span>
 <span class="s2">            ORDER BY task_id</span>
-<span class="s2">        &quot;</span><span class="p">;</span>
+<span class="s2">        "</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLExecute</span><span class="p">(</span><span class="n">sSQL</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Returned &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; task row(s) for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOwner</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Returned "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRows</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" task row(s) for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOwner</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">/* Logs the returned row count for the selected owner;</span>
 <span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aRows</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
-<span class="c1">/*</span>
-<span class="c1">Usage:</span>
-<span class="c1">DoProc(&quot;SummarizeUserQueue&quot;)</span>
-<span class="c1">;</span>
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SummarizeUserQueue"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3080,7 +3074,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 01:02:01 UTC">September 29, 2026</span>
   </span>
 
     

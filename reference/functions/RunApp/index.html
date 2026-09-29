@@ -3625,38 +3625,38 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GeneratePdfReport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sApp</span><span class="p">,</span><span class="w"> </span><span class="n">sArgs</span><span class="p">,</span><span class="w"> </span><span class="n">bFinished</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sApp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\Tools\DocConverter.exe&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">&#39;</span><span class="s2">&quot;C:\Reports\Daily Summary.docx&quot;</span><span class="w"> </span><span class="o">/</span><span class="n">outpdf</span><span class="err">&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sApp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Tools\DocConverter.exe"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">'</span><span class="s2">"C:\Reports\Daily Summary.docx"</span><span class="w"> </span><span class="o">/</span><span class="n">outpdf</span><span class="err">'</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bFinished</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunApp</span><span class="p">(</span><span class="n">sApp</span><span class="p">,</span><span class="w"> </span><span class="n">sArgs</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bFinished</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;PDF conversion finished&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"PDF conversion finished"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;PDF conversion could not be started&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"PDF conversion could not be started"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bFinished</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GeneratePdfReport&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GeneratePdfReport"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="report-the-launch-error-after-a-failed-start">Report the launch error after a failed start<a class="headerlink" href="#report-the-launch-error-after-a-failed-start" title="Permanent link">&para;</a></h3>
 <p>Wait for a command-line tool to finish, and surface the last SSL error when the process could not be created.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportAuditData</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sApp</span><span class="p">,</span><span class="w"> </span><span class="n">sArgs</span><span class="p">,</span><span class="w"> </span><span class="n">bFinished</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sApp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\Program Files\Acme Tools\AuditExport.exe&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">&#39;</span><span class="o">/</span><span class="n">batch</span><span class="w"> </span><span class="n">B</span><span class="o">-</span><span class="mi">1042</span><span class="w"> </span><span class="o">/</span><span class="n">output</span><span class="w"> </span><span class="s2">&quot;C:\Exports\audit.csv&quot;</span><span class="err">&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sApp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Program Files\Acme Tools\AuditExport.exe"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">'</span><span class="o">/</span><span class="n">batch</span><span class="w"> </span><span class="n">B</span><span class="o">-</span><span class="mi">1042</span><span class="w"> </span><span class="o">/</span><span class="n">output</span><span class="w"> </span><span class="s2">"C:\Exports\audit.csv"</span><span class="err">'</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bFinished</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunApp</span><span class="p">(</span><span class="n">sApp</span><span class="p">,</span><span class="w"> </span><span class="n">sArgs</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bFinished</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Audit export finished&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Audit export finished"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: startup error;</span>
 <span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span>
-<span class="w">            </span><span class="s2">&quot;Audit export could not be started: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span>
+<span class="w">            </span><span class="s2">"Audit export could not be started: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span>
 <span class="w">        </span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -3664,25 +3664,25 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ExportAuditData&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExportAuditData"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="pass-the-full-command-line-in-sapplication">Pass the full command line in <code>sApplication</code><a class="headerlink" href="#pass-the-full-command-line-in-sapplication" title="Permanent link">&para;</a></h3>
 <p>Omit <code>sArguments</code> and let <code>RunApp</code> split a quoted executable path from the rest of the command line before launching the process.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LaunchQuotedCommand</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCommand</span><span class="p">,</span><span class="w"> </span><span class="n">bFinished</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sCommand</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">&#39;</span><span class="s2">&quot;C:\Program Files\Acme Tools\Exporter.exe&quot;</span><span class="w"> </span><span class="o">/</span><span class="n">mode</span><span class="w"> </span><span class="n">sync</span><span class="w"> </span><span class="o">/</span><span class="n">batch</span><span class="w"> </span><span class="n">B</span><span class="o">-</span><span class="mi">1042</span><span class="err">&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sCommand</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">'</span><span class="s2">"C:\Program Files\Acme Tools\Exporter.exe"</span><span class="w"> </span><span class="o">/</span><span class="n">mode</span><span class="w"> </span><span class="n">sync</span><span class="w"> </span><span class="o">/</span><span class="n">batch</span><span class="w"> </span><span class="n">B</span><span class="o">-</span><span class="mi">1042</span><span class="err">'</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bFinished</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunApp</span><span class="p">(</span><span class="n">sCommand</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bFinished</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Exporter could not be started&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Exporter could not be started"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bFinished</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LaunchQuotedCommand&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LaunchQuotedCommand"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

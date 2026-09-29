@@ -4016,27 +4016,27 @@
 <p>Deletes a cabinet by ID using the default deep-delete mode and logs either a success message or the Documentum error when the call returns <a href="../../literals/false/"><code>.F.</code></a>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DeleteObsoleteCabinet</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sCabinetId</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sCabinetId</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ARCHIVE_2020&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sCabinetId</span><span class="p">,</span><span class="w"> </span><span class="s2">"ARCHIVE_2020"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bDeleted</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bDeleted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocDeleteCabinet</span><span class="p">(</span><span class="n">sCabinetId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bDeleted</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Cabinet delete failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Cabinet delete failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">            </span><span class="c1">/* Logs on failure: cabinet delete failed;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Cabinet deleted: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCabinetId</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Cabinet deleted: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCabinetId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DeleteObsoleteCabinet&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;ARCHIVE_2020&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DeleteObsoleteCabinet"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"ARCHIVE_2020"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="pass-f-for-bdeepdelete-to-use-the-non-default-delete-mode">Pass <a href="../../literals/false/"><code>.F.</code></a> for <code>bDeepDelete</code> to use the non-default delete mode<a class="headerlink" href="#pass-f-for-bdeepdelete-to-use-the-non-default-delete-mode" title="Permanent link">&para;</a></h3>
 <p>Passes <a href="../../literals/false/"><code>.F.</code></a> for <code>bDeepDelete</code> to use non-recursive delete mode, then logs either a success message or the Documentum error when the call fails.</p>
@@ -4047,13 +4047,13 @@
 <span class="w">    </span><span class="n">bDeleted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocDeleteCabinet</span><span class="p">(</span><span class="n">sCabinetId</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bDeleted</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Empty cabinet deleted: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCabinetId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Empty cabinet deleted: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCabinetId</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
 <span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Cabinet delete failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Cabinet delete failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: cabinet delete failed;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4061,14 +4061,14 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DeleteEmptyCabinetOnly&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;ARCHIVE-2023&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DeleteEmptyCabinetOnly"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"ARCHIVE-2023"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="delete-multiple-cabinets-and-collect-per-cabinet-failure-details">Delete multiple cabinets and collect per-cabinet failure details<a class="headerlink" href="#delete-multiple-cabinets-and-collect-per-cabinet-failure-details" title="Permanent link">&para;</a></h3>
 <p>Iterates a list of cabinet IDs, attempts each delete, and collects a failure object — including any Documentum error message — for every cabinet that was not deleted successfully.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DeleteCabinetsBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aCabinetIds</span><span class="p">,</span><span class="w"> </span><span class="n">aFailures</span><span class="p">,</span><span class="w"> </span><span class="n">oFailure</span><span class="p">,</span><span class="w"> </span><span class="n">sCabinetId</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aCabinetIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;ARCHIVE-2023&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ARCHIVE-2024&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ARCHIVE-2025&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aCabinetIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"ARCHIVE-2023"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ARCHIVE-2024"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ARCHIVE-2025"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">aFailures</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCabinetIds</span><span class="p">);</span>
@@ -4078,7 +4078,7 @@
 <span class="w">            </span><span class="k">:LOOP</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
 <span class="w">            </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
@@ -4094,7 +4094,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DeleteCabinetsBatch&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DeleteCabinetsBatch"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

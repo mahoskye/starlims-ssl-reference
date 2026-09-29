@@ -4391,18 +4391,18 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDayFirstFormat</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCurrentFormat</span><span class="p">,</span><span class="w"> </span><span class="n">sTodayText</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">DateFormat</span><span class="p">(</span><span class="s2">&quot;DD/MM/YYYY&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">DateFormat</span><span class="p">(</span><span class="s2">"DD/MM/YYYY"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">sCurrentFormat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsGetDateFormat</span><span class="p">();</span>
 <span class="w">    </span><span class="n">sTodayText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="nf">Today</span><span class="p">());</span>
 
-<span class="w">    </span><span class="c1">/* Logs current stored format and today&#39;s date in day-first format;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Current format: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentFormat</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Today: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTodayText</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">/* Logs current stored format and today's date in day-first format;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Current format: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentFormat</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Today: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTodayText</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDayFirstFormat&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowDayFirstFormat"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="temporarily-switch-to-an-iso-style-format-and-restore-afterward">Temporarily switch to an ISO-style format and restore afterward<a class="headerlink" href="#temporarily-switch-to-an-iso-style-format-and-restore-afterward" title="Permanent link">&para;</a></h3>
 <p>Saves the current format, switches to an ISO-style pattern inside a <a href="../../keywords/TRY/"><code>:TRY</code></a> block, formats today's date, then restores the original format in the <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> block.</p>
@@ -4412,12 +4412,12 @@
 <span class="w">    </span><span class="n">sOriginalFormat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsGetDateFormat</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">DateFormat</span><span class="p">(</span><span class="s2">&quot;YYYY-MM-DD&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">DateFormat</span><span class="p">(</span><span class="s2">"YYYY-MM-DD"</span><span class="p">);</span>
 
 <span class="w">        </span><span class="n">sExportDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="nf">Today</span><span class="p">());</span>
 
 <span class="w">        </span><span class="c1">/* Logs export date in ISO-style format;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Export date: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExportDate</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Export date: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sExportDate</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">DateFormat</span><span class="p">(</span><span class="n">sOriginalFormat</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
@@ -4426,7 +4426,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildExportDate&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildExportDate"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="select-a-format-by-output-target-and-verify-the-stored-normalization">Select a format by output target and verify the stored normalization<a class="headerlink" href="#select-a-format-by-output-target-and-verify-the-stored-normalization" title="Permanent link">&para;</a></h3>
 <p>Selects a format string based on the target system (EU, ISO, or default), applies it, then reads back the stored normalized value and formats today's date. The ISO case shows how <code>"YYYY-mm-DD"</code> normalizes to <code>"yyyy-MM-dd"</code>.</p>
@@ -4437,14 +4437,14 @@
 <span class="w">    </span><span class="n">sOriginalFormat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsGetDateFormat</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sTarget</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;EU&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sRequestedFormat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;DD/MM/YYYY&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sTarget</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"EU"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sRequestedFormat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"DD/MM/YYYY"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sTarget</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;ISO&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sRequestedFormat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;YYYY-mm-DD&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sTarget</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"ISO"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sRequestedFormat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"YYYY-mm-DD"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sRequestedFormat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;MM/DD/YYYY&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sRequestedFormat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"MM/DD/YYYY"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
 
@@ -4455,9 +4455,9 @@
 <span class="w">        </span><span class="n">sDateText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="nf">Today</span><span class="p">());</span>
 
 <span class="w">        </span><span class="c1">/* ISO target shows requested, normalized stored, and formatted values;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Requested format: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRequestedFormat</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Stored format: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStoredFormat</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Formatted date: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDateText</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Requested format: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRequestedFormat</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Stored format: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStoredFormat</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Formatted date: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDateText</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:FINALLY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">DateFormat</span><span class="p">(</span><span class="n">sOriginalFormat</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
@@ -4466,7 +4466,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FormatDateForTarget&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;ISO&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FormatDateForTarget"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"ISO"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

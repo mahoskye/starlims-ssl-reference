@@ -4410,18 +4410,18 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckReviewDateInvariant</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dReviewDate</span><span class="p">,</span><span class="w"> </span><span class="n">bIsInvariant</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">dReviewDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dReviewDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">""</span><span class="p">);</span>
 <span class="w">    </span><span class="n">bIsInvariant</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsInvariantDate</span><span class="p">(</span><span class="n">dReviewDate</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsInvariant</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Workflow blocked: review date is uninitialized&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Workflow blocked: review date is uninitialized"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Workflow approved: review date is properly set&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Workflow approved: review date is properly set"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckReviewDateInvariant&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckReviewDateInvariant"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="count-user-set-versus-invariant-dates-across-imported-records">Count user-set versus invariant dates across imported records<a class="headerlink" href="#count-user-set-versus-invariant-dates-across-imported-records" title="Permanent link">&para;</a></h3>
 <p>Iterate over a list of sample records, each represented as a three-element array of <code>{dReceived, dAnalyzed, dReported}</code> dates, and use <code>IsInvariantDate</code> to count how many date fields are set versus still invariant. With the data below, three fields have real dates and six are invariant, and the warning fires because <code>nInvariantDates</code> is greater than zero.</p>
@@ -4433,9 +4433,9 @@
 <span class="w">    </span><span class="n">nInvariantDates</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRecords</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/08/2026&quot;</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)},</span>
-<span class="w">        </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/07/2026&quot;</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;04/08/2026&quot;</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)},</span>
-<span class="w">        </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)}</span>
+<span class="w">        </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"04/08/2026"</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">""</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">""</span><span class="p">)},</span>
+<span class="w">        </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"04/07/2026"</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"04/08/2026"</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">""</span><span class="p">)},</span>
+<span class="w">        </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">""</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">""</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">""</span><span class="p">)}</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aRecords</span><span class="p">);</span>
@@ -4450,12 +4450,12 @@
 <span class="w">        </span><span class="k">:NEXT</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Imported dates: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nUserDates</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; user-set, &quot;</span>
-<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nInvariantDates</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; invariant/unset&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Imported dates: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nUserDates</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" user-set, "</span>
+<span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nInvariantDates</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" invariant/unset"</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMsg</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nInvariantDates</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Warning: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nInvariantDates</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; date fields require completion&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Warning: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nInvariantDates</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" date fields require completion"</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMsg</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4463,7 +4463,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateImportedDates&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateImportedDates"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

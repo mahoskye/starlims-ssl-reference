@@ -3873,29 +3873,29 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertReportExample</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sReportPath</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sReportPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\Reports\AnalysisReport001.rpt&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sReportPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Reports\AnalysisReport001.rpt"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ConvertReport</span><span class="p">(</span><span class="n">sReportPath</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Report conversion succeeded for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sReportPath</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Report conversion succeeded for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sReportPath</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ConvertReportExample&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ConvertReportExample"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="handle-conversion-failure-with-trycatch">Handle conversion failure with :TRY/:CATCH<a class="headerlink" href="#handle-conversion-failure-with-trycatch" title="Permanent link">&para;</a></h3>
 <p>Wraps the call in <code>:TRY/:CATCH</code> so a failed conversion is reported via the error description rather than silently ignored or assumed to return <a href="../../literals/false/"><code>.F.</code></a>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">HandleMissingReport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFile</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;NonExistentReport.rpt&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFile</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"NonExistentReport.rpt"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">ConvertReport</span><span class="p">(</span><span class="n">sFile</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Report conversion succeeded for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFile</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Report conversion succeeded for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFile</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ConvertReport failed for &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFile</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span>
+<span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ConvertReport failed for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFile</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span>
 <span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: conversion failure summary;</span>
@@ -3903,7 +3903,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;HandleMissingReport&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"HandleMissingReport"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="batch-convert-reports-and-aggregate-failures">Batch convert reports and aggregate failures<a class="headerlink" href="#batch-convert-reports-and-aggregate-failures" title="Permanent link">&para;</a></h3>
 <p>Converts four report files, keeps processing after failures, counts both outcomes, and logs one summary at the end.</p>
@@ -3911,12 +3911,12 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFiles</span><span class="p">,</span><span class="w"> </span><span class="n">sSourceFolder</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sLogMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nSuccessCount</span><span class="p">,</span><span class="w"> </span><span class="n">nFailCount</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">,</span><span class="w"> </span><span class="n">sResultSummary</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSourceFolder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\\Reports\\Pending\\&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSourceFolder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\\Reports\\Pending\\"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">aFiles</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="s2">&quot;Analysis_Q1.rpt&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;Analysis_Q2.rpt&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;Analysis_Q3.rpt&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;Invalid_File.rpt&quot;</span>
+<span class="w">        </span><span class="s2">"Analysis_Q1.rpt"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"Analysis_Q2.rpt"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"Analysis_Q3.rpt"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"Invalid_File.rpt"</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">nSuccessCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
@@ -3928,21 +3928,21 @@
 <span class="w">        </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">ConvertReport</span><span class="p">(</span><span class="n">sFilePath</span><span class="p">);</span>
 <span class="w">            </span><span class="n">nSuccessCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Converted: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Converted: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFilePath</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs one line for each successful conversion;</span>
 <span class="w">        </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">            </span><span class="n">nFailCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="w">            </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Failed to convert &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span>
+<span class="w">            </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Failed to convert "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFilePath</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span>
 <span class="w">                            </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLogMessage</span><span class="p">);</span>
 <span class="w">            </span><span class="c1">/* Logs one line for each failed conversion;</span>
 <span class="w">        </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sResultSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Batch complete: &quot;</span>
-<span class="w">                        </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSuccessCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; succeeded, &quot;</span>
-<span class="w">                        </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFailCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; failed&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sResultSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Batch complete: "</span>
+<span class="w">                        </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nSuccessCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" succeeded, "</span>
+<span class="w">                        </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nFailCount</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" failed"</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sResultSummary</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs batch totals;</span>
 
@@ -3950,7 +3950,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BatchConvertReports&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BatchConvertReports"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

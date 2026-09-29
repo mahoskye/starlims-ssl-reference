@@ -4471,15 +4471,15 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseIsoDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDateInput</span><span class="p">,</span><span class="w"> </span><span class="n">dParsedDate</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDateInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;2026-04-11&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDateInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"2026-04-11"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">dParsedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromString</span><span class="p">(</span><span class="n">sDateInput</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;yyyy-MM-dd&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dParsedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromString</span><span class="p">(</span><span class="n">sDateInput</span><span class="p">,</span><span class="w"> </span><span class="s2">"yyyy-MM-dd"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Parsed date: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dParsedDate</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Parsed date: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dParsedDate</span><span class="p">));</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseIsoDate&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ParseIsoDate"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs (assuming MM/DD/YYYY date format):</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Parsed date: 04/11/2026
@@ -4489,43 +4489,43 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseImportedDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFormats</span><span class="p">,</span><span class="w"> </span><span class="n">dParsedDate</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sDateInput</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDateInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;25.04.2024&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aFormats</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;yyyy-MM-dd&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;MM/dd/yyyy&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dd.MM.yyyy&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;yyyyMMdd&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sDateInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"25.04.2024"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aFormats</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"yyyy-MM-dd"</span><span class="p">,</span><span class="w"> </span><span class="s2">"MM/dd/yyyy"</span><span class="p">,</span><span class="w"> </span><span class="s2">"dd.MM.yyyy"</span><span class="p">,</span><span class="w"> </span><span class="s2">"yyyyMMdd"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">dParsedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromString</span><span class="p">(</span><span class="n">sDateInput</span><span class="p">,</span><span class="w"> </span><span class="n">aFormats</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Imported date: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dParsedDate</span><span class="p">));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Imported date: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dParsedDate</span><span class="p">));</span>
 
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Could not parse imported date: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Could not parse imported date: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: Could not parse imported date;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseImportedDate&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ParseImportedDate"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="parse-local-culture-input-and-keep-the-result-unspecified">Parse local-culture input and keep the result unspecified<a class="headerlink" href="#parse-local-culture-input-and-keep-the-result-unspecified" title="Permanent link">&para;</a></h3>
 <p>Passes <a href="../../literals/true/"><code>.T.</code></a> for both <code>bUseLocalCulture</code> and <code>bMakeInvariant</code> to parse a user-entered date string with the current local culture while marking the result as an unspecified date.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseLocalDateForStorage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dParsedDate</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sDateInput</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDateInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;11/04/2026&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDateInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"11/04/2026"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">dParsedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromString</span><span class="p">(</span><span class="n">sDateInput</span><span class="p">,,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Accepted date: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dParsedDate</span><span class="p">));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Accepted date: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dParsedDate</span><span class="p">));</span>
 
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Date input is invalid: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Date input is invalid: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: Date input is invalid;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseLocalDateForStorage&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ParseLocalDateForStorage"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

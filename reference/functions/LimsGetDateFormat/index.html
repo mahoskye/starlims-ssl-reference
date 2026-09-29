@@ -4353,11 +4353,11 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDateFormat</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sDateFormat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsGetDateFormat</span><span class="p">();</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Enter date using format: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDateFormat</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Enter date using format: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDateFormat</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDateFormatPrompt&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowDateFormatPrompt"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Enter date using format: MM/dd/yyyy
@@ -4371,9 +4371,9 @@
 <span class="w">    </span><span class="n">sDateFormat</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsGetDateFormat</span><span class="p">();</span>
 
 <span class="w">    </span><span class="n">aRawData</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;SMP-001&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Lead&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;03/15/2026&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PENDING&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;SMP-002&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Mercury&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;03/16/2026&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;COMPLETE&quot;</span><span class="p">},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;SMP-003&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Arsenic&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;03/17/2026&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PENDING&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"SMP-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Lead"</span><span class="p">,</span><span class="w"> </span><span class="s2">"03/15/2026"</span><span class="p">,</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"SMP-002"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Mercury"</span><span class="p">,</span><span class="w"> </span><span class="s2">"03/16/2026"</span><span class="p">,</span><span class="w"> </span><span class="s2">"COMPLETE"</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"SMP-003"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Arsenic"</span><span class="p">,</span><span class="w"> </span><span class="s2">"03/17/2026"</span><span class="p">,</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">}</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">aParsedDates</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
@@ -4385,12 +4385,12 @@
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bValid</span><span class="p">;</span>
 <span class="w">            </span><span class="n">dParsed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">StringToDate</span><span class="p">(</span><span class="n">sDateCol</span><span class="p">,</span><span class="w"> </span><span class="n">sDateFormat</span><span class="p">);</span>
 <span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aParsedDates</span><span class="p">,</span><span class="w"> </span><span class="n">dParsed</span><span class="p">);</span>
-<span class="w">            </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDateCol</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; parsed as &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span>
+<span class="w">            </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Row "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDateCol</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" parsed as "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span>
 <span class="w">                </span><span class="n">dParsed</span><span class="p">);</span>
 <span class="w">            </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sLogMsg</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs: parsed row details;</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aParsedDates</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">));</span>
-<span class="w">            </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Row &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: Invalid date &#39;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDateCol</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;&#39; for format &quot;</span>
+<span class="w">            </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aParsedDates</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">""</span><span class="p">));</span>
+<span class="w">            </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Row "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": Invalid date '"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDateCol</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"' for format "</span>
 <span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="n">sDateFormat</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">sLogMsg</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs on failure: invalid date;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -4400,7 +4400,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseImportedSampleDates&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ParseImportedSampleDates"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

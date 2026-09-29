@@ -3673,49 +3673,49 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowOutputPath</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSettingName</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSettingName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ReportOutputPath&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSettingName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ReportOutputPath"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetSetting</span><span class="p">(</span><span class="n">sSettingName</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;ReportOutputPath is not configured&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"ReportOutputPath is not configured"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Reports will be written to &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Reports will be written to "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs configured output path;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowOutputPath&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowOutputPath"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="read-a-boolean-feature-flag-safely">Read a Boolean feature flag safely<a class="headerlink" href="#read-a-boolean-feature-flag-safely" title="Permanent link">&para;</a></h3>
 <p>Uses <a href="../LimsTypeEx/"><code>LimsTypeEx</code></a> to check both the returned type and value before branching, guarding against an unconfigured setting or a non-boolean value stored under the same name.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckFeatureFlag</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">vSetting</span><span class="p">,</span><span class="w"> </span><span class="n">sSettingType</span><span class="p">,</span><span class="w"> </span><span class="n">sSettingName</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSettingName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;EnableAdvancedReporting&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSettingName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"EnableAdvancedReporting"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">vSetting</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetSetting</span><span class="p">(</span><span class="n">sSettingName</span><span class="p">);</span>
 <span class="w">    </span><span class="n">sSettingType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsTypeEx</span><span class="p">(</span><span class="n">vSetting</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sSettingType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;STRING&quot;</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">vSetting</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSettingName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is not configured&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sSettingType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"STRING"</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">vSetting</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSettingName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" is not configured"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sSettingType</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">&quot;LOGIC&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">sSettingName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; must contain a Boolean value&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sSettingType</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">"LOGIC"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">sSettingName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" must contain a Boolean value"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">vSetting</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Advanced reporting is enabled&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Advanced reporting is enabled"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Advanced reporting is disabled&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Advanced reporting is disabled"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckFeatureFlag&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckFeatureFlag"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="normalize-a-numeric-setting-with-fallback-handling">Normalize a numeric setting with fallback handling<a class="headerlink" href="#normalize-a-numeric-setting-with-fallback-handling" title="Permanent link">&para;</a></h3>
 <p>Uses <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> and <a href="../../keywords/BEGINCASE/"><code>:BEGINCASE</code></a> to handle three storage possibilities: already numeric, missing, or stored as a numeric string. It falls back to a hard-coded default of <code>30000</code> when the setting is absent.</p>
@@ -3723,7 +3723,7 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">vSetting</span><span class="p">,</span><span class="w"> </span><span class="n">sSettingType</span><span class="p">,</span><span class="w"> </span><span class="n">sSettingName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nTimeout</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSettingName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;DatabaseTimeout&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSettingName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"DatabaseTimeout"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nTimeout</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">30000</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
@@ -3731,22 +3731,22 @@
 <span class="w">        </span><span class="n">sSettingType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsTypeEx</span><span class="p">(</span><span class="n">vSetting</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:BEGINCASE</span><span class="p">;</span>
-<span class="w">        </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sSettingType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;NUMERIC&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sSettingType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"NUMERIC"</span><span class="p">;</span>
 <span class="w">            </span><span class="n">nTimeout</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">vSetting</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<span class="w">        </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sSettingType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;STRING&quot;</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">vSetting</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sSettingType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"STRING"</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">vSetting</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">            </span><span class="c1">/* Use the default timeout when the setting is missing;</span>
 <span class="w">            </span><span class="k">:EXITCASE</span><span class="p">;</span>
-<span class="w">        </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sSettingType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;STRING&quot;</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="nf">IsNumeric</span><span class="p">(</span><span class="n">vSetting</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sSettingType</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"STRING"</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="nf">IsNumeric</span><span class="p">(</span><span class="n">vSetting</span><span class="p">);</span>
 <span class="w">            </span><span class="n">nTimeout</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Val</span><span class="p">(</span><span class="n">vSetting</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">sSettingName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; must contain a numeric value&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="n">sSettingName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" must contain a numeric value"</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Failed to read &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSettingName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Failed to read "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSettingName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs read failure details;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
@@ -3754,7 +3754,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetTimeoutValue&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetTimeoutValue"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

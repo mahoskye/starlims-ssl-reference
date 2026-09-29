@@ -3610,18 +3610,18 @@ array, executes the named function, and returns whatever that function returns. 
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunConfiguredReport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFunctionName</span><span class="p">,</span><span class="w"> </span><span class="n">aArgs</span><span class="p">,</span><span class="w"> </span><span class="n">vResult</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sFunctionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Reports.OrderSummary&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">aArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;2024-01-01&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;2024-03-31&quot;</span><span class="p">};</span>
+<span class="w">    </span><span class="n">sFunctionName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Reports.OrderSummary"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">aArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"2024-01-01"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2024-03-31"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">vResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ExecFunction</span><span class="p">(</span><span class="n">sFunctionName</span><span class="p">,</span><span class="w"> </span><span class="n">aArgs</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Result: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">vResult</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Result: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">vResult</span><span class="p">));</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">vResult</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunConfiguredReport&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RunConfiguredReport"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Result: &lt;return value of Reports.OrderSummary&gt;
@@ -3633,10 +3633,10 @@ array, executes the named function, and returns whatever that function returns. 
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sStepFunc</span><span class="p">,</span><span class="w"> </span><span class="n">aStepArgs</span><span class="p">,</span><span class="w"> </span><span class="n">vResult</span><span class="p">,</span><span class="w"> </span><span class="n">bShouldContinue</span><span class="p">,</span><span class="w"> </span><span class="n">sLogMsg</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aWorkflowSteps</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;MyApp.StepCheckConfig&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{}},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;MyApp.StepUploadData&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;fileA.csv&quot;</span><span class="p">}},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;MyApp.StepValidateResults&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{}},</span>
-<span class="w">        </span><span class="p">{</span><span class="s2">&quot;MyApp.StepFinalize&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{}}</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"MyApp.StepCheckConfig"</span><span class="p">,</span><span class="w"> </span><span class="p">{}},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"MyApp.StepUploadData"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"fileA.csv"</span><span class="p">}},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"MyApp.StepValidateResults"</span><span class="p">,</span><span class="w"> </span><span class="p">{}},</span>
+<span class="w">        </span><span class="p">{</span><span class="s2">"MyApp.StepFinalize"</span><span class="p">,</span><span class="w"> </span><span class="p">{}}</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">nTotalSteps</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aWorkflowSteps</span><span class="p">);</span>
@@ -3646,18 +3646,18 @@ array, executes the named function, and returns whatever that function returns. 
 <span class="w">        </span><span class="n">sStepFunc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aWorkflowSteps</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
 <span class="w">        </span><span class="n">aStepArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aWorkflowSteps</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span>
 
-<span class="w">        </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Starting step &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStepFunc</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sLogMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Starting step "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStepFunc</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLogMsg</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">            </span><span class="n">vResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ExecFunction</span><span class="p">(</span><span class="n">sStepFunc</span><span class="p">,</span><span class="w"> </span><span class="n">aStepArgs</span><span class="p">);</span>
 
-<span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="p">(</span><span class="nf">LimsTypeEx</span><span class="p">(</span><span class="n">vResult</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;LOGIC&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="p">(</span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">vResult</span><span class="p">);</span>
-<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Step &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; failed. Aborting chain.&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">:IF</span><span class="w"> </span><span class="p">(</span><span class="nf">LimsTypeEx</span><span class="p">(</span><span class="n">vResult</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"LOGIC"</span><span class="p">)</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="p">(</span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">vResult</span><span class="p">);</span>
+<span class="w">                </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Step "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" failed. Aborting chain."</span><span class="p">);</span>
 <span class="w">                </span><span class="n">bShouldContinue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">            </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:CATCH</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Error in step &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStepFunc</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Error in step "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStepFunc</span><span class="p">);</span>
 <span class="w">            </span><span class="n">bShouldContinue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
@@ -3667,14 +3667,14 @@ array, executes the named function, and returns whatever that function returns. 
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bShouldContinue</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow completed all steps successfully.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow completed all steps successfully."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow terminated early due to error or step failure.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow terminated early due to error or step failure."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunAutomatedChain&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RunAutomatedChain"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

@@ -4183,51 +4183,51 @@
 <p>Deletes all versions of a document using the default <code>bAllVersions</code> behavior and logs either a success message or the Documentum error when the call returns <a href="../../literals/false/"><code>.F.</code></a>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DeleteArchivedDocument</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sObjId</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0900000180001234&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="s2">"0900000180001234"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bDeleted</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bDeleted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocDelete</span><span class="p">(</span><span class="n">sObjId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bDeleted</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Document delete failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Document delete failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">());</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Document deleted: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Document deleted: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DeleteArchivedDocument&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;0900000180001234&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DeleteArchivedDocument"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"0900000180001234"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="delete-only-the-current-version-by-passing-f-for-ballversions">Delete only the current version by passing <a href="../../literals/false/"><code>.F.</code></a> for <code>bAllVersions</code><a class="headerlink" href="#delete-only-the-current-version-by-passing-f-for-ballversions" title="Permanent link">&para;</a></h3>
 <p>Passes <a href="../../literals/false/"><code>.F.</code></a> for <code>bAllVersions</code> to request a single-version delete, then distinguishes between a Documentum command failure and a <a href="../../literals/false/"><code>.F.</code></a> result with no recorded error.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DeleteCurrentVersionOnly</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sObjId</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0900000180005678&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="s2">"0900000180005678"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bDeleted</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bDeleted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocDelete</span><span class="p">(</span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bDeleted</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Delete request completed for one version: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Delete request completed for one version: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sObjId</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;Single-version delete failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Single-version delete failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Single-version delete request returned .F. with no stored backend message&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Single-version delete request returned .F. with no stored backend message"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DeleteCurrentVersionOnly&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;0900000180005678&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DeleteCurrentVersionOnly"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"0900000180005678"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="delete-multiple-documents-and-collect-per-document-failure-details">Delete multiple documents and collect per-document failure details<a class="headerlink" href="#delete-multiple-documents-and-collect-per-document-failure-details" title="Permanent link">&para;</a></h3>
 <p>Iterates a list of document object IDs, attempts each delete, and collects a failure object for every document that was not deleted successfully, then reports the overall outcome.</p>
@@ -4235,9 +4235,9 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aObjIds</span><span class="p">,</span><span class="w"> </span><span class="n">aFailures</span><span class="p">,</span><span class="w"> </span><span class="n">oFailure</span><span class="p">,</span><span class="w"> </span><span class="n">sObjId</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aObjIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="s2">&quot;0900000180002001&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;0900000180002002&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;0900000180002003&quot;</span>
+<span class="w">        </span><span class="s2">"0900000180002001"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"0900000180002002"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"0900000180002003"</span>
 <span class="w">    </span><span class="p">};</span>
 <span class="w">    </span><span class="n">aFailures</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
 
@@ -4257,16 +4257,16 @@
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aFailures</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;One or more document deletes failed&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"One or more document deletes failed"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;All requested documents were deleted&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"All requested documents were deleted"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aFailures</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DeleteDocumentsBatch&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DeleteDocumentsBatch"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

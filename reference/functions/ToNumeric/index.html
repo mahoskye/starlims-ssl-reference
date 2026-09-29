@@ -3773,14 +3773,14 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ParseUserInput</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">nParsedValue</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;42.5&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"42.5"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nParsedValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ToNumeric</span><span class="p">(</span><span class="n">sUserInput</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Parsed value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nParsedValue</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Parsed value: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nParsedValue</span><span class="p">));</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseUserInput&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ParseUserInput"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Parsed value: 42.5
@@ -3793,22 +3793,22 @@
 
 <span class="w">    </span><span class="n">nResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ToNumeric</span><span class="p">(</span><span class="n">sRawValue</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Left</span><span class="p">(</span><span class="n">sRawValue</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;0x&quot;</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="nf">Left</span><span class="p">(</span><span class="n">sRawValue</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;0X&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;hexadecimal&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Left</span><span class="p">(</span><span class="n">sRawValue</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"0x"</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="nf">Left</span><span class="p">(</span><span class="n">sRawValue</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"0X"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"hexadecimal"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;decimal&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"decimal"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span>
-<span class="w">        </span><span class="s2">&quot;Input &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRawValue</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; parsed as &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sType</span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nResult</span><span class="p">)</span>
+<span class="w">        </span><span class="s2">"Input "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRawValue</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" parsed as "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sType</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">": "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nResult</span><span class="p">)</span>
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nResult</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ParseNumericInput&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;0xFF&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ParseNumericInput"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"0xFF"</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Input 0xFF parsed as hexadecimal: 255
@@ -3822,14 +3822,14 @@
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">nValue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ToNumeric</span><span class="p">(</span><span class="n">sImportedValue</span><span class="p">);</span>
 
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Imported value: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nValue</span><span class="p">));</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Imported value: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nValue</span><span class="p">));</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span>
-<span class="w">            </span><span class="s2">&quot;Could not convert &#39;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sImportedValue</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;&#39;: &quot;</span>
+<span class="w">            </span><span class="s2">"Could not convert '"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sImportedValue</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"': "</span>
 <span class="w">            </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span>
 <span class="w">        </span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: conversion error;</span>
@@ -3839,7 +3839,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ImportNumericField&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;123abc&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ImportNumericField"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"123abc"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

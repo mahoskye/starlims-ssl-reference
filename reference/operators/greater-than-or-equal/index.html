@@ -2769,9 +2769,9 @@
 <span class="w">    </span><span class="n">bIsPassing</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nScore</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">nMinPassing</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsPassing</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Student passed with a score of &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nScore</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Student passed with a score of "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nScore</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Student did not pass. Score: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nScore</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; minimum: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Student did not pass. Score: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nScore</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" minimum: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span>
 <span class="w">            </span><span class="n">nMinPassing</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -2781,7 +2781,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckPassingScore&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckPassingScore"</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Student passed with a score of 72
@@ -2791,12 +2791,12 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FilterActivityLogs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dReferenceDate</span><span class="p">,</span><span class="w"> </span><span class="n">dLogDate</span><span class="p">,</span><span class="w"> </span><span class="n">bIsEligible</span><span class="p">,</span><span class="w"> </span><span class="n">aLogs</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nMatchCount</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">dReferenceDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/15/2024&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dReferenceDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"01/15/2024"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">aLogs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/10/2024&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/15/2024&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;01/20/2024&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;02/01/2024&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"01/10/2024"</span><span class="p">),</span>
+<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"01/15/2024"</span><span class="p">),</span>
+<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"01/20/2024"</span><span class="p">),</span>
+<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"02/01/2024"</span><span class="p">)</span>
 <span class="w">    </span><span class="p">};</span>
 <span class="w">    </span><span class="n">nMatchCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
@@ -2806,17 +2806,17 @@
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsEligible</span><span class="p">;</span>
 <span class="w">            </span><span class="n">nMatchCount</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Included log &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; dated &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dLogDate</span><span class="p">));</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Included log "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nIndex</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" dated "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dLogDate</span><span class="p">));</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Matching logs: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nMatchCount</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Matching logs: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nMatchCount</span><span class="p">));</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nMatchCount</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FilterActivityLogs&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FilterActivityLogs"</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs one line per matching log, then the total:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Included log 2 dated 01/15/2024
@@ -2829,21 +2829,21 @@ Matching logs: 3
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckBatchBoundary</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBatchId</span><span class="p">,</span><span class="w"> </span><span class="n">sBoundary</span><span class="p">,</span><span class="w"> </span><span class="n">bAtOrAfter</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BATCH-200&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sBoundary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;BATCH-150&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"BATCH-200"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBoundary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"BATCH-150"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bAtOrAfter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">sBoundary</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bAtOrAfter</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Batch &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is at or after the boundary&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Batch "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" is at or after the boundary"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Batch &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is before the boundary&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Batch "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" is before the boundary"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bAtOrAfter</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckBatchBoundary&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckBatchBoundary"</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Batch BATCH-200 is at or after the boundary

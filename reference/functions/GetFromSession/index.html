@@ -3673,16 +3673,16 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetStoredUsername</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserKey</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUserKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;preferred_username&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"preferred_username"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFromSession</span><span class="p">(</span><span class="n">sUserKey</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Retrieved username: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sUserName</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Retrieved username: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sUserName</span><span class="p">));</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sUserName</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetStoredUsername&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetStoredUsername"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Retrieved username: jsmith
@@ -3692,20 +3692,20 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessUserWorkflow</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">bIsAuthenticated</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFromSession</span><span class="p">(</span><span class="s2">&quot;UserName&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFromSession</span><span class="p">(</span><span class="s2">"UserName"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">bIsAuthenticated</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">!</span><span class="nf">Empty</span><span class="p">(</span><span class="n">sUserName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsAuthenticated</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Welcome, &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;. Proceeding with workflow.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Welcome, "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">". Proceeding with workflow."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Access denied. Please log in before proceeding.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Access denied. Please log in before proceeding."</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bIsAuthenticated</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ProcessUserWorkflow&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ProcessUserWorkflow"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="assemble-a-settings-summary-from-several-session-keys">Assemble a settings summary from several session keys<a class="headerlink" href="#assemble-a-settings-summary-from-several-session-keys" title="Permanent link">&para;</a></h3>
 <p>Reads multiple keys in one procedure, substitutes defaults for any that are missing, and builds a single summary string for downstream workflow logic.</p>
@@ -3713,22 +3713,22 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sReviewMode</span><span class="p">,</span><span class="w"> </span><span class="n">sPageSize</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFromSession</span><span class="p">(</span><span class="s2">&quot;UserName&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sReviewMode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFromSession</span><span class="p">(</span><span class="s2">&quot;ReviewMode&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sPageSize</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFromSession</span><span class="p">(</span><span class="s2">&quot;PageSize&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFromSession</span><span class="p">(</span><span class="s2">"UserName"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sReviewMode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFromSession</span><span class="p">(</span><span class="s2">"ReviewMode"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sPageSize</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetFromSession</span><span class="p">(</span><span class="s2">"PageSize"</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;User=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sUserName</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"User="</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sUserName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sReviewMode</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;, mode=default&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">", mode=default"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;, mode=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sReviewMode</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">", mode="</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sReviewMode</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sPageSize</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;, page size=system default&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">", page size=system default"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;, page size=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sPageSize</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">", page size="</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sPageSize</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
@@ -3737,7 +3737,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RestoreUserPreferences&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RestoreUserPreferences"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>User=jsmith, mode=read-only, page size=25

@@ -3637,7 +3637,7 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsApproved</span><span class="p">,</span><span class="w"> </span><span class="n">sStatusLabel</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bIsApproved</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sStatusLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IIf</span><span class="p">(</span><span class="n">bIsApproved</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Approved&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Pending Review&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sStatusLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IIf</span><span class="p">(</span><span class="n">bIsApproved</span><span class="p">,</span><span class="w"> </span><span class="s2">"Approved"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Pending Review"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sStatusLabel</span><span class="p">);</span>
 
@@ -3645,7 +3645,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetApprovalStatus&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetApprovalStatus"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Approved
@@ -3656,21 +3656,21 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bLoggedOnly</span><span class="p">,</span><span class="w"> </span><span class="n">sStatusFilter</span><span class="p">,</span><span class="w"> </span><span class="n">sDateFilter</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bLoggedOnly</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sStatusFilter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;status = &#39;Logged&#39;&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sDateFilter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;logdate &gt;= SYSDATE - 7&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sStatusFilter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"status = 'Logged'"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDateFilter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"logdate &gt;= SYSDATE - 7"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT sampleid, status, logdate</span>
 <span class="s2">        FROM sample</span>
-<span class="s2">        WHERE &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">IIf</span><span class="p">(</span><span class="n">bLoggedOnly</span><span class="p">,</span><span class="w"> </span><span class="n">sStatusFilter</span><span class="p">,</span><span class="w"> </span><span class="n">sDateFilter</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">        WHERE "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">IIf</span><span class="p">(</span><span class="n">bLoggedOnly</span><span class="p">,</span><span class="w"> </span><span class="n">sStatusFilter</span><span class="p">,</span><span class="w"> </span><span class="n">sDateFilter</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        ORDER BY logdate DESC</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sSQL</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;BuildSampleQuery&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSampleQuery"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="prepare-both-branch-values-before-calling-iif">Prepare both branch values before calling IIf<a class="headerlink" href="#prepare-both-branch-values-before-calling-iif" title="Permanent link">&para;</a></h3>
 <p>Illustrates the recommended style: compute both branch values before the <code>IIf</code> call rather than inline, making both branches easier to read and avoiding complex expressions inside the call itself.</p>
@@ -3679,8 +3679,8 @@
 
 <span class="w">    </span><span class="n">bUseDetailed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sShortLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;QC Summary&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sDetailedLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;QC Summary - Includes exception details&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sShortLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"QC Summary"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sDetailedLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"QC Summary - Includes exception details"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IIf</span><span class="p">(</span><span class="n">bUseDetailed</span><span class="p">,</span><span class="w"> </span><span class="n">sDetailedLabel</span><span class="p">,</span><span class="w"> </span><span class="n">sShortLabel</span><span class="p">);</span>
 
@@ -3688,7 +3688,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetReportLabel&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetReportLabel"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

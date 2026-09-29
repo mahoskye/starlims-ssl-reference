@@ -4317,21 +4317,21 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateGuidInput</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;3F2504E0-4F89-11D3-9A0C-0305E82C3301&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserInput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"3F2504E0-4F89-11D3-9A0C-0305E82C3301"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">bIsValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsGuid</span><span class="p">(</span><span class="n">sUserInput</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Valid GUID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Valid GUID: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Invalid GUID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Invalid GUID: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserInput</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateGuidInput&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateGuidInput"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Valid GUID: 3F2504E0-4F89-11D3-9A0C-0305E82C3301
@@ -4342,13 +4342,13 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRawIdentifiers</span><span class="p">,</span><span class="w"> </span><span class="n">aValidGuids</span><span class="p">,</span><span class="w"> </span><span class="n">aInvalidIds</span><span class="p">,</span><span class="w"> </span><span class="n">sIdentifier</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sReport</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aRawIdentifiers</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="s2">&quot;A45E7F92-8B3D-4D9A-9F3C-2B1A6D8E4C71&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;NOT_A_GUID&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;12345678-1234-1234-1234-123456789012&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;INVALID&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;B72F3C19-9E2A-4D8B-91F7-3C5D8E6A1924&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;MISSING_HYPHENS&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">&quot;00000000-0000-0000-0000-000000000000&quot;</span>
+<span class="w">        </span><span class="s2">"A45E7F92-8B3D-4D9A-9F3C-2B1A6D8E4C71"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"NOT_A_GUID"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"12345678-1234-1234-1234-123456789012"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"INVALID"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"B72F3C19-9E2A-4D8B-91F7-3C5D8E6A1924"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"MISSING_HYPHENS"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"00000000-0000-0000-0000-000000000000"</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">aValidGuids</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
@@ -4364,15 +4364,15 @@
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Valid: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aValidGuids</span><span class="p">))</span>
-<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; | Invalid: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aInvalidIds</span><span class="p">));</span>
+<span class="w">    </span><span class="n">sReport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Valid: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aValidGuids</span><span class="p">))</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s2">" | Invalid: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aInvalidIds</span><span class="p">));</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sReport</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aValidGuids</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;FilterValidGuids&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FilterValidGuids"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Valid: 4 | Invalid: 3
@@ -4384,7 +4384,7 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sGuid</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">vGuid</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;No GUID was provided&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No GUID was provided"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4394,22 +4394,22 @@
 <span class="w">        </span><span class="n">bIsValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">IsGuid</span><span class="p">(</span><span class="n">sGuid</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Validated GUID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGuid</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Validated GUID: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGuid</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Value is not a GUID: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGuid</span><span class="p">);</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Value is not a GUID: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sGuid</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">&quot;GUID validation failed: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"GUID validation failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: GUID validation failed;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ValidateOptionalGuid&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;3F2504E0-4F89-11D3-9A0C-0305E82C3301&quot;</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateOptionalGuid"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"3F2504E0-4F89-11D3-9A0C-0305E82C3301"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

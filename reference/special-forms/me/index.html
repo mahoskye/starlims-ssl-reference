@@ -2146,7 +2146,7 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nTotal</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nTotal</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">nQuantity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">nUnitPrice</span><span class="p">;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Total: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nTotal</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Total: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nTotal</span><span class="p">));</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nTotal</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -2162,7 +2162,7 @@
 <p>Usage:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oCalc</span><span class="p">;</span>
 
-<span class="n">oCalc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">&quot;OrderCalculator&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">});</span>
+<span class="n">oCalc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">"OrderCalculator"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">});</span>
 <span class="n">oCalc</span><span class="p">:</span><span class="nf">CalculateTotal</span><span class="p">();</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
@@ -2176,12 +2176,12 @@
 
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">Process</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="nf">IsValid</span><span class="p">();</span>
-<span class="w">        </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;PROCESSED&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; processed successfully&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"PROCESSED"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" processed successfully"</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs the success message for the sample ID;</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;FAILED&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; failed validation&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"FAILED"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" failed validation"</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs the failure message for the sample ID;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -2199,16 +2199,16 @@
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sId</span><span class="p">;</span>
 
 <span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sSampleId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sId</span><span class="p">;</span>
-<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;PENDING&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="bp">Me</span><span class="p">:</span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"PENDING"</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 </code></pre></div>
 <p>Usage:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oSample</span><span class="p">;</span>
 
-<span class="n">oSample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">&quot;SampleProcessor&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;S-001&quot;</span><span class="p">});</span>
+<span class="n">oSample</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">"SampleProcessor"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-001"</span><span class="p">});</span>
 <span class="n">oSample</span><span class="p">:</span><span class="nf">Process</span><span class="p">();</span>
 
-<span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Status: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSample</span><span class="p">:</span><span class="nf">GetStatus</span><span class="p">());</span>
+<span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Status: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSample</span><span class="p">:</span><span class="nf">GetStatus</span><span class="p">());</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Status: PROCESSED
@@ -2226,7 +2226,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetDisplay</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sKey</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sValue</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sKey</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" = "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">Me</span><span class="p">:</span><span class="n">sValue</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 
@@ -2240,8 +2240,8 @@
 <p>Usage:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oEntry</span><span class="p">;</span>
 
-<span class="n">oEntry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">&quot;ConfigEntry&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;MaxRetries&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;3&quot;</span><span class="p">});</span>
-<span class="n">oEntry</span><span class="p">:</span><span class="nf">UpdateValue</span><span class="p">(</span><span class="s2">&quot;5&quot;</span><span class="p">);</span>
+<span class="n">oEntry</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">(</span><span class="s2">"ConfigEntry"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"MaxRetries"</span><span class="p">,</span><span class="w"> </span><span class="s2">"3"</span><span class="p">});</span>
+<span class="n">oEntry</span><span class="p">:</span><span class="nf">UpdateValue</span><span class="p">(</span><span class="s2">"5"</span><span class="p">);</span>
 <span class="nf">UsrMes</span><span class="p">(</span><span class="n">oEntry</span><span class="p">:</span><span class="nf">GetDisplay</span><span class="p">());</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>

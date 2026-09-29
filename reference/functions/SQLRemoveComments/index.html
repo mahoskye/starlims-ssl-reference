@@ -4362,12 +4362,12 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RemoveCommentsFromSQL</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">sCleaned</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        /* Get active samples */</span>
 <span class="s2">        SELECT sample_id, sample_name, status</span>
 <span class="s2">        FROM samples</span>
-<span class="s2">        WHERE status = &#39;A&#39; -- only active rows</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">        WHERE status = 'A' -- only active rows</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sCleaned</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLRemoveComments</span><span class="p">(</span><span class="n">sSQL</span><span class="p">);</span>
 
@@ -4378,20 +4378,20 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RemoveCommentsFromSQL&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RemoveCommentsFromSQL"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="preserve-comment-markers-inside-quoted-string-literals">Preserve comment markers inside quoted string literals<a class="headerlink" href="#preserve-comment-markers-inside-quoted-string-literals" title="Permanent link">&para;</a></h3>
 <p>Verify that <a href="../../operators/decrement/"><code>--</code></a> and <code>/* ... */</code> sequences inside single-quoted SQL literals are not stripped while an unquoted block comment is removed.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PreserveQuotedMarkers</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sRawSQL</span><span class="p">,</span><span class="w"> </span><span class="n">sCleanSQL</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sRawSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
-<span class="s2">        SELECT sample_id, &#39;--keep-this-text&#39; AS literal_value</span>
+<span class="w">    </span><span class="n">sRawSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
+<span class="s2">        SELECT sample_id, '--keep-this-text' AS literal_value</span>
 <span class="s2">        FROM sample</span>
-<span class="s2">        WHERE note = &#39;contains /* not a comment */ text&#39;</span>
+<span class="s2">        WHERE note = 'contains /* not a comment */ text'</span>
 <span class="s2">        /* remove this block comment */</span>
-<span class="s2">        AND status = &#39;A&#39;</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">        AND status = 'A'</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sCleanSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLRemoveComments</span><span class="p">(</span><span class="n">sRawSQL</span><span class="p">);</span>
 
@@ -4402,21 +4402,21 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PreserveQuotedMarkers&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"PreserveQuotedMarkers"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="preserve-an-oracle-optimizer-hint-while-removing-other-comments">Preserve an Oracle optimizer hint while removing other comments<a class="headerlink" href="#preserve-an-oracle-optimizer-hint-while-removing-other-comments" title="Permanent link">&para;</a></h3>
 <p>Confirm that a <code>/*+ ... */</code> optimizer hint is kept while a regular block comment and a line comment are removed.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PreserveOptimizerHint</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sRawSQL</span><span class="p">,</span><span class="w"> </span><span class="n">sCleanSQL</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sRawSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sRawSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT /*+ INDEX(sample idx_sample_status) */</span>
 <span class="s2">               sample_id, sample_name</span>
 <span class="s2">        FROM sample</span>
 <span class="s2">        /* remove this note */</span>
-<span class="s2">        WHERE status = &#39;A&#39; -- keep only active rows</span>
+<span class="s2">        WHERE status = 'A' -- keep only active rows</span>
 <span class="s2">        ORDER BY sample_name</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sCleanSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">SQLRemoveComments</span><span class="p">(</span><span class="n">sRawSQL</span><span class="p">);</span>
 
@@ -4427,7 +4427,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;PreserveOptimizerHint&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"PreserveOptimizerHint"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

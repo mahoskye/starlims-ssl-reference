@@ -4407,12 +4407,12 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDayOfYear</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dSampleDate</span><span class="p">,</span><span class="w"> </span><span class="n">nDayOfYear</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">dSampleDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/15/2024&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dSampleDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/15/2024"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">nDayOfYear</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DOY</span><span class="p">(</span><span class="n">dSampleDate</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dSampleDate</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; is day &quot;</span>
-<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDayOfYear</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; of the year.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dSampleDate</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" is day "</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDayOfYear</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" of the year."</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 
@@ -4420,7 +4420,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowDayOfYear&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowDayOfYear"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>03/15/2024 is day 75 of the year.
@@ -4430,18 +4430,18 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckPlannedDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dPlannedDate</span><span class="p">,</span><span class="w"> </span><span class="n">nDayOfYear</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">dPlannedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">dPlannedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">""</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">dPlannedDate</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Planned date is empty. Skip DOY until a real date is available.&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Planned date is empty. Skip DOY until a real date is available."</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs when the planned date is empty;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nDayOfYear</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DOY</span><span class="p">(</span><span class="n">dPlannedDate</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Planned date &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dPlannedDate</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; falls on day &quot;</span>
-<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDayOfYear</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; of the year.&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Planned date "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dPlannedDate</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" falls on day "</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDayOfYear</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" of the year."</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the planned date and its day-of-year;</span>
@@ -4450,7 +4450,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckPlannedDate&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckPlannedDate"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="compare-recurring-dates-across-leap-and-non-leap-years">Compare recurring dates across leap and non-leap years<a class="headerlink" href="#compare-recurring-dates-across-leap-and-non-leap-years" title="Permanent link">&para;</a></h3>
 <p>Iterates five dates spanning both a regular and a leap year, displaying the day-of-year for each and flagging February 29 as a leap-day-only event.</p>
@@ -4458,22 +4458,22 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aDates</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">dEventDate</span><span class="p">,</span><span class="w"> </span><span class="n">nDayOfYear</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aDates</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;02/28/2023&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/01/2023&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;02/28/2024&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;02/29/2024&quot;</span><span class="p">),</span>
-<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">&quot;03/01/2024&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"02/28/2023"</span><span class="p">),</span>
+<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/01/2023"</span><span class="p">),</span>
+<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"02/28/2024"</span><span class="p">),</span>
+<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"02/29/2024"</span><span class="p">),</span>
+<span class="w">        </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/01/2024"</span><span class="p">)</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aDates</span><span class="p">);</span>
 <span class="w">        </span><span class="n">dEventDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aDates</span><span class="p">[</span><span class="n">nIndex</span><span class="p">];</span>
 <span class="w">        </span><span class="n">nDayOfYear</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DOY</span><span class="p">(</span><span class="n">dEventDate</span><span class="p">);</span>
 
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dEventDate</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; maps to DOY &quot;</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="n">dEventDate</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" maps to DOY "</span>
 <span class="w">                    </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nDayOfYear</span><span class="p">);</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Month</span><span class="p">(</span><span class="n">dEventDate</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="nf">Day</span><span class="p">(</span><span class="n">dEventDate</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">29</span><span class="p">;</span>
-<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot; and should be handled as a leap-day-only event.&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">" and should be handled as a leap-day-only event."</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
@@ -4484,7 +4484,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompareAnnualSchedule&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CompareAnnualSchedule"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

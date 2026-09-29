@@ -2932,12 +2932,12 @@
 <p>Declares a public variable at script level and reads it from two procedures. With <code>sBasePath</code> set to <code>"C:\STARLIMS\Config"</code>, both procedures see the same value.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PUBLIC</span><span class="w"> </span><span class="n">sBasePath</span><span class="p">;</span>
 
-<span class="n">sBasePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;C:\STARLIMS\Config&quot;</span><span class="p">;</span>
+<span class="n">sBasePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\STARLIMS\Config"</span><span class="p">;</span>
 
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DisplayConfig</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Base path is: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBasePath</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Base path is: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBasePath</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the configured base path;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -2948,28 +2948,28 @@
 <span class="w">    </span><span class="n">bIsSet</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sBasePath</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIsSet</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Config path has been set&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Config path has been set"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Config path is empty&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Config path is empty"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;DisplayConfig&quot;</span><span class="p">);</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CheckConfig&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DisplayConfig"</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckConfig"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="declaring-a-public-variable-inside-a-setup-procedure">Declaring a public variable inside a setup procedure<a class="headerlink" href="#declaring-a-public-variable-inside-a-setup-procedure" title="Permanent link">&para;</a></h3>
 <p>Shows that <code>:PUBLIC</code> can appear in normal procedure flow and still create shared state for later procedures. <code>InitializeWorkflow</code> declares and sets the public variables; <code>RunWorkflow</code> reads them without declaring them locally.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">InitializeWorkflow</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOrderNo</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sOrderNo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;ORD-2024-0042&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOrderNo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ORD-2024-0042"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:PUBLIC</span><span class="w"> </span><span class="n">sCurrentOrderNo</span><span class="p">,</span><span class="w"> </span><span class="n">bWorkflowReady</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sCurrentOrderNo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sOrderNo</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bWorkflowReady</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow initialized for order &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentOrderNo</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow initialized for order "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentOrderNo</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the initialized order number;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
@@ -2977,11 +2977,11 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">bWorkflowReady</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Workflow is not initialized&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Workflow is not initialized"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Running workflow for order &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentOrderNo</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Running workflow for order "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCurrentOrderNo</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">    </span><span class="c1">/* Logs the active workflow order;</span>
 
@@ -2989,8 +2989,8 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;InitializeWorkflow&quot;</span><span class="p">);</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;RunWorkflow&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"InitializeWorkflow"</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RunWorkflow"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

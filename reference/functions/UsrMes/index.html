@@ -3532,46 +3532,46 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowUserNotification</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessageText</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessageText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Sample login completed successfully&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sMessageText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample login completed successfully"</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Login Status&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sMessageText</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Login Status"</span><span class="p">,</span><span class="w"> </span><span class="n">sMessageText</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;ShowUserNotification&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowUserNotification"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="rely-on-the-default-caption">Rely on the default caption<a class="headerlink" href="#rely-on-the-default-caption" title="Permanent link">&para;</a></h3>
 <p>When the second argument is omitted, <code>UsrMes</code> uses <code>****User message****</code> as the caption and moves the single argument into the message body. Capturing the return value lets later code reuse the formatted log text.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogSingleTextMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLoggedText</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sLoggedText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Instrument maintenance completed&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sLoggedText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Instrument maintenance completed"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="nf">Empty</span><span class="p">(</span><span class="n">sLoggedText</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">&quot;Last user message&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sLoggedText</span><span class="p">);</span><span class="w"> </span><span class="c1">/* Logs returned log text;</span>
+<span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Last user message"</span><span class="p">,</span><span class="w"> </span><span class="n">sLoggedText</span><span class="p">);</span><span class="w"> </span><span class="c1">/* Logs returned log text;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LogSingleTextMessage&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LogSingleTextMessage"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="build-a-multi-line-audit-style-message">Build a multi-line audit-style message<a class="headerlink" href="#build-a-multi-line-audit-style-message" title="Permanent link">&para;</a></h3>
 <p>Build the message body from dynamic fields first, then log it and return the formatted entry for downstream use. The returned string is suitable for reuse or for writing to an external log.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogAuditEvent</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAction</span><span class="p">,</span><span class="w"> </span><span class="n">sAuditBody</span><span class="p">,</span><span class="w"> </span><span class="n">sLoggedText</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sAction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Released batch 24-0419&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sAuditBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Operator: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MYUSERNAME</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sAuditBody</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;Action: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sAction</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sAuditBody</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;Logged on: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="nf">Today</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Time</span><span class="p">();</span>
+<span class="w">    </span><span class="n">sAction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Released batch 24-0419"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sAuditBody</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Operator: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MYUSERNAME</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sAuditBody</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">"Action: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sAction</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sAuditBody</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">"Logged on: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="nf">Today</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Time</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">sLoggedText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">&quot;Batch Audit&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sAuditBody</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sLoggedText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Batch Audit"</span><span class="p">,</span><span class="w"> </span><span class="n">sAuditBody</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sLoggedText</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;LogAuditEvent&quot;</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LogAuditEvent"</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>

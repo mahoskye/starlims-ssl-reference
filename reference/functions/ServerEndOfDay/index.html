@@ -4435,14 +4435,14 @@
 
 <span class="w">    </span><span class="n">dCutoff</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ServerEndOfDay</span><span class="p">(</span><span class="n">dWorkDate</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Server cutoff: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">dCutoff</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Server cutoff: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">dCutoff</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">dCutoff</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetServerCutoff&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetServerCutoff"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Server cutoff: &lt;04/15/2026 23:59:59&gt;
@@ -4456,13 +4456,13 @@
 <span class="w">    </span><span class="n">dRangeStart</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ServerStartOfDay</span><span class="p">(</span><span class="n">dOrderDate</span><span class="p">);</span>
 <span class="w">    </span><span class="n">dRangeEnd</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ServerEndOfDay</span><span class="p">(</span><span class="n">dOrderDate</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"</span>
 <span class="s2">        SELECT ordno, status, logdate</span>
 <span class="s2">        FROM orders</span>
 <span class="s2">        WHERE logdate &gt;= ?</span>
 <span class="s2">          AND logdate &lt;= ?</span>
 <span class="s2">        ORDER BY logdate</span>
-<span class="s2">    &quot;</span><span class="p">;</span>
+<span class="s2">    "</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sOrdersXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSet</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">dRangeStart</span><span class="p">,</span><span class="w"> </span><span class="n">dRangeEnd</span><span class="p">});</span>
 
@@ -4470,7 +4470,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;GetOrdersForDay&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetOrdersForDay"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)});</span>
 </code></pre></div>
 <h3 id="compare-server-and-client-day-cutoffs">Compare server and client day cutoffs<a class="headerlink" href="#compare-server-and-client-day-cutoffs" title="Permanent link">&para;</a></h3>
 <p>Compute both the server and client end-of-day boundaries for the same input and show whether they agree.</p>
@@ -4481,20 +4481,20 @@
 <span class="w">    </span><span class="n">dServerEnd</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ServerEndOfDay</span><span class="p">(</span><span class="n">dEventDate</span><span class="p">);</span>
 <span class="w">    </span><span class="n">dClientEnd</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ClientEndOfDay</span><span class="p">(</span><span class="n">dEventDate</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">&quot;Server end: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">dServerEnd</span><span class="p">)</span>
-<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, Client end: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">dClientEnd</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sSummary</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Server end: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">dServerEnd</span><span class="p">)</span>
+<span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="s2">", Client end: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">dClientEnd</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">dServerEnd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">dClientEnd</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; (same cutoff)&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" (same cutoff)"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; (different cutoff)&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSummary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" (different cutoff)"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">dServerEnd</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">&quot;CompareDayCutoffs&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CompareDayCutoffs"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)});</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs one of:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Server end: [date], Client end: [date] (same cutoff)
