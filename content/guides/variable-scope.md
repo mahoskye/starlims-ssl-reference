@@ -159,8 +159,8 @@ When the name itself is data, these functions follow the same resolution order:
 | [`SetByName`](../reference/functions/SetByName.md) | Write by name — may update a **caller's** variable rather than create a local |
 | [`CreateLocal`](../reference/functions/CreateLocal.md) | Create or overwrite a name in the current scope |
 | [`CreatePublic`](../reference/functions/CreatePublic.md) | Create or overwrite a public variable |
-| [`IsDefined`](../reference/functions/IsDefined.md) | Test whether a name exists in the current scope |
-| [`LKill`](../reference/functions/LKill.md) | Remove a variable by name |
+| [`IsDefined`](../reference/functions/IsDefined.md) | Test whether a name resolves anywhere — current, caller, or public scope. It cannot prove a name is local. |
+| [`LKill`](../reference/functions/LKill.md) | Remove a **public** variable by name; locals and caller variables are unaffected |
 
 [`SetByName`](../reference/functions/SetByName.md) carries the same hazard as a
 plain assignment, and more visibly: if the name is not in the current scope, it
