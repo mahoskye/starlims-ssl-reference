@@ -38,7 +38,7 @@ bResult := needle $ haystack;
 | Left | Right | Result | Behavior |
 | --- | --- | --- | --- |
 | [string](../types/string.md) | [string](../types/string.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md) if the left string is found anywhere within the right string; otherwise [`.F.`](../literals/false.md). |
-| [string](../types/string.md) | non-string | error | Raises a runtime error because `$` does not implicitly convert the right operand to string. |
+| [string](../types/string.md) | non-string | error | Raises a runtime error because `$` does not implicitly convert the right operand to string. The message ends `invalid operand: <value> (of type <type>) for operator: $.` |
 | non-string | any | error | Raises a runtime error because `$` is only implemented for string left operands. |
 
 ## Precedence
@@ -168,10 +168,11 @@ Converts `nBatchNo` to a string with [`LimsString`](../functions/LimsString.md) 
 DoProc("SafeDollarComparison");
 ```
 
-`UsrMes` first logs:
+`UsrMes` logs:
 
 ```text
 Explicit conversion result: .T.
+Comparison failed: Run-time error: … invalid operand: <the object's XML> (of type SSLExpando) for operator: $.
 ```
 
 ## Related elements
