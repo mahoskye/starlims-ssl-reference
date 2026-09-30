@@ -12,6 +12,7 @@ change, because several conventions here are load-bearing for tooling.
 | `docs/` | Build hooks only (`hooks.py`). Do not add pages here; MkDocs will not see them. |
 | `content/data/ssl-element-meta.json` | **Generated** — never edit by hand. See [Regenerating the metadata JSON](#regenerating-the-metadata-json). |
 | `tools/extract_reference_meta.py` | The generator for that JSON. |
+| `tools/example_harness/extract.py` | Inventories every ` ```ssl ` example for example testing. See [Example inventory](#example-inventory). |
 | `ssl_lexer.py` | Custom Pygments lexer registered by `docs/hooks.py`, which is what makes ` ```ssl ` code fences highlight. |
 | `mkdocs.yml` | Site config **and the full hand-maintained nav** — every page must be listed there. |
 
@@ -117,6 +118,28 @@ This file has consumers beyond this site: downstream repositories
 `vs-code-ssl-formatter`) vendor it or consume it transitively. Treat its
 shape as an interface — if you need to change what the extractor emits,
 coordinate with those projects.
+
+## Example inventory
+
+`tools/example_harness/extract.py` walks every page and writes one record per
+` ```ssl ` block to `tools/example_harness/examples.json`: where the block
+lives, its kind (`procedure`, `class`, `syntax`, `fragment`), the procedures
+it defines, the `/* Usage;` trailer calls, the ` ```text ` output the page
+promises for it, and what it depends on (database, integrations, helper
+procedures, classes). Its `runnable` field sorts the examples by what a runner
+needs to execute them: `pure` examples need nothing beyond the language itself.
+
+The JSON is generated and not committed; regenerate it from the repository
+root whenever you need it:
+
+```bash
+python3 tools/example_harness/extract.py
+```
+
+It prints a summary table of examples by kind and runnability. The tool reads
+the same conventions the content lint enforces, so keep example output in
+` ```text ` fences introduced by a sentence such as "`UsrMes` logs:", and keep
+usage trailers in the canonical `/* Usage;` form.
 
 ## Content ground rules
 
