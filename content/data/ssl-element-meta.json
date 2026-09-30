@@ -14138,21 +14138,20 @@
       "source_path": "content/reference/types/netobject.md",
       "exceptions": [],
       "caveats": [
-        "Member access with : forwards to the underlying .NET wrapped object when no SSL-side member matches (e.g. oNet:AnyMember(...)). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as Run-time error: Invalid method: Split. Check a member before relying on it; see Native Members.",
-        "GetProperty(), SetProperty(), IsProperty(), and Invoke() raise a null-reference error when the wrapped value is null and the target member is not static.",
-        "Invalid property names raise an error from GetProperty() or SetProperty(). Invalid method names raise an error from Invoke().",
-        "IsProperty() checks fields and properties, not methods.",
-        "IsEmpty() only checks whether the wrapped reference is null. It does not inspect row counts, collection lengths, or other content."
+        "Only the wrapped type's native members are available, and a member that doesn't exist, or doesn't accept the arguments given, raises an error such as Run-time error: Invalid method: Split. Check a member before relying on it; see Native Members.",
+        "Calling a member that the wrapped type doesn't have, or that doesn't accept the arguments given, raises Run-time error: Invalid method: … (or Invalid property: … for a property).",
+        "A member name in the wrong case raises the same errors.",
+        "An index past the end of a .NET collection raises the collection's own error, such as There is no row at position 1."
       ],
       "best_practices": {
         "do": [
-          "Call IsEmpty() and IsProperty() before accessing a property on a netobject whose wrapped value may be null or whose schema may vary.",
-          "Use SetProperty() only for members that already exist on the wrapped value.",
-          "Use ToJson() only when you know the wrapped value is a DataSet."
+          "Call native members by their exact .NET names and casing, such as oBuilder:Append(\"-01\") and oTable:Rows:Count.",
+          "Index .NET collections from 0: oTable:Rows[0], oDs:Tables[0].",
+          "Use the static form of LimsNETConnect to call static methods such as System.Math.Abs."
         ],
         "dont": [
-          "Call GetProperty() or Invoke() blindly when the value might be null or the member might not exist. Null wrapped values raise a null-reference error, and invalid member names raise an error.",
-          "Assume numeric indexing is always SSL-style 1-based. Wrapped collections use their own indexing behavior.",
+          "Call GetProperty(), SetProperty(), IsProperty(), Invoke(), IsEmpty() or ToJson() on a netobject. They raise Invalid method; use the native members and the ToJson function instead.",
+          "Assume numeric indexing is SSL-style 1-based. .NET collections start at 0.",
           "Treat netobject like a dynamic SSL object that supports AddProperty(). It cannot add new members to the wrapped value."
         ]
       }

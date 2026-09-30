@@ -17,11 +17,9 @@ Provides dynamic access to external objects for property access, method invocati
 
 The `netobject` type represents a value returned by SSL's .NET interop helpers such as [`MakeNETObject`](../functions/MakeNETObject.md), [`LimsNETConnect`](../functions/LimsNETConnect.md), and [`LimsNETTypeOf`](../functions/LimsNETTypeOf.md). Use it when you need to work with a .NET value from SSL code.
 
-`netobject` lets you read and write public fields or properties with `GetProperty()` and `SetProperty()`, test for a public field or property with `IsProperty()`, and call public methods with `Invoke()`. Returned values come back as ordinary SSL values when possible; .NET values that still need interop access remain `netobject` values.
+You work with a `netobject` through its native .NET members, called with `:`: `oBuilder:Append("-01")`, `oBuilder:ToString()`, `oBuilder:Length`. Returned values come back as ordinary SSL values when possible; .NET values that still need interop access remain `netobject` values. Members can be chained, as in `oTable:Rows:Count` or `oDs:Tables[0]:Rows[0]["sample_id"]`.
 
-`IsEmpty()` returns [`.T.`](../literals/true.md) only when the wrapped reference is null. [`ToJson()`](../functions/ToJson.md) is supported only when the wrapped value is a `DataSet`; other wrapped values raise an error. `netobject` does not support [`AddProperty()`](../functions/AddProperty.md).
-
-The member access behind `Invoke()` and `GetProperty()` is also available implicitly on every SSL value. Writing `sValue:ToUpper()` on a [`string`](string.md), `dDate:AddMonths(3)` on a [`date`](date.md), or `aValues:Length` on an [`array`](array.md) forwards to the underlying .NET value in the same way `oNetObject:Invoke("MethodName")` does here. Use `netobject` and its explicit methods when working with externally constructed .NET values; see the type pages for [`string`](string.md), [`number`](number.md), [`date`](date.md), [`boolean`](boolean.md), and [`array`](array.md) for the implicit form, and [Native Members on SSL Values](../../guides/native-members.md) for the members verified on STARLIMS v11.
+`netobject` has no SSL-defined members. `GetProperty()`, `SetProperty()`, `IsProperty()`, `Invoke()`, `IsEmpty()` and `ToJson()` all raise `Run-time error: Invalid method: …` on a `netobject`, in any letter case. Native member names are case-sensitive: see [Member names and case](../../guides/native-members.md#member-names-and-case). The same native members are reachable on ordinary SSL values, such as `sValue:ToUpper()` or `aValues:Length`; see [Native Members on SSL Values](../../guides/native-members.md).
 
 ## Creating values
 
@@ -29,7 +27,7 @@ The member access behind `Invoke()` and `GetProperty()` is also available implic
 
 ```ssl
 oBuilder := LimsNETConnect("System", "System.Text.StringBuilder", {"LAB"}, .F.);
-oMath := LimsNETTypeOf("System.Math");
+oMath := LimsNETConnect(, "System.Math",, .T.);
 ```
 
 - **Runtime type:** `OBJECT`
@@ -37,14 +35,17 @@ oMath := LimsNETTypeOf("System.Math");
 
 ## Members
 
-| Member | Kind | Returns | Description |
-|---|---|---|---|
-| `GetProperty(sName)` | Method | `any` | Reads a public field or property by name. |
-| `SetProperty(sName, vValue)` | Method | `none` | Writes an existing public field or property by name. |
-| `IsProperty(sName)` | Method | [`boolean`](boolean.md) | Returns [`.T.`](../literals/true.md) when a public field or property with the given name exists. |
-| `Invoke(sName, [aArgs])` | Method | `any` | Calls a public method by name and returns its result. |
-| `IsEmpty()` | Method | [`boolean`](boolean.md) | Returns [`.T.`](../literals/true.md) only when the wrapped reference is null. |
-| [`ToJson()`](../functions/ToJson.md) | Method | [`string`](string.md) | Serializes the wrapped value to JSON when it is a `DataSet`. Other wrapped values raise an error. |
+A `netobject` has no SSL-defined members; use the wrapped .NET type's own members. For common needs:
+
+| Task | Use |
+|---|---|
+| Read a property | `oNet:PropertyName`, e.g. `oBuilder:Length` |
+| Call a method | `oNet:MethodName(args)`, e.g. `oBuilder:Append("-01")` |
+| Call a static method | Connect to the type as static with [`LimsNETConnect`](../functions/LimsNETConnect.md)`(, "System.Math",, .T.)`, then `oMath:Abs(-42)` |
+| Serialize a `DataSet` to JSON | [`ToJson`](../functions/ToJson.md)`(oDataSet)` |
+| Check the type | [`LimsTypeEx`](../functions/LimsTypeEx.md) returns `"OBJECT"` |
+
+A type object from [`LimsNETTypeOf`](../functions/LimsNETTypeOf.md) does not call the type's static methods: `LimsNETTypeOf("System.Math"):Abs(-42)` raises `Invalid method: Abs`. Use the static form of [`LimsNETConnect`](../functions/LimsNETConnect.md) for that.
 
 ## Indexing
 
@@ -59,48 +60,43 @@ Direct indexing is available only when the wrapped value exposes an indexer shap
 | Arrays | By numeric index | Yes |
 | Other values with an `Item` indexer | Depends on the wrapped type | Depends on the wrapped type |
 
-Numeric indexing follows the wrapped value's own indexer behavior. `netobject` does not normalize every wrapped collection to SSL array semantics.
+Numeric indexing follows the wrapped value's own indexer, which for .NET collections is **0-based**: `oTable:Rows[0]` is the first row, and `oTable:Rows[1]` on a one-row table raises `There is no row at position 1.`
 
 ## Notes for daily SSL work
 
 !!! success "Do"
-    - Call `IsEmpty()` and `IsProperty()` before accessing a property on a `netobject` whose wrapped value may be null or whose schema may vary.
-    - Use `SetProperty()` only for members that already exist on the wrapped value.
-    - Use [`ToJson()`](../functions/ToJson.md) only when you know the wrapped value is a `DataSet`.
+    - Call native members by their exact .NET names and casing, such as `oBuilder:Append("-01")` and `oTable:Rows:Count`.
+    - Index .NET collections from `0`: `oTable:Rows[0]`, `oDs:Tables[0]`.
+    - Use the static form of [`LimsNETConnect`](../functions/LimsNETConnect.md) to call static methods such as `System.Math.Abs`.
 
 !!! failure "Don't"
-    - Call `GetProperty()` or `Invoke()` blindly when the value might be null or the member might not exist. Null wrapped values raise a null-reference error, and invalid member names raise an error.
-    - Assume numeric indexing is always SSL-style 1-based. Wrapped collections use their own indexing behavior.
+    - Call `GetProperty()`, `SetProperty()`, `IsProperty()`, `Invoke()`, `IsEmpty()` or `ToJson()` on a `netobject`. They raise `Invalid method`; use the native members and the [`ToJson`](../functions/ToJson.md) function instead.
+    - Assume numeric indexing is SSL-style 1-based. .NET collections start at `0`.
     - Treat `netobject` like a dynamic SSL object that supports [`AddProperty()`](../functions/AddProperty.md). It cannot add new members to the wrapped value.
 
 ## Errors and edge cases
 
-- `GetProperty()`, `SetProperty()`, `IsProperty()`, and `Invoke()` raise a null-reference error when the wrapped value is null and the target member is not static.
-- Invalid property names raise an error from `GetProperty()` or `SetProperty()`. Invalid method names raise an error from `Invoke()`.
-- `IsProperty()` checks fields and properties, not methods.
-- `IsEmpty()` only checks whether the wrapped reference is null. It does not inspect row counts, collection lengths, or other content.
+- Calling a member that the wrapped type doesn't have, or that doesn't accept the arguments given, raises `Run-time error: Invalid method: …` (or `Invalid property: …` for a property).
+- A member name in the wrong case raises the same errors.
+- An index past the end of a .NET collection raises the collection's own error, such as `There is no row at position 1.`
 
 ## Examples
 
-### Reading a property and invoking a method
+### Reading a property and calling a method
 
-Creates a `StringBuilder` wrapping `"LAB"`, reads its `Length` property (3), appends `"-01"`, and returns the resulting string `"LAB-01"`.
+Creates a `StringBuilder` wrapping `"LAB"`, reads its `Length` property, appends `"-01"`, and returns the resulting string.
 
 ```ssl
 :PROCEDURE ReadNetObjectProperties;
-	:DECLARE oBuilder, bHasLength, nLength, sResult;
+	:DECLARE oBuilder, nLength, sResult;
 
 	oBuilder := LimsNETConnect("System", "System.Text.StringBuilder", {"LAB"}, .F.);
 
-	bHasLength := oBuilder:IsProperty("Length");
+	nLength := oBuilder:Length;
+	InfoMes("Initial length: " + LimsString(nLength));
 
-	:IF bHasLength;
-		nLength := oBuilder:GetProperty("Length");
-		InfoMes("Initial length: " + LimsString(nLength));
-	:ENDIF;
-
-	oBuilder:Invoke("Append", {"-01"});
-	sResult := oBuilder:Invoke("ToString");
+	oBuilder:Append("-01");
+	sResult := oBuilder:ToString();
 
 	:RETURN sResult;
 :ENDPROC;
@@ -109,50 +105,45 @@ Creates a `StringBuilder` wrapping `"LAB"`, reads its `Length` property (3), app
 DoProc("ReadNetObjectProperties");
 ```
 
-### Invoking a static .NET member
+`InfoMes` logs `Initial length: 3`, and the procedure returns `"LAB-01"`.
 
-Uses [`LimsNETTypeOf`](../functions/LimsNETTypeOf.md) to obtain a `netobject` representing `System.Math`, then calls `Abs(-42)` = 42 and `Max(42, 10)` = 42.
+### Calling a static .NET method
+
+Connects to `System.Math` as a static type with [`LimsNETConnect`](../functions/LimsNETConnect.md), then calls `Abs(-42)`, which returns `42`.
 
 ```ssl
 :PROCEDURE UseStaticNetType;
-	:DECLARE oMath, nAbsolute, nLargest;
+	:DECLARE oMath, nAbsolute;
 
-	oMath := LimsNETTypeOf("System.Math");
+	oMath := LimsNETConnect(, "System.Math",, .T.);
 
-	nAbsolute := oMath:Invoke("Abs", {(0 - 42)});
-	nLargest := oMath:Invoke("Max", {nAbsolute, 10});
+	nAbsolute := oMath:Abs(-42);
 
-	:RETURN nLargest;
+	:RETURN nAbsolute;
 :ENDPROC;
 
 /* Usage;
 DoProc("UseStaticNetType");
 ```
 
-### Working with indexed collections and ToJson
+### Building a DataSet and serializing it with ToJson
 
-Builds a `DataSet` with one row, reads a cell value through the `DataRow` indexer by column name, and serializes the dataset to JSON.
+Builds a `DataSet` with one row through chained native members, reads a cell through the `DataRow` indexer by column name (rows are 0-based), and serializes the dataset with the [`ToJson`](../functions/ToJson.md) function.
 
 ```ssl
 :PROCEDURE SerializeDataSetNetObject;
-	:DECLARE oDataSet, oTable, oColumns, oRows, oTables, oRow, sSampleID, sJson;
+	:DECLARE oDataSet, oTable, sSampleID, sJson;
 
 	oDataSet := LimsNETConnect("System.Data", "System.Data.DataSet", {}, .F.);
 	oTable := LimsNETConnect("System.Data", "System.Data.DataTable", {"sample"}, .F.);
 
-	oColumns := oTable:GetProperty("Columns");
-	oColumns:Invoke("Add", {"sample_id"});
-	oColumns:Invoke("Add", {"status"});
+	oTable:Columns:Add("sample_id");
+	oTable:Columns:Add("status");
+	oTable:Rows:Add({"S-1001", "Logged"});
+	oDataSet:Tables:Add(oTable);
 
-	oRows := oTable:GetProperty("Rows");
-	oRows:Invoke("Add", {{"S-1001", "Logged"}});
-
-	oTables := oDataSet:GetProperty("Tables");
-	oTables:Invoke("Add", {oTable});
-
-	oRow := oRows[1];
-	sSampleID := oRow["sample_id"];
-	sJson := oDataSet:ToJson();
+	sSampleID := oTable:Rows[0]["sample_id"];
+	sJson := ToJson(oDataSet);
 
 	InfoMes("Sample: " + sSampleID);
 
@@ -163,9 +154,45 @@ Builds a `DataSet` with one row, reads a cell value through the `DataRow` indexe
 DoProc("SerializeDataSetNetObject");
 ```
 
+`InfoMes` logs `Sample: S-1001`. The returned JSON lists the dataset's tables, each with its `TableName`, `Columns` (name, data type and flags), `PrimaryKey` and `Rows`:
+
+```text
+{
+	"Tables": [
+		{
+			"TableName": "sample",
+			"Columns": [
+				{
+					"ColumnName": "sample_id",
+					"DataType": "string",
+					"AllowDBNull": true,
+					"ReadOnly": false,
+					"Unique": false
+				},
+				{
+					"ColumnName": "status",
+					"DataType": "string",
+					"AllowDBNull": true,
+					"ReadOnly": false,
+					"Unique": false
+				}
+			],
+			"PrimaryKey": [],
+			"Rows": [
+				{
+					"sample_id": "S-1001",
+					"status": "Logged"
+				}
+			]
+		}
+	],
+	"Relations": []
+}
+```
+
 ## Caveats
 
-- Member access with `:` forwards to the underlying .NET wrapped object when no SSL-side member matches (e.g. `oNet:AnyMember(...)`). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
+- Only the wrapped type's native members are available, and a member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
 
 ## Related elements
 
