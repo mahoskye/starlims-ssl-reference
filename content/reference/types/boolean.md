@@ -15,7 +15,7 @@ starlims:
 
 Represents logical true/false values in SSL.
 
-The boolean type holds one of two logical values: [`.T.`](../literals/true.md) or [`.F.`](../literals/false.md). Use booleans for conditions, flags, validation results, and other yes-or-no decisions. Boolean values support logical operators, equality checks, cloning, and JSON serialization. They do not support indexing, ordering operators, or containment.
+The boolean type holds one of two logical values: [`.T.`](../literals/true.md) or [`.F.`](../literals/false.md). Use booleans for conditions, flags, validation results, and other yes-or-no decisions. Boolean values support logical operators and equality checks, and [`ToJson`](../functions/ToJson.md) serializes them as `true` or `false`. They do not support indexing, ordering operators, or containment.
 
 Boolean values participate in logical expressions with `.AND.`, `.OR.`, and `.NOT.`. In SSL expression evaluation, `.AND.` and `.OR.` short-circuit, so the right-hand expression is only evaluated when needed to determine the result.
 
@@ -47,30 +47,20 @@ bOther := .F.;
 
 ## Members
 
-### Properties
+Booleans have no SSL-defined `:` members. Calls such as `bValue:And(x)`, `bValue:Or(x)`, `bValue:Not()`, `bValue:Eq(x)`, `bValue:EqEq(x)`, `bValue:IsEmpty()`, `bValue:ToJson()` and `bValue:clone()` raise `Run-time error: Invalid method: …`, and `bValue:value` raises `Invalid property: value`. Use the operators above and these functions instead:
 
-| Member | Returns | Description |
-| --- | --- | --- |
-| `value` | boolean | The stored boolean value. |
-
-### Methods
-
-| Member | Returns | Description |
-| --- | --- | --- |
-| `And(vValue)` | boolean | Returns the logical AND of this boolean and another boolean value. Raises a runtime error for non-boolean operands. |
-| `Or(vValue)` | boolean | Returns the logical OR of this boolean and another boolean value. Raises a runtime error for non-boolean operands. |
-| `Not()` | boolean | Returns the negated boolean value. |
-| `Eq(vValue)` | boolean | Returns [`.T.`](../literals/true.md) when both operands are booleans with the same value. Raises a runtime error for non-boolean operands. |
-| `EqEq(vValue)` | boolean | Exact equality check. For booleans, this behaves the same as `Eq(vValue)`. |
-| `IsEmpty()` | boolean | Returns [`.T.`](../literals/true.md) when the boolean is [`.F.`](../literals/false.md) and [`.F.`](../literals/false.md) when the boolean is [`.T.`](../literals/true.md). |
-| [`ToJson()`](../functions/ToJson.md) | [string](string.md) | Returns the JSON boolean text `true` or `false`. |
-| `clone()` | boolean | Returns a copy of the boolean value. |
+| Task | Use |
+|---|---|
+| Combine or negate | `.AND.`, `.OR.`, `.NOT.` or [`!`](../operators/not.md) |
+| Compare | [`==`](../operators/strict-equals.md) or [`=`](../operators/equals.md) |
+| Convert to text | [`LimsString`](../functions/LimsString.md), which gives `.T.` or `.F.` |
+| Serialize to JSON | [`ToJson`](../functions/ToJson.md), which gives `true` or `false` |
 
 ## Calling .NET `Boolean` methods
 
-In addition to the SSL-defined members above, any public method or property on .NET's `System.Boolean` is callable on a `boolean` value with the `:` method-call syntax. The runtime forwards `bValue:Name(args)` to the underlying .NET boolean by name.
+Public methods of .NET's `System.Boolean` can be called on a `boolean` value with the `:` method-call syntax.
 
-`System.Boolean` exposes a very thin instance surface — essentially `CompareTo(other)`, `Equals(other)`, and `ToString()` — and its members either duplicate or differ subtly from SSL's native idioms. Notably, .NET's `ToString()` returns the strings `"True"` or `"False"` rather than SSL's [`.T.`](../literals/true.md) or [`.F.`](../literals/false.md), so reaching for it as a display conversion can be surprising. Use SSL's logical operators, [`Empty`](../functions/Empty.md), and [`LimsString`](../functions/LimsString.md) for boolean work; there is rarely a reason to dispatch through the .NET passthrough on a boolean value.
+`System.Boolean` exposes a very thin instance surface — essentially `CompareTo(other)`, `Equals(other)`, and `ToString()` — and its members either duplicate or differ subtly from SSL's native idioms. Notably, .NET's `ToString()` returns the strings `"True"` or `"False"` rather than SSL's [`.T.`](../literals/true.md) or [`.F.`](../literals/false.md), so reaching for it as a display conversion can be surprising. Use SSL's logical operators, [`Empty`](../functions/Empty.md), and [`LimsString`](../functions/LimsString.md) for boolean work; there is rarely a reason to call a .NET member on a boolean value.
 
 This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete.
 
@@ -190,7 +180,7 @@ DoProc("ValidateSampleSubmission", {"S-001", 50, .T.});
 
 ### Serializing boolean flags to JSON and restoring state
 
-Packs three boolean flags into a JSON object using [`ToJson()`](../functions/ToJson.md), parses the JSON back with [`FromJson`](../functions/FromJson.md), and validates that each field is a `"LOGIC"` type.
+Packs three boolean flags into a JSON object using [`ToJson`](../functions/ToJson.md), parses the JSON back with [`FromJson`](../functions/FromJson.md), and validates that each field is a `"LOGIC"` type.
 
 ```ssl
 :PROCEDURE RoundTripBooleanFlags;
@@ -201,9 +191,9 @@ Packs three boolean flags into a JSON object using [`ToJson()`](../functions/ToJ
 	bVerified := .F.;
 	bLocked := .T.;
 
-	sJson := '{"active":' + bActive:ToJson() +
-			 ',"verified":' + bVerified:ToJson() +
-			 ',"locked":' + bLocked:ToJson() + '}';
+	sJson := '{"active":' + ToJson(bActive) +
+			 ',"verified":' + ToJson(bVerified) +
+			 ',"locked":' + ToJson(bLocked) + '}';
 
 	oState := FromJson(sJson);
 
@@ -230,7 +220,7 @@ State restored correctly
 
 ## Caveats
 
-- Member access with `:` forwards to the underlying .NET Boolean object when no SSL-side member matches (e.g. `bFlag:ToString()`). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
+- A `:` member call on a boolean reaches a .NET `Boolean` member (e.g. `bFlag:ToString()`). A member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
 
 ## Related elements
 

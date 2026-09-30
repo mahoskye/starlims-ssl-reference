@@ -12002,9 +12002,8 @@
       "caveats": [
         "GetPropList() returns only dynamic property names. It does not include inherited object members or XmlType.",
         "IsProperty(\"XmlType\") is always true, even if you never assigned a custom XML type.",
-        "When XmlType is not set, ToString() uses SSLExpando as the root element name. Setting XmlType to NIL clears any custom value and restores the default.",
-        "ToString() returns the same XML content as Serialize().",
-        "ToString() returns XML, not a debug-style property dump."
+        "When XmlType is not set, Serialize() uses SSLExpando as the root element name. Setting XmlType to NIL clears any custom value and restores the default.",
+        "ToString() returns NIL, not XML. Use Serialize() for the XML text."
       ],
       "best_practices": {
         "do": [
@@ -14035,7 +14034,7 @@
       "exceptions": [],
       "caveats": [
         "Arrays have no Count property and no SSL-defined methods: aValues:Count raises Run-time error: Invalid property: Count, and aValues:Append(x) raises Invalid method: Append. Use ALen and the other array functions listed under Members.",
-        "Member access with : forwards to the underlying .NET list object when no SSL-side member matches (e.g. aValues:Length). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as Run-time error: Invalid method: Split. Check a member before relying on it; see Native Members.",
+        "A : member call on an array reaches a .NET array member (e.g. aValues:Length). A member that doesn't exist, or doesn't accept the arguments given, raises an error such as Run-time error: Invalid method: Split. Check a member before relying on it; see Native Members.",
         "aValues[1] is the first element. aValues[0] is invalid.",
         "Index access outside the array raises a runtime error.",
         "Arrays can hold mixed value types, so validate or normalize element types before doing arithmetic or exact comparisons.",
@@ -14064,7 +14063,7 @@
       "source_path": "content/reference/types/boolean.md",
       "exceptions": [],
       "caveats": [
-        "Member access with : forwards to the underlying .NET Boolean object when no SSL-side member matches (e.g. bFlag:ToString()). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as Run-time error: Invalid method: Split. Check a member before relying on it; see Native Members."
+        "A : member call on a boolean reaches a .NET Boolean member (e.g. bFlag:ToString()). A member that doesn't exist, or doesn't accept the arguments given, raises an error such as Run-time error: Invalid method: Split. Check a member before relying on it; see Native Members."
       ],
       "best_practices": {
         "do": [
@@ -14088,13 +14087,13 @@
       "source_path": "content/reference/types/codeblock.md",
       "exceptions": [],
       "caveats": [
-        "clone() copies the code block value, but it does not create a separate procedure."
+        "Any : member call on a code block raises an error, including :eval(), :ToString() and :clone(). Run a code block with Eval."
       ],
       "best_practices": {
         "do": [
           "Use a code block when you need a small reusable expression that fits naturally inline.",
           "Keep code blocks expression-based and move multi-step logic into a procedure.",
-          "Check IsEmpty() before evaluation when a code block may not have been initialized."
+          "Check LimsTypeEx(fnValue) == \"CODEBLOCK\" before evaluation when a variable may not hold a code block."
         ],
         "dont": [
           "Compare code blocks with =, ==, or !=. Code blocks do not support equality checks and the comparison raises a runtime error.",
@@ -14112,20 +14111,21 @@
       "source_path": "content/reference/types/date.md",
       "exceptions": [],
       "caveats": [
-        "Member access with : forwards to the underlying .NET DateTime object when no SSL-side member matches (e.g. dValue:AddMonths(2)). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as Run-time error: Invalid method: Split. Check a member before relying on it; see Native Members."
+        "A : member call on a date reaches a .NET DateTime member (e.g. dValue:AddMonths(2)). A member that doesn't exist, or doesn't accept the arguments given, raises an error such as Run-time error: Invalid method: Split. Check a member before relying on it; see Native Members."
       ],
       "best_practices": {
         "do": [
-          "Check IsEmpty() before using a date in business rules or display logic.",
+          "Check Empty before using a date in business rules or display logic.",
           "Use + and - with numeric day offsets instead of converting dates to strings.",
           "Use date-to-date subtraction when you need a day count.",
-          "Format output explicitly with ToString() or DToC when the display format matters."
+          "Format output with an explicit format, such as dValue:ToString(\"yyyy-MM-dd\"), when the display format matters."
         ],
         "dont": [
           "Treat a date like a string or number for comparison logic. Use the date comparison operators directly.",
-          "Assume an empty date behaves like a real scheduled value. Validate with IsEmpty() first.",
+          "Assume an empty date behaves like a real scheduled value. Validate with Empty first.",
           "Use [] indexing on a date. Dates are scalar values, not collections.",
-          "Assume ToJson() and ToString() produce the same output. ToJson() is for JSON serialization, not user-facing display."
+          "Assume dValue:ToString() with no format gives MM/dd/yyyy. It gives the date and time in the server's format, such as 9/30/2026 12:00:00 AM.",
+          "Use ToJson for display. It is for JSON serialization, not user-facing text."
         ]
       }
     },
@@ -14166,14 +14166,14 @@
       "source_path": "content/reference/types/number.md",
       "exceptions": [],
       "caveats": [
-        "Member access with : forwards to the underlying .NET numeric object when no SSL-side member matches (e.g. nValue:ToString(\"F2\")). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as Run-time error: Invalid method: Split. Check a member before relying on it; see Native Members."
+        "A : member call on a number reaches a member of its .NET numeric type (e.g. nValue:ToString(\"F2\")). A member that doesn't exist, or doesn't accept the arguments given, raises an error such as Run-time error: Invalid method: Split. Check a member before relying on it; see Native Members."
       ],
       "best_practices": {
         "do": [
           "Use numeric operators directly for arithmetic and numeric comparisons.",
           "Use == when you want exact equality and want your code to read consistently across types.",
-          "Check IsInt or IsInt64 before doing shifts or bitwise work on values that may contain fractions.",
-          "Convert explicitly with LimsString or ToString() when building user-facing text."
+          "Check that a value is a whole number, such as nValue == Integer(nValue), before doing shifts or bitwise work on values that may contain fractions.",
+          "Convert explicitly with LimsString or nValue:ToString() when building user-facing text."
         ],
         "dont": [
           "Write bitwise logic with &, |, or ^ as bitwise operators. In SSL, bitwise work uses _AND(), _OR(), _XOR(), _NOT(), and the shift operators << and >>.",
@@ -14194,7 +14194,8 @@
       "caveats": [
         "Reading a missing property raises a runtime error with the message Property not found: <name>.",
         "AddProperty() validates the property name and initializes the new property to \"\".",
-        "IsEmpty() is not a property-count check for objects."
+        "IsEmpty() is not a property-count check for objects.",
+        "On dynamic objects created with CreateUdObject(), member and property names ignore case: oValue:getproperty(\"Status\"), oValue:xmltype, and oValue:status for a property set as oValue:Status all work. Members of strings, numbers, dates and arrays are case-sensitive; see Member names and case."
       ],
       "best_practices": {
         "do": [
@@ -14208,7 +14209,8 @@
           "Treat object members like array indexes. Objects do not support direct indexing of their own properties.",
           "Rely on clone() for a deep copy. On dynamic objects created with CreateUdObject(), it copies only the top-level properties, so a nested array or object changed through the copy also changes in the original. Do not assume other object values support clone() the same way.",
           "Call CreateLocal() to create an object. It creates a local variable by name, and with no arguments it raises an error.",
-          "Set XmlType to a non-string value. That raises an error."
+          "Set XmlType to a non-string value. That raises an error.",
+          "Call ToString() for the XML text. On dynamic objects it returns NIL; use Serialize()."
         ]
       }
     },
@@ -14221,13 +14223,13 @@
       "source_path": "content/reference/types/string.md",
       "exceptions": [],
       "caveats": [
-        "Member access with : forwards to the underlying .NET String object when no SSL-side member matches (e.g. sValue:EndsWith(\"suffix\")). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as Run-time error: Invalid method: Split. Check a member before relying on it; see Native Members."
+        "A : member call on a string reaches a .NET String member (e.g. sValue:EndsWith(\"suffix\")). A member that doesn't exist, or doesn't accept the arguments given, raises an error such as Run-time error: Invalid method: Split. Check a member before relying on it; see Native Members."
       ],
       "best_practices": {
         "do": [
           "Use == when you need exact string equality.",
           "Use = only when you intentionally want prefix behavior.",
-          "Use IsEmpty() when a value may be blank or whitespace-only.",
+          "Use Empty when a value may be blank or whitespace-only.",
           "Remember that sValue[1] is the first character, not sValue[0]."
         ],
         "dont": [

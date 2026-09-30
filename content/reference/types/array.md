@@ -71,7 +71,7 @@ In practice, this passthrough is rarely the best path for SSL arrays, for two re
 
 Prefer SSL-native array functions ([`ALen`](../functions/ALen.md), [`AScan`](../functions/AScan.md), [`SortArray`](../functions/SortArray.md), [`AAdd`](../functions/AAdd.md)) for portability and readability. Reach for the .NET passthrough only when you need a specific `System.Array` operation that the SSL library does not cover.
 
-This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Their names are case-sensitive: `aValues:Clone()` works, but `aValues:clone()` raises `Invalid method: clone`.
+This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Their names are case-sensitive: `aValues:Clone()` works, but `aValues:clone()` raises `Invalid method: clone`, and `aValues:length` raises `Invalid property: length` (see [Member names and case](../../guides/native-members.md#member-names-and-case)).
 
 ### Example: reading the underlying `Array.Length` property
 
@@ -235,7 +235,7 @@ Snapshot: ["Reviewed","Logged","Released"]
 ## Caveats
 
 - Arrays have no `Count` property and no SSL-defined methods: `aValues:Count` raises `Run-time error: Invalid property: Count`, and `aValues:Append(x)` raises `Invalid method: Append`. Use [`ALen`](../functions/ALen.md) and the other array functions listed under [Members](#members).
-- Member access with `:` forwards to the underlying .NET list object when no SSL-side member matches (e.g. `aValues:Length`). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
+- A `:` member call on an array reaches a .NET array member (e.g. `aValues:Length`). A member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
 
 ## Related elements
 
