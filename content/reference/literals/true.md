@@ -32,7 +32,7 @@ Equality checks on `.T.` require both operands to be booleans. Comparing `.T.` t
 | `.T. = .F.` | [`.F.`](false.md) | |
 | `.T. = 1` | runtime error | Boolean equality requires both operands to be booleans |
 | `.T. = 0` | runtime error | Same — use explicit type checking instead |
-| `IsEmpty(.T.)` | [`.F.`](false.md) | `.T.` is not empty (unlike [`.F.`](false.md) which is) |
+| [`Empty`](../functions/Empty.md)`(.T.)` | [`.F.`](false.md) | `.T.` is not empty (unlike [`.F.`](false.md) which is) |
 
 ## Type coercion
 

@@ -62,7 +62,7 @@ Arrays have no SSL-defined `:` members. Calls such as `aValues:Append(x)`, `aVal
 
 ## Calling .NET `Array` methods
 
-Any public method or property on the underlying .NET array is callable on an `array` value with the `:` method-call syntax. The runtime forwards `aValues:Name(args)` to the underlying `System.Object[]` (which inherits from `System.Array`) by name.
+An `array` value also exposes the public members of a .NET `System.Object[]` array through the `:` method-call syntax, such as `aValues:Length` and `aValues:Clone()`.
 
 In practice, this passthrough is rarely the best path for SSL arrays, for two reasons:
 
@@ -75,7 +75,7 @@ This passthrough is an interop convenience, not part of the SSL language surface
 
 ### Example: reading the underlying `Array.Length` property
 
-Reads .NET's `Length` property on the underlying `System.Object[]` through the `:` dispatch. The result matches [`ALen`](../functions/ALen.md), so this is primarily a demonstration that the dispatch works on `array` values rather than a recommended pattern.
+Reads the .NET `Length` property with `:`. The result matches [`ALen`](../functions/ALen.md), so this mainly shows that native members work on `array` values; `ALen` is the usual choice.
 
 ```ssl
 :PROCEDURE ShowArrayLength;

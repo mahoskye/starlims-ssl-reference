@@ -70,20 +70,21 @@ Strings have no SSL-defined `:` members. Calls such as `sValue:IsEmpty()`, `sVal
 
 ## Calling .NET `String` methods
 
-Public methods and properties of .NET's `System.String` can be called on a `string` value with the `:` method-call syntax, such as `sValue:Trim()` or `sValue:Length`. For example, `"abc":CompareTo("abd")` returns `-1`, and `sValue:Clone()` returns the same text. Member names are case-sensitive: `sValue:ToUpper()` and `sValue:Clone()` work, but `sValue:toupper()` and `sValue:clone()` raise `Invalid method: …`, and `sValue:length` raises `Invalid property: length` (see [Member names and case](../../guides/native-members.md#member-names-and-case)). Not every member form is reachable: `sValue:Split(",")` raises `Invalid method: Split`, so verify a member before relying on it. Static methods such as `String.Format` and `String.Join` are reachable through the same syntax; for a static call the receiver is only used to locate the type.
+Public methods and properties of .NET's `System.String` can be called on a `string` value with the `:` method-call syntax, such as `sValue:Trim()` or `sValue:Length`. For example, `"abc":CompareTo("abd")` returns `-1`, and `sValue:Clone()` returns the same text. Member names are case-sensitive: `sValue:ToUpper()` and `sValue:Clone()` work, but `sValue:toupper()` and `sValue:clone()` raise `Invalid method: …`, and `sValue:length` raises `Invalid property: length` (see [Member names and case](../../guides/native-members.md#member-names-and-case)). Not every member form is reachable: `sValue:Split(",")` raises `Invalid method: Split`, so verify a member before relying on it. `Format` is reachable the same way; see [Formatting text with `Format`](../../guides/native-members.md#formatting-text-with-format).
 
 This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer SSL-native string functions ([`Replace`](../functions/Replace.md), [`Upper`](../functions/Upper.md), [`Lower`](../functions/Lower.md), [`SubStr`](../functions/SubStr.md), and similar) for portability, and reserve direct .NET calls for behavior the SSL library does not cover. See [Native Members on SSL Values](../../guides/native-members.md) for the members verified on STARLIMS v11 and how to check others.
 
-### Example: calling `String.Format` through a string value
+### Example: formatting text with `Format`
 
-Uses .NET's static `String.Format` to build a formatted message. The receiver `sName` only directs the runtime to `System.String`; the formatted output comes entirely from the arguments.
+Uses .NET's `Format` member to build a formatted message. The pattern is the first argument, and the values fill its numbered placeholders. By convention it is called on an empty string held in a variable named for its job.
 
 ```ssl
 :PROCEDURE BuildGreeting;
-	:DECLARE sName, sMessage;
+	:DECLARE sFmt, sName, sMessage;
 
+	sFmt := "";
 	sName := "Hello";
-	sMessage := sName:Format("{0} world", sName);
+	sMessage := sFmt:Format("{0} world", sName);
 
 	UsrMes(sMessage);
 
