@@ -190,9 +190,9 @@ Request a dataset object instead of an array, then traverse its rows using the .
 
 	oDs := SQLExecute(sSQL,,,,, "dataset");
 
-	oTable := oDs:GetProperty("Tables")[0];
-	oRows := oTable:GetProperty("Rows");
-	nCount := oRows:GetProperty("Count");
+	oTable := oDs:Tables[0];
+	oRows := oTable:Rows;
+	nCount := oRows:Count;
 
 	UsrMes("Batch " + sBatch + ": " + LimsString(nCount) + " sample(s)");
 	/* Logs batch sample count;

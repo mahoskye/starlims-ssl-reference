@@ -9,7 +9,7 @@ Native members come in two shapes:
 
 ## Native members count from zero
 
-SSL strings and arrays are 1-based. Native members use .NET's 0-based positions, the same rule that applies to .NET collections reached through colon access, such as `:GetProperty("Tables")[0]` on a dataset (see [`SQLExecute`](../reference/functions/SQLExecute.md#return-a-dataset-and-traverse-rows-with-0-based-net-indexing)).
+SSL strings and arrays are 1-based. Native members use .NET's 0-based positions, the same rule that applies to .NET collections reached through colon access, such as `oDs:Tables[0]` on a dataset (see [`SQLExecute`](../reference/functions/SQLExecute.md#return-a-dataset-and-traverse-rows-with-0-based-net-indexing)).
 
 | SSL function | Result | Native member | Result |
 |---|---|---|---|
