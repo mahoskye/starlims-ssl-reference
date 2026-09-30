@@ -13,7 +13,7 @@ starlims:
 
 Returns the configured user log folder path with a trailing backslash.
 
-`GetLogsFolder` returns `AppConfig.Instance.UserLogFolder + "\\"` as a string. The function takes no parameters, performs no validation, and does not check whether the folder exists or is writable. The returned value always ends with a trailing backslash.
+`GetLogsFolder` returns the configured user log folder path as a string, always ending with a backslash. The function takes no parameters, performs no validation, and does not check whether the folder exists or is writable. The returned value always ends with a trailing backslash.
 
 ## When to use
 
