@@ -1468,10 +1468,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#reading-a-property-and-invoking-a-method" class="md-nav__link">
+  <a href="#reading-a-property-and-calling-a-method" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading a property and invoking a method
+        Reading a property and calling a method
       
     </span>
   </a>
@@ -1479,10 +1479,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#invoking-a-static-net-member" class="md-nav__link">
+  <a href="#calling-a-static-net-method" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Invoking a static .NET member
+        Calling a static .NET method
       
     </span>
   </a>
@@ -1490,10 +1490,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#working-with-indexed-collections-and-tojson" class="md-nav__link">
+  <a href="#building-a-dataset-and-serializing-it-with-tojson" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Working with indexed collections and ToJson
+        Building a DataSet and serializing it with ToJson
       
     </span>
   </a>
@@ -1895,10 +1895,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#reading-a-property-and-invoking-a-method" class="md-nav__link">
+  <a href="#reading-a-property-and-calling-a-method" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Reading a property and invoking a method
+        Reading a property and calling a method
       
     </span>
   </a>
@@ -1906,10 +1906,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#invoking-a-static-net-member" class="md-nav__link">
+  <a href="#calling-a-static-net-method" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Invoking a static .NET member
+        Calling a static .NET method
       
     </span>
   </a>
@@ -1917,10 +1917,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#working-with-indexed-collections-and-tojson" class="md-nav__link">
+  <a href="#building-a-dataset-and-serializing-it-with-tojson" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Working with indexed collections and ToJson
+        Building a DataSet and serializing it with ToJson
       
     </span>
   </a>
@@ -2049,67 +2049,50 @@
 <h2 id="what-it-is">What it is<a class="headerlink" href="#what-it-is" title="Permanent link">&para;</a></h2>
 <p>Provides dynamic access to external objects for property access, method invocation, and selected interop scenarios in SSL.</p>
 <p>The <code>netobject</code> type represents a value returned by SSL's .NET interop helpers such as <a href="../../functions/MakeNETObject/"><code>MakeNETObject</code></a>, <a href="../../functions/LimsNETConnect/"><code>LimsNETConnect</code></a>, and <a href="../../functions/LimsNETTypeOf/"><code>LimsNETTypeOf</code></a>. Use it when you need to work with a .NET value from SSL code.</p>
-<p><code>netobject</code> lets you read and write public fields or properties with <code>GetProperty()</code> and <code>SetProperty()</code>, test for a public field or property with <code>IsProperty()</code>, and call public methods with <code>Invoke()</code>. Returned values come back as ordinary SSL values when possible; .NET values that still need interop access remain <code>netobject</code> values.</p>
-<p><code>IsEmpty()</code> returns <a href="../../literals/true/"><code>.T.</code></a> only when the wrapped reference is null. <a href="../../functions/ToJson/"><code>ToJson()</code></a> is supported only when the wrapped value is a <code>DataSet</code>; other wrapped values raise an error. <code>netobject</code> does not support <a href="../../functions/AddProperty/"><code>AddProperty()</code></a>.</p>
-<p>The member access behind <code>Invoke()</code> and <code>GetProperty()</code> is also available implicitly on every SSL value. Writing <code>sValue:ToUpper()</code> on a <a href="../string/"><code>string</code></a>, <code>dDate:AddMonths(3)</code> on a <a href="../date/"><code>date</code></a>, or <code>aValues:Length</code> on an <a href="../array/"><code>array</code></a> forwards to the underlying .NET value in the same way <code>oNetObject:Invoke("MethodName")</code> does here. Use <code>netobject</code> and its explicit methods when working with externally constructed .NET values; see the type pages for <a href="../string/"><code>string</code></a>, <a href="../number/"><code>number</code></a>, <a href="../date/"><code>date</code></a>, <a href="../boolean/"><code>boolean</code></a>, and <a href="../array/"><code>array</code></a> for the implicit form, and <a href="../../../guides/native-members/">Native Members on SSL Values</a> for the members verified on STARLIMS v11.</p>
+<p>You work with a <code>netobject</code> through its native .NET members, called with <code>:</code>: <code>oBuilder:Append("-01")</code>, <code>oBuilder:ToString()</code>, <code>oBuilder:Length</code>. Returned values come back as ordinary SSL values when possible; .NET values that still need interop access remain <code>netobject</code> values. Members can be chained, as in <code>oTable:Rows:Count</code> or <code>oDs:Tables[0]:Rows[0]["sample_id"]</code>.</p>
+<p><code>netobject</code> has no SSL-defined members. <code>GetProperty()</code>, <code>SetProperty()</code>, <code>IsProperty()</code>, <code>Invoke()</code>, <code>IsEmpty()</code> and <code>ToJson()</code> all raise <code>Run-time error: Invalid method: …</code> on a <code>netobject</code>, in any letter case. Native member names are case-sensitive: see <a href="../../../guides/native-members/#member-names-and-case">Member names and case</a>. The same native members are reachable on ordinary SSL values, such as <code>sValue:ToUpper()</code> or <code>aValues:Length</code>; see <a href="../../../guides/native-members/">Native Members on SSL Values</a>.</p>
 <h2 id="creating-values">Creating values<a class="headerlink" href="#creating-values" title="Permanent link">&para;</a></h2>
 <p><code>netobject</code> values cannot be created with a literal. They are returned by interop functions.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">oBuilder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(</span><span class="s2">"System"</span><span class="p">,</span><span class="w"> </span><span class="s2">"System.Text.StringBuilder"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LAB"</span><span class="p">},</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
-<span class="n">oMath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="s2">"System.Math"</span><span class="p">);</span>
+<span class="n">oMath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(,</span><span class="w"> </span><span class="s2">"System.Math"</span><span class="p">,,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
 </code></pre></div>
 <ul>
 <li><strong>Runtime type:</strong> <code>OBJECT</code></li>
 <li><strong>Literal syntax:</strong> None. Use <a href="../../functions/MakeNETObject/"><code>MakeNETObject</code></a>, <a href="../../functions/LimsNETConnect/"><code>LimsNETConnect</code></a>, or <a href="../../functions/LimsNETTypeOf/"><code>LimsNETTypeOf</code></a>.</li>
 </ul>
 <h2 id="members">Members<a class="headerlink" href="#members" title="Permanent link">&para;</a></h2>
+<p>A <code>netobject</code> has no SSL-defined members; use the wrapped .NET type's own members. For common needs:</p>
 <table>
 <thead>
 <tr>
-<th>Member</th>
-<th>Kind</th>
-<th>Returns</th>
-<th>Description</th>
+<th>Task</th>
+<th>Use</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>GetProperty(sName)</code></td>
-<td>Method</td>
-<td><code>any</code></td>
-<td>Reads a public field or property by name.</td>
+<td>Read a property</td>
+<td><code>oNet:PropertyName</code>, e.g. <code>oBuilder:Length</code></td>
 </tr>
 <tr>
-<td><code>SetProperty(sName, vValue)</code></td>
-<td>Method</td>
-<td><code>none</code></td>
-<td>Writes an existing public field or property by name.</td>
+<td>Call a method</td>
+<td><code>oNet:MethodName(args)</code>, e.g. <code>oBuilder:Append("-01")</code></td>
 </tr>
 <tr>
-<td><code>IsProperty(sName)</code></td>
-<td>Method</td>
-<td><a href="../boolean/"><code>boolean</code></a></td>
-<td>Returns <a href="../../literals/true/"><code>.T.</code></a> when a public field or property with the given name exists.</td>
+<td>Call a static method</td>
+<td>Connect to the type as static with <a href="../../functions/LimsNETConnect/"><code>LimsNETConnect</code></a><code>(, "System.Math",, .T.)</code>, then <code>oMath:Abs(-42)</code></td>
 </tr>
 <tr>
-<td><code>Invoke(sName, [aArgs])</code></td>
-<td>Method</td>
-<td><code>any</code></td>
-<td>Calls a public method by name and returns its result.</td>
+<td>Serialize a <code>DataSet</code> to JSON</td>
+<td><a href="../../functions/ToJson/"><code>ToJson</code></a><code>(oDataSet)</code></td>
 </tr>
 <tr>
-<td><code>IsEmpty()</code></td>
-<td>Method</td>
-<td><a href="../boolean/"><code>boolean</code></a></td>
-<td>Returns <a href="../../literals/true/"><code>.T.</code></a> only when the wrapped reference is null.</td>
-</tr>
-<tr>
-<td><a href="../../functions/ToJson/"><code>ToJson()</code></a></td>
-<td>Method</td>
-<td><a href="../string/"><code>string</code></a></td>
-<td>Serializes the wrapped value to JSON when it is a <code>DataSet</code>. Other wrapped values raise an error.</td>
+<td>Check the type</td>
+<td><a href="../../functions/LimsTypeEx/"><code>LimsTypeEx</code></a> returns <code>"OBJECT"</code></td>
 </tr>
 </tbody>
 </table>
+<p>A type object from <a href="../../functions/LimsNETTypeOf/"><code>LimsNETTypeOf</code></a> does not call the type's static methods: <code>LimsNETTypeOf("System.Math"):Abs(-42)</code> raises <code>Invalid method: Abs</code>. Use the static form of <a href="../../functions/LimsNETConnect/"><code>LimsNETConnect</code></a> for that.</p>
 <h2 id="indexing">Indexing<a class="headerlink" href="#indexing" title="Permanent link">&para;</a></h2>
 <p>Direct indexing is available only when the wrapped value exposes an indexer shape that <code>netobject</code> understands.</p>
 <table>
@@ -2153,48 +2136,43 @@
 </tr>
 </tbody>
 </table>
-<p>Numeric indexing follows the wrapped value's own indexer behavior. <code>netobject</code> does not normalize every wrapped collection to SSL array semantics.</p>
+<p>Numeric indexing follows the wrapped value's own indexer, which for .NET collections is <strong>0-based</strong>: <code>oTable:Rows[0]</code> is the first row, and <code>oTable:Rows[1]</code> on a one-row table raises <code>There is no row at position 1.</code></p>
 <h2 id="notes-for-daily-ssl-work">Notes for daily SSL work<a class="headerlink" href="#notes-for-daily-ssl-work" title="Permanent link">&para;</a></h2>
 <div class="admonition success">
 <p class="admonition-title">Do</p>
 <ul>
-<li>Call <code>IsEmpty()</code> and <code>IsProperty()</code> before accessing a property on a <code>netobject</code> whose wrapped value may be null or whose schema may vary.</li>
-<li>Use <code>SetProperty()</code> only for members that already exist on the wrapped value.</li>
-<li>Use <a href="../../functions/ToJson/"><code>ToJson()</code></a> only when you know the wrapped value is a <code>DataSet</code>.</li>
+<li>Call native members by their exact .NET names and casing, such as <code>oBuilder:Append("-01")</code> and <code>oTable:Rows:Count</code>.</li>
+<li>Index .NET collections from <code>0</code>: <code>oTable:Rows[0]</code>, <code>oDs:Tables[0]</code>.</li>
+<li>Use the static form of <a href="../../functions/LimsNETConnect/"><code>LimsNETConnect</code></a> to call static methods such as <code>System.Math.Abs</code>.</li>
 </ul>
 </div>
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
-<li>Call <code>GetProperty()</code> or <code>Invoke()</code> blindly when the value might be null or the member might not exist. Null wrapped values raise a null-reference error, and invalid member names raise an error.</li>
-<li>Assume numeric indexing is always SSL-style 1-based. Wrapped collections use their own indexing behavior.</li>
+<li>Call <code>GetProperty()</code>, <code>SetProperty()</code>, <code>IsProperty()</code>, <code>Invoke()</code>, <code>IsEmpty()</code> or <code>ToJson()</code> on a <code>netobject</code>. They raise <code>Invalid method</code>; use the native members and the <a href="../../functions/ToJson/"><code>ToJson</code></a> function instead.</li>
+<li>Assume numeric indexing is SSL-style 1-based. .NET collections start at <code>0</code>.</li>
 <li>Treat <code>netobject</code> like a dynamic SSL object that supports <a href="../../functions/AddProperty/"><code>AddProperty()</code></a>. It cannot add new members to the wrapped value.</li>
 </ul>
 </div>
 <h2 id="errors-and-edge-cases">Errors and edge cases<a class="headerlink" href="#errors-and-edge-cases" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>GetProperty()</code>, <code>SetProperty()</code>, <code>IsProperty()</code>, and <code>Invoke()</code> raise a null-reference error when the wrapped value is null and the target member is not static.</li>
-<li>Invalid property names raise an error from <code>GetProperty()</code> or <code>SetProperty()</code>. Invalid method names raise an error from <code>Invoke()</code>.</li>
-<li><code>IsProperty()</code> checks fields and properties, not methods.</li>
-<li><code>IsEmpty()</code> only checks whether the wrapped reference is null. It does not inspect row counts, collection lengths, or other content.</li>
+<li>Calling a member that the wrapped type doesn't have, or that doesn't accept the arguments given, raises <code>Run-time error: Invalid method: …</code> (or <code>Invalid property: …</code> for a property).</li>
+<li>A member name in the wrong case raises the same errors.</li>
+<li>An index past the end of a .NET collection raises the collection's own error, such as <code>There is no row at position 1.</code></li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<h3 id="reading-a-property-and-invoking-a-method">Reading a property and invoking a method<a class="headerlink" href="#reading-a-property-and-invoking-a-method" title="Permanent link">&para;</a></h3>
-<p>Creates a <code>StringBuilder</code> wrapping <code>"LAB"</code>, reads its <code>Length</code> property (3), appends <code>"-01"</code>, and returns the resulting string <code>"LAB-01"</code>.</p>
+<h3 id="reading-a-property-and-calling-a-method">Reading a property and calling a method<a class="headerlink" href="#reading-a-property-and-calling-a-method" title="Permanent link">&para;</a></h3>
+<p>Creates a <code>StringBuilder</code> wrapping <code>"LAB"</code>, reads its <code>Length</code> property, appends <code>"-01"</code>, and returns the resulting string.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadNetObjectProperties</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oBuilder</span><span class="p">,</span><span class="w"> </span><span class="n">bHasLength</span><span class="p">,</span><span class="w"> </span><span class="n">nLength</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oBuilder</span><span class="p">,</span><span class="w"> </span><span class="n">nLength</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oBuilder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(</span><span class="s2">"System"</span><span class="p">,</span><span class="w"> </span><span class="s2">"System.Text.StringBuilder"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LAB"</span><span class="p">},</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">bHasLength</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oBuilder</span><span class="p">:</span><span class="nf">IsProperty</span><span class="p">(</span><span class="s2">"Length"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nLength</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oBuilder</span><span class="p">:</span><span class="n">Length</span><span class="p">;</span>
+<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Initial length: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nLength</span><span class="p">));</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bHasLength</span><span class="p">;</span>
-<span class="w">        </span><span class="n">nLength</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oBuilder</span><span class="p">:</span><span class="nf">GetProperty</span><span class="p">(</span><span class="s2">"Length"</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Initial length: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nLength</span><span class="p">));</span>
-<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-
-<span class="w">    </span><span class="n">oBuilder</span><span class="p">:</span><span class="nf">Invoke</span><span class="p">(</span><span class="s2">"Append"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"-01"</span><span class="p">});</span>
-<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oBuilder</span><span class="p">:</span><span class="nf">Invoke</span><span class="p">(</span><span class="s2">"ToString"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oBuilder</span><span class="p">:</span><span class="nf">Append</span><span class="p">(</span><span class="s2">"-01"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oBuilder</span><span class="p">:</span><span class="nf">ToString</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -2202,43 +2180,37 @@
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReadNetObjectProperties"</span><span class="p">);</span>
 </code></pre></div>
-<h3 id="invoking-a-static-net-member">Invoking a static .NET member<a class="headerlink" href="#invoking-a-static-net-member" title="Permanent link">&para;</a></h3>
-<p>Uses <a href="../../functions/LimsNETTypeOf/"><code>LimsNETTypeOf</code></a> to obtain a <code>netobject</code> representing <code>System.Math</code>, then calls <code>Abs(-42)</code> = 42 and <code>Max(42, 10)</code> = 42.</p>
+<p><code>InfoMes</code> logs <code>Initial length: 3</code>, and the procedure returns <code>"LAB-01"</code>.</p>
+<h3 id="calling-a-static-net-method">Calling a static .NET method<a class="headerlink" href="#calling-a-static-net-method" title="Permanent link">&para;</a></h3>
+<p>Connects to <code>System.Math</code> as a static type with <a href="../../functions/LimsNETConnect/"><code>LimsNETConnect</code></a>, then calls <code>Abs(-42)</code>, which returns <code>42</code>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UseStaticNetType</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oMath</span><span class="p">,</span><span class="w"> </span><span class="n">nAbsolute</span><span class="p">,</span><span class="w"> </span><span class="n">nLargest</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oMath</span><span class="p">,</span><span class="w"> </span><span class="n">nAbsolute</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oMath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETTypeOf</span><span class="p">(</span><span class="s2">"System.Math"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oMath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(,</span><span class="w"> </span><span class="s2">"System.Math"</span><span class="p">,,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">nAbsolute</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oMath</span><span class="p">:</span><span class="nf">Invoke</span><span class="p">(</span><span class="s2">"Abs"</span><span class="p">,</span><span class="w"> </span><span class="p">{(</span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">42</span><span class="p">)});</span>
-<span class="w">    </span><span class="n">nLargest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oMath</span><span class="p">:</span><span class="nf">Invoke</span><span class="p">(</span><span class="s2">"Max"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">nAbsolute</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">});</span>
+<span class="w">    </span><span class="n">nAbsolute</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oMath</span><span class="p">:</span><span class="nf">Abs</span><span class="p">(</span><span class="o">-</span><span class="mi">42</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nLargest</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">nAbsolute</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"UseStaticNetType"</span><span class="p">);</span>
 </code></pre></div>
-<h3 id="working-with-indexed-collections-and-tojson">Working with indexed collections and ToJson<a class="headerlink" href="#working-with-indexed-collections-and-tojson" title="Permanent link">&para;</a></h3>
-<p>Builds a <code>DataSet</code> with one row, reads a cell value through the <code>DataRow</code> indexer by column name, and serializes the dataset to JSON.</p>
+<h3 id="building-a-dataset-and-serializing-it-with-tojson">Building a DataSet and serializing it with ToJson<a class="headerlink" href="#building-a-dataset-and-serializing-it-with-tojson" title="Permanent link">&para;</a></h3>
+<p>Builds a <code>DataSet</code> with one row through chained native members, reads a cell through the <code>DataRow</code> indexer by column name (rows are 0-based), and serializes the dataset with the <a href="../../functions/ToJson/"><code>ToJson</code></a> function.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SerializeDataSetNetObject</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oDataSet</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">oColumns</span><span class="p">,</span><span class="w"> </span><span class="n">oRows</span><span class="p">,</span><span class="w"> </span><span class="n">oTables</span><span class="p">,</span><span class="w"> </span><span class="n">oRow</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sJson</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oDataSet</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sJson</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oDataSet</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(</span><span class="s2">"System.Data"</span><span class="p">,</span><span class="w"> </span><span class="s2">"System.Data.DataSet"</span><span class="p">,</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
 <span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LimsNETConnect</span><span class="p">(</span><span class="s2">"System.Data"</span><span class="p">,</span><span class="w"> </span><span class="s2">"System.Data.DataTable"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"sample"</span><span class="p">},</span><span class="w"> </span><span class="kc">.F.</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">oColumns</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oTable</span><span class="p">:</span><span class="nf">GetProperty</span><span class="p">(</span><span class="s2">"Columns"</span><span class="p">);</span>
-<span class="w">    </span><span class="n">oColumns</span><span class="p">:</span><span class="nf">Invoke</span><span class="p">(</span><span class="s2">"Add"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"sample_id"</span><span class="p">});</span>
-<span class="w">    </span><span class="n">oColumns</span><span class="p">:</span><span class="nf">Invoke</span><span class="p">(</span><span class="s2">"Add"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"status"</span><span class="p">});</span>
+<span class="w">    </span><span class="n">oTable</span><span class="p">:</span><span class="n">Columns</span><span class="p">:</span><span class="nf">Add</span><span class="p">(</span><span class="s2">"sample_id"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oTable</span><span class="p">:</span><span class="n">Columns</span><span class="p">:</span><span class="nf">Add</span><span class="p">(</span><span class="s2">"status"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oTable</span><span class="p">:</span><span class="n">Rows</span><span class="p">:</span><span class="nf">Add</span><span class="p">({</span><span class="s2">"S-1001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Logged"</span><span class="p">});</span>
+<span class="w">    </span><span class="n">oDataSet</span><span class="p">:</span><span class="n">Tables</span><span class="p">:</span><span class="nf">Add</span><span class="p">(</span><span class="n">oTable</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">oRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oTable</span><span class="p">:</span><span class="nf">GetProperty</span><span class="p">(</span><span class="s2">"Rows"</span><span class="p">);</span>
-<span class="w">    </span><span class="n">oRows</span><span class="p">:</span><span class="nf">Invoke</span><span class="p">(</span><span class="s2">"Add"</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span><span class="s2">"S-1001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Logged"</span><span class="p">}});</span>
-
-<span class="w">    </span><span class="n">oTables</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oDataSet</span><span class="p">:</span><span class="nf">GetProperty</span><span class="p">(</span><span class="s2">"Tables"</span><span class="p">);</span>
-<span class="w">    </span><span class="n">oTables</span><span class="p">:</span><span class="nf">Invoke</span><span class="p">(</span><span class="s2">"Add"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">oTable</span><span class="p">});</span>
-
-<span class="w">    </span><span class="n">oRow</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRows</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oRow</span><span class="p">[</span><span class="s2">"sample_id"</span><span class="p">];</span>
-<span class="w">    </span><span class="n">sJson</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oDataSet</span><span class="p">:</span><span class="nf">ToJson</span><span class="p">();</span>
+<span class="w">    </span><span class="n">sSampleID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oTable</span><span class="p">:</span><span class="n">Rows</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"sample_id"</span><span class="p">];</span>
+<span class="w">    </span><span class="n">sJson</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ToJson</span><span class="p">(</span><span class="n">oDataSet</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Sample: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">);</span>
 
@@ -2248,9 +2220,42 @@
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SerializeDataSetNetObject"</span><span class="p">);</span>
 </code></pre></div>
+<p><code>InfoMes</code> logs <code>Sample: S-1001</code>. The returned JSON lists the dataset's tables, each with its <code>TableName</code>, <code>Columns</code> (name, data type and flags), <code>PrimaryKey</code> and <code>Rows</code>:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>{
+    "Tables": [
+        {
+            "TableName": "sample",
+            "Columns": [
+                {
+                    "ColumnName": "sample_id",
+                    "DataType": "string",
+                    "AllowDBNull": true,
+                    "ReadOnly": false,
+                    "Unique": false
+                },
+                {
+                    "ColumnName": "status",
+                    "DataType": "string",
+                    "AllowDBNull": true,
+                    "ReadOnly": false,
+                    "Unique": false
+                }
+            ],
+            "PrimaryKey": [],
+            "Rows": [
+                {
+                    "sample_id": "S-1001",
+                    "status": "Logged"
+                }
+            ]
+        }
+    ],
+    "Relations": []
+}
+</code></pre></div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Member access with <code>:</code> forwards to the underlying .NET wrapped object when no SSL-side member matches (e.g. <code>oNet:AnyMember(...)</code>). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as <code>Run-time error: Invalid method: Split</code>. Check a member before relying on it; see <a href="../../../guides/native-members/">Native Members</a>.</li>
+<li>Only the wrapped type's native members are available, and a member that doesn't exist, or doesn't accept the arguments given, raises an error such as <code>Run-time error: Invalid method: Split</code>. Check a member before relying on it; see <a href="../../../guides/native-members/">Native Members</a>.</li>
 </ul>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2279,7 +2284,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 17:32:13 UTC">September 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 30, 2026 21:05:38 UTC">September 30, 2026</span>
   </span>
 
     
