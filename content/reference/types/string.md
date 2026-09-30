@@ -20,7 +20,7 @@ The `string` type stores text exactly as text. You can create string values with
 
 Strings support concatenation with [`+`](../operators/plus.md), trimmed concatenation with [`-`](../operators/minus.md), containment checks with [`$`](../operators/dollar.md), exact equality with [`==`](../operators/strict-equals.md), and prefix-style equality with [`=`](../operators/equals.md). For strings, `sLeft = sRight` returns [`.T.`](../literals/true.md) when the right operand is empty, exactly equal to the left operand, or a prefix of the left operand.
 
-Strings are 1-based for indexing. `sValue[1]` returns the first character as a single-character string. [`Empty`](../functions/Empty.md) treats null string values, `""`, and strings that become empty after trimming spaces, tabs, carriage returns, or line feeds as empty. [`ToJson()`](../functions/ToJson.md) returns JSON string text for non-null values and `null` for null strings.
+Strings are 1-based for indexing. `sValue[1]` returns the first character as a single-character string. [`Empty`](../functions/Empty.md) treats `""` and strings that become empty after trimming spaces, tabs, carriage returns, or line feeds as empty. [`ToJson`](../functions/ToJson.md)`(sValue)` returns the text as a quoted JSON string.
 
 ## Creating values
 
@@ -54,18 +54,23 @@ sBracketed := [text value];
 
 ## Members
 
-| Member | Kind | Parameters | Returns | Description |
-|---|---|---|---|---|
-| `value` | Property | — | `string` | Returns the stored text value. |
-| `clone()` | Method | none | `string` | Returns a copy of the string. |
-| `IsEmpty()` | Method | none | [`boolean`](boolean.md) | Returns [`.T.`](../literals/true.md) when the value is null, empty, or only whitespace made of spaces, tabs, carriage returns, or line feeds. |
-| [`ToJson()`](../functions/ToJson.md) | Method | none | `string` | Returns JSON string text, or `null` when the string value is null. |
-| `CompareTo(sOther)` | Method | `sOther` (`string`) | [`number`](number.md) | Returns a negative number, `0`, or a positive number based on lexical ordering. |
-| `Index(nPos)` | Method | `nPos` ([`number`](number.md)) | `string` | Returns the character at the specified 1-based position. In SSL code this is normally used through `sValue[nPos]`. |
+Strings have no SSL-defined `:` members. Calls such as `sValue:IsEmpty()`, `sValue:ToJson()`, `sValue:Index(1)` and `sValue:clone()` raise `Run-time error: Invalid method: …`, and `sValue:value` raises `Invalid property: value`. Work with strings through the operators above and the string functions instead:
+
+| Task | Use |
+|---|---|
+| Test for blank or whitespace-only text | [`Empty`](../functions/Empty.md) |
+| Count characters | [`Len`](../functions/Len.md) |
+| Read one character | `sValue[nPos]` (see [Indexing](#indexing)) |
+| Take part of the text | [`SubStr`](../functions/SubStr.md), [`Left`](../functions/Left.md), [`Right`](../functions/Right.md) |
+| Find text | [`At`](../functions/At.md), or [`$`](../operators/dollar.md) for a yes/no check |
+| Change case or trim | [`Upper`](../functions/Upper.md), [`Lower`](../functions/Lower.md), [`AllTrim`](../functions/AllTrim.md) |
+| Replace text | [`Replace`](../functions/Replace.md) (case-insensitive), [`StrTran`](../functions/StrTran.md) (case-sensitive) |
+| Serialize to JSON | [`ToJson`](../functions/ToJson.md) |
+| Compare order | [`<`](../operators/less-than.md), [`>`](../operators/greater-than.md), or `sValue:CompareTo(sOther)`, a .NET member; see below |
 
 ## Calling .NET `String` methods
 
-In addition to the SSL-defined members above, any public method or property on .NET's `System.String` is callable on a `string` value with the `:` method-call syntax. The runtime forwards `sValue:Name(args)` to the underlying .NET string by name. Not every member form is reachable: `sValue:Split(",")` raises `Invalid method: Split`, so verify a member before relying on it. Static methods such as `String.Format` and `String.Join` are reachable through the same syntax; for a static call the receiver is only used to locate the type.
+Public methods and properties of .NET's `System.String` can be called on a `string` value with the `:` method-call syntax, such as `sValue:Trim()` or `sValue:Length`. For example, `"abc":CompareTo("abd")` returns `-1`, and `sValue:Clone()` returns the same text. Member names are case-sensitive: `sValue:ToUpper()` and `sValue:Clone()` work, but `sValue:toupper()` and `sValue:clone()` raise `Invalid method: …`, and `sValue:length` raises `Invalid property: length` (see [Member names and case](../../guides/native-members.md#member-names-and-case)). Not every member form is reachable: `sValue:Split(",")` raises `Invalid method: Split`, so verify a member before relying on it. Static methods such as `String.Format` and `String.Join` are reachable through the same syntax; for a static call the receiver is only used to locate the type.
 
 This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer SSL-native string functions ([`Replace`](../functions/Replace.md), [`Upper`](../functions/Upper.md), [`Lower`](../functions/Lower.md), [`SubStr`](../functions/SubStr.md), and similar) for portability, and reserve direct .NET calls for behavior the SSL library does not cover. See [Native Members on SSL Values](../../guides/native-members.md) for the members verified on STARLIMS v11 and how to check others.
 
@@ -111,7 +116,7 @@ Index expressions must resolve to an integer value. Values below `1` or above th
 !!! success "Do"
     - Use [`==`](../operators/strict-equals.md) when you need exact string equality.
     - Use [`=`](../operators/equals.md) only when you intentionally want prefix behavior.
-    - Use `IsEmpty()` when a value may be blank or whitespace-only.
+    - Use [`Empty`](../functions/Empty.md) when a value may be blank or whitespace-only.
     - Remember that `sValue[1]` is the first character, not `sValue[0]`.
 
 !!! failure "Don't"
@@ -183,7 +188,7 @@ DoProc("CompareStatuses");
 
 ### Checking blank input and serializing to JSON
 
-Normalizes whitespace-only input to a fallback string, then serializes the result as JSON. `IsEmpty()` treats `"   "` as empty.
+Normalizes whitespace-only input to a fallback string, then serializes the result with [`ToJson`](../functions/ToJson.md). [`Empty`](../functions/Empty.md) treats `"   "` as empty.
 
 ```ssl
 :PROCEDURE BuildCommentPayload;
@@ -191,11 +196,11 @@ Normalizes whitespace-only input to a fallback string, then serializes the resul
 
 	sComment := "   ";
 
-	:IF sComment:IsEmpty();
+	:IF Empty(sComment);
 		sComment := "No comment provided";
 	:ENDIF;
 
-	sJson := sComment:ToJson();
+	sJson := ToJson(sComment);
 
 	UsrMes(sJson);
 
@@ -214,7 +219,7 @@ DoProc("BuildCommentPayload");
 
 ## Caveats
 
-- Member access with `:` forwards to the underlying .NET String object when no SSL-side member matches (e.g. `sValue:EndsWith("suffix")`). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
+- A `:` member call on a string reaches a .NET `String` member (e.g. `sValue:EndsWith("suffix")`). A member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
 
 ## Related elements
 

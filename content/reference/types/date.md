@@ -46,31 +46,33 @@ dParsed := CToD("04/15/2026");
 
 ## Members
 
-| Member | Kind | Returns | Description |
-| --- | --- | --- | --- |
-| `value` | Property | `date` | Gets or sets the stored date value. |
-| `IsEmpty()` | Method | [`boolean`](boolean.md) | Returns [`.T.`](../literals/true.md) when the date is empty, [`.F.`](../literals/false.md) otherwise. |
-| `ToString()` | Method | [`string`](string.md) | Formats the date using the default `MM/dd/yyyy` display format. Returns `"  /  /    "` when the date is empty. |
-| `ToString(sFormat)` | Method | [`string`](string.md) | Formats the date using a caller-supplied format string. Returns `"  /  /    "` when the date is empty. |
-| [`ToJson()`](../functions/ToJson.md) | Method | [`string`](string.md) | Serializes the date to an ISO 8601 date/time string wrapped as JSON text. Returns `null` for empty dates. |
-| `clone()` | Method | `date` | Creates a copy of the current date value. |
-| `MakeInvariant()` | Method | [`NIL`](../literals/nil.md) | Marks the date as a wall-clock value with no time-zone offset in JSON output. |
-| `MakeLocal()` | Method | [`NIL`](../literals/nil.md) | Marks the date as a local-time value so JSON output includes the local offset. |
-| `ChangeKind(nKind)` | Method | [`NIL`](../literals/nil.md) | Changes how the stored date is interpreted for later serialization. |
+Dates have no SSL-defined `:` members. Calls such as `dValue:IsEmpty()`, `dValue:ToJson()`, `dValue:clone()`, `dValue:MakeInvariant()`, `dValue:MakeLocal()` and `dValue:ChangeKind(n)` raise `Run-time error: Invalid method: …`, and `dValue:value` raises `Invalid property: value`. Work with dates through the operators above, the date functions, and the .NET members below:
+
+| Task | Use |
+|---|---|
+| Test for an empty date | [`Empty`](../functions/Empty.md) |
+| Format as text | [`DToC`](../functions/DToC.md), [`DateToString`](../functions/DateToString.md), or `dValue:ToString(sFormat)`, a .NET member |
+| Compact `yyyyMMdd` text | [`DToS`](../functions/DToS.md) |
+| Read the year, month or day | [`Year`](../functions/Year.md), [`Month`](../functions/Month.md), [`Day`](../functions/Day.md) |
+| Add or subtract days | [`+`](../operators/plus.md) and [`-`](../operators/minus.md) with a number of days |
+| Add months or years | [`DateAdd`](../functions/DateAdd.md)`(dValue, n, "month")`, or `dValue:AddMonths(n)` and `dValue:AddYears(n)`, .NET members |
+| Serialize to JSON | [`ToJson`](../functions/ToJson.md) |
 
 ## Calling .NET `DateTime` methods
 
-In addition to the SSL-defined members above, any public method or property on .NET's `System.DateTime` is callable on a non-empty `date` value with the `:` method-call syntax. The runtime forwards `dValue:Name(args)` to the underlying .NET date by name.
+Public methods and properties of .NET's `System.DateTime` can be called on a non-empty `date` value with the `:` method-call syntax. Member names are case-sensitive: `dValue:AddDays(1)` and `dValue:Year` work, but `dValue:adddays(1)` raises `Invalid method: adddays` and `dValue:year` raises `Invalid property: year` (see [Member names and case](../../guides/native-members.md#member-names-and-case)).
 
 This is particularly useful for arithmetic that SSL's [`+`](../operators/plus.md) and [`-`](../operators/minus.md) operators do not cover, since those only add or subtract whole-day offsets. `System.DateTime` offers month-aware and year-aware arithmetic — for example `AddMonths(n)`, `AddYears(n)`, `AddHours(n)`, `AddMinutes(n)` — and component accessors such as `Year`, `Month`, `Day`, `DayOfWeek`, and `DayOfYear`.
 
-Empty dates cannot be dispatched through this passthrough. The underlying .NET value of an empty date is `null`, and calling a method on it raises a null-reference error. Always guard with [`Empty`](../functions/Empty.md) before reaching for .NET members.
+`dValue:ToString()` with no format gives the date and time in the server's format, such as `9/30/2026 12:00:00 AM`. It is not a fixed `MM/dd/yyyy` form. Pass a format, such as `dValue:ToString("yyyy-MM-dd")`, when the output format matters.
 
-This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined date members and SSL-native date functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover. See [Native Members on SSL Values](../../guides/native-members.md) for the members verified on STARLIMS v11 and how to check others.
+Any member access on an empty date raises an error. Always guard with [`Empty`](../functions/Empty.md) before calling a .NET member.
+
+This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer SSL-native date functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover. See [Native Members on SSL Values](../../guides/native-members.md) for the members verified on STARLIMS v11 and how to check others.
 
 ### Example: month-aware date arithmetic
 
-Uses .NET's `AddMonths(nMonths)` method to compute a date three months after a start date. SSL's [`+`](../operators/plus.md) operator only adds whole-day offsets, so month-aware arithmetic — which correctly handles end-of-month and leap-year edge cases — is only available through this passthrough.
+Uses .NET's `AddMonths(nMonths)` method to compute a date three months after a start date. SSL's [`+`](../operators/plus.md) operator only adds whole-day offsets, so month-aware arithmetic — which correctly handles end-of-month and leap-year edge cases — needs `AddMonths` or [`DateAdd`](../functions/DateAdd.md) with `"month"`.
 
 ```ssl
 :PROCEDURE ComputeReviewDate;
@@ -110,22 +112,23 @@ January 31 plus three months lands on April 30, because April has only 30 days. 
 ## Notes for daily SSL work
 
 !!! success "Do"
-    - Check `IsEmpty()` before using a date in business rules or display logic.
+    - Check [`Empty`](../functions/Empty.md) before using a date in business rules or display logic.
     - Use [`+`](../operators/plus.md) and [`-`](../operators/minus.md) with numeric day offsets instead of converting dates to strings.
     - Use date-to-date subtraction when you need a day count.
-    - Format output explicitly with `ToString()` or [`DToC`](../functions/DToC.md) when the display format matters.
+    - Format output with an explicit format, such as `dValue:ToString("yyyy-MM-dd")`, when the display format matters.
 
 !!! failure "Don't"
     - Treat a date like a string or number for comparison logic. Use the date comparison operators directly.
-    - Assume an empty date behaves like a real scheduled value. Validate with `IsEmpty()` first.
+    - Assume an empty date behaves like a real scheduled value. Validate with [`Empty`](../functions/Empty.md) first.
     - Use `[]` indexing on a date. Dates are scalar values, not collections.
-    - Assume [`ToJson()`](../functions/ToJson.md) and `ToString()` produce the same output. [`ToJson()`](../functions/ToJson.md) is for JSON serialization, not user-facing display.
+    - Assume `dValue:ToString()` with no format gives `MM/dd/yyyy`. It gives the date and time in the server's format, such as `9/30/2026 12:00:00 AM`.
+    - Use [`ToJson`](../functions/ToJson.md) for display. It is for JSON serialization, not user-facing text.
 
 ## Examples
 
 ### Validating a required date
 
-Checks for an empty date before continuing. `CToD("")` returns an empty date, so `IsEmpty()` returns [`.T.`](../literals/true.md) and the procedure exits early.
+Checks for an empty date before continuing. `CToD("")` returns an empty date, so [`Empty`](../functions/Empty.md) returns [`.T.`](../literals/true.md) and the procedure exits early.
 
 ```ssl
 :PROCEDURE ValidateRequiredDate;
@@ -133,12 +136,12 @@ Checks for an empty date before continuing. `CToD("")` returns an empty date, so
 
     dSubmittedDate := CToD("");
 
-    :IF dSubmittedDate:IsEmpty();
+    :IF Empty(dSubmittedDate);
         UsrMes("Required date is missing");
         :RETURN .F.;
     :ENDIF;
 
-    sMessage := "Date received: " + dSubmittedDate:ToString();
+    sMessage := "Date received: " + dSubmittedDate:ToString("yyyy-MM-dd");
     InfoMes(sMessage);
 
     :RETURN .T.;
@@ -177,7 +180,7 @@ Adds 14 days to a start date, then compares the due date with today to show days
         InfoMes(sMessage);
     :ENDIF;
 
-    sMessage := "Due date: " + dDueDate:ToString("YYYY-MM-DD");
+    sMessage := "Due date: " + dDueDate:ToString("yyyy-MM-dd");
     InfoMes(sMessage);
 
     :RETURN dDueDate;
@@ -187,45 +190,42 @@ Adds 14 days to a start date, then compares the due date with today to show days
 DoProc("CheckTaskDueDate");
 ```
 
-### Controlling JSON serialization output
+### Formatting a date with and without a format
 
-Clones the current date twice, marks one as invariant and one as local, then serializes both to show how the output format differs. Output includes the current timestamp and varies each time the example runs.
+Builds a fixed date and formats it three ways. `ToString()` with no format follows the server's date and time settings, so its output varies by server. The explicit format and [`DToS`](../functions/DToS.md) do not.
 
 ```ssl
-:PROCEDURE ShowDateJsonModes;
-    :DECLARE dSourceDate, dInvariantDate, dLocalDate;
-    :DECLARE sInvariantJson, sLocalJson;
+:PROCEDURE ShowDateFormats;
+    :DECLARE dSampled, sDefault, sIso, sCompact;
 
-    dSourceDate := Now();
+    dSampled := DateFromNumbers(2026, 9, 30);
 
-    dInvariantDate := dSourceDate:clone();
-    dInvariantDate:MakeInvariant();
-    sInvariantJson := dInvariantDate:ToJson();
+    sDefault := dSampled:ToString();
+    sIso := dSampled:ToString("yyyy-MM-dd");
+    sCompact := DToS(dSampled);
 
-    dLocalDate := dSourceDate:clone();
-    dLocalDate:MakeLocal();
-    sLocalJson := dLocalDate:ToJson();
+    UsrMes("Default: " + sDefault);
+    UsrMes("ISO: " + sIso);
+    UsrMes("DToS: " + sCompact);
 
-    InfoMes("Invariant JSON: " + sInvariantJson);
-    InfoMes("Local JSON: " + sLocalJson);
-
-    :RETURN;
+    :RETURN sIso;
 :ENDPROC;
 
 /* Usage;
-DoProc("ShowDateJsonModes");
+DoProc("ShowDateFormats");
 ```
 
-[`InfoMes`](../functions/InfoMes.md) logs (values vary by current date and time zone):
+[`UsrMes`](../functions/UsrMes.md) logs (the first line varies with the server's settings):
 
 ```text
-Invariant JSON: "2026-04-23T14:30:00"
-Local JSON: "2026-04-23T14:30:00+05:00"
+Default: 9/30/2026 12:00:00 AM
+ISO: 2026-09-30
+DToS: 20260930
 ```
 
 ## Caveats
 
-- Member access with `:` forwards to the underlying .NET DateTime object when no SSL-side member matches (e.g. `dValue:AddMonths(2)`). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
+- A `:` member call on a date reaches a .NET `DateTime` member (e.g. `dValue:AddMonths(2)`). A member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
 
 ## Related elements
 

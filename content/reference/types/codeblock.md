@@ -42,12 +42,13 @@ Equality is not supported for code blocks. Comparing them raises a runtime error
 
 ## Members
 
-| Member | Kind | Returns | Description |
-|--------|------|---------|-------------|
-| `eval` | Method | `any` | Evaluates the code block with the arguments you provide. |
-| `IsEmpty()` | Method | [`boolean`](boolean.md) | Returns [`.T.`](../literals/true.md) when the code block is uninitialized, otherwise [`.F.`](../literals/false.md). |
-| `ToString()` | Method | [`string`](string.md) | Always returns the fixed text `Code block`. Does not expose the parameter list or expression body. |
-| `clone()` | Method | `code block` | Creates another code block value that reuses the same callable logic. |
+Code blocks have no `:` members. Any member call on a code block, such as `fnDouble:eval(2)`, `fnDouble:IsEmpty()`, `fnDouble:ToString()` or `fnDouble:clone()`, raises an error that begins `Run-time error: the operator/method: Contents is not implemented on type:` and ends `Operand: Code block`. Use functions instead:
+
+| Task | Use |
+|---|---|
+| Run the code block | [`Eval`](../functions/Eval.md)`(fnDouble, 2)` |
+| Check that a value is a code block | [`LimsTypeEx`](../functions/LimsTypeEx.md)`(vValue) == "CODEBLOCK"` |
+| Find a matching array element | [`AScan`](../functions/AScan.md) with a code block |
 
 ## Indexing
 
@@ -59,7 +60,7 @@ Equality is not supported for code blocks. Comparing them raises a runtime error
 !!! success "Do"
     - Use a code block when you need a small reusable expression that fits naturally inline.
     - Keep code blocks expression-based and move multi-step logic into a procedure.
-    - Check `IsEmpty()` before evaluation when a code block may not have been initialized.
+    - Check `LimsTypeEx(fnValue) == "CODEBLOCK"` before evaluation when a variable may not hold a code block.
 
 !!! failure "Don't"
     - Compare code blocks with [`=`](../operators/equals.md), [`==`](../operators/strict-equals.md), or [`!=`](../operators/not-equals.md). Code blocks do not support equality checks and the comparison raises a runtime error.
@@ -68,7 +69,7 @@ Equality is not supported for code blocks. Comparing them raises a runtime error
 
 ## Errors and edge cases
 
-- `clone()` copies the code block value, but it does not create a separate procedure.
+- Any `:` member call on a code block raises an error, including `:eval()`, `:ToString()` and `:clone()`. Run a code block with [`Eval`](../functions/Eval.md).
 
 ## Examples
 

@@ -15,7 +15,7 @@ starlims:
 
 The `number` type represents numeric values in SSL. Use it for arithmetic, ordering, exact numeric comparisons, shifts, and integer-only bitwise work.
 
-SSL has a single numeric type for whole numbers and fractional values. Numeric values support arithmetic operators, comparison operators, exponentiation, and shift operators. Integer-only bitwise operations are available through the [`_AND()`](../functions/_AND.md), [`_OR()`](../functions/_OR.md), [`_XOR()`](../functions/_XOR.md), and [`_NOT()`](../functions/_NOT.md) built-ins. Numeric values are scalar values, so they do not support `[]` indexing. For display or string building, convert numbers explicitly with [`LimsString`](../functions/LimsString.md) or `ToString()`.
+SSL has a single numeric type for whole numbers and fractional values. Numeric values support arithmetic operators, comparison operators, exponentiation, and shift operators. Integer-only bitwise operations are available through the [`_AND()`](../functions/_AND.md), [`_OR()`](../functions/_OR.md), [`_XOR()`](../functions/_XOR.md), and [`_NOT()`](../functions/_NOT.md) built-ins. Numeric values are scalar values, so they do not support `[]` indexing. For display or string building, convert numbers explicitly with [`LimsString`](../functions/LimsString.md) or `nValue:ToString()`.
 
 ## Creating values
 
@@ -62,30 +62,30 @@ nSmall := 1.2e-3;
 
 ## Members
 
-| Member | Kind | Returns | Description |
-|--------|------|---------|-------------|
-| `value` | Property | `number` | Gets or sets the stored numeric value. |
-| `IsInt` | Property | [`boolean`](boolean.md) | Returns [`.T.`](../literals/true.md) when the value is a whole number within the 32-bit signed integer range (`-2147483648` through `2147483647`). |
-| `IsInt64` | Property | [`boolean`](boolean.md) | Returns [`.T.`](../literals/true.md) when the value is a whole number within the 64-bit signed integer range. |
-| `IsEmpty()` | Method | [`boolean`](boolean.md) | Returns [`.T.`](../literals/true.md) when the value is `0`, [`.F.`](../literals/false.md) otherwise. |
-| `ToString()` | Method | [`string`](string.md) | Formats the number using the default numeric string representation. |
-| `ToString(sDecimal, sGroup)` | Method | [`string`](string.md) | Formats the number using caller-supplied decimal and group separators. |
-| [`ToJson()`](../functions/ToJson.md) | Method | [`string`](string.md) | Serializes the number with `.` as the decimal separator and `,` as the group separator. |
-| `clone()` | Method | `number` | Creates a copy of the current numeric value. |
+Numbers have no SSL-defined `:` members. Calls such as `nValue:IsEmpty()`, `nValue:ToJson()` and `nValue:clone()` raise `Run-time error: Invalid method: …`, and properties such as `nValue:value`, `nValue:IsInt` and `nValue:IsInt64` raise `Invalid property: …`. Work with numbers through the operators above and the numeric functions instead:
+
+| Task | Use |
+|---|---|
+| Convert to text | [`LimsString`](../functions/LimsString.md), or `nValue:ToString()`, a .NET member; see below |
+| Format with a pattern | `nValue:ToString(sFormat)`, such as `ToString("N2")`, a .NET member; see below |
+| Test for zero | [`Empty`](../functions/Empty.md) |
+| Test for a whole number | `nValue == Integer(nValue)`, with [`Integer`](../functions/Integer.md) |
+| Round or truncate | [`Round`](../functions/Round.md), [`Integer`](../functions/Integer.md) |
+| Serialize to JSON | [`ToJson`](../functions/ToJson.md) |
 
 ## Calling .NET numeric methods
 
-In addition to the SSL-defined members above, any public method or property on the underlying .NET numeric type is callable on a `number` value with the `:` method-call syntax. The runtime forwards `nValue:Name(args)` to that .NET value by name.
+Public methods and properties of the value's .NET numeric type can be called on a `number` value with the `:` method-call syntax. For example, `nValue:ToString()` gives `"42"` for `42`, and `nValue:ToString("N2")` gives `"1,234.50"` for `1234.5`. Member names are case-sensitive: `nValue:tostring()` raises `Invalid method: tostring` (see [Member names and case](../../guides/native-members.md#member-names-and-case)).
 
-The .NET type that backs a `number` depends on the current value: integer-valued numbers within the 32-bit signed integer range present as `System.Int32`, and all other numeric values present as `System.Double`. As a result, the available member set varies with the value. Members common to both types — for example, `CompareTo(other)`, `Equals(other)`, and `ToString(sFormat)` with a .NET format string — work for any numeric value. Type-specific members only resolve when the value happens to match that type, so guard with `IsInt` if needed.
+The .NET type depends on the current value: `nValue:GetType()` reports `System.Int32` for a whole number such as `42` and `System.Double` for `1.5`. As a result, the available member set varies with the value. Members common to both types — for example, `CompareTo(other)`, `Equals(other)`, and `ToString(sFormat)` with a .NET format string — work for any numeric value. Type-specific members only resolve when the value happens to match that type.
 
-Static numeric helpers that live on other .NET types — for example, `System.Math.Sqrt` or `System.Math.Round` — are not reachable through this dispatch, because `Math` is not the value's type. Use the SSL function library for those operations.
+Static numeric helpers that live on other .NET types — for example, `System.Math.Sqrt` or `System.Math.Round` — are not reachable this way, because `Math` is not the value's type. Use the SSL function library for those operations.
 
-This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined number members and SSL-native math functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover. See [Native Members on SSL Values](../../guides/native-members.md) for the members verified on STARLIMS v11 and how to check others.
+This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer SSL-native math functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover. See [Native Members on SSL Values](../../guides/native-members.md) for the members verified on STARLIMS v11 and how to check others.
 
 ### Example: formatting a number with grouped digits
 
-Uses .NET's single-argument `ToString(sFormat)` overload with the `"N0"` standard format string to render a large integer with thousands separators. SSL's own `ToString()` and `ToString(sDecimal, sGroup)` overloads are unaffected; the single-argument form resolves to the .NET method on the backing numeric type and uses the current culture's separators.
+Uses the .NET `ToString(sFormat)` member with the `"N0"` standard format string to render a large integer with thousands separators. The separators follow the server's settings.
 
 ```ssl
 :PROCEDURE FormatRecordCount;
@@ -119,8 +119,8 @@ DoProc("FormatRecordCount");
 !!! success "Do"
     - Use numeric operators directly for arithmetic and numeric comparisons.
     - Use [`==`](../operators/strict-equals.md) when you want exact equality and want your code to read consistently across types.
-    - Check `IsInt` or `IsInt64` before doing shifts or bitwise work on values that may contain fractions.
-    - Convert explicitly with [`LimsString`](../functions/LimsString.md) or `ToString()` when building user-facing text.
+    - Check that a value is a whole number, such as `nValue == Integer(nValue)`, before doing shifts or bitwise work on values that may contain fractions.
+    - Convert explicitly with [`LimsString`](../functions/LimsString.md) or `nValue:ToString()` when building user-facing text.
 
 !!! failure "Don't"
     - Write bitwise logic with [`&`](../operators/and.md), [`|`](../operators/or.md), or [`^`](../operators/power.md) as bitwise operators. In SSL, bitwise work uses [`_AND()`](../functions/_AND.md), [`_OR()`](../functions/_OR.md), [`_XOR()`](../functions/_XOR.md), [`_NOT()`](../functions/_NOT.md), and the shift operators [`<<`](../operators/shift-left.md) and [`>>`](../operators/shift-right.md).
@@ -167,9 +167,9 @@ Computes area, perimeter, ratio, and squared width for a 10 x 5 rectangle, then 
 DoProc("NumberArithmetic");
 ```
 
-### Integer-only shifts, masks, and formatting
+### Integer-only shifts and masks
 
-Validates that the values are integer-valued before using shifts and bitwise built-ins, starting from `nFlags = 6` (binary 0110) and `nMask = 3` (binary 0011).
+Checks with [`Integer`](../functions/Integer.md) that the values are whole numbers before using shifts and bitwise built-ins, starting from `nFlags = 6` (binary 0110) and `nMask = 3` (binary 0011).
 
 ```ssl
 :PROCEDURE NumberBitwiseOps;
@@ -179,7 +179,7 @@ Validates that the values are integer-valued before using shifts and bitwise bui
     nFlags := 6;
     nMask := 3;
 
-    :IF !nFlags:IsInt .OR. !nMask:IsInt;
+    :IF nFlags != Integer(nFlags) .OR. nMask != Integer(nMask);
         ErrorMes("Bitwise operations require integer values");
         :RETURN .F.;
     :ENDIF;
@@ -193,13 +193,13 @@ Validates that the values are integer-valued before using shifts and bitwise bui
     nToggled := _XOR(nFlags, 2);
     /* 6 XOR 2 = 4;
 
-    InfoMes("Shifted: " + nShifted:ToString(".", ","));
+    InfoMes("Shifted: " + LimsString(nShifted));
     /* Logs: Shifted: 12;
-    InfoMes("Masked: " + nMasked:ToString(".", ","));
+    InfoMes("Masked: " + LimsString(nMasked));
     /* Logs: Masked: 2;
-    InfoMes("Combined: " + nCombined:ToString(".", ","));
+    InfoMes("Combined: " + LimsString(nCombined));
     /* Logs: Combined: 14;
-    InfoMes("Toggled: " + nToggled:ToString(".", ","));
+    InfoMes("Toggled: " + LimsString(nToggled));
     /* Logs: Toggled: 4;
 
     :RETURN nCombined;
@@ -234,7 +234,7 @@ Computes mean and variance over an array of measurements, then uses bitwise flag
     nMean     := nSum / nCount;
     nVariance := (nSumSq / nCount) - (nMean ^ 2);
 
-    :IF nMean:IsInt;
+    :IF nMean == Integer(nMean);
         nClassBits := 0;
         :IF nMean > 100;
             nClassBits := _OR(nClassBits, 1);
@@ -246,8 +246,8 @@ Computes mean and variance over an array of measurements, then uses bitwise flag
         nClassBits := -1;
     :ENDIF;
 
-    sReport := "Mean: " + nMean:ToString(".", ",") +
-               " | Variance: " + nVariance:ToString(".", ",") +
+    sReport := "Mean: " + LimsString(nMean) +
+               " | Variance: " + LimsString(nVariance) +
                " | ClassBits: " + LimsString(nClassBits);
 
     InfoMes(sReport);
@@ -260,7 +260,7 @@ DoProc("AnalyzeMeasurements", {{10, 20, 30}});
 
 ## Caveats
 
-- Member access with `:` forwards to the underlying .NET numeric object when no SSL-side member matches (e.g. `nValue:ToString("F2")`). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
+- A `:` member call on a number reaches a member of its .NET numeric type (e.g. `nValue:ToString("F2")`). A member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
 
 ## Related elements
 

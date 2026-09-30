@@ -66,8 +66,8 @@ Objects support identity comparison operators. Arithmetic and relational operato
 | `IsEmpty()` | Method | none | [`boolean`](boolean.md) | Always returns [`.F.`](../literals/false.md) for object values. |
 | `IsMethod(sName)` | Method | `sName` ([`string`](string.md)) | [`boolean`](boolean.md) | Returns [`.T.`](../literals/true.md) when the named method is callable on the object. |
 | `InvokeMethod(sName, [aArgs])` | Method | `sName` ([`string`](string.md)), `aArgs` ([`array`](array.md) or [`NIL`](../literals/nil.md)) | `any` | Calls a method by name using dynamic dispatch. |
-| `clone()` | Method | none | `object` | On dynamic objects created with [`CreateUdObject()`](../functions/CreateUdObject.md), returns a new object with the same `XmlType` and dynamic properties. Only the top-level properties are copied. Nested arrays and objects are shared with the original. |
-| `ToString()` | Method | none | [`string`](string.md) | On dynamic objects, returns the serialized XML text. |
+| `clone()` | Method | none | `object` | On dynamic objects created with [`CreateUdObject()`](../functions/CreateUdObject.md), returns a new object with the same `XmlType` and dynamic properties. Only the top-level properties are copied. Nested arrays and objects are shared with the original. `Clone()` works the same. |
+| `ToString()` | Method | none | [`NIL`](../literals/nil.md) | On dynamic objects created with [`CreateUdObject()`](../functions/CreateUdObject.md), returns [`NIL`](../literals/nil.md), not the XML text. Use `Serialize()` for XML. |
 | `Destroy()` | Method | none | none | Runs object cleanup logic. The base implementation does nothing. |
 
 ## Indexing
@@ -91,12 +91,14 @@ Objects support identity comparison operators. Arithmetic and relational operato
     - Rely on `clone()` for a deep copy. On dynamic objects created with [`CreateUdObject()`](../functions/CreateUdObject.md), it copies only the top-level properties, so a nested array or object changed through the copy also changes in the original. Do not assume other object values support `clone()` the same way.
     - Call [`CreateLocal()`](../functions/CreateLocal.md) to create an object. It creates a local variable by name, and with no arguments it raises an error.
     - Set `XmlType` to a non-string value. That raises an error.
+    - Call `ToString()` for the XML text. On dynamic objects it returns [`NIL`](../literals/nil.md); use `Serialize()`.
 
 ## Errors and edge cases
 
 - Reading a missing property raises a runtime error with the message `Property not found: <name>.`
 - [`AddProperty()`](../functions/AddProperty.md) validates the property name and initializes the new property to `""`.
 - `IsEmpty()` is not a property-count check for objects.
+- On dynamic objects created with [`CreateUdObject()`](../functions/CreateUdObject.md), member and property names ignore case: `oValue:getproperty("Status")`, `oValue:xmltype`, and `oValue:status` for a property set as `oValue:Status` all work. Members of strings, numbers, dates and arrays are case-sensitive; see [Member names and case](../../guides/native-members.md#member-names-and-case).
 
 ## Examples
 

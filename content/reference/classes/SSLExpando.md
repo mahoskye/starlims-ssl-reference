@@ -13,7 +13,7 @@ starlims:
 
 `SSLExpando` is a built-in object class for storing named values whose shape is decided at runtime.
 
-Use `SSLExpando{}` when you need an object that can grow as your script runs. You can add and update dynamic properties by name, check whether a property exists, list the current dynamic properties, and serialize the object to XML. `XmlType` controls the XML root element name and is always treated as an available property. Dynamic property names are matched case-insensitively.
+Use `SSLExpando{}` when you need an object that can grow as your script runs. You can add and update dynamic properties by name, check whether a property exists, list the current dynamic properties, and serialize the object to XML. `XmlType` controls the XML root element name and is always treated as an available property. Member and dynamic property names are matched case-insensitively.
 
 ## When to use
 
@@ -31,7 +31,7 @@ Creates an empty `SSLExpando` instance.
 
 | Name | Type | Access | Description |
 |------|------|--------|-------------|
-| `XmlType` | [string](../types/string.md) | read-write | XML root element name used by `ToString()` and `Serialize()` |
+| `XmlType` | [string](../types/string.md) | read-write | XML root element name used by `Serialize()` |
 
 ## Methods
 
@@ -42,7 +42,7 @@ Creates an empty `SSLExpando` instance.
 | `SetProperty(sProp, vValue)` | none | Sets `XmlType` or a dynamic property |
 | `IsProperty(sProp)` | [boolean](../types/boolean.md) | Returns whether a property is available |
 | `GetPropList` | [array](../types/array.md) | Returns the current dynamic property names |
-| `ToString` | [string](../types/string.md) | Returns the object's XML representation |
+| `ToString` | [`NIL`](../literals/nil.md) | Returns [`NIL`](../literals/nil.md), not XML. Use `Serialize()` for XML |
 
 ### `clone`
 
@@ -95,9 +95,9 @@ Returns the current dynamic property names.
 
 ### `ToString`
 
-Returns the object as XML.
+Returns [`NIL`](../literals/nil.md). It does not return the object's XML. Call `Serialize()` for the XML text; see [object](../types/object.md#members).
 
-**Returns:** [string](../types/string.md) — XML string for the current `SSLExpando`.
+**Returns:** [`NIL`](../literals/nil.md).
 
 ## Inheritance
 
@@ -119,15 +119,14 @@ Returns the object as XML.
 
 - `GetPropList()` returns only dynamic property names. It does not include inherited object members or `XmlType`.
 - `IsProperty("XmlType")` is always true, even if you never assigned a custom XML type.
-- When `XmlType` is not set, `ToString()` uses `SSLExpando` as the root element name. Setting `XmlType` to [`NIL`](../literals/nil.md) clears any custom value and restores the default.
-- `ToString()` returns the same XML content as `Serialize()`.
-- `ToString()` returns XML, not a debug-style property dump.
+- When `XmlType` is not set, `Serialize()` uses `SSLExpando` as the root element name. Setting `XmlType` to [`NIL`](../literals/nil.md) clears any custom value and restores the default.
+- `ToString()` returns [`NIL`](../literals/nil.md), not XML. Use `Serialize()` for the XML text.
 
 ## Examples
 
 ### Build a dynamic sample payload
 
-Creates an `SSLExpando`, assigns `XmlType` and three dynamic properties, then reads a property with `GetProperty`, lists the dynamic property count with `GetPropList`, and serializes the object to XML with `ToString`.
+Creates an `SSLExpando`, assigns `XmlType` and three dynamic properties, then reads a property with `GetProperty`, lists the dynamic property count with `GetPropList`, and serializes the object to XML with `Serialize`.
 
 ```ssl
 :PROCEDURE BuildSamplePayload;
@@ -147,7 +146,7 @@ Creates an `SSLExpando`, assigns `XmlType` and three dynamic properties, then re
 	aProps := oPayload:GetPropList();
 	UsrMes("Dynamic property count: " + LimsString(ALen(aProps)));
 
-	sXml := oPayload:ToString();
+	sXml := oPayload:Serialize();
 	UsrMes(sXml);  /* Logs XML with root element SampleRecord;
 :ENDPROC;
 
