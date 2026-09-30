@@ -130,12 +130,14 @@ Days: 30
 ### Arrays and objects
 
 - An array exposes `Length` as a property: `aItems:Length` is the element count. `aItems:Count` raises `Invalid property: Count`. Use [`ALen`](../reference/functions/ALen.md) or `:Length`.
+- `aItems:Clone()` returns a new array with the same elements. Arrays have no SSL-style members such as `Append`, `IsEmpty` or `ToJson`; those raise `Invalid method`. See [array](../reference/types/array.md#members) for the functions to use instead.
 - Objects from [`CreateUdObject`](../reference/functions/CreateUdObject.md) have no native members. Only their own methods exist, and calling any other method raises `Method not found`. That includes `ToString`: `oRecord:ToString()` raises `Method not found: ToString`.
 
 ### Unknown members
 
 - An unknown method, or a call whose arguments match no form of the member, raises `Run-time error: Invalid method: X`.
 - An unknown property on a string, number, or array raises `Invalid property: X`.
+- Member names must match the .NET casing. `aItems:Clone()` works, but `aItems:clone()` raises `Invalid method: clone`.
 - Not every form of a native member is reachable. `"a,b,c":Split(",")` raises `Invalid method: Split`, even though .NET strings have a `Split` method. Use [`BuildArray`](../reference/functions/BuildArray.md) to split delimited text.
 
 ## Formatting text with `Format`
