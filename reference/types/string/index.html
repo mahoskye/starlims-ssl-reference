@@ -2107,7 +2107,7 @@
 and JSON serialization.</p>
 <p>The <code>string</code> type stores text exactly as text. You can create string values with double-quoted, single-quoted, or bracketed literals such as <code>"text"</code>, <code>'text'</code>, and <code>[text]</code>.</p>
 <p>Strings support concatenation with <a href="../../operators/plus/"><code>+</code></a>, trimmed concatenation with <a href="../../operators/minus/"><code>-</code></a>, containment checks with <a href="../../operators/dollar/"><code>$</code></a>, exact equality with <a href="../../operators/strict-equals/"><code>==</code></a>, and prefix-style equality with <a href="../../operators/equals/"><code>=</code></a>. For strings, <code>sLeft = sRight</code> returns <a href="../../literals/true/"><code>.T.</code></a> when the right operand is empty, exactly equal to the left operand, or a prefix of the left operand.</p>
-<p>Strings are 1-based for indexing. <code>sValue[1]</code> returns the first character as a single-character string. <a href="../../functions/Empty/"><code>Empty</code></a> treats null string values, <code>""</code>, and strings that become empty after trimming spaces, tabs, carriage returns, or line feeds as empty. <a href="../../functions/ToJson/"><code>ToJson()</code></a> returns JSON string text for non-null values and <code>null</code> for null strings.</p>
+<p>Strings are 1-based for indexing. <code>sValue[1]</code> returns the first character as a single-character string. <a href="../../functions/Empty/"><code>Empty</code></a> treats <code>""</code> and strings that become empty after trimming spaces, tabs, carriage returns, or line feeds as empty. <a href="../../functions/ToJson/"><code>ToJson</code></a><code>(sValue)</code> returns the text as a quoted JSON string.</p>
 <h2 id="creating-values">Creating values<a class="headerlink" href="#creating-values" title="Permanent link">&para;</a></h2>
 <p>String values are created with any of three literal forms.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="n">sDouble</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"text value"</span><span class="p">;</span>
@@ -2204,63 +2204,55 @@ and JSON serialization.</p>
 </tbody>
 </table>
 <h2 id="members">Members<a class="headerlink" href="#members" title="Permanent link">&para;</a></h2>
+<p>Strings have no SSL-defined <code>:</code> members. Calls such as <code>sValue:IsEmpty()</code>, <code>sValue:ToJson()</code>, <code>sValue:Index(1)</code> and <code>sValue:clone()</code> raise <code>Run-time error: Invalid method: …</code>, and <code>sValue:value</code> raises <code>Invalid property: value</code>. Work with strings through the operators above and the string functions instead:</p>
 <table>
 <thead>
 <tr>
-<th>Member</th>
-<th>Kind</th>
-<th>Parameters</th>
-<th>Returns</th>
-<th>Description</th>
+<th>Task</th>
+<th>Use</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>value</code></td>
-<td>Property</td>
-<td>—</td>
-<td><code>string</code></td>
-<td>Returns the stored text value.</td>
+<td>Test for blank or whitespace-only text</td>
+<td><a href="../../functions/Empty/"><code>Empty</code></a></td>
 </tr>
 <tr>
-<td><code>clone()</code></td>
-<td>Method</td>
-<td>none</td>
-<td><code>string</code></td>
-<td>Returns a copy of the string.</td>
+<td>Count characters</td>
+<td><a href="../../functions/Len/"><code>Len</code></a></td>
 </tr>
 <tr>
-<td><code>IsEmpty()</code></td>
-<td>Method</td>
-<td>none</td>
-<td><a href="../boolean/"><code>boolean</code></a></td>
-<td>Returns <a href="../../literals/true/"><code>.T.</code></a> when the value is null, empty, or only whitespace made of spaces, tabs, carriage returns, or line feeds.</td>
+<td>Read one character</td>
+<td><code>sValue[nPos]</code> (see <a href="#indexing">Indexing</a>)</td>
 </tr>
 <tr>
-<td><a href="../../functions/ToJson/"><code>ToJson()</code></a></td>
-<td>Method</td>
-<td>none</td>
-<td><code>string</code></td>
-<td>Returns JSON string text, or <code>null</code> when the string value is null.</td>
+<td>Take part of the text</td>
+<td><a href="../../functions/SubStr/"><code>SubStr</code></a>, <a href="../../functions/Left/"><code>Left</code></a>, <a href="../../functions/Right/"><code>Right</code></a></td>
 </tr>
 <tr>
-<td><code>CompareTo(sOther)</code></td>
-<td>Method</td>
-<td><code>sOther</code> (<code>string</code>)</td>
-<td><a href="../number/"><code>number</code></a></td>
-<td>Returns a negative number, <code>0</code>, or a positive number based on lexical ordering.</td>
+<td>Find text</td>
+<td><a href="../../functions/At/"><code>At</code></a>, or <a href="../../operators/dollar/"><code>$</code></a> for a yes/no check</td>
 </tr>
 <tr>
-<td><code>Index(nPos)</code></td>
-<td>Method</td>
-<td><code>nPos</code> (<a href="../number/"><code>number</code></a>)</td>
-<td><code>string</code></td>
-<td>Returns the character at the specified 1-based position. In SSL code this is normally used through <code>sValue[nPos]</code>.</td>
+<td>Change case or trim</td>
+<td><a href="../../functions/Upper/"><code>Upper</code></a>, <a href="../../functions/Lower/"><code>Lower</code></a>, <a href="../../functions/AllTrim/"><code>AllTrim</code></a></td>
+</tr>
+<tr>
+<td>Replace text</td>
+<td><a href="../../functions/Replace/"><code>Replace</code></a> (case-insensitive), <a href="../../functions/StrTran/"><code>StrTran</code></a> (case-sensitive)</td>
+</tr>
+<tr>
+<td>Serialize to JSON</td>
+<td><a href="../../functions/ToJson/"><code>ToJson</code></a></td>
+</tr>
+<tr>
+<td>Compare order</td>
+<td><a href="../../operators/less-than/"><code>&lt;</code></a>, <a href="../../operators/greater-than/"><code>&gt;</code></a>, or <code>sValue:CompareTo(sOther)</code>, a .NET member; see below</td>
 </tr>
 </tbody>
 </table>
 <h2 id="calling-net-string-methods">Calling .NET <code>String</code> methods<a class="headerlink" href="#calling-net-string-methods" title="Permanent link">&para;</a></h2>
-<p>In addition to the SSL-defined members above, any public method or property on .NET's <code>System.String</code> is callable on a <code>string</code> value with the <code>:</code> method-call syntax. The runtime forwards <code>sValue:Name(args)</code> to the underlying .NET string by name. Not every member form is reachable: <code>sValue:Split(",")</code> raises <code>Invalid method: Split</code>, so verify a member before relying on it. Static methods such as <code>String.Format</code> and <code>String.Join</code> are reachable through the same syntax; for a static call the receiver is only used to locate the type.</p>
+<p>Public methods and properties of .NET's <code>System.String</code> can be called on a <code>string</code> value with the <code>:</code> method-call syntax, such as <code>sValue:Trim()</code> or <code>sValue:Length</code>. For example, <code>"abc":CompareTo("abd")</code> returns <code>-1</code>, and <code>sValue:Clone()</code> returns the same text. Member names are case-sensitive: <code>sValue:ToUpper()</code> and <code>sValue:Clone()</code> work, but <code>sValue:toupper()</code> and <code>sValue:clone()</code> raise <code>Invalid method: …</code>, and <code>sValue:length</code> raises <code>Invalid property: length</code> (see <a href="../../../guides/native-members/#member-names-and-case">Member names and case</a>). Not every member form is reachable: <code>sValue:Split(",")</code> raises <code>Invalid method: Split</code>, so verify a member before relying on it. Static methods such as <code>String.Format</code> and <code>String.Join</code> are reachable through the same syntax; for a static call the receiver is only used to locate the type.</p>
 <p>This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer SSL-native string functions (<a href="../../functions/Replace/"><code>Replace</code></a>, <a href="../../functions/Upper/"><code>Upper</code></a>, <a href="../../functions/Lower/"><code>Lower</code></a>, <a href="../../functions/SubStr/"><code>SubStr</code></a>, and similar) for portability, and reserve direct .NET calls for behavior the SSL library does not cover. See <a href="../../../guides/native-members/">Native Members on SSL Values</a> for the members verified on STARLIMS v11 and how to check others.</p>
 <h3 id="example-calling-stringformat-through-a-string-value">Example: calling <code>String.Format</code> through a string value<a class="headerlink" href="#example-calling-stringformat-through-a-string-value" title="Permanent link">&para;</a></h3>
 <p>Uses .NET's static <code>String.Format</code> to build a formatted message. The receiver <code>sName</code> only directs the runtime to <code>System.String</code>; the formatted output comes entirely from the arguments.</p>
@@ -2315,7 +2307,7 @@ and JSON serialization.</p>
 <ul>
 <li>Use <a href="../../operators/strict-equals/"><code>==</code></a> when you need exact string equality.</li>
 <li>Use <a href="../../operators/equals/"><code>=</code></a> only when you intentionally want prefix behavior.</li>
-<li>Use <code>IsEmpty()</code> when a value may be blank or whitespace-only.</li>
+<li>Use <a href="../../functions/Empty/"><code>Empty</code></a> when a value may be blank or whitespace-only.</li>
 <li>Remember that <code>sValue[1]</code> is the first character, not <code>sValue[0]</code>.</li>
 </ul>
 </div>
@@ -2378,17 +2370,17 @@ and JSON serialization.</p>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CompareStatuses"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="checking-blank-input-and-serializing-to-json">Checking blank input and serializing to JSON<a class="headerlink" href="#checking-blank-input-and-serializing-to-json" title="Permanent link">&para;</a></h3>
-<p>Normalizes whitespace-only input to a fallback string, then serializes the result as JSON. <code>IsEmpty()</code> treats <code>"   "</code> as empty.</p>
+<p>Normalizes whitespace-only input to a fallback string, then serializes the result with <a href="../../functions/ToJson/"><code>ToJson</code></a>. <a href="../../functions/Empty/"><code>Empty</code></a> treats <code>"   "</code> as empty.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildCommentPayload</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sComment</span><span class="p">,</span><span class="w"> </span><span class="n">sJson</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sComment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"   "</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sComment</span><span class="p">:</span><span class="nf">IsEmpty</span><span class="p">();</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sComment</span><span class="p">);</span>
 <span class="w">        </span><span class="n">sComment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"No comment provided"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sJson</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sComment</span><span class="p">:</span><span class="nf">ToJson</span><span class="p">();</span>
+<span class="w">    </span><span class="n">sJson</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ToJson</span><span class="p">(</span><span class="n">sComment</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sJson</span><span class="p">);</span>
 
@@ -2403,7 +2395,7 @@ and JSON serialization.</p>
 </code></pre></div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Member access with <code>:</code> forwards to the underlying .NET String object when no SSL-side member matches (e.g. <code>sValue:EndsWith("suffix")</code>). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as <code>Run-time error: Invalid method: Split</code>. Check a member before relying on it; see <a href="../../../guides/native-members/">Native Members</a>.</li>
+<li>A <code>:</code> member call on a string reaches a .NET <code>String</code> member (e.g. <code>sValue:EndsWith("suffix")</code>). A member that doesn't exist, or doesn't accept the arguments given, raises an error such as <code>Run-time error: Invalid method: Split</code>. Check a member before relying on it; see <a href="../../../guides/native-members/">Native Members</a>.</li>
 </ul>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2435,7 +2427,7 @@ and JSON serialization.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 17:32:13 UTC">September 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 30, 2026 20:20:34 UTC">September 30, 2026</span>
   </span>
 
     

@@ -2208,14 +2208,14 @@
 <td>Method</td>
 <td>none</td>
 <td><code>object</code></td>
-<td>On dynamic objects created with <a href="../../functions/CreateUdObject/"><code>CreateUdObject()</code></a>, returns a new object with the same <code>XmlType</code> and dynamic properties. Only the top-level properties are copied. Nested arrays and objects are shared with the original.</td>
+<td>On dynamic objects created with <a href="../../functions/CreateUdObject/"><code>CreateUdObject()</code></a>, returns a new object with the same <code>XmlType</code> and dynamic properties. Only the top-level properties are copied. Nested arrays and objects are shared with the original. <code>Clone()</code> works the same.</td>
 </tr>
 <tr>
 <td><code>ToString()</code></td>
 <td>Method</td>
 <td>none</td>
-<td><a href="../string/"><code>string</code></a></td>
-<td>On dynamic objects, returns the serialized XML text.</td>
+<td><a href="../../literals/nil/"><code>NIL</code></a></td>
+<td>On dynamic objects created with <a href="../../functions/CreateUdObject/"><code>CreateUdObject()</code></a>, returns <a href="../../literals/nil/"><code>NIL</code></a>, not the XML text. Use <code>Serialize()</code> for XML.</td>
 </tr>
 <tr>
 <td><code>Destroy()</code></td>
@@ -2263,6 +2263,7 @@
 <li>Rely on <code>clone()</code> for a deep copy. On dynamic objects created with <a href="../../functions/CreateUdObject/"><code>CreateUdObject()</code></a>, it copies only the top-level properties, so a nested array or object changed through the copy also changes in the original. Do not assume other object values support <code>clone()</code> the same way.</li>
 <li>Call <a href="../../functions/CreateLocal/"><code>CreateLocal()</code></a> to create an object. It creates a local variable by name, and with no arguments it raises an error.</li>
 <li>Set <code>XmlType</code> to a non-string value. That raises an error.</li>
+<li>Call <code>ToString()</code> for the XML text. On dynamic objects it returns <a href="../../literals/nil/"><code>NIL</code></a>; use <code>Serialize()</code>.</li>
 </ul>
 </div>
 <h2 id="errors-and-edge-cases">Errors and edge cases<a class="headerlink" href="#errors-and-edge-cases" title="Permanent link">&para;</a></h2>
@@ -2270,6 +2271,7 @@
 <li>Reading a missing property raises a runtime error with the message <code>Property not found: &lt;name&gt;.</code></li>
 <li><a href="../../functions/AddProperty/"><code>AddProperty()</code></a> validates the property name and initializes the new property to <code>""</code>.</li>
 <li><code>IsEmpty()</code> is not a property-count check for objects.</li>
+<li>On dynamic objects created with <a href="../../functions/CreateUdObject/"><code>CreateUdObject()</code></a>, member and property names ignore case: <code>oValue:getproperty("Status")</code>, <code>oValue:xmltype</code>, and <code>oValue:status</code> for a property set as <code>oValue:Status</code> all work. Members of strings, numbers, dates and arrays are case-sensitive; see <a href="../../../guides/native-members/#member-names-and-case">Member names and case</a>.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="creating-and-reading-a-dynamic-object">Creating and reading a dynamic object<a class="headerlink" href="#creating-and-reading-a-dynamic-object" title="Permanent link">&para;</a></h3>
@@ -2389,7 +2391,7 @@ First test: pH
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 22:02:48 UTC">September 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 30, 2026 20:20:34 UTC">September 30, 2026</span>
   </span>
 
     

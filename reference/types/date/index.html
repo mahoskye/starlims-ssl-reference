@@ -1490,10 +1490,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#controlling-json-serialization-output" class="md-nav__link">
+  <a href="#formatting-a-date-with-and-without-a-format" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Controlling JSON serialization output
+        Formatting a date with and without a format
       
     </span>
   </a>
@@ -1973,10 +1973,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#controlling-json-serialization-output" class="md-nav__link">
+  <a href="#formatting-a-date-with-and-without-a-format" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Controlling JSON serialization output
+        Formatting a date with and without a format
       
     </span>
   </a>
@@ -2183,79 +2183,53 @@
 </tbody>
 </table>
 <h2 id="members">Members<a class="headerlink" href="#members" title="Permanent link">&para;</a></h2>
+<p>Dates have no SSL-defined <code>:</code> members. Calls such as <code>dValue:IsEmpty()</code>, <code>dValue:ToJson()</code>, <code>dValue:clone()</code>, <code>dValue:MakeInvariant()</code>, <code>dValue:MakeLocal()</code> and <code>dValue:ChangeKind(n)</code> raise <code>Run-time error: Invalid method: …</code>, and <code>dValue:value</code> raises <code>Invalid property: value</code>. Work with dates through the operators above, the date functions, and the .NET members below:</p>
 <table>
 <thead>
 <tr>
-<th>Member</th>
-<th>Kind</th>
-<th>Returns</th>
-<th>Description</th>
+<th>Task</th>
+<th>Use</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>value</code></td>
-<td>Property</td>
-<td><code>date</code></td>
-<td>Gets or sets the stored date value.</td>
+<td>Test for an empty date</td>
+<td><a href="../../functions/Empty/"><code>Empty</code></a></td>
 </tr>
 <tr>
-<td><code>IsEmpty()</code></td>
-<td>Method</td>
-<td><a href="../boolean/"><code>boolean</code></a></td>
-<td>Returns <a href="../../literals/true/"><code>.T.</code></a> when the date is empty, <a href="../../literals/false/"><code>.F.</code></a> otherwise.</td>
+<td>Format as text</td>
+<td><a href="../../functions/DToC/"><code>DToC</code></a>, <a href="../../functions/DateToString/"><code>DateToString</code></a>, or <code>dValue:ToString(sFormat)</code>, a .NET member</td>
 </tr>
 <tr>
-<td><code>ToString()</code></td>
-<td>Method</td>
-<td><a href="../string/"><code>string</code></a></td>
-<td>Formats the date using the default <code>MM/dd/yyyy</code> display format. Returns <code>"  /  /    "</code> when the date is empty.</td>
+<td>Compact <code>yyyyMMdd</code> text</td>
+<td><a href="../../functions/DToS/"><code>DToS</code></a></td>
 </tr>
 <tr>
-<td><code>ToString(sFormat)</code></td>
-<td>Method</td>
-<td><a href="../string/"><code>string</code></a></td>
-<td>Formats the date using a caller-supplied format string. Returns <code>"  /  /    "</code> when the date is empty.</td>
+<td>Read the year, month or day</td>
+<td><a href="../../functions/Year/"><code>Year</code></a>, <a href="../../functions/Month/"><code>Month</code></a>, <a href="../../functions/Day/"><code>Day</code></a></td>
 </tr>
 <tr>
-<td><a href="../../functions/ToJson/"><code>ToJson()</code></a></td>
-<td>Method</td>
-<td><a href="../string/"><code>string</code></a></td>
-<td>Serializes the date to an ISO 8601 date/time string wrapped as JSON text. Returns <code>null</code> for empty dates.</td>
+<td>Add or subtract days</td>
+<td><a href="../../operators/plus/"><code>+</code></a> and <a href="../../operators/minus/"><code>-</code></a> with a number of days</td>
 </tr>
 <tr>
-<td><code>clone()</code></td>
-<td>Method</td>
-<td><code>date</code></td>
-<td>Creates a copy of the current date value.</td>
+<td>Add months or years</td>
+<td><a href="../../functions/DateAdd/"><code>DateAdd</code></a><code>(dValue, n, "month")</code>, or <code>dValue:AddMonths(n)</code> and <code>dValue:AddYears(n)</code>, .NET members</td>
 </tr>
 <tr>
-<td><code>MakeInvariant()</code></td>
-<td>Method</td>
-<td><a href="../../literals/nil/"><code>NIL</code></a></td>
-<td>Marks the date as a wall-clock value with no time-zone offset in JSON output.</td>
-</tr>
-<tr>
-<td><code>MakeLocal()</code></td>
-<td>Method</td>
-<td><a href="../../literals/nil/"><code>NIL</code></a></td>
-<td>Marks the date as a local-time value so JSON output includes the local offset.</td>
-</tr>
-<tr>
-<td><code>ChangeKind(nKind)</code></td>
-<td>Method</td>
-<td><a href="../../literals/nil/"><code>NIL</code></a></td>
-<td>Changes how the stored date is interpreted for later serialization.</td>
+<td>Serialize to JSON</td>
+<td><a href="../../functions/ToJson/"><code>ToJson</code></a></td>
 </tr>
 </tbody>
 </table>
 <h2 id="calling-net-datetime-methods">Calling .NET <code>DateTime</code> methods<a class="headerlink" href="#calling-net-datetime-methods" title="Permanent link">&para;</a></h2>
-<p>In addition to the SSL-defined members above, any public method or property on .NET's <code>System.DateTime</code> is callable on a non-empty <code>date</code> value with the <code>:</code> method-call syntax. The runtime forwards <code>dValue:Name(args)</code> to the underlying .NET date by name.</p>
+<p>Public methods and properties of .NET's <code>System.DateTime</code> can be called on a non-empty <code>date</code> value with the <code>:</code> method-call syntax. Member names are case-sensitive: <code>dValue:AddDays(1)</code> and <code>dValue:Year</code> work, but <code>dValue:adddays(1)</code> raises <code>Invalid method: adddays</code> and <code>dValue:year</code> raises <code>Invalid property: year</code> (see <a href="../../../guides/native-members/#member-names-and-case">Member names and case</a>).</p>
 <p>This is particularly useful for arithmetic that SSL's <a href="../../operators/plus/"><code>+</code></a> and <a href="../../operators/minus/"><code>-</code></a> operators do not cover, since those only add or subtract whole-day offsets. <code>System.DateTime</code> offers month-aware and year-aware arithmetic — for example <code>AddMonths(n)</code>, <code>AddYears(n)</code>, <code>AddHours(n)</code>, <code>AddMinutes(n)</code> — and component accessors such as <code>Year</code>, <code>Month</code>, <code>Day</code>, <code>DayOfWeek</code>, and <code>DayOfYear</code>.</p>
-<p>Empty dates cannot be dispatched through this passthrough. The underlying .NET value of an empty date is <code>null</code>, and calling a method on it raises a null-reference error. Always guard with <a href="../../functions/Empty/"><code>Empty</code></a> before reaching for .NET members.</p>
-<p>This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer the SSL-defined date members and SSL-native date functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover. See <a href="../../../guides/native-members/">Native Members on SSL Values</a> for the members verified on STARLIMS v11 and how to check others.</p>
+<p><code>dValue:ToString()</code> with no format gives the date and time in the server's format, such as <code>9/30/2026 12:00:00 AM</code>. It is not a fixed <code>MM/dd/yyyy</code> form. Pass a format, such as <code>dValue:ToString("yyyy-MM-dd")</code>, when the output format matters.</p>
+<p>Any member access on an empty date raises an error. Always guard with <a href="../../functions/Empty/"><code>Empty</code></a> before calling a .NET member.</p>
+<p>This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Prefer SSL-native date functions for portability, and reserve direct .NET calls for behavior the SSL library does not cover. See <a href="../../../guides/native-members/">Native Members on SSL Values</a> for the members verified on STARLIMS v11 and how to check others.</p>
 <h3 id="example-month-aware-date-arithmetic">Example: month-aware date arithmetic<a class="headerlink" href="#example-month-aware-date-arithmetic" title="Permanent link">&para;</a></h3>
-<p>Uses .NET's <code>AddMonths(nMonths)</code> method to compute a date three months after a start date. SSL's <a href="../../operators/plus/"><code>+</code></a> operator only adds whole-day offsets, so month-aware arithmetic — which correctly handles end-of-month and leap-year edge cases — is only available through this passthrough.</p>
+<p>Uses .NET's <code>AddMonths(nMonths)</code> method to compute a date three months after a start date. SSL's <a href="../../operators/plus/"><code>+</code></a> operator only adds whole-day offsets, so month-aware arithmetic — which correctly handles end-of-month and leap-year edge cases — needs <code>AddMonths</code> or <a href="../../functions/DateAdd/"><code>DateAdd</code></a> with <code>"month"</code>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ComputeReviewDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dStartDate</span><span class="p">,</span><span class="w"> </span><span class="n">dReviewDate</span><span class="p">;</span>
 
@@ -2289,35 +2263,36 @@
 <div class="admonition success">
 <p class="admonition-title">Do</p>
 <ul>
-<li>Check <code>IsEmpty()</code> before using a date in business rules or display logic.</li>
+<li>Check <a href="../../functions/Empty/"><code>Empty</code></a> before using a date in business rules or display logic.</li>
 <li>Use <a href="../../operators/plus/"><code>+</code></a> and <a href="../../operators/minus/"><code>-</code></a> with numeric day offsets instead of converting dates to strings.</li>
 <li>Use date-to-date subtraction when you need a day count.</li>
-<li>Format output explicitly with <code>ToString()</code> or <a href="../../functions/DToC/"><code>DToC</code></a> when the display format matters.</li>
+<li>Format output with an explicit format, such as <code>dValue:ToString("yyyy-MM-dd")</code>, when the display format matters.</li>
 </ul>
 </div>
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
 <li>Treat a date like a string or number for comparison logic. Use the date comparison operators directly.</li>
-<li>Assume an empty date behaves like a real scheduled value. Validate with <code>IsEmpty()</code> first.</li>
+<li>Assume an empty date behaves like a real scheduled value. Validate with <a href="../../functions/Empty/"><code>Empty</code></a> first.</li>
 <li>Use <code>[]</code> indexing on a date. Dates are scalar values, not collections.</li>
-<li>Assume <a href="../../functions/ToJson/"><code>ToJson()</code></a> and <code>ToString()</code> produce the same output. <a href="../../functions/ToJson/"><code>ToJson()</code></a> is for JSON serialization, not user-facing display.</li>
+<li>Assume <code>dValue:ToString()</code> with no format gives <code>MM/dd/yyyy</code>. It gives the date and time in the server's format, such as <code>9/30/2026 12:00:00 AM</code>.</li>
+<li>Use <a href="../../functions/ToJson/"><code>ToJson</code></a> for display. It is for JSON serialization, not user-facing text.</li>
 </ul>
 </div>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="validating-a-required-date">Validating a required date<a class="headerlink" href="#validating-a-required-date" title="Permanent link">&para;</a></h3>
-<p>Checks for an empty date before continuing. <code>CToD("")</code> returns an empty date, so <code>IsEmpty()</code> returns <a href="../../literals/true/"><code>.T.</code></a> and the procedure exits early.</p>
+<p>Checks for an empty date before continuing. <code>CToD("")</code> returns an empty date, so <a href="../../functions/Empty/"><code>Empty</code></a> returns <a href="../../literals/true/"><code>.T.</code></a> and the procedure exits early.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateRequiredDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dSubmittedDate</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dSubmittedDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">""</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">dSubmittedDate</span><span class="p">:</span><span class="nf">IsEmpty</span><span class="p">();</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">dSubmittedDate</span><span class="p">);</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Required date is missing"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Date received: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dSubmittedDate</span><span class="p">:</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Date received: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dSubmittedDate</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">"yyyy-MM-dd"</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
@@ -2349,7 +2324,7 @@
 <span class="w">        </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Due date: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">"YYYY-MM-DD"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Due date: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">"yyyy-MM-dd"</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">dDueDate</span><span class="p">;</span>
@@ -2358,38 +2333,35 @@
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CheckTaskDueDate"</span><span class="p">);</span>
 </code></pre></div>
-<h3 id="controlling-json-serialization-output">Controlling JSON serialization output<a class="headerlink" href="#controlling-json-serialization-output" title="Permanent link">&para;</a></h3>
-<p>Clones the current date twice, marks one as invariant and one as local, then serializes both to show how the output format differs. Output includes the current timestamp and varies each time the example runs.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDateJsonModes</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dSourceDate</span><span class="p">,</span><span class="w"> </span><span class="n">dInvariantDate</span><span class="p">,</span><span class="w"> </span><span class="n">dLocalDate</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sInvariantJson</span><span class="p">,</span><span class="w"> </span><span class="n">sLocalJson</span><span class="p">;</span>
+<h3 id="formatting-a-date-with-and-without-a-format">Formatting a date with and without a format<a class="headerlink" href="#formatting-a-date-with-and-without-a-format" title="Permanent link">&para;</a></h3>
+<p>Builds a fixed date and formats it three ways. <code>ToString()</code> with no format follows the server's date and time settings, so its output varies by server. The explicit format and <a href="../../functions/DToS/"><code>DToS</code></a> do not.</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDateFormats</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dSampled</span><span class="p">,</span><span class="w"> </span><span class="n">sDefault</span><span class="p">,</span><span class="w"> </span><span class="n">sIso</span><span class="p">,</span><span class="w"> </span><span class="n">sCompact</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">dSourceDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Now</span><span class="p">();</span>
+<span class="w">    </span><span class="n">dSampled</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateFromNumbers</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">dInvariantDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dSourceDate</span><span class="p">:</span><span class="nf">clone</span><span class="p">();</span>
-<span class="w">    </span><span class="n">dInvariantDate</span><span class="p">:</span><span class="nf">MakeInvariant</span><span class="p">();</span>
-<span class="w">    </span><span class="n">sInvariantJson</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dInvariantDate</span><span class="p">:</span><span class="nf">ToJson</span><span class="p">();</span>
+<span class="w">    </span><span class="n">sDefault</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dSampled</span><span class="p">:</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="w">    </span><span class="n">sIso</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dSampled</span><span class="p">:</span><span class="nf">ToString</span><span class="p">(</span><span class="s2">"yyyy-MM-dd"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sCompact</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DToS</span><span class="p">(</span><span class="n">dSampled</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">dLocalDate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dSourceDate</span><span class="p">:</span><span class="nf">clone</span><span class="p">();</span>
-<span class="w">    </span><span class="n">dLocalDate</span><span class="p">:</span><span class="nf">MakeLocal</span><span class="p">();</span>
-<span class="w">    </span><span class="n">sLocalJson</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">dLocalDate</span><span class="p">:</span><span class="nf">ToJson</span><span class="p">();</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Default: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDefault</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"ISO: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sIso</span><span class="p">);</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"DToS: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCompact</span><span class="p">);</span>
 
-<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Invariant JSON: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInvariantJson</span><span class="p">);</span>
-<span class="w">    </span><span class="nf">InfoMes</span><span class="p">(</span><span class="s2">"Local JSON: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLocalJson</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">:RETURN</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sIso</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowDateJsonModes"</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowDateFormats"</span><span class="p">);</span>
 </code></pre></div>
-<p><a href="../../functions/InfoMes/"><code>InfoMes</code></a> logs (values vary by current date and time zone):</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>Invariant JSON: "2026-04-23T14:30:00"
-Local JSON: "2026-04-23T14:30:00+05:00"
+<p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs (the first line varies with the server's settings):</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Default: 9/30/2026 12:00:00 AM
+ISO: 2026-09-30
+DToS: 20260930
 </code></pre></div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Member access with <code>:</code> forwards to the underlying .NET DateTime object when no SSL-side member matches (e.g. <code>dValue:AddMonths(2)</code>). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as <code>Run-time error: Invalid method: Split</code>. Check a member before relying on it; see <a href="../../../guides/native-members/">Native Members</a>.</li>
+<li>A <code>:</code> member call on a date reaches a .NET <code>DateTime</code> member (e.g. <code>dValue:AddMonths(2)</code>). A member that doesn't exist, or doesn't accept the arguments given, raises an error such as <code>Run-time error: Invalid method: Split</code>. Check a member before relying on it; see <a href="../../../guides/native-members/">Native Members</a>.</li>
 </ul>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2417,7 +2389,7 @@ Local JSON: "2026-04-23T14:30:00+05:00"
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 17:32:13 UTC">September 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 30, 2026 20:20:34 UTC">September 30, 2026</span>
   </span>
 
     

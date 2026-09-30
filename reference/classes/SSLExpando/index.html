@@ -2791,7 +2791,7 @@
 
 <h1 id="sslexpando">SSLExpando<a class="headerlink" href="#sslexpando" title="Permanent link">&para;</a></h1>
 <p><code>SSLExpando</code> is a built-in object class for storing named values whose shape is decided at runtime.</p>
-<p>Use <code>SSLExpando{}</code> when you need an object that can grow as your script runs. You can add and update dynamic properties by name, check whether a property exists, list the current dynamic properties, and serialize the object to XML. <code>XmlType</code> controls the XML root element name and is always treated as an available property. Dynamic property names are matched case-insensitively.</p>
+<p>Use <code>SSLExpando{}</code> when you need an object that can grow as your script runs. You can add and update dynamic properties by name, check whether a property exists, list the current dynamic properties, and serialize the object to XML. <code>XmlType</code> controls the XML root element name and is always treated as an available property. Member and dynamic property names are matched case-insensitively.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When a script needs to assemble flexible sample, result, or request data.</li>
@@ -2816,7 +2816,7 @@
 <td><code>XmlType</code></td>
 <td><a href="../../types/string/">string</a></td>
 <td>read-write</td>
-<td>XML root element name used by <code>ToString()</code> and <code>Serialize()</code></td>
+<td>XML root element name used by <code>Serialize()</code></td>
 </tr>
 </tbody>
 </table>
@@ -2857,8 +2857,8 @@
 </tr>
 <tr>
 <td><code>ToString</code></td>
-<td><a href="../../types/string/">string</a></td>
-<td>Returns the object's XML representation</td>
+<td><a href="../../literals/nil/"><code>NIL</code></a></td>
+<td>Returns <a href="../../literals/nil/"><code>NIL</code></a>, not XML. Use <code>Serialize()</code> for XML</td>
 </tr>
 </tbody>
 </table>
@@ -2942,8 +2942,8 @@
 <p>Returns the current dynamic property names.</p>
 <p><strong>Returns:</strong> <a href="../../types/array/">array</a> — Array of property names.</p>
 <h3 id="tostring"><code>ToString</code><a class="headerlink" href="#tostring" title="Permanent link">&para;</a></h3>
-<p>Returns the object as XML.</p>
-<p><strong>Returns:</strong> <a href="../../types/string/">string</a> — XML string for the current <code>SSLExpando</code>.</p>
+<p>Returns <a href="../../literals/nil/"><code>NIL</code></a>. It does not return the object's XML. Call <code>Serialize()</code> for the XML text; see <a href="../../types/object/#members">object</a>.</p>
+<p><strong>Returns:</strong> <a href="../../literals/nil/"><code>NIL</code></a>.</p>
 <h2 id="inheritance">Inheritance<a class="headerlink" href="#inheritance" title="Permanent link">&para;</a></h2>
 <p><strong>Base class:</strong> <a href="../../types/object/"><code>object</code></a></p>
 <h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
@@ -2967,13 +2967,12 @@
 <ul>
 <li><code>GetPropList()</code> returns only dynamic property names. It does not include inherited object members or <code>XmlType</code>.</li>
 <li><code>IsProperty("XmlType")</code> is always true, even if you never assigned a custom XML type.</li>
-<li>When <code>XmlType</code> is not set, <code>ToString()</code> uses <code>SSLExpando</code> as the root element name. Setting <code>XmlType</code> to <a href="../../literals/nil/"><code>NIL</code></a> clears any custom value and restores the default.</li>
-<li><code>ToString()</code> returns the same XML content as <code>Serialize()</code>.</li>
-<li><code>ToString()</code> returns XML, not a debug-style property dump.</li>
+<li>When <code>XmlType</code> is not set, <code>Serialize()</code> uses <code>SSLExpando</code> as the root element name. Setting <code>XmlType</code> to <a href="../../literals/nil/"><code>NIL</code></a> clears any custom value and restores the default.</li>
+<li><code>ToString()</code> returns <a href="../../literals/nil/"><code>NIL</code></a>, not XML. Use <code>Serialize()</code> for the XML text.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="build-a-dynamic-sample-payload">Build a dynamic sample payload<a class="headerlink" href="#build-a-dynamic-sample-payload" title="Permanent link">&para;</a></h3>
-<p>Creates an <code>SSLExpando</code>, assigns <code>XmlType</code> and three dynamic properties, then reads a property with <code>GetProperty</code>, lists the dynamic property count with <code>GetPropList</code>, and serializes the object to XML with <code>ToString</code>.</p>
+<p>Creates an <code>SSLExpando</code>, assigns <code>XmlType</code> and three dynamic properties, then reads a property with <code>GetProperty</code>, lists the dynamic property count with <code>GetPropList</code>, and serializes the object to XML with <code>Serialize</code>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSamplePayload</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPayload</span><span class="p">,</span><span class="w"> </span><span class="n">aProps</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 
@@ -2991,7 +2990,7 @@
 <span class="w">    </span><span class="n">aProps</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">GetPropList</span><span class="p">();</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Dynamic property count: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="nf">ALen</span><span class="p">(</span><span class="n">aProps</span><span class="p">)));</span>
 
-<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">ToString</span><span class="p">();</span>
+<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">Serialize</span><span class="p">();</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sXml</span><span class="p">);</span><span class="w">  </span><span class="c1">/* Logs XML with root element SampleRecord;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
@@ -3049,7 +3048,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 30, 2026 20:20:34 UTC">September 30, 2026</span>
   </span>
 
     

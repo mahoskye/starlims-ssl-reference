@@ -1347,34 +1347,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Members">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Properties
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Methods
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1914,34 +1886,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Members">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Properties
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Methods
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2160,7 +2104,7 @@
 <h1 id="boolean">boolean<a class="headerlink" href="#boolean" title="Permanent link">&para;</a></h1>
 <h2 id="what-it-is">What it is<a class="headerlink" href="#what-it-is" title="Permanent link">&para;</a></h2>
 <p>Represents logical true/false values in SSL.</p>
-<p>The boolean type holds one of two logical values: <a href="../../literals/true/"><code>.T.</code></a> or <a href="../../literals/false/"><code>.F.</code></a>. Use booleans for conditions, flags, validation results, and other yes-or-no decisions. Boolean values support logical operators, equality checks, cloning, and JSON serialization. They do not support indexing, ordering operators, or containment.</p>
+<p>The boolean type holds one of two logical values: <a href="../../literals/true/"><code>.T.</code></a> or <a href="../../literals/false/"><code>.F.</code></a>. Use booleans for conditions, flags, validation results, and other yes-or-no decisions. Boolean values support logical operators and equality checks, and <a href="../../functions/ToJson/"><code>ToJson</code></a> serializes them as <code>true</code> or <code>false</code>. They do not support indexing, ordering operators, or containment.</p>
 <p>Boolean values participate in logical expressions with <code>.AND.</code>, <code>.OR.</code>, and <code>.NOT.</code>. In SSL expression evaluation, <code>.AND.</code> and <code>.OR.</code> short-circuit, so the right-hand expression is only evaluated when needed to determine the result.</p>
 <p>Equality on booleans is strict: the other operand must also be a boolean. Comparing a boolean to a string, number, array, or object raises a runtime error rather than returning <a href="../../literals/false/"><code>.F.</code></a>.</p>
 <p><a href="../../functions/Empty/"><code>Empty</code></a> has a boolean-specific meaning for boolean values. It returns <a href="../../literals/true/"><code>.T.</code></a> when the value is <a href="../../literals/false/"><code>.F.</code></a> and <a href="../../literals/false/"><code>.F.</code></a> when the value is <a href="../../literals/true/"><code>.T.</code></a>, so for booleans it behaves the same as logical negation rather than acting as an "uninitialized" check.</p>
@@ -2217,78 +2161,36 @@
 </tbody>
 </table>
 <h2 id="members">Members<a class="headerlink" href="#members" title="Permanent link">&para;</a></h2>
-<h3 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h3>
+<p>Booleans have no SSL-defined <code>:</code> members. Calls such as <code>bValue:And(x)</code>, <code>bValue:Or(x)</code>, <code>bValue:Not()</code>, <code>bValue:Eq(x)</code>, <code>bValue:EqEq(x)</code>, <code>bValue:IsEmpty()</code>, <code>bValue:ToJson()</code> and <code>bValue:clone()</code> raise <code>Run-time error: Invalid method: …</code>, and <code>bValue:value</code> raises <code>Invalid property: value</code>. Use the operators above and these functions instead:</p>
 <table>
 <thead>
 <tr>
-<th>Member</th>
-<th>Returns</th>
-<th>Description</th>
+<th>Task</th>
+<th>Use</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>value</code></td>
-<td>boolean</td>
-<td>The stored boolean value.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Member</th>
-<th>Returns</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>And(vValue)</code></td>
-<td>boolean</td>
-<td>Returns the logical AND of this boolean and another boolean value. Raises a runtime error for non-boolean operands.</td>
+<td>Combine or negate</td>
+<td><code>.AND.</code>, <code>.OR.</code>, <code>.NOT.</code> or <a href="../../operators/not/"><code>!</code></a></td>
 </tr>
 <tr>
-<td><code>Or(vValue)</code></td>
-<td>boolean</td>
-<td>Returns the logical OR of this boolean and another boolean value. Raises a runtime error for non-boolean operands.</td>
+<td>Compare</td>
+<td><a href="../../operators/strict-equals/"><code>==</code></a> or <a href="../../operators/equals/"><code>=</code></a></td>
 </tr>
 <tr>
-<td><code>Not()</code></td>
-<td>boolean</td>
-<td>Returns the negated boolean value.</td>
+<td>Convert to text</td>
+<td><a href="../../functions/LimsString/"><code>LimsString</code></a>, which gives <code>.T.</code> or <code>.F.</code></td>
 </tr>
 <tr>
-<td><code>Eq(vValue)</code></td>
-<td>boolean</td>
-<td>Returns <a href="../../literals/true/"><code>.T.</code></a> when both operands are booleans with the same value. Raises a runtime error for non-boolean operands.</td>
-</tr>
-<tr>
-<td><code>EqEq(vValue)</code></td>
-<td>boolean</td>
-<td>Exact equality check. For booleans, this behaves the same as <code>Eq(vValue)</code>.</td>
-</tr>
-<tr>
-<td><code>IsEmpty()</code></td>
-<td>boolean</td>
-<td>Returns <a href="../../literals/true/"><code>.T.</code></a> when the boolean is <a href="../../literals/false/"><code>.F.</code></a> and <a href="../../literals/false/"><code>.F.</code></a> when the boolean is <a href="../../literals/true/"><code>.T.</code></a>.</td>
-</tr>
-<tr>
-<td><a href="../../functions/ToJson/"><code>ToJson()</code></a></td>
-<td><a href="../string/">string</a></td>
-<td>Returns the JSON boolean text <code>true</code> or <code>false</code>.</td>
-</tr>
-<tr>
-<td><code>clone()</code></td>
-<td>boolean</td>
-<td>Returns a copy of the boolean value.</td>
+<td>Serialize to JSON</td>
+<td><a href="../../functions/ToJson/"><code>ToJson</code></a>, which gives <code>true</code> or <code>false</code></td>
 </tr>
 </tbody>
 </table>
 <h2 id="calling-net-boolean-methods">Calling .NET <code>Boolean</code> methods<a class="headerlink" href="#calling-net-boolean-methods" title="Permanent link">&para;</a></h2>
-<p>In addition to the SSL-defined members above, any public method or property on .NET's <code>System.Boolean</code> is callable on a <code>boolean</code> value with the <code>:</code> method-call syntax. The runtime forwards <code>bValue:Name(args)</code> to the underlying .NET boolean by name.</p>
-<p><code>System.Boolean</code> exposes a very thin instance surface — essentially <code>CompareTo(other)</code>, <code>Equals(other)</code>, and <code>ToString()</code> — and its members either duplicate or differ subtly from SSL's native idioms. Notably, .NET's <code>ToString()</code> returns the strings <code>"True"</code> or <code>"False"</code> rather than SSL's <a href="../../literals/true/"><code>.T.</code></a> or <a href="../../literals/false/"><code>.F.</code></a>, so reaching for it as a display conversion can be surprising. Use SSL's logical operators, <a href="../../functions/Empty/"><code>Empty</code></a>, and <a href="../../functions/LimsString/"><code>LimsString</code></a> for boolean work; there is rarely a reason to dispatch through the .NET passthrough on a boolean value.</p>
+<p>Public methods of .NET's <code>System.Boolean</code> can be called on a <code>boolean</code> value with the <code>:</code> method-call syntax.</p>
+<p><code>System.Boolean</code> exposes a very thin instance surface — essentially <code>CompareTo(other)</code>, <code>Equals(other)</code>, and <code>ToString()</code> — and its members either duplicate or differ subtly from SSL's native idioms. Notably, .NET's <code>ToString()</code> returns the strings <code>"True"</code> or <code>"False"</code> rather than SSL's <a href="../../literals/true/"><code>.T.</code></a> or <a href="../../literals/false/"><code>.F.</code></a>, so reaching for it as a display conversion can be surprising. Use SSL's logical operators, <a href="../../functions/Empty/"><code>Empty</code></a>, and <a href="../../functions/LimsString/"><code>LimsString</code></a> for boolean work; there is rarely a reason to call a .NET member on a boolean value.</p>
 <p>This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete.</p>
 <h3 id="example-how-net-tostring-differs-from-ssl-conventions">Example: how .NET <code>ToString()</code> differs from SSL conventions<a class="headerlink" href="#example-how-net-tostring-differs-from-ssl-conventions" title="Permanent link">&para;</a></h3>
 <p>Compares <code>bFlag:ToString()</code> against <a href="../../functions/LimsString/"><code>LimsString</code></a> to show that the .NET passthrough produces <code>"True"</code> and <code>"False"</code> while SSL's conversion functions produce <a href="../../literals/true/"><code>.T.</code></a> and <a href="../../literals/false/"><code>.F.</code></a>. Prefer <a href="../../functions/LimsString/"><code>LimsString</code></a> when building user-facing text from a boolean value.</p>
@@ -2391,7 +2293,7 @@ Via LimsString():    .T.
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateSampleSubmission"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="serializing-boolean-flags-to-json-and-restoring-state">Serializing boolean flags to JSON and restoring state<a class="headerlink" href="#serializing-boolean-flags-to-json-and-restoring-state" title="Permanent link">&para;</a></h3>
-<p>Packs three boolean flags into a JSON object using <a href="../../functions/ToJson/"><code>ToJson()</code></a>, parses the JSON back with <a href="../../functions/FromJson/"><code>FromJson</code></a>, and validates that each field is a <code>"LOGIC"</code> type.</p>
+<p>Packs three boolean flags into a JSON object using <a href="../../functions/ToJson/"><code>ToJson</code></a>, parses the JSON back with <a href="../../functions/FromJson/"><code>FromJson</code></a>, and validates that each field is a <code>"LOGIC"</code> type.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RoundTripBooleanFlags</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bActive</span><span class="p">,</span><span class="w"> </span><span class="n">bVerified</span><span class="p">,</span><span class="w"> </span><span class="n">bLocked</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sJson</span><span class="p">,</span><span class="w"> </span><span class="n">oState</span><span class="p">,</span><span class="w"> </span><span class="n">bRestoreOk</span><span class="p">;</span>
@@ -2400,9 +2302,9 @@ Via LimsString():    .T.
 <span class="w">    </span><span class="n">bVerified</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bLocked</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sJson</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="s2">"active"</span><span class="p">:</span><span class="err">'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bActive</span><span class="p">:</span><span class="nf">ToJson</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
-<span class="w">             </span><span class="err">'</span><span class="p">,</span><span class="s2">"verified"</span><span class="p">:</span><span class="err">'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bVerified</span><span class="p">:</span><span class="nf">ToJson</span><span class="p">()</span><span class="w"> </span><span class="o">+</span>
-<span class="w">             </span><span class="err">'</span><span class="p">,</span><span class="s2">"locked"</span><span class="p">:</span><span class="err">'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">bLocked</span><span class="p">:</span><span class="nf">ToJson</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="err">'</span><span class="p">}</span><span class="err">'</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sJson</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">'</span><span class="p">{</span><span class="s2">"active"</span><span class="p">:</span><span class="err">'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ToJson</span><span class="p">(</span><span class="n">bActive</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">             </span><span class="err">'</span><span class="p">,</span><span class="s2">"verified"</span><span class="p">:</span><span class="err">'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ToJson</span><span class="p">(</span><span class="n">bVerified</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">             </span><span class="err">'</span><span class="p">,</span><span class="s2">"locked"</span><span class="p">:</span><span class="err">'</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ToJson</span><span class="p">(</span><span class="n">bLocked</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="err">'</span><span class="p">}</span><span class="err">'</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oState</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">FromJson</span><span class="p">(</span><span class="n">sJson</span><span class="p">);</span>
 
@@ -2425,7 +2327,7 @@ Via LimsString():    .T.
 </code></pre></div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Member access with <code>:</code> forwards to the underlying .NET Boolean object when no SSL-side member matches (e.g. <code>bFlag:ToString()</code>). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as <code>Run-time error: Invalid method: Split</code>. Check a member before relying on it; see <a href="../../../guides/native-members/">Native Members</a>.</li>
+<li>A <code>:</code> member call on a boolean reaches a .NET <code>Boolean</code> member (e.g. <code>bFlag:ToString()</code>). A member that doesn't exist, or doesn't accept the arguments given, raises an error such as <code>Run-time error: Invalid method: Split</code>. Check a member before relying on it; see <a href="../../../guides/native-members/">Native Members</a>.</li>
 </ul>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2455,7 +2357,7 @@ Via LimsString():    .T.
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 17:32:13 UTC">September 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 30, 2026 20:20:34 UTC">September 30, 2026</span>
   </span>
 
     

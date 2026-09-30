@@ -2231,7 +2231,7 @@
 <li>The instance-level members reachable through the <code>:</code> syntax are limited (<code>Length</code>, <code>Rank</code>, <code>GetType()</code>, <code>Clone()</code>). <code>Length</code> matches <a href="../../functions/ALen/"><code>ALen</code></a>, and <code>Clone()</code> returns a new array with the same top-level elements.</li>
 </ul>
 <p>Prefer SSL-native array functions (<a href="../../functions/ALen/"><code>ALen</code></a>, <a href="../../functions/AScan/"><code>AScan</code></a>, <a href="../../functions/SortArray/"><code>SortArray</code></a>, <a href="../../functions/AAdd/"><code>AAdd</code></a>) for portability and readability. Reach for the .NET passthrough only when you need a specific <code>System.Array</code> operation that the SSL library does not cover.</p>
-<p>This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Their names are case-sensitive: <code>aValues:Clone()</code> works, but <code>aValues:clone()</code> raises <code>Invalid method: clone</code>.</p>
+<p>This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Their names are case-sensitive: <code>aValues:Clone()</code> works, but <code>aValues:clone()</code> raises <code>Invalid method: clone</code>, and <code>aValues:length</code> raises <code>Invalid property: length</code> (see <a href="../../../guides/native-members/#member-names-and-case">Member names and case</a>).</p>
 <h3 id="example-reading-the-underlying-arraylength-property">Example: reading the underlying <code>Array.Length</code> property<a class="headerlink" href="#example-reading-the-underlying-arraylength-property" title="Permanent link">&para;</a></h3>
 <p>Reads .NET's <code>Length</code> property on the underlying <code>System.Object[]</code> through the <code>:</code> dispatch. The result matches <a href="../../functions/ALen/"><code>ALen</code></a>, so this is primarily a demonstration that the dispatch works on <code>array</code> values rather than a recommended pattern.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowArrayLength</span><span class="p">;</span>
@@ -2387,7 +2387,7 @@ Snapshot: ["Reviewed","Logged","Released"]
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Arrays have no <code>Count</code> property and no SSL-defined methods: <code>aValues:Count</code> raises <code>Run-time error: Invalid property: Count</code>, and <code>aValues:Append(x)</code> raises <code>Invalid method: Append</code>. Use <a href="../../functions/ALen/"><code>ALen</code></a> and the other array functions listed under <a href="#members">Members</a>.</li>
-<li>Member access with <code>:</code> forwards to the underlying .NET list object when no SSL-side member matches (e.g. <code>aValues:Length</code>). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as <code>Run-time error: Invalid method: Split</code>. Check a member before relying on it; see <a href="../../../guides/native-members/">Native Members</a>.</li>
+<li>A <code>:</code> member call on an array reaches a .NET array member (e.g. <code>aValues:Length</code>). A member that doesn't exist, or doesn't accept the arguments given, raises an error such as <code>Run-time error: Invalid method: Split</code>. Check a member before relying on it; see <a href="../../../guides/native-members/">Native Members</a>.</li>
 </ul>
 <h2 id="related-elements">Related elements<a class="headerlink" href="#related-elements" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2416,7 +2416,7 @@ Snapshot: ["Reviewed","Logged","Released"]
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 30, 2026 19:34:51 UTC">September 30, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 30, 2026 20:20:34 UTC">September 30, 2026</span>
   </span>
 
     
