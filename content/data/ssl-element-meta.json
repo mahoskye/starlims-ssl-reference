@@ -14034,19 +14034,19 @@
       "source_path": "content/reference/types/array.md",
       "exceptions": [],
       "caveats": [
-        "Arrays have no Count property: aValues:Count raises Run-time error: Invalid property: Count. Use ALen or aValues:Length.",
+        "Arrays have no Count property and no SSL-defined methods: aValues:Count raises Run-time error: Invalid property: Count, and aValues:Append(x) raises Invalid method: Append. Use ALen and the other array functions listed under Members.",
         "Member access with : forwards to the underlying .NET list object when no SSL-side member matches (e.g. aValues:Length). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as Run-time error: Invalid method: Split. Check a member before relying on it; see Native Members.",
         "aValues[1] is the first element. aValues[0] is invalid.",
-        "Invalid positions for RemoveAt, InsertAt, or index access raise runtime errors.",
+        "Index access outside the array raises a runtime error.",
         "Arrays can hold mixed value types, so validate or normalize element types before doing arithmetic or exact comparisons.",
-        "clone() deep-copies nested arrays and other contained values instead of reusing the same references.",
-        "ToJson() returns JSON array text and emits null for NIL entries."
+        "Clone() copies only the top level. Only a flat copy has been checked; when an array holds nested arrays, don't assume the copy's nested arrays are independent of the original's.",
+        "ToJson(aValues) returns JSON array text and emits null for NIL entries."
       ],
       "best_practices": {
         "do": [
           "Use 1-based loops such as :FOR nIndex := 1 :TO ALen(aValues); when iterating arrays.",
           "Check Empty or ALen before indexing when the array may be empty.",
-          "Use clone() before changing a copied array when the original must remain unchanged."
+          "Copy with aValues:Clone() (capital C) before changing an array when the original must remain unchanged."
         ],
         "dont": [
           "Assume arrays are 0-based. That causes off-by-one bugs because SSL arrays start at 1.",

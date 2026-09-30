@@ -23,12 +23,12 @@ Use arrays when values need to stay in a defined order, when you need positional
 
 ## Creating values
 
-Arrays are commonly created with literal syntax such as `{1, 2, 3}` or nested forms such as `{{"A", 1}, {"B", 2}}`. You can also start with an empty array and append elements.
+Arrays are commonly created with literal syntax such as `{1, 2, 3}` or nested forms such as `{{"A", 1}, {"B", 2}}`. You can also start with an empty array and append elements with [`AAdd`](../functions/AAdd.md).
 
 ```ssl
 aItems := {"S-1001", "S-1002", "S-1003"};
 aEmpty := {};
-aEmpty:Append("S-1004");
+AAdd(aEmpty, "S-1004");
 ```
 
 | Attribute | Value |
@@ -48,30 +48,30 @@ Arrays support identity comparison operators. Arithmetic and relational operator
 
 ## Members
 
-| Member | Kind | Parameters | Returns | Description |
-|---|---|---|---|---|
-| `Append` | Method | `element` (`any`) | none | Adds an element to the end of the array. |
-| `RemoveAt` | Method | `index` ([`number`](number.md)) | none | Removes the element at the specified 1-based position. |
-| `InsertAt` | Method | `index` ([`number`](number.md)), `value` (`any`) | none | Inserts a value at the specified 1-based position. |
-| `Index` | Method | `index` ([`number`](number.md)) | `any` | Returns the value at the specified 1-based position. In SSL code this is normally used through indexing syntax such as `aValues[2]`. |
-| `IsEmpty` | Method | none | [`boolean`](boolean.md) | Returns [`.T.`](../literals/true.md) when the array has zero elements. |
-| [`ToJson`](../functions/ToJson.md) | Method | none | [`string`](string.md) | Serializes the array as JSON array text. |
-| `clone` | Method | none | `array` | Returns a deep copy of the array and its contained values. |
-| `GetList` | Method | none | `any` | Returns the array contents in list form for APIs that expose list-style access. |
-| `value` | Property | — | `any` | Gets or replaces the full array contents. |
+Arrays have no SSL-defined `:` members. Calls such as `aValues:Append(x)`, `aValues:InsertAt(n, x)`, `aValues:RemoveAt(n)`, `aValues:IsEmpty()`, `aValues:ToJson()` and `aValues:clone()`, and properties such as `aValues:Count` and `aValues:value`, raise `Run-time error: Invalid method: …` or `Invalid property: …`. Work with arrays through the array functions instead:
+
+| Task | Use |
+|---|---|
+| Count elements | [`ALen`](../functions/ALen.md) |
+| Append an element | [`AAdd`](../functions/AAdd.md) |
+| Find an element | [`AScan`](../functions/AScan.md) |
+| Sort | [`SortArray`](../functions/SortArray.md) |
+| Test for no elements | [`Empty`](../functions/Empty.md) |
+| Serialize to JSON | [`ToJson`](../functions/ToJson.md) |
+| Copy | `aValues:Clone()`, a .NET member; see below |
 
 ## Calling .NET `Array` methods
 
-In addition to the SSL-defined members above, any public method or property on the underlying .NET array is callable on an `array` value with the `:` method-call syntax. The runtime forwards `aValues:Name(args)` to the underlying `System.Object[]` (which inherits from `System.Array`) by name.
+Any public method or property on the underlying .NET array is callable on an `array` value with the `:` method-call syntax. The runtime forwards `aValues:Name(args)` to the underlying `System.Object[]` (which inherits from `System.Array`) by name.
 
 In practice, this passthrough is rarely the best path for SSL arrays, for two reasons:
 
 - The most useful array operations in .NET — `Sort`, `Reverse`, `IndexOf`, `BinarySearch` — are static methods on `System.Array` that take the array as an explicit parameter rather than a receiver. They are reached most reliably through explicit netobject interop with [`LimsNETTypeOf`](../functions/LimsNETTypeOf.md) (see [`netobject`](netobject.md)) rather than through the implicit `:` passthrough on an array value.
-- The instance-level members reachable through the `:` syntax are limited (`Length`, `Rank`, `GetType()`, `Clone()`) and largely overlap with SSL's own array surface. Where they do differ, the semantics differ subtly — for example, `Clone()` returns a shallow copy of the underlying `object[]`, while SSL's `clone()` produces a deep copy of the SSL array and its nested values.
+- The instance-level members reachable through the `:` syntax are limited (`Length`, `Rank`, `GetType()`, `Clone()`). `Length` matches [`ALen`](../functions/ALen.md), and `Clone()` returns a new array with the same top-level elements.
 
-Prefer SSL-native array functions ([`ALen`](../functions/ALen.md), [`AScan`](../functions/AScan.md), [`SortArray`](../functions/SortArray.md), [`AAdd`](../functions/AAdd.md)) and the SSL-defined members for portability and readability. Reach for the .NET passthrough only when you need a specific `System.Array` operation that the SSL library does not cover.
+Prefer SSL-native array functions ([`ALen`](../functions/ALen.md), [`AScan`](../functions/AScan.md), [`SortArray`](../functions/SortArray.md), [`AAdd`](../functions/AAdd.md)) for portability and readability. Reach for the .NET passthrough only when you need a specific `System.Array` operation that the SSL library does not cover.
 
-This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete.
+This passthrough is an interop convenience, not part of the SSL language surface. The members are not declared in SSL and do not appear in editor autocomplete. Their names are case-sensitive: `aValues:Clone()` works, but `aValues:clone()` raises `Invalid method: clone`.
 
 ### Example: reading the underlying `Array.Length` property
 
@@ -115,7 +115,7 @@ Index expressions must evaluate to an integer. If the index expression is not an
 !!! success "Do"
     - Use 1-based loops such as `:FOR nIndex := 1 :TO ALen(aValues);` when iterating arrays.
     - Check [`Empty`](../functions/Empty.md) or [`ALen`](../functions/ALen.md) before indexing when the array may be empty.
-    - Use `clone()` before changing a copied array when the original must remain unchanged.
+    - Copy with `aValues:Clone()` (capital `C`) before changing an array when the original must remain unchanged.
 
 !!! failure "Don't"
     - Assume arrays are 0-based. That causes off-by-one bugs because SSL arrays start at `1`.
@@ -125,16 +125,16 @@ Index expressions must evaluate to an integer. If the index expression is not an
 ## Errors and edge cases
 
 - `aValues[1]` is the first element. `aValues[0]` is invalid.
-- Invalid positions for `RemoveAt`, `InsertAt`, or index access raise runtime errors.
+- Index access outside the array raises a runtime error.
 - Arrays can hold mixed value types, so validate or normalize element types before doing arithmetic or exact comparisons.
-- `clone()` deep-copies nested arrays and other contained values instead of reusing the same references.
-- [`ToJson()`](../functions/ToJson.md) returns JSON array text and emits `null` for [`NIL`](../literals/nil.md) entries.
+- `Clone()` copies only the top level. Only a flat copy has been checked; when an array holds nested arrays, don't assume the copy's nested arrays are independent of the original's.
+- [`ToJson`](../functions/ToJson.md)`(aValues)` returns JSON array text and emits `null` for [`NIL`](../literals/nil.md) entries.
 
 ## Examples
 
 ### Collecting ordered sample IDs
 
-Starts with an empty array, appends three sample IDs, then reads them back in order with a 1-based loop.
+Starts with an empty array, appends three sample IDs with [`AAdd`](../functions/AAdd.md), then reads them back in order with a 1-based loop.
 
 ```ssl
 :PROCEDURE CollectSampleIds;
@@ -142,9 +142,9 @@ Starts with an empty array, appends three sample IDs, then reads them back in or
 
     aSampleIds := {};
 
-    aSampleIds:Append("S-1001");
-    aSampleIds:Append("S-1002");
-    aSampleIds:Append("S-1003");
+    AAdd(aSampleIds, "S-1001");
+    AAdd(aSampleIds, "S-1002");
+    AAdd(aSampleIds, "S-1003");
 
     :FOR nIndex := 1 :TO ALen(aSampleIds);
         UsrMes("Queued sample " + aSampleIds[nIndex]);
@@ -167,7 +167,7 @@ Queued sample S-1003
 
 ### Updating nested result rows
 
-Inserts a new row, updates two values in existing rows by index, then removes a row. After all edits, two rows remain.
+Appends a new row with [`AAdd`](../functions/AAdd.md), then updates values in existing rows by index. After the edits, three rows remain.
 
 ```ssl
 :PROCEDURE PrepareResultRows;
@@ -178,12 +178,10 @@ Inserts a new row, updates two values in existing rows by index, then removes a 
         {"S-1002", "Pending", 6.8}
     };
 
-    aResults:InsertAt(2, {"S-1001A", "Pending", 7.0});
+    AAdd(aResults, {"S-1003", "Pending", 7.0});
 
     aResults[1][2] := "Reviewed";
     aResults[3][3] := 6.9;
-
-    aResults:RemoveAt(2);
 
     aRow := aResults[1];
 
@@ -201,30 +199,24 @@ DoProc("PrepareResultRows");
 
 ```text
 First row status: Reviewed
-Remaining rows: 2
+Remaining rows: 3
 ```
 
-### Cloning an array before reshaping it
+### Copying an array before changing it
 
-Creates an independent snapshot with `clone()`, appends a test to the snapshot's first row, and serializes the snapshot. The original array is unchanged.
+Copies a flat array with the .NET `Clone()` member, changes the copy, and serializes both with [`ToJson`](../functions/ToJson.md). The original is unchanged. The member name is case-sensitive: `Clone()`, not `clone()`.
 
 ```ssl
 :PROCEDURE BuildAuditSnapshot;
-    :DECLARE aOriginal, aSnapshot, sJson;
+    :DECLARE aOriginal, aSnapshot;
 
-    aOriginal := {
-        {"S-1001", {"pH", "Conductivity"}},
-        {"S-1002", {"pH"}}
-    };
+    aOriginal := {"Logged", "Logged", "Released"};
 
-    aSnapshot := aOriginal:clone();
-    aSnapshot[1][2]:Append("Turbidity");
+    aSnapshot := aOriginal:Clone();
+    aSnapshot[1] := "Reviewed";
 
-    sJson := aSnapshot:ToJson();
-
-    UsrMes("Original tests: " + LimsString(ALen(aOriginal[1][2])));
-    UsrMes("Snapshot tests: " + LimsString(ALen(aSnapshot[1][2])));
-    UsrMes(sJson);
+    UsrMes("Original: " + ToJson(aOriginal));
+    UsrMes("Snapshot: " + ToJson(aSnapshot));
 
     :RETURN aSnapshot;
 :ENDPROC;
@@ -236,14 +228,13 @@ DoProc("BuildAuditSnapshot");
 [`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
-Original tests: 2
-Snapshot tests: 3
-[["S-1001",["pH","Conductivity","Turbidity"]],["S-1002",["pH"]]]
+Original: ["Logged","Logged","Released"]
+Snapshot: ["Reviewed","Logged","Released"]
 ```
 
 ## Caveats
 
-- Arrays have no `Count` property: `aValues:Count` raises `Run-time error: Invalid property: Count`. Use [`ALen`](../functions/ALen.md) or `aValues:Length`.
+- Arrays have no `Count` property and no SSL-defined methods: `aValues:Count` raises `Run-time error: Invalid property: Count`, and `aValues:Append(x)` raises `Invalid method: Append`. Use [`ALen`](../functions/ALen.md) and the other array functions listed under [Members](#members).
 - Member access with `:` forwards to the underlying .NET list object when no SSL-side member matches (e.g. `aValues:Length`). A member that is not listed on this page may still exist on the .NET object, but a member that doesn't exist, or doesn't accept the arguments given, raises an error such as `Run-time error: Invalid method: Split`. Check a member before relying on it; see [Native Members](../../guides/native-members.md).
 
 ## Related elements
