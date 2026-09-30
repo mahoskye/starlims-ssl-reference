@@ -43,7 +43,7 @@ CreateLocal(sVarName, [vVarValue])
 | Trigger | Exception message |
 | --- | --- |
 | `sVarName` is omitted, as in `CreateLocal()`, or is [`NIL`](../literals/nil.md). | `Argument varName cannot be null. CreateLocal().` followed by `Parameter name: varName` on a second line |
-| `sVarName` is not a string. | `Argument sVarName must be a string.` |
+| `sVarName` is not a string. | `Argument varName must be a string. CreateLocal().` followed by `Parameter name: varName` on a second line |
 
 ## Best practices
 
