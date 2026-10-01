@@ -14,7 +14,7 @@
       "returns": 12
     },
     "with_exceptions": 266,
-    "with_caveats": 401,
+    "with_caveats": 402,
     "with_best_practices": 458
   },
   "elements": [
@@ -8459,26 +8459,26 @@
       "id": "ssl.function.prmcount",
       "element_type": "function",
       "title": "PrmCount",
-      "summary": "Returns how many arguments were passed to the currently executing procedure.",
+      "summary": "Returns how many arguments the caller passed to the current server script; only valid in script-level code.",
       "doc_status": "published",
       "source_path": "content/reference/functions/PrmCount.md",
       "exceptions": [
         {
-          "trigger": "Called outside a procedure context.",
+          "trigger": "Called inside a :PROCEDURE, or in code run with ExecUdf.",
           "message": "Function PrmCount() is not available in procedures."
         }
       ],
-      "caveats": [],
+      "caveats": [
+        "The count is the number of arguments the caller passed, not the number of parameters the script declares: a script with two parameters called with one argument gets 1."
+      ],
       "best_practices": {
         "do": [
-          "Call PrmCount() inside a procedure body when the procedure accepts optional or flexible arguments.",
-          "Check the result before using arguments that may have been omitted by the caller.",
-          "Keep the count check close to the logic that depends on it so the procedure stays easy to follow."
+          "Call PrmCount() in a server script's top-level code, after its :PARAMETERS line.",
+          "Check the count before using parameters a caller may have left out."
         ],
         "dont": [
-          "Call PrmCount() from top-level script code or any non-procedure context.",
-          "Assume every declared parameter was supplied by the caller; check PrmCount() first when omitted arguments matter.",
-          "Use PrmCount() as a substitute for clear procedure design when a fixed signature is enough."
+          "Call PrmCount() inside a :PROCEDURE. It raises an error there. Inside a procedure, test a parameter with Empty or LimsTypeEx instead, or give it a default with :DEFAULT.",
+          "Use PrmCount() in code run with ExecUdf, which raises the same error."
         ]
       }
     },
@@ -9939,7 +9939,8 @@
         }
       ],
       "caveats": [
-        "The change affects the current execution context immediately."
+        "The change affects the current execution context immediately.",
+        "While the session user name is changed, messages written with UsrMes go to the user log of the name you set, not to your own log (verified in Designer). Capture anything you need to report, restore the original user name, then log."
       ],
       "best_practices": {
         "do": [
@@ -9950,7 +9951,8 @@
         "dont": [
           "Pass NIL, an empty string, or a non-string value.",
           "Assume this function authenticates the user or verifies that the user exists.",
-          "Change the current user without restoring the previous value when later code depends on the original context."
+          "Change the current user without restoring the previous value when later code depends on the original context.",
+          "Log with UsrMes while the user name is switched and expect the message in your own user log. It goes to the log of the user name you set."
         ]
       }
     },

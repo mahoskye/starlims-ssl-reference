@@ -1,6 +1,6 @@
 ---
 title: "PrmCount"
-summary: "Returns how many arguments were passed to the currently executing procedure."
+summary: "Returns how many arguments the caller passed to the current server script; only valid in script-level code."
 id: ssl.function.prmcount
 element_type: function
 doc_status: published
@@ -11,15 +11,16 @@ starlims:
 
 # PrmCount
 
-Returns how many arguments were passed to the currently executing procedure.
+Returns how many arguments the caller passed to the current server script; only valid in script-level code.
 
-`PrmCount()` reports the number of arguments supplied to the current procedure call. Use it inside a procedure when behavior depends on whether the caller passed zero, one, or more arguments. The function returns the count for the immediate current call only.
+`PrmCount()` reports how many arguments the caller supplied to the running server script, for example with [`ExecFunction`](ExecFunction.md)`("Category.Script", aArgs)`. Use it in a script whose [`:PARAMETERS`](../keywords/PARAMETERS.md) has optional trailing parameters, to tell an omitted argument from one that was passed.
+
+`PrmCount()` works only in the script's top-level code. Inside a [`:PROCEDURE`](../keywords/PROCEDURE.md), including one reached with [`DoProc`](DoProc.md), and in code run with [`ExecUdf`](ExecUdf.md), it raises `Function PrmCount() is not available in procedures.`
 
 ## When to use
 
-- When a procedure supports optional trailing arguments and needs to detect how many were actually supplied.
-- When a utility procedure changes behavior based on a flexible argument count.
-- When you want to validate that a caller supplied the minimum number of arguments before using them.
+- When a server script accepts optional trailing arguments and needs to know how many the caller actually supplied.
+- When a script called with [`ExecFunction`](ExecFunction.md) should reject calls that leave out a required argument.
 
 ## Syntax
 
@@ -33,53 +34,52 @@ This function takes no parameters.
 
 ## Returns
 
-**[number](../types/number.md)** — The number of arguments passed to the current procedure call.
+**[number](../types/number.md)** — The number of arguments the caller passed to the current server script.
 
 ## Exceptions
 
 | Trigger | Exception message |
 | --- | --- |
-| Called outside a procedure context. | `Function PrmCount() is not available in procedures.` |
+| Called inside a `:PROCEDURE`, or in code run with `ExecUdf`. | `Function PrmCount() is not available in procedures.` |
 
 ## Best practices
 
 !!! success "Do"
-    - Call `PrmCount()` inside a procedure body when the procedure accepts optional or flexible arguments.
-    - Check the result before using arguments that may have been omitted by the caller.
-    - Keep the count check close to the logic that depends on it so the procedure stays easy to follow.
+    - Call `PrmCount()` in a server script's top-level code, after its `:PARAMETERS` line.
+    - Check the count before using parameters a caller may have left out.
 
 !!! failure "Don't"
-    - Call `PrmCount()` from top-level script code or any non-procedure context.
-    - Assume every declared parameter was supplied by the caller; check `PrmCount()` first when omitted arguments matter.
-    - Use `PrmCount()` as a substitute for clear procedure design when a fixed signature is enough.
+    - Call `PrmCount()` inside a `:PROCEDURE`. It raises an error there. Inside a procedure, test a parameter with [`Empty`](Empty.md) or [`LimsTypeEx`](LimsTypeEx.md) instead, or give it a default with [`:DEFAULT`](../keywords/DEFAULT.md).
+    - Use `PrmCount()` in code run with `ExecUdf`, which raises the same error.
+
+## Caveats
+
+- The count is the number of arguments the caller passed, not the number of parameters the script declares: a script with two parameters called with one argument gets `1`.
 
 ## Examples
 
 ### Reject calls that omit a required argument
 
-Use `PrmCount()` at the start of a procedure to verify that the caller supplied the minimum input you need.
+A server script `Orders.ShowOrderStatus` checks that its caller passed an order number before using it.
 
 ```ssl
-:PROCEDURE ShowOrderStatus;
-	:PARAMETERS sOrderNo;
+:PARAMETERS sOrderNo;
 
-	:DECLARE nArgs;
+:IF PrmCount() < 1;
+	UsrMes("Order number is required");
+	:RETURN .F.;
+:ENDIF;
 
-	nArgs := PrmCount();
+UsrMes("Looking up order " + sOrderNo);
 
-	:IF nArgs < 1;
-		UsrMes("Order number is required");
-		:RETURN .F.;
-	:ENDIF;
+:RETURN .T.;
+```
 
-	UsrMes("Looking up order " + sOrderNo);
+Calling it from another script, first without and then with the argument:
 
-	:RETURN .T.;
-:ENDPROC;
-
-/* Usage;
-DoProc("ShowOrderStatus");
-DoProc("ShowOrderStatus", {"ORD-1001"});
+```ssl
+ExecFunction("Orders.ShowOrderStatus");
+ExecFunction("Orders.ShowOrderStatus", {"ORD-1001"});
 ```
 
 `UsrMes` logs, in order:
@@ -91,38 +91,38 @@ Looking up order ORD-1001
 
 ### Apply defaults only to omitted trailing arguments
 
-Count the supplied arguments first, then fill in optional values only when the caller left them out.
+A server script `Labels.BuildLabel` counts the arguments it received and fills in only the optional values the caller left out.
 
 ```ssl
-:PROCEDURE BuildLabel;
-	:PARAMETERS sText, sPrefix, sSuffix;
+:PARAMETERS sText, sPrefix, sSuffix;
+:DECLARE nArgs, sResult;
 
-	:DECLARE nArgs, sResult;
+nArgs := PrmCount();
 
-	nArgs := PrmCount();
+:IF nArgs < 1;
+	sText := "Untitled";
+:ENDIF;
 
-	:IF nArgs < 1;
-		sText := "Untitled";
-	:ENDIF;
+:IF nArgs < 2;
+	sPrefix := "[";
+:ENDIF;
 
-	:IF nArgs < 2;
-		sPrefix := "[";
-	:ENDIF;
+:IF nArgs < 3;
+	sSuffix := "]";
+:ENDIF;
 
-	:IF nArgs < 3;
-		sSuffix := "]";
-	:ENDIF;
+sResult := sPrefix + sText + sSuffix;
+UsrMes(sResult);
 
-	sResult := sPrefix + sText + sSuffix;
-	UsrMes(sResult);
+:RETURN sResult;
+```
 
-	:RETURN sResult;
-:ENDPROC;
+Calling it with one, two and three arguments:
 
-/* Usage;
-DoProc("BuildLabel", {"Report"});
-DoProc("BuildLabel", {"Report", "("});
-DoProc("BuildLabel", {"Report", "(", ")"});
+```ssl
+ExecFunction("Labels.BuildLabel", {"Report"});
+ExecFunction("Labels.BuildLabel", {"Report", "("});
+ExecFunction("Labels.BuildLabel", {"Report", "(", ")"});
 ```
 
 `UsrMes` logs, in order:

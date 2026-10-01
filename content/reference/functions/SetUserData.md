@@ -58,25 +58,30 @@ SetUserData(sUserName)
     - Pass [`NIL`](../literals/nil.md), an empty string, or a non-string value.
     - Assume this function authenticates the user or verifies that the user exists.
     - Change the current user without restoring the previous value when later code depends on the original context.
+    - Log with [`UsrMes`](UsrMes.md) while the user name is switched and expect the message in your own user log. It goes to the log of the user name you set.
 
 ## Caveats
 
 - The change affects the current execution context immediately.
+- While the session user name is changed, messages written with [`UsrMes`](UsrMes.md) go to the user log of the name you set, not to your own log (verified in Designer). Capture anything you need to report, restore the original user name, then log.
 
 ## Examples
 
 ### Set the current user name
 
-Use `SetUserData` and then confirm the change with [`GetUserData`](GetUserData.md).
+Use `SetUserData`, confirm the change with [`GetUserData`](GetUserData.md), and restore the original user name before logging the result.
 
 ```ssl
 :PROCEDURE ShowCurrentUser;
-    :DECLARE sUserName, sCurrentUser;
+    :DECLARE sOriginalUser, sCurrentUser;
 
-    sUserName := "jsmith";
-    SetUserData(sUserName);
+    sOriginalUser := GetUserData();
 
+    SetUserData("jsmith");
     sCurrentUser := GetUserData();
+
+    SetUserData(sOriginalUser);
+
     UsrMes("Current user: " + sCurrentUser);
 :ENDPROC;
 
@@ -92,22 +97,25 @@ Current user: jsmith
 
 ### Change the user temporarily and restore the original
 
-Store the original value before switching, then restore it after the work is done.
+Store the original value before switching, restore it after the work is done, and log once it is restored.
 
 ```ssl
 :PROCEDURE RunAsReviewer;
-    :DECLARE sOriginalUser, sReviewUser;
+    :DECLARE sOriginalUser, sReviewUser, sRanAs;
 
     sOriginalUser := GetUserData();
     sReviewUser := "REVIEWER";
 
     :TRY;
         SetUserData(sReviewUser);
-        UsrMes("Running as: " + GetUserData());
-        UsrMes("Review work completed");
+        sRanAs := GetUserData();
     :FINALLY;
         SetUserData(sOriginalUser);
     :ENDTRY;
+
+    /* Logged after restoring the user name, so the messages reach your own log;
+    UsrMes("Ran as: " + sRanAs);
+    UsrMes("Review work completed");
 :ENDPROC;
 
 /* Usage;
@@ -121,7 +129,7 @@ Check the input first so the function is called only with a non-empty string.
 ```ssl
 :PROCEDURE ApplyRequestedUser;
     :PARAMETERS sRequestedUser;
-    :DECLARE sOriginalUser;
+    :DECLARE sOriginalUser, sActiveUser;
 
     :IF Empty(sRequestedUser);
         UsrMes("A user name is required");
@@ -132,10 +140,12 @@ Check the input first so the function is called only with a non-empty string.
 
     :TRY;
         SetUserData(sRequestedUser);
-        UsrMes("Active user: " + GetUserData());
+        sActiveUser := GetUserData();
     :FINALLY;
         SetUserData(sOriginalUser);
     :ENDTRY;
+
+    UsrMes("Active user: " + sActiveUser);
 :ENDPROC;
 
 /* Usage;
