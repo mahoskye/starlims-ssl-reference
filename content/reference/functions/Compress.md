@@ -21,8 +21,8 @@ Compresses a non-empty string and returns the compressed result as either a base
   round-trip decompression.
 - When another step in the workflow needs a temporary compressed file instead of
   an in-memory value.
-- When you want to reduce the size of repetitive text before passing it between
-  SSL procedures or integrations.
+- When you want to reduce the size of long, repetitive text before passing it between
+  SSL procedures or integrations. Short text can come out longer; see Caveats.
 
 ## Syntax
 
@@ -63,6 +63,7 @@ Compress(sSource, [bToFile])
 ## Caveats
 
 - File output is created under the application work `Temp` folder with a generated name.
+- The in-memory result is encoded text, so short input can come out longer than it went in: the 72-character report in the first example compresses to 124 characters. Compression pays off on longer, repetitive text.
 - The generated file name uses a `.zip` extension even though the content is produced by GZip compression.
 - This function documents only the explicit argument-validation errors shown above. Other runtime failures, such as file-write problems when `bToFile` is [`.T.`](../literals/true.md), depend on the environment.
 
@@ -101,7 +102,7 @@ DoProc("CompressReportText");
 
 ```text
 Original length: 72
-Compressed length: [value less than 72]
+Compressed length: 124
 ```
 
 ### Write compressed output to a temporary file
@@ -137,7 +138,7 @@ DoProc("CreateCompressedPayloadFile");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Compressed file created: [Temp path].zip
+Compressed file created: <work-folder>\Temp\<generated name>.zip
 ```
 
 ### Batch process payloads and verify mixed output modes
