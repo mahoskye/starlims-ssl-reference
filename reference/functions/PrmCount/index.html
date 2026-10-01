@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Returns how many arguments were passed to the currently executing procedure.">
+        <meta name="description" content="Returns how many arguments the caller passed to the current server script; only valid in script-level code.">
       
       
       
@@ -1533,6 +1533,17 @@
     <span class="md-ellipsis">
       
         Best practices
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caveats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caveats
       
     </span>
   </a>
@@ -3341,6 +3352,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#caveats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caveats
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3500,13 +3522,13 @@
 
 
 <h1 id="prmcount">PrmCount<a class="headerlink" href="#prmcount" title="Permanent link">&para;</a></h1>
-<p>Returns how many arguments were passed to the currently executing procedure.</p>
-<p><code>PrmCount()</code> reports the number of arguments supplied to the current procedure call. Use it inside a procedure when behavior depends on whether the caller passed zero, one, or more arguments. The function returns the count for the immediate current call only.</p>
+<p>Returns how many arguments the caller passed to the current server script; only valid in script-level code.</p>
+<p><code>PrmCount()</code> reports how many arguments the caller supplied to the running server script, for example with <a href="../ExecFunction/"><code>ExecFunction</code></a><code>("Category.Script", aArgs)</code>. Use it in a script whose <a href="../../keywords/PARAMETERS/"><code>:PARAMETERS</code></a> has optional trailing parameters, to tell an omitted argument from one that was passed.</p>
+<p><code>PrmCount()</code> works only in the script's top-level code. Inside a <a href="../../keywords/PROCEDURE/"><code>:PROCEDURE</code></a>, including one reached with <a href="../DoProc/"><code>DoProc</code></a>, and in code run with <a href="../ExecUdf/"><code>ExecUdf</code></a>, it raises <code>Function PrmCount() is not available in procedures.</code></p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
-<li>When a procedure supports optional trailing arguments and needs to detect how many were actually supplied.</li>
-<li>When a utility procedure changes behavior based on a flexible argument count.</li>
-<li>When you want to validate that a caller supplied the minimum number of arguments before using them.</li>
+<li>When a server script accepts optional trailing arguments and needs to know how many the caller actually supplied.</li>
+<li>When a script called with <a href="../ExecFunction/"><code>ExecFunction</code></a> should reject calls that leave out a required argument.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">PrmCount</span><span class="p">()</span>
@@ -3514,7 +3536,7 @@
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>This function takes no parameters.</p>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
-<p><strong><a href="../../types/number/">number</a></strong> — The number of arguments passed to the current procedure call.</p>
+<p><strong><a href="../../types/number/">number</a></strong> — The number of arguments the caller passed to the current server script.</p>
 <h2 id="exceptions">Exceptions<a class="headerlink" href="#exceptions" title="Permanent link">&para;</a></h2>
 <table data-ssl-table="exceptions"><colgroup><col><col></colgroup>
 <thead>
@@ -3525,7 +3547,7 @@
 </thead>
 <tbody>
 <tr>
-<td>Called outside a procedure context.</td>
+<td>Called inside a <code>:PROCEDURE</code>, or in code run with <code>ExecUdf</code>.</td>
 <td><code>Function PrmCount() is not available in procedures.</code></td>
 </tr>
 </tbody>
@@ -3534,78 +3556,71 @@
 <div class="admonition success">
 <p class="admonition-title">Do</p>
 <ul>
-<li>Call <code>PrmCount()</code> inside a procedure body when the procedure accepts optional or flexible arguments.</li>
-<li>Check the result before using arguments that may have been omitted by the caller.</li>
-<li>Keep the count check close to the logic that depends on it so the procedure stays easy to follow.</li>
+<li>Call <code>PrmCount()</code> in a server script's top-level code, after its <code>:PARAMETERS</code> line.</li>
+<li>Check the count before using parameters a caller may have left out.</li>
 </ul>
 </div>
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
-<li>Call <code>PrmCount()</code> from top-level script code or any non-procedure context.</li>
-<li>Assume every declared parameter was supplied by the caller; check <code>PrmCount()</code> first when omitted arguments matter.</li>
-<li>Use <code>PrmCount()</code> as a substitute for clear procedure design when a fixed signature is enough.</li>
+<li>Call <code>PrmCount()</code> inside a <code>:PROCEDURE</code>. It raises an error there. Inside a procedure, test a parameter with <a href="../Empty/"><code>Empty</code></a> or <a href="../LimsTypeEx/"><code>LimsTypeEx</code></a> instead, or give it a default with <a href="../../keywords/DEFAULT/"><code>:DEFAULT</code></a>.</li>
+<li>Use <code>PrmCount()</code> in code run with <code>ExecUdf</code>, which raises the same error.</li>
 </ul>
 </div>
+<h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The count is the number of arguments the caller passed, not the number of parameters the script declares: a script with two parameters called with one argument gets <code>1</code>.</li>
+</ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="reject-calls-that-omit-a-required-argument">Reject calls that omit a required argument<a class="headerlink" href="#reject-calls-that-omit-a-required-argument" title="Permanent link">&para;</a></h3>
-<p>Use <code>PrmCount()</code> at the start of a procedure to verify that the caller supplied the minimum input you need.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowOrderStatus</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sOrderNo</span><span class="p">;</span>
+<p>A server script <code>Orders.ShowOrderStatus</code> checks that its caller passed an order number before using it.</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sOrderNo</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nArgs</span><span class="p">;</span>
+<span class="k">:IF</span><span class="w"> </span><span class="nf">PrmCount</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Order number is required"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
+<span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">nArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">PrmCount</span><span class="p">();</span>
+<span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Looking up order "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOrderNo</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nArgs</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Order number is required"</span><span class="p">);</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Looking up order "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sOrderNo</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<span class="k">:ENDPROC</span><span class="p">;</span>
-
-<span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowOrderStatus"</span><span class="p">);</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowOrderStatus"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"ORD-1001"</span><span class="p">});</span>
+<span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
+</code></pre></div>
+<p>Calling it from another script, first without and then with the argument:</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ExecFunction</span><span class="p">(</span><span class="s2">"Orders.ShowOrderStatus"</span><span class="p">);</span>
+<span class="nf">ExecFunction</span><span class="p">(</span><span class="s2">"Orders.ShowOrderStatus"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"ORD-1001"</span><span class="p">});</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs, in order:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Order number is required
 Looking up order ORD-1001
 </code></pre></div>
 <h3 id="apply-defaults-only-to-omitted-trailing-arguments">Apply defaults only to omitted trailing arguments<a class="headerlink" href="#apply-defaults-only-to-omitted-trailing-arguments" title="Permanent link">&para;</a></h3>
-<p>Count the supplied arguments first, then fill in optional values only when the caller left them out.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildLabel</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sText</span><span class="p">,</span><span class="w"> </span><span class="n">sPrefix</span><span class="p">,</span><span class="w"> </span><span class="n">sSuffix</span><span class="p">;</span>
+<p>A server script <code>Labels.BuildLabel</code> counts the arguments it received and fills in only the optional values the caller left out.</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sText</span><span class="p">,</span><span class="w"> </span><span class="n">sPrefix</span><span class="p">,</span><span class="w"> </span><span class="n">sSuffix</span><span class="p">;</span>
+<span class="k">:DECLARE</span><span class="w"> </span><span class="n">nArgs</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nArgs</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
+<span class="n">nArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">PrmCount</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">nArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">PrmCount</span><span class="p">();</span>
+<span class="k">:IF</span><span class="w"> </span><span class="n">nArgs</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Untitled"</span><span class="p">;</span>
+<span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nArgs</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Untitled"</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="k">:IF</span><span class="w"> </span><span class="n">nArgs</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPrefix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"["</span><span class="p">;</span>
+<span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nArgs</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sPrefix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"["</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="k">:IF</span><span class="w"> </span><span class="n">nArgs</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sSuffix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"]"</span><span class="p">;</span>
+<span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">nArgs</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sSuffix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"]"</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPrefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sText</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSuffix</span><span class="p">;</span>
+<span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">sResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sPrefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sText</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSuffix</span><span class="p">;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
-<span class="k">:ENDPROC</span><span class="p">;</span>
-
-<span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildLabel"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Report"</span><span class="p">});</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildLabel"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Report"</span><span class="p">,</span><span class="w"> </span><span class="s2">"("</span><span class="p">});</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildLabel"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Report"</span><span class="p">,</span><span class="w"> </span><span class="s2">"("</span><span class="p">,</span><span class="w"> </span><span class="s2">")"</span><span class="p">});</span>
+<span class="k">:RETURN</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
+</code></pre></div>
+<p>Calling it with one, two and three arguments:</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">ExecFunction</span><span class="p">(</span><span class="s2">"Labels.BuildLabel"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Report"</span><span class="p">});</span>
+<span class="nf">ExecFunction</span><span class="p">(</span><span class="s2">"Labels.BuildLabel"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Report"</span><span class="p">,</span><span class="w"> </span><span class="s2">"("</span><span class="p">});</span>
+<span class="nf">ExecFunction</span><span class="p">(</span><span class="s2">"Labels.BuildLabel"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"Report"</span><span class="p">,</span><span class="w"> </span><span class="s2">"("</span><span class="p">,</span><span class="w"> </span><span class="s2">")"</span><span class="p">});</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs, in order:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>[Report]
@@ -3638,7 +3653,7 @@ Looking up order ORD-1001
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 01:02:01 UTC">September 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 1, 2026 22:05:20 UTC">October 1, 2026</span>
   </span>
 
     
