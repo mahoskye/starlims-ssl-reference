@@ -17,11 +17,12 @@ AddColDelimiters updates `aCols` in place. For each element, it builds a value i
 
 If `sDSN` is [`NIL`](../literals/nil.md), the function uses empty delimiters. If `aCols` is [`NIL`](../literals/nil.md) or `sTable` is [`NIL`](../literals/nil.md), the function leaves the array unchanged and returns no value. The function trims `sTable` before building the qualified names.
 
+!!! warning "Not callable from SSL"
+    On STARLIMS v11, every call to `AddColDelimiters` from SSL code fails to compile with `Compile-time error: … Invalid prototype for built-in function: AddColDelimiters`, whatever arguments are passed. Sixteen argument shapes were tested, from no arguments to four. Build qualified names with [`AddNameDelimiters`](AddNameDelimiters.md) instead, as in the example below.
+
 ## When to use
 
-- When you need an existing array of column names converted to qualified `table.column` names.
-- When SQL must adapt to the identifier delimiter rules of the target database.
-- When you want to prepare a column array in place before building a SELECT list or export query.
+- Not from SSL code: calls are rejected at compile time. To qualify columns for a specific database, apply [`AddNameDelimiters`](AddNameDelimiters.md) to the table and to each column name.
 
 ## Syntax
 
@@ -41,104 +42,53 @@ AddColDelimiters(sDSN, aCols, sTable)
 
 **none** — No return value. The function updates `aCols` directly.
 
+## Exceptions
+
+| Trigger | Exception message |
+| --- | --- |
+| Any call from SSL code, with any arguments. | `Compile-time error: <line>:<column> Invalid prototype for built-in function: AddColDelimiters` |
+
 ## Best practices
 
 !!! success "Do"
-    - Call `AddColDelimiters` before joining `aCols` into a SELECT list or export statement.
-    - Pass the same DSN the SQL will use so the delimiter style matches the target database.
-    - Copy the array first if you need to keep the original unqualified column names.
-    - Use [`AddNameDelimiters`](AddNameDelimiters.md) when you need to delimit one identifier instead of an entire column array.
+    - Qualify column names with [`AddNameDelimiters`](AddNameDelimiters.md), applied to the table name and to each column name.
+    - Pass the same connection name the SQL will use, so the delimiter style matches the target database.
 
 !!! failure "Don't"
-    - Expect a new array back. The existing `aCols` array is modified in place.
-    - Pass [`NIL`](../literals/nil.md) for `aCols` or `sTable` and expect partial output. The function does nothing in that case.
-    - Hardcode brackets or quotes when the DSN can vary by database.
-    - Assume the function trims column names. It uses each column value as provided.
+    - Call `AddColDelimiters` from SSL code. It does not compile.
+    - Hardcode brackets or quotes when the connection can vary by database.
 
 ## Examples
 
-### Qualify a list of columns
+### Qualify a list of columns with AddNameDelimiters
 
-Adds table qualification and database-specific delimiters to each column name in place. The exact delimiter characters depend on the DBMS type for the given DSN (for example, `[` and `]` for SQL Server).
+Builds `table.column` names for a SELECT list by delimiting the table name and each column name with [`AddNameDelimiters`](AddNameDelimiters.md), then joins them with [`BuildString`](BuildString.md).
 
 ```ssl
-:PROCEDURE BuildQualifiedColumns;
-	:DECLARE aColumns, nIndex;
+:PROCEDURE QualifyColumns;
+    :PARAMETERS sDSN, sTable, aCols;
+    :DECLARE aQualified, sPrefix, nIndex;
 
-	aColumns := {"sample_id", "sample_name", "status"};
+    aQualified := {};
+    sPrefix := AddNameDelimiters(sDSN, sTable) + ".";
 
-	AddColDelimiters("LIMS", aColumns, "samples");
+    :FOR nIndex := 1 :TO ALen(aCols);
+        AAdd(aQualified, sPrefix + AddNameDelimiters(sDSN, aCols[nIndex]));
+    :NEXT;
 
-	:FOR nIndex := 1 :TO ALen(aColumns);
-		UsrMes(aColumns[nIndex]);
-	:NEXT;
+    UsrMes(BuildString(aQualified, 1, ALen(aQualified), ", "));
+
+    :RETURN aQualified;
 :ENDPROC;
 
 /* Usage;
-DoProc("BuildQualifiedColumns");
+DoProc("QualifyColumns", {"DATABASE", "sample", {"sample_id", "status"}});
 ```
 
-[`UsrMes`](UsrMes.md) logs (SQL Server example):
+On SQL Server, [`UsrMes`](UsrMes.md) logs:
 
 ```text
-[samples].[sample_id]
-[samples].[sample_name]
-[samples].[status]
-```
-
-### Prepare columns before joining them into SQL
-
-Qualifies the column array in place, then joins the result into a SELECT list using [`BuildString`](BuildString.md).
-
-```ssl
-:PROCEDURE BuildSelectList;
-	:DECLARE aColumns, sSelectList;
-
-	aColumns := {"sample_id", "analysis_date", "status_code"};
-
-	AddColDelimiters("LIMS", aColumns, "samples");
-
-	sSelectList := BuildString(aColumns,,, ", ");
-
-	UsrMes("SELECT " + sSelectList + " FROM samples");
-:ENDPROC;
-
-/* Usage;
-DoProc("BuildSelectList");
-```
-
-[`UsrMes`](UsrMes.md) logs (SQL Server example):
-
-```text
-SELECT [samples].[sample_id], [samples].[analysis_date], [samples].[status_code] FROM samples
-```
-
-### Qualify columns without database-specific wrappers
-
-Passes [`NIL`](../literals/nil.md) for `sDSN` so that no delimiter characters are added and the result uses plain `table.column` notation.
-
-```ssl
-:PROCEDURE BuildPlainQualifiedColumns;
-	:DECLARE aColumns, nIndex;
-
-	aColumns := {"sample_id", "result_value"};
-
-	AddColDelimiters(, aColumns, "results");
-
-	:FOR nIndex := 1 :TO ALen(aColumns);
-		UsrMes(aColumns[nIndex]);
-	:NEXT;
-:ENDPROC;
-
-/* Usage;
-DoProc("BuildPlainQualifiedColumns");
-```
-
-[`UsrMes`](UsrMes.md) logs:
-
-```text
-results.sample_id
-results.result_value
+[sample].[sample_id], [sample].[status]
 ```
 
 ## Related

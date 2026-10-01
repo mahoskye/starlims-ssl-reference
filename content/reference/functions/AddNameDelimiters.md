@@ -13,7 +13,7 @@ starlims:
 
 Wrap a name in database-specific delimiters.
 
-AddNameDelimiters returns `sName` wrapped in the identifier delimiters used by the database identified by `sDSN`. If `sDSN` is [`NIL`](../literals/nil.md), it uses an empty string instead. If `sName` is [`NIL`](../literals/nil.md), it also uses an empty string.
+AddNameDelimiters returns `sName` wrapped in the identifier delimiters used by the database identified by `sDSN`. If `sDSN` is omitted or [`NIL`](../literals/nil.md), it uses the delimiters of the default connection. If `sName` is [`NIL`](../literals/nil.md), it also uses an empty string.
 
 Before adding delimiters, the function trims `sName`. If `sDSN` is empty, the function returns the trimmed name without any delimiter characters. A non-empty `sDSN` must name a database connection configured in your environment, such as the default `DATABASE` connection. Any other name raises an error.
 
@@ -61,7 +61,7 @@ AddNameDelimiters(sDSN, sName)
 !!! failure "Don't"
     - Assume the same delimiter characters work for every database.
     - Expect this function to modify a variable in place. It returns a new string.
-    - Pass [`NIL`](../literals/nil.md) and expect an error. The function falls back to empty strings for missing arguments.
+    - Pass [`NIL`](../literals/nil.md) and expect an error. A missing `sDSN` falls back to the default connection's delimiters, and a missing `sName` to an empty name.
     - Pass a connection name that is not configured in your environment. That raises `The provider name: <sDSN> not found.`
 
 ## Examples
@@ -93,7 +93,7 @@ SELECT [sample_id] FROM [samples]
 
 ### Handle omitted values safely
 
-Omits `sDSN` so that no delimiter characters are applied; the function returns the trimmed name unchanged.
+Omits `sDSN`, so the default connection's delimiters apply: brackets on SQL Server.
 
 ```ssl
 :PROCEDURE ShowDefaultDelimiterBehavior;
@@ -111,7 +111,7 @@ DoProc("ShowDefaultDelimiterBehavior");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Delimited name: status
+Delimited name: [status]
 ```
 
 ## Related
