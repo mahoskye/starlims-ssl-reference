@@ -13,7 +13,7 @@ starlims:
 
 Sorts an array in place and returns the same array.
 
-`SortArray` reorders the elements in `aTarget` and returns the sorted array. Pass `1` or [`.T.`](../literals/true.md) in `vNumeric` to force numeric comparison. Pass a code block to compare two elements yourself. If `vNumeric` is omitted or contains any other value, the function uses the default sort behavior. `aTarget` cannot be [`NIL`](../literals/nil.md).
+`SortArray` reorders the elements in `aTarget` and returns the sorted array. Pass `1` or [`.T.`](../literals/true.md) in `vNumeric` to compare elements that are strings holding numbers, such as `"42"`, by their numeric value. Numeric mode requires string elements: on an array of numbers it raises `Failed to compare two elements in the array.` Pass a code block to compare two elements yourself. If `vNumeric` is omitted or contains any other value, the function uses the default sort behavior. `aTarget` cannot be [`NIL`](../literals/nil.md).
 
 ## When to use
 
@@ -33,7 +33,7 @@ SortArray(aTarget, [vNumeric])
 | Name | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | `aTarget` | [array](../types/array.md) | yes | — | Array to sort in place. |
-| `vNumeric` | any | no | — | Sort mode selector. Pass `1` or [`.T.`](../literals/true.md) for numeric comparison, or pass a code block such as `{|vLeft, vRight| ...}` that returns a negative number, `0`, or a positive number. Other values use the default sort behavior. |
+| `vNumeric` | any | no | — | Sort mode selector. Pass `1` or [`.T.`](../literals/true.md) to compare string elements by their numeric value, or pass a code block such as `{|vLeft, vRight| ...}` that returns a negative number, `0`, or a positive number. Other values use the default sort behavior. |
 
 ## Returns
 
@@ -64,15 +64,15 @@ SortArray(aTarget, [vNumeric])
 
 ## Examples
 
-### Sort numbers in ascending order
+### Sort numeric strings in ascending order
 
-Capture the original element order with [`BuildString`](BuildString.md), sort numerically, then show both the before and after strings.
+Capture the original element order with [`BuildString`](BuildString.md), sort the strings by their numeric value, then show both the before and after strings. Numeric mode needs string elements, so the values are written as strings: `"3"` sorts before `"15"` here, which a plain text sort would not do.
 
 ```ssl
 :PROCEDURE DemoNumericSort;
     :DECLARE aNumbers, sBefore, sAfter;
 
-    aNumbers := {42, 15, 87, 3, 29};
+    aNumbers := {"42", "15", "87", "3", "29"};
 
     sBefore := BuildString(aNumbers, 1, ALen(aNumbers), ", ");
     SortArray(aNumbers, .T.);

@@ -133,15 +133,13 @@ Guards against an unsupported DSN by checking for an empty delimiter before buil
 DoProc("BuildSelectStatement", {"DATABASE"});
 ```
 
-`UsrMes` logs one of:
-
-```text
-No delimiter mapping is available for this DSN
-```
+`UsrMes` logs:
 
 ```text
 SELECT [orderdate] FROM [orders]
 ```
+
+The brackets are SQL Server's delimiters; another provider returns its own. For a connection name that has no delimiter mapping, the procedure logs `No delimiter mapping is available for this DSN` and returns an empty string.
 
 ## Related
 

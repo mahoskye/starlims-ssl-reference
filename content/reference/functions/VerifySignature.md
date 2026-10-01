@@ -64,13 +64,14 @@ VerifySignature(sCertificateString, sData, sSignature)
 
 ## Caveats
 
+- Invalid Base64 input raises `Exception has been thrown by the target of an invocation.`, whose underlying error is `Invalid length for a Base-64 char array or string.` Catch it with [`:TRY`](../keywords/TRY.md) when the values come from outside the script.
 - `VerifySignature` verifies the signature with the certificate's public key by using a SHA-1 digest of the UTF-8 bytes of `sData`.
 
 ## Examples
 
 ### Verify a signed payload
 
-Check whether a payload signature is valid and branch on the boolean result. The function returns [`.T.`](../literals/true.md) only when the signature passes; a mismatch returns [`.F.`](../literals/false.md) without raising an error.
+Check whether a payload signature is valid and branch on the boolean result. The function returns [`.T.`](../literals/true.md) only when the signature passes; a mismatch returns [`.F.`](../literals/false.md) without raising an error. The certificate and signature values are placeholders: replace them with a real Base64 DER certificate and a Base64 signature made with its private key. As written they are not valid Base64, so the call raises.
 
 ```ssl
 :PROCEDURE VerifySignedPayload;
