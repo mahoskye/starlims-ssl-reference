@@ -74,7 +74,7 @@ Converts a user-selected date to the start of the client-local day and logs the 
 
 	dFilterStart := ClientStartOfDay(dSelectedDate);
 
-	sMessage := "Client day starts at: " + LimsString(dFilterStart);
+	sMessage := "Client day starts at: " + DateToString(dFilterStart, "MM/dd/yyyy HH:mm:ss.fff");
 	UsrMes(sMessage);
 
 	:RETURN dFilterStart;
@@ -87,7 +87,7 @@ DoProc("NormalizeClientFilterDate", {CToD("04/23/2026")});
 `UsrMes` logs:
 
 ```text
-Client day starts at: [date at 00:00:00.000]
+Client day starts at: 04/23/2026 00:00:00.000
 ```
 
 ### Query records across a full client-local calendar day
@@ -150,7 +150,7 @@ DoProc("CompareDayBoundaries", {CToD("04/23/2026")});
 `UsrMes` logs one of:
 
 ```text
-Client start: [date], Server start: [date] (same day boundary)
+Client start: <date>, Server start: <date> (same day boundary)
 ```
 
 ```text

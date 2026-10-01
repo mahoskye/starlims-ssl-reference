@@ -143,14 +143,15 @@ Combines unit separator (`Chr(31)`) and record separator (`Chr(30)`) control cha
 
     sPayload := "TXSEND" + sUnitSeparator + sData;
 
-    UsrMes("Payload with protocol control codes: " + sPayload);
+    /* Show the separators in a readable form, since raw control characters break the log viewer;
+    UsrMes("Payload with protocol control codes: " + StrTran(StrTran(sPayload, Chr(31), "<US>"), Chr(30), "<RS>"));
 :ENDPROC;
 
 /* Usage;
 DoProc("EmbedProtocolControlCodes");
 ```
 
-[`UsrMes`](UsrMes.md) logs (with `<US>` = `Chr(31)` and `<RS>` = `Chr(30)`):
+The procedure logs the payload with each separator shown by name, `<US>` for `Chr(31)` and `<RS>` for `Chr(30)`. Logging the raw control characters themselves stops Designer's log viewer from displaying the log, so convert them to visible text before logging. [`UsrMes`](UsrMes.md) logs:
 
 ```text
 Payload with protocol control codes: TXSEND<US>Sample123<US>Pending<US>2024-04-11<RS>

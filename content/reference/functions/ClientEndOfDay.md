@@ -74,7 +74,7 @@ Converts a user-selected date to the end of the client-local day and logs the re
 
 	dEndOfDay := ClientEndOfDay(dSelectedDate);
 
-	sMessage := "Client end of day: " + LimsString(dEndOfDay);
+	sMessage := "Client end of day: " + DateToString(dEndOfDay, "MM/dd/yyyy HH:mm:ss.fff");
 	UsrMes(sMessage);
 
 	:RETURN dEndOfDay;
@@ -87,7 +87,7 @@ DoProc("GetClientDayCutoff", {CToD("04/23/2026")});
 `UsrMes` logs:
 
 ```text
-Client end of day: [date at 23:59:59.997]
+Client end of day: 04/23/2026 23:59:59.997
 ```
 
 ### Use the end-of-day cutoff as a query upper bound
@@ -148,7 +148,7 @@ DoProc("CompareDayCutoffs", {CToD("04/23/2026")});
 `UsrMes` logs one of:
 
 ```text
-Client end: [date], Server end: [date] (same cutoff)
+Client end: <date>, Server end: <date> (same cutoff)
 ```
 
 ```text

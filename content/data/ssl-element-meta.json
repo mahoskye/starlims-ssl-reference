@@ -13,7 +13,7 @@
       "special_form": 8,
       "returns": 12
     },
-    "with_exceptions": 265,
+    "with_exceptions": 266,
     "with_caveats": 401,
     "with_best_practices": 458
   },
@@ -319,20 +319,21 @@
       "summary": "Qualify each column in an array as table.column with database-specific identifier delimiters.",
       "doc_status": "published",
       "source_path": "content/reference/functions/AddColDelimiters.md",
-      "exceptions": [],
+      "exceptions": [
+        {
+          "trigger": "Any call from SSL code, with any arguments.",
+          "message": "Compile-time error: <line>:<column> Invalid prototype for built-in function: AddColDelimiters"
+        }
+      ],
       "caveats": [],
       "best_practices": {
         "do": [
-          "Call AddColDelimiters before joining aCols into a SELECT list or export statement.",
-          "Pass the same DSN the SQL will use so the delimiter style matches the target database.",
-          "Copy the array first if you need to keep the original unqualified column names.",
-          "Use AddNameDelimiters when you need to delimit one identifier instead of an entire column array."
+          "Qualify column names with AddNameDelimiters, applied to the table name and to each column name.",
+          "Pass the same connection name the SQL will use, so the delimiter style matches the target database."
         ],
         "dont": [
-          "Expect a new array back. The existing aCols array is modified in place.",
-          "Pass NIL for aCols or sTable and expect partial output. The function does nothing in that case.",
-          "Hardcode brackets or quotes when the DSN can vary by database.",
-          "Assume the function trims column names. It uses each column value as provided."
+          "Call AddColDelimiters from SSL code. It does not compile.",
+          "Hardcode brackets or quotes when the connection can vary by database."
         ]
       }
     },
@@ -360,7 +361,7 @@
         "dont": [
           "Assume the same delimiter characters work for every database.",
           "Expect this function to modify a variable in place. It returns a new string.",
-          "Pass NIL and expect an error. The function falls back to empty strings for missing arguments.",
+          "Pass NIL and expect an error. A missing sDSN falls back to the default connection's delimiters, and a missing sName to an empty name.",
           "Pass a connection name that is not configured in your environment. That raises The provider name: <sDSN> not found."
         ]
       }
