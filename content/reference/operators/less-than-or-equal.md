@@ -126,8 +126,10 @@ DoProc("CheckDateCutoff");
 [`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
-Entry date is within the cutoff period: 03/28/2024
+Entry date is within the cutoff period: 3/28/2024
 ```
+
+Dates print in the session date format (see [`DateFormat`](../functions/DateFormat.md)).
 
 ### Comparing batch keys against an inclusive boundary
 

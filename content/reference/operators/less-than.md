@@ -123,8 +123,10 @@ DoProc("CheckDateCutoff");
 [`InfoMes`](../functions/InfoMes.md) logs:
 
 ```text
-Sample date is before the cutoff: 03/28/2024
+Sample date is before the cutoff: 3/28/2024
 ```
+
+Dates print in the session date format (see [`DateFormat`](../functions/DateFormat.md)).
 
 ### Guarding a dynamic comparison with [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md)
 

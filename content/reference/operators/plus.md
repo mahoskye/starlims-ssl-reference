@@ -144,8 +144,10 @@ DoProc("CalculateDueDate");
 `UsrMes` logs:
 
 ```text
-Due date: 01/29/2024
+Due date: 1/29/2024
 ```
+
+Dates print in the session date format (see [`DateFormat`](../functions/DateFormat.md)).
 
 ## Related elements
 

@@ -147,8 +147,10 @@ DoProc("CalculateDateDifference");
 [`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
-Reminder date: 03/12/2024, days until due: 5
+Reminder date: 3/12/2024, days until due: 5
 ```
+
+Dates print in the session date format (see [`DateFormat`](../functions/DateFormat.md)).
 
 ## Related elements
 
