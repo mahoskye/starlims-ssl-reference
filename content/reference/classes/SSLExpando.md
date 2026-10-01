@@ -1,6 +1,6 @@
 ---
 title: "SSLExpando"
-summary: "SSLExpando is a built-in object class for storing named values whose shape is decided at runtime."
+summary: "SSLExpando is the class of dynamic objects created with CreateUdObject(), which store named values whose shape is decided at runtime."
 id: ssl.class.sslexpando
 element_type: class
 doc_status: published
@@ -11,9 +11,9 @@ starlims:
 
 # SSLExpando
 
-`SSLExpando` is a built-in object class for storing named values whose shape is decided at runtime.
+`SSLExpando` is the class of dynamic objects created with [`CreateUdObject()`](../functions/CreateUdObject.md), which store named values whose shape is decided at runtime.
 
-Use `SSLExpando{}` when you need an object that can grow as your script runs. You can add and update dynamic properties by name, check whether a property exists, list the current dynamic properties, and serialize the object to XML. `XmlType` controls the XML root element name and is always treated as an available property. Member and dynamic property names are matched case-insensitively.
+Create one with [`CreateUdObject()`](../functions/CreateUdObject.md) when you need an object that can grow as your script runs. The class name is not a constructor: `SSLExpando{}` raises the compile-time error `Invalid built-in class: SSLExpando`. You can add and update dynamic properties by name, check whether a property exists, list the current dynamic properties, and serialize the object to XML. `XmlType` controls the XML root element name and is always treated as an available property. Member and dynamic property names are matched case-insensitively.
 
 ## When to use
 
@@ -23,9 +23,12 @@ Use `SSLExpando{}` when you need an object that can grow as your script runs. Yo
 
 ## Constructors
 
-### `SSLExpando{}`
+`SSLExpando` has no constructor you can call by class name. `SSLExpando{}` raises the compile-time error `Invalid built-in class: SSLExpando`.
 
-Creates an empty `SSLExpando` instance.
+Create instances with [`CreateUdObject()`](../functions/CreateUdObject.md):
+
+- `CreateUdObject()` creates an empty object.
+- `CreateUdObject({{"prop", value}})` creates an object with the listed properties already set.
 
 ## Properties
 
@@ -106,11 +109,13 @@ Returns [`NIL`](../literals/nil.md). It does not return the object's XML. Call `
 ## Best practices
 
 !!! success "Do"
+    - Create the object with [`CreateUdObject()`](../functions/CreateUdObject.md).
     - Use `SetProperty()` and `GetProperty()` when the property name comes from runtime data.
     - Set `XmlType` before serializing when another system expects a specific root element name.
     - Call `IsProperty()` before `GetProperty()` for optional fields.
 
 !!! failure "Don't"
+    - Write `SSLExpando{}`. It raises the compile-time error `Invalid built-in class: SSLExpando`.
     - Assume `GetProperty()` returns an empty value for missing fields. It raises `Property not found: <name>.`.
     - Expect `GetPropList()` to include inherited object members. It only returns dynamic properties on the `SSLExpando`.
     - Rely on `clone()` for an independent deep copy of nested arrays or objects. Only the top-level property bag is copied.
@@ -126,13 +131,13 @@ Returns [`NIL`](../literals/nil.md). It does not return the object's XML. Call `
 
 ### Build a dynamic sample payload
 
-Creates an `SSLExpando`, assigns `XmlType` and three dynamic properties, then reads a property with `GetProperty`, lists the dynamic property count with `GetPropList`, and serializes the object to XML with `Serialize`.
+Creates an `SSLExpando` with [`CreateUdObject()`](../functions/CreateUdObject.md), assigns `XmlType` and three dynamic properties, then reads a property with `GetProperty`, lists the dynamic property count with `GetPropList`, and serializes the object to XML with `Serialize`.
 
 ```ssl
 :PROCEDURE BuildSamplePayload;
 	:DECLARE oPayload, aProps, sXml;
 
-	oPayload := SSLExpando{};
+	oPayload := CreateUdObject();
 	oPayload:XmlType := "SampleRecord";
 
 	oPayload:SetProperty("SampleID", "LAB-2026-0042");
@@ -162,7 +167,7 @@ Creates an `SSLExpando` for a release request, clones it twice into separate obj
 :PROCEDURE CloneRequestState;
 	:DECLARE oRequest, oReviewCopy, oReleaseCopy;
 
-	oRequest := SSLExpando{};
+	oRequest := CreateUdObject();
 	oRequest:XmlType := "ReleaseRequest";
 	oRequest:SetProperty("SampleID", "LAB-2026-0042");
 	oRequest:SetProperty("Decision", "Pending");

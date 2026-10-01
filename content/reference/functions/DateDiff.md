@@ -106,10 +106,10 @@ Computes the elapsed days between a fixed log date and today using the default `
 DoProc("GetSampleAgeDays");
 ```
 
-[`UsrMes`](UsrMes.md) logs (output depends on the current date):
+[`UsrMes`](UsrMes.md) logs the number of days from the log date to today, so the value depends on the day the procedure runs:
 
 ```text
-Sample age in days: 38
+Sample age in days: <days>
 ```
 
 ### Validate a 48-hour hold time between two timestamps

@@ -13,7 +13,7 @@ starlims:
 
 Adds a time interval to a date and returns the resulting date.
 
-`DateAdd` returns a new date based on the input date, a numeric offset, and an optional interval name. Supported intervals are `year`, `month`, `day`, `hour`, `minute`, `second`, and `millisecond`. If `sDatepart` is omitted, [`NIL`](../literals/nil.md), or not a string, the function uses `day`. For `year` and `month`, the function rounds `nNumber` to an integer before applying the change. Use [`DateDiff`](DateDiff.md) or [`DateDiffEx`](DateDiffEx.md) when you need to measure the difference between two dates instead of shifting one.
+`DateAdd` returns a new date based on the input date, a numeric offset, and an optional interval name. Supported intervals are `year`, `month`, `day`, `hour`, `minute`, `second`, and `millisecond`. If `sDatepart` is omitted, [`NIL`](../literals/nil.md), or not a string, the function uses `day`. For `year` and `month`, the function rounds `nNumber` to an integer before applying the change. Use [`DateDiff`](DateDiff.md) or [`DateDiffEx`](DateDiffEx.md) when you need to measure the difference between two dates instead of shifting one. Dates in the example output follow the session date format (see [`DateFormat`](DateFormat.md)) and are shown with the default format, which prints a date such as `3/15/2024` without zero padding.
 
 ## When to use
 
@@ -89,10 +89,10 @@ Adds seven days to a fixed start date using the default `day` interval and logs 
 DoProc("CalculateTaskDueDate");
 ```
 
-[`UsrMes`](UsrMes.md) logs (assuming MM/DD/YYYY date format):
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
-Task started on 01/15/2024 and is due on 01/22/2024
+Task started on 1/15/2024 and is due on 1/22/2024
 ```
 
 ### Add a year to a registration date and report renewal status

@@ -13,7 +13,7 @@ starlims:
 
 Returns the application's base folder path as a string for use in file and configuration operations.
 
-`GetAppBaseFolder` returns the root directory path configured for the current application context. It takes no arguments and always returns the same value within a given run.
+`GetAppBaseFolder` returns the root directory path configured for the current application context. It takes no arguments and always returns the same value within a given run. The returned path ends with a backslash, so append a relative folder or file name directly instead of adding another separator.
 
 ## When to use
 
@@ -34,7 +34,7 @@ This function takes no parameters.
 
 ## Returns
 
-**[string](../types/string.md)** — The base folder path configured for the application context.
+**[string](../types/string.md)** — The base folder path configured for the application context, ending with a backslash.
 
 ## Best practices
 
@@ -65,7 +65,7 @@ Use the application's base folder to store user-uploaded files.
 
 	sAppBasePath := GetAppBaseFolder();
 	sUploadFolder := "UserUploads";
-	sFullPath := sAppBasePath + "\" + sUploadFolder;
+	sFullPath := sAppBasePath + sUploadFolder;
 
 	UsrMes("Upload folder path: " + sFullPath);
 
@@ -76,10 +76,10 @@ Use the application's base folder to store user-uploaded files.
 DoProc("SetupUserUploadFolder");
 ```
 
-[`UsrMes`](UsrMes.md) logs:
+[`UsrMes`](UsrMes.md) logs the full path, where `<app-folder>` stands for the application base folder in your environment:
 
 ```text
-Upload folder path: C:\STARLIMS\UserUploads
+Upload folder path: <app-folder>\UserUploads
 ```
 
 ### Build a dynamic path to read a configuration file
@@ -91,8 +91,8 @@ Combine the application base folder with relative paths to read configuration fi
 	:DECLARE sBaseFolder, sConfigRelative, sFullPath, sContent;
 
 	sBaseFolder := GetAppBaseFolder();
-	sConfigRelative := "config" + "/" + "application.cfg";
-	sFullPath := sBaseFolder + "\" + sConfigRelative;
+	sConfigRelative := "config\application.cfg";
+	sFullPath := sBaseFolder + sConfigRelative;
 
 	sContent := ReadText(sFullPath);
 	:IF Empty(sContent);

@@ -15,6 +15,8 @@ Generates dataset XML from in-memory values, field definitions, and output flags
 
 `GetDataSetXMLFromArray` converts array data into an XML dataset string. You can control the table name, whether the XML output includes header information, and whether schema metadata is emitted. The function requires `aArrayOfValues`; when that argument is [`NIL`](../literals/nil.md), it raises an error before any XML is built.
 
+With the header enabled, the XML starts with the declaration `<?xml version="1.0" standalone="yes" ?>`. The data follows as an indented `<DataSet>` root element that holds one element per row, named after `sTableName`, with one child element per field.
+
 Unlike [`GetDataSetFromArrayEx`](GetDataSetFromArrayEx.md), this function does not add the extra field-name normalization step before calling the XML generator. Use it when you want direct control over the XML-oriented form.
 
 ## When to use
@@ -106,7 +108,23 @@ DoProc("BuildSampleResultsXml");
 
 ```text
 <?xml version="1.0" standalone="yes" ?>
-<DataSet><sample_results><sample_id>LAB-001</sample_id><test_code>pH</test_code><result_value>7.1</result_value></sample_results><sample_results><sample_id>LAB-002</sample_id><test_code>pH</test_code><result_value>6.9</result_value></sample_results><sample_results><sample_id>LAB-003</sample_id><test_code>pH</test_code><result_value>7.3</result_value></sample_results></DataSet>
+<DataSet>
+  <sample_results>
+    <sample_id>LAB-001</sample_id>
+    <test_code>pH</test_code>
+    <result_value>7.1</result_value>
+  </sample_results>
+  <sample_results>
+    <sample_id>LAB-002</sample_id>
+    <test_code>pH</test_code>
+    <result_value>6.9</result_value>
+  </sample_results>
+  <sample_results>
+    <sample_id>LAB-003</sample_id>
+    <test_code>pH</test_code>
+    <result_value>7.3</result_value>
+  </sample_results>
+</DataSet>
 ```
 
 ### Include schema with typed field definitions

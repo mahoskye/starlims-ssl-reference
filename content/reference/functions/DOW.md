@@ -14,7 +14,7 @@ starlims:
 Returns the numeric day of week for a date.
 
 `DOW()` returns a number from `1` through `7` for valid dates, where `1`
-represents Sunday and `7` represents Saturday. If the supplied date is empty, the function returns `0`. Passing [`NIL`](../literals/nil.md) or a value that is not a date raises an error.
+represents Sunday and `7` represents Saturday. If the supplied date is empty, the function returns `0`. Passing [`NIL`](../literals/nil.md) or a value that is not a date raises an error. Dates in the example output follow the session date format (see [`DateFormat`](DateFormat.md)) and are shown with the default format, which prints a date such as `3/15/2024` without zero padding.
 
 ## When to use
 
@@ -96,7 +96,7 @@ DoProc("ShowWeekdayNumber");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Weekday number for 03/23/2024 is 7
+Weekday number for 3/23/2024 is 7
 ```
 
 ### Guard against an empty date before using the weekday result

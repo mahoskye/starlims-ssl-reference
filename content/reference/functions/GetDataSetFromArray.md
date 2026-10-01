@@ -15,6 +15,8 @@ Builds a dataset XML string from an array of values and an optional array of fie
 
 `GetDataSetFromArray` is the simple wrapper around [`GetDataSetFromArrayEx`](GetDataSetFromArrayEx.md). It always uses the table name `TABLE`, includes the dataset header, and does not include schema metadata. Pass a two-dimensional array when each inner array represents one row. If `aArrayFields` is omitted or empty, the function generates default column names such as `Field1`, `Field2`, and so on.
 
+The returned XML starts with the declaration `<?xml version="1.0" standalone="yes" ?>`, followed by an indented `<DataSet>` root element that holds one `<TABLE>` element per row, with one child element per field.
+
 If `aArrayOfValues` is [`NIL`](../literals/nil.md), the function raises an error before any dataset is built. If `aArrayOfValues` is empty, or if the effective field list is empty, the function returns an empty string.
 
 ## When to use
@@ -94,16 +96,33 @@ DoProc("BuildResultDataset");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-<?xml version="1.0"?><DATASET><TABLE><sample_id>LAB-001</sample_id><test_code>pH</test_code><result_value>7.1</result_value></TABLE><TABLE><sample_id>LAB-002</sample_id><test_code>pH</test_code><result_value>6.9</result_value></TABLE><TABLE><sample_id>LAB-003</sample_id><test_code>pH</test_code><result_value>7.3</result_value></TABLE></DATASET>
+<?xml version="1.0" standalone="yes" ?>
+<DataSet>
+  <TABLE>
+    <sample_id>LAB-001</sample_id>
+    <test_code>pH</test_code>
+    <result_value>7.1</result_value>
+  </TABLE>
+  <TABLE>
+    <sample_id>LAB-002</sample_id>
+    <test_code>pH</test_code>
+    <result_value>6.9</result_value>
+  </TABLE>
+  <TABLE>
+    <sample_id>LAB-003</sample_id>
+    <test_code>pH</test_code>
+    <result_value>7.3</result_value>
+  </TABLE>
+</DataSet>
 ```
 
 ### Let the function generate field names
 
-Omits `aArrayFields` so the function generates `Field1`, `Field2`, `Field3` automatically, then parses the returned XML string into a dataset to report the row count.
+Omits `aArrayFields` so the function generates `Field1`, `Field2`, `Field3` automatically, then logs the returned XML.
 
 ```ssl
 :PROCEDURE BuildAnonymousDataset;
-    :DECLARE aRows, sDataset, oDataset;
+    :DECLARE aRows, sDataset;
 
     aRows := {
         {"A100", "Released", "2026-04-18"},
@@ -111,9 +130,8 @@ Omits `aArrayFields` so the function generates `Field1`, `Field2`, `Field3` auto
     };
 
     sDataset := GetDataSetFromArray(aRows);
-    oDataset := SSLDataset{sDataset, .T.};
 
-    UsrMes("Generated " + LimsString(oDataset:RecordCount) + " rows");
+    UsrMes(sDataset);
     :RETURN sDataset;
 :ENDPROC;
 
@@ -124,7 +142,19 @@ DoProc("BuildAnonymousDataset");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Generated 2 rows
+<?xml version="1.0" standalone="yes" ?>
+<DataSet>
+  <TABLE>
+    <Field1>A100</Field1>
+    <Field2>Released</Field2>
+    <Field3>2026-04-18</Field3>
+  </TABLE>
+  <TABLE>
+    <Field1>A101</Field1>
+    <Field2>Pending</Field2>
+    <Field3>2026-04-19</Field3>
+  </TABLE>
+</DataSet>
 ```
 
 ### Build a dataset from query results

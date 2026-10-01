@@ -129,7 +129,7 @@ Resolves the parent table or a field object by name.
 
 ### Read a field by name or index
 
-Uses `GetIndex()` to locate the column (zero-based), adds 1 to convert to a 1-based index, then calls `GetField()` to get the field. Returns early when the column is missing (`GetIndex` returns `-1`).
+Uses `GetIndex()` to locate the column (zero-based), adds 1 to convert to a 1-based index, then calls `GetField()` to get the field. Returns early when the column is missing (`GetIndex` returns `-1`). `ShowFirstSampleStatus` builds a small two-row table to call it with: [`GetDataSetXMLFromArray`](../functions/GetDataSetXMLFromArray.md) produces XML with a schema, and the table's `FromXml()` method loads it.
 
 ```ssl
 :PROCEDURE ReadStatusField;
@@ -147,13 +147,35 @@ Uses `GetIndex()` to locate the column (zero-based), adds 1 to convert to a 1-ba
 	:RETURN oField:Value;
 :ENDPROC;
 
+:PROCEDURE ShowFirstSampleStatus;
+	:DECLARE aFields, aValues, aRows, oTable, sStatus, sXml;
+
+	aFields := {{"sample_id", "S", 20}, {"status", "S", 12}};
+	aValues := {{"S-001", "Logged"}, {"S-002", "Pending"}};
+	sXml := GetDataSetXMLFromArray(aValues, aFields, "sample", .T., .T.);
+
+	oTable := CDataTable{};
+	oTable:FromXml(sXml);
+
+	aRows := oTable:Rows;
+	sStatus := DoProc("ReadStatusField", {aRows[1]});
+
+	UsrMes("First sample status: " + sStatus);
+:ENDPROC;
+
 /* Usage;
-DoProc("ReadStatusField", {oRow});
+DoProc("ShowFirstSampleStatus");
+```
+
+[`UsrMes`](../functions/UsrMes.md) logs:
+
+```text
+First sample status: Logged
 ```
 
 ### Create and populate a new row
 
-Calls `NewRow()` on the table to create an empty row, assigns field values through `GetField():Value`, then adds the row to the table with `AddRow()`.
+Calls `NewRow()` on the table to create an empty row, assigns field values through `GetField():Value`, then adds the row to the table with `AddRow()`. `AddSampleToTable` loads an empty table that has only a schema, adds one row through `AddSampleRow`, and logs the row count.
 
 ```ssl
 :PROCEDURE AddSampleRow;
@@ -169,8 +191,28 @@ Calls `NewRow()` on the table to create an empty row, assigns field values throu
 	:RETURN oRow;
 :ENDPROC;
 
+:PROCEDURE AddSampleToTable;
+	:DECLARE aFields, oTable, sXml;
+
+	aFields := {{"sample_id", "S", 20}, {"status", "S", 12}};
+	sXml := GetDataSetXMLFromArray({}, aFields, "sample", .T., .T.);
+
+	oTable := CDataTable{};
+	oTable:FromXml(sXml);
+
+	DoProc("AddSampleRow", {oTable, "S-001", "Logged"});
+
+	UsrMes("Rows in table: " + LimsString(oTable:RowsCount));
+:ENDPROC;
+
 /* Usage;
-DoProc("AddSampleRow", {oTable, "S-001", "Logged"});
+DoProc("AddSampleToTable");
+```
+
+[`UsrMes`](../functions/UsrMes.md) logs:
+
+```text
+Rows in table: 1
 ```
 
 ### Save a row with the table SQL helpers

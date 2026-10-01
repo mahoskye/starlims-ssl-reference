@@ -13,7 +13,7 @@ starlims:
 
 Converts a date value to a string using the current SSL date format.
 
-`DToC` takes one date argument and returns its string representation using the current date format setting. If `dDate` is an empty date, the function returns the placeholder string `"  /  /    "`. Passing [`NIL`](../literals/nil.md) or a non-date value raises an exception. Use `DToC` for user-facing output that should follow the current date format setting. Use [`DToS`](DToS.md) or [`DateToString`](DateToString.md) when you need a fixed output format instead of the active setting.
+`DToC` takes one date argument and returns its string representation using the current date format setting. If `dDate` is an empty date, the function returns the placeholder string `"  /  /    "`. Passing [`NIL`](../literals/nil.md) or a non-date value raises an exception. Use `DToC` for user-facing output that should follow the current date format setting. Use [`DToS`](DToS.md) or [`DateToString`](DateToString.md) when you need a fixed output format instead of the active setting. Dates in the example output follow the session date format (see [`DateFormat`](DateFormat.md)) and are shown with the default format, which prints a date such as `3/15/2024` without zero padding.
 
 ## When to use
 
@@ -84,7 +84,7 @@ DoProc("ShowLoggedDate");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Logged on 03/15/2024
+Logged on 3/15/2024
 ```
 
 ### Replace the empty-date placeholder with a friendly label

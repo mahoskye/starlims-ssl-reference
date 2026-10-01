@@ -15,7 +15,7 @@ Returns the identifier delimiter character for the database behind a DSN.
 
 `GetRdbmsDelimiter` maps a DSN to the delimiter character used for quoted identifiers. For SQL Server and Sybase, it returns `[` for opening delimiters and `]` for closing delimiters. For Oracle and DB2, it always returns `"` because the same character is used on both sides. If the DSN does not resolve to one of those database types, the function returns an empty string.
 
-If `sDSN` is [`NIL`](../literals/nil.md), SSL converts it to an empty string before the lookup. The function returns a string value and does not modify its inputs.
+If `sDSN` is [`NIL`](../literals/nil.md), SSL converts it to an empty string before the lookup. A non-empty `sDSN` must name a database connection configured in your environment, such as the default `DATABASE` connection. Any other name raises an error. The function returns a string value and does not modify its inputs.
 
 ## When to use
 
@@ -34,7 +34,7 @@ GetRdbmsDelimiter([sDSN], bOpen)
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `sDSN` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Data source name used to determine the database platform. |
+| `sDSN` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Name of the database connection whose platform determines the delimiter, such as `"DATABASE"`. A name that is not a configured connection raises an error. |
 | `bOpen` | [boolean](../types/boolean.md) | yes | — | When [`.T.`](../literals/true.md), returns the opening delimiter. When [`.F.`](../literals/false.md), returns the closing delimiter. |
 
 ## Returns
@@ -49,12 +49,18 @@ Behavior by database type:
 | SYBASE | `[` | `]` |
 | ORACLE | `"` | `"` |
 | DB2 | `"` | `"` |
-| Other or unknown | `""` | `""` |
+| Other | `""` | `""` |
+
+## Exceptions
+
+| Trigger | Exception message |
+| --- | --- |
+| `sDSN` is not empty and does not name a configured database connection. | `The provider name: <sDSN> not found.` |
 
 ## Best practices
 
 !!! success "Do"
-    - Use the DSN that matches the database where the SQL will run.
+    - Pass the name of the connection where the SQL will run, such as `"DATABASE"` for the default connection.
     - Call the function twice when you need separate opening and closing delimiters.
     - Handle the empty-string result explicitly when the DSN may point to an unsupported platform.
     - Use [`AddNameDelimiters`](AddNameDelimiters.md) or [`AddColDelimiters`](AddColDelimiters.md) when those higher-level helpers already fit your task.
@@ -63,6 +69,7 @@ Behavior by database type:
     - Hardcode `[` `]` or `"` when the same logic may run against more than one database platform.
     - Ignore `bOpen`. It matters for SQL Server and Sybase, where opening and closing delimiters are different.
     - Assume every DSN produces a delimiter. Unsupported mappings return an empty string.
+    - Pass a connection name that is not configured in your environment. That raises `The provider name: <sDSN> not found.`
     - Use this helper when you actually need a fully wrapped identifier; reach for [`AddNameDelimiters`](AddNameDelimiters.md) instead.
 
 ## Caveats
@@ -73,7 +80,7 @@ Behavior by database type:
 
 ### Wrap an identifier with platform-specific delimiters
 
-Retrieves the opening and closing delimiter characters for the given DSN and wraps a single identifier name, demonstrating the two-call pattern for platforms where the delimiters differ.
+Retrieves the opening and closing delimiter characters for the given DSN and wraps a single identifier name, demonstrating the two-call pattern for platforms where the delimiters differ. The usage passes the default `DATABASE` connection. Replace it with the name of the connection your SQL runs on.
 
 ```ssl
 :PROCEDURE BuildDelimitedIdentifier;
@@ -88,10 +95,10 @@ Retrieves the opening and closing delimiter characters for the given DSN and wra
 :ENDPROC;
 
 /* Usage;
-DoProc("BuildDelimitedIdentifier", {"LIMSDB", "orders"});
+DoProc("BuildDelimitedIdentifier", {"DATABASE", "orders"});
 ```
 
-[`UsrMes`](UsrMes.md) logs (SQL Server DSN, `sName` = `"orders"`):
+[`UsrMes`](UsrMes.md) logs, for a SQL Server connection:
 
 ```text
 Delimited identifier: [orders]
@@ -123,7 +130,7 @@ Guards against an unsupported DSN by checking for an empty delimiter before buil
 :ENDPROC;
 
 /* Usage;
-DoProc("BuildSelectStatement", {"LIMSDB"});
+DoProc("BuildSelectStatement", {"DATABASE"});
 ```
 
 `UsrMes` logs one of:

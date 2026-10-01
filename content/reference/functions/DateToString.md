@@ -86,10 +86,10 @@ Formats the current timestamp using the default `MM/dd/yyyy HH:mm:ss` pattern an
 DoProc("ShowRunTimestamp");
 ```
 
-[`UsrMes`](UsrMes.md) logs (output depends on the current time):
+[`UsrMes`](UsrMes.md) logs the current date and time in `MM/dd/yyyy HH:mm:ss` form:
 
 ```text
-Run completed at 04/23/2026 14:30:00
+Run completed at <date> <time>
 ```
 
 ### Format a date with a fixed interchange pattern

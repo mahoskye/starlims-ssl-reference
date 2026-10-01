@@ -96,9 +96,13 @@ DoProc("ShowRegionText");
 
 ### Replace placeholder tokens after lookup
 
-Retrieves a template region and replaces `{CUSTOMER}` and `{DATE}` placeholders in one call by passing parallel source and destination arrays. The exact output depends on what `InvoiceTemplate` contains in the region scope.
+Retrieves a template region and replaces `{CUSTOMER}` and `{DATE}` placeholders in one call by passing parallel source and destination arrays. The script defines the `InvoiceTemplate` region with [`:REGION`](../keywords/REGION.md), so the lookup finds it. In a script that defines no regions, `GetRegionEx` returns an empty string, so there would be no invoice text to log.
 
 ```ssl
+:REGION InvoiceTemplate;
+Invoice for {CUSTOMER} dated {DATE}
+:ENDREGION;
+
 :PROCEDURE BuildInvoiceHeader;
 	:DECLARE aDst, aSrc, sHeader;
 
@@ -116,10 +120,10 @@ Retrieves a template region and replaces `{CUSTOMER}` and `{DATE}` placeholders 
 DoProc("BuildInvoiceHeader");
 ```
 
-[`UsrMes`](UsrMes.md) logs this output when `InvoiceTemplate` = `"Invoice for {CUSTOMER} dated {DATE}"`:
+[`UsrMes`](UsrMes.md) logs the filled template, with today's date in the session date format (see [`DateFormat`](DateFormat.md)):
 
 ```text
-Invoice for Acme Corp dated 23/04/2026
+Invoice for Acme Corp dated <date>
 ```
 
 ### Override region lookup with a local region map

@@ -45,7 +45,7 @@ GetInternal(oTarget, sPropName)
 | --- | --- |
 | `oTarget` is [`NIL`](../literals/nil.md). | `Argument oTarget cannot be null.` |
 | `sPropName` is [`NIL`](../literals/nil.md). | `Argument sPropName cannot be null.` |
-| A dynamic object does not contain the named property. | `Property not found: <propertyName>.` |
+| A dynamic object does not contain the named property. | `Run-time error: Property not found: <propertyName>.` |
 
 ## Best practices
 
@@ -174,7 +174,7 @@ DoProc("ReadOptionalPriority");
 [`UsrMes`](UsrMes.md) logs when the property is absent:
 
 ```text
-Lookup failed: Property not found: Priority.
+Lookup failed: Run-time error: Property not found: Priority.
 ```
 
 ## Related
