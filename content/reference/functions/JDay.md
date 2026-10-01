@@ -97,8 +97,10 @@ DoProc("ShowSampleJDay");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-03/15/2024 is day 75 of the year.
+3/15/2024 is day 75 of the year.
 ```
+
+The date text follows the current session date format, set with [`DateFormat`](DateFormat.md).
 
 ### Get today's day-of-year by omitting the argument
 
@@ -123,10 +125,8 @@ DoProc("LogTodayOrdinal");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Today is day 113 of the year.
+Today is day <n> of the year.
 ```
-
-(day number varies by date)
 
 ### Skip empty dates to avoid the sentinel return value
 

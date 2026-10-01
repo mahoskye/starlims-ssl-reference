@@ -58,14 +58,14 @@ This function takes no parameters.
 
 ### Capture the current timestamp for a log entry
 
-Call `Now()` once and store the result before displaying it. The exact timestamp depends on when the procedure runs.
+Call `Now()` once and store the result, then format it with [`DateToString`](DateToString.md) so the message shows both the date and the time. The exact timestamp depends on when the procedure runs.
 
 ```ssl
 :PROCEDURE LogTimestamp;
 	:DECLARE dTimestamp, sLogMessage;
 
 	dTimestamp := Now();
-	sLogMessage := "Event recorded at " + LimsString(dTimestamp);
+	sLogMessage := "Event recorded at " + DateToString(dTimestamp);
 
 	UsrMes(sLogMessage);
 
@@ -79,10 +79,10 @@ DoProc("LogTimestamp");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Event recorded at 04/23/2026 14:30:00
+Event recorded at <timestamp>
 ```
 
-The exact timestamp varies.
+`<timestamp>` is the moment the procedure runs, in the `MM/dd/yyyy HH:mm:ss` pattern that [`DateToString`](DateToString.md) uses by default. Converting the value with [`LimsString`](LimsString.md) instead logs only the date part.
 
 ### Measure elapsed time between two timestamps
 
@@ -94,11 +94,11 @@ Capture the start time, do work, then capture the end time and pass both to [`Da
 
 	dStart := Now();
 
-	UsrMes("Starting work at " + LimsString(dStart));
+	UsrMes("Starting work at " + DateToString(dStart));
 	/* Logs the current start timestamp;
 
 	dEnd := Now();
-	nElapsedSeconds := DateDiff(dStart, dEnd, "ss");
+	nElapsedSeconds := DateDiff(dStart, dEnd, "second");
 
 	sMessage := "Elapsed seconds: " + LimsString(nElapsedSeconds);
 	UsrMes(sMessage);
@@ -132,7 +132,7 @@ Capture `Now()` once so both the SQL update and the confirmation message use the
 	:TRY;
 		RunSQL(sSQL,, {dReleasedAt, sStatus, "S-1001"});
 		bSuccess := .T.;
-		sMessage := "Sample released at " + LimsString(dReleasedAt);
+		sMessage := "Sample released at " + DateToString(dReleasedAt);
 	:CATCH;
 		oErr := GetLastSSLError();
 		sMessage := "Sample release update failed: " + oErr:Description;
@@ -150,7 +150,7 @@ DoProc("StampReleasedSamples");
 `UsrMes` logs either:
 
 ```text
-Sample released at 04/23/2026 14:30:00
+Sample released at <timestamp>
 ```
 
 or:

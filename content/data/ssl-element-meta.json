@@ -7210,7 +7210,7 @@
       "exceptions": [
         {
           "trigger": "vSource is a non-empty unsupported type, a non-integer numeric value, or outside the supported numeric range.",
-          "message": "Argument: vSource must be a string or an integer."
+          "message": "Argument: source must be a string or an integer. followed by Parameter name: source` on a second line"
         }
       ],
       "caveats": [
@@ -7977,7 +7977,7 @@
         },
         {
           "trigger": "A targeted column in vDate does not contain a date.",
-          "message": "Column: <index> doesn't contain date values."
+          "message": "Column: <index> doesn't contain date values. MakeDateLocal()."
         }
       ],
       "caveats": [
@@ -10167,7 +10167,7 @@
         }
       ],
       "caveats": [
-        "If the formatted value does not fit in the requested width, Str() returns a string of * characters of that width.",
+        "If the value with nDecimals decimal places does not fit in nLength, Str() drops the decimal digits that do not fit instead of widening the field. Str(123456.789, 8, 2) returns \"123456.7\".",
         "When nLength is supplied and nDecimals is omitted, the function keeps fractional digits only as long as they fit in the field.",
         "Negative values are padded so that the minus sign stays immediately before the first visible digit.",
         "A negative nLength uses the current numeric separator settings when formatting the result. See SetDecimalSeparator and SetGroupSeparator."
@@ -10181,7 +10181,7 @@
         "dont": [
           "Pass NIL as nNumber. Str() raises an error instead of returning a placeholder string.",
           "Assume Str(nNumber) returns an unpadded value. Default output commonly includes leading spaces.",
-          "Ignore an all-asterisk result. That indicates the requested field width cannot represent the value."
+          "Assume nDecimals is always honored. When the field is too narrow, the result has fewer decimal places than requested."
         ]
       }
     },

@@ -112,8 +112,10 @@ DoProc("GetLatestReviewDate");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Latest review date: 04/02/2026
+Latest review date: 4/2/2026
 ```
+
+The date text follows the current session date format, set with [`DateFormat`](DateFormat.md).
 
 ### Compare candidate string keys before lookup
 

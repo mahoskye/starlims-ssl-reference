@@ -109,10 +109,10 @@ DoProc("CompareSeededValue");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-First: <seeded_value>, Second: <seeded_value>, Same value: T
+First: <seeded_value>, Second: <seeded_value>, Same value: .T.
 ```
 
-Both values are identical and `Same value` is `T` regardless of the runtime's RNG implementation. The exact numbers depend on the platform.
+Both values are identical and `Same value` is `.T.` regardless of the runtime's RNG implementation. The exact numbers depend on the platform.
 
 ### Seed once, then consume a repeatable sequence
 

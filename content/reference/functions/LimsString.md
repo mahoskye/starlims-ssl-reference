@@ -13,7 +13,7 @@ starlims:
 
 Converts a value to a string, returning `"NIL"` when the input is [`NIL`](../literals/nil.md).
 
-`LimsString` returns the literal string `"NIL"` for a null input. When the input is numeric, it formats the number with the current decimal and group separator settings. For other non-null values, it returns that value's normal string form.
+`LimsString` returns the literal string `"NIL"` for a null input. When the input is numeric, it formats the number with the current decimal and group separator settings. For other non-null values, it returns that value's normal string form. Logical values become `".T."` or `".F."`.
 
 ## When to use
 
@@ -80,7 +80,7 @@ Current result: NIL
 
 ### Build a mixed-value summary line
 
-Iterate over an array containing a string, a number, [`NIL`](../literals/nil.md), and a boolean, converting each element with `LimsString`. The resulting summary shows `"NIL"` for the missing slot and `"True"` for the boolean.
+Iterate over an array containing a string, a number, [`NIL`](../literals/nil.md), and a boolean, converting each element with `LimsString`. The resulting summary shows `"NIL"` for the missing slot and `".T."` for the boolean.
 
 ```ssl
 :PROCEDURE BuildSummaryLine;
@@ -111,7 +111,7 @@ DoProc("BuildSummaryLine");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Summary: Batch-1042 | 27.5 | NIL | True
+Summary: Batch-1042 | 27.5 | NIL | .T.
 ```
 
 ## Related

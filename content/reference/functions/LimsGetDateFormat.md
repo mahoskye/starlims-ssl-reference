@@ -13,7 +13,7 @@ starlims:
 
 Returns the current global date format string used for date parsing and formatting.
 
-`LimsGetDateFormat()` retrieves the format string defined in the application configuration, such as `"MM/dd/yyyy"` or `"yyyy-MM-dd"`. It takes no parameters and is safe to call any time. If the global date format has not been explicitly configured, it returns the built-in default `"MM/dd/yyyy"`.
+`LimsGetDateFormat()` retrieves the current date format string, such as `"M/d/yyyy"` or `"yyyy-MM-dd"`. It takes no parameters and is safe to call any time. If no format has been set with [`DateFormat`](DateFormat.md), it returns the default session format, `"M/d/yyyy"`.
 
 ## When to use
 
@@ -34,7 +34,7 @@ This function takes no parameters.
 
 ## Returns
 
-**[string](../types/string.md)** — The current date format pattern used throughout the application (e.g., `"MM/dd/yyyy"`).
+**[string](../types/string.md)** — The current date format pattern used throughout the application (e.g., `"M/d/yyyy"`).
 
 ## Best practices
 
@@ -57,7 +57,7 @@ This function takes no parameters.
 
 ### Display the expected date format to the user
 
-Call `LimsGetDateFormat` to retrieve the configured format and display it as part of a user prompt. When the default configuration is active, the format is `"MM/dd/yyyy"`.
+Call `LimsGetDateFormat` to retrieve the configured format and display it as part of a user prompt. With the default session format, the result is `"M/d/yyyy"`.
 
 ```ssl
 :PROCEDURE ShowDateFormatPrompt;
@@ -74,7 +74,7 @@ DoProc("ShowDateFormatPrompt");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Enter date using format: MM/dd/yyyy
+Enter date using format: M/d/yyyy
 ```
 
 ### Parse imported date strings using the current global format

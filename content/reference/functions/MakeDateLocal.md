@@ -53,7 +53,7 @@ MakeDateLocal(vDate, [vColumnsIndex])
 | `vDate` is not a date or array. | `Argument: vDate is neither a Date nor an Array.` |
 | `vDate` is an array and `vColumnsIndex` is [`NIL`](../literals/nil.md) or omitted. | `Argument: vColumnsIndex cannot be null.` |
 | `vColumnsIndex` is not a number or array. | `Argument: vColumnsIndex is neither a Number nor an Array.` |
-| A targeted column in `vDate` does not contain a date. | `Column: <index> doesn't contain date values.` |
+| A targeted column in `vDate` does not contain a date. | `Column: <index> doesn't contain date values. MakeDateLocal().` |
 
 ## Best practices
 
@@ -169,7 +169,7 @@ DoProc("TryLocalizeInvalidColumn");
 [`ErrorMes`](ErrorMes.md) logs:
 
 ```text
-Column: 2 doesn't contain date values.
+Column: 2 doesn't contain date values. MakeDateLocal().
 ```
 
 ## Related

@@ -85,10 +85,10 @@ DoProc("ShowCurrentMinute");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Current minute: 42
+Current minute: <minute>
 ```
 
-The exact value depends on when the procedure runs.
+`<minute>` is the minute component (0 through 59) of the time the procedure runs.
 
 ### Count events into 60 minute buckets
 

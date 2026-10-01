@@ -13,7 +13,7 @@ starlims:
 
 Converts a numeric value to a formatted string.
 
-`Str()` returns a character representation of `nNumber` with optional field width and decimal control. The result is space-padded on the left rather than zero-padded, which makes it useful for aligned text output. If you omit both optional parameters, integer values default to a 10-character field with no decimals, while non-integer values default to a 20-character field with 9 decimal places. If the requested format cannot fit the value, the function returns a field of asterisks.
+`Str()` returns a character representation of `nNumber` with optional field width and decimal control. The result is space-padded on the left rather than zero-padded, which makes it useful for aligned text output. If you omit both optional parameters, integer values default to a 10-character field with no decimals, while non-integer values default to a 20-character field with 9 decimal places. If the value with the requested decimal places is wider than `nLength`, `Str()` keeps only the decimal digits that fit, so `Str(123456.789, 8, 2)` returns `"123456.7"`.
 
 ## When to use
 
@@ -55,11 +55,11 @@ Str(nNumber, [nLength], [nDecimals])
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) as `nNumber`. `Str()` raises an error instead of returning a placeholder string.
     - Assume `Str(nNumber)` returns an unpadded value. Default output commonly includes leading spaces.
-    - Ignore an all-asterisk result. That indicates the requested field width cannot represent the value.
+    - Assume `nDecimals` is always honored. When the field is too narrow, the result has fewer decimal places than requested.
 
 ## Caveats
 
-- If the formatted value does not fit in the requested width, `Str()` returns a string of [`*`](../operators/multiply.md) characters of that width.
+- If the value with `nDecimals` decimal places does not fit in `nLength`, `Str()` drops the decimal digits that do not fit instead of widening the field. `Str(123456.789, 8, 2)` returns `"123456.7"`.
 - When `nLength` is supplied and `nDecimals` is omitted, the function keeps fractional digits only as long as they fit in the field.
 - Negative values are padded so that the minus sign stays immediately before the first visible digit.
 - A negative `nLength` uses the current numeric separator settings when formatting the result. See [`SetDecimalSeparator`](SetDecimalSeparator.md) and [`SetGroupSeparator`](SetGroupSeparator.md).
@@ -124,9 +124,9 @@ Sample      Result   Average
 S-1024        7.20    12.346
 ```
 
-### Detect overflow before exporting fixed-width values
+### See decimals dropped in a narrow fixed-width field
 
-Check for the asterisk overflow result before writing fixed-width numeric text.
+Format a reading into an 8-character export field with two decimal places. With two decimals, `123456.789` needs 9 characters, so `Str()` keeps the field at 8 characters and drops the second decimal digit.
 
 ```ssl
 :PROCEDURE ExportReading;
@@ -135,15 +135,10 @@ Check for the asterisk overflow result before writing fixed-width numeric text.
     nReading := 123456.789;
     sFormatted := Str(nReading, 8, 2);
 
-    :IF sFormatted == Replicate("*", 8);
-        ErrorMes("Reading does not fit in the export field");
-        :RETURN .F.;
-    :ENDIF;
-
     sOutput := "READING=" + sFormatted;
     UsrMes(sOutput);
 
-    :RETURN .T.;
+    :RETURN sFormatted;
 :ENDPROC;
 
 /* Usage;
@@ -153,10 +148,10 @@ DoProc("ExportReading");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-READING=123456.79
+READING=123456.7
 ```
 
-If the value does not fit the requested width, [`ErrorMes`](ErrorMes.md) logs `Reading does not fit in the export field` and the procedure returns `.F.`.
+When every decimal place matters, use a field wide enough for the value, or check the result before you export it.
 
 ## Related
 

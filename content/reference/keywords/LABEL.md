@@ -89,9 +89,10 @@ Uses [`Branch`](../functions/Branch.md)`()` to redirect control to a label later
 
 	:RETURN .F.;
 :ENDPROC;
-```
 
-Run with `DoProc("ProcessSample")`.
+/* Usage;
+DoProc("ProcessSample");
+```
 
 [`UsrMes`](../functions/UsrMes.md) logs:
 
@@ -121,9 +122,10 @@ Mashed labels omit the space after `:LABEL`, so [`Branch`](../functions/Branch.m
 
 	:RETURN "SKIPPED";
 :ENDPROC;
-```
 
-Run with `DoProc("RouteMode")`.
+/* Usage;
+DoProc("RouteMode");
+```
 
 [`UsrMes`](../functions/UsrMes.md) logs:
 

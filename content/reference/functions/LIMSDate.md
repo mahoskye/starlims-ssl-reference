@@ -15,7 +15,7 @@ Returns a date value as a formatted string.
 
 `LIMSDate` accepts either an SSL date value or a string. When you pass a string, the function parses it using the current application date format, the same behavior used by [`CToD`](CToD.md). If you omit the format or pass an empty format, the function returns the date in `dd-MMM-yy` format.
 
-Null-date inputs are handled specially. With no format, the function returns `0--`. With a supplied format that contains `MMM`, it returns `0--0`. With other supplied formats, it returns a blank placeholder shaped like the format string. Non-date, non-string inputs raise an error.
+Null-date inputs are handled specially. With no format, the function returns `0--`. With a supplied format that contains `MMM`, it returns `0--0`. With other supplied formats, it returns a blank placeholder shaped like the format string: each date part becomes the same number of spaces and the separators stay. Non-date, non-string inputs raise an error.
 
 ## When to use
 
@@ -96,7 +96,7 @@ Entered: 03/15/2024 | Displayed: 2024-03-15
 
 ### Handle blank and invalid date strings without exceptions
 
-Process a batch of legacy date strings where some entries are blank or unparseable. `LIMSDate` treats both as null dates and returns a blank placeholder shaped like the format. Neither raises an exception.
+Process a batch of legacy date strings where some entries are blank or unparseable. `LIMSDate` treats both as null dates and returns a blank placeholder shaped like the format. For `"yyyy/MM/dd"` that is four spaces, a slash, two spaces, a slash, and two spaces. Neither raises an exception.
 
 ```ssl
 :PROCEDURE FormatLegacyDates;
@@ -131,8 +131,8 @@ DoProc("FormatLegacyDates");
 
 ```text
 Sample: SAM001 | Imported: 1998/03/15
-Sample: SAM002 | Imported:
-Sample: SAM003 | Imported:
+Sample: SAM002 | Imported:     /  /  
+Sample: SAM003 | Imported:     /  /  
 Sample: SAM004 | Imported: 2001/12/31
 Sample: SAM005 | Imported: 1999/07/04
 ```
