@@ -98,7 +98,7 @@ DoProc("CheckWorkflowStatus");
 
 ### Report which names from a candidate list are defined
 
-Iterate over a list of candidate variable names and build a comma-separated summary of those currently in scope. The single [`UsrMes`](UsrMes.md) call at the end logs either the list of available names or a not-defined message.
+Iterate over a list of candidate variable names and build a comma-separated summary of those currently in scope. The single [`UsrMes`](UsrMes.md) call at the end logs either the list of available names or a not-defined message. `RunInputSummary` creates two of the three candidates as public variables with [`CreatePublic`](CreatePublic.md), so `sOperatorNote` is left out of the summary, and removes them again with [`LKill`](LKill.md) afterward.
 
 ```ssl
 :PROCEDURE SummarizeAvailableInputs;
@@ -131,8 +131,23 @@ Iterate over a list of candidate variable names and build a comma-separated summ
     :RETURN sAvailable;
 :ENDPROC;
 
+:PROCEDURE RunInputSummary;
+    :DECLARE sAvailable;
+
+    CreatePublic("sCacheKey", "CK-1042");
+    CreatePublic("sContextId", "CTX-7");
+
+    sAvailable := DoProc("SummarizeAvailableInputs",
+        {{"sCacheKey", "sContextId", "sOperatorNote"}});
+
+    LKill("sCacheKey");
+    LKill("sContextId");
+
+    :RETURN sAvailable;
+:ENDPROC;
+
 /* Usage;
-DoProc("SummarizeAvailableInputs", {{"sCacheKey", "sContextId"}});
+DoProc("RunInputSummary");
 ```
 
 [`UsrMes`](UsrMes.md) logs:

@@ -88,8 +88,10 @@ DoProc("GetEarlierEventDate");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Earlier event date: 03/10/2026
+Earlier event date: 3/10/2026
 ```
+
+The date text follows the current session date format, set with [`DateFormat`](DateFormat.md).
 
 ### Keep the smaller of two measurements
 

@@ -108,8 +108,10 @@ DoProc("ShowLabelPrintedStamp");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Label printed on 04/23/2026 at 14:30:00
+Label printed on <date> at <time>
 ```
+
+`<date>` and `<time>` are the moment the procedure runs. The date text follows the current session date format, set with [`DateFormat`](DateFormat.md).
 
 ## Related
 

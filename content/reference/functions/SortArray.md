@@ -150,11 +150,7 @@ Sort an array of rows by a primary key (priority) and a secondary key (sequence)
         {"S-103", 1, 20}
     };
 
-    fnByPriorityThenSeq := {|aLeft, aRight| IIf(;
-        aLeft[2] == aRight[2],;
-        aLeft[3] - aRight[3],;
-        aLeft[2] - aRight[2];
-    )};
+    fnByPriorityThenSeq := {|aLeft, aRight| IIf(aLeft[2] == aRight[2], aLeft[3] - aRight[3], aLeft[2] - aRight[2])};
 
     :TRY;
         SortArray(aTasks, fnByPriorityThenSeq);

@@ -150,7 +150,7 @@ DoProc("EncodeNotes");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-true
+.T.
 ```
 
 ## Related

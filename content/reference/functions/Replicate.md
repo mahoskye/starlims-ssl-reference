@@ -108,11 +108,11 @@ DoProc("DisplaySeparator");
 
 ```text
 ----------------------------------------
-Analysis Results | Generated: 04/29/2026
+Analysis Results | Generated: <date>
 ----------------------------------------
 ```
 
-The date varies on each call.
+`<date>` is the current date, so it varies from day to day. The date text follows the current session date format, set with [`DateFormat`](DateFormat.md).
 
 ### Generate SQL `IN` clause placeholders
 

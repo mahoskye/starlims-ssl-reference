@@ -90,7 +90,7 @@ DoProc("ValidateLogin");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Names match: True
+Names match: .T.
 ```
 
 ### Validate a status code regardless of input casing

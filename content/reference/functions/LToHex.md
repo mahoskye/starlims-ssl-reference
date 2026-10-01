@@ -43,7 +43,7 @@ LToHex(vSource)
 
 | Trigger | Exception message |
 | --- | --- |
-| `vSource` is a non-empty unsupported type, a non-integer numeric value, or outside the supported numeric range. | `Argument: vSource must be a string or an integer.` |
+| `vSource` is a non-empty unsupported type, a non-integer numeric value, or outside the supported numeric range. | `Argument: source must be a string or an integer.` followed by `Parameter name: source` on a second line |
 
 ## Best practices
 
@@ -159,7 +159,8 @@ DoProc("ValidateHexInput");
 ```text
 Whole-number hex: 00000400
 Empty input was returned unchanged
-Conversion failed: Argument: vSource must be a string or an integer.
+Conversion failed: Argument: source must be a string or an integer.
+Parameter name: source
 ```
 
 ## Related

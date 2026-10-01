@@ -137,8 +137,10 @@ DoProc("GetMonthEndDate", {CToD("03/15/2024")});
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Month end is 03/31/2024
+Month end is 3/31/2024
 ```
+
+The date text follows the current session date format, set with [`DateFormat`](DateFormat.md).
 
 ### Compare month lengths across multiple reporting periods
 

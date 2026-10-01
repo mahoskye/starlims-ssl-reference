@@ -56,7 +56,7 @@ This function takes no parameters.
 
 ### Compare user and server UTC offsets
 
-Fetch both the user and server UTC offsets and log their difference. Both values are in minutes. The actual numbers depend on the current session's timezone configuration. The output below uses UTC-5 as a sample user offset.
+Fetch both the user and server UTC offsets and log their difference. Both values are in minutes. The actual numbers depend on the user's and the server's time zones.
 
 ```ssl
 :PROCEDURE CompareTimeZones;
@@ -82,12 +82,14 @@ DoProc("CompareTimeZones");
 `UsrMes` logs:
 
 ```text
-User offset: -300 minutes, server offset: 0 minutes, difference: -300 minutes
+User offset: <user offset> minutes, server offset: <server offset> minutes, difference: <difference> minutes
 ```
+
+For example, a user at UTC-5 has an offset of `-300`, and a server running on UTC has an offset of `0`.
 
 ### Convert a UTC time-of-day to user local time
 
-Shift a fixed UTC time (14:30) into the user's local time using the minute-based offset. The modulo-and-clamp loop handles offsets that would otherwise push the result below midnight or past the end of the day. The output below assumes a UTC-5 user offset.
+Shift a fixed UTC time (14:30) into the user's local time using the minute-based offset. The modulo-and-clamp loop handles offsets that would otherwise push the result below midnight or past the end of the day. The result depends on the user's time zone.
 
 ```ssl
 :PROCEDURE ShowLocalCutoffTime;
@@ -134,8 +136,10 @@ DoProc("ShowLocalCutoffTime");
 `UsrMes` logs:
 
 ```text
-Local cutoff time: 09:30
+Local cutoff time: <hh:mm>
 ```
+
+`<hh:mm>` is 14:30 UTC shifted by the user's offset. For a user at UTC-5 (offset `-300`), it is `09:30`.
 
 ## Related
 

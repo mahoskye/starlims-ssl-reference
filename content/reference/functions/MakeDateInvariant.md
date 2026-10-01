@@ -93,7 +93,7 @@ DoProc("NormalizeUserSubmittedDate");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Invariant kind applied: True
+Invariant kind applied: .T.
 ```
 
 ### Mark one date column in a row array as invariant

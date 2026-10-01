@@ -87,8 +87,8 @@ DoProc("DemoLKillBasic");
 `UsrMes` logs:
 
 ```text
-Defined before delete: True
-Defined after delete: False
+Defined before delete: .T.
+Defined after delete: .F.
 ```
 
 ### Reset a shared public value before recreating it
@@ -171,7 +171,7 @@ DoProc("DemoLKillBatchCleanup");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-All shared filters removed: True
+All shared filters removed: .T.
 ```
 
 ## Related
