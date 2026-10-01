@@ -1316,6 +1316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exceptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#best-practices" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1339,32 +1350,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#qualify-a-list-of-columns" class="md-nav__link">
+  <a href="#qualify-a-list-of-columns-with-addnamedelimiters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Qualify a list of columns
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prepare-columns-before-joining-them-into-sql" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Prepare columns before joining them into SQL
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#qualify-columns-without-database-specific-wrappers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Qualify columns without database-specific wrappers
+        Qualify a list of columns with AddNameDelimiters
       
     </span>
   </a>
@@ -4007,6 +3996,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exceptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#best-practices" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4030,32 +4030,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#qualify-a-list-of-columns" class="md-nav__link">
+  <a href="#qualify-a-list-of-columns-with-addnamedelimiters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Qualify a list of columns
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prepare-columns-before-joining-them-into-sql" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Prepare columns before joining them into SQL
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#qualify-columns-without-database-specific-wrappers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Qualify columns without database-specific wrappers
+        Qualify a list of columns with AddNameDelimiters
       
     </span>
   </a>
@@ -4217,11 +4195,13 @@
 <p>Qualify each column in an array as <code>table.column</code> with database-specific identifier delimiters.</p>
 <p>AddColDelimiters updates <code>aCols</code> in place. For each element, it builds a value in the form <code>table.column</code>, wrapping both parts with the delimiter characters for the database identified by <code>sDSN</code>.</p>
 <p>If <code>sDSN</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the function uses empty delimiters. If <code>aCols</code> is <a href="../../literals/nil/"><code>NIL</code></a> or <code>sTable</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the function leaves the array unchanged and returns no value. The function trims <code>sTable</code> before building the qualified names.</p>
+<div class="admonition warning">
+<p class="admonition-title">Not callable from SSL</p>
+<p>On STARLIMS v11, every call to <code>AddColDelimiters</code> from SSL code fails to compile with <code>Compile-time error: … Invalid prototype for built-in function: AddColDelimiters</code>, whatever arguments are passed. Sixteen argument shapes were tested, from no arguments to four. Build qualified names with <a href="../AddNameDelimiters/"><code>AddNameDelimiters</code></a> instead, as in the example below.</p>
+</div>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
-<li>When you need an existing array of column names converted to qualified <code>table.column</code> names.</li>
-<li>When SQL must adapt to the identifier delimiter rules of the target database.</li>
-<li>When you want to prepare a column array in place before building a SELECT list or export query.</li>
+<li>Not from SSL code: calls are rejected at compile time. To qualify columns for a specific database, apply <a href="../AddNameDelimiters/"><code>AddNameDelimiters</code></a> to the table and to each column name.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">AddColDelimiters</span><span class="p">(</span><span class="n">sDSN</span><span class="p">,</span><span class="w"> </span><span class="n">aCols</span><span class="p">,</span><span class="w"> </span><span class="n">sTable</span><span class="p">)</span>
@@ -4263,88 +4243,60 @@
 </table>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
 <p><strong>none</strong> — No return value. The function updates <code>aCols</code> directly.</p>
+<h2 id="exceptions">Exceptions<a class="headerlink" href="#exceptions" title="Permanent link">&para;</a></h2>
+<table data-ssl-table="exceptions"><colgroup><col><col></colgroup>
+<thead>
+<tr>
+<th>Trigger</th>
+<th>Exception message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Any call from SSL code, with any arguments.</td>
+<td><code>Compile-time error: &lt;line&gt;:&lt;column&gt; Invalid prototype for built-in function: AddColDelimiters</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <div class="admonition success">
 <p class="admonition-title">Do</p>
 <ul>
-<li>Call <code>AddColDelimiters</code> before joining <code>aCols</code> into a SELECT list or export statement.</li>
-<li>Pass the same DSN the SQL will use so the delimiter style matches the target database.</li>
-<li>Copy the array first if you need to keep the original unqualified column names.</li>
-<li>Use <a href="../AddNameDelimiters/"><code>AddNameDelimiters</code></a> when you need to delimit one identifier instead of an entire column array.</li>
+<li>Qualify column names with <a href="../AddNameDelimiters/"><code>AddNameDelimiters</code></a>, applied to the table name and to each column name.</li>
+<li>Pass the same connection name the SQL will use, so the delimiter style matches the target database.</li>
 </ul>
 </div>
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
-<li>Expect a new array back. The existing <code>aCols</code> array is modified in place.</li>
-<li>Pass <a href="../../literals/nil/"><code>NIL</code></a> for <code>aCols</code> or <code>sTable</code> and expect partial output. The function does nothing in that case.</li>
-<li>Hardcode brackets or quotes when the DSN can vary by database.</li>
-<li>Assume the function trims column names. It uses each column value as provided.</li>
+<li>Call <code>AddColDelimiters</code> from SSL code. It does not compile.</li>
+<li>Hardcode brackets or quotes when the connection can vary by database.</li>
 </ul>
 </div>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<h3 id="qualify-a-list-of-columns">Qualify a list of columns<a class="headerlink" href="#qualify-a-list-of-columns" title="Permanent link">&para;</a></h3>
-<p>Adds table qualification and database-specific delimiters to each column name in place. The exact delimiter characters depend on the DBMS type for the given DSN (for example, <code>[</code> and <code>]</code> for SQL Server).</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildQualifiedColumns</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aColumns</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
+<h3 id="qualify-a-list-of-columns-with-addnamedelimiters">Qualify a list of columns with AddNameDelimiters<a class="headerlink" href="#qualify-a-list-of-columns-with-addnamedelimiters" title="Permanent link">&para;</a></h3>
+<p>Builds <code>table.column</code> names for a SELECT list by delimiting the table name and each column name with <a href="../AddNameDelimiters/"><code>AddNameDelimiters</code></a>, then joins them with <a href="../BuildString/"><code>BuildString</code></a>.</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">QualifyColumns</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sDSN</span><span class="p">,</span><span class="w"> </span><span class="n">sTable</span><span class="p">,</span><span class="w"> </span><span class="n">aCols</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aQualified</span><span class="p">,</span><span class="w"> </span><span class="n">sPrefix</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aColumns</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"sample_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample_name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"status"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aQualified</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{};</span>
+<span class="w">    </span><span class="n">sPrefix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">AddNameDelimiters</span><span class="p">(</span><span class="n">sDSN</span><span class="p">,</span><span class="w"> </span><span class="n">sTable</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"."</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">AddColDelimiters</span><span class="p">(</span><span class="s2">"LIMS"</span><span class="p">,</span><span class="w"> </span><span class="n">aColumns</span><span class="p">,</span><span class="w"> </span><span class="s2">"samples"</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aColumns</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">aColumns</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]);</span>
+<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aCols</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">AAdd</span><span class="p">(</span><span class="n">aQualified</span><span class="p">,</span><span class="w"> </span><span class="n">sPrefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">AddNameDelimiters</span><span class="p">(</span><span class="n">sDSN</span><span class="p">,</span><span class="w"> </span><span class="n">aCols</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]));</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aQualified</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aQualified</span><span class="p">),</span><span class="w"> </span><span class="s2">", "</span><span class="p">));</span>
+
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aQualified</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildQualifiedColumns"</span><span class="p">);</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"QualifyColumns"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"DATABASE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"sample_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"status"</span><span class="p">}});</span>
 </code></pre></div>
-<p><a href="../UsrMes/"><code>UsrMes</code></a> logs (SQL Server example):</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>[samples].[sample_id]
-[samples].[sample_name]
-[samples].[status]
-</code></pre></div>
-<h3 id="prepare-columns-before-joining-them-into-sql">Prepare columns before joining them into SQL<a class="headerlink" href="#prepare-columns-before-joining-them-into-sql" title="Permanent link">&para;</a></h3>
-<p>Qualifies the column array in place, then joins the result into a SELECT list using <a href="../BuildString/"><code>BuildString</code></a>.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSelectList</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aColumns</span><span class="p">,</span><span class="w"> </span><span class="n">sSelectList</span><span class="p">;</span>
-
-<span class="w">    </span><span class="n">aColumns</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"sample_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"analysis_date"</span><span class="p">,</span><span class="w"> </span><span class="s2">"status_code"</span><span class="p">};</span>
-
-<span class="w">    </span><span class="nf">AddColDelimiters</span><span class="p">(</span><span class="s2">"LIMS"</span><span class="p">,</span><span class="w"> </span><span class="n">aColumns</span><span class="p">,</span><span class="w"> </span><span class="s2">"samples"</span><span class="p">);</span>
-
-<span class="w">    </span><span class="n">sSelectList</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">BuildString</span><span class="p">(</span><span class="n">aColumns</span><span class="p">,,,</span><span class="w"> </span><span class="s2">", "</span><span class="p">);</span>
-
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"SELECT "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSelectList</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" FROM samples"</span><span class="p">);</span>
-<span class="k">:ENDPROC</span><span class="p">;</span>
-
-<span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSelectList"</span><span class="p">);</span>
-</code></pre></div>
-<p><a href="../UsrMes/"><code>UsrMes</code></a> logs (SQL Server example):</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>SELECT [samples].[sample_id], [samples].[analysis_date], [samples].[status_code] FROM samples
-</code></pre></div>
-<h3 id="qualify-columns-without-database-specific-wrappers">Qualify columns without database-specific wrappers<a class="headerlink" href="#qualify-columns-without-database-specific-wrappers" title="Permanent link">&para;</a></h3>
-<p>Passes <a href="../../literals/nil/"><code>NIL</code></a> for <code>sDSN</code> so that no delimiter characters are added and the result uses plain <code>table.column</code> notation.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildPlainQualifiedColumns</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aColumns</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
-
-<span class="w">    </span><span class="n">aColumns</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"sample_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"result_value"</span><span class="p">};</span>
-
-<span class="w">    </span><span class="nf">AddColDelimiters</span><span class="p">(,</span><span class="w"> </span><span class="n">aColumns</span><span class="p">,</span><span class="w"> </span><span class="s2">"results"</span><span class="p">);</span>
-
-<span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aColumns</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">aColumns</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]);</span>
-<span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
-<span class="k">:ENDPROC</span><span class="p">;</span>
-
-<span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildPlainQualifiedColumns"</span><span class="p">);</span>
-</code></pre></div>
-<p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>results.sample_id
-results.result_value
+<p>On SQL Server, <a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>[sample].[sample_id], [sample].[status]
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4374,7 +4326,7 @@ results.result_value
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 1, 2026 21:25:24 UTC">October 1, 2026</span>
   </span>
 
     
