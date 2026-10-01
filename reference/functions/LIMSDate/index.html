@@ -4358,7 +4358,7 @@
 <h1 id="limsdate">LIMSDate<a class="headerlink" href="#limsdate" title="Permanent link">&para;</a></h1>
 <p>Returns a date value as a formatted string.</p>
 <p><code>LIMSDate</code> accepts either an SSL date value or a string. When you pass a string, the function parses it using the current application date format, the same behavior used by <a href="../CToD/"><code>CToD</code></a>. If you omit the format or pass an empty format, the function returns the date in <code>dd-MMM-yy</code> format.</p>
-<p>Null-date inputs are handled specially. With no format, the function returns <code>0--</code>. With a supplied format that contains <code>MMM</code>, it returns <code>0--0</code>. With other supplied formats, it returns a blank placeholder shaped like the format string. Non-date, non-string inputs raise an error.</p>
+<p>Null-date inputs are handled specially. With no format, the function returns <code>0--</code>. With a supplied format that contains <code>MMM</code>, it returns <code>0--0</code>. With other supplied formats, it returns a blank placeholder shaped like the format string: each date part becomes the same number of spaces and the separators stay. Non-date, non-string inputs raise an error.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need a formatted date string for display, export, or reporting.</li>
@@ -4461,7 +4461,7 @@
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Entered: 03/15/2024 | Displayed: 2024-03-15
 </code></pre></div>
 <h3 id="handle-blank-and-invalid-date-strings-without-exceptions">Handle blank and invalid date strings without exceptions<a class="headerlink" href="#handle-blank-and-invalid-date-strings-without-exceptions" title="Permanent link">&para;</a></h3>
-<p>Process a batch of legacy date strings where some entries are blank or unparseable. <code>LIMSDate</code> treats both as null dates and returns a blank placeholder shaped like the format. Neither raises an exception.</p>
+<p>Process a batch of legacy date strings where some entries are blank or unparseable. <code>LIMSDate</code> treats both as null dates and returns a blank placeholder shaped like the format. For <code>"yyyy/MM/dd"</code> that is four spaces, a slash, two spaces, a slash, and two spaces. Neither raises an exception.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FormatLegacyDates</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aLegacyRecords</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">sSourceDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFormattedDate</span><span class="p">,</span><span class="w"> </span><span class="n">sReportLine</span><span class="p">;</span>
@@ -4491,8 +4491,8 @@
 </code></pre></div>
 <p><code>UsrMes</code> logs one line per record, for example:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample: SAM001 | Imported: 1998/03/15
-Sample: SAM002 | Imported:
-Sample: SAM003 | Imported:
+Sample: SAM002 | Imported:     /  /  
+Sample: SAM003 | Imported:     /  /  
 Sample: SAM004 | Imported: 2001/12/31
 Sample: SAM005 | Imported: 1999/07/04
 </code></pre></div>
@@ -4561,7 +4561,7 @@ Due Date: 15-Apr-2026
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 1, 2026 20:48:37 UTC">October 1, 2026</span>
   </span>
 
     

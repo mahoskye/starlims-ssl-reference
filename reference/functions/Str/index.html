@@ -2775,10 +2775,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#detect-overflow-before-exporting-fixed-width-values" class="md-nav__link">
+  <a href="#see-decimals-dropped-in-a-narrow-fixed-width-field" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Detect overflow before exporting fixed-width values
+        See decimals dropped in a narrow fixed-width field
       
     </span>
   </a>
@@ -4108,10 +4108,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#detect-overflow-before-exporting-fixed-width-values" class="md-nav__link">
+  <a href="#see-decimals-dropped-in-a-narrow-fixed-width-field" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Detect overflow before exporting fixed-width values
+        See decimals dropped in a narrow fixed-width field
       
     </span>
   </a>
@@ -4245,7 +4245,7 @@
 
 <h1 id="str">Str<a class="headerlink" href="#str" title="Permanent link">&para;</a></h1>
 <p>Converts a numeric value to a formatted string.</p>
-<p><code>Str()</code> returns a character representation of <code>nNumber</code> with optional field width and decimal control. The result is space-padded on the left rather than zero-padded, which makes it useful for aligned text output. If you omit both optional parameters, integer values default to a 10-character field with no decimals, while non-integer values default to a 20-character field with 9 decimal places. If the requested format cannot fit the value, the function returns a field of asterisks.</p>
+<p><code>Str()</code> returns a character representation of <code>nNumber</code> with optional field width and decimal control. The result is space-padded on the left rather than zero-padded, which makes it useful for aligned text output. If you omit both optional parameters, integer values default to a 10-character field with no decimals, while non-integer values default to a 20-character field with 9 decimal places. If the value with the requested decimal places is wider than <code>nLength</code>, <code>Str()</code> keeps only the decimal digits that fit, so <code>Str(123456.789, 8, 2)</code> returns <code>"123456.7"</code>.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need fixed-width numeric text for reports, exports, or aligned output.</li>
@@ -4321,12 +4321,12 @@
 <ul>
 <li>Pass <a href="../../literals/nil/"><code>NIL</code></a> as <code>nNumber</code>. <code>Str()</code> raises an error instead of returning a placeholder string.</li>
 <li>Assume <code>Str(nNumber)</code> returns an unpadded value. Default output commonly includes leading spaces.</li>
-<li>Ignore an all-asterisk result. That indicates the requested field width cannot represent the value.</li>
+<li>Assume <code>nDecimals</code> is always honored. When the field is too narrow, the result has fewer decimal places than requested.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li>If the formatted value does not fit in the requested width, <code>Str()</code> returns a string of <a href="../../operators/multiply/"><code>*</code></a> characters of that width.</li>
+<li>If the value with <code>nDecimals</code> decimal places does not fit in <code>nLength</code>, <code>Str()</code> drops the decimal digits that do not fit instead of widening the field. <code>Str(123456.789, 8, 2)</code> returns <code>"123456.7"</code>.</li>
 <li>When <code>nLength</code> is supplied and <code>nDecimals</code> is omitted, the function keeps fractional digits only as long as they fit in the field.</li>
 <li>Negative values are padded so that the minus sign stays immediately before the first visible digit.</li>
 <li>A negative <code>nLength</code> uses the current numeric separator settings when formatting the result. See <a href="../SetDecimalSeparator/"><code>SetDecimalSeparator</code></a> and <a href="../SetGroupSeparator/"><code>SetGroupSeparator</code></a>.</li>
@@ -4376,32 +4376,27 @@ Trimmed value: 42
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample      Result   Average
 S-1024        7.20    12.346
 </code></pre></div>
-<h3 id="detect-overflow-before-exporting-fixed-width-values">Detect overflow before exporting fixed-width values<a class="headerlink" href="#detect-overflow-before-exporting-fixed-width-values" title="Permanent link">&para;</a></h3>
-<p>Check for the asterisk overflow result before writing fixed-width numeric text.</p>
+<h3 id="see-decimals-dropped-in-a-narrow-fixed-width-field">See decimals dropped in a narrow fixed-width field<a class="headerlink" href="#see-decimals-dropped-in-a-narrow-fixed-width-field" title="Permanent link">&para;</a></h3>
+<p>Format a reading into an 8-character export field with two decimal places. With two decimals, <code>123456.789</code> needs 9 characters, so <code>Str()</code> keeps the field at 8 characters and drops the second decimal digit.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportReading</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nReading</span><span class="p">,</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">,</span><span class="w"> </span><span class="n">sOutput</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">nReading</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mf">123456.789</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sFormatted</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Str</span><span class="p">(</span><span class="n">nReading</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sFormatted</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">Replicate</span><span class="p">(</span><span class="s2">"*"</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Reading does not fit in the export field"</span><span class="p">);</span>
-<span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-
 <span class="w">    </span><span class="n">sOutput</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"READING="</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sOutput</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sFormatted</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExportReading"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>READING=123456.79
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>READING=123456.7
 </code></pre></div>
-<p>If the value does not fit the requested width, <a href="../ErrorMes/"><code>ErrorMes</code></a> logs <code>Reading does not fit in the export field</code> and the procedure returns <code>.F.</code>.</p>
+<p>When every decimal place matters, use a field wide enough for the value, or check the result before you export it.</p>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../LStr/"><code>LStr</code></a></li>
@@ -4432,7 +4427,7 @@ S-1024        7.20    12.346
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 1, 2026 20:48:37 UTC">October 1, 2026</span>
   </span>
 
     

@@ -4375,12 +4375,12 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="capture-the-current-timestamp-for-a-log-entry">Capture the current timestamp for a log entry<a class="headerlink" href="#capture-the-current-timestamp-for-a-log-entry" title="Permanent link">&para;</a></h3>
-<p>Call <code>Now()</code> once and store the result before displaying it. The exact timestamp depends on when the procedure runs.</p>
+<p>Call <code>Now()</code> once and store the result, then format it with <a href="../DateToString/"><code>DateToString</code></a> so the message shows both the date and the time. The exact timestamp depends on when the procedure runs.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LogTimestamp</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dTimestamp</span><span class="p">,</span><span class="w"> </span><span class="n">sLogMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">dTimestamp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Now</span><span class="p">();</span>
-<span class="w">    </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Event recorded at "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">dTimestamp</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sLogMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Event recorded at "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DateToString</span><span class="p">(</span><span class="n">dTimestamp</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sLogMessage</span><span class="p">);</span>
 
@@ -4391,9 +4391,9 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LogTimestamp"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>Event recorded at 04/23/2026 14:30:00
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Event recorded at &lt;timestamp&gt;
 </code></pre></div>
-<p>The exact timestamp varies.</p>
+<p><code>&lt;timestamp&gt;</code> is the moment the procedure runs, in the <code>MM/dd/yyyy HH:mm:ss</code> pattern that <a href="../DateToString/"><code>DateToString</code></a> uses by default. Converting the value with <a href="../LimsString/"><code>LimsString</code></a> instead logs only the date part.</p>
 <h3 id="measure-elapsed-time-between-two-timestamps">Measure elapsed time between two timestamps<a class="headerlink" href="#measure-elapsed-time-between-two-timestamps" title="Permanent link">&para;</a></h3>
 <p>Capture the start time, do work, then capture the end time and pass both to <a href="../DateDiff/"><code>DateDiff</code></a>. The elapsed count is typically <code>0</code> in this example because both <code>Now()</code> calls happen immediately after each other.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">MeasureElapsedTime</span><span class="p">;</span>
@@ -4401,11 +4401,11 @@
 
 <span class="w">    </span><span class="n">dStart</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Now</span><span class="p">();</span>
 
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Starting work at "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">dStart</span><span class="p">));</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Starting work at "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DateToString</span><span class="p">(</span><span class="n">dStart</span><span class="p">));</span>
 <span class="w">    </span><span class="c1">/* Logs the current start timestamp;</span>
 
 <span class="w">    </span><span class="n">dEnd</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Now</span><span class="p">();</span>
-<span class="w">    </span><span class="n">nElapsedSeconds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateDiff</span><span class="p">(</span><span class="n">dStart</span><span class="p">,</span><span class="w"> </span><span class="n">dEnd</span><span class="p">,</span><span class="w"> </span><span class="s2">"ss"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">nElapsedSeconds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DateDiff</span><span class="p">(</span><span class="n">dStart</span><span class="p">,</span><span class="w"> </span><span class="n">dEnd</span><span class="p">,</span><span class="w"> </span><span class="s2">"second"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Elapsed seconds: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nElapsedSeconds</span><span class="p">);</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sMessage</span><span class="p">);</span>
@@ -4435,7 +4435,7 @@
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">RunSQL</span><span class="p">(</span><span class="n">sSQL</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="n">dReleasedAt</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="s2">"S-1001"</span><span class="p">});</span>
 <span class="w">        </span><span class="n">bSuccess</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample released at "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">dReleasedAt</span><span class="p">);</span>
+<span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample released at "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DateToString</span><span class="p">(</span><span class="n">dReleasedAt</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Sample release update failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">;</span>
@@ -4450,7 +4450,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"StampReleasedSamples"</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs either:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample released at 04/23/2026 14:30:00
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample released at &lt;timestamp&gt;
 </code></pre></div>
 <p>or:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample release update failed: &lt;database error&gt;
@@ -4486,7 +4486,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 16:48:52 UTC">September 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 1, 2026 20:48:37 UTC">October 1, 2026</span>
   </span>
 
     
