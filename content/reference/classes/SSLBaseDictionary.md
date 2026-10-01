@@ -13,7 +13,7 @@ starlims:
 
 Provides the shared dictionary surface used by SSL dictionary classes such as [`SSLStringDictionary{}`](SSLStringDictionary.md) and [`SSLIntDictionary{}`](SSLIntDictionary.md).
 
-`SSLBaseDictionary` defines the members shared by SSL dictionary objects: `Count`, `Keys`, `Values`, `Clear`, `AddValue`, `GetValue`, `Contains`, `Remove`, `TryGetValue`, and `Invoke`. You do not create `SSLBaseDictionary{}` directly. Instead, create a concrete dictionary class that matches your key type and use these inherited members on that instance.
+`SSLBaseDictionary` defines the members shared by SSL dictionary objects: `Count`, `Keys`, `Values`, `Clear`, `AddValue`, `GetValue`, `Contains`, `Remove`, `TryGetValue`, and `Invoke` (which raises; see below). You do not create `SSLBaseDictionary{}` directly. Instead, create a concrete dictionary class that matches your key type and use these inherited members on that instance.
 
 The shared behavior is small and consistent. `Count` returns the current number of entries. `Keys` and `Values` return arrays built from the dictionary's current contents. `Clear()` removes all entries and returns [`.T.`](../literals/true.md).
 
@@ -112,19 +112,9 @@ Attempts to read a value without relying on a fallback argument.
 
 ### `Invoke`
 
-Invokes a dictionary method by name.
+`Invoke` is meant to call a dictionary method by name, but it raises in every form tested on STARLIMS v11: `Invoke("Clear")`, `Invoke("AddValue", 1001, "Queued")` and `Invoke("AddValue", {1001, "Queued"})` all raise `Exception has been thrown by the target of an invocation.` (the underlying error is `Object reference not set to an instance of an object.`).
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `sMethodName` | [string](../types/string.md) | yes | Method name such as `AddValue`, `GetValue`, `Contains`, `Remove`, `TryGetValue`, or `Clear` |
-| `vArg1`, `vArg2`, ... | any | no | Arguments to pass to the named method |
-
-**Returns:** any — Result of the invoked method.
-
-**Raises:**
-- **When a required method argument is missing:** The method: `<name>` requires at least one parameter
-
-`Invoke` matches these method names without case sensitivity.
+Call the method directly, such as `oDict:AddValue(1001, "Queued")`. When the method name is only known at run time, use `InvokeMethod(sMethodName, aArgs)`, which passes the arguments as one array: `oDict:InvokeMethod("AddValue", {1001, "Queued"})` returns [`.T.`](../literals/true.md).
 
 ## Inheritance
 
@@ -153,7 +143,7 @@ Concrete classes that inherit from `SSLBaseDictionary` include:
 
 ## Caveats
 
-- `Invoke("Clear")` works without arguments, but methods such as `AddValue`, `GetValue`, `Contains`, `Remove`, and `TryGetValue` raise an error when called through `Invoke` without the required key argument.
+- `Invoke` raises in every form, with or without arguments. Call methods directly, or use `InvokeMethod(sMethodName, aArgs)` to choose the method at run time.
 
 ## Examples
 
@@ -196,9 +186,9 @@ Creates an [`SSLStringDictionary`](SSLStringDictionary.md), adds two entries, th
 DoProc("DictionaryBaseMembers");
 ```
 
-### Call dictionary methods dynamically with Invoke
+### Call dictionary methods dynamically with InvokeMethod
 
-Uses `Invoke` to call `AddValue`, `Contains`, and `GetValue` by name on an [`SSLIntDictionary`](SSLIntDictionary.md). This pattern is useful when the method to call is determined at runtime.
+Uses `InvokeMethod` to call `AddValue`, `Contains`, and `GetValue` by name on an [`SSLIntDictionary`](SSLIntDictionary.md), passing each method's arguments as one array. `Invoke` cannot be used for this; see [`Invoke`](#invoke). This pattern is useful when the method to call is determined at runtime.
 
 ```ssl
 :PROCEDURE DictionaryInvokeExample;
@@ -207,13 +197,13 @@ Uses `Invoke` to call `AddValue`, `Contains`, and `GetValue` by name on an [`SSL
 	oDict := SSLIntDictionary{};
 
 	sMethod := "AddValue";
-	vResult := oDict:Invoke(sMethod, 1001, "Queued");
+	vResult := oDict:InvokeMethod(sMethod, {1001, "Queued"});
 	UsrMes("AddValue success: " + LimsString(vResult));
 
-	vResult := oDict:Invoke("Contains", 1001);
+	vResult := oDict:InvokeMethod("Contains", {1001});
 	UsrMes("Contains 1001: " + LimsString(vResult));
 
-	vResult := oDict:Invoke("GetValue", 1001, "Missing");
+	vResult := oDict:InvokeMethod("GetValue", {1001, "Missing"});
 	UsrMes("Value 1001: " + LimsString(vResult));
 :ENDPROC;
 
