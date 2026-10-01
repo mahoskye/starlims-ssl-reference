@@ -15,7 +15,7 @@ Wrap a name in database-specific delimiters.
 
 AddNameDelimiters returns `sName` wrapped in the identifier delimiters used by the database identified by `sDSN`. If `sDSN` is [`NIL`](../literals/nil.md), it uses an empty string instead. If `sName` is [`NIL`](../literals/nil.md), it also uses an empty string.
 
-Before adding delimiters, the function trims `sName`. If the DSN does not map to a supported database, the function returns the trimmed name without any delimiter characters.
+Before adding delimiters, the function trims `sName`. If `sDSN` is empty, the function returns the trimmed name without any delimiter characters. A non-empty `sDSN` must name a database connection configured in your environment, such as the default `DATABASE` connection. Any other name raises an error.
 
 The function always returns a string result. It does not modify its inputs.
 
@@ -37,18 +37,24 @@ AddNameDelimiters(sDSN, sName)
 
 | Name | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
-| `sDSN` | [string](../types/string.md) | no | `""` | Data source name used to determine delimiter rules. Unsupported or empty values produce no delimiter characters. |
+| `sDSN` | [string](../types/string.md) | no | `""` | Name of the database connection whose delimiter rules apply, such as `"DATABASE"`. An empty value produces no delimiter characters. A name that is not a configured connection raises an error. |
 | `sName` | [string](../types/string.md) | no | `""` | Identifier to wrap in database-specific delimiters. The function trims this value before wrapping it. |
 
 ## Returns
 
 **[string](../types/string.md)** — Trimmed and delimited version of `sName`.
 
+## Exceptions
+
+| Trigger | Exception message |
+| --- | --- |
+| `sDSN` is not empty and does not name a configured database connection. | `The provider name: <sDSN> not found.` |
+
 ## Best practices
 
 !!! success "Do"
     - Use AddNameDelimiters for individual table, view, or column names.
-    - Pass the DSN that matches the database where the SQL will run.
+    - Pass the name of the connection where the SQL will run, such as `"DATABASE"` for the default connection.
     - Use this together with [`AddColDelimiters`](AddColDelimiters.md) when you need both individual identifiers and qualified column arrays.
     - Pass the raw identifier value and let the function trim outer spaces before adding delimiters.
 
@@ -56,20 +62,20 @@ AddNameDelimiters(sDSN, sName)
     - Assume the same delimiter characters work for every database.
     - Expect this function to modify a variable in place. It returns a new string.
     - Pass [`NIL`](../literals/nil.md) and expect an error. The function falls back to empty strings for missing arguments.
-    - Assume an unknown DSN will still quote the identifier. In that case the function returns the trimmed name unchanged.
+    - Pass a connection name that is not configured in your environment. That raises `The provider name: <sDSN> not found.`
 
 ## Examples
 
 ### Build a SQL fragment with delimited identifiers
 
-Calls `AddNameDelimiters` twice, once for the table name and once for the column, then joins the results into a SELECT statement. The exact delimiters depend on the DBMS type for the given DSN.
+Calls `AddNameDelimiters` twice, once for the table name and once for the column, then joins the results into a SELECT statement. The example uses the default `DATABASE` connection. Replace it with the name of the connection your SQL runs on. The exact delimiters depend on that connection's database type.
 
 ```ssl
 :PROCEDURE BuildSelectStatement;
 	:DECLARE sTableName, sColumnName, sSQL;
 
-	sTableName := AddNameDelimiters("LIMS", "samples");
-	sColumnName := AddNameDelimiters("LIMS", "sample_id");
+	sTableName := AddNameDelimiters("DATABASE", "samples");
+	sColumnName := AddNameDelimiters("DATABASE", "sample_id");
 
 	sSQL := "SELECT " + sColumnName + " FROM " + sTableName;
 	UsrMes(sSQL);
@@ -79,7 +85,7 @@ Calls `AddNameDelimiters` twice, once for the table name and once for the column
 DoProc("BuildSelectStatement");
 ```
 
-[`UsrMes`](UsrMes.md) logs (SQL Server example):
+[`UsrMes`](UsrMes.md) logs, for a SQL Server connection:
 
 ```text
 SELECT [sample_id] FROM [samples]

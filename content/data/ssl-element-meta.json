@@ -13,7 +13,7 @@
       "special_form": 8,
       "returns": 12
     },
-    "with_exceptions": 263,
+    "with_exceptions": 265,
     "with_caveats": 401,
     "with_best_practices": 458
   },
@@ -343,12 +343,17 @@
       "summary": "Wrap a name in database-specific delimiters.",
       "doc_status": "published",
       "source_path": "content/reference/functions/AddNameDelimiters.md",
-      "exceptions": [],
+      "exceptions": [
+        {
+          "trigger": "sDSN is not empty and does not name a configured database connection.",
+          "message": "The provider name: <sDSN> not found."
+        }
+      ],
       "caveats": [],
       "best_practices": {
         "do": [
           "Use AddNameDelimiters for individual table, view, or column names.",
-          "Pass the DSN that matches the database where the SQL will run.",
+          "Pass the name of the connection where the SQL will run, such as \"DATABASE\" for the default connection.",
           "Use this together with AddColDelimiters when you need both individual identifiers and qualified column arrays.",
           "Pass the raw identifier value and let the function trim outer spaces before adding delimiters."
         ],
@@ -356,7 +361,7 @@
           "Assume the same delimiter characters work for every database.",
           "Expect this function to modify a variable in place. It returns a new string.",
           "Pass NIL and expect an error. The function falls back to empty strings for missing arguments.",
-          "Assume an unknown DSN will still quote the identifier. In that case the function returns the trimmed name unchanged."
+          "Pass a connection name that is not configured in your environment. That raises The provider name: <sDSN> not found."
         ]
       }
     },
@@ -4519,7 +4524,7 @@
           "message": "Argument sXml cannot be null."
         },
         {
-          "trigger": "The string cannot be parsed as valid XML.",
+          "trigger": "The string cannot be parsed as valid XML, or the root element is not one of the recognized type tags.",
           "message": "Error unpacking XML"
         },
         {
@@ -4537,10 +4542,6 @@
         {
           "trigger": "An element's text cannot be converted to its declared type.",
           "message": "Tag {element} contains an invalid value!"
-        },
-        {
-          "trigger": "The root element is not one of the recognized type tags.",
-          "message": "Unknown tag <{tagName}> in XML structure!"
         }
       ],
       "caveats": [
@@ -5415,7 +5416,7 @@
         },
         {
           "trigger": "A dynamic object does not contain the named property.",
-          "message": "Property not found: <propertyName>."
+          "message": "Run-time error: Property not found: <propertyName>."
         }
       ],
       "caveats": [
@@ -5453,6 +5454,10 @@
         {
           "trigger": "vArg1 is NIL.",
           "message": "Argument vArg1 cannot be null."
+        },
+        {
+          "trigger": "An index is outside the bounds of the array it is applied to.",
+          "message": "Run-time error: Index was out of range. Must be non-negative and less than the size of the collection."
         }
       ],
       "caveats": [
@@ -5667,13 +5672,18 @@
       "summary": "Returns the identifier delimiter character for the database behind a DSN.",
       "doc_status": "published",
       "source_path": "content/reference/functions/GetRdbmsDelimiter.md",
-      "exceptions": [],
+      "exceptions": [
+        {
+          "trigger": "sDSN is not empty and does not name a configured database connection.",
+          "message": "The provider name: <sDSN> not found."
+        }
+      ],
       "caveats": [
         "The function returns only the delimiter character. You must still place it correctly around the identifier."
       ],
       "best_practices": {
         "do": [
-          "Use the DSN that matches the database where the SQL will run.",
+          "Pass the name of the connection where the SQL will run, such as \"DATABASE\" for the default connection.",
           "Call the function twice when you need separate opening and closing delimiters.",
           "Handle the empty-string result explicitly when the DSN may point to an unsupported platform.",
           "Use AddNameDelimiters or AddColDelimiters when those higher-level helpers already fit your task."
@@ -5682,6 +5692,7 @@
           "Hardcode [ ] or \" when the same logic may run against more than one database platform.",
           "Ignore bOpen. It matters for SQL Server and Sybase, where opening and closing delimiters are different.",
           "Assume every DSN produces a delimiter. Unsupported mappings return an empty string.",
+          "Pass a connection name that is not configured in your environment. That raises The provider name: <sDSN> not found.",
           "Use this helper when you actually need a fully wrapped identifier; reach for AddNameDelimiters instead."
         ]
       }
@@ -11995,7 +12006,7 @@
       "id": "ssl.class.sslexpando",
       "element_type": "class",
       "title": "SSLExpando",
-      "summary": "SSLExpando is a built-in object class for storing named values whose shape is decided at runtime.",
+      "summary": "SSLExpando is the class of dynamic objects created with CreateUdObject(), which store named values whose shape is decided at runtime.",
       "doc_status": "published",
       "source_path": "content/reference/classes/SSLExpando.md",
       "exceptions": [],
@@ -12007,11 +12018,13 @@
       ],
       "best_practices": {
         "do": [
+          "Create the object with CreateUdObject().",
           "Use SetProperty() and GetProperty() when the property name comes from runtime data.",
           "Set XmlType before serializing when another system expects a specific root element name.",
           "Call IsProperty() before GetProperty() for optional fields."
         ],
         "dont": [
+          "Write SSLExpando{}. It raises the compile-time error Invalid built-in class: SSLExpando.",
           "Assume GetProperty() returns an empty value for missing fields. It raises Property not found: <name>..",
           "Expect GetPropList() to include inherited object members. It only returns dynamic properties on the SSLExpando.",
           "Rely on clone() for an independent deep copy of nested arrays or objects. Only the top-level property bag is copied."

@@ -53,6 +53,7 @@ GetInternalC(oTarget, sCollectionName, vArg1, [vArg2], [vArg3], [vArg4], [vArg5]
 | `oTarget` is [`NIL`](../literals/nil.md). | `Argument oTarget cannot be null.` |
 | `sCollectionName` is [`NIL`](../literals/nil.md). | `Argument sCollectionName cannot be null.` |
 | `vArg1` is [`NIL`](../literals/nil.md). | `Argument vArg1 cannot be null.` |
+| An index is outside the bounds of the array it is applied to. | `Run-time error: Index was out of range. Must be non-negative and less than the size of the collection.` |
 
 ## Best practices
 
@@ -172,10 +173,10 @@ Handle a runtime error from a deeper lookup when the requested path does not exi
 DoProc("ReadOptionalMetric");
 ```
 
-[`UsrMes`](UsrMes.md) logs a runtime-specific failure message, such as:
+[`UsrMes`](UsrMes.md) logs, because `aBatches` has only two elements:
 
 ```text
-Lookup failed: Subscript out of range
+Lookup failed: Run-time error: Index was out of range. Must be non-negative and less than the size of the collection.
 ```
 
 ## Related

@@ -82,11 +82,13 @@ Fetches a value previously stored in the session under a known key and logs it; 
 DoProc("GetStoredUsername");
 ```
 
-[`UsrMes`](UsrMes.md) logs:
+The procedure assumes an earlier step stored a value under `preferred_username`, for example with [`AddToSession`](AddToSession.md). [`UsrMes`](UsrMes.md) logs that value:
 
 ```text
-Retrieved username: jsmith
+Retrieved username: <stored value>
 ```
+
+When the key has not been set in the current session, `GetFromSession` returns an empty string and the line ends after the colon.
 
 ### Guard workflow logic based on a session flag
 
@@ -148,10 +150,16 @@ Reads multiple keys in one procedure, substitutes defaults for any that are miss
 DoProc("RestoreUserPreferences");
 ```
 
-[`UsrMes`](UsrMes.md) logs:
+When none of the three keys has been set in the current session, [`UsrMes`](UsrMes.md) logs the defaults:
 
 ```text
-User=jsmith, mode=read-only, page size=25
+User=, mode=default, page size=system default
+```
+
+When earlier steps stored values under those keys, the stored values replace the defaults:
+
+```text
+User=<UserName>, mode=<ReviewMode>, page size=<PageSize>
 ```
 
 ## Related

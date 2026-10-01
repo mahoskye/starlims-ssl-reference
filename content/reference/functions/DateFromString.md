@@ -15,7 +15,7 @@ Parses a string into a date value with optional format and culture controls.
 
 `DateFromString` accepts a required source string plus optional format, culture, and date-handling controls. When `vFormat` is omitted, the function uses the selected culture's normal date parsing rules. When `vFormat` is a string or an array of strings, the input must match one of those formats exactly.
 
-By default, parsing uses invariant culture. Pass `bUseLocalCulture` as [`.T.`](../literals/true.md) to parse with the current local culture instead. By default, the returned value is marked as a local date. Pass `bMakeInvariant` as [`.T.`](../literals/true.md) to return the parsed value as an unspecified date.
+By default, parsing uses invariant culture. Pass `bUseLocalCulture` as [`.T.`](../literals/true.md) to parse with the current local culture instead. By default, the returned value is marked as a local date. Pass `bMakeInvariant` as [`.T.`](../literals/true.md) to return the parsed value as an unspecified date. Dates in the example output follow the session date format (see [`DateFormat`](DateFormat.md)) and are shown with the default format, which prints a date such as `3/15/2024` without zero padding.
 
 ## When to use
 
@@ -94,10 +94,10 @@ Parses an ISO-style date string by supplying the exact format, then logs the res
 DoProc("ParseIsoDate");
 ```
 
-[`UsrMes`](UsrMes.md) logs (assuming MM/DD/YYYY date format):
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
-Parsed date: 04/11/2026
+Parsed date: 4/11/2026
 ```
 
 ### Accept several exact import formats

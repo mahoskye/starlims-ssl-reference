@@ -50,12 +50,11 @@ FromXml(sXml)
 | Trigger | Exception message |
 | --- | --- |
 | `sXml` is [`NIL`](../literals/nil.md). | `Argument sXml cannot be null.` |
-| The string cannot be parsed as valid XML. | `Error unpacking XML` |
+| The string cannot be parsed as valid XML, or the root element is not one of the recognized type tags. | `Error unpacking XML` |
 | An element inside `<complextype>` does not match the declared element type. | `Incorrect element type {element} found in array of type {typeName}` |
 | The `<complextype>` contents cannot be converted to the target array type. | `Can't convert to array` |
 | The root element is `<error>`. | `Error sent from outside: {message}` |
 | An element's text cannot be converted to its declared type. | `Tag {element} contains an invalid value!` |
-| The root element is not one of the recognized type tags. | `Unknown tag <{tagName}> in XML structure!` |
 
 ## Best practices
 
@@ -156,7 +155,7 @@ DoProc("ParseXmlWithErrorHandling");
 [`ErrorMes`](ErrorMes.md) logs:
 
 ```text
-Parse failed: Unknown tag <person> in XML structure!
+Parse failed: Error unpacking XML
 ```
 
 ## Related

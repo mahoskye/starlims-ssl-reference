@@ -165,7 +165,7 @@ DoProc("InspectSessionState");
 
 ```text
 sCurrentUser = jsmith (STRING)
-nSessionTimeout = 300 (DOUBLE)
+nSessionTimeout = 300 (NUMERIC)
 bIsAuthenticated = .T. (LOGIC)
 ```
 

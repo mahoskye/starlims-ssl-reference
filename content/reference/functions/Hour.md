@@ -65,7 +65,7 @@ Hour(dDate)
 
 ### Choose a greeting based on the current hour
 
-Call `Hour` on the current timestamp and use its value to select a time-of-day greeting. Because the procedure reads the live clock, the greeting and hour shown in the output are representative, and the actual values depend on when the procedure runs.
+Call `Hour` on the current timestamp and use its value to select a time-of-day greeting. Because the procedure reads the live clock, the greeting and the hour depend on when the procedure runs.
 
 ```ssl
 :PROCEDURE ShowLoginGreeting;
@@ -93,10 +93,10 @@ Call `Hour` on the current timestamp and use its value to select a time-of-day g
 DoProc("ShowLoginGreeting");
 ```
 
-[`UsrMes`](UsrMes.md) logs:
+[`UsrMes`](UsrMes.md) logs `Good morning`, `Good afternoon`, or `Good evening`, followed by the current hour from `0` through `23`:
 
 ```text
-Good morning. Current hour: 9
+<greeting>. Current hour: <hour>
 ```
 
 ### Count events into 24 hourly buckets

@@ -35,7 +35,7 @@ Key-value stores with different key types, plus the dynamic property-bag object 
 | [SSLBaseDictionary](SSLBaseDictionary.md) | Provides the shared dictionary surface used by SSL dictionary classes such as SSLStringDictionary{} and SSLIntDictionary{}. |
 | [SSLStringDictionary](SSLStringDictionary.md) | Stores values by string key. |
 | [SSLIntDictionary](SSLIntDictionary.md) | Stores values by whole-number keys. |
-| [SSLExpando](SSLExpando.md) | SSLExpando is a built-in object class for storing named values whose shape is decided at runtime. |
+| [SSLExpando](SSLExpando.md) | SSLExpando is the class of dynamic objects created with CreateUdObject(), which store named values whose shape is decided at runtime. |
 
 ## Documents and storage
 

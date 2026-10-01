@@ -13,7 +13,7 @@ starlims:
 
 Calculates the ordinal day number of a date within its year.
 
-`DOY()` returns the day-of-year for a valid date, from `1` through `366`. January 1 returns `1`, and December 31 returns `365` or `366` depending on whether the year is a leap year. The function requires a date value. Unlike related date-part functions such as [`Day`](Day.md), [`Month`](Month.md), [`Year`](Year.md), [`DOW`](DOW.md), and [`NoOfDays`](NoOfDays.md), `DOY()` does not return `0` for an empty date. It raises an error instead.
+`DOY()` returns the day-of-year for a valid date, from `1` through `366`. January 1 returns `1`, and December 31 returns `365` or `366` depending on whether the year is a leap year. The function requires a date value. Unlike related date-part functions such as [`Day`](Day.md), [`Month`](Month.md), [`Year`](Year.md), [`DOW`](DOW.md), and [`NoOfDays`](NoOfDays.md), `DOY()` does not return `0` for an empty date. It raises an error instead. Dates in the example output follow the session date format (see [`DateFormat`](DateFormat.md)) and are shown with the default format, which prints a date such as `3/15/2024` without zero padding.
 
 ## When to use
 
@@ -86,7 +86,7 @@ DoProc("ShowDayOfYear");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-03/15/2024 is day 75 of the year.
+3/15/2024 is day 75 of the year.
 ```
 
 ### Guard against an empty date before calling DOY

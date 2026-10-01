@@ -13,7 +13,7 @@ starlims:
 
 Converts a string in the current SSL date format to a date value.
 
-`CToD` parses `sDateString` using the current SSL date format setting. When the text can be parsed with that setting, the function returns the corresponding date value. When parsing fails, it returns an empty date instead of raising a parse error. Passing [`NIL`](../literals/nil.md) is the documented exception case.
+`CToD` parses `sDateString` using the current SSL date format setting. When the text can be parsed with that setting, the function returns the corresponding date value. When parsing fails, it returns an empty date instead of raising a parse error. Passing [`NIL`](../literals/nil.md) is the documented exception case. Dates in the example output follow the session date format (see [`DateFormat`](DateFormat.md)) and are shown with the default format, which prints a date such as `3/15/2024` without zero padding.
 
 ## When to use
 
@@ -85,10 +85,10 @@ Parses a date string using the current date format and checks whether the result
 DoProc("ParseSingleDate");
 ```
 
-[`UsrMes`](UsrMes.md) logs (assuming MM/DD/YYYY date format):
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
-Parsed date: 03/15/2024
+Parsed date: 3/15/2024
 ```
 
 ### Validate a batch of imported date strings
@@ -168,7 +168,7 @@ DoProc("ResolveCutoffDate", {"03/15/2024"});
 `UsrMes` logs on success:
 
 ```text
-Using cutoff date: 03/15/2024
+Using cutoff date: 3/15/2024
 ```
 
 ## Related

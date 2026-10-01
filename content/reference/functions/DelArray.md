@@ -81,6 +81,9 @@ Logs the array contents before and after removing the element at a given index, 
 				+ ": " + BuildString(aValues);
 	UsrMes(sResult);
 :ENDPROC;
+
+/* Usage;
+DoProc("RemoveArrayElement");
 ```
 
 [`UsrMes`](UsrMes.md) logs:
@@ -116,6 +119,9 @@ Iterates in reverse order to safely remove all entries except a target value, co
 	UsrMes("Processed: " + BuildString(aProcessedSamples));
 	UsrMes("Still pending: " + BuildString(aPendingSamples));
 :ENDPROC;
+
+/* Usage;
+DoProc("ProcessPendingSamples");
 ```
 
 [`UsrMes`](UsrMes.md) logs:
@@ -152,6 +158,9 @@ Removes multiple elements by supplying positions in descending order so that eac
 
 	:RETURN aSampleList;
 :ENDPROC;
+
+/* Usage;
+DoProc("RemoveMultipleEntries");
 ```
 
 [`UsrMes`](UsrMes.md) logs:
