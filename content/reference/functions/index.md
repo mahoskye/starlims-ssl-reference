@@ -298,7 +298,7 @@ starlims:
 | [IIf](IIf.md) | Selects one of two values based on a boolean condition. |
 | [LCase](LCase.md) | Conditionally evaluates one of two SSL expressions supplied as strings. |
 | [LimsExec](LimsExec.md) | Executes an external application with optional arguments and user interface visibility. |
-| [PrmCount](PrmCount.md) | Returns the number of parameters passed to the currently running procedure. |
+| [PrmCount](PrmCount.md) | Returns how many arguments the caller passed to the current server script; only valid in script-level code. |
 | [RunApp](RunApp.md) | Launches an external application with optional arguments and indicates if execution succeeded (or throws on invalid parameters). |
 
 ## FTP
