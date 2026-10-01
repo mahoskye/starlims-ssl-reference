@@ -3753,7 +3753,7 @@
 
 <h1 id="getappbasefolder">GetAppBaseFolder<a class="headerlink" href="#getappbasefolder" title="Permanent link">&para;</a></h1>
 <p>Returns the application's base folder path as a string for use in file and configuration operations.</p>
-<p><code>GetAppBaseFolder</code> returns the root directory path configured for the current application context. It takes no arguments and always returns the same value within a given run.</p>
+<p><code>GetAppBaseFolder</code> returns the root directory path configured for the current application context. It takes no arguments and always returns the same value within a given run. The returned path ends with a backslash, so append a relative folder or file name directly instead of adding another separator.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need a reliable reference to the root directory for your application's files or settings.</li>
@@ -3767,7 +3767,7 @@
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>This function takes no parameters.</p>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
-<p><strong><a href="../../types/string/">string</a></strong> — The base folder path configured for the application context.</p>
+<p><strong><a href="../../types/string/">string</a></strong> — The base folder path configured for the application context, ending with a backslash.</p>
 <h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <div class="admonition success">
 <p class="admonition-title">Do</p>
@@ -3798,7 +3798,7 @@
 
 <span class="w">    </span><span class="n">sAppBasePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetAppBaseFolder</span><span class="p">();</span>
 <span class="w">    </span><span class="n">sUploadFolder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"UserUploads"</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFullPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sAppBasePath</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"\"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUploadFolder</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFullPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sAppBasePath</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUploadFolder</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Upload folder path: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFullPath</span><span class="p">);</span>
 
@@ -3808,8 +3808,8 @@
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SetupUserUploadFolder"</span><span class="p">);</span>
 </code></pre></div>
-<p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>Upload folder path: C:\STARLIMS\UserUploads
+<p><a href="../UsrMes/"><code>UsrMes</code></a> logs the full path, where <code>&lt;app-folder&gt;</code> stands for the application base folder in your environment:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Upload folder path: &lt;app-folder&gt;\UserUploads
 </code></pre></div>
 <h3 id="build-a-dynamic-path-to-read-a-configuration-file">Build a dynamic path to read a configuration file<a class="headerlink" href="#build-a-dynamic-path-to-read-a-configuration-file" title="Permanent link">&para;</a></h3>
 <p>Combine the application base folder with relative paths to read configuration files.</p>
@@ -3817,8 +3817,8 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBaseFolder</span><span class="p">,</span><span class="w"> </span><span class="n">sConfigRelative</span><span class="p">,</span><span class="w"> </span><span class="n">sFullPath</span><span class="p">,</span><span class="w"> </span><span class="n">sContent</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sBaseFolder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetAppBaseFolder</span><span class="p">();</span>
-<span class="w">    </span><span class="n">sConfigRelative</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"config"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"application.cfg"</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sFullPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sBaseFolder</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"\"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sConfigRelative</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sConfigRelative</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"config\application.cfg"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFullPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sBaseFolder</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sConfigRelative</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sContent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ReadText</span><span class="p">(</span><span class="n">sFullPath</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sContent</span><span class="p">);</span>
@@ -3860,7 +3860,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 1, 2026 20:47:20 UTC">October 1, 2026</span>
   </span>
 
     

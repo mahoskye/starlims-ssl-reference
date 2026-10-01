@@ -1540,6 +1540,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exceptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#best-practices" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4007,6 +4018,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exceptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#best-practices" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4216,7 +4238,7 @@
 <h1 id="getrdbmsdelimiter">GetRdbmsDelimiter<a class="headerlink" href="#getrdbmsdelimiter" title="Permanent link">&para;</a></h1>
 <p>Returns the identifier delimiter character for the database behind a DSN.</p>
 <p><code>GetRdbmsDelimiter</code> maps a DSN to the delimiter character used for quoted identifiers. For SQL Server and Sybase, it returns <code>[</code> for opening delimiters and <code>]</code> for closing delimiters. For Oracle and DB2, it always returns <code>"</code> because the same character is used on both sides. If the DSN does not resolve to one of those database types, the function returns an empty string.</p>
-<p>If <code>sDSN</code> is <a href="../../literals/nil/"><code>NIL</code></a>, SSL converts it to an empty string before the lookup. The function returns a string value and does not modify its inputs.</p>
+<p>If <code>sDSN</code> is <a href="../../literals/nil/"><code>NIL</code></a>, SSL converts it to an empty string before the lookup. A non-empty <code>sDSN</code> must name a database connection configured in your environment, such as the default <code>DATABASE</code> connection. Any other name raises an error. The function returns a string value and does not modify its inputs.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When building SQL or metadata strings that must adapt to the target database.</li>
@@ -4244,7 +4266,7 @@
 <td><a href="../../types/string/">string</a></td>
 <td>no</td>
 <td><a href="../../literals/nil/"><code>NIL</code></a></td>
-<td>Data source name used to determine the database platform.</td>
+<td>Name of the database connection whose platform determines the delimiter, such as <code>"DATABASE"</code>. A name that is not a configured connection raises an error.</td>
 </tr>
 <tr>
 <td><code>bOpen</code></td>
@@ -4288,9 +4310,24 @@
 <td><code>"</code></td>
 </tr>
 <tr>
-<td>Other or unknown</td>
+<td>Other</td>
 <td><code>""</code></td>
 <td><code>""</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="exceptions">Exceptions<a class="headerlink" href="#exceptions" title="Permanent link">&para;</a></h2>
+<table data-ssl-table="exceptions"><colgroup><col><col></colgroup>
+<thead>
+<tr>
+<th>Trigger</th>
+<th>Exception message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sDSN</code> is not empty and does not name a configured database connection.</td>
+<td><code>The provider name: &lt;sDSN&gt; not found.</code></td>
 </tr>
 </tbody>
 </table>
@@ -4298,7 +4335,7 @@
 <div class="admonition success">
 <p class="admonition-title">Do</p>
 <ul>
-<li>Use the DSN that matches the database where the SQL will run.</li>
+<li>Pass the name of the connection where the SQL will run, such as <code>"DATABASE"</code> for the default connection.</li>
 <li>Call the function twice when you need separate opening and closing delimiters.</li>
 <li>Handle the empty-string result explicitly when the DSN may point to an unsupported platform.</li>
 <li>Use <a href="../AddNameDelimiters/"><code>AddNameDelimiters</code></a> or <a href="../AddColDelimiters/"><code>AddColDelimiters</code></a> when those higher-level helpers already fit your task.</li>
@@ -4310,6 +4347,7 @@
 <li>Hardcode <code>[</code> <code>]</code> or <code>"</code> when the same logic may run against more than one database platform.</li>
 <li>Ignore <code>bOpen</code>. It matters for SQL Server and Sybase, where opening and closing delimiters are different.</li>
 <li>Assume every DSN produces a delimiter. Unsupported mappings return an empty string.</li>
+<li>Pass a connection name that is not configured in your environment. That raises <code>The provider name: &lt;sDSN&gt; not found.</code></li>
 <li>Use this helper when you actually need a fully wrapped identifier; reach for <a href="../AddNameDelimiters/"><code>AddNameDelimiters</code></a> instead.</li>
 </ul>
 </div>
@@ -4319,7 +4357,7 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="wrap-an-identifier-with-platform-specific-delimiters">Wrap an identifier with platform-specific delimiters<a class="headerlink" href="#wrap-an-identifier-with-platform-specific-delimiters" title="Permanent link">&para;</a></h3>
-<p>Retrieves the opening and closing delimiter characters for the given DSN and wraps a single identifier name, demonstrating the two-call pattern for platforms where the delimiters differ.</p>
+<p>Retrieves the opening and closing delimiter characters for the given DSN and wraps a single identifier name, demonstrating the two-call pattern for platforms where the delimiters differ. The usage passes the default <code>DATABASE</code> connection. Replace it with the name of the connection your SQL runs on.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildDelimitedIdentifier</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sDSN</span><span class="p">,</span><span class="w"> </span><span class="n">sName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOpen</span><span class="p">,</span><span class="w"> </span><span class="n">sClose</span><span class="p">,</span><span class="w"> </span><span class="n">sIdentifier</span><span class="p">;</span>
@@ -4332,9 +4370,9 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildDelimitedIdentifier"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LIMSDB"</span><span class="p">,</span><span class="w"> </span><span class="s2">"orders"</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildDelimitedIdentifier"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"DATABASE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"orders"</span><span class="p">});</span>
 </code></pre></div>
-<p><a href="../UsrMes/"><code>UsrMes</code></a> logs (SQL Server DSN, <code>sName</code> = <code>"orders"</code>):</p>
+<p><a href="../UsrMes/"><code>UsrMes</code></a> logs, for a SQL Server connection:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Delimited identifier: [orders]
 </code></pre></div>
 <h3 id="build-a-provider-specific-select-statement">Build a provider-specific SELECT statement<a class="headerlink" href="#build-a-provider-specific-select-statement" title="Permanent link">&para;</a></h3>
@@ -4360,7 +4398,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSelectStatement"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LIMSDB"</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSelectStatement"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"DATABASE"</span><span class="p">});</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs one of:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>No delimiter mapping is available for this DSN
@@ -4395,7 +4433,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 1, 2026 20:47:20 UTC">October 1, 2026</span>
   </span>
 
     

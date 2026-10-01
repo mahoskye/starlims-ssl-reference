@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="SSLExpando is a built-in object class for storing named values whose shape is decided at runtime.">
+        <meta name="description" content="SSLExpando is the class of dynamic objects created with CreateUdObject(), which store named values whose shape is decided at runtime.">
       
       
       
@@ -1473,23 +1473,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Constructors">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sslexpando_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SSLExpando{}
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2502,23 +2485,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Constructors">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#sslexpando_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SSLExpando{}
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2790,8 +2756,8 @@
 
 
 <h1 id="sslexpando">SSLExpando<a class="headerlink" href="#sslexpando" title="Permanent link">&para;</a></h1>
-<p><code>SSLExpando</code> is a built-in object class for storing named values whose shape is decided at runtime.</p>
-<p>Use <code>SSLExpando{}</code> when you need an object that can grow as your script runs. You can add and update dynamic properties by name, check whether a property exists, list the current dynamic properties, and serialize the object to XML. <code>XmlType</code> controls the XML root element name and is always treated as an available property. Member and dynamic property names are matched case-insensitively.</p>
+<p><code>SSLExpando</code> is the class of dynamic objects created with <a href="../../functions/CreateUdObject/"><code>CreateUdObject()</code></a>, which store named values whose shape is decided at runtime.</p>
+<p>Create one with <a href="../../functions/CreateUdObject/"><code>CreateUdObject()</code></a> when you need an object that can grow as your script runs. The class name is not a constructor: <code>SSLExpando{}</code> raises the compile-time error <code>Invalid built-in class: SSLExpando</code>. You can add and update dynamic properties by name, check whether a property exists, list the current dynamic properties, and serialize the object to XML. <code>XmlType</code> controls the XML root element name and is always treated as an available property. Member and dynamic property names are matched case-insensitively.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When a script needs to assemble flexible sample, result, or request data.</li>
@@ -2799,8 +2765,12 @@
 <li>When you need XML output for a dynamic object.</li>
 </ul>
 <h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">&para;</a></h2>
-<h3 id="sslexpando_1"><code>SSLExpando{}</code><a class="headerlink" href="#sslexpando_1" title="Permanent link">&para;</a></h3>
-<p>Creates an empty <code>SSLExpando</code> instance.</p>
+<p><code>SSLExpando</code> has no constructor you can call by class name. <code>SSLExpando{}</code> raises the compile-time error <code>Invalid built-in class: SSLExpando</code>.</p>
+<p>Create instances with <a href="../../functions/CreateUdObject/"><code>CreateUdObject()</code></a>:</p>
+<ul>
+<li><code>CreateUdObject()</code> creates an empty object.</li>
+<li><code>CreateUdObject({{"prop", value}})</code> creates an object with the listed properties already set.</li>
+</ul>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2950,6 +2920,7 @@
 <div class="admonition success">
 <p class="admonition-title">Do</p>
 <ul>
+<li>Create the object with <a href="../../functions/CreateUdObject/"><code>CreateUdObject()</code></a>.</li>
 <li>Use <code>SetProperty()</code> and <code>GetProperty()</code> when the property name comes from runtime data.</li>
 <li>Set <code>XmlType</code> before serializing when another system expects a specific root element name.</li>
 <li>Call <code>IsProperty()</code> before <code>GetProperty()</code> for optional fields.</li>
@@ -2958,6 +2929,7 @@
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
+<li>Write <code>SSLExpando{}</code>. It raises the compile-time error <code>Invalid built-in class: SSLExpando</code>.</li>
 <li>Assume <code>GetProperty()</code> returns an empty value for missing fields. It raises <code>Property not found: &lt;name&gt;.</code>.</li>
 <li>Expect <code>GetPropList()</code> to include inherited object members. It only returns dynamic properties on the <code>SSLExpando</code>.</li>
 <li>Rely on <code>clone()</code> for an independent deep copy of nested arrays or objects. Only the top-level property bag is copied.</li>
@@ -2972,11 +2944,11 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="build-a-dynamic-sample-payload">Build a dynamic sample payload<a class="headerlink" href="#build-a-dynamic-sample-payload" title="Permanent link">&para;</a></h3>
-<p>Creates an <code>SSLExpando</code>, assigns <code>XmlType</code> and three dynamic properties, then reads a property with <code>GetProperty</code>, lists the dynamic property count with <code>GetPropList</code>, and serializes the object to XML with <code>Serialize</code>.</p>
+<p>Creates an <code>SSLExpando</code> with <a href="../../functions/CreateUdObject/"><code>CreateUdObject()</code></a>, assigns <code>XmlType</code> and three dynamic properties, then reads a property with <code>GetProperty</code>, lists the dynamic property count with <code>GetPropList</code>, and serializes the object to XML with <code>Serialize</code>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSamplePayload</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPayload</span><span class="p">,</span><span class="w"> </span><span class="n">aProps</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLExpando</span><span class="p">{};</span>
+<span class="w">    </span><span class="n">oPayload</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">();</span>
 <span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="n">XmlType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SampleRecord"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oPayload</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">"SampleID"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-2026-0042"</span><span class="p">);</span>
@@ -3002,7 +2974,7 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CloneRequestState</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oRequest</span><span class="p">,</span><span class="w"> </span><span class="n">oReviewCopy</span><span class="p">,</span><span class="w"> </span><span class="n">oReleaseCopy</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oRequest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLExpando</span><span class="p">{};</span>
+<span class="w">    </span><span class="n">oRequest</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateUdObject</span><span class="p">();</span>
 <span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="n">XmlType</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ReleaseRequest"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">"SampleID"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LAB-2026-0042"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">oRequest</span><span class="p">:</span><span class="nf">SetProperty</span><span class="p">(</span><span class="s2">"Decision"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Pending"</span><span class="p">);</span>
@@ -3048,7 +3020,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 30, 2026 20:20:34 UTC">September 30, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 1, 2026 20:47:20 UTC">October 1, 2026</span>
   </span>
 
     

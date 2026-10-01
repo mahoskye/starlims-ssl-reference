@@ -2947,7 +2947,7 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="read-a-field-by-name-or-index">Read a field by name or index<a class="headerlink" href="#read-a-field-by-name-or-index" title="Permanent link">&para;</a></h3>
-<p>Uses <code>GetIndex()</code> to locate the column (zero-based), adds 1 to convert to a 1-based index, then calls <code>GetField()</code> to get the field. Returns early when the column is missing (<code>GetIndex</code> returns <code>-1</code>).</p>
+<p>Uses <code>GetIndex()</code> to locate the column (zero-based), adds 1 to convert to a 1-based index, then calls <code>GetField()</code> to get the field. Returns early when the column is missing (<code>GetIndex</code> returns <code>-1</code>). <code>ShowFirstSampleStatus</code> builds a small two-row table to call it with: <a href="../../functions/GetDataSetXMLFromArray/"><code>GetDataSetXMLFromArray</code></a> produces XML with a schema, and the table's <code>FromXml()</code> method loads it.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReadStatusField</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">oRow</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nColIndex</span><span class="p">,</span><span class="w"> </span><span class="n">oField</span><span class="p">;</span>
@@ -2963,11 +2963,30 @@
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oField</span><span class="p">:</span><span class="n">Value</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
+<span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowFirstSampleStatus</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{{</span><span class="s2">"sample_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S"</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">"status"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S"</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">}};</span>
+<span class="w">    </span><span class="n">aValues</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{{</span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Logged"</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-002"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Pending"</span><span class="p">}};</span>
+<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSetXMLFromArray</span><span class="p">(</span><span class="n">aValues</span><span class="p">,</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample"</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">CDataTable</span><span class="p">{};</span>
+<span class="w">    </span><span class="n">oTable</span><span class="p">:</span><span class="nf">FromXml</span><span class="p">(</span><span class="n">sXml</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">aRows</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oTable</span><span class="p">:</span><span class="n">Rows</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sStatus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReadStatusField"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">aRows</span><span class="p">[</span><span class="mi">1</span><span class="p">]});</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"First sample status: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="p">);</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReadStatusField"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">oRow</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowFirstSampleStatus"</span><span class="p">);</span>
+</code></pre></div>
+<p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>First sample status: Logged
 </code></pre></div>
 <h3 id="create-and-populate-a-new-row">Create and populate a new row<a class="headerlink" href="#create-and-populate-a-new-row" title="Permanent link">&para;</a></h3>
-<p>Calls <code>NewRow()</code> on the table to create an empty row, assigns field values through <code>GetField():Value</code>, then adds the row to the table with <code>AddRow()</code>.</p>
+<p>Calls <code>NewRow()</code> on the table to create an empty row, assigns field values through <code>GetField():Value</code>, then adds the row to the table with <code>AddRow()</code>. <code>AddSampleToTable</code> loads an empty table that has only a schema, adds one row through <code>AddSampleRow</code>, and logs the row count.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AddSampleRow</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oRow</span><span class="p">;</span>
@@ -2981,8 +3000,25 @@
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">oRow</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
+<span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AddSampleToTable</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">aFields</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{{</span><span class="s2">"sample_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S"</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="s2">"status"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S"</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">}};</span>
+<span class="w">    </span><span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSetXMLFromArray</span><span class="p">({},</span><span class="w"> </span><span class="n">aFields</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample"</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">oTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">CDataTable</span><span class="p">{};</span>
+<span class="w">    </span><span class="n">oTable</span><span class="p">:</span><span class="nf">FromXml</span><span class="p">(</span><span class="n">sXml</span><span class="p">);</span>
+
+<span class="w">    </span><span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AddSampleRow"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Logged"</span><span class="p">});</span>
+
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Rows in table: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">oTable</span><span class="p">:</span><span class="n">RowsCount</span><span class="p">));</span>
+<span class="k">:ENDPROC</span><span class="p">;</span>
+
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AddSampleRow"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Logged"</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AddSampleToTable"</span><span class="p">);</span>
+</code></pre></div>
+<p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Rows in table: 1
 </code></pre></div>
 <h3 id="save-a-row-with-the-table-sql-helpers">Save a row with the table SQL helpers<a class="headerlink" href="#save-a-row-with-the-table-sql-helpers" title="Permanent link">&para;</a></h3>
 <p>Pairs <code>ToArrayForInsert()</code> or <code>ToArrayForUpdate()</code> with the matching SQL string from the table. Both helpers produce arrays whose column ordering matches what the table SQL methods generate, making them safe to pass directly to <a href="../../functions/RunSQL/"><code>RunSQL</code></a>. A failed statement raises, so <a href="../../keywords/CATCH/"><code>:CATCH</code></a> logs it and the procedure returns <a href="../../literals/false/"><code>.F.</code></a>.</p>
@@ -3039,7 +3075,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 16:48:52 UTC">September 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 1, 2026 20:47:20 UTC">October 1, 2026</span>
   </span>
 
     

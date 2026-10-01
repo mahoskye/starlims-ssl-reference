@@ -1344,6 +1344,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exceptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#best-practices" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3996,6 +4007,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exceptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#best-practices" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4194,7 +4216,7 @@
 <h1 id="addnamedelimiters">AddNameDelimiters<a class="headerlink" href="#addnamedelimiters" title="Permanent link">&para;</a></h1>
 <p>Wrap a name in database-specific delimiters.</p>
 <p>AddNameDelimiters returns <code>sName</code> wrapped in the identifier delimiters used by the database identified by <code>sDSN</code>. If <code>sDSN</code> is <a href="../../literals/nil/"><code>NIL</code></a>, it uses an empty string instead. If <code>sName</code> is <a href="../../literals/nil/"><code>NIL</code></a>, it also uses an empty string.</p>
-<p>Before adding delimiters, the function trims <code>sName</code>. If the DSN does not map to a supported database, the function returns the trimmed name without any delimiter characters.</p>
+<p>Before adding delimiters, the function trims <code>sName</code>. If <code>sDSN</code> is empty, the function returns the trimmed name without any delimiter characters. A non-empty <code>sDSN</code> must name a database connection configured in your environment, such as the default <code>DATABASE</code> connection. Any other name raises an error.</p>
 <p>The function always returns a string result. It does not modify its inputs.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4224,7 +4246,7 @@
 <td><a href="../../types/string/">string</a></td>
 <td>no</td>
 <td><code>""</code></td>
-<td>Data source name used to determine delimiter rules. Unsupported or empty values produce no delimiter characters.</td>
+<td>Name of the database connection whose delimiter rules apply, such as <code>"DATABASE"</code>. An empty value produces no delimiter characters. A name that is not a configured connection raises an error.</td>
 </tr>
 <tr>
 <td><code>sName</code></td>
@@ -4237,12 +4259,27 @@
 </table>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
 <p><strong><a href="../../types/string/">string</a></strong> — Trimmed and delimited version of <code>sName</code>.</p>
+<h2 id="exceptions">Exceptions<a class="headerlink" href="#exceptions" title="Permanent link">&para;</a></h2>
+<table data-ssl-table="exceptions"><colgroup><col><col></colgroup>
+<thead>
+<tr>
+<th>Trigger</th>
+<th>Exception message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sDSN</code> is not empty and does not name a configured database connection.</td>
+<td><code>The provider name: &lt;sDSN&gt; not found.</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <div class="admonition success">
 <p class="admonition-title">Do</p>
 <ul>
 <li>Use AddNameDelimiters for individual table, view, or column names.</li>
-<li>Pass the DSN that matches the database where the SQL will run.</li>
+<li>Pass the name of the connection where the SQL will run, such as <code>"DATABASE"</code> for the default connection.</li>
 <li>Use this together with <a href="../AddColDelimiters/"><code>AddColDelimiters</code></a> when you need both individual identifiers and qualified column arrays.</li>
 <li>Pass the raw identifier value and let the function trim outer spaces before adding delimiters.</li>
 </ul>
@@ -4253,17 +4290,17 @@
 <li>Assume the same delimiter characters work for every database.</li>
 <li>Expect this function to modify a variable in place. It returns a new string.</li>
 <li>Pass <a href="../../literals/nil/"><code>NIL</code></a> and expect an error. The function falls back to empty strings for missing arguments.</li>
-<li>Assume an unknown DSN will still quote the identifier. In that case the function returns the trimmed name unchanged.</li>
+<li>Pass a connection name that is not configured in your environment. That raises <code>The provider name: &lt;sDSN&gt; not found.</code></li>
 </ul>
 </div>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="build-a-sql-fragment-with-delimited-identifiers">Build a SQL fragment with delimited identifiers<a class="headerlink" href="#build-a-sql-fragment-with-delimited-identifiers" title="Permanent link">&para;</a></h3>
-<p>Calls <code>AddNameDelimiters</code> twice, once for the table name and once for the column, then joins the results into a SELECT statement. The exact delimiters depend on the DBMS type for the given DSN.</p>
+<p>Calls <code>AddNameDelimiters</code> twice, once for the table name and once for the column, then joins the results into a SELECT statement. The example uses the default <code>DATABASE</code> connection. Replace it with the name of the connection your SQL runs on. The exact delimiters depend on that connection's database type.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSelectStatement</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sColumnName</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">AddNameDelimiters</span><span class="p">(</span><span class="s2">"LIMS"</span><span class="p">,</span><span class="w"> </span><span class="s2">"samples"</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sColumnName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">AddNameDelimiters</span><span class="p">(</span><span class="s2">"LIMS"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample_id"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">AddNameDelimiters</span><span class="p">(</span><span class="s2">"DATABASE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"samples"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sColumnName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">AddNameDelimiters</span><span class="p">(</span><span class="s2">"DATABASE"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample_id"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SELECT "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sColumnName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" FROM "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTableName</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sSQL</span><span class="p">);</span>
@@ -4272,7 +4309,7 @@
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSelectStatement"</span><span class="p">);</span>
 </code></pre></div>
-<p><a href="../UsrMes/"><code>UsrMes</code></a> logs (SQL Server example):</p>
+<p><a href="../UsrMes/"><code>UsrMes</code></a> logs, for a SQL Server connection:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>SELECT [sample_id] FROM [samples]
 </code></pre></div>
 <h3 id="handle-omitted-values-safely">Handle omitted values safely<a class="headerlink" href="#handle-omitted-values-safely" title="Permanent link">&para;</a></h3>
@@ -4319,7 +4356,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 1, 2026 20:47:20 UTC">October 1, 2026</span>
   </span>
 
     
