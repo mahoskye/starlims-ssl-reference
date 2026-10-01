@@ -99,7 +99,7 @@ Validate and parse a batch of imported date strings against the live global form
 	:FOR nIndex := 1 :TO ALen(aRawData);
 		sDateCol := aRawData[nIndex, 3];
 
-		bValid := ValidateDate(sDateCol, sDateFormat);
+		bValid := ValidateDate(sDateCol);
 		:IF bValid;
 			dParsed := StringToDate(sDateCol, sDateFormat);
 			AAdd(aParsedDates, dParsed);

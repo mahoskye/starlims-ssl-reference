@@ -186,7 +186,37 @@ DoProc("BuildImportTemplateXml");
 
 ```text
 <?xml version="1.0" standalone="yes" ?>
-<DataSet><xs:schema id="DataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"><xs:element name="DataSet" msdata:IsDataSet="true"><xs:complexType><xs:choice minOccurs="0" maxOccurs="unbounded"><xs:element name="sample_import"><xs:complexType><xs:sequence><xs:element name="sample_id" type="xs:string" minOccurs="0"/><xs:element name="status" type="xs:string" minOccurs="0"/><xs:element name="received_date" type="xs:dateTime" minOccurs="0"/></xs:sequence></xs:complexType></xs:element></xs:choice></xs:complexType></xs:element></xs:schema></DataSet>
+<DataSet>
+  <xs:schema id="DataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="DataSet" msdata:IsDataSet="true" msdata:MainDataTable="sample_import" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="sample_import">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="sample_id" minOccurs="0">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:maxLength value="20" />
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+                <xs:element name="status" minOccurs="0">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                      <xs:maxLength value="12" />
+                    </xs:restriction>
+                  </xs:simpleType>
+                </xs:element>
+                <xs:element name="received_date" msdata:DateTimeMode="Local" type="xs:dateTime" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+</DataSet>
 ```
 
 ## Related

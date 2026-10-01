@@ -113,7 +113,11 @@ DoProc("ShowSerializedObject");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-<serialized XML representation of oRecord>
+<?xml version="1.0"?>
+<SSLExpando xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<SampleID xsi:type="string">S-1001</SampleID>
+	<Status xsi:type="string">Logged</Status>
+</SSLExpando>
 ```
 
 ### Dispatch between methods with different argument counts

@@ -74,7 +74,7 @@ DoProc("ShowCurrentUser");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Current user: jsmith
+Current user: <user>
 ```
 
 ### Require a current user before continuing

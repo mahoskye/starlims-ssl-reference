@@ -77,7 +77,7 @@ DoProc("BuildHeaderTemplate");
 
 ```text
 Laboratory report
-Prepared for: jsmith
+Prepared for: <user>
 ```
 
 ## Related
