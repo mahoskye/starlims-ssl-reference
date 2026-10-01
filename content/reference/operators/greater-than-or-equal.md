@@ -130,11 +130,13 @@ DoProc("FilterActivityLogs");
 `UsrMes` logs one line per matching log, then the total:
 
 ```text
-Included log 2 dated 01/15/2024
-Included log 3 dated 01/20/2024
-Included log 4 dated 02/01/2024
+Included log 2 dated 1/15/2024
+Included log 3 dated 1/20/2024
+Included log 4 dated 2/1/2024
 Matching logs: 3
 ```
+
+Dates print in the session date format (see [`DateFormat`](../functions/DateFormat.md)).
 
 ### Routing batch IDs from a lexical boundary
 

@@ -156,8 +156,8 @@ DoProc("DemonstrateIteration");
 [`UsrMes`](../functions/UsrMes.md) logs twice:
 
 ```text
-Square root of 50 = 7.07...
-Square root of 150 = 12.25...
+Square root of 50 = 7.07106792898442
+Square root of 150 = 12.2474487308713
 ```
 
 ### Nested loops with conditional exit

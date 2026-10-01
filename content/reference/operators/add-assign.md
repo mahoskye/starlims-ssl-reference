@@ -176,11 +176,13 @@ DoProc("ScheduleFollowUps");
 [`UsrMes`](../functions/UsrMes.md) logs (one line per iteration):
 
 ```text
-Follow-up #1: 01/22/2024
-Follow-up #2: 01/29/2024
-Follow-up #3: 02/05/2024
-Follow-up #4: 02/12/2024
+Follow-up #1: 1/22/2024
+Follow-up #2: 1/29/2024
+Follow-up #3: 2/5/2024
+Follow-up #4: 2/12/2024
 ```
+
+Dates print in the session date format (see [`DateFormat`](../functions/DateFormat.md)).
 
 ## Related elements
 

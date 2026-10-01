@@ -127,7 +127,7 @@ DoProc("BuildLoginNotice");
 [`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
-User jsmith signed in on 04/23/2026
+User <user> signed in on <date>
 ```
 
 ### Choose between multiple stored templates

@@ -125,8 +125,10 @@ DoProc("CheckDeadline");
 [`InfoMes`](../functions/InfoMes.md) logs:
 
 ```text
-The item is overdue. Deadline: 04/15/2026
+The item is overdue. Deadline: 4/15/2026
 ```
+
+Dates print in the session date format (see [`DateFormat`](../functions/DateFormat.md)).
 
 ### Comparing string keys
 
