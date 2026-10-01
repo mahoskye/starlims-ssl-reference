@@ -147,7 +147,7 @@ DoProc("BuildImportRow");
 [`UsrMes`](UsrMes.md) logs (username varies by session):
 
 ```text
-LAB-0105 reviewed by jsmith (3 replicates)
+LAB-0105 reviewed by <user> (3 replicates)
 ```
 
 ### Instantiate a user-defined class with constructor arguments
