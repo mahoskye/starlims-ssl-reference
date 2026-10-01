@@ -3692,11 +3692,12 @@
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
+<li>Invalid Base64 input raises <code>Exception has been thrown by the target of an invocation.</code>, whose underlying error is <code>Invalid length for a Base-64 char array or string.</code> Catch it with <a href="../../keywords/TRY/"><code>:TRY</code></a> when the values come from outside the script.</li>
 <li><code>VerifySignature</code> verifies the signature with the certificate's public key by using a SHA-1 digest of the UTF-8 bytes of <code>sData</code>.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="verify-a-signed-payload">Verify a signed payload<a class="headerlink" href="#verify-a-signed-payload" title="Permanent link">&para;</a></h3>
-<p>Check whether a payload signature is valid and branch on the boolean result. The function returns <a href="../../literals/true/"><code>.T.</code></a> only when the signature passes; a mismatch returns <a href="../../literals/false/"><code>.F.</code></a> without raising an error.</p>
+<p>Check whether a payload signature is valid and branch on the boolean result. The function returns <a href="../../literals/true/"><code>.T.</code></a> only when the signature passes; a mismatch returns <a href="../../literals/false/"><code>.F.</code></a> without raising an error. The certificate and signature values are placeholders: replace them with a real Base64 DER certificate and a Base64 signature made with its private key. As written they are not valid Base64, so the call raises.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">VerifySignedPayload</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCertificate</span><span class="p">,</span><span class="w"> </span><span class="n">sPayload</span><span class="p">,</span><span class="w"> </span><span class="n">sSignature</span><span class="p">,</span><span class="w"> </span><span class="n">bIsValid</span><span class="p">;</span>
 
@@ -3822,7 +3823,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 1, 2026 21:13:56 UTC">October 1, 2026</span>
   </span>
 
     

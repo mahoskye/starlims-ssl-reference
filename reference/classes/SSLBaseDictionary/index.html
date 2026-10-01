@@ -1525,10 +1525,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#call-dictionary-methods-dynamically-with-invoke" class="md-nav__link">
+  <a href="#call-dictionary-methods-dynamically-with-invokemethod" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Call dictionary methods dynamically with Invoke
+        Call dictionary methods dynamically with InvokeMethod
       
     </span>
   </a>
@@ -2660,10 +2660,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#call-dictionary-methods-dynamically-with-invoke" class="md-nav__link">
+  <a href="#call-dictionary-methods-dynamically-with-invokemethod" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Call dictionary methods dynamically with Invoke
+        Call dictionary methods dynamically with InvokeMethod
       
     </span>
   </a>
@@ -2779,7 +2779,7 @@
 
 <h1 id="sslbasedictionary">SSLBaseDictionary<a class="headerlink" href="#sslbasedictionary" title="Permanent link">&para;</a></h1>
 <p>Provides the shared dictionary surface used by SSL dictionary classes such as <a href="../SSLStringDictionary/"><code>SSLStringDictionary{}</code></a> and <a href="../SSLIntDictionary/"><code>SSLIntDictionary{}</code></a>.</p>
-<p><code>SSLBaseDictionary</code> defines the members shared by SSL dictionary objects: <code>Count</code>, <code>Keys</code>, <code>Values</code>, <code>Clear</code>, <code>AddValue</code>, <code>GetValue</code>, <code>Contains</code>, <code>Remove</code>, <code>TryGetValue</code>, and <code>Invoke</code>. You do not create <code>SSLBaseDictionary{}</code> directly. Instead, create a concrete dictionary class that matches your key type and use these inherited members on that instance.</p>
+<p><code>SSLBaseDictionary</code> defines the members shared by SSL dictionary objects: <code>Count</code>, <code>Keys</code>, <code>Values</code>, <code>Clear</code>, <code>AddValue</code>, <code>GetValue</code>, <code>Contains</code>, <code>Remove</code>, <code>TryGetValue</code>, and <code>Invoke</code> (which raises; see below). You do not create <code>SSLBaseDictionary{}</code> directly. Instead, create a concrete dictionary class that matches your key type and use these inherited members on that instance.</p>
 <p>The shared behavior is small and consistent. <code>Count</code> returns the current number of entries. <code>Keys</code> and <code>Values</code> return arrays built from the dictionary's current contents. <code>Clear()</code> removes all entries and returns <a href="../../literals/true/"><code>.T.</code></a>.</p>
 <p>Key validation depends on the concrete dictionary class. That difference matters because the methods do not all react the same way to an invalid key:</p>
 <ul>
@@ -2954,35 +2954,8 @@
 <p><strong>Raises:</strong>
 - <strong>When the key is not valid for the concrete dictionary class:</strong> raises an error.</p>
 <h3 id="invoke"><code>Invoke</code><a class="headerlink" href="#invoke" title="Permanent link">&para;</a></h3>
-<p>Invokes a dictionary method by name.</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>sMethodName</code></td>
-<td><a href="../../types/string/">string</a></td>
-<td>yes</td>
-<td>Method name such as <code>AddValue</code>, <code>GetValue</code>, <code>Contains</code>, <code>Remove</code>, <code>TryGetValue</code>, or <code>Clear</code></td>
-</tr>
-<tr>
-<td><code>vArg1</code>, <code>vArg2</code>, ...</td>
-<td>any</td>
-<td>no</td>
-<td>Arguments to pass to the named method</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Returns:</strong> any — Result of the invoked method.</p>
-<p><strong>Raises:</strong>
-- <strong>When a required method argument is missing:</strong> The method: <code>&lt;name&gt;</code> requires at least one parameter</p>
-<p><code>Invoke</code> matches these method names without case sensitivity.</p>
+<p><code>Invoke</code> is meant to call a dictionary method by name, but it raises in every form tested on STARLIMS v11: <code>Invoke("Clear")</code>, <code>Invoke("AddValue", 1001, "Queued")</code> and <code>Invoke("AddValue", {1001, "Queued"})</code> all raise <code>Exception has been thrown by the target of an invocation.</code> (the underlying error is <code>Object reference not set to an instance of an object.</code>).</p>
+<p>Call the method directly, such as <code>oDict:AddValue(1001, "Queued")</code>. When the method name is only known at run time, use <code>InvokeMethod(sMethodName, aArgs)</code>, which passes the arguments as one array: <code>oDict:InvokeMethod("AddValue", {1001, "Queued"})</code> returns <a href="../../literals/true/"><code>.T.</code></a>.</p>
 <h2 id="inheritance">Inheritance<a class="headerlink" href="#inheritance" title="Permanent link">&para;</a></h2>
 <p><strong>Base class:</strong> <a href="../../types/object/"><code>object</code></a></p>
 <p>Concrete classes that inherit from <code>SSLBaseDictionary</code> include:</p>
@@ -3013,7 +2986,7 @@
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>Invoke("Clear")</code> works without arguments, but methods such as <code>AddValue</code>, <code>GetValue</code>, <code>Contains</code>, <code>Remove</code>, and <code>TryGetValue</code> raise an error when called through <code>Invoke</code> without the required key argument.</li>
+<li><code>Invoke</code> raises in every form, with or without arguments. Call methods directly, or use <code>InvokeMethod(sMethodName, aArgs)</code> to choose the method at run time.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="use-shared-dictionary-members-on-a-concrete-dictionary">Use shared dictionary members on a concrete dictionary<a class="headerlink" href="#use-shared-dictionary-members-on-a-concrete-dictionary" title="Permanent link">&para;</a></h3>
@@ -3051,21 +3024,21 @@
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DictionaryBaseMembers"</span><span class="p">);</span>
 </code></pre></div>
-<h3 id="call-dictionary-methods-dynamically-with-invoke">Call dictionary methods dynamically with Invoke<a class="headerlink" href="#call-dictionary-methods-dynamically-with-invoke" title="Permanent link">&para;</a></h3>
-<p>Uses <code>Invoke</code> to call <code>AddValue</code>, <code>Contains</code>, and <code>GetValue</code> by name on an <a href="../SSLIntDictionary/"><code>SSLIntDictionary</code></a>. This pattern is useful when the method to call is determined at runtime.</p>
+<h3 id="call-dictionary-methods-dynamically-with-invokemethod">Call dictionary methods dynamically with InvokeMethod<a class="headerlink" href="#call-dictionary-methods-dynamically-with-invokemethod" title="Permanent link">&para;</a></h3>
+<p>Uses <code>InvokeMethod</code> to call <code>AddValue</code>, <code>Contains</code>, and <code>GetValue</code> by name on an <a href="../SSLIntDictionary/"><code>SSLIntDictionary</code></a>, passing each method's arguments as one array. <code>Invoke</code> cannot be used for this; see <a href="#invoke"><code>Invoke</code></a>. This pattern is useful when the method to call is determined at runtime.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DictionaryInvokeExample</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oDict</span><span class="p">,</span><span class="w"> </span><span class="n">vResult</span><span class="p">,</span><span class="w"> </span><span class="n">sMethod</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oDict</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">SSLIntDictionary</span><span class="p">{};</span>
 
 <span class="w">    </span><span class="n">sMethod</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"AddValue"</span><span class="p">;</span>
-<span class="w">    </span><span class="n">vResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oDict</span><span class="p">:</span><span class="nf">Invoke</span><span class="p">(</span><span class="n">sMethod</span><span class="p">,</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w"> </span><span class="s2">"Queued"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">vResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oDict</span><span class="p">:</span><span class="nf">InvokeMethod</span><span class="p">(</span><span class="n">sMethod</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">1001</span><span class="p">,</span><span class="w"> </span><span class="s2">"Queued"</span><span class="p">});</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"AddValue success: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">vResult</span><span class="p">));</span>
 
-<span class="w">    </span><span class="n">vResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oDict</span><span class="p">:</span><span class="nf">Invoke</span><span class="p">(</span><span class="s2">"Contains"</span><span class="p">,</span><span class="w"> </span><span class="mi">1001</span><span class="p">);</span>
+<span class="w">    </span><span class="n">vResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oDict</span><span class="p">:</span><span class="nf">InvokeMethod</span><span class="p">(</span><span class="s2">"Contains"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">1001</span><span class="p">});</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Contains 1001: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">vResult</span><span class="p">));</span>
 
-<span class="w">    </span><span class="n">vResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oDict</span><span class="p">:</span><span class="nf">Invoke</span><span class="p">(</span><span class="s2">"GetValue"</span><span class="p">,</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w"> </span><span class="s2">"Missing"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">vResult</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oDict</span><span class="p">:</span><span class="nf">InvokeMethod</span><span class="p">(</span><span class="s2">"GetValue"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">1001</span><span class="p">,</span><span class="w"> </span><span class="s2">"Missing"</span><span class="p">});</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Value 1001: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">vResult</span><span class="p">));</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
@@ -3101,7 +3074,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 30, 2026 23:34:03 UTC">April 30, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 1, 2026 21:13:56 UTC">October 1, 2026</span>
   </span>
 
     
