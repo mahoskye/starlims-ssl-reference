@@ -14,6 +14,7 @@ so CI can stop them from drifting again:
    ``/*`` or lone ``;`` lines, so multi-line and prose variants are caught.
 4. A file's ```ssl fences indent consistently — tabs or spaces, not both.
 5. Reference-page frontmatter carries no vestigial ``category:``/``tags:``.
+6. No link whose text was turned into a placeholder, such as ``<date>(../types/date.md)``.
 
 Run from the repository root:
 
@@ -38,6 +39,7 @@ CANON_TRAILER = re.compile(r"^/\* Usage(?:: [^;\n]+)?;\n")
 TRAILER_CALL = re.compile(r"\b(?:DoProc|ExecFunction)\(")
 TRAILER_JUNK = re.compile(r"^\s*;\s*$|^\s*/\*\s*$", re.M)
 DANGLING_ASSIGN = re.compile(r":=[ \t]*$")
+BROKEN_LINK = re.compile(r"<[A-Za-z][\w ]*>\((?:\.\./|\./)?[\w./-]+\.md(?:#[\w-]+)?\)")
 
 
 def ssl_blocks(text: str) -> list[str]:
@@ -108,6 +110,10 @@ def main() -> int:
             fm = re.match(r"^---\n(.*?)\n---\n", text, re.S)
             if fm and re.search(r"^(category|tags):", fm.group(1), re.M):
                 problems.append(f"{rel}: vestigial 'category:'/'tags:' frontmatter")
+
+        # 6. placeholder-mangled links
+        for m in BROKEN_LINK.finditer(text):
+            problems.append(f"{rel}: link text replaced by a placeholder: {m.group(0)!r}")
 
     if problems:
         print(f"{len(problems)} content lint problem(s):")

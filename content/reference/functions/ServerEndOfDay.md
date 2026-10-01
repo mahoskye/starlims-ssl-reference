@@ -149,11 +149,11 @@ DoProc("CompareDayCutoffs", {DateFromNumbers(2026, 4, 15)});
 `UsrMes` logs one of:
 
 ```text
-Server end: [date], Client end: [date] (same cutoff)
+Server end: <date>, Client end: <date> (same cutoff)
 ```
 
 ```text
-Server end: [date], Client end: [date] (different cutoff)
+Server end: <date>, Client end: <date> (different cutoff)
 ```
 
 ## Related

@@ -152,7 +152,7 @@ Client end: <date>, Server end: <date> (same cutoff)
 ```
 
 ```text
-Client end: [date], Server end: [date] (different cutoff)
+Client end: <date>, Server end: <date> (different cutoff)
 ```
 
 ## Related

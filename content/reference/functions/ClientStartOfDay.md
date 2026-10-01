@@ -154,7 +154,7 @@ Client start: <date>, Server start: <date> (same day boundary)
 ```
 
 ```text
-Client start: [date], Server start: [date] (different day boundary)
+Client start: <date>, Server start: <date> (different day boundary)
 ```
 
 ## Related
