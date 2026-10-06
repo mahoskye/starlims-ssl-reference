@@ -4086,7 +4086,7 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowDatabaseType</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDBMSName</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sDBMSName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDBMSName</span><span class="p">(</span><span class="s2">"LIMSDB"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sDBMSName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDBMSName</span><span class="p">(</span><span class="s2">"DATABASE"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"DBMS: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDBMSName</span><span class="p">);</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -4098,36 +4098,39 @@
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>DBMS: SQL
 </code></pre></div>
 <h3 id="branch-sql-logic-by-database-platform">Branch SQL logic by database platform<a class="headerlink" href="#branch-sql-logic-by-database-platform" title="Permanent link">&para;</a></h3>
-<p>Reads the DBMS name for a given connection and selects the appropriate SQL syntax for row limiting and current-date expressions.</p>
+<p>Reads the DBMS name for a given connection and selects the appropriate SQL syntax for row limiting and current-date expressions. SQL Server limits rows with <code>TOP</code> after <code>SELECT</code>, while Oracle filters on <code>ROWNUM</code> in the <code>WHERE</code> clause.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildQueryByDBMS</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sConnectionName</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDBMSName</span><span class="p">,</span><span class="w"> </span><span class="n">sLimitClause</span><span class="p">,</span><span class="w"> </span><span class="n">sDateFunction</span><span class="p">,</span><span class="w"> </span><span class="n">sQuery</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDBMSName</span><span class="p">,</span><span class="w"> </span><span class="n">sTopClause</span><span class="p">,</span><span class="w"> </span><span class="n">sRowFilter</span><span class="p">,</span><span class="w"> </span><span class="n">sDateFunction</span><span class="p">,</span><span class="w"> </span><span class="n">sQuery</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sDBMSName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDBMSName</span><span class="p">(</span><span class="n">sConnectionName</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:BEGINCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sDBMSName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"SQL"</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sLimitClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"TOP 10"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sTopClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"TOP 10 "</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sRowFilter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sDateFunction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"GETDATE()"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CASE</span><span class="w"> </span><span class="n">sDBMSName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"ORACLE"</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sLimitClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"ROWNUM &lt;= 10"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sTopClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sRowFilter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">" AND ROWNUM &lt;= 10"</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sDateFunction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SYSDATE"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:OTHERWISE</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sLimitClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"1 = 1"</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sTopClause</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sRowFilter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sDateFunction</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"CURRENT_DATE"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:EXITCASE</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDCASE</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sQuery</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SELECT sample_id FROM samples WHERE "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLimitClause</span>
-<span class="w">              </span><span class="o">+</span><span class="w"> </span><span class="s2">" AND created_date &gt; "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDateFunction</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sQuery</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SELECT "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTopClause</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"sample_id FROM samples"</span>
+<span class="w">              </span><span class="o">+</span><span class="w"> </span><span class="s2">" WHERE created_date &lt; "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sDateFunction</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sRowFilter</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sQuery</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildQueryByDBMS"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"REPORTING"</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildQueryByDBMS"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"DATABASE"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="audit-all-configured-connections-for-their-platform">Audit all configured connections for their platform<a class="headerlink" href="#audit-all-configured-connections-for-their-platform" title="Permanent link">&para;</a></h3>
 <p>Iterates every connection returned by <a href="../GetConnectionStrings/"><code>GetConnectionStrings</code></a>, calls <code>GetDBMSName</code> for each, and reports the platform or an error message when a connection cannot be resolved.</p>
@@ -4182,7 +4185,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 6, 2026 20:19:49 UTC">October 6, 2026</span>
   </span>
 
     

@@ -4313,7 +4313,7 @@
 <li>Pass only additional insert columns in <code>aFields</code>; <code>sFieldName</code> is inserted automatically.</li>
 <li>Keep <code>aFields</code> and <code>aValues</code> aligned by position and length.</li>
 <li>Check for a <code>0</code> return when the counter cannot be generated.</li>
-<li>Make sure the counter for the table, field, and prefix has been set up before relying on it for unique keys.</li>
+<li>Expect the first call for a new table, field, and prefix to return <code>1</code>, and make sure that key is free in <code>sTableName</code>.</li>
 <li>Wrap calls in <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> when the inputs or database state may be unreliable.</li>
 </ul>
 </div>
@@ -4322,7 +4322,7 @@
 <ul>
 <li>Put <code>sFieldName</code> in <code>aFields</code>; that produces a duplicate insert column.</li>
 <li>Use <code>LimsSetCounter</code> just to read the next number. It also inserts a row into <code>sTableName</code>, even when <code>aFields</code> and <code>aValues</code> are omitted.</li>
-<li>Assume the first call creates the counter. Without an existing counter, every call returns <code>1</code>.</li>
+<li>Drop or reset the counter's database sequence while rows that used its keys still exist; the next call starts again at <code>1</code>.</li>
 <li>Assume empty strings are treated the same as <a href="../../literals/nil/"><code>NIL</code></a>; only <a href="../../literals/nil/"><code>NIL</code></a> table or field arguments short-circuit to <code>0</code> before work starts.</li>
 <li>Assume mismatched arrays will still insert a partial row; the function skips the insert when the array lengths differ.</li>
 <li>Assume an insert failure always means the generated number can be reused; some environments may still consume the next counter value.</li>
@@ -4330,7 +4330,7 @@
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li>When no counter exists yet for the table, field, and prefix, <code>LimsSetCounter</code> returns <code>1</code> but does not create the counter, so repeated calls keep returning <code>1</code> (and inserting rows with the same key). Once the counter exists, each call advances it.</li>
+<li>On SQL Server, the counter is a database sequence named <code>C_&lt;table&gt;_&lt;field&gt;</code>, with <code>_&lt;prefix&gt;</code> added when <code>sPrefix</code> is supplied. This is the same name the <a href="../../classes/Sequence/"><code>Sequence</code></a> class uses. In observed runtime behavior, the first call creates the sequence and returns <code>1</code>, and each later call advances it.</li>
 <li>If <code>aFields</code> and <code>aValues</code> have different lengths, the counter value is still generated, but the row insert is skipped.</li>
 <li><code>nIncrementWith</code> affects how far the stored counter advances, but the returned numeric value is still the first value from that reserved range.</li>
 <li>Insert-failure handling is not identical in every deployment. Do not assume the generated number was rolled back unless you have verified that behavior in your environment.</li>
@@ -4454,7 +4454,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 6, 2026 19:37:51 UTC">October 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 6, 2026 20:21:58 UTC">October 6, 2026</span>
   </span>
 
     
