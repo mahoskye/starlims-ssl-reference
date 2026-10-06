@@ -1203,10 +1203,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#use-nil-to-distinguish-a-missing-date-from-a-real-one" class="md-nav__link">
+  <a href="#detect-a-missing-date-with-empty" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Use NIL to distinguish a missing date from a real one
+        Detect a missing date with Empty
       
     </span>
   </a>
@@ -3872,10 +3872,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#use-nil-to-distinguish-a-missing-date-from-a-real-one" class="md-nav__link">
+  <a href="#detect-a-missing-date-with-empty" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Use NIL to distinguish a missing date from a real one
+        Detect a missing date with Empty
       
     </span>
   </a>
@@ -4035,7 +4035,7 @@
 
 <h1 id="lsearch">LSearch<a class="headerlink" href="#lsearch" title="Permanent link">&para;</a></h1>
 <p>Returns a single value from a SQL query, or a caller-supplied fallback when the query produces no scalar result.</p>
-<p><code>LSearch</code> executes a parameterized SQL statement and returns the first scalar value produced by the query. Use it when you need one value, not a result set. If the query returns no row, or the scalar value is database <code>NULL</code>, the function returns <code>vDefaultValue</code> instead. <code>LSearch</code> uses positional <code>?</code> placeholders with <code>aArrayOfValues</code>; unlike <a href="../SQLExecute/"><code>SQLExecute</code></a>, it does not support <code>?varName?</code> substitution.</p>
+<p><code>LSearch</code> executes a parameterized SQL statement and returns the first scalar value produced by the query. Use it when you need one value, not a result set. If the query returns no row, or the scalar value is database <code>NULL</code>, the function returns <code>vDefaultValue</code> instead. One exception in observed runtime behavior: when <code>vDefaultValue</code> is <a href="../../literals/nil/"><code>NIL</code></a> and no row matches, the function returns an empty string, not <a href="../../literals/nil/"><code>NIL</code></a>. <code>LSearch</code> uses positional <code>?</code> placeholders with <code>aArrayOfValues</code>; unlike <a href="../SQLExecute/"><code>SQLExecute</code></a>, it does not support <code>?varName?</code> substitution.</p>
 <p>When the database returns a date/time value, SSL surfaces it as a <code>DATE</code>. Other results are returned in their native scalar form.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4071,7 +4071,7 @@
 <td>any</td>
 <td>yes</td>
 <td>—</td>
-<td>Value returned when the query returns no row or the scalar result is database <code>NULL</code>.</td>
+<td>Value returned when the query returns no row or the scalar result is database <code>NULL</code>. A <a href="../../literals/nil/"><code>NIL</code></a> default comes back as an empty string when no row matches.</td>
 </tr>
 <tr>
 <td><code>sConnectionName</code></td>
@@ -4096,7 +4096,7 @@
 <li><strong>string / number / logic</strong> — Returned as the database value for the first scalar column.</li>
 <li><strong><a href="../../types/date/">date</a></strong> — Returned when the database value is a date/time value.</li>
 <li><strong>other values</strong> — Surfaced as returned by the query when the scalar value is not one of the common primitive cases above.</li>
-<li><strong><code>vDefaultValue</code></strong> — Returned when the query finds no row or the scalar value is database <code>NULL</code>.</li>
+<li><strong><code>vDefaultValue</code></strong> — Returned when the query finds no row or the scalar value is database <code>NULL</code>. When <code>vDefaultValue</code> is <a href="../../literals/nil/"><code>NIL</code></a> and no row matches, an empty string is returned instead.</li>
 </ul>
 <h2 id="exceptions">Exceptions<a class="headerlink" href="#exceptions" title="Permanent link">&para;</a></h2>
 <table data-ssl-table="exceptions"><colgroup><col><col></colgroup>
@@ -4135,7 +4135,8 @@
 <ul>
 <li>Pass an explicit fallback that matches how your script should behave when no row is found.</li>
 <li>Use positional <code>?</code> placeholders with <code>aArrayOfValues</code> instead of concatenating values into SQL text.</li>
-<li>Use <a href="../../literals/nil/"><code>NIL</code></a> as the fallback when you need to distinguish missing data from an empty string or zero.</li>
+<li>Test the result with <a href="../Empty/"><code>Empty</code></a><code>()</code> when you pass <a href="../../literals/nil/"><code>NIL</code></a> as the fallback, because a missing row comes back as an empty string.</li>
+<li>Pass a sentinel value that cannot occur in your data when you must tell a missing row apart from a real empty string or zero.</li>
 <li>Switch to <a href="../LSelect/"><code>LSelect</code></a>, <a href="../LSelect1/"><code>LSelect1</code></a>, or <a href="../LSelectC/"><code>LSelectC</code></a> when you need rows rather than one scalar value.</li>
 </ul>
 </div>
@@ -4145,12 +4146,14 @@
 <li>Use <code>?varName?</code> syntax with <code>LSearch</code>. That substitution style is for <a href="../SQLExecute/"><code>SQLExecute</code></a> only.</li>
 <li>Treat <code>LSearch</code> as a multi-row query helper. It is meant for a single scalar result.</li>
 <li>Pass a multidimensional array to <code>aArrayOfValues</code>; it raises an error before execution.</li>
-<li>Rely on an implicit fallback. Decide whether your missing-data case should return <code>""</code>, <code>0</code>, <a href="../../literals/nil/"><code>NIL</code></a>, <a href="../../literals/false/"><code>.F.</code></a>, or another explicit value.</li>
+<li>Rely on an implicit fallback. Decide whether your missing-data case should return <code>""</code>, <code>0</code>, <a href="../../literals/false/"><code>.F.</code></a>, or another explicit value.</li>
+<li>Compare the result to <a href="../../literals/nil/"><code>NIL</code></a> to detect a missing row. A <a href="../../literals/nil/"><code>NIL</code></a> fallback comes back as an empty string, so the comparison is false.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>LSearch</code> falls back only when the scalar result is missing or database <code>NULL</code>. An actual empty string from the database is returned as-is.</li>
+<li>With a <a href="../../literals/nil/"><code>NIL</code></a> fallback and no matching row, <code>LSearch</code> returns an empty string, not <a href="../../literals/nil/"><code>NIL</code></a>, in observed runtime behavior. A <code>= NIL</code> or <code>== NIL</code> check on the result is therefore false. Use <a href="../Empty/"><code>Empty</code></a><code>()</code> instead.</li>
 <li>Passing a non-array value as <code>aArrayOfValues</code> (the fourth parameter) can lock up the application — the runtime's error handling for this type mismatch is anything but graceful. Always pass an array of bind values or omit the parameter entirely.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
@@ -4191,8 +4194,8 @@
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetOpenTaskCount"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"SMP-001"</span><span class="p">});</span>
 </code></pre></div>
-<h3 id="use-nil-to-distinguish-a-missing-date-from-a-real-one">Use <a href="../../literals/nil/"><code>NIL</code></a> to distinguish a missing date from a real one<a class="headerlink" href="#use-nil-to-distinguish-a-missing-date-from-a-real-one" title="Permanent link">&para;</a></h3>
-<p>Use <a href="../../literals/nil/"><code>NIL</code></a> as the fallback so that a missing approval date is distinguishable from a genuine date value. After the query, a <a href="../../literals/nil/"><code>NIL</code></a> result means the invoice has not yet been approved.</p>
+<h3 id="detect-a-missing-date-with-empty">Detect a missing date with <a href="../Empty/"><code>Empty</code></a><a class="headerlink" href="#detect-a-missing-date-with-empty" title="Permanent link">&para;</a></h3>
+<p>Passes <a href="../../literals/nil/"><code>NIL</code></a> as the fallback and tests the result with <a href="../Empty/"><code>Empty</code></a><code>()</code>. When no approved row matches, <code>LSearch</code> returns an empty string rather than <a href="../../literals/nil/"><code>NIL</code></a>, so an empty result means the invoice has not yet been approved.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowApprovalDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sInvoiceID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dApprovalDate</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
@@ -4205,7 +4208,8 @@
 <span class="s2">              AND status = ?</span>
 <span class="s2">        "</span><span class="p">,</span><span class="w"> </span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="s2">"DATABASE"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">sInvoiceID</span><span class="p">,</span><span class="w"> </span><span class="s2">"A"</span><span class="p">});</span>
 
-<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">dApprovalDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">/* A missing row comes back as an empty string, not NIL;</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">dApprovalDate</span><span class="p">);</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Invoice "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sInvoiceID</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" has not been approved yet"</span><span class="p">);</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -4257,7 +4261,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 6, 2026 19:37:51 UTC">October 6, 2026</span>
   </span>
 
     

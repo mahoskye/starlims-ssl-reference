@@ -1617,17 +1617,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sequencesplatforma-stablename-sfieldname" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Sequence{sPlatforma, sTableName, sFieldName}
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#sequencesplatforma-stablename-sfieldname-sprefix" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2506,17 +2495,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sequencesplatforma-stablename-sfieldname" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Sequence{sPlatforma, sTableName, sFieldName}
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#sequencesplatforma-stablename-sfieldname-sprefix" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2791,7 +2769,7 @@
 
 <h1 id="sequence">Sequence<a class="headerlink" href="#sequence" title="Permanent link">&para;</a></h1>
 <p>Creates and manages a database sequence for a table field on Oracle or SQL Server.</p>
-<p><code>Sequence</code> gives SSL scripts a compact API for creating, resetting, dropping, and querying a database sequence. You construct it with a platform name, table name, field name, and an optional prefix. The object derives a sequence name from those values, uses <code>StartWith</code> when creating the sequence on both platforms, and uses <code>CacheSize</code> when creating the sequence on SQL Server.</p>
+<p><code>Sequence</code> gives SSL scripts a compact API for creating, resetting, dropping, and querying a database sequence. You construct it with a platform name, table name, field name, and a prefix, passing <code>""</code> as the prefix when you do not need one. The object derives a sequence name from those values, uses <code>StartWith</code> when creating the sequence on both platforms, and uses <code>CacheSize</code> when creating the sequence on SQL Server.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When a script needs a database sequence for a specific table field.</li>
@@ -2800,40 +2778,8 @@
 <li>When the same sequence definition must be pointed at another database with <code>SetDatabase()</code>.</li>
 </ul>
 <h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">&para;</a></h2>
-<h3 id="sequencesplatforma-stablename-sfieldname"><code>Sequence{sPlatforma, sTableName, sFieldName}</code><a class="headerlink" href="#sequencesplatforma-stablename-sfieldname" title="Permanent link">&para;</a></h3>
-<p>Creates a sequence object with an empty prefix.</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>sPlatforma</code></td>
-<td><a href="../../types/string/">string</a></td>
-<td>yes</td>
-<td>Database platform. <code>"ORACLE"</code> selects Oracle behavior. Any other value uses SQL Server behavior.</td>
-</tr>
-<tr>
-<td><code>sTableName</code></td>
-<td><a href="../../types/string/">string</a></td>
-<td>yes</td>
-<td>Table name used to derive the sequence name.</td>
-</tr>
-<tr>
-<td><code>sFieldName</code></td>
-<td><a href="../../types/string/">string</a></td>
-<td>yes</td>
-<td>Field name used to derive the sequence name.</td>
-</tr>
-</tbody>
-</table>
 <h3 id="sequencesplatforma-stablename-sfieldname-sprefix"><code>Sequence{sPlatforma, sTableName, sFieldName, sPrefix}</code><a class="headerlink" href="#sequencesplatforma-stablename-sfieldname-sprefix" title="Permanent link">&para;</a></h3>
-<p>Creates a sequence object with an additional name suffix.</p>
+<p>Creates a sequence object for a table field. All four arguments are required. The three-argument form <code>Sequence{sPlatforma, sTableName, sFieldName}</code> fails to compile with <code>invalid arguments for constructor</code>.</p>
 <table>
 <thead>
 <tr>
@@ -2865,8 +2811,8 @@
 <tr>
 <td><code>sPrefix</code></td>
 <td><a href="../../types/string/">string</a></td>
-<td>no</td>
-<td>Optional suffix added to the derived sequence name. If omitted or passed as <a href="../../literals/nil/"><code>NIL</code></a>, an empty suffix is used.</td>
+<td>yes</td>
+<td>Suffix added to the derived sequence name. Pass <code>""</code> for no suffix. With <code>""</code>, the sequence is named <code>C_&lt;TABLE&gt;_&lt;FIELD&gt;</code>, for example <code>C_SAMPLE_SAMPLE_ID</code> for table <code>sample</code> and field <code>sample_id</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -3008,6 +2954,7 @@
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
+<li>Construct <code>Sequence</code> with only three arguments. Pass <code>""</code> as the fourth argument when you do not need a suffix.</li>
 <li>Assume <code>CacheSize</code> changes Oracle behavior, because it is only used when SQL Server creates the sequence.</li>
 <li>Treat any non-<code>"ORACLE"</code> platform value as validation-safe input, because it falls back to SQL Server behavior.</li>
 <li>Use <code>Reset()</code> on Oracle when the sequence cannot be safely recreated, because Oracle does not support resetting in place and the operation resets the sequence by recreating it.</li>
@@ -3023,11 +2970,11 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="create-a-sequence-and-read-the-next-value">Create a sequence and read the next value<a class="headerlink" href="#create-a-sequence-and-read-the-next-value" title="Permanent link">&para;</a></h3>
-<p>Creates a SQL Server sequence for a sample table with a custom starting value and cache size, then reads the next value. Checks <code>Exists</code> first to avoid creating a sequence that is already present.</p>
+<p>Creates a SQL Server sequence for a sample table with a custom starting value and cache size, then reads the next value. The empty fourth argument means no suffix, so the sequence is named <code>C_SAMPLE_SAMPLE_ID</code>. Checks <code>Exists</code> first to avoid creating a sequence that is already present.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateSampleSequence</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oSeq</span><span class="p">,</span><span class="w"> </span><span class="n">nNextValue</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oSeq</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Sequence</span><span class="p">{</span><span class="s2">"SQLSERVER"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample_id"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oSeq</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Sequence</span><span class="p">{</span><span class="s2">"SQLSERVER"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">};</span>
 <span class="w">    </span><span class="n">oSeq</span><span class="p">:</span><span class="n">StartWith</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oSeq</span><span class="p">:</span><span class="n">CacheSize</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
 
@@ -3047,7 +2994,7 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SyncSampleSequence</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oSeq</span><span class="p">,</span><span class="w"> </span><span class="n">nMaxId</span><span class="p">,</span><span class="w"> </span><span class="n">nStartValue</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">oSeq</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Sequence</span><span class="p">{</span><span class="s2">"SQLSERVER"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample_id"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oSeq</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">Sequence</span><span class="p">{</span><span class="s2">"SQLSERVER"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample"</span><span class="p">,</span><span class="w"> </span><span class="s2">"sample_id"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">nMaxId</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">"</span>
 <span class="s2">        SELECT MAX(sample_id)</span>
@@ -3118,7 +3065,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 6, 2026 19:37:51 UTC">October 6, 2026</span>
   </span>
 
     

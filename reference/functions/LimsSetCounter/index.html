@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Generates the next counter value and, when given matching field and value arrays, inserts a new row with that key.">
+        <meta name="description" content="Generates the next counter value and inserts a new row with that key into the target table.">
       
       
       
@@ -4236,9 +4236,9 @@
 
 
 <h1 id="limssetcounter">LimsSetCounter<a class="headerlink" href="#limssetcounter" title="Permanent link">&para;</a></h1>
-<p>Generates the next counter value and, when given matching field and value arrays, inserts a new row with that key.</p>
-<p><code>LimsSetCounter</code> gets the next value for a counter identified by <code>sTableName</code>, <code>sFieldName</code>, and an optional <code>sPrefix</code>. It always returns the numeric counter value. When <code>aFields</code> and <code>aValues</code> are both supplied and have the same length, the function also inserts a new row into <code>sTableName</code>, using the generated key for <code>sFieldName</code> plus the additional columns from <code>aFields</code>.</p>
-<p>If <code>sPrefix</code> is supplied, the inserted value for <code>sFieldName</code> is the prefix concatenated with the generated number, while the function still returns the numeric part. If <code>sTableName</code> or <code>sFieldName</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the function returns <code>0</code> immediately.</p>
+<p>Generates the next counter value and inserts a new row with that key into the target table.</p>
+<p><code>LimsSetCounter</code> gets the next value for a counter identified by <code>sTableName</code>, <code>sFieldName</code>, and an optional <code>sPrefix</code>. It always returns the numeric counter value. The function also inserts a new row into <code>sTableName</code> with the generated key in <code>sFieldName</code>. In observed runtime behavior this insert happens even when <code>aFields</code> and <code>aValues</code> are omitted. When both arrays are supplied and have the same length, their columns are added to that row.</p>
+<p>If <code>sPrefix</code> is supplied, the inserted value for <code>sFieldName</code> is the prefix concatenated with the generated number (for example <code>PX1</code> for prefix <code>PX</code>), while the function still returns the numeric part. If <code>sTableName</code> or <code>sFieldName</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the function returns <code>0</code> immediately.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need the next numeric counter value for a table field.</li>
@@ -4265,7 +4265,7 @@
 <td><a href="../../types/string/">string</a></td>
 <td>yes</td>
 <td>—</td>
-<td>Target table name. The generated key is inserted into this table when the field and value arrays match.</td>
+<td>Target table name. The generated key is inserted into this table as a new row.</td>
 </tr>
 <tr>
 <td><code>sFieldName</code></td>
@@ -4305,7 +4305,7 @@
 </tbody>
 </table>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
-<p><strong><a href="../../types/number/">number</a></strong> — The generated numeric counter value.</p>
+<p><strong><a href="../../types/number/">number</a></strong> — The generated numeric counter value. When no counter exists yet for the table, field, and prefix, this is <code>1</code>.</p>
 <h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <div class="admonition success">
 <p class="admonition-title">Do</p>
@@ -4313,6 +4313,7 @@
 <li>Pass only additional insert columns in <code>aFields</code>; <code>sFieldName</code> is inserted automatically.</li>
 <li>Keep <code>aFields</code> and <code>aValues</code> aligned by position and length.</li>
 <li>Check for a <code>0</code> return when the counter cannot be generated.</li>
+<li>Make sure the counter for the table, field, and prefix has been set up before relying on it for unique keys.</li>
 <li>Wrap calls in <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> when the inputs or database state may be unreliable.</li>
 </ul>
 </div>
@@ -4320,6 +4321,8 @@
 <p class="admonition-title">Don't</p>
 <ul>
 <li>Put <code>sFieldName</code> in <code>aFields</code>; that produces a duplicate insert column.</li>
+<li>Use <code>LimsSetCounter</code> just to read the next number. It also inserts a row into <code>sTableName</code>, even when <code>aFields</code> and <code>aValues</code> are omitted.</li>
+<li>Assume the first call creates the counter. Without an existing counter, every call returns <code>1</code>.</li>
 <li>Assume empty strings are treated the same as <a href="../../literals/nil/"><code>NIL</code></a>; only <a href="../../literals/nil/"><code>NIL</code></a> table or field arguments short-circuit to <code>0</code> before work starts.</li>
 <li>Assume mismatched arrays will still insert a partial row; the function skips the insert when the array lengths differ.</li>
 <li>Assume an insert failure always means the generated number can be reused; some environments may still consume the next counter value.</li>
@@ -4327,6 +4330,7 @@
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
+<li>When no counter exists yet for the table, field, and prefix, <code>LimsSetCounter</code> returns <code>1</code> but does not create the counter, so repeated calls keep returning <code>1</code> (and inserting rows with the same key). Once the counter exists, each call advances it.</li>
 <li>If <code>aFields</code> and <code>aValues</code> have different lengths, the counter value is still generated, but the row insert is skipped.</li>
 <li><code>nIncrementWith</code> affects how far the stored counter advances, but the returned numeric value is still the first value from that reserved range.</li>
 <li>Insert-failure handling is not identical in every deployment. Do not assume the generated number was rolled back unless you have verified that behavior in your environment.</li>
@@ -4450,7 +4454,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 8, 2026 00:37:07 UTC">August 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 6, 2026 19:37:51 UTC">October 6, 2026</span>
   </span>
 
     
