@@ -113,10 +113,10 @@ Executes a parameterless query on the default connection using all default outpu
 DoProc("ExportActiveSamples");
 ```
 
-[`UsrMes`](UsrMes.md) logs:
+[`UsrMes`](UsrMes.md) logs the length, where `<n>` depends on the rows and columns returned:
 
 ```text
-Returned XML length: 1243
+Returned XML length: <n>
 ```
 
 ### Query a named connection with parameters and schema

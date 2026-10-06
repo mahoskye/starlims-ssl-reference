@@ -107,7 +107,7 @@ Target a named database and wrap the call in [`:TRY`](../keywords/TRY.md) / [`:C
     :PARAMETERS sOutputFile;
     :DECLARE sSql, sDb, sResult, oErr;
 
-    sDb := "LIMBDATA";
+    sDb := "DATABASE";
     sSql := "
         SELECT sample_id, sample_name, status, received_date
         FROM sample

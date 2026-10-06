@@ -78,15 +78,17 @@ Attempt a database write that references a non-existent column, then retrieve an
 		:ENDIF;
 	:ENDTRY;
 :ENDPROC;
+
+/* Usage;
+DoProc("ShowLastSqlError");
 ```
 
-`ErrorMes` logs:
+[`ErrorMes`](ErrorMes.md) logs the SQL Server message, which spans two lines:
 
 ```text
-Database update failed: <SQL error description>
+Database update failed: ExecuteNonQuery exception SQL-00207: Invalid column name 'missing_column'.
+Invalid column name 'missing_column'.
 ```
-
-Call it with `DoProc("ShowLastSqlError");`.
 
 ### Return structured SQL diagnostics from a [`:CATCH`](../keywords/CATCH.md) block
 
@@ -122,9 +124,10 @@ Build a plain object from the caught SQL error's fields so a caller can log or d
 
 	:RETURN NIL;
 :ENDPROC;
-```
 
-Call it with `DoProc("BuildSqlDiagnostic");`.
+/* Usage;
+DoProc("BuildSqlDiagnostic");
+```
 
 ## Related
 

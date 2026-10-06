@@ -70,7 +70,7 @@ Calls `GetDBMSName` with an explicit connection name and logs the result in a me
 :PROCEDURE ShowDatabaseType;
 	:DECLARE sDBMSName;
 
-	sDBMSName := GetDBMSName("LIMSDB");
+	sDBMSName := GetDBMSName("DATABASE");
 
 	UsrMes("DBMS: " + sDBMSName);
 :ENDPROC;
@@ -87,38 +87,41 @@ DBMS: SQL
 
 ### Branch SQL logic by database platform
 
-Reads the DBMS name for a given connection and selects the appropriate SQL syntax for row limiting and current-date expressions.
+Reads the DBMS name for a given connection and selects the appropriate SQL syntax for row limiting and current-date expressions. SQL Server limits rows with `TOP` after `SELECT`, while Oracle filters on `ROWNUM` in the `WHERE` clause.
 
 ```ssl
 :PROCEDURE BuildQueryByDBMS;
 	:PARAMETERS sConnectionName;
-	:DECLARE sDBMSName, sLimitClause, sDateFunction, sQuery;
+	:DECLARE sDBMSName, sTopClause, sRowFilter, sDateFunction, sQuery;
 
 	sDBMSName := GetDBMSName(sConnectionName);
 
 	:BEGINCASE;
 	:CASE sDBMSName == "SQL";
-		sLimitClause := "TOP 10";
+		sTopClause := "TOP 10 ";
+		sRowFilter := "";
 		sDateFunction := "GETDATE()";
 		:EXITCASE;
 	:CASE sDBMSName == "ORACLE";
-		sLimitClause := "ROWNUM <= 10";
+		sTopClause := "";
+		sRowFilter := " AND ROWNUM <= 10";
 		sDateFunction := "SYSDATE";
 		:EXITCASE;
 	:OTHERWISE;
-		sLimitClause := "1 = 1";
+		sTopClause := "";
+		sRowFilter := "";
 		sDateFunction := "CURRENT_DATE";
 		:EXITCASE;
 	:ENDCASE;
 
-	sQuery := "SELECT sample_id FROM samples WHERE " + sLimitClause
-			  + " AND created_date > " + sDateFunction;
+	sQuery := "SELECT " + sTopClause + "sample_id FROM samples"
+			  + " WHERE created_date < " + sDateFunction + sRowFilter;
 
 	:RETURN sQuery;
 :ENDPROC;
 
 /* Usage;
-DoProc("BuildQueryByDBMS", {"REPORTING"});
+DoProc("BuildQueryByDBMS", {"DATABASE"});
 ```
 
 ### Audit all configured connections for their platform

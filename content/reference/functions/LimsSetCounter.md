@@ -50,20 +50,20 @@ LimsSetCounter(sTableName, sFieldName, [sPrefix], [aFields], [aValues], [nIncrem
     - Pass only additional insert columns in `aFields`; `sFieldName` is inserted automatically.
     - Keep `aFields` and `aValues` aligned by position and length.
     - Check for a `0` return when the counter cannot be generated.
-    - Make sure the counter for the table, field, and prefix has been set up before relying on it for unique keys.
+    - Expect the first call for a new table, field, and prefix to return `1`, and make sure that key is free in `sTableName`.
     - Wrap calls in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) when the inputs or database state may be unreliable.
 
 !!! failure "Don't"
     - Put `sFieldName` in `aFields`; that produces a duplicate insert column.
     - Use `LimsSetCounter` just to read the next number. It also inserts a row into `sTableName`, even when `aFields` and `aValues` are omitted.
-    - Assume the first call creates the counter. Without an existing counter, every call returns `1`.
+    - Drop or reset the counter's database sequence while rows that used its keys still exist; the next call starts again at `1`.
     - Assume empty strings are treated the same as [`NIL`](../literals/nil.md); only [`NIL`](../literals/nil.md) table or field arguments short-circuit to `0` before work starts.
     - Assume mismatched arrays will still insert a partial row; the function skips the insert when the array lengths differ.
     - Assume an insert failure always means the generated number can be reused; some environments may still consume the next counter value.
 
 ## Caveats
 
-- When no counter exists yet for the table, field, and prefix, `LimsSetCounter` returns `1` but does not create the counter, so repeated calls keep returning `1` (and inserting rows with the same key). Once the counter exists, each call advances it.
+- On SQL Server, the counter is a database sequence named `C_<table>_<field>`, with `_<prefix>` added when `sPrefix` is supplied. This is the same name the [`Sequence`](../classes/Sequence.md) class uses. In observed runtime behavior, the first call creates the sequence and returns `1`, and each later call advances it.
 - If `aFields` and `aValues` have different lengths, the counter value is still generated, but the row insert is skipped.
 - `nIncrementWith` affects how far the stored counter advances, but the returned numeric value is still the first value from that reserved range.
 - Insert-failure handling is not identical in every deployment. Do not assume the generated number was rolled back unless you have verified that behavior in your environment.

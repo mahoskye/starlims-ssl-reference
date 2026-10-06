@@ -81,10 +81,17 @@ Capture and log a formatted error message after a SQL operation fails.
 DoProc("DisplaySqlErrorExample");
 ```
 
-`ErrorMes` logs:
+[`ErrorMes`](ErrorMes.md) logs the error's full description. On SQL Server it reads like this, with the statement text after `SQL stmt:`:
 
 ```text
-The formatted SQL error message returned by GetLastSQLError
+Error: Invalid object name 'nonexistenttable'.
+   In SSL runtime (use FullDescriptionEx property for more info).
+SQL error: SQL-00208: Invalid object name 'nonexistenttable'.
+SQL stmt:
+    SELECT *
+    FROM nonexistenttable
+Error: ExecuteNonQuery exception Invalid object name 'nonexistenttable'.
+   In SSL runtime (use FullDescriptionEx property for more info).
 ```
 
 ## Related
