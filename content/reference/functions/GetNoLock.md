@@ -72,7 +72,7 @@ Gets the no-lock hint for a named connection and embeds it immediately after the
 :PROCEDURE LoadLoggedSamples;
     :DECLARE sSQL, sNoLock, aSamples;
 
-    sNoLock := GetNoLock("LIMS");
+    sNoLock := GetNoLock("DATABASE");
 
     sSQL := "
         SELECT sample_id, status
@@ -124,7 +124,7 @@ Retrieves the hint once and reuses the same value after each table name in a mul
 :PROCEDURE LoadPendingResults;
     :DECLARE sConnection, sNoLock, sSQL, aRows;
 
-    sConnection := "LIMS";
+    sConnection := "DATABASE";
     sNoLock := GetNoLock(sConnection);
 
     sSQL := "

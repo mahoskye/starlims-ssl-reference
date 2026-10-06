@@ -129,7 +129,7 @@ Passes a status parameter via a `?` placeholder to a named connection, with head
 	:DEFAULT sStatus, "A";
 	:DECLARE sSql, sXml, sConnection, aValues;
 
-	sConnection := "REPORTING";
+	sConnection := "DATABASE";
 	sSql := "
 	    SELECT sample_id, sample_name, status, received_date
 	    FROM sample
@@ -157,7 +157,7 @@ Suppresses the XML header, assigns a custom table name, enables null-as-blank, a
 	:DEFAULT dStartDate, CToD("01/01/2024");
 	:DECLARE sSql, sXml, sConnection, aValues, aInvariantDateCols, oErr;
 
-	sConnection := "REPORTING";
+	sConnection := "DATABASE";
 	sSql := "
 	    SELECT sample_id, sample_name, created_date, released_date
 	    FROM sample

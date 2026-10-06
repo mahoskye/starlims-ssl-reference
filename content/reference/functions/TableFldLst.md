@@ -80,7 +80,7 @@ Call `TableFldLst` with an explicit connection name and use the returned array l
 :PROCEDURE ShowSampleFields;
     :DECLARE aFieldNames, sConnectionName, sTableName;
 
-    sConnectionName := "LAB";
+    sConnectionName := "DATABASE";
     sTableName := "sample";
 
     aFieldNames := TableFldLst(sConnectionName, sTableName);
@@ -132,7 +132,7 @@ Wrap the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md)
     :DECLARE aFieldNames, oErr;
 
     :TRY;
-        aFieldNames := TableFldLst("LAB", "audit_log");
+        aFieldNames := TableFldLst("DATABASE", "audit_log");
 
         :RETURN aFieldNames;
     :CATCH;

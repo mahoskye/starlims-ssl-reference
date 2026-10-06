@@ -98,7 +98,7 @@ Iterate over a list of connection names and report each one's availability. Pass
 :PROCEDURE CheckMultiDatabaseConnections;
     :DECLARE aConnectionNames, sConnectionName, bIsConnected, sStatusMessage, nIndex;
 
-    aConnectionNames := {"LIMS_MASTER", "LIMS_REPORTING", "LIMS_ARCHIVE"};
+    aConnectionNames := {"DATABASE", "DICTIONARY"};
 
     :FOR nIndex := 1 :TO ALen(aConnectionNames);
         sConnectionName := aConnectionNames[nIndex];
@@ -148,7 +148,7 @@ Wrap the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md)
 :ENDPROC;
 
 /* Usage;
-DoProc("CheckDatabaseConnectivity", {"LIMS_MASTER"});
+DoProc("CheckDatabaseConnectivity", {"DATABASE"});
 ```
 
 ## Related

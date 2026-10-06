@@ -82,7 +82,7 @@ Fetch a single BLOB column, write it to disk, and confirm the file was actually 
     :DECLARE sConnectionName, sTableName, sColumnName, sWhereCondition;
     :DECLARE sOutputFilePath, oErr, nBytes;
 
-    sConnectionName := "LIMS";
+    sConnectionName := "DATABASE";
     sTableName := "attachments";
     sColumnName := "pdf_blob";
     sWhereCondition := "attachmentid = 'ATT12345'";
@@ -132,7 +132,7 @@ Query for a list of IDs and export each matching BLOB to a separate file, tracki
     :DECLARE sReportId, sWhereCondition, sOutputFilePath;
     :DECLARE nWritten, nSkipped, oErr;
 
-    sConnectionName := "LIMS";
+    sConnectionName := "DATABASE";
     sTableName := "report_archive";
     sColumnName := "report_blob";
     nWritten := 0;

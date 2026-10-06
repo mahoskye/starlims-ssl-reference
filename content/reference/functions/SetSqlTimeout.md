@@ -103,7 +103,7 @@ Extend the timeout on a named connection before a long update, then restore it i
 :PROCEDURE RefreshArchiveSummary;
 	:DECLARE sConnection, nPrevTimeout, bUpdated;
 
-	sConnection := "ARCHIVE";
+	sConnection := "DATABASE";
 	bUpdated := .F.;
 	nPrevTimeout := SetSqlTimeout(180, sConnection);
 
@@ -138,7 +138,7 @@ Set different timeouts on two named connections, query each, then restore both o
 	:DECLARE nOpsPrevTimeout, nArchivePrevTimeout;
 	:DECLARE aOpsRows, aArchiveRows;
 
-	nOpsPrevTimeout := SetSqlTimeout(45, "LIMS");
+	nOpsPrevTimeout := SetSqlTimeout(45, "DATABASE");
 	nArchivePrevTimeout := SetSqlTimeout(180, "ARCHIVE");
 
 	:TRY;
@@ -147,7 +147,7 @@ Set different timeouts on two named connections, query each, then restore both o
 		    FROM orders
 		    WHERE status = 'Logged'
 		",
-			"LIMS");
+			"DATABASE");
 
 		aArchiveRows := SQLExecute("
 		    SELECT COUNT(*) AS row_count
@@ -163,7 +163,7 @@ Set different timeouts on two named connections, query each, then restore both o
 		/* Logs operational and archive row counts;
 	:FINALLY;
 		SetSqlTimeout(nArchivePrevTimeout, "ARCHIVE");
-		SetSqlTimeout(nOpsPrevTimeout, "LIMS");
+		SetSqlTimeout(nOpsPrevTimeout, "DATABASE");
 	:ENDTRY;
 :ENDPROC;
 

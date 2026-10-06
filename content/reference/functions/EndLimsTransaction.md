@@ -165,7 +165,7 @@ Opens a transaction on a named connection and validates that no open tasks remai
 :ENDPROC;
 
 /* Usage;
-DoProc("ApplyBatchStatus", {"MyConn", "BATCH-001", "Closed"});
+DoProc("ApplyBatchStatus", {"DATABASE", "BATCH-001", "Closed"});
 ```
 
 ### Handle nested transaction scopes on one connection
@@ -237,7 +237,7 @@ Opens an outer transaction for a batch update and an inner transaction for the a
 :ENDPROC;
 
 /* Usage;
-DoProc("SaveBatchAndAudit", {"MyConn", "BATCH-001"});
+DoProc("SaveBatchAndAudit", {"DATABASE", "BATCH-001"});
 ```
 
 ## Related

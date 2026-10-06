@@ -68,7 +68,7 @@ Retrieve a named connection and confirm the retrieval succeeded. Pass a configur
 :PROCEDURE GetConnectionExample;
 	:DECLARE oConn;
 
-	oConn := GetConnectionByName("LIMS");
+	oConn := GetConnectionByName("DATABASE");
 
 	UsrMes("Database: " + oConn:DatabaseName);
 :ENDPROC;
