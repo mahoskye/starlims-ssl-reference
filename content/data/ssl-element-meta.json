@@ -1575,7 +1575,9 @@
         }
       ],
       "caveats": [
-        "CreateORMSession does not call UpdatingTable by itself. The check runs later when a supported table update is about to execute."
+        "CreateORMSession does not call UpdatingTable by itself. The check runs later when a supported table update is about to execute.",
+        "Once CreateORMSession has run, the ORM table check applies to every UPDATE for the rest of the run, through RunSQL or SQLExecute, with or without bound values. In observed runtime behavior, an UPDATE on a table that is not registered as an application table, such as a scratch or staging table, raises Run-time error: Invalid property: ClassName. This happens whether UpdatingTable is set or not. INSERT, SELECT, CREATE TABLE and DROP TABLE are not affected.",
+        "Setting UpdatingTable back to NIL does not end the session. A later call returns the same object, and the effect lasts until the run ends. A separate run starts without it."
       ],
       "best_practices": {
         "do": [
@@ -1586,7 +1588,8 @@
         "dont": [
           "Assume each call creates a fresh session object. The function returns the shared session once it already exists.",
           "Return strings, numbers, or NIL from UpdatingTable. A non-boolean return value causes a runtime error.",
-          "Block updates unintentionally with an overly broad UpdatingTable rule."
+          "Block updates unintentionally with an overly broad UpdatingTable rule.",
+          "Call CreateORMSession in a run that also updates tables that are not registered application tables. Those updates fail for the rest of the run."
         ]
       }
     },
