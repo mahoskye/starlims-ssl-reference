@@ -54,7 +54,7 @@ When a variable is declared with [`:DECLARE`](../keywords/DECLARE.md), it starts
 ## Errors and edge cases
 
 - [`LimsString`](../functions/LimsString.md)`(NIL)` returns the string `"NIL"`.
-- A [`LSearch`](../functions/LSearch.md) call with a `NIL` default returns an empty string, not `NIL`, when no row matches. Test the result with [`Empty`](../functions/Empty.md)`()` rather than comparing it to `NIL`.
+- A [`LSearch`](../functions/LSearch.md) call with no default, or a `NIL` one, returns an empty string, not `NIL`, when no row matches. Test the result with [`Empty`](../functions/Empty.md)`()` rather than comparing it to `NIL`.
 
 ## Examples
 
@@ -84,7 +84,7 @@ DoProc("DemonstrateNilVsEmpty");
 
 ### Checking a lookup that found no row
 
-Passes `NIL` as the default to [`LSearch`](../functions/LSearch.md). When no row matches, `LSearch` returns an empty string rather than `NIL` in observed runtime behavior, so a `== NIL` check does not detect the missing row. [`Empty`](../functions/Empty.md)`()` treats `NIL` and `""` the same way, so it is the reliable check. The output below assumes `"S-999"` is absent from the database.
+Leaves out [`LSearch`](../functions/LSearch.md)'s default value. When no row matches, `LSearch` returns an empty string rather than `NIL` in observed runtime behavior, so a `== NIL` check does not detect the missing row. [`Empty`](../functions/Empty.md)`()` treats `NIL` and `""` the same way, so it is the reliable check. The output below assumes `"S-999"` is absent from the database.
 
 ```ssl
 :PROCEDURE FindSample;
@@ -93,7 +93,7 @@ Passes `NIL` as the default to [`LSearch`](../functions/LSearch.md). When no row
 
     sName := LSearch("
         SELECT sample_name FROM sample WHERE sample_id = ?
-    ", NIL,, {sSampleID});
+    ",,, {sSampleID});
 
     :RETURN sName;
 :ENDPROC;

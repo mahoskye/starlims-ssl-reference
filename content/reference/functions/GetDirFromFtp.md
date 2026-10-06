@@ -226,8 +226,7 @@ Inspect the entry layout and branch on the attributes column so later logic can 
         sPattern,
         sUser,
         sPassword,
-        21,
-        NIL,
+        21,,
         .T.
     );
 

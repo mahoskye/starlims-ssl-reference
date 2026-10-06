@@ -38,7 +38,7 @@ Wraps an exception object as an `SSLError`. In normal SSL code, use [`GetLastSSL
 | `RuntimeException` | [object](../types/object.md) | read-only | Low-level exception object. Prefer `Description`, `Operation`, `Code`, or `FullDescription` for typical error handling. |
 | `Description` | [string](../types/string.md) | read-only | Primary error message text. |
 | `Operation` | [string](../types/string.md) | read-only | Reported error location or operation name. This can be empty. |
-| `GenCode` | [number](../types/number.md) | read-only | Numeric error code. |
+| `GenCode` | [number](../types/number.md) | read-only | Numeric error code. For a SQL Server error, observed as `0`, like `Code`. |
 | `Code` | [number](../types/number.md) | read-only | Numeric error code. For an error from [`RaiseError`](../functions/RaiseError.md), the code you passed. For a SQL Server error, observed as `0`. Read the SQL Server error number from `GenCode` on [`GetLastSQLError()`](../functions/GetLastSQLError.md) instead. |
 | `FullDescription` | [string](../types/string.md) | read-only | Multi-line diagnostic text with abbreviated stack details and nested causes. |
 | `FullDescriptionEx` | [string](../types/string.md) | read-only | Multi-line diagnostic text with full stack details and nested causes. |
@@ -72,7 +72,7 @@ Wraps an exception object as an `SSLError`. In normal SSL code, use [`GetLastSSL
 
 - `InnerException` only returns nested SSL runtime errors, not every possible nested cause.
 - `Operation` can be blank and `Code` can be `0` when the source error did not provide them.
-- For a SQL Server error caught in [`:CATCH`](../keywords/CATCH.md) (for example an invalid column or an invalid object name), `Code` is `0` in observed runtime behavior. The SQL Server error number (`207` for an invalid column, `208` for an invalid object) is in `GenCode` on the [`SSLSQLError`](SSLSQLError.md) returned by [`GetLastSQLError()`](../functions/GetLastSQLError.md).
+- For a SQL Server error caught in [`:CATCH`](../keywords/CATCH.md) (for example an invalid column or an invalid object name), both `Code` and `GenCode` are `0` in observed runtime behavior. The SQL Server error number (`207` for an invalid column, `208` for an invalid object) is in `GenCode` on the [`SSLSQLError`](SSLSQLError.md) returned by [`GetLastSQLError()`](../functions/GetLastSQLError.md).
 - `FullDescription` and `FullDescriptionEx` are formatted diagnostic strings, not structured field-by-field data.
 - `FullDescriptionEx` includes the full stack trace when one is available; `FullDescription` uses a shorter stack view.
 - For compiler errors, SQL errors, and script-not-found errors, the formatted diagnostic text uses specialized headings instead of a generic `Error:` line.
