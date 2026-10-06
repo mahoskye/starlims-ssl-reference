@@ -111,10 +111,10 @@ Executes a parameterless query on a named connection and reports the length of t
 DoProc("ExportActiveSamples");
 ```
 
-[`UsrMes`](UsrMes.md) logs:
+[`UsrMes`](UsrMes.md) logs the length, where `<n>` depends on the rows and columns returned:
 
 ```text
-Returned XML length: 1243
+Returned XML length: <n>
 ```
 
 ### Use positional parameters and suppress the XML header
@@ -167,12 +167,12 @@ Passes a date parameter and an invariant-date column index array, wrapping the c
 	aInvariantDateCols := {4, 5};
 
 	:TRY;
-		sXml := GetDataSetEx(sSql, sConnection, aValues, .T., .T., "sample_audit", .T., ;
-			aInvariantDateCols);
+		sXml := GetDataSetEx(sSql, sConnection, aValues, .T., .T., "sample_audit",
+							 .T., aInvariantDateCols);
 		:RETURN sXml;
 	:CATCH;
 		oErr := GetLastSSLError();
-		/* Logs on failure: Import failed;
+		/* Logs on failure: GetDataSetEx failed;
 		ErrorMes("GetDataSetEx failed: " + oErr:Description);
 		:RETURN "";
 	:ENDTRY;

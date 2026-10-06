@@ -58,7 +58,7 @@ LimsSqlDisconnect([sConnectionName])
 
 ### Disconnect after a read operation
 
-Connect to a named database, query a sample, and then disconnect explicitly. a warning is logged if the disconnect fails.
+Connect to a named database, query a sample, and then disconnect explicitly. A warning is logged if the disconnect fails.
 
 ```ssl
 :PROCEDURE FetchSampleData;
@@ -72,9 +72,8 @@ Connect to a named database, query a sample, and then disconnect explicitly. a w
 	aResults := SQLExecute("
 	    SELECT sample_name
 	    FROM samples
-	    WHERE sample_id = ?
-	",
-		, {sSampleID});
+	    WHERE sample_id = ?sSampleID?
+	", sConnName);
 
 	:IF ALen(aResults) > 0;
 		/* Logs fetched sample name;
@@ -116,9 +115,8 @@ Use [`:FINALLY`](../keywords/FINALLY.md) to guarantee that the named connection 
 		aResults := SQLExecute("
 		    SELECT sample_name, status
 		    FROM samples
-		    WHERE sample_id = ?
-		",
-			, {sSampleID});
+		    WHERE sample_id = ?sSampleID?
+		", sConnectionName);
 
 		:IF ALen(aResults) == 0;
 			RaiseError("No sample found with ID: " + sSampleID);
@@ -147,7 +145,7 @@ DoProc("ProcessSampleData");
 
 ### Disconnect all connections matching a prefix
 
-Retrieve all registered connection names and disconnect each one whose name starts with `TEMP_`.
+Retrieve all configured connections and disconnect each one whose name starts with `TEMP_`.
 
 ```ssl
 :PROCEDURE CleanupTempConnections;
@@ -158,7 +156,7 @@ Retrieve all registered connection names and disconnect each one whose name star
 	nCleaned := 0;
 
 	:FOR nIndex := 1 :TO ALen(aAllConns);
-		sConnName := aAllConns[nIndex];
+		sConnName := aAllConns[nIndex, 1];
 		:IF Left(sConnName, Len(sPrefix)) == sPrefix;
 			:IF IsDBConnected(sConnName);
 				LimsSqlDisconnect(sConnName);

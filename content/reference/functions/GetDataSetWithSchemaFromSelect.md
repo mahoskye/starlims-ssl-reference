@@ -105,10 +105,10 @@ Executes a parameterless query on the default connection and reports the length 
 DoProc("ExportActiveSamples");
 ```
 
-[`UsrMes`](UsrMes.md) logs:
+[`UsrMes`](UsrMes.md) logs the length, where `<n>` depends on the rows and columns returned:
 
 ```text
-Returned XML length: 2187
+Returned XML length: <n>
 ```
 
 ### Query a named connection with positional parameters

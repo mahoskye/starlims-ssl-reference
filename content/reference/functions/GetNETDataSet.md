@@ -105,10 +105,10 @@ Runs a query against the default connection with no parameters and logs the leng
 DoProc("ExportOpenSamples");
 ```
 
-[`UsrMes`](UsrMes.md) logs:
+[`UsrMes`](UsrMes.md) logs the length, where `<n>` depends on the rows and columns returned:
 
 ```text
-Returned XML length: 547
+Returned XML length: <n>
 ```
 
 ### Use positional parameters and set the table name
@@ -176,7 +176,7 @@ DoProc("LoadSamplesAsObject", {"A"});
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Returned type: System.Data.DataSet
+Returned type: OBJECT
 ```
 
 On failure, [`ErrorMes`](ErrorMes.md) logs a message beginning with:
