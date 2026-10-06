@@ -60,7 +60,7 @@ This function takes no parameters.
 ## Caveats
 
 - `CreateORMSession` does not call `UpdatingTable` by itself. The check runs later when a supported table update is about to execute.
-- Once `CreateORMSession` has run, the ORM table check applies to every `UPDATE` for the rest of the run, through [`RunSQL`](RunSQL.md) or [`SQLExecute`](SQLExecute.md), with or without bound values. In observed runtime behavior, an `UPDATE` on a table that is not registered as an application table, such as a scratch or staging table, raises `Run-time error: Invalid property: ClassName`. This happens whether `UpdatingTable` is set or not. `INSERT`, `SELECT`, `CREATE TABLE` and `DROP TABLE` are not affected.
+- Once `CreateORMSession` has run, the ORM table check applies to every `UPDATE` for the rest of the run, through [`RunSQL`](RunSQL.md) or [`SQLExecute`](SQLExecute.md), with or without bound values. In observed runtime behavior, an `UPDATE` on a table that is not registered as an application table, such as a scratch or staging table, raises `Run-time error: Invalid property: ClassName`. This happens whether `UpdatingTable` is set or not, and `UpdatingTable` is not called for that update. `INSERT`, `SELECT`, `CREATE TABLE` and `DROP TABLE` are not affected.
 - Setting `UpdatingTable` back to [`NIL`](../literals/nil.md) does not end the session. A later call returns the same object, and the effect lasts until the run ends. A separate run starts without it.
 
 ## Examples
