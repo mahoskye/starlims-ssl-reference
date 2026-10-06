@@ -13,7 +13,7 @@ starlims:
 
 Creates and manages a database sequence for a table field on Oracle or SQL Server.
 
-`Sequence` gives SSL scripts a compact API for creating, resetting, dropping, and querying a database sequence. You construct it with a platform name, table name, field name, and an optional prefix. The object derives a sequence name from those values, uses `StartWith` when creating the sequence on both platforms, and uses `CacheSize` when creating the sequence on SQL Server.
+`Sequence` gives SSL scripts a compact API for creating, resetting, dropping, and querying a database sequence. You construct it with a platform name, table name, field name, and a prefix, passing `""` as the prefix when you do not need one. The object derives a sequence name from those values, uses `StartWith` when creating the sequence on both platforms, and uses `CacheSize` when creating the sequence on SQL Server.
 
 ## When to use
 
@@ -24,26 +24,16 @@ Creates and manages a database sequence for a table field on Oracle or SQL Serve
 
 ## Constructors
 
-### `Sequence{sPlatforma, sTableName, sFieldName}`
-
-Creates a sequence object with an empty prefix.
-
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `sPlatforma` | [string](../types/string.md) | yes | Database platform. `"ORACLE"` selects Oracle behavior. Any other value uses SQL Server behavior. |
-| `sTableName` | [string](../types/string.md) | yes | Table name used to derive the sequence name. |
-| `sFieldName` | [string](../types/string.md) | yes | Field name used to derive the sequence name. |
-
 ### `Sequence{sPlatforma, sTableName, sFieldName, sPrefix}`
 
-Creates a sequence object with an additional name suffix.
+Creates a sequence object for a table field. All four arguments are required. The three-argument form `Sequence{sPlatforma, sTableName, sFieldName}` fails to compile with `invalid arguments for constructor`.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `sPlatforma` | [string](../types/string.md) | yes | Database platform. `"ORACLE"` selects Oracle behavior. Any other value uses SQL Server behavior. |
 | `sTableName` | [string](../types/string.md) | yes | Table name used to derive the sequence name. |
 | `sFieldName` | [string](../types/string.md) | yes | Field name used to derive the sequence name. |
-| `sPrefix` | [string](../types/string.md) | no | Optional suffix added to the derived sequence name. If omitted or passed as [`NIL`](../literals/nil.md), an empty suffix is used. |
+| `sPrefix` | [string](../types/string.md) | yes | Suffix added to the derived sequence name. Pass `""` for no suffix. With `""`, the sequence is named `C_<TABLE>_<FIELD>`, for example `C_SAMPLE_SAMPLE_ID` for table `sample` and field `sample_id`. |
 
 ## Properties
 
@@ -110,6 +100,7 @@ Changes the database used for later property lookups and method calls.
     - Use `SetDatabase()` before sequence operations when the work should target a non-default database.
 
 !!! failure "Don't"
+    - Construct `Sequence` with only three arguments. Pass `""` as the fourth argument when you do not need a suffix.
     - Assume `CacheSize` changes Oracle behavior, because it is only used when SQL Server creates the sequence.
     - Treat any non-`"ORACLE"` platform value as validation-safe input, because it falls back to SQL Server behavior.
     - Use `Reset()` on Oracle when the sequence cannot be safely recreated, because Oracle does not support resetting in place and the operation resets the sequence by recreating it.
@@ -126,13 +117,13 @@ Changes the database used for later property lookups and method calls.
 
 ### Create a sequence and read the next value
 
-Creates a SQL Server sequence for a sample table with a custom starting value and cache size, then reads the next value. Checks `Exists` first to avoid creating a sequence that is already present.
+Creates a SQL Server sequence for a sample table with a custom starting value and cache size, then reads the next value. The empty fourth argument means no suffix, so the sequence is named `C_SAMPLE_SAMPLE_ID`. Checks `Exists` first to avoid creating a sequence that is already present.
 
 ```ssl
 :PROCEDURE CreateSampleSequence;
     :DECLARE oSeq, nNextValue;
 
-    oSeq := Sequence{"SQLSERVER", "sample", "sample_id"};
+    oSeq := Sequence{"SQLSERVER", "sample", "sample_id", ""};
     oSeq:StartWith := 1000;
     oSeq:CacheSize := 20;
 
@@ -156,7 +147,7 @@ Queries the highest existing ID in the table to determine the next safe starting
 :PROCEDURE SyncSampleSequence;
     :DECLARE oSeq, nMaxId, nStartValue;
 
-    oSeq := Sequence{"SQLSERVER", "sample", "sample_id"};
+    oSeq := Sequence{"SQLSERVER", "sample", "sample_id", ""};
 
     nMaxId := LSearch("
         SELECT MAX(sample_id)

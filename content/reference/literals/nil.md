@@ -54,6 +54,7 @@ When a variable is declared with [`:DECLARE`](../keywords/DECLARE.md), it starts
 ## Errors and edge cases
 
 - [`LimsString`](../functions/LimsString.md)`(NIL)` returns the string `"NIL"`.
+- A [`LSearch`](../functions/LSearch.md) call with a `NIL` default returns an empty string, not `NIL`, when no row matches. Test the result with [`Empty`](../functions/Empty.md)`()` rather than comparing it to `NIL`.
 
 ## Examples
 
@@ -81,9 +82,9 @@ Declares `sValue`, which starts as an empty string (not `NIL`), then assigns `NI
 DoProc("DemonstrateNilVsEmpty");
 ```
 
-### Using NIL as a lookup sentinel
+### Checking a lookup that found no row
 
-Passes `NIL` as the default to [`LSearch`](../functions/LSearch.md) so the procedure can distinguish "no row found" from an empty result. With `"S-999"` absent from the database, `FindSample` returns `NIL`, and both the direct comparison and [`Empty`](../functions/Empty.md)`()` check confirm the absence.
+Passes `NIL` as the default to [`LSearch`](../functions/LSearch.md). When no row matches, `LSearch` returns an empty string rather than `NIL` in observed runtime behavior, so a `== NIL` check does not detect the missing row. [`Empty`](../functions/Empty.md)`()` treats `NIL` and `""` the same way, so it is the reliable check. The output below assumes `"S-999"` is absent from the database.
 
 ```ssl
 :PROCEDURE FindSample;
@@ -102,14 +103,13 @@ Passes `NIL` as the default to [`LSearch`](../functions/LSearch.md) so the proce
 
     sResult := DoProc("FindSample", {"S-999"});
 
-    :IF sResult == NIL;
+    /* LSearch returns an empty string, not NIL, when no row matches;
+    UsrMes("Result is NIL: " + LimsString(sResult == NIL));
+
+    :IF Empty(sResult);
         UsrMes("Sample not found");
     :ELSE;
         UsrMes("Found: " + sResult);
-    :ENDIF;
-
-    :IF Empty(sResult);
-        UsrMes("No result (from Empty check)");
     :ENDIF;
 
     :RETURN sResult;
@@ -117,6 +117,13 @@ Passes `NIL` as the default to [`LSearch`](../functions/LSearch.md) so the proce
 
 /* Usage;
 DoProc("CheckSampleLookup");
+```
+
+[`UsrMes`](../functions/UsrMes.md) logs:
+
+```text
+Result is NIL: .F.
+Sample not found
 ```
 
 ## Related elements

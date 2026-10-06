@@ -93,12 +93,12 @@ DoProc("ConnectToSamples");
 
 ### Branch on error type and use FINALLY for shared cleanup
 
-Use a [`:BEGINCASE`](BEGINCASE.md) inside `:CATCH` to route different error codes to different handlers. [`:FINALLY`](FINALLY.md) runs unconditionally to report the final outcome.
+Use a [`:BEGINCASE`](BEGINCASE.md) inside `:CATCH` to route different errors to different handlers. Validation errors are raised with code `1001` and recognized through `oErr:Code`. A SQL Server error reports `Code` as `0`, so the SQL Server error number (`207` for an invalid column, `208` for an invalid object) is read from `GenCode` on [`GetLastSQLError`](../functions/GetLastSQLError.md)`()`. [`:FINALLY`](FINALLY.md) runs unconditionally to report the final outcome.
 
 ```ssl
 :PROCEDURE ProcessSampleData;
 	:DECLARE sSampleID, sSQL, sLogMessage;
-	:DECLARE oErr, aResults, nIndex, nTotal;
+	:DECLARE oErr, oSqlErr, nSqlCode, aResults, nIndex, nTotal;
 	:DECLARE bSuccess, bValidationError, bDbError;
 
 	sSampleID := "LAB-2024-0042";
@@ -118,7 +118,7 @@ Use a [`:BEGINCASE`](BEGINCASE.md) inside `:CATCH` to route different error code
 		aResults := SQLExecute(sSQL);
 
 		:IF ALen(aResults) == 0;
-			RaiseError("No sample found with ID: " + sSampleID);
+			RaiseError("No sample found with ID: " + sSampleID, "ProcessSampleData", 1001);
 		:ENDIF;
 
 		:FOR nIndex := 1 :TO ALen(aResults);
@@ -127,7 +127,8 @@ Use a [`:BEGINCASE`](BEGINCASE.md) inside `:CATCH` to route different error code
 			/* Logs current row being processed;
 
 			:IF Empty(aResults[nIndex, 1]);
-				RaiseError("Empty result value at row " + LimsString(nIndex));
+				RaiseError("Empty result value at row " + LimsString(nIndex), "ProcessSampleData",
+					1001);
 			:ENDIF;
 
 			nTotal += aResults[nIndex, 1];
@@ -135,23 +136,30 @@ Use a [`:BEGINCASE`](BEGINCASE.md) inside `:CATCH` to route different error code
 
 	:CATCH;
 		oErr := GetLastSSLError();
+		nSqlCode := 0;
+
+		/* SQL Server error numbers are in GenCode on the SQL error object, not in oErr:Code;
+		oSqlErr := GetLastSQLError();
+		:IF !Empty(oSqlErr);
+			nSqlCode := oSqlErr:GenCode;
+		:ENDIF;
 
 		:BEGINCASE;
-		:CASE oErr:Code == 207;
+		:CASE oErr:Code == 1001;
 			bValidationError := .T.;
 			sLogMessage := "Validation failed: " + oErr:Description;
 			UsrMes(sLogMessage);
 			/* Logs validation failure message;
 			:EXITCASE;
-		:CASE oErr:Code == 208;
+		:CASE nSqlCode == 207 .OR. nSqlCode == 208;
 			bDbError := .T.;
-			sLogMessage := "Database error in query: " + oErr:Operation;
+			sLogMessage := "Database error " + LimsString(nSqlCode) + " in query: "
+				+ oErr:Description;
 			ErrorMes(sLogMessage);
 			/* Logs database failure message;
 			:EXITCASE;
 		:OTHERWISE;
-			sLogMessage := "Unexpected error (" + LimsString(oErr:Code) + "): "
-				+ oErr:Description;
+			sLogMessage := "Unexpected error: " + oErr:Description;
 			ErrorMes(sLogMessage);
 			/* Logs unexpected failure message;
 			:EXITCASE;

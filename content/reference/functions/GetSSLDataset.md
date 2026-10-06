@@ -63,19 +63,21 @@ For `SELECT` statements, the first table contains the returned rows. For non-`SE
 
 !!! success "Do"
     - Supply both `aParamNames` and `aParamValues` when using bound parameters.
+    - Write SQL Server parameters as `@name` in both `sSql` and `aParamNames`.
     - Use a stable `sTableName` when downstream code depends on the dataset table name.
     - Set `bNullAsBlank` to [`.F.`](../literals/false.md) when your logic must distinguish database nulls from blank strings.
     - Use one consistent form in `aInvariantDateCols`: all names or all zero-based ordinals.
 
 !!! failure "Don't"
     - Assume `GetSSLDataset` uses `?varName?` substitution like [`SQLExecute`](SQLExecute.md). This function binds explicit parameter names and values arrays.
+    - Use Oracle-style `:name` placeholders against SQL Server. They raise a syntax error there.
     - Pass only one of `aParamNames` or `aParamValues`. If either is missing, no parameters are bound.
     - Assume omitted `sTableName` falls back to `Table`. This function falls back to `__TableName__` when it cannot derive a table name.
     - Mix column names and numeric ordinals in the same `aInvariantDateCols` array.
 
 ## Caveats
 
-- Placeholder syntax in `sSql` must match the target provider. In practice that is typically `:name` for Oracle and `@name` for non-Oracle providers.
+- Placeholder syntax in `sSql` must match the target provider. On SQL Server, write named parameters as `@name` in the SQL and list them the same way in `aParamNames` (for example `{"@status"}`). An Oracle-style `:name` placeholder raises `Incorrect syntax near ':'` on SQL Server.
 - If `aParamValues` contains more entries than `aParamNames`, the extra values are ignored.
 - `bNullAsBlank` affects how the returned [`SSLDataset`](../classes/SSLDataset.md) exposes values, especially through methods such as `ToArray()`.
 
@@ -113,7 +115,7 @@ DoProc("ReviewActiveSamples");
 
 ### Bind named parameters and set the dataset table name
 
-Passes a bound `:status` parameter and assigns the stable table name `orders_by_status` so that downstream code can reference the table by name regardless of how the SQL is phrased.
+Passes a bound `@status` parameter and assigns the stable table name `orders_by_status` so that downstream code can reference the table by name regardless of how the SQL is phrased.
 
 ```ssl
 :PROCEDURE LoadOrdersByStatus;
@@ -124,11 +126,11 @@ Passes a bound `:status` parameter and assigns the stable table name `orders_by_
 	sSql := "
 	    SELECT order_id, customer_name, status
 	    FROM orders
-	    WHERE status = :status
+	    WHERE status = @status
 	    ORDER BY order_id
 	";
 
-	aParamNames := {":status"};
+	aParamNames := {"@status"};
 	aParamValues := {sStatus};
 	oDataset := GetSSLDataset(sSql, "DATABASE", aParamNames, aParamValues,
 		"orders_by_status");
@@ -163,11 +165,11 @@ Sets `bNullAsBlank` to [`.F.`](../literals/false.md) so database nulls stay dist
 	sSql := "
 	    SELECT sample_id, reviewer, review_date, comments
 	    FROM sample_audit
-	    WHERE status = :status
+	    WHERE status = @status
 	    ORDER BY review_date
 	";
 
-	aParamNames := {":status"};
+	aParamNames := {"@status"};
 	aParamValues := {sStatus};
 	aInvariantDateCols := {"review_date"};
 
