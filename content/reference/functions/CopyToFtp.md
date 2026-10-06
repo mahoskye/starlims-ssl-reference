@@ -151,8 +151,7 @@ Sends the same manifest text to three remote files in one SFTP call, using a pri
         sManifest,
         sUserName,
         sPassword,
-        22,
-        NIL,
+        22,,
         .T.,
         sPrivateKeyPath
     );
@@ -196,8 +195,7 @@ Checks the return value after uploading three date-stamped files and stops the w
         sPayload,
         sUserName,
         sPassword,
-        21,
-        NIL,
+        21,,
         .F.
     );
 

@@ -7008,14 +7008,14 @@
       ],
       "caveats": [
         "LSearch falls back only when the scalar result is missing or database NULL. An actual empty string from the database is returned as-is.",
-        "With a NIL fallback and no matching row, LSearch returns an empty string, not NIL, in observed runtime behavior. A = NIL or == NIL check on the result is therefore false. Use Empty() instead.",
+        "With the fallback omitted or NIL and no matching row, LSearch returns an empty string, not NIL, in observed runtime behavior. A = NIL or == NIL check on the result is therefore false. Use Empty() instead.",
         "Passing a non-array value as aArrayOfValues (the fourth parameter) can lock up the application — the runtime's error handling for this type mismatch is anything but graceful. Always pass an array of bind values or omit the parameter entirely."
       ],
       "best_practices": {
         "do": [
           "Pass an explicit fallback that matches how your script should behave when no row is found.",
           "Use positional ? placeholders with aArrayOfValues instead of concatenating values into SQL text.",
-          "Test the result with Empty() when you pass NIL as the fallback, because a missing row comes back as an empty string.",
+          "Test the result with Empty() when you leave out the fallback, because a missing row comes back as an empty string.",
           "Pass a sentinel value that cannot occur in your data when you must tell a missing row apart from a real empty string or zero.",
           "Switch to LSelect, LSelect1, or LSelectC when you need rows rather than one scalar value."
         ],
@@ -7024,7 +7024,8 @@
           "Treat LSearch as a multi-row query helper. It is meant for a single scalar result.",
           "Pass a multidimensional array to aArrayOfValues; it raises an error before execution.",
           "Rely on an implicit fallback. Decide whether your missing-data case should return \"\", 0, .F., or another explicit value.",
-          "Compare the result to NIL to detect a missing row. A NIL fallback comes back as an empty string, so the comparison is false."
+          "Compare the result to NIL to detect a missing row. Without a fallback, a missing row comes back as an empty string, so the comparison is false.",
+          "Pass NIL just to reach a later argument. Leave the position empty instead: LSearch(sSQL,,, {sValue})."
         ]
       }
     },
@@ -11998,7 +11999,7 @@
       "caveats": [
         "InnerException only returns nested SSL runtime errors, not every possible nested cause.",
         "Operation can be blank and Code can be 0 when the source error did not provide them.",
-        "For a SQL Server error caught in :CATCH (for example an invalid column or an invalid object name), Code is 0 in observed runtime behavior. The SQL Server error number (207 for an invalid column, 208 for an invalid object) is in GenCode on the SSLSQLError returned by GetLastSQLError().",
+        "For a SQL Server error caught in :CATCH (for example an invalid column or an invalid object name), both Code and GenCode are 0 in observed runtime behavior. The SQL Server error number (207 for an invalid column, 208 for an invalid object) is in GenCode on the SSLSQLError returned by GetLastSQLError().",
         "FullDescription and FullDescriptionEx are formatted diagnostic strings, not structured field-by-field data.",
         "FullDescriptionEx includes the full stack trace when one is available; FullDescription uses a shorter stack view.",
         "For compiler errors, SQL errors, and script-not-found errors, the formatted diagnostic text uses specialized headings instead of a generic Error: line.",
@@ -14017,7 +14018,7 @@
       "exceptions": [],
       "caveats": [
         "LimsString(NIL) returns the string \"NIL\".",
-        "A LSearch call with a NIL default returns an empty string, not NIL, when no row matches. Test the result with Empty() rather than comparing it to NIL."
+        "A LSearch call with no default, or a NIL one, returns an empty string, not NIL, when no row matches. Test the result with Empty() rather than comparing it to NIL."
       ],
       "best_practices": {
         "do": [
