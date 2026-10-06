@@ -4433,7 +4433,8 @@
           "Pass a file path to handle-based requests such as READ or WRITE, or a handle to path-based requests such as COPY or DIR.",
           "Assume READ returns a short string at end of file. It pads the result with spaces when fewer characters are available.",
           "Treat RENAME as a metadata-only rename. It uses the same move logic as MOVE and therefore depends on a destination path.",
-          "Rely on non-canonical request prefixes in published code just because the implementation accepts leading-text matches."
+          "Rely on non-canonical request prefixes in published code just because the implementation accepts leading-text matches.",
+          "Pass \"EXISTS\" to test whether a file exists. There is no such request, so it raises Invalid request provided!. Use CHECK."
         ]
       }
     },
@@ -4685,7 +4686,7 @@
         ],
         "dont": [
           "Assume the array always has at least one row. The system may have no connections configured.",
-          "Assume column order. Column 1 is the name, column 2 the provider, and column 3 the connection string. Always access by index in that order."
+          "Assume column order. Column 1 is the name, column 2 the provider settings, and column 3 the connection string. Always access by index in that order."
         ]
       }
     },
@@ -4822,20 +4823,21 @@
         }
       ],
       "caveats": [
-        "Large result sets can produce very large XML strings and corresponding memory cost."
+        "Large result sets can produce very large XML strings and corresponding memory cost.",
+        "On a connection that stores times in UTC, date columns that are not in aInvariantDateCols are converted to local time, and the XML shows them with a time-zone offset. Invariant columns are returned exactly as stored, with no offset."
       ],
       "best_practices": {
         "do": [
           "Use ? placeholders with aValues for dynamic values.",
           "Omit aValues entirely when the query has no parameters.",
           "Pass an explicit sTableName when downstream XML consumers depend on a stable dataset table name.",
-          "Use numeric 1-based column indexes in aInvariantDateCols."
+          "Count aInvariantDateCols columns from 1, or pass column names."
         ],
         "dont": [
           "Use ?varName? syntax with GetDataSet. That substitution style is for SQLExecute, not GetDataSet.",
           "Pass a nested array in aValues. The function expects a single-dimensional values array.",
           "Assume omitted bNullAsBlank preserves database nulls. The default is .T..",
-          "Pass column names in aInvariantDateCols. This parameter is index-based."
+          "Count aInvariantDateCols columns from 0. This function counts from 1. Of the functions that take aInvariantDateCols, only GetSSLDataset counts from 0."
         ]
       }
     },
@@ -4881,13 +4883,13 @@
           "Use ? placeholders with aValues for dynamic values.",
           "Omit aValues entirely when the command has no parameters.",
           "Pass an explicit sTableName when downstream XML consumers depend on a stable dataset table name.",
-          "Use numeric 1-based column indexes in aInvariantDateCols."
+          "Count aInvariantDateCols columns from 1, or pass column names."
         ],
         "dont": [
           "Use ?varName? syntax with GetDataSetEx. That substitution style is for SQLExecute.",
           "Pass a nested array in aValues. The function expects a single-dimensional values array.",
           "Assume omitted bNullAsBlank preserves database nulls. The default is .T..",
-          "Pass column names in aInvariantDateCols. This parameter is index-based."
+          "Count aInvariantDateCols columns from 0. This function counts from 1. Of the functions that take aInvariantDateCols, only GetSSLDataset counts from 0."
         ]
       }
     },
@@ -5086,13 +5088,14 @@
           "Use positional ? placeholders with aValues for dynamic values.",
           "Pass an explicit sConnectionName when the query must run against a non-default connection.",
           "Set bIncludeHeader and bIncludeSchema explicitly when another system depends on a specific XML shape.",
-          "Use numeric 1-based column indexes in aInvariantDateCols."
+          "Count aInvariantDateCols columns from 1, or pass column names."
         ],
         "dont": [
           "Use ?varName? syntax with GetDataSetXMLFromSelect. That substitution style is for SQLExecute.",
           "Pass a nested array in aValues. The function expects a single-dimensional values array.",
           "Treat sConnectionName as a display label for the XML. It is the database connection name.",
-          "Assume schema is included by default. This function defaults bIncludeSchema to .F.."
+          "Assume schema is included by default. This function defaults bIncludeSchema to .F..",
+          "Count aInvariantDateCols columns from 0. This function counts from 1. Of the functions that take aInvariantDateCols, only GetSSLDataset counts from 0."
         ]
       }
     },
@@ -5820,7 +5823,9 @@
       "caveats": [
         "Placeholder syntax in sSql must match the target provider. On SQL Server, write named parameters as @name in the SQL and list them the same way in aParamNames (for example {\"@status\"}). An Oracle-style :name placeholder raises Incorrect syntax near ':' on SQL Server.",
         "If aParamValues contains more entries than aParamNames, the extra values are ignored.",
-        "bNullAsBlank affects how the returned SSLDataset exposes values, especially through methods such as ToArray()."
+        "bNullAsBlank affects how the returned SSLDataset exposes values, especially through methods such as ToArray().",
+        "aInvariantDateCols counts columns from 0, so {1} marks the second column. GetDataSet, GetDataSetEx, GetDataSetXMLFromSelect, LSelect, LSelect1, LSelectC and SQLExecute count from 1. Column names work the same way everywhere.",
+        "On a connection that stores times in UTC, date columns that are not in aInvariantDateCols are converted to local time, and ToXml() shows them with a time-zone offset. Invariant columns are returned exactly as stored, with no offset."
       ],
       "best_practices": {
         "do": [
@@ -8876,7 +8881,7 @@
         "do": [
           "Use a restrictive sWhereCondition so the query clearly targets the row you expect.",
           "Wrap the call in :TRY / :CATCH when the database, file path, or permissions may fail.",
-          "Verify the output file after the call with FileSupport(..., \"EXISTS\") or FileSupport(..., \"SIZE\") because .T. does not guarantee bytes were written.",
+          "Verify the output file after the call with FileSupport(..., \"CHECK\") or FileSupport(..., \"SIZE\") because .T. does not guarantee bytes were written.",
           "Leave bIsCompressed omitted or pass .F.."
         ],
         "dont": [

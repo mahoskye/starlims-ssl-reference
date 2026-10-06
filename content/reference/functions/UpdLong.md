@@ -183,7 +183,7 @@ Copy an external file to a local temp path, update the long column inside a tran
         BeginLimsTransaction(sConnectionName, "SERIALIZABLE");
         bInTrans := .T.;
 
-        :IF FileSupport(sExternalPath, "EXISTS");
+        :IF FileSupport(sExternalPath, "CHECK");
             FileSupport(sExternalPath, "COPYTOFILE", sInputPath);
         :ELSE;
             RaiseError("External file not found at " + sExternalPath);
@@ -207,7 +207,7 @@ Copy an external file to a local temp path, update the long column inside a tran
 
         :RETURN .F.;
     :FINALLY;
-        :IF !Empty(sInputPath) .AND. FileSupport(sInputPath, "EXISTS");
+        :IF !Empty(sInputPath) .AND. FileSupport(sInputPath, "CHECK");
             FileSupport(sInputPath, "DELETE");
         :ENDIF;
     :ENDTRY;

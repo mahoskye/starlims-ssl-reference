@@ -80,6 +80,8 @@ For `SELECT` statements, the first table contains the returned rows. For non-`SE
 - Placeholder syntax in `sSql` must match the target provider. On SQL Server, write named parameters as `@name` in the SQL and list them the same way in `aParamNames` (for example `{"@status"}`). An Oracle-style `:name` placeholder raises `Incorrect syntax near ':'` on SQL Server.
 - If `aParamValues` contains more entries than `aParamNames`, the extra values are ignored.
 - `bNullAsBlank` affects how the returned [`SSLDataset`](../classes/SSLDataset.md) exposes values, especially through methods such as `ToArray()`.
+- `aInvariantDateCols` counts columns from 0, so `{1}` marks the second column. [`GetDataSet`](GetDataSet.md), [`GetDataSetEx`](GetDataSetEx.md), [`GetDataSetXMLFromSelect`](GetDataSetXMLFromSelect.md), [`LSelect`](LSelect.md), [`LSelect1`](LSelect1.md), [`LSelectC`](LSelectC.md) and [`SQLExecute`](SQLExecute.md) count from 1. Column names work the same way everywhere.
+- On a connection that stores times in UTC, date columns that are not in `aInvariantDateCols` are converted to local time, and [`ToXml()`](ToXml.md) shows them with a time-zone offset. Invariant columns are returned exactly as stored, with no offset.
 
 ## Examples
 

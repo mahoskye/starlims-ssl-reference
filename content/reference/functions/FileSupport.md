@@ -108,6 +108,7 @@ For `SETATTR`, only the first non-space character is used. The supported values 
     - Assume `READ` returns a short string at end of file. It pads the result with spaces when fewer characters are available.
     - Treat `RENAME` as a metadata-only rename. It uses the same move logic as `MOVE` and therefore depends on a destination path.
     - Rely on non-canonical request prefixes in published code just because the implementation accepts leading-text matches.
+    - Pass `"EXISTS"` to test whether a file exists. There is no such request, so it raises `Invalid request provided!`. Use `CHECK`.
 
 ## Caveats
 

@@ -121,7 +121,7 @@ Checks each source file for existence first, then merges only the files that are
     :FOR nIndex := 1 :TO ALen(aSourceFiles);
         sFile := aSourceFiles[nIndex];
 
-        :IF FileSupport(sFile, "EXISTS");
+        :IF FileSupport(sFile, "CHECK");
             AAdd(aValidFiles, sFile);
         :ENDIF;
     :NEXT;

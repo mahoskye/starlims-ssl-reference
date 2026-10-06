@@ -77,10 +77,10 @@ Retrieve a named connection and confirm the retrieval succeeded. Pass a configur
 DoProc("GetConnectionExample");
 ```
 
-[`UsrMes`](UsrMes.md) logs:
+[`UsrMes`](UsrMes.md) logs the name of the database behind the connection, where `<database name>` depends on your environment:
 
 ```text
-Database: LIMSDB
+Database: <database name>
 ```
 
 ## Related
