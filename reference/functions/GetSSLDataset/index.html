@@ -4171,6 +4171,8 @@
 <li>Placeholder syntax in <code>sSql</code> must match the target provider. On SQL Server, write named parameters as <code>@name</code> in the SQL and list them the same way in <code>aParamNames</code> (for example <code>{"@status"}</code>). An Oracle-style <code>:name</code> placeholder raises <code>Incorrect syntax near ':'</code> on SQL Server.</li>
 <li>If <code>aParamValues</code> contains more entries than <code>aParamNames</code>, the extra values are ignored.</li>
 <li><code>bNullAsBlank</code> affects how the returned <a href="../../classes/SSLDataset/"><code>SSLDataset</code></a> exposes values, especially through methods such as <code>ToArray()</code>.</li>
+<li><code>aInvariantDateCols</code> counts columns from 0, so <code>{1}</code> marks the second column. <a href="../GetDataSet/"><code>GetDataSet</code></a>, <a href="../GetDataSetEx/"><code>GetDataSetEx</code></a>, <a href="../GetDataSetXMLFromSelect/"><code>GetDataSetXMLFromSelect</code></a>, <a href="../LSelect/"><code>LSelect</code></a>, <a href="../LSelect1/"><code>LSelect1</code></a>, <a href="../LSelectC/"><code>LSelectC</code></a> and <a href="../SQLExecute/"><code>SQLExecute</code></a> count from 1. Column names work the same way everywhere.</li>
+<li>On a connection that stores times in UTC, date columns that are not in <code>aInvariantDateCols</code> are converted to local time, and <a href="../ToXml/"><code>ToXml()</code></a> shows them with a time-zone offset. Invariant columns are returned exactly as stored, with no offset.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="read-query-results-as-an-ssldataset">Read query results as an SSLDataset<a class="headerlink" href="#read-query-results-as-an-ssldataset" title="Permanent link">&para;</a></h3>
@@ -4297,7 +4299,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 6, 2026 19:37:51 UTC">October 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 6, 2026 22:21:01 UTC">October 6, 2026</span>
   </span>
 
     
