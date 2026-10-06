@@ -131,17 +131,20 @@ DoProc("RefreshArchiveSummary");
 
 ### Save and restore timeouts independently across two connections
 
-Set different timeouts on two named connections, query each, then restore both original values in [`:FINALLY`](../keywords/FINALLY.md) in reverse order.
+Set different timeouts on two named connections, query each, then restore both original values in [`:FINALLY`](../keywords/FINALLY.md) in reverse order. The second timeout is set inside [`:TRY`](../keywords/TRY.md), so the first is restored even if the second connection is not available, and `bArchiveSet` keeps the second restore from running when the second call failed.
 
 ```ssl
 :PROCEDURE CompareOperationalAndArchiveCounts;
-	:DECLARE nOpsPrevTimeout, nArchivePrevTimeout;
+	:DECLARE nOpsPrevTimeout, nArchivePrevTimeout, bArchiveSet;
 	:DECLARE aOpsRows, aArchiveRows;
 
+	bArchiveSet := .F.;
 	nOpsPrevTimeout := SetSqlTimeout(45, "DATABASE");
-	nArchivePrevTimeout := SetSqlTimeout(180, "ARCHIVE");
 
 	:TRY;
+		nArchivePrevTimeout := SetSqlTimeout(180, "ARCHIVE");
+		bArchiveSet := .T.;
+
 		aOpsRows := SQLExecute("
 		    SELECT COUNT(*) AS row_count
 		    FROM orders
@@ -162,7 +165,9 @@ Set different timeouts on two named connections, query each, then restore both o
 		);
 		/* Logs operational and archive row counts;
 	:FINALLY;
-		SetSqlTimeout(nArchivePrevTimeout, "ARCHIVE");
+		:IF bArchiveSet;
+			SetSqlTimeout(nArchivePrevTimeout, "ARCHIVE");
+		:ENDIF;
 		SetSqlTimeout(nOpsPrevTimeout, "DATABASE");
 	:ENDTRY;
 :ENDPROC;
