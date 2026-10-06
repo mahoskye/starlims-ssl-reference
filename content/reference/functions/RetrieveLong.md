@@ -58,7 +58,7 @@ RetrieveLong([sConnectionName], sTableName, sColumnName, sWhereCondition, sOutpu
 !!! success "Do"
     - Use a restrictive `sWhereCondition` so the query clearly targets the row you expect.
     - Wrap the call in `:TRY / :CATCH` when the database, file path, or permissions may fail.
-    - Verify the output file after the call with `FileSupport(..., "EXISTS")` or `FileSupport(..., "SIZE")` because [`.T.`](../literals/true.md) does not guarantee bytes were written.
+    - Verify the output file after the call with `FileSupport(..., "CHECK")` or `FileSupport(..., "SIZE")` because [`.T.`](../literals/true.md) does not guarantee bytes were written.
     - Leave `bIsCompressed` omitted or pass [`.F.`](../literals/false.md).
 
 !!! failure "Don't"
@@ -98,7 +98,7 @@ Fetch a single BLOB column, write it to disk, and confirm the file was actually 
             .F.
         );
 
-        :IF FileSupport(sOutputFilePath, "EXISTS");
+        :IF FileSupport(sOutputFilePath, "CHECK");
             nBytes := FileSupport(sOutputFilePath, "SIZE");
             UsrMes(
                 "Exported attachment to " + sOutputFilePath +
@@ -160,7 +160,7 @@ Query for a list of IDs and export each matching BLOB to a separate file, tracki
                 .F.
             );
 
-            :IF FileSupport(sOutputFilePath, "EXISTS") .AND. FileSupport(sOutputFilePath, "SIZE") > 0;
+            :IF FileSupport(sOutputFilePath, "CHECK") .AND. FileSupport(sOutputFilePath, "SIZE") > 0;
                 nWritten += 1;
             :ELSE;
                 nSkipped += 1;

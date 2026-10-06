@@ -150,7 +150,7 @@ DoProc("BuildStringTVP");
 
 ### Target a specific connection and catch errors
 
-Passes a named connection to direct the TVP at a non-default database, and wraps the call in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) to handle resolution failures.
+Passes the connection name explicitly, which is how you would direct the TVP at a non-default database, and wraps the call in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) to handle resolution failures.
 
 ```ssl
 :PROCEDURE BuildRemoteTVP;
@@ -172,7 +172,13 @@ Passes a named connection to direct the TVP at a non-default database, and wraps
 DoProc("BuildRemoteTVP");
 ```
 
-On failure, [`ErrorMes`](ErrorMes.md) logs:
+[`UsrMes`](UsrMes.md) logs:
+
+```text
+Remote TVP created
+```
+
+On failure, for example when the connection name is unknown, [`ErrorMes`](ErrorMes.md) logs:
 
 ```text
 TVP creation failed: <error message>

@@ -13,7 +13,7 @@ starlims:
 
 Returns the uppercase DBMS provider identifier for a named database connection.
 
-Returns a string such as `"SQLSERVER"` or `"ORACLE"` for the connection identified by `sConnectionName`. If `sConnectionName` is omitted, empty, or [`NIL`](../literals/nil.md), the function uses the default connection. If the name does not match any configured connection, or if the internal database collection is unavailable, the function raises an error; it never returns [`NIL`](../literals/nil.md) or an empty string for a failed lookup.
+Returns the provider identifier for the connection identified by `sConnectionName`, for example `"NATIVESQL"` for a SQL Server connection that uses the native provider. It is the provider entry from the connection's provider settings (column 2 of [`GetConnectionStrings`](GetConnectionStrings.md)), while [`GetDBMSName`](GetDBMSName.md) returns the platform, such as `"SQL"`. If `sConnectionName` is omitted, empty, or [`NIL`](../literals/nil.md), the function uses the default connection. If the name does not match any configured connection, or if the internal database collection is unavailable, the function raises an error; it never returns [`NIL`](../literals/nil.md) or an empty string for a failed lookup.
 
 ## When to use
 
@@ -80,7 +80,7 @@ DoProc("ShowProviderName");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Provider: SQLSERVER
+Provider: NATIVESQL
 ```
 
 ### Handle an unknown connection name safely
@@ -107,7 +107,7 @@ DoProc("GetProviderSafe", {"NoSuchConnection"});
 
 ### Branch logic by provider identifier
 
-Uses the returned identifier to select a provider-specific integration strategy, falling back to `"GENERIC"` when the connection is not found.
+Uses the returned identifier to select a provider-specific integration strategy, falling back to `"GENERIC"` for other providers or when the connection is not found. For the `DATABASE` connection on SQL Server it returns `"MSSQL_SPECIFIC"`.
 
 ```ssl
 :PROCEDURE AdaptIntegrationByProvider;
@@ -121,14 +121,8 @@ Uses the returned identifier to select a provider-specific integration strategy,
     :ENDTRY;
 
     :BEGINCASE;
-    :CASE sProvider == "ORACLE";
-        sStrategy := "ORACLE_SPECIFIC";
-        :EXITCASE;
-    :CASE sProvider == "SQLSERVER";
+    :CASE sProvider == "NATIVESQL";
         sStrategy := "MSSQL_SPECIFIC";
-        :EXITCASE;
-    :CASE sProvider == "POSTGRESQL";
-        sStrategy := "POSTGRES_SPECIFIC";
         :EXITCASE;
     :OTHERWISE;
         sStrategy := "GENERIC";

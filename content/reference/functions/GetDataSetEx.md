@@ -44,7 +44,7 @@ GetDataSetEx(sCommandString, [sConnectionName], [aValues], [bIncludeSchema], [bI
 | `bIncludeHeader` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Whether to include the XML declaration/header in the returned string. |
 | `sTableName` | [string](../types/string.md) | no | derived from query, else `Table` | Table name to assign to the first dataset table in the XML. |
 | `bNullAsBlank` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Whether database nulls should be emitted as blank values in the XML output. |
-| `aInvariantDateCols` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Array of 1-based numeric column indexes to treat as invariant-date columns. |
+| `aInvariantDateCols` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Date columns to return as stored, without time-zone conversion. Pass 1-based column indexes or column names. |
 
 ## Returns
 
@@ -69,13 +69,13 @@ For `SELECT` statements, the XML contains the returned rows. For non-`SELECT` st
     - Use `?` placeholders with `aValues` for dynamic values.
     - Omit `aValues` entirely when the command has no parameters.
     - Pass an explicit `sTableName` when downstream XML consumers depend on a stable dataset table name.
-    - Use numeric 1-based column indexes in `aInvariantDateCols`.
+    - Count `aInvariantDateCols` columns from 1, or pass column names.
 
 !!! failure "Don't"
     - Use `?varName?` syntax with `GetDataSetEx`. That substitution style is for [`SQLExecute`](SQLExecute.md).
     - Pass a nested array in `aValues`. The function expects a single-dimensional values array.
     - Assume omitted `bNullAsBlank` preserves database nulls. The default is [`.T.`](../literals/true.md).
-    - Pass column names in `aInvariantDateCols`. This parameter is index-based.
+    - Count `aInvariantDateCols` columns from 0. This function counts from 1. Of the functions that take `aInvariantDateCols`, only [`GetSSLDataset`](GetSSLDataset.md) counts from 0.
 
 ## Caveats
 

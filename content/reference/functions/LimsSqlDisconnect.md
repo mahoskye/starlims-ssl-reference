@@ -58,7 +58,7 @@ LimsSqlDisconnect([sConnectionName])
 
 ### Disconnect after a read operation
 
-Connect to a named database, query a sample, and then disconnect explicitly. A warning is logged if the disconnect fails.
+Connect to a named database, query a sample, and then disconnect explicitly. A message is logged if the connection cannot be opened or the disconnect fails.
 
 ```ssl
 :PROCEDURE FetchSampleData;
@@ -67,7 +67,11 @@ Connect to a named database, query a sample, and then disconnect explicitly. A w
 	sConnName := "AnalyticalDB";
 	sSampleID := "SAMPLE-2024-001";
 
-	LimsSqlConnect(sConnName);
+	:IF !LimsSqlConnect(sConnName);
+		/* Logs on failure: connection not available;
+		UsrMes("Could not connect to " + sConnName);
+		:RETURN .F.;
+	:ENDIF;
 
 	aResults := SQLExecute("
 	    SELECT sample_name

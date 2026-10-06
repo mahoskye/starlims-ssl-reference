@@ -81,7 +81,7 @@ Wait three seconds after triggering a process before checking whether the output
 
 	LWait(nWaitSeconds);
 
-	bFileExists := FileSupport(sFilePath, "EXISTS");
+	bFileExists := FileSupport(sFilePath, "CHECK");
 
 	:IF bFileExists;
 		UsrMes("File is ready for processing");

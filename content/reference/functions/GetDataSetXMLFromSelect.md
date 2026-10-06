@@ -48,7 +48,7 @@ GetDataSetXMLFromSelect(sCommandString, [sConnectionName], [bIncludeHeader], [aV
 | `bIncludeSchema` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Whether to include XML schema information in the returned string. |
 | `sTableName` | [string](../types/string.md) | no | derived from query, else `Table` | Table name to assign to the first dataset table in the XML. |
 | `bNullAsBlank` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Whether database nulls should be emitted as blank values in the XML output. |
-| `aInvariantDateCols` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Array of 1-based numeric column indexes to treat as invariant-date columns. |
+| `aInvariantDateCols` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Date columns to return as stored, without time-zone conversion. Pass 1-based column indexes or column names. |
 
 ## Returns
 
@@ -73,13 +73,14 @@ If `bIncludeHeader` is [`.F.`](../literals/false.md), the function returns the X
     - Use positional `?` placeholders with `aValues` for dynamic values.
     - Pass an explicit `sConnectionName` when the query must run against a non-default connection.
     - Set `bIncludeHeader` and `bIncludeSchema` explicitly when another system depends on a specific XML shape.
-    - Use numeric 1-based column indexes in `aInvariantDateCols`.
+    - Count `aInvariantDateCols` columns from 1, or pass column names.
 
 !!! failure "Don't"
     - Use `?varName?` syntax with `GetDataSetXMLFromSelect`. That substitution style is for [`SQLExecute`](SQLExecute.md).
     - Pass a nested array in `aValues`. The function expects a single-dimensional values array.
     - Treat `sConnectionName` as a display label for the XML. It is the database connection name.
     - Assume schema is included by default. This function defaults `bIncludeSchema` to [`.F.`](../literals/false.md).
+    - Count `aInvariantDateCols` columns from 0. This function counts from 1. Of the functions that take `aInvariantDateCols`, only [`GetSSLDataset`](GetSSLDataset.md) counts from 0.
 
 ## Caveats
 

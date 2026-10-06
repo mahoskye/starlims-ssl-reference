@@ -39,7 +39,7 @@ GetDataSet(sCommandString, [aValues], [bIncludeSchema], [sTableName], [bNullAsBl
 | `bIncludeSchema` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Whether to include XML schema information in the returned string. |
 | `sTableName` | [string](../types/string.md) | no | derived from query, else `Table` | Table name to assign in the returned dataset XML. |
 | `bNullAsBlank` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Whether database nulls should be emitted as blank values in the dataset output. |
-| `aInvariantDateCols` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Array of 1-based column indexes to treat as invariant-date columns. |
+| `aInvariantDateCols` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Date columns to return as stored, without time-zone conversion. Pass 1-based column indexes or column names. |
 
 ## Returns
 
@@ -64,17 +64,18 @@ The returned XML always includes the XML header. If you need control over header
     - Use `?` placeholders with `aValues` for dynamic values.
     - Omit `aValues` entirely when the query has no parameters.
     - Pass an explicit `sTableName` when downstream XML consumers depend on a stable dataset table name.
-    - Use numeric 1-based column indexes in `aInvariantDateCols`.
+    - Count `aInvariantDateCols` columns from 1, or pass column names.
 
 !!! failure "Don't"
     - Use `?varName?` syntax with `GetDataSet`. That substitution style is for [`SQLExecute`](SQLExecute.md), not `GetDataSet`.
     - Pass a nested array in `aValues`. The function expects a single-dimensional values array.
     - Assume omitted `bNullAsBlank` preserves database nulls. The default is [`.T.`](../literals/true.md).
-    - Pass column names in `aInvariantDateCols`. This parameter is index-based.
+    - Count `aInvariantDateCols` columns from 0. This function counts from 1. Of the functions that take `aInvariantDateCols`, only [`GetSSLDataset`](GetSSLDataset.md) counts from 0.
 
 ## Caveats
 
 - Large result sets can produce very large XML strings and corresponding memory cost.
+- On a connection that stores times in UTC, date columns that are not in `aInvariantDateCols` are converted to local time, and the XML shows them with a time-zone offset. Invariant columns are returned exactly as stored, with no offset.
 
 ## Examples
 
