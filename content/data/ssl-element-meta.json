@@ -5819,19 +5819,21 @@
         }
       ],
       "caveats": [
-        "Placeholder syntax in sSql must match the target provider. In practice that is typically :name for Oracle and @name for non-Oracle providers.",
+        "Placeholder syntax in sSql must match the target provider. On SQL Server, write named parameters as @name in the SQL and list them the same way in aParamNames (for example {\"@status\"}). An Oracle-style :name placeholder raises Incorrect syntax near ':' on SQL Server.",
         "If aParamValues contains more entries than aParamNames, the extra values are ignored.",
         "bNullAsBlank affects how the returned SSLDataset exposes values, especially through methods such as ToArray()."
       ],
       "best_practices": {
         "do": [
           "Supply both aParamNames and aParamValues when using bound parameters.",
+          "Write SQL Server parameters as @name in both sSql and aParamNames.",
           "Use a stable sTableName when downstream code depends on the dataset table name.",
           "Set bNullAsBlank to .F. when your logic must distinguish database nulls from blank strings.",
           "Use one consistent form in aInvariantDateCols: all names or all zero-based ordinals."
         ],
         "dont": [
           "Assume GetSSLDataset uses ?varName? substitution like SQLExecute. This function binds explicit parameter names and values arrays.",
+          "Use Oracle-style :name placeholders against SQL Server. They raise a syntax error there.",
           "Pass only one of aParamNames or aParamValues. If either is missing, no parameters are bound.",
           "Assume omitted sTableName falls back to Table. This function falls back to __TableName__ when it cannot derive a table name.",
           "Mix column names and numeric ordinals in the same aInvariantDateCols array."
@@ -7006,20 +7008,23 @@
       ],
       "caveats": [
         "LSearch falls back only when the scalar result is missing or database NULL. An actual empty string from the database is returned as-is.",
+        "With a NIL fallback and no matching row, LSearch returns an empty string, not NIL, in observed runtime behavior. A = NIL or == NIL check on the result is therefore false. Use Empty() instead.",
         "Passing a non-array value as aArrayOfValues (the fourth parameter) can lock up the application — the runtime's error handling for this type mismatch is anything but graceful. Always pass an array of bind values or omit the parameter entirely."
       ],
       "best_practices": {
         "do": [
           "Pass an explicit fallback that matches how your script should behave when no row is found.",
           "Use positional ? placeholders with aArrayOfValues instead of concatenating values into SQL text.",
-          "Use NIL as the fallback when you need to distinguish missing data from an empty string or zero.",
+          "Test the result with Empty() when you pass NIL as the fallback, because a missing row comes back as an empty string.",
+          "Pass a sentinel value that cannot occur in your data when you must tell a missing row apart from a real empty string or zero.",
           "Switch to LSelect, LSelect1, or LSelectC when you need rows rather than one scalar value."
         ],
         "dont": [
           "Use ?varName? syntax with LSearch. That substitution style is for SQLExecute only.",
           "Treat LSearch as a multi-row query helper. It is meant for a single scalar result.",
           "Pass a multidimensional array to aArrayOfValues; it raises an error before execution.",
-          "Rely on an implicit fallback. Decide whether your missing-data case should return \"\", 0, NIL, .F., or another explicit value."
+          "Rely on an implicit fallback. Decide whether your missing-data case should return \"\", 0, .F., or another explicit value.",
+          "Compare the result to NIL to detect a missing row. A NIL fallback comes back as an empty string, so the comparison is false."
         ]
       }
     },
@@ -7659,11 +7664,12 @@
       "id": "ssl.function.limssetcounter",
       "element_type": "function",
       "title": "LimsSetCounter",
-      "summary": "Generates the next counter value and, when given matching field and value arrays, inserts a new row with that key.",
+      "summary": "Generates the next counter value and inserts a new row with that key into the target table.",
       "doc_status": "published",
       "source_path": "content/reference/functions/LimsSetCounter.md",
       "exceptions": [],
       "caveats": [
+        "When no counter exists yet for the table, field, and prefix, LimsSetCounter returns 1 but does not create the counter, so repeated calls keep returning 1 (and inserting rows with the same key). Once the counter exists, each call advances it.",
         "If aFields and aValues have different lengths, the counter value is still generated, but the row insert is skipped.",
         "nIncrementWith affects how far the stored counter advances, but the returned numeric value is still the first value from that reserved range.",
         "Insert-failure handling is not identical in every deployment. Do not assume the generated number was rolled back unless you have verified that behavior in your environment."
@@ -7673,10 +7679,13 @@
           "Pass only additional insert columns in aFields; sFieldName is inserted automatically.",
           "Keep aFields and aValues aligned by position and length.",
           "Check for a 0 return when the counter cannot be generated.",
+          "Make sure the counter for the table, field, and prefix has been set up before relying on it for unique keys.",
           "Wrap calls in :TRY / :CATCH when the inputs or database state may be unreliable."
         ],
         "dont": [
           "Put sFieldName in aFields; that produces a duplicate insert column.",
+          "Use LimsSetCounter just to read the next number. It also inserts a row into sTableName, even when aFields and aValues are omitted.",
+          "Assume the first call creates the counter. Without an existing counter, every call returns 1.",
           "Assume empty strings are treated the same as NIL; only NIL table or field arguments short-circuit to 0 before work starts.",
           "Assume mismatched arrays will still insert a partial row; the function skips the insert when the array lengths differ.",
           "Assume an insert failure always means the generated number can be reused; some environments may still consume the next counter value."
@@ -11989,6 +11998,7 @@
       "caveats": [
         "InnerException only returns nested SSL runtime errors, not every possible nested cause.",
         "Operation can be blank and Code can be 0 when the source error did not provide them.",
+        "For a SQL Server error caught in :CATCH (for example an invalid column or an invalid object name), Code is 0 in observed runtime behavior. The SQL Server error number (207 for an invalid column, 208 for an invalid object) is in GenCode on the SSLSQLError returned by GetLastSQLError().",
         "FullDescription and FullDescriptionEx are formatted diagnostic strings, not structured field-by-field data.",
         "FullDescriptionEx includes the full stack trace when one is available; FullDescription uses a shorter stack view.",
         "For compiler errors, SQL errors, and script-not-found errors, the formatted diagnostic text uses specialized headings instead of a generic Error: line.",
@@ -11997,13 +12007,15 @@
       "best_practices": {
         "do": [
           "Read oErr:Description for user-facing error text after GetLastSSLError().",
-          "Use oErr:Code and oErr:Operation when you need structured diagnostics.",
+          "Use oErr:Code and oErr:Operation when you need structured diagnostics for errors raised with RaiseError.",
+          "Read GetLastSQLError():GenCode when you need the SQL Server error number for a failed query.",
           "Use oErr:FullDescriptionEx for support logs when you need the complete stack trace."
         ],
         "dont": [
           "Assume oErr:InnerException is always available or that it contains every nested cause. Only nested SSL runtime errors surface there.",
           "Show FullDescription or FullDescriptionEx directly to end users unless they need technical diagnostics.",
-          "Rely on Operation or Code being populated when you build an SSLError from an arbitrary exception object."
+          "Rely on Operation or Code being populated when you build an SSLError from an arbitrary exception object.",
+          "Branch on SQL Server error numbers such as 207 or 208 with oErr:Code. For a caught SQL error, Code is 0."
         ]
       }
     },
@@ -12160,6 +12172,7 @@
           "Use SetDatabase() before sequence operations when the work should target a non-default database."
         ],
         "dont": [
+          "Construct Sequence with only three arguments. Pass \"\" as the fourth argument when you do not need a suffix.",
           "Assume CacheSize changes Oracle behavior, because it is only used when SQL Server creates the sequence.",
           "Treat any non-\"ORACLE\" platform value as validation-safe input, because it falls back to SQL Server behavior.",
           "Use Reset() on Oracle when the sequence cannot be safely recreated, because Oracle does not support resetting in place and the operation resets the sequence by recreating it."
@@ -14003,7 +14016,8 @@
       "source_path": "content/reference/literals/nil.md",
       "exceptions": [],
       "caveats": [
-        "LimsString(NIL) returns the string \"NIL\"."
+        "LimsString(NIL) returns the string \"NIL\".",
+        "A LSearch call with a NIL default returns an empty string, not NIL, when no row matches. Test the result with Empty() rather than comparing it to NIL."
       ],
       "best_practices": {
         "do": [
