@@ -87,7 +87,7 @@ Upload a single file to the `DOCUMENT_FILE` column of a specific sample row. Wra
     :DECLARE sConnectionName, sTableName, sColumnName, sWhereCondition;
     :DECLARE sFilePath, oErr;
 
-    sConnectionName := "LIMS";
+    sConnectionName := "DATABASE";
     sTableName := "SAMPLE";
     sColumnName := "DOCUMENT_FILE";
     sWhereCondition := "SAMPLE_ID = 'SAM-2024-001'";
@@ -117,7 +117,7 @@ Iterate over a list of asset IDs and upload a matching image file for each one. 
     :DECLARE aAssetIds, aImageFiles, nIndex, nUpdated, nFailed;
     :DECLARE oErr, sErrorMsg;
 
-    sConnectionName := "LIMS";
+    sConnectionName := "DATABASE";
     sTableName := "assets";
     sColumnName := "image_data";
     nUpdated := 0;
@@ -170,7 +170,7 @@ Copy an external file to a local temp path, update the long column inside a tran
     :DECLARE bInTrans;
     :DECLARE oErr, sLogMsg;
 
-    sConnectionName := "LIMS";
+    sConnectionName := "DATABASE";
     sTableName := "SAMPLE_ANALYSIS";
     sColumnName := "RESULT_FILE";
     sWhereCond := "ANALYSIS_ID = 'A-2024-00421'";

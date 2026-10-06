@@ -100,7 +100,7 @@ Passes an explicit connection name and logs the current open transaction count f
 :PROCEDURE CheckNamedConnection;
     :DECLARE sConnection, nTranCount;
 
-    sConnection := "LIMS";
+    sConnection := "DATABASE";
     nTranCount := GetTransactionsCount(sConnection);
 
     UsrMes(
@@ -118,7 +118,7 @@ DoProc("CheckNamedConnection");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Connection LIMS has 0 open transaction(s).
+Connection DATABASE has 0 open transaction(s).
 ```
 
 ### End only the transaction your code started
@@ -130,7 +130,7 @@ Records the transaction depth before the update, opens a new transaction only wh
     :PARAMETERS sSampleID;
     :DECLARE sConnection, nStartCount, nEndCount, bStartedHere, oErr;
 
-    sConnection := "LIMS";
+    sConnection := "DATABASE";
     bStartedHere := .F.;
     nStartCount := GetTransactionsCount(sConnection);
 

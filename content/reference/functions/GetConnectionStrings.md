@@ -89,7 +89,7 @@ Search the connection list for a specific name and display its provider when fou
 :ENDPROC;
 
 /* Usage;
-DoProc("FindConnection", {"LIMS"});
+DoProc("FindConnection", {"DATABASE"});
 ```
 
 ## Related

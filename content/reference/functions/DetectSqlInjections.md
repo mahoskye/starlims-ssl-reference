@@ -80,7 +80,7 @@ Enables SQL injection detection on a named connection and reports whether detect
 :PROCEDURE EnableDetection;
     :DECLARE sConnectionName, bPreviousState, sMessage;
 
-    sConnectionName := "LABDATA";
+    sConnectionName := "DATABASE";
     bPreviousState := DetectSqlInjections(.T., sConnectionName);
 
     :IF bPreviousState;
@@ -102,8 +102,8 @@ DoProc("EnableDetection");
 `UsrMes` logs one of:
 
 ```text
-SQL injection detection was already enabled for LABDATA
-SQL injection detection is now enabled for LABDATA
+SQL injection detection was already enabled for DATABASE
+SQL injection detection is now enabled for DATABASE
 ```
 
 ### Temporarily disable detection and restore it
@@ -114,7 +114,7 @@ Disables SQL injection detection before running a controlled query, then restore
 :PROCEDURE RunControlledQuery;
     :DECLARE sConnectionName, bPreviousState, aRows, sSQL, oErr;
 
-    sConnectionName := "LABDATA";
+    sConnectionName := "DATABASE";
     bPreviousState := DetectSqlInjections(.F., sConnectionName);
 
     :TRY;
@@ -151,7 +151,7 @@ Enables SQL injection detection on each connection in a list and tracks which on
 :PROCEDURE NormalizeDetectionSettings;
     :DECLARE aConnections, sConnectionName, aChanged, bPreviousState, nIndex;
 
-    aConnections := {"LIMS", "LABDATA", "REPORTING"};
+    aConnections := {"DATABASE", "DICTIONARY"};
     aChanged := {};
 
     :FOR nIndex := 1 :TO ALen(aConnections);

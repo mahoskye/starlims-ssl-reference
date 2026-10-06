@@ -68,7 +68,7 @@ Calls the function with an explicit connection name and logs the returned upperc
 :PROCEDURE ShowProviderName;
     :DECLARE sProviderName;
 
-    sProviderName := GetDBMSProviderName("LIMS");
+    sProviderName := GetDBMSProviderName("DATABASE");
 
     UsrMes("Provider: " + sProviderName);
 :ENDPROC;
@@ -102,7 +102,7 @@ Wraps the call in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) 
 :ENDPROC;
 
 /* Usage;
-DoProc("GetProviderSafe", {"LIMS"});
+DoProc("GetProviderSafe", {"NoSuchConnection"});
 ```
 
 ### Branch logic by provider identifier
@@ -139,7 +139,7 @@ Uses the returned identifier to select a provider-specific integration strategy,
 :ENDPROC;
 
 /* Usage;
-DoProc("AdaptIntegrationByProvider", {"REPORTING"});
+DoProc("AdaptIntegrationByProvider", {"DATABASE"});
 ```
 
 ## Related

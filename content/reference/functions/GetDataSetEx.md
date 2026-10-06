@@ -92,7 +92,7 @@ Executes a parameterless query on a named connection and reports the length of t
 :PROCEDURE ExportActiveSamples;
 	:DECLARE sSql, sXml, sConnection;
 
-	sConnection := "REPORTING";
+	sConnection := "DATABASE";
 	sSql := "
 	    SELECT sample_id, sample_name, status
 	    FROM sample
@@ -127,7 +127,7 @@ Passes a status value via a `?` placeholder, suppresses the XML declaration and 
 	:DEFAULT sStatus, "A";
 	:DECLARE sSql, sXml, sConnection, aValues;
 
-	sConnection := "REPORTING";
+	sConnection := "DATABASE";
 	sSql := "
 	    SELECT sample_id, sample_name, status, received_date
 	    FROM sample
@@ -155,7 +155,7 @@ Passes a date parameter and an invariant-date column index array, wrapping the c
 	:DEFAULT dStartDate, CToD("01/01/2024");
 	:DECLARE sSql, sXml, sConnection, aValues, aInvariantDateCols, oErr;
 
-	sConnection := "REPORTING";
+	sConnection := "DATABASE";
 	sSql := "
 	    SELECT sample_id, sample_name, status, created_date, released_date
 	    FROM sample

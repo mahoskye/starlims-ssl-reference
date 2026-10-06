@@ -121,7 +121,7 @@ Filters by both status and received date using two `?` placeholders, targeting a
 	:DEFAULT sStatus, "A";
 	:DECLARE sSql, sXml, sConnection, aValues;
 
-	sConnection := "REPORTING";
+	sConnection := "DATABASE";
 	sSql := "
 	    SELECT sample_id, sample_name, status, received_date
 	    FROM sample

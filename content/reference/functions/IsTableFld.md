@@ -71,13 +71,13 @@ IsTableFld(sConnectionName, sTableName, sFieldName)
 
 ### Check a field before reading it
 
-Check whether `received_date` exists in the `sample` table on the `LAB` connection before issuing the query. If the field is absent the guard fires and returns early, avoiding a runtime SQL error.
+Check whether `received_date` exists in the `sample` table on the `DATABASE` connection before issuing the query. If the field is absent the guard fires and returns early, avoiding a runtime SQL error.
 
 ```ssl
 :PROCEDURE GetSamplesWithOptionalDate;
     :DECLARE sConnectionName, sTableName, sFieldName, aSamples;
 
-    sConnectionName := "LAB";
+    sConnectionName := "DATABASE";
     sTableName := "sample";
     sFieldName := "received_date";
 
@@ -148,7 +148,7 @@ Collect the names of any required fields that are absent from the `result` table
 :PROCEDURE StartResultExport;
     :DECLARE aMissingFields;
 
-    aMissingFields := DoProc("GetMissingResultFields", {"LAB"});
+    aMissingFields := DoProc("GetMissingResultFields", {"DATABASE"});
 
     :IF ALen(aMissingFields) > 0;
         ErrorMes("result is missing one or more required fields");

@@ -159,7 +159,7 @@ Passes a named connection to direct the TVP at a non-default database, and wraps
 	aIds := {2001, 2002, 2003};
 
 	:TRY;
-		oTVP := ArrayToTVP(aIds, "INT", "LABDATA");
+		oTVP := ArrayToTVP(aIds, "INT", "DATABASE");
 		UsrMes("Remote TVP created");
 
 	:CATCH;

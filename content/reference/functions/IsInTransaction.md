@@ -130,7 +130,7 @@ Pass an explicit connection name and wrap the call in [`:TRY`](../keywords/TRY.m
 :ENDPROC;
 
 /* Usage;
-DoProc("CheckNamedConnectionTransaction", {"LIMS_PROD"});
+DoProc("CheckNamedConnectionTransaction", {"DATABASE"});
 ```
 
 ## Related

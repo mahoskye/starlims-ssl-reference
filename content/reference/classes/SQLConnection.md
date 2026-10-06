@@ -68,7 +68,7 @@ Retrieves a configured connection and logs non-sensitive metadata.
 :PROCEDURE ShowConnectionInfo;
     :DECLARE oConn, sMessage;
 
-    oConn := GetConnectionByName("LIMS");
+    oConn := GetConnectionByName("DATABASE");
 
     sMessage := "Database: " + oConn:DatabaseName;
     sMessage := sMessage + ", platform: " + oConn:Platforma;
@@ -91,7 +91,7 @@ Uses the `UseUTC` property to branch timestamp-handling logic.
 :PROCEDURE DescribeConnectionTimeMode;
     :DECLARE oConn, sMode;
 
-    oConn := GetConnectionByName("LIMS");
+    oConn := GetConnectionByName("DATABASE");
 
     :IF oConn:UseUTC;
         sMode := "Connection uses UTC timestamps";

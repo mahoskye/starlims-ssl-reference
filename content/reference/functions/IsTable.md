@@ -68,13 +68,13 @@ IsTable(sConnectionName, sTableName)
 
 ### Check a table before querying it
 
-Guard the query with an existence check before calling [`SQLExecute`](SQLExecute.md). If the `sample` table does not exist on the `LAB` connection, the message fires and the procedure returns early with an empty array.
+Guard the query with an existence check before calling [`SQLExecute`](SQLExecute.md). If the `sample` table does not exist on the `DATABASE` connection, the message fires and the procedure returns early with an empty array.
 
 ```ssl
 :PROCEDURE GetSampleRows;
 	:DECLARE sConnectionName, sTableName, aSamples;
 
-	sConnectionName := "LAB";
+	sConnectionName := "DATABASE";
 	sTableName := "sample";
 
 	:IF !IsTable(sConnectionName, sTableName);
@@ -147,7 +147,7 @@ Check that every table a module depends on exists before proceeding. `ValidateRe
 	:DECLARE aMissingTables;
 
 	aMissingTables := DoProc("ValidateRequiredTables", {
-		"LAB",
+		"DATABASE",
 		{"sample", "result", "ordtask"}
 	});
 

@@ -161,7 +161,7 @@ Passes `sConnName` to target a specific connection, then updates an order and al
 
 /* Usage;
 DoProc("SaveOrderAndTasks", {
-    "LABDB",
+    "DATABASE",
     "ORD-001",
     "APPROVED",
     {"TASK-01", "TASK-02"}
@@ -226,7 +226,7 @@ Passes `"Serializable"` as the isolation level to prevent other transactions fro
 :ENDPROC;
 
 /* Usage;
-DoProc("PostCloseoutAudit", {"LABDB", "BATCH-001"});
+DoProc("PostCloseoutAudit", {"DATABASE", "BATCH-001"});
 ```
 
 ## Related
