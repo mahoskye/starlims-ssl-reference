@@ -4270,7 +4270,7 @@
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>CreateORMSession</code> does not call <code>UpdatingTable</code> by itself. The check runs later when a supported table update is about to execute.</li>
-<li>Once <code>CreateORMSession</code> has run, the ORM table check applies to every <code>UPDATE</code> for the rest of the run, through <a href="../RunSQL/"><code>RunSQL</code></a> or <a href="../SQLExecute/"><code>SQLExecute</code></a>, with or without bound values. In observed runtime behavior, an <code>UPDATE</code> on a table that is not registered as an application table, such as a scratch or staging table, raises <code>Run-time error: Invalid property: ClassName</code>. This happens whether <code>UpdatingTable</code> is set or not. <code>INSERT</code>, <code>SELECT</code>, <code>CREATE TABLE</code> and <code>DROP TABLE</code> are not affected.</li>
+<li>Once <code>CreateORMSession</code> has run, the ORM table check applies to every <code>UPDATE</code> for the rest of the run, through <a href="../RunSQL/"><code>RunSQL</code></a> or <a href="../SQLExecute/"><code>SQLExecute</code></a>, with or without bound values. In observed runtime behavior, an <code>UPDATE</code> on a table that is not registered as an application table, such as a scratch or staging table, raises <code>Run-time error: Invalid property: ClassName</code>. This happens whether <code>UpdatingTable</code> is set or not, and <code>UpdatingTable</code> is not called for that update. <code>INSERT</code>, <code>SELECT</code>, <code>CREATE TABLE</code> and <code>DROP TABLE</code> are not affected.</li>
 <li>Setting <code>UpdatingTable</code> back to <a href="../../literals/nil/"><code>NIL</code></a> does not end the session. A later call returns the same object, and the effect lasts until the run ends. A separate run starts without it.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
@@ -4334,7 +4334,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 6, 2026 22:27:55 UTC">October 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 6, 2026 22:36:30 UTC">October 6, 2026</span>
   </span>
 
     
