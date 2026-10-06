@@ -76,7 +76,7 @@ Retrieves a configured connection and logs non-sensitive metadata.
 
     UsrMes(sMessage);
 
-    :RETURN oConn;
+    :RETURN sMessage;
 :ENDPROC;
 
 /* Usage;
