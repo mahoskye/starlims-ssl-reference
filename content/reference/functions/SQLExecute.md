@@ -126,7 +126,7 @@ DoProc("GetLoggedTasks");
 
 ### Run an UPDATE and verify success
 
-Execute an `UPDATE` statement and check the boolean return value; use [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) to handle any database error, and roll back on failure by passing [`.T.`](../literals/true.md) as the third argument.
+Execute an `UPDATE` statement and check the boolean return value; use [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) to handle any database error. This call is not inside a transaction, so there is nothing to roll back; see [Caveats](#caveats) for failures inside one.
 
 ```ssl
 :PROCEDURE CompleteTask;
@@ -142,7 +142,7 @@ Execute an `UPDATE` statement and check the boolean return value; use [`:TRY`](.
 	";
 
 	:TRY;
-		bSuccess := SQLExecute(sSQL,, .T.);
+		bSuccess := SQLExecute(sSQL);
 
 		:IF !bSuccess;
 			ErrorMes("Task update failed");

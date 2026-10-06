@@ -132,7 +132,7 @@ Passes `sConnName` to target a specific connection, then updates an order and al
             UPDATE orders SET
                 status = ?
             WHERE ordno = ?
-        ",, {sNewStatus, sOrdNo});
+        ", sConnName, {sNewStatus, sOrdNo});
 
         :FOR nIndex := 1 :TO ALen(aTaskCodes);
             RunSQL("
@@ -140,7 +140,7 @@ Passes `sConnName` to target a specific connection, then updates an order and al
                     status = ?
                 WHERE ordno = ?
                   AND testcode = ?
-            ",, {sNewStatus, sOrdNo, aTaskCodes[nIndex]});
+            ", sConnName, {sNewStatus, sOrdNo, aTaskCodes[nIndex]});
         :NEXT;
 
         bCommit := .T.;
@@ -188,7 +188,7 @@ Passes `"Serializable"` as the isolation level to prevent other transactions fro
             FROM batch_task
             WHERE batchid = ?
               AND status != ?
-        ", 0,, {sBatchID, "Closed"});
+        ", 0, sConnName, {sBatchID, "Closed"});
 
         :IF nOpenTasks > 0;
             RaiseError("The batch still has open tasks");
@@ -201,13 +201,13 @@ Passes `"Serializable"` as the isolation level to prevent other transactions fro
             VALUES (
                 ?, ?
             )
-        ",, {"BATCH_CLOSEOUT", sBatchID});
+        ", sConnName, {"BATCH_CLOSEOUT", sBatchID});
 
         RunSQL("
             UPDATE batch SET
                 status = ?
             WHERE batchid = ?
-        ",, {"Closed", sBatchID});
+        ", sConnName, {"Closed", sBatchID});
 
         bCommit := .T.;
 

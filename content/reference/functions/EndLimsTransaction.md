@@ -136,7 +136,7 @@ Opens a transaction on a named connection and validates that no open tasks remai
             FROM batch_task
             WHERE batchid = ?
               AND status = ?
-        ", 0,, {sBatchID, "Open"});
+        ", 0, sConnName, {sBatchID, "Open"});
 
         :IF nOpenTasks > 0;
             RaiseError("The batch still has open tasks");
@@ -146,7 +146,7 @@ Opens a transaction on a named connection and validates that no open tasks remai
             UPDATE batch SET
                 status = ?
             WHERE batchid = ?
-        ",, {sStatus, sBatchID});
+        ", sConnName, {sStatus, sBatchID});
 
         bCommit := .T.;
 
@@ -189,7 +189,7 @@ Opens an outer transaction for a batch update and an inner transaction for the a
             UPDATE batch SET
                 status = ?
             WHERE batchid = ?
-        ",, {"Closed", sBatchID});
+        ", sConnName, {"Closed", sBatchID});
 
         bInnerStarted := BeginLimsTransaction(sConnName);
 
@@ -201,7 +201,7 @@ Opens an outer transaction for a batch update and an inner transaction for the a
                 VALUES (
                     ?, ?
                 )
-            ",, {"BATCH_CLOSEOUT", sBatchID});
+            ", sConnName, {"BATCH_CLOSEOUT", sBatchID});
 
             bInnerCommit := .T.;
 

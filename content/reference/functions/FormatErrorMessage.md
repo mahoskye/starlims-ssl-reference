@@ -48,7 +48,6 @@ FormatErrorMessage(vError)
 !!! failure "Don't"
     - Assume every input produces a meaningful description — non-SSLError values always fall back to `"Unknown error."`.
     - Cast or convert error objects to string directly; direct conversion may produce technical or unhelpful output.
-    - Expect nested or compound error details; only the top-level description is returned.
 
 ## Caveats
 
