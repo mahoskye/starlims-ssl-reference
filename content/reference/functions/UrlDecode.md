@@ -13,7 +13,7 @@ starlims:
 
 Decodes percent-encoded URL text back into its readable string form.
 
-`UrlDecode` takes a [string](../types/string.md) value and returns its decoded form. If `sData` is [`NIL`](../literals/nil.md), the function returns [`NIL`](../literals/nil.md). If `sData` is not a [string](../types/string.md), the function raises an error. Use it when you receive URL-encoded text and need the readable value in SSL.
+`UrlDecode` takes a [string](../types/string.md) value and returns its decoded form. Both `%20` and `+` decode to a space, so `UrlDecode(UrlEncode(sText))` returns the original text. If `sData` is [`NIL`](../literals/nil.md), the function returns [`NIL`](../literals/nil.md). If `sData` is not a [string](../types/string.md), the function raises an error. Use it when you receive URL-encoded text and need the readable value in SSL.
 
 ## When to use
 

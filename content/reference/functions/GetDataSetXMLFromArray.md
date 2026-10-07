@@ -17,7 +17,7 @@ Generates dataset XML from in-memory values, field definitions, and output flags
 
 With the header enabled, the XML starts with the declaration `<?xml version="1.0" standalone="yes" ?>`. The data follows as an indented `<DataSet>` root element that holds one element per row, named after `sTableName`, with one child element per field.
 
-Unlike [`GetDataSetFromArrayEx`](GetDataSetFromArrayEx.md), this function does not generate default field names (`Field1`, `Field2`, ...) when `aArrayFields` is omitted. Use it when you want direct control over the XML-oriented form.
+Unlike [`GetDataSetFromArrayEx`](GetDataSetFromArrayEx.md), this function does not generate default field names (`Field1`, `Field2`, ...): when `aArrayFields` is omitted, the call raises an error, and when it is an empty array, the function returns an empty string. Use it when you want direct control over the XML-oriented form.
 
 ## When to use
 
@@ -38,7 +38,7 @@ GetDataSetXMLFromArray(aArrayOfValues, [aArrayFields], [sTableName], [bIncludeHe
 | Name | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | `aArrayOfValues` | [array](../types/array.md) | yes | — | Values to serialize. In the common case, each element is a row array. If an element is a scalar value, the runtime wraps it as a single-column row. |
-| `aArrayFields` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Field definitions for the output columns. Each element may be a field name string or a definition array such as `{"sample_id", "S", 20}` or `{"result_value", "N", 10, 2}`. |
+| `aArrayFields` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Field definitions for the output columns. Each element may be a field name string or a definition array such as `{"sample_id", "S", 20}` or `{"result_value", "N", 10, 2}`. Omitting it raises an error; an empty array returns an empty string. |
 | `sTableName` | [string](../types/string.md) | no | `Table` | Table name used when the argument is omitted or [`NIL`](../literals/nil.md). If you pass an empty string, the generated table name is normalized to `TABLE`. |
 | `bIncludeHeader` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Whether to include header information in the generated XML. |
 | `bIncludeSchema` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Whether to include schema metadata in the generated XML. |
@@ -52,6 +52,7 @@ GetDataSetXMLFromArray(aArrayOfValues, [aArrayFields], [sTableName], [bIncludeHe
 | Trigger | Exception message |
 | --- | --- |
 | `aArrayOfValues` is [`NIL`](../literals/nil.md). | `The values array parameter is null` |
+| `aArrayFields` is omitted. | `Object reference not set to an instance of an object.` |
 | A value cannot be stored in its field's declared type, such as text in a `D` (date) field. `{message}` is the .NET conversion error. | `{message}Couldn't store <{value}> in a Column.  Expected type is {type}.` |
 
 ## Best practices

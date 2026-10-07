@@ -30,19 +30,7 @@ Request:MethodName(args)
 
 ## Availability
 
-`Request` is available **only inside endpoint scripts**. Outside that context — for example, in a script invoked through `DoProc` from an interactive desktop session, or in a job triggered without an HTTP envelope — referencing `Request` raises an undeclared-variable error.
-
-If your code may run in either context, guard with a `:TRY` / `:CATCH` block:
-
-```ssl
-:DECLARE sUserAgent;
-
-:TRY;
-    sUserAgent := Request:UserAgent;
-:CATCH;
-    sUserAgent := "(no request)";
-:ENDTRY;
-```
+`Request` describes an incoming HTTP call **only inside endpoint scripts**. Referencing it elsewhere does not raise an undeclared-variable error: in observed runtime behavior, a script run from Designer can read `Request:UserAgent`, which returns the Designer client's user-agent text. A successful read therefore does not prove that the script is handling an HTTP request.
 
 ## What it holds
 
@@ -62,7 +50,7 @@ The web-service subclass inherits everything from `SSLRequest`, so code that rea
 ## Caveats
 
 - `Request` is read-only from the script's perspective. Modifying values on its collection properties (`QueryString`, `Headers`, etc.) does not change anything downstream.
-- Outside an endpoint context, `Request` raises an undeclared-variable error on access. Guard with `:TRY` / `:CATCH` if your script may run in either context.
+- Outside an endpoint context, `Request` does not raise on access, but its values do not come from an HTTP caller. In a script run from Designer, `Request:UserAgent` returns the Designer client's user-agent text.
 - Whether `Request` is an `SSLRequest` or `SSLWsRequest` depends on how the script was invoked. Code that needs to work in both contexts should rely only on the inherited surface — avoid `Parameters` unless you know the call path is a web service.
 
 ## Examples

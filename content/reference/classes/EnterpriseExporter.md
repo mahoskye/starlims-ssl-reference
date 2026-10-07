@@ -43,7 +43,7 @@ Exports tables into a destination folder.
 | `FromSQL` | [boolean](../types/boolean.md) | write-only | Switches the export to SQL mode, where each table entry can supply a full SQL statement. |
 | `NullAsBlank` | [boolean](../types/boolean.md) | write-only | In SQL mode, controls whether exported `NULL` values are treated as blanks. Defaults to [`.F.`](../literals/false.md). |
 | `InvariantDateColumns` | [array](../types/array.md) | write-only | In SQL mode, names date columns that are exported exactly as stored, without conversion from UTC to local time. |
-| `ErrorMsg` | [string](../types/string.md) | read-write | Final error text from the export run. |
+| `ErrorMsg` | [string](../types/string.md) | read-write | Final error text from the export run. [`NIL`](../literals/nil.md) on a new instance, before `DoExport()` runs. |
 
 ## Methods
 

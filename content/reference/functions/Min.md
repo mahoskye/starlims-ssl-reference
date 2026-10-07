@@ -13,7 +13,7 @@ starlims:
 
 Returns whichever of two values compares lower when both arguments are the same supported type.
 
-`Min` accepts two arguments and returns the lesser one. It supports three value families: strings, numbers, and dates. When both arguments are strings, it returns the string that compares lower. When both are numbers, it returns the smaller numeric value. When both are dates, it returns the earlier date.
+`Min` accepts two arguments and returns the lesser one. It supports three value families: strings, numbers, and dates. When both arguments are strings, it returns the string that compares lower. Strings compare alphabetically rather than by character code: `Max("a", "B")` returns `"B"`, `Min("a", "B")` returns `"a"`, and `Max("abc", "ABD")` returns `"ABD"`. When both are numbers, it returns the smaller numeric value. When both are dates, it returns the earlier date.
 
 If the two arguments are different types, the function raises an error. If both arguments are the same type but not a supported type, the function raises an error.
 

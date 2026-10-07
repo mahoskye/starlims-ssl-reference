@@ -33,7 +33,7 @@ Round(nValue, nDigits, [sMidPointRounding])
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `nValue` | [number](../types/number.md) | yes | — | The number to be rounded. |
-| `nDigits` | [number](../types/number.md) | yes | — | Number of decimal places to round to. |
+| `nDigits` | [number](../types/number.md) | yes | — | Number of decimal places to round to, from 0 to 15. |
 | `sMidPointRounding` | [string](../types/string.md) | no | `"ToEven"` | Rounding midpoint mode. Pass `"AwayFromZero"` (case-insensitive) to round halfway values away from zero; any other value or omitting the argument entirely selects banker's rounding. |
 
 ## Returns
@@ -46,6 +46,7 @@ Round(nValue, nDigits, [sMidPointRounding])
 | --- | --- |
 | `nValue` is not a number. | `First parameter must be a number` |
 | `nDigits` is not a number. | `Second parameter must be a number` |
+| `nDigits` is less than 0 or greater than 15. | `Rounding digits must be between 0 and 15, inclusive.` |
 
 ## Best practices
 
@@ -62,7 +63,7 @@ Round(nValue, nDigits, [sMidPointRounding])
 ## Caveats
 
 - Floating-point rounding may not always match visual or manual expectations due to binary representation. For example, `Round(2.675, 2)` may return `2.67`, not `2.68`.
-- Very large values for `nDigits` are not supported; stay within standard double-precision range.
+- `nDigits` must be between 0 and 15. A negative value or a value above 15 raises an error (see Exceptions).
 
 ## Examples
 

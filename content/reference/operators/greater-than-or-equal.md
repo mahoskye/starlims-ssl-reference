@@ -14,7 +14,7 @@ starlims:
 
 Compares two values of the same supported type and returns [`.T.`](../literals/true.md) when the left operand is greater than or equal to the right operand.
 
-The `>=` operator supports number, date, and string comparisons. Numbers are compared numerically; dates are compared chronologically; strings are compared with case-sensitive invariant ordering. `>=` includes equality: it returns [`.T.`](../literals/true.md) when the values are equal or when the left operand is larger.
+The `>=` operator supports number, date, and string comparisons. Numbers are compared numerically; dates are compared chronologically; strings are compared with case-sensitive invariant ordering. Letters sort alphabetically first, and case only breaks ties, with lowercase before uppercase: `"a" < "B"` and `"a" < "A"` are both [`.T.`](../literals/true.md), while `"Z" < "a"` is [`.F.`](../literals/false.md). `>=` includes equality: it returns [`.T.`](../literals/true.md) when the values are equal or when the left operand is larger.
 
 If the operands are different types, or if the type does not support `>=`, the comparison raises a runtime error.
 

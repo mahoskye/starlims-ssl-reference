@@ -39,6 +39,12 @@ LKill(sVarName)
 
 **[string](../types/string.md)** — Always returns `""`.
 
+## Exceptions
+
+| Trigger | Exception message |
+| --- | --- |
+| `sVarName` is [`NIL`](../literals/nil.md). | `Value cannot be null.` |
+
 ## Best practices
 
 !!! success "Do"
@@ -49,7 +55,7 @@ LKill(sVarName)
 !!! failure "Don't"
     - Use `LKill()` as a substitute for clearing a local variable. It only removes public variables.
     - Assume a missing public variable is an error condition. `LKill()` simply does nothing when the name is not present.
-    - Rely on undocumented input handling for invalid arguments. Pass a valid public-variable name string.
+    - Pass [`NIL`](../literals/nil.md) as the name. It raises an error, while an empty string is accepted and removes nothing.
 
 ## Caveats
 

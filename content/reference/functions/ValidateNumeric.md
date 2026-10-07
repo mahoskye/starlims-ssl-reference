@@ -15,7 +15,7 @@ Determines whether a string is a valid numeric value under the current STARLIMS 
 
 `ValidateNumeric` checks whether `sNumber` matches the runtime's current numeric validation rules. It trims surrounding whitespace, never accepts hexadecimal input, and returns [`.T.`](../literals/true.md) only when the string is accepted as a numeric value under the active decimal and group separator settings.
 
-Blank strings return [`.F.`](../literals/false.md). Inputs with more than one configured decimal separator return [`.F.`](../literals/false.md). Group separators are only accepted when the current numeric settings allow them. Passing [`NIL`](../literals/nil.md) for `sNumber` raises an error instead of returning [`.F.`](../literals/false.md).
+Blank strings return [`.F.`](../literals/false.md). Inputs with more than one configured decimal separator return [`.F.`](../literals/false.md). Group separators are only accepted when the current numeric settings allow them: with the default separators, `ValidateNumeric("1,234.56")` returns [`.F.`](../literals/false.md), while [`IsNumeric`](IsNumeric.md)`("1,234.56")` returns [`.T.`](../literals/true.md). Passing [`NIL`](../literals/nil.md) for `sNumber` raises an error instead of returning [`.F.`](../literals/false.md).
 
 In environments using the legacy numeric validation rules, `ValidateNumeric` behaves like [`IsNumeric`](IsNumeric.md)`(sNumber, .F.)`.
 
@@ -55,7 +55,7 @@ ValidateNumeric(sNumber)
     - Use this function when hexadecimal text must not be accepted.
 
 !!! failure "Don't"
-    - Assume grouped numbers are always valid. They only pass when the current numeric settings allow group separators.
+    - Assume grouped numbers are always valid. They only pass when the current numeric settings allow group separators, and with the default settings `"1,234.56"` is rejected.
     - Use `ValidateNumeric` when hexadecimal input should be allowed. Use [`IsNumeric`](IsNumeric.md) with `bAllowHex` instead.
     - Treat an error on [`NIL`](../literals/nil.md) input as a normal [`.F.`](../literals/false.md) result.
 

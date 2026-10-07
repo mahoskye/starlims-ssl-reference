@@ -46,6 +46,7 @@ Eval(fnCode, [vArg1], [vArg2], ...)
 | Trigger | Exception message |
 | --- | --- |
 | `fnCode` is not a code block. | `Run-time error: the operator/method: eval is not implemented on type: <type>. Operand: <operand>` |
+| Fewer arguments are supplied than the code block declares parameters. | `Index was outside the bounds of the array.` |
 
 ## Best practices
 
@@ -62,7 +63,7 @@ Eval(fnCode, [vArg1], [vArg2], ...)
 ## Caveats
 
 - Errors raised inside the invoked block propagate to the Eval call site; wrap the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) when the block may fail.
-- Eval passes the supplied arguments to the code block in order; it does not compile source text, rename parameters, or add its own defaults.
+- Eval passes the supplied arguments to the code block in order; it does not compile source text, rename parameters, or add its own defaults. Supply one argument for every parameter the block declares: a missing argument raises an error rather than arriving as [`NIL`](../literals/nil.md).
 
 ## Examples
 

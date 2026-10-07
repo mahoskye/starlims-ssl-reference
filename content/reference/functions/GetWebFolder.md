@@ -13,7 +13,7 @@ starlims:
 
 Returns the current web folder path as a string.
 
-`GetWebFolder` takes no parameters and returns the web folder path exposed by the current application context. The function does not validate the path, check whether the folder exists, or normalize the returned string for you.
+`GetWebFolder` takes no parameters and returns the web folder path exposed by the current application context. The returned path ends with a backslash. The function does not validate the path or check whether the folder exists.
 
 ## When to use
 
@@ -33,14 +33,14 @@ This function takes no parameters.
 
 ## Returns
 
-**[string](../types/string.md)** — The current web folder path.
+**[string](../types/string.md)** — The current web folder path, ending with a backslash.
 
 ## Best practices
 
 !!! success "Do"
     - Use `GetWebFolder` when you need the configured web-root path rather than a hard-coded location.
     - Verify the returned value before using it in later file operations.
-    - Normalize path separators in your own code if you need to append relative paths safely.
+    - Append relative paths directly, because the returned path already ends with a backslash.
 
 !!! failure "Don't"
     - Hard-code the web folder path in scripts.
@@ -49,7 +49,7 @@ This function takes no parameters.
 
 ## Caveats
 
-- Any separator handling or path normalization must be done by the caller.
+- The returned path already ends with a backslash, so adding another separator before a relative path produces a doubled backslash.
 
 ## Examples
 
@@ -79,11 +79,11 @@ DoProc("ShowWebFolder");
 
 ### Build a file path under the web folder
 
-Check the returned folder value, add a separator only when needed, and then append a relative asset path.
+Check the returned folder value, then append a relative asset path. The folder already ends with a backslash, so no separator is added.
 
 ```ssl
 :PROCEDURE GetAssetPath;
-	:DECLARE sWebFolder, sLastChar, sSeparator, sAssetPath;
+	:DECLARE sWebFolder, sAssetPath;
 
 	sWebFolder := GetWebFolder();
 
@@ -92,14 +92,7 @@ Check the returned folder value, add a separator only when needed, and then appe
 		:RETURN "";
 	:ENDIF;
 
-	sLastChar := sWebFolder[Len(sWebFolder)];
-	sSeparator := "";
-
-	:IF !(sLastChar $ "/\");
-		sSeparator := "\";
-	:ENDIF;
-
-	sAssetPath := sWebFolder + sSeparator + "assets\report_template.html";
+	sAssetPath := sWebFolder + "assets\report_template.html";
 
 	:RETURN sAssetPath;
 :ENDPROC;
@@ -114,8 +107,7 @@ Compare the web folder with other folder helpers so published output goes under 
 
 ```ssl
 :PROCEDURE ResolvePublishedOutputPath;
-	:DECLARE sWebFolder, sWorkFolder, sLogsFolder, sLastChar;
-	:DECLARE sSeparator, sOutputPath;
+	:DECLARE sWebFolder, sWorkFolder, sLogsFolder, sOutputPath;
 
 	sWebFolder := GetWebFolder();
 	sWorkFolder := GetAppWorkPathFolder();
@@ -130,14 +122,7 @@ Compare the web folder with other folder helpers so published output goes under 
 		UsrMes("Configuration", "Review folder configuration before publishing files");
 	:ENDIF;
 
-	sLastChar := sWebFolder[Len(sWebFolder)];
-	sSeparator := "";
-
-	:IF !(sLastChar $ "/\");
-		sSeparator := "\";
-	:ENDIF;
-
-	sOutputPath := sWebFolder + sSeparator + "downloads\daily-report.txt";
+	sOutputPath := sWebFolder + "downloads\daily-report.txt";
 
 	:RETURN sOutputPath;
 :ENDPROC;

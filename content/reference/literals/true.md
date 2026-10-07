@@ -39,7 +39,6 @@ Equality checks on `.T.` require both operands to be booleans. Comparing `.T.` t
 | Target | Result |
 |--------|--------|
 | [string](../types/string.md) | `".T."` |
-| [number](../types/number.md) | `1` |
 | JSON ([`ToJson`](../functions/ToJson.md)) | `true` (a JSON boolean token) |
 
 ## Notes for daily SSL work

@@ -90,7 +90,7 @@ Retrieves a column by name or by 1-based index.
 
 - **When `vIndex` is [`NIL`](../literals/nil.md):** `Argument vIndex cannot be null.`
 - **When `vIndex` is not a string or integer:** `Argument vIndex is not string nor integer.`
-- **When `vIndex` is an out-of-range integer:** `Index [<n>] is out of range (fields count=<count>)`
+- **When `vIndex` is an out-of-range integer:** `Index [<n>] is out of range(fileds count=<count>)`
 - **When `vIndex` names a column that does not exist:** `Column: [<name>] does not exist.`
 
 ## Inheritance
@@ -114,7 +114,8 @@ Retrieves a column by name or by 1-based index.
 ## Caveats
 
 - `Get()` raises an error for invalid names, invalid types, [`NIL`](../literals/nil.md), and out-of-range numeric positions.
-- Numeric access is 1-based, but the value reported in out-of-range error messages may not match the index you supplied.
+- Numeric access is 1-based, but the out-of-range error message reports the zero-based position, one less than the index you passed: `Get(5)` on a two-column table reports `Index [4]`.
+- `GetIndex()` here returns a 1-based position, or `0` for a missing column. [`CDataRow`](CDataRow.md)'s `GetIndex()` differs: it returns a zero-based position, or `-1`.
 - `Add()` and `Set()` can be called, but they do not modify the collection.
 
 ## Examples

@@ -55,7 +55,7 @@ leftBoolean .OR. rightBoolean
 
 ## Errors and edge cases
 
-- Either operand being non-boolean raises a runtime error.
+- A non-boolean right operand does not raise. When the left operand is [`.T.`](../literals/true.md), the right side is not evaluated; when it is [`.F.`](../literals/false.md), `.OR.` returns the right operand unchanged, so `.F. .OR. "x"` returns `"x"`, not a boolean.
 
 ## Examples
 

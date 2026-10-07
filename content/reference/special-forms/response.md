@@ -28,17 +28,7 @@ Response:MethodName(args)
 
 ## Availability
 
-`Response` is available **only inside endpoint scripts**. Outside that context — for example, in a script invoked through `DoProc` from an interactive desktop session — referencing `Response` raises an undeclared-variable error.
-
-If your code may run in either context, guard with a `:TRY` / `:CATCH` block:
-
-```ssl
-:TRY;
-    Response:Write("only sent to HTTP callers");
-:CATCH;
-    /* not running as an endpoint — write to a log or skip ;
-:ENDTRY;
-```
+`Response` shapes an HTTP reply **only inside endpoint scripts**. Referencing it elsewhere does not raise an undeclared-variable error: in observed runtime behavior, calling `Response:Write` from a script run in Designer completes without an error, so a `:TRY` / `:CATCH` guard does not detect that the script is not an endpoint.
 
 ## What it holds
 
@@ -58,7 +48,7 @@ The web-service subclass inherits everything from `SSLResponse`, so calls like `
 ## Caveats
 
 - `Response` is mutable: assigning properties and calling methods affects what the client receives. Be deliberate about ordering — set `ContentType` and `StatusCode` before the first `Write` so headers go out correctly.
-- Outside an endpoint context, `Response` raises an undeclared-variable error on access. Guard with `:TRY` / `:CATCH` if your script may run in either context.
+- Outside an endpoint context, `Response` does not raise on access: `Response:Write` called from a script run in Designer completes without an error.
 - Whether `Response` is an `SSLResponse` or `SSLWsResponse` depends on how the script was invoked. Code that needs to work in both contexts should rely only on the inherited surface — avoid `Value` unless you know the call path is a web service.
 - After calling `End()`, further `Write` calls have no effect on the wire. After `Redirect()`, `:RETURN` from the script — subsequent code may run but its output is unlikely to reach the client.
 

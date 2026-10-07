@@ -41,7 +41,7 @@ LimsTypeEx(vSource)
 
 | Input value | Return value |
 |-------------|--------------|
-| [`NIL`](../literals/nil.md) | [`NIL`](../literals/nil.md) |
+| [`NIL`](../literals/nil.md) | `NIL` (the string `"NIL"`) |
 | String | `STRING` |
 | Number | `NUMERIC` |
 | Boolean | `LOGIC` |
@@ -56,7 +56,7 @@ For most application code, the standard values above are the ones you will use. 
 ## Best practices
 
 !!! success "Do"
-    - Compare the return value against the documented uppercase names such as `STRING`, `NUMERIC`, and [`NIL`](../literals/nil.md).
+    - Compare the return value against the documented uppercase names such as `"STRING"`, `"NUMERIC"`, and `"NIL"`.
     - Use `LimsTypeEx` before type-specific operations when input may vary at runtime.
     - Handle [`NIL`](../literals/nil.md) explicitly when blank or missing input is meaningful to your logic.
 

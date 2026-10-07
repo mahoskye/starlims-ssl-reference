@@ -14,7 +14,7 @@ starlims:
 Invokes a function by name at runtime and returns the result.
 
 `ExecFunction` takes a function name as a string and an optional argument
-array, executes the named function, and returns whatever that function returns. A one-segment name resolves in the current script. A two-segment name runs the named server script, and a three-segment name calls `Category.Script.Procedure` the same way [`DoProc`](DoProc.md) does. The second argument, when supplied, must be an array.
+array, executes the named function, and returns whatever that function returns. A one-segment name is looked up as a script name in the default categories, not as a procedure in the current script. A two-segment name runs the named server script, and a three-segment name calls `Category.Script.Procedure` the same way [`DoProc`](DoProc.md) does. The second argument, when supplied, must be an array.
 
 ## When to use
 
@@ -45,6 +45,7 @@ ExecFunction(sName, [aParameters])
 | Trigger | Exception message |
 | --- | --- |
 | `aParameters` is provided but is not an array. | `Value cannot be null.`, then `Parameter name: Wrong parameters for {functionName}` on the second line |
+| A one-segment `sName` matches no script in the default categories. | `There is no script with name: <sName> among default categories.` |
 
 ## Best practices
 

@@ -1,6 +1,6 @@
 ---
 title: "-- (decrement)"
-summary: "Decreases a number variable by one, trims trailing spaces in strings, or subtracts days from a date depending on operand type."
+summary: "Decreases a number variable by one, or subtracts one day from a date variable."
 id: ssl.operator.decrement
 element_type: operator
 doc_status: published
@@ -12,11 +12,11 @@ starlims:
 # -- (decrement)
 ## What it does
 
-Decreases a number variable by one, trims trailing spaces in strings, or subtracts days from a date depending on operand type.
+Decreases a number variable by one, or subtracts one day from a date variable.
 
-The `--` operator decreases the value of variables in place, supporting numbers, strings, and dates with type-specific behavior.
+The `--` operator decreases the value of variables in place, supporting numbers and dates.
 
-For number variables, prefix (`--x`) subtracts one then returns the new value, while postfix (`x--`) returns the original value before decrementing. On strings, `--` trims trailing spaces from the value. With dates, `--` subtracts one day from the date.
+For number variables, prefix (`--x`) subtracts one then returns the new value, while postfix (`x--`) returns the original value before decrementing. With dates, `--` subtracts one day from the date. A string operand raises a runtime invalid-operand error.
 
 The operator must be applied directly to a variable. Applying it to a constant, expression result, or a value of an unsupported type raises an error.
 
@@ -47,7 +47,7 @@ variable--
 | Left | Right | Result | Behavior |
 |------|-------|--------|----------|
 | [number](../types/number.md) | n/a | [number](../types/number.md) | Subtracts 1 from the number value |
-| [string](../types/string.md) | n/a | [string](../types/string.md) | Trims trailing spaces from the string |
+| [string](../types/string.md) | n/a | error | Raises a runtime invalid-operand error |
 | [date](../types/date.md) | n/a | [date](../types/date.md) | Subtracts one day from the date |
 
 ## Precedence
@@ -60,11 +60,11 @@ variable--
 !!! success "Do"
     - Use prefix form (`--variable`) when the decremented value is needed immediately in further computations.
     - Decrement dates when you need to step backward by one day.
-    - Apply `--` only to supported value types (numbers, strings, dates).
+    - Apply `--` only to supported value types (numbers and dates).
 
 !!! failure "Don't"
     - Assume postfix (`variable--`) also returns the updated value. The postfix form returns the original before decrementing.
-    - Use `--` on arrays, objects, booleans, or expression results. Unsupported usage raises errors.
+    - Use `--` on strings, arrays, objects, booleans, or expression results. Unsupported usage raises errors.
     - Use `--` when a non-unit decrement is needed. Use [`subtract-assign`](subtract-assign.md) ([`-=`](subtract-assign.md)) instead.
 
 ## Examples

@@ -15,7 +15,7 @@ Returns the character code of the first character in a string.
 
 Asc returns the numeric code for the first character of `sSource`. Characters after the first one are ignored.
 
-Pass a non-empty string. If `sSource` is [`NIL`](../literals/nil.md), Asc raises an error, and an empty string does not provide a first character to evaluate.
+Pass a non-empty string. If `sSource` is [`NIL`](../literals/nil.md) or an empty string, Asc raises an error.
 
 Use Asc when you need numeric character comparisons or when working with code values that pair naturally with [`Chr`](Chr.md).
 
@@ -46,6 +46,7 @@ Asc(sSource)
 | Trigger | Exception message |
 | --- | --- |
 | `sSource` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. Asc().` |
+| `sSource` is an empty string. | `Index was outside the bounds of the array.` |
 
 ## Best practices
 
@@ -56,7 +57,7 @@ Asc(sSource)
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md). Asc raises an error for a null argument.
-    - Pass an empty string. Asc requires a first character to read.
+    - Pass an empty string. Asc raises an error when there is no first character to read.
     - Expect Asc to evaluate the whole string. It only uses the first character.
     - Use Asc when direct string comparison is clearer than code-based logic.
 

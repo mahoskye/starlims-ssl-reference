@@ -19,7 +19,7 @@ Checks whether a date value has an unspecified (invariant) kind.
 
 - When you need to distinguish between invariant (unspecified) dates and those with a defined context (local or UTC).
 - When validating input from sources where date kind may affect downstream logic or data integrity.
-- When building workflows that require special handling for uninitialized or default date values.
+- When a date should be marked local with [`MakeDateLocal`](MakeDateLocal.md) only if it is still invariant.
 
 ## Syntax
 
@@ -54,52 +54,62 @@ IsInvariantDate(dDate)
 !!! failure "Don't"
     - Assume that user-provided or external values are already of date type — validate before calling to avoid runtime errors.
     - Attempt to infer date kind using property checks or workarounds. This function provides a single-point, reliable check for invariance.
-    - Ignore potential default or uninitialized dates in business logic. Unspecified dates can introduce subtle bugs if left unchecked.
+    - Treat an invariant date as empty or unset. Dates built with [`CToD`](CToD.md) are invariant even when they hold a real date; use [`Empty`](Empty.md) to detect an empty date.
 
 ## Caveats
 
 - This function does not convert or mutate the input value — it only inspects it.
+- In observed runtime behavior, dates built with [`CToD`](CToD.md) are invariant, both for a real date and for the empty date `CToD("")`. The kind says nothing about whether a date is set.
 
 ## Examples
 
-### Block a workflow when the review date is invariant
+### Mark an invariant review date as local
 
-Call `IsInvariantDate` on a date produced by [`CToD`](CToD.md) with an empty string. An empty date string yields an invariant date, so the [`:IF`](../keywords/IF.md) branch fires and [`ErrorMes`](ErrorMes.md) logs the rejection. If a proper date were supplied, the [`:ELSE`](../keywords/ELSE.md) branch would fire and [`InfoMes`](InfoMes.md) would log the approval message.
+A date built with [`CToD`](CToD.md) is invariant, even when it holds a real date. The first [`:IF`](../keywords/IF.md) branch fires and [`MakeDateLocal`](MakeDateLocal.md) marks the date local in place, so the second check fires too.
 
 ```ssl
-:PROCEDURE CheckReviewDateInvariant;
-	:DECLARE dReviewDate, bIsInvariant;
+:PROCEDURE NormalizeReviewDate;
+	:DECLARE dReviewDate;
 
-	dReviewDate := CToD("");
-	bIsInvariant := IsInvariantDate(dReviewDate);
+	dReviewDate := CToD("04/08/2026");
 
-	:IF bIsInvariant;
-		ErrorMes("Workflow blocked: review date is uninitialized");
-	:ELSE;
-		InfoMes("Workflow approved: review date is properly set");
+	:IF IsInvariantDate(dReviewDate);
+		UsrMes("Review date is invariant, marking it as local");
+		MakeDateLocal(dReviewDate);
+	:ENDIF;
+
+	:IF .NOT. IsInvariantDate(dReviewDate);
+		UsrMes("Review date is now local");
 	:ENDIF;
 :ENDPROC;
 
 /* Usage;
-DoProc("CheckReviewDateInvariant");
+DoProc("NormalizeReviewDate");
 ```
 
-### Count user-set versus invariant dates across imported records
+[`UsrMes`](UsrMes.md) logs:
 
-Iterate over a list of sample records, each represented as a three-element array of `{dReceived, dAnalyzed, dReported}` dates, and use `IsInvariantDate` to count how many date fields are set versus still invariant. With the data below, three fields have real dates and six are invariant, and the warning fires because `nInvariantDates` is greater than zero.
+```text
+Review date is invariant, marking it as local
+Review date is now local
+```
+
+### Count local versus invariant dates across imported records
+
+Iterate over a list of sample records, each represented as a three-element array of `{dReceived, dAnalyzed, dReported}` dates, and use `IsInvariantDate` to count how many date fields are local versus invariant. Dates built with [`CToD`](CToD.md) are invariant, and [`MakeDateLocal`](MakeDateLocal.md) marks a date local, so with the data below three fields are local and six are invariant. The warning fires because `nInvariantDates` is greater than zero.
 
 ```ssl
-:PROCEDURE ValidateImportedDates;
+:PROCEDURE CountImportedDateKinds;
 	:DECLARE aRecords, aDates;
-	:DECLARE nIndex, nDateIndex, nUserDates, nInvariantDates, sMsg;
+	:DECLARE nIndex, nDateIndex, nLocalDates, nInvariantDates, sMsg;
 
-	nUserDates := 0;
+	nLocalDates := 0;
 	nInvariantDates := 0;
 
 	aRecords := {
-		{CToD("04/08/2026"), CToD(""), CToD("")},
-		{CToD("04/07/2026"), CToD("04/08/2026"), CToD("")},
-		{CToD(""), CToD(""), CToD("")}
+		{MakeDateLocal(CToD("04/06/2026")), CToD("04/07/2026"), CToD("04/08/2026")},
+		{MakeDateLocal(CToD("04/07/2026")), MakeDateLocal(CToD("04/08/2026")), CToD("04/09/2026")},
+		{CToD("04/08/2026"), CToD("04/09/2026"), CToD("04/10/2026")}
 	};
 
 	:FOR nIndex := 1 :TO ALen(aRecords);
@@ -109,17 +119,17 @@ Iterate over a list of sample records, each represented as a three-element array
 			:IF IsInvariantDate(aDates[nDateIndex]);
 				nInvariantDates := nInvariantDates + 1;
 			:ELSE;
-				nUserDates := nUserDates + 1;
+				nLocalDates := nLocalDates + 1;
 			:ENDIF;
 		:NEXT;
 	:NEXT;
 
-	sMsg := "Imported dates: " + LimsString(nUserDates) + " user-set, "
-			+ LimsString(nInvariantDates) + " invariant/unset";
+	sMsg := "Imported dates: " + LimsString(nLocalDates) + " local, "
+			+ LimsString(nInvariantDates) + " invariant";
 	UsrMes(sMsg);
 
 	:IF nInvariantDates > 0;
-		sMsg := "Warning: " + LimsString(nInvariantDates) + " date fields require completion";
+		sMsg := "Warning: " + LimsString(nInvariantDates) + " date fields are invariant";
 		UsrMes(sMsg);
 	:ENDIF;
 
@@ -127,7 +137,7 @@ Iterate over a list of sample records, each represented as a three-element array
 :ENDPROC;
 
 /* Usage;
-DoProc("ValidateImportedDates");
+DoProc("CountImportedDateKinds");
 ```
 
 ## Related

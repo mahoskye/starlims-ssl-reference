@@ -35,7 +35,7 @@ GetRegion(sRegionName, [aSourceValues], [aDestinationValues])
 |------|------|----------|---------|-------------|
 | `sRegionName` | [string](../types/string.md) | yes | — | Region name to look up. Matching is case-insensitive. |
 | `aSourceValues` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Source strings to replace in the retrieved region text. Replacement is only attempted when both `aSourceValues` and `aDestinationValues` are supplied. |
-| `aDestinationValues` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Replacement strings corresponding to `aSourceValues`. Must have the same number of elements as `aSourceValues`. |
+| `aDestinationValues` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Replacement strings corresponding to `aSourceValues`. Must have the same number of elements as `aSourceValues`. Non-string values, such as numbers, are converted to text. |
 
 ## Returns
 
@@ -49,7 +49,7 @@ GetRegion(sRegionName, [aSourceValues], [aDestinationValues])
 | `sRegionName` is not a string. | `Argument must be of type string.` |
 | `aSourceValues` or `aDestinationValues` is not an array. | `Run-time error: Invalid arguments for GetRegion!`, then `Should be: string, array, array.` on the second line |
 | `aSourceValues` and `aDestinationValues` have different lengths. | `Run-time error: Invalid arguments for GetRegion!`, then `Source array's length is not equal with destination array's length.` on the second line |
-| The region name is not found in the current scope. | `Run-time error: GetRegion: <sRegionName> not in scope.` |
+| The region name is not found in the current scope. The value substituted for `<sRegionName>` is the lowercased region name. | `Run-time error: GetRegion: <sRegionName> not in scope.` |
 
 ## Best practices
 

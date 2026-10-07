@@ -64,7 +64,7 @@ ServerEndOfDay(dDate)
 
 ### Normalize a date to the server day's end
 
-Take any date value and return a version stamped to `23:59:59.997` on the same calendar day, then display the result.
+Take any date value and return a version stamped to `23:59:59.997` on the same calendar day, then display the result with [`DateToString`](DateToString.md), because [`LimsString`](LimsString.md) shows only the date part.
 
 ```ssl
 :PROCEDURE GetServerCutoff;
@@ -73,7 +73,7 @@ Take any date value and return a version stamped to `23:59:59.997` on the same c
 
     dCutoff := ServerEndOfDay(dWorkDate);
 
-    sMessage := "Server cutoff: " + LimsString(dCutoff);
+    sMessage := "Server cutoff: " + DateToString(dCutoff, "MM/dd/yyyy HH:mm:ss.fff");
     UsrMes(sMessage);
 
     :RETURN dCutoff;
@@ -86,7 +86,7 @@ DoProc("GetServerCutoff", {DateFromNumbers(2026, 4, 15)});
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Server cutoff: <04/15/2026 23:59:59>
+Server cutoff: 04/15/2026 23:59:59.997
 ```
 
 ### Build a full-day server-side query range

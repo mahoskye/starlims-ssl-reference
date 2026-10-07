@@ -13,7 +13,7 @@ starlims:
 
 Retrieves the value of a variable by name from the current scope, a caller scope, or public storage.
 
-Returns the value of the named variable, found the same way as a bare read of that name: the current scope first, then the scopes of the calling procedures, then public variables. The name is case-sensitive and must be non-empty. If the variable does not exist, the runtime raises an error. Use this function when the variable name is only known at runtime. When the name is fixed, read the variable directly. Use [`SetByName`](SetByName.md) to assign a variable by name.
+Returns the value of the named variable, found the same way as a bare read of that name: the current scope first, then the scopes of the calling procedures, then public variables. The name is matched case-insensitively and must be non-empty. If the variable does not exist, the runtime raises an error. Use this function when the variable name is only known at runtime. When the name is fixed, read the variable directly. Use [`SetByName`](SetByName.md) to assign a variable by name.
 
 ## When to use
 
@@ -31,7 +31,7 @@ GetByName(sName)
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `sName` | [string](../types/string.md) | yes | — | The name of the variable to retrieve. Case-sensitive. |
+| `sName` | [string](../types/string.md) | yes | — | The name of the variable to retrieve. Matched case-insensitively. |
 
 ## Returns
 
@@ -53,7 +53,7 @@ GetByName(sName)
 
 !!! failure "Don't"
     - Assume that missing or empty names are handled gracefully.
-    - Create variables distinguished only by letter case (e.g., `Status` vs `status`).
+    - Rely on letter case to tell variables apart. `Status` and `status` are the same variable.
     - Assume the variable will always be found and unconditionally use the result.
 
 ## Caveats

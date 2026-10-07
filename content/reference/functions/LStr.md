@@ -42,10 +42,10 @@ LStr(vNumber)
 !!! success "Do"
     - Use `LStr` when [`NIL`](../literals/nil.md) values must appear as the explicit placeholder `"NIL"` in UI output, logs, or exports.
     - Use [`LTransform`](LTransform.md) or [`StrZero`](StrZero.md) on the number itself, instead of `LStr`, when you need padding or fixed decimals.
-    - Apply `LStr` when serializing mixed data sources that must never produce empty strings for missing values.
+    - Apply `LStr` when serializing mixed data sources where missing ([`NIL`](../literals/nil.md)) values must appear as `"NIL"` rather than as empty strings.
 
 !!! failure "Don't"
-    - Assume the output will be empty or [`NIL`](../literals/nil.md); `LStr` always returns a non-empty string.
+    - Assume the output will be [`NIL`](../literals/nil.md); [`NIL`](../literals/nil.md) input becomes `"NIL"`. An empty or all-space string still comes back as `""`.
     - Use `LStr` when strict output formatting or padding is required — use [`LTransform`](LTransform.md) or [`StrZero`](StrZero.md) instead.
     - Use the result directly in numeric operations; the output is always a string and must be reconverted if a number is needed.
 

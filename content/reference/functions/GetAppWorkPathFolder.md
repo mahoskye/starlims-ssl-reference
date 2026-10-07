@@ -35,7 +35,7 @@ This function takes no parameters.
 
 ## Returns
 
-**[string](../types/string.md)** — The application work path folder configured in the system.
+**[string](../types/string.md)** — The application work path folder configured in the system, ending with a backslash.
 
 ## Best practices
 
@@ -49,7 +49,7 @@ This function takes no parameters.
 
 ## Caveats
 
-- The returned path may use different formats (trailing slash, drive letters) depending on operating system or configuration.
+- The returned path ends with a backslash, so append a relative folder or file name directly instead of adding another separator.
 
 ## Examples
 
@@ -99,7 +99,7 @@ Check that the work path is non-empty and verify whether a specific file is pres
 	InfoMes("Work path is: " + sWorkPath);
 	/* Logs the configured work path;
 
-	sTestFile := sWorkPath + "\config.xml";
+	sTestFile := sWorkPath + "config.xml";
 
 	:IF FileSupport(sTestFile, "CHECK");
 		InfoMes("Config file exists at: " + sTestFile);

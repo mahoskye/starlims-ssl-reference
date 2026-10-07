@@ -36,7 +36,7 @@ This function takes no parameters.
 
 ## Returns
 
-**[string](../types/string.md)** — The current time formatted with the active time format.
+**[string](../types/string.md)** — The current time formatted with the active time format. With the default format, the result is a 24-hour `HH:mm:ss` string such as `18:54:22`.
 
 ## Best practices
 

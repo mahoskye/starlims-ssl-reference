@@ -13,7 +13,7 @@ starlims:
 
 Encrypts a string with a password by using the legacy built-in `RC2`, `DES`, or `3DES` algorithms.
 
-`EncryptData` returns an empty string when `sInputData` or `sPassword` is empty. When values are supplied, it encrypts the text and returns a STARLIMS-formatted encrypted string that includes the information needed by [`DecryptData`](DecryptData.md) to choose the algorithm and key size during decryption. If `sAlgorithm` is omitted, the function uses `3DES`. If `sKey` is omitted, it uses `128`. If `sRetType` is omitted, it defaults to `BASE64`.
+`EncryptData` returns an empty string when `sInputData` or `sPassword` is empty. When values are supplied, it encrypts the text and returns a STARLIMS-formatted encrypted string that includes the information needed by [`DecryptData`](DecryptData.md) to choose the algorithm and key size during decryption. If `sAlgorithm` is omitted, the function uses `3DES`. If `sKey` is omitted, it uses `128`. `sRetType` is accepted but ignored.
 
 This function is best suited to legacy interoperability or existing reversible encryption flows. For one-way hashing, use [`HashData`](HashData.md).
 
@@ -37,7 +37,7 @@ EncryptData(sInputData, sPassword, [sAlgorithm], [sKey], [sRetType])
 | `sPassword` | [string](../types/string.md) | yes | — | Password used to derive the encryption key. If empty, the function returns `""`. |
 | `sAlgorithm` | [string](../types/string.md) | no | `3DES` | Encryption algorithm. Supported values are `RC2`, `DES`, and `3DES`. |
 | `sKey` | [string](../types/string.md) | no | `128` | Requested key length in bits as a string, or `MAX`. |
-| `sRetType` | [string](../types/string.md) | no | `BASE64` | Optional return-type argument. |
+| `sRetType` | [string](../types/string.md) | no | — | Accepted but ignored: passing `"HEX"` returns the same string as omitting it. |
 
 ## Returns
 

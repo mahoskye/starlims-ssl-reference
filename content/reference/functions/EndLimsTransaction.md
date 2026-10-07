@@ -15,7 +15,7 @@ Ends a LIMS transaction on the default connection or on a named connection.
 
 Use `EndLimsTransaction` to close a transaction scope started with [`BeginLimsTransaction`](BeginLimsTransaction.md). If `sConnectionName` is omitted or empty, the function uses the default LIMS connection. If `bCommit` is omitted, it defaults to [`.T.`](../literals/true.md).
 
-Each call decreases the transaction depth for that connection. On the outermost transaction, [`.T.`](../literals/true.md) commits and [`.F.`](../literals/false.md) rolls back. If an inner transaction was rolled back, a later outermost commit raises an error instead of committing.
+Each call decreases the transaction depth for that connection. On the outermost transaction, [`.T.`](../literals/true.md) commits and [`.F.`](../literals/false.md) rolls back. If an inner transaction was rolled back, a later outermost commit raises an error instead of committing. The transaction is still closed: [`GetTransactionsCount`](GetTransactionsCount.md) returns `0` afterwards.
 
 With no transaction open, `EndLimsTransaction` returns [`.T.`](../literals/true.md) and raises nothing. It also does not check which routine began the open transaction: a helper that calls it without having begun a transaction ends its caller's transaction, and with `bCommit` omitted, commits it. Track the transactions your code begins with a `bStarted` flag and end only those.
 
@@ -49,6 +49,7 @@ EndLimsTransaction([sConnectionName], [bCommit])
 | The named connection does not exist. | `The provider name: {sConnectionName} not found.` |
 | No database collection is available. | `The internal database collection is null` |
 | The database provider cannot close the transaction. | `Transaction cannot be ended {message}` |
+| An inner transaction was rolled back and the outermost call commits. | `Transaction cannot be ended Cannot commit the outermost transaction because one of the inner transactions was rollbacked!` |
 
 ## Best practices
 

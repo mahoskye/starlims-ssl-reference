@@ -69,7 +69,7 @@ StdRound(sStandard, nDigits, nNumber)
 
 - For `ISO`, the returned string is truncated to 15 characters when it becomes longer than that.
 - Pass a whole number for `nDigits`; fractional values are not supported.
-- Unsupported `sStandard` values are not rejected; the function still returns a formatted string.
+- Unsupported `sStandard` values are not rejected; the function returns the number as an unrounded string. `StdRound("XYZ", 2, 12.3456)` and `StdRound("fda", 2, 12.3456)` both return `"12.3456"`.
 
 ## Examples
 
@@ -100,7 +100,7 @@ DoProc("FormatReportedValue");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Reported value: <rounded value>
+Reported value: 12.35
 ```
 
 ### Compare FDA, EPA, and ISO results
@@ -134,6 +134,14 @@ Run the same input through each supported standard so a review script can show t
 
 /* Usage;
 DoProc("ReviewStandardOutputs");
+```
+
+[`UsrMes`](UsrMes.md) logs the following. The `ISO` result is left-padded to 15 characters:
+
+```text
+FDA: 12.35
+EPA: 12.3
+ISO:           12.35
 ```
 
 ### Normalize ISO output for export while preserving the raw value

@@ -13,7 +13,7 @@ starlims:
 
 Assigns a fallback expression to a parameter when the caller omits that argument.
 
-The `:DEFAULT` keyword works with a parameter that was already declared by [`:PARAMETERS`](PARAMETERS.md). In standard SSL scripts, procedures, methods, and constructors, each `:DEFAULT` line must appear immediately after [`:PARAMETERS`](PARAMETERS.md), and each line applies to one parameter. The form is `:DEFAULT paramName, defaultExpression;` with a comma between the parameter name and the expression. When the caller supplies that argument explicitly, SSL keeps the caller's value instead of using the default.
+The `:DEFAULT` keyword works with a parameter that was already declared by [`:PARAMETERS`](PARAMETERS.md). In standard SSL scripts, procedures, methods, and constructors, each `:DEFAULT` line must appear immediately after [`:PARAMETERS`](PARAMETERS.md), and each line applies to one parameter. The form is `:DEFAULT paramName, defaultExpression;` with a comma between the parameter name and the expression. When the caller supplies that argument explicitly, SSL keeps the caller's value instead of using the default. The default also applies when the caller passes [`NIL`](../literals/nil.md) explicitly or leaves the position empty, as in `DoProc("Proc", {1, , 3})`: any argument that arrives as [`NIL`](../literals/nil.md) gets the default.
 
 ## Behavior
 

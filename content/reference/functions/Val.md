@@ -13,7 +13,7 @@ starlims:
 
 Converts numeric text at the start of a string to a number.
 
-`Val` converts `sNumber` to a numeric result. It ignores leading whitespace and uses the current STARLIMS decimal and group separator settings when parsing. When `Val` is operating in its traditional parsing mode, it reads the numeric prefix from left to right and stops when the text stops looking numeric, so a value such as `"12.5 mg"` returns `12.5`.
+`Val` converts `sNumber` to a numeric result. It ignores leading whitespace and uses the current STARLIMS decimal and group separator settings when parsing. When `Val` is operating in its traditional parsing mode, which is the behavior observed on a default installation, it reads the numeric prefix from left to right and stops when the text stops looking numeric, so a value such as `"12.5 mg"` returns `12.5`.
 
 Passing [`NIL`](../literals/nil.md) or a non-string value raises an error. On systems that use strict numeric parsing for `Val`, invalid numeric text raises the same format error as [`ToNumeric`](ToNumeric.md) instead of returning a partial result.
 
@@ -65,7 +65,7 @@ In the traditional `Val` parsing mode, text with a valid leading numeric portion
 
 - In the traditional parsing mode, a string such as `"123ABC"` returns `123` and a string such as `"ABC123"` returns `0`.
 - Scientific notation with a leading numeric prefix is accepted, such as `"2.5e2"`.
-- Some installations also accept a leading `0x` or `0X` hexadecimal value when `Val` is using its traditional parsing behavior.
+- In the traditional parsing mode, a leading `0x` or `0X` hexadecimal value is accepted (`Val("0x1A")` returns `26`), and so is exponent notation (`Val("2.5e2")` returns `250`).
 
 ## Examples
 

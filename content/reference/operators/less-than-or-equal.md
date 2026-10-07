@@ -14,7 +14,7 @@ starlims:
 
 Compares two values of the same supported type and returns [`.T.`](../literals/true.md) when the left operand is less than or equal to the right operand.
 
-The `<=` operator supports number, date, and string comparisons. Numbers are compared numerically, dates are compared chronologically, and strings are compared with case-sensitive invariant ordering. `<=` includes equality: it returns [`.T.`](../literals/true.md) when the values are equal or when the left operand is smaller.
+The `<=` operator supports number, date, and string comparisons. Numbers are compared numerically, dates are compared chronologically, and strings are compared with case-sensitive invariant ordering. Letters sort alphabetically first, and case only breaks ties, with lowercase before uppercase: `"a" < "B"` and `"a" < "A"` are both [`.T.`](../literals/true.md), while `"Z" < "a"` is [`.F.`](../literals/false.md). `<=` includes equality: it returns [`.T.`](../literals/true.md) when the values are equal or when the left operand is smaller.
 
 If the operands are different types, or if the type does not support `<=`, the comparison raises a runtime error instead of returning a boolean value.
 
@@ -59,7 +59,7 @@ vLeft <= vRight
 ## Errors and edge cases
 
 - Either operand being [`NIL`](../literals/nil.md) raises a runtime error instead of returning a boolean value.
-- String comparisons are case-sensitive and culture-invariant, which can give results that differ from end-user alphabetical expectations.
+- String comparisons are case-sensitive and culture-invariant: letters sort alphabetically and case only breaks ties, so the order does not depend on the user's locale.
 
 ## Examples
 
