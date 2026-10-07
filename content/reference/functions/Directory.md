@@ -15,7 +15,7 @@ Retrieves filesystem entries that match a path or wildcard pattern, with optiona
 
 `Directory` returns an array of rows. Each row contains the entry name, size, last modified value, a formatted last modified time string, and an attribute string. By default, the function returns visible non-system files only. Directories are only included when `sAttributes` contains uppercase `D`, hidden entries are only included when it contains uppercase `H`, and system entries are only included when it contains uppercase `S`. Read-only (`R`) and archive (`A`) can appear in the returned attribute string, but they are not used as filter switches.
 
-If `sFilePattern` is an existing directory path, the function lists entries in that directory using [`*`](../operators/multiply.md) as the pattern. If you pass an empty string, the listing logic falls back to the current working directory, but the path is still checked against the folder whitelist first. If the target directory does not exist, or the listing fails for a non-permission reason, the function returns an empty array.
+If `sFilePattern` is an existing directory path, the function lists entries in that directory using the wildcard pattern `*`. If you pass an empty string, the listing logic falls back to the current working directory, but the path is still checked against the folder whitelist first. A path outside the WhitelistFolders setting raises an error. Any other listing failure, including a missing directory, returns an empty array.
 
 ## When to use
 
@@ -33,7 +33,7 @@ Directory(sFilePattern, [sAttributes])
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `sFilePattern` | [string](../types/string.md) | yes | — | Path and wildcard pattern to list, such as `"C:\\Reports\\*.txt"`. If it points to an existing directory, `Directory` lists that directory with the [`*`](../operators/multiply.md) pattern. If you pass an empty string, the listing logic uses the current working directory after the whitelist check passes. |
+| `sFilePattern` | [string](../types/string.md) | yes | — | Path and wildcard pattern to list, such as `"C:\Reports\*.txt"`. If it points to an existing directory, `Directory` lists that directory with the wildcard pattern `*`. If you pass an empty string, the listing logic uses the current working directory after the whitelist check passes. |
 | `sAttributes` | [string](../types/string.md) | no | `""` | Attribute filter string. Uppercase `D` includes directories, uppercase `H` includes hidden entries, and uppercase `S` includes system entries. Other characters are ignored for filtering. |
 
 ## Returns
@@ -60,17 +60,17 @@ Each row contains these values:
 
 !!! success "Do"
     - Pass an explicit directory and pattern so the listing scope is clear.
-    - Check for an empty result because missing matches and non-permission listing failures both return an empty array.
+    - Check for an empty result because missing matches and listing failures other than the whitelist check both return an empty array.
     - Read the returned attribute string from column 5 when you need to distinguish files from directories or inspect `R` and `A`.
 
 !!! failure "Don't"
     - Assume `R` or `A` in `sAttributes` will filter the result set. They appear in returned metadata, but they are not filter switches.
     - Assume directories are included by default. Add `D` when you want directory rows returned.
-    - Treat an empty result as proof that the directory is accessible and has no matching items. It can also mean the directory does not exist or the listing failed for another non-whitelist reason.
+    - Treat an empty result as proof that the directory is accessible and has no matching items. It can also mean the directory does not exist or the listing failed for a reason other than the whitelist check.
 
 ## Caveats
 
-- Non-whitelist access raises an exception; other listing failures return an empty array.
+- A path outside the WhitelistFolders setting raises an exception; any other listing failure, including a missing directory, returns an empty array.
 
 ## Examples
 

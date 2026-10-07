@@ -2415,18 +2415,18 @@
         }
       ],
       "caveats": [
-        "Non-whitelist access raises an exception; other listing failures return an empty array."
+        "A path outside the WhitelistFolders setting raises an exception; any other listing failure, including a missing directory, returns an empty array."
       ],
       "best_practices": {
         "do": [
           "Pass an explicit directory and pattern so the listing scope is clear.",
-          "Check for an empty result because missing matches and non-permission listing failures both return an empty array.",
+          "Check for an empty result because missing matches and listing failures other than the whitelist check both return an empty array.",
           "Read the returned attribute string from column 5 when you need to distinguish files from directories or inspect R and A."
         ],
         "dont": [
           "Assume R or A in sAttributes will filter the result set. They appear in returned metadata, but they are not filter switches.",
           "Assume directories are included by default. Add D when you want directory rows returned.",
-          "Treat an empty result as proof that the directory is accessible and has no matching items. It can also mean the directory does not exist or the listing failed for another non-whitelist reason."
+          "Treat an empty result as proof that the directory is accessible and has no matching items. It can also mean the directory does not exist or the listing failed for a reason other than the whitelist check."
         ]
       }
     },
@@ -2447,16 +2447,17 @@
           "message": "Value cannot be null., then Parameter name: Wrong parameters for {name}` on the second line"
         },
         {
-          "trigger": "A one-segment name does not resolve in the current script.",
+          "trigger": "A one-segment name computed at runtime does not resolve in the current script.",
           "message": "Run-time error: Method {name} not found in script {scriptName}!"
         }
       ],
       "caveats": [
         "Calling DoProc() with no arguments stops the script from compiling, so no runtime error can be caught.",
+        "A string literal name is resolved when the script compiles: DoProc(\"NoSuchProc\") stops the script from compiling with Invalid method: NoSuchProc, so no :TRY can catch it. The runtime \"not found\" error in Exceptions applies only to names built at runtime.",
         "DoProc is a compile-time error inside class methods — every name form is rejected, not just same-class calls. Use Me:MethodName() or Base:MethodName() instead.",
         "The called procedure does not get an isolated set of variables. Names it never declares resolve outward into the calling scope, so an undeclared assignment in the procedure can overwrite a caller variable of the same name. See Variable Scope.",
         "One-segment names are resolved case-insensitively in the current script.",
-        "Three-segment names are passed into the executor path instead of local method lookup."
+        "A three-segment name calls Category.Script.Procedure the same way ExecFunction does."
       ],
       "best_practices": {
         "do": [
@@ -4613,7 +4614,7 @@
           "message": "GetByName(): Variable name cannot be missing."
         },
         {
-          "trigger": "The variable named sName does not exist in the current scope.",
+          "trigger": "No variable named sName is visible from the current scope, a caller scope, or public variables.",
           "message": "Variable [<sName>] is undefined!"
         }
       ],
@@ -5946,7 +5947,7 @@
       "best_practices": {
         "do": [
           "Use the default connection when you only need the current script context.",
-          "Check the count before calling EndLimsTransaction in defensive transaction-handling code.",
+          "Track the transactions your code begins with a bStarted flag and end only those; use the count for diagnostics, not as the guard for EndLimsTransaction.",
           "Pass an explicit connection name when your script works with more than one database connection."
         ],
         "dont": [
@@ -9081,7 +9082,7 @@
       "id": "ssl.function.runsql",
       "element_type": "function",
       "title": "RunSQL",
-      "summary": "Executes a SQL statement and returns whether execution completed without an uncaught SQL error.",
+      "summary": "Executes a non-query SQL statement and returns .T. on success. Under default settings, a failed statement raises an error.",
       "doc_status": "published",
       "source_path": "content/reference/functions/RunSQL.md",
       "exceptions": [
@@ -10250,7 +10251,7 @@
       ],
       "caveats": [
         "Replacements are non-overlapping. Each match is processed once in the original left-to-right scan.",
-        "The raw source does not define a special searchFor = \"\" behavior. Avoid empty search strings."
+        "Avoid passing an empty string as searchFor."
       ],
       "best_practices": {
         "do": [

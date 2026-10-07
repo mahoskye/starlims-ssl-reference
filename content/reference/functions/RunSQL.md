@@ -1,6 +1,6 @@
 ---
 title: "RunSQL"
-summary: "Executes a SQL statement and returns whether execution completed without an uncaught SQL error."
+summary: "Executes a non-query SQL statement and returns .T. on success. Under default settings, a failed statement raises an error."
 id: ssl.function.runsql
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # RunSQL
 
-Executes a SQL statement and returns whether execution completed without an uncaught SQL error.
+Executes a non-query SQL statement and returns .T. on success. Under default settings, a failed statement raises an error.
 
 `RunSQL` is the non-query database helper for SQL that changes data or schema. It executes the SQL text on the specified connection, or on the default connection when `sConnectionName` is omitted. Use positional `?` placeholders in the SQL text and pass the corresponding values in `aValues`.
 

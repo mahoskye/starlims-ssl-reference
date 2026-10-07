@@ -26,7 +26,7 @@ Matching is case-sensitive. If `replaceWith` is omitted or [`NIL`](../literals/n
 ## Syntax
 
 ```ssl
-StrTran(source, searchFor, replaceWith)
+StrTran(source, searchFor, [replaceWith])
 ```
 
 ## Parameters
@@ -64,7 +64,7 @@ StrTran(source, searchFor, replaceWith)
 ## Caveats
 
 - Replacements are non-overlapping. Each match is processed once in the original left-to-right scan.
-- The raw source does not define a special `searchFor = ""` behavior. Avoid empty search strings.
+- Avoid passing an empty string as `searchFor`.
 
 ## Examples
 

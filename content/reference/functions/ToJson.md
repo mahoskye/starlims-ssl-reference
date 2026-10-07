@@ -88,6 +88,7 @@ Build a small dynamic object and serialize it to JSON. The output includes the o
 	});
 
 	sJson := ToJson(oSample);
+	UsrMes(sJson);
 
 	:RETURN sJson;
 :ENDPROC;
@@ -96,7 +97,7 @@ Build a small dynamic object and serialize it to JSON. The output includes the o
 DoProc("BuildSampleJson");
 ```
 
-Expected JSON:
+[`UsrMes`](UsrMes.md) logs:
 
 ```text
 {"sampleId":"SAMP-1001","status":"Logged","approved":false,"XmlType":"SSLExpando"}

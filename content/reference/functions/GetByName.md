@@ -13,7 +13,7 @@ starlims:
 
 Retrieves the value of a variable by name from the current scope, a caller scope, or public storage.
 
-Returns the value of the named variable, found the same way as a bare read of that name: the current scope first, then the scopes of the calling procedures, then public variables. The name is case-sensitive and must be non-empty. If the variable does not exist, the runtime raises an error. Use this function when the variable name is only known at runtime — for static references, access the variable directly or use [`SetByName`](SetByName.md).
+Returns the value of the named variable, found the same way as a bare read of that name: the current scope first, then the scopes of the calling procedures, then public variables. The name is case-sensitive and must be non-empty. If the variable does not exist, the runtime raises an error. Use this function when the variable name is only known at runtime. When the name is fixed, read the variable directly. Use [`SetByName`](SetByName.md) to assign a variable by name.
 
 ## When to use
 
@@ -42,7 +42,7 @@ GetByName(sName)
 | Trigger | Exception message |
 | --- | --- |
 | `sName` is [`NIL`](../literals/nil.md) or empty. | `GetByName(): Variable name cannot be missing.` |
-| The variable named `sName` does not exist in the current scope. | `Variable [<sName>] is undefined!` |
+| No variable named `sName` is visible from the current scope, a caller scope, or public variables. | `Variable [<sName>] is undefined!` |
 
 ## Best practices
 

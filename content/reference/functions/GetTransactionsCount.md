@@ -49,7 +49,7 @@ GetTransactionsCount(sConnection)
 
 !!! success "Do"
     - Use the default connection when you only need the current script context.
-    - Check the count before calling [`EndLimsTransaction`](EndLimsTransaction.md) in defensive transaction-handling code.
+    - Track the transactions your code begins with a `bStarted` flag and end only those; use the count for diagnostics, not as the guard for [`EndLimsTransaction`](EndLimsTransaction.md).
     - Pass an explicit connection name when your script works with more than one database connection.
 
 !!! failure "Don't"

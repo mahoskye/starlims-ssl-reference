@@ -39,7 +39,7 @@ CreateUdObject(sClassName, [aArgs])
 | Name | Form | Type | Required | Default | Description |
 |------|------|------|----------|---------|-------------|
 | `aPropertyDefs` | property-def | [array](../types/array.md) | conditional | — | Property definitions for the dynamic object. Each element must be either a property name string or a two-element array of `{propertyName, initialValue}`. A bare property name creates the property with an empty-string value. |
-| `sClassName` | class-name | [string](../types/string.md) | conditional | — | Name of a user-defined [`:CLASS`](../keywords/CLASS.md) to instantiate. Not for built-in classes such as `Email{}` or `SSLDataset{}`. |
+| `sClassName` | class-name | [string](../types/string.md) | conditional | — | Category-qualified name of the user-defined [`:CLASS`](../keywords/CLASS.md) script to instantiate, written `Category.ScriptName` (for example, `"Samples.SampleTicket"` for a class script named `SampleTicket` in the `Samples` category). Not for built-in classes such as `Email{}` or `SSLDataset{}`. |
 | `aArgs` | class-name | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Constructor arguments for the class-name form. Pass all arguments as one array in call order, even when there is only one argument. |
 
 Only one form is used per call. `aPropertyDefs` and `sClassName` are both the first positional argument — they are distinguished by type (array vs. string).
