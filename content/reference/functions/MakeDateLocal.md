@@ -51,8 +51,8 @@ MakeDateLocal(vDate, [vColumnsIndex])
 | --- | --- |
 | `vDate` is [`NIL`](../literals/nil.md). | `Argument: date cannot be null.` |
 | `vDate` is not a date or array. | `Argument dateValue is neither a Date nor an Array.` |
-| `vDate` is an array and `vColumnsIndex` is [`NIL`](../literals/nil.md) or omitted. | `Argument: vColumnsIndex cannot be null.` |
-| `vColumnsIndex` is not a number or array. | `Argument: vColumnsIndex is neither a Number nor an Array.` |
+| `vDate` is an array and `vColumnsIndex` is [`NIL`](../literals/nil.md) or omitted. | `Argument columnsIndex cannot be null.` |
+| `vColumnsIndex` is not a number or array. | `Argument columnsIndex is neither a Number nor an Array.` |
 | A targeted column in `vDate` does not contain a date. | `Column: <index> doesn't contain date values. MakeDateLocal().` |
 
 ## Best practices

@@ -51,8 +51,8 @@ BuildString(aTarget, [nStart], [nCount], [sDelimiter])
 | Trigger | Exception message |
 | --- | --- |
 | `aTarget` is [`NIL`](../literals/nil.md). | `BuildString(): target array cannot be null.` |
-| `nStart` is not an integer-valued number. | `Starting index must be an integer value.` |
-| `nCount` is not an integer-valued number. | `Element count must be an integer value.` |
+| `nStart` is not an integer-valued number. | `BuildString(): starting index must be an integer value.` |
+| `nCount` is not an integer-valued number. | `BuildString(): element count must be an integer value.` |
 | `nStart` is less than `1`. | `BuildString(): starting index cannot be less that one.` |
 | `nCount` is less than `0`. | `BuildString(): element count cannot be less that zero.` |
 

@@ -44,7 +44,7 @@ StrZero(nNumber, [nLength], [nDecimals])
 
 | Trigger | Exception message |
 | --- | --- |
-| `nNumber` is [`NIL`](../literals/nil.md) and at least one optional argument is supplied. | `nNumber argument cannot be null.` |
+| `nNumber` is [`NIL`](../literals/nil.md) and at least one optional argument is supplied. | `number argument cannot be null in StrZero()` |
 
 ## Best practices
 

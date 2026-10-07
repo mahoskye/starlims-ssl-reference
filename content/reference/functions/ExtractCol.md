@@ -44,7 +44,7 @@ ExtractCol(aTarget, nColumn)
 | --- | --- |
 | `aTarget` is [`NIL`](../literals/nil.md). | `ExtractCol(): target array cannot be null.` |
 | `nColumn` is [`NIL`](../literals/nil.md) and `aTarget` is not empty. | `ExtractCol(): column number cannot be null.` |
-| `nColumn` is not an integer. | `Column number must be an integer value.` |
+| `nColumn` is not an integer. | `ExtractCol(): column number must be an integer value.` |
 | `nColumn` is less than `1`. | `ExtractCol(): column number cannot be less than one.` |
 | Any row is not an array. | `ExtractCol(): target must be an array of arrays (a two dimensional array).` |
 | `nColumn` exceeds the length of any row. | `ExtractCol(): column number cannot exceed the number of elements in any sub-array.` |

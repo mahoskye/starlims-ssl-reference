@@ -46,7 +46,7 @@ GetRegionEx(sRegionName, [aSourceValues], [aDestinationValues], [oLocalRegions])
 | --- | --- |
 | `sRegionName` is [`NIL`](../literals/nil.md). | `Argument cannot be null` |
 | `sRegionName` is not a string. | `Argument must be of type string.` |
-| `aSourceValues` or `aDestinationValues` is not an array. | `Invalid arguments for GetRegion! Should be: string, array, array.` |
+| `aSourceValues` or `aDestinationValues` is not an array. | `Run-time error: Invalid arguments for GetRegion!`, then `Should be: string, array, array.` on the second line |
 | `aSourceValues` and `aDestinationValues` have different lengths. | `Run-time error: Invalid arguments for GetRegion!`, then `Source array's length is not equal with destination array's length.` on the second line |
 | The region name is not found in either the local override map or the current region scope. The value substituted for `<sRegionName>` is the lowercased region name. | `Run-time error: GetRegion: <sRegionName> not in scope.` |
 

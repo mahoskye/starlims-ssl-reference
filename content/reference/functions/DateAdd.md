@@ -47,7 +47,7 @@ DateAdd(dDate, nNumber, [sDatepart])
 | `dDate` is not a date value. | `Argument: date must be of date type` |
 | `nNumber` is [`NIL`](../literals/nil.md). | `Argument: number cannot be null.` |
 | `nNumber` is not numeric. | `Argument number must be a number. DateAdd().` |
-| `sDatepart` is not a recognized interval name. `<value>` is the invalid string supplied; the message contains a line break between the two sentences. | `Argument datepart (value=<value>) is invalid. Possible values:year, month, day, hour, minute, second, millisecond.` |
+| `sDatepart` is not a recognized interval name. `<value>` is the string supplied. | `Argument datepart (value=<value>) is invalid.`, then `Possible values:year, month, day, hour, minute, second, millisecond.` on the second line |
 
 ## Best practices
 
