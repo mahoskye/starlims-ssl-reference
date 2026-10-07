@@ -5,8 +5,8 @@ id: ssl.special_form.access-modifiers
 element_type: special_form
 doc_status: published
 starlims:
-  applies_to: [11]
-  verified_against: [11]
+  applies_to: [11, 12]
+  verified_against: [12]
 ---
 
 # Access Modifiers

@@ -5,8 +5,8 @@ id: ssl.operator.double-star-power
 element_type: operator
 doc_status: published
 starlims:
-  applies_to: [11]
-  verified_against: [11]
+  applies_to: [11, 12]
+  verified_against: [12]
 ---
 
 # ** (double-star-power)

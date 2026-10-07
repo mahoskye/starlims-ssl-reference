@@ -1,14 +1,14 @@
 ---
 title: "SSL Reference"
-summary: "Reference for 460 SSL language elements as implemented in STARLIMS v11."
+summary: "Reference for 460 SSL language elements as implemented in STARLIMS v11, verified on STARLIMS v12."
 starlims:
-  applies_to: [11]
+  applies_to: [11, 12]
   verified_against: [11]
 ---
 
 # SSL Reference
 
-Reference for 460 SSL language elements, documenting behavior as implemented in STARLIMS version 11.
+Reference for 460 SSL language elements, documenting behavior as implemented in STARLIMS version 11 and verified on STARLIMS version 12.
 
 Element pages draw from a common set of sections — the exact mix varies by category:
 

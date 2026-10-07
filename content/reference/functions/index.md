@@ -2,7 +2,7 @@
 title: "Functions"
 summary: "330 built-in functions organized by category."
 starlims:
-  applies_to: [11]
+  applies_to: [11, 12]
   verified_against: [11]
 ---
 

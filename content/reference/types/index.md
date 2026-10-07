@@ -2,7 +2,7 @@
 title: "Types"
 summary: "8 core SSL types - the building blocks of every SSL expression."
 starlims:
-  applies_to: [11]
+  applies_to: [11, 12]
   verified_against: [11]
 ---
 

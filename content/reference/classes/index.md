@@ -2,7 +2,7 @@
 title: "Classes"
 summary: "29 classes providing structured data access, document management, and system services."
 starlims:
-  applies_to: [11]
+  applies_to: [11, 12]
   verified_against: [11]
 ---
 

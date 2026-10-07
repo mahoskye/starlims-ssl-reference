@@ -2,7 +2,7 @@
 title: "Obtained Objects"
 summary: "Objects you obtain from another element — clients, requests, responses, and other return-shaped values that are not constructed directly."
 starlims:
-  applies_to: [11]
+  applies_to: [11, 12]
   verified_against: [11]
 ---
 

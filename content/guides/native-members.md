@@ -52,7 +52,7 @@ Substring: Hel
 
 ## Verified members
 
-The members below have been verified on STARLIMS v11. Other members may work, but verify them first (see [Verifying a member](#verifying-a-member)).
+The members below have been verified on STARLIMS v12. Other members may work, but verify them first (see [Verifying a member](#verifying-a-member)).
 
 ### Strings
 

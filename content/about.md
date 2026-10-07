@@ -15,8 +15,9 @@ single browsable site.
 
 ## What it documents
 
-Everything here describes SSL **as observed in STARLIMS version 11**. Other
-versions may behave differently — if you are on a different version, verify
+Everything here describes SSL **as implemented in STARLIMS version 11**. Most
+pages' examples and error messages have since been checked on a **STARLIMS
+version 12** server. Other versions may behave differently — if you are on a different version, verify
 behavior in your own environment before relying on a page.
 
 ## How it was built — and why you should double-check

@@ -5,7 +5,7 @@ id: ssl.keyword.class
 element_type: keyword
 doc_status: published
 starlims:
-  applies_to: [11]
+  applies_to: [11, 12]
   verified_against: [11]
 ---
 
