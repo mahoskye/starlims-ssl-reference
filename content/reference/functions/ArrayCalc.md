@@ -80,7 +80,7 @@ ArrayCalc(aTarget, [sOperation], [vValue], [nStart], [nCount])
 | `MERGE` receives a non-array `vValue`. | `ArrayCalc(): for MERGE operations, value parameter must be an array.` |
 | `SORT` receives an empty array for `vValue`. | `sortColumnIndex array is empty.` |
 | `SORT` receives an unsupported type for `vValue`. Accepted types are a numeric column index, an array of numeric column indexes, or a comparison code block. | `If present, sortColumnIndex must be either numeric or array of numeric values.` |
-| A `SORT` comparison code block returns a non-numeric result. | `Array sort: the code block which compares two elements of the array, needs to return an integer value (less than zero if first element is smaller; zero if they are equal; and greater than zero if first element is greater).` |
+| A `SORT` comparison code block returns a non-numeric result. | `Failed to compare two elements in the array.` (the inner error reads `Array sort: the code block which compares two elements of the array, needs to return an integer value (less than zero if first element is smaller; zero if they are equal; and greater than zero if first element is greater).`) |
 | `nStart` is not a whole number for `COPY`. The same condition raises the same message for `DEL`, `FILL`, and `INS`. | `ArrayCalc(): for COPY operations, starting index must be an integer value.` |
 | `nStart < 1` for `COPY`. The same condition raises the same message for `DEL`, `FILL`, and `INS`. | `ArrayCalc(): for COPY operations, starting index cannot be less than one.` |
 | `nCount` is not a whole number for `COPY`. The same condition raises the same message for `DEL` and `FILL`. | `ArrayCalc(): for COPY operations, count must be an integer value.` |
