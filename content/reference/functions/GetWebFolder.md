@@ -95,7 +95,7 @@ Check the returned folder value, add a separator only when needed, and then appe
 	sSeparator := "";
 
 	:IF !(sLastChar $ "/\");
-		sSeparator := "\\";
+		sSeparator := "\";
 	:ENDIF;
 
 	sAssetPath := sWebFolder + sSeparator + "assets\report_template.html";
@@ -132,7 +132,7 @@ Compare the web folder with other folder helpers so published output goes under 
 	sSeparator := "";
 
 	:IF !(sLastChar $ "/\");
-		sSeparator := "\\";
+		sSeparator := "\";
 	:ENDIF;
 
 	sOutputPath := sWebFolder + sSeparator + "downloads\daily-report.txt";
