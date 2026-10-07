@@ -13,10 +13,6 @@ starlims:
 
 Qualify each column in an array as `table.column` with database-specific identifier delimiters.
 
-AddColDelimiters updates `aCols` in place. For each element, it builds a value in the form `table.column`, wrapping both parts with the delimiter characters for the database identified by `sDSN`.
-
-If `sDSN` is [`NIL`](../literals/nil.md), the function uses empty delimiters. If `aCols` is [`NIL`](../literals/nil.md) or `sTable` is [`NIL`](../literals/nil.md), the function leaves the array unchanged and returns no value. The function trims `sTable` before building the qualified names.
-
 !!! warning "Not callable from SSL"
     On STARLIMS v11, every call to `AddColDelimiters` from SSL code fails to compile with `Compile-time error: … Invalid prototype for built-in function: AddColDelimiters`, whatever arguments are passed. Sixteen argument shapes were tested, from no arguments to four. Build qualified names with [`AddNameDelimiters`](AddNameDelimiters.md) instead, as in the example below.
 
@@ -34,13 +30,13 @@ AddColDelimiters(sDSN, aCols, sTable)
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `sDSN` | [string](../types/string.md) | no | `""` | Data source name used to determine delimiter rules. |
-| `aCols` | [array](../types/array.md) | yes | — | Array of column names to update in place. Each element is replaced with a qualified name. |
-| `sTable` | [string](../types/string.md) | yes | — | Table name used to qualify each column. The function trims this value before using it. |
+| `sDSN` | [string](../types/string.md) | no | — | Data source name used to determine delimiter rules. |
+| `aCols` | [array](../types/array.md) | yes | — | Array of column names to qualify. |
+| `sTable` | [string](../types/string.md) | yes | — | Table name used to qualify each column. |
 
 ## Returns
 
-**none** — No return value. The function updates `aCols` directly.
+**none** — Calls from SSL do not compile, so there is no result to use.
 
 ## Exceptions
 

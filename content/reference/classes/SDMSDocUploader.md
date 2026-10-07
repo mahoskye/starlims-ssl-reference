@@ -27,7 +27,7 @@ Uploads files into SDMS, attaches uploads to workflow steps, and checks in docum
 
 ### `SDMSDocUploader{oCredentials}`
 
-Creates an uploader and loads the SDMS URL, username, password hash, site ID, and session ID from the credentials object. Workflow IDs start in a missing state and must be set before workflow-specific calls.
+Creates an uploader and loads the SDMS URL, username, password hash, site ID, and session ID from the credentials object. Workflow IDs start unset; set `WorkflowId`, `StageId`, and `ActionId` before workflow-specific calls.
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
@@ -35,7 +35,7 @@ Creates an uploader and loads the SDMS URL, username, password hash, site ID, an
 
 ### `SDMSDocUploader{}`
 
-Creates an uploader without loading SDMS connection or authentication values. Workflow IDs start at `0`, so the workflow-specific missing-ID validation described below does not run automatically unless you assign your own values.
+Creates an uploader without loading SDMS connection or authentication values. Workflow IDs start at `0`, so workflow-specific methods do not raise the missing-ID errors described below; if you don't set the IDs, `0` is sent.
 
 ## Properties
 
@@ -223,7 +223,7 @@ This class also inherits the SDMS `ErrorMessage`, `SessionId`, and `IsSessionExp
 
 - `UploadOriginalDoc()`, `AttachDocToWorkflow()`, `AttachFileToDocument()`, `UploadOfficeTemplate()`, `UploadELNDocument()`, and `UploadNewRevisionForWorkflowDocument()` can auto-fill blank `DocName`, `FileType`, and `ProjectName` values.
 - `CheckInDocument()` does not auto-fill `DocName`; it raises an error if `DocName` is blank.
-- `AttachDocToWorkflow()` validates missing workflow IDs only when those properties are still in the missing-value state used by the credentialed constructor.
+- `AttachDocToWorkflow()` raises its missing-ID errors only on an uploader created with `SDMSDocUploader{oCredentials}` whose `WorkflowId`, `StageId`, or `ActionId` has not been set.
 - `CheckInWorkflowDocument()` accepts [`NIL`](../literals/nil.md) for `nDocEntryPoint`; in that case it skips the source stage header.
 - `DoUpload()` returns the document ID, while the higher-level helper methods return booleans.
 - When `UploadOriginalDoc()` runs the UXML upload, `FilePath` is overwritten with a temporary path. Reassign `FilePath` before reusing the same uploader instance.
@@ -248,7 +248,7 @@ Creates a credentials object, builds an `SDMSDocUploader`, then uploads a PDF fi
     });
 
     oUploader := SDMSDocUploader{oCredentials};
-    oUploader:FilePath := "C:/Docs/AnalysisReport.pdf";
+    oUploader:FilePath := "C:\Docs\AnalysisReport.pdf";
     oUploader:FileType := "PDF";
     oUploader:ProjectName := "Laboratory Results";
 
@@ -282,7 +282,7 @@ Sets the workflow, stage, and action IDs on an `SDMSDocUploader` instance, then 
     });
 
     oUploader := SDMSDocUploader{oCredentials};
-    oUploader:FilePath := "C:/Docs/BatchRecord.pdf";
+    oUploader:FilePath := "C:\Docs\BatchRecord.pdf";
     oUploader:DocName := "BatchRecord.pdf";
     oUploader:WorkflowId := 1205;
     oUploader:StageId := 3;
@@ -320,7 +320,7 @@ Sets `DocId`, `DocName`, and `FilePath` on an existing document, then calls `Che
     oUploader := SDMSDocUploader{oCredentials};
     oUploader:DocId := 10045;
     oUploader:DocName := "AnalysisReport.pdf";
-    oUploader:FilePath := "C:/Docs/AnalysisReport_v2.pdf";
+    oUploader:FilePath := "C:\Docs\AnalysisReport_v2.pdf";
 
     :TRY;
         bCheckedIn := oUploader:CheckInDocument("2.1", "RELEASED");

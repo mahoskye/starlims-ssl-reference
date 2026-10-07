@@ -36,7 +36,7 @@ The object also starts with a default log file path value, but trace logging is 
 |------|------|--------|-------------|
 | `DiffDataTable` | [string](../types/string.md) | read-only | Serialized dataset string produced by the most recent successful `Compare()` call. Empty until a comparison serializes the current result table. |
 | `InternalErrors` | [string](../types/string.md) | read-only | Accumulated error text captured when log-file setup fails or when metadata retrieval calls fail while collecting forms, scripts, data sources, or tables. |
-| `LogFilePath` | [string](../types/string.md) | read-write | Current log file path. Setting it attempts to create or replace the file and resets the active trace listeners to write to that file. |
+| `LogFilePath` | [string](../types/string.md) | read-write | Current log file path. Setting it creates or replaces the file and sends the trace log there. |
 | `ResultTable` | [object](../types/object.md) | read-only | Current package table used for collected dictionary metadata and later comparison results. |
 
 ## Methods
@@ -53,7 +53,7 @@ Compares the current `ResultTable` to another package table. The method returns 
 
 ### `ConnectToExternalSystem`
 
-Attempts to connect to another STARLIMS system using the supplied URL, username, and password. The URL is converted to the generic service endpoint before login is attempted.
+Attempts to connect to another STARLIMS system using the supplied URL, username, and password.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
@@ -93,7 +93,7 @@ Collects application form metadata into `ResultTable`.
     - Assume `Compare()` returns every row from the source table — unchanged rows are removed from the current result set.
     - Treat `ConnectToExternalSystem()` failures as thrown errors — the method reports failure with [`.F.`](../literals/false.md).
     - Expect `GetDataFromWholeDictionary()` to clear earlier rows first — it appends collected metadata to the existing `ResultTable`.
-    - Assume setting `LogFilePath` always succeeds — invalid or inaccessible paths are recorded in `InternalErrors` and the trace listeners are only updated on success.
+    - Assume setting `LogFilePath` always succeeds — invalid or inaccessible paths are recorded in `InternalErrors`, and the trace log is not redirected to them.
 
 ## Caveats
 
@@ -146,7 +146,7 @@ DoProc("CompareDictionaryMetadata");
 
 ### Connect to another system before collecting metadata
 
-Sets `LogFilePath` to create a trace file for the run, then calls `ConnectToExternalSystem()` before attempting to collect dictionary metadata. If connection fails, `InternalErrors` is checked for any captured error detail.
+Sets `LogFilePath` to create a trace file for the run, then calls `ConnectToExternalSystem()` before attempting to collect dictionary metadata. If connection fails, the example also checks `InternalErrors`, which at that point can only hold an error from the earlier `LogFilePath` assignment.
 
 ```ssl
 :PROCEDURE CollectExternalDictionaryMetadata;

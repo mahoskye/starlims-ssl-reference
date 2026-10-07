@@ -283,7 +283,7 @@ Uploads a local file as a blob.
 
 - **When `sLocalPath` does not exist:** `File does not exist: <sLocalPath>`
 - **When the file is larger than 64 MB:** `Not implemented for files bigger than 64 MB: <sLocalPath>`
-- **When `sBlobName` is empty, longer than 1024 characters, or ends with `.` or [`/`](../operators/divide.md):** `Invalid blob name. Blob names cannot end with a dot (.) or a forward slash (/). A blob name must be between 1 and 1024 characters long.`
+- **When `sBlobName` is empty, longer than 1024 characters, or ends with `.` or `/`:** `Invalid blob name. Blob names cannot end with a dot (.) or a forward slash (/). A blob name must be between 1 and 1024 characters long.`
 - **When Azure returns an unexpected success status:** A runtime error describing the unexpected HTTP status.
 
 ### `GetBlob`
@@ -336,7 +336,7 @@ Downloads a blob to a temporary file, reads that file as text, deletes the tempo
 !!! failure "Don't"
     - Assume the credential constructors default to HTTPS. The two-argument constructor uses HTTP, and the three-argument constructor only uses HTTPS when `bUseHttp` is [`.T.`](../literals/true.md).
     - Build `SelectEntities()` filters with comparison operators such as less-than or greater-than.
-      The public API only builds equality filters from the properties you supply.
+      `SelectEntities()` only builds equality filters from the properties you supply.
     - Expect `GetBlob()` to return blob contents. It returns a file path to the downloaded blob.
     - Omit `PartitionKey` or `RowKey` when inserting or updating entities. Those calls fail before the request is sent.
 

@@ -42,23 +42,18 @@ Exports tables into a destination folder.
 | `IsEnterpriseOnly` | [boolean](../types/boolean.md) | write-only | Switches the export to enterprise-only mode, where each table entry can supply a custom `FROM` source. |
 | `FromSQL` | [boolean](../types/boolean.md) | write-only | Switches the export to SQL mode, where each table entry can supply a full SQL statement. |
 | `NullAsBlank` | [boolean](../types/boolean.md) | write-only | In SQL mode, controls whether exported `NULL` values are treated as blanks. Defaults to [`.F.`](../literals/false.md). |
-| `InvariantDateColumns` | [array](../types/array.md) | write-only | In SQL mode, supplies the invariant date columns passed to the export operation. |
+| `InvariantDateColumns` | [array](../types/array.md) | write-only | In SQL mode, names date columns that are exported exactly as stored, without conversion from UTC to local time. |
+| `ErrorMsg` | [string](../types/string.md) | read-write | Final error text from the export run. |
 
 ## Methods
 
 | Name | Returns | Description |
 |------|---------|-------------|
-| `DoExport()` | [boolean](../types/boolean.md) | Runs the export and returns the completion result from the underlying export process. It also updates `ErrorMsg` with the final exporter message when the call returns normally. |
+| `DoExport()` | [boolean](../types/boolean.md) | Runs the export and returns [`.T.`](../literals/true.md) when the export run completes, [`.F.`](../literals/false.md) otherwise. It also updates `ErrorMsg` with the final exporter message when the call returns normally. |
 
 ## Inheritance
 
-**Base class:** `EnterpriseImpExBase`
-
-Inherited member:
-
-| Name | Type | Access | Description |
-|------|------|--------|-------------|
-| `ErrorMsg` | [string](../types/string.md) | read-write | Final error text from the export run. |
+**Base class:** [`object`](../types/object.md)
 
 ## Best practices
 
@@ -102,8 +97,8 @@ Passes a named table list in default mode. Because `DoExport()` does not report 
 	:DECLARE aTables, oExporter, bSuccess;
 
 	aTables := {"users", "roles", "permissions"};
-	oExporter := EnterpriseExporter{aTables, .F., "C:/Exports/EnterpriseData"};
-	oExporter:LogFile := "C:/Exports/EnterpriseData/export.log";
+	oExporter := EnterpriseExporter{aTables, .F., "C:\Exports\EnterpriseData"};
+	oExporter:LogFile := "C:\Exports\EnterpriseData\export.log";
 
 	bSuccess := oExporter:DoExport();
 
@@ -131,9 +126,9 @@ Sets `IsEnterpriseOnly` and passes a table entry array where each entry's second
 
 	aTables := {{"users", "enterprise_users_view"}};
 
-	oExporter := EnterpriseExporter{aTables, .F., "C:/Exports/EnterpriseOnly"};
+	oExporter := EnterpriseExporter{aTables, .F., "C:\Exports\EnterpriseOnly"};
 	oExporter:IsEnterpriseOnly := .T.;
-	oExporter:LogFile := "C:/Exports/EnterpriseOnly/export.log";
+	oExporter:LogFile := "C:\Exports\EnterpriseOnly\export.log";
 
 	bSuccess := oExporter:DoExport();
 
@@ -151,7 +146,7 @@ DoProc("ExportEnterpriseOnlyTable");
 
 ### Export in SQL mode with date handling options
 
-Sets `FromSQL` and supplies a full SQL statement as the second value in each table entry. `NullAsBlank` converts exported `NULL` values to blank strings, and `InvariantDateColumns` ensures `reported_on` and `approved_on` are written in a locale-independent format.
+Sets `FromSQL` and supplies a full SQL statement as the second value in each table entry. `NullAsBlank` converts exported `NULL` values to blank strings, and `InvariantDateColumns` keeps `reported_on` and `approved_on` exactly as stored, without converting them from UTC to local time.
 
 ```ssl
 :PROCEDURE ExportWithSQLMode;
@@ -168,11 +163,11 @@ ORDER BY sample_id
 	}};
 	aDateCols := {"reported_on", "approved_on"};
 
-	oExporter := EnterpriseExporter{aTables, .F., "C:/Exports/SqlMode"};
+	oExporter := EnterpriseExporter{aTables, .F., "C:\Exports\SqlMode"};
 	oExporter:FromSQL := .T.;
 	oExporter:NullAsBlank := .T.;
 	oExporter:InvariantDateColumns := aDateCols;
-	oExporter:LogFile := "C:/Exports/SqlMode/export.log";
+	oExporter:LogFile := "C:\Exports\SqlMode\export.log";
 
 	bSuccess := oExporter:DoExport();
 

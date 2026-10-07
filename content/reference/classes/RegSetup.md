@@ -17,7 +17,7 @@ Use `RegSetup` when an SSL script needs to read machine-level configuration from
 
 `RegOpenKey()` returns [`.T.`](../literals/true.md) when the subkey is found and opened, or [`.F.`](../literals/false.md) when the subkey does not exist. `RegQueryValue()` reads a value from the currently open key and returns [`NIL`](../literals/nil.md) when that value name is not present. `RegCloseKey()` always returns [`.T.`](../literals/true.md).
 
-The surfaced method signatures include `access` and `type` parameters, but the current behavior ignores both parameters.
+`RegOpenKey()` and `RegQueryValue()` each take a second argument (`nAccess`, `nType`) that is required but has no effect.
 
 ## When to use
 

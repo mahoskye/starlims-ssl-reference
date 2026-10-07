@@ -115,7 +115,7 @@ Retrieves a column by name or by 1-based index.
 
 - `Get()` raises an error for invalid names, invalid types, [`NIL`](../literals/nil.md), and out-of-range numeric positions.
 - Numeric access is 1-based, but the value reported in out-of-range error messages may not match the index you supplied.
-- `Add()` and `Set()` are surfaced members, but they do not modify the collection.
+- `Add()` and `Set()` can be called, but they do not modify the collection.
 
 ## Examples
 
@@ -127,7 +127,7 @@ Uses `GetIndex` to locate the column first, then retrieves it with `Get`. The `G
 :PROCEDURE InspectColumn;
 	:DECLARE oImport, oTable, oColumns, oColumn, nIndex, sMsg;
 
-	oImport := TablesImport{"C:/Import"};
+	oImport := TablesImport{"C:\Import"};
 	oTable := oImport:GetTable("limsusers");
 	oColumns := oTable:Columns;
 
@@ -155,7 +155,7 @@ Accesses the first column using a 1-based numeric index. The `Count` guard ensur
 :PROCEDURE InspectFirstColumn;
 	:DECLARE oImport, oTable, oColumns, oColumn;
 
-	oImport := TablesImport{"C:/Import"};
+	oImport := TablesImport{"C:\Import"};
 	oTable := oImport:GetTable("limsusers");
 	oColumns := oTable:Columns;
 
@@ -179,7 +179,7 @@ Demonstrates that `Get` raises an error for a column name that does not exist. U
 :PROCEDURE HandleMissingColumn;
 	:DECLARE oImport, oTable, oColumns, oErr;
 
-	oImport := TablesImport{"C:/Import"};
+	oImport := TablesImport{"C:\Import"};
 	oTable := oImport:GetTable("limsusers");
 	oColumns := oTable:Columns;
 

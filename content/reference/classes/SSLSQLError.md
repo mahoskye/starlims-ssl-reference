@@ -27,7 +27,7 @@ It adds SQL-specific details such as the captured SQL statement, provider error 
 
 `SSLSQLError` is normally returned by [`GetLastSQLError()`](../functions/GetLastSQLError.md) or [`ReturnLastSQLError()`](../functions/ReturnLastSQLError.md).
 
-No separate SSL-facing constructor contract is surfaced for normal script use.
+You can't construct one directly; get it from [`GetLastSQLError()`](../functions/GetLastSQLError.md).
 
 ## Properties
 
@@ -38,7 +38,7 @@ No separate SSL-facing constructor contract is surfaced for normal script use.
 | `ErrorStackTrace` | [string](../types/string.md) | read-only | Combined stack trace text from the captured exception chain, or `Empty stack trace.` when no stack trace text was captured. |
 | `Description` | [string](../types/string.md) | read-only | Alias of `ErrorMessage`. |
 | `Operation` | [string](../types/string.md) | read-only | Always returns `SQL operation.` |
-| `GenCode` | [number](../types/number.md) | read-only | Numeric code derived from `SQLState`. If `SQLState` is a 9-character provider code, SSL tries its 5-character suffix. Returns `0` when no numeric code can be extracted. |
+| `GenCode` | [number](../types/number.md) | read-only | Numeric database error code. On SQL Server, this is the native error number (for example 207 for an invalid column, 208 for an invalid object). Returns `0` when no number is available. |
 | `Sql` | [string](../types/string.md) | read-only | SQL statement associated with the captured database error, when available. |
 
 ## Methods

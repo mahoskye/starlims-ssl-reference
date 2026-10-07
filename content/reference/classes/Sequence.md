@@ -13,7 +13,7 @@ starlims:
 
 Creates and manages a database sequence for a table field on Oracle or SQL Server.
 
-`Sequence` gives SSL scripts a compact API for creating, resetting, dropping, and querying a database sequence. You construct it with a platform name, table name, field name, and a prefix, passing `""` as the prefix when you do not need one. The object derives a sequence name from those values, uses `StartWith` when creating the sequence on both platforms, and uses `CacheSize` when creating the sequence on SQL Server.
+`Sequence` gives SSL scripts a compact API for creating, resetting, dropping, and querying a database sequence. You construct it with a platform name, table name, field name, and a suffix (the `sPrefix` argument), passing `""` when you do not need one. The object derives a sequence name from those values, uses `StartWith` when creating the sequence on both platforms, and uses `CacheSize` when creating the sequence on SQL Server.
 
 ## When to use
 
@@ -33,7 +33,7 @@ Creates a sequence object for a table field. All four arguments are required. Th
 | `sPlatforma` | [string](../types/string.md) | yes | Database platform. `"ORACLE"` selects Oracle behavior. Any other value uses SQL Server behavior. |
 | `sTableName` | [string](../types/string.md) | yes | Table name used to derive the sequence name. |
 | `sFieldName` | [string](../types/string.md) | yes | Field name used to derive the sequence name. |
-| `sPrefix` | [string](../types/string.md) | yes | Suffix added to the derived sequence name. Pass `""` for no suffix. With `""`, the sequence is named `C_<TABLE>_<FIELD>`, for example `C_SAMPLE_SAMPLE_ID` for table `sample` and field `sample_id`. |
+| `sPrefix` | [string](../types/string.md) | yes | Despite its name, `sPrefix` is appended as a suffix: `C_<TABLE>_<FIELD>_<SPREFIX>`. Pass `""` for no suffix. With `""`, the sequence is named `C_<TABLE>_<FIELD>`, for example `C_SAMPLE_SAMPLE_ID` for table `sample` and field `sample_id`. |
 
 ## Properties
 
@@ -107,7 +107,7 @@ Changes the database used for later property lookups and method calls.
 
 ## Caveats
 
-- `SequenceName` is derived from the table name and field name, both converted to uppercase, and always starts with `C_`. When a prefix is supplied, it is appended in uppercase after the field name.
+- `SequenceName` is derived from the table name and field name, both converted to uppercase, and always starts with `C_`. When `sPrefix` is not empty, it is appended in uppercase after the field name, separated by `_`.
 - `Create()` handles create failures by showing a message rather than exposing a dedicated return value.
 - `Drop()`, `Exists`, `NextValue`, and `Reset()` still depend on the target database being reachable and the sequence being valid in that database.
 - Oracle and SQL Server do not reset sequences the same way. Oracle reset recreates the sequence, while SQL Server resets the existing sequence in place.

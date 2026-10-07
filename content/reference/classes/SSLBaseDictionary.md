@@ -135,7 +135,7 @@ Concrete classes that inherit from `SSLBaseDictionary` include:
     - Read `Keys`, `Values`, and `Count` after updates when you need the current dictionary state.
 
 !!! failure "Don't"
-    - Document or write examples as if `SSLBaseDictionary{}` can be instantiated directly, because this page describes an abstract base class.
+    - Create `SSLBaseDictionary{}` directly. Create a concrete dictionary such as [`SSLStringDictionary{}`](SSLStringDictionary.md) or [`SSLIntDictionary{}`](SSLIntDictionary.md) instead.
     - Assume all dictionary classes accept the same key types, because the concrete class decides what is valid.
     - Expect all invalid-key operations to fail the same way, because `AddValue` and `GetValue` handle invalid keys differently from `Contains`, `Remove`, and `TryGetValue`.
     - Treat `TryGetValue` as returning the value by itself, because it returns an object with `Exists` and `Value`.

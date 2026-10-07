@@ -15,7 +15,7 @@ Returns the index of the first array element that matches a value or condition e
 
 AScanExact searches `aTarget` from a 1-based starting position and returns the index of the first match. You can search by value or by passing a code block. If you omit `nStart`, the scan begins at element `1`. If you omit `nCount`, AScanExact searches from `nStart` through the end of the array. If no match is found, it returns `0`.
 
-When `vValueOrBlock` is a regular value, AScanExact compares each element by exact value and only compares non-[`NIL`](../literals/nil.md) elements whose type matches the search value. Unlike [`AScan`](AScan.md), it does not use string prefix matching. When `vValueOrBlock` is a code block, AScanExact calls the block for each element and matches the first element whose block result is boolean [`.T.`](../literals/true.md). If `aTarget` is [`NIL`](../literals/nil.md), AScanExact returns `0`. If the requested search range runs past the end of the array, the scan stops at the last element.
+When `vValueOrBlock` is a regular value, AScanExact compares each element by exact value. Every non-[`NIL`](../literals/nil.md) element in the scanned range must have the same type as the search value, or the call raises. [`NIL`](../literals/nil.md) elements are skipped unless you search for [`NIL`](../literals/nil.md). Unlike [`AScan`](AScan.md), it does not use string prefix matching. When `vValueOrBlock` is a code block, AScanExact calls the block for each element and matches the first element whose block result is boolean [`.T.`](../literals/true.md). If `aTarget` is [`NIL`](../literals/nil.md), AScanExact returns `0`. If the requested search range runs past the end of the array, the scan stops at the last element.
 
 ## When to use
 
