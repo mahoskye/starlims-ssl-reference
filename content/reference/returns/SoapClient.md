@@ -178,7 +178,7 @@ Uses `UseWebServiceWithCredentials` and bumps `TimeOut` to 60 seconds for a slow
 
     :IF .NOT. oSoapClient:UseWebServiceWithCredentials( ;
             "https://secure-soap.example/Reports?wsdl", ;
-            "LIMSDOMAIN\\reports_user", ;
+            "LIMSDOMAIN\reports_user", ;
             "********");
         UsrMes("Auth/config failed: " + oSoapClient:Error);
         :RETURN;

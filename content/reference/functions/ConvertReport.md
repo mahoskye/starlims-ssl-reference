@@ -117,7 +117,7 @@ Converts four report files, keeps processing after failures, counts both outcome
 	:DECLARE aFiles, sSourceFolder, oErr, sLogMessage;
 	:DECLARE nSuccessCount, nFailCount, nIndex, sFilePath, sResultSummary;
 
-	sSourceFolder := "C:\\Reports\\Pending\\";
+	sSourceFolder := "C:\Reports\Pending\";
 	aFiles := {
 		"Analysis_Q1.rpt",
 		"Analysis_Q2.rpt",

@@ -165,7 +165,7 @@ Send an HTML-formatted report with a PDF attachment over TLS, using an explicit 
 	sUName := "automation_user";
 	sUPass := "smtp_password";
 
-	aAttachments := {"C:\\Reports\\TestResults_001.pdf"};
+	aAttachments := {"C:\Reports\TestResults_001.pdf"};
 	aCCList := {"manager@lab.example.com"};
 	aBCCList := {};
 

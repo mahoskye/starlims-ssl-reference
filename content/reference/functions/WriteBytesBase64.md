@@ -75,8 +75,8 @@ This example writes a known base64 string to a file and reports success after th
 :PROCEDURE SaveLogoImage;
 	:DECLARE sFileName, sBase64Data;
 
-	sFileName := "C:\\STARLIMS\\Exports\\logo.png";
-	sBase64Data := "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gRAAAAABJRU5ErkJggg==";
+	sFileName := "C:\STARLIMS\Exports\logo.png";
+	sBase64Data := "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8DwHwAFBQIAX8jx0gAAAABJRU5ErkJggg==";
 
 	WriteBytesBase64(sFileName, sBase64Data);
 
@@ -100,7 +100,7 @@ Write the file, then read it back with [`ReadBytesBase64`](ReadBytesBase64.md) t
 :PROCEDURE SaveAndVerifyDocument;
 	:DECLARE sFileName, sBase64Data, sSavedBase64, oErr;
 
-	sFileName := "C:\\STARLIMS\\Exports\\payload.bin";
+	sFileName := "C:\STARLIMS\Exports\payload.bin";
 	sBase64Data := "AAECAwQ=";
 
 	:TRY;

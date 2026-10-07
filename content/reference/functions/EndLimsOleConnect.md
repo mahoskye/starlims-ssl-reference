@@ -91,7 +91,7 @@ Release the automation object even when later work raises an error.
 :PROCEDURE ExportWithOleCleanup;
     :DECLARE oExcel, sWorkbookPath, oErr;
 
-    sWorkbookPath := "C:\\Temp\\results.xlsx";
+    sWorkbookPath := "C:\Temp\results.xlsx";
     oExcel := NIL;
 
     :TRY;

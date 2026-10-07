@@ -42,6 +42,7 @@ GetFileVersion(sFileName)
 | Trigger | Exception message |
 | --- | --- |
 | `sFileName` is [`NIL`](../literals/nil.md). | `Argument cannot be null. GetFileVersion()` |
+| The file does not exist. | `<sFileName>` (the message is the path itself) |
 
 ## Best practices
 
@@ -69,7 +70,7 @@ Show the version string for a specific file and display it to the user.
 :PROCEDURE ShowDllVersion;
     :DECLARE sFileName, sVersion;
 
-    sFileName := "C:\\Windows\\System32\\shell32.dll";
+    sFileName := "C:\Windows\System32\shell32.dll";
     sVersion := GetFileVersion(sFileName);
 
     UsrMes(sFileName + " version: " + sVersion);
@@ -79,15 +80,15 @@ Show the version string for a specific file and display it to the user.
 DoProc("ShowDllVersion");
 ```
 
-[`UsrMes`](UsrMes.md) logs:
+[`UsrMes`](UsrMes.md) logs the version, where `<version>` depends on the Windows build. It can include a build label, for example `10.0.17763.2145 (WinBuild.160101.0800)`:
 
 ```text
-C:\Windows\System32\shell32.dll version: 6.1.7601.23537
+C:\Windows\System32\shell32.dll version: <version>
 ```
 
 ### Compare a file against an expected version
 
-Check whether a deployed file matches the version your script expects.
+Check whether a deployed file matches the version your script expects. Replace `starlims.exe` and the expected version with a file that exists in your installation and the version you require. A missing file raises an error.
 
 ```ssl
 :PROCEDURE CheckExpectedVersion;
@@ -116,7 +117,7 @@ DoProc("CheckExpectedVersion");
 
 ### Audit several files with error handling
 
-Collect version information for multiple files and continue even if one lookup fails.
+Collect version information for multiple files and continue even if one lookup fails, for example because the file doesn't exist. The application file names are examples; use files from your installation.
 
 ```ssl
 :PROCEDURE AuditFileVersions;
@@ -125,7 +126,7 @@ Collect version information for multiple files and continue even if one lookup f
     aFileNames := {
         GetAppBaseFolder() + "starlims.exe",
         GetAppBaseFolder() + "lims.dll",
-        "C:\\Windows\\System32\\shell32.dll"
+        "C:\Windows\System32\shell32.dll"
     };
     aReport := {};
 

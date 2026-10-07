@@ -131,7 +131,7 @@ Uses `GetIndex` to locate the column first, then retrieves it with `Get`. The `G
 	oTable := oImport:GetTable("limsusers");
 	oColumns := oTable:Columns;
 
-	nIndex := oColumns:GetIndex("user_name");
+	nIndex := oColumns:GetIndex("username");
 
 	:IF nIndex > 0;
 		oColumn := oColumns:Get(nIndex);
@@ -139,7 +139,7 @@ Uses `GetIndex` to locate the column first, then retrieves it with `Get`. The `G
 		sMsg := sMsg + " is at position " + LimsString(nIndex);
 		UsrMes(sMsg);
 	:ELSE;
-		UsrMes("Column user_name was not found");
+		UsrMes("Column username was not found");
 	:ENDIF;
 :ENDPROC;
 
