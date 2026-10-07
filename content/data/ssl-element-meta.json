@@ -14,7 +14,7 @@
       "returns": 12
     },
     "with_exceptions": 265,
-    "with_caveats": 403,
+    "with_caveats": 402,
     "with_best_practices": 458
   },
   "elements": [
@@ -9801,7 +9801,7 @@
       "id": "ssl.function.setgroupseparator",
       "element_type": "function",
       "title": "SetGroupSeparator",
-      "summary": "Changes the group (thousands) separator character used when numbers are formatted as strings across the application.",
+      "summary": "Changes the group (thousands) separator character used when numbers are formatted as strings.",
       "doc_status": "published",
       "source_path": "content/reference/functions/SetGroupSeparator.md",
       "exceptions": [
@@ -9815,7 +9815,7 @@
         }
       ],
       "caveats": [
-        "Changing the separator affects all subsequent numeric operations globally; parts of the application that expect a different separator may behave incorrectly.",
+        "Changing the separator affects all subsequent numeric operations; parts of the application that expect a different separator may behave incorrectly.",
         "There is no validation that sGroupSep does not conflict with the current decimal separator."
       ],
       "best_practices": {
@@ -9826,7 +9826,7 @@
         ],
         "dont": [
           "Pass multi-character strings or empty values as sGroupSep.",
-          "Frequently switch the separator mid-session unless all components are aware of the change; the setting is global and unpredictable changes can cause inconsistent parsing.",
+          "Frequently switch the separator mid-session unless all components are aware of the change; unexpected changes can cause inconsistent parsing.",
           "Assume the initial separator value without querying; other modules may have changed it."
         ]
       }
@@ -9950,7 +9950,7 @@
       ],
       "caveats": [
         "The change affects the current execution context immediately.",
-        "While the session user name is changed, messages written with UsrMes go to the user log of the name you set, not to your own log (verified in Designer). Capture anything you need to report, restore the original user name, then log."
+        "While the session user name is changed, messages written with UsrMes go to the user log of the name you set, not to your own log. Capture anything you need to report, restore the original user name, then log."
       ],
       "best_practices": {
         "do": [
@@ -9991,7 +9991,7 @@
         ],
         "dont": [
           "Assume this function enforces password complexity, password history, or other policy rules.",
-          "Assume empty strings raise an exception. Only NIL is rejected by the documented implementation.",
+          "Assume empty strings raise an exception. Only NIL is rejected.",
           "Ignore the return value when the password change must be confirmed.",
           "Expose the new password carelessly in current-user flows, because the session is updated when sUserName matches the active user."
         ]
@@ -10046,9 +10046,10 @@
         }
       ],
       "caveats": [
-        "The result string replaces . with the system decimal separator before returning.",
+        "The result uses the current decimal separator.",
         "Negative values keep the minus sign in the returned string.",
-        "For ISO, the returned string can be left-padded to a total length of 15 characters."
+        "For ISO, the returned string can be left-padded to a total length of 15 characters, and is truncated to 15 characters when it becomes longer than that.",
+        "Unsupported sStandard values are not rejected; the function still returns a formatted string."
       ],
       "best_practices": {
         "do": [
@@ -10078,12 +10079,16 @@
           "message": "SortArray(): target array cannot be null."
         },
         {
+          "trigger": "vNumeric is 1 or .T. and the elements are numbers, not strings.",
+          "message": "Failed to compare two elements in the array."
+        },
+        {
           "trigger": "The custom comparator does not return a numeric comparison result.",
           "message": "Failed to compare two elements in the array. (the inner error reads Array sort: the code block which compares two elements of the array, needs to return an integer value (less than zero if first element is smaller; zero if they are equal; and greater than zero if first element is greater).`)"
         }
       ],
       "caveats": [
-        "Only .T. and numeric 1 select the numeric comparer. Other truthy values fall back to the default sort."
+        "Only .T. and numeric 1 select the numeric comparer. Other values, such as 2 or \"Y\", fall back to the default sort."
       ],
       "best_practices": {
         "do": [
@@ -10094,7 +10099,7 @@
         "dont": [
           "Assume the code block receives one element. It compares two elements and must return a negative number, 0, or a positive number.",
           "Expect SortArray to leave the original array unchanged. Any other reference to the same array sees the new order.",
-          "Expect unsupported error behavior for other vNumeric values. Values other than .T., 1, or a code block fall back to the default sort path."
+          "Expect an error for other vNumeric values. Values other than .T., 1, or a code block silently use the default sort."
         ]
       }
     },
@@ -10148,8 +10153,8 @@
       ],
       "caveats": [
         "For ISO, the returned string is truncated to 15 characters when it becomes longer than that.",
-        "nDigits is parsed as an integer by the implementation, so fractional values are not a supported input shape.",
-        "Unsupported sStandard values are not rejected. They skip the named rounding branches and still return a formatted string."
+        "Pass a whole number for nDigits; fractional values are not supported.",
+        "Unsupported sStandard values are not rejected; the function still returns a formatted string."
       ],
       "best_practices": {
         "do": [
@@ -10162,8 +10167,8 @@
         "dont": [
           "Assume StdRound returns a number. It returns formatted text.",
           "Pass NIL for any argument. The function raises an error instead of supplying defaults.",
-          "Rely on undocumented standard names or alternate casing. The function only branches on exact FDA, EPA, and ISO values.",
-          "Assume nDigits means the same thing for every standard. The EPA path does not behave like a simple decimal-place formatter."
+          "Rely on undocumented standard names or alternate casing. Standard names are case-sensitive: only exact FDA, EPA, and ISO are recognized.",
+          "Assume nDigits means the same thing for every standard. EPA does not behave like a simple decimal-place formatter."
         ]
       }
     },
@@ -10385,7 +10390,7 @@
           "Pass an array when the submitted code expects positional parameters.",
           "Use an object with Parameters and Caption when you want both runtime inputs and a readable job label.",
           "Capture the returned batch ID if later workflow needs to track or correlate the submission.",
-          "Omit userName and password unless the batch must run under different credentials."
+          "Omit sUserName and sPassword unless the batch must run under different credentials."
         ],
         "dont": [
           "Assume the function returns the batch execution result. It returns a submission ID.",
@@ -10953,11 +10958,11 @@
         },
         {
           "trigger": "sSignature is NIL or not valid base64. Unsupported or malformed signature content can also raise an error.",
-          "message": "For NIL: Value cannot be null., then Parameter name: s on the second line. Invalid base64 raises its own message."
+          "message": "For NIL: Value cannot be null., then Parameter name: s on the second line. For invalid base64: Exception has been thrown by the target of an invocation., with the inner error `Invalid length for a Base-64 char array or string."
         }
       ],
       "caveats": [
-        "Invalid Base64 input raises Exception has been thrown by the target of an invocation., whose underlying error is Invalid length for a Base-64 char array or string. Catch it with :TRY when the values come from outside the script.",
+        "Invalid Base64 input raises an error rather than returning .F. (see Exceptions). Catch it with :TRY when the values come from outside the script.",
         "VerifySignature verifies the signature with the certificate's public key by using a SHA-1 digest of the UTF-8 bytes of sData."
       ],
       "best_practices": {
@@ -11083,8 +11088,8 @@
         }
       ],
       "caveats": [
-        "In SFTP mode, connection and login happen before the guarded write block, so some setup failures can raise an error instead of returning .F..",
-        "In FTP mode, the request URI is built before the guarded transfer block, so invalid URI construction failures are not part of the .F. return path."
+        "In SFTP mode, connection and login failures can raise an error instead of returning .F., so wrap the call in :TRY / :CATCH.",
+        "In FTP mode, a server name, directory, or file name that does not form a valid FTP address raises an error instead of returning .F.."
       ],
       "best_practices": {
         "do": [
@@ -12261,7 +12266,7 @@
       "exceptions": [],
       "caveats": [
         "GetInlineCode raises a runtime error if the named block is not in scope.",
-        "DeleteInlineCode raises a runtime error if the named block is not in scope."
+        "DeleteInlineCode raises <name> not in scope. when other inline blocks exist but this name is not among them. With no inline blocks defined, it returns .T.."
       ],
       "best_practices": {
         "do": [
@@ -12334,9 +12339,7 @@
       "doc_status": "published",
       "source_path": "content/reference/keywords/CLASS.md",
       "exceptions": [],
-      "caveats": [
-        "Members whose names start with _ are excluded from reflection-based access."
-      ],
+      "caveats": [],
       "best_practices": {
         "do": [
           "Put :INHERIT immediately after :CLASS when the class derives from another class.",

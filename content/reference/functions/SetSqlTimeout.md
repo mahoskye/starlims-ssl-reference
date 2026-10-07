@@ -15,7 +15,7 @@ Sets the SQL command timeout for a database connection and returns the previous 
 
 `SetSqlTimeout(nTimeout, sConnection)` applies a new timeout value in seconds and returns the timeout that was in effect before the change. If `nTimeout` is omitted or [`NIL`](../literals/nil.md), the function uses `30`. If `sConnection` is omitted, [`NIL`](../literals/nil.md), or an empty string, the current default connection is used.
 
-The function validates only the public argument types before applying the change: `nTimeout` must be an integer-valued number when supplied, and `sConnection` must be a string when supplied.
+The function checks only the argument types: `nTimeout` must be an integer-valued number when supplied, and `sConnection` must be a string when supplied.
 
 ## When to use
 

@@ -49,7 +49,12 @@ Constructors use the reserved declaration name [`Constructor`](../special-forms/
 
 ```ssl
 :CLASS ClassName;
-:INHERIT category.scriptname;
+:INHERIT ParentClass;
+```
+
+```ssl
+:CLASS ClassName;
+:INHERIT Category.ParentClass;
 ```
 
 ## Parameters
@@ -82,10 +87,6 @@ Constructors use the reserved declaration name [`Constructor`](../special-forms/
       built-in class construction rules.
     - Return a value from [`Constructor`](../special-forms/constructor.md). SSL treats that as a compile-time error.
     - Split related fields across method bodies. Declaring them in the class body makes the instance state clear and consistent.
-
-## Caveats
-
-- Members whose names start with `_` are excluded from reflection-based access.
 
 ## Examples
 

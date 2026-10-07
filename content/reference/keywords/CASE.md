@@ -111,9 +111,33 @@ Standard sample passed QC with result: 82.5
 
 ### Route sample status to branch-specific actions
 
-Dispatch a sample through different processing paths based on its status string. Each branch calls a dedicated procedure and records a result code. With `sSampleID` of `"S001"` and `sStatus` of `"NEW"`, the first branch runs.
+Dispatch a sample through different processing paths based on its status string. Each branch calls a dedicated procedure, shown here as a stub, and records a result code. With `sSampleID` of `"S001"` and `sStatus` of `"NEW"`, the first branch runs.
 
 ```ssl
+:PROCEDURE RegisterSample;
+    :PARAMETERS sSampleID;
+    /* Registration steps go here;
+    :RETURN .T.;
+:ENDPROC;
+
+:PROCEDURE UpdateLocation;
+    :PARAMETERS sSampleID, sLocation;
+    /* Location update steps go here;
+    :RETURN .T.;
+:ENDPROC;
+
+:PROCEDURE GenerateReport;
+    :PARAMETERS sSampleID;
+    /* Report steps go here;
+    :RETURN .T.;
+:ENDPROC;
+
+:PROCEDURE LogCancellation;
+    :PARAMETERS sSampleID;
+    /* Cancellation steps go here;
+    :RETURN .T.;
+:ENDPROC;
+
 :PROCEDURE ProcessSampleStatus;
     :PARAMETERS sSampleID, sStatus;
     :DECLARE sMessage, nResult;

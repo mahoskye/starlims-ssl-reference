@@ -31,13 +31,13 @@ SigFig(sStandard, nDigits, nValue)
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `sStandard` | [string](../types/string.md) | yes | — | Rounding standard name. The implementation has explicit handling for `FDA`, `EPA`, and `ISO`. |
-| `nDigits` | [number](../types/number.md) | yes | — | Digit count passed to the rounding routine. |
+| `sStandard` | [string](../types/string.md) | yes | — | Rounding standard name. Supported standards are `FDA`, `EPA`, and `ISO`. |
+| `nDigits` | [number](../types/number.md) | yes | — | Whole-number digit count. FDA and ISO use it as decimal places; EPA uses it as the number of significant digits. |
 | `nValue` | [number](../types/number.md) | yes | — | Numeric value to round and format. |
 
 ## Returns
 
-**[string](../types/string.md)** — The formatted string returned by the selected rounding routine.
+**[string](../types/string.md)** — The rounded value as a formatted string.
 
 ## Exceptions
 
@@ -63,9 +63,10 @@ SigFig(sStandard, nDigits, nValue)
 
 ## Caveats
 
-- The result string replaces `.` with the system decimal separator before returning.
+- The result uses the current decimal separator.
 - Negative values keep the minus sign in the returned string.
-- For `ISO`, the returned string can be left-padded to a total length of 15 characters.
+- For `ISO`, the returned string can be left-padded to a total length of 15 characters, and is truncated to 15 characters when it becomes longer than that.
+- Unsupported `sStandard` values are not rejected; the function still returns a formatted string.
 
 ## Examples
 

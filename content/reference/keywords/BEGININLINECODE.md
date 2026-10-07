@@ -69,7 +69,7 @@ You can also quote the block name:
 ## Caveats
 
 - [`GetInlineCode`](../functions/GetInlineCode.md) raises a runtime error if the named block is not in scope.
-- [`DeleteInlineCode`](../functions/DeleteInlineCode.md) raises a runtime error if the named block is not in scope.
+- [`DeleteInlineCode`](../functions/DeleteInlineCode.md) raises `<name> not in scope.` when other inline blocks exist but this name is not among them. With no inline blocks defined, it returns [`.T.`](../literals/true.md).
 
 ## Examples
 

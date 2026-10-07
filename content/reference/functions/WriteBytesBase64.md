@@ -82,9 +82,10 @@ This example writes a known base64 string to a file and reports success after th
 
 	UsrMes("File written to " + sFileName);
 :ENDPROC;
-```
 
-Call it with `DoProc("SaveLogoImage")`.
+/* Usage;
+DoProc("SaveLogoImage");
+```
 
 [`UsrMes`](UsrMes.md) logs:
 
@@ -119,9 +120,10 @@ Write the file, then read it back with [`ReadBytesBase64`](ReadBytesBase64.md) t
 		/* Logs on failure: write failed;
 	:ENDTRY;
 :ENDPROC;
-```
 
-Call it with `DoProc("SaveAndVerifyDocument")`.
+/* Usage;
+DoProc("SaveAndVerifyDocument");
+```
 
 ## Related
 

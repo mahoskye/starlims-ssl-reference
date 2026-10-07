@@ -13,9 +13,9 @@ starlims:
 
 Appends text to a remote file over FTP or SFTP.
 
-`WriteToFtp` writes the supplied text to the end of a remote file. If the target file does not already exist, the function creates it and writes the text starting at offset 0. When `bIsSFTP` is [`.T.`](../literals/true.md), the call uses the SFTP implementation; otherwise it uses FTP. If `sFileContents` is [`NIL`](../literals/nil.md), the function treats it as an empty string.
+`WriteToFtp` writes the supplied text to the end of a remote file. If the target file does not already exist, the function creates it and writes the text starting at offset 0. When `bIsSFTP` is [`.T.`](../literals/true.md), the call uses SFTP; otherwise it uses FTP. If `sFileContents` is [`NIL`](../literals/nil.md), the function treats it as an empty string.
 
-For FTP, the transfer request uses append semantics. For SFTP, the function looks up the current remote file size and writes starting at that offset. In both modes, the function preserves existing file contents instead of replacing them.
+In both modes, the text is written after the existing contents of the remote file, so the function preserves those contents instead of replacing them.
 
 ## When to use
 
@@ -47,7 +47,7 @@ WriteToFtp(sServerNameOrIP, sRemoteDirectory, sRemoteFileName, sFileContents, sU
 
 ## Returns
 
-**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the write completes successfully; [`.F.`](../literals/false.md) when the transfer operation reaches the FTP or SFTP write step and that step fails with a handled web exception.
+**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the write completes successfully; [`.F.`](../literals/false.md) when the upload itself fails. Some setup errors raise instead of returning [`.F.`](../literals/false.md); see [Caveats](#caveats).
 
 ## Exceptions
 
@@ -74,8 +74,8 @@ WriteToFtp(sServerNameOrIP, sRemoteDirectory, sRemoteFileName, sFileContents, sU
 
 ## Caveats
 
-- In SFTP mode, connection and login happen before the guarded write block, so some setup failures can raise an error instead of returning [`.F.`](../literals/false.md).
-- In FTP mode, the request URI is built before the guarded transfer block, so invalid URI construction failures are not part of the [`.F.`](../literals/false.md) return path.
+- In SFTP mode, connection and login failures can raise an error instead of returning [`.F.`](../literals/false.md), so wrap the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md).
+- In FTP mode, a server name, directory, or file name that does not form a valid FTP address raises an error instead of returning [`.F.`](../literals/false.md).
 
 ## Examples
 

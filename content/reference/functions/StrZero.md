@@ -13,7 +13,7 @@ starlims:
 
 Formats a number as a zero-padded string, with optional total width and decimal precision.
 
-`StrZero` is used when you need a fixed-width numeric string for display, export, or identifiers. It pads the integer portion with leading zeroes and can include a fixed number of decimal places. When `nLength` and `nDecimals` are both omitted, integers default to a 10-character field and non-integers to a 20-character field with up to 9 decimal places. When the requested width cannot hold the formatted value, the function returns a string of [`*`](../operators/multiply.md) characters of that width.
+`StrZero` is used when you need a fixed-width numeric string for display, export, or identifiers. It pads the integer portion with leading zeroes and can include a fixed number of decimal places. When `nLength` and `nDecimals` are both omitted, integers default to a 10-character field and non-integers to a 20-character field with up to 9 decimal places. When the requested width cannot hold the formatted value, the function returns a string of `*` characters of that width.
 
 ## When to use
 
@@ -38,7 +38,7 @@ StrZero(nNumber, [nLength], [nDecimals])
 
 ## Returns
 
-**[string](../types/string.md)** — The formatted number, left-padded with zeros to the requested width. Returns a string of [`*`](../operators/multiply.md) characters when the value overflows the requested width.
+**[string](../types/string.md)** — The formatted number, left-padded with zeros to the requested width. Returns a string of `*` characters when the value overflows the requested width.
 
 ## Exceptions
 
