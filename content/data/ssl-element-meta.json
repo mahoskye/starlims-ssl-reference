@@ -13628,7 +13628,7 @@
       "source_path": "content/reference/operators/modulo-assign.md",
       "exceptions": [],
       "caveats": [
-        "The sign of the remainder follows the left operand. For example, -7 %= 3 leaves the value as -1."
+        "The sign of the remainder follows the left operand. For example, with nValue := -7;, nValue %= 3; leaves nValue as -1."
       ],
       "best_practices": {
         "do": [
@@ -14205,7 +14205,7 @@
           "Convert explicitly with LimsString or nValue:ToString() when building user-facing text."
         ],
         "dont": [
-          "Write bitwise logic with &, |, or ^ as bitwise operators. In SSL, bitwise work uses _AND(), _OR(), _XOR(), _NOT(), and the shift operators << and >>.",
+          "Write bitwise logic with & or | (they are not SSL operators) or with ^ (it raises to a power). In SSL, bitwise work uses _AND(), _OR(), _XOR(), _NOT(), and the shift operators << and >>.",
           "Concatenate strings and numbers directly with +. Convert the number first.",
           "Use fractional values with shifts or bitwise built-ins. They require integer-valued operands.",
           "Treat numbers like arrays or strings. Numeric values are scalar and are not indexable."
@@ -14222,7 +14222,7 @@
       "exceptions": [],
       "caveats": [
         "Reading a missing property raises a runtime error with the message Property not found: <name>.",
-        "AddProperty() validates the property name and initializes the new property to \"\".",
+        "AddProperty() initializes the new property to \"\". It does not validate the name: \"1abc\" is accepted.",
         "IsEmpty() is not a property-count check for objects.",
         "On dynamic objects created with CreateUdObject(), member and property names ignore case: oValue:getproperty(\"Status\"), oValue:xmltype, and oValue:status for a property set as oValue:Status all work. Members of strings, numbers, dates and arrays are case-sensitive; see Member names and case."
       ],
@@ -14312,7 +14312,7 @@
       "best_practices": {
         "do": [
           "Use Base:MethodName() when you are extending inherited behavior rather than replacing it completely.",
-          "Call Base:Constructor() in a derived constructor when the parent class needs initialization.",
+          "Call Base:Constructor(args) in a derived constructor when the parent constructor takes arguments. A parameterless parent constructor runs automatically (see Constructor).",
           "Keep Base usage focused on places where the parent implementation is clearly part of the design."
         ],
         "dont": [
@@ -14386,7 +14386,7 @@
         "Constructor is meaningful only as the fixed constructor declaration name inside :CLASS.",
         ":RETURN value; inside a constructor causes a compile-time error.",
         "Constructors run during object creation; they are not invoked like ordinary methods.",
-        "If no constructor is declared, SSL provides an implicit parameterless one."
+        "If no constructor is declared, the class can still be created with no arguments."
       ],
       "best_practices": {
         "do": [
@@ -14396,7 +14396,7 @@
         ],
         "dont": [
           "Instantiate a user-defined class with MyClass{}. That brace form is for built-in classes, not :CLASS files.",
-          "Call Base:Constructor() when the base constructor is parameterless. SSL already emits that call automatically.",
+          "Call Base:Constructor() when the base constructor is parameterless. That call already happens automatically.",
           "Return a value from a constructor. :RETURN value; is a compile-time error."
         ]
       }
@@ -14523,7 +14523,7 @@
         "HttpRequest is not directly constructable. Obtain it from HttpClient:CreateHttpRequest.",
         "Timeout is in milliseconds. Setting a value of 30 waits 30 milliseconds, not 30 seconds.",
         "SetContent(sValue) encodes text as UTF-8. If you need a different encoding, build the byte array yourself and pass it to the bytes form.",
-        "The multipart forms of SetContent (and CreateHttpForm) are usable today, but the multipart object surfaces are documented in a separate, forthcoming batch."
+        "The multipart forms of SetContent (and CreateHttpForm) exist, but the multipart objects they take are not documented yet."
       ],
       "best_practices": {
         "do": [
@@ -14632,7 +14632,7 @@
       "caveats": [
         "SSLResponse is not directly constructable. It is the value of the Response ambient, available only in endpoint contexts.",
         "For web-service contexts, Response is the SSLWsResponse subclass; everything documented here is still available, plus the additional Value property used to return a structured result.",
-        "AddCookie and SetCookie both require an explicit expiration date. If you want a session cookie, supply a date in the past or NIL per your environment's convention — confirm with a small test in your target environment."
+        "AddCookie and SetCookie both require an explicit expiration date."
       ],
       "best_practices": {
         "do": [
@@ -14709,9 +14709,7 @@
         "SoapClient is not directly constructable. Obtain it from WebServices{}:CreateSoapClient().",
         "Use* methods return .F. on failure rather than raising — always check the return value and Error.",
         "CallWebService returns NIL on failure rather than raising. Check the return value before reading the response.",
-        "TimeOut is in milliseconds. Values <= 0 disable the timeout entirely.",
-        "The configuration step caches results based on the WSDL content. Calling UseWebService repeatedly with the same WSDL is cheap; switching WSDLs on the same client is supported but may rebuild the proxy.",
-        "UseDefaultCredentials falls back to GlobalUseDefaultCredentials only when the local property has not been set. Once you assign to it, the local value wins regardless of the global value."
+        "TimeOut is in milliseconds. Values <= 0 disable the timeout entirely."
       ],
       "best_practices": {
         "do": [
@@ -14771,7 +14769,7 @@
         "SoapResponse is not directly constructable. Obtain it from SoapClient:CallWebService or from GetObjectField / GetArrayItem on another SoapResponse.",
         "GetArrayItem uses **zero-based** indexing, unlike most SSL array operations.",
         "GetArrayLength returns -1 (not 0) when the wrapped value is not an array. Use this to distinguish \"not an array\" from \"empty array.\"",
-        "ValueAsStringDate and ValueAsStringTime return empty strings when the wrapped value is not a date/time. Both are derived from the same underlying value when present.",
+        "ValueAsStringDate and ValueAsStringTime return empty strings when the wrapped value is not a date/time.",
         "Serialization or read errors on Xml and XmlByRef return empty strings and set the parent SoapClient's Error property. Check Error after reading these properties when an empty value is unexpected."
       ],
       "best_practices": {

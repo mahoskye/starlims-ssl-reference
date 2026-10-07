@@ -39,7 +39,7 @@ Configuration methods return `.F.` on failure rather than raising — read `Erro
 | `AcceptCookies` | [boolean](../types/boolean.md) | read-write | When `.T.` (the default), the client retains cookies set by the service across calls. |
 | `UseDefaultCredentials` | [boolean](../types/boolean.md) | read-write | When `.T.`, calls authenticate with the calling process's default credentials. Falls back to `GlobalUseDefaultCredentials` when not set explicitly on the client. |
 | `GlobalUseDefaultCredentials` | [boolean](../types/boolean.md) | read-write | Class-wide default for `UseDefaultCredentials`. Affects every `SoapClient` that has not set the property locally. |
-| `WsAssembly` | [object](../types/object.md) | read-only | Advanced — a handle to the generated proxy types for the configured WSDL. Used internally by [`Parameters:CreateCustomType`](SoapParameters.md#createcustomtype) and [`GetWSType`](#getwstype); rarely needed directly. |
+| `WsAssembly` | [object](../types/object.md) | read-only | Advanced; rarely needed directly. |
 
 ## Methods Summary
 
@@ -70,7 +70,7 @@ Same as `UseWebService` but authenticates the WSDL fetch and subsequent calls wi
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `sWsdlLocation` | [string](../types/string.md) | yes | URL, file path, or inline WSDL XML. |
-| `sUser` | [string](../types/string.md) | yes | Username. May be domain-prefixed (`DOMAIN\\user`). Pass an empty string to fall back to default credentials. |
+| `sUser` | [string](../types/string.md) | yes | Username. May be domain-prefixed (`DOMAIN\user`). Pass an empty string to fall back to default credentials. |
 | `sPassword` | [string](../types/string.md) | yes | Password. |
 
 **Returns:** [boolean](../types/boolean.md) — `.T.` on success; `.F.` when configuration fails. Read `Error` for the reason.
@@ -127,8 +127,6 @@ Advanced — returns a handle to a named proxy type. Useful when working with cu
 - `Use*` methods return `.F.` on failure rather than raising — always check the return value and `Error`.
 - `CallWebService` returns `NIL` on failure rather than raising. Check the return value before reading the response.
 - `TimeOut` is in milliseconds. Values `<= 0` disable the timeout entirely.
-- The configuration step caches results based on the WSDL content. Calling `UseWebService` repeatedly with the same WSDL is cheap; switching WSDLs on the same client is supported but may rebuild the proxy.
-- `UseDefaultCredentials` falls back to `GlobalUseDefaultCredentials` only when the local property has not been set. Once you assign to it, the local value wins regardless of the global value.
 
 ## Examples
 
@@ -176,10 +174,8 @@ Uses `UseWebServiceWithCredentials` and bumps `TimeOut` to 60 seconds for a slow
     oWebServices := WebServices{};
     oSoapClient := oWebServices:CreateSoapClient();
 
-    :IF .NOT. oSoapClient:UseWebServiceWithCredentials( ;
-            "https://secure-soap.example/Reports?wsdl", ;
-            "LIMSDOMAIN\reports_user", ;
-            "********");
+    :IF .NOT. oSoapClient:UseWebServiceWithCredentials("https://secure-soap.example/Reports?wsdl",
+            "LIMSDOMAIN\reports_user", "********");
         UsrMes("Auth/config failed: " + oSoapClient:Error);
         :RETURN;
     :ENDIF;

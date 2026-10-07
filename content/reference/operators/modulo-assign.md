@@ -57,7 +57,7 @@ target %= divisor;
 
 ## Errors and edge cases
 
-- The sign of the remainder follows the left operand. For example, `-7 %= 3` leaves the value as `-1`.
+- The sign of the remainder follows the left operand. For example, with `nValue := -7;`, `nValue %= 3;` leaves `nValue` as `-1`.
 
 ## Examples
 
@@ -93,7 +93,7 @@ Remainder of 23 divided by 7 is 2
 
 ### Wrapping a circular slot counter
 
-Uses a zero-based slot offset incremented with `%=` to wrap around a 5-slot buffer. After 8 writes, slots 1-3 hold the most recent writes (6-8) and slots 4-5 hold the earlier ones (4-5).
+Uses a zero-based slot offset that is incremented with `+=` and wrapped with `%=` around a 5-slot buffer. After 8 writes, slots 1-3 hold the most recent writes (6-8) and slots 4-5 hold the earlier ones (4-5).
 
 ```ssl
 :PROCEDURE ProcessCircularSlots;

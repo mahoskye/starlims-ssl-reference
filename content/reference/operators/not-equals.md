@@ -14,7 +14,7 @@ starlims:
 
 Returns [`.T.`](../literals/true.md) when two values are not strictly equal under SSL equality rules.
 
-The `!=` operator is SSL's preferred not-equals form. It uses the same strict comparison path as [`strict-equals`](strict-equals.md) ([`==`](strict-equals.md)), then negates the result. Aliases are [`not-equals-legacy`](not-equals-legacy.md) ([`<>`](not-equals-legacy.md)) and [`hash`](hash.md) ([`#`](hash.md)). All three compile to the same behavior.
+The `!=` operator is SSL's preferred not-equals form. It uses the same strict comparison as [`strict-equals`](strict-equals.md) ([`==`](strict-equals.md)), then negates the result. Aliases are [`not-equals-legacy`](not-equals-legacy.md) ([`<>`](not-equals-legacy.md)) and [`hash`](hash.md) ([`#`](hash.md)). All three behave identically.
 
 For strings, `!=` uses exact comparison, not prefix matching. For example, `"Logged" != "Log"` returns [`.T.`](../literals/true.md) because strict equality returns [`.F.`](../literals/false.md). For numbers, booleans, and dates, it compares values directly. For arrays and objects, it compares references rather than walking contents.
 

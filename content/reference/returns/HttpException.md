@@ -29,7 +29,7 @@ An `HttpException` is the object you receive from [`HttpClient:GetLastServerExce
 |---|---|
 | [`HttpClient`](HttpClient.md) | `oHttpClient:GetLastServerException()` |
 
-`HttpException` is also raised directly by [`HttpClient:GetResponse`](HttpClient.md#getresponse) (and any method that delegates to it) when a request fails. Catch the error in a `:TRY` / `:CATCH` block to access it.
+`HttpException` is also raised directly by [`HttpClient:GetResponse`](HttpClient.md#getresponse) (and any method that delegates to it) when a request fails. Catch the error in a `:TRY` / `:CATCH` block and call `GetLastServerException()` inside `:CATCH` to read it, as the examples below do.
 
 ## Properties
 
@@ -103,10 +103,14 @@ Distinguishes a transient timeout from a protocol-level failure to choose betwee
         UsrMes("Result: " + sBody);
     :CATCH;
         oError := oHttpClient:GetLastServerException();
-        :IF oError != NIL .AND. oError:Status = "Timeout";
-            bShouldRetry := .T.;
+        :IF oError == NIL;
+            UsrMes("Request failed: " + GetLastSSLError():Description);
         :ELSE;
-            UsrMes("Permanent failure: " + oError:Message);
+            :IF oError:Status == "Timeout";
+                bShouldRetry := .T.;
+            :ELSE;
+                UsrMes("Permanent failure: " + oError:Message);
+            :ENDIF;
         :ENDIF;
     :ENDTRY;
 

@@ -44,7 +44,7 @@ Base:Constructor(args)
 
 !!! success "Do"
     - Use `Base:MethodName()` when you are extending inherited behavior rather than replacing it completely.
-    - Call `Base:Constructor()` in a derived constructor when the parent class needs initialization.
+    - Call `Base:Constructor(args)` in a derived constructor when the parent constructor takes arguments. A parameterless parent constructor runs automatically (see [`Constructor`](constructor.md)).
     - Keep `Base` usage focused on places where the parent implementation is clearly part of the design.
 
 !!! failure "Don't"
@@ -64,7 +64,7 @@ Base:Constructor(args)
 
 ### Calling the parent implementation from an override
 
-A derived `Calculator` class overrides `Add` to track the last value before delegating to the parent implementation via `Base:Add(nValue)`. The constructor also chains to `Base:Constructor()` to ensure the parent initializes its state.
+A derived `Calculator` class overrides `Add` to track the last value before delegating to the parent implementation via `Base:Add(nValue)`. The parent's parameterless constructor runs automatically before the derived constructor body, so `nTotal` starts at 0 without an explicit `Base:Constructor()` call.
 
 Parent class:
 
@@ -113,7 +113,6 @@ Derived class:
 
 
 :PROCEDURE Constructor;
-	Base:Constructor();
 	Me:nLastValue := 0;
 :ENDPROC;
 ```

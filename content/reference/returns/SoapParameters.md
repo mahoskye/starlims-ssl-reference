@@ -177,7 +177,10 @@ Adds a single string parameter and invokes the method.
 
     oWebServices := WebServices{};
     oSoapClient := oWebServices:CreateSoapClient();
-    oSoapClient:UseWebService("https://lims-soap.example/Samples?wsdl");
+    :IF .NOT. oSoapClient:UseWebService("https://lims-soap.example/Samples?wsdl");
+        UsrMes("Configuration failed: " + oSoapClient:Error);
+        :RETURN;
+    :ENDIF;
 
     oSoapClient:Parameters:Add("<string>SAMP-001</string>");
 
@@ -201,7 +204,10 @@ Uses `CreateCustomType` to instantiate a DTO defined by the service, populates f
 
     oWebServices := WebServices{};
     oSoapClient := oWebServices:CreateSoapClient();
-    oSoapClient:UseWebService("https://orders-soap.example/Orders?wsdl");
+    :IF .NOT. oSoapClient:UseWebService("https://orders-soap.example/Orders?wsdl");
+        UsrMes("Configuration failed: " + oSoapClient:Error);
+        :RETURN;
+    :ENDIF;
 
     oOrder := oSoapClient:Parameters:CreateCustomType("OrderRequest");
     :IF oOrder = NIL;
@@ -234,7 +240,10 @@ Flags one parameter as by-reference, invokes the method, then reads the modified
 
     oWebServices := WebServices{};
     oSoapClient := oWebServices:CreateSoapClient();
-    oSoapClient:UseWebService("https://lims-soap.example/Samples?wsdl");
+    :IF .NOT. oSoapClient:UseWebService("https://lims-soap.example/Samples?wsdl");
+        UsrMes("Configuration failed: " + oSoapClient:Error);
+        :RETURN;
+    :ENDIF;
 
     oSoapClient:Parameters:Add("<string>SAMP-001</string>");
     oSoapClient:Parameters:AddByRef("<string></string>");  /* output parameter — service fills it in;

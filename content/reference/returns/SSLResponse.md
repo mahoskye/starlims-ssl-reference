@@ -144,7 +144,7 @@ Sends a `401 Unauthorized` status with an appropriate authentication challenge. 
 
 - `SSLResponse` is not directly constructable. It is the value of the [`Response`](../special-forms/response.md) ambient, available only in endpoint contexts.
 - For web-service contexts, `Response` is the [`SSLWsResponse`](SSLWsResponse.md) subclass; everything documented here is still available, plus the additional `Value` property used to return a structured result.
-- `AddCookie` and `SetCookie` both require an explicit expiration date. If you want a session cookie, supply a date in the past or `NIL` per your environment's convention — confirm with a small test in your target environment.
+- `AddCookie` and `SetCookie` both require an explicit expiration date.
 
 ## Examples
 
@@ -156,7 +156,7 @@ Sets the content type and writes a small JSON body.
 :PROCEDURE SendInstrumentStatus;
     Response:ContentType := "application/json";
     Response:StatusCode := 200;
-    Response:Write("{""instrument"":""Acme-1042"",""status"":""ok""}");
+    Response:Write('{"instrument":"Acme-1042","status":"ok"}');
 :ENDPROC;
 ```
 

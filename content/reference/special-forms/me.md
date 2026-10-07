@@ -160,6 +160,7 @@ UsrMes("Status: " + oSample:GetStatus());
 [`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
+S-001 processed successfully
 Status: PROCESSED
 ```
 

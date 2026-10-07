@@ -168,7 +168,7 @@ Creates an `HttpRequest`, sets the method and an `Accept` header, sends it, then
     oRequest:Method := "POST";
     oRequest:ContentType := "application/json";
     oRequest:Accept := "application/json";
-    oRequest:SetContent("{""batch"":""B-1042"",""status"":""complete""}");
+    oRequest:SetContent('{"batch":"B-1042","status":"complete"}');
 
     oResponse := oHttpClient:GetResponse(oRequest);
     sBody := oResponse:GetValueAsString();

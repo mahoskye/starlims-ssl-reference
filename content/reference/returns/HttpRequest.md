@@ -75,7 +75,7 @@ Sets the request body. The body must be set before the request is sent. Forms:
 |-----------|------|----------|-------------|
 | `sValue` / `aBytes` / `oForm` / `oMultipart` | varies | yes | The body content. |
 
-The multipart object surfaces (`HttpForm`, `HttpMultipart`) are documented in a separate batch.
+The multipart form and multipart objects are not documented yet.
 
 ### `SetContentFromFile`
 
@@ -89,7 +89,7 @@ Sets the request body to the contents of a file on disk.
 
 Returns a multipart form object you can populate and pass back to `SetContent`. Use this for `multipart/form-data` POSTs that include named parts.
 
-**Returns:** [object](../types/object.md) — A multipart form. Its surface is documented in a separate batch.
+**Returns:** [object](../types/object.md) — A multipart form. Its members are not documented yet.
 
 ## Best practices
 
@@ -108,7 +108,7 @@ Returns a multipart form object you can populate and pass back to `SetContent`. 
 - `HttpRequest` is not directly constructable. Obtain it from [`HttpClient:CreateHttpRequest`](HttpClient.md#createhttprequest).
 - `Timeout` is in milliseconds. Setting a value of `30` waits 30 milliseconds, not 30 seconds.
 - `SetContent(sValue)` encodes text as UTF-8. If you need a different encoding, build the byte array yourself and pass it to the bytes form.
-- The multipart forms of `SetContent` (and `CreateHttpForm`) are usable today, but the multipart object surfaces are documented in a separate, forthcoming batch.
+- The multipart forms of `SetContent` (and `CreateHttpForm`) exist, but the multipart objects they take are not documented yet.
 
 ## Examples
 
@@ -127,7 +127,7 @@ Sets the method, content type, and accept header before posting a small JSON pay
     oRequest:Method := "POST";
     oRequest:ContentType := "application/json";
     oRequest:Accept := "application/json";
-    oRequest:SetContent("{""batch"":""B-1042"",""status"":""complete""}");
+    oRequest:SetContent('{"batch":"B-1042","status":"complete"}');
 
     oResponse := oHttpClient:GetResponse(oRequest);
     UsrMes(oResponse:GetValueAsString());

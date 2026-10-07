@@ -15,12 +15,13 @@ starlims:
 
 Runs one-time class initialization code when a user-defined class instance is created.
 
-Use `Constructor` to set initial field values, validate incoming arguments, and prepare an object before any other instance method runs. It is a reserved constructor declaration name inside [`:CLASS`](../keywords/CLASS.md), not a normal method name. If a class does not declare a constructor, SSL generates a default parameterless constructor.
+Use `Constructor` to set initial field values, validate incoming arguments, and prepare an object before any other instance method runs. It is a reserved constructor declaration name inside [`:CLASS`](../keywords/CLASS.md), not a normal method name. If a class does not declare a constructor, it can still be created with no arguments.
 
-When `CreateUdObject("ClassName")` or `CreateUdObject("ClassName", {args})` creates a user-defined class instance, SSL runs that class's constructor automatically. Before the constructor body runs, SSL also emits a call to the base class's parameterless constructor. Constructors cannot return values.
+When `CreateUdObject("ClassName")` or `CreateUdObject("ClassName", {args})` creates a user-defined class instance, SSL runs that class's constructor automatically. Before the constructor body runs, the parent class's parameterless constructor runs automatically. Constructors cannot return values.
 
-Because `Constructor` is a special declaration form, it cannot be called as a
-normal method from SSL code.
+Because `Constructor` is a special declaration form, it cannot be called on an
+instance (for example `oItem:Constructor()`). The only explicit call is
+`Base:Constructor(args)` from a derived constructor.
 
 ## When to use it
 
@@ -68,7 +69,7 @@ A constructor is an ordinary class method for identifier resolution: write to cl
 
 `Constructor` can only be declared inside a [`:CLASS`](../keywords/CLASS.md) block. Using it outside a class does not produce a valid procedure declaration. Inside a constructor, `:RETURN;` is allowed as an early exit, but `:RETURN value;` is a compile-time error.
 
-SSL automatically emits a call to the base class's parameterless constructor before the constructor body executes. You do not need to call `Base:Constructor()` when the base constructor takes no arguments. If you need to invoke a base constructor that takes parameters, call `Base:Constructor(args)` explicitly. The explicit call passes the arguments that the auto-call cannot.
+The parent class's parameterless constructor runs automatically before the constructor body executes. You do not need to call `Base:Constructor()` when the base constructor takes no arguments. If you need to invoke a base constructor that takes parameters, call `Base:Constructor(args)` explicitly. The explicit call passes the arguments that the automatic call cannot.
 
 ## Notes for daily SSL work
 
@@ -79,7 +80,7 @@ SSL automatically emits a call to the base class's parameterless constructor bef
 
 !!! failure "Don't"
     - Instantiate a user-defined class with `MyClass{}`. That brace form is for built-in classes, not [`:CLASS`](../keywords/CLASS.md) files.
-    - Call `Base:Constructor()` when the base constructor is parameterless. SSL already emits that call automatically.
+    - Call `Base:Constructor()` when the base constructor is parameterless. That call already happens automatically.
     - Return a value from a constructor. `:RETURN value;` is a compile-time error.
 
 ## Errors and edge cases
@@ -88,7 +89,7 @@ SSL automatically emits a call to the base class's parameterless constructor bef
 - `:RETURN value;` inside a constructor causes a compile-time error.
 - Constructors run during object creation; they are not invoked like ordinary
   methods.
-- If no constructor is declared, SSL provides an implicit parameterless one.
+- If no constructor is declared, the class can still be created with no arguments.
 
 ## Examples
 

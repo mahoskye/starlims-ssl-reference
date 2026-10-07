@@ -70,7 +70,7 @@ The web-service subclass inherits everything from `SSLResponse`, so calls like `
 :PROCEDURE SendStatus;
     Response:ContentType := "application/json";
     Response:StatusCode := 200;
-    Response:Write("{""status"":""ok""}");
+    Response:Write('{"status":"ok"}');
 :ENDPROC;
 ```
 

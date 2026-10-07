@@ -99,9 +99,13 @@ Sets a non-success status and a structured error payload.
 
 ```ssl
 :PROCEDURE GuardedLookup;
-    :DECLARE sSampleId, oError;
+    :DECLARE aParams, sSampleId, oError;
 
-    sSampleId := Request:Parameters[1];
+    aParams := Request:Parameters;
+    sSampleId := "";
+    :IF Len(aParams) >= 1;
+        sSampleId := aParams[1];
+    :ENDIF;
 
     :IF Empty(sSampleId);
         oError := CreateUdObject();

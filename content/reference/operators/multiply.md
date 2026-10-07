@@ -86,7 +86,7 @@ Rectangle area: 103.75
 
 ### Computing a discounted line total
 
-Uses multiplication twice: once for the subtotal and once for the discount. The parentheses on `nSubtotal - nDiscount` are not needed here (subtraction is lower precedence) but make the intent explicit.
+Uses multiplication twice: once for the subtotal and once for the discount.
 
 ```ssl
 :PROCEDURE CalcLineTotal;

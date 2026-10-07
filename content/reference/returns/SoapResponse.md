@@ -104,7 +104,7 @@ Writes a binary result to a file. Raises if the wrapped value is not binary.
 | `sFileName` | [string](../types/string.md) | yes | Destination path. |
 | `bForceOverride` | [boolean](../types/boolean.md) | yes | When `.T.`, overwrites an existing file at the destination. |
 
-**Returns:** [string](../types/string.md) — The path written to, or empty string on failure (parent `SoapClient`'s `Error` is set).
+**Returns:** [string](../types/string.md) — The path written to. When the value is binary but the write fails, returns an empty string and sets the parent `SoapClient`'s `Error`. A non-binary value raises instead.
 
 ### `GetTypeInfo`
 
@@ -116,7 +116,7 @@ Returns a short, human-readable name for the wrapped value's type — useful whe
 
 Returns an XML string listing every field on a complex result, with each entry's name and type. Raises if the wrapped value is not a complex type.
 
-**Returns:** [string](../types/string.md) — XML listing the fields. Empty string on failure.
+**Returns:** [string](../types/string.md) — XML listing the fields. A value that is not a complex type raises; other failures return an empty string.
 
 ## Best practices
 
@@ -137,7 +137,7 @@ Returns an XML string listing every field on a complex result, with each entry's
 - `SoapResponse` is not directly constructable. Obtain it from [`SoapClient:CallWebService`](SoapClient.md#callwebservice) or from `GetObjectField` / `GetArrayItem` on another `SoapResponse`.
 - `GetArrayItem` uses **zero-based** indexing, unlike most SSL array operations.
 - `GetArrayLength` returns `-1` (not `0`) when the wrapped value is not an array. Use this to distinguish "not an array" from "empty array."
-- `ValueAsStringDate` and `ValueAsStringTime` return empty strings when the wrapped value is not a date/time. Both are derived from the same underlying value when present.
+- `ValueAsStringDate` and `ValueAsStringTime` return empty strings when the wrapped value is not a date/time.
 - Serialization or read errors on `Xml` and `XmlByRef` return empty strings and set the parent `SoapClient`'s `Error` property. Check `Error` after reading these properties when an empty value is unexpected.
 
 ## Examples
@@ -152,7 +152,10 @@ Reads a single string value from a SOAP method that returns one.
 
     oWebServices := WebServices{};
     oSoapClient := oWebServices:CreateSoapClient();
-    oSoapClient:UseWebService("https://lims-soap.example/Instruments?wsdl");
+    :IF .NOT. oSoapClient:UseWebService("https://lims-soap.example/Instruments?wsdl");
+        UsrMes("Configuration failed: " + oSoapClient:Error);
+        :RETURN;
+    :ENDIF;
     oSoapClient:Parameters:Add("<int>42</int>");
 
     oResponse := oSoapClient:CallWebService("GetInstrumentName");
@@ -177,7 +180,10 @@ Reads how many items came back, then walks the array.
 
     oWebServices := WebServices{};
     oSoapClient := oWebServices:CreateSoapClient();
-    oSoapClient:UseWebService("https://lims-soap.example/Samples?wsdl");
+    :IF .NOT. oSoapClient:UseWebService("https://lims-soap.example/Samples?wsdl");
+        UsrMes("Configuration failed: " + oSoapClient:Error);
+        :RETURN;
+    :ENDIF;
     oSoapClient:Parameters:Add("<int>10</int>");
 
     oResponse := oSoapClient:CallWebService("GetRecentSamples");
@@ -212,7 +218,10 @@ Calls a method that returns a PDF report and writes it to disk.
 
     oWebServices := WebServices{};
     oSoapClient := oWebServices:CreateSoapClient();
-    oSoapClient:UseWebService("https://reports-soap.example/Reports?wsdl");
+    :IF .NOT. oSoapClient:UseWebService("https://reports-soap.example/Reports?wsdl");
+        UsrMes("Configuration failed: " + oSoapClient:Error);
+        :RETURN;
+    :ENDIF;
     oSoapClient:Parameters:Add("<string>B-1042</string>");
 
     oResponse := oSoapClient:CallWebService("RenderBatchReport");
