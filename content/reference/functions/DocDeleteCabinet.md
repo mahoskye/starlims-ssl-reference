@@ -34,11 +34,11 @@ DocDeleteCabinet(sCabinetId, [bDeepDelete])
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `sCabinetId` | [string](../types/string.md) | yes | — | Cabinet reference to delete. |
-| `bDeepDelete` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Delete mode flag passed to the Documentum cabinet delete operation. If omitted, the function uses [`.T.`](../literals/true.md). |
+| `bDeepDelete` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | When [`.T.`](../literals/true.md), the delete proceeds recursively. When [`.F.`](../literals/false.md), the delete fails if the cabinet has children. If omitted, the function uses [`.T.`](../literals/true.md). |
 
 ## Returns
 
-**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the cabinet delete succeeds. [`.F.`](../literals/false.md) when the backend delete call fails.
+**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the cabinet delete succeeds. [`.F.`](../literals/false.md) when the delete fails.
 
 ## Exceptions
 
@@ -52,7 +52,7 @@ DocDeleteCabinet(sCabinetId, [bDeepDelete])
     - Check the boolean result immediately after the call.
     - Pass `bDeepDelete` explicitly when your workflow depends on a specific delete mode.
     - Read [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) right after a [`.F.`](../literals/false.md) result when you need the failure details from this delete attempt.
-    - Use this within an initialized Documentum session.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `sCabinetId`; that raises an immediate SSL argument error.
@@ -61,15 +61,14 @@ DocDeleteCabinet(sCabinetId, [bDeepDelete])
 
 ## Caveats
 
-- Only [`NIL`](../literals/nil.md) is checked by the SSL wrapper before the delete call is made.
-- Backend delete failures return [`.F.`](../literals/false.md) instead of raising a second documented SSL exception from this function.
+- Only a [`NIL`](../literals/nil.md) `sCabinetId` raises. Other delete failures return [`.F.`](../literals/false.md) and are recorded for [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md).
 - This function relies on the current Documentum session state.
 
 ## Examples
 
 ### Delete one cabinet using the default recursive behavior
 
-Deletes a cabinet by ID using the default deep-delete mode and logs either a success message or the Documentum error when the call returns [`.F.`](../literals/false.md).
+Deletes a cabinet by ID using the default deep-delete mode and logs either a success message or the Documentum error when the call returns [`.F.`](../literals/false.md). Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE DeleteObsoleteCabinet;
@@ -99,7 +98,7 @@ DoProc("DeleteObsoleteCabinet", {"ARCHIVE_2020"});
 
 ### Pass [`.F.`](../literals/false.md) for `bDeepDelete` to use the non-default delete mode
 
-Passes [`.F.`](../literals/false.md) for `bDeepDelete` to use non-recursive delete mode, then logs either a success message or the Documentum error when the call fails.
+Passes [`.F.`](../literals/false.md) for `bDeepDelete` to use non-recursive delete mode, then logs either a success message or the Documentum error when the call fails. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE DeleteEmptyCabinetOnly;
@@ -128,7 +127,7 @@ DoProc("DeleteEmptyCabinetOnly", {"ARCHIVE-2023"});
 
 ### Delete multiple cabinets and collect per-cabinet failure details
 
-Iterates a list of cabinet IDs, attempts each delete, and collects a failure object — including any Documentum error message — for every cabinet that was not deleted successfully.
+Iterates a list of cabinet IDs, attempts each delete, and collects a failure object — including any Documentum error message — for every cabinet that was not deleted successfully. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE DeleteCabinetsBatch;
@@ -169,5 +168,6 @@ DoProc("DeleteCabinetsBatch");
 - [`DocDeleteFolder`](DocDeleteFolder.md)
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
 - [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`boolean`](../types/boolean.md)
 - [`string`](../types/string.md)

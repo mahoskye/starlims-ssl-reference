@@ -99,7 +99,7 @@ Places `DocEndDocumentumInterface` in a [`:FINALLY`](../keywords/FINALLY.md) blo
 
 ```ssl
 :PROCEDURE ExportDocumentWithCleanup;
-    :DECLARE sDocBase, sUser, sPassword, sDocumentId, sExportPath, oErr;
+    :DECLARE sDocBase, sUser, sPassword, sDocumentId, sExportData, oErr;
 
     sDocBase := "ProductionDB";
     sUser := "doc_user";
@@ -117,9 +117,14 @@ Places `DocEndDocumentumInterface` in a [`:FINALLY`](../keywords/FINALLY.md) blo
     :ENDIF;
 
     :TRY;
-        sExportPath := DocExportDocument(sDocumentId);
+        sExportData := DocExportDocument(sDocumentId);
 
-        UsrMes("Exported document to: " + sExportPath);
+        :IF DocCommandFailed();
+            ErrorMes("Documentum export failed: " + DocGetErrorMessage());
+            /* Logs on export failure;
+        :ELSE;
+            UsrMes("Exported document: " + sDocumentId);
+        :ENDIF;
 
     :CATCH;
         oErr := GetLastSSLError();

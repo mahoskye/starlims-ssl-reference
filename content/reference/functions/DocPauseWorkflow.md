@@ -1,6 +1,6 @@
 ---
 title: "DocPauseWorkflow"
-summary: "Temporarily halts workflow processing to prevent further steps until manual intervention or review."
+summary: "Pauses a Documentum workflow and returns whether the pause succeeded."
 id: ssl.function.docpauseworkflow
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # DocPauseWorkflow
 
-Temporarily halts workflow processing to prevent further steps until manual intervention or review.
+Pauses a Documentum workflow and returns whether the pause succeeded.
 
 `DocPauseWorkflow` attempts to pause the Documentum workflow identified by `sWorkflowId`. It returns [`.T.`](../literals/true.md) when the pause operation succeeds and [`.F.`](../literals/false.md) when it does not. If `sWorkflowId` is [`NIL`](../literals/nil.md), the function raises an exception before attempting the pause.
 
@@ -49,6 +49,7 @@ DocPauseWorkflow(sWorkflowId)
     - Validate or obtain the workflow ID before calling the function.
     - Check the boolean return value and handle [`.F.`](../literals/false.md) explicitly.
     - Use surrounding workflow logic to decide whether to retry, report, or defer manual review.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `sWorkflowId`. That raises an exception.
@@ -57,13 +58,13 @@ DocPauseWorkflow(sWorkflowId)
 
 ## Caveats
 
-- The function returns only a boolean result; it does not provide a reason when the pause does not succeed.
+- The function returns only a boolean result. After a [`.F.`](../literals/false.md) result, check [`DocCommandFailed`](DocCommandFailed.md) and read [`DocGetErrorMessage`](DocGetErrorMessage.md) immediately for the reason.
 
 ## Examples
 
 ### Pause an ongoing workflow for review
 
-Calls `DocPauseWorkflow` and builds a result message from the boolean return, then logs it. On success the message confirms the pause; on failure it reports which workflow could not be paused.
+Calls `DocPauseWorkflow` and builds a result message from the boolean return, then logs it. On success the message confirms the pause; on failure it reports which workflow could not be paused. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE PauseWorkflowForReview;
@@ -99,7 +100,7 @@ Failed to pause workflow WF-2024-0042
 
 ### Pause a workflow only when review is required
 
-Guards the pause call behind a `bReviewRequired` flag so the workflow is only halted when business rules require it, returning [`.F.`](../literals/false.md) immediately when review is not needed.
+Guards the pause call behind a `bReviewRequired` flag so the workflow is only halted when business rules require it, returning [`.F.`](../literals/false.md) immediately when review is not needed. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE PauseWorkflowIfReviewRequired;
@@ -129,7 +130,7 @@ DoProc("PauseWorkflowIfReviewRequired", {"WF-2024-0042", .T.});
 
 ### Pause multiple workflows and collect the results
 
-Iterates a list of workflow IDs, records each result into a summary object, and reports the overall count of successful and failed pause operations.
+Iterates a list of workflow IDs, records each result into a summary object, and reports the overall count of successful and failed pause operations. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE PauseWorkflowBatch;
@@ -183,7 +184,9 @@ DoProc("PauseWorkflowBatch", {{"WF-2024-0042", "WF-2024-0043"}});
 - [`DocResumeWorkflow`](DocResumeWorkflow.md)
 - [`DocStopWorkflow`](DocStopWorkflow.md)
 - [`DocGetWorkflowStatus`](DocGetWorkflowStatus.md)
+- [`DocCommandFailed`](DocCommandFailed.md)
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
 - [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`boolean`](../types/boolean.md)
 - [`string`](../types/string.md)

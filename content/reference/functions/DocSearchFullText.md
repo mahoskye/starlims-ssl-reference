@@ -42,13 +42,13 @@ DocSearchFullText(sTextToSearch, [sStartLocation], [nResultSetSize])
 
 Each returned row contains these columns:
 
-| Column | Description |
-|--------|-------------|
-| `r_object_id` | Documentum object ID |
-| `object_name` | Object name |
-| `r_object_type` | Object type |
-| `title` | Title |
-| `subject` | Subject |
+| Position | Column | Description |
+|----------|--------|-------------|
+| `row[1]` | `r_object_id` | Documentum object ID |
+| `row[2]` | `object_name` | Object name |
+| `row[3]` | `r_object_type` | Object type |
+| `row[4]` | `title` | Title |
+| `row[5]` | `subject` | Subject |
 
 If no documents match, the function returns an empty array.
 
@@ -57,7 +57,6 @@ If no documents match, the function returns an empty array.
 | Trigger | Exception message |
 | --- | --- |
 | `sTextToSearch` is [`NIL`](../literals/nil.md). | `sTextToSearch argument cannot be null` |
-| Blank or whitespace-only search text. | Also rejected by the underlying search call. |
 
 ## Best practices
 
@@ -66,6 +65,7 @@ If no documents match, the function returns an empty array.
     - Pass `sStartLocation` when the search should stay inside a known folder tree.
     - Set `nResultSetSize` for review queues and pick lists that only need a bounded result set.
     - Read the returned rows by documented column position so your code stays predictable.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md), `""`, or whitespace-only text as the search value.
@@ -73,11 +73,15 @@ If no documents match, the function returns an empty array.
     - Search the entire repository when a folder path is already known.
     - Assume a match exists before checking `ALen(aResults)`.
 
+## Caveats
+
+- Blank or whitespace-only `sTextToSearch` is rejected by the Documentum search, so validate the text before calling.
+
 ## Examples
 
 ### Search for a keyword in all documents
 
-Searches all `dm_document` content for a keyword, counts the matches, and logs the total.
+Searches all `dm_document` content for a keyword, counts the matches, and logs the total. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE SearchPoliciesByKeyword;
@@ -104,12 +108,12 @@ DoProc("SearchPoliciesByKeyword");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Found [n] documents containing compliance
+Found <n> documents containing compliance
 ```
 
 ### Search within a specific folder tree
 
-Scopes the search to a specific folder path with a result cap, then lists each matching document name or reports no matches.
+Scopes the search to a specific folder path with a result cap, then lists each matching document name or reports no matches. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE SearchEngineeringSafetyDocs;
@@ -142,7 +146,7 @@ DoProc("SearchEngineeringSafetyDocs");
 
 ### Collect object IDs for a bounded review queue
 
-Searches for documents matching a phrase under a quality folder with a 50-row cap, collects the object IDs, and logs the queue size.
+Searches for documents matching a phrase under a quality folder with a 50-row cap, collects the object IDs, and logs the queue size. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE BuildComplianceReviewQueue;
@@ -174,13 +178,15 @@ DoProc("BuildComplianceReviewQueue");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Queued [n] documents for compliance review
+Queued <n> documents for compliance review
 ```
 
 ## Related
 
 - [`DocSearchAsDataset`](DocSearchAsDataset.md)
 - [`DocSearchUsingDql`](DocSearchUsingDql.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`string`](../types/string.md)
 - [`number`](../types/number.md)
 - [`array`](../types/array.md)

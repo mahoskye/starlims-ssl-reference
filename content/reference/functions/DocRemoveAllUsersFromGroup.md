@@ -51,6 +51,7 @@ DocRemoveAllUsersFromGroup(sGroupName)
     - Validate that `sGroupName` is populated before calling the function.
     - Check the boolean return value and treat [`.F.`](../literals/false.md) as an operation failure.
     - Re-add users explicitly after a successful reset if you are rebuilding group membership.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `sGroupName`.
@@ -60,13 +61,13 @@ DocRemoveAllUsersFromGroup(sGroupName)
 ## Caveats
 
 - If the group cannot be updated, the function returns [`.F.`](../literals/false.md).
-- The boolean result does not identify the specific backend failure.
+- After a [`.F.`](../literals/false.md) result, check [`DocCommandFailed`](DocCommandFailed.md) and read [`DocGetErrorMessage`](DocGetErrorMessage.md) immediately for the reason.
 
 ## Examples
 
 ### Clear one existing group
 
-Calls `DocRemoveAllUsersFromGroup` with a hardcoded group name and reports success or failure with branched messaging calls.
+Calls `DocRemoveAllUsersFromGroup` with a hardcoded group name and reports success or failure with branched messaging calls. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ClearExistingGroup;
@@ -91,7 +92,7 @@ DoProc("ClearExistingGroup");
 
 ### Reset a project group before repopulating it
 
-Builds the group name from a project code, clears the group, reports the outcome, and returns the boolean so the caller can react to a failure.
+Builds the group name from a project code, clears the group, reports the outcome, and returns the boolean so the caller can react to a failure. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ResetProjectGroup;
@@ -119,7 +120,7 @@ DoProc("ResetProjectGroup", {"ALPHA"});
 
 ### Clear multiple groups and capture per-group results
 
-Iterates a list of group names, records the outcome of each clear operation in a [`CreateUdObject`](CreateUdObject.md) result, and accumulates all results into an array for the caller.
+Iterates a list of group names, records the outcome of each clear operation in a [`CreateUdObject`](CreateUdObject.md) result, and accumulates all results into an array for the caller. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ClearDocumentGroups;
@@ -159,5 +160,9 @@ DoProc("ClearDocumentGroups", {{"LabUsers", "QATeam"}});
 - [`DocCreateGroup`](DocCreateGroup.md)
 - [`DocAddUsersToGroup`](DocAddUsersToGroup.md)
 - [`DocRemoveUsersFromGroup`](DocRemoveUsersFromGroup.md)
+- [`DocCommandFailed`](DocCommandFailed.md)
+- [`DocGetErrorMessage`](DocGetErrorMessage.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`boolean`](../types/boolean.md)
 - [`string`](../types/string.md)

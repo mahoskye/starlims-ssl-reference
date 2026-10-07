@@ -15,7 +15,7 @@ Stops a Documentum workflow by its workflow ID.
 
 `DocStopWorkflow` calls the active Documentum interface and asks it to stop the workflow identified by `sWorkflowId`. It returns [`.T.`](../literals/true.md) when the stop call reports success and [`.F.`](../literals/false.md) when the call does not succeed.
 
-The SSL wrapper rejects a [`NIL`](../literals/nil.md) `sWorkflowId` and raises an exception before the Documentum stop call runs. After a [`.F.`](../literals/false.md) result, use [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) to check whether the active Documentum context recorded an error.
+Passing [`NIL`](../literals/nil.md) for `sWorkflowId` raises an exception. After a [`.F.`](../literals/false.md) result, use [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) to check whether the active Documentum context recorded an error.
 
 ## When to use
 
@@ -48,7 +48,7 @@ DocStopWorkflow(sWorkflowId)
 ## Best practices
 
 !!! success "Do"
-    - Initialize the Documentum interface before calling this function.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
     - Check the boolean result immediately after the call.
     - After a [`.F.`](../literals/false.md) result, use [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) for diagnostics.
 
@@ -59,22 +59,20 @@ DocStopWorkflow(sWorkflowId)
 
 ## Caveats
 
-- This page documents a required non-[`NIL`](../literals/nil.md) argument. The wrapper does not add a separate empty-string check.
+- Only a [`NIL`](../literals/nil.md) `sWorkflowId` raises. A blank `sWorkflowId` is passed on to Documentum.
 - The function depends on an active Documentum interface context.
 
 ## Examples
 
 ### Stop one workflow
 
-Initializes the Documentum interface, stops a single workflow by ID, and logs a success or failure message.
+Stops a single workflow by ID and logs a success or failure message. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE StopOneWorkflow;
     :DECLARE sWorkflowId, bStopped;
 
     sWorkflowId := "WF-2024-00142";
-
-    DocInitDocumentumInterface();
 
     bStopped := DocStopWorkflow(sWorkflowId);
 
@@ -85,8 +83,6 @@ Initializes the Documentum interface, stops a single workflow by ID, and logs a 
         UsrMes("Could not stop workflow " + sWorkflowId);
         /* Logs the workflow ID on failure;
     :ENDIF;
-
-    DocEndDocumentumInterface();
 :ENDPROC;
 
 /* Usage;
@@ -95,7 +91,7 @@ DoProc("StopOneWorkflow");
 
 ### Read the Documentum error after a failed stop
 
-Logs in to Documentum before stopping, then reads the error message from [`DocCommandFailed`](DocCommandFailed.md) when the stop returns [`.F.`](../literals/false.md).
+Logs in to Documentum before stopping, then checks [`DocCommandFailed`](DocCommandFailed.md) and reads the message with [`DocGetErrorMessage`](DocGetErrorMessage.md) when the stop returns [`.F.`](../literals/false.md).
 
 ```ssl
 :PROCEDURE StopWorkflowWithMessage;
@@ -219,5 +215,6 @@ DoProc("StopWorkflowBatch", {{"WF-2024-00142", "WF-2024-00143"}, .T.});
 - [`DocEndDocumentumInterface`](DocEndDocumentumInterface.md)
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
 - [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`boolean`](../types/boolean.md)
 - [`string`](../types/string.md)

@@ -54,6 +54,7 @@ DocRepeatWorkitem(sWorkitemId, aUsers, [sSignOffUser], [sSignOffPass], [sSignOff
     - Validate that `sWorkitemId` and `aUsers` are assigned before calling the function.
     - Check the boolean return value and handle [`.F.`](../literals/false.md) explicitly in workflow logic.
     - Pass the optional signoff values when the repeat must capture approval context.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `sWorkitemId` or `aUsers`. The function raises an error before the repeat is attempted.
@@ -62,13 +63,13 @@ DocRepeatWorkitem(sWorkitemId, aUsers, [sSignOffUser], [sSignOffPass], [sSignOff
 
 ## Caveats
 
-- A [`.F.`](../literals/false.md) result indicates the repeat did not succeed, but the function does not return a separate failure message.
+- A [`.F.`](../literals/false.md) result indicates the repeat did not succeed. Check [`DocCommandFailed`](DocCommandFailed.md) and read [`DocGetErrorMessage`](DocGetErrorMessage.md) immediately for the reason.
 
 ## Examples
 
 ### Repeat a workitem for a new assignee list
 
-Shows the minimum call form using only the two required parameters: the workitem ID and the user list.
+Shows the minimum call form using only the two required parameters: the workitem ID and the user list. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE RepeatWorkitemBasic;
@@ -97,12 +98,17 @@ DoProc("RepeatWorkitemBasic");
 
 ```text
 Repeated workitem WI-2024-00423
+```
+
+On failure, `UsrMes` logs:
+
+```text
 Could not repeat workitem WI-2024-00423
 ```
 
 ### Repeat a workitem with signoff details
 
-Shows the full five-argument call form, passing signoff credentials and a reason alongside the workitem ID and user list.
+Shows the full five-argument call form, passing signoff credentials and a reason alongside the workitem ID and user list. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE RepeatWorkitemWithSignoff;
@@ -143,6 +149,11 @@ DoProc("RepeatWorkitemWithSignoff");
 
 ```text
 Repeated WI-2024-00847 with signoff context
+```
+
+On failure, `UsrMes` logs:
+
+```text
 Repeat request failed for WI-2024-00847
 ```
 
@@ -153,6 +164,10 @@ Repeat request failed for WI-2024-00847
 - [`DocStopWorkflow`](DocStopWorkflow.md)
 - [`DocGetTasks`](DocGetTasks.md)
 - [`DocGetWorkflowStatus`](DocGetWorkflowStatus.md)
+- [`DocCommandFailed`](DocCommandFailed.md)
+- [`DocGetErrorMessage`](DocGetErrorMessage.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`boolean`](../types/boolean.md)
 - [`string`](../types/string.md)
 - [`array`](../types/array.md)

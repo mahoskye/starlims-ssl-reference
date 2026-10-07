@@ -13,7 +13,7 @@ starlims:
 
 Executes SSL source supplied as a string and returns the result.
 
-`ExecUdf` runs SSL code built at runtime. If `sCode` is an expression without a trailing semicolon, the runtime evaluates it as a return expression. If `sCode` is a bare identifier that matches a local variable, `ExecUdf` returns that variable's current value instead of compiling new code. When supplied, `aArgs` must be an array, and `bCacheCode` enables reuse of compiled code for repeated execution of the same source text.
+`ExecUdf` runs SSL code built at runtime. If `sCode` is a single expression with no trailing semicolon, `ExecUdf` returns its value. If `sCode` is just the name of a local variable, `ExecUdf` returns that variable's current value. When supplied, `aArgs` must be an array, and `bCacheCode` enables reuse of compiled code for repeated execution of the same source text.
 
 ## When to use
 
@@ -69,7 +69,7 @@ ExecUdf(sCode, [aArgs], [bCacheCode])
 
 ### Evaluate a simple expression string
 
-Passes an arithmetic expression as a string to `ExecUdf` and logs the numeric result. Because the string does not end with `;`, the runtime wraps it as `:RETURN 2 + 3 * 4;` and returns `14`.
+Passes an arithmetic expression as a string to `ExecUdf` and logs the numeric result. Because the string is a single expression with no trailing `;`, `ExecUdf` returns its value, `14`.
 
 ```ssl
 :PROCEDURE RunDynamicExpression;
@@ -94,7 +94,7 @@ Calculated value: 14
 
 ### Return a local variable by name
 
-Passes a bare identifier string to `ExecUdf`. Because `"sStatus"` matches an existing local variable and does not end with `;`, the runtime returns that variable's current value directly instead of compiling new code.
+Passes a bare identifier string to `ExecUdf`. Because `"sStatus"` matches an existing local variable and does not end with `;`, `ExecUdf` returns that variable's current value.
 
 ```ssl
 :PROCEDURE ReturnLocalValue;

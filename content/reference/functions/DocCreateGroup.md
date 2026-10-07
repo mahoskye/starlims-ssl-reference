@@ -51,6 +51,7 @@ DocCreateGroup(sGroupName, [sDescription])
     - Capture the returned identifier when later steps need to refer to the created group.
     - Check for an empty-string result before assuming the group was created.
     - Read [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) immediately after an empty result when you need the Documentum failure details.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `sGroupName`; that raises an immediate SSL error.
@@ -59,13 +60,13 @@ DocCreateGroup(sGroupName, [sDescription])
 
 ## Caveats
 
-- Blank strings for `sGroupName` are allowed by the public SSL contract and are not rejected by the function itself.
+- A blank `sGroupName` is not rejected by `DocCreateGroup` itself; Documentum decides whether it is valid.
 
 ## Examples
 
 ### Create one group with only the required argument
 
-Creates a Documentum group using just the required name and logs either the returned group identifier or a message when the result is empty.
+Creates a Documentum group using just the required name and logs either the returned group identifier or a message when the result is empty. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE CreateProjectGroup;
@@ -89,7 +90,7 @@ DoProc("CreateProjectGroup");
 
 ### Create multiple groups with descriptions and collect failures
 
-Iterates a list of name-and-description pairs, creates each group, and collects the names of any groups whose create call returned an empty identifier.
+Iterates a list of name-and-description pairs, creates each group, and collects the names of any groups whose create call returned an empty identifier. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE CreateDepartmentGroups;
@@ -122,7 +123,7 @@ DoProc("CreateDepartmentGroups");
 
 ### Capture Documentum error details immediately after a failed create
 
-Creates a group with a description, then reads the Documentum error message immediately when the create call returns an empty identifier.
+Creates a group with a description, then reads the Documentum error message immediately when the create call returns an empty identifier. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ProvisionProjectTeam;
@@ -157,4 +158,6 @@ DoProc("ProvisionProjectTeam");
 - [`DocCommandFailed`](DocCommandFailed.md)
 - [`DocCreateUser`](DocCreateUser.md)
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`string`](../types/string.md)

@@ -19,10 +19,10 @@ Eval does not parse or compile SSL source text. If you have SSL source in a stri
 
 ## When to use
 
-- When you need to run code generated or composed at runtime rather than defined statically.
-- When supporting configurable business rules or workflows where logic is stored as code blocks externally.
-- When implementing systems that allow users to script behaviors at runtime.
-- When you want to pass arguments to dynamic code blocks for evaluation.
+- When a routine receives a code block (a callback, predicate, or strategy) and needs to call it.
+- When choosing one of several code blocks at runtime, for example from a dispatch table.
+- When you want to pass arguments to a code block value and use its result.
+- To run SSL source text stored in a string, use [`ExecUdf`](ExecUdf.md) instead.
 
 ## Syntax
 
@@ -51,7 +51,7 @@ Eval(fnCode, [vArg1], [vArg2], ...)
 
 !!! success "Do"
     - Pass a code block value (from a `{|params| expr}` literal or a function that returns one) as the first argument.
-    - Reserve use of Eval for scenarios requiring dynamic, runtime code evaluation.
+    - Reserve use of Eval for calling code block values that are chosen or passed in at runtime.
     - Handle errors that may arise from evaluated code blocks.
 
 !!! failure "Don't"
@@ -62,7 +62,7 @@ Eval(fnCode, [vArg1], [vArg2], ...)
 ## Caveats
 
 - Errors raised inside the invoked block propagate to the Eval call site; wrap the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) when the block may fail.
-- Eval forwards the supplied argument array to the code block; it does not compile source text, rename parameters, or add its own defaults.
+- Eval passes the supplied arguments to the code block in order; it does not compile source text, rename parameters, or add its own defaults.
 
 ## Examples
 
@@ -100,9 +100,9 @@ DoProc("EvalCodeBlock");
 Adding 25 + 17 = 42
 ```
 
-### Strategy pattern — pick one code block out of several
+### Strategy pattern — apply a tier's chain of pricing rules
 
-Choose between several pricing rule code blocks based on a customer tier and apply the chosen rule to a running total.
+Choose a list of pricing rule code blocks based on a customer tier and apply them in order to a running total. The VIP tier applies the VIP discount and then the clearance rule.
 
 ```ssl
 :PROCEDURE ApplyDiscountRules;

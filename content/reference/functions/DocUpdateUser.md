@@ -1,6 +1,6 @@
 ---
 title: "DocUpdateUser"
-summary: "Updates a Documentum user and returns the backend result message."
+summary: "Updates a Documentum user and returns the Documentum result message."
 id: ssl.function.docupdateuser
 element_type: function
 doc_status: published
@@ -11,14 +11,14 @@ starlims:
 
 # DocUpdateUser
 
-Updates a Documentum user and returns the backend result message.
+Updates a Documentum user and returns the Documentum result message.
 
-`DocUpdateUser` requires `sLoginName` and `sPassword`, then optionally accepts `sUserName`, `sEMail`, `sDefaultFolder`, `sGroupName`, `sPermissionSet`, and `nUserPrivileges`. If `sLoginName` or `sPassword` is [`NIL`](../literals/nil.md), the function raises an error before attempting the update. If `nUserPrivileges` is omitted or [`NIL`](../literals/nil.md), the function uses `0`. The function returns the backend string result, or an empty string when the update path does not return a value.
+`DocUpdateUser` requires `sLoginName` and `sPassword`, then optionally accepts `sUserName`, `sEMail`, `sDefaultFolder`, `sGroupName`, `sPermissionSet`, and `nUserPrivileges`. If `sLoginName` or `sPassword` is [`NIL`](../literals/nil.md), the function raises an error before attempting the update. If `nUserPrivileges` is omitted or [`NIL`](../literals/nil.md), the function uses `0`. The function returns the result text Documentum returns for the update, or an empty string when there is none.
 
 ## When to use
 
 - When an SSL script needs to submit updated Documentum user details.
-- When a workflow needs the backend result message after an update attempt.
+- When a workflow needs the Documentum result message after an update attempt.
 - When the update should include an explicit privilege value instead of the default `0`.
 
 ## Syntax
@@ -42,7 +42,7 @@ DocUpdateUser(sLoginName, sPassword, [sUserName], [sEMail], [sDefaultFolder], [s
 
 ## Returns
 
-**[string](../types/string.md)** — The backend result message, or an empty string when the update path does not return a value.
+**[string](../types/string.md)** — The result message Documentum returns for the update, or an empty string when there is none.
 
 ## Exceptions
 
@@ -57,17 +57,18 @@ DocUpdateUser(sLoginName, sPassword, [sUserName], [sEMail], [sDefaultFolder], [s
     - Validate that `sLoginName` and `sPassword` are assigned before calling the function.
     - Omit trailing optional arguments you do not need, and skip only the positions required to reach a later argument.
     - Check whether the returned string is empty before treating the update as confirmed.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `sLoginName` or `sPassword`. Those arguments raise an immediate error instead of attempting the update.
-    - Assume omitted optional arguments have a documented repository-side effect beyond being forwarded as omitted values.
+    - Assume omitted optional arguments leave the user's existing values unchanged. Pass every field whose value matters.
     - Ignore an empty return string when later logic depends on a confirmed update result.
 
 ## Examples
 
 ### Update a user's display name and email
 
-Passes only the required credentials plus display name and email, then logs the backend result string.
+Passes only the required credentials plus display name and email, then logs the result string. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE UpdateUserContact;
@@ -86,7 +87,7 @@ Passes only the required credentials plus display name and email, then logs the 
     :ENDIF;
 
     UsrMes(sResult);
-    /* Logs backend result message on success;
+    /* Logs the result message on success;
 
     :RETURN sResult;
 :ENDPROC;
@@ -97,7 +98,7 @@ DoProc("UpdateUserContact");
 
 ### Update folder, group, and permission set by skipping optional positions
 
-Skips the `sUserName` and `sEMail` positions using adjacent commas so that only the folder, group, and permission set are updated.
+Skips the `sUserName` and `sEMail` positions using adjacent commas so that only the folder, group, and permission set are updated. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE UpdateUserAccess;
@@ -124,7 +125,7 @@ Skips the `sUserName` and `sEMail` positions using adjacent commas so that only 
     :ENDIF;
 
     UsrMes(sResult);
-    /* Logs backend result message on success;
+    /* Logs the result message on success;
 
     :RETURN sResult;
 :ENDPROC;
@@ -135,7 +136,7 @@ DoProc("UpdateUserAccess");
 
 ### Update all fields with error handling
 
-Passes all eight arguments and wraps the call in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) to handle SSL exceptions, using [`GetLastSSLError`](GetLastSSLError.md) to extract the failure description.
+Passes all eight arguments and wraps the call in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) to handle SSL exceptions, using [`GetLastSSLError`](GetLastSSLError.md) to extract the failure description. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE UpdateUserWithHandling;
@@ -169,18 +170,13 @@ Passes all eight arguments and wraps the call in [`:TRY`](../keywords/TRY.md)/[`
         :ENDIF;
 
         UsrMes(sResult);
-        /* Logs backend result message on success;
+        /* Logs the result message on success;
 
         :RETURN sResult;
     :CATCH;
         oErr := GetLastSSLError();
-
-        :IF Empty(oErr);
-            ErrorMes("DocUpdateUser failed for " + sLoginName);
-        :ELSE;
-            ErrorMes("DocUpdateUser failed: " + oErr:Description);
-            /* Logs failure details when available;
-        :ENDIF;
+        ErrorMes("DocUpdateUser failed: " + oErr:Description);
+        /* Logs the error details;
 
         :RETURN "";
     :ENDTRY;
@@ -195,6 +191,8 @@ DoProc("UpdateUserWithHandling");
 - [`DocCreateUser`](DocCreateUser.md)
 - [`DocDeleteUser`](DocDeleteUser.md)
 - [`DocExistsUser`](DocExistsUser.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`GetLastSSLError`](GetLastSSLError.md)
 - [`string`](../types/string.md)
 - [`number`](../types/number.md)

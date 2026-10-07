@@ -54,6 +54,7 @@ DocSearchUsingDql(sDql, [nResultSetSize])
     - Check [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) when `ALen(aResults) == 0` and you need to know whether the search failed.
     - Pass `nResultSetSize` for review queues, lookups, and other flows that do not need the full result set.
     - Read row values by their documented query position, such as `aResults[nIndex, 2]` for the second selected column.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Treat each result row as an object with named properties. Each row is an array.
@@ -70,33 +71,27 @@ DocSearchUsingDql(sDql, [nResultSetSize])
 
 ### Search for document IDs and names
 
-Queries released documents with a 10-row cap, checks for a failed call before iterating, and prints each document name.
+Queries released documents with a 10-row cap, checks for a failed call before iterating, and prints each document name. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ListReleasedDocumentNames;
     :DECLARE sDql, aResults, nIndex;
 
-    DocInitDocumentumInterface();
+    sDql := "SELECT r_object_id, object_name FROM dm_document WHERE a_status = 'Released'";
+    aResults := DocSearchUsingDql(sDql, 10);
 
-    :TRY;
-        sDql := "SELECT r_object_id, object_name FROM dm_document WHERE a_status = 'Released'";
-        aResults := DocSearchUsingDql(sDql, 10);
+    :IF ALen(aResults) == 0 .AND. DocCommandFailed();
+        /* Logs on failure: Document search failed;
+        ErrorMes("Document search failed: " + DocGetErrorMessage());
+        :RETURN {};
+    :ENDIF;
 
-        :IF ALen(aResults) == 0 .AND. DocCommandFailed();
-            /* Logs on failure: Document search failed;
-            ErrorMes("Document search failed: " + DocGetErrorMessage());
-            :RETURN {};
-        :ENDIF;
+    :FOR nIndex := 1 :TO ALen(aResults);
+        /* Logs each document name;
+        UsrMes(aResults[nIndex, 2]);
+    :NEXT;
 
-        :FOR nIndex := 1 :TO ALen(aResults);
-            /* Logs each document name;
-            UsrMes(aResults[nIndex, 2]);
-        :NEXT;
-
-        :RETURN aResults;
-    :FINALLY;
-        DocEndDocumentumInterface();
-    :ENDTRY;
+    :RETURN aResults;
 :ENDPROC;
 
 /* Usage;
@@ -105,34 +100,28 @@ DoProc("ListReleasedDocumentNames");
 
 ### Select specific columns for a stable row shape
 
-Fetches three columns from documents in a specific folder path and assembles each row into a `"name (id)"` label string for a summary array.
+Fetches three columns from documents in a specific folder path and assembles each row into a `"name (id)"` label string for a summary array. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE BuildDocumentSummary;
     :DECLARE sDql, aResults, aSummary, nIndex;
 
-    DocInitDocumentumInterface();
+    sDql := "SELECT r_object_id, object_name, title FROM dm_document "
+            + "WHERE folder('/Quality/Specs', DESCEND)";
+    aResults := DocSearchUsingDql(sDql, 25);
+    aSummary := {};
 
-    :TRY;
-        sDql := "SELECT r_object_id, object_name, title FROM dm_document "
-                + "WHERE folder('/Quality/Specs', DESCEND)";
-        aResults := DocSearchUsingDql(sDql, 25);
-        aSummary := {};
+    :IF ALen(aResults) == 0 .AND. DocCommandFailed();
+        /* Logs on failure: Unable to read document summary;
+        ErrorMes("Unable to read document summary: " + DocGetErrorMessage());
+        :RETURN {};
+    :ENDIF;
 
-        :IF ALen(aResults) == 0 .AND. DocCommandFailed();
-            /* Logs on failure: Unable to read document summary;
-            ErrorMes("Unable to read document summary: " + DocGetErrorMessage());
-            :RETURN {};
-        :ENDIF;
+    :FOR nIndex := 1 :TO ALen(aResults);
+        AAdd(aSummary, aResults[nIndex, 2] + " (" + aResults[nIndex, 1] + ")");
+    :NEXT;
 
-        :FOR nIndex := 1 :TO ALen(aResults);
-            AAdd(aSummary, aResults[nIndex, 2] + " (" + aResults[nIndex, 1] + ")");
-        :NEXT;
-
-        :RETURN aSummary;
-    :FINALLY;
-        DocEndDocumentumInterface();
-    :ENDTRY;
+    :RETURN aSummary;
 :ENDPROC;
 
 /* Usage;
@@ -141,31 +130,25 @@ DoProc("BuildDocumentSummary");
 
 ### Use RETURN_TOP inside the DQL to control the limit directly
 
-Shows that when `RETURN_TOP` is already in the DQL text, `nResultSetSize` has no effect. The limit is controlled entirely by the DQL clause.
+Shows that when `RETURN_TOP` is already in the DQL text, `nResultSetSize` has no effect. The limit is controlled entirely by the DQL clause. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE GetRecentProtocolRows;
     :DECLARE sDql, aResults, sError;
 
-    DocInitDocumentumInterface();
+    sDql := "SELECT r_object_id, object_name, subject FROM dm_document "
+            + "WHERE object_name LIKE 'Protocol%' "
+            + "ENABLE (RETURN_TOP 5)";
+    aResults := DocSearchUsingDql(sDql, 50);
 
-    :TRY;
-        sDql := "SELECT r_object_id, object_name, subject FROM dm_document "
-                + "WHERE object_name LIKE 'Protocol%' "
-                + "ENABLE (RETURN_TOP 5)";
-        aResults := DocSearchUsingDql(sDql, 50);
+    :IF ALen(aResults) == 0 .AND. DocCommandFailed();
+        sError := DocGetErrorMessage();
+        /* Logs on failure: Protocol search failed;
+        ErrorMes("Protocol search failed: " + sError);
+        :RETURN {};
+    :ENDIF;
 
-        :IF ALen(aResults) == 0 .AND. DocCommandFailed();
-            sError := DocGetErrorMessage();
-            /* Logs on failure: Protocol search failed;
-            ErrorMes("Protocol search failed: " + sError);
-            :RETURN {};
-        :ENDIF;
-
-        :RETURN aResults;
-    :FINALLY;
-        DocEndDocumentumInterface();
-    :ENDTRY;
+    :RETURN aResults;
 :ENDPROC;
 
 /* Usage;
@@ -179,6 +162,7 @@ DoProc("GetRecentProtocolRows");
 - [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
 - [`DocSearchAsDataset`](DocSearchAsDataset.md)
 - [`DocSearchFullText`](DocSearchFullText.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`string`](../types/string.md)
 - [`number`](../types/number.md)
 - [`array`](../types/array.md)

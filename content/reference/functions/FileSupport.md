@@ -17,7 +17,7 @@ Performs multiple file operations through a single request-driven interface.
 
 Supported request families are `CHECK`, `SETATTR`, `GETATTR`, `CREATE`, `OPEN`, `CLOSE`, `READ`, `READBLK`, `WRITE`, `BOF`, `EOF`, `TELL`, `SEEK`, `RESIZE`, `COPY`, `DELETE`, `MOVE`, `RENAME`, `PATH`, `FOLDERNAME`, `FILENAME`, `NAME`, `EXT`, `SIZE`, `DATE`, `TIME`, and `DIR`.
 
-The implementation matches `sRequest` by case-insensitive leading text. Use the canonical request names above to avoid accidental matches.
+`sRequest` is matched case-insensitively on its leading text, so a prefix can select a request. Use the canonical request names above to avoid accidental matches.
 
 ## When to use
 
@@ -64,7 +64,7 @@ FileSupport(vFileIdentifier, sRequest, [vArg1], [sArg2], [sEncoding])
 | `RESIZE` | [number](../types/number.md) | Sets the file length to `vArg1` and returns the new size. |
 | `COPY` | [boolean](../types/boolean.md) | Copies the source file to the destination path in `vArg1`, overwriting an existing target if present. |
 | `DELETE` | [boolean](../types/boolean.md) | Deletes the file. Returns [`.F.`](../literals/false.md) when the file does not exist or deletion fails. |
-| `MOVE`, `RENAME` | [boolean](../types/boolean.md) | Moves the source file to the destination path in `vArg1`. `RENAME` uses the same implementation as `MOVE`. |
+| `MOVE`, `RENAME` | [boolean](../types/boolean.md) | Moves the source file to the destination path in `vArg1`. `RENAME` behaves exactly like `MOVE`. |
 | `PATH` | [string](../types/string.md) | Returns the full path for `vFileIdentifier`. |
 | `FOLDERNAME` | [string](../types/string.md) | Returns the containing directory path. |
 | `FILENAME` | [string](../types/string.md) | Returns the file name with extension. |
@@ -99,15 +99,15 @@ For `SETATTR`, only the first non-space character is used. The supported values 
 
 !!! success "Do"
     - Use `CREATE` or `OPEN` first, keep the returned handle, and close it with `CLOSE` when you finish.
-    - Use the canonical request names such as `"READ"`, `"WRITE"`, and `"SEEK"` even though the implementation matches by leading text.
+    - Use the canonical request names such as `"READ"`, `"WRITE"`, and `"SEEK"` even though a leading-text match also works.
     - Check the boolean result from `COPY`, `DELETE`, `MOVE`, `RENAME`, and `CLOSE` before assuming the operation succeeded.
     - Wrap path-based operations in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) when the target path may fall outside the configured whitelist.
 
 !!! failure "Don't"
     - Pass a file path to handle-based requests such as `READ` or `WRITE`, or a handle to path-based requests such as `COPY` or `DIR`.
     - Assume `READ` returns a short string at end of file. It pads the result with spaces when fewer characters are available.
-    - Treat `RENAME` as a metadata-only rename. It uses the same move logic as `MOVE` and therefore depends on a destination path.
-    - Rely on non-canonical request prefixes in published code just because the implementation accepts leading-text matches.
+    - Treat `RENAME` as a metadata-only rename. It behaves exactly like `MOVE` and therefore depends on a destination path.
+    - Rely on non-canonical request prefixes in published code just because leading-text matches are accepted.
     - Pass `"EXISTS"` to test whether a file exists. There is no such request, so it raises `Invalid request provided!`. Use `CHECK`.
 
 ## Caveats

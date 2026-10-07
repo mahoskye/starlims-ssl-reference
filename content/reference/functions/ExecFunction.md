@@ -14,7 +14,7 @@ starlims:
 Invokes a function by name at runtime and returns the result.
 
 `ExecFunction` takes a function name as a string and an optional argument
-array, executes the named function, and returns whatever that function returns. A one-segment name resolves in the current script; a three-segment name is dispatched through the same external execution path used by [`DoProc`](DoProc.md). The second argument, when supplied, must be an array.
+array, executes the named function, and returns whatever that function returns. A one-segment name resolves in the current script. A two-segment name runs the named server script, and a three-segment name calls `Category.Script.Procedure` the same way [`DoProc`](DoProc.md) does. The second argument, when supplied, must be an array.
 
 ## When to use
 
@@ -100,7 +100,7 @@ Result: <return value of Reports.OrderSummary>
 
 ### Chain data-driven workflow steps
 
-Iterates a list of workflow step names and calls each with `ExecFunction`. If any step returns a falsy value or raises an error, `bShouldContinue` is set to [`.F.`](../literals/false.md) and the loop exits early via [`:EXITFOR`](../keywords/EXITFOR.md).
+Iterates a list of workflow step names and calls each with `ExecFunction`. If any step returns [`.F.`](../literals/false.md) or raises an error, `bShouldContinue` is set to [`.F.`](../literals/false.md) and the loop exits early via [`:EXITFOR`](../keywords/EXITFOR.md).
 
 ```ssl
 :PROCEDURE RunAutomatedChain;

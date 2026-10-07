@@ -35,7 +35,7 @@ DocExportDocument(sDocumentId, [sFormat])
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `sDocumentId` | [string](../types/string.md) | yes | — | Document identifier to export. |
-| `sFormat` | [string](../types/string.md) | no | omitted | Export format to request. When omitted, the one-argument overload is used. |
+| `sFormat` | [string](../types/string.md) | no | omitted | Export format to request. When omitted, the default export format is used. |
 
 ## Returns
 

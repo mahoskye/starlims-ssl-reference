@@ -50,6 +50,7 @@ Returns `""` when the underlying Documentum call does not return a dataset.
     - Call [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md) before Documentum operations and check the result immediately after this call.
     - Treat an empty string as an ambiguous result until you also check [`DocCommandFailed`](DocCommandFailed.md).
     - Capture [`DocGetErrorMessage`](DocGetErrorMessage.md) right away when [`DocCommandFailed()`](DocCommandFailed.md) is [`.T.`](../literals/true.md).
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Assume `""` means only that the type has no attributes.
@@ -64,13 +65,11 @@ Returns `""` when the underlying Documentum call does not return a dataset.
 
 ### Retrieve attributes for a known type
 
-Initializes Documentum, fetches the attribute dataset for `dm_document`, and logs it when the call succeeds and returns a non-empty result.
+Fetches the attribute dataset for `dm_document` and logs it when the call succeeds and returns a non-empty result. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ShowTypeAttributes;
     :DECLARE sTypeName, sAttrs;
-
-    DocInitDocumentumInterface();
 
     sTypeName := "dm_document";
     sAttrs := DocGetTypeAttributesAsDataset(sTypeName);
@@ -78,8 +77,6 @@ Initializes Documentum, fetches the attribute dataset for `dm_document`, and log
     :IF .NOT. DocCommandFailed() .AND. .NOT. Empty(sAttrs);
         UsrMes("Attributes for " + sTypeName + ":" + Chr(10) + sAttrs);
     :ENDIF;
-
-    DocEndDocumentumInterface();
 :ENDPROC;
 
 /* Usage;
@@ -90,19 +87,17 @@ DoProc("ShowTypeAttributes");
 
 ```text
 Attributes for dm_document:
-[dataset text]
+<dataset text>
 ```
 
 ### Distinguish an empty result from a failed command
 
-Retrieves the attribute dataset for a caller-supplied type name, distinguishing a backend failure (checked via [`DocCommandFailed`](DocCommandFailed.md)) from a successful call that returned no data.
+Retrieves the attribute dataset for a caller-supplied type name, distinguishing a backend failure (checked via [`DocCommandFailed`](DocCommandFailed.md)) from a successful call that returned no data. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE LoadTypeAttributes;
     :PARAMETERS sTypeName;
     :DECLARE sAttrs, sErrMsg;
-
-    DocInitDocumentumInterface();
 
     sAttrs := DocGetTypeAttributesAsDataset(sTypeName);
 
@@ -110,15 +105,12 @@ Retrieves the attribute dataset for a caller-supplied type name, distinguishing 
         sErrMsg := DocGetErrorMessage();
         UsrMes("Unable to load type attributes: " + sErrMsg);
         /* Logs on failure: Unable to load type attributes;
-        DocEndDocumentumInterface();
         :RETURN "";
     :ENDIF;
 
     :IF Empty(sAttrs);
         UsrMes("No attribute dataset was returned for type " + sTypeName);
     :ENDIF;
-
-    DocEndDocumentumInterface();
 
     :RETURN sAttrs;
 :ENDPROC;
@@ -129,14 +121,12 @@ DoProc("LoadTypeAttributes", {"dm_document"});
 
 ### Compare two type definitions before a mapping step
 
-Calls `DocGetTypeAttributesAsDataset` twice to retrieve source and target type definitions, returning [`.T.`](../literals/true.md) only when both calls succeed and the resulting datasets are identical.
+Calls `DocGetTypeAttributesAsDataset` twice to retrieve source and target type definitions, returning [`.T.`](../literals/true.md) only when both calls succeed and the resulting datasets are identical. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE CompareTypeDefinitions;
     :PARAMETERS sSourceType, sTargetType;
     :DECLARE sSourceAttrs, sTargetAttrs, sErrMsg;
-
-    DocInitDocumentumInterface();
 
     sSourceAttrs := DocGetTypeAttributesAsDataset(sSourceType);
 
@@ -144,7 +134,6 @@ Calls `DocGetTypeAttributesAsDataset` twice to retrieve source and target type d
         sErrMsg := DocGetErrorMessage();
         UsrMes("Failed to read source type attributes: " + sErrMsg);
         /* Logs on source failure: Failed to read source type attributes;
-        DocEndDocumentumInterface();
         :RETURN .F.;
     :ENDIF;
 
@@ -154,17 +143,13 @@ Calls `DocGetTypeAttributesAsDataset` twice to retrieve source and target type d
         sErrMsg := DocGetErrorMessage();
         UsrMes("Failed to read target type attributes: " + sErrMsg);
         /* Logs on target failure: Failed to read target type attributes;
-        DocEndDocumentumInterface();
         :RETURN .F.;
     :ENDIF;
 
     :IF Empty(sSourceAttrs) .OR. Empty(sTargetAttrs);
         UsrMes("One or both type definitions returned no dataset text");
-        DocEndDocumentumInterface();
         :RETURN .F.;
     :ENDIF;
-
-    DocEndDocumentumInterface();
 
     :RETURN sSourceAttrs == sTargetAttrs;
 :ENDPROC;
@@ -179,4 +164,5 @@ DoProc("CompareTypeDefinitions", {"dm_document", "dm_sysobject"});
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
 - [`DocGetTypeAttributes`](DocGetTypeAttributes.md)
 - [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`string`](../types/string.md)

@@ -60,7 +60,7 @@ DocGetTypeAttributes(sTypeName)
 ## Best practices
 
 !!! success "Do"
-    - Initialize and log in to the Documentum interface before calling `DocGetTypeAttributes` in workflows that use Documentum APIs.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
     - Treat each result row as a fixed-position array and read values by their documented 1-based positions.
     - Check [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) immediately after an empty result when you need to know whether the lookup failed.
     - Use `row[4]`, `row[5]`, and `row[6]` for schema decisions such as type-sensitive validation, length checks, and handling repeating attributes.
@@ -81,7 +81,7 @@ DocGetTypeAttributes(sTypeName)
 
 ### List attribute names for a known type
 
-Fetches all attributes for the `dm_document` type and prints each attribute's name alongside its description, exiting early when the result is empty.
+Fetches all attributes for the `dm_document` type and prints each attribute's name alongside its description, exiting early when the result is empty. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ListTypeAttributes;
@@ -110,13 +110,12 @@ DoProc("ListTypeAttributes");
 `UsrMes` logs:
 
 ```text
-No attributes returned for dm_document
-[attribute name] - [attribute description]
+<attribute name> - <attribute description>
 ```
 
 ### Separate repeating and single-value attributes
 
-Counts how many attributes are single-value and how many are repeating for a caller-supplied type name, then logs a summary line.
+Counts how many attributes are single-value and how many are repeating for a caller-supplied type name, then logs a summary line. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE SummarizeTypeAttributes;
@@ -155,7 +154,7 @@ DoProc("SummarizeTypeAttributes", {"dm_document"});
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Type [type name] has [n] single-value attributes and [n] repeating attributes
+Type <type name> has <n> single-value attributes and <n> repeating attributes
 ```
 
 ### Distinguish an empty result from a failed Documentum lookup
@@ -203,13 +202,13 @@ Logs in to Documentum, fetches type attributes, and distinguishes a failed looku
 DoProc("AuditTypeDefinition", {"ProductionDB", "doc_user", "secret", "dm_document"});
 ```
 
-Possible output:
+Depending on the outcome, `ErrorMes` or `UsrMes` logs one of:
 
 ```text
-Documentum login failed: [Documentum error]
-Type attribute lookup failed: [Documentum error]
+Documentum login failed: <Documentum error>
+Type attribute lookup failed: <Documentum error>
 No attributes returned for type dm_document
-[attribute name] type=[type code]
+<attribute name> type=<type code>
 ```
 
 ## Related
@@ -219,6 +218,7 @@ No attributes returned for type dm_document
 - [`DocGetMetadata`](DocGetMetadata.md)
 - [`DocGetTypeAttributesAsDataset`](DocGetTypeAttributesAsDataset.md)
 - [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`array`](../types/array.md)
 - [`string`](../types/string.md)
 - [`number`](../types/number.md)

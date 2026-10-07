@@ -1,6 +1,6 @@
 ---
 title: "DocCreateUser"
-summary: "Creates a new user account and returns its identifier."
+summary: "Creates a Documentum user and returns its identifier."
 id: ssl.function.doccreateuser
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # DocCreateUser
 
-Creates a new user account and returns its identifier.
+Creates a Documentum user and returns its identifier.
 
 `DocCreateUser` requires `sLoginName` and `sPassword`, then optionally accepts `sUserName`, `sEmail`, `sDefaultFolder`, `sGroupName`, `sPermissionSet`, and `nUserPrivileges`. If `sLoginName` or `sPassword` is [`NIL`](../literals/nil.md), the function raises an error before attempting creation. Optional string arguments can be omitted, and `nUserPrivileges` defaults to `0` when omitted. On success, the function returns the created user identifier as a string. If the create operation does not return a value, the function returns an empty string.
 
@@ -69,6 +69,7 @@ DocCreateUser(
       group, permission, or privilege settings immediately.
     - Check whether the returned identifier is empty before treating the create
       operation as successful.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `sLoginName` or `sPassword`. Those arguments raise an immediate error instead of creating the user.
@@ -83,7 +84,7 @@ DocCreateUser(
 
 ### Create a user with required credentials only
 
-Creates a Documentum user account with only a login name and password and logs the returned identifier or an error when the result is empty.
+Creates a Documentum user account with only a login name and password and logs the returned identifier or an error when the result is empty. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE CreateBasicUser;
@@ -111,7 +112,7 @@ DoProc("CreateBasicUser");
 
 ### Create a user with profile and access settings
 
-Creates a full user account by passing all eight arguments: login name, password, display name, email, default folder, group, permission set, and privilege level.
+Creates a full user account by passing all eight arguments: login name, password, display name, email, default folder, group, permission set, and privilege level. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE CreateLabTechUser;
@@ -156,9 +157,9 @@ Creates a full user account by passing all eight arguments: login name, password
 DoProc("CreateLabTechUser");
 ```
 
-### Catch null-argument errors and check for an empty result
+### Catch unexpected errors and check for an empty result
 
-Wraps the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) to handle a [`NIL`](../literals/nil.md)-argument exception and also guards against an empty identifier result to cover both failure paths.
+Wraps the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) to guard against unexpected errors and also checks for an empty identifier result. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE CreateUserWithHandling;
@@ -184,14 +185,8 @@ Wraps the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md
         :RETURN sUserId;
     :CATCH;
         oErr := GetLastSSLError();
-
-        :IF Empty(oErr);
-            ErrorMes("DocCreateUser failed for " + sLoginName);
-            /* Logs a generic failure message for the login;
-        :ELSE;
-            ErrorMes("DocCreateUser failed: " + oErr:Description);
-            /* Logs the failure details returned by SSL;
-        :ENDIF;
+        ErrorMes("DocCreateUser failed: " + oErr:Description);
+        /* Logs the error details;
 
         :RETURN "";
     :ENDTRY;
@@ -206,6 +201,8 @@ DoProc("CreateUserWithHandling");
 - [`DocExistsUser`](DocExistsUser.md)
 - [`DocUpdateUser`](DocUpdateUser.md)
 - [`DocDeleteUser`](DocDeleteUser.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`GetLastSSLError`](GetLastSSLError.md)
 - [`string`](../types/string.md)
 - [`number`](../types/number.md)

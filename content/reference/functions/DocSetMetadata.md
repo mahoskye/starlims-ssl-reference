@@ -53,7 +53,7 @@ DocSetMetadata(sObjId, aAttributes)
     - Build `aAttributes` as an array of two-item arrays so each row clearly maps an attribute name to a value.
     - Check [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) immediately after a [`.F.`](../literals/false.md) return.
     - Group related metadata changes into one call when they target the same object.
-    - Initialize the Documentum interface before Documentum API work in scripts that manage their own session lifecycle.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `sObjId` or `aAttributes`; both raise an error before any metadata update is attempted.
@@ -63,13 +63,13 @@ DocSetMetadata(sObjId, aAttributes)
 
 ## Caveats
 
-- The SSL entry point documents argument validation only for [`NIL`](../literals/nil.md) values. Blank strings, unknown attribute names, and other backend-specific validation outcomes are handled by the Documentum call, not by a separate SSL pre-check.
+- Only [`NIL`](../literals/nil.md) arguments raise. Blank values and unknown attribute names are passed to Documentum; a rejection returns [`.F.`](../literals/false.md) and is recorded for [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md).
 
 ## Examples
 
 ### Update one metadata field
 
-Sets a single `status` attribute on a known document and reports success or failure.
+Sets a single `status` attribute on a known document and reports success or failure. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE UpdateDocumentStatus;
@@ -78,22 +78,16 @@ Sets a single `status` attribute on a known document and reports success or fail
     sObjId := "0900001680000b3f";
     aAttributes := {{"status", "Final"}};
 
-    DocInitDocumentumInterface();
+    bSuccess := DocSetMetadata(sObjId, aAttributes);
 
-    :TRY;
-        bSuccess := DocSetMetadata(sObjId, aAttributes);
+    :IF bSuccess;
+        UsrMes("Document metadata updated for " + sObjId);
+    :ELSE;
+        /* Logs on failure: metadata update failed;
+        UsrMes("Metadata update failed: " + DocGetErrorMessage());
+    :ENDIF;
 
-        :IF bSuccess;
-            UsrMes("Document metadata updated for " + sObjId);
-        :ELSE;
-            /* Logs on failure: metadata update failed;
-            UsrMes("Metadata update failed: " + DocGetErrorMessage());
-        :ENDIF;
-
-        :RETURN bSuccess;
-    :FINALLY;
-        DocEndDocumentumInterface();
-    :ENDTRY;
+    :RETURN bSuccess;
 :ENDPROC;
 
 /* Usage;
@@ -102,7 +96,7 @@ DoProc("UpdateDocumentStatus");
 
 ### Update several fields and inspect the failure state
 
-Updates three fields at once and uses [`DocCommandFailed`](DocCommandFailed.md) to confirm a backend failure before reading the error message.
+Updates three fields at once and uses [`DocCommandFailed`](DocCommandFailed.md) to confirm a backend failure before reading the error message. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE UpdateDocumentProfile;
@@ -110,30 +104,24 @@ Updates three fields at once and uses [`DocCommandFailed`](DocCommandFailed.md) 
 
     sObjId := "090000128000efad";
     aAttributes := {
-        {"author", "Marie Curie"},
+        {"author", "QC Analyst"},
         {"category", "Chemistry"},
         {"status", "Approved"}
     };
 
-    DocInitDocumentumInterface();
+    bSuccess := DocSetMetadata(sObjId, aAttributes);
 
-    :TRY;
-        bSuccess := DocSetMetadata(sObjId, aAttributes);
-
-        :IF .NOT. bSuccess;
-            :IF DocCommandFailed();
-                /* Logs on failure: metadata update failed;
-                UsrMes("Metadata update failed: " + DocGetErrorMessage());
-            :ENDIF;
-
-            :RETURN .F.;
+    :IF .NOT. bSuccess;
+        :IF DocCommandFailed();
+            /* Logs on failure: metadata update failed;
+            UsrMes("Metadata update failed: " + DocGetErrorMessage());
         :ENDIF;
 
-        UsrMes("Profile metadata updated for " + sObjId);
-        :RETURN .T.;
-    :FINALLY;
-        DocEndDocumentumInterface();
-    :ENDTRY;
+        :RETURN .F.;
+    :ENDIF;
+
+    UsrMes("Profile metadata updated for " + sObjId);
+    :RETURN .T.;
 :ENDPROC;
 
 /* Usage;
@@ -142,7 +130,7 @@ DoProc("UpdateDocumentProfile");
 
 ### Build a conditional metadata payload at runtime
 
-Builds the attribute array based on an approval flag, adding approval date and flag fields when approved and a rejection flag when not, then submits the whole set in one call.
+Builds the attribute array based on an approval flag, adding approval date and flag fields when approved and a rejection flag when not, then submits the whole set in one call. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE SyncReviewMetadata;
@@ -160,20 +148,14 @@ Builds the attribute array based on an approval flag, adding approval date and f
         AAdd(aAttributes, {"approved_flag", "N"});
     :ENDIF;
 
-    DocInitDocumentumInterface();
+    bSuccess := DocSetMetadata(sObjId, aAttributes);
 
-    :TRY;
-        bSuccess := DocSetMetadata(sObjId, aAttributes);
+    :IF .NOT. bSuccess .AND. DocCommandFailed();
+        /* Logs on failure: review metadata sync failed;
+        UsrMes("Review metadata sync failed: " + DocGetErrorMessage());
+    :ENDIF;
 
-        :IF .NOT. bSuccess .AND. DocCommandFailed();
-            /* Logs on failure: review metadata sync failed;
-            UsrMes("Review metadata sync failed: " + DocGetErrorMessage());
-        :ENDIF;
-
-        :RETURN bSuccess;
-    :FINALLY;
-        DocEndDocumentumInterface();
-    :ENDTRY;
+    :RETURN bSuccess;
 :ENDPROC;
 
 /* Usage;
@@ -187,6 +169,7 @@ DoProc("SyncReviewMetadata", {"0900001680000b3f", "jdoe", .T.});
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
 - [`DocGetMetadata`](DocGetMetadata.md)
 - [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`boolean`](../types/boolean.md)
 - [`string`](../types/string.md)
 - [`array`](../types/array.md)

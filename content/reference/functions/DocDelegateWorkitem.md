@@ -53,6 +53,7 @@ DocDelegateWorkitem(sWorkitemId, sTargetUser)
     - Validate both `sWorkitemId` and `sTargetUser` before calling so the function does not raise on [`NIL`](../literals/nil.md) input.
     - Check the boolean return value before continuing workflow logic that assumes the delegation succeeded.
     - If the function returns [`.F.`](../literals/false.md), check [`DocCommandFailed`](DocCommandFailed.md) before relying on [`DocGetErrorMessage`](DocGetErrorMessage.md) for the failure reason.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `sWorkitemId` or `sTargetUser`. That raises an argument-null exception instead of returning [`.F.`](../literals/false.md).
@@ -69,7 +70,7 @@ DocDelegateWorkitem(sWorkitemId, sTargetUser)
 
 ### Delegate a work item and check the boolean result
 
-Delegates a work item to a named user and logs success or failure based on the boolean return value.
+Delegates a work item to a named user and logs success or failure based on the boolean return value. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE DelegateSingleWorkitem;
@@ -95,7 +96,7 @@ DoProc("DelegateSingleWorkitem");
 
 ### Validate inputs and return a structured result with any Documentum message
 
-Validates that both required values are non-empty before calling the function, then returns a result object carrying the success flag and any Documentum error message.
+Validates that both required values are non-empty before calling the function, then returns a result object carrying the success flag and any Documentum error message. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE TryDelegateWorkitem;
@@ -138,7 +139,7 @@ DoProc("TryDelegateWorkitem", {"WI-2024-00142", "jsmith"});
 
 ### Delegate a batch of work items and collect per-item outcomes
 
-Iterates a work item ID array parameter, skips any blank IDs, delegates each valid item to the target user, and returns an array of result objects with the outcome and any Documentum message for each item.
+Iterates a work item ID array parameter, skips any blank IDs, delegates each valid item to the target user, and returns an array of result objects with the outcome and any Documentum message for each item. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE DelegateWorkitemBatch;
@@ -199,5 +200,7 @@ DoProc(
 - [`DocGetWorkflowStatus`](DocGetWorkflowStatus.md)
 - [`DocGetWorkitemProperties`](DocGetWorkitemProperties.md)
 - [`DocRepeatWorkitem`](DocRepeatWorkitem.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`boolean`](../types/boolean.md)
 - [`string`](../types/string.md)
