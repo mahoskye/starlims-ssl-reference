@@ -17,8 +17,6 @@ Checks whether a user name and password combination is accepted.
 
 When `sUserName` contains a backslash, such as `DOMAIN\user`, the function first tries Windows authentication with that domain-qualified name. If that check does not succeed, the function then continues with the application password check for the user name portion after the backslash.
 
-For application passwords, the function accepts either the current stored password hash or an older salted password format. If the legacy salted value matches, the function updates the stored password through [`SetUserPassword`](SetUserPassword.md) and still returns [`.T.`](../literals/true.md).
-
 ## When to use
 
 - When you need to verify credentials before allowing a sensitive action.
@@ -58,7 +56,7 @@ ChkPassword([sUserName], [sPassword])
 
 - `ChkPassword` returns only [`.T.`](../literals/true.md) or [`.F.`](../literals/false.md). It does not report why a check failed.
 - For `DOMAIN\user` input, a failed Windows authentication attempt does not stop processing; the function then continues with the application password check for `user`.
-- A successful match against the older salted password format updates the stored password value before returning [`.T.`](../literals/true.md).
+- A successful check may update the user's stored password record.
 
 ## Examples
 
@@ -100,7 +98,7 @@ Credentials were not accepted for jsmith
 
 ### Re-authenticate the current session user
 
-Passes [`NIL`](../literals/nil.md) for `sUserName` so `ChkPassword` uses the current session user from [`GetUserData`](GetUserData.md), and logs the result.
+Omits `sUserName` so `ChkPassword` uses the current session user from [`GetUserData`](GetUserData.md), and logs the result.
 
 ```ssl
 :PROCEDURE ConfirmCurrentUser;
@@ -108,7 +106,7 @@ Passes [`NIL`](../literals/nil.md) for `sUserName` so `ChkPassword` uses the cur
 	:DECLARE bConfirmed, sUserName;
 
 	sUserName := GetUserData();
-	bConfirmed := ChkPassword(NIL, sPassword);
+	bConfirmed := ChkPassword(, sPassword);
 
 	:IF bConfirmed;
 		UsrMes("Re-authentication succeeded for " + sUserName);
@@ -133,9 +131,9 @@ Re-authentication succeeded for jsmith
 Re-authentication failed for jsmith
 ```
 
-### Accept domain-qualified or application credentials
+### Re-authenticate before changing an application password
 
-Accepts either a `DOMAIN\user` name or a plain application user name, then calls [`SetUserPassword`](SetUserPassword.md) only when the credential check succeeds.
+Checks the user's current application password, then calls [`SetUserPassword`](SetUserPassword.md) only when the credential check succeeds.
 
 ```ssl
 :PROCEDURE ChangePasswordAfterCheck;

@@ -48,7 +48,7 @@ DeleteFromFtp(
 | `sRemoteFileName` | [string](../types/string.md) | yes | — | Remote file name to delete. |
 | `sUserName` | [string](../types/string.md) | yes | — | User name passed to the FTP or SFTP login operation. |
 | `sPassword` | [string](../types/string.md) | yes | — | Password for normal login. When `sPrivateKeyFilePath` is supplied on the SFTP path, this value is used as the private-key passphrase. |
-| `nPort` | [number](../types/number.md) | no | `21` | Server port. If omitted, or if a non-positive value is supplied, the function uses `21`. |
+| `nPort` | [number](../types/number.md) | no | `21` | Server port. If omitted, or if a non-positive value is supplied, the function uses `21`. This also applies when `bIsSFTP` is [`.T.`](../literals/true.md), so pass `22` explicitly for a standard SFTP server. |
 | `sProxy` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Must be left empty. Supplying a non-empty value raises an error. |
 | `bIsSFTP` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Set to [`.T.`](../literals/true.md) to use the SFTP implementation. Omitted or [`NIL`](../literals/nil.md) keeps the FTP implementation. |
 | `sPrivateKeyFilePath` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Optional private key file for SFTP authentication. Ignored on the FTP path. |

@@ -1,6 +1,6 @@
 ---
 title: "DocCreateACL"
-summary: "Creates a Documentum ACL and returns the backend result string."
+summary: "Creates a Documentum ACL and returns a result string."
 id: ssl.function.doccreateacl
 element_type: function
 doc_status: published
@@ -11,9 +11,9 @@ starlims:
 
 # DocCreateACL
 
-Creates a Documentum ACL and returns the backend result string.
+Creates a Documentum ACL and returns a result string.
 
-`DocCreateACL` requires an ACL `sAclName` and accepts optional `sDescription` and `aGroups` arguments. The wrapper exposes one-, two-, and three-argument forms. Passing [`NIL`](../literals/nil.md) for `sAclName` raises an error before the backend create call runs. When the backend call returns a value, `DocCreateACL` returns that string. When the backend call returns no value, the function returns `""`.
+`DocCreateACL` requires an ACL `sAclName` and accepts optional `sDescription` and `aGroups` arguments. Passing [`NIL`](../literals/nil.md) for `sAclName` raises an error. Otherwise the function returns the result string from the Documentum ACL create request, or `""` when the request returns no value. After an empty result, use [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) to check for a failure.
 
 ## When to use
 
@@ -38,7 +38,7 @@ DocCreateACL(sAclName, [sDescription], [aGroups])
 
 ## Returns
 
-**[string](../types/string.md)** — Result string returned by the ACL creation call, or `""` when the backend call returns no value.
+**[string](../types/string.md)** — Result string returned by the ACL create request, or `""` when the request returns no value.
 
 ## Exceptions
 
@@ -52,16 +52,16 @@ DocCreateACL(sAclName, [sDescription], [aGroups])
     - Pass a non-[`NIL`](../literals/nil.md) ACL name every time you call the function.
     - Check for an empty-string result before assuming the ACL was created.
     - Pass `sDescription` and `aGroups` only when you have meaningful values for them.
-    - Read [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) immediately after an empty result when you need backend failure details.
+    - Read [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) immediately after an empty result when you need failure details.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `sAclName`; that raises an immediate SSL error.
     - Assume `""` means the ACL already exists or that the create call succeeded.
-    - Invent validation rules for ACL names or group contents that this wrapper does not document.
 
 ## Caveats
 
-- The wrapper checks only whether `sAclName` is [`NIL`](../literals/nil.md). Other validation is handled by the backend create call.
+- `DocCreateACL` itself rejects only a [`NIL`](../literals/nil.md) `sAclName`. Documentum performs any other validation of the ACL name, description, and groups.
 
 ## Examples
 
@@ -120,7 +120,7 @@ Builds the ACL name and description from a project code parameter, passes an ini
 DoProc("CreateProjectAcl", {"ALPHA"});
 ```
 
-### Validate inputs and inspect the backend failure state on an empty result
+### Validate inputs and inspect the Documentum failure state on an empty result
 
 Guards against an empty ACL name, strips blank group names from the input array, then calls the function and reads the Documentum failure state when the result is empty.
 
@@ -178,6 +178,8 @@ DoProc("CreateAclSafely", {"QualityACL", "ACL for quality", {"LabUsers", "Superv
 - [`DocCommandFailed`](DocCommandFailed.md)
 - [`DocCreateGroup`](DocCreateGroup.md)
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`DocRemoveUsersFromGroup`](DocRemoveUsersFromGroup.md)
 - [`string`](../types/string.md)
 - [`array`](../types/array.md)

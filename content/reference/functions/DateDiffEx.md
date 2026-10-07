@@ -13,7 +13,7 @@ starlims:
 
 Returns the elapsed interval between two date values as an object.
 
-`DateDiffEx` subtracts `dStartDate` from `dEndDate` and returns an interval object for the full elapsed span. Use it when you need interval members such as `Days`, `Hours`, `Minutes`, [`Seconds`](Seconds.md), or `TotalDays` instead of one whole-number result.
+`DateDiffEx` subtracts `dStartDate` from `dEndDate` and returns an interval object for the full elapsed span. Use it when you need interval members such as `Days`, `Hours`, `Minutes`, `Seconds`, or `TotalDays` instead of one whole-number result.
 
 Use [`DateDiff`](DateDiff.md) when you need a numeric difference in one
 specific unit.

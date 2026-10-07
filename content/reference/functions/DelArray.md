@@ -93,7 +93,7 @@ Array before deletion: Red,Green,Blue,Yellow
 Array after removing index 2: Red,Blue,Yellow
 ```
 
-### Remove matching entries by iterating backwards
+### Remove all but one entry by iterating backwards
 
 Iterates in reverse order to safely remove all entries except a target value, collecting removed items in a separate array without index-shift errors.
 

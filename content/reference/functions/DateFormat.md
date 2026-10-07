@@ -57,20 +57,26 @@ DateFormat(sNewFormat)
 
 ### Set a day-first format and confirm the stored value
 
-Sets a day-first date format and then reads back the stored value with [`LimsGetDateFormat`](LimsGetDateFormat.md) to confirm normalization, followed by today's date formatted in that pattern.
+Sets a day-first date format and then reads back the stored value with [`LimsGetDateFormat`](LimsGetDateFormat.md) to confirm normalization, followed by today's date formatted in that pattern. The original format is restored in the [`:FINALLY`](../keywords/FINALLY.md) block.
 
 ```ssl
 :PROCEDURE ShowDayFirstFormat;
-	:DECLARE sCurrentFormat, sTodayText;
+	:DECLARE sOriginalFormat, sCurrentFormat, sTodayText;
 
-	DateFormat("DD/MM/YYYY");
+	sOriginalFormat := LimsGetDateFormat();
 
-	sCurrentFormat := LimsGetDateFormat();
-	sTodayText := DToC(Today());
+	:TRY;
+		DateFormat("DD/MM/YYYY");
 
-	/* Logs current stored format and today's date in day-first format;
-	UsrMes("Current format: " + sCurrentFormat);
-	UsrMes("Today: " + sTodayText);
+		sCurrentFormat := LimsGetDateFormat();
+		sTodayText := DToC(Today());
+
+		/* Logs current stored format and today's date in day-first format;
+		UsrMes("Current format: " + sCurrentFormat);
+		UsrMes("Today: " + sTodayText);
+	:FINALLY;
+		DateFormat(sOriginalFormat);
+	:ENDTRY;
 :ENDPROC;
 
 /* Usage;

@@ -71,7 +71,7 @@ Compress(sSource, [bToFile])
 
 ### Compress text in memory
 
-Compresses a multi-line report string and logs both the original and compressed lengths to show the size reduction.
+Compresses a short multi-line report string and logs both the original and compressed lengths. Short text like this comes out longer once encoded; see Caveats.
 
 ```ssl
 :PROCEDURE CompressReportText;

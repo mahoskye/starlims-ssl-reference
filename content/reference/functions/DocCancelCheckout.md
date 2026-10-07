@@ -62,12 +62,13 @@ DocCancelCheckout(sDocumentId)
 - A document id or path that cannot be resolved also returns [`.F.`](../literals/false.md), with [`DocGetErrorMessage`](DocGetErrorMessage.md) returning a message such as `Failed: Object does not exist`.
 - The function does not tell you whether a [`.T.`](../literals/true.md) result came from cancelling an active checkout or from a document that was already not checked out.
 - The function changes checkout state only; it does not check in content or delete the document.
+- A valid Documentum session is required, typically established with [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md) and [`DocLoginToDocumentum`](DocLoginToDocumentum.md).
 
 ## Examples
 
 ### Inspect Documentum diagnostics after a failed cancel-checkout call
 
-Attempts to cancel checkout for a document id passed as a procedure parameter, then builds a diagnostic message using [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) when the call returns [`.F.`](../literals/false.md).
+Attempts to cancel checkout for a document id passed as a procedure parameter, then builds a diagnostic message using [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) when the call returns [`.F.`](../literals/false.md). The procedure assumes the caller has already opened a Documentum session.
 
 ```ssl
 :PROCEDURE CancelCheckoutWithDiagnostics;
@@ -99,7 +100,7 @@ DoProc("CancelCheckoutWithDiagnostics", {"DOC-001"});
 
 ### Cancel checkout for multiple documents and collect failures
 
-Iterates a list of document ids, cancels checkout for each one, and collects failure messages, with Documentum diagnostics appended when available, before continuing to the next document.
+Iterates a list of document ids, cancels checkout for each one, and collects failure messages, with Documentum diagnostics appended when available, before continuing to the next document. The procedure assumes the caller has already opened a Documentum session.
 
 ```ssl
 :PROCEDURE CancelCheckoutBatch;

@@ -165,7 +165,7 @@ DoProc("AppendManifestToSftpFiles");
 
 ### Stop processing when the batch upload fails
 
-Checks the return value after uploading three date-stamped files and stops the workflow with an error message if any upload fails.
+Checks the return value after uploading three date-stamped files, then logs a failure message and returns [`.F.`](../literals/false.md) if any upload fails.
 
 ```ssl
 :PROCEDURE PublishNightlyFeed;
@@ -174,7 +174,7 @@ Checks the return value after uploading three date-stamped files and stops the w
     :DECLARE aRemoteFiles;
     :DECLARE bUploaded;
 
-    sServer := "ftp.partnerlab.com";
+    sServer := "ftp.partnerlab.example.com";
     sRemoteDir := "/incoming/daily";
     sUserName := "nightly_feed";
     sPassword := "demo-password";
