@@ -51,10 +51,10 @@ FromXml(sXml)
 | --- | --- |
 | `sXml` is [`NIL`](../literals/nil.md). | `Argument xml cannot be null. FromXml().` |
 | The string cannot be parsed as valid XML, or the root element is not one of the recognized type tags. | `Error unpacking XML` |
-| An element inside `<complextype>` does not match the declared element type. | `Incorrect element type {element} found in array of type {typeName}` |
+| An element inside `<complextype>` does not match the declared element type. | `Error unpacking XML` (the inner error reads `Incorrect element type {element} found in array of type {typeName}`) |
 | The `<complextype>` contents cannot be converted to the target array type. | `Error unpacking XML` |
-| The root element is `<error>`. | `Error sent from outside: {message}` |
-| An element's text cannot be converted to its declared type. | `Tag {element} contains an invalid value!` |
+| The root element is `<error>`. | `Error unpacking XML` (the inner error reads `Error sent from outside: {message}`) |
+| An element's text cannot be converted to its declared type. | `Error unpacking XML` (the inner error reads `Tag {element} contains an invalid value!`) |
 
 ## Best practices
 
