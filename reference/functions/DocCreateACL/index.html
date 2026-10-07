@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Creates a Documentum ACL and returns the backend result string.">
+        <meta name="description" content="Creates a Documentum ACL and returns a result string.">
       
       
       
@@ -1525,10 +1525,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#validate-inputs-and-inspect-the-backend-failure-state-on-an-empty-result" class="md-nav__link">
+  <a href="#validate-inputs-and-inspect-the-documentum-failure-state-on-an-empty-result" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validate inputs and inspect the backend failure state on an empty result
+        Validate inputs and inspect the Documentum failure state on an empty result
       
     </span>
   </a>
@@ -3856,10 +3856,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#validate-inputs-and-inspect-the-backend-failure-state-on-an-empty-result" class="md-nav__link">
+  <a href="#validate-inputs-and-inspect-the-documentum-failure-state-on-an-empty-result" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validate inputs and inspect the backend failure state on an empty result
+        Validate inputs and inspect the Documentum failure state on an empty result
       
     </span>
   </a>
@@ -4018,8 +4018,8 @@
 
 
 <h1 id="doccreateacl">DocCreateACL<a class="headerlink" href="#doccreateacl" title="Permanent link">&para;</a></h1>
-<p>Creates a Documentum ACL and returns the backend result string.</p>
-<p><code>DocCreateACL</code> requires an ACL <code>sAclName</code> and accepts optional <code>sDescription</code> and <code>aGroups</code> arguments. The wrapper exposes one-, two-, and three-argument forms. Passing <a href="../../literals/nil/"><code>NIL</code></a> for <code>sAclName</code> raises an error before the backend create call runs. When the backend call returns a value, <code>DocCreateACL</code> returns that string. When the backend call returns no value, the function returns <code>""</code>.</p>
+<p>Creates a Documentum ACL and returns a result string.</p>
+<p><code>DocCreateACL</code> requires an ACL <code>sAclName</code> and accepts optional <code>sDescription</code> and <code>aGroups</code> arguments. Passing <a href="../../literals/nil/"><code>NIL</code></a> for <code>sAclName</code> raises an error. Otherwise the function returns the result string from the Documentum ACL create request, or <code>""</code> when the request returns no value. After an empty result, use <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> and <a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a> to check for a failure.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need to create a Documentum ACL from SSL code.</li>
@@ -4066,7 +4066,7 @@
 </tbody>
 </table>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
-<p><strong><a href="../../types/string/">string</a></strong> — Result string returned by the ACL creation call, or <code>""</code> when the backend call returns no value.</p>
+<p><strong><a href="../../types/string/">string</a></strong> — Result string returned by the ACL create request, or <code>""</code> when the request returns no value.</p>
 <h2 id="exceptions">Exceptions<a class="headerlink" href="#exceptions" title="Permanent link">&para;</a></h2>
 <table data-ssl-table="exceptions"><colgroup><col><col></colgroup>
 <thead>
@@ -4089,7 +4089,8 @@
 <li>Pass a non-<a href="../../literals/nil/"><code>NIL</code></a> ACL name every time you call the function.</li>
 <li>Check for an empty-string result before assuming the ACL was created.</li>
 <li>Pass <code>sDescription</code> and <code>aGroups</code> only when you have meaningful values for them.</li>
-<li>Read <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> and <a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a> immediately after an empty result when you need backend failure details.</li>
+<li>Read <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> and <a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a> immediately after an empty result when you need failure details.</li>
+<li>Call the function within an initialized, logged-in Documentum session (<a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a>, <a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a>).</li>
 </ul>
 </div>
 <div class="admonition failure">
@@ -4097,12 +4098,11 @@
 <ul>
 <li>Pass <a href="../../literals/nil/"><code>NIL</code></a> for <code>sAclName</code>; that raises an immediate SSL error.</li>
 <li>Assume <code>""</code> means the ACL already exists or that the create call succeeded.</li>
-<li>Invent validation rules for ACL names or group contents that this wrapper does not document.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li>The wrapper checks only whether <code>sAclName</code> is <a href="../../literals/nil/"><code>NIL</code></a>. Other validation is handled by the backend create call.</li>
+<li><code>DocCreateACL</code> itself rejects only a <a href="../../literals/nil/"><code>NIL</code></a> <code>sAclName</code>. Documentum performs any other validation of the ACL name, description, and groups.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="create-an-acl-by-name-only">Create an ACL by name only<a class="headerlink" href="#create-an-acl-by-name-only" title="Permanent link">&para;</a></h3>
@@ -4152,7 +4152,7 @@
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CreateProjectAcl"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"ALPHA"</span><span class="p">});</span>
 </code></pre></div>
-<h3 id="validate-inputs-and-inspect-the-backend-failure-state-on-an-empty-result">Validate inputs and inspect the backend failure state on an empty result<a class="headerlink" href="#validate-inputs-and-inspect-the-backend-failure-state-on-an-empty-result" title="Permanent link">&para;</a></h3>
+<h3 id="validate-inputs-and-inspect-the-documentum-failure-state-on-an-empty-result">Validate inputs and inspect the Documentum failure state on an empty result<a class="headerlink" href="#validate-inputs-and-inspect-the-documentum-failure-state-on-an-empty-result" title="Permanent link">&para;</a></h3>
 <p>Guards against an empty ACL name, strips blank group names from the input array, then calls the function and reads the Documentum failure state when the result is empty.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateAclSafely</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sAclName</span><span class="p">,</span><span class="w"> </span><span class="n">sDescription</span><span class="p">,</span><span class="w"> </span><span class="n">aGroups</span><span class="p">;</span>
@@ -4206,6 +4206,8 @@
 <li><a href="../DocCommandFailed/"><code>DocCommandFailed</code></a></li>
 <li><a href="../DocCreateGroup/"><code>DocCreateGroup</code></a></li>
 <li><a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a></li>
+<li><a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a></li>
+<li><a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a></li>
 <li><a href="../DocRemoveUsersFromGroup/"><code>DocRemoveUsersFromGroup</code></a></li>
 <li><a href="../../types/string/"><code>string</code></a></li>
 <li><a href="../../types/array/"><code>array</code></a></li>
@@ -4230,7 +4232,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:47:58 UTC">October 7, 2026</span>
   </span>
 
     

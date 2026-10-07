@@ -3674,7 +3674,7 @@
 <td><a href="../../types/number/">number</a></td>
 <td>no</td>
 <td><code>21</code></td>
-<td>Server port. If omitted or non-positive, the implementation uses <code>21</code>.</td>
+<td>Server port. If omitted or non-positive, <code>21</code> is used, even on the SFTP path. Pass <code>22</code> explicitly when the SFTP server uses the standard SFTP port.</td>
 </tr>
 <tr>
 <td><code>sProxy</code></td>
@@ -3788,7 +3788,7 @@
 <p>Connects to a partner SFTP server using a private key and handles connection or login failures explicitly in a <a href="../../keywords/CATCH/"><code>:CATCH</code></a> block, since SFTP setup errors raise rather than return <a href="../../literals/false/"><code>.F.</code></a>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckPartnerDrop</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sServer</span><span class="p">,</span><span class="w"> </span><span class="n">sRemoteDir</span><span class="p">,</span><span class="w"> </span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassphrase</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPort</span><span class="p">,</span><span class="w"> </span><span class="n">sProxy</span><span class="p">,</span><span class="w"> </span><span class="n">sPrivateKey</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPort</span><span class="p">,</span><span class="w"> </span><span class="n">sPrivateKey</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bIsSFTP</span><span class="p">,</span><span class="w"> </span><span class="n">bFileExists</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oError</span><span class="p">;</span>
 
@@ -3798,9 +3798,8 @@
 <span class="w">    </span><span class="n">sUser</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"automation_user"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sPassphrase</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"KeyPassphrase123"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">nPort</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">22</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sProxy</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">NIL</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bIsSFTP</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sPrivateKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/etc/ssh/automation_key.ppk"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sPrivateKey</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Keys\automation_key.ppk"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
 <span class="w">        </span><span class="n">bFileExists</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CheckOnFtp</span><span class="p">(</span>
@@ -3809,9 +3808,7 @@
 <span class="w">            </span><span class="n">sFileName</span><span class="p">,</span>
 <span class="w">            </span><span class="n">sUser</span><span class="p">,</span>
 <span class="w">            </span><span class="n">sPassphrase</span><span class="p">,</span>
-<span class="w">            </span><span class="n">nPort</span><span class="p">,</span>
-<span class="w">            </span><span class="n">sProxy</span><span class="p">,</span>
-<span class="w">            </span><span class="n">bIsSFTP</span><span class="p">,</span>
+<span class="w">            </span><span class="n">nPort</span><span class="p">,,</span><span class="w"> </span><span class="n">bIsSFTP</span><span class="p">,</span>
 <span class="w">            </span><span class="n">sPrivateKey</span>
 <span class="w">        </span><span class="p">);</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
@@ -3915,7 +3912,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:47:58 UTC">October 7, 2026</span>
   </span>
 
     

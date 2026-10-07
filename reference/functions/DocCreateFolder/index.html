@@ -1453,10 +1453,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#validate-inputs-and-handle-both-raised-and-backend-failures" class="md-nav__link">
+  <a href="#validate-inputs-and-handle-both-raised-and-documentum-failures" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validate inputs and handle both raised and backend failures
+        Validate inputs and handle both raised and Documentum failures
       
     </span>
   </a>
@@ -3772,10 +3772,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#validate-inputs-and-handle-both-raised-and-backend-failures" class="md-nav__link">
+  <a href="#validate-inputs-and-handle-both-raised-and-documentum-failures" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Validate inputs and handle both raised and backend failures
+        Validate inputs and handle both raised and Documentum failures
       
     </span>
   </a>
@@ -3935,14 +3935,14 @@
 
 <h1 id="doccreatefolder">DocCreateFolder<a class="headerlink" href="#doccreatefolder" title="Permanent link">&para;</a></h1>
 <p>Creates a Documentum folder under a parent path and returns the string result from the create operation.</p>
-<p><code>DocCreateFolder</code> takes a required parent path, a required folder name, and an optional ACL name. The surfaced SSL function raises immediately only when <code>sParentPath</code> or <code>sFolderName</code> is <a href="../../literals/nil/"><code>NIL</code></a>. Otherwise it forwards the provided values to the Documentum create call and returns its string result. If that call does not produce a value, the function returns an empty string.</p>
+<p><code>DocCreateFolder</code> takes a required parent path, a required folder name, and an optional ACL name. Passing <a href="../../literals/nil/"><code>NIL</code></a> for <code>sParentPath</code> or <code>sFolderName</code> raises an error. Otherwise the function returns the result string from the Documentum folder-create request, or an empty string when the request returns no value.</p>
 <p>Treat a <code>""</code> result as a failed create attempt and check it immediately with <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> and <a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a>.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need to create a folder under an existing Documentum path from SSL.</li>
 <li>When your workflow needs the returned create result for later Documentum operations.</li>
 <li>When you need to supply an ACL during folder creation instead of relying on
-  backend defaults.</li>
+  Documentum defaults.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">DocCreateFolder</span><span class="p">(</span><span class="n">sParentPath</span><span class="p">,</span><span class="w"> </span><span class="n">sFolderName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sAcl</span><span class="p">])</span>
@@ -4008,7 +4008,7 @@
 <p class="admonition-title">Do</p>
 <ul>
 <li>Validate that <code>sParentPath</code> and <code>sFolderName</code> contain usable values before calling the function.</li>
-<li>Omit <code>sAcl</code> when you do not need to override the backend's default behavior.</li>
+<li>Omit <code>sAcl</code> when you do not need to override the Documentum default.</li>
 <li>Check for an empty return immediately, then inspect <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> and <a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a> before making another Documentum call.</li>
 </ul>
 </div>
@@ -4023,7 +4023,7 @@
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The call is intended for use within an initialized Documentum session.</li>
-<li><code>sParentPath</code> and <code>sFolderName</code> are checked only for <a href="../../literals/nil/"><code>NIL</code></a> at the SSL boundary. Other input validation depends on the backend call.</li>
+<li><code>DocCreateFolder</code> itself rejects only a <a href="../../literals/nil/"><code>NIL</code></a> <code>sParentPath</code> or <code>sFolderName</code>. Documentum performs any other input validation.</li>
 <li>When the create operation fails without raising a direct SSL argument error, inspect the current Documentum session with <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> and <a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a> before making another Documentum call.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
@@ -4047,7 +4047,7 @@
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Folder created: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sCreateResult</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">/* Logs: created folder path;</span>
+<span class="w">    </span><span class="c1">/* Logs: created folder result;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sCreateResult</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -4098,7 +4098,7 @@
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SetupProjectFolders"</span><span class="p">);</span>
 </code></pre></div>
-<h3 id="validate-inputs-and-handle-both-raised-and-backend-failures">Validate inputs and handle both raised and backend failures<a class="headerlink" href="#validate-inputs-and-handle-both-raised-and-backend-failures" title="Permanent link">&para;</a></h3>
+<h3 id="validate-inputs-and-handle-both-raised-and-documentum-failures">Validate inputs and handle both raised and Documentum failures<a class="headerlink" href="#validate-inputs-and-handle-both-raised-and-documentum-failures" title="Permanent link">&para;</a></h3>
 <p>Guards against blank path or name inputs, wraps the call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle a raised SSL exception, and then inspects the Documentum failure state for an empty result.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateDynamicFolder</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sParentPath</span><span class="p">,</span><span class="w"> </span><span class="n">sFolderName</span><span class="p">,</span><span class="w"> </span><span class="n">sAcl</span><span class="p">;</span>
@@ -4117,7 +4117,7 @@
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
 <span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"DocCreateFolder raised an error: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">/* Logs when NIL is passed: DocCreateFolder raised an error;</span>
+<span class="w">        </span><span class="c1">/* Logs if the call raises: DocCreateFolder raised an error;</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
 
@@ -4167,7 +4167,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:47:58 UTC">October 7, 2026</span>
   </span>
 
     

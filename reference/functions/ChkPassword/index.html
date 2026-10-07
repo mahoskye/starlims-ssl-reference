@@ -1940,10 +1940,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#accept-domain-qualified-or-application-credentials" class="md-nav__link">
+  <a href="#re-authenticate-before-changing-an-application-password" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Accept domain-qualified or application credentials
+        Re-authenticate before changing an application password
       
     </span>
   </a>
@@ -3442,10 +3442,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#accept-domain-qualified-or-application-credentials" class="md-nav__link">
+  <a href="#re-authenticate-before-changing-an-application-password" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Accept domain-qualified or application credentials
+        Re-authenticate before changing an application password
       
     </span>
   </a>
@@ -3581,7 +3581,6 @@
 <p>Checks whether a user name and password combination is accepted.</p>
 <p><code>ChkPassword</code> returns <a href="../../literals/true/"><code>.T.</code></a> when the supplied credentials are accepted and <a href="../../literals/false/"><code>.F.</code></a> otherwise. If <code>sUserName</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the function uses the current session user. If <code>sPassword</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the function treats it as <code>""</code>.</p>
 <p>When <code>sUserName</code> contains a backslash, such as <code>DOMAIN\user</code>, the function first tries Windows authentication with that domain-qualified name. If that check does not succeed, the function then continues with the application password check for the user name portion after the backslash.</p>
-<p>For application passwords, the function accepts either the current stored password hash or an older salted password format. If the legacy salted value matches, the function updates the stored password through <a href="../SetUserPassword/"><code>SetUserPassword</code></a> and still returns <a href="../../literals/true/"><code>.T.</code></a>.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need to verify credentials before allowing a sensitive action.</li>
@@ -3642,7 +3641,7 @@
 <ul>
 <li><code>ChkPassword</code> returns only <a href="../../literals/true/"><code>.T.</code></a> or <a href="../../literals/false/"><code>.F.</code></a>. It does not report why a check failed.</li>
 <li>For <code>DOMAIN\user</code> input, a failed Windows authentication attempt does not stop processing; the function then continues with the application password check for <code>user</code>.</li>
-<li>A successful match against the older salted password format updates the stored password value before returning <a href="../../literals/true/"><code>.T.</code></a>.</li>
+<li>A successful check may update the user's stored password record.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="validate-credentials-from-a-login-form">Validate credentials from a login form<a class="headerlink" href="#validate-credentials-from-a-login-form" title="Permanent link">&para;</a></h3>
@@ -3673,13 +3672,13 @@
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Credentials were not accepted for jsmith
 </code></pre></div>
 <h3 id="re-authenticate-the-current-session-user">Re-authenticate the current session user<a class="headerlink" href="#re-authenticate-the-current-session-user" title="Permanent link">&para;</a></h3>
-<p>Passes <a href="../../literals/nil/"><code>NIL</code></a> for <code>sUserName</code> so <code>ChkPassword</code> uses the current session user from <a href="../GetUserData/"><code>GetUserData</code></a>, and logs the result.</p>
+<p>Omits <code>sUserName</code> so <code>ChkPassword</code> uses the current session user from <a href="../GetUserData/"><code>GetUserData</code></a>, and logs the result.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConfirmCurrentUser</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bConfirmed</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetUserData</span><span class="p">();</span>
-<span class="w">    </span><span class="n">bConfirmed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ChkPassword</span><span class="p">(</span><span class="kc">NIL</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
+<span class="w">    </span><span class="n">bConfirmed</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">ChkPassword</span><span class="p">(,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bConfirmed</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Re-authentication succeeded for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
@@ -3698,8 +3697,8 @@
 </code></pre></div>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Re-authentication failed for jsmith
 </code></pre></div>
-<h3 id="accept-domain-qualified-or-application-credentials">Accept domain-qualified or application credentials<a class="headerlink" href="#accept-domain-qualified-or-application-credentials" title="Permanent link">&para;</a></h3>
-<p>Accepts either a <code>DOMAIN\user</code> name or a plain application user name, then calls <a href="../SetUserPassword/"><code>SetUserPassword</code></a> only when the credential check succeeds.</p>
+<h3 id="re-authenticate-before-changing-an-application-password">Re-authenticate before changing an application password<a class="headerlink" href="#re-authenticate-before-changing-an-application-password" title="Permanent link">&para;</a></h3>
+<p>Checks the user's current application password, then calls <a href="../SetUserPassword/"><code>SetUserPassword</code></a> only when the credential check succeeds.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ChangePasswordAfterCheck</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sCurrentPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">bAuthenticated</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredHash</span><span class="p">;</span>
@@ -3761,7 +3760,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:47:58 UTC">October 7, 2026</span>
   </span>
 
     
