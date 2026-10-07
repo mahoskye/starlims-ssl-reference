@@ -56,7 +56,7 @@ Returns the value associated with the given name. Returns an empty string when t
 
 ### `Set`
 
-Stores a value under the given name. Use this for collections you can write to (for example, a response header collection if your endpoint exposes one). For request-side collections, treat values as read — `Set` does not change the underlying request.
+Stores a value under the given name. `Set` changes only this in-memory copy; it does not change the request.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|

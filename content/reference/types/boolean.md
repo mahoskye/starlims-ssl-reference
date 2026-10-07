@@ -41,7 +41,7 @@ bOther := .F.;
 | --- | --- | --- | --- |
 | [`and`](../operators/and.md) | `.AND.` | boolean | Logical AND. Returns [`.T.`](../literals/true.md) only when both operands are boolean true. Short-circuits evaluation. |
 | [`or`](../operators/or.md) | `.OR.` | boolean | Logical OR. Returns [`.T.`](../literals/true.md) when either operand is boolean true. Short-circuits evaluation. |
-| [`not`](../operators/not.md) | `.NOT.` | boolean | Logical negation of a boolean value. [`!`](../operators/not.md) is also supported. |
+| [`not`](../operators/not.md) | `.NOT.` | boolean | Logical negation of a boolean value. [`!`](../operators/bang.md) is also supported. |
 | [`equals`](../operators/equals.md) | [`=`](../operators/equals.md) | boolean | Equality comparison. Returns [`.T.`](../literals/true.md) when both operands are booleans with the same value. |
 | [`strict-equals`](../operators/strict-equals.md) | [`==`](../operators/strict-equals.md) | boolean | Exact equality comparison. For booleans, behaves the same as [`=`](../operators/equals.md). |
 
@@ -51,7 +51,7 @@ Booleans have no SSL-defined `:` members. Calls such as `bValue:And(x)`, `bValue
 
 | Task | Use |
 |---|---|
-| Combine or negate | `.AND.`, `.OR.`, `.NOT.` or [`!`](../operators/not.md) |
+| Combine or negate | `.AND.`, `.OR.`, `.NOT.` or [`!`](../operators/bang.md) |
 | Compare | [`==`](../operators/strict-equals.md) or [`=`](../operators/equals.md) |
 | Convert to text | [`LimsString`](../functions/LimsString.md), which gives `.T.` or `.F.` |
 | Serialize to JSON | [`ToJson`](../functions/ToJson.md), which gives `true` or `false` |
@@ -102,7 +102,7 @@ Via LimsString():    .T.
 
 !!! success "Do"
     - Use [`.T.`](../literals/true.md) and [`.F.`](../literals/false.md) explicitly for assignments, comparisons, and return values.
-    - Use `.NOT.` or [`!`](../operators/not.md) when you mean logical negation.
+    - Use `.NOT.` or [`!`](../operators/bang.md) when you mean logical negation.
     - Use [`==`](../operators/strict-equals.md) when you want exact equality, even though [`=`](../operators/equals.md) and [`==`](../operators/strict-equals.md) behave the same for booleans.
 
 !!! failure "Don't"

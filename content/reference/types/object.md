@@ -96,7 +96,7 @@ Objects support identity comparison operators. Arithmetic and relational operato
 ## Errors and edge cases
 
 - Reading a missing property raises a runtime error with the message `Property not found: <name>.`
-- [`AddProperty()`](../functions/AddProperty.md) validates the property name and initializes the new property to `""`.
+- [`AddProperty()`](../functions/AddProperty.md) initializes the new property to `""`. It does not validate the name: `"1abc"` is accepted.
 - `IsEmpty()` is not a property-count check for objects.
 - On dynamic objects created with [`CreateUdObject()`](../functions/CreateUdObject.md), member and property names ignore case: `oValue:getproperty("Status")`, `oValue:xmltype`, and `oValue:status` for a property set as `oValue:Status` all work. Members of strings, numbers, dates and arrays are case-sensitive; see [Member names and case](../../guides/native-members.md#member-names-and-case).
 

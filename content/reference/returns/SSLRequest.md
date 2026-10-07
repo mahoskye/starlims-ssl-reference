@@ -106,7 +106,7 @@ Saves the request body to a file on the server and returns the path. Useful for 
 
 ### Branch on HTTP method, read query parameters
 
-Distinguishes a `GET` from a `POST`, then handles each.
+Distinguishes a `GET` from a `POST`, then handles each. An empty `POST` body gets a 400 response.
 
 ```ssl
 :PROCEDURE HandleSampleRequest;
@@ -117,11 +117,18 @@ Distinguishes a `GET` from a `POST`, then handles each.
     :IF sMethod = "GET";
         sId := Request:QueryString:Id;
         Response:Write("Lookup sample: " + sId);
-    :ELSEIF sMethod = "POST";
-        Response:Write("Create from body: " + Request:BodyAsString);
     :ELSE;
-        Response:StatusCode := 405;
-        Response:Write("Method not allowed");
+        :IF sMethod = "POST";
+            :IF Empty(Request:BodyAsString);
+                Response:StatusCode := 400;
+                Response:Write("Empty body");
+            :ELSE;
+                Response:Write("Create from body: " + Request:BodyAsString);
+            :ENDIF;
+        :ELSE;
+            Response:StatusCode := 405;
+            Response:Write("Method not allowed");
+        :ENDIF;
     :ENDIF;
 :ENDPROC;
 ```

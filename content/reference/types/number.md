@@ -123,7 +123,7 @@ DoProc("FormatRecordCount");
     - Convert explicitly with [`LimsString`](../functions/LimsString.md) or `nValue:ToString()` when building user-facing text.
 
 !!! failure "Don't"
-    - Write bitwise logic with [`&`](../operators/and.md), [`|`](../operators/or.md), or [`^`](../operators/power.md) as bitwise operators. In SSL, bitwise work uses [`_AND()`](../functions/_AND.md), [`_OR()`](../functions/_OR.md), [`_XOR()`](../functions/_XOR.md), [`_NOT()`](../functions/_NOT.md), and the shift operators [`<<`](../operators/shift-left.md) and [`>>`](../operators/shift-right.md).
+    - Write bitwise logic with `&` or `|` (they are not SSL operators) or with [`^`](../operators/power.md) (it raises to a power). In SSL, bitwise work uses [`_AND()`](../functions/_AND.md), [`_OR()`](../functions/_OR.md), [`_XOR()`](../functions/_XOR.md), [`_NOT()`](../functions/_NOT.md), and the shift operators [`<<`](../operators/shift-left.md) and [`>>`](../operators/shift-right.md).
     - Concatenate strings and numbers directly with [`+`](../operators/plus.md). Convert the number first.
     - Use fractional values with shifts or bitwise built-ins. They require integer-valued operands.
     - Treat numbers like arrays or strings. Numeric values are scalar and are not indexable.
