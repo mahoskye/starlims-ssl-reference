@@ -130,7 +130,7 @@ Today is day <n> of the year.
 
 ### Skip empty dates to avoid the sentinel return value
 
-Use [`Empty`](Empty.md) to detect invariant dates before calling `JDay`, so the sentinel value `34` is never mistaken for a real result. With the three-element input, two records produce valid day numbers and one is counted as empty.
+Use [`Empty`](Empty.md) to detect empty dates before calling `JDay`, so the sentinel value `34` is never mistaken for a real result. With the three-element input, two records produce valid day numbers and one is counted as empty.
 
 ```ssl
 :PROCEDURE SummarizeScheduleDates;

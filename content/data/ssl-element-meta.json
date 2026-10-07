@@ -14,7 +14,7 @@
       "returns": 12
     },
     "with_exceptions": 265,
-    "with_caveats": 403,
+    "with_caveats": 402,
     "with_best_practices": 458
   },
   "elements": [
@@ -6321,8 +6321,7 @@
       "best_practices": {
         "do": [
           "Use IsDBConnected() before database work when your script needs a fast availability check.",
-          "Pass an explicit connection name when your script works with more than one connection.",
-          "Wrap the call in :TRY / :CATCH when the runtime context may not have database state available."
+          "Pass an explicit connection name when your script works with more than one connection."
         ],
         "dont": [
           "Treat this as a connectivity probe that validates credentials, network reachability, or a successful round-trip query.",
@@ -6449,7 +6448,6 @@
         "If vConnection is NIL, empty, or missing, the default connection is used.",
         "vConnection can be a connection name or a SQLConnection object returned by GetConnectionByName.",
         "Passing an unknown connection name raises an error rather than returning .F..",
-        "If the internal database collection is unavailable, an error is raised and the function does not return a value.",
         "Returns .T. for any open transaction on the connection, including one a caller began and at any nesting depth. It cannot tell a routine whether it owns the transaction, and it does not report the nesting depth; use GetTransactionsCount for that."
       ],
       "best_practices": {
@@ -6539,7 +6537,6 @@
       "exceptions": [],
       "caveats": [
         "Returns only production vs. non-production — it does not indicate which specific non-production environment is active (e.g., development, staging).",
-        "Changes to the production mode status require a configuration update and restart; the result does not reflect real-time changes during a session.",
         "This function does not validate license types or features."
       ],
       "best_practices": {
@@ -6666,7 +6663,7 @@
         }
       ],
       "caveats": [
-        "Despite its name, LCase does **not** lowercase a string. Use Lower (or the culture-aware LLower) to convert a string to lowercase.",
+        "Despite its name, LCase does **not** lowercase a string. Use Lower or LLower to convert a string to lowercase.",
         "LCase can return different value types depending on the selected expression.",
         "Only the selected branch is executed.",
         "Whitespace-only sFalseValue is treated the same as an empty false branch and returns \"\".",
@@ -6716,8 +6713,7 @@
       ],
       "caveats": [
         "This function performs a direct bind only. It does not search LDAP to discover a user DN first.",
-        "sLdapDistinctiveName is only checked for the value \"ntlm\" in a case-insensitive comparison.",
-        "The function always disposes the LDAP connection before returning or propagating an exception."
+        "sLdapDistinctiveName is only checked for the value \"ntlm\" in a case-insensitive comparison."
       ],
       "best_practices": {
         "do": [
@@ -6728,7 +6724,7 @@
         "dont": [
           "Treat the return value as a boolean or status code. This function succeeds with \"\" and raises exceptions on errors.",
           "Omit sLdapPassword for a normal bind. An empty password triggers The password cannot be null.",
-          "Pass sLdapDistinctiveName unless you intentionally need the NTLM mode switch. Other behavior is not implemented here."
+          "Pass sLdapDistinctiveName unless you need NTLM authentication; \"ntlm\" is the only value it recognizes."
         ]
       }
     },
@@ -6775,7 +6771,7 @@
       ],
       "caveats": [
         "If sSearchFilter is omitted, the function uses (&(objectClass=user)(name={0})).",
-        "Custom filters are passed through string.Format(sSearchFilter, sSearchUserName), so filters that use {0} are populated with sSearchUserName before the LDAP search runs.",
+        "{0} in sSearchFilter (including the default filter) is replaced with sSearchUserName before the search runs.",
         "The search must return exactly one entry. Zero matches and multi-match results both raise exceptions.",
         "When one of the requested attributes is missing, its slot in the returned comma-delimited string is empty.",
         "When an attribute value itself contains commas, the returned multi-attribute string is ambiguous because values are joined without escaping.",
@@ -6821,7 +6817,7 @@
       ],
       "best_practices": {
         "do": [
-          "Supply a fully qualified directory or directory-plus-pattern such as C:\\\\reports\\\\*.pdf so the lookup target is explicit.",
+          "Supply a fully qualified directory or directory-plus-pattern such as C:\\reports\\*.pdf so the lookup target is explicit.",
           "Use D, H, and S only when you intentionally want to include directories, hidden entries, or system entries.",
           "Handle empty arrays defensively, as no matches found is not an error.",
           "Use Directory when you need size, date, time, or attribute metadata instead of just names."
@@ -7006,7 +7002,7 @@
       "caveats": [
         "LSearch falls back only when the scalar result is missing or database NULL. An actual empty string from the database is returned as-is.",
         "With the fallback omitted or NIL and no matching row, LSearch returns an empty string, not NIL, in observed runtime behavior. A = NIL or == NIL check on the result is therefore false. Use Empty() instead.",
-        "Passing a non-array value as aArrayOfValues (the fourth parameter) can lock up the application — the runtime's error handling for this type mismatch is anything but graceful. Always pass an array of bind values or omit the parameter entirely."
+        "In observed runtime behavior, passing a non-array value as aArrayOfValues (the fourth parameter) can lock up the application instead of raising an error. Always pass an array of bind values or omit the parameter entirely."
       ],
       "best_practices": {
         "do": [
@@ -7108,9 +7104,7 @@
           "message": "Parameters count mismatch"
         }
       ],
-      "caveats": [
-        "A database connection is closed after the reader is consumed, even when the query raises an error."
-      ],
+      "caveats": [],
       "best_practices": {
         "do": [
           "Check ALen(aRows) before processing the result.",
@@ -7195,7 +7189,7 @@
       "best_practices": {
         "do": [
           "Use LStr when NIL values must appear as the explicit placeholder \"NIL\" in UI output, logs, or exports.",
-          "Pair LStr with LTransform or StrZero when field-width padding or decimal precision is required after conversion.",
+          "Use LTransform or StrZero on the number itself, instead of LStr, when you need padding or fixed decimals.",
           "Apply LStr when serializing mixed data sources that must never produce empty strings for missing values."
         ],
         "dont": [
@@ -7456,12 +7450,11 @@
       "id": "ssl.function.limsgetdateformat",
       "element_type": "function",
       "title": "LimsGetDateFormat",
-      "summary": "Returns the current global date format string used for date parsing and formatting.",
+      "summary": "Returns the current session date format string used for date parsing and formatting.",
       "doc_status": "published",
       "source_path": "content/reference/functions/LimsGetDateFormat.md",
       "exceptions": [],
       "caveats": [
-        "Changing the global date format via DateFormat does not notify all clients in real time; always call this function each time you need the value.",
         "The function returns the format string but does not validate it; a misconfigured format string may cause downstream parsing errors."
       ],
       "best_practices": {
@@ -7471,7 +7464,7 @@
           "Document the expected date format for integration partners and when writing export/import routines."
         ],
         "dont": [
-          "Hard-code date format strings directly in your logic.",
+          "Hard-code the session's display format when you mean \"whatever format the user works in\"; use an explicit format only when an export or interface needs a fixed shape.",
           "Assume a specific date order or delimiter based on regional habits.",
           "Ignore the global configuration when presenting or persisting date strings."
         ]
@@ -7699,14 +7692,12 @@
       "source_path": "content/reference/functions/LimsSqlConnect.md",
       "exceptions": [
         {
-          "trigger": "The connection registration step throws an internal error.",
+          "trigger": "Registering the connection fails unexpectedly.",
           "message": "AddConnection throws an exception <message>"
         }
       ],
       "caveats": [
         "If sConnectionName does not match a configured connection name, the function returns .F..",
-        "If the name is tenant-specific and the current tenant context is missing or does not match the tenant encoded in the name, the function returns .F..",
-        "If the runtime has not initialized the active connection collection, the function returns .F..",
         "Re-registering an existing connection name replaces the currently registered entry for that name."
       ],
       "best_practices": {
@@ -7717,7 +7708,7 @@
         ],
         "dont": [
           "Assume LimsSqlConnect changes the default connection. It only registers the named connection.",
-          "Treat .F. as an exception-only case. Unknown names and unavailable tenant-specific names can fail by returning .F..",
+          "Treat .F. as an exception-only case. Unknown names fail by returning .F..",
           "Re-register the same connection name without a reason. A later registration replaces the existing named entry."
         ]
       }
@@ -7797,7 +7788,7 @@
       "id": "ssl.function.limstype",
       "element_type": "function",
       "title": "LimsType",
-      "summary": "Returns the single-character SSL type code for a variable name or expression.",
+      "summary": "Returns the SSL type code for a variable name or expression.",
       "doc_status": "published",
       "source_path": "content/reference/functions/LimsType.md",
       "exceptions": [

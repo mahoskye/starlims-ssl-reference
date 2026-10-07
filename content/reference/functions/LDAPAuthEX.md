@@ -36,11 +36,11 @@ LDAPAuthEX(sLdapHost, [nLdapPort], sBindUserName, sBindUserPassword, [sSearchUse
 | `nLdapPort` | [number](../types/number.md) | no | `389` | LDAP server port. |
 | `sBindUserName` | [string](../types/string.md) | yes | — | Service-account username used for the initial bind and search. |
 | `sBindUserPassword` | [string](../types/string.md) | yes | — | Password for `sBindUserName`. Empty or omitted values cause the bind step to fail. |
-| `sSearchUserName` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | User identifier inserted into `sSearchFilter` with `string.Format(sSearchFilter, sSearchUserName)`. In normal usage this is the user being authenticated. |
+| `sSearchUserName` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | User identifier substituted for `{0}` in `sSearchFilter`. In normal usage this is the user being authenticated. Needed whenever the filter (including the default) contains `{0}`. |
 | `sSearchUserPassword` | [string](../types/string.md) | yes | — | Password used in the second bind against the matched entry. Empty or omitted values cause authentication to fail. |
 | `sLdapDistinguishedName` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Accepted in the signature but has no effect on the search or bind behavior. |
 | `sLdapDistinguishedNameStartSearch` | [string](../types/string.md) | yes | — | Distinguished name that defines where the LDAP search begins. |
-| `sSearchFilter` | [string](../types/string.md) | no | `(&(objectClass=user)(name={0}))` | LDAP filter pattern. When supplied, it is formatted with `sSearchUserName`. The search must return exactly one entry. |
+| `sSearchFilter` | [string](../types/string.md) | no | `(&(objectClass=user)(name={0}))` | LDAP filter pattern; `{0}` (in a supplied filter or the default) is replaced with `sSearchUserName`. The search must return exactly one entry. |
 | `sAuthAttribName` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Attribute name to return after successful authentication. Supply multiple names separated by commas to return multiple values in order. |
 | `bSecure` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | When [`.T.`](../literals/true.md), enables SSL for the LDAP connection. |
 
@@ -78,7 +78,7 @@ LDAPAuthEX(sLdapHost, [nLdapPort], sBindUserName, sBindUserPassword, [sSearchUse
 ## Caveats
 
 - If `sSearchFilter` is omitted, the function uses `(&(objectClass=user)(name={0}))`.
-- Custom filters are passed through `string.Format(sSearchFilter, sSearchUserName)`, so filters that use `{0}` are populated with `sSearchUserName` before the LDAP search runs.
+- `{0}` in `sSearchFilter` (including the default filter) is replaced with `sSearchUserName` before the search runs.
 - The search must return exactly one entry. Zero matches and multi-match results both raise exceptions.
 - When one of the requested attributes is missing, its slot in the returned comma-delimited string is empty.
 - When an attribute value itself contains commas, the returned multi-attribute string is ambiguous because values are joined without escaping.
@@ -88,7 +88,7 @@ LDAPAuthEX(sLdapHost, [nLdapPort], sBindUserName, sBindUserPassword, [sSearchUse
 
 ### Authenticate without returning an attribute
 
-Use `LDAPAuthEX` as an authentication check by leaving `sAuthAttribName` empty. A successful call returns `""`.
+Use `LDAPAuthEX` as an authentication check by omitting `sAuthAttribName`. A successful call returns `""`.
 
 ```ssl
 :PROCEDURE AuthenticateOnly;
@@ -110,11 +110,9 @@ Use `LDAPAuthEX` as an authentication check by leaving `sAuthAttribName` empty. 
         sBindPass,
         sUserName,
         sUserPass,
-        "",
+        ,
         sBaseDn,
-        "(&(objectClass=user)(sAMAccountName={0}))",
-        "",
-        .F.
+        "(&(objectClass=user)(sAMAccountName={0}))"
     );
 
     UsrMes("LDAP authentication succeeded for " + sUserName);
@@ -154,7 +152,7 @@ Request a single attribute after successful authentication.
         sBindPass,
         sUserName,
         sUserPass,
-        "",
+        ,
         sBaseDn,
         "(&(objectClass=user)(sAMAccountName={0}))",
         "mail",
@@ -199,7 +197,7 @@ Use SSL, a narrower search base, and explicit exception handling when the search
             sBindPass,
             sUserName,
             sUserPass,
-            "",
+            ,
             sBaseDn,
             "(&(objectClass=user)(sAMAccountName={0})(department=Research))",
             "mail,userPrincipalName",

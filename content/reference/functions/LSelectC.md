@@ -35,7 +35,7 @@ LSelectC(sCommandString, [aFieldList], [sConnectionName], [aArrayOfValues], [bNu
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `sCommandString` | [string](../types/string.md) | yes | — | SQL `SELECT` statement to execute. Use positional `?` placeholders for parameter binding. |
-| `aFieldList` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Not implemented. This argument must be omitted or skipped. Passing any array value raises `aFieldList != NULL - Not implemented yet.` |
+| `aFieldList` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Not implemented. This argument must be omitted or skipped. Passing any array value raises `fieldList != NULL - Not implemented yet.` |
 | `sConnectionName` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Database connection name. If omitted, SSL uses the default connection. |
 | `aArrayOfValues` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Values bound to the positional `?` placeholders in `sCommandString`, in order. |
 | `bNullAsBlank` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Controls how database `NULL` values are surfaced. When [`.T.`](../literals/true.md), `NULL` values become empty SSL defaults for the column type. When [`.F.`](../literals/false.md), `NULL` values are returned as [`NIL`](../literals/nil.md). |

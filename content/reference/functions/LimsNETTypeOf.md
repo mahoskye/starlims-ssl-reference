@@ -13,13 +13,13 @@ starlims:
 
 Resolves a .NET type name string to a .NET `Type` object.
 
-Use `LimsNETTypeOf` when you need a runtime type handle for .NET interop. It accepts a non-empty string, trims surrounding whitespace, and returns a .NET type object for the resolved name. The resolver recognizes common aliases such as [`string`](../types/string.md), `int`, `bool`, `double`, `decimal`, `datetime`, and [`object`](../types/object.md), and it also accepts fully qualified type names.
+Use `LimsNETTypeOf` when you need a runtime type handle for .NET interop. It accepts a non-empty string, trims surrounding whitespace, and returns a .NET type object for the resolved name. The resolver recognizes common aliases such as `string`, `int`, `bool`, `double`, `decimal`, `datetime`, and `object`, and it also accepts fully qualified type names.
 
 ## When to use
 
 - When another .NET interop step needs a resolved type object rather than a raw type name string.
 - When you want to accept a type name from configuration or user input and resolve it at runtime.
-- When you need alias support such as [`string`](../types/string.md) or `int` instead of writing the full `System.*` name.
+- When you need alias support such as `string` or `int` instead of writing the full `System.*` name.
 
 ## Syntax
 
@@ -31,7 +31,7 @@ LimsNETTypeOf(sTypeName)
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `sTypeName` | [string](../types/string.md) | yes | — | Type name to resolve. Leading and trailing whitespace is ignored. Built-in aliases such as [`string`](../types/string.md), `int`, `bool`, `datetime`, and [`object`](../types/object.md) are supported, as are fully qualified type names. |
+| `sTypeName` | [string](../types/string.md) | yes | — | Type name to resolve. Leading and trailing whitespace is ignored. Built-in aliases such as `string`, `int`, `bool`, `datetime`, and `object` are supported, as are fully qualified type names. |
 
 ## Returns
 

@@ -54,7 +54,7 @@ LDir(sFilePattern, [sAttributes])
 ## Best practices
 
 !!! success "Do"
-    - Supply a fully qualified directory or directory-plus-pattern such as `C:\\reports\\*.pdf` so the lookup target is explicit.
+    - Supply a fully qualified directory or directory-plus-pattern such as `C:\reports\*.pdf` so the lookup target is explicit.
     - Use `D`, `H`, and `S` only when you intentionally want to include directories, hidden entries, or system entries.
     - Handle empty arrays defensively, as no matches found is not an error.
     - Use [`Directory`](Directory.md) when you need size, date, time, or attribute metadata instead of just names.

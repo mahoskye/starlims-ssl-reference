@@ -95,7 +95,7 @@ Names match: .T.
 
 ### Validate a status code regardless of input casing
 
-Trim and lowercase the incoming status before checking it against a fixed list, so that `"Active"`, `"ACTIVE"`, and `"active"` all pass. Values not in the list are rejected by using the original unmodified input in the message.
+Trim and lowercase the incoming status before checking it against a fixed list, so that `"Active"`, `"ACTIVE"`, and `"active"` all pass. Values not in the list are rejected, and the message shows the original input.
 
 ```ssl
 :PROCEDURE ValidateSampleStatus;
@@ -105,7 +105,7 @@ Trim and lowercase the incoming status before checking it against a fixed list, 
 	sNormalizedStatus := LLower(AllTrim(sStatusCode));
 	aValidStatuses := {"active", "pending", "closed"};
 
-	bIsValid := AScan(aValidStatuses, sNormalizedStatus) > 0;
+	bIsValid := AScanExact(aValidStatuses, sNormalizedStatus) > 0;
 
 	:IF bIsValid;
 		UsrMes("Status accepted: " + sNormalizedStatus);

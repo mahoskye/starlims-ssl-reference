@@ -90,7 +90,7 @@ Use [`IsHex`](IsHex.md) to filter a batch before calling `LFromHex`, so only wel
 :PROCEDURE DecodeHexBatch;
 	:DECLARE aInput, aDecoded, aInvalid, sHex, sDecoded, sMessage, nIndex;
 
-	aInput := {"48656C6C6F", "4D61686F", "XYZ123", "414243"};
+	aInput := {"48656C6C6F", "4C616231", "XYZ123", "414243"};
 	aDecoded := {};
 	aInvalid := {};
 

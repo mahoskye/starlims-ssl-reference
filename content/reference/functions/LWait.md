@@ -98,7 +98,7 @@ DoProc("WaitForFileAccess");
 
 ### Throttle API calls in a scheduled batch
 
-Add a pause between endpoint calls to avoid exceeding rate limits. The delay is skipped after the last endpoint so the procedure does not wait unnecessarily.
+Add a pause between endpoint calls to avoid exceeding rate limits. The delay is derived from the per-minute limit, so five calls per minute means 12 seconds between calls. The delay is skipped after the last endpoint so the procedure does not wait unnecessarily.
 
 ```ssl
 :PROCEDURE ThrottleApiCalls;
@@ -112,7 +112,7 @@ Add a pause between endpoint calls to avoid exceeding rate limits. The delay is 
 		"Users.SyncDirectory"
 	};
 	nRateLimit := 5;
-	nDelaySeconds := 2;
+	nDelaySeconds := 60 / nRateLimit;
 
 	nCount := ALen(aEndpoints);
 	sLogMsg := "Processing " + LimsString(nCount) + " endpoints with rate limit of "

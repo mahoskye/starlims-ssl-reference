@@ -49,7 +49,7 @@ LimsSqlConnect(sConnectionName)
 
 | Trigger | Exception message |
 | --- | --- |
-| The connection registration step throws an internal error. | `AddConnection throws an exception <message>` |
+| Registering the connection fails unexpectedly. | `AddConnection throws an exception <message>` |
 
 ## Best practices
 
@@ -60,14 +60,12 @@ LimsSqlConnect(sConnectionName)
 
 !!! failure "Don't"
     - Assume `LimsSqlConnect` changes the default connection. It only registers the named connection.
-    - Treat [`.F.`](../literals/false.md) as an exception-only case. Unknown names and unavailable tenant-specific names can fail by returning [`.F.`](../literals/false.md).
+    - Treat [`.F.`](../literals/false.md) as an exception-only case. Unknown names fail by returning [`.F.`](../literals/false.md).
     - Re-register the same connection name without a reason. A later registration replaces the existing named entry.
 
 ## Caveats
 
 - If `sConnectionName` does not match a configured connection name, the function returns [`.F.`](../literals/false.md).
-- If the name is tenant-specific and the current tenant context is missing or does not match the tenant encoded in the name, the function returns [`.F.`](../literals/false.md).
-- If the runtime has not initialized the active connection collection, the function returns [`.F.`](../literals/false.md).
 - Re-registering an existing connection name replaces the currently registered entry for that name.
 
 ## Examples

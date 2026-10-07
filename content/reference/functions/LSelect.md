@@ -35,7 +35,7 @@ LSelect(sCommandString, [aFieldList], [sConnectionName], [aArrayOfValues], [bNul
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `sCommandString` | [string](../types/string.md) | yes | — | SQL statement to execute. Use positional `?` placeholders for parameter binding. |
-| `aFieldList` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Not implemented. This argument must be omitted or skipped. Passing any array value raises `aFieldList != NULL - Not implemented yet.` |
+| `aFieldList` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Not implemented. This argument must be omitted or skipped. Passing any array value raises `fieldList != NULL - Not implemented yet.` |
 | `sConnectionName` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Database connection name. If omitted, SSL uses the default connection. |
 | `aArrayOfValues` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Values bound to the positional `?` placeholders in `sCommandString`. |
 | `bNullAsBlank` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Controls how database `NULL` values are surfaced. When [`.T.`](../literals/true.md), `NULL` values become type defaults such as `""`, `0`, [`.F.`](../literals/false.md), or an empty date. When [`.F.`](../literals/false.md), `NULL` values are returned as [`NIL`](../literals/nil.md). |

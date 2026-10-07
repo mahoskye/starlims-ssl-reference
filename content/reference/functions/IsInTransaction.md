@@ -13,7 +13,7 @@ starlims:
 
 Returns [`.T.`](../literals/true.md) if the specified database connection currently has an open transaction.
 
-`IsInTransaction` checks whether the connection identified by `vConnection` is currently inside a transaction. `vConnection` can be a connection name or a [`SQLConnection`](../classes/SQLConnection.md) object returned by [`GetConnectionByName`](GetConnectionByName.md). If `vConnection` is [`NIL`](../literals/nil.md) or empty, the function checks the default connection. If the supplied name does not match a known connection, or if the internal database collection is unavailable, an error is raised. This function does not alter, begin, or end transactions.
+`IsInTransaction` checks whether the connection identified by `vConnection` is currently inside a transaction. `vConnection` can be a connection name or a [`SQLConnection`](../classes/SQLConnection.md) object returned by [`GetConnectionByName`](GetConnectionByName.md). If `vConnection` is [`NIL`](../literals/nil.md) or empty, the function checks the default connection. If the supplied name does not match a known connection, an error is raised. This function does not alter, begin, or end transactions.
 
 ## When to use
 
@@ -62,7 +62,6 @@ IsInTransaction([vConnection])
 - If `vConnection` is [`NIL`](../literals/nil.md), empty, or missing, the default connection is used.
 - `vConnection` can be a connection name or a [`SQLConnection`](../classes/SQLConnection.md) object returned by [`GetConnectionByName`](GetConnectionByName.md).
 - Passing an unknown connection name raises an error rather than returning [`.F.`](../literals/false.md).
-- If the internal database collection is unavailable, an error is raised and the function does not return a value.
 - Returns [`.T.`](../literals/true.md) for any open transaction on the connection, including one a caller began and at any nesting depth. It cannot tell a routine whether it owns the transaction, and it does not report the nesting depth; use [`GetTransactionsCount`](GetTransactionsCount.md) for that.
 
 ## Examples

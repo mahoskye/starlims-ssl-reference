@@ -26,7 +26,7 @@ If `nLdapPort` is omitted, the function uses `389`. If `bSecure` is omitted, it 
 ## Syntax
 
 ```ssl
-LDAPAuth(sLdapHost, [nLdapPort], sLdapUserName, [sLdapPassword], [sLdapDistinctiveName], [bSecure])
+LDAPAuth(sLdapHost, [nLdapPort], sLdapUserName, sLdapPassword, [sLdapDistinctiveName], [bSecure])
 ```
 
 ## Parameters
@@ -36,7 +36,7 @@ LDAPAuth(sLdapHost, [nLdapPort], sLdapUserName, [sLdapPassword], [sLdapDistincti
 | `sLdapHost` | [string](../types/string.md) | yes | — | LDAP server host name or address |
 | `nLdapPort` | [number](../types/number.md) | no | `389` | LDAP server port |
 | `sLdapUserName` | [string](../types/string.md) | yes | — | User name passed to the bind operation |
-| `sLdapPassword` | [string](../types/string.md) | no | `""` | Password passed to the bind operation. An empty password raises an exception. |
+| `sLdapPassword` | [string](../types/string.md) | yes | — | Password passed to the bind operation. An empty or omitted password raises `The password cannot be null`. |
 | `sLdapDistinctiveName` | [string](../types/string.md) | no | `""` | Special authentication mode selector. Use `"ntlm"` to perform an NTLM bind. |
 | `bSecure` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | When [`.T.`](../literals/true.md), enables SSL/TLS on the LDAP connection |
 
@@ -64,13 +64,12 @@ LDAPAuth(sLdapHost, [nLdapPort], sLdapUserName, [sLdapPassword], [sLdapDistincti
 !!! failure "Don't"
     - Treat the return value as a boolean or status code. This function succeeds with `""` and raises exceptions on errors.
     - Omit `sLdapPassword` for a normal bind. An empty password triggers `The password cannot be null`.
-    - Pass `sLdapDistinctiveName` unless you intentionally need the NTLM mode switch. Other behavior is not implemented here.
+    - Pass `sLdapDistinctiveName` unless you need NTLM authentication; `"ntlm"` is the only value it recognizes.
 
 ## Caveats
 
 - This function performs a direct bind only. It does not search LDAP to discover a user DN first.
 - `sLdapDistinctiveName` is only checked for the value `"ntlm"` in a case-insensitive comparison.
-- The function always disposes the LDAP connection before returning or propagating an exception.
 
 ## Examples
 

@@ -103,7 +103,7 @@ Dash found at position: 4
 
 ### Find the second occurrence of a separator
 
-Use the first match's position as the offset for the second `LimsAt` call. In `"Orders/2026/Incoming/Batch01"`, the first [`/`](../operators/divide.md) is at position 7 and the second is at position 12.
+Use the first match's position as the offset for the second `LimsAt` call. In `"Orders/2026/Incoming/Batch01"`, the first `/` is at position 7 and the second is at position 12.
 
 ```ssl
 :PROCEDURE FindSecondSlash;
@@ -137,7 +137,7 @@ Second slash: 12
 
 ### Extract a field value after a known label
 
-Locate the `OWNER=` label with `LimsAt`, use [`Len`](Len.md) to calculate the value start position, then find the closing [`|`](../operators/or.md) with a second `LimsAt` call before extracting the value with [`SubStr`](SubStr.md). The header `"STATUS=Logged|OWNER=JSMITH|BATCH=LAB-2026-0042"` yields `"JSMITH"`.
+Locate the `OWNER=` label with `LimsAt`, use [`Len`](Len.md) to calculate the value start position, then find the closing `|` with a second `LimsAt` call before extracting the value with [`SubStr`](SubStr.md). The header `"STATUS=Logged|OWNER=JSMITH|BATCH=LAB-2026-0042"` yields `"JSMITH"`.
 
 ```ssl
 :PROCEDURE ExtractOwnerValue;
