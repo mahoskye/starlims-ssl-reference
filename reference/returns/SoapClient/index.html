@@ -2355,7 +2355,7 @@
 <td><code>WsAssembly</code></td>
 <td><a href="../../types/object/">object</a></td>
 <td>read-only</td>
-<td>Advanced — a handle to the generated proxy types for the configured WSDL. Used internally by <a href="../SoapParameters/#createcustomtype"><code>Parameters:CreateCustomType</code></a> and <a href="#getwstype"><code>GetWSType</code></a>; rarely needed directly.</td>
+<td>Advanced; rarely needed directly.</td>
 </tr>
 </tbody>
 </table>
@@ -2440,7 +2440,7 @@
 <td><code>sUser</code></td>
 <td><a href="../../types/string/">string</a></td>
 <td>yes</td>
-<td>Username. May be domain-prefixed (<code>DOMAIN\\user</code>). Pass an empty string to fall back to default credentials.</td>
+<td>Username. May be domain-prefixed (<code>DOMAIN\user</code>). Pass an empty string to fall back to default credentials.</td>
 </tr>
 <tr>
 <td><code>sPassword</code></td>
@@ -2546,8 +2546,6 @@
 <li><code>Use*</code> methods return <code>.F.</code> on failure rather than raising — always check the return value and <code>Error</code>.</li>
 <li><code>CallWebService</code> returns <code>NIL</code> on failure rather than raising. Check the return value before reading the response.</li>
 <li><code>TimeOut</code> is in milliseconds. Values <code>&lt;= 0</code> disable the timeout entirely.</li>
-<li>The configuration step caches results based on the WSDL content. Calling <code>UseWebService</code> repeatedly with the same WSDL is cheap; switching WSDLs on the same client is supported but may rebuild the proxy.</li>
-<li><code>UseDefaultCredentials</code> falls back to <code>GlobalUseDefaultCredentials</code> only when the local property has not been set. Once you assign to it, the local value wins regardless of the global value.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="call-a-soap-method-that-takes-one-parameter">Call a SOAP method that takes one parameter<a class="headerlink" href="#call-a-soap-method-that-takes-one-parameter" title="Permanent link">&para;</a></h3>
@@ -2587,10 +2585,8 @@
 <span class="w">    </span><span class="n">oWebServices</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">WebServices</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oSoapClient</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oWebServices</span><span class="p">:</span><span class="nf">CreateSoapClient</span><span class="p">();</span>
 
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">UseWebServiceWithCredentials</span><span class="p">(</span><span class="w"> </span><span class="p">;</span>
-<span class="w">            </span><span class="s2">"https://secure-soap.example/Reports?wsdl"</span><span class="p">,</span><span class="w"> </span><span class="p">;</span>
-<span class="w">            </span><span class="s2">"LIMSDOMAIN\reports_user"</span><span class="p">,</span><span class="w"> </span><span class="p">;</span>
-<span class="w">            </span><span class="s2">"********"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="nf">UseWebServiceWithCredentials</span><span class="p">(</span><span class="s2">"https://secure-soap.example/Reports?wsdl"</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"LIMSDOMAIN\reports_user"</span><span class="p">,</span><span class="w"> </span><span class="s2">"********"</span><span class="p">);</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Auth/config failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oSoapClient</span><span class="p">:</span><span class="n">Error</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
@@ -2667,7 +2663,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:09:01 UTC">October 7, 2026</span>
   </span>
 
     

@@ -2126,10 +2126,11 @@
 <h1 id="constructor">Constructor<a class="headerlink" href="#constructor" title="Permanent link">&para;</a></h1>
 <h2 id="what-it-does">What it does<a class="headerlink" href="#what-it-does" title="Permanent link">&para;</a></h2>
 <p>Runs one-time class initialization code when a user-defined class instance is created.</p>
-<p>Use <code>Constructor</code> to set initial field values, validate incoming arguments, and prepare an object before any other instance method runs. It is a reserved constructor declaration name inside <a href="../../keywords/CLASS/"><code>:CLASS</code></a>, not a normal method name. If a class does not declare a constructor, SSL generates a default parameterless constructor.</p>
-<p>When <code>CreateUdObject("ClassName")</code> or <code>CreateUdObject("ClassName", {args})</code> creates a user-defined class instance, SSL runs that class's constructor automatically. Before the constructor body runs, SSL also emits a call to the base class's parameterless constructor. Constructors cannot return values.</p>
-<p>Because <code>Constructor</code> is a special declaration form, it cannot be called as a
-normal method from SSL code.</p>
+<p>Use <code>Constructor</code> to set initial field values, validate incoming arguments, and prepare an object before any other instance method runs. It is a reserved constructor declaration name inside <a href="../../keywords/CLASS/"><code>:CLASS</code></a>, not a normal method name. If a class does not declare a constructor, it can still be created with no arguments.</p>
+<p>When <code>CreateUdObject("ClassName")</code> or <code>CreateUdObject("ClassName", {args})</code> creates a user-defined class instance, SSL runs that class's constructor automatically. Before the constructor body runs, the parent class's parameterless constructor runs automatically. Constructors cannot return values.</p>
+<p>Because <code>Constructor</code> is a special declaration form, it cannot be called on an
+instance (for example <code>oItem:Constructor()</code>). The only explicit call is
+<code>Base:Constructor(args)</code> from a derived constructor.</p>
 <h2 id="when-to-use-it">When to use it<a class="headerlink" href="#when-to-use-it" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When every new instance must start with a known valid state.</li>
@@ -2164,7 +2165,7 @@ normal method from SSL code.</p>
 <p>A constructor is an ordinary class method for identifier resolution: write to class-level <a href="../../keywords/DECLARE/"><code>:DECLARE</code></a> fields as <code>Me:fieldName := ...</code> (or <a href="../base/"><code>Base:fieldName</code></a> for a parent field). A bare <code>fieldName := ...</code> writes to a local variable or <a href="../../keywords/PARAMETERS/"><code>:PARAMETERS</code></a> entry instead, leaving the instance field untouched. See <a href="../me/"><code>Me:</code></a> for the full rule.</p>
 <h2 id="context-rules">Context rules<a class="headerlink" href="#context-rules" title="Permanent link">&para;</a></h2>
 <p><code>Constructor</code> can only be declared inside a <a href="../../keywords/CLASS/"><code>:CLASS</code></a> block. Using it outside a class does not produce a valid procedure declaration. Inside a constructor, <code>:RETURN;</code> is allowed as an early exit, but <code>:RETURN value;</code> is a compile-time error.</p>
-<p>SSL automatically emits a call to the base class's parameterless constructor before the constructor body executes. You do not need to call <code>Base:Constructor()</code> when the base constructor takes no arguments. If you need to invoke a base constructor that takes parameters, call <code>Base:Constructor(args)</code> explicitly. The explicit call passes the arguments that the auto-call cannot.</p>
+<p>The parent class's parameterless constructor runs automatically before the constructor body executes. You do not need to call <code>Base:Constructor()</code> when the base constructor takes no arguments. If you need to invoke a base constructor that takes parameters, call <code>Base:Constructor(args)</code> explicitly. The explicit call passes the arguments that the automatic call cannot.</p>
 <h2 id="notes-for-daily-ssl-work">Notes for daily SSL work<a class="headerlink" href="#notes-for-daily-ssl-work" title="Permanent link">&para;</a></h2>
 <div class="admonition success">
 <p class="admonition-title">Do</p>
@@ -2178,7 +2179,7 @@ normal method from SSL code.</p>
 <p class="admonition-title">Don't</p>
 <ul>
 <li>Instantiate a user-defined class with <code>MyClass{}</code>. That brace form is for built-in classes, not <a href="../../keywords/CLASS/"><code>:CLASS</code></a> files.</li>
-<li>Call <code>Base:Constructor()</code> when the base constructor is parameterless. SSL already emits that call automatically.</li>
+<li>Call <code>Base:Constructor()</code> when the base constructor is parameterless. That call already happens automatically.</li>
 <li>Return a value from a constructor. <code>:RETURN value;</code> is a compile-time error.</li>
 </ul>
 </div>
@@ -2188,7 +2189,7 @@ normal method from SSL code.</p>
 <li><code>:RETURN value;</code> inside a constructor causes a compile-time error.</li>
 <li>Constructors run during object creation; they are not invoked like ordinary
   methods.</li>
-<li>If no constructor is declared, SSL provides an implicit parameterless one.</li>
+<li>If no constructor is declared, the class can still be created with no arguments.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="basic-field-initialization">Basic field initialization<a class="headerlink" href="#basic-field-initialization" title="Permanent link">&para;</a></h3>
@@ -2340,7 +2341,7 @@ Rejected: Sample ID is required
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:09:01 UTC">October 7, 2026</span>
   </span>
 
     
