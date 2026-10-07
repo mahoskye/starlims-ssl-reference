@@ -3601,8 +3601,8 @@
 
 <h1 id="makedironftp">MakeDirOnFtp<a class="headerlink" href="#makedironftp" title="Permanent link">&para;</a></h1>
 <p>Creates a remote directory by using FTP, or by using SFTP when <code>bIsSFTP</code> is <a href="../../literals/true/"><code>.T.</code></a>.</p>
-<p>On the FTP path, <code>MakeDirOnFtp</code> sends an FTP <code>MKD</code> request for the target directory and returns <a href="../../literals/true/"><code>.T.</code></a> only when the server reports that the path was created. On the SFTP path, it connects and logs in first, then attempts to create the directory and returns <a href="../../literals/true/"><code>.T.</code></a> when the SFTP library reports success.</p>
-<p>Missing <code>sServerNameOrIP</code>, missing <code>sRemoteDirectory</code>, and a non-empty <code>sProxy</code> raise an error instead of returning <a href="../../literals/false/"><code>.F.</code></a>. On the SFTP path, connection, login, and private-key setup happen before the function reaches its boolean return path, so those failures can also raise.</p>
+<p>On the FTP path, <code>MakeDirOnFtp</code> sends an FTP <code>MKD</code> request for the target directory and returns <a href="../../literals/true/"><code>.T.</code></a> only when the server reports that the path was created. On the SFTP path, it connects and logs in first, then attempts to create the directory and returns <a href="../../literals/true/"><code>.T.</code></a> when the SFTP server reports success.</p>
+<p>Missing <code>sServerNameOrIP</code>, missing <code>sRemoteDirectory</code>, and a non-empty <code>sProxy</code> raise an error instead of returning <a href="../../literals/false/"><code>.F.</code></a>. On the SFTP path, connection, login, and private-key setup failures can also raise.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need to create a remote working folder before uploading files.</li>
@@ -3666,7 +3666,7 @@
 <td><a href="../../types/number/">number</a></td>
 <td>no</td>
 <td><code>21</code></td>
-<td>Server port. If omitted or less than or equal to <code>0</code>, the implementation uses <code>21</code> on both the FTP and SFTP paths.</td>
+<td>Server port. If omitted or less than or equal to <code>0</code>, the function uses <code>21</code> on both the FTP and SFTP paths.</td>
 </tr>
 <tr>
 <td><code>sProxy</code></td>
@@ -3680,7 +3680,7 @@
 <td><a href="../../types/boolean/">boolean</a></td>
 <td>no</td>
 <td><a href="../../literals/false/"><code>.F.</code></a></td>
-<td>Set to <a href="../../literals/true/"><code>.T.</code></a> to use the SFTP implementation. Omit it or pass <a href="../../literals/nil/"><code>NIL</code></a>/<a href="../../literals/false/"><code>.F.</code></a> to use FTP.</td>
+<td>Set to <a href="../../literals/true/"><code>.T.</code></a> to use SFTP. Omit it or pass <a href="../../literals/nil/"><code>NIL</code></a>/<a href="../../literals/false/"><code>.F.</code></a> to use FTP.</td>
 </tr>
 <tr>
 <td><code>sPrivateKeyFilePath</code></td>
@@ -3692,7 +3692,7 @@
 </tbody>
 </table>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
-<p><strong><a href="../../types/boolean/">boolean</a></strong> — <a href="../../literals/true/"><code>.T.</code></a> when the remote directory creation call succeeds; <a href="../../literals/false/"><code>.F.</code></a> when the FTP request fails (handled as a <code>WebException</code> on the FTP path) or when the directory-creation call fails after a successful connect and login (SFTP path).</p>
+<p><strong><a href="../../types/boolean/">boolean</a></strong> — <a href="../../literals/true/"><code>.T.</code></a> when the remote directory creation call succeeds; <a href="../../literals/false/"><code>.F.</code></a> when the server rejects the FTP request, or when the SFTP directory-creation call fails after a successful connect and login.</p>
 <h2 id="exceptions">Exceptions<a class="headerlink" href="#exceptions" title="Permanent link">&para;</a></h2>
 <table data-ssl-table="exceptions"><colgroup><col><col></colgroup>
 <thead>
@@ -3738,7 +3738,7 @@
 <li>Pass a manual proxy string expecting the function to use it. A non-empty <code>sProxy</code> argument raises an error.</li>
 <li>Assume every failure comes back as <a href="../../literals/false/"><code>.F.</code></a>. On the SFTP path, some setup
   failures can raise before the boolean result is reached.</li>
-<li>Document or code around a separate <code>MakeDirOnSftp</code> call when this API is already the supported entry point for both modes.</li>
+<li>Look for a separate SFTP function; <code>MakeDirOnFtp</code> with <code>bIsSFTP</code> set to <a href="../../literals/true/"><code>.T.</code></a> handles SFTP.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
@@ -3896,7 +3896,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:58:19 UTC">October 7, 2026</span>
   </span>
 
     

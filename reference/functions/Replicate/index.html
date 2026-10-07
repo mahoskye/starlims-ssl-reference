@@ -4223,7 +4223,7 @@
 
 <h1 id="replicate">Replicate<a class="headerlink" href="#replicate" title="Permanent link">&para;</a></h1>
 <p>Creates a string by repeating the source string a specified number of times.</p>
-<p><code>Replicate</code> returns a new string made up of <code>source</code> repeated <code>count</code> times. When <code>source</code> is empty the result is always <code>""</code> regardless of <code>count</code>. When <code>count</code> is zero the result is also <code>""</code>. A negative <code>count</code> or a <a href="../../literals/nil/"><code>NIL</code></a> argument raises an error.</p>
+<p><code>Replicate</code> returns a new string made up of <code>sSource</code> repeated <code>nCount</code> times. When <code>sSource</code> is empty the result is always <code>""</code> regardless of <code>nCount</code>. When <code>nCount</code> is zero the result is also <code>""</code>. A negative <code>nCount</code> or a <a href="../../literals/nil/"><code>NIL</code></a> argument raises an error.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need to build a separator, padding, or ruler string of a fixed width.</li>
@@ -4231,7 +4231,7 @@
 <li>When you want to repeat an entire substring pattern rather than extract or pad individual characters.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Replicate</span><span class="p">(</span><span class="n">source</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">)</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Replicate</span><span class="p">(</span><span class="n">sSource</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -4246,14 +4246,14 @@
 </thead>
 <tbody>
 <tr>
-<td><code>source</code></td>
+<td><code>sSource</code></td>
 <td><a href="../../types/string/">string</a></td>
 <td>yes</td>
 <td>—</td>
 <td>Source string to be repeated</td>
 </tr>
 <tr>
-<td><code>count</code></td>
+<td><code>nCount</code></td>
 <td><a href="../../types/number/">number</a></td>
 <td>yes</td>
 <td>—</td>
@@ -4262,7 +4262,7 @@
 </tbody>
 </table>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
-<p><strong><a href="../../types/string/">string</a></strong> — String consisting of the source string repeated count times</p>
+<p><strong><a href="../../types/string/">string</a></strong> — String consisting of the source string repeated <code>nCount</code> times</p>
 <h2 id="exceptions">Exceptions<a class="headerlink" href="#exceptions" title="Permanent link">&para;</a></h2>
 <table data-ssl-table="exceptions"><colgroup><col><col></colgroup>
 <thead>
@@ -4273,15 +4273,15 @@
 </thead>
 <tbody>
 <tr>
-<td><code>source</code> is <a href="../../literals/nil/"><code>NIL</code></a>.</td>
+<td><code>sSource</code> is <a href="../../literals/nil/"><code>NIL</code></a>.</td>
 <td><code>Argument source cannot be null. Replicate().</code></td>
 </tr>
 <tr>
-<td><code>count</code> is <a href="../../literals/nil/"><code>NIL</code></a>.</td>
+<td><code>nCount</code> is <a href="../../literals/nil/"><code>NIL</code></a>.</td>
 <td><code>Argument count cannot be null. Replicate().</code></td>
 </tr>
 <tr>
-<td><code>count</code> is negative.</td>
+<td><code>nCount</code> is negative.</td>
 <td><code>Argument count cannot be less then zero. Replicate().</code></td>
 </tr>
 </tbody>
@@ -4290,17 +4290,17 @@
 <div class="admonition success">
 <p class="admonition-title">Do</p>
 <ul>
-<li>Always validate that count is zero or greater before calling the function.</li>
+<li>Always validate that <code>nCount</code> is zero or greater before calling the function.</li>
 <li>Handle cases where the source string may be empty to avoid unnecessary processing.</li>
 <li>Use this function to generate consistent string patterns, such as repeated separators.</li>
+<li>Build padding by repeating one character, for example <code>sValue + Replicate(" ", 10 - Len(sValue))</code>, guarding against a negative count.</li>
 </ul>
 </div>
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
 <li>Assume the function handles negative counts gracefully. Negative counts raise an error that halts execution if unhandled.</li>
-<li>Expect a non-empty result when <code>source</code> is empty, even with a positive count. The function always returns <code>""</code> when <code>source</code> is empty.</li>
-<li>Use it as a substitute for string padding functions like <a href="../Left/"><code>Left</code></a>. <code>Replicate</code> only repeats the entire source string, not single characters for padding.</li>
+<li>Expect a non-empty result when <code>sSource</code> is empty, even with a positive count. The function always returns <code>""</code> when <code>sSource</code> is empty.</li>
 </ul>
 </div>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
@@ -4401,7 +4401,7 @@ Analysis Results | Generated: &lt;date&gt;
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:58:19 UTC">October 7, 2026</span>
   </span>
 
     

@@ -4259,7 +4259,7 @@
 
 <h1 id="sqlremovecomments">SQLRemoveComments<a class="headerlink" href="#sqlremovecomments" title="Permanent link">&para;</a></h1>
 <p>Removes SQL comments from a string and returns the cleaned SQL text.</p>
-<p><code>SQLRemoveComments</code> is a string-cleanup helper. It removes <a href="../../operators/decrement/"><code>--</code></a> line comments and ordinary <code>/* ... */</code> block comments from the supplied SQL text, but it does not execute or validate the SQL. If <code>sStatement</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the function returns <a href="../../literals/nil/"><code>NIL</code></a>. If <code>sStatement</code> is an empty string, it returns the empty string unchanged. If <code>sStatement</code> is any non-string value, the function raises an argument error.</p>
+<p><code>SQLRemoveComments</code> is a string-cleanup helper. It removes <code>--</code> line comments and ordinary <code>/* ... */</code> block comments from the supplied SQL text, but it does not execute or validate the SQL. If <code>sStatement</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the function returns <a href="../../literals/nil/"><code>NIL</code></a>. If <code>sStatement</code> is an empty string, it returns the empty string unchanged. If <code>sStatement</code> is any non-string value, the function raises an argument error.</p>
 <p>Single-quoted SQL string literals are preserved, so comment markers inside a quoted SQL value are not stripped. Oracle optimizer hints that start with <code>/*+</code> are also preserved.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4315,7 +4315,7 @@
 <tr>
 <td><code>sStatement</code> is a non-empty string</td>
 <td><a href="../../types/string/">string</a></td>
-<td>Returns the SQL text with <a href="../../operators/decrement/"><code>--</code></a> comments and ordinary <code>/* ... */</code> comments removed.</td>
+<td>Returns the SQL text with <code>--</code> comments and ordinary <code>/* ... */</code> comments removed.</td>
 </tr>
 </tbody>
 </table>
@@ -4357,12 +4357,12 @@
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="../../operators/decrement/"><code>--</code></a> comments are removed through the end of the line.</li>
+<li><code>--</code> comments are removed through the end of the line.</li>
 <li>The function does not check whether the remaining SQL is valid.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="remove-line-and-block-comments-from-a-query">Remove line and block comments from a query<a class="headerlink" href="#remove-line-and-block-comments-from-a-query" title="Permanent link">&para;</a></h3>
-<p>Pass SQL containing both a <code>/* ... */</code> block comment and a <a href="../../operators/decrement/"><code>--</code></a> line comment; the result is the same statement with those comment sequences stripped.</p>
+<p>Pass SQL containing both a <code>/* ... */</code> block comment and a <code>--</code> line comment; the result is the same statement with those comment sequences stripped.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RemoveCommentsFromSQL</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">sCleaned</span><span class="p">;</span>
 
@@ -4385,7 +4385,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RemoveCommentsFromSQL"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="preserve-comment-markers-inside-quoted-string-literals">Preserve comment markers inside quoted string literals<a class="headerlink" href="#preserve-comment-markers-inside-quoted-string-literals" title="Permanent link">&para;</a></h3>
-<p>Verify that <a href="../../operators/decrement/"><code>--</code></a> and <code>/* ... */</code> sequences inside single-quoted SQL literals are not stripped while an unquoted block comment is removed.</p>
+<p>Verify that <code>--</code> and <code>/* ... */</code> sequences inside single-quoted SQL literals are not stripped while an unquoted block comment is removed.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">PreserveQuotedMarkers</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sRawSQL</span><span class="p">,</span><span class="w"> </span><span class="n">sCleanSQL</span><span class="p">;</span>
 
@@ -4459,7 +4459,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:58:19 UTC">October 7, 2026</span>
   </span>
 
     

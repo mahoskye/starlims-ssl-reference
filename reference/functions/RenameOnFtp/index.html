@@ -3601,9 +3601,9 @@
 
 <h1 id="renameonftp">RenameOnFtp<a class="headerlink" href="#renameonftp" title="Permanent link">&para;</a></h1>
 <p>Renames a remote file on an FTP server, or on an SFTP server when <code>bIsSFTP</code> is <a href="../../literals/true/"><code>.T.</code></a>.</p>
-<p><code>RenameOnFtp</code> renames a file within the same remote directory. On both the FTP and SFTP paths, the implementation delegates to the corresponding move helper with the same source and target directory and a different target file name.</p>
-<p>The function validates <code>sServerNameOrIP</code>, <code>sFileNameOld</code>, <code>sFileNameNew</code>, and <code>sProxy</code> before attempting the rename. It also rejects renames where the trimmed new and old file names are the same ignoring case. If those validations pass, the function returns <a href="../../literals/true/"><code>.T.</code></a> only when the underlying move completes. Otherwise, it returns <a href="../../literals/false/"><code>.F.</code></a>.</p>
-<p>On the SFTP path, connection, login, and private-key setup happen inside helper calls before the function reaches its normal <a href="../../literals/false/"><code>.F.</code></a> return path, so some SFTP failures can still raise instead of returning <a href="../../literals/false/"><code>.F.</code></a>.</p>
+<p><code>RenameOnFtp</code> renames a file within the same remote directory. It works like <a href="../MoveInFtp/"><code>MoveInFtp</code></a> with the same source and target directory and a different target file name.</p>
+<p>The function validates <code>sServerNameOrIP</code>, <code>sFileNameOld</code>, <code>sFileNameNew</code>, and <code>sProxy</code> before attempting the rename. It also rejects renames where the trimmed new and old file names are the same ignoring case. If those validations pass, the function returns <a href="../../literals/true/"><code>.T.</code></a> only when the move completes. Otherwise, it returns <a href="../../literals/false/"><code>.F.</code></a>.</p>
+<p>On the SFTP path, connection, login, and private-key setup failures can raise instead of returning <a href="../../literals/false/"><code>.F.</code></a>.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When a workflow needs to rename a file already present on an FTP or SFTP server.</li>
@@ -3672,7 +3672,7 @@
 <td><a href="../../types/number/">number</a></td>
 <td>no</td>
 <td><code>21</code></td>
-<td>Server port. If omitted or non-positive, the implementation uses <code>21</code>, even on the SFTP path.</td>
+<td>Server port. If omitted or non-positive, the function uses <code>21</code>, even for SFTP.</td>
 </tr>
 <tr>
 <td><code>sProxy</code></td>
@@ -3686,7 +3686,7 @@
 <td><a href="../../types/boolean/">boolean</a></td>
 <td>no</td>
 <td><a href="../../literals/false/"><code>.F.</code></a></td>
-<td>Set to <a href="../../literals/true/"><code>.T.</code></a> to use the SFTP implementation. Omitted or <a href="../../literals/nil/"><code>NIL</code></a> keeps the FTP implementation.</td>
+<td>Set to <a href="../../literals/true/"><code>.T.</code></a> to use SFTP. Omitted or <a href="../../literals/nil/"><code>NIL</code></a> uses FTP.</td>
 </tr>
 <tr>
 <td><code>sPrivateKeyFilePath</code></td>
@@ -3698,7 +3698,7 @@
 </tbody>
 </table>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
-<p><strong><a href="../../types/boolean/">boolean</a></strong> — <a href="../../literals/true/"><code>.T.</code></a> when the rename completes; <a href="../../literals/false/"><code>.F.</code></a> when the underlying FTP or SFTP move helper cannot complete the rename.</p>
+<p><strong><a href="../../types/boolean/">boolean</a></strong> — <a href="../../literals/true/"><code>.T.</code></a> when the rename completes; <a href="../../literals/false/"><code>.F.</code></a> when the rename cannot be completed.</p>
 <h2 id="exceptions">Exceptions<a class="headerlink" href="#exceptions" title="Permanent link">&para;</a></h2>
 <table data-ssl-table="exceptions"><colgroup><col><col></colgroup>
 <thead>
@@ -3932,7 +3932,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:58:19 UTC">October 7, 2026</span>
   </span>
 
     
