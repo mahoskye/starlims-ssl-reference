@@ -73,7 +73,7 @@ Prepared for: %USER%
 DoProc("BuildHeaderTemplate");
 ```
 
-`UsrMes` logs this output when the current user is `jsmith`:
+`UsrMes` logs:
 
 ```text
 Laboratory report

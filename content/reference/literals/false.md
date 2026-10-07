@@ -45,7 +45,7 @@ Uniquely among booleans, [`Empty`](../functions/Empty.md)`(.F.)` returns [`.T.`]
 | ----------------------------------------- | ---------------------------------------------------- |
 | [string](../types/string.md)              | `".F."`                                              |
 | [number](../types/number.md)              | `0`                                                  |
-| JSON ([`ToJson`](../functions/ToJson.md)) | `"false"` (a string value, not a JSON boolean token) |
+| JSON ([`ToJson`](../functions/ToJson.md)) | `false` (a JSON boolean token)                       |
 
 ## Notes for daily SSL work
 
@@ -113,8 +113,8 @@ bFlag := .F.;
     UsrMes("bFlag is false");
 :ENDIF;
 
-/* To check if a value is a boolean rather than missing, use LimsType;
-:IF LimsType(bFlag) == "L";
+/* To check if a value is a boolean rather than missing, use LimsTypeEx;
+:IF LimsTypeEx(bFlag) == "LOGIC";
     UsrMes("bFlag is a boolean, not missing");
 :ENDIF;
 ```

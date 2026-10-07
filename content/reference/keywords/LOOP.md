@@ -20,7 +20,7 @@ In nested loops, `:LOOP` affects only the nearest enclosing [`:WHILE`](WHILE.md)
 
 `:LOOP` has no arguments and no return value. It is a loop-control keyword, not an expression.
 
-`:LOOP` is only valid inside an active [`:WHILE`](WHILE.md) or [`:FOR`](FOR.md) loop. Using it outside either loop raises `Found :LOOP outside :WHILE/:FOR`. It is also a compile-time error to place `:LOOP` inside a [`:FINALLY`](FINALLY.md) block, where it raises `Cannot have :LOOP inside :FINALLY.`
+`:LOOP` is only valid inside an active [`:WHILE`](WHILE.md) or [`:FOR`](FOR.md) loop. Using it outside either loop is a compile-time error: `Found :LOOP outside :WHILE/:FOR`. It is also a compile-time error to place `:LOOP` inside a [`:FINALLY`](FINALLY.md) block: `Cannot have :LOOP inside :FINALLY.`
 
 When `:LOOP` runs inside a [`:WHILE`](WHILE.md), control jumps to the loop's next condition check. When it runs inside a [`:FOR`](FOR.md), control jumps to the loop's increment step and then evaluates whether another iteration should run.
 
@@ -50,7 +50,7 @@ When `:LOOP` runs inside a [`:WHILE`](WHILE.md), control jumps to the loop's nex
 
 !!! failure "Don't"
     - Use [`:EXITFOR`](EXITFOR.md) or [`:EXITWHILE`](EXITWHILE.md) when only the current iteration should be skipped. Those keywords terminate the loop instead of continuing it.
-    - Place `:LOOP` inside a [`:FINALLY`](FINALLY.md) block. That raises `Cannot have :LOOP inside :FINALLY.`
+    - Place `:LOOP` inside a [`:FINALLY`](FINALLY.md) block. That is a compile-time error: `Cannot have :LOOP inside :FINALLY.`
     - Place `:LOOP` where required cleanup or bookkeeping would be skipped unintentionally.
     - Assume code after `:LOOP` still runs for that iteration. It never does.
 

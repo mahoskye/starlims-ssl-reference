@@ -25,7 +25,7 @@ Declaring a name is what makes it private to the current scope. SSL resolves an 
 
 - When defining local working variables for a procedure, method, or script.
 - When declaring class fields that should be available to all methods in the class.
-- When you want variables to exist before assignment instead of relying on undeclared-variable warnings or errors.
+- When you want a variable to be private to the routine instead of letting an assignment create or reuse a name from a caller scope.
 - When you want to introduce a new variable at the point where a later block of logic starts using it.
 
 ## Syntax
@@ -54,7 +54,7 @@ Declaring a name is what makes it private to the current scope. SSL resolves an 
     - Use clear Hungarian-style names for local variables in examples and new code.
 
 !!! failure "Don't"
-    - Rely on assignment to introduce a variable. SSL expects names to be declared before use, and an assignment to an undeclared name can land on a caller's variable instead of creating a new one.
+    - Rely on assignment to introduce a variable. With undeclared-variable creation on (the default), an assignment to an undeclared name can land on a caller's variable instead of creating a new one.
     - Re-declare the same name casually. SSL accepts it, but repeated declarations make scope harder to follow.
     - Scatter declarations through unrelated logic just because the language permits it. Use later declarations only when they genuinely improve clarity.
 
@@ -97,7 +97,7 @@ Sample LAB-2024-0042 - Calcium Carbonate Test registered with result 98.6
 
 ### Declaring a variable where a new logic block starts
 
-`:DECLARE` can appear later in the statement flow when a new working variable becomes needed. Here `sAuditText` is only declared inside the [`:IF`](IF.md) block where it is used, keeping it scoped to its purpose.
+`:DECLARE` can appear later in the statement flow when a new working variable becomes needed. Here `sAuditText` is declared inside the [`:IF`](IF.md) block, next to the only code that uses it.
 
 ```ssl
 :PROCEDURE DescribeSampleStatus;
