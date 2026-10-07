@@ -78,7 +78,7 @@ Read a UTF-8 text file and return the full contents.
 :PROCEDURE LoadConfigSettings;
     :DECLARE sConfigPath, sConfigData;
 
-    sConfigPath := GetAppWorkPathFolder() + "/config/app_settings.txt";
+    sConfigPath := GetAppWorkPathFolder() + "config\app_settings.txt";
     sConfigData := ReadText(sConfigPath);
 
     :IF Empty(sConfigData);
@@ -104,7 +104,7 @@ Read only the first part of a file and specify a non-default encoding.
 :PROCEDURE PreviewLegacyFile;
     :DECLARE sFilePath, sPreview;
 
-    sFilePath := GetAppWorkPathFolder() + "/import/legacy_report.txt";
+    sFilePath := GetAppWorkPathFolder() + "import\legacy_report.txt";
     sPreview := ReadText(sFilePath, 120, "ASCII");
 
     :IF Empty(sPreview);
@@ -129,7 +129,7 @@ Wrap the read in structured error handling so you can report file or access prob
 :PROCEDURE LoadImportPreview;
     :DECLARE sFilePath, sHeader, nHeaderLength, oErr;
 
-    sFilePath := GetAppWorkPathFolder() + "/import/IncomingSamples.csv";
+    sFilePath := GetAppWorkPathFolder() + "import\IncomingSamples.csv";
     nHeaderLength := 1024;
 
     :TRY;

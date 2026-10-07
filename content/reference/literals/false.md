@@ -44,7 +44,6 @@ Uniquely among booleans, [`Empty`](../functions/Empty.md)`(.F.)` returns [`.T.`]
 | Target                                    | Result                                               |
 | ----------------------------------------- | ---------------------------------------------------- |
 | [string](../types/string.md)              | `".F."`                                              |
-| [number](../types/number.md)              | `0`                                                  |
 | JSON ([`ToJson`](../functions/ToJson.md)) | `false` (a JSON boolean token)                       |
 
 ## Notes for daily SSL work

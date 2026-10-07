@@ -13,7 +13,7 @@ starlims:
 
 Extracts part of a string starting at a position you specify.
 
-`SubStr()` returns characters from `sSource` starting at `nStartPos`. Positions are 1-based for positive values, so `1` means the first character. If `nStartPos` is omitted or `0`, extraction starts at the first character. Negative values count backward from the end of the string, so `-1` returns the last character and `-2` starts at the second-to-last character. If `nLength` is omitted, the function returns all remaining characters. If `nStartPos` is beyond the end of the string, the result is `""`. If `nLength` is negative or longer than the remaining characters, `SubStr()` returns only the available characters.
+`SubStr()` returns characters from `sSource` starting at `nStartPos`. Positions are 1-based for positive values, so `1` means the first character. If `nStartPos` is omitted or `0`, extraction starts at the first character. Negative values count backward from the end of the string, so `-1` returns the last character and `-2` starts at the second-to-last character. If `nLength` is omitted, the function returns all remaining characters. If `nStartPos` is beyond the end of the string, the result is `""`. If `nLength` is longer than the remaining characters, `SubStr()` returns only the available characters. A negative `nLength` returns the rest of the string, so `SubStr("ABCDEF", 2, -1)` returns `"BCDEF"`.
 
 ## When to use
 

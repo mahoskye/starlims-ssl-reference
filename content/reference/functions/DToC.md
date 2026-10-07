@@ -59,7 +59,7 @@ DToC(dDate)
 
 ## Caveats
 
-- The empty-date placeholder `"  /  /    "` is a literal string of spaces and slashes, not an empty string. Calling [`Empty`](Empty.md) on the result returns [`.F.`](../literals/false.md).
+- The empty-date placeholder `"  /  /    "` is a literal string of spaces and slashes, not an empty string. In observed runtime behavior it stays the same after [`DateFormat`](DateFormat.md) sets another format, such as `"yyyy-MM-dd"`. Calling [`Empty`](Empty.md) on the result returns [`.F.`](../literals/false.md).
 
 ## Examples
 

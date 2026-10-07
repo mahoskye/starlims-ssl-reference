@@ -75,7 +75,7 @@ Wraps an exception object as an `SSLError`. In normal SSL code, use [`GetLastSSL
 - For a SQL Server error caught in [`:CATCH`](../keywords/CATCH.md) (for example an invalid column or an invalid object name), both `Code` and `GenCode` are `0` in observed runtime behavior. The SQL Server error number (`207` for an invalid column, `208` for an invalid object) is in `GenCode` on the [`SSLSQLError`](SSLSQLError.md) returned by [`GetLastSQLError()`](../functions/GetLastSQLError.md).
 - `FullDescription` and `FullDescriptionEx` are formatted diagnostic strings, not structured field-by-field data.
 - `FullDescriptionEx` includes the full stack trace when one is available; `FullDescription` uses a shorter stack view.
-- For compiler errors, SQL errors, and script-not-found errors, the formatted diagnostic text uses specialized headings instead of a generic `Error:` line.
+- For SQL errors, `FullDescription` still starts with a generic `Error: <message>` line, then adds a `SQL error: <SQLState>: <message>` line and a `SQL stmt: <statement>` line with the failing SQL.
 - When constructing `SSLError` from an arbitrary exception, `Operation` defaults to blank and `Code` to `0` unless the wrapped exception already carried that information.
 
 ## Examples

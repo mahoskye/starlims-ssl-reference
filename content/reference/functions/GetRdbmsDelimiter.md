@@ -15,7 +15,7 @@ Returns the identifier delimiter character for the database behind a DSN.
 
 `GetRdbmsDelimiter` maps a DSN to the delimiter character used for quoted identifiers. For SQL Server and Sybase, it returns `[` for opening delimiters and `]` for closing delimiters. For Oracle and DB2, it always returns `"` because the same character is used on both sides. If the DSN does not resolve to one of those database types, the function returns an empty string.
 
-If `sDSN` is [`NIL`](../literals/nil.md), SSL converts it to an empty string before the lookup. A non-empty `sDSN` must name a database connection configured in your environment, such as the default `DATABASE` connection. Any other name raises an error. The function returns a string value and does not modify its inputs.
+If `sDSN` is omitted, [`NIL`](../literals/nil.md), or an empty string, the function uses the default connection: on SQL Server, `GetRdbmsDelimiter(, .T.)` returns `[`. A non-empty `sDSN` must name a database connection configured in your environment, such as the default `DATABASE` connection. Any other name raises an error. The function returns a string value and does not modify its inputs.
 
 ## When to use
 
@@ -34,7 +34,7 @@ GetRdbmsDelimiter([sDSN], bOpen)
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `sDSN` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Name of the database connection whose platform determines the delimiter, such as `"DATABASE"`. A name that is not a configured connection raises an error. |
+| `sDSN` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Name of the database connection whose platform determines the delimiter, such as `"DATABASE"`. If omitted or empty, the default connection is used. A name that is not a configured connection raises an error. |
 | `bOpen` | [boolean](../types/boolean.md) | yes | — | When [`.T.`](../literals/true.md), returns the opening delimiter. When [`.F.`](../literals/false.md), returns the closing delimiter. |
 
 ## Returns

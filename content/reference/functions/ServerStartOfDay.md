@@ -64,7 +64,7 @@ ServerStartOfDay(dDate)
 
 ### Normalize a date to the server day's start
 
-Take any date value and return a version stamped to `00:00:00` on the same calendar day, then display the result.
+Take any date value and return a version stamped to `00:00:00` on the same calendar day, then display the result with [`DateToString`](DateToString.md), because [`LimsString`](LimsString.md) shows only the date part.
 
 ```ssl
 :PROCEDURE GetServerDayStart;
@@ -73,7 +73,7 @@ Take any date value and return a version stamped to `00:00:00` on the same calen
 
     dDayStart := ServerStartOfDay(dWorkDate);
 
-    sMessage := "Server day start: " + LimsString(dDayStart);
+    sMessage := "Server day start: " + DateToString(dDayStart, "MM/dd/yyyy HH:mm:ss.fff");
     UsrMes(sMessage);
 
     :RETURN dDayStart;
@@ -86,7 +86,7 @@ DoProc("GetServerDayStart", {DateFromNumbers(2026, 4, 15)});
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Server day start: <04/15/2026 00:00:00>
+Server day start: 04/15/2026 00:00:00.000
 ```
 
 ### Build a full-day server-side query range

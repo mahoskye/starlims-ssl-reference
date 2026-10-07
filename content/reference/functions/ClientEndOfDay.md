@@ -13,7 +13,7 @@ starlims:
 
 Returns the end of the client's calendar day for a date value.
 
-`ClientEndOfDay` returns a date set to `23:59:59.997` for the client-local day that contains the supplied value. If the input carries timezone information, the function adjusts between the user and server timezone offsets before calculating that boundary. If the input is an empty date, the function returns it unchanged. If the input does not carry timezone information, the function follows [`ServerEndOfDay`](ServerEndOfDay.md) behavior.
+`ClientEndOfDay` returns a date set to `23:59:59.997` for the client-local day that contains the supplied value. If the input carries timezone information, the function adjusts between the user and server timezone offsets before calculating that boundary. If the input is an empty date, the function returns it unchanged. If the input does not carry timezone information, the function follows [`ServerEndOfDay`](ServerEndOfDay.md) behavior. In observed runtime behavior, a value from [`Now`](Now.md) carries timezone information, while a date built with [`CToD`](CToD.md) does not and always gets the server boundary.
 
 ## When to use
 
@@ -119,7 +119,7 @@ DoProc("GenerateClientDayReport", {CToD("04/23/2026")});
 
 ### Compare client and server end-of-day cutoffs
 
-Computes both the client and server end-of-day for the same input date and reports whether they produce the same cutoff.
+Computes both the client and server end-of-day for the same input value and reports whether they produce the same cutoff. The usage passes [`Now`](Now.md), because a date built with [`CToD`](CToD.md) always gives the same cutoff.
 
 ```ssl
 :PROCEDURE CompareDayCutoffs;
@@ -142,7 +142,7 @@ Computes both the client and server end-of-day for the same input date and repor
 :ENDPROC;
 
 /* Usage;
-DoProc("CompareDayCutoffs", {CToD("04/23/2026")});
+DoProc("CompareDayCutoffs", {Now()});
 ```
 
 `UsrMes` logs one of:

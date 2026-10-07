@@ -15,7 +15,7 @@ Returns the index of the first array element that matches a value or condition.
 
 AScan searches `aTarget` from a 1-based starting position and returns the index of the first match. You can search by value or by passing a code block. If you omit `nStart`, the scan begins at element `1`. If you omit `nCount`, AScan searches from `nStart` through the end of the array. If no match is found, it returns `0`.
 
-When `vValueOrBlock` is a regular value, the scanned elements must have the same type as the search value: an element of a different type raises an error rather than being skipped (see Exceptions). For strings, AScan uses prefix matching rather than exact matching, so a search for `"APP"` matches `"APPROVED"`. When `vValueOrBlock` is a code block, AScan calls the block for each element and matches the first element whose block result is boolean [`.T.`](../literals/true.md). If `aTarget` is [`NIL`](../literals/nil.md), AScan returns `0`.
+When `vValueOrBlock` is a regular value, the scanned elements must have the same type as the search value: an element of a different type raises an error rather than being skipped (see Exceptions). [`NIL`](../literals/nil.md) elements are the exception: they are skipped, so `AScan({NIL, "B"}, "B")` returns `2`. For strings, AScan uses prefix matching rather than exact matching, so a search for `"APP"` matches `"APPROVED"`, and an empty search string matches the first string element. When `vValueOrBlock` is a code block, AScan calls the block for each element and matches the first element whose block result is boolean [`.T.`](../literals/true.md). If `aTarget` is [`NIL`](../literals/nil.md), AScan returns `0`.
 
 ## When to use
 

@@ -135,8 +135,8 @@ Sends a `401 Unauthorized` status with an appropriate authentication challenge. 
     - Use `End()` when you want to terminate the response early after writing partial content.
 
 !!! failure "Don't"
-    - Try to construct an `SSLResponse` directly — it is only available as the [`Response`](../special-forms/response.md) ambient inside endpoint scripts.
-    - Reach for `Response` outside an endpoint context. It will not be available — see [`Response`](../special-forms/response.md) for behavior.
+    - Try to construct an `SSLResponse` directly — it is only available as the [`Response`](../special-forms/response.md) ambient.
+    - Reach for `Response` outside an endpoint context. It does not shape an HTTP reply there — see [`Response`](../special-forms/response.md) for behavior.
     - Use `AddHeader` to set `Content-Type`. Use the `ContentType` property so the runtime can manage it consistently.
     - Continue writing after `End()` and expect the new content to appear on the wire.
 

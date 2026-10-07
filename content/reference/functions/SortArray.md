@@ -62,6 +62,7 @@ SortArray(aTarget, [vNumeric])
 ## Caveats
 
 - Only [`.T.`](../literals/true.md) and numeric `1` select the numeric comparer. Other values, such as `2` or `"Y"`, fall back to the default sort.
+- A comparator should return a whole number. In observed runtime behavior, a block that returns a fraction, such as `{|x, y| x - y}` over `{1.5, 1.2, 1.9}`, does not raise, but the array does not come back in ascending order. For non-integer keys, return `-1`, `0`, or `1` explicitly, for example with [`IIf`](IIf.md).
 
 ## Examples
 

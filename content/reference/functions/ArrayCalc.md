@@ -36,7 +36,7 @@ ArrayCalc(aTarget, [sOperation], [vValue], [nStart], [nCount])
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `aTarget` | [array](../types/array.md) | yes | — | Target array for the selected operation. |
-| `sOperation` | [string](../types/string.md) | no | empty string | Exact operation code such as `DUP`, `SUM`, `COPY`, or `SORT`. The documented codes are uppercase. Unrecognized values return [`NIL`](../literals/nil.md). |
+| `sOperation` | [string](../types/string.md) | no | empty string | Exact operation code such as `DUP`, `SUM`, `COPY`, or `SORT`. The documented codes are uppercase, and matching is case-sensitive: `"sum"` is not recognized. Unrecognized values return [`NIL`](../literals/nil.md). |
 | `vValue` | any | no | omitted | Extra value used by operations such as `MERGE`, `SORT`, `ADD`, `FILL`, and `INS`. For `SORT`, pass a numeric column index, an array of numeric column indexes, or a comparison code block. |
 | `nStart` | [number](../types/number.md) | no | `1` | Starting index used by `COPY`, `DEL`, `FILL`, and `INS`. |
 | `nCount` | [number](../types/number.md) | no | `ALen(aTarget)` | Element count used by `COPY`, `DEL`, and `FILL`. If the requested range extends past the end of `aTarget`, ArrayCalc shortens the count to the available elements. |
@@ -89,7 +89,7 @@ ArrayCalc(aTarget, [sOperation], [vValue], [nStart], [nCount])
 | A scanned element is [`NIL`](../literals/nil.md) during `MIN`. The same pattern applies to `MAX`. | `ArrayCalc(): for MIN operations, array elements cannot be null.` |
 | Scanned elements use mixed types during `MIN`. The same pattern applies to `MAX`. | `ArrayCalc(): for MIN operations, array elements must have the same type.` |
 | `AVG1` receives a target array with no elements. | `ArrayCalc(): for AVG1 operations, target array must contain at least one element (cannot divide by zero).` |
-| `AVG` receives a target array with no non-empty elements. | `ArrayCalc(): for AVG operations, target array must contain at least one non-empty element (cannot divide by zero).` |
+| `AVG` has no non-empty, nonzero elements to average (for example `{0, 0}`). | `ArrayCalc(): for AVG operations, target array must contain at least one non-empty element (cannot divide by zero).` |
 | `DEV1` receives a target array with fewer than two elements. | `ArrayCalc(): for DEV1 operations, target array must contain at least two elements (cannot divide by zero).` |
 | Fewer than two non-empty, nonzero elements remain after filtering for `DEV`. | `ArrayCalc(): for DEV operations, target array must contain at least two elements (cannot divide by zero).` |
 

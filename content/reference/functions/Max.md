@@ -13,7 +13,7 @@ starlims:
 
 Returns whichever of two values compares greater when both arguments are the same supported type.
 
-`Max` accepts two arguments and returns the larger one. It supports three value families: strings, numbers, and dates. When both arguments are strings, it returns the string that compares greater. When both are numbers, it returns the larger numeric value. When both are dates, it returns the later date.
+`Max` accepts two arguments and returns the larger one. It supports three value families: strings, numbers, and dates. When both arguments are strings, it returns the string that compares greater. Strings compare alphabetically rather than by character code: `Max("a", "B")` returns `"B"`, `Min("a", "B")` returns `"a"`, and `Max("abc", "ABD")` returns `"ABD"`. When both are numbers, it returns the larger numeric value. When both are dates, it returns the later date.
 
 If the two arguments are different types, the function raises an error. If both arguments are the same type but that type is not supported by `Max`, the call also fails.
 

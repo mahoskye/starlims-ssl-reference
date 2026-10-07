@@ -14,11 +14,11 @@ starlims:
 
 Returns [`.T.`](../literals/true.md) when two values are strictly equal under SSL equality rules.
 
-The `==` operator uses exact equality for strings, numbers, booleans, and dates. For arrays and objects, it checks whether both operands reference the same instance rather than comparing contents. `NIL == NIL` returns [`.T.`](../literals/true.md), while [`NIL`](../literals/nil.md) compared with a non-[`NIL`](../literals/nil.md) value returns [`.F.`](../literals/false.md). Comparing a code block raises a runtime error.
+The `==` operator uses exact equality for strings, numbers, booleans, and dates. For arrays and objects, it checks whether both operands reference the same instance rather than comparing contents. `NIL == NIL` returns [`.T.`](../literals/true.md), while [`NIL`](../literals/nil.md) compared with a non-[`NIL`](../literals/nil.md) value, on either side, returns [`.F.`](../literals/false.md). Comparing a code block raises a runtime error.
 
 For strings, `==` requires an exact match - it does not use the prefix matching behavior of [`equals`](equals.md). For example, `"Logged" == "Log"` returns [`.F.`](../literals/false.md), while `"Logged" = "Log"` returns [`.T.`](../literals/true.md).
 
-Type-mismatch behavior depends on the left operand. A string on the left compared with a non-string on the right returns [`.F.`](../literals/false.md). A numeric, boolean, or date value on the left compared with an incompatible right operand raises a runtime invalid-operand error.
+Type-mismatch behavior depends on the left operand. A string on the left compared with a non-string on the right returns [`.F.`](../literals/false.md). A numeric, boolean, or date value on the left compared with [`NIL`](../literals/nil.md) returns [`.F.`](../literals/false.md), so a guard such as `nValue == NIL` is safe. Compared with any other incompatible right operand, it raises a runtime invalid-operand error.
 
 ## When to use it
 
@@ -46,6 +46,7 @@ bEqual := vLeft == vRight;
 | [object](../types/object.md) | [object](../types/object.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md) only when both operands reference the same object instance. |
 | [`NIL`](../literals/nil.md) | [`NIL`](../literals/nil.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md). |
 | [`NIL`](../literals/nil.md) | non-[`NIL`](../literals/nil.md) | [boolean](../types/boolean.md) | Returns [`.F.`](../literals/false.md). |
+| number/boolean/date | [`NIL`](../literals/nil.md) | [boolean](../types/boolean.md) | Returns [`.F.`](../literals/false.md). |
 | code block | any | error | Raises a runtime error. |
 
 ## Precedence
@@ -67,7 +68,7 @@ bEqual := vLeft == vRight;
 
 ## Errors and edge cases
 
-- Code block left operand raises `Cannot compare to a code block`.
+- Code block left operand raises `Run-time error: == : Cannot compare to a code block`.
 
 ## Examples
 

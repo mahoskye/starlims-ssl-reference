@@ -16,7 +16,7 @@ Increases a number variable by one, modifying its value in place.
 
 The `++` operator adds one to a numeric variable. It supports both prefix (`++variable`) and postfix (`variable++`) forms. Both forms increment the variable in place, but they differ in what they return when used inside a larger expression: prefix returns the new (incremented) value; postfix returns the original value before incrementing.
 
-`++` is equivalent to `variable += 1` but more concise. The operand must be a variable holding a number. Using `++` on a non-numeric variable, a literal, or an expression result raises a runtime error.
+`++` is equivalent to `variable += 1` but more concise. The operand must be a variable holding a number or a date; on a date, `++` adds one day. Using `++` on a variable of another type, a literal, or an expression result raises a runtime error.
 
 ## When to use it
 
@@ -42,6 +42,7 @@ Prefix form — increments, then returns new value:
 | Left | Right | Result | Behavior |
 |------|-------|--------|----------|
 | [number](../types/number.md) | n/a | [number](../types/number.md) | Adds 1 to the variable in place. |
+| [date](../types/date.md) | n/a | [date](../types/date.md) | Adds one day to the variable in place. |
 
 ## Precedence
 
@@ -55,7 +56,7 @@ Prefix form — increments, then returns new value:
     - Use the prefix form (`++variable`) when the incremented value is needed immediately in the same expression.
 
 !!! failure "Don't"
-    - Use `++` on non-variable or non-numeric values. Only variables holding numbers can be incremented.
+    - Use `++` on non-variable values or on types other than numbers and dates. Only variables holding numbers or dates can be incremented.
     - Assume prefix and postfix always behave identically inside expressions. Prefix returns the new value; postfix returns the old value.
 
 ## Examples

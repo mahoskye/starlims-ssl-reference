@@ -18,9 +18,9 @@ The `=` operator is type-aware. For strings, it is a loose comparison: it return
 
 For strings, `=` is not exact-match equality. `"Logged" = "Log"` returns [`.T.`](../literals/true.md) because the left string starts with the right string. Use [`strict-equals`](strict-equals.md) when a string comparison must be exact.
 
-Type-mismatch behavior depends on the left operand. A string on the left returns [`.F.`](../literals/false.md) when the right operand is not a string. Numeric, boolean, and date values on the left raise a runtime invalid-operand error when the right operand is an incompatible type.
+Type-mismatch behavior depends on the left operand. A string on the left returns [`.F.`](../literals/false.md) when the right operand is not a string. Numeric, boolean, and date values on the left raise a runtime invalid-operand error when the right operand is an incompatible type other than [`NIL`](../literals/nil.md).
 
-`NIL = NIL` returns [`.T.`](../literals/true.md). [`NIL`](../literals/nil.md) compared with any non-[`NIL`](../literals/nil.md) value returns [`.F.`](../literals/false.md).
+`NIL = NIL` returns [`.T.`](../literals/true.md). [`NIL`](../literals/nil.md) compared with any non-[`NIL`](../literals/nil.md) value returns [`.F.`](../literals/false.md), whichever side it is on: `5 = NIL` and `Today() = NIL` are both [`.F.`](../literals/false.md).
 
 ## When to use it
 
@@ -48,6 +48,7 @@ bEqual := vLeft = vRight;
 | [object](../types/object.md) | [object](../types/object.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md) only when both operands reference the same object instance. |
 | NIL | NIL | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md). |
 | NIL | non-[`NIL`](../literals/nil.md) | [boolean](../types/boolean.md) | Returns [`.F.`](../literals/false.md). |
+| number/date | NIL | [boolean](../types/boolean.md) | Returns [`.F.`](../literals/false.md). |
 | code block | any | error | Raises a runtime error. |
 
 ## Precedence

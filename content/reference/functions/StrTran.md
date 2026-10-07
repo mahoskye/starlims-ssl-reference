@@ -47,6 +47,7 @@ StrTran(source, searchFor, [replaceWith])
 | --- | --- |
 | `source` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. StrTran().` |
 | `searchFor` is [`NIL`](../literals/nil.md). | `Argument searchFor cannot be null. StrTran().` |
+| `searchFor` is an empty string. | `String cannot be of zero length.` |
 
 ## Best practices
 
@@ -64,7 +65,7 @@ StrTran(source, searchFor, [replaceWith])
 ## Caveats
 
 - Replacements are non-overlapping. Each match is processed once in the original left-to-right scan.
-- Avoid passing an empty string as `searchFor`.
+- An empty `searchFor` raises an error (see Exceptions), so check it before calling.
 
 ## Examples
 

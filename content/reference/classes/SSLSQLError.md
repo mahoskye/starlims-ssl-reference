@@ -34,7 +34,7 @@ You can't construct one directly; get it from [`GetLastSQLError()`](../functions
 | Name | Type | Access | Description |
 |------|------|--------|-------------|
 | `ErrorMessage` | [string](../types/string.md) | read-only | Combined message text from the captured database exception chain, or `No Exception.` when no message text was captured. |
-| `SQLState` | [string](../types/string.md) | read-only | Provider error state or code text captured for the SQL error. |
+| `SQLState` | [string](../types/string.md) | read-only | Provider error state or code text captured for the SQL error. On SQL Server, this is `SQL-` followed by the zero-padded error number, for example `SQL-00207` for an invalid column. |
 | `ErrorStackTrace` | [string](../types/string.md) | read-only | Combined stack trace text from the captured exception chain, or `Empty stack trace.` when no stack trace text was captured. |
 | `Description` | [string](../types/string.md) | read-only | Alias of `ErrorMessage`. |
 | `Operation` | [string](../types/string.md) | read-only | Always returns `SQL operation.` |
@@ -63,7 +63,7 @@ You can't construct one directly; get it from [`GetLastSQLError()`](../functions
 
 ## Caveats
 
-- `Description` and `ErrorMessage` are the same value, and inherited `Code` returns the same numeric value as `GenCode`.
+- `Description` and `ErrorMessage` are the same value, and inherited `Code` returns the same numeric value as `GenCode` (for example `207` for an invalid column on SQL Server).
 - `ErrorMessage` and `ErrorStackTrace` can include text from nested causes in the same exception chain.
 - Inherited [`SSLError`](SSLError.md) properties such as `FullDescription`, `FullDescriptionEx`, `NETException`, and `InnerException` are still available.
 

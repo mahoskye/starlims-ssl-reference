@@ -13,7 +13,7 @@ starlims:
 
 Converts a hexadecimal string to its decimal string representation.
 
-`LHex2Dec()` takes a string containing a hexadecimal number and returns the equivalent decimal value as a string. If `sSource` is [`NIL`](../literals/nil.md), the function raises an error. Invalid input is not sanitized or repaired before conversion, so this function is best used after input has already been validated.
+`LHex2Dec()` takes a string containing a hexadecimal number and returns the equivalent decimal value as a string. If `sSource` is [`NIL`](../literals/nil.md), the function raises an error. Lowercase hexadecimal digits are accepted (`"1a7f"` returns `"6783"`). Input that is not a hexadecimal number, such as `"GG"`, raises an error, so this function is best used after input has already been validated.
 
 ## When to use
 
@@ -42,6 +42,7 @@ LHex2Dec(sSource)
 | Trigger | Exception message |
 | --- | --- |
 | `sSource` is [`NIL`](../literals/nil.md). | `Object reference not set to an instance of an object.` |
+| `sSource` is not a hexadecimal number, such as `"GG"`. | `Input string was not in a correct format.` |
 
 ## Best practices
 

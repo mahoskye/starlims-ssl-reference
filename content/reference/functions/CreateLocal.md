@@ -13,7 +13,7 @@ starlims:
 
 Creates or overwrites a local variable in the current scope by name.
 
-`CreateLocal` creates or updates a local variable in the current local scope using a runtime-supplied name. `sVarName` must be a string. `vVarValue` is optional; when you omit it, the local variable is initialized to an empty string. If a local with the same name already exists in the current scope, `CreateLocal` overwrites that local value. The function returns the supplied `vVarValue` unchanged; when the second argument is omitted, the local still stores `""`, but the call itself returns no value. Use `CreateLocal` when the variable name is decided at runtime and the value should remain local instead of becoming public.
+`CreateLocal` creates or updates a local variable in the current local scope using a runtime-supplied name. `sVarName` must be a string. `vVarValue` is optional; when you omit it, the local variable is initialized to an empty string. If a local with the same name already exists in the current scope, `CreateLocal` overwrites that local value. The function returns the supplied `vVarValue` unchanged; when the second argument is omitted, the local still stores `""`, but the call itself returns [`NIL`](../literals/nil.md). Use `CreateLocal` when the variable name is decided at runtime and the value should remain local instead of becoming public.
 
 ## When to use
 
@@ -36,7 +36,7 @@ CreateLocal(sVarName, [vVarValue])
 
 ## Returns
 
-**any** — Returns the supplied `vVarValue`. If `vVarValue` is omitted, the local variable is still created with `""`, and the call returns no value.
+**any** — Returns the supplied `vVarValue`. If `vVarValue` is omitted, the local variable is still created with `""`, and the call returns [`NIL`](../literals/nil.md).
 
 ## Exceptions
 

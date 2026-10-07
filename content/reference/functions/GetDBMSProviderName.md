@@ -56,7 +56,7 @@ GetDBMSProviderName([sConnectionName])
 
 ## Caveats
 
-- Logical names are matched exactly; extra spaces or wrong case will fail the lookup and raise an error.
+- Logical names are matched case-insensitively (`"database"` finds the `DATABASE` connection), but extra spaces fail the lookup and raise an error.
 
 ## Examples
 

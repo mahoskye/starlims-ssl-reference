@@ -60,7 +60,7 @@ SetGroupSeparator(sGroupSep)
 ## Caveats
 
 - Changing the separator affects all subsequent numeric operations; parts of the application that expect a different separator may behave incorrectly.
-- There is no validation that `sGroupSep` does not conflict with the current decimal separator.
+- There is no validation that `sGroupSep` does not conflict with the current decimal separator: `SetGroupSeparator(GetDecimalSeparator())` succeeds without an error, and both separators are then the same character.
 
 ## Examples
 

@@ -59,7 +59,7 @@ Returns the field value as a date when the value is already a date or when a str
 
 Returns the field value as a number when the value is already numeric or when a string value can be parsed as a number.
 
-**Returns:** [number](../types/number.md) — Converted number
+**Returns:** [number](../types/number.md) — Converted number, or `0` when a string value cannot be parsed as a number
 
 ### `ToString`
 
@@ -91,7 +91,7 @@ Returns the field value when it is a string.
 ## Caveats
 
 - For non-binary fields, assigning [`NIL`](../literals/nil.md) stores a null value.
-- `ToNumber()` may raise an error when the current value is not numeric and is not a parsable string.
+- `ToNumber()` returns `0` for a string value that cannot be parsed as a number (for example `"abc"`), so a `0` result does not prove the field holds zero.
 - For binary fields, reading `Value` depends on a usable table import folder.
 - For binary fields, assigning `Value` requires a string file path that already exists.
 

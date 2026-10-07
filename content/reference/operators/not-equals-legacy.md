@@ -18,7 +18,7 @@ The `<>` operator is the legacy not-equals form. It is a full alias for [`not-eq
 
 For strings, `<>` uses exact comparison, not prefix matching. For example, `"Logged" <> "Log"` returns [`.T.`](../literals/true.md) because strict equality returns [`.F.`](../literals/false.md). If you want loose prefix matching, use [`equals`](equals.md) with [`=`](equals.md) instead. For numbers, booleans, and dates, it compares values directly. For arrays and objects, it compares references rather than walking contents.
 
-Type-mismatch behavior depends on the left operand. A string on the left compared with a non-string on the right returns [`.T.`](../literals/true.md). A numeric, boolean, or date value on the left compared with an incompatible right operand raises a runtime invalid-operand error instead of returning a boolean.
+Type-mismatch behavior depends on the left operand. A string on the left compared with a non-string on the right returns [`.T.`](../literals/true.md). A numeric, boolean, or date value on the left compared with [`NIL`](../literals/nil.md) returns [`.T.`](../literals/true.md), but compared with any other incompatible right operand raises a runtime invalid-operand error instead of returning a boolean.
 
 ## When to use it
 
@@ -46,6 +46,7 @@ bDifferent := vLeft <> vRight;
 | [object](../types/object.md) | [object](../types/object.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md) unless both operands reference the same object instance. |
 | [`NIL`](../literals/nil.md) | [`NIL`](../literals/nil.md) | [boolean](../types/boolean.md) | Returns [`.F.`](../literals/false.md). |
 | [`NIL`](../literals/nil.md) | non-[`NIL`](../literals/nil.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md). |
+| number/boolean/date | [`NIL`](../literals/nil.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md). |
 | code block | any | error | Raises a runtime error. |
 
 ## Precedence
@@ -67,7 +68,7 @@ bDifferent := vLeft <> vRight;
 
 ## Errors and edge cases
 
-- Code block left operand raises `Cannot compare to a code block`.
+- Code block left operand raises `Run-time error: == : Cannot compare to a code block`. The message names `==` because the operator negates strict equality.
 
 ## Examples
 

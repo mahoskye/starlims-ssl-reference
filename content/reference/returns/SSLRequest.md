@@ -90,8 +90,8 @@ Saves the request body to a file on the server and returns the path. Useful for 
     - Treat `Request` as read-only — the values reflect what the client sent.
 
 !!! failure "Don't"
-    - Try to construct an `SSLRequest` directly — it is only available as the [`Request`](../special-forms/request.md) ambient inside endpoint scripts.
-    - Reach for `Request` outside an endpoint context (e.g., from a script invoked through `DoProc` from an interactive session). It will not be available — see [`Request`](../special-forms/request.md) for behavior.
+    - Try to construct an `SSLRequest` directly — it is only available as the [`Request`](../special-forms/request.md) ambient.
+    - Reach for `Request` outside an endpoint context (e.g., from a script invoked through `DoProc` from an interactive session). It does not describe an HTTP call there — see [`Request`](../special-forms/request.md) for behavior.
     - Use `BodyAsString` for binary uploads. Use `BodyAsBinary` or `SaveInputStream()` instead.
     - Modify values on the collection properties expecting the incoming request to change. The values are read-only views.
 

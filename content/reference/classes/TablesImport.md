@@ -58,7 +58,7 @@ It reads `<sFolder>\<sName>\<sName>.txt`, which can contain dataset XML or a tex
 **Returns:** [object](../types/object.md) — [`CDataTable`](CDataTable.md) on success, or [`NIL`](../literals/nil.md) when loading fails.
 
 **Raises:**
-- `sName argument cannot be null.` (runtime message reads `TName arg. can not be null`)
+- **When `sName` is [`NIL`](../literals/nil.md):** `tName arg. can not be null in TablesImport.GetTable()`
 
 ## Inheritance
 

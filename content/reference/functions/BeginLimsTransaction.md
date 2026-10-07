@@ -69,6 +69,7 @@ BeginLimsTransaction([sConnectionName], [sIsoLevel])
 ## Caveats
 
 - Repeated calls on the same connection increase that connection's transaction depth, so each successful begin must be matched with exactly one [`EndLimsTransaction`](EndLimsTransaction.md) call.
+- An unrecognized non-empty `sIsoLevel` string does not raise. In observed runtime behavior the transaction runs at `Read Uncommitted`, so a misspelled level silently allows dirty reads.
 
 ## Examples
 

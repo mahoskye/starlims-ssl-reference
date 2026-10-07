@@ -63,7 +63,7 @@ Rat(sSubString, sSource)
 
 ## Caveats
 
-- An empty `sSubString` returns `0`.
+- An empty `sSubString` returns `0`, even when `sSource` is empty (unlike [`At`](At.md), which returns `1`).
 - An empty `sSource` also returns `0` when `sSubString` is not empty.
 - The result is one-based, so convert carefully when working with zero-based external systems.
 

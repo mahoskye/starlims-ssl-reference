@@ -63,13 +63,13 @@ Returned objects follow these rules:
 
 !!! failure "Don't"
     - Assume repeated sibling elements are returned as a scalar value. The singular property keeps only the first matching child.
-    - Assume an attribute named `value` will appear as `Value`. The function prefixes that attribute name to avoid colliding with the generated text-value property.
+    - Assume an attribute named `value` will appear as `Value`. The function renames that attribute to `Attrvalue` to avoid colliding with the generated text-value property.
     - Pass [`NIL`](../literals/nil.md), `""`, or a non-string value for `sXml`. Those inputs raise the documented argument error.
 
 ## Caveats
 
 - Attribute names that contain `:` appear with `_` instead.
-- When an attribute name is `value`, the function renames it with an `Attr` prefix to avoid colliding with the generated `Value` property.
+- When an attribute name is `value`, the function renames it to `Attrvalue` to avoid colliding with the generated `Value` property. For `<a value='x'/>`, `GetInternal(oNode, "Attrvalue")` returns `"x"`.
 - `bPreserveWhitespace` only changes what the XML loader keeps. Whitespace nodes between nested elements are still not exposed as child properties in the returned object tree.
 - Non-boolean `bPreserveWhitespace` values behave like the argument was omitted,
   so whitespace preservation stays off.

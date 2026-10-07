@@ -33,7 +33,7 @@ ExecUdf(sCode, [aArgs], [bCacheCode])
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `sCode` | [string](../types/string.md) | yes | — | SSL source to execute. If it is [`NIL`](../literals/nil.md), it is treated as an empty string. |
-| `aArgs` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Optional argument array for the dynamic call. When supplied, it must be an array. |
+| `aArgs` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Optional argument array for the dynamic call. When supplied, it must be an array. The dynamic code receives the elements, in order, through its own [`:PARAMETERS`](../keywords/PARAMETERS.md) statement: `ExecUdf(":PARAMETERS a, b; :RETURN a + b;", {2, 3})` returns `5`. |
 | `bCacheCode` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Reuses compiled code for repeated execution of the same source text. |
 
 ## Returns

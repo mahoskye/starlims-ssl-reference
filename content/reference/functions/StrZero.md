@@ -13,7 +13,7 @@ starlims:
 
 Formats a number as a zero-padded string, with optional total width and decimal precision.
 
-`StrZero` is used when you need a fixed-width numeric string for display, export, or identifiers. It pads the integer portion with leading zeroes and can include a fixed number of decimal places. When `nLength` and `nDecimals` are both omitted, integers default to a 10-character field and non-integers to a 20-character field with up to 9 decimal places. When the requested width cannot hold the formatted value, the function returns a string of `*` characters of that width.
+`StrZero` is used when you need a fixed-width numeric string for display, export, or identifiers. It pads the integer portion with leading zeroes and can include a fixed number of decimal places. When `nLength` and `nDecimals` are both omitted, integers default to a 10-character field and non-integers to a 20-character field with up to 9 decimal places. When the requested decimal places do not fit, decimal digits are dropped first: `StrZero(123456.78, 8, 2)` returns `"123456.7"`. Only when the integer part is wider than `nLength` does the function return a string of `*` characters of that width, so `StrZero(123456789, 5)` returns `"*****"`. A negative number keeps its minus sign before the zeros: `StrZero(-12, 6)` returns `"-00012"`.
 
 ## When to use
 
@@ -38,7 +38,7 @@ StrZero(nNumber, [nLength], [nDecimals])
 
 ## Returns
 
-**[string](../types/string.md)** — The formatted number, left-padded with zeros to the requested width. Returns a string of `*` characters when the value overflows the requested width.
+**[string](../types/string.md)** — The formatted number, left-padded with zeros to the requested width. Decimal digits that do not fit are dropped. Returns a string of `*` characters when the integer part is wider than the requested width.
 
 ## Exceptions
 
@@ -123,7 +123,7 @@ LAB-2024-0042,000012.377
 
 ### Detect and report overflow before export
 
-Detect the documented overflow case where `StrZero` returns an all-asterisk string.
+Detect the documented overflow case where `StrZero` returns an all-asterisk string. The usage passes a value whose integer part is wider than the 8-character field.
 
 ```ssl
 :PROCEDURE FormatResultValue;
@@ -149,7 +149,7 @@ Detect the documented overflow case where `StrZero` returns an all-asterisk stri
 :ENDPROC;
 
 /* Usage;
-DoProc("FormatResultValue", {123456.78, 8, 2});
+DoProc("FormatResultValue", {123456789.5, 8, 2});
 ```
 
 ## Related

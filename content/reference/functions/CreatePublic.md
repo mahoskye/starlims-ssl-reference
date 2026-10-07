@@ -13,7 +13,7 @@ starlims:
 
 Creates or overwrites a public variable by name.
 
-`CreatePublic` creates a public variable when it does not already exist, then writes the supplied value into it. `sVarName` must be a string. If `vVarValue` is omitted, the public variable is initialized to an empty string. The function returns the supplied `vVarValue`; when the second argument is omitted, the public variable still stores `""`, but the call itself returns no value. Use `CreatePublic` when the variable name is only known at runtime and the value must be available outside the current local scope.
+`CreatePublic` creates a public variable when it does not already exist, then writes the supplied value into it. `sVarName` must be a string. If `vVarValue` is omitted, the public variable is initialized to an empty string. The function returns the supplied `vVarValue`; when the second argument is omitted, the public variable still stores `""`, but the call itself returns [`NIL`](../literals/nil.md). Use `CreatePublic` when the variable name is only known at runtime and the value must be available outside the current local scope.
 
 ## When to use
 
@@ -36,7 +36,7 @@ CreatePublic(sVarName, [vVarValue])
 
 ## Returns
 
-**any** — The supplied `vVarValue`. If `vVarValue` is omitted, the public variable is created with `""`, and the call returns no value.
+**any** — The supplied `vVarValue`. If `vVarValue` is omitted, the public variable is created with `""`, and the call returns [`NIL`](../literals/nil.md).
 
 ## Exceptions
 

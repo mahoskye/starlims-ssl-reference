@@ -13,7 +13,7 @@ starlims:
 
 Converts a hexadecimal string to a string by reading the input in two-character chunks and decoding each chunk as a byte.
 
-`LFromHex` returns an empty string for empty input. If the input length is odd, the final character is still decoded as a single hexadecimal digit. If the argument is [`NIL`](../literals/nil.md), the function raises an error.
+`LFromHex` returns an empty string for empty input. If the input length is odd, the final character is still decoded as a single hexadecimal digit. If the argument is [`NIL`](../literals/nil.md), the function raises an error. Lowercase hexadecimal digits decode the same as uppercase ones (`"48656c6c6f"` returns `"Hello"`), while input that contains non-hexadecimal characters raises an error.
 
 ## When to use
 
@@ -43,6 +43,7 @@ LFromHex(sSource)
 | Trigger | Exception message |
 | --- | --- |
 | `sSource` is [`NIL`](../literals/nil.md). | `argument source cannot be null. LFromHex()` |
+| `sSource` contains characters that are not hexadecimal digits, such as `"XYZ123"`. | `Could not find any recognizable digits.` |
 
 ## Best practices
 
@@ -52,7 +53,7 @@ LFromHex(sSource)
     - Treat [`NIL`](../literals/nil.md) as an error case and handle it before decoding.
 
 !!! failure "Don't"
-    - Assume external input is valid hexadecimal text. Invalid content can fail during decoding.
+    - Assume external input is valid hexadecimal text. Non-hexadecimal characters raise an error during decoding.
     - Pass [`NIL`](../literals/nil.md) to `LFromHex`. The function raises an exception for [`NIL`](../literals/nil.md) input.
     - Use `LFromHex` when you need a numeric conversion. Use [`LHex2Dec`](LHex2Dec.md) for hexadecimal-to-decimal conversion.
 

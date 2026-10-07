@@ -13,7 +13,7 @@
       "special_form": 8,
       "returns": 12
     },
-    "with_exceptions": 265,
+    "with_exceptions": 267,
     "with_caveats": 402,
     "with_best_practices": 458
   },
@@ -529,7 +529,7 @@
           "message": "ArrayCalc(): for AVG1 operations, target array must contain at least one element (cannot divide by zero)."
         },
         {
-          "trigger": "AVG receives a target array with no non-empty elements.",
+          "trigger": "AVG has no non-empty, nonzero elements to average (for example {0, 0}).",
           "message": "ArrayCalc(): for AVG operations, target array must contain at least one non-empty element (cannot divide by zero)."
         },
         {
@@ -637,7 +637,7 @@
         "Empty arrays are allowed. With omitted type information, an empty array defaults to string TVP behavior.",
         "NIL elements are allowed as long as the non-NIL elements still match the chosen TVP type.",
         "Only the first element is checked for nesting. A nested array later in the list does not raise the one-dimensional error; it fails the element-type checks instead.",
-        "This function only creates the TVP object. How that object is bound to a query or procedure depends on the database call that receives it."
+        "This function only creates the TVP object. To use it, pass it as the value for a positional ? placeholder that the query reads as a table. For example, LSelect(\"SELECT COUNT(*) FROM ? t\",,, {ArrayToTVP({1, 2, 3}, \"INT\")}) returns {{3}} on SQL Server."
       ],
       "best_practices": {
         "do": [
@@ -665,6 +665,10 @@
         {
           "trigger": "sSource is NIL.",
           "message": "Argument source cannot be null. Asc()."
+        },
+        {
+          "trigger": "sSource is an empty string.",
+          "message": "Index was outside the bounds of the array."
         }
       ],
       "caveats": [],
@@ -676,7 +680,7 @@
         ],
         "dont": [
           "Pass NIL. Asc raises an error for a null argument.",
-          "Pass an empty string. Asc requires a first character to read.",
+          "Pass an empty string. Asc raises an error when there is no first character to read.",
           "Expect Asc to evaluate the whole string. It only uses the first character.",
           "Use Asc when direct string comparison is clearer than code-based logic."
         ]
@@ -744,7 +748,8 @@
         }
       ],
       "caveats": [
-        "Repeated calls on the same connection increase that connection's transaction depth, so each successful begin must be matched with exactly one EndLimsTransaction call."
+        "Repeated calls on the same connection increase that connection's transaction depth, so each successful begin must be matched with exactly one EndLimsTransaction call.",
+        "An unrecognized non-empty sIsoLevel string does not raise. In observed runtime behavior the transaction runs at Read Uncommitted, so a misspelled level silently allows dirty reads."
       ],
       "best_practices": {
         "do": [
@@ -1787,7 +1792,7 @@
         }
       ],
       "caveats": [
-        "The empty-date placeholder \"  /  /    \" is a literal string of spaces and slashes, not an empty string. Calling Empty on the result returns .F.."
+        "The empty-date placeholder \"  /  /    \" is a literal string of spaces and slashes, not an empty string. In observed runtime behavior it stays the same after DateFormat sets another format, such as \"yyyy-MM-dd\". Calling Empty on the result returns .F.."
       ],
       "best_practices": {
         "do": [
@@ -2100,7 +2105,7 @@
         }
       ],
       "caveats": [
-        "The format string uses .NET-style tokens (yyyy, MM, dd, HH, mm, ss), not the SSL date format tokens used by DToC and CToD."
+        "The format string is case-sensitive, and unlike DateFormat, DateToString does not normalize token case. MM is the month and mm is minutes, while uppercase YYYY and DD are output as literal text: for a date at 14:30, DateToString(d, \"YYYY-mm-DD\") returns YYYY-30-DD."
       ],
       "best_practices": {
         "do": [
@@ -4121,6 +4126,10 @@
         {
           "trigger": "The database provider cannot close the transaction.",
           "message": "Transaction cannot be ended {message}"
+        },
+        {
+          "trigger": "An inner transaction was rolled back and the outermost call commits.",
+          "message": "Transaction cannot be ended Cannot commit the outermost transaction because one of the inner transactions was rollbacked!"
         }
       ],
       "caveats": [
@@ -4182,11 +4191,15 @@
         {
           "trigger": "fnCode is not a code block.",
           "message": "Run-time error: the operator/method: eval is not implemented on type: <type>. Operand: <operand>"
+        },
+        {
+          "trigger": "Fewer arguments are supplied than the code block declares parameters.",
+          "message": "Index was outside the bounds of the array."
         }
       ],
       "caveats": [
         "Errors raised inside the invoked block propagate to the Eval call site; wrap the call in :TRY / :CATCH when the block may fail.",
-        "Eval passes the supplied arguments to the code block in order; it does not compile source text, rename parameters, or add its own defaults."
+        "Eval passes the supplied arguments to the code block in order; it does not compile source text, rename parameters, or add its own defaults. Supply one argument for every parameter the block declares: a missing argument raises an error rather than arriving as NIL."
       ],
       "best_practices": {
         "do": [
@@ -4212,6 +4225,10 @@
         {
           "trigger": "aParameters is provided but is not an array.",
           "message": "Value cannot be null., then Parameter name: Wrong parameters for {functionName}` on the second line"
+        },
+        {
+          "trigger": "A one-segment sName matches no script in the default categories.",
+          "message": "There is no script with name: <sName> among default categories."
         }
       ],
       "caveats": [
@@ -4608,7 +4625,7 @@
       "source_path": "content/reference/functions/GetAppWorkPathFolder.md",
       "exceptions": [],
       "caveats": [
-        "The returned path may use different formats (trailing slash, drive letters) depending on operating system or configuration."
+        "The returned path ends with a backslash, so append a relative folder or file name directly instead of adding another separator."
       ],
       "best_practices": {
         "do": [
@@ -4649,7 +4666,7 @@
         ],
         "dont": [
           "Assume that missing or empty names are handled gracefully.",
-          "Create variables distinguished only by letter case (e.g., Status vs status).",
+          "Rely on letter case to tell variables apart. Status and status are the same variable.",
           "Assume the variable will always be found and unconditionally use the result."
         ]
       }
@@ -4751,7 +4768,7 @@
         }
       ],
       "caveats": [
-        "Logical names are matched exactly; extra spaces or wrong case will fail the lookup and raise an error."
+        "Logical names are matched case-insensitively (\"database\" finds the DATABASE connection), but extra spaces fail the lookup and raise an error."
       ],
       "best_practices": {
         "do": [
@@ -5032,6 +5049,10 @@
           "message": "The values array parameter is null"
         },
         {
+          "trigger": "aArrayFields is omitted.",
+          "message": "Object reference not set to an instance of an object."
+        },
+        {
           "trigger": "A value cannot be stored in its field's declared type, such as text in a D (date) field. {message} is the .NET conversion error.",
           "message": "{message}Couldn't store <{value}> in a Column.  Expected type is {type}."
         }
@@ -5242,7 +5263,7 @@
         }
       ],
       "caveats": [
-        "Any additional file-system or platform-specific failures depend on the runtime lookup, so handle uncertain paths defensively."
+        "An existing file with no version information returns an empty string rather than raising, so check the result with Empty before using it."
       ],
       "best_practices": {
         "do": [
@@ -5735,7 +5756,7 @@
           "message": "Run-time error: Invalid arguments for GetRegion!, then Source array's length is not equal with destination array's length.` on the second line"
         },
         {
-          "trigger": "The region name is not found in the current scope.",
+          "trigger": "The region name is not found in the current scope. The value substituted for <sRegionName> is the lowercased region name.",
           "message": "Run-time error: GetRegion: <sRegionName> not in scope."
         }
       ],
@@ -6007,13 +6028,13 @@
       "source_path": "content/reference/functions/GetWebFolder.md",
       "exceptions": [],
       "caveats": [
-        "Any separator handling or path normalization must be done by the caller."
+        "The returned path already ends with a backslash, so adding another separator before a relative path produces a doubled backslash."
       ],
       "best_practices": {
         "do": [
           "Use GetWebFolder when you need the configured web-root path rather than a hard-coded location.",
           "Verify the returned value before using it in later file operations.",
-          "Normalize path separators in your own code if you need to append relative paths safely."
+          "Append relative paths directly, because the returned path already ends with a backslash."
         ],
         "dont": [
           "Hard-code the web folder path in scripts.",
@@ -6498,7 +6519,8 @@
         }
       ],
       "caveats": [
-        "This function does not convert or mutate the input value — it only inspects it."
+        "This function does not convert or mutate the input value — it only inspects it.",
+        "In observed runtime behavior, dates built with CToD are invariant, both for a real date and for the empty date CToD(\"\"). The kind says nothing about whether a date is set."
       ],
       "best_practices": {
         "do": [
@@ -6509,7 +6531,7 @@
         "dont": [
           "Assume that user-provided or external values are already of date type — validate before calling to avoid runtime errors.",
           "Attempt to infer date kind using property checks or workarounds. This function provides a single-point, reliable check for invariance.",
-          "Ignore potential default or uninitialized dates in business logic. Unspecified dates can introduce subtle bugs if left unchecked."
+          "Treat an invariant date as empty or unset. Dates built with CToD are invariant even when they hold a real date; use Empty to detect an empty date."
         ]
       }
     },
@@ -6857,6 +6879,10 @@
         {
           "trigger": "sSource is NIL.",
           "message": "argument source cannot be null. LFromHex()"
+        },
+        {
+          "trigger": "sSource contains characters that are not hexadecimal digits, such as \"XYZ123\".",
+          "message": "Could not find any recognizable digits."
         }
       ],
       "caveats": [],
@@ -6867,7 +6893,7 @@
           "Treat NIL as an error case and handle it before decoding."
         ],
         "dont": [
-          "Assume external input is valid hexadecimal text. Invalid content can fail during decoding.",
+          "Assume external input is valid hexadecimal text. Non-hexadecimal characters raise an error during decoding.",
           "Pass NIL to LFromHex. The function raises an exception for NIL input.",
           "Use LFromHex when you need a numeric conversion. Use LHex2Dec for hexadecimal-to-decimal conversion."
         ]
@@ -6884,6 +6910,10 @@
         {
           "trigger": "sSource is NIL.",
           "message": "Object reference not set to an instance of an object."
+        },
+        {
+          "trigger": "sSource is not a hexadecimal number, such as \"GG\".",
+          "message": "Input string was not in a correct format."
         }
       ],
       "caveats": [],
@@ -6940,7 +6970,12 @@
       "summary": "Deletes a public variable from the current SSL session by name and returns an empty string.",
       "doc_status": "published",
       "source_path": "content/reference/functions/LKill.md",
-      "exceptions": [],
+      "exceptions": [
+        {
+          "trigger": "sVarName is NIL.",
+          "message": "Value cannot be null."
+        }
+      ],
       "caveats": [
         "Removing a public variable can change later code paths that expect the shared value to still exist."
       ],
@@ -6953,7 +6988,7 @@
         "dont": [
           "Use LKill() as a substitute for clearing a local variable. It only removes public variables.",
           "Assume a missing public variable is an error condition. LKill() simply does nothing when the name is not present.",
-          "Rely on undocumented input handling for invalid arguments. Pass a valid public-variable name string."
+          "Pass NIL as the name. It raises an error, while an empty string is accepted and removes nothing."
         ]
       }
     },
@@ -7206,10 +7241,10 @@
         "do": [
           "Use LStr when NIL values must appear as the explicit placeholder \"NIL\" in UI output, logs, or exports.",
           "Use LTransform or StrZero on the number itself, instead of LStr, when you need padding or fixed decimals.",
-          "Apply LStr when serializing mixed data sources that must never produce empty strings for missing values."
+          "Apply LStr when serializing mixed data sources where missing (NIL) values must appear as \"NIL\" rather than as empty strings."
         ],
         "dont": [
-          "Assume the output will be empty or NIL; LStr always returns a non-empty string.",
+          "Assume the output will be NIL; NIL input becomes \"NIL\". An empty or all-space string still comes back as \"\".",
           "Use LStr when strict output formatting or padding is required — use LTransform or StrZero instead.",
           "Use the result directly in numeric operations; the output is always a string and must be reconverted if a number is needed."
         ]
@@ -7851,7 +7886,7 @@
       "caveats": [],
       "best_practices": {
         "do": [
-          "Compare the return value against the documented uppercase names such as STRING, NUMERIC, and NIL.",
+          "Compare the return value against the documented uppercase names such as \"STRING\", \"NUMERIC\", and \"NIL\".",
           "Use LimsTypeEx before type-specific operations when input may vary at runtime.",
           "Handle NIL explicitly when blank or missing input is meaningful to your logic."
         ],
@@ -8568,7 +8603,7 @@
         }
       ],
       "caveats": [
-        "An empty sSubString returns 0.",
+        "An empty sSubString returns 0, even when sSource is empty (unlike At, which returns 1).",
         "An empty sSource also returns 0 when sSubString is not empty.",
         "The result is one-based, so convert carefully when working with zero-based external systems."
       ],
@@ -8968,11 +9003,15 @@
         {
           "trigger": "nDigits is not a number.",
           "message": "Second parameter must be a number"
+        },
+        {
+          "trigger": "nDigits is less than 0 or greater than 15.",
+          "message": "Rounding digits must be between 0 and 15, inclusive."
         }
       ],
       "caveats": [
         "Floating-point rounding may not always match visual or manual expectations due to binary representation. For example, Round(2.675, 2) may return 2.67, not 2.68.",
-        "Very large values for nDigits are not supported; stay within standard double-precision range."
+        "nDigits must be between 0 and 15. A negative value or a value above 15 raises an error (see Exceptions)."
       ],
       "best_practices": {
         "do": [
@@ -9816,7 +9855,7 @@
       ],
       "caveats": [
         "Changing the separator affects all subsequent numeric operations; parts of the application that expect a different separator may behave incorrectly.",
-        "There is no validation that sGroupSep does not conflict with the current decimal separator."
+        "There is no validation that sGroupSep does not conflict with the current decimal separator: SetGroupSeparator(GetDecimalSeparator()) succeeds without an error, and both separators are then the same character."
       ],
       "best_practices": {
         "do": [
@@ -9917,6 +9956,10 @@
         {
           "trigger": "sConnection is supplied but is not a string.",
           "message": "Argument 'connection' must be a string."
+        },
+        {
+          "trigger": "sConnection names a connection that is not configured.",
+          "message": "The provider name: <sConnection> not found."
         }
       ],
       "caveats": [
@@ -10088,7 +10131,8 @@
         }
       ],
       "caveats": [
-        "Only .T. and numeric 1 select the numeric comparer. Other values, such as 2 or \"Y\", fall back to the default sort."
+        "Only .T. and numeric 1 select the numeric comparer. Other values, such as 2 or \"Y\", fall back to the default sort.",
+        "A comparator should return a whole number. In observed runtime behavior, a block that returns a fraction, such as {|x, y| x - y} over {1.5, 1.2, 1.9}, does not raise, but the array does not come back in ascending order. For non-integer keys, return -1, 0, or 1 explicitly, for example with IIf."
       ],
       "best_practices": {
         "do": [
@@ -10154,7 +10198,7 @@
       "caveats": [
         "For ISO, the returned string is truncated to 15 characters when it becomes longer than that.",
         "Pass a whole number for nDigits; fractional values are not supported.",
-        "Unsupported sStandard values are not rejected; the function still returns a formatted string."
+        "Unsupported sStandard values are not rejected; the function returns the number as an unrounded string. StdRound(\"XYZ\", 2, 12.3456) and StdRound(\"fda\", 2, 12.3456) both return \"12.3456\"."
       ],
       "best_practices": {
         "do": [
@@ -10189,7 +10233,7 @@
         "If the value with nDecimals decimal places does not fit in nLength, Str() drops the decimal digits that do not fit instead of widening the field. Str(123456.789, 8, 2) returns \"123456.7\".",
         "When nLength is supplied and nDecimals is omitted, the function keeps fractional digits only as long as they fit in the field.",
         "Negative values are padded so that the minus sign stays immediately before the first visible digit.",
-        "A negative nLength uses the current numeric separator settings when formatting the result. See SetDecimalSeparator and SetGroupSeparator."
+        "A negative nLength returns the number without padding and without trailing decimal zeros: Str(1234.5, -10, 2) returns \"1234.5\", while Str(1234.5, 10, 2) returns \"   1234.50\"."
       ],
       "best_practices": {
         "do": [
@@ -10258,11 +10302,15 @@
         {
           "trigger": "searchFor is NIL.",
           "message": "Argument searchFor cannot be null. StrTran()."
+        },
+        {
+          "trigger": "searchFor is an empty string.",
+          "message": "String cannot be of zero length."
         }
       ],
       "caveats": [
         "Replacements are non-overlapping. Each match is processed once in the original left-to-right scan.",
-        "Avoid passing an empty string as searchFor."
+        "An empty searchFor raises an error (see Exceptions), so check it before calling."
       ],
       "best_practices": {
         "do": [
@@ -10493,7 +10541,12 @@
       "summary": "Serializes an SSL value, array, or object to a JSON string.",
       "doc_status": "published",
       "source_path": "content/reference/functions/ToJson.md",
-      "exceptions": [],
+      "exceptions": [
+        {
+          "trigger": "vValue is a code block.",
+          "message": "ToJson() method is not implemented on type: <type>"
+        }
+      ],
       "caveats": [
         "A .NET object, such as a StringBuilder, is not rejected. ToJson returns its type name as a JSON string.",
         "Date output format depends on the date kind: local dates include an offset, UTC dates include Z, and unspecified dates omit a zone suffix."
@@ -10863,7 +10916,7 @@
       "caveats": [
         "In the traditional parsing mode, a string such as \"123ABC\" returns 123 and a string such as \"ABC123\" returns 0.",
         "Scientific notation with a leading numeric prefix is accepted, such as \"2.5e2\".",
-        "Some installations also accept a leading 0x or 0X hexadecimal value when Val is using its traditional parsing behavior."
+        "In the traditional parsing mode, a leading 0x or 0X hexadecimal value is accepted (Val(\"0x1A\") returns 26), and so is exponent notation (Val(\"2.5e2\") returns 250)."
       ],
       "best_practices": {
         "do": [
@@ -10934,7 +10987,7 @@
           "Use this function when hexadecimal text must not be accepted."
         ],
         "dont": [
-          "Assume grouped numbers are always valid. They only pass when the current numeric settings allow group separators.",
+          "Assume grouped numbers are always valid. They only pass when the current numeric settings allow group separators, and with the default settings \"1,234.56\" is rejected.",
           "Use ValidateNumeric when hexadecimal input should be allowed. Use IsNumeric with bAllowHex instead.",
           "Treat an error on NIL input as a normal .F. result."
         ]
@@ -11125,7 +11178,7 @@
       ],
       "caveats": [
         "Attribute names that contain : appear with _ instead.",
-        "When an attribute name is value, the function renames it with an Attr prefix to avoid colliding with the generated Value property.",
+        "When an attribute name is value, the function renames it to Attrvalue to avoid colliding with the generated Value property. For <a value='x'/>, GetInternal(oNode, \"Attrvalue\") returns \"x\".",
         "bPreserveWhitespace only changes what the XML loader keeps. Whitespace nodes between nested elements are still not exposed as child properties in the returned object tree.",
         "Non-boolean bPreserveWhitespace values behave like the argument was omitted, so whitespace preservation stays off."
       ],
@@ -11137,7 +11190,7 @@
         ],
         "dont": [
           "Assume repeated sibling elements are returned as a scalar value. The singular property keeps only the first matching child.",
-          "Assume an attribute named value will appear as Value. The function prefixes that attribute name to avoid colliding with the generated text-value property.",
+          "Assume an attribute named value will appear as Value. The function renames that attribute to Attrvalue to avoid colliding with the generated text-value property.",
           "Pass NIL, \"\", or a non-string value for sXml. Those inputs raise the documented argument error."
         ]
       }
@@ -11291,7 +11344,11 @@
           "message": "Run-time error: SSLDouble: <value> _OR <v>: invalid operand(s). Expected integers."
         },
         {
-          "trigger": "Either operand is NIL.",
+          "trigger": "nValue1 is NIL.",
+          "message": "Object reference not set to an instance of an object."
+        },
+        {
+          "trigger": "nValue2 is NIL.",
           "message": "Run-time error: SSLDouble - invalid operand:  (of type null) for operator: _OR."
         },
         {
@@ -11450,7 +11507,8 @@
       "exceptions": [],
       "caveats": [
         "Get() raises an error for invalid names, invalid types, NIL, and out-of-range numeric positions.",
-        "Numeric access is 1-based, but the value reported in out-of-range error messages may not match the index you supplied.",
+        "Numeric access is 1-based, but the out-of-range error message reports the zero-based position, one less than the index you passed: Get(5) on a two-column table reports Index [4].",
+        "GetIndex() here returns a 1-based position, or 0 for a missing column. CDataRow's GetIndex() differs: it returns a zero-based position, or -1.",
         "Add() and Set() can be called, but they do not modify the collection."
       ],
       "best_practices": {
@@ -11478,7 +11536,7 @@
       "exceptions": [],
       "caveats": [
         "For non-binary fields, assigning NIL stores a null value.",
-        "ToNumber() may raise an error when the current value is not numeric and is not a parsable string.",
+        "ToNumber() returns 0 for a string value that cannot be parsed as a number (for example \"abc\"), so a 0 result does not prove the field holds zero.",
         "For binary fields, reading Value depends on a usable table import folder.",
         "For binary fields, assigning Value requires a string file path that already exists."
       ],
@@ -12004,7 +12062,7 @@
         "For a SQL Server error caught in :CATCH (for example an invalid column or an invalid object name), both Code and GenCode are 0 in observed runtime behavior. The SQL Server error number (207 for an invalid column, 208 for an invalid object) is in GenCode on the SSLSQLError returned by GetLastSQLError().",
         "FullDescription and FullDescriptionEx are formatted diagnostic strings, not structured field-by-field data.",
         "FullDescriptionEx includes the full stack trace when one is available; FullDescription uses a shorter stack view.",
-        "For compiler errors, SQL errors, and script-not-found errors, the formatted diagnostic text uses specialized headings instead of a generic Error: line.",
+        "For SQL errors, FullDescription still starts with a generic Error: <message> line, then adds a SQL error: <SQLState>: <message> line and a SQL stmt: <statement> line with the failing SQL.",
         "When constructing SSLError from an arbitrary exception, Operation defaults to blank and Code to 0 unless the wrapped exception already carried that information."
       ],
       "best_practices": {
@@ -12110,7 +12168,7 @@
       "source_path": "content/reference/classes/SSLSQLError.md",
       "exceptions": [],
       "caveats": [
-        "Description and ErrorMessage are the same value, and inherited Code returns the same numeric value as GenCode.",
+        "Description and ErrorMessage are the same value, and inherited Code returns the same numeric value as GenCode (for example 207 for an invalid column on SQL Server).",
         "ErrorMessage and ErrorStackTrace can include text from nested causes in the same exception chain.",
         "Inherited SSLError properties such as FullDescription, FullDescriptionEx, NETException, and InnerException are still available."
       ],
@@ -13322,7 +13380,7 @@
       "id": "ssl.operator.decrement",
       "element_type": "operator",
       "title": "-- (decrement)",
-      "summary": "Decreases a number variable by one, trims trailing spaces in strings, or subtracts days from a date depending on operand type.",
+      "summary": "Decreases a number variable by one, or subtracts one day from a date variable.",
       "doc_status": "published",
       "source_path": "content/reference/operators/decrement.md",
       "exceptions": [],
@@ -13331,11 +13389,11 @@
         "do": [
           "Use prefix form (--variable) when the decremented value is needed immediately in further computations.",
           "Decrement dates when you need to step backward by one day.",
-          "Apply -- only to supported value types (numbers, strings, dates)."
+          "Apply -- only to supported value types (numbers and dates)."
         ],
         "dont": [
           "Assume postfix (variable--) also returns the updated value. The postfix form returns the original before decrementing.",
-          "Use -- on arrays, objects, booleans, or expression results. Unsupported usage raises errors.",
+          "Use -- on strings, arrays, objects, booleans, or expression results. Unsupported usage raises errors.",
           "Use -- when a non-unit decrement is needed. Use subtract-assign (-=) instead."
         ]
       }
@@ -13487,7 +13545,7 @@
       "exceptions": [],
       "caveats": [
         "Either operand being NIL raises a runtime error instead of returning a boolean.",
-        "String comparisons are case-sensitive and culture-invariant, which can give results that differ from end-user alphabetical expectations."
+        "String comparisons are case-sensitive and culture-invariant: letters sort alphabetically and case only breaks ties, so the order does not depend on the user's locale."
       ],
       "best_practices": {
         "do": [
@@ -13522,7 +13580,7 @@
         ],
         "dont": [
           "Assume # and != behave differently. They are full aliases with identical logic.",
-          "Assume # silently returns .T. for any type mismatch. Only a string-on-left path behaves that way; numeric, date, and boolean left operands with incompatible rights raise a runtime error.",
+          "Assume # silently returns .T. for any type mismatch. A string on the left, or NIL on the right, returns .T.; numeric, date, and boolean left operands with other incompatible rights raise a runtime error.",
           "Assume # walks array or object contents. It only compares references."
         ]
       }
@@ -13542,7 +13600,7 @@
           "Use the prefix form (++variable) when the incremented value is needed immediately in the same expression."
         ],
         "dont": [
-          "Use ++ on non-variable or non-numeric values. Only variables holding numbers can be incremented.",
+          "Use ++ on non-variable values or on types other than numbers and dates. Only variables holding numbers or dates can be incremented.",
           "Assume prefix and postfix always behave identically inside expressions. Prefix returns the new value; postfix returns the old value."
         ]
       }
@@ -13557,7 +13615,7 @@
       "exceptions": [],
       "caveats": [
         "Either operand being NIL raises a runtime error instead of returning a boolean value.",
-        "String comparisons are case-sensitive and culture-invariant, which can give results that differ from end-user alphabetical expectations."
+        "String comparisons are case-sensitive and culture-invariant: letters sort alphabetically and case only breaks ties, so the order does not depend on the user's locale."
       ],
       "best_practices": {
         "do": [
@@ -13582,7 +13640,7 @@
       "exceptions": [],
       "caveats": [
         "Comparing a value against NIL raises a runtime error instead of returning a boolean value.",
-        "String comparisons are case-sensitive and culture-invariant, which can give results that differ from end-user alphabetical expectations."
+        "String comparisons are case-sensitive and culture-invariant: letters sort alphabetically and case only breaks ties, so the order does not depend on the user's locale."
       ],
       "best_practices": {
         "do": [
@@ -13725,7 +13783,7 @@
       "source_path": "content/reference/operators/not-equals-legacy.md",
       "exceptions": [],
       "caveats": [
-        "Code block left operand raises Cannot compare to a code block."
+        "Code block left operand raises Run-time error: == : Cannot compare to a code block. The message names == because the operator negates strict equality."
       ],
       "best_practices": {
         "do": [
@@ -13749,7 +13807,7 @@
       "source_path": "content/reference/operators/not-equals.md",
       "exceptions": [],
       "caveats": [
-        "Code block left operand raises Cannot compare to a code block."
+        "Code block left operand raises Run-time error: == : Cannot compare to a code block. The message names == because the operator negates strict equality."
       ],
       "best_practices": {
         "do": [
@@ -13798,7 +13856,7 @@
       "source_path": "content/reference/operators/or.md",
       "exceptions": [],
       "caveats": [
-        "Either operand being non-boolean raises a runtime error."
+        "A non-boolean right operand does not raise. When the left operand is .T., the right side is not evaluated; when it is .F., .OR. returns the right operand unchanged, so .F. .OR. \"x\" returns \"x\", not a boolean."
       ],
       "best_practices": {
         "do": [
@@ -13944,7 +14002,7 @@
       "source_path": "content/reference/operators/strict-equals.md",
       "exceptions": [],
       "caveats": [
-        "Code block left operand raises Cannot compare to a code block."
+        "Code block left operand raises Run-time error: == : Cannot compare to a code block."
       ],
       "best_practices": {
         "do": [
@@ -14337,7 +14395,7 @@
         "Code blocks contain a single expression, not multiple statements.",
         "At least one bound variable is required between the pipes; {|| ...} is not valid.",
         "Comparing code blocks directly is not supported.",
-        "Executing a code block with missing required parameters results in a runtime error.",
+        "Executing a code block with fewer arguments than it declares parameters raises an error instead of passing NIL: Eval({|nA, nB| nB}, 1) raises Index was outside the bounds of the array.",
         "Outer variables referenced inside a code block are captured by reference. Changes to those variables in the outer scope are visible inside later Eval calls."
       ],
       "best_practices": {
@@ -14441,7 +14499,7 @@
       "exceptions": [],
       "caveats": [
         "Request is read-only from the script's perspective. Modifying values on its collection properties (QueryString, Headers, etc.) does not change anything downstream.",
-        "Outside an endpoint context, Request raises an undeclared-variable error on access. Guard with :TRY / :CATCH if your script may run in either context.",
+        "Outside an endpoint context, Request does not raise on access, but its values do not come from an HTTP caller. In a script run from Designer, Request:UserAgent returns the Designer client's user-agent text.",
         "Whether Request is an SSLRequest or SSLWsRequest depends on how the script was invoked. Code that needs to work in both contexts should rely only on the inherited surface — avoid Parameters unless you know the call path is a web service."
       ],
       "best_practices": {}
@@ -14456,7 +14514,7 @@
       "exceptions": [],
       "caveats": [
         "Response is mutable: assigning properties and calling methods affects what the client receives. Be deliberate about ordering — set ContentType and StatusCode before the first Write so headers go out correctly.",
-        "Outside an endpoint context, Response raises an undeclared-variable error on access. Guard with :TRY / :CATCH if your script may run in either context.",
+        "Outside an endpoint context, Response does not raise on access: Response:Write called from a script run in Designer completes without an error.",
         "Whether Response is an SSLResponse or SSLWsResponse depends on how the script was invoked. Code that needs to work in both contexts should rely only on the inherited surface — avoid Value unless you know the call path is a web service.",
         "After calling End(), further Write calls have no effect on the wire. After Redirect(), :RETURN from the script — subsequent code may run but its output is unlikely to reach the client."
       ],
@@ -14617,8 +14675,8 @@
           "Treat Request as read-only — the values reflect what the client sent."
         ],
         "dont": [
-          "Try to construct an SSLRequest directly — it is only available as the Request ambient inside endpoint scripts.",
-          "Reach for Request outside an endpoint context (e.g., from a script invoked through DoProc from an interactive session). It will not be available — see Request for behavior.",
+          "Try to construct an SSLRequest directly — it is only available as the Request ambient.",
+          "Reach for Request outside an endpoint context (e.g., from a script invoked through DoProc from an interactive session). It does not describe an HTTP call there — see Request for behavior.",
           "Use BodyAsString for binary uploads. Use BodyAsBinary or SaveInputStream() instead.",
           "Modify values on the collection properties expecting the incoming request to change. The values are read-only views."
         ]
@@ -14645,8 +14703,8 @@
           "Use End() when you want to terminate the response early after writing partial content."
         ],
         "dont": [
-          "Try to construct an SSLResponse directly — it is only available as the Response ambient inside endpoint scripts.",
-          "Reach for Response outside an endpoint context. It will not be available — see Response for behavior.",
+          "Try to construct an SSLResponse directly — it is only available as the Response ambient.",
+          "Reach for Response outside an endpoint context. It does not shape an HTTP reply there — see Response for behavior.",
           "Use AddHeader to set Content-Type. Use the ContentType property so the runtime can manage it consistently.",
           "Continue writing after End() and expect the new content to appear on the wire."
         ]

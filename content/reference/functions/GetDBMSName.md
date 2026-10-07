@@ -13,7 +13,7 @@ starlims:
 
 Returns the DBMS platform name for a configured database connection.
 
-Returns `"SQL"` for SQL Server connections and `"ORACLE"` for Oracle connections, for the connection identified by `sConnectionName`. If `sConnectionName` is omitted or [`NIL`](../literals/nil.md), the function uses the default connection. If the name does not match any configured connection, or if the internal database collection is unavailable, the function raises an error.
+Returns `"SQL"` for SQL Server connections and `"ORACLE"` for Oracle connections, for the connection identified by `sConnectionName`. If `sConnectionName` is omitted, empty, or [`NIL`](../literals/nil.md), the function uses the default connection. If the name does not match any configured connection, or if the internal database collection is unavailable, the function raises an error.
 
 ## When to use
 
@@ -31,7 +31,7 @@ GetDBMSName([sConnectionName])
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `sConnectionName` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Connection name to look up. If omitted or [`NIL`](../literals/nil.md), the default connection is used. |
+| `sConnectionName` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Connection name to look up. If omitted, empty, or [`NIL`](../literals/nil.md), the default connection is used. |
 
 ## Returns
 

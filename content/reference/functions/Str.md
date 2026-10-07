@@ -62,7 +62,7 @@ Str(nNumber, [nLength], [nDecimals])
 - If the value with `nDecimals` decimal places does not fit in `nLength`, `Str()` drops the decimal digits that do not fit instead of widening the field. `Str(123456.789, 8, 2)` returns `"123456.7"`.
 - When `nLength` is supplied and `nDecimals` is omitted, the function keeps fractional digits only as long as they fit in the field.
 - Negative values are padded so that the minus sign stays immediately before the first visible digit.
-- A negative `nLength` uses the current numeric separator settings when formatting the result. See [`SetDecimalSeparator`](SetDecimalSeparator.md) and [`SetGroupSeparator`](SetGroupSeparator.md).
+- A negative `nLength` returns the number without padding and without trailing decimal zeros: `Str(1234.5, -10, 2)` returns `"1234.5"`, while `Str(1234.5, 10, 2)` returns `"   1234.50"`.
 
 ## Examples
 

@@ -35,7 +35,7 @@ GetFileVersion(sFileName)
 
 ## Returns
 
-**[string](../types/string.md)** — The file version string returned for `sFileName`.
+**[string](../types/string.md)** — The file version string returned for `sFileName`, or an empty string when the file exists but carries no version information (for example a `.ini` or `.txt` file).
 
 ## Exceptions
 
@@ -58,7 +58,7 @@ GetFileVersion(sFileName)
 
 ## Caveats
 
-- Any additional file-system or platform-specific failures depend on the runtime lookup, so handle uncertain paths defensively.
+- An existing file with no version information returns an empty string rather than raising, so check the result with [`Empty`](Empty.md) before using it.
 
 ## Examples
 

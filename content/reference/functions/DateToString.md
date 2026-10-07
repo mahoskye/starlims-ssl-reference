@@ -63,7 +63,7 @@ DateToString(dDate, [sFormat])
 
 ## Caveats
 
-- The format string uses .NET-style tokens (`yyyy`, `MM`, `dd`, `HH`, `mm`, `ss`), not the SSL date format tokens used by [`DToC`](DToC.md) and [`CToD`](CToD.md).
+- The format string is case-sensitive, and unlike [`DateFormat`](DateFormat.md), `DateToString` does not normalize token case. `MM` is the month and `mm` is minutes, while uppercase `YYYY` and `DD` are output as literal text: for a date at 14:30, `DateToString(d, "YYYY-mm-DD")` returns `YYYY-30-DD`.
 
 ## Examples
 

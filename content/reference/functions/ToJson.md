@@ -52,7 +52,9 @@ Behavior depends on the input value:
 
 ## Exceptions
 
-No documented exceptions.
+| Trigger | Exception message |
+| --- | --- |
+| `vValue` is a code block. | `ToJson() method is not implemented on type: <type>` |
 
 ## Best practices
 
@@ -136,7 +138,7 @@ DoProc("BuildOrderPayload");
 
 ### Handle values that may not be serializable
 
-Wrap `ToJson` in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) when the caller cannot guarantee the value comes from a supported type. If serialization fails, this pattern surfaces the message and returns an empty string instead of letting the error propagate. Not every unsupported value fails: a .NET object, for example, is written out as its type name (see [Caveats](#caveats)).
+Wrap `ToJson` in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) when the caller cannot guarantee the value comes from a supported type. If serialization fails, this pattern surfaces the message and returns an empty string instead of letting the error propagate. Not every unsupported value fails: a .NET object, for example, is written out as its type name (see [Caveats](#caveats)). The usage passes a code block, which `ToJson` cannot serialize, so the [`:CATCH`](../keywords/CATCH.md) branch runs.
 
 ```ssl
 :PROCEDURE SerializeSafely;
@@ -155,7 +157,13 @@ Wrap `ToJson` in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md)
 :ENDPROC;
 
 /* Usage;
-DoProc("SerializeSafely", {CreateUdObject()});
+DoProc("SerializeSafely", {{|x| x}});
+```
+
+[`ErrorMes`](ErrorMes.md) logs:
+
+```text
+ToJson() method is not implemented on type: <type>
 ```
 
 ## Related

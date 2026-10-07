@@ -13,7 +13,7 @@ starlims:
 
 Returns the timestamp for the start of the client's calendar day.
 
-`ClientStartOfDay` returns the value that corresponds to the beginning of the client-local day that contains the supplied date. If `dDate` is an empty date, the function returns it unchanged. If the value does not carry timezone information, the function behaves like [`ServerStartOfDay`](ServerStartOfDay.md). Otherwise it uses the difference between the user and server timezone offsets to calculate the client-day boundary.
+`ClientStartOfDay` returns the value that corresponds to the beginning of the client-local day that contains the supplied date. If `dDate` is an empty date, the function returns it unchanged. If the value does not carry timezone information, the function behaves like [`ServerStartOfDay`](ServerStartOfDay.md). In observed runtime behavior, a value from [`Now`](Now.md) carries timezone information, while a date built with [`CToD`](CToD.md) does not. Otherwise it uses the difference between the user and server timezone offsets to calculate the client-day boundary.
 
 ## When to use
 
@@ -121,7 +121,7 @@ DoProc("GetClientDayResults", {CToD("04/23/2026")});
 
 ### Compare client and server day-start boundaries
 
-Computes both the client and server start-of-day for the same input date and reports whether they produce the same boundary.
+Computes both the client and server start-of-day for the same input value and reports whether they produce the same boundary. The usage passes [`Now`](Now.md), because a date built with [`CToD`](CToD.md) always gives the server boundary.
 
 ```ssl
 :PROCEDURE CompareDayBoundaries;
@@ -144,7 +144,7 @@ Computes both the client and server start-of-day for the same input date and rep
 :ENDPROC;
 
 /* Usage;
-DoProc("CompareDayBoundaries", {CToD("04/23/2026")});
+DoProc("CompareDayBoundaries", {Now()});
 ```
 
 `UsrMes` logs one of:

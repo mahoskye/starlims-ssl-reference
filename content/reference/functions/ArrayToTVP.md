@@ -99,8 +99,10 @@ ArrayToTVP(aValues, [sDataType], [sConnectionName])
 - Only the first element is checked for nesting. A nested array later in the
   list does not raise the one-dimensional error; it fails the element-type
   checks instead.
-- This function only creates the TVP object. How that object is bound to a
-  query or procedure depends on the database call that receives it.
+- This function only creates the TVP object. To use it, pass it as the value
+  for a positional `?` placeholder that the query reads as a table. For
+  example, `LSelect("SELECT COUNT(*) FROM ? t",,, {ArrayToTVP({1, 2, 3}, "INT")})`
+  returns `{{3}}` on SQL Server.
 
 ## Examples
 
@@ -189,6 +191,7 @@ TVP creation failed: <error message>
 - [`ArrayNew`](ArrayNew.md)
 - [`BuildArray`](BuildArray.md)
 - [`BuildArray2`](BuildArray2.md)
+- [`LSelect`](LSelect.md)
 - [`SQLExecute`](SQLExecute.md)
 - [`array`](../types/array.md)
 - [`object`](../types/object.md)

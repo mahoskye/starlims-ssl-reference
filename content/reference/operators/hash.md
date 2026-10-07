@@ -14,11 +14,11 @@ starlims:
 
 Returns [`.T.`](../literals/true.md) when two values are not equal and [`.F.`](../literals/false.md) when they are equal.
 
-The `#` operator tests for inequality. It delegates to the same equality logic as [`=`](equals.md), then negates the result. For numbers, booleans, and dates, the comparison is exact. For strings, the comparison uses the same prefix semantics as [`=`](equals.md): `"Logged" # "Log"` is [`.F.`](../literals/false.md) because `"Logged" = "Log"` is [`.T.`](../literals/true.md). For arrays and objects, `#` compares by reference — two distinct arrays or objects with identical contents are not equal under `#`.
+The `#` operator tests for inequality. It uses the same strict comparison as [`==`](strict-equals.md), then negates the result. For numbers, booleans, and dates, the comparison is exact. For strings, the comparison is also exact, not the prefix matching of [`=`](equals.md): `"Logged" # "Log"` is [`.T.`](../literals/true.md), even though `"Logged" = "Log"` is also [`.T.`](../literals/true.md). For arrays and objects, `#` compares by reference — two distinct arrays or objects with identical contents are not equal under `#`.
 
 `#` is a full alias for [`not-equals`](not-equals.md) ([`!=`](not-equals.md)). Both behave identically.
 
-Type-mismatch behavior depends on the left operand. A string on the left returns [`.T.`](../literals/true.md) when the right operand is not a string (because the underlying [`=`](equals.md) returns [`.F.`](../literals/false.md)). A number, date, or boolean on the left raises a runtime error when the right operand is an incompatible type.
+Type-mismatch behavior depends on the left operand. A string on the left returns [`.T.`](../literals/true.md) when the right operand is not a string. A number, date, or boolean on the left raises a runtime error when the right operand is an incompatible type; [`NIL`](../literals/nil.md) on the right does not raise and returns [`.T.`](../literals/true.md).
 
 ## When to use it
 
@@ -39,13 +39,14 @@ bResult := vLeft # vRight;
 | [number](../types/number.md) | [number](../types/number.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md) when the values differ numerically. |
 | [boolean](../types/boolean.md) | [boolean](../types/boolean.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md) when the boolean values differ. |
 | [date](../types/date.md) | [date](../types/date.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md) when the dates differ. |
-| [string](../types/string.md) | [string](../types/string.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md) when the strings are not equal under SSL's prefix matching. |
-| [string](../types/string.md) | non-string | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md) (underlying [`=`](equals.md) returns [`.F.`](../literals/false.md)). |
+| [string](../types/string.md) | [string](../types/string.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md) when the strings are not exactly equal. |
+| [string](../types/string.md) | non-string | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md). |
 | [array](../types/array.md) | [array](../types/array.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md) unless both operands reference the same array instance. |
 | [object](../types/object.md) | [object](../types/object.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md) unless both operands reference the same object instance. |
 | NIL | NIL | [boolean](../types/boolean.md) | Returns [`.F.`](../literals/false.md). |
 | NIL | non-[`NIL`](../literals/nil.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md). |
-| number/boolean/date | incompatible | error | Raises a runtime invalid-operand error. |
+| number/boolean/date | NIL | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md). |
+| number/boolean/date | incompatible non-[`NIL`](../literals/nil.md) | error | Raises a runtime invalid-operand error. |
 
 ## Precedence
 
@@ -61,7 +62,7 @@ bResult := vLeft # vRight;
 
 !!! failure "Don't"
     - Assume `#` and [`!=`](not-equals.md) behave differently. They are full aliases with identical logic.
-    - Assume `#` silently returns [`.T.`](../literals/true.md) for any type mismatch. Only a string-on-left path behaves that way; numeric, date, and boolean left operands with incompatible rights raise a runtime error.
+    - Assume `#` silently returns [`.T.`](../literals/true.md) for any type mismatch. A string on the left, or [`NIL`](../literals/nil.md) on the right, returns [`.T.`](../literals/true.md); numeric, date, and boolean left operands with other incompatible rights raise a runtime error.
     - Assume `#` walks array or object contents. It only compares references.
 
 ## Errors and edge cases
