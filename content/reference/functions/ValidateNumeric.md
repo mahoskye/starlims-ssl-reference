@@ -45,7 +45,7 @@ ValidateNumeric(sNumber)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sNumber` is [`NIL`](../literals/nil.md). | `Argument sNumber cannot be null.` |
+| `sNumber` is [`NIL`](../literals/nil.md). | `Value cannot be null.` |
 
 ## Best practices
 

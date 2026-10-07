@@ -48,7 +48,7 @@ GetDataSetFromArrayEx(aArrayOfValues, [aArrayFields], [sTableName], [bIncludeHea
 
 | Trigger | Exception message |
 | --- | --- |
-| `aArrayOfValues` is [`NIL`](../literals/nil.md). | `The values array parameter is null` |
+| `aArrayOfValues` is [`NIL`](../literals/nil.md). | `Object reference not set to an instance of an object.` |
 | Array preparation fails. | `Preparing the input arrays generated an error : {message}` |
 
 ## Best practices

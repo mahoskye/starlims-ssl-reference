@@ -49,8 +49,7 @@ RunSQL(sCommandString, [sConnectionName], [aValues])
 | `sCommandString` is [`NIL`](../literals/nil.md) or empty. | `The command string is null` |
 | SSL cannot resolve the connection's DBMS. | `Cannot determine the database engine name.` |
 | `sConnectionName` does not identify a configured connection. | `The provider name: <sConnectionName> not found.` |
-| `aValues` is a multidimensional array. | `The current array has more than 1 dimension.` |
-| The number of `?` placeholders does not match the supplied values. | `Parameters count mismatch` |
+| `aValues` has fewer values than there are `?` placeholders. | `ExecuteNonQuery exception Not enough values provided for parameters.` |
 
 ## Best practices
 
@@ -70,6 +69,7 @@ RunSQL(sCommandString, [sConnectionName], [aValues])
 
 ## Caveats
 
+- A nested array in `aValues` is not rejected. In observed runtime behavior, `RunSQL("SELECT ? AS a", "DATABASE", {{1, 2}})` returns [`.T.`](../literals/true.md).
 - `aValues` must line up with the positional `?` placeholders in order.
 - A single third argument such as `sValue` is accepted, but arrays are clearer once more than one parameter is involved.
 - `IgnoreSqlErrors(.T.)` on its own does not stop a failure from raising, because ignoring is already on by default. `ShowSqlErrors(.F.)` is the setting that makes `RunSQL` return [`.F.`](../literals/false.md).

@@ -43,7 +43,7 @@ GetConnectionByName(sConnectionName)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sConnectionName` does not match any configured connection. | `The provider name: <name> not found.` |
+| `sConnectionName` does not match any configured connection. | `GetConnectionByName failed` |
 
 ## Best practices
 

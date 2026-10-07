@@ -56,10 +56,10 @@ LimsNETConnect([sAssembly], [sTypeName], [aArgs], [bAsStatic])
 | Trigger | Exception message |
 | --- | --- |
 | `sAssembly` is not a string. | `Argument 'assembly' must be a string. LimsNETConnect().` |
-| `sTypeName` is not a string. | `Argument 'sTypeName' must be a string.` |
-| `aArgs` is not an array. | `Argument 'aArgs' must be an array.` |
-| A `.dll` path cannot be found. | `File: <path> doesn't exist.` |
-| Assembly loading fails. | `Error loading the assembly: <assembly>.` |
+| `sTypeName` is not a string. | `typeName`, then `Parameter name: Argument 'typeName' must be a string. LimsNETConnect().` on the second line |
+| `aArgs` is not an array. | `args`, then `Parameter name: Argument 'args' must be an array. LimsNETConnect().` on the second line |
+| A `.dll` path cannot be found. | `File: <path> doesn't exists.` |
+| Assembly loading fails. | `Could not load file or assembly '<assembly>, Version=<version>, Culture=neutral, PublicKeyToken=<token>' or one of its dependencies. The system cannot find the file specified.` |
 | The requested type cannot be resolved. | `Type: <typeFullName> was not found.` |
 
 ## Best practices

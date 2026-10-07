@@ -41,7 +41,7 @@ IsGuid(sGuid)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sGuid` is [`NIL`](../literals/nil.md). | `IsGuid (Parameter 'sGuid')` |
+| `sGuid` is [`NIL`](../literals/nil.md). | `IsGuid`, then `Parameter name: guid` on the second line |
 
 ## Best practices
 

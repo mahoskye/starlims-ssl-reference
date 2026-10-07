@@ -17,7 +17,7 @@ AddProperty adds a property to `oTarget` when `vPropName` is a string, or adds m
 
 If `oTarget` is [`NIL`](../literals/nil.md), AddProperty raises an error. If `vPropName` is [`NIL`](../literals/nil.md), it raises an error. If `vPropName` is neither a string nor an array of strings, or if any array element is not a string, it raises `Invalid property`.
 
-Property names must be valid SSL object property identifiers. Names must start with a letter or underscore and can then contain letters, digits, or underscores.
+Use valid SSL identifiers for property names: start with a letter or underscore, then use letters, digits, or underscores. The runtime does not enforce this (see [Caveats](#caveats)).
 
 ## When to use
 
@@ -36,7 +36,7 @@ AddProperty(oTarget, vPropName)
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `oTarget` | [object](../types/object.md) | yes | — | Object that receives the new property or properties. |
-| `vPropName` | [string](../types/string.md) or [array](../types/array.md) | yes | — | Property name as a string, or an array of property-name strings. Each name must be a valid property identifier. |
+| `vPropName` | [string](../types/string.md) or [array](../types/array.md) | yes | — | Property name as a string, or an array of property-name strings. Use valid SSL identifiers. |
 
 ## Returns
 
@@ -49,7 +49,6 @@ AddProperty(oTarget, vPropName)
 | `oTarget` is [`NIL`](../literals/nil.md). | `Argument o cannot be null. AddProperty()` |
 | `vPropName` is [`NIL`](../literals/nil.md). | `Argument propName cannot be null. AddProperty()` |
 | `vPropName` is not a string or an array element is not a string. | `Invalid property` |
-| A property name is not a valid identifier. | `Invalid property name: <name>` |
 
 ## Best practices
 
@@ -64,6 +63,10 @@ AddProperty(oTarget, vPropName)
     - Expect a return value you can use in further expressions. The function always returns [`NIL`](../literals/nil.md).
     - Pass [`NIL`](../literals/nil.md) for the target object or property name. Both are required.
     - Use spaces, hyphens, or leading digits in property names.
+
+## Caveats
+
+- Property names are not checked against identifier rules. In observed runtime behavior, `AddProperty(o, "1 bad")` adds the property and returns [`NIL`](../literals/nil.md) instead of raising an error.
 
 ## Examples
 

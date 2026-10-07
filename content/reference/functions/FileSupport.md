@@ -87,9 +87,9 @@ For `SETATTR`, only the first non-space character is used. The supported values 
 | Trigger | Exception message |
 | --- | --- |
 | `vFileIdentifier` is [`NIL`](../literals/nil.md). | `Fileidentifier is mandatory!` |
-| `vFileIdentifier` is neither a string nor a number. | `Request argument does not contain a string/numeric!` |
+| `vFileIdentifier` is neither a string nor a number. | `fileIdentifier`, then `Parameter name: Request argument does not contain a string/numeric!` on the second line |
 | `sRequest` is [`NIL`](../literals/nil.md). | `Request is mandatory!` |
-| `sRequest` is not a string. | `Request argument does not contain a string!` |
+| `sRequest` is not a string. | `request`, then `Parameter name: Request argument does not contain a string!` on the second line |
 | `sEncoding` is provided but is not a string. | `Argument: <encoding> must be of type string. FileSupport().` |
 | `sRequest` does not match any supported request family. | `Invalid request provided!` |
 | The byte count for `READ` is negative. | `Read size expected positive or 0` |

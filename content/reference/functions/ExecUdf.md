@@ -44,8 +44,8 @@ ExecUdf(sCode, [aArgs], [bCacheCode])
 
 | Trigger | Exception message |
 | --- | --- |
-| `aArgs` is provided but is not an array. | A runtime error. |
-| `sCode` cannot be compiled or does not produce a runnable entry point. | A runtime error. |
+| `aArgs` is provided but is not an array. | `Expected an array but actual type was: {type}` |
+| `sCode` has a syntax error such as an unexpected token. Other compile failures raise the compiler's own message. | `unexpected token: ["{token}",<{tokenType}>,line={line},col={column}]` |
 
 ## Best practices
 

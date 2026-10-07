@@ -57,10 +57,9 @@ Only one form is used per call. `aPropertyDefs` and `sClassName` are both the fi
 | Trigger | Exception message |
 | --- | --- |
 | The first argument is neither a string nor an array. | `Argument must be an array` |
-| The second argument in the class-name form is not an array. | `Wrong parameters for <className>` |
+| The second argument in the class-name form is not an array. | `Value cannot be null.`, then `Parameter name: Wrong parameters for <className>` on the second line |
 | A property-definition element is neither a string nor a two-element array. | `Invalid property definition. Property#: <index>` |
 | A property name is empty or not a string. | `Property name must be a non-empty string. Property#: <index>` |
-| A property name is not a valid SSL identifier. | `Invalid property name. Property#: <index>` |
 | A property named `XmlType` is assigned a non-string value. | `The value for property XmlType must be a string` |
 
 ## Best practices
@@ -79,6 +78,7 @@ Only one form is used per call. `aPropertyDefs` and `sClassName` are both the fi
 
 ## Caveats
 
+- Property names in the array form are not checked against identifier rules. In observed runtime behavior, `CreateUdObject({"1abc"})` creates a property named `1abc` instead of raising an error.
 - An empty `aPropertyDefs` array is valid and returns an empty dynamic object.
 - If the same property name appears more than once in `aPropertyDefs`, the last value wins.
 - `XmlType` is a special property name on dynamic objects and must receive a string value when you set it through `aPropertyDefs`.

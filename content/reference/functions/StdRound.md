@@ -45,9 +45,9 @@ StdRound(sStandard, nDigits, nNumber)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sStandard` is [`NIL`](../literals/nil.md). | `Argument sStandard cannot be null.` |
-| `nDigits` is [`NIL`](../literals/nil.md). | `Argument nDigits cannot be null.` |
-| `nNumber` is [`NIL`](../literals/nil.md). | `Argument nNumber cannot be null.` |
+| `sStandard` is [`NIL`](../literals/nil.md). | `Value cannot be null.` |
+| `nDigits` is [`NIL`](../literals/nil.md). | `Value cannot be null.` |
+| `nNumber` is [`NIL`](../literals/nil.md). | `Value cannot be null.` |
 
 ## Best practices
 

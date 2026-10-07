@@ -43,9 +43,9 @@ SigFig(sStandard, nDigits, nValue)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sStandard` is [`NIL`](../literals/nil.md). | `Argument sStandard cannot be null.` |
-| `nDigits` is [`NIL`](../literals/nil.md). | `Argument nDigits cannot be null.` |
-| `nValue` is [`NIL`](../literals/nil.md). | `Argument nValue cannot be null.` |
+| `sStandard` is [`NIL`](../literals/nil.md). | `Value cannot be null.` |
+| `nDigits` is [`NIL`](../literals/nil.md). | `Value cannot be null.` |
+| `nValue` is [`NIL`](../literals/nil.md). | `Value cannot be null.` |
 
 ## Best practices
 

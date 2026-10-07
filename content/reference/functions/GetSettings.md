@@ -41,7 +41,7 @@ GetSettings(aNames)
 
 | Trigger                                                    | Exception message                                                                                                                     |
 | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `aNames` is [`NIL`](../literals/nil.md) or an empty array. | `Argument name cannot be null or empty.` Note: the runtime message incorrectly names the function as [`GetSetting()`](GetSetting.md). |
+| `aNames` is [`NIL`](../literals/nil.md) or an empty array. | `Argument name cannot be null or empty. GetSetting()` |
 
 ## Best practices
 

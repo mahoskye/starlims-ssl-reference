@@ -41,7 +41,7 @@ LHex2Dec(sSource)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sSource` is [`NIL`](../literals/nil.md). | `Source string cannot be null.` |
+| `sSource` is [`NIL`](../literals/nil.md). | `Object reference not set to an instance of an object.` |
 
 ## Best practices
 

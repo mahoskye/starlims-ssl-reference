@@ -45,7 +45,7 @@ Eval(fnCode, [vArg1], [vArg2], ...)
 
 | Trigger | Exception message |
 | --- | --- |
-| `fnCode` is not a code block. | An operator-not-implemented error. |
+| `fnCode` is not a code block. | `Run-time error: the operator/method: eval is not implemented on type: <type>. Operand: <operand>` |
 
 ## Best practices
 

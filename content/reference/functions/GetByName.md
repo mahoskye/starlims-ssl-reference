@@ -42,7 +42,7 @@ GetByName(sName)
 | Trigger | Exception message |
 | --- | --- |
 | `sName` is [`NIL`](../literals/nil.md) or empty. | `GetByName(): Variable name cannot be missing.` |
-| The variable named `sName` does not exist in the current scope. | `Variable [name] is undefined!` |
+| The variable named `sName` does not exist in the current scope. | `Variable [<sName>] is undefined!` |
 
 ## Best practices
 

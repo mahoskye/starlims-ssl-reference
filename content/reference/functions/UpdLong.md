@@ -51,7 +51,7 @@ UpdLong([sConnectionName], sTableName, sColumnName, sWhereCondition, sInputFileP
 | `sTableName`, `sColumnName`, `sWhereCondition`, or `sInputFilePath` is [`NIL`](../literals/nil.md). | `Function parameters are incorrect.` |
 | The input path is not allowed by whitelist settings. | `Access to folder/file <sInputFilePath> is denied.` |
 | The input file does not exist. | `File <sInputFilePath> cannot be found.` |
-| The file cannot be read. | `Error reading the file <sInputFilePath>.` |
+| The file cannot be read. | `Error reading the file <sInputFilePath>` |
 | No rows match the `sWhereCondition`. | `Error updating long value\nNo rows were updated - maybe the WHERE clause evaluated to False: <sWhereCondition>` |
 | The database update fails for another reason. | `Error updating long value\n<database error>` |
 

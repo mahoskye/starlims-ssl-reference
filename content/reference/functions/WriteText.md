@@ -48,7 +48,7 @@ WriteText(sFileName, sCharsToWrite, [vConfirmRequired], [sAppend], [sEncoding])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sFileName` is [`NIL`](../literals/nil.md) or empty. | `Argument sFileName cannot be null or empty.` |
+| `sFileName` is [`NIL`](../literals/nil.md) or empty. | `Value cannot be null.` |
 | `sAppend` is not one of those four values. | `Only 'Y', 'y', 'N', and 'n' are accepted values!` |
 | `sEncoding` is not a string. | `Argument: <sEncoding> must be of type string.` |
 | The target path is outside the allowed whitelist. | `Access to folder/file <sFileName> is denied.\nIf system needs access to this folder/file please ask the System Administrator to add the item to WhitelistFolders setting in the configuration file.` |

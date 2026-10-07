@@ -46,8 +46,8 @@ WriteBytesBase64(sFileName, sBase64Data)
 | --- | --- |
 | The target path is outside the allowed whitelist. | `Access to folder/file <sFileName> is denied.\nIf system needs access to this folder/file please ask the System Administrator to add the item to WhitelistFolders setting in the configuration file.` |
 | `sFileName` is [`NIL`](../literals/nil.md) or empty and the whitelist check does not fail first. | `WriteBytesBase64(): File name cannot be missing.` |
-| `sBase64Data` is not valid base64. The write does not start. | A .NET `FormatException` |
-| The write operation raises a file-system error, such as a missing parent folder or insufficient write permissions. | File-system exceptions propagate from the write operation. |
+| `sBase64Data` is not valid base64. The write does not start. | `Invalid length for a Base-64 char array or string.` |
+| The parent folder of `sFileName` does not exist. | `Could not find a part of the path '<sFileName>'.` |
 
 ## Best practices
 

@@ -51,7 +51,7 @@ RetrieveLong([sConnectionName], sTableName, sColumnName, sWhereCondition, sOutpu
 | The connection name is unknown. | `The provider name: <sConnectionName> not found.` |
 | The database collection is unavailable. | `The internal database collection is null` |
 | The output path is outside the configured whitelist. | `Access to folder/file <path> is denied. If system needs access to this folder/file please ask the System Administrator to add the item to WhitelistFolders setting in the configuration file.` |
-| The database call or file write fails (any existing output file is deleted first). | The original error message is re-raised as a data access exception. |
+| The database query fails, for example because the table does not exist. | `ExecuteScalar exception <database error>` |
 
 ## Best practices
 
