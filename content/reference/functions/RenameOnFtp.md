@@ -13,11 +13,11 @@ starlims:
 
 Renames a remote file on an FTP server, or on an SFTP server when `bIsSFTP` is [`.T.`](../literals/true.md).
 
-`RenameOnFtp` renames a file within the same remote directory. On both the FTP and SFTP paths, the implementation delegates to the corresponding move helper with the same source and target directory and a different target file name.
+`RenameOnFtp` renames a file within the same remote directory. It works like [`MoveInFtp`](MoveInFtp.md) with the same source and target directory and a different target file name.
 
-The function validates `sServerNameOrIP`, `sFileNameOld`, `sFileNameNew`, and `sProxy` before attempting the rename. It also rejects renames where the trimmed new and old file names are the same ignoring case. If those validations pass, the function returns [`.T.`](../literals/true.md) only when the underlying move completes. Otherwise, it returns [`.F.`](../literals/false.md).
+The function validates `sServerNameOrIP`, `sFileNameOld`, `sFileNameNew`, and `sProxy` before attempting the rename. It also rejects renames where the trimmed new and old file names are the same ignoring case. If those validations pass, the function returns [`.T.`](../literals/true.md) only when the move completes. Otherwise, it returns [`.F.`](../literals/false.md).
 
-On the SFTP path, connection, login, and private-key setup happen inside helper calls before the function reaches its normal [`.F.`](../literals/false.md) return path, so some SFTP failures can still raise instead of returning [`.F.`](../literals/false.md).
+On the SFTP path, connection, login, and private-key setup failures can raise instead of returning [`.F.`](../literals/false.md).
 
 ## When to use
 
@@ -41,14 +41,14 @@ RenameOnFtp(sServerNameOrIP, [sRemoteDirectory], sFileNameOld, sFileNameNew, [sU
 | `sFileNameNew` | [string](../types/string.md) | yes | — | New remote file name to apply in the same directory. |
 | `sUserName` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | User name passed to the FTP or SFTP login step. |
 | `sPassword` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Password for password-based login. On the SFTP path, this value is also used as the private-key passphrase when `sPrivateKeyFilePath` is supplied. |
-| `nPort` | [number](../types/number.md) | no | `21` | Server port. If omitted or non-positive, the implementation uses `21`, even on the SFTP path. |
+| `nPort` | [number](../types/number.md) | no | `21` | Server port. If omitted or non-positive, the function uses `21`, even for SFTP. |
 | `sProxy` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Must be left empty. Supplying a non-empty value raises an error. |
-| `bIsSFTP` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Set to [`.T.`](../literals/true.md) to use the SFTP implementation. Omitted or [`NIL`](../literals/nil.md) keeps the FTP implementation. |
+| `bIsSFTP` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Set to [`.T.`](../literals/true.md) to use SFTP. Omitted or [`NIL`](../literals/nil.md) uses FTP. |
 | `sPrivateKeyFilePath` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Optional private key file for SFTP authentication. Ignored on the FTP path. |
 
 ## Returns
 
-**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the rename completes; [`.F.`](../literals/false.md) when the underlying FTP or SFTP move helper cannot complete the rename.
+**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the rename completes; [`.F.`](../literals/false.md) when the rename cannot be completed.
 
 ## Exceptions
 

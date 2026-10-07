@@ -7897,7 +7897,7 @@
         "do": [
           "Normalize both values before an exact string comparison when case should not matter.",
           "Combine Lower with AllTrim when input may contain extra spaces.",
-          "Use Lower and LLower interchangeably only when you want the same behavior."
+          "Lower and LLower behave the same; pick one and use it consistently."
         ],
         "dont": [
           "Assume Lower handles NIL input silently. It raises an error instead.",
@@ -8036,7 +8036,7 @@
           "Assume SFTP automatically switches to port 22. This function uses 21 unless you pass another nPort.",
           "Pass a manual proxy string expecting the function to use it. A non-empty sProxy argument raises an error.",
           "Assume every failure comes back as .F.. On the SFTP path, some setup failures can raise before the boolean result is reached.",
-          "Document or code around a separate MakeDirOnSftp call when this API is already the supported entry point for both modes."
+          "Look for a separate SFTP function; MakeDirOnFtp with bIsSFTP set to .T. handles SFTP."
         ]
       }
     },
@@ -8088,7 +8088,7 @@
       "caveats": [
         "PI and RAND still require the nNumber argument even though the calculation ignores it.",
         "Numeric domain validation is not performed. Operations such as LOG, LOG10, SQRT, and COT can return special numeric results such as NaN or infinity for some inputs.",
-        "FACT does not validate its input. The factorial loop terminates when the value reaches 1, so 0, negative numbers, and non-integers are not safe inputs."
+        "FACT expects a positive whole number. Do not pass 0, a negative number, or a fraction; check the input first (for example nValue >= 1 .AND. nValue == Integer(nValue))."
       ],
       "best_practices": {
         "do": [
@@ -8386,7 +8386,7 @@
         ],
         "dont": [
           "Use Nothing() when the literal string \"0\" is a valid code, quantity, or response in your workflow.",
-          "Assume Nothing() only extends Empty() for numeric zero. The extra behavior is the exact stringified value \"0\".",
+          "Expect Nothing() to treat \"00\" or \"0.0\" as missing. Beyond Empty, it only adds values whose string form is exactly \"0\".",
           "Treat Nothing(), Empty, and IsDefined as interchangeable. They answer different questions."
         ]
       }
@@ -8543,17 +8543,17 @@
       "source_path": "content/reference/functions/Rat.md",
       "exceptions": [
         {
-          "trigger": "subStr is NIL.",
+          "trigger": "sSubString is NIL.",
           "message": "Argument subStr cannot be null. RAt()."
         },
         {
-          "trigger": "source is NIL.",
+          "trigger": "sSource is NIL.",
           "message": "Argument source cannot be null. RAt()."
         }
       ],
       "caveats": [
-        "An empty subStr returns 0.",
-        "An empty source also returns 0 when subStr is not empty.",
+        "An empty sSubString returns 0.",
+        "An empty sSource also returns 0 when sSubString is not empty.",
         "The result is one-based, so convert carefully when working with zero-based external systems."
       ],
       "best_practices": {
@@ -8634,7 +8634,7 @@
       ],
       "caveats": [
         "sRemoteDirectory is not validated as required. If you do not need a folder path, pass an empty string.",
-        "SFTP connection, login, or private-key setup occurs before the SFTP read is wrapped in its transfer-error handler, so some SFTP failures may raise an exception instead of returning \"\".",
+        "On SFTP, connection, login, and private-key failures can raise an exception; only failures during the read itself return \"\".",
         "The function returns text. Binary files can produce unreadable content."
       ],
       "best_practices": {
@@ -8654,7 +8654,7 @@
       "id": "ssl.function.readtext",
       "element_type": "function",
       "title": "ReadText",
-      "summary": "Retrieves text content from a file in memory, allowing partial reads and encoding selection.",
+      "summary": "Reads a text file and returns its contents, or the first n characters, as a string, with an optional encoding.",
       "doc_status": "published",
       "source_path": "content/reference/functions/ReadText.md",
       "exceptions": [
@@ -8799,29 +8799,29 @@
       "source_path": "content/reference/functions/Replicate.md",
       "exceptions": [
         {
-          "trigger": "source is NIL.",
+          "trigger": "sSource is NIL.",
           "message": "Argument source cannot be null. Replicate()."
         },
         {
-          "trigger": "count is NIL.",
+          "trigger": "nCount is NIL.",
           "message": "Argument count cannot be null. Replicate()."
         },
         {
-          "trigger": "count is negative.",
+          "trigger": "nCount is negative.",
           "message": "Argument count cannot be less then zero. Replicate()."
         }
       ],
       "caveats": [],
       "best_practices": {
         "do": [
-          "Always validate that count is zero or greater before calling the function.",
+          "Always validate that nCount is zero or greater before calling the function.",
           "Handle cases where the source string may be empty to avoid unnecessary processing.",
-          "Use this function to generate consistent string patterns, such as repeated separators."
+          "Use this function to generate consistent string patterns, such as repeated separators.",
+          "Build padding by repeating one character, for example sValue + Replicate(\" \", 10 - Len(sValue)), guarding against a negative count."
         ],
         "dont": [
           "Assume the function handles negative counts gracefully. Negative counts raise an error that halts execution if unhandled.",
-          "Expect a non-empty result when source is empty, even with a positive count. The function always returns \"\" when source is empty.",
-          "Use it as a substitute for string padding functions like Left. Replicate only repeats the entire source string, not single characters for padding."
+          "Expect a non-empty result when sSource is empty, even with a positive count. The function always returns \"\" when sSource is empty."
         ]
       }
     },
@@ -8885,7 +8885,7 @@
       "source_path": "content/reference/functions/ReturnLastSQLError.md",
       "exceptions": [],
       "caveats": [
-        "This function returns the SQL error currently stored by the database library, not a snapshot taken earlier."
+        "This function returns the SQL error recorded at the time of the call, not a snapshot taken earlier."
       ],
       "best_practices": {
         "do": [
@@ -8895,7 +8895,7 @@
         ],
         "dont": [
           "Assume a value is always returned. A later database call may leave you with NIL or a different SQL error state.",
-          "Treat this as a general SSL error function. It returns the database library's stored SQL error only.",
+          "Treat this as a general SSL error function. It returns the recorded SQL error only.",
           "Rely on ClearLastSSLError to reset this value. That function clears the general SSL error state, not the SQL error exposed here."
         ]
       }
@@ -8994,7 +8994,7 @@
         "dont": [
           "Use RoundPoint5 when you need arbitrary precision such as 1, 2, or 3 decimal places.",
           "Pass values that may be NIL without handling that case first.",
-          "Assume it is interchangeable with every domain-specific half-step rule; it follows the built-in implementation used by STARLIMS."
+          "Assume it is interchangeable with every domain-specific half-step rule. It always rounds to one decimal place with the FDA rule first, so check that this matches your rule."
         ]
       }
     },
@@ -9290,7 +9290,7 @@
         "do": [
           "Pass a dedicated bind account with a real password and enough rights to search the target branch.",
           "Start from the narrowest practical base DN so the search is more likely to return exactly one entry.",
-          "Use a custom sSearchFilter only when you need a different attribute match, and keep it compatible with string.Format substitution."
+          "Use a custom sSearchFilter only when you need a different attribute match, and put {0} where sSearchUserName belongs."
         ],
         "dont": [
           "Treat sBindUserPassword as safely optional in practice. Omitting it passes an empty string and the bind fails.",
@@ -9431,7 +9431,7 @@
         }
       ],
       "caveats": [
-        "The first three parameters are required by contract, and blank values can also fail even when the parameter itself is not NIL.",
+        "The first four parameters are required, and blank values can also fail even when the parameter itself is not NIL.",
         "bIgnoreErrors defaults to .T., so callers that need fail-fast behavior should pass .F. explicitly."
       ],
       "best_practices": {
@@ -9443,7 +9443,7 @@
           "Validate attachment paths before calling the function."
         ],
         "dont": [
-          "Rely on the surfaced optional signature to mean blank required fields are safe. Empty SMTP, sender, recipient, and subject values can still fail at runtime.",
+          "Leave out or blank the subject, or pass blank SMTP, sender, or recipient values. The send fails.",
           "Pass a string where the function expects an array of addresses or attachments.",
           "Ignore a .F. return when bIgnoreErrors is .T.. That means the send failed and only the error handling mode changed.",
           "Mark HTML content as plain text. Set bIsBodyHTML correctly so the message body is interpreted as intended.",
@@ -9696,8 +9696,7 @@
         "Variable names are resolved case-insensitively.",
         "If the name exists in a caller scope but not the current scope, SetByName() updates the caller variable.",
         "If the name does not match any local or public variable and undeclared-variable creation is enabled, a new local variable is created in the current scope.",
-        "If the name does not match any local or public variable and undeclared-variable creation is disabled, the call raises an error.",
-        "When a variable is resolved in a caller scope or created after a miss, the runtime's undefined-variable callback may run if one has been registered."
+        "If the name does not match any local or public variable and undeclared-variable creation is disabled, the call raises an error."
       ],
       "best_practices": {
         "do": [

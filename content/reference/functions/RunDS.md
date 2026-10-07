@@ -46,7 +46,7 @@ RunDS(sDataSourceName, [aParameters], [vReturnType])
 | [`.T.`](../literals/true.md) | [string](../types/string.md) containing XML |
 | `"array"` | [array](../types/array.md) |
 | `"xml"` | [string](../types/string.md) containing XML |
-| `"dataset"` | dataset handle |
+| `"dataset"` | dataset handle in [object](../types/object.md) form, for APIs that specifically expect a dataset (compare `ToDataSet()` on [`SSLDataset`](../classes/SSLDataset.md)) |
 | `"ssldataset"` | [`SSLDataset`](../classes/SSLDataset.md) |
 | any other string | [array](../types/array.md) |
 

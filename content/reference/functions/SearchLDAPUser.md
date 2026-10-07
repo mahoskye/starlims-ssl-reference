@@ -65,7 +65,7 @@ SearchLDAPUser(sLdapHost, [nLdapPort], sBindUserName, [sBindUserPassword], [sSea
 !!! success "Do"
     - Pass a dedicated bind account with a real password and enough rights to search the target branch.
     - Start from the narrowest practical base DN so the search is more likely to return exactly one entry.
-    - Use a custom `sSearchFilter` only when you need a different attribute match, and keep it compatible with `string.Format` substitution.
+    - Use a custom `sSearchFilter` only when you need a different attribute match, and put `{0}` where `sSearchUserName` belongs.
 
 !!! failure "Don't"
     - Treat `sBindUserPassword` as safely optional in practice. Omitting it passes an empty string and the bind fails.
@@ -113,9 +113,10 @@ Use the built-in default filter and handle lookup failures explicitly.
         ErrorMes("LDAP lookup failed: " + oErr:Description);
     :ENDTRY;
 :ENDPROC;
-```
 
-Call with `DoProc("GetUserDn")`.
+/* Usage;
+DoProc("GetUserDn");
+```
 
 ### Search by a different LDAP attribute
 
@@ -140,9 +141,10 @@ Supply a custom filter pattern when the account name is stored in a different at
 
     UsrMes("Found DN: " + sUserDn);
 :ENDPROC;
-```
 
-Call with `DoProc("GetUserDnBySamAccountName")`.
+/* Usage;
+DoProc("GetUserDnBySamAccountName");
+```
 
 [`UsrMes`](UsrMes.md) logs:
 
@@ -192,9 +194,10 @@ Use `SearchLDAPUser` as the lookup step in a larger workflow, then persist the r
         ErrorMes("LDAP workflow failed: " + oErr:Description);
     :ENDTRY;
 :ENDPROC;
-```
 
-Call with `DoProc("ResolveAndStoreUserDn", {"jsmith"})`.
+/* Usage;
+DoProc("ResolveAndStoreUserDn", {"jsmith"});
+```
 
 ## Related
 

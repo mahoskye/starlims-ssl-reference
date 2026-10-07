@@ -13,7 +13,7 @@ starlims:
 
 Assigns a value to a variable whose name is supplied at runtime.
 
-`SetByName()` takes a variable name and a value, then writes that value to the matching variable. It first looks for an existing local variable in the current scope, then in caller scopes, then in public variables. If no existing variable is found, the runtime either creates a new local variable or raises an error, depending on the current `AllowUndeclaredVars` setting. The function returns the same value that was assigned.
+`SetByName()` takes a variable name and a value, then writes that value to the matching variable. It first looks for an existing local variable in the current scope, then in caller scopes, then in public variables. If no existing variable is found, the runtime either creates a new local variable or raises an error, depending on the `UndeclaredVars` setting, which is on by default (so by default a new local is created). The function returns the same value that was assigned.
 
 Use `SetByName()` when the target variable name is only known at runtime, such as in generic helpers, import routines, or configuration-driven code.
 
@@ -68,7 +68,6 @@ SetByName(sName, vValue)
 - If the name exists in a caller scope but not the current scope, `SetByName()` updates the caller variable.
 - If the name does not match any local or public variable and undeclared-variable creation is enabled, a new local variable is created in the current scope.
 - If the name does not match any local or public variable and undeclared-variable creation is disabled, the call raises an error.
-- When a variable is resolved in a caller scope or created after a miss, the runtime's undefined-variable callback may run if one has been registered.
 
 ## Examples
 

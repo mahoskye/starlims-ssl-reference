@@ -13,7 +13,7 @@ starlims:
 
 Returns the currently stored SQL error as an [`SSLSQLError`](../classes/SSLSQLError.md) object, or [`NIL`](../literals/nil.md) when no SQL error is recorded.
 
-`ReturnLastSQLError()` is a zero-parameter getter for the database library's current SQL error state. It returns the same stored value as [`GetLastSQLError()`](GetLastSQLError.md): when a database operation stores a SQL error, the function returns an [`SSLSQLError`](../classes/SSLSQLError.md); otherwise it returns [`NIL`](../literals/nil.md).
+`ReturnLastSQLError()` takes no parameters and returns the SQL error currently recorded by database calls. It returns the same value as [`GetLastSQLError()`](GetLastSQLError.md): when a database operation records a SQL error, the function returns an [`SSLSQLError`](../classes/SSLSQLError.md); otherwise it returns [`NIL`](../literals/nil.md).
 
 ## When to use
 
@@ -45,12 +45,12 @@ This function takes no parameters.
 
 !!! failure "Don't"
     - Assume a value is always returned. A later database call may leave you with [`NIL`](../literals/nil.md) or a different SQL error state.
-    - Treat this as a general SSL error function. It returns the database library's stored SQL error only.
+    - Treat this as a general SSL error function. It returns the recorded SQL error only.
     - Rely on [`ClearLastSSLError`](ClearLastSSLError.md) to reset this value. That function clears the general SSL error state, not the SQL error exposed here.
 
 ## Caveats
 
-- This function returns the SQL error currently stored by the database library, not a snapshot taken earlier.
+- This function returns the SQL error recorded at the time of the call, not a snapshot taken earlier.
 
 ## Examples
 

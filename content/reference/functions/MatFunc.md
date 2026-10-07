@@ -64,7 +64,7 @@ MatFunc(sFunctionName, nNumber)
 
 - `PI` and `RAND` still require the `nNumber` argument even though the calculation ignores it.
 - Numeric domain validation is not performed. Operations such as `LOG`, `LOG10`, `SQRT`, and `COT` can return special numeric results such as `NaN` or infinity for some inputs.
-- `FACT` does not validate its input. The factorial loop terminates when the value reaches `1`, so `0`, negative numbers, and non-integers are not safe inputs.
+- `FACT` expects a positive whole number. Do not pass `0`, a negative number, or a fraction; check the input first (for example `nValue >= 1 .AND. nValue == Integer(nValue)`).
 
 ## Examples
 
@@ -177,11 +177,8 @@ Handle multiple requested operations, keep successful results, and record failur
 
     :RETURN aResults;
 :ENDPROC;
-```
 
-Usage:
-
-```ssl
+/* Usage;
 :DECLARE aJobs, aResults;
 
 aJobs := {
