@@ -45,8 +45,8 @@ DoProc(sProcedureName, [aArguments])
 | Trigger | Exception message |
 | --- | --- |
 | The name has exactly two segments or more than three segments. | `Run-time error: Invalid procedure name: {name}` |
-| `aArguments` is provided but is not an array. | `Wrong parameters for {name}` |
-| A one-segment name does not resolve in the current script. | `Method {name} not found in script {scriptName}!` |
+| `aArguments` is provided but is not an array. | `Value cannot be null.`, then `Parameter name: Wrong parameters for {name}` on the second line |
+| A one-segment name does not resolve in the current script. | `Run-time error: Method {name} not found in script {scriptName}!` |
 
 ## Best practices
 

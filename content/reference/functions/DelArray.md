@@ -44,7 +44,7 @@ DelArray(aTarget, nIndex)
 | --- | --- |
 | `aTarget` is [`NIL`](../literals/nil.md). | `DelArray(): target array cannot be null.` |
 | `nIndex` is [`NIL`](../literals/nil.md). | `DelArray(): element index cannot be null.` |
-| `nIndex` is not an integer-valued number. | `Element index must be an integer value.` |
+| `nIndex` is not an integer-valued number. | `DelArray(): element index must be an integer value.` |
 | `nIndex` is less than `1`. | `DelArray(): element index cannot be less than one.` |
 
 ## Best practices

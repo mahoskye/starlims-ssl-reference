@@ -46,9 +46,9 @@ VerifySignature(sCertificateString, sData, sSignature)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sCertificateString` is empty, [`NIL`](../literals/nil.md), not valid base64, not a DER certificate, or does not expose a supported public key for this verification. | Raises an error. |
-| `sData` is [`NIL`](../literals/nil.md). | Raises an error. |
-| `sSignature` is [`NIL`](../literals/nil.md) or not valid base64. Unsupported or malformed signature content can also raise an error. | Raises an error. |
+| `sCertificateString` is empty, [`NIL`](../literals/nil.md), not valid base64, not a DER certificate, or does not expose a supported public key for this verification. | For an empty string: `m_safeCertContext is an invalid handle.` Other certificate problems raise their own messages. |
+| `sData` is [`NIL`](../literals/nil.md). | `String reference not set to an instance of a String.` |
+| `sSignature` is [`NIL`](../literals/nil.md) or not valid base64. Unsupported or malformed signature content can also raise an error. | For NIL: `Value cannot be null.`, then `Parameter name: s` on the second line. Invalid base64 raises its own message. |
 
 ## Best practices
 

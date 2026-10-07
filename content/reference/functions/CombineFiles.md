@@ -48,7 +48,7 @@ CombineFiles(aFileNames, sOutFile)
 | `sOutFile` is [`NIL`](../literals/nil.md). | `Value cannot be null.` |
 | The whitelist configuration denies access to a source or output path. | `Access to folder/file {path} is denied. If system needs access to this folder/file please ask the System Administrator to add the item to WhitelistFolders setting in the configuration file.` |
 | `sOutFile` already exists, because the output file is opened in create-new mode. | `The file '{path}' already exists.` |
-| A source file cannot be opened for reading. | Raises an I/O error. |
+| A source file does not exist. | `Could not find file '<path>'.` |
 
 ## Best practices
 
