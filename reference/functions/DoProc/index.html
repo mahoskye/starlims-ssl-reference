@@ -3545,7 +3545,7 @@
 
 <h1 id="doproc">DoProc<a class="headerlink" href="#doproc" title="Permanent link">&para;</a></h1>
 <p>Calls a local or scripted procedure by name with an optional argument array.</p>
-<p><code>DoProc</code> takes a procedure name and an optional argument array. A one-segment name calls a procedure in the current script. A three-segment name is passed through the same runtime path used by <a href="../ExecFunction/"><code>ExecFunction</code></a>.</p>
+<p><code>DoProc</code> takes a procedure name and an optional argument array. A one-segment name calls a procedure in the current script. A three-segment name calls <code>Category.Script.Procedure</code> the same way <a href="../ExecFunction/"><code>ExecFunction</code></a> does.</p>
 <p>The second argument, when supplied, must be an array. <code>DoProc</code> does not enforce an exact argument count before dispatch. Extra values are ignored, and missing positions are left for the target procedure to handle.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3573,7 +3573,7 @@
 <td><a href="../../types/string/">string</a></td>
 <td>yes</td>
 <td>—</td>
-<td>Procedure name to invoke. Use a one-segment name for a procedure in the current script, or a three-segment name to dispatch through the same runtime path as <a href="../ExecFunction/"><code>ExecFunction</code></a>.</td>
+<td>Procedure name to invoke. Use a one-segment name for a procedure in the current script, or a three-segment name to call <code>Category.Script.Procedure</code> the same way <a href="../ExecFunction/"><code>ExecFunction</code></a> does.</td>
 </tr>
 <tr>
 <td><code>aArguments</code></td>
@@ -3604,7 +3604,7 @@
 <td><code>Value cannot be null.</code>, then <code>Parameter name: Wrong parameters for {name}</code> on the second line</td>
 </tr>
 <tr>
-<td>A one-segment name does not resolve in the current script.</td>
+<td>A one-segment name computed at runtime does not resolve in the current script.</td>
 <td><code>Run-time error: Method {name} not found in script {scriptName}!</code></td>
 </tr>
 </tbody>
@@ -3632,10 +3632,11 @@
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Calling <code>DoProc()</code> with no arguments stops the script from compiling, so no runtime error can be caught.</li>
+<li>A string literal name is resolved when the script compiles: <code>DoProc("NoSuchProc")</code> stops the script from compiling with <code>Invalid method: NoSuchProc</code>, so no <a href="../../keywords/TRY/"><code>:TRY</code></a> can catch it. The runtime "not found" error in Exceptions applies only to names built at runtime.</li>
 <li><code>DoProc</code> is a compile-time error inside class methods — every name form is rejected, not just same-class calls. Use <code>Me:MethodName()</code> or <code>Base:MethodName()</code> instead.</li>
 <li>The called procedure does not get an isolated set of variables. Names it never declares resolve outward into the calling scope, so an undeclared assignment in the procedure can overwrite a caller variable of the same name. See <a href="../../../guides/variable-scope/">Variable Scope</a>.</li>
 <li>One-segment names are resolved case-insensitively in the current script.</li>
-<li>Three-segment names are passed into the executor path instead of local method lookup.</li>
+<li>A three-segment name calls <code>Category.Script.Procedure</code> the same way <a href="../ExecFunction/"><code>ExecFunction</code></a> does.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="call-a-local-procedure-by-name">Call a local procedure by name<a class="headerlink" href="#call-a-local-procedure-by-name" title="Permanent link">&para;</a></h3>
@@ -3722,7 +3723,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RouteStatusMessage"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="kc">.T.</span><span class="p">,</span><span class="w"> </span><span class="s2">"Something failed"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="dispatch-to-an-external-procedure-path">Dispatch to an external procedure path<a class="headerlink" href="#dispatch-to-an-external-procedure-path" title="Permanent link">&para;</a></h3>
-<p>Builds a three-segment procedure name at runtime and dispatches to it using <code>DoProc</code>, demonstrating the external executor path.</p>
+<p>Builds a three-segment procedure name at runtime and dispatches to it using <code>DoProc</code>, the same way <a href="../ExecFunction/"><code>ExecFunction</code></a> would.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SubmitConfiguredStep</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sStepName</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sProcName</span><span class="p">,</span><span class="w"> </span><span class="n">vResult</span><span class="p">;</span>
@@ -3771,7 +3772,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:48:07 UTC">October 7, 2026</span>
   </span>
 
     

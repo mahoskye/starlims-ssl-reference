@@ -4035,7 +4035,7 @@
 
 <h1 id="sqlexecute">SQLExecute<a class="headerlink" href="#sqlexecute" title="Permanent link">&para;</a></h1>
 <p>Executes SQL and returns either query results or a success flag.</p>
-<p><code>SQLExecute</code> runs a SQL statement against the specified connection or the current default connection. When the prepared SQL begins with <code>SELECT</code>, it can return rows as an array, XML text, or a dataset object depending on <code>vReturnType</code>. Other statements return a boolean success value. This is the database function that supports named <code>?varName?</code> parameter substitution in the SQL text.</p>
+<p><code>SQLExecute</code> runs a SQL statement against the specified connection or the current default connection. When the statement begins with <code>SELECT</code>, it can return rows as an array, XML text, or a dataset object depending on <code>vReturnType</code>. Other statements return a boolean success value. This is the database function that supports named <code>?varName?</code> parameter substitution in the SQL text.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you want to execute a <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, or other SQL statement through one function.</li>
@@ -4077,7 +4077,7 @@
 <td><a href="../../types/boolean/">boolean</a></td>
 <td>no</td>
 <td><a href="../../literals/true/"><code>.T.</code></a></td>
-<td>Applies to non-<code>SELECT</code> statements. Whatever its value, a failed statement leaves an open transaction open; see <a href="#caveats">Caveats</a>.</td>
+<td>Applies to non-<code>SELECT</code> statements. No effect on a failed statement was observed: an open transaction stays open whether this is <a href="../../literals/true/"><code>.T.</code></a> or <a href="../../literals/false/"><code>.F.</code></a>, so end the transaction yourself; see <a href="#caveats">Caveats</a>.</td>
 </tr>
 <tr>
 <td><code>bNullAsBlank</code></td>
@@ -4098,14 +4098,14 @@
 <td><a href="../../types/boolean/">boolean</a> or <a href="../../types/string/">string</a></td>
 <td>no</td>
 <td><code>"array"</code></td>
-<td>When the prepared SQL begins with <code>SELECT</code>: <a href="../../literals/false/"><code>.F.</code></a> or non-<code>xml</code>/non-<code>dataset</code> strings return an array, <a href="../../literals/true/"><code>.T.</code></a> or <code>"xml"</code> returns XML text, and the exact string <code>"dataset"</code> returns a dataset object. Ignored for other statements.</td>
+<td>For a <code>SELECT</code> statement: <a href="../../literals/false/"><code>.F.</code></a> or non-<code>xml</code>/non-<code>dataset</code> strings return an array, <a href="../../literals/true/"><code>.T.</code></a> or <code>"xml"</code> returns XML text, and the exact string <code>"dataset"</code> returns a dataset object. Ignored for other statements.</td>
 </tr>
 <tr>
 <td><code>sTableName</code></td>
 <td><a href="../../types/string/">string</a></td>
 <td>no</td>
 <td>omitted</td>
-<td>Optional table name to use for XML or dataset-shaped results when the prepared SQL begins with <code>SELECT</code>.</td>
+<td>Optional table name to use for XML or dataset-shaped results for a <code>SELECT</code> statement.</td>
 </tr>
 <tr>
 <td><code>bIncludeSchema</code></td>
@@ -4125,7 +4125,7 @@
 </table>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
 <p><strong>any</strong> — Rows for a <code>SELECT</code> statement, as an array, XML string, or dataset object depending on <code>vReturnType</code>; a boolean success value for other statements.</p>
-<p>When the prepared SQL begins with <code>SELECT</code>, the return value depends on <code>vReturnType</code>:</p>
+<p>For a <code>SELECT</code> statement, the return value depends on <code>vReturnType</code>:</p>
 <table>
 <thead>
 <tr>
@@ -4305,14 +4305,14 @@
 </code></pre></div>
 <h3 id="return-a-dataset-and-traverse-rows-with-0-based-net-indexing">Return a dataset and traverse rows with 0-based .NET indexing<a class="headerlink" href="#return-a-dataset-and-traverse-rows-with-0-based-net-indexing" title="Permanent link">&para;</a></h3>
 <p>Request a dataset object instead of an array, then traverse its rows using the .NET <code>DataTable</code> and <code>DataRowCollection</code> properties with zero-based indexing.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportBatchAsJson</span><span class="p">;</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListBatchSamples</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sBatch</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">oDs</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">oRows</span><span class="p">,</span><span class="w"> </span><span class="n">oRow</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sBatch</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"ExportBatchAsJson: batch ID is required"</span><span class="p">);</span>
+<span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"ListBatchSamples: batch ID is required"</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4342,7 +4342,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ExportBatchAsJson"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"B-2024-001"</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ListBatchSamples"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"B-2024-001"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4377,7 +4377,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:48:07 UTC">October 7, 2026</span>
   </span>
 
     

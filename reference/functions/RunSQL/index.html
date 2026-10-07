@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Executes a SQL statement and returns whether execution completed without an uncaught SQL error.">
+        <meta name="description" content="Executes a non-query SQL statement and returns .T. on success. Under default settings, a failed statement raises an error.">
       
       
       
@@ -4034,7 +4034,7 @@
 
 
 <h1 id="runsql">RunSQL<a class="headerlink" href="#runsql" title="Permanent link">&para;</a></h1>
-<p>Executes a SQL statement and returns whether execution completed without an uncaught SQL error.</p>
+<p>Executes a non-query SQL statement and returns .T. on success. Under default settings, a failed statement raises an error.</p>
 <p><code>RunSQL</code> is the non-query database helper for SQL that changes data or schema. It executes the SQL text on the specified connection, or on the default connection when <code>sConnectionName</code> is omitted. Use positional <code>?</code> placeholders in the SQL text and pass the corresponding values in <code>aValues</code>.</p>
 <p>The function returns <a href="../../literals/true/"><code>.T.</code></a> when execution succeeds. What happens on failure depends on two global flags, <a href="../IgnoreSqlErrors/"><code>IgnoreSqlErrors</code></a> and <a href="../ShowSqlErrors/"><code>ShowSqlErrors</code></a>, which both start at <a href="../../literals/true/"><code>.T.</code></a>. SQL error ignoring is therefore on by default, and <code>ShowSqlErrors</code> decides the outcome: while it is <a href="../../literals/true/"><code>.T.</code></a>, a failing statement raises an error that you handle with <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a>. Only when <code>ShowSqlErrors</code> is <a href="../../literals/false/"><code>.F.</code></a> (and ignoring is still on) does <code>RunSQL</code> return <a href="../../literals/false/"><code>.F.</code></a> instead. The error details are then available from <a href="../GetLastSQLError/"><code>GetLastSQLError</code></a>, not <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a>. <code>RunSQL</code> does not return rows; use <a href="../LSearch/"><code>LSearch</code></a>, <a href="../LSelect/"><code>LSelect</code></a>, <a href="../LSelect1/"><code>LSelect1</code></a>, <a href="../LSelectC/"><code>LSelectC</code></a>, or <a href="../SQLExecute/"><code>SQLExecute</code></a> when you need query results.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
@@ -4275,7 +4275,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:48:07 UTC">October 7, 2026</span>
   </span>
 
     

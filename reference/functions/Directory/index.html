@@ -3798,7 +3798,7 @@
 <h1 id="directory">Directory<a class="headerlink" href="#directory" title="Permanent link">&para;</a></h1>
 <p>Retrieves filesystem entries that match a path or wildcard pattern, with optional filtering for directories, hidden entries, and system entries.</p>
 <p><code>Directory</code> returns an array of rows. Each row contains the entry name, size, last modified value, a formatted last modified time string, and an attribute string. By default, the function returns visible non-system files only. Directories are only included when <code>sAttributes</code> contains uppercase <code>D</code>, hidden entries are only included when it contains uppercase <code>H</code>, and system entries are only included when it contains uppercase <code>S</code>. Read-only (<code>R</code>) and archive (<code>A</code>) can appear in the returned attribute string, but they are not used as filter switches.</p>
-<p>If <code>sFilePattern</code> is an existing directory path, the function lists entries in that directory using <a href="../../operators/multiply/"><code>*</code></a> as the pattern. If you pass an empty string, the listing logic falls back to the current working directory, but the path is still checked against the folder whitelist first. If the target directory does not exist, or the listing fails for a non-permission reason, the function returns an empty array.</p>
+<p>If <code>sFilePattern</code> is an existing directory path, the function lists entries in that directory using the wildcard pattern <code>*</code>. If you pass an empty string, the listing logic falls back to the current working directory, but the path is still checked against the folder whitelist first. A path outside the WhitelistFolders setting raises an error. Any other listing failure, including a missing directory, returns an empty array.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need file metadata, not just names.</li>
@@ -3825,7 +3825,7 @@
 <td><a href="../../types/string/">string</a></td>
 <td>yes</td>
 <td>—</td>
-<td>Path and wildcard pattern to list, such as <code>"C:\\Reports\\*.txt"</code>. If it points to an existing directory, <code>Directory</code> lists that directory with the <a href="../../operators/multiply/"><code>*</code></a> pattern. If you pass an empty string, the listing logic uses the current working directory after the whitelist check passes.</td>
+<td>Path and wildcard pattern to list, such as <code>"C:\Reports\*.txt"</code>. If it points to an existing directory, <code>Directory</code> lists that directory with the wildcard pattern <code>*</code>. If you pass an empty string, the listing logic uses the current working directory after the whitelist check passes.</td>
 </tr>
 <tr>
 <td><code>sAttributes</code></td>
@@ -3895,7 +3895,7 @@
 <p class="admonition-title">Do</p>
 <ul>
 <li>Pass an explicit directory and pattern so the listing scope is clear.</li>
-<li>Check for an empty result because missing matches and non-permission listing failures both return an empty array.</li>
+<li>Check for an empty result because missing matches and listing failures other than the whitelist check both return an empty array.</li>
 <li>Read the returned attribute string from column 5 when you need to distinguish files from directories or inspect <code>R</code> and <code>A</code>.</li>
 </ul>
 </div>
@@ -3904,12 +3904,12 @@
 <ul>
 <li>Assume <code>R</code> or <code>A</code> in <code>sAttributes</code> will filter the result set. They appear in returned metadata, but they are not filter switches.</li>
 <li>Assume directories are included by default. Add <code>D</code> when you want directory rows returned.</li>
-<li>Treat an empty result as proof that the directory is accessible and has no matching items. It can also mean the directory does not exist or the listing failed for another non-whitelist reason.</li>
+<li>Treat an empty result as proof that the directory is accessible and has no matching items. It can also mean the directory does not exist or the listing failed for a reason other than the whitelist check.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Non-whitelist access raises an exception; other listing failures return an empty array.</li>
+<li>A path outside the WhitelistFolders setting raises an exception; any other listing failure, including a missing directory, returns an empty array.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="list-visible-text-files">List visible text files<a class="headerlink" href="#list-visible-text-files" title="Permanent link">&para;</a></h3>
@@ -4035,7 +4035,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:48:07 UTC">October 7, 2026</span>
   </span>
 
     
