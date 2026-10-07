@@ -74,8 +74,8 @@ id: ssl.<category>.<slug>
 element_type: function | class | keyword | operator | literal | type | special_form | returns
 doc_status: published
 starlims:
-  applies_to: [11]
-  verified_against: [11]
+  applies_to: [11, 12]
+  verified_against: [12]   # versions where the page's behavior was confirmed on a server
 ---
 ```
 
@@ -143,8 +143,8 @@ usage trailers in the canonical `/* Usage;` form.
 
 ## Content ground rules
 
-- **Verify before documenting.** Behavior claims should match STARLIMS v11
-  as actually observed; when something is observed-but-not-vendor-documented,
+- **Verify before documenting.** Behavior claims should match STARLIMS as actually
+  observed (pages are written for v11 and checked on v12); when something is observed-but-not-vendor-documented,
   say "in observed runtime behavior".
 - **Write for SSL developers, not for the doc pipeline.** No build/pipeline
   narration, internal tool names, or style-rule IDs in `content/`.

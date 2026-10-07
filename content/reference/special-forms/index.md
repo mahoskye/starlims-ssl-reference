@@ -2,7 +2,7 @@
 title: "Special Forms"
 summary: "8 language constructs grouped by role - class infrastructure, endpoint runtime ambients, and other script-level forms."
 starlims:
-  applies_to: [11]
+  applies_to: [11, 12]
   verified_against: [11]
 ---
 

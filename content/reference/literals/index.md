@@ -2,7 +2,7 @@
 title: "Literals"
 summary: "3 literal values - boolean and null constants."
 starlims:
-  applies_to: [11]
+  applies_to: [11, 12]
   verified_against: [11]
 ---
 

@@ -1,6 +1,6 @@
 # SSL Reference
 
-An unofficial reference for the **STARLIMS Scripting Language (SSL)** as implemented in **STARLIMS version 11** — functions, classes, keywords, operators, types, and language constructs, with behavior notes and code examples.
+An unofficial reference for the **STARLIMS Scripting Language (SSL)** as implemented in **STARLIMS version 11**, with behavior verified on **STARLIMS version 12** — functions, classes, keywords, operators, types, and language constructs, with behavior notes and code examples.
 
 ## What's here
 
@@ -31,4 +31,4 @@ An unofficial reference for the **STARLIMS Scripting Language (SSL)** as impleme
 
 Element pages document parameters, return types, known exception messages, do/don't guidance, and code examples — the exact sections vary by category.
 
-This site is **unofficial** and was drafted with the help of AI tools from the maintainer's working notes, then reviewed. It aims to be useful to SSL developers working in STARLIMS v11 environments, but it will contain mistakes — when a page disagrees with what your system does, trust your system and [report the difference](https://github.com/mahoskye/starlims-ssl-reference/issues). See [About This Reference](about.md) for provenance, version scope, and license details.
+This site is **unofficial** and was drafted with the help of AI tools from the maintainer's working notes, then reviewed. It aims to be useful to SSL developers working in STARLIMS v11 and v12 environments, but it will contain mistakes — when a page disagrees with what your system does, trust your system and [report the difference](https://github.com/mahoskye/starlims-ssl-reference/issues). See [About This Reference](about.md) for provenance, version scope, and license details.

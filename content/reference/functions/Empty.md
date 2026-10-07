@@ -5,8 +5,8 @@ id: ssl.function.empty
 element_type: function
 doc_status: published
 starlims:
-  applies_to: [11]
-  verified_against: [11]
+  applies_to: [11, 12]
+  verified_against: [12]
 ---
 
 # Empty

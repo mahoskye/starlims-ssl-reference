@@ -5,7 +5,7 @@ id: ssl.class.azurestorage
 element_type: class
 doc_status: published
 starlims:
-  applies_to: [11]
+  applies_to: [11, 12]
   verified_against: [11]
 ---
 

@@ -2,7 +2,7 @@
 title: "Operators"
 summary: "32 operators - arithmetic, comparison, logical, bitwise, and assignment."
 starlims:
-  applies_to: [11]
+  applies_to: [11, 12]
   verified_against: [11]
 ---
 
