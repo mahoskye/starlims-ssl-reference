@@ -52,9 +52,7 @@ Behavior depends on the input value:
 
 ## Exceptions
 
-| Trigger | Exception message |
-| --- | --- |
-| Passing an unsupported external object. | `Objects of type: <type> cannot be serialized to json` |
+No documented exceptions.
 
 ## Best practices
 
@@ -70,6 +68,7 @@ Behavior depends on the input value:
 
 ## Caveats
 
+- A .NET object, such as a `StringBuilder`, is not rejected. `ToJson` returns its type name as a JSON string.
 - Date output format depends on the date kind: local dates include an offset, UTC dates include `Z`, and unspecified dates omit a zone suffix.
 
 ## Examples
@@ -136,7 +135,7 @@ DoProc("BuildOrderPayload");
 
 ### Handle values that may not be serializable
 
-Wrap `ToJson` in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) when the caller cannot guarantee the value comes from a supported type. Unsupported external objects raise an exception; this pattern surfaces the message and returns an empty string instead of letting the error propagate.
+Wrap `ToJson` in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) when the caller cannot guarantee the value comes from a supported type. If serialization fails, this pattern surfaces the message and returns an empty string instead of letting the error propagate. Not every unsupported value fails: a .NET object, for example, is written out as its type name (see [Caveats](#caveats)).
 
 ```ssl
 :PROCEDURE SerializeSafely;

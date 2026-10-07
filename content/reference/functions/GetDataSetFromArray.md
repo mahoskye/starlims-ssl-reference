@@ -46,7 +46,7 @@ GetDataSetFromArray(aArrayOfValues, [aArrayFields])
 
 | Trigger | Exception message |
 | --- | --- |
-| `aArrayOfValues` is [`NIL`](../literals/nil.md). | `The values array parameter is null` |
+| `aArrayOfValues` is [`NIL`](../literals/nil.md). | `Object reference not set to an instance of an object.` |
 
 ## Best practices
 

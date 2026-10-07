@@ -44,8 +44,7 @@ DoProc(sProcedureName, [aArguments])
 
 | Trigger | Exception message |
 | --- | --- |
-| The procedure name is missing. | `Please provide at least one parameter for DoProc` |
-| The name has exactly two segments or more than three segments. | `Invalid procedure name: {name}` |
+| The name has exactly two segments or more than three segments. | `Run-time error: Invalid procedure name: {name}` |
 | `aArguments` is provided but is not an array. | `Wrong parameters for {name}` |
 | A one-segment name does not resolve in the current script. | `Method {name} not found in script {scriptName}!` |
 
@@ -66,6 +65,7 @@ DoProc(sProcedureName, [aArguments])
 
 ## Caveats
 
+- Calling `DoProc()` with no arguments stops the script from compiling, so no runtime error can be caught.
 - `DoProc` is a compile-time error inside class methods — every name form is rejected, not just same-class calls. Use `Me:MethodName()` or `Base:MethodName()` instead.
 - The called procedure does not get an isolated set of variables. Names it never declares resolve outward into the calling scope, so an undeclared assignment in the procedure can overwrite a caller variable of the same name. See [Variable Scope](../../guides/variable-scope.md).
 - One-segment names are resolved case-insensitively in the current script.

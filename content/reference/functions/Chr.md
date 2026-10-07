@@ -41,7 +41,7 @@ Chr([nAsciiCode])
 
 | Trigger | Exception message |
 | --- | --- |
-| The rounded value is outside the supported character-code range `0` through `65535`. | Raises an error. |
+| The rounded value is outside the supported character-code range `0` through `65535`. | `Value was either too large or too small for a character.` |
 
 ## Best practices
 

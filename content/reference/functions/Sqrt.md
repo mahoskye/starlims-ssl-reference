@@ -42,7 +42,7 @@ Sqrt(nNumber)
 
 | Trigger | Exception message |
 | --- | --- |
-| `nNumber` is [`NIL`](../literals/nil.md). | `Argument nNumber cannot be null.` |
+| `nNumber` is [`NIL`](../literals/nil.md). | `Value cannot be null.` |
 
 ## Best practices
 

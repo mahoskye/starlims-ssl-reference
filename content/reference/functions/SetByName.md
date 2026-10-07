@@ -46,7 +46,7 @@ SetByName(sName, vValue)
 | Trigger | Exception message |
 | --- | --- |
 | `sName` is [`NIL`](../literals/nil.md) or empty. | `SetByName(): Variable name cannot be missing.` |
-| No matching variable exists and undeclared-variable creation is disabled. | `Variable [<sName>] is undefined!` |
+| No matching variable exists and undeclared-variable creation is disabled. | `Run-time error: Variable [<sName>] is undefined!` |
 
 ## Best practices
 

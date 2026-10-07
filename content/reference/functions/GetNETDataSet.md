@@ -56,7 +56,6 @@ GetNETDataSet(sCommandString, [sConnectionName], [aValues], [sTableName], [bRetu
 | The provider for `sConnectionName` cannot be resolved. | `The provider name: <sConnectionName> not found.` |
 | The database collection is unavailable. | `The internal database collection is null.` |
 | The database engine name cannot be determined. | `Cannot determine the database engine name.` |
-| The query returns a null data table. | `The returned data set is null.` |
 
 ## Best practices
 
@@ -74,6 +73,7 @@ GetNETDataSet(sCommandString, [sConnectionName], [aValues], [sTableName], [bRetu
 
 ## Caveats
 
+- A command that returns no result set, such as a T-SQL `DECLARE`, returns a data set with one empty table instead of raising an error.
 - Passing extra values beyond the placeholder count does not raise an error; only too few values raises `Parameters count mismatch.`
 - XML and object output use the same query path; `bReturnXml` changes only the final return format.
 

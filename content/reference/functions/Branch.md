@@ -45,7 +45,6 @@ Branch(vTarget)
 | Trigger | Exception message |
 | --- | --- |
 | More than one argument is provided. | `Compile-time error: <line>:<column> Branch with too many arguments` |
-| The branch target argument is missing. | `Branch target missing` |
 
 ## Best practices
 
@@ -61,6 +60,7 @@ Branch(vTarget)
 
 ## Caveats
 
+- Calling `Branch()` without a target stops the script from compiling, so no runtime error can be caught.
 - For [`:LABEL name;`](../keywords/LABEL.md), the usual branch target is `"LABEL name"`. For mashed labels such as [`:LABELNAME;`](../keywords/LABEL.md), the target text must match that exact token text instead.
 
 ## Examples

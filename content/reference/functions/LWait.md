@@ -43,7 +43,7 @@ LWait([nSeconds])
 
 | Trigger | Exception message |
 | --- | --- |
-| `nSeconds` is negative. | `(Argument out of range)` |
+| `nSeconds` is negative. | `Number must be either non-negative and less than or equal to Int32.MaxValue or -1.` |
 
 ## Best practices
 

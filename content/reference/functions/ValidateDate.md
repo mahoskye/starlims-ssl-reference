@@ -48,7 +48,7 @@ In strict `yyyyMMdd` mode, values shorter than 8 characters or containing non-nu
 | Trigger | Exception message |
 | --- | --- |
 | `sDateString` is [`NIL`](../literals/nil.md). | `Argument: stringDate cannot be null.` |
-| `sDateString` is not a string. | `Argument: sDateString must be of string type.` |
+| `sDateString` is not a string. | `Argument: stringDate must be of date type` |
 | `bUseDateFormat` is supplied but is not boolean. | `Argument: useDateFormat must be of boolean type` |
 
 ## Best practices

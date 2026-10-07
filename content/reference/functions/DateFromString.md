@@ -47,11 +47,11 @@ DateFromString(sDateAsString, [vFormat], [bUseLocalCulture], [bMakeInvariant])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sDateAsString` is [`NIL`](../literals/nil.md). | A null argument exception. The exact runtime message is platform-dependent. |
+| `sDateAsString` is [`NIL`](../literals/nil.md). | `Value cannot be null.` |
 | `vFormat` is not [`NIL`](../literals/nil.md), a string, or an array. | `Argument 'format' can be NIL, string or array.` |
 | `bUseLocalCulture` is not [`NIL`](../literals/nil.md) and not a boolean. | `Argument 'useLocalculture' can be NIL or boolean.` |
 | `bMakeInvariant` is not [`NIL`](../literals/nil.md) and not a boolean. | `Argument 'makeInvariant' can be NIL or boolean.` |
-| The text cannot be parsed by the selected culture and format. | A format exception. |
+| The text cannot be parsed by the selected culture and format. | `String was not recognized as a valid DateTime.` |
 
 ## Best practices
 

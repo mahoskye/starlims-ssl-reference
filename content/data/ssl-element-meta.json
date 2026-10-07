@@ -13,8 +13,8 @@
       "special_form": 8,
       "returns": 12
     },
-    "with_exceptions": 266,
-    "with_caveats": 402,
+    "with_exceptions": 265,
+    "with_caveats": 403,
     "with_best_practices": 458
   },
   "elements": [
@@ -385,13 +385,11 @@
         {
           "trigger": "vPropName is not a string or an array element is not a string.",
           "message": "Invalid property"
-        },
-        {
-          "trigger": "A property name is not a valid identifier.",
-          "message": "Invalid property name: <name>"
         }
       ],
-      "caveats": [],
+      "caveats": [
+        "Property names are not checked against identifier rules. In observed runtime behavior, AddProperty(o, \"1 bad\") adds the property and returns NIL instead of raising an error."
+      ],
       "best_practices": {
         "do": [
           "Pass an array of strings when you need to add several properties at once.",
@@ -488,11 +486,11 @@
         },
         {
           "trigger": "SORT receives an empty array for vValue.",
-          "message": "A runtime error is raised."
+          "message": "sortColumnIndex array is empty."
         },
         {
           "trigger": "SORT receives an unsupported type for vValue. Accepted types are a numeric column index, an array of numeric column indexes, or a comparison code block.",
-          "message": "A runtime error is raised."
+          "message": "If present, sortColumnIndex must be either numeric or array of numeric values."
         },
         {
           "trigger": "A SORT comparison code block returns a non-numeric result.",
@@ -775,13 +773,10 @@
         {
           "trigger": "More than one argument is provided.",
           "message": "Compile-time error: <line>:<column> Branch with too many arguments"
-        },
-        {
-          "trigger": "The branch target argument is missing.",
-          "message": "Branch target missing"
         }
       ],
       "caveats": [
+        "Calling Branch() without a target stops the script from compiling, so no runtime error can be caught.",
         "For :LABEL name;, the usual branch target is \"LABEL name\". For mashed labels such as :LABELNAME;, the target text must match that exact token text instead."
       ],
       "best_practices": {
@@ -1148,7 +1143,7 @@
       "exceptions": [
         {
           "trigger": "The rounded value is outside the supported character-code range 0 through 65535.",
-          "message": "Raises an error."
+          "message": "Value was either too large or too small for a character."
         }
       ],
       "caveats": [
@@ -1301,11 +1296,11 @@
       "exceptions": [
         {
           "trigger": "aFileNames is NIL.",
-          "message": "Raises a null-argument error for aFileNames."
+          "message": "Value cannot be null."
         },
         {
           "trigger": "sOutFile is NIL.",
-          "message": "Raises a null-argument error for sOutFile."
+          "message": "Value cannot be null."
         },
         {
           "trigger": "The whitelist configuration denies access to a source or output path.",
@@ -1313,7 +1308,7 @@
         },
         {
           "trigger": "sOutFile already exists, because the output file is opened in create-new mode.",
-          "message": "Raises a file-creation error."
+          "message": "The file '{path}' already exists."
         },
         {
           "trigger": "A source file cannot be opened for reading.",
@@ -1641,7 +1636,7 @@
         },
         {
           "trigger": "The second argument in the class-name form is not an array.",
-          "message": "Wrong parameters for <className>"
+          "message": "Value cannot be null., then Parameter name: Wrong parameters for <className>` on the second line"
         },
         {
           "trigger": "A property-definition element is neither a string nor a two-element array.",
@@ -1652,15 +1647,12 @@
           "message": "Property name must be a non-empty string. Property#: <index>"
         },
         {
-          "trigger": "A property name is not a valid SSL identifier.",
-          "message": "Invalid property name. Property#: <index>"
-        },
-        {
           "trigger": "A property named XmlType is assigned a non-string value.",
           "message": "The value for property XmlType must be a string"
         }
       ],
       "caveats": [
+        "Property names in the array form are not checked against identifier rules. In observed runtime behavior, CreateUdObject({\"1abc\"}) creates a property named 1abc instead of raising an error.",
         "An empty aPropertyDefs array is valid and returns an empty dynamic object.",
         "If the same property name appears more than once in aPropertyDefs, the last value wins.",
         "XmlType is a special property name on dynamic objects and must receive a string value when you set it through aPropertyDefs."
@@ -2047,7 +2039,7 @@
       "exceptions": [
         {
           "trigger": "sDateAsString is NIL.",
-          "message": "A null argument exception. The exact runtime message is platform-dependent."
+          "message": "Value cannot be null."
         },
         {
           "trigger": "vFormat is not NIL, a string, or an array.",
@@ -2063,7 +2055,7 @@
         },
         {
           "trigger": "The text cannot be parsed by the selected culture and format.",
-          "message": "A format exception."
+          "message": "String was not recognized as a valid DateTime."
         }
       ],
       "caveats": [
@@ -2447,12 +2439,8 @@
       "source_path": "content/reference/functions/DoProc.md",
       "exceptions": [
         {
-          "trigger": "The procedure name is missing.",
-          "message": "Please provide at least one parameter for DoProc"
-        },
-        {
           "trigger": "The name has exactly two segments or more than three segments.",
-          "message": "Invalid procedure name: {name}"
+          "message": "Run-time error: Invalid procedure name: {name}"
         },
         {
           "trigger": "aArguments is provided but is not an array.",
@@ -2464,6 +2452,7 @@
         }
       ],
       "caveats": [
+        "Calling DoProc() with no arguments stops the script from compiling, so no runtime error can be caught.",
         "DoProc is a compile-time error inside class methods — every name form is rejected, not just same-class calls. Use Me:MethodName() or Base:MethodName() instead.",
         "The called procedure does not get an isolated set of variables. Names it never declares resolve outward into the calling scope, so an undeclared assignment in the procedure can overwrite a caller variable of the same name. See Variable Scope.",
         "One-segment names are resolved case-insensitively in the current script.",
@@ -4168,7 +4157,7 @@
       "exceptions": [
         {
           "trigger": "fnCode is not a code block.",
-          "message": "An operator-not-implemented error."
+          "message": "Run-time error: the operator/method: eval is not implemented on type: <type>. Operand: <operand>"
         }
       ],
       "caveats": [
@@ -4197,15 +4186,12 @@
       "source_path": "content/reference/functions/ExecFunction.md",
       "exceptions": [
         {
-          "trigger": "Called with no arguments at all.",
-          "message": "Please provide at least one parameter for ExecFunction"
-        },
-        {
           "trigger": "aParameters is provided but is not an array.",
-          "message": "Wrong parameters for {functionName}"
+          "message": "Value cannot be null., then Parameter name: Wrong parameters for {functionName}` on the second line"
         }
       ],
       "caveats": [
+        "Calling ExecFunction() with no arguments stops the script from compiling, so no runtime error can be caught.",
         "A class file is not a runnable target: it has no script entry point, so a two-segment path naming a class file fails at runtime, and a three-segment path does not invoke its methods. Create the object with CreateUdObject and call the method on the instance instead.",
         "The called target does not get an isolated set of variables. Names it never declares resolve outward into this scope, so an undeclared assignment in the target — a :FOR counter especially — can overwrite a variable of the same name here. See Variable Scope.",
         "If the function name is misspelled, empty, or references a non-existent target, a runtime error is thrown with little context.",
@@ -4271,11 +4257,11 @@
       "exceptions": [
         {
           "trigger": "aArgs is provided but is not an array.",
-          "message": "A runtime error."
+          "message": "Expected an array but actual type was: {type}"
         },
         {
-          "trigger": "sCode cannot be compiled or does not produce a runnable entry point.",
-          "message": "A runtime error."
+          "trigger": "sCode has a syntax error such as an unexpected token. Other compile failures raise the compiler's own message.",
+          "message": "unexpected token: [\"{token}\",<{tokenType}>,line={line},col={column}]"
         }
       ],
       "caveats": [
@@ -4394,7 +4380,7 @@
         },
         {
           "trigger": "vFileIdentifier is neither a string nor a number.",
-          "message": "Request argument does not contain a string/numeric!"
+          "message": "fileIdentifier, then Parameter name: Request argument does not contain a string/numeric!` on the second line"
         },
         {
           "trigger": "sRequest is NIL.",
@@ -4402,7 +4388,7 @@
         },
         {
           "trigger": "sRequest is not a string.",
-          "message": "Request argument does not contain a string!"
+          "message": "request, then Parameter name: Request argument does not contain a string!` on the second line"
         },
         {
           "trigger": "sEncoding is provided but is not a string.",
@@ -4538,7 +4524,7 @@
         },
         {
           "trigger": "The <complextype> contents cannot be converted to the target array type.",
-          "message": "Can't convert to array"
+          "message": "Error unpacking XML"
         },
         {
           "trigger": "The root element is <error>.",
@@ -4626,7 +4612,7 @@
         },
         {
           "trigger": "The variable named sName does not exist in the current scope.",
-          "message": "Variable [name] is undefined!"
+          "message": "Variable [<sName>] is undefined!"
         }
       ],
       "caveats": [
@@ -4655,7 +4641,7 @@
       "exceptions": [
         {
           "trigger": "sConnectionName does not match any configured connection.",
-          "message": "The provider name: <name> not found."
+          "message": "GetConnectionByName failed"
         }
       ],
       "caveats": [],
@@ -4906,7 +4892,7 @@
       "exceptions": [
         {
           "trigger": "aArrayOfValues is NIL.",
-          "message": "The values array parameter is null"
+          "message": "Object reference not set to an instance of an object."
         }
       ],
       "caveats": [
@@ -4936,7 +4922,7 @@
       "exceptions": [
         {
           "trigger": "aArrayOfValues is NIL.",
-          "message": "The values array parameter is null"
+          "message": "Object reference not set to an instance of an object."
         },
         {
           "trigger": "Array preparation fails.",
@@ -5025,8 +5011,8 @@
           "message": "The values array parameter is null"
         },
         {
-          "trigger": "Array preparation fails.",
-          "message": "Preparing the input arrays generated an error : {message}"
+          "trigger": "A value cannot be stored in its field's declared type, such as text in a D (date) field. {message} is the .NET conversion error.",
+          "message": "{message}Couldn't store <{value}> in a Column.  Expected type is {type}."
         }
       ],
       "caveats": [
@@ -5597,13 +5583,10 @@
         {
           "trigger": "The database engine name cannot be determined.",
           "message": "Cannot determine the database engine name."
-        },
-        {
-          "trigger": "The query returns a null data table.",
-          "message": "The returned data set is null."
         }
       ],
       "caveats": [
+        "A command that returns no result set, such as a T-SQL DECLARE, returns a data set with one empty table instead of raising an error.",
         "Passing extra values beyond the placeholder count does not raise an error; only too few values raises Parameters count mismatch.",
         "XML and object output use the same query path; bReturnXml changes only the final return format."
       ],
@@ -5730,11 +5713,11 @@
         },
         {
           "trigger": "aSourceValues and aDestinationValues have different lengths.",
-          "message": "Invalid arguments for GetRegion! Source array's length is not equal with destination array's length."
+          "message": "Run-time error: Invalid arguments for GetRegion!, then Source array's length is not equal with destination array's length.` on the second line"
         },
         {
           "trigger": "The region name is not found in the current scope.",
-          "message": "GetRegion: <sRegionName> not in scope. The value substituted for <sRegionName>` is the lowercased region name."
+          "message": "Run-time error: GetRegion: <sRegionName> not in scope."
         }
       ],
       "caveats": [
@@ -5775,11 +5758,11 @@
         },
         {
           "trigger": "aSourceValues and aDestinationValues have different lengths.",
-          "message": "Invalid arguments for GetRegion! Source array's length is not equal with destination array's length."
+          "message": "Run-time error: Invalid arguments for GetRegion!, then Source array's length is not equal with destination array's length.` on the second line"
         },
         {
           "trigger": "The region name is not found in either the local override map or the current region scope. The value substituted for <sRegionName> is the lowercased region name.",
-          "message": "GetRegion: <sRegionName> not in scope."
+          "message": "Run-time error: GetRegion: <sRegionName> not in scope."
         }
       ],
       "caveats": [
@@ -5891,7 +5874,7 @@
       "exceptions": [
         {
           "trigger": "aNames is NIL or an empty array.",
-          "message": "Argument name cannot be null or empty.` Note: the runtime message incorrectly names the function as GetSetting()."
+          "message": "Argument name cannot be null or empty. GetSetting()"
         }
       ],
       "caveats": [
@@ -6390,7 +6373,7 @@
       "exceptions": [
         {
           "trigger": "sGuid is NIL.",
-          "message": "IsGuid (Parameter 'sGuid')"
+          "message": "IsGuid, then Parameter name: guid` on the second line"
         }
       ],
       "caveats": [
@@ -6420,7 +6403,7 @@
       "exceptions": [
         {
           "trigger": "sSource is NIL.",
-          "message": "Source string cannot be null."
+          "message": "Object reference not set to an instance of an object."
         }
       ],
       "caveats": [
@@ -6885,7 +6868,7 @@
       "exceptions": [
         {
           "trigger": "sSource is NIL.",
-          "message": "Source string cannot be null."
+          "message": "Object reference not set to an instance of an object."
         }
       ],
       "caveats": [],
@@ -6916,7 +6899,7 @@
         },
         {
           "trigger": "vDate is neither a string nor a date.",
-          "message": "Argument vDate must be a date or string value."
+          "message": "<date> parameter invalid!"
         }
       ],
       "caveats": [
@@ -7311,7 +7294,7 @@
       "exceptions": [
         {
           "trigger": "nSeconds is negative.",
-          "message": "(Argument out of range)"
+          "message": "Number must be either non-negative and less than or equal to Int32.MaxValue or -1."
         }
       ],
       "caveats": [
@@ -7544,19 +7527,19 @@
         },
         {
           "trigger": "sTypeName is not a string.",
-          "message": "Argument 'sTypeName' must be a string."
+          "message": "typeName, then Parameter name: Argument 'typeName' must be a string. LimsNETConnect().` on the second line"
         },
         {
           "trigger": "aArgs is not an array.",
-          "message": "Argument 'aArgs' must be an array."
+          "message": "args, then Parameter name: Argument 'args' must be an array. LimsNETConnect().` on the second line"
         },
         {
           "trigger": "A .dll path cannot be found.",
-          "message": "File: <path> doesn't exist."
+          "message": "File: <path> doesn't exists."
         },
         {
           "trigger": "Assembly loading fails.",
-          "message": "Error loading the assembly: <assembly>."
+          "message": "Could not load file or assembly '<assembly>, Version=<version>, Culture=neutral, PublicKeyToken=<token>' or one of its dependencies. The system cannot find the file specified."
         },
         {
           "trigger": "The requested type cannot be resolved.",
@@ -7817,7 +7800,7 @@
       "exceptions": [
         {
           "trigger": "sParam is NIL.",
-          "message": "A null-argument error whose second line reads Parameter name: param."
+          "message": "null argument in LimsType()"
         },
         {
           "trigger": "sParam is not a string.",
@@ -8694,8 +8677,8 @@
           "message": "Access to folder/file <path> is denied. If system needs access to this folder/file please ask the System Administrator to add the item to WhitelistFolders setting in the configuration file."
         },
         {
-          "trigger": "The file cannot be opened or the encoding name is unsupported.",
-          "message": "The underlying file I/O or encoding lookup raises an error."
+          "trigger": "The file does not exist.",
+          "message": "Could not find file '<path>'."
         }
       ],
       "caveats": [
@@ -8877,8 +8860,8 @@
           "message": "Access to folder/file <path> is denied. If system needs access to this folder/file please ask the System Administrator to add the item to WhitelistFolders setting in the configuration file."
         },
         {
-          "trigger": "The database call or file write fails (any existing output file is deleted first).",
-          "message": "The original error message is re-raised as a data access exception."
+          "trigger": "The database query fails, for example because the table does not exist.",
+          "message": "ExecuteScalar exception <database error>"
         }
       ],
       "caveats": [
@@ -9113,15 +9096,12 @@
           "message": "The provider name: <sConnectionName> not found."
         },
         {
-          "trigger": "aValues is a multidimensional array.",
-          "message": "The current array has more than 1 dimension."
-        },
-        {
-          "trigger": "The number of ? placeholders does not match the supplied values.",
-          "message": "Parameters count mismatch"
+          "trigger": "aValues has fewer values than there are ? placeholders.",
+          "message": "ExecuteNonQuery exception Not enough values provided for parameters."
         }
       ],
       "caveats": [
+        "A nested array in aValues is not rejected. In observed runtime behavior, RunSQL(\"SELECT ? AS a\", \"DATABASE\", {{1, 2}}) returns .T..",
         "aValues must line up with the positional ? placeholders in order.",
         "A single third argument such as sValue is accepted, but arrays are clearer once more than one parameter is involved.",
         "IgnoreSqlErrors(.T.) on its own does not stop a failure from raising, because ignoring is already on by default. ShowSqlErrors(.F.) is the setting that makes RunSQL return .F..",
@@ -9715,7 +9695,7 @@
         },
         {
           "trigger": "No matching variable exists and undeclared-variable creation is disabled.",
-          "message": "Variable [<sName>] is undefined!"
+          "message": "Run-time error: Variable [<sName>] is undefined!"
         }
       ],
       "caveats": [
@@ -10045,15 +10025,15 @@
       "exceptions": [
         {
           "trigger": "sStandard is NIL.",
-          "message": "Argument sStandard cannot be null."
+          "message": "Value cannot be null."
         },
         {
           "trigger": "nDigits is NIL.",
-          "message": "Argument nDigits cannot be null."
+          "message": "Value cannot be null."
         },
         {
           "trigger": "nValue is NIL.",
-          "message": "Argument nValue cannot be null."
+          "message": "Value cannot be null."
         }
       ],
       "caveats": [
@@ -10119,7 +10099,7 @@
       "exceptions": [
         {
           "trigger": "nNumber is NIL.",
-          "message": "Argument nNumber cannot be null."
+          "message": "Value cannot be null."
         }
       ],
       "caveats": [],
@@ -10146,15 +10126,15 @@
       "exceptions": [
         {
           "trigger": "sStandard is NIL.",
-          "message": "Argument sStandard cannot be null."
+          "message": "Value cannot be null."
         },
         {
           "trigger": "nDigits is NIL.",
-          "message": "Argument nDigits cannot be null."
+          "message": "Value cannot be null."
         },
         {
           "trigger": "nNumber is NIL.",
-          "message": "Argument nNumber cannot be null."
+          "message": "Value cannot be null."
         }
       ],
       "caveats": [
@@ -10499,13 +10479,9 @@
       "summary": "Serializes an SSL value, array, or object to a JSON string.",
       "doc_status": "published",
       "source_path": "content/reference/functions/ToJson.md",
-      "exceptions": [
-        {
-          "trigger": "Passing an unsupported external object.",
-          "message": "Objects of type: <type> cannot be serialized to json"
-        }
-      ],
+      "exceptions": [],
       "caveats": [
+        "A .NET object, such as a StringBuilder, is not rejected. ToJson returns its type name as a JSON string.",
         "Date output format depends on the date kind: local dates include an offset, UTC dates include Z, and unspecified dates omit a zone suffix."
       ],
       "best_practices": {
@@ -10562,7 +10538,7 @@
       "exceptions": [
         {
           "trigger": "nNumber is not numeric.",
-          "message": "Argument 'nNumber' must be a numeric."
+          "message": "number, then Parameter name: Argument 'number' must be a numeric.` on the second line"
         },
         {
           "trigger": "nDecimalPlaces is not an integer.",
@@ -10689,7 +10665,7 @@
         },
         {
           "trigger": "The file cannot be read.",
-          "message": "Error reading the file <sInputFilePath>."
+          "message": "Error reading the file <sInputFilePath>"
         },
         {
           "trigger": "No rows match the sWhereCondition.",
@@ -10902,7 +10878,7 @@
         },
         {
           "trigger": "sDateString is not a string.",
-          "message": "Argument: sDateString must be of string type."
+          "message": "Argument: stringDate must be of date type"
         },
         {
           "trigger": "bUseDateFormat is supplied but is not boolean.",
@@ -10933,7 +10909,7 @@
       "exceptions": [
         {
           "trigger": "sNumber is NIL.",
-          "message": "Argument sNumber cannot be null."
+          "message": "Value cannot be null."
         }
       ],
       "caveats": [],
@@ -11006,11 +10982,11 @@
         },
         {
           "trigger": "sBase64Data is not valid base64. The write does not start.",
-          "message": "A .NET `FormatException"
+          "message": "Invalid length for a Base-64 char array or string."
         },
         {
-          "trigger": "The write operation raises a file-system error, such as a missing parent folder or insufficient write permissions.",
-          "message": "File-system exceptions propagate from the write operation."
+          "trigger": "The parent folder of sFileName does not exist.",
+          "message": "Could not find a part of the path '<sFileName>'."
         }
       ],
       "caveats": [
@@ -11039,7 +11015,7 @@
       "exceptions": [
         {
           "trigger": "sFileName is NIL or empty.",
-          "message": "Argument sFileName cannot be null or empty."
+          "message": "Value cannot be null."
         },
         {
           "trigger": "sAppend is not one of those four values.",
@@ -11130,7 +11106,7 @@
         },
         {
           "trigger": "sXml is malformed XML.",
-          "message": "A runtime error from the XML loader."
+          "message": "Data at the root level is invalid. Line <line>, position <position>."
         }
       ],
       "caveats": [

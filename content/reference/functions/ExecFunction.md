@@ -44,8 +44,7 @@ ExecFunction(sName, [aParameters])
 
 | Trigger | Exception message |
 | --- | --- |
-| Called with no arguments at all. | `Please provide at least one parameter for ExecFunction` |
-| `aParameters` is provided but is not an array. | `Wrong parameters for {functionName}` |
+| `aParameters` is provided but is not an array. | `Value cannot be null.`, then `Parameter name: Wrong parameters for {functionName}` on the second line |
 
 ## Best practices
 
@@ -63,6 +62,7 @@ ExecFunction(sName, [aParameters])
 
 ## Caveats
 
+- Calling `ExecFunction()` with no arguments stops the script from compiling, so no runtime error can be caught.
 - A class file is not a runnable target: it has no script entry point, so a two-segment path naming a class file fails at runtime, and a three-segment path does not invoke its methods. Create the object with [`CreateUdObject`](CreateUdObject.md) and call the method on the instance instead.
 - The called target does not get an isolated set of variables. Names it never declares resolve outward into this scope, so an undeclared assignment in the target — a [`:FOR`](../keywords/FOR.md) counter especially — can overwrite a variable of the same name here. See [Variable Scope](../../guides/variable-scope.md).
 - If the function name is misspelled, empty, or references a non-existent target, a runtime error is thrown with little context.

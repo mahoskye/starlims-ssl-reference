@@ -52,7 +52,7 @@ GetDataSetXMLFromArray(aArrayOfValues, [aArrayFields], [sTableName], [bIncludeHe
 | Trigger | Exception message |
 | --- | --- |
 | `aArrayOfValues` is [`NIL`](../literals/nil.md). | `The values array parameter is null` |
-| Array preparation fails. | `Preparing the input arrays generated an error : {message}` |
+| A value cannot be stored in its field's declared type, such as text in a `D` (date) field. `{message}` is the .NET conversion error. | `{message}Couldn't store <{value}> in a Column.  Expected type is {type}.` |
 
 ## Best practices
 
