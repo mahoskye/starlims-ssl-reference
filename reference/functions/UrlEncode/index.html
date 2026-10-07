@@ -4223,11 +4223,11 @@
 
 <h1 id="urlencode">UrlEncode<a class="headerlink" href="#urlencode" title="Permanent link">&para;</a></h1>
 <p>Converts a string into a format safe for inclusion in a URL by encoding unsafe characters.</p>
-<p><code>UrlEncode</code> returns the encoded form of <code>sData</code> for use in URL values such as query parameters or path segments. If <code>sData</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the function returns <a href="../../literals/nil/"><code>NIL</code></a>. If <code>sData</code> is not a <a href="../../types/string/">string</a>, the function raises an error. Use <a href="../UrlDecode/"><code>UrlDecode</code></a> when you need to reverse the operation.</p>
+<p><code>UrlEncode</code> returns the encoded form of <code>sData</code> for use in URL values. The output is query-string (form) encoding: spaces become <code>+</code>. In a URL path, <code>+</code> is a literal plus, so when you encode a path segment, replace <code>+</code> with <code>%20</code> in the result. If <code>sData</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the function returns <a href="../../literals/nil/"><code>NIL</code></a>. If <code>sData</code> is not a <a href="../../types/string/">string</a>, the function raises an error. Use <a href="../UrlDecode/"><code>UrlDecode</code></a> when you need to reverse the operation.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When adding user-entered text to a query string.</li>
-<li>When building URL path segments from dynamic names or identifiers.</li>
+<li>When building URL path segments from dynamic names or identifiers, after replacing <code>+</code> with <code>%20</code> in the result.</li>
 <li>When preparing redirect targets or download links that include spaces or reserved characters.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
@@ -4290,7 +4290,7 @@
 </div>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="add-user-input-to-a-query-string">Add user input to a query string<a class="headerlink" href="#add-user-input-to-a-query-string" title="Permanent link">&para;</a></h3>
-<p>Encode one dynamic value before appending it to a query string. Spaces become <a href="../../operators/plus/"><code>+</code></a> and special characters such as <code>'</code> and <a href="../../operators/and/"><code>&amp;</code></a> become percent-encoded sequences.</p>
+<p>Encode one dynamic value before appending it to a query string. Spaces become <code>+</code> and special characters such as <code>'</code> and <code>&amp;</code> become percent-encoded sequences.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSearchUrl</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCompanyName</span><span class="p">,</span><span class="w"> </span><span class="n">sEncodedCompany</span><span class="p">,</span><span class="w"> </span><span class="n">sBaseUrl</span><span class="p">,</span><span class="w"> </span><span class="n">sUrl</span><span class="p">;</span>
 
@@ -4312,7 +4312,7 @@
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>https://example.com/api/search?company=O%27Reilly+%26+Associates
 </code></pre></div>
 <h3 id="encode-multiple-query-parameter-values">Encode multiple query parameter values<a class="headerlink" href="#encode-multiple-query-parameter-values" title="Permanent link">&para;</a></h3>
-<p>Encode each user-supplied value separately before building the final URL. Encoding values one at a time prevents accidental double-encoding of the <a href="../../operators/and/"><code>&amp;</code></a> separator.</p>
+<p>Encode each user-supplied value separately before building the final URL. This keeps the <code>&amp;</code> separators between parameters unencoded.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildOrderLookupUrl</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sOrderNo</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sEncodedOrderNo</span><span class="p">,</span><span class="w"> </span><span class="n">sEncodedStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sUrl</span><span class="p">;</span>
@@ -4330,13 +4330,13 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildOrderLookupUrl"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"ORD-2024-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">"PENDING REVIEW"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="encode-optional-filters-and-path-segments">Encode optional filters and path segments<a class="headerlink" href="#encode-optional-filters-and-path-segments" title="Permanent link">&para;</a></h3>
-<p>Combine required path segments with an optional query value while preserving <a href="../../literals/nil/"><code>NIL</code></a> behavior for the optional input. When <code>sFilter</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the URL omits the filter parameter entirely.</p>
+<p>Combine required path segments with an optional query value while preserving <a href="../../literals/nil/"><code>NIL</code></a> behavior for the optional input. When <code>sFilter</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the URL omits the filter parameter entirely. The path segments replace <code>+</code> with <code>%20</code>, because a <code>+</code> in a URL path is not read back as a space.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildDownloadUrl</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sFolderName</span><span class="p">,</span><span class="w"> </span><span class="n">sFileName</span><span class="p">,</span><span class="w"> </span><span class="n">sFilter</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFolderSegment</span><span class="p">,</span><span class="w"> </span><span class="n">sFileSegment</span><span class="p">,</span><span class="w"> </span><span class="n">sUrl</span><span class="p">,</span><span class="w"> </span><span class="n">sEncodedFilter</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sFolderSegment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">UrlEncode</span><span class="p">(</span><span class="n">sFolderName</span><span class="p">);</span>
-<span class="w">    </span><span class="n">sFileSegment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">UrlEncode</span><span class="p">(</span><span class="n">sFileName</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sFolderSegment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replace</span><span class="p">(</span><span class="nf">UrlEncode</span><span class="p">(</span><span class="n">sFolderName</span><span class="p">),</span><span class="w"> </span><span class="s2">"+"</span><span class="p">,</span><span class="w"> </span><span class="s2">"%20"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">sFileSegment</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">Replace</span><span class="p">(</span><span class="nf">UrlEncode</span><span class="p">(</span><span class="n">sFileName</span><span class="p">),</span><span class="w"> </span><span class="s2">"+"</span><span class="p">,</span><span class="w"> </span><span class="s2">"%20"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="n">sUrl</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"https://example.com/files/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFolderSegment</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sFileSegment</span><span class="p">;</span>
 
@@ -4376,7 +4376,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:10:03 UTC">October 7, 2026</span>
   </span>
 
     

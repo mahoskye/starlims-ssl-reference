@@ -3602,7 +3602,7 @@
 <h1 id="setuserpassword">SetUserPassword<a class="headerlink" href="#setuserpassword" title="Permanent link">&para;</a></h1>
 <p>Updates a user's password and returns the stored password hash.</p>
 <p><code>SetUserPassword()</code> hashes <code>sPassword</code>, attempts to store the new value for <code>sUserName</code>, and returns the hash when the update succeeds. If the update does not succeed, the function returns <code>""</code>.</p>
-<p>The function raises an exception when either argument is <a href="../../literals/nil/"><code>NIL</code></a>. It does not reject empty strings, and it does not perform password-policy or password-history checks. When <code>sUserName</code> matches the current session user, the function also stores the new password in the session under <code>STARLIMSPass</code>.</p>
+<p>The function raises an exception when either argument is <a href="../../literals/nil/"><code>NIL</code></a>. It does not reject empty strings, and it does not perform password-policy or password-history checks. When <code>sUserName</code> matches the current session user, the session's stored password is updated too.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need to complete a password reset or forced password-change flow.</li>
@@ -3671,7 +3671,7 @@
 <p class="admonition-title">Don't</p>
 <ul>
 <li>Assume this function enforces password complexity, password history, or other policy rules.</li>
-<li>Assume empty strings raise an exception. Only <a href="../../literals/nil/"><code>NIL</code></a> is rejected by the documented implementation.</li>
+<li>Assume empty strings raise an exception. Only <a href="../../literals/nil/"><code>NIL</code></a> is rejected.</li>
 <li>Ignore the return value when the password change must be confirmed.</li>
 <li>Expose the new password carelessly in current-user flows, because the session is updated when <code>sUserName</code> matches the active user.</li>
 </ul>
@@ -3736,9 +3736,9 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ChangePasswordAfterCheck"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"jsmith"</span><span class="p">,</span><span class="w"> </span><span class="s2">"CurrentPass!"</span><span class="p">,</span><span class="w"> </span><span class="s2">"NewPass2026!"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="apply-password-history-checks-in-a-reset-loop">Apply password-history checks in a reset loop<a class="headerlink" href="#apply-password-history-checks-in-a-reset-loop" title="Permanent link">&para;</a></h3>
-<p>Process multiple requested resets, skipping values that already appear in each user's stored password history.</p>
+<p>Process multiple requested resets, skipping values that already appear in a supplied password history for that user.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResetPasswordsWithHistoryCheck</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aResetRequests</span><span class="p">,</span><span class="w"> </span><span class="n">aHistoryByUser</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aResetRequests</span><span class="p">,</span><span class="w"> </span><span class="n">aHistoryByUser</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nHistoryIndex</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sNewPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sStoredHash</span><span class="p">,</span><span class="w"> </span><span class="n">aPrevPasswords</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aResetRequests</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span>
@@ -3754,7 +3754,11 @@
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aResetRequests</span><span class="p">);</span>
 <span class="w">        </span><span class="n">sUserName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aResetRequests</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">];</span>
 <span class="w">        </span><span class="n">sNewPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aResetRequests</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span>
-<span class="w">        </span><span class="n">aPrevPasswords</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aHistoryByUser</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span>
+<span class="w">        </span><span class="n">nHistoryIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">AScan</span><span class="p">(</span><span class="n">aHistoryByUser</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="err">|</span><span class="n">aRow</span><span class="err">|</span><span class="w"> </span><span class="n">aRow</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sUserName</span><span class="p">});</span>
+<span class="w">        </span><span class="n">aPrevPasswords</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">nHistoryIndex</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="n">aPrevPasswords</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aHistoryByUser</span><span class="p">[</span><span class="n">nHistoryIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="nf">ChkNewPassword</span><span class="p">(</span><span class="n">sNewPassword</span><span class="p">,</span><span class="w"> </span><span class="n">aPrevPasswords</span><span class="p">);</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Skipped "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" because the password was used before."</span><span class="p">);</span>
@@ -3804,7 +3808,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:10:03 UTC">October 7, 2026</span>
   </span>
 
     
