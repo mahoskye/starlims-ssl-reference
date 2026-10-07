@@ -15,7 +15,7 @@ starlims:
 
 The `.T.` literal represents the boolean value true in SSL. It is case-insensitive — `.T.` and `.t.` are both valid. Use `.T.` in logical expressions, assignments, comparisons, and conditional statements wherever a boolean true is required.
 
-Equality checks on `.T.` require both operands to be booleans. Comparing `.T.` to a number (for example `.T. = 1`) raises a runtime error. Unlike [`.F.`](false.md), `.T.` is **not** considered empty — `IsEmpty(.T.)` returns [`.F.`](false.md).
+Equality checks on `.T.` require both operands to be booleans. Comparing `.T.` to a number (for example `.T. = 1`) raises a runtime error. Unlike [`.F.`](false.md), `.T.` is **not** considered empty — [`Empty`](../functions/Empty.md)`(.T.)` returns [`.F.`](false.md).
 
 ## Syntax
 
@@ -40,7 +40,7 @@ Equality checks on `.T.` require both operands to be booleans. Comparing `.T.` t
 |--------|--------|
 | [string](../types/string.md) | `".T."` |
 | [number](../types/number.md) | `1` |
-| JSON ([`ToJson`](../functions/ToJson.md)) | `"true"` (a string value, not a JSON boolean token) |
+| JSON ([`ToJson`](../functions/ToJson.md)) | `true` (a JSON boolean token) |
 
 ## Notes for daily SSL work
 

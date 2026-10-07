@@ -40,15 +40,15 @@ Use `:EXITWHILE;` when a [`:WHILE`](WHILE.md) loop should stop as soon as a cond
     - Preserve any state the caller needs after the loop, such as a found flag or error message.
 
 !!! failure "Don't"
-    - Use `:EXITWHILE` outside a [`:WHILE`](WHILE.md) loop. That raises `Found :EXITWHILE outside :WHILE`.
-    - Place `:EXITWHILE` in a [`:FINALLY`](FINALLY.md) block. That raises `Cannot have :EXITWHILE inside :FINALLY.`
+    - Use `:EXITWHILE` outside a [`:WHILE`](WHILE.md) loop. That is a compile-time error: `Found :EXITWHILE outside :WHILE`.
+    - Place `:EXITWHILE` in a [`:FINALLY`](FINALLY.md) block. That is a compile-time error: `Cannot have :EXITWHILE inside :FINALLY.`
     - Use `:EXITWHILE` as a substitute for ordinary loop conditions when the loop should exit naturally.
 
 ## Caveats
 
 - `:EXITWHILE` must be written as an uppercase colon-prefixed keyword.
-- Outside a [`:WHILE`](WHILE.md) loop, `:EXITWHILE` raises `Found :EXITWHILE outside :WHILE`.
-- Inside a [`:FINALLY`](FINALLY.md) block, `:EXITWHILE` raises `Cannot have :EXITWHILE inside :FINALLY.`
+- Outside a [`:WHILE`](WHILE.md) loop, `:EXITWHILE` is a compile-time error: `Found :EXITWHILE outside :WHILE`.
+- Inside a [`:FINALLY`](FINALLY.md) block, `:EXITWHILE` is a compile-time error: `Cannot have :EXITWHILE inside :FINALLY.`
 
 ## Examples
 

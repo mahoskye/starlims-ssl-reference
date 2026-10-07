@@ -61,14 +61,14 @@ aItems[2] := "Updated";
     - Use chained assignment only when every target should receive the exact same value.
 
 !!! failure "Don't"
-    - Assign to undeclared variables and assume SSL will always create them for you. In normal code, undeclared targets can raise a runtime error, and where they do not, the write can land on a caller's variable instead.
+    - Assign to undeclared variables and assume SSL will always create them for you. With undeclared-variable creation on (the default), the write can land on a caller's variable instead; with it turned off, an undeclared target raises a runtime error.
     - Hide important state changes inside dense expressions when a standalone assignment would be clearer.
     - Assume `aCopy := aOriginal;` creates an independent array or object. Both names can still refer to the same underlying value.
 
 ## Errors and edge cases
 
 - Invalid targets raise a compile-time error: `Assignment: invalid left-hand side ...`.
-- Assigning to an undeclared variable can raise the runtime error `Variable [name] is undefined!`.
+- When undeclared-variable creation is turned off, assigning to an undeclared variable raises `Variable [name] is undefined!`. With the default setting it does not raise.
 - An undeclared target is resolved outward — current scope, then caller scopes, then public variables — so the assignment can overwrite a caller's variable rather than create a new one. See [Variable Scope](../../guides/variable-scope.md).
 - Compound operators such as [`add-assign`](add-assign.md) ([`+=`](add-assign.md)), [`subtract-assign`](subtract-assign.md) ([`-=`](subtract-assign.md)), [`multiply-assign`](multiply-assign.md) ([`*=`](multiply-assign.md)), [`divide-assign`](divide-assign.md) ([`/=`](divide-assign.md)), [`modulo-assign`](modulo-assign.md) ([`%=`](modulo-assign.md)), and [`power-assign`](power-assign.md) ([`^=`](power-assign.md)) are separate operators that combine an operation with assignment.
 

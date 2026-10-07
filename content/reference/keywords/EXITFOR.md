@@ -40,15 +40,15 @@ Use `:EXITFOR;` when a counted loop should stop early after a condition is met, 
     - Preserve any state the caller needs after the loop, such as a found flag or result value.
 
 !!! failure "Don't"
-    - Use `:EXITFOR` outside a [`:FOR`](FOR.md) loop. That raises `Found :EXITFOR outside :FOR`.
-    - Place `:EXITFOR` in a [`:FINALLY`](FINALLY.md) block. That raises `Cannot have :EXITFOR inside :FINALLY.`
+    - Use `:EXITFOR` outside a [`:FOR`](FOR.md) loop. That is a compile-time error: `Found :EXITFOR outside :FOR`.
+    - Place `:EXITFOR` in a [`:FINALLY`](FINALLY.md) block. That is a compile-time error: `Cannot have :EXITFOR inside :FINALLY.`
     - Use `:EXITFOR` as a substitute for ordinary branching when the loop should continue running.
 
 ## Caveats
 
 - `:EXITFOR` must be written in uppercase.
-- Outside a [`:FOR`](FOR.md) loop, `:EXITFOR` raises `Found :EXITFOR outside :FOR`.
-- Inside a [`:FINALLY`](FINALLY.md) block, `:EXITFOR` raises `Cannot have :EXITFOR inside :FINALLY.`
+- Outside a [`:FOR`](FOR.md) loop, `:EXITFOR` is a compile-time error: `Found :EXITFOR outside :FOR`.
+- Inside a [`:FINALLY`](FINALLY.md) block, `:EXITFOR` is a compile-time error: `Cannot have :EXITFOR inside :FINALLY.`
 
 ## Examples
 
@@ -99,7 +99,7 @@ Found Batch B (ID 1002)
 
 ### Exit only the inner loop in nested FOR blocks
 
-`:EXITFOR` exits only the innermost [`:FOR`](FOR.md) loop. A `bFound` flag signals the outer loop to exit on the next iteration. With `sTargetID` set to `"SMP-005"`, the match is at row 2, column 2.
+`:EXITFOR` exits only the innermost [`:FOR`](FOR.md) loop. A `bFound` flag, checked right after the inner loop, makes the outer loop exit too. With `sTargetID` set to `"SMP-005"`, the match is at row 2, column 2.
 
 ```ssl
 :PROCEDURE FindSampleInGrid;

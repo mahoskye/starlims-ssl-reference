@@ -177,7 +177,7 @@ The captured body is raw text, so a region can hold a JSON (or SQL, or any other
 ```ssl
 :DECLARE sJson;
 
-sJson := GetRegion("TestJSON", {"$RunID$", "$CustomerName$"}, {1234, "Bill Smith"});
+sJson := GetRegion("TestJSON", {"$RunID$", "$CustomerName$"}, {1234, "Example Customer"});
 
 :REGION TestJSON;
 {

@@ -22,7 +22,7 @@ The keyword can only appear directly after the class declaration, and only one p
 
 ## Behavior
 
-`:INHERIT` modifies a [`:CLASS`](CLASS.md) definition. The inherited class becomes the parent for member lookup, so child methods can use [`Base:MethodName()`](../special-forms/base.md) to call inherited behavior and can read or write inherited fields with [`Base:fieldName`](../special-forms/base.md). Inside any class method, a bare identifier refers to a local or [`:PARAMETERS`](PARAMETERS.md) entry — class-level fields declared in the child must be qualified with [`Me:`](../special-forms/me.md), and fields declared on the parent must be qualified with [`Base:`](../special-forms/base.md).
+`:INHERIT` modifies a [`:CLASS`](CLASS.md) definition. The inherited class becomes the parent for member lookup, so child methods can use [`Base:MethodName()`](../special-forms/base.md) to call inherited behavior and can read or write inherited fields with [`Base:fieldName`](../special-forms/base.md). Inside any class method, a bare identifier refers to a local or [`:PARAMETERS`](PARAMETERS.md) entry — class-level fields must be qualified with [`Me:`](../special-forms/me.md), which also finds fields inherited from the parent. Use [`Base:`](../special-forms/base.md) only when you specifically need the parent's member, for example the parent version of an overridden method.
 
 The keyword does not stand alone and is not used in script code outside a class definition.
 

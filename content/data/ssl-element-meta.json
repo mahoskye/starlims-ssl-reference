@@ -12375,7 +12375,7 @@
           "Use clear Hungarian-style names for local variables in examples and new code."
         ],
         "dont": [
-          "Rely on assignment to introduce a variable. SSL expects names to be declared before use, and an assignment to an undeclared name can land on a caller's variable instead of creating a new one.",
+          "Rely on assignment to introduce a variable. With undeclared-variable creation on (the default), an assignment to an undeclared name can land on a caller's variable instead of creating a new one.",
           "Re-declare the same name casually. SSL accepts it, but repeated declarations make scope harder to follow.",
           "Scatter declarations through unrelated logic just because the language permits it. Use later declarations only when they genuinely improve clarity."
         ]
@@ -12657,8 +12657,8 @@
       "exceptions": [],
       "caveats": [
         ":EXITFOR must be written in uppercase.",
-        "Outside a :FOR loop, :EXITFOR raises Found :EXITFOR outside :FOR.",
-        "Inside a :FINALLY block, :EXITFOR raises Cannot have :EXITFOR inside :FINALLY."
+        "Outside a :FOR loop, :EXITFOR is a compile-time error: Found :EXITFOR outside :FOR.",
+        "Inside a :FINALLY block, :EXITFOR is a compile-time error: Cannot have :EXITFOR inside :FINALLY."
       ],
       "best_practices": {
         "do": [
@@ -12667,8 +12667,8 @@
           "Preserve any state the caller needs after the loop, such as a found flag or result value."
         ],
         "dont": [
-          "Use :EXITFOR outside a :FOR loop. That raises Found :EXITFOR outside :FOR.",
-          "Place :EXITFOR in a :FINALLY block. That raises Cannot have :EXITFOR inside :FINALLY.",
+          "Use :EXITFOR outside a :FOR loop. That is a compile-time error: Found :EXITFOR outside :FOR.",
+          "Place :EXITFOR in a :FINALLY block. That is a compile-time error: Cannot have :EXITFOR inside :FINALLY.",
           "Use :EXITFOR as a substitute for ordinary branching when the loop should continue running."
         ]
       }
@@ -12683,8 +12683,8 @@
       "exceptions": [],
       "caveats": [
         ":EXITWHILE must be written as an uppercase colon-prefixed keyword.",
-        "Outside a :WHILE loop, :EXITWHILE raises Found :EXITWHILE outside :WHILE.",
-        "Inside a :FINALLY block, :EXITWHILE raises Cannot have :EXITWHILE inside :FINALLY."
+        "Outside a :WHILE loop, :EXITWHILE is a compile-time error: Found :EXITWHILE outside :WHILE.",
+        "Inside a :FINALLY block, :EXITWHILE is a compile-time error: Cannot have :EXITWHILE inside :FINALLY."
       ],
       "best_practices": {
         "do": [
@@ -12693,8 +12693,8 @@
           "Preserve any state the caller needs after the loop, such as a found flag or error message."
         ],
         "dont": [
-          "Use :EXITWHILE outside a :WHILE loop. That raises Found :EXITWHILE outside :WHILE.",
-          "Place :EXITWHILE in a :FINALLY block. That raises Cannot have :EXITWHILE inside :FINALLY.",
+          "Use :EXITWHILE outside a :WHILE loop. That is a compile-time error: Found :EXITWHILE outside :WHILE.",
+          "Place :EXITWHILE in a :FINALLY block. That is a compile-time error: Cannot have :EXITWHILE inside :FINALLY.",
           "Use :EXITWHILE as a substitute for ordinary loop conditions when the loop should exit naturally."
         ]
       }
@@ -12873,7 +12873,7 @@
         ],
         "dont": [
           "Use :EXITFOR or :EXITWHILE when only the current iteration should be skipped. Those keywords terminate the loop instead of continuing it.",
-          "Place :LOOP inside a :FINALLY block. That raises Cannot have :LOOP inside :FINALLY.",
+          "Place :LOOP inside a :FINALLY block. That is a compile-time error: Cannot have :LOOP inside :FINALLY.",
           "Place :LOOP where required cleanup or bookkeeping would be skipped unintentionally.",
           "Assume code after :LOOP still runs for that iteration. It never does."
         ]
@@ -13272,7 +13272,7 @@
       "exceptions": [],
       "caveats": [
         "Invalid targets raise a compile-time error: Assignment: invalid left-hand side ....",
-        "Assigning to an undeclared variable can raise the runtime error Variable [name] is undefined!.",
+        "When undeclared-variable creation is turned off, assigning to an undeclared variable raises Variable [name] is undefined!. With the default setting it does not raise.",
         "An undeclared target is resolved outward — current scope, then caller scopes, then public variables — so the assignment can overwrite a caller's variable rather than create a new one. See Variable Scope.",
         "Compound operators such as add-assign (+=), subtract-assign (-=), multiply-assign (*=), divide-assign (/=), modulo-assign (%=), and power-assign (^=) are separate operators that combine an operation with assignment."
       ],
@@ -13283,7 +13283,7 @@
           "Use chained assignment only when every target should receive the exact same value."
         ],
         "dont": [
-          "Assign to undeclared variables and assume SSL will always create them for you. In normal code, undeclared targets can raise a runtime error, and where they do not, the write can land on a caller's variable instead.",
+          "Assign to undeclared variables and assume SSL will always create them for you. With undeclared-variable creation on (the default), the write can land on a caller's variable instead; with it turned off, an undeclared target raises a runtime error.",
           "Hide important state changes inside dense expressions when a standalone assignment would be clearer.",
           "Assume aCopy := aOriginal; creates an independent array or object. Both names can still refer to the same underlying value."
         ]
