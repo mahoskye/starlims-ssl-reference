@@ -37,11 +37,11 @@ DateFromString(sDateAsString, [vFormat], [bUseLocalCulture], [bMakeInvariant])
 | `sDateAsString` | [string](../types/string.md) | yes | — | Source text to parse. |
 | `vFormat` | [string](../types/string.md), [array](../types/array.md), or NIL | no | [`NIL`](../literals/nil.md) | Exact format to use, or an array of exact formats to try. When omitted, the function uses standard parsing for the selected culture. |
 | `bUseLocalCulture` | [boolean](../types/boolean.md) or NIL | no | [`NIL`](../literals/nil.md) | When [`.T.`](../literals/true.md), parse with the current local culture. When [`NIL`](../literals/nil.md) or [`.F.`](../literals/false.md), parse with invariant culture. |
-| `bMakeInvariant` | [boolean](../types/boolean.md) or NIL | no | [`NIL`](../literals/nil.md) | When [`.T.`](../literals/true.md), return an unspecified date. When [`NIL`](../literals/nil.md) or [`.F.`](../literals/false.md), return a local date. |
+| `bMakeInvariant` | [boolean](../types/boolean.md) or NIL | no | [`NIL`](../literals/nil.md) | When [`.T.`](../literals/true.md), return an invariant (unspecified-kind) date, so [`IsInvariantDate`](IsInvariantDate.md) returns [`.T.`](../literals/true.md). When [`NIL`](../literals/nil.md) or [`.F.`](../literals/false.md), return a local date. |
 
 ## Returns
 
-**[date](../types/date.md)** — The parsed date value, marked as local when `bMakeInvariant` is [`NIL`](../literals/nil.md) or [`.F.`](../literals/false.md), or as an unspecified date when `bMakeInvariant` is [`.T.`](../literals/true.md).
+**[date](../types/date.md)** — The parsed date value, marked as local when `bMakeInvariant` is [`NIL`](../literals/nil.md) or [`.F.`](../literals/false.md). When `bMakeInvariant` is [`.T.`](../literals/true.md), the result is an invariant (unspecified-kind) date, so [`IsInvariantDate`](IsInvariantDate.md) returns [`.T.`](../literals/true.md).
 
 ## Exceptions
 
@@ -58,7 +58,7 @@ DateFromString(sDateAsString, [vFormat], [bUseLocalCulture], [bMakeInvariant])
 !!! success "Do"
     - Pass an explicit format when the incoming text is expected to follow a known pattern.
     - Pass an array of formats when imported data can legitimately arrive in more than one exact shape.
-    - Use `useLocalCulture` only when the input is intentionally tied to the current local culture.
+    - Use `bUseLocalCulture` only when the input is intentionally tied to the current local culture.
     - Handle parse failures with [`:TRY`](../keywords/TRY.md) and [`:CATCH`](../keywords/CATCH.md) when invalid input is possible.
 
 !!! failure "Don't"

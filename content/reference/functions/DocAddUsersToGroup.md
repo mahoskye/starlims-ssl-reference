@@ -51,6 +51,7 @@ DocAddUsersToGroup(sGroupName, aUsers)
     - Validate that `sGroupName` and `aUsers` are populated before calling the function.
     - Check the boolean return value and handle [`.F.`](../literals/false.md) as an operation failure.
     - Build the `aUsers` array from validated user names before calling the function.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for either argument.
@@ -169,6 +170,8 @@ DoProc("SyncHRGroupsToDMS", {"ENGINEERING"});
 - [`DocRemoveUsersFromGroup`](DocRemoveUsersFromGroup.md)
 - [`DocRemoveAllUsersFromGroup`](DocRemoveAllUsersFromGroup.md)
 - [`DocExistsUser`](DocExistsUser.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`boolean`](../types/boolean.md)
 - [`string`](../types/string.md)
 - [`array`](../types/array.md)

@@ -142,7 +142,7 @@ Combines [`ChkPassword`](ChkPassword.md), `ChkNewPassword`, and [`SetUserPasswor
 ```ssl
 :PROCEDURE UpdateUserPasswordIfAllowed;
     :PARAMETERS sUserName, sCurrentPassword, sNewPassword, aPrevPasswords;
-    :DECLARE oResult, bCurrentOk, bIsNew;
+    :DECLARE oResult, bCurrentOk, bIsNew, sStoredHash;
 
     oResult := CreateUdObject();
     oResult:success := .F.;
@@ -162,9 +162,13 @@ Combines [`ChkPassword`](ChkPassword.md), `ChkNewPassword`, and [`SetUserPasswor
     :ENDIF;
 
     :TRY;
-        SetUserPassword(sUserName, sNewPassword);
-        oResult:success := .T.;
-        oResult:message := "Password updated successfully.";
+        sStoredHash := SetUserPassword(sUserName, sNewPassword);
+        :IF Empty(sStoredHash);
+            oResult:message := "Password update did not complete.";
+        :ELSE;
+            oResult:success := .T.;
+            oResult:message := "Password updated successfully.";
+        :ENDIF;
     :CATCH;
         oResult:message := GetLastSSLError():Description;
     :ENDTRY;

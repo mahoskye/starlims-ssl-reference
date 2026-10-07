@@ -48,7 +48,7 @@ CheckOnFtp(
 | `sRemoteFileName` | [string](../types/string.md) | yes | — | Remote file name to check. |
 | `sUserName` | [string](../types/string.md) | yes | — | User name passed to the FTP or SFTP login operation. |
 | `sPassword` | [string](../types/string.md) | yes | — | Password for password-based login. When `sPrivateKeyFilePath` is supplied on the SFTP path, this value is used as the private-key passphrase. |
-| `nPort` | [number](../types/number.md) | no | `21` | Server port. If omitted or non-positive, the implementation uses `21`. |
+| `nPort` | [number](../types/number.md) | no | `21` | Server port. If omitted or non-positive, `21` is used, even on the SFTP path. Pass `22` explicitly when the SFTP server uses the standard SFTP port. |
 | `sProxy` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Must be left empty. Supplying a non-empty value raises an error. |
 | `bIsSFTP` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Set to [`.T.`](../literals/true.md) to use the SFTP implementation. Omitted or [`NIL`](../literals/nil.md) keeps the FTP implementation. |
 | `sPrivateKeyFilePath` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Optional private key file for SFTP authentication. Ignored on the FTP path. |
@@ -129,7 +129,7 @@ Connects to a partner SFTP server using a private key and handles connection or 
 ```ssl
 :PROCEDURE CheckPartnerDrop;
     :DECLARE sServer, sRemoteDir, sFileName, sUser, sPassphrase;
-    :DECLARE nPort, sProxy, sPrivateKey;
+    :DECLARE nPort, sPrivateKey;
     :DECLARE bIsSFTP, bFileExists;
     :DECLARE oError;
 
@@ -139,9 +139,8 @@ Connects to a partner SFTP server using a private key and handles connection or 
     sUser := "automation_user";
     sPassphrase := "KeyPassphrase123";
     nPort := 22;
-    sProxy := NIL;
     bIsSFTP := .T.;
-    sPrivateKey := "/etc/ssh/automation_key.ppk";
+    sPrivateKey := "C:\Keys\automation_key.ppk";
 
     :TRY;
         bFileExists := CheckOnFtp(
@@ -150,9 +149,7 @@ Connects to a partner SFTP server using a private key and handles connection or 
             sFileName,
             sUser,
             sPassphrase,
-            nPort,
-            sProxy,
-            bIsSFTP,
+            nPort,, bIsSFTP,
             sPrivateKey
         );
     :CATCH;

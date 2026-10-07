@@ -13,7 +13,7 @@ starlims:
 
 Creates a Documentum folder under a parent path and returns the string result from the create operation.
 
-`DocCreateFolder` takes a required parent path, a required folder name, and an optional ACL name. The surfaced SSL function raises immediately only when `sParentPath` or `sFolderName` is [`NIL`](../literals/nil.md). Otherwise it forwards the provided values to the Documentum create call and returns its string result. If that call does not produce a value, the function returns an empty string.
+`DocCreateFolder` takes a required parent path, a required folder name, and an optional ACL name. Passing [`NIL`](../literals/nil.md) for `sParentPath` or `sFolderName` raises an error. Otherwise the function returns the result string from the Documentum folder-create request, or an empty string when the request returns no value.
 
 Treat a `""` result as a failed create attempt and check it immediately with [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md).
 
@@ -22,7 +22,7 @@ Treat a `""` result as a failed create attempt and check it immediately with [`D
 - When you need to create a folder under an existing Documentum path from SSL.
 - When your workflow needs the returned create result for later Documentum operations.
 - When you need to supply an ACL during folder creation instead of relying on
-  backend defaults.
+  Documentum defaults.
 
 ## Syntax
 
@@ -53,7 +53,7 @@ DocCreateFolder(sParentPath, sFolderName, [sAcl])
 
 !!! success "Do"
     - Validate that `sParentPath` and `sFolderName` contain usable values before calling the function.
-    - Omit `sAcl` when you do not need to override the backend's default behavior.
+    - Omit `sAcl` when you do not need to override the Documentum default.
     - Check for an empty return immediately, then inspect [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) before making another Documentum call.
 
 !!! failure "Don't"
@@ -64,7 +64,7 @@ DocCreateFolder(sParentPath, sFolderName, [sAcl])
 ## Caveats
 
 - The call is intended for use within an initialized Documentum session.
-- `sParentPath` and `sFolderName` are checked only for [`NIL`](../literals/nil.md) at the SSL boundary. Other input validation depends on the backend call.
+- `DocCreateFolder` itself rejects only a [`NIL`](../literals/nil.md) `sParentPath` or `sFolderName`. Documentum performs any other input validation.
 - When the create operation fails without raising a direct SSL argument error, inspect the current Documentum session with [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) before making another Documentum call.
 
 ## Examples
@@ -92,7 +92,7 @@ Creates a single folder under a known parent path and checks the Documentum fail
     :ENDIF;
 
     UsrMes("Folder created: " + sCreateResult);
-    /* Logs: created folder path;
+    /* Logs: created folder result;
 
     :RETURN sCreateResult;
 :ENDPROC;
@@ -148,7 +148,7 @@ Iterates a list of project names, creates each folder under a shared base path w
 DoProc("SetupProjectFolders");
 ```
 
-### Validate inputs and handle both raised and backend failures
+### Validate inputs and handle both raised and Documentum failures
 
 Guards against blank path or name inputs, wraps the call in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) to handle a raised SSL exception, and then inspects the Documentum failure state for an empty result.
 
@@ -170,7 +170,7 @@ Guards against blank path or name inputs, wraps the call in [`:TRY`](../keywords
     :CATCH;
         oErr := GetLastSSLError();
         ErrorMes("DocCreateFolder raised an error: " + oErr:Description);
-        /* Logs when NIL is passed: DocCreateFolder raised an error;
+        /* Logs if the call raises: DocCreateFolder raised an error;
         :RETURN "";
     :ENDTRY;
 

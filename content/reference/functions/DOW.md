@@ -125,16 +125,10 @@ Checks whether `DOW` returned `0` (empty date) before branching to a weekday-spe
 DoProc("CheckPlannedDate");
 ```
 
-`UsrMes` logs either:
+`UsrMes` logs:
 
 ```text
 Planned date is empty.
-```
-
-or:
-
-```text
-Planned date falls on weekday [n]
 ```
 
 ### Route scheduled runs based on weekday rules

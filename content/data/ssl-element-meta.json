@@ -1118,7 +1118,7 @@
       "caveats": [
         "ChkPassword returns only .T. or .F.. It does not report why a check failed.",
         "For DOMAIN\\user input, a failed Windows authentication attempt does not stop processing; the function then continues with the application password check for user.",
-        "A successful match against the older salted password format updates the stored password value before returning .T.."
+        "A successful check may update the user's stored password record."
       ],
       "best_practices": {
         "do": [
@@ -2067,7 +2067,7 @@
         "do": [
           "Pass an explicit format when the incoming text is expected to follow a known pattern.",
           "Pass an array of formats when imported data can legitimately arrive in more than one exact shape.",
-          "Use useLocalCulture only when the input is intentionally tied to the current local culture.",
+          "Use bUseLocalCulture only when the input is intentionally tied to the current local culture.",
           "Handle parse failures with :TRY and :CATCH when invalid input is possible."
         ],
         "dont": [
@@ -2530,7 +2530,8 @@
         "do": [
           "Validate that sGroupName and aUsers are populated before calling the function.",
           "Check the boolean return value and handle .F. as an operation failure.",
-          "Build the aUsers array from validated user names before calling the function."
+          "Build the aUsers array from validated user names before calling the function.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for either argument.",
@@ -2556,7 +2557,8 @@
         "Passing an empty string does not raise directly; the underlying Documentum call fails and the function returns .F.. In that case, DocGetErrorMessage returns a message such as You must specify document's path or document's id!.",
         "A document id or path that cannot be resolved also returns .F., with DocGetErrorMessage returning a message such as Failed: Object does not exist.",
         "The function does not tell you whether a .T. result came from cancelling an active checkout or from a document that was already not checked out.",
-        "The function changes checkout state only; it does not check in content or delete the document."
+        "The function changes checkout state only; it does not check in content or delete the document.",
+        "A valid Documentum session is required, typically established with DocInitDocumentumInterface and DocLoginToDocumentum."
       ],
       "best_practices": {
         "do": [
@@ -2703,7 +2705,7 @@
       "id": "ssl.function.doccreateacl",
       "element_type": "function",
       "title": "DocCreateACL",
-      "summary": "Creates a Documentum ACL and returns the backend result string.",
+      "summary": "Creates a Documentum ACL and returns a result string.",
       "doc_status": "published",
       "source_path": "content/reference/functions/DocCreateACL.md",
       "exceptions": [
@@ -2713,19 +2715,19 @@
         }
       ],
       "caveats": [
-        "The wrapper checks only whether sAclName is NIL. Other validation is handled by the backend create call."
+        "DocCreateACL itself rejects only a NIL sAclName. Documentum performs any other validation of the ACL name, description, and groups."
       ],
       "best_practices": {
         "do": [
           "Pass a non-NIL ACL name every time you call the function.",
           "Check for an empty-string result before assuming the ACL was created.",
           "Pass sDescription and aGroups only when you have meaningful values for them.",
-          "Read DocCommandFailed and DocGetErrorMessage immediately after an empty result when you need backend failure details."
+          "Read DocCommandFailed and DocGetErrorMessage immediately after an empty result when you need failure details.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for sAclName; that raises an immediate SSL error.",
-          "Assume \"\" means the ACL already exists or that the create call succeeded.",
-          "Invent validation rules for ACL names or group contents that this wrapper does not document."
+          "Assume \"\" means the ACL already exists or that the create call succeeded."
         ]
       }
     },
@@ -2778,13 +2780,13 @@
       ],
       "caveats": [
         "The call is intended for use within an initialized Documentum session.",
-        "sParentPath and sFolderName are checked only for NIL at the SSL boundary. Other input validation depends on the backend call.",
+        "DocCreateFolder itself rejects only a NIL sParentPath or sFolderName. Documentum performs any other input validation.",
         "When the create operation fails without raising a direct SSL argument error, inspect the current Documentum session with DocCommandFailed and DocGetErrorMessage before making another Documentum call."
       ],
       "best_practices": {
         "do": [
           "Validate that sParentPath and sFolderName contain usable values before calling the function.",
-          "Omit sAcl when you do not need to override the backend's default behavior.",
+          "Omit sAcl when you do not need to override the Documentum default.",
           "Check for an empty return immediately, then inspect DocCommandFailed and DocGetErrorMessage before making another Documentum call."
         ],
         "dont": [

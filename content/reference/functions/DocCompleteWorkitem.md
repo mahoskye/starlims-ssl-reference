@@ -110,7 +110,7 @@ DoProc("CompleteBasicWorkitem");
 
 ### Complete a work item with sign-off and inspect the failure message on error
 
-Completes a work item with all four sign-off arguments, then reads the Documentum error message to build a specific failure description when the operation returns [`.F.`](../literals/false.md).
+Completes a work item with all three sign-off arguments, then reads the Documentum error message to build a specific failure description when the operation returns [`.F.`](../literals/false.md). The procedure assumes the caller has already opened a Documentum session.
 
 ```ssl
 :PROCEDURE CompleteRegulatedWorkitem;
@@ -151,7 +151,7 @@ DoProc("CompleteRegulatedWorkitem");
 
 ### Complete a batch of work items and stop on the first failure
 
-Accepts a work item ID array and sign-off values as parameters, validates each ID is non-blank, and halts the batch immediately on the first failed completion with a specific or generic error message.
+Accepts a work item ID array and sign-off values as parameters, validates each ID is non-blank, and halts the batch immediately on the first failed completion with a specific or generic error message. The procedure assumes the caller has already opened a Documentum session.
 
 ```ssl
 :PROCEDURE CompleteWorkitemBatch;
