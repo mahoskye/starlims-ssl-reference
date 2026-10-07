@@ -120,7 +120,7 @@ Do not end a transaction in [`:FINALLY`](../reference/keywords/FINALLY.md) with 
 | Function | Purpose |
 |----------|---------|
 | [GetLastSSLError](../reference/functions/GetLastSSLError.md) | Returns the most recent error object (use `:Description` for the message text) |
-| [GetLastSQLError](../reference/functions/GetLastSQLError.md) | Returns the most recent SQL error message |
+| [GetLastSQLError](../reference/functions/GetLastSQLError.md) | Returns the most recent SQL error as an [`SSLSQLError`](../reference/classes/SSLSQLError.md) object (`:Description`, `:GenCode`), or [`NIL`](../reference/literals/nil.md) when none is recorded |
 | [ClearLastSSLError](../reference/functions/ClearLastSSLError.md) | Clears the stored error state |
 | [RaiseError](../reference/functions/RaiseError.md) | Throws a custom error with a specified message |
 | [FormatErrorMessage](../reference/functions/FormatErrorMessage.md) | Formats an error object into a full description string |

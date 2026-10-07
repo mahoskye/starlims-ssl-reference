@@ -20,13 +20,13 @@ Operators listed from highest precedence (binds tightest) to lowest. Operators a
 | Unary | [increment](increment.md) | `++` | none |
 | Unary | [decrement](decrement.md) | `--` | none |
 | Unary | [not](not.md) | `.NOT.` | right |
-| Additive | [minus](minus.md) | `-` | left |
-| Additive | [plus](plus.md) | `+` | left |
+| Power | [power](power.md) | `^` | right |
+| Power | [double-star-power](double-star-power.md) | `**` | right |
 | Multiplicative | [multiply](multiply.md) | `*` | left |
 | Multiplicative | [divide](divide.md) | `/` | left |
 | Multiplicative | [modulo](modulo.md) | `%` | left |
-| Power | [power](power.md) | `^` | right |
-| Power | [double-star-power](double-star-power.md) | `**` | right |
+| Additive | [minus](minus.md) | `-` | left |
+| Additive | [plus](plus.md) | `+` | left |
 | Shift | [shift-left](shift-left.md) | `<<` | left |
 | Shift | [shift-right](shift-right.md) | `>>` | left |
 | Relational | [less-than](less-than.md) | `<` | left |
@@ -38,7 +38,7 @@ Operators listed from highest precedence (binds tightest) to lowest. Operators a
 | Equality | [not-equals](not-equals.md) | `!=` | left |
 | Equality | [not-equals-legacy](not-equals-legacy.md) | `<>` | left |
 | Equality | [hash](hash.md) | `#` | left |
-| Containment | [dollar](dollar.md) | `$` | left |
+| Equality | [dollar](dollar.md) | `$` | left |
 | Logical AND | [and](and.md) | `.AND.` | left |
 | Logical OR | [or](or.md) | `.OR.` | left |
 | Assignment | [assignment](assignment.md) | `:=` | right |
