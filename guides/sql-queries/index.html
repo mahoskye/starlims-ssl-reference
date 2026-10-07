@@ -1514,7 +1514,7 @@
 <span class="nf">RunSQL</span><span class="p">(</span><span class="s2">"UPDATE samples SET status = 'C' WHERE sample_id = ?"</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-001"</span><span class="p">});</span>
 
 <span class="c1">/* XML dataset;</span>
-<span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSet</span><span class="p">(</span><span class="s2">"SELECT sample_id FROM samples WHERE batch = ?"</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">"B-100"</span><span class="p">});</span>
+<span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSet</span><span class="p">(</span><span class="s2">"SELECT sample_id FROM samples WHERE batch = ?"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"B-100"</span><span class="p">});</span>
 
 <span class="c1">/* Named-parameter query;</span>
 <span class="n">sBatch</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"B-100"</span><span class="p">;</span>
@@ -1522,12 +1522,12 @@
 </code></pre></div>
 <p>Two idioms in these examples are worth decoding up front:</p>
 <ul>
-<li><strong>Adjacent commas</strong> (<code>,,</code>) skip an optional middle parameter — here the connection name, so the call uses the default connection. <code>LSearch("...", "",, {...})</code> passes the SQL, then a default value, skips the connection name, then passes the bound values.</li>
+<li><strong>Adjacent commas</strong> (<code>,,</code>) skip an optional middle parameter — here the connection name, so the call uses the default connection. <code>LSearch("...", "",, {...})</code> passes the SQL, then a default value, skips the connection name, then passes the bound values. <a href="../../reference/functions/GetDataSet/"><code>GetDataSet</code></a> has no connection parameter, so its values array comes second with nothing skipped.</li>
 <li><strong><code>?sBatch?</code></strong> is <a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a>'s named-parameter form: the engine substitutes the value of the variable <code>sBatch</code> from the calling scope. The other functions use positional <code>?</code> placeholders with a values array instead. Both are covered in detail <a href="#sqlexecute-flexible-execution">below</a>.</li>
 </ul>
 <h2 id="connection-names">Connection names<a class="headerlink" href="#connection-names" title="Permanent link">&para;</a></h2>
 <p>Most SQL functions accept an optional connection name parameter that identifies which configured database to run the query against. When omitted, the function uses the current default connection.</p>
-<p>The connection name is the key registered in the system's database configuration. You can discover available names at runtime with <a href="../../reference/functions/GetConnectionStrings/"><code>GetConnectionStrings</code></a>, which returns a 2D array where column 1 is the connection name, column 2 is the provider, and column 3 is the full connection string.</p>
+<p>The connection name is the key registered in the system's database configuration. You can discover available names at runtime with <a href="../../reference/functions/GetConnectionStrings/"><code>GetConnectionStrings</code></a>, which returns a 2D array where column 1 is the connection name, column 2 is the provider settings string (such as <code>SQL;NATIVESQL;...;USEUTC</code>), and column 3 is the full connection string.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aConns</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">aRows</span><span class="p">,</span><span class="w"> </span><span class="n">sDefault</span><span class="p">;</span>
 
 <span class="c1">/* See what connections are available;</span>
@@ -1545,7 +1545,7 @@
 <span class="c1">/* Check what the current default is;</span>
 <span class="n">sDefault</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDefaultConnection</span><span class="p">();</span>
 </code></pre></div>
-<p>The same connection name parameter appears in <a href="../../reference/functions/RunSQL/"><code>RunSQL</code></a>, <a href="../../reference/functions/LSelect/"><code>LSelect</code></a>, <a href="../../reference/functions/LSelect1/"><code>LSelect1</code></a>, <a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a>, and related functions as the second argument after the SQL string. Watch for two exceptions: <a href="../../reference/functions/LSearch/"><code>LSearch</code></a> takes the connection name as its <strong>third</strong> argument (after the default value), and <a href="../../reference/functions/GetDataSet/"><code>GetDataSet</code></a> has no connection parameter at all — use <a href="../../reference/functions/GetDataSetEx/"><code>GetDataSetEx</code></a> (connection name second) to query a named connection.</p>
+<p>The same connection name parameter appears in <a href="../../reference/functions/RunSQL/"><code>RunSQL</code></a>, <a href="../../reference/functions/LSelect1/"><code>LSelect1</code></a>, <a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a>, and related functions as the second argument after the SQL string. Watch for three exceptions: <a href="../../reference/functions/LSearch/"><code>LSearch</code></a> takes the connection name as its <strong>third</strong> argument (after the default value), <a href="../../reference/functions/LSelect/"><code>LSelect</code></a> takes a field list second and the connection name <strong>third</strong>, and <a href="../../reference/functions/GetDataSet/"><code>GetDataSet</code></a> has no connection parameter at all — use <a href="../../reference/functions/GetDataSetEx/"><code>GetDataSetEx</code></a> (connection name second) to query a named connection.</p>
 <h2 id="parameterized-queries">Parameterized queries<a class="headerlink" href="#parameterized-queries" title="Permanent link">&para;</a></h2>
 <p>All SQL functions support parameterized queries using the <code>?</code> placeholder. This is the <strong>recommended approach</strong> for any query that includes user-supplied or variable data.</p>
 <h3 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h3>
@@ -1564,7 +1564,7 @@
 <li>Better query plan caching on the database server</li>
 </ul>
 <h3 id="parameter-count-must-match">Parameter count must match<a class="headerlink" href="#parameter-count-must-match" title="Permanent link">&para;</a></h3>
-<p>The number of <code>?</code> placeholders must match the number of elements in the values array. A mismatch throws a "Parameters count mismatch" error. Each <code>?</code> is positional — there are no named parameters, so if you need the same value in multiple places, you must pass it multiple times.</p>
+<p>The number of <code>?</code> placeholders must match the number of elements in the values array. Too few values raises an error, and the message depends on the function: <a href="../../reference/functions/RunSQL/"><code>RunSQL</code></a> raises <code>ExecuteNonQuery exception Not enough values provided for parameters.</code>, while <a href="../../reference/functions/LSelect/"><code>LSelect</code></a>, <a href="../../reference/functions/LSelect1/"><code>LSelect1</code></a>, <a href="../../reference/functions/LSearch/"><code>LSearch</code></a> and <a href="../../reference/functions/GetDataSet/"><code>GetDataSet</code></a> raise <code>Parameters count mismatch</code>. Each <code>?</code> is positional — there are no named parameters, so if you need the same value in multiple places, you must pass it multiple times.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">;</span>
 
 <span class="c1">/* Correct: 2 placeholders, 2 values;</span>
@@ -1664,18 +1664,18 @@
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Empty array behavior</p>
-<p>Both functions handle empty arrays gracefully by substituting a type-appropriate sentinel value that matches no real rows. This ensures the SQL is syntactically valid and returns zero rows instead of throwing an error.</p>
+<p><a href="../../reference/functions/PrepareArrayForIn/"><code>PrepareArrayForIn</code></a> adds one sentinel of the requested type to an empty array. <a href="../../reference/functions/BuildStringForIn/"><code>BuildStringForIn</code></a> returns a fixed quoted string sentinel for an empty or <a href="../../reference/literals/nil/"><code>NIL</code></a> array. Either way the <code>IN</code> clause stays syntactically valid and matches no real rows, so the query returns zero rows instead of raising an error.</p>
 </div>
 <h2 id="string-concatenation-not-recommended">String concatenation (not recommended)<a class="headerlink" href="#string-concatenation-not-recommended" title="Permanent link">&para;</a></h2>
-<p>The alternative to parameterized queries is building the SQL string with concatenation and <a href="../../reference/functions/LimsString/"><code>LimsString</code></a>:</p>
+<p>The alternative to parameterized queries is building the SQL string with concatenation:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
 
 <span class="c1">/* String concatenation — avoid when possible;</span>
-<span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SELECT * FROM samples WHERE batch_id = "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sBatchId</span><span class="p">);</span>
-<span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSQL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" AND status = "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">sStatus</span><span class="p">);</span>
+<span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"SELECT * FROM samples WHERE batch_id = '"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sBatchId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"'"</span><span class="p">;</span>
+<span class="n">sSQL</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sSQL</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" AND status = '"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sStatus</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"'"</span><span class="p">;</span>
 <span class="n">aResults</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSelect1</span><span class="p">(</span><span class="n">sSQL</span><span class="p">);</span>
 </code></pre></div>
-<p><a href="../../reference/functions/LimsString/"><code>LimsString</code></a> wraps strings in single quotes and formats dates and numbers for SQL. While it handles basic quoting, it is <strong>not a substitute for parameterized queries</strong>:</p>
+<p><a href="../../reference/functions/LimsString/"><code>LimsString</code></a> converts a value to text but does not quote it or escape embedded quotes, so string values must be quoted (and their single quotes doubled) by hand, as above. Concatenation is <strong>not a substitute for parameterized queries</strong>:</p>
 <ul>
 <li>No protection against SQL injection if values contain crafted content</li>
 <li>Date and number formatting depends on server locale settings</li>
@@ -1696,7 +1696,7 @@
 <span class="c1">/* Numeric result;</span>
 <span class="n">nCount</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">LSearch</span><span class="p">(</span><span class="s2">"SELECT COUNT(*) FROM samples WHERE batch_id = ?"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">"B-100"</span><span class="p">});</span>
 </code></pre></div>
-<p>The second parameter is the default returned when the query finds no rows. This avoids needing to check for NIL after every lookup.</p>
+<p>The second parameter is the default returned when the query finds no rows. Without one, a miss returns an empty string <code>""</code>, not NIL.</p>
 <h3 id="lselect1-result-array">LSelect1 — result array<a class="headerlink" href="#lselect1-result-array" title="Permanent link">&para;</a></h3>
 <p>Returns a 2D array where rows are the first dimension and columns are the second:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sSampleId</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sPriority</span><span class="p">;</span>
@@ -1727,7 +1727,7 @@
 <p>Returns a SELECT result as an XML string. Useful when passing data to external systems or storing structured output:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 
-<span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSet</span><span class="p">(</span><span class="s2">"SELECT sample_id, status FROM samples WHERE batch = ?"</span><span class="p">,,</span><span class="w"> </span><span class="p">{</span><span class="s2">"B-100"</span><span class="p">});</span>
+<span class="n">sXml</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetDataSet</span><span class="p">(</span><span class="s2">"SELECT sample_id, status FROM samples WHERE batch = ?"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"B-100"</span><span class="p">});</span>
 </code></pre></div>
 <h2 id="sqlexecute-flexible-execution">SQLExecute — flexible execution<a class="headerlink" href="#sqlexecute-flexible-execution" title="Permanent link">&para;</a></h2>
 <p><a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a> differs from the other SQL functions in two ways: it uses <strong>named <code>?varName?</code> placeholders</strong> instead of a positional values array, and its return type is controlled by an explicit parameter.</p>
@@ -1845,7 +1845,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 16:51:33 UTC">September 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:07:51 UTC">October 7, 2026</span>
   </span>
 
     
