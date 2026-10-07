@@ -4336,8 +4336,10 @@
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateHexCode"</span><span class="p">);</span>
 </code></pre></div>
-<p>Call with <code>DoProc("ValidateHexCode")</code>.</p>
 <h3 id="normalize-mixed-case-input-before-validating">Normalize mixed-case input before validating<a class="headerlink" href="#normalize-mixed-case-input-before-validating" title="Permanent link">&para;</a></h3>
 <p>Trim whitespace and convert to uppercase before calling <code>IsHex</code>, so that values like <code>" a3f7 "</code> pass validation rather than failing on case or whitespace. Calling with <code>"a3f7"</code> produces <code>"A3F7"</code> after normalization, which is valid; calling with <code>"not hex"</code> produces <code>"NOT HEX"</code>, which is not.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">NormalizeAndValidateHex</span><span class="p">;</span>
@@ -4357,8 +4359,10 @@
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bIsValidHex</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"NormalizeAndValidateHex"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"a3f7"</span><span class="p">});</span>
 </code></pre></div>
-<p>Call with <code>DoProc("NormalizeAndValidateHex", {"a3f7"})</code>.</p>
 <h3 id="filter-and-convert-a-batch-of-hex-strings">Filter and convert a batch of hex strings<a class="headerlink" href="#filter-and-convert-a-batch-of-hex-strings" title="Permanent link">&para;</a></h3>
 <p>Use <code>IsHex</code> as a gate before calling <a href="../LHex2Dec/"><code>LHex2Dec</code></a>, so that only valid uppercase hex strings are converted. From the five inputs, <code>"ab"</code> (lowercase), <code>"0x10"</code> (prefix), and <code>"FF"</code>, <code>"1A"</code>, and <code>"7B"</code> (valid) demonstrate how the filter works. Three values pass and two are silently skipped.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ConvertValidHexBatch</span><span class="p">;</span>
@@ -4378,8 +4382,10 @@
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">aDecimalValues</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
+
+<span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ConvertValidHexBatch"</span><span class="p">);</span>
 </code></pre></div>
-<p>Call with <code>DoProc("ConvertValidHexBatch")</code>.</p>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../LFromHex/"><code>LFromHex</code></a></li>
@@ -4408,7 +4414,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:57:44 UTC">October 7, 2026</span>
   </span>
 
     

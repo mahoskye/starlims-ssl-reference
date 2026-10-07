@@ -4223,7 +4223,7 @@
 
 <h1 id="lstr">LStr<a class="headerlink" href="#lstr" title="Permanent link">&para;</a></h1>
 <p>Converts a value to its trimmed string representation, returning <code>"NIL"</code> when the input is <a href="../../literals/nil/"><code>NIL</code></a>.</p>
-<p><code>LStr</code> calls <a href="../LimsString/"><code>LimsString</code></a> internally and trims the result. When the input is a number, global group and decimal separators are applied. For other input types, the default string conversion is used. Unlike <a href="../LTransform/"><code>LTransform</code></a> or <a href="../StrZero/"><code>StrZero</code></a>, <code>LStr</code> does not pad or shape the output — use those functions when fixed field widths or decimal precision are required.</p>
+<p><code>LStr</code> returns the same text as <a href="../LimsString/"><code>LimsString</code></a>, with leading and trailing spaces trimmed. When the input is a number, global group and decimal separators are applied. For other input types, the default string conversion is used. Unlike <a href="../LTransform/"><code>LTransform</code></a> or <a href="../StrZero/"><code>StrZero</code></a>, <code>LStr</code> does not pad or shape the output — use those functions when fixed field widths or decimal precision are required.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When displaying or exporting numbers that might be missing, and a non-empty explicit placeholder is required instead of a blank.</li>
@@ -4261,7 +4261,7 @@
 <p class="admonition-title">Do</p>
 <ul>
 <li>Use <code>LStr</code> when <a href="../../literals/nil/"><code>NIL</code></a> values must appear as the explicit placeholder <code>"NIL"</code> in UI output, logs, or exports.</li>
-<li>Pair <code>LStr</code> with <a href="../LTransform/"><code>LTransform</code></a> or <a href="../StrZero/"><code>StrZero</code></a> when field-width padding or decimal precision is required after conversion.</li>
+<li>Use <a href="../LTransform/"><code>LTransform</code></a> or <a href="../StrZero/"><code>StrZero</code></a> on the number itself, instead of <code>LStr</code>, when you need padding or fixed decimals.</li>
 <li>Apply <code>LStr</code> when serializing mixed data sources that must never produce empty strings for missing values.</li>
 </ul>
 </div>
@@ -4397,7 +4397,7 @@ Sample 3: 18.3
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:57:44 UTC">October 7, 2026</span>
   </span>
 
     

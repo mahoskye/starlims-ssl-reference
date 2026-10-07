@@ -3657,7 +3657,7 @@
 <td><a href="../../types/string/">string</a></td>
 <td>no</td>
 <td><a href="../../literals/nil/"><code>NIL</code></a></td>
-<td>User identifier inserted into <code>sSearchFilter</code> with <code>string.Format(sSearchFilter, sSearchUserName)</code>. In normal usage this is the user being authenticated.</td>
+<td>User identifier substituted for <code>{0}</code> in <code>sSearchFilter</code>. In normal usage this is the user being authenticated. Needed whenever the filter (including the default) contains <code>{0}</code>.</td>
 </tr>
 <tr>
 <td><code>sSearchUserPassword</code></td>
@@ -3685,7 +3685,7 @@
 <td><a href="../../types/string/">string</a></td>
 <td>no</td>
 <td><code>(&amp;(objectClass=user)(name={0}))</code></td>
-<td>LDAP filter pattern. When supplied, it is formatted with <code>sSearchUserName</code>. The search must return exactly one entry.</td>
+<td>LDAP filter pattern; <code>{0}</code> (in a supplied filter or the default) is replaced with <code>sSearchUserName</code>. The search must return exactly one entry.</td>
 </tr>
 <tr>
 <td><code>sAuthAttribName</code></td>
@@ -3770,7 +3770,7 @@
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li>If <code>sSearchFilter</code> is omitted, the function uses <code>(&amp;(objectClass=user)(name={0}))</code>.</li>
-<li>Custom filters are passed through <code>string.Format(sSearchFilter, sSearchUserName)</code>, so filters that use <code>{0}</code> are populated with <code>sSearchUserName</code> before the LDAP search runs.</li>
+<li><code>{0}</code> in <code>sSearchFilter</code> (including the default filter) is replaced with <code>sSearchUserName</code> before the search runs.</li>
 <li>The search must return exactly one entry. Zero matches and multi-match results both raise exceptions.</li>
 <li>When one of the requested attributes is missing, its slot in the returned comma-delimited string is empty.</li>
 <li>When an attribute value itself contains commas, the returned multi-attribute string is ambiguous because values are joined without escaping.</li>
@@ -3778,7 +3778,7 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="authenticate-without-returning-an-attribute">Authenticate without returning an attribute<a class="headerlink" href="#authenticate-without-returning-an-attribute" title="Permanent link">&para;</a></h3>
-<p>Use <code>LDAPAuthEX</code> as an authentication check by leaving <code>sAuthAttribName</code> empty. A successful call returns <code>""</code>.</p>
+<p>Use <code>LDAPAuthEX</code> as an authentication check by omitting <code>sAuthAttribName</code>. A successful call returns <code>""</code>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuthenticateOnly</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLdapHost</span><span class="p">,</span><span class="w"> </span><span class="n">sBindUser</span><span class="p">,</span><span class="w"> </span><span class="n">sBindPass</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sUserPass</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBaseDn</span><span class="p">,</span><span class="w"> </span><span class="n">nLdapPort</span><span class="p">;</span>
@@ -3798,11 +3798,9 @@
 <span class="w">        </span><span class="n">sBindPass</span><span class="p">,</span>
 <span class="w">        </span><span class="n">sUserName</span><span class="p">,</span>
 <span class="w">        </span><span class="n">sUserPass</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">        </span><span class="p">,</span>
 <span class="w">        </span><span class="n">sBaseDn</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">"(&amp;(objectClass=user)(sAMAccountName={0}))"</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">""</span><span class="p">,</span>
-<span class="w">        </span><span class="kc">.F.</span>
+<span class="w">        </span><span class="s2">"(&amp;(objectClass=user)(sAMAccountName={0}))"</span>
 <span class="w">    </span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"LDAP authentication succeeded for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sUserName</span><span class="p">);</span>
@@ -3835,7 +3833,7 @@
 <span class="w">        </span><span class="n">sBindPass</span><span class="p">,</span>
 <span class="w">        </span><span class="n">sUserName</span><span class="p">,</span>
 <span class="w">        </span><span class="n">sUserPass</span><span class="p">,</span>
-<span class="w">        </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">        </span><span class="p">,</span>
 <span class="w">        </span><span class="n">sBaseDn</span><span class="p">,</span>
 <span class="w">        </span><span class="s2">"(&amp;(objectClass=user)(sAMAccountName={0}))"</span><span class="p">,</span>
 <span class="w">        </span><span class="s2">"mail"</span><span class="p">,</span>
@@ -3873,7 +3871,7 @@
 <span class="w">            </span><span class="n">sBindPass</span><span class="p">,</span>
 <span class="w">            </span><span class="n">sUserName</span><span class="p">,</span>
 <span class="w">            </span><span class="n">sUserPass</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">""</span><span class="p">,</span>
+<span class="w">            </span><span class="p">,</span>
 <span class="w">            </span><span class="n">sBaseDn</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">"(&amp;(objectClass=user)(sAMAccountName={0})(department=Research))"</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">"mail,userPrincipalName"</span><span class="p">,</span>
@@ -3918,7 +3916,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:57:44 UTC">October 7, 2026</span>
   </span>
 
     

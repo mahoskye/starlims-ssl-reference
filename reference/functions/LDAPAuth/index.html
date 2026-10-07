@@ -3610,7 +3610,7 @@
 <li>When you want a simple success-or-exception authentication flow in SSL code.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LDAPAuth</span><span class="p">(</span><span class="n">sLdapHost</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">nLdapPort</span><span class="p">],</span><span class="w"> </span><span class="n">sLdapUserName</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sLdapPassword</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">sLdapDistinctiveName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bSecure</span><span class="p">])</span>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">LDAPAuth</span><span class="p">(</span><span class="n">sLdapHost</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">nLdapPort</span><span class="p">],</span><span class="w"> </span><span class="n">sLdapUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sLdapPassword</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sLdapDistinctiveName</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">bSecure</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -3648,9 +3648,9 @@
 <tr>
 <td><code>sLdapPassword</code></td>
 <td><a href="../../types/string/">string</a></td>
-<td>no</td>
-<td><code>""</code></td>
-<td>Password passed to the bind operation. An empty password raises an exception.</td>
+<td>yes</td>
+<td>—</td>
+<td>Password passed to the bind operation. An empty or omitted password raises <code>The password cannot be null</code>.</td>
 </tr>
 <tr>
 <td><code>sLdapDistinctiveName</code></td>
@@ -3715,14 +3715,13 @@
 <ul>
 <li>Treat the return value as a boolean or status code. This function succeeds with <code>""</code> and raises exceptions on errors.</li>
 <li>Omit <code>sLdapPassword</code> for a normal bind. An empty password triggers <code>The password cannot be null</code>.</li>
-<li>Pass <code>sLdapDistinctiveName</code> unless you intentionally need the NTLM mode switch. Other behavior is not implemented here.</li>
+<li>Pass <code>sLdapDistinctiveName</code> unless you need NTLM authentication; <code>"ntlm"</code> is the only value it recognizes.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li>This function performs a direct bind only. It does not search LDAP to discover a user DN first.</li>
 <li><code>sLdapDistinctiveName</code> is only checked for the value <code>"ntlm"</code> in a case-insensitive comparison.</li>
-<li>The function always disposes the LDAP connection before returning or propagating an exception.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="validate-credentials-with-the-default-port">Validate credentials with the default port<a class="headerlink" href="#validate-credentials-with-the-default-port" title="Permanent link">&para;</a></h3>
@@ -3838,7 +3837,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:57:44 UTC">October 7, 2026</span>
   </span>
 
     
