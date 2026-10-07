@@ -49,7 +49,7 @@ Lower(sSource)
 !!! success "Do"
     - Normalize both values before an exact string comparison when case should not matter.
     - Combine `Lower` with [`AllTrim`](AllTrim.md) when input may contain extra spaces.
-    - Use `Lower` and [`LLower`](LLower.md) interchangeably only when you want the same behavior.
+    - `Lower` and [`LLower`](LLower.md) behave the same; pick one and use it consistently.
 
 !!! failure "Don't"
     - Assume `Lower` handles [`NIL`](../literals/nil.md) input silently. It raises an error instead.

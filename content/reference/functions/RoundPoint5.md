@@ -13,7 +13,7 @@ starlims:
 
 Rounds a numeric value to a half-point increment.
 
-`RoundPoint5` returns a number in `0.5` steps. The implementation first applies FDA rounding to one decimal place, then snaps that rounded value to the nearest multiple of `0.5`. Use it when your business rule is specifically "round to the nearest half" rather than "round to N decimal places."
+`RoundPoint5` returns a number in `0.5` steps. It first rounds to one decimal place using the FDA rule (see [`StdRound`](StdRound.md)), then rounds that value to the nearest multiple of `0.5`; for example, `3.74` becomes `3.5`. Use it when your business rule is specifically "round to the nearest half" rather than "round to N decimal places."
 
 ## When to use
 
@@ -53,7 +53,7 @@ RoundPoint5(nNumber)
 !!! failure "Don't"
     - Use `RoundPoint5` when you need arbitrary precision such as 1, 2, or 3 decimal places.
     - Pass values that may be [`NIL`](../literals/nil.md) without handling that case first.
-    - Assume it is interchangeable with every domain-specific half-step rule; it follows the built-in implementation used by STARLIMS.
+    - Assume it is interchangeable with every domain-specific half-step rule. It always rounds to one decimal place with the FDA rule first, so check that this matches your rule.
 
 ## Examples
 

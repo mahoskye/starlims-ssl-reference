@@ -35,15 +35,15 @@ MoveInFtp(sServerNameOrIP, [sRemoteDirectoryFrom], [sRemoteDirectoryTo], sRemote
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `sServerNameOrIP` | [string](../types/string.md) | yes | — | Remote server name or IP address. |
-| `sRemoteDirectoryFrom` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Source directory portion of the remote path. Empty values are passed through to the underlying FTP or SFTP download step. |
+| `sRemoteDirectoryFrom` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Source directory portion of the remote path. An empty value is handled differently on FTP and SFTP (see Caveats). |
 | `sRemoteDirectoryTo` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Target directory portion of the remote path. Empty values are passed through as-is; this parameter does not automatically reuse `sRemoteDirectoryFrom`. |
 | `sRemoteFileFrom` | [string](../types/string.md) | yes | — | Source remote file name. |
 | `sRemoteFileTo` | [string](../types/string.md) | no | `sRemoteFileFrom` | Target remote file name. When omitted or empty, the source file name is reused. |
 | `sUserName` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | User name passed to the FTP or SFTP login operation. |
 | `sPassword` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Password for password-based login. On the SFTP path, this is also used as the private-key passphrase when `sPrivateKeyFilePath` is supplied. |
-| `nPort` | [number](../types/number.md) | no | `21` | Server port. If omitted or non-positive, the implementation uses `21`, even on the SFTP path. |
+| `nPort` | [number](../types/number.md) | no | `21` | Server port. If omitted or non-positive, the function uses `21`, even for SFTP. |
 | `sProxy` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Must be left empty. Supplying a non-empty value raises an error. |
-| `bIsSFTP` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Set to [`.T.`](../literals/true.md) to use the SFTP implementation. Omitted or [`NIL`](../literals/nil.md) keeps the FTP implementation. |
+| `bIsSFTP` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Set to [`.T.`](../literals/true.md) to use SFTP. Omitted or [`NIL`](../literals/nil.md) uses FTP. |
 | `sPrivateKeyFilePath` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Optional private key file for SFTP authentication. Ignored on the FTP path. |
 
 ## Returns
@@ -127,7 +127,7 @@ Move a file from one directory to another and apply a new file name in the proce
 ```ssl
 :PROCEDURE ArchiveScannedDocument;
     :PARAMETERS sServerName, sUser, sPassword;
-    :DEFAULT sServerName, "ftp.acme-lims.com";
+    :DEFAULT sServerName, "ftp.example.com";
     :DEFAULT sUser, "limsftp";
     :DEFAULT sPassword, "";
     :DECLARE sSourceDir, sArchiveDir, sOriginalFile, sNewFile, sRefNumber;

@@ -13,7 +13,7 @@ starlims:
 
 Creates a string by repeating the source string a specified number of times.
 
-`Replicate` returns a new string made up of `source` repeated `count` times. When `source` is empty the result is always `""` regardless of `count`. When `count` is zero the result is also `""`. A negative `count` or a [`NIL`](../literals/nil.md) argument raises an error.
+`Replicate` returns a new string made up of `sSource` repeated `nCount` times. When `sSource` is empty the result is always `""` regardless of `nCount`. When `nCount` is zero the result is also `""`. A negative `nCount` or a [`NIL`](../literals/nil.md) argument raises an error.
 
 ## When to use
 
@@ -24,39 +24,39 @@ Creates a string by repeating the source string a specified number of times.
 ## Syntax
 
 ```ssl
-Replicate(source, count)
+Replicate(sSource, nCount)
 ```
 
 ## Parameters
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `source` | [string](../types/string.md) | yes | — | Source string to be repeated |
-| `count` | [number](../types/number.md) | yes | — | Number of times to repeat the source string |
+| `sSource` | [string](../types/string.md) | yes | — | Source string to be repeated |
+| `nCount` | [number](../types/number.md) | yes | — | Number of times to repeat the source string |
 
 ## Returns
 
-**[string](../types/string.md)** — String consisting of the source string repeated count times
+**[string](../types/string.md)** — String consisting of the source string repeated `nCount` times
 
 ## Exceptions
 
 | Trigger | Exception message |
 | --- | --- |
-| `source` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. Replicate().` |
-| `count` is [`NIL`](../literals/nil.md). | `Argument count cannot be null. Replicate().` |
-| `count` is negative. | `Argument count cannot be less then zero. Replicate().` |
+| `sSource` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. Replicate().` |
+| `nCount` is [`NIL`](../literals/nil.md). | `Argument count cannot be null. Replicate().` |
+| `nCount` is negative. | `Argument count cannot be less then zero. Replicate().` |
 
 ## Best practices
 
 !!! success "Do"
-    - Always validate that count is zero or greater before calling the function.
+    - Always validate that `nCount` is zero or greater before calling the function.
     - Handle cases where the source string may be empty to avoid unnecessary processing.
     - Use this function to generate consistent string patterns, such as repeated separators.
+    - Build padding by repeating one character, for example `sValue + Replicate(" ", 10 - Len(sValue))`, guarding against a negative count.
 
 !!! failure "Don't"
     - Assume the function handles negative counts gracefully. Negative counts raise an error that halts execution if unhandled.
-    - Expect a non-empty result when `source` is empty, even with a positive count. The function always returns `""` when `source` is empty.
-    - Use it as a substitute for string padding functions like [`Left`](Left.md). `Replicate` only repeats the entire source string, not single characters for padding.
+    - Expect a non-empty result when `sSource` is empty, even with a positive count. The function always returns `""` when `sSource` is empty.
 
 ## Examples
 

@@ -1,6 +1,6 @@
 ---
 title: "ReadText"
-summary: "Retrieves text content from a file in memory, allowing partial reads and encoding selection."
+summary: "Reads a text file and returns its contents, or the first n characters, as a string, with an optional encoding."
 id: ssl.function.readtext
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # ReadText
 
-Retrieves text content from a file in memory, allowing partial reads and encoding selection.
+Reads a text file and returns its contents, or the first n characters, as a string, with an optional encoding.
 
 `ReadText` reads a text file and returns its contents as a string. You can read the whole file or request only the first `n` characters. If `nCharsToRead` is omitted, [`NIL`](../literals/nil.md), or less than or equal to zero, the function returns the full text. If `sEncoding` is omitted or [`NIL`](../literals/nil.md), the file is read as `UTF8`.
 

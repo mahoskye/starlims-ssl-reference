@@ -13,7 +13,7 @@ starlims:
 
 Finds the last occurrence of a substring in a string and returns its one-based position.
 
-`Rat()` searches `source` for the rightmost occurrence of `subStr`. It returns a one-based match position, or `0` when the substring is not present.
+`Rat()` searches `sSource` for the rightmost occurrence of `sSubString`. It returns a one-based match position, or `0` when the substring is not present.
 
 Use `Rat()` when you need the last delimiter, suffix marker, or final repeated token in a string. If you need the first occurrence instead, use [`At`](At.md).
 
@@ -26,15 +26,15 @@ Use `Rat()` when you need the last delimiter, suffix marker, or final repeated t
 ## Syntax
 
 ```ssl
-Rat(subStr, source)
+Rat(sSubString, sSource)
 ```
 
 ## Parameters
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `subStr` | [string](../types/string.md) | yes | — | Substring to look for. |
-| `source` | [string](../types/string.md) | yes | — | String to search. |
+| `sSubString` | [string](../types/string.md) | yes | — | Substring to look for. |
+| `sSource` | [string](../types/string.md) | yes | — | String to search. |
 
 ## Returns
 
@@ -44,8 +44,8 @@ Rat(subStr, source)
 
 | Trigger | Exception message |
 | --- | --- |
-| `subStr` is [`NIL`](../literals/nil.md). | `Argument subStr cannot be null. RAt().` |
-| `source` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. RAt().` |
+| `sSubString` is [`NIL`](../literals/nil.md). | `Argument subStr cannot be null. RAt().` |
+| `sSource` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. RAt().` |
 
 ## Best practices
 
@@ -63,8 +63,8 @@ Rat(subStr, source)
 
 ## Caveats
 
-- An empty `subStr` returns `0`.
-- An empty `source` also returns `0` when `subStr` is not empty.
+- An empty `sSubString` returns `0`.
+- An empty `sSource` also returns `0` when `sSubString` is not empty.
 - The result is one-based, so convert carefully when working with zero-based external systems.
 
 ## Examples
@@ -146,8 +146,7 @@ Use `Rat()` twice to split a fully qualified procedure reference into category, 
         nPrevDotPos := Rat(".", sScriptPart);
 
         :IF nPrevDotPos = 0;
-            sScript := sQualifiedName;
-            sProcedure := "";
+            sScript := sScriptPart;
         :ELSE;
             sCategory := Left(sScriptPart, nPrevDotPos - 1);
             sScript := SubStr(sScriptPart, nPrevDotPos + 1);

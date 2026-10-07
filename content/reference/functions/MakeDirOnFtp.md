@@ -13,9 +13,9 @@ starlims:
 
 Creates a remote directory by using FTP, or by using SFTP when `bIsSFTP` is [`.T.`](../literals/true.md).
 
-On the FTP path, `MakeDirOnFtp` sends an FTP `MKD` request for the target directory and returns [`.T.`](../literals/true.md) only when the server reports that the path was created. On the SFTP path, it connects and logs in first, then attempts to create the directory and returns [`.T.`](../literals/true.md) when the SFTP library reports success.
+On the FTP path, `MakeDirOnFtp` sends an FTP `MKD` request for the target directory and returns [`.T.`](../literals/true.md) only when the server reports that the path was created. On the SFTP path, it connects and logs in first, then attempts to create the directory and returns [`.T.`](../literals/true.md) when the SFTP server reports success.
 
-Missing `sServerNameOrIP`, missing `sRemoteDirectory`, and a non-empty `sProxy` raise an error instead of returning [`.F.`](../literals/false.md). On the SFTP path, connection, login, and private-key setup happen before the function reaches its boolean return path, so those failures can also raise.
+Missing `sServerNameOrIP`, missing `sRemoteDirectory`, and a non-empty `sProxy` raise an error instead of returning [`.F.`](../literals/false.md). On the SFTP path, connection, login, and private-key setup failures can also raise.
 
 ## When to use
 
@@ -46,14 +46,14 @@ MakeDirOnFtp(
 | `sRemoteDirectory` | [string](../types/string.md) | yes | — | Remote directory path to create. |
 | `sUserName` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | User name passed to the FTP or SFTP login operation. |
 | `sPassword` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | FTP password, or SFTP password or private-key passphrase. |
-| `nPort` | [number](../types/number.md) | no | `21` | Server port. If omitted or less than or equal to `0`, the implementation uses `21` on both the FTP and SFTP paths. |
+| `nPort` | [number](../types/number.md) | no | `21` | Server port. If omitted or less than or equal to `0`, the function uses `21` on both the FTP and SFTP paths. |
 | `sProxy` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Must be omitted, [`NIL`](../literals/nil.md), or an empty string. A non-empty value raises an error. |
-| `bIsSFTP` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Set to [`.T.`](../literals/true.md) to use the SFTP implementation. Omit it or pass [`NIL`](../literals/nil.md)/[`.F.`](../literals/false.md) to use FTP. |
+| `bIsSFTP` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Set to [`.T.`](../literals/true.md) to use SFTP. Omit it or pass [`NIL`](../literals/nil.md)/[`.F.`](../literals/false.md) to use FTP. |
 | `sPrivateKeyFilePath` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Optional private key file for SFTP authentication. Ignored on the FTP path. |
 
 ## Returns
 
-**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the remote directory creation call succeeds; [`.F.`](../literals/false.md) when the FTP request fails (handled as a `WebException` on the FTP path) or when the directory-creation call fails after a successful connect and login (SFTP path).
+**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the remote directory creation call succeeds; [`.F.`](../literals/false.md) when the server rejects the FTP request, or when the SFTP directory-creation call fails after a successful connect and login.
 
 ## Exceptions
 
@@ -78,7 +78,7 @@ MakeDirOnFtp(
     - Pass a manual proxy string expecting the function to use it. A non-empty `sProxy` argument raises an error.
     - Assume every failure comes back as [`.F.`](../literals/false.md). On the SFTP path, some setup
       failures can raise before the boolean result is reached.
-    - Document or code around a separate `MakeDirOnSftp` call when this API is already the supported entry point for both modes.
+    - Look for a separate SFTP function; `MakeDirOnFtp` with `bIsSFTP` set to [`.T.`](../literals/true.md) handles SFTP.
 
 ## Caveats
 

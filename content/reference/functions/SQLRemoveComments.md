@@ -13,7 +13,7 @@ starlims:
 
 Removes SQL comments from a string and returns the cleaned SQL text.
 
-`SQLRemoveComments` is a string-cleanup helper. It removes [`--`](../operators/decrement.md) line comments and ordinary `/* ... */` block comments from the supplied SQL text, but it does not execute or validate the SQL. If `sStatement` is [`NIL`](../literals/nil.md), the function returns [`NIL`](../literals/nil.md). If `sStatement` is an empty string, it returns the empty string unchanged. If `sStatement` is any non-string value, the function raises an argument error.
+`SQLRemoveComments` is a string-cleanup helper. It removes `--` line comments and ordinary `/* ... */` block comments from the supplied SQL text, but it does not execute or validate the SQL. If `sStatement` is [`NIL`](../literals/nil.md), the function returns [`NIL`](../literals/nil.md). If `sStatement` is an empty string, it returns the empty string unchanged. If `sStatement` is any non-string value, the function raises an argument error.
 
 Single-quoted SQL string literals are preserved, so comment markers inside a quoted SQL value are not stripped. Oracle optimizer hints that start with `/*+` are also preserved.
 
@@ -43,7 +43,7 @@ SQLRemoveComments(sStatement)
 |-----------|-------------|----------|
 | `sStatement` is [`NIL`](../literals/nil.md) | [`NIL`](../literals/nil.md) | Returns [`NIL`](../literals/nil.md). |
 | `sStatement` is `""` | [string](../types/string.md) | Returns the empty string unchanged. |
-| `sStatement` is a non-empty string | [string](../types/string.md) | Returns the SQL text with [`--`](../operators/decrement.md) comments and ordinary `/* ... */` comments removed. |
+| `sStatement` is a non-empty string | [string](../types/string.md) | Returns the SQL text with `--` comments and ordinary `/* ... */` comments removed. |
 
 ## Exceptions
 
@@ -69,14 +69,14 @@ SQLRemoveComments(sStatement)
 
 ## Caveats
 
-- [`--`](../operators/decrement.md) comments are removed through the end of the line.
+- `--` comments are removed through the end of the line.
 - The function does not check whether the remaining SQL is valid.
 
 ## Examples
 
 ### Remove line and block comments from a query
 
-Pass SQL containing both a `/* ... */` block comment and a [`--`](../operators/decrement.md) line comment; the result is the same statement with those comment sequences stripped.
+Pass SQL containing both a `/* ... */` block comment and a `--` line comment; the result is the same statement with those comment sequences stripped.
 
 ```ssl
 :PROCEDURE RemoveCommentsFromSQL;
@@ -103,7 +103,7 @@ DoProc("RemoveCommentsFromSQL");
 
 ### Preserve comment markers inside quoted string literals
 
-Verify that [`--`](../operators/decrement.md) and `/* ... */` sequences inside single-quoted SQL literals are not stripped while an unquoted block comment is removed.
+Verify that `--` and `/* ... */` sequences inside single-quoted SQL literals are not stripped while an unquoted block comment is removed.
 
 ```ssl
 :PROCEDURE PreserveQuotedMarkers;

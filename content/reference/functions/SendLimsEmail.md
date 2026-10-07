@@ -13,7 +13,7 @@ starlims:
 
 Sends an email through SMTP and returns whether the send succeeded.
 
-`SendLimsEmail` sends a message immediately using the supplied SMTP server and recipient list. The function supports attachments, CC/BCC recipients, SMTP authentication, TLS/SSL, HTML bodies, and an optional encrypted certificate payload. When `bIgnoreErrors` is [`.T.`](../literals/true.md), failures are logged and the function returns [`.F.`](../literals/false.md). When `bIgnoreErrors` is [`.F.`](../literals/false.md), the function raises the underlying error instead.
+`SendLimsEmail` sends a message immediately using the supplied SMTP server and recipient list. The function supports attachments, CC/BCC recipients, SMTP authentication, TLS/SSL, HTML bodies, and an optional encrypted certificate payload. When `bIgnoreErrors` is [`.T.`](../literals/true.md), failures are logged and the function returns [`.F.`](../literals/false.md). When `bIgnoreErrors` is [`.F.`](../literals/false.md), the function raises the send error instead.
 
 ## When to use
 
@@ -29,7 +29,7 @@ SendLimsEmail(
 	sSMTP,
 	aRecipients,
 	sFromWho,
-	[sSubject],
+	sSubject,
 	[sMessageBody],
 	[aAttachList],
 	[aCCList],
@@ -54,7 +54,7 @@ SendLimsEmail(
 | `sSMTP` | [string](../types/string.md) | yes | — | SMTP server name. [`NIL`](../literals/nil.md) raises or returns [`.F.`](../literals/false.md) depending on `bIgnoreErrors`. An empty string also causes the send to fail. |
 | `aRecipients` | [array](../types/array.md) | yes | — | Recipient email addresses. [`NIL`](../literals/nil.md) raises or returns [`.F.`](../literals/false.md) depending on `bIgnoreErrors`. The send also fails if the array is empty. |
 | `sFromWho` | [string](../types/string.md) | yes | — | Sender address. [`NIL`](../literals/nil.md) raises or returns [`.F.`](../literals/false.md) depending on `bIgnoreErrors`. An empty string also causes the send to fail. |
-| `sSubject` | [string](../types/string.md) | no | `""` | Subject line. The surfaced signature allows it to be omitted, but the normal send path rejects an empty subject. |
+| `sSubject` | [string](../types/string.md) | yes | — | Subject line. An empty subject makes the send fail. |
 | `sMessageBody` | [string](../types/string.md) | no | `"***"` | Message body text. |
 | `aAttachList` | [array](../types/array.md) | no | `{}` | Attachment file paths. Empty paths or missing files cause the send to fail. |
 | `aCCList` | [array](../types/array.md) | no | `{}` | CC recipient addresses. |
@@ -64,7 +64,7 @@ SendLimsEmail(
 | `sUName` | [string](../types/string.md) | no | `""` | SMTP user name. |
 | `sUPass` | [string](../types/string.md) | no | `""` | SMTP password. |
 | `bIgnoreErrors` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | When [`.T.`](../literals/true.md), logs the failure and returns [`.F.`](../literals/false.md). When [`.F.`](../literals/false.md), raises the error instead. |
-| `bUseCDO` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Legacy transport flag retained in the public signature. |
+| `bUseCDO` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Legacy flag; leave it [`.F.`](../literals/false.md). |
 | `nTimeout` | [number](../types/number.md) | no | `240` | Timeout in seconds. |
 | `bUseSSL` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Enables a secure SMTP connection. |
 | `bIsBodyHTML` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Treats `sMessageBody` as HTML. |
@@ -101,7 +101,7 @@ When `bIgnoreErrors` is [`.F.`](../literals/false.md), the function raises inste
     - Validate attachment paths before calling the function.
 
 !!! failure "Don't"
-    - Rely on the surfaced optional signature to mean blank required fields are safe. Empty SMTP, sender, recipient, and subject values can still fail at runtime.
+    - Leave out or blank the subject, or pass blank SMTP, sender, or recipient values. The send fails.
     - Pass a string where the function expects an array of addresses or attachments.
     - Ignore a [`.F.`](../literals/false.md) return when `bIgnoreErrors` is [`.T.`](../literals/true.md). That means the send failed and only the error handling mode changed.
     - Mark HTML content as plain text. Set `bIsBodyHTML` correctly so the message body is interpreted as intended.
@@ -109,7 +109,7 @@ When `bIgnoreErrors` is [`.F.`](../literals/false.md), the function raises inste
 
 ## Caveats
 
-- The first three parameters are required by contract, and blank values can also fail even when the parameter itself is not [`NIL`](../literals/nil.md).
+- The first four parameters are required, and blank values can also fail even when the parameter itself is not [`NIL`](../literals/nil.md).
 - `bIgnoreErrors` defaults to [`.T.`](../literals/true.md), so callers that need fail-fast behavior should pass [`.F.`](../literals/false.md) explicitly.
 
 ## Examples
@@ -139,7 +139,7 @@ Send a simple notification using the default parameters: plain text, no attachme
 DoProc("SendNotificationEmail");
 ```
 
-`UsrMes` logs:
+If the send fails, `UsrMes` logs:
 
 ```text
 Email was not sent.

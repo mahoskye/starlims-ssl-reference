@@ -13,11 +13,11 @@ starlims:
 
 Decodes MIME-encoded data to its plain string representation.
 
-`MimeDecode` decodes strings produced by the matching [`MimeEncode`](MimeEncode.md) function. The decoder only acts on strings that begin with the proprietary signature [`MimeEncode`](MimeEncode.md) emits; generic base64 or quoted-printable content from external sources is **not** recognized and is returned unchanged. If the input is a valid wrapped string, the original plain text is returned. If [`NIL`](../literals/nil.md) or a value of the wrong type is passed, it raises an error indicating that a string is required. When an empty string is provided, it returns an empty string without error. Use this function strictly for round-tripping data that was previously encoded with [`MimeEncode`](MimeEncode.md) in this same SSL environment; for arbitrary base64 or quoted-printable input, use a dedicated codec.
+`MimeDecode` decodes strings produced by the matching [`MimeEncode`](MimeEncode.md) function. The decoder only acts on strings that begin with the proprietary signature [`MimeEncode`](MimeEncode.md) emits; generic base64 or quoted-printable content from external sources is **not** recognized and is returned unchanged. If the input is a valid wrapped string, the original plain text is returned. If [`NIL`](../literals/nil.md) or a value of the wrong type is passed, it raises an error indicating that a string is required. When an empty string is provided, it returns an empty string without error. Use this function only for data that was encoded with [`MimeEncode`](MimeEncode.md); for arbitrary base64 or quoted-printable input, use a dedicated codec.
 
 ## When to use
 
-- When decoding strings that were previously encoded with [`MimeEncode`](MimeEncode.md) in the same SSL environment.
+- When decoding strings that were previously encoded with [`MimeEncode`](MimeEncode.md).
 - When reading SSL data from database fields or external payloads where [`MimeEncode`](MimeEncode.md) was used for storage or transmission.
 
 ## Syntax

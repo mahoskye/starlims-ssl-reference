@@ -15,7 +15,7 @@ Retrieves a remote file as a string by using FTP, or SFTP when `bIsSFTP` is [`.T
 
 `ReadFromFtp` reads the contents of a remote file into memory and returns them as a string. By default it uses FTP. If `bIsSFTP` is [`.T.`](../literals/true.md), it uses SFTP instead, and `sPrivateKeyFilePath` can be used for key-based login. The function throws immediately when `sServerNameOrIP` or `sRemoteFileName` is empty, and it also throws if `sProxy` is provided with a non-empty value.
 
-For FTP, omitted or non-positive `nMaxSize` falls back to `64000`, and the read stops after that many bytes. For the current SFTP implementation, `nMaxSize` is validated the same way but not enforced during the actual file read, so the full remote file is returned. Transfer failures caught during the read return an empty string and log an error message.
+For FTP, omitted or non-positive `nMaxSize` falls back to `64000`, and the read stops after that many bytes. On SFTP, `nMaxSize` is not applied and the whole file is returned. Transfer failures caught during the read return an empty string and log an error message.
 
 ## When to use
 
@@ -37,7 +37,7 @@ ReadFromFtp(sServerNameOrIP, [sRemoteDirectory], sRemoteFileName, [nMaxSize], [s
 | `sServerNameOrIP` | [string](../types/string.md) | yes | — | FTP or SFTP server name or IP address. Empty values raise an exception. |
 | `sRemoteDirectory` | [string](../types/string.md) | no | `""` | Remote folder that contains the file. |
 | `sRemoteFileName` | [string](../types/string.md) | yes | — | File name to read. Empty values raise an exception. |
-| `nMaxSize` | [number](../types/number.md) | no | `64000` when omitted or `<= 0` | Maximum bytes to read on the FTP path. On the current SFTP path, the full file is still read. |
+| `nMaxSize` | [number](../types/number.md) | no | `64000` when omitted or `<= 0` | Maximum bytes to read on the FTP path. On SFTP, the full file is still read. |
 | `sUserName` | [string](../types/string.md) | no | `""` | User name passed to the FTP or SFTP login routine. |
 | `sPassword` | [string](../types/string.md) | no | `""` | Password passed to the login routine. When `sPrivateKeyFilePath` is used for SFTP, this value is used as the private-key passphrase. |
 | `nPort` | [number](../types/number.md) | no | `21` when omitted or `<= 0` | Network port for the connection. |
@@ -73,7 +73,7 @@ ReadFromFtp(sServerNameOrIP, [sRemoteDirectory], sRemoteFileName, [nMaxSize], [s
 ## Caveats
 
 - `sRemoteDirectory` is not validated as required. If you do not need a folder path, pass an empty string.
-- SFTP connection, login, or private-key setup occurs before the SFTP read is wrapped in its transfer-error handler, so some SFTP failures may raise an exception instead of returning `""`.
+- On SFTP, connection, login, and private-key failures can raise an exception; only failures during the read itself return `""`.
 - The function returns text. Binary files can produce unreadable content.
 
 ## Examples
@@ -129,7 +129,7 @@ Use `nMaxSize` to limit an FTP read, then extract just the first line for lightw
 	:DECLARE sFileContent, sHeaderLine;
 	:DECLARE nMaxSize, nLineEnd;
 
-	sServer := "ftp.analytical-lab.com";
+	sServer := "ftp.analytical-lab.example.com";
 	sRemoteDir := "/logs/transfers";
 	sFileName := "transfer_log_2024.txt";
 	sUser := "lab_reader";

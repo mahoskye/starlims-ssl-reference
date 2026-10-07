@@ -32,9 +32,9 @@ SendFromOutbox([bIgnoreErrors], [bUseCDO], [nTimeout])
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `bIgnoreErrors` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Present in the signature. Outbox processing catches per-email send failures, continues with later rows, and returns [`.F.`](../literals/false.md) if any row fails. |
-| `bUseCDO` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Passed through to the underlying send operation. |
-| `nTimeout` | [number](../types/number.md) | no | `240` | Send timeout in seconds. A negative value is treated as the absolute timeout value with alternate send behavior. |
+| `bIgnoreErrors` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Has no effect: per-email send failures are caught either way, processing continues with later rows, and the function returns [`.F.`](../literals/false.md) if any row fails. |
+| `bUseCDO` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Legacy transport flag, as for [`SendLimsEmail`](SendLimsEmail.md); leave it [`.F.`](../literals/false.md). |
+| `nTimeout` | [number](../types/number.md) | no | `240` | Send timeout in seconds. |
 
 ## Returns
 

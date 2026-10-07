@@ -114,11 +114,8 @@ Fetch a single BLOB column, write it to disk, and confirm the file was actually 
         /* Logs on failure: RetrieveLong failed;
     :ENDTRY;
 :ENDPROC;
-```
 
-Run with:
-
-```ssl
+/* Usage;
 DoProc("ExportAttachmentPdf");
 ```
 
@@ -178,11 +175,8 @@ Query for a list of IDs and export each matching BLOB to a separate file, tracki
     );
     /* Logs: report export summary;
 :ENDPROC;
-```
 
-Run with:
-
-```ssl
+/* Usage;
 DoProc("ExportApprovedReports");
 ```
 

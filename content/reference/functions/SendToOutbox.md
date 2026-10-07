@@ -176,12 +176,12 @@ Queue an HTML message with a PDF attachment, CC and BCC recipients, and SMTP aut
 DoProc("QueueHtmlEmail");
 ```
 
-### Raise and handle validation errors explicitly
+### Catch queue failures
 
-Wrap the call in `:TRY;` to catch the unconditional validation errors and inspect the failure with [`GetLastSSLError`](GetLastSSLError.md).
+Wrap the call in `:TRY;` to catch validation or queue errors and inspect the failure with [`GetLastSSLError`](GetLastSSLError.md).
 
 ```ssl
-:PROCEDURE QueueEmailFailFast;
+:PROCEDURE QueueEmailWithErrorHandling;
 	:DECLARE aAttachList, aBCCList, aCCList, aRecipients, bQueued, oErr;
 	:DECLARE sBody, sFromWho, sReplyTo, sSMTP, sSubject, sUName, sUPass;
 
@@ -226,7 +226,7 @@ Wrap the call in `:TRY;` to catch the unconditional validation errors and inspec
 :ENDPROC;
 
 /* Usage;
-DoProc("QueueEmailFailFast");
+DoProc("QueueEmailWithErrorHandling");
 ```
 
 ## Related

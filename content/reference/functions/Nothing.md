@@ -58,7 +58,7 @@ Nothing(vValue)
 
 !!! failure "Don't"
     - Use `Nothing()` when the literal string `"0"` is a valid code, quantity, or response in your workflow.
-    - Assume `Nothing()` only extends [`Empty()`](Empty.md) for numeric zero. The extra behavior is the exact stringified value `"0"`.
+    - Expect `Nothing()` to treat `"00"` or `"0.0"` as missing. Beyond [`Empty`](Empty.md), it only adds values whose string form is exactly `"0"`.
     - Treat `Nothing()`, [`Empty`](Empty.md), and [`IsDefined`](IsDefined.md) as interchangeable. They answer different questions.
 
 ## Examples

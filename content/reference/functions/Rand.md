@@ -76,7 +76,7 @@ DoProc("PickRandomCode");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Selected code: Charlie
+Selected code: <one of Alpha, Bravo, Charlie, Delta>
 ```
 
 The selected element varies on every call.
@@ -148,7 +148,7 @@ DoProc("BuildRepeatableSequence");
 Sequence: <first_value>, <second_value>, <third_value>
 ```
 
-The same seed always produces the same sequence. The exact numbers depend on the platform's RNG implementation.
+The same seed produces the same sequence, as long as no other `Rand()` call draws from the shared generator in between. The exact numbers depend on the platform's RNG implementation.
 
 ## Related
 

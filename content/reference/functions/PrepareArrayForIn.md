@@ -42,7 +42,7 @@ PrepareArrayForIn(aTarget, sItemType)
 
 ## Returns
 
-**[array](../types/array.md)** — The same array after preparation. Empty input receives one sentinel element based on `sItemType`. Non-empty input keeps its length with `""` elements replaced by the string sentinel.
+**[array](../types/array.md)** — The same array after preparation. Empty input receives one sentinel element based on `sItemType`. Non-empty input keeps its length with `""` elements replaced by the string sentinel. The string sentinel is `C7082BA7C83D38CAE98421BE494753931F8B52A8` (the same value [`BuildStringForIn`](BuildStringForIn.md) uses); the numeric sentinel is `-2147483648`.
 
 ## Exceptions
 
@@ -149,7 +149,7 @@ When `aOrderIDs` arrives empty, `PrepareArrayForIn` adds a numeric sentinel (`-2
 :ENDPROC;
 
 /* Usage;
-DoProc("GetOrdersByIDList", {{1001, 1002}});
+DoProc("GetOrdersByIDList", {{}});
 ```
 
 ## Related
