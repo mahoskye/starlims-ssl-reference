@@ -1,6 +1,6 @@
 ---
 title: "LimsGetDateFormat"
-summary: "Returns the current global date format string used for date parsing and formatting."
+summary: "Returns the current session date format string used for date parsing and formatting."
 id: ssl.function.limsgetdateformat
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # LimsGetDateFormat
 
-Returns the current global date format string used for date parsing and formatting.
+Returns the current session date format string used for date parsing and formatting.
 
 `LimsGetDateFormat()` retrieves the current date format string, such as `"M/d/yyyy"` or `"yyyy-MM-dd"`. It takes no parameters and is safe to call any time. If no format has been set with [`DateFormat`](DateFormat.md), it returns the default session format, `"M/d/yyyy"`.
 
@@ -34,7 +34,7 @@ This function takes no parameters.
 
 ## Returns
 
-**[string](../types/string.md)** — The current date format pattern used throughout the application (e.g., `"M/d/yyyy"`).
+**[string](../types/string.md)** — The date format pattern currently in effect for this session (e.g., `"M/d/yyyy"`).
 
 ## Best practices
 
@@ -44,13 +44,12 @@ This function takes no parameters.
     - Document the expected date format for integration partners and when writing export/import routines.
 
 !!! failure "Don't"
-    - Hard-code date format strings directly in your logic.
+    - Hard-code the session's display format when you mean "whatever format the user works in"; use an explicit format only when an export or interface needs a fixed shape.
     - Assume a specific date order or delimiter based on regional habits.
     - Ignore the global configuration when presenting or persisting date strings.
 
 ## Caveats
 
-- Changing the global date format via [`DateFormat`](DateFormat.md) does not notify all clients in real time; always call this function each time you need the value.
 - The function returns the format string but does not validate it; a misconfigured format string may cause downstream parsing errors.
 
 ## Examples

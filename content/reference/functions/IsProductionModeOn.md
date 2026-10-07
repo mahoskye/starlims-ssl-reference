@@ -49,7 +49,6 @@ This function takes no parameters.
 ## Caveats
 
 - Returns only production vs. non-production — it does not indicate which specific non-production environment is active (e.g., development, staging).
-- Changes to the production mode status require a configuration update and restart; the result does not reflect real-time changes during a session.
 - This function does not validate license types or features.
 
 ## Examples

@@ -13,7 +13,7 @@ starlims:
 
 Formats a numeric expression as a string by applying a picture string.
 
-If `vExpression` is [`NIL`](../literals/nil.md), `LTransform` returns an empty string. If `vExpression` is not numeric, it returns the value's string representation and does not apply the picture. For numeric input, `sPicture` is applied after converting both [`#`](../operators/hash.md) and `9` placeholders to `0`, so those placeholder characters behave the same in this function.
+If `vExpression` is [`NIL`](../literals/nil.md), `LTransform` returns an empty string. If `vExpression` is not numeric, it returns the value's string representation and does not apply the picture. For numeric input, `sPicture` is applied after converting both `#` and `9` placeholders to `0`, so those placeholder characters behave the same in this function.
 
 After formatting a numeric value, `LTransform` replaces leading zeroes with spaces until it reaches the digit immediately before the decimal point. For negative values, the minus sign is moved so it appears just before the first non-space digit.
 
@@ -34,7 +34,7 @@ LTransform(vExpression, sPicture)
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `vExpression` | any | yes | — | Value to convert. Numeric values use the picture; non-numeric values are returned as plain text. |
-| `sPicture` | [string](../types/string.md) | yes | — | Numeric picture string used when `vExpression` is numeric. In `LTransform`, [`#`](../operators/hash.md) and `9` are treated the same as `0`. |
+| `sPicture` | [string](../types/string.md) | yes | — | Numeric picture string used when `vExpression` is numeric. In `LTransform`, `#` and `9` are treated the same as `0`. |
 
 ## Returns
 
@@ -48,7 +48,7 @@ LTransform(vExpression, sPicture)
     - Handle mixed-type input deliberately when the picture should apply only to numeric values.
 
 !!! failure "Don't"
-    - Assume [`#`](../operators/hash.md) and `9` behave differently in `LTransform`. Both are converted to `0` before formatting.
+    - Assume `#` and `9` behave differently in `LTransform`. Both are converted to `0` before formatting.
     - Expect `sPicture` to affect strings, dates, or other non-numeric values. Non-numeric input is returned as plain text.
     - Assume a [`NIL`](../literals/nil.md) input will be preserved as `"NIL"` or raise an error. `LTransform` returns an empty string instead.
 

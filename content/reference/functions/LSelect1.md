@@ -67,10 +67,6 @@ LSelect1(sCommandString, [sConnectionName], [aArrayOfValues], [bNullAsBlank], [a
     - Pass a multidimensional values array.
     - Use invariant date handling unless the date column really needs to bypass timezone conversion.
 
-## Caveats
-
-- A database connection is closed after the reader is consumed, even when the query raises an error.
-
 ## Examples
 
 ### Fetch rows and handle an empty result

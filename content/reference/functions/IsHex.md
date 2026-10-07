@@ -85,9 +85,10 @@ Call `IsHex` on a hardcoded value and branch on the result. The input `"A3F7"` c
         :RETURN .F.;
     :ENDIF;
 :ENDPROC;
-```
 
-Call with `DoProc("ValidateHexCode")`.
+/* Usage;
+DoProc("ValidateHexCode");
+```
 
 ### Normalize mixed-case input before validating
 
@@ -111,9 +112,10 @@ Trim whitespace and convert to uppercase before calling `IsHex`, so that values 
 
     :RETURN bIsValidHex;
 :ENDPROC;
-```
 
-Call with `DoProc("NormalizeAndValidateHex", {"a3f7"})`.
+/* Usage;
+DoProc("NormalizeAndValidateHex", {"a3f7"});
+```
 
 ### Filter and convert a batch of hex strings
 
@@ -137,9 +139,10 @@ Use `IsHex` as a gate before calling [`LHex2Dec`](LHex2Dec.md), so that only val
 
     :RETURN aDecimalValues;
 :ENDPROC;
-```
 
-Call with `DoProc("ConvertValidHexBatch")`.
+/* Usage;
+DoProc("ConvertValidHexBatch");
+```
 
 ## Related
 

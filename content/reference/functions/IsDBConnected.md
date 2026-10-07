@@ -49,7 +49,6 @@ IsDBConnected([sConnectionName])
 !!! success "Do"
     - Use `IsDBConnected()` before database work when your script needs a fast availability check.
     - Pass an explicit connection name when your script works with more than one connection.
-    - Wrap the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) when the runtime context may not have database state available.
 
 !!! failure "Don't"
     - Treat this as a connectivity probe that validates credentials, network reachability, or a successful round-trip query.
@@ -119,32 +118,25 @@ Iterate over a list of connection names and report each one's availability. Pass
 DoProc("CheckMultiDatabaseConnections");
 ```
 
-### Handle uninitialized database state with [`:TRY`](../keywords/TRY.md)
+### Check a caller-supplied connection name
 
-Wrap the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) for code paths where the runtime database collection may not be initialized. The catch block retrieves the error with [`GetLastSSLError`](GetLastSSLError.md) and logs it via [`ErrorMes`](ErrorMes.md) before returning a safe [`.F.`](../literals/false.md).
+Take the connection name as a parameter and branch on the result. A name that does not match a known connection returns [`.F.`](../literals/false.md) rather than raising, so the procedure can report it and return.
 
 ```ssl
 :PROCEDURE CheckDatabaseConnectivity;
     :PARAMETERS sConnName;
     :DEFAULT sConnName, "";
-    :DECLARE bIsConnected, oErr;
+    :DECLARE bIsConnected;
 
-    :TRY;
-        bIsConnected := IsDBConnected(sConnName);
+    bIsConnected := IsDBConnected(sConnName);
 
-        :IF bIsConnected;
-            UsrMes("Requested connection is available");
-        :ELSE;
-            UsrMes("Requested connection is not available");
-        :ENDIF;
+    :IF bIsConnected;
+        UsrMes("Requested connection is available");
+    :ELSE;
+        UsrMes("Requested connection is not available");
+    :ENDIF;
 
-        :RETURN bIsConnected;
-    :CATCH;
-        oErr := GetLastSSLError();
-        ErrorMes("Connection lookup failed: " + oErr:Description);
-        /* Logs a failure message when the lookup raises an error;
-        :RETURN .F.;
-    :ENDTRY;
+    :RETURN bIsConnected;
 :ENDPROC;
 
 /* Usage;

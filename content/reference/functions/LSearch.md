@@ -81,7 +81,7 @@ Common return shapes include:
 
 - `LSearch` falls back only when the scalar result is missing or database `NULL`. An actual empty string from the database is returned as-is.
 - With the fallback omitted or [`NIL`](../literals/nil.md) and no matching row, `LSearch` returns an empty string, not [`NIL`](../literals/nil.md), in observed runtime behavior. A `= NIL` or `== NIL` check on the result is therefore false. Use [`Empty`](Empty.md)`()` instead.
-- Passing a non-array value as `aArrayOfValues` (the fourth parameter) can lock up the application — the runtime's error handling for this type mismatch is anything but graceful. Always pass an array of bind values or omit the parameter entirely.
+- In observed runtime behavior, passing a non-array value as `aArrayOfValues` (the fourth parameter) can lock up the application instead of raising an error. Always pass an array of bind values or omit the parameter entirely.
 
 ## Examples
 
@@ -109,7 +109,7 @@ DoProc("GetSampleStatus", {"SMP-001"});
 
 ### Use a numeric fallback with COUNT(*)
 
-Count open tasks for a sample. If no tasks match the filter, `LSearch` returns `0` rather than [`NIL`](../literals/nil.md) or an empty result.
+Count open tasks for a sample. `COUNT(*)` always returns a row, so the result is `0` when no tasks match; the `0` fallback only matters if the query itself returns no row.
 
 ```ssl
 :PROCEDURE GetOpenTaskCount;

@@ -1,6 +1,6 @@
 ---
 title: "LimsType"
-summary: "Returns the single-character SSL type code for a variable name or expression."
+summary: "Returns the SSL type code for a variable name or expression."
 id: ssl.function.limstype
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # LimsType
 
-Returns the single-character SSL type code for a variable name or expression.
+Returns the SSL type code for a variable name or expression.
 
 `LimsType` accepts a string that is either a bare variable name or an SSL expression. For a bare identifier, it looks up the variable directly. For any other string, it evaluates `:RETURN <string>;` in the current scope and inspects the result.
 
@@ -37,7 +37,7 @@ LimsType(sParam)
 
 ## Returns
 
-**[string](../types/string.md)** — A single-character type code based on what `sParam` evaluates to.
+**[string](../types/string.md)** — A one- or two-character type code based on what `sParam` evaluates to.
 
 | Return value | Meaning |
 | --- | --- |

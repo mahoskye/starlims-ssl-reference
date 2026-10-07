@@ -13,7 +13,7 @@ starlims:
 
 Converts a value to its trimmed string representation, returning `"NIL"` when the input is [`NIL`](../literals/nil.md).
 
-`LStr` calls [`LimsString`](LimsString.md) internally and trims the result. When the input is a number, global group and decimal separators are applied. For other input types, the default string conversion is used. Unlike [`LTransform`](LTransform.md) or [`StrZero`](StrZero.md), `LStr` does not pad or shape the output — use those functions when fixed field widths or decimal precision are required.
+`LStr` returns the same text as [`LimsString`](LimsString.md), with leading and trailing spaces trimmed. When the input is a number, global group and decimal separators are applied. For other input types, the default string conversion is used. Unlike [`LTransform`](LTransform.md) or [`StrZero`](StrZero.md), `LStr` does not pad or shape the output — use those functions when fixed field widths or decimal precision are required.
 
 ## When to use
 
@@ -41,7 +41,7 @@ LStr(vNumber)
 
 !!! success "Do"
     - Use `LStr` when [`NIL`](../literals/nil.md) values must appear as the explicit placeholder `"NIL"` in UI output, logs, or exports.
-    - Pair `LStr` with [`LTransform`](LTransform.md) or [`StrZero`](StrZero.md) when field-width padding or decimal precision is required after conversion.
+    - Use [`LTransform`](LTransform.md) or [`StrZero`](StrZero.md) on the number itself, instead of `LStr`, when you need padding or fixed decimals.
     - Apply `LStr` when serializing mixed data sources that must never produce empty strings for missing values.
 
 !!! failure "Don't"

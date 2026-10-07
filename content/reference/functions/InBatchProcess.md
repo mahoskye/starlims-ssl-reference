@@ -55,9 +55,9 @@ This function takes no parameters.
 
 ## Examples
 
-### Skip a popup during batch execution
+### Tag the log entry with the execution context
 
-Use a non-interactive message in batch and a user popup in interactive execution, showing the most direct application of the `InBatchProcess()` check.
+Prefix the log message with the execution context, showing the most direct application of the `InBatchProcess()` check.
 
 ```ssl
 :PROCEDURE NotifyCompletion;
@@ -67,11 +67,11 @@ Use a non-interactive message in batch and a user popup in interactive execution
     sMessage := "Sample release processing completed";
 
     :IF bIsBatch;
-        /* Batch run uses non-interactive logging;
-        InfoMes(sMessage);
+        /* Logs the batch-tagged message;
+        UsrMes("[batch] " + sMessage);
     :ELSE;
-        /* Interactive run can show a user message;
-        UsrMes(sMessage);
+        /* Logs the interactive-tagged message;
+        UsrMes("[interactive] " + sMessage);
     :ENDIF;
 
     :RETURN bIsBatch;
