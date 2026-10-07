@@ -1800,6 +1800,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#caveats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caveats
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3397,6 +3408,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#caveats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caveats
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3559,7 +3581,7 @@
 <p>Adds one or more properties to an object.</p>
 <p>AddProperty adds a property to <code>oTarget</code> when <code>vPropName</code> is a string, or adds multiple properties when <code>vPropName</code> is an array of strings. Each new property is created with an initial value of <code>""</code>. The function returns <a href="../../literals/nil/"><code>NIL</code></a>.</p>
 <p>If <code>oTarget</code> is <a href="../../literals/nil/"><code>NIL</code></a>, AddProperty raises an error. If <code>vPropName</code> is <a href="../../literals/nil/"><code>NIL</code></a>, it raises an error. If <code>vPropName</code> is neither a string nor an array of strings, or if any array element is not a string, it raises <code>Invalid property</code>.</p>
-<p>Property names must be valid SSL object property identifiers. Names must start with a letter or underscore and can then contain letters, digits, or underscores.</p>
+<p>Use valid SSL identifiers for property names: start with a letter or underscore, then use letters, digits, or underscores. The runtime does not enforce this (see <a href="#caveats">Caveats</a>).</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need to extend a user-defined object with additional properties at runtime.</li>
@@ -3593,7 +3615,7 @@
 <td><a href="../../types/string/">string</a> or <a href="../../types/array/">array</a></td>
 <td>yes</td>
 <td>—</td>
-<td>Property name as a string, or an array of property-name strings. Each name must be a valid property identifier.</td>
+<td>Property name as a string, or an array of property-name strings. Use valid SSL identifiers.</td>
 </tr>
 </tbody>
 </table>
@@ -3620,10 +3642,6 @@
 <td><code>vPropName</code> is not a string or an array element is not a string.</td>
 <td><code>Invalid property</code></td>
 </tr>
-<tr>
-<td>A property name is not a valid identifier.</td>
-<td><code>Invalid property name: &lt;name&gt;</code></td>
-</tr>
 </tbody>
 </table>
 <h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
@@ -3645,6 +3663,10 @@
 <li>Use spaces, hyphens, or leading digits in property names.</li>
 </ul>
 </div>
+<h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Property names are not checked against identifier rules. In observed runtime behavior, <code>AddProperty(o, "1 bad")</code> adds the property and returns <a href="../../literals/nil/"><code>NIL</code></a> instead of raising an error.</li>
+</ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="add-one-property">Add one property<a class="headerlink" href="#add-one-property" title="Permanent link">&para;</a></h3>
 <p>Creates a user-defined object, adds a single property, and shows that the property starts as an empty string before being assigned a value.</p>
@@ -3713,7 +3735,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 20:33:43 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 20:44:46 UTC">October 7, 2026</span>
   </span>
 
     

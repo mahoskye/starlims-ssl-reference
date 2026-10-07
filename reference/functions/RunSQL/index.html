@@ -4106,12 +4106,8 @@
 <td><code>The provider name: &lt;sConnectionName&gt; not found.</code></td>
 </tr>
 <tr>
-<td><code>aValues</code> is a multidimensional array.</td>
-<td><code>The current array has more than 1 dimension.</code></td>
-</tr>
-<tr>
-<td>The number of <code>?</code> placeholders does not match the supplied values.</td>
-<td><code>Parameters count mismatch</code></td>
+<td><code>aValues</code> has fewer values than there are <code>?</code> placeholders.</td>
+<td><code>ExecuteNonQuery exception Not enough values provided for parameters.</code></td>
 </tr>
 </tbody>
 </table>
@@ -4138,6 +4134,7 @@
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
+<li>A nested array in <code>aValues</code> is not rejected. In observed runtime behavior, <code>RunSQL("SELECT ? AS a", "DATABASE", {{1, 2}})</code> returns <a href="../../literals/true/"><code>.T.</code></a>.</li>
 <li><code>aValues</code> must line up with the positional <code>?</code> placeholders in order.</li>
 <li>A single third argument such as <code>sValue</code> is accepted, but arrays are clearer once more than one parameter is involved.</li>
 <li><code>IgnoreSqlErrors(.T.)</code> on its own does not stop a failure from raising, because ignoring is already on by default. <code>ShowSqlErrors(.F.)</code> is the setting that makes <code>RunSQL</code> return <a href="../../literals/false/"><code>.F.</code></a>.</li>
@@ -4278,7 +4275,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 20:33:43 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 20:44:46 UTC">October 7, 2026</span>
   </span>
 
     
