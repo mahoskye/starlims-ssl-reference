@@ -2698,9 +2698,9 @@
 <h1 id="hash"># (hash)<a class="headerlink" href="#hash" title="Permanent link">&para;</a></h1>
 <h2 id="what-it-does">What it does<a class="headerlink" href="#what-it-does" title="Permanent link">&para;</a></h2>
 <p>Returns <a href="../../literals/true/"><code>.T.</code></a> when two values are not equal and <a href="../../literals/false/"><code>.F.</code></a> when they are equal.</p>
-<p>The <code>#</code> operator tests for inequality. It delegates to the same equality logic as <a href="../equals/"><code>=</code></a>, then negates the result. For numbers, booleans, and dates, the comparison is exact. For strings, the comparison uses the same prefix semantics as <a href="../equals/"><code>=</code></a>: <code>"Logged" # "Log"</code> is <a href="../../literals/false/"><code>.F.</code></a> because <code>"Logged" = "Log"</code> is <a href="../../literals/true/"><code>.T.</code></a>. For arrays and objects, <code>#</code> compares by reference — two distinct arrays or objects with identical contents are not equal under <code>#</code>.</p>
+<p>The <code>#</code> operator tests for inequality. It uses the same strict comparison as <a href="../strict-equals/"><code>==</code></a>, then negates the result. For numbers, booleans, and dates, the comparison is exact. For strings, the comparison is also exact, not the prefix matching of <a href="../equals/"><code>=</code></a>: <code>"Logged" # "Log"</code> is <a href="../../literals/true/"><code>.T.</code></a>, even though <code>"Logged" = "Log"</code> is also <a href="../../literals/true/"><code>.T.</code></a>. For arrays and objects, <code>#</code> compares by reference — two distinct arrays or objects with identical contents are not equal under <code>#</code>.</p>
 <p><code>#</code> is a full alias for <a href="../not-equals/"><code>not-equals</code></a> (<a href="../not-equals/"><code>!=</code></a>). Both behave identically.</p>
-<p>Type-mismatch behavior depends on the left operand. A string on the left returns <a href="../../literals/true/"><code>.T.</code></a> when the right operand is not a string (because the underlying <a href="../equals/"><code>=</code></a> returns <a href="../../literals/false/"><code>.F.</code></a>). A number, date, or boolean on the left raises a runtime error when the right operand is an incompatible type.</p>
+<p>Type-mismatch behavior depends on the left operand. A string on the left returns <a href="../../literals/true/"><code>.T.</code></a> when the right operand is not a string. A number, date, or boolean on the left raises a runtime error when the right operand is an incompatible type; <a href="../../literals/nil/"><code>NIL</code></a> on the right does not raise and returns <a href="../../literals/true/"><code>.T.</code></a>.</p>
 <h2 id="when-to-use-it">When to use it<a class="headerlink" href="#when-to-use-it" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When testing whether two values differ.</li>
@@ -2743,13 +2743,13 @@
 <td><a href="../../types/string/">string</a></td>
 <td><a href="../../types/string/">string</a></td>
 <td><a href="../../types/boolean/">boolean</a></td>
-<td>Returns <a href="../../literals/true/"><code>.T.</code></a> when the strings are not equal under SSL's prefix matching.</td>
+<td>Returns <a href="../../literals/true/"><code>.T.</code></a> when the strings are not exactly equal.</td>
 </tr>
 <tr>
 <td><a href="../../types/string/">string</a></td>
 <td>non-string</td>
 <td><a href="../../types/boolean/">boolean</a></td>
-<td>Returns <a href="../../literals/true/"><code>.T.</code></a> (underlying <a href="../equals/"><code>=</code></a> returns <a href="../../literals/false/"><code>.F.</code></a>).</td>
+<td>Returns <a href="../../literals/true/"><code>.T.</code></a>.</td>
 </tr>
 <tr>
 <td><a href="../../types/array/">array</a></td>
@@ -2777,7 +2777,13 @@
 </tr>
 <tr>
 <td>number/boolean/date</td>
-<td>incompatible</td>
+<td>NIL</td>
+<td><a href="../../types/boolean/">boolean</a></td>
+<td>Returns <a href="../../literals/true/"><code>.T.</code></a>.</td>
+</tr>
+<tr>
+<td>number/boolean/date</td>
+<td>incompatible non-<a href="../../literals/nil/"><code>NIL</code></a></td>
 <td>error</td>
 <td>Raises a runtime invalid-operand error.</td>
 </tr>
@@ -2801,7 +2807,7 @@
 <p class="admonition-title">Don't</p>
 <ul>
 <li>Assume <code>#</code> and <a href="../not-equals/"><code>!=</code></a> behave differently. They are full aliases with identical logic.</li>
-<li>Assume <code>#</code> silently returns <a href="../../literals/true/"><code>.T.</code></a> for any type mismatch. Only a string-on-left path behaves that way; numeric, date, and boolean left operands with incompatible rights raise a runtime error.</li>
+<li>Assume <code>#</code> silently returns <a href="../../literals/true/"><code>.T.</code></a> for any type mismatch. A string on the left, or <a href="../../literals/nil/"><code>NIL</code></a> on the right, returns <a href="../../literals/true/"><code>.T.</code></a>; numeric, date, and boolean left operands with other incompatible rights raise a runtime error.</li>
 <li>Assume <code>#</code> walks array or object contents. It only compares references.</li>
 </ul>
 </div>
@@ -2911,7 +2917,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 23:10:56 UTC">October 7, 2026</span>
   </span>
 
     

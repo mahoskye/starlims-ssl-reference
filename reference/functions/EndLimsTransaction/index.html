@@ -3840,7 +3840,7 @@
 <h1 id="endlimstransaction">EndLimsTransaction<a class="headerlink" href="#endlimstransaction" title="Permanent link">&para;</a></h1>
 <p>Ends a LIMS transaction on the default connection or on a named connection.</p>
 <p>Use <code>EndLimsTransaction</code> to close a transaction scope started with <a href="../BeginLimsTransaction/"><code>BeginLimsTransaction</code></a>. If <code>sConnectionName</code> is omitted or empty, the function uses the default LIMS connection. If <code>bCommit</code> is omitted, it defaults to <a href="../../literals/true/"><code>.T.</code></a>.</p>
-<p>Each call decreases the transaction depth for that connection. On the outermost transaction, <a href="../../literals/true/"><code>.T.</code></a> commits and <a href="../../literals/false/"><code>.F.</code></a> rolls back. If an inner transaction was rolled back, a later outermost commit raises an error instead of committing.</p>
+<p>Each call decreases the transaction depth for that connection. On the outermost transaction, <a href="../../literals/true/"><code>.T.</code></a> commits and <a href="../../literals/false/"><code>.F.</code></a> rolls back. If an inner transaction was rolled back, a later outermost commit raises an error instead of committing. The transaction is still closed: <a href="../GetTransactionsCount/"><code>GetTransactionsCount</code></a> returns <code>0</code> afterwards.</p>
 <p>With no transaction open, <code>EndLimsTransaction</code> returns <a href="../../literals/true/"><code>.T.</code></a> and raises nothing. It also does not check which routine began the open transaction: a helper that calls it without having begun a transaction ends its caller's transaction, and with <code>bCommit</code> omitted, commits it. Track the transactions your code begins with a <code>bStarted</code> flag and end only those.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3901,6 +3901,10 @@
 <tr>
 <td>The database provider cannot close the transaction.</td>
 <td><code>Transaction cannot be ended {message}</code></td>
+</tr>
+<tr>
+<td>An inner transaction was rolled back and the outermost call commits.</td>
+<td><code>Transaction cannot be ended Cannot commit the outermost transaction because one of the inner transactions was rollbacked!</code></td>
 </tr>
 </tbody>
 </table>
@@ -4114,7 +4118,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 23:10:56 UTC">October 7, 2026</span>
   </span>
 
     

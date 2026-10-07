@@ -2947,7 +2947,7 @@
 <ul>
 <li><strong>When <code>vIndex</code> is <a href="../../literals/nil/"><code>NIL</code></a>:</strong> <code>Argument vIndex cannot be null.</code></li>
 <li><strong>When <code>vIndex</code> is not a string or integer:</strong> <code>Argument vIndex is not string nor integer.</code></li>
-<li><strong>When <code>vIndex</code> is an out-of-range integer:</strong> <code>Index [&lt;n&gt;] is out of range (fields count=&lt;count&gt;)</code></li>
+<li><strong>When <code>vIndex</code> is an out-of-range integer:</strong> <code>Index [&lt;n&gt;] is out of range(fileds count=&lt;count&gt;)</code></li>
 <li><strong>When <code>vIndex</code> names a column that does not exist:</strong> <code>Column: [&lt;name&gt;] does not exist.</code></li>
 </ul>
 <h2 id="inheritance">Inheritance<a class="headerlink" href="#inheritance" title="Permanent link">&para;</a></h2>
@@ -2974,7 +2974,8 @@
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>Get()</code> raises an error for invalid names, invalid types, <a href="../../literals/nil/"><code>NIL</code></a>, and out-of-range numeric positions.</li>
-<li>Numeric access is 1-based, but the value reported in out-of-range error messages may not match the index you supplied.</li>
+<li>Numeric access is 1-based, but the out-of-range error message reports the zero-based position, one less than the index you passed: <code>Get(5)</code> on a two-column table reports <code>Index [4]</code>.</li>
+<li><code>GetIndex()</code> here returns a 1-based position, or <code>0</code> for a missing column. <a href="../CDataRow/"><code>CDataRow</code></a>'s <code>GetIndex()</code> differs: it returns a zero-based position, or <code>-1</code>.</li>
 <li><code>Add()</code> and <code>Set()</code> can be called, but they do not modify the collection.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
@@ -3071,7 +3072,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:50:27 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 23:10:56 UTC">October 7, 2026</span>
   </span>
 
     

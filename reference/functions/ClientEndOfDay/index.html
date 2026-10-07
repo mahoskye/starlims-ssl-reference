@@ -4357,7 +4357,7 @@
 
 <h1 id="clientendofday">ClientEndOfDay<a class="headerlink" href="#clientendofday" title="Permanent link">&para;</a></h1>
 <p>Returns the end of the client's calendar day for a date value.</p>
-<p><code>ClientEndOfDay</code> returns a date set to <code>23:59:59.997</code> for the client-local day that contains the supplied value. If the input carries timezone information, the function adjusts between the user and server timezone offsets before calculating that boundary. If the input is an empty date, the function returns it unchanged. If the input does not carry timezone information, the function follows <a href="../ServerEndOfDay/"><code>ServerEndOfDay</code></a> behavior.</p>
+<p><code>ClientEndOfDay</code> returns a date set to <code>23:59:59.997</code> for the client-local day that contains the supplied value. If the input carries timezone information, the function adjusts between the user and server timezone offsets before calculating that boundary. If the input is an empty date, the function returns it unchanged. If the input does not carry timezone information, the function follows <a href="../ServerEndOfDay/"><code>ServerEndOfDay</code></a> behavior. In observed runtime behavior, a value from <a href="../Now/"><code>Now</code></a> carries timezone information, while a date built with <a href="../CToD/"><code>CToD</code></a> does not and always gets the server boundary.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When filtering or reporting through the end of a day as the user experiences that day.</li>
@@ -4476,7 +4476,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GenerateClientDayReport"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"04/23/2026"</span><span class="p">)});</span>
 </code></pre></div>
 <h3 id="compare-client-and-server-end-of-day-cutoffs">Compare client and server end-of-day cutoffs<a class="headerlink" href="#compare-client-and-server-end-of-day-cutoffs" title="Permanent link">&para;</a></h3>
-<p>Computes both the client and server end-of-day for the same input date and reports whether they produce the same cutoff.</p>
+<p>Computes both the client and server end-of-day for the same input value and reports whether they produce the same cutoff. The usage passes <a href="../Now/"><code>Now</code></a>, because a date built with <a href="../CToD/"><code>CToD</code></a> always gives the same cutoff.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareDayCutoffs</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">dEventDate</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">dClientEnd</span><span class="p">,</span><span class="w"> </span><span class="n">dServerEnd</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
@@ -4497,7 +4497,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CompareDayCutoffs"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"04/23/2026"</span><span class="p">)});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CompareDayCutoffs"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">Now</span><span class="p">()});</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs one of:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Client end: &lt;date&gt;, Server end: &lt;date&gt; (same cutoff)
@@ -4531,7 +4531,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 23:10:56 UTC">October 7, 2026</span>
   </span>
 
     

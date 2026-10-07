@@ -2720,9 +2720,9 @@
 <h1 id="strict-equals">== (strict-equals)<a class="headerlink" href="#strict-equals" title="Permanent link">&para;</a></h1>
 <h2 id="what-it-does">What it does<a class="headerlink" href="#what-it-does" title="Permanent link">&para;</a></h2>
 <p>Returns <a href="../../literals/true/"><code>.T.</code></a> when two values are strictly equal under SSL equality rules.</p>
-<p>The <code>==</code> operator uses exact equality for strings, numbers, booleans, and dates. For arrays and objects, it checks whether both operands reference the same instance rather than comparing contents. <code>NIL == NIL</code> returns <a href="../../literals/true/"><code>.T.</code></a>, while <a href="../../literals/nil/"><code>NIL</code></a> compared with a non-<a href="../../literals/nil/"><code>NIL</code></a> value returns <a href="../../literals/false/"><code>.F.</code></a>. Comparing a code block raises a runtime error.</p>
+<p>The <code>==</code> operator uses exact equality for strings, numbers, booleans, and dates. For arrays and objects, it checks whether both operands reference the same instance rather than comparing contents. <code>NIL == NIL</code> returns <a href="../../literals/true/"><code>.T.</code></a>, while <a href="../../literals/nil/"><code>NIL</code></a> compared with a non-<a href="../../literals/nil/"><code>NIL</code></a> value, on either side, returns <a href="../../literals/false/"><code>.F.</code></a>. Comparing a code block raises a runtime error.</p>
 <p>For strings, <code>==</code> requires an exact match - it does not use the prefix matching behavior of <a href="../equals/"><code>equals</code></a>. For example, <code>"Logged" == "Log"</code> returns <a href="../../literals/false/"><code>.F.</code></a>, while <code>"Logged" = "Log"</code> returns <a href="../../literals/true/"><code>.T.</code></a>.</p>
-<p>Type-mismatch behavior depends on the left operand. A string on the left compared with a non-string on the right returns <a href="../../literals/false/"><code>.F.</code></a>. A numeric, boolean, or date value on the left compared with an incompatible right operand raises a runtime invalid-operand error.</p>
+<p>Type-mismatch behavior depends on the left operand. A string on the left compared with a non-string on the right returns <a href="../../literals/false/"><code>.F.</code></a>. A numeric, boolean, or date value on the left compared with <a href="../../literals/nil/"><code>NIL</code></a> returns <a href="../../literals/false/"><code>.F.</code></a>, so a guard such as <code>nValue == NIL</code> is safe. Compared with any other incompatible right operand, it raises a runtime invalid-operand error.</p>
 <h2 id="when-to-use-it">When to use it<a class="headerlink" href="#when-to-use-it" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When exact string equality is required (not prefix matching).</li>
@@ -2799,6 +2799,12 @@
 <td>Returns <a href="../../literals/false/"><code>.F.</code></a>.</td>
 </tr>
 <tr>
+<td>number/boolean/date</td>
+<td><a href="../../literals/nil/"><code>NIL</code></a></td>
+<td><a href="../../types/boolean/">boolean</a></td>
+<td>Returns <a href="../../literals/false/"><code>.F.</code></a>.</td>
+</tr>
+<tr>
 <td>code block</td>
 <td>any</td>
 <td>error</td>
@@ -2830,7 +2836,7 @@
 </div>
 <h2 id="errors-and-edge-cases">Errors and edge cases<a class="headerlink" href="#errors-and-edge-cases" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Code block left operand raises <code>Cannot compare to a code block</code>.</li>
+<li>Code block left operand raises <code>Run-time error: == : Cannot compare to a code block</code>.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="comparing-two-strings-exactly">Comparing two strings exactly<a class="headerlink" href="#comparing-two-strings-exactly" title="Permanent link">&para;</a></h3>
@@ -2944,7 +2950,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 23:10:56 UTC">October 7, 2026</span>
   </span>
 
     

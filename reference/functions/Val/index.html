@@ -3713,7 +3713,7 @@
 
 <h1 id="val">Val<a class="headerlink" href="#val" title="Permanent link">&para;</a></h1>
 <p>Converts numeric text at the start of a string to a number.</p>
-<p><code>Val</code> converts <code>sNumber</code> to a numeric result. It ignores leading whitespace and uses the current STARLIMS decimal and group separator settings when parsing. When <code>Val</code> is operating in its traditional parsing mode, it reads the numeric prefix from left to right and stops when the text stops looking numeric, so a value such as <code>"12.5 mg"</code> returns <code>12.5</code>.</p>
+<p><code>Val</code> converts <code>sNumber</code> to a numeric result. It ignores leading whitespace and uses the current STARLIMS decimal and group separator settings when parsing. When <code>Val</code> is operating in its traditional parsing mode, which is the behavior observed on a default installation, it reads the numeric prefix from left to right and stops when the text stops looking numeric, so a value such as <code>"12.5 mg"</code> returns <code>12.5</code>.</p>
 <p>Passing <a href="../../literals/nil/"><code>NIL</code></a> or a non-string value raises an error. On systems that use strict numeric parsing for <code>Val</code>, invalid numeric text raises the same format error as <a href="../ToNumeric/"><code>ToNumeric</code></a> instead of returning a partial result.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3789,7 +3789,7 @@
 <ul>
 <li>In the traditional parsing mode, a string such as <code>"123ABC"</code> returns <code>123</code> and a string such as <code>"ABC123"</code> returns <code>0</code>.</li>
 <li>Scientific notation with a leading numeric prefix is accepted, such as <code>"2.5e2"</code>.</li>
-<li>Some installations also accept a leading <code>0x</code> or <code>0X</code> hexadecimal value when <code>Val</code> is using its traditional parsing behavior.</li>
+<li>In the traditional parsing mode, a leading <code>0x</code> or <code>0X</code> hexadecimal value is accepted (<code>Val("0x1A")</code> returns <code>26</code>), and so is exponent notation (<code>Val("2.5e2")</code> returns <code>250</code>).</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="convert-a-simple-numeric-string">Convert a simple numeric string<a class="headerlink" href="#convert-a-simple-numeric-string" title="Permanent link">&para;</a></h3>
@@ -3879,7 +3879,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 23:10:56 UTC">October 7, 2026</span>
   </span>
 
     

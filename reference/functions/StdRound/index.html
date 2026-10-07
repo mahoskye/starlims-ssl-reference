@@ -4033,7 +4033,7 @@
 <ul>
 <li>For <code>ISO</code>, the returned string is truncated to 15 characters when it becomes longer than that.</li>
 <li>Pass a whole number for <code>nDigits</code>; fractional values are not supported.</li>
-<li>Unsupported <code>sStandard</code> values are not rejected; the function still returns a formatted string.</li>
+<li>Unsupported <code>sStandard</code> values are not rejected; the function returns the number as an unrounded string. <code>StdRound("XYZ", 2, 12.3456)</code> and <code>StdRound("fda", 2, 12.3456)</code> both return <code>"12.3456"</code>.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="format-one-reported-value-with-the-fda-standard">Format one reported value with the FDA standard<a class="headerlink" href="#format-one-reported-value-with-the-fda-standard" title="Permanent link">&para;</a></h3>
@@ -4057,7 +4057,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FormatReportedValue"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>Reported value: &lt;rounded value&gt;
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Reported value: 12.35
 </code></pre></div>
 <h3 id="compare-fda-epa-and-iso-results">Compare FDA, EPA, and ISO results<a class="headerlink" href="#compare-fda-epa-and-iso-results" title="Permanent link">&para;</a></h3>
 <p>Run the same input through each supported standard so a review script can show the different formatted outputs.</p>
@@ -4087,6 +4087,11 @@
 
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReviewStandardOutputs"</span><span class="p">);</span>
+</code></pre></div>
+<p><a href="../UsrMes/"><code>UsrMes</code></a> logs the following. The <code>ISO</code> result is left-padded to 15 characters:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>FDA: 12.35
+EPA: 12.3
+ISO:           12.35
 </code></pre></div>
 <h3 id="normalize-iso-output-for-export-while-preserving-the-raw-value">Normalize ISO output for export while preserving the raw value<a class="headerlink" href="#normalize-iso-output-for-export-while-preserving-the-raw-value" title="Permanent link">&para;</a></h3>
 <p>Keep the original fixed-width <code>ISO</code> string for export logic, but derive a trimmed display value for logs or UI text.</p>
@@ -4141,7 +4146,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:10:03 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 23:10:56 UTC">October 7, 2026</span>
   </span>
 
     

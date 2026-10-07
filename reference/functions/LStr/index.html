@@ -4262,13 +4262,13 @@
 <ul>
 <li>Use <code>LStr</code> when <a href="../../literals/nil/"><code>NIL</code></a> values must appear as the explicit placeholder <code>"NIL"</code> in UI output, logs, or exports.</li>
 <li>Use <a href="../LTransform/"><code>LTransform</code></a> or <a href="../StrZero/"><code>StrZero</code></a> on the number itself, instead of <code>LStr</code>, when you need padding or fixed decimals.</li>
-<li>Apply <code>LStr</code> when serializing mixed data sources that must never produce empty strings for missing values.</li>
+<li>Apply <code>LStr</code> when serializing mixed data sources where missing (<a href="../../literals/nil/"><code>NIL</code></a>) values must appear as <code>"NIL"</code> rather than as empty strings.</li>
 </ul>
 </div>
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
-<li>Assume the output will be empty or <a href="../../literals/nil/"><code>NIL</code></a>; <code>LStr</code> always returns a non-empty string.</li>
+<li>Assume the output will be <a href="../../literals/nil/"><code>NIL</code></a>; <a href="../../literals/nil/"><code>NIL</code></a> input becomes <code>"NIL"</code>. An empty or all-space string still comes back as <code>""</code>.</li>
 <li>Use <code>LStr</code> when strict output formatting or padding is required — use <a href="../LTransform/"><code>LTransform</code></a> or <a href="../StrZero/"><code>StrZero</code></a> instead.</li>
 <li>Use the result directly in numeric operations; the output is always a string and must be reconverted if a number is needed.</li>
 </ul>
@@ -4397,7 +4397,7 @@ Sample 3: 18.3
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:57:44 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 23:10:56 UTC">October 7, 2026</span>
   </span>
 
     

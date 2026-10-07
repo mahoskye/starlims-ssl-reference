@@ -3775,7 +3775,7 @@
 
 <h1 id="getwebfolder">GetWebFolder<a class="headerlink" href="#getwebfolder" title="Permanent link">&para;</a></h1>
 <p>Returns the current web folder path as a string.</p>
-<p><code>GetWebFolder</code> takes no parameters and returns the web folder path exposed by the current application context. The function does not validate the path, check whether the folder exists, or normalize the returned string for you.</p>
+<p><code>GetWebFolder</code> takes no parameters and returns the web folder path exposed by the current application context. The returned path ends with a backslash. The function does not validate the path or check whether the folder exists.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need the configured web-root path instead of hard-coding one.</li>
@@ -3788,14 +3788,14 @@
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <p>This function takes no parameters.</p>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
-<p><strong><a href="../../types/string/">string</a></strong> — The current web folder path.</p>
+<p><strong><a href="../../types/string/">string</a></strong> — The current web folder path, ending with a backslash.</p>
 <h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <div class="admonition success">
 <p class="admonition-title">Do</p>
 <ul>
 <li>Use <code>GetWebFolder</code> when you need the configured web-root path rather than a hard-coded location.</li>
 <li>Verify the returned value before using it in later file operations.</li>
-<li>Normalize path separators in your own code if you need to append relative paths safely.</li>
+<li>Append relative paths directly, because the returned path already ends with a backslash.</li>
 </ul>
 </div>
 <div class="admonition failure">
@@ -3808,7 +3808,7 @@
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Any separator handling or path normalization must be done by the caller.</li>
+<li>The returned path already ends with a backslash, so adding another separator before a relative path produces a doubled backslash.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="show-the-configured-web-folder">Show the configured web folder<a class="headerlink" href="#show-the-configured-web-folder" title="Permanent link">&para;</a></h3>
@@ -3832,9 +3832,9 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowWebFolder"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="build-a-file-path-under-the-web-folder">Build a file path under the web folder<a class="headerlink" href="#build-a-file-path-under-the-web-folder" title="Permanent link">&para;</a></h3>
-<p>Check the returned folder value, add a separator only when needed, and then append a relative asset path.</p>
+<p>Check the returned folder value, then append a relative asset path. The folder already ends with a backslash, so no separator is added.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetAssetPath</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWebFolder</span><span class="p">,</span><span class="w"> </span><span class="n">sLastChar</span><span class="p">,</span><span class="w"> </span><span class="n">sSeparator</span><span class="p">,</span><span class="w"> </span><span class="n">sAssetPath</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWebFolder</span><span class="p">,</span><span class="w"> </span><span class="n">sAssetPath</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sWebFolder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetWebFolder</span><span class="p">();</span>
 
@@ -3843,14 +3843,7 @@
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sLastChar</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sWebFolder</span><span class="p">[</span><span class="nf">Len</span><span class="p">(</span><span class="n">sWebFolder</span><span class="p">)];</span>
-<span class="w">    </span><span class="n">sSeparator</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="p">(</span><span class="n">sLastChar</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="s2">"/\"</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sSeparator</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"\"</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-
-<span class="w">    </span><span class="n">sAssetPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sWebFolder</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSeparator</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"assets\report_template.html"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sAssetPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sWebFolder</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"assets\report_template.html"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sAssetPath</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -3861,8 +3854,7 @@
 <h3 id="choose-the-correct-root-for-published-output">Choose the correct root for published output<a class="headerlink" href="#choose-the-correct-root-for-published-output" title="Permanent link">&para;</a></h3>
 <p>Compare the web folder with other folder helpers so published output goes under the web root and not under the work or log folders.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ResolvePublishedOutputPath</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWebFolder</span><span class="p">,</span><span class="w"> </span><span class="n">sWorkFolder</span><span class="p">,</span><span class="w"> </span><span class="n">sLogsFolder</span><span class="p">,</span><span class="w"> </span><span class="n">sLastChar</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSeparator</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWebFolder</span><span class="p">,</span><span class="w"> </span><span class="n">sWorkFolder</span><span class="p">,</span><span class="w"> </span><span class="n">sLogsFolder</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sWebFolder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetWebFolder</span><span class="p">();</span>
 <span class="w">    </span><span class="n">sWorkFolder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetAppWorkPathFolder</span><span class="p">();</span>
@@ -3877,14 +3869,7 @@
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Configuration"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Review folder configuration before publishing files"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sLastChar</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sWebFolder</span><span class="p">[</span><span class="nf">Len</span><span class="p">(</span><span class="n">sWebFolder</span><span class="p">)];</span>
-<span class="w">    </span><span class="n">sSeparator</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="err">!</span><span class="p">(</span><span class="n">sLastChar</span><span class="w"> </span><span class="o">$</span><span class="w"> </span><span class="s2">"/\"</span><span class="p">);</span>
-<span class="w">        </span><span class="n">sSeparator</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"\"</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-
-<span class="w">    </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sWebFolder</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sSeparator</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"downloads\daily-report.txt"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sWebFolder</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"downloads\daily-report.txt"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -3919,7 +3904,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:59:27 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 23:10:56 UTC">October 7, 2026</span>
   </span>
 
     

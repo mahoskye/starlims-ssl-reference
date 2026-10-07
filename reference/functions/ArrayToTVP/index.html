@@ -4399,8 +4399,10 @@ target database from <code>sConnectionName</code> when that argument is a string
 <li>Only the first element is checked for nesting. A nested array later in the
   list does not raise the one-dimensional error; it fails the element-type
   checks instead.</li>
-<li>This function only creates the TVP object. How that object is bound to a
-  query or procedure depends on the database call that receives it.</li>
+<li>This function only creates the TVP object. To use it, pass it as the value
+  for a positional <code>?</code> placeholder that the query reads as a table. For
+  example, <code>LSelect("SELECT COUNT(*) FROM ? t",,, {ArrayToTVP({1, 2, 3}, "INT")})</code>
+  returns <code>{{3}}</code> on SQL Server.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="create-an-integer-tvp">Create an integer TVP<a class="headerlink" href="#create-an-integer-tvp" title="Permanent link">&para;</a></h3>
@@ -4470,6 +4472,7 @@ target database from <code>sConnectionName</code> when that argument is a string
 <li><a href="../ArrayNew/"><code>ArrayNew</code></a></li>
 <li><a href="../BuildArray/"><code>BuildArray</code></a></li>
 <li><a href="../BuildArray2/"><code>BuildArray2</code></a></li>
+<li><a href="../LSelect/"><code>LSelect</code></a></li>
 <li><a href="../SQLExecute/"><code>SQLExecute</code></a></li>
 <li><a href="../../types/array/"><code>array</code></a></li>
 <li><a href="../../types/object/"><code>object</code></a></li>
@@ -4494,7 +4497,7 @@ target database from <code>sConnectionName</code> when that argument is a string
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:50:27 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 23:10:56 UTC">October 7, 2026</span>
   </span>
 
     

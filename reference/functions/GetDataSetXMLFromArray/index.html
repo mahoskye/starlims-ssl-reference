@@ -3869,7 +3869,7 @@
 <p>Generates dataset XML from in-memory values, field definitions, and output flags.</p>
 <p><code>GetDataSetXMLFromArray</code> converts array data into an XML dataset string. You can control the table name, whether the XML output includes header information, and whether schema metadata is emitted. The function requires <code>aArrayOfValues</code>; when that argument is <a href="../../literals/nil/"><code>NIL</code></a>, it raises an error before any XML is built.</p>
 <p>With the header enabled, the XML starts with the declaration <code>&lt;?xml version="1.0" standalone="yes" ?&gt;</code>. The data follows as an indented <code>&lt;DataSet&gt;</code> root element that holds one element per row, named after <code>sTableName</code>, with one child element per field.</p>
-<p>Unlike <a href="../GetDataSetFromArrayEx/"><code>GetDataSetFromArrayEx</code></a>, this function does not generate default field names (<code>Field1</code>, <code>Field2</code>, ...) when <code>aArrayFields</code> is omitted. Use it when you want direct control over the XML-oriented form.</p>
+<p>Unlike <a href="../GetDataSetFromArrayEx/"><code>GetDataSetFromArrayEx</code></a>, this function does not generate default field names (<code>Field1</code>, <code>Field2</code>, ...): when <code>aArrayFields</code> is omitted, the call raises an error, and when it is an empty array, the function returns an empty string. Use it when you want direct control over the XML-oriented form.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When another system needs dataset XML rather than an <a href="../../classes/SSLDataset/"><code>SSLDataset</code></a> object.</li>
@@ -3905,7 +3905,7 @@
 <td><a href="../../types/array/">array</a></td>
 <td>no</td>
 <td><a href="../../literals/nil/"><code>NIL</code></a></td>
-<td>Field definitions for the output columns. Each element may be a field name string or a definition array such as <code>{"sample_id", "S", 20}</code> or <code>{"result_value", "N", 10, 2}</code>.</td>
+<td>Field definitions for the output columns. Each element may be a field name string or a definition array such as <code>{"sample_id", "S", 20}</code> or <code>{"result_value", "N", 10, 2}</code>. Omitting it raises an error; an empty array returns an empty string.</td>
 </tr>
 <tr>
 <td><code>sTableName</code></td>
@@ -3944,6 +3944,10 @@
 <tr>
 <td><code>aArrayOfValues</code> is <a href="../../literals/nil/"><code>NIL</code></a>.</td>
 <td><code>The values array parameter is null</code></td>
+</tr>
+<tr>
+<td><code>aArrayFields</code> is omitted.</td>
+<td><code>Object reference not set to an instance of an object.</code></td>
 </tr>
 <tr>
 <td>A value cannot be stored in its field's declared type, such as text in a <code>D</code> (date) field. <code>{message}</code> is the .NET conversion error.</td>
@@ -4128,7 +4132,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:59:27 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 23:10:56 UTC">October 7, 2026</span>
   </span>
 
     
