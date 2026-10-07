@@ -61,9 +61,9 @@ DocStartWorkflow(sWorkflowId, [aDocumentIds], [sPackageName])
     - Pass `aDocumentIds` as an array, even when you are attaching only one document.
     - Read the returned values with SSL's 1-based indexing: `aWorkflowInfo[1]` for the workflow ID and `aWorkflowInfo[2]` for performers.
     - Omit `sPackageName` when the default package name is acceptable.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
-    - Document or code against zero-based positions such as index `0`. SSL arrays are 1-based.
     - Assume `aDocumentIds` is always optional. Some workflows require at least one document at startup.
     - Assume `aWorkflowInfo[2]` always contains a populated performer array. Check the returned value before iterating it.
 
@@ -76,7 +76,7 @@ DocStartWorkflow(sWorkflowId, [aDocumentIds], [sPackageName])
 
 ### Start a workflow without documents
 
-Starts a simple workflow by ID without document attachments and logs the created workflow instance ID.
+Starts a simple workflow by ID without document attachments and logs the created workflow instance ID. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE StartSimpleWorkflow;
@@ -98,12 +98,12 @@ DoProc("StartSimpleWorkflow");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Started workflow [created workflow ID]
+Started workflow <created workflow ID>
 ```
 
 ### Start a workflow with attached documents
 
-Passes a document ID array and a package name when starting, then reads the performer list from `aWorkflowInfo[2]` and lists each assigned performer.
+Passes a document ID array and a package name when starting, then reads the performer list from `aWorkflowInfo[2]` and lists each assigned performer. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE StartWorkflowWithDocuments;
@@ -132,7 +132,7 @@ DoProc("StartWorkflowWithDocuments");
 
 ### Start a workflow with error handling
 
-Wraps the start call in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) to handle workflow exceptions, using [`GetLastSSLError`](GetLastSSLError.md) to extract the error description on failure.
+Wraps the start call in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) to handle workflow exceptions, using [`GetLastSSLError`](GetLastSSLError.md) to extract the error description on failure. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE StartWorkflowSafe;
@@ -162,5 +162,7 @@ DoProc("StartWorkflowSafe", {"QCReview", {"0900000180001234"}});
 
 - [`DocGetTasks`](DocGetTasks.md)
 - [`DocStopWorkflow`](DocStopWorkflow.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`string`](../types/string.md)
 - [`array`](../types/array.md)

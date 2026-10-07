@@ -13,7 +13,7 @@ starlims:
 
 Deletes a Documentum user by login name.
 
-`DocDeleteUser` accepts one required string argument, `sLoginName`. If `sLoginName` is [`NIL`](../literals/nil.md), the function raises an error before attempting the deletion. When the delete call completes successfully, the function returns [`.T.`](../literals/true.md). If the delete path does not return a value, the function returns [`.F.`](../literals/false.md).
+`DocDeleteUser` accepts one required string argument, `sLoginName`. If `sLoginName` is [`NIL`](../literals/nil.md), the function raises an error before attempting the deletion. When the delete completes successfully, the function returns [`.T.`](../literals/true.md). It returns [`.F.`](../literals/false.md) when Documentum does not confirm the delete. A user that does not exist raises an error instead (see [Exceptions](#exceptions)).
 
 ## When to use
 
@@ -35,13 +35,14 @@ DocDeleteUser(sLoginName)
 
 ## Returns
 
-**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the delete completes successfully. [`.F.`](../literals/false.md) only when the delete path does not return a value.
+**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the delete completes successfully. [`.F.`](../literals/false.md) when Documentum does not confirm the delete. A missing user raises instead (see [Exceptions](#exceptions)).
 
 ## Exceptions
 
 | Trigger | Exception message |
 | --- | --- |
 | `sLoginName` is [`NIL`](../literals/nil.md). | `sLoginName argument cannot be null` |
+| The user does not exist in Documentum. | `Failed: Object does not exist` |
 
 ## Best practices
 
@@ -49,6 +50,7 @@ DocDeleteUser(sLoginName)
     - Pass a real login name, not [`NIL`](../literals/nil.md) or an unvalidated value.
     - Check the boolean return value before reporting success.
     - Use [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) when the user may already be missing or the delete must be reported clearly.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `sLoginName`; the function raises an error before it attempts deletion.
@@ -57,13 +59,13 @@ DocDeleteUser(sLoginName)
 
 ## Caveats
 
-- When the target user does not exist in Documentum, the backend raises `Failed: Object does not exist` rather than returning [`.F.`](../literals/false.md). Use [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) to handle this case.
+- When the target user does not exist in Documentum, the call raises `Failed: Object does not exist` rather than returning [`.F.`](../literals/false.md). Use [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) to handle this case.
 
 ## Examples
 
 ### Delete one user by login name and check the result
 
-Calls `DocDeleteUser` with a hardcoded login name and logs a success or failure message based on the boolean return value.
+Calls `DocDeleteUser` with a hardcoded login name and logs a success or failure message based on the boolean return value. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE DeleteDocUser;
@@ -85,7 +87,7 @@ DoProc("DeleteDocUser");
 
 ### Validate input and catch errors such as a missing user
 
-Validates that `sLoginName` is non-empty before calling the function, then wraps the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) to handle the `Failed: Object does not exist` exception that the backend raises when the user is not found.
+Validates that `sLoginName` is non-empty before calling the function, then wraps the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) to handle the `Failed: Object does not exist` exception that is raised when the user is not found. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE DeleteDocUserSafe;
@@ -109,13 +111,8 @@ Validates that `sLoginName` is non-empty before calling the function, then wraps
         :RETURN bDeleted;
     :CATCH;
         oErr := GetLastSSLError();
-
-        :IF Empty(oErr);
-            ErrorMes("DocDeleteUser failed for " + sLoginName);
-        :ELSE;
-            ErrorMes("DocDeleteUser failed: " + oErr:Description);
-            /* Logs on failure with backend details;
-        :ENDIF;
+        ErrorMes("DocDeleteUser failed: " + oErr:Description);
+        /* Logs on failure with the error details;
 
         :RETURN .F.;
     :ENDTRY;
@@ -130,6 +127,8 @@ DoProc("DeleteDocUserSafe", {"jsmith"});
 - [`DocCreateUser`](DocCreateUser.md)
 - [`DocExistsUser`](DocExistsUser.md)
 - [`DocUpdateUser`](DocUpdateUser.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`GetLastSSLError`](GetLastSSLError.md)
 - [`boolean`](../types/boolean.md)
 - [`string`](../types/string.md)

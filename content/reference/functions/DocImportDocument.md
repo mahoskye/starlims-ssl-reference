@@ -15,9 +15,9 @@ Imports a document into Documentum and returns the underlying import result as a
 
 `DocImportDocument` sends the source file path and destination path to the Documentum import operation. You can also supply a document name, document type, application code, and ACL name when that metadata should be part of the import.
 
-Only `sDocFile` and `sDestinationPath` are null-validated by this function. When `sDocName`, `sDocType`, `sAppCode`, or `sAclName` are omitted, the call forwards them as omitted values to the Documentum import operation.
+Only `sDocFile` and `sDestinationPath` are required, and passing [`NIL`](../literals/nil.md) for either raises. Omit `sDocName`, `sDocType`, `sAppCode`, and `sAclName` when the import does not need them.
 
-The function runs inside the current Documentum interface context. When the underlying import operation throws, the Documentum helper records the failure in that context and this function returns `""`.
+The function runs inside the current Documentum interface context. If the import fails, the function returns `""`, [`DocCommandFailed`](DocCommandFailed.md) returns [`.T.`](../literals/true.md), and [`DocGetErrorMessage`](DocGetErrorMessage.md) gives the reason.
 
 ## When to use
 
@@ -77,7 +77,7 @@ DocImportDocument(
 ## Caveats
 
 - The exact content or format of the success string is not defined here.
-- The Documentum helper clears the current failure state before the import runs. If the import throws, it stores that exception and the function returns `""`.
+- Each call clears the previous Documentum failure state first. If the import fails, the new failure is recorded and the function returns `""`.
 
 ## Examples
 
@@ -120,7 +120,7 @@ DoProc("ImportDocumentBasic");
 
 ### Import with metadata and ACL
 
-Imports a typed document with all six metadata fields, showing how to supply name, type, application code, and ACL alongside the required source and destination paths.
+Imports a typed document with all six arguments: the required source and destination paths plus name, type, application code, and ACL.
 
 ```ssl
 :PROCEDURE ImportTypedDocument;

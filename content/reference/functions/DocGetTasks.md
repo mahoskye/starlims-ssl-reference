@@ -62,6 +62,7 @@ DocGetTasks(sWorkflowId)
     - Access each task row by its documented 1-based positions such as `aTasks[nIndex, 3]` for the task name or `aTasks[nIndex, 9]` for the workflow ID.
     - Check [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) when `ALen(aTasks) == 0` and you need to know whether the empty result came from a failure.
     - Pass a non-empty `sWorkflowId` when you want one workflow only, because [`NIL`](../literals/nil.md) and `""` remove the filter and return all available tasks.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Treat each result row as an object with named properties. Each task is returned as an array row.
@@ -76,7 +77,7 @@ DocGetTasks(sWorkflowId)
 
 ### List task names for one workflow
 
-Queries Documentum for all tasks matching a specific workflow ID and prints each task name, exiting early when the result is empty.
+Queries Documentum for all tasks matching a specific workflow ID and prints each task name, exiting early when the result is empty. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ListWorkflowTasks;
@@ -106,7 +107,7 @@ DoProc("ListWorkflowTasks");
 
 ### Detect lookup failures when filtering by workflow
 
-Calls `DocGetTasks` with a workflow ID and distinguishes a backend failure (empty result with [`DocCommandFailed`](DocCommandFailed.md) set) from a workflow that genuinely has no tasks, returning an empty array with an error message only on failure.
+Calls `DocGetTasks` with a workflow ID and distinguishes a backend failure (empty result with [`DocCommandFailed`](DocCommandFailed.md) set) from a workflow that genuinely has no tasks, returning an empty array with an error message only on failure. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE GetWorkflowTasksSafe;
@@ -132,13 +133,13 @@ DoProc("GetWorkflowTasksSafe", {"WF-100245"});
 
 ### Group all available tasks by workflow title
 
-Fetches all inbox tasks by passing [`NIL`](../literals/nil.md) as the filter, then counts how many tasks belong to each distinct workflow title and returns a summary array of `{title, count}` pairs.
+Fetches all inbox tasks by passing `""` as the filter, then counts how many tasks belong to each distinct workflow title and returns a summary array of `{title, count}` pairs. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE SummarizeInboxTasksByWorkflow;
     :DECLARE aTasks, aSummary, sWorkflowTitle, nPos, nIndex;
 
-    aTasks := DocGetTasks(NIL);
+    aTasks := DocGetTasks("");
     aSummary := {};
 
     :IF ALen(aTasks) == 0 .AND. DocCommandFailed();
@@ -172,6 +173,8 @@ DoProc("SummarizeInboxTasksByWorkflow");
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
 - [`DocGetTasksCount`](DocGetTasksCount.md)
 - [`DocStartWorkflow`](DocStartWorkflow.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`array`](../types/array.md)
 - [`date`](../types/date.md)
 - [`number`](../types/number.md)

@@ -37,7 +37,7 @@ DocGetMetadata(sObjId, [sAttributes])
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `sObjId` | [string](../types/string.md) | yes | — | Object ID or object path to query. Passing [`NIL`](../literals/nil.md) raises an exception. |
-| `sAttributes` | [string](../types/string.md) | no | omitted | Comma-separated attribute list to request. Omit it, or pass [`NIL`](../literals/nil.md), to request all attributes. |
+| `sAttributes` | [string](../types/string.md) | no | omitted | Comma-separated attribute list to request. Omit it, or pass [`NIL`](../literals/nil.md) or `""`, to request all attributes. |
 
 ## Returns
 
@@ -61,7 +61,7 @@ DocGetMetadata(sObjId, [sAttributes])
 ## Best practices
 
 !!! success "Do"
-    - Initialize the Documentum interface before calling `DocGetMetadata` in workflows that use the Documentum API.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
     - Treat each result row as a fixed-position array and read values by their documented 1-based positions.
     - Omit `sAttributes` when you want the full metadata set.
     - Check [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) immediately after an empty result when you need to know whether the call failed.
@@ -75,14 +75,14 @@ DocGetMetadata(sObjId, [sAttributes])
 ## Caveats
 
 - Only [`NIL`](../literals/nil.md) is rejected for `sObjId`. Blank or invalid identifiers are passed through to the Documentum layer.
-- When `sAttributes` is [`NIL`](../literals/nil.md) or blank, the backend requests the full attribute list for the object's type.
+- When `sAttributes` is omitted, [`NIL`](../literals/nil.md), or `""`, all attributes for the object's type are returned.
 - `row[4]` is a numeric type code, not a descriptive type name.
 
 ## Examples
 
 ### List all metadata name and value pairs
 
-Requests all metadata for a document, checks [`DocCommandFailed`](DocCommandFailed.md) on an empty result to distinguish a backend failure from an object with no attributes, and prints each name-value pair.
+Requests all metadata for a document, checks [`DocCommandFailed`](DocCommandFailed.md) on an empty result to distinguish a backend failure from an object with no attributes, and prints each name-value pair. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ListDocumentMetadata;
@@ -90,35 +90,29 @@ Requests all metadata for a document, checks [`DocCommandFailed`](DocCommandFail
 
 	sObjId := "0900000180001234";
 
-	DocInitDocumentumInterface();
+	aMetadata := DocGetMetadata(sObjId);
+	nCount := ALen(aMetadata);
 
-	:TRY;
-		aMetadata := DocGetMetadata(sObjId);
-		nCount := ALen(aMetadata);
-
-		:IF nCount == 0;
-			:IF DocCommandFailed();
-				UsrMes("Metadata lookup failed: " + DocGetErrorMessage());
-				/* Logs on command failure;
-			:ELSE;
-				UsrMes("No metadata returned for " + sObjId);
-				/* Logs when metadata is empty;
-			:ENDIF;
-
-			:RETURN aMetadata;
+	:IF nCount == 0;
+		:IF DocCommandFailed();
+			UsrMes("Metadata lookup failed: " + DocGetErrorMessage());
+			/* Logs on command failure;
+		:ELSE;
+			UsrMes("No metadata returned for " + sObjId);
+			/* Logs when metadata is empty;
 		:ENDIF;
 
-		:FOR nIndex := 1 :TO nCount;
-			sLine := aMetadata[nIndex, 1] + " = "
-					 + LimsString(aMetadata[nIndex, 2]);
-			UsrMes(sLine);
-			/* Logs each attribute name and value;
-		:NEXT;
-
 		:RETURN aMetadata;
-	:FINALLY;
-		DocEndDocumentumInterface();
-	:ENDTRY;
+	:ENDIF;
+
+	:FOR nIndex := 1 :TO nCount;
+		sLine := aMetadata[nIndex, 1] + " = "
+				 + LimsString(aMetadata[nIndex, 2]);
+		UsrMes(sLine);
+		/* Logs each attribute name and value;
+	:NEXT;
+
+	:RETURN aMetadata;
 :ENDPROC;
 
 /* Usage;
@@ -127,7 +121,7 @@ DoProc("ListDocumentMetadata");
 
 ### Request a specific attribute subset
 
-Passes a comma-separated attribute list to restrict the result to two fields, then reads each row's attribute name to extract the `author` and `r_creation_date` values.
+Passes a comma-separated attribute list to restrict the result to two fields, then reads each row's attribute name to extract the `author` and `r_creation_date` values. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE GetSelectedMetadata;
@@ -138,34 +132,28 @@ Passes a comma-separated attribute list to restrict the result to two fields, th
 	sAuthor := "";
 	sCreatedOn := "";
 
-	DocInitDocumentumInterface();
+	aMetadata := DocGetMetadata(sObjId, sAttrs);
 
-	:TRY;
-		aMetadata := DocGetMetadata(sObjId, sAttrs);
+	:IF ALen(aMetadata) == 0;
+		:RETURN aMetadata;
+	:ENDIF;
 
-		:IF ALen(aMetadata) == 0;
-			:RETURN aMetadata;
+	:FOR nIndex := 1 :TO ALen(aMetadata);
+		:IF Upper(aMetadata[nIndex, 1]) == "AUTHOR";
+			sAuthor := LimsString(aMetadata[nIndex, 2]);
 		:ENDIF;
 
-		:FOR nIndex := 1 :TO ALen(aMetadata);
-			:IF Upper(aMetadata[nIndex, 1]) == "AUTHOR";
-				sAuthor := LimsString(aMetadata[nIndex, 2]);
-			:ENDIF;
+		:IF Upper(aMetadata[nIndex, 1]) == "R_CREATION_DATE";
+			sCreatedOn := LimsString(aMetadata[nIndex, 2]);
+		:ENDIF;
+	:NEXT;
 
-			:IF Upper(aMetadata[nIndex, 1]) == "R_CREATION_DATE";
-				sCreatedOn := LimsString(aMetadata[nIndex, 2]);
-			:ENDIF;
-		:NEXT;
+	UsrMes("Author: " + sAuthor);
+	/* Logs the selected author;
+	UsrMes("Created: " + sCreatedOn);
+	/* Logs the creation date;
 
-		UsrMes("Author: " + sAuthor);
-		/* Logs the selected author;
-		UsrMes("Created: " + sCreatedOn);
-		/* Logs the creation date;
-
-		:RETURN aMetadata;
-	:FINALLY;
-		DocEndDocumentumInterface();
-	:ENDTRY;
+	:RETURN aMetadata;
 :ENDPROC;
 
 /* Usage;
@@ -174,7 +162,7 @@ DoProc("GetSelectedMetadata");
 
 ### Audit attribute definitions in the returned rows
 
-Fetches all metadata, counts how many attributes are repeating and how many have a declared length greater than 255, and logs a summary line using the type-code and length columns.
+Fetches all metadata, counts how many attributes are repeating and how many have a declared length greater than 255, and logs a summary line using the length and repeating-flag columns. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE AuditMetadataShape;
@@ -184,35 +172,29 @@ Fetches all metadata, counts how many attributes are repeating and how many have
 	nRepeating := 0;
 	nLongFields := 0;
 
-	DocInitDocumentumInterface();
+	aMetadata := DocGetMetadata(sObjId);
 
-	:TRY;
-		aMetadata := DocGetMetadata(sObjId);
+	:IF ALen(aMetadata) == 0;
+		:RETURN aMetadata;
+	:ENDIF;
 
-		:IF ALen(aMetadata) == 0;
-			:RETURN aMetadata;
+	:FOR nIndex := 1 :TO ALen(aMetadata);
+		:IF aMetadata[nIndex, 6];
+			nRepeating += 1;
 		:ENDIF;
 
-		:FOR nIndex := 1 :TO ALen(aMetadata);
-			:IF aMetadata[nIndex, 6];
-				nRepeating += 1;
-			:ENDIF;
+		:IF aMetadata[nIndex, 5] > 255;
+			nLongFields += 1;
+		:ENDIF;
+	:NEXT;
 
-			:IF aMetadata[nIndex, 5] > 255;
-				nLongFields += 1;
-			:ENDIF;
-		:NEXT;
+	sSummary := "Attributes: " + LimsString(ALen(aMetadata))
+				+ ", repeating: " + LimsString(nRepeating)
+				+ ", length > 255: " + LimsString(nLongFields);
+	UsrMes(sSummary);
+	/* Logs attribute summary counts;
 
-		sSummary := "Attributes: " + LimsString(ALen(aMetadata))
-					+ ", repeating: " + LimsString(nRepeating)
-					+ ", length > 255: " + LimsString(nLongFields);
-		UsrMes(sSummary);
-		/* Logs attribute summary counts;
-
-		:RETURN aMetadata;
-	:FINALLY;
-		DocEndDocumentumInterface();
-	:ENDTRY;
+	:RETURN aMetadata;
 :ENDPROC;
 
 /* Usage;
@@ -226,6 +208,7 @@ DoProc("AuditMetadataShape", {"0900000180001234"});
 - [`DocGetTypeAttributes`](DocGetTypeAttributes.md)
 - [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
 - [`DocSetMetadata`](DocSetMetadata.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`array`](../types/array.md)
 - [`string`](../types/string.md)
 - [`number`](../types/number.md)

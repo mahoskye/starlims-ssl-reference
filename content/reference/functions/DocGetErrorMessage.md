@@ -51,7 +51,7 @@ This function takes no parameters.
 
 ## Caveats
 
-- Documentum login and command execution paths clear the stored exception before they run, then replace it only if an error occurs.
+- Each Documentum login or command clears the stored error before it runs and records a new one only if it fails.
 - The returned text comes from the underlying exception message and may vary by environment or failure type.
 
 ## Examples
@@ -87,7 +87,7 @@ Stores the error message immediately after a failed import so the value is prese
 
 ```ssl
 :PROCEDURE ImportWithLoggedError;
-	:DECLARE sDocId, sErrMsg;
+	:DECLARE sImportResult, sErrMsg;
 
 	DocInitDocumentumInterface();
 
@@ -98,13 +98,11 @@ Stores the error message immediately after a failed import so the value is prese
 			:RETURN;
 		:ENDIF;
 
-		sDocId := DocImportDocument(
+		sImportResult := DocImportDocument(
 			"C:\Docs\Result.pdf",
 			"/Standard/Reports/2024",
 			"Result.pdf",
-			"PDF",
-			"",
-			""
+			"PDF"
 		);
 
 		:IF DocCommandFailed();
@@ -114,8 +112,8 @@ Stores the error message immediately after a failed import so the value is prese
 			:RETURN;
 		:ENDIF;
 
-		UsrMes("Imported document ID: " + sDocId);
-		/* Logs imported document ID;
+		UsrMes("Import completed: " + sImportResult);
+		/* Logs the import result;
 	:FINALLY;
 		DocEndDocumentumInterface();
 	:ENDTRY;
@@ -145,7 +143,7 @@ Encapsulates the [`DocCommandFailed`](DocCommandFailed.md) flag and `DocGetError
 :ENDPROC;
 
 :PROCEDURE ImportDocumentWithStatus;
-	:DECLARE oStatus, sDocId;
+	:DECLARE oStatus, sImportResult;
 
 	DocInitDocumentumInterface();
 
@@ -155,13 +153,11 @@ Encapsulates the [`DocCommandFailed`](DocCommandFailed.md) flag and `DocGetError
 			:RETURN;
 		:ENDIF;
 
-		sDocId := DocImportDocument(
+		sImportResult := DocImportDocument(
 			"C:\Docs\Result.pdf",
 			"/Standard/Reports/2024",
 			"Result.pdf",
-			"PDF",
-			"",
-			""
+			"PDF"
 		);
 
 		oStatus := DoProc("ReadImportStatus");
@@ -170,8 +166,8 @@ Encapsulates the [`DocCommandFailed`](DocCommandFailed.md) flag and `DocGetError
 			ErrorMes("Import failed: " + oStatus:errorMessage);
 			/* Logs import failure details;
 		:ELSE;
-			UsrMes("Imported document ID: " + sDocId);
-			/* Logs imported document ID;
+			UsrMes("Import completed: " + sImportResult);
+			/* Logs the import result;
 		:ENDIF;
 	:FINALLY;
 		DocEndDocumentumInterface();

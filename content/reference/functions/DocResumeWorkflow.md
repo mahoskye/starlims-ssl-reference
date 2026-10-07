@@ -49,6 +49,7 @@ DocResumeWorkflow(sWorkflowId)
     - Validate that `sWorkflowId` is assigned before calling the function.
     - Check the boolean return value and handle [`.F.`](../literals/false.md) explicitly in your workflow logic.
     - Use [`DocGetWorkflowStatus`](DocGetWorkflowStatus.md) or surrounding workflow context when you only want to resume workflows in a known state.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `sWorkflowId`. The function raises an error before attempting the resume.
@@ -57,13 +58,13 @@ DocResumeWorkflow(sWorkflowId)
 
 ## Caveats
 
-- A [`.F.`](../literals/false.md) result indicates that the resume request did not succeed, but the function does not return a separate failure message.
+- A [`.F.`](../literals/false.md) result indicates that the resume request did not succeed. Check [`DocCommandFailed`](DocCommandFailed.md) and read [`DocGetErrorMessage`](DocGetErrorMessage.md) immediately for the reason.
 
 ## Examples
 
 ### Resume one workflow by ID
 
-Fetches a workflow by ID, branches on the boolean result to build an outcome message, and returns the boolean to the caller.
+Resumes a workflow by ID, branches on the boolean result to build an outcome message, and returns the boolean to the caller. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ResumeWorkflowBasic;
@@ -97,7 +98,7 @@ On failure: `Workflow WF-2024-0042 could not be resumed`
 
 ### Resume only when the workflow is paused
 
-Checks the current workflow status with [`DocGetWorkflowStatus`](DocGetWorkflowStatus.md) before calling `DocResumeWorkflow`, so the resume is only attempted when the workflow is in the `"Paused"` state.
+Checks the current workflow status with [`DocGetWorkflowStatus`](DocGetWorkflowStatus.md) before calling `DocResumeWorkflow`, so the resume is only attempted when the workflow is in the `"Paused"` state. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ResumePausedWorkflowOnly;
@@ -131,7 +132,7 @@ DoProc("ResumePausedWorkflowOnly", {"WF-2024-0042"});
 
 ### Resume multiple workflows and collect results
 
-Iterates a list of workflow IDs, skips empty entries, and collects each resume outcome into a summary object, then logs a single count line for resumed, failed, and skipped workflows.
+Iterates a list of workflow IDs, skips empty entries, and collects each resume outcome into a summary object, then logs a single count line for resumed, failed, and skipped workflows. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ResumeWorkflowBatch;
@@ -183,5 +184,6 @@ DoProc("ResumeWorkflowBatch", {{"WF-2024-0042", "WF-2024-0043"}});
 - [`DocCommandFailed`](DocCommandFailed.md)
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
 - [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`boolean`](../types/boolean.md)
 - [`string`](../types/string.md)

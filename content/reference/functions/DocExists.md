@@ -15,7 +15,7 @@ Checks whether a Documentum document exists for a given object ID.
 
 `DocExists(sObjId)` returns [`.T.`](../literals/true.md) when the specified document exists and [`.F.`](../literals/false.md) when the check returns no success value. Passing [`NIL`](../literals/nil.md) for `sObjId` raises an argument error before the Documentum call is attempted.
 
-The function uses the current Documentum session context. Initialize that context with [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md) before calling `DocExists`.
+The function uses the current Documentum session context. Initialize that context with [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md) and log in with [`DocLoginToDocumentum`](DocLoginToDocumentum.md) before calling `DocExists`.
 
 If the Documentum lookup fails, `DocExists` still returns [`.F.`](../literals/false.md). When you need to distinguish "not found" from "Documentum command failed," check [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) immediately after the call.
 
@@ -52,7 +52,7 @@ DocExists(sObjId)
 
 !!! success "Do"
     - Validate that `sObjId` is populated before calling the function.
-    - Initialize the Documentum interface with [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md) before using `DocExists`.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
     - Check [`DocCommandFailed`](DocCommandFailed.md) right after a [`.F.`](../literals/false.md) result when you need to separate a missing document from a Documentum failure.
     - Use `DocExists` as a precondition check before operations such as [`DocDelete`](DocDelete.md) or [`DocExportDocument`](DocExportDocument.md).
 
@@ -70,7 +70,7 @@ DocExists(sObjId)
 
 ### Check existence before deleting a document
 
-Guards a delete operation by first calling `DocExists`, skipping the delete and reporting the outcome when the document is absent, and confirming deletion when it succeeds.
+Guards a delete operation by first calling `DocExists`, skipping the delete and reporting the outcome when the document is absent, and confirming deletion when it succeeds. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE DeleteIfDocumentExists;
@@ -78,29 +78,23 @@ Guards a delete operation by first calling `DocExists`, skipping the delete and 
 
     sObjId := "0900000180001234";
 
-    DocInitDocumentumInterface();
+    bExists := DocExists(sObjId);
 
-    :TRY;
-        bExists := DocExists(sObjId);
+    :IF .NOT. bExists;
+        UsrMes("Document was not found: " + sObjId);
+        :RETURN .F.;
+    :ENDIF;
 
-        :IF .NOT. bExists;
-            UsrMes("Document was not found: " + sObjId);
-            :RETURN .F.;
-        :ENDIF;
+    bDeleted := DocDelete(sObjId);
 
-        bDeleted := DocDelete(sObjId);
+    :IF .NOT. bDeleted;
+        UsrMes("Delete request did not succeed for: " + sObjId);
+        :RETURN .F.;
+    :ENDIF;
 
-        :IF .NOT. bDeleted;
-            UsrMes("Delete request did not succeed for: " + sObjId);
-            :RETURN .F.;
-        :ENDIF;
+    UsrMes("Document deleted: " + sObjId);
 
-        UsrMes("Document deleted: " + sObjId);
-
-        :RETURN .T.;
-    :FINALLY;
-        DocEndDocumentumInterface();
-    :ENDTRY;
+    :RETURN .T.;
 :ENDPROC;
 
 /* Usage;
@@ -109,35 +103,29 @@ DoProc("DeleteIfDocumentExists");
 
 ### Distinguish not found from Documentum failure
 
-Checks [`DocCommandFailed`](DocCommandFailed.md) after a [`.F.`](../literals/false.md) result to tell apart a genuine missing document from a Documentum command failure, displaying a different message for each case.
+Checks [`DocCommandFailed`](DocCommandFailed.md) after a [`.F.`](../literals/false.md) result to tell apart a genuine missing document from a Documentum command failure, displaying a different message for each case. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE CheckDocumentStatus;
     :PARAMETERS sObjId;
     :DECLARE bExists, sErrMsg;
 
-    DocInitDocumentumInterface();
+    bExists := DocExists(sObjId);
 
-    :TRY;
-        bExists := DocExists(sObjId);
+    :IF bExists;
+        UsrMes("Document is available: " + sObjId);
+        :RETURN .T.;
+    :ENDIF;
 
-        :IF bExists;
-            UsrMes("Document is available: " + sObjId);
-            :RETURN .T.;
-        :ENDIF;
-
-        :IF DocCommandFailed();
-            sErrMsg := DocGetErrorMessage();
-            ErrorMes("Documentum check failed: " + sErrMsg);
-            :RETURN .F.;
-        :ENDIF;
-
-        UsrMes("Document was not found: " + sObjId);
-
+    :IF DocCommandFailed();
+        sErrMsg := DocGetErrorMessage();
+        ErrorMes("Documentum check failed: " + sErrMsg);
         :RETURN .F.;
-    :FINALLY;
-        DocEndDocumentumInterface();
-    :ENDTRY;
+    :ENDIF;
+
+    UsrMes("Document was not found: " + sObjId);
+
+    :RETURN .F.;
 :ENDPROC;
 
 /* Usage;
@@ -151,5 +139,6 @@ DoProc("CheckDocumentStatus", {"0900000180001234"});
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
 - [`DocExportDocument`](DocExportDocument.md)
 - [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`boolean`](../types/boolean.md)
 - [`string`](../types/string.md)

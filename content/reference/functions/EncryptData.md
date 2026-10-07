@@ -37,7 +37,7 @@ EncryptData(sInputData, sPassword, [sAlgorithm], [sKey], [sRetType])
 | `sPassword` | [string](../types/string.md) | yes | — | Password used to derive the encryption key. If empty, the function returns `""`. |
 | `sAlgorithm` | [string](../types/string.md) | no | `3DES` | Encryption algorithm. Supported values are `RC2`, `DES`, and `3DES`. |
 | `sKey` | [string](../types/string.md) | no | `128` | Requested key length in bits as a string, or `MAX`. |
-| `sRetType` | [string](../types/string.md) | no | `BASE64` | Optional return-type argument retained by the public signature. |
+| `sRetType` | [string](../types/string.md) | no | `BASE64` | Optional return-type argument. |
 
 ## Returns
 
@@ -66,7 +66,7 @@ EncryptData(sInputData, sPassword, [sAlgorithm], [sKey], [sRetType])
 ## Caveats
 
 - `sKey` is a key length setting such as `128` or `MAX`, not the password text itself.
-- The public signature includes `sRetType`, but the return format is always the STARLIMS-formatted encrypted string expected by [`DecryptData`](DecryptData.md).
+- `sRetType` is accepted, but the return format is always the STARLIMS-formatted encrypted string expected by [`DecryptData`](DecryptData.md).
 
 ## Examples
 

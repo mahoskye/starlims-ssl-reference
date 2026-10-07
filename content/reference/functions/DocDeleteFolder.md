@@ -53,6 +53,7 @@ DocDeleteFolder(sFolderId, [bDeepDelete])
     - Check the boolean result immediately after the call.
     - Use [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) right after a [`.F.`](../literals/false.md) result so you capture the failure from this delete attempt.
     - Pass `bDeepDelete` explicitly when your workflow must guarantee either recursive delete or empty-folder-only delete behavior.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `sFolderId`; that raises an immediate SSL argument error.
@@ -70,7 +71,7 @@ DocDeleteFolder(sFolderId, [bDeepDelete])
 
 ### Delete one folder using the default recursive behavior
 
-Deletes a folder using the default deep-delete mode, captures any Documentum error message when the call returns [`.F.`](../literals/false.md), and logs the result.
+Deletes a folder using the default deep-delete mode, captures any Documentum error message when the call returns [`.F.`](../literals/false.md), and logs the result. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE DeleteArchiveFolder;
@@ -104,7 +105,7 @@ DoProc("DeleteArchiveFolder", {"ARCHIVE-FOLDER-001"});
 
 ### Require the folder to be empty before deleting
 
-Passes [`.F.`](../literals/false.md) for `bDeepDelete` to reject non-empty folders, then distinguishes between a non-empty-folder failure (skipped with a message) and any other delete failure (reported as an error).
+Passes [`.F.`](../literals/false.md) for `bDeepDelete` to reject non-empty folders, then distinguishes between a non-empty-folder failure (skipped with a message) and any other delete failure (reported as an error). Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE DeleteEmptyFolderOnly;
@@ -143,7 +144,7 @@ DoProc("DeleteEmptyFolderOnly", {"ARCHIVE-FOLDER-001"});
 
 ### Delete multiple folders and collect per-folder failure details
 
-Iterates a list of folder IDs, attempts each delete, and collects a failure object for every folder that was not deleted successfully, then reports the overall outcome.
+Iterates a list of folder IDs, attempts each delete, and collects a failure object for every folder that was not deleted successfully, then reports the overall outcome. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE DeleteFoldersBatch;
@@ -193,5 +194,6 @@ DoProc("DeleteFoldersBatch");
 - [`DocCommandFailed`](DocCommandFailed.md)
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
 - [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`boolean`](../types/boolean.md)
 - [`string`](../types/string.md)

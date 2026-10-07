@@ -61,6 +61,7 @@ If the work item has no linked documents, the array length is `3`.
     - Check `ALen(aProps)` before iterating document IDs from `aProps[4]` onward.
     - Wrap the call in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) when the work item may be missing or inaccessible.
     - Treat the first two booleans as current-user workflow permissions, especially for supervisor scenarios.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Assume the document list starts at `aProps[1]`; the first three entries are always booleans.
@@ -76,7 +77,7 @@ If the work item has no linked documents, the array length is `3`.
 
 ### Read the three workflow flags
 
-Reads the first three elements of the properties array and logs each as a boolean, showing whether delegation, repeatability, and sign-off are active for the current user.
+Reads the first three elements of the properties array and logs each as a boolean, showing whether delegation, repeatability, and sign-off are active for the current user. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ShowWorkitemFlags;
@@ -103,7 +104,7 @@ DoProc("ShowWorkitemFlags");
 
 ### List linked document IDs
 
-Checks [`ALen`](ALen.md) to detect when no packages are attached, then iterates from position 4 onward to print each linked document ID.
+Checks [`ALen`](ALen.md) to detect when no packages are attached, then iterates from position 4 onward to print each linked document ID. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ListWorkitemDocuments;
@@ -131,7 +132,7 @@ DoProc("ListWorkitemDocuments", {"0900001280001234"});
 
 ### Route follow-up logic from the returned values
 
-Reads the three boolean flags and the document count, then selects a workflow route based on sign-off, delegation, repeatability, and document presence. Uses [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) to handle work items that are missing or inaccessible.
+Reads the three boolean flags and the document count, then selects a workflow route based on sign-off, delegation, repeatability, and document presence. Uses [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) to handle work items that are missing or inaccessible. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE EvaluateWorkitemRouting;
@@ -184,6 +185,8 @@ DoProc("EvaluateWorkitemRouting", {"0900001280001234"});
 - [`DocRepeatWorkitem`](DocRepeatWorkitem.md)
 - [`DocCommandFailed`](DocCommandFailed.md)
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`array`](../types/array.md)
 - [`string`](../types/string.md)
 - [`boolean`](../types/boolean.md)

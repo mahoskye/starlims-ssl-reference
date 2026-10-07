@@ -41,10 +41,11 @@ This function takes no parameters.
     - Check `ALen(aCabinets)` before iterating or validating against the result.
     - Treat the result as a list of names only. If you need more than the name, fetch that data separately.
     - Use [`DocCommandFailed`](DocCommandFailed.md) or [`DocGetErrorMessage`](DocGetErrorMessage.md) when an empty array might indicate a failed Documentum call rather than simply no results.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Assume the array contains cabinet objects or metadata fields. This function returns names only.
-    - Assume the result order is stable. The raw query does not apply an `ORDER BY` clause.
+    - Assume any particular result order. Sort the array yourself if order matters.
     - Call the function repeatedly inside tight loops when one lookup can be reused.
 
 ## Caveats
@@ -55,7 +56,7 @@ This function takes no parameters.
 
 ### List all cabinet names
 
-Calls `DocGetCabinets()`, exits early when the result is empty, then prints each cabinet name in turn.
+Calls `DocGetCabinets()`, exits early when the result is empty, then prints each cabinet name in turn. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ListCabinetNames;
@@ -80,7 +81,7 @@ DoProc("ListCabinetNames");
 
 ### Validate a configured cabinet name
 
-Searches the cabinet list for a case-insensitive match against a configured name, then checks [`DocCommandFailed`](DocCommandFailed.md) on a negative result to distinguish a backend failure from a genuinely missing cabinet.
+Searches the cabinet list for a case-insensitive match against a configured name, then checks [`DocCommandFailed`](DocCommandFailed.md) on a negative result to distinguish a backend failure from a genuinely missing cabinet. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ValidateCabinetName;
@@ -114,7 +115,7 @@ DoProc("ValidateCabinetName", {"QA_Reports"});
 
 ### Reconcile cabinets against a control table
 
-Fetches the live cabinet list, checks [`DocCommandFailed`](DocCommandFailed.md) immediately, then compares against configured cabinet names from a control table and inserts an audit row for each cabinet that is missing in Documentum.
+Fetches the live cabinet list, checks [`DocCommandFailed`](DocCommandFailed.md) immediately, then compares against configured cabinet names from a control table and inserts an audit row for each cabinet that is missing in Documentum. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE AuditConfiguredCabinets;
@@ -164,5 +165,7 @@ DoProc("AuditConfiguredCabinets");
 - [`DocCommandFailed`](DocCommandFailed.md)
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
 - [`DocGetFolders`](DocGetFolders.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`array`](../types/array.md)
 - [`string`](../types/string.md)

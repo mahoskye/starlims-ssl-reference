@@ -14,7 +14,7 @@
       "returns": 12
     },
     "with_exceptions": 265,
-    "with_caveats": 402,
+    "with_caveats": 403,
     "with_best_practices": 458
   },
   "elements": [
@@ -2811,14 +2811,15 @@
         }
       ],
       "caveats": [
-        "Blank strings for sGroupName are allowed by the public SSL contract and are not rejected by the function itself."
+        "A blank sGroupName is not rejected by DocCreateGroup itself; Documentum decides whether it is valid."
       ],
       "best_practices": {
         "do": [
           "Pass a meaningful group name every time you call the function.",
           "Capture the returned identifier when later steps need to refer to the created group.",
           "Check for an empty-string result before assuming the group was created.",
-          "Read DocCommandFailed and DocGetErrorMessage immediately after an empty result when you need the Documentum failure details."
+          "Read DocCommandFailed and DocGetErrorMessage immediately after an empty result when you need the Documentum failure details.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for sGroupName; that raises an immediate SSL error.",
@@ -2831,7 +2832,7 @@
       "id": "ssl.function.doccreateuser",
       "element_type": "function",
       "title": "DocCreateUser",
-      "summary": "Creates a new user account and returns its identifier.",
+      "summary": "Creates a Documentum user and returns its identifier.",
       "doc_status": "published",
       "source_path": "content/reference/functions/DocCreateUser.md",
       "exceptions": [
@@ -2851,7 +2852,8 @@
         "do": [
           "Validate that sLoginName and sPassword are assigned before calling the function.",
           "Pass optional attributes during creation when the account needs folder, group, permission, or privilege settings immediately.",
-          "Check whether the returned identifier is empty before treating the create operation as successful."
+          "Check whether the returned identifier is empty before treating the create operation as successful.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for sLoginName or sPassword. Those arguments raise an immediate error instead of creating the user.",
@@ -2886,7 +2888,8 @@
         "do": [
           "Validate both sWorkitemId and sTargetUser before calling so the function does not raise on NIL input.",
           "Check the boolean return value before continuing workflow logic that assumes the delegation succeeded.",
-          "If the function returns .F., check DocCommandFailed before relying on DocGetErrorMessage for the failure reason."
+          "If the function returns .F., check DocCommandFailed before relying on DocGetErrorMessage for the failure reason.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for sWorkitemId or sTargetUser. That raises an argument-null exception instead of returning .F..",
@@ -2909,18 +2912,19 @@
         }
       ],
       "caveats": [
-        "Only NIL is checked by the SSL wrapper. Blank strings are passed through to the backend delete call."
+        "Only a NIL sObjId raises. A blank sObjId is passed on to Documentum."
       ],
       "best_practices": {
         "do": [
           "Check the boolean result immediately after the call.",
           "Pass bAllVersions explicitly when your workflow depends on deleting one version versus all versions.",
           "Read DocCommandFailed and DocGetErrorMessage right after a .F. result when you need the failure details.",
-          "Validate that sObjId is populated before calling the function."
+          "Validate that sObjId is populated before calling the function.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for sObjId; that raises an immediate SSL argument error.",
-          "Assume a failed delete raises an exception in normal flow; backend failures come back as .F..",
+          "Assume a failed delete raises an exception in normal flow; Documentum failures come back as .F..",
           "Use the default call form when you only want the single-version delete request.",
           "Delay reading DocGetErrorMessage, because a later Documentum call can replace the stored error state."
         ]
@@ -2940,8 +2944,7 @@
         }
       ],
       "caveats": [
-        "Only NIL is checked by the SSL wrapper before the delete call is made.",
-        "Backend delete failures return .F. instead of raising a second documented SSL exception from this function.",
+        "Only a NIL sCabinetId raises. Other delete failures return .F. and are recorded for DocCommandFailed and DocGetErrorMessage.",
         "This function relies on the current Documentum session state."
       ],
       "best_practices": {
@@ -2949,7 +2952,7 @@
           "Check the boolean result immediately after the call.",
           "Pass bDeepDelete explicitly when your workflow depends on a specific delete mode.",
           "Read DocCommandFailed and DocGetErrorMessage right after a .F. result when you need the failure details from this delete attempt.",
-          "Use this within an initialized Documentum session."
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for sCabinetId; that raises an immediate SSL argument error.",
@@ -2981,7 +2984,8 @@
         "do": [
           "Check the boolean result immediately after the call.",
           "Use DocCommandFailed and DocGetErrorMessage right after a .F. result so you capture the failure from this delete attempt.",
-          "Pass bDeepDelete explicitly when your workflow must guarantee either recursive delete or empty-folder-only delete behavior."
+          "Pass bDeepDelete explicitly when your workflow must guarantee either recursive delete or empty-folder-only delete behavior.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for sFolderId; that raises an immediate SSL argument error.",
@@ -3001,16 +3005,21 @@
         {
           "trigger": "sLoginName is NIL.",
           "message": "sLoginName argument cannot be null"
+        },
+        {
+          "trigger": "The user does not exist in Documentum.",
+          "message": "Failed: Object does not exist"
         }
       ],
       "caveats": [
-        "When the target user does not exist in Documentum, the backend raises Failed: Object does not exist rather than returning .F.. Use :TRY / :CATCH to handle this case."
+        "When the target user does not exist in Documentum, the call raises Failed: Object does not exist rather than returning .F.. Use :TRY / :CATCH to handle this case."
       ],
       "best_practices": {
         "do": [
           "Pass a real login name, not NIL or an unvalidated value.",
           "Check the boolean return value before reporting success.",
-          "Use :TRY / :CATCH when the user may already be missing or the delete must be reported clearly."
+          "Use :TRY / :CATCH when the user may already be missing or the delete must be reported clearly.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for sLoginName; the function raises an error before it attempts deletion.",
@@ -3063,7 +3072,7 @@
       "best_practices": {
         "do": [
           "Validate that sObjId is populated before calling the function.",
-          "Initialize the Documentum interface with DocInitDocumentumInterface before using DocExists.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum).",
           "Check DocCommandFailed right after a .F. result when you need to separate a missing document from a Documentum failure.",
           "Use DocExists as a precondition check before operations such as DocDelete or DocExportDocument."
         ],
@@ -3099,7 +3108,8 @@
         "do": [
           "Pass both required string arguments every time you call the function.",
           "Validate candidate user names before using them in downstream workflow logic.",
-          "Handle the .F. result explicitly when the user is required for the next step."
+          "Handle the .F. result explicitly when the user is required for the next step.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for sLoginName or sUserName; the function raises an error immediately.",
@@ -3155,11 +3165,12 @@
         "do": [
           "Check ALen(aCabinets) before iterating or validating against the result.",
           "Treat the result as a list of names only. If you need more than the name, fetch that data separately.",
-          "Use DocCommandFailed or DocGetErrorMessage when an empty array might indicate a failed Documentum call rather than simply no results."
+          "Use DocCommandFailed or DocGetErrorMessage when an empty array might indicate a failed Documentum call rather than simply no results.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Assume the array contains cabinet objects or metadata fields. This function returns names only.",
-          "Assume the result order is stable. The raw query does not apply an ORDER BY clause.",
+          "Assume any particular result order. Sort the array yourself if order matters.",
           "Call the function repeatedly inside tight loops when one lookup can be reused."
         ]
       }
@@ -3179,13 +3190,15 @@
       ],
       "caveats": [
         "Blank strings for sFolderPath are not rejected. They are passed through to the Documentum query and will likely return an empty array.",
-        "Passing an empty string for sDocTypes is not the same as omitting it. Only NIL triggers the dm_document default."
+        "Passing an empty string for sDocTypes is not the same as omitting it. Only NIL triggers the dm_document default.",
+        "An empty array can also mean the Documentum query failed. Check DocCommandFailed and DocGetErrorMessage right after the call to tell the two apart."
       ],
       "best_practices": {
         "do": [
           "Check ALen(aDocuments) before iterating, because an invalid folder path or an unmatched filter returns an empty array.",
           "Access document fields by their documented 1-based positions such as aDocuments[nIndex, 2] for the name and aDocuments[nIndex, 5] for the status.",
-          "Omit sDocTypes when you want the default dm_document behavior."
+          "Omit sDocTypes when you want the default dm_document behavior.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Treat each result row as an object with named properties. Each result row is an array.",
@@ -3203,7 +3216,7 @@
       "source_path": "content/reference/functions/DocGetErrorMessage.md",
       "exceptions": [],
       "caveats": [
-        "Documentum login and command execution paths clear the stored exception before they run, then replace it only if an error occurs.",
+        "Each Documentum login or command clears the stored error before it runs and records a new one only if it fails.",
         "The returned text comes from the underlying exception message and may vary by environment or failure type."
       ],
       "best_practices": {
@@ -3240,7 +3253,8 @@
         "do": [
           "Check ALen(aFolders) before iterating, because both an empty folder and a failed Documentum lookup can produce an empty array.",
           "Access row values by their documented 1-based positions such as aFolders[nIndex, 2] for the folder name.",
-          "Check DocCommandFailed and DocGetErrorMessage when an empty result may indicate a failed lookup rather than a folder with no child folders."
+          "Check DocCommandFailed and DocGetErrorMessage when an empty result may indicate a failed lookup rather than a folder with no child folders.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Treat each result row as an object with named properties. Each row is an array.",
@@ -3264,12 +3278,12 @@
       ],
       "caveats": [
         "Only NIL is rejected for sObjId. Blank or invalid identifiers are passed through to the Documentum layer.",
-        "When sAttributes is NIL or blank, the backend requests the full attribute list for the object's type.",
+        "When sAttributes is omitted, NIL, or \"\", all attributes for the object's type are returned.",
         "row[4] is a numeric type code, not a descriptive type name."
       ],
       "best_practices": {
         "do": [
-          "Initialize the Documentum interface before calling DocGetMetadata in workflows that use the Documentum API.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum).",
           "Treat each result row as a fixed-position array and read values by their documented 1-based positions.",
           "Omit sAttributes when you want the full metadata set.",
           "Check DocCommandFailed and DocGetErrorMessage immediately after an empty result when you need to know whether the call failed."
@@ -3297,7 +3311,8 @@
         "do": [
           "Access each task row by its documented 1-based positions such as aTasks[nIndex, 3] for the task name or aTasks[nIndex, 9] for the workflow ID.",
           "Check DocCommandFailed and DocGetErrorMessage when ALen(aTasks) == 0 and you need to know whether the empty result came from a failure.",
-          "Pass a non-empty sWorkflowId when you want one workflow only, because NIL and \"\" remove the filter and return all available tasks."
+          "Pass a non-empty sWorkflowId when you want one workflow only, because NIL and \"\" remove the filter and return all available tasks.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Treat each result row as an object with named properties. Each task is returned as an array row.",
@@ -3317,12 +3332,12 @@
       "caveats": [
         "The function exposes only one failure sentinel: -1.",
         "The function returns only the total inbox count. It does not filter by workflow or distinguish task types.",
-        "The Documentum helper layer clears the previous failure state before the call runs. If this call fails, it records the new failure and returns -1."
+        "Each call clears the previous Documentum failure state first. If this call fails, it records the new failure and returns -1."
       ],
       "best_practices": {
         "do": [
           "Check for -1 before using the returned count in workflow logic or UI.",
-          "Initialize the Documentum interface and log in before calling this function.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum).",
           "Pair a -1 result with DocCommandFailed and DocGetErrorMessage when you need failure details.",
           "Use this function when you need only the total count, not the individual task rows."
         ],
@@ -3353,7 +3368,7 @@
       ],
       "best_practices": {
         "do": [
-          "Initialize and log in to the Documentum interface before calling DocGetTypeAttributes in workflows that use Documentum APIs.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum).",
           "Treat each result row as a fixed-position array and read values by their documented 1-based positions.",
           "Check DocCommandFailed and DocGetErrorMessage immediately after an empty result when you need to know whether the lookup failed.",
           "Use row[4], row[5], and row[6] for schema decisions such as type-sensitive validation, length checks, and handling repeating attributes."
@@ -3386,7 +3401,8 @@
         "do": [
           "Call DocInitDocumentumInterface before Documentum operations and check the result immediately after this call.",
           "Treat an empty string as an ambiguous result until you also check DocCommandFailed.",
-          "Capture DocGetErrorMessage right away when DocCommandFailed() is .T.."
+          "Capture DocGetErrorMessage right away when DocCommandFailed() is .T..",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Assume \"\" means only that the type has no attributes.",
@@ -3413,7 +3429,8 @@
         "do": [
           "Branch on the documented status values and keep a fallback path for \"Unknown\".",
           "Treat \"Finished\" as the result for completed workflows and for workflow IDs that are no longer found.",
-          "Check DocCommandFailed and DocGetErrorMessage when the function returns an empty string."
+          "Check DocCommandFailed and DocGetErrorMessage when the function returns an empty string.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Assume an empty string means the workflow finished. It means the lookup failed.",
@@ -3443,7 +3460,8 @@
           "Read the returned array by fixed position, not by guessing from value type.",
           "Check ALen(aProps) before iterating document IDs from aProps[4] onward.",
           "Wrap the call in :TRY / :CATCH when the work item may be missing or inaccessible.",
-          "Treat the first two booleans as current-user workflow permissions, especially for supervisor scenarios."
+          "Treat the first two booleans as current-user workflow permissions, especially for supervisor scenarios.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Assume the document list starts at aProps[1]; the first three entries are always booleans.",
@@ -3472,7 +3490,7 @@
       ],
       "caveats": [
         "The exact content or format of the success string is not defined here.",
-        "The Documentum helper clears the current failure state before the import runs. If the import throws, it stores that exception and the function returns \"\"."
+        "Each call clears the previous Documentum failure state first. If the import fails, the new failure is recorded and the function returns \"\"."
       ],
       "best_practices": {
         "do": [
@@ -3557,7 +3575,7 @@
       "id": "ssl.function.docpauseworkflow",
       "element_type": "function",
       "title": "DocPauseWorkflow",
-      "summary": "Temporarily halts workflow processing to prevent further steps until manual intervention or review.",
+      "summary": "Pauses a Documentum workflow and returns whether the pause succeeded.",
       "doc_status": "published",
       "source_path": "content/reference/functions/DocPauseWorkflow.md",
       "exceptions": [
@@ -3567,13 +3585,14 @@
         }
       ],
       "caveats": [
-        "The function returns only a boolean result; it does not provide a reason when the pause does not succeed."
+        "The function returns only a boolean result. After a .F. result, check DocCommandFailed and read DocGetErrorMessage immediately for the reason."
       ],
       "best_practices": {
         "do": [
           "Validate or obtain the workflow ID before calling the function.",
           "Check the boolean return value and handle .F. explicitly.",
-          "Use surrounding workflow logic to decide whether to retry, report, or defer manual review."
+          "Use surrounding workflow logic to decide whether to retry, report, or defer manual review.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for sWorkflowId. That raises an exception.",
@@ -3597,13 +3616,14 @@
       ],
       "caveats": [
         "If the group cannot be updated, the function returns .F..",
-        "The boolean result does not identify the specific backend failure."
+        "After a .F. result, check DocCommandFailed and read DocGetErrorMessage immediately for the reason."
       ],
       "best_practices": {
         "do": [
           "Validate that sGroupName is populated before calling the function.",
           "Check the boolean return value and treat .F. as an operation failure.",
-          "Re-add users explicitly after a successful reset if you are rebuilding group membership."
+          "Re-add users explicitly after a successful reset if you are rebuilding group membership.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for sGroupName.",
@@ -3637,7 +3657,8 @@
         "do": [
           "Validate that sGroupName and aUsers are populated before calling the function.",
           "Check the boolean return value and treat .F. as an operation failure.",
-          "Build the aUsers array from validated user names before calling the function."
+          "Build the aUsers array from validated user names before calling the function.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for either argument.",
@@ -3664,13 +3685,14 @@
         }
       ],
       "caveats": [
-        "A .F. result indicates the repeat did not succeed, but the function does not return a separate failure message."
+        "A .F. result indicates the repeat did not succeed. Check DocCommandFailed and read DocGetErrorMessage immediately for the reason."
       ],
       "best_practices": {
         "do": [
           "Validate that sWorkitemId and aUsers are assigned before calling the function.",
           "Check the boolean return value and handle .F. explicitly in workflow logic.",
-          "Pass the optional signoff values when the repeat must capture approval context."
+          "Pass the optional signoff values when the repeat must capture approval context.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for sWorkitemId or aUsers. The function raises an error before the repeat is attempted.",
@@ -3693,13 +3715,14 @@
         }
       ],
       "caveats": [
-        "A .F. result indicates that the resume request did not succeed, but the function does not return a separate failure message."
+        "A .F. result indicates that the resume request did not succeed. Check DocCommandFailed and read DocGetErrorMessage immediately for the reason."
       ],
       "best_practices": {
         "do": [
           "Validate that sWorkflowId is assigned before calling the function.",
           "Check the boolean return value and handle .F. explicitly in your workflow logic.",
-          "Use DocGetWorkflowStatus or surrounding workflow context when you only want to resume workflows in a known state."
+          "Use DocGetWorkflowStatus or surrounding workflow context when you only want to resume workflows in a known state.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for sWorkflowId. The function raises an error before attempting the resume.",
@@ -3717,17 +3740,13 @@
       "source_path": "content/reference/functions/DocSearchAsDataset.md",
       "exceptions": [
         {
-          "trigger": "The underlying query object cannot be obtained.",
+          "trigger": "The search query cannot be created in the current Documentum session.",
           "message": "Couldn't obtain query"
-        },
-        {
-          "trigger": "The underlying Documentum search raises repository or DQL execution errors.",
-          "message": "Repository or DQL execution errors can also propagate from the underlying Documentum search."
         }
       ],
       "caveats": [
         "Omitting every filter searches the default object type without folder scoping.",
-        "sWhere is appended directly to the generated filter logic, so invalid DQL can fail at runtime.",
+        "sWhere is appended directly to the generated filter logic, so invalid DQL can fail at runtime. Repository and DQL errors from the search can also raise.",
         "The return value is XML with schema, so parse it with a dataset-aware workflow before treating it as tabular data."
       ],
       "best_practices": {
@@ -3735,7 +3754,8 @@
           "Pass only the filters you need so the generated search stays narrow and predictable.",
           "Check for an empty string before trying to parse or forward the returned dataset XML.",
           "Keep sWhere as a valid DQL condition fragment that can follow WHERE or AND.",
-          "Set nResultSetSize when the caller only needs a bounded result set."
+          "Set nResultSetSize when the caller only needs a bounded result set.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Treat the return value as an array. The function returns dataset XML, not row data.",
@@ -3755,19 +3775,18 @@
         {
           "trigger": "sTextToSearch is NIL.",
           "message": "sTextToSearch argument cannot be null"
-        },
-        {
-          "trigger": "Blank or whitespace-only search text.",
-          "message": "Also rejected by the underlying search call."
         }
       ],
-      "caveats": [],
+      "caveats": [
+        "Blank or whitespace-only sTextToSearch is rejected by the Documentum search, so validate the text before calling."
+      ],
       "best_practices": {
         "do": [
           "Validate that sTextToSearch is not blank before calling the function.",
           "Pass sStartLocation when the search should stay inside a known folder tree.",
           "Set nResultSetSize for review queues and pick lists that only need a bounded result set.",
-          "Read the returned rows by documented column position so your code stays predictable."
+          "Read the returned rows by documented column position so your code stays predictable.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL, \"\", or whitespace-only text as the search value.",
@@ -3799,7 +3818,8 @@
           "Select only the columns your script actually uses so the returned row shape stays simple and predictable.",
           "Check DocCommandFailed and DocGetErrorMessage when ALen(aResults) == 0 and you need to know whether the search failed.",
           "Pass nResultSetSize for review queues, lookups, and other flows that do not need the full result set.",
-          "Read row values by their documented query position, such as aResults[nIndex, 2] for the second selected column."
+          "Read row values by their documented query position, such as aResults[nIndex, 2] for the second selected column.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Treat each result row as an object with named properties. Each row is an array.",
@@ -3827,14 +3847,14 @@
         }
       ],
       "caveats": [
-        "The SSL entry point documents argument validation only for NIL values. Blank strings, unknown attribute names, and other backend-specific validation outcomes are handled by the Documentum call, not by a separate SSL pre-check."
+        "Only NIL arguments raise. Blank values and unknown attribute names are passed to Documentum; a rejection returns .F. and is recorded for DocCommandFailed and DocGetErrorMessage."
       ],
       "best_practices": {
         "do": [
           "Build aAttributes as an array of two-item arrays so each row clearly maps an attribute name to a value.",
           "Check DocCommandFailed and DocGetErrorMessage immediately after a .F. return.",
           "Group related metadata changes into one call when they target the same object.",
-          "Initialize the Documentum interface before Documentum API work in scripts that manage their own session lifecycle."
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for sObjId or aAttributes; both raise an error before any metadata update is attempted.",
@@ -3885,10 +3905,10 @@
         "do": [
           "Pass aDocumentIds as an array, even when you are attaching only one document.",
           "Read the returned values with SSL's 1-based indexing: aWorkflowInfo[1] for the workflow ID and aWorkflowInfo[2] for performers.",
-          "Omit sPackageName when the default package name is acceptable."
+          "Omit sPackageName when the default package name is acceptable.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
-          "Document or code against zero-based positions such as index 0. SSL arrays are 1-based.",
           "Assume aDocumentIds is always optional. Some workflows require at least one document at startup.",
           "Assume aWorkflowInfo[2] always contains a populated performer array. Check the returned value before iterating it."
         ]
@@ -3908,12 +3928,12 @@
         }
       ],
       "caveats": [
-        "This page documents a required non-NIL argument. The wrapper does not add a separate empty-string check.",
+        "Only a NIL sWorkflowId raises. A blank sWorkflowId is passed on to Documentum.",
         "The function depends on an active Documentum interface context."
       ],
       "best_practices": {
         "do": [
-          "Initialize the Documentum interface before calling this function.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum).",
           "Check the boolean result immediately after the call.",
           "After a .F. result, use DocCommandFailed and DocGetErrorMessage for diagnostics."
         ],
@@ -3928,7 +3948,7 @@
       "id": "ssl.function.docupdateuser",
       "element_type": "function",
       "title": "DocUpdateUser",
-      "summary": "Updates a Documentum user and returns the backend result message.",
+      "summary": "Updates a Documentum user and returns the Documentum result message.",
       "doc_status": "published",
       "source_path": "content/reference/functions/DocUpdateUser.md",
       "exceptions": [
@@ -3946,11 +3966,12 @@
         "do": [
           "Validate that sLoginName and sPassword are assigned before calling the function.",
           "Omit trailing optional arguments you do not need, and skip only the positions required to reach a later argument.",
-          "Check whether the returned string is empty before treating the update as confirmed."
+          "Check whether the returned string is empty before treating the update as confirmed.",
+          "Call the function within an initialized, logged-in Documentum session (DocInitDocumentumInterface, DocLoginToDocumentum)."
         ],
         "dont": [
           "Pass NIL for sLoginName or sPassword. Those arguments raise an immediate error instead of attempting the update.",
-          "Assume omitted optional arguments have a documented repository-side effect beyond being forwarded as omitted values.",
+          "Assume omitted optional arguments leave the user's existing values unchanged. Pass every field whose value matters.",
           "Ignore an empty return string when later logic depends on a confirmed update result."
         ]
       }
@@ -4042,7 +4063,7 @@
       ],
       "caveats": [
         "sKey is a key length setting such as 128 or MAX, not the password text itself.",
-        "The public signature includes sRetType, but the return format is always the STARLIMS-formatted encrypted string expected by DecryptData."
+        "sRetType is accepted, but the return format is always the STARLIMS-formatted encrypted string expected by DecryptData."
       ],
       "best_practices": {
         "do": [
@@ -4165,12 +4186,12 @@
       ],
       "caveats": [
         "Errors raised inside the invoked block propagate to the Eval call site; wrap the call in :TRY / :CATCH when the block may fail.",
-        "Eval forwards the supplied argument array to the code block; it does not compile source text, rename parameters, or add its own defaults."
+        "Eval passes the supplied arguments to the code block in order; it does not compile source text, rename parameters, or add its own defaults."
       ],
       "best_practices": {
         "do": [
           "Pass a code block value (from a {|params| expr} literal or a function that returns one) as the first argument.",
-          "Reserve use of Eval for scenarios requiring dynamic, runtime code evaluation.",
+          "Reserve use of Eval for calling code block values that are chosen or passed in at runtime.",
           "Handle errors that may arise from evaluated code blocks."
         ],
         "dont": [
@@ -4417,15 +4438,15 @@
       "best_practices": {
         "do": [
           "Use CREATE or OPEN first, keep the returned handle, and close it with CLOSE when you finish.",
-          "Use the canonical request names such as \"READ\", \"WRITE\", and \"SEEK\" even though the implementation matches by leading text.",
+          "Use the canonical request names such as \"READ\", \"WRITE\", and \"SEEK\" even though a leading-text match also works.",
           "Check the boolean result from COPY, DELETE, MOVE, RENAME, and CLOSE before assuming the operation succeeded.",
           "Wrap path-based operations in :TRY / :CATCH when the target path may fall outside the configured whitelist."
         ],
         "dont": [
           "Pass a file path to handle-based requests such as READ or WRITE, or a handle to path-based requests such as COPY or DIR.",
           "Assume READ returns a short string at end of file. It pads the result with spaces when fewer characters are available.",
-          "Treat RENAME as a metadata-only rename. It uses the same move logic as MOVE and therefore depends on a destination path.",
-          "Rely on non-canonical request prefixes in published code just because the implementation accepts leading-text matches.",
+          "Treat RENAME as a metadata-only rename. It behaves exactly like MOVE and therefore depends on a destination path.",
+          "Rely on non-canonical request prefixes in published code just because leading-text matches are accepted.",
           "Pass \"EXISTS\" to test whether a file exists. There is no such request, so it raises Invalid request provided!. Use CHECK."
         ]
       }

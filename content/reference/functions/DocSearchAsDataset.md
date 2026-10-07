@@ -61,8 +61,7 @@ If no rows are returned, the function returns `""`.
 
 | Trigger | Exception message |
 | --- | --- |
-| The underlying query object cannot be obtained. | `Couldn't obtain query` |
-| The underlying Documentum search raises repository or DQL execution errors. | Repository or DQL execution errors can also propagate from the underlying Documentum search. |
+| The search query cannot be created in the current Documentum session. | `Couldn't obtain query` |
 
 ## Best practices
 
@@ -71,6 +70,7 @@ If no rows are returned, the function returns `""`.
     - Check for an empty string before trying to parse or forward the returned dataset XML.
     - Keep `sWhere` as a valid DQL condition fragment that can follow `WHERE` or `AND`.
     - Set `nResultSetSize` when the caller only needs a bounded result set.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Treat the return value as an array. The function returns dataset XML, not row data.
@@ -80,14 +80,14 @@ If no rows are returned, the function returns `""`.
 ## Caveats
 
 - Omitting every filter searches the default object type without folder scoping.
-- `sWhere` is appended directly to the generated filter logic, so invalid DQL can fail at runtime.
+- `sWhere` is appended directly to the generated filter logic, so invalid DQL can fail at runtime. Repository and DQL errors from the search can also raise.
 - The return value is XML with schema, so parse it with a dataset-aware workflow before treating it as tabular data.
 
 ## Examples
 
 ### Search a folder and return the dataset XML
 
-Fetches documents containing `"Approved"` from a specific folder path and returns the raw dataset XML, using [`Empty`](Empty.md) to guard against a no-match result.
+Fetches documents containing `"Approved"` from a specific folder path and returns the raw dataset XML, using [`Empty`](Empty.md) to guard against a no-match result. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE FindApprovedDocsInFolder;
@@ -114,7 +114,7 @@ DoProc("FindApprovedDocsInFolder");
 
 ### Parse the dataset XML into rows
 
-Searches for revised documents under a configurable path with a result cap, parses the returned dataset XML into a table, and lists each document name and version label.
+Searches for revised documents under a configurable path with a result cap, parses the returned dataset XML into a table, and lists each document name and version label. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE BuildRevisedDocReport;
@@ -160,7 +160,7 @@ DoProc("BuildRevisedDocReport");
 
 ### Build a version-aware review queue
 
-Searches all PDF versions of documents matching `"method"` under a controlled-docs path and collects their object IDs into an array for downstream processing.
+Searches all PDF versions of documents matching `"method"` under a controlled-docs path and collects their object IDs into an array for downstream processing. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE BuildReviewQueue;
@@ -201,6 +201,8 @@ DoProc("BuildReviewQueue");
 
 - [`DocSearchFullText`](DocSearchFullText.md)
 - [`DocSearchUsingDql`](DocSearchUsingDql.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`CDataTable`](../classes/CDataTable.md)
 - [`string`](../types/string.md)
 - [`boolean`](../types/boolean.md)

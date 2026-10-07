@@ -15,7 +15,7 @@ Removes one or more users from an existing Documentum group.
 
 Pass the target group name and an array of user names. The function returns [`.T.`](../literals/true.md) when the group update completes successfully and [`.F.`](../literals/false.md) when the removal operation fails. Passing [`NIL`](../literals/nil.md) for `sGroupName` or `aUsers` raises an error before the Documentum call starts.
 
-When the named group cannot be found, the underlying removal call fails and this function returns [`.F.`](../literals/false.md) rather than surfacing that backend error directly.
+When the named group cannot be found, the function returns [`.F.`](../literals/false.md) instead of raising. After a [`.F.`](../literals/false.md) result, check [`DocCommandFailed`](DocCommandFailed.md) and read [`DocGetErrorMessage`](DocGetErrorMessage.md) immediately for the reason.
 
 ## When to use
 
@@ -53,6 +53,7 @@ DocRemoveUsersFromGroup(sGroupName, aUsers)
     - Validate that `sGroupName` and `aUsers` are populated before calling the function.
     - Check the boolean return value and treat [`.F.`](../literals/false.md) as an operation failure.
     - Build the `aUsers` array from validated user names before calling the function.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for either argument.
@@ -68,7 +69,7 @@ DocRemoveUsersFromGroup(sGroupName, aUsers)
 
 ### Remove one user from a known group
 
-Wraps a single user name in a one-element array and reports success or failure.
+Wraps a single user name in a one-element array and reports success or failure. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE RemoveOneUser;
@@ -91,7 +92,7 @@ DoProc("RemoveOneUser");
 
 ### Remove a validated user list from one project group
 
-Constructs a group name from a project code, removes the supplied user list, reports the outcome, and returns the boolean so the caller can react to a failure.
+Constructs a group name from a project code, removes the supplied user list, reports the outcome, and returns the boolean so the caller can react to a failure. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE RemoveProjectUsers;
@@ -117,7 +118,7 @@ DoProc("RemoveProjectUsers", {"ALPHA", {"jsmith"}});
 
 ### Remove users from several groups and capture per-group results
 
-Applies the same user list removal to each group in a list, records each per-group result in a [`CreateUdObject`](CreateUdObject.md), and returns the full result array.
+Applies the same user list removal to each group in a list, records each per-group result in a [`CreateUdObject`](CreateUdObject.md), and returns the full result array. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE RemoveUsersFromGroups;
@@ -159,6 +160,10 @@ DoProc("RemoveUsersFromGroups", {{"QC_Analysts", "QA_Team"}, {"jsmith"}});
 - [`DocRemoveAllUsersFromGroup`](DocRemoveAllUsersFromGroup.md)
 - [`DocCreateGroup`](DocCreateGroup.md)
 - [`DocExistsUser`](DocExistsUser.md)
+- [`DocCommandFailed`](DocCommandFailed.md)
+- [`DocGetErrorMessage`](DocGetErrorMessage.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`boolean`](../types/boolean.md)
 - [`string`](../types/string.md)
 - [`array`](../types/array.md)

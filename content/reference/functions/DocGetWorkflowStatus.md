@@ -61,6 +61,7 @@ DocGetWorkflowStatus(sWorkflowId)
     - Branch on the documented status values and keep a fallback path for `"Unknown"`.
     - Treat `"Finished"` as the result for completed workflows and for workflow IDs that are no longer found.
     - Check [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) when the function returns an empty string.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Assume an empty string means the workflow finished. It means the lookup failed.
@@ -71,7 +72,7 @@ DocGetWorkflowStatus(sWorkflowId)
 
 ### Display the current workflow status
 
-Fetches the current status of a workflow and logs it, using a default workflow ID when none is supplied.
+Fetches the current status of a workflow and logs it, using a default workflow ID when none is supplied. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ShowWorkflowStatus;
@@ -91,12 +92,12 @@ DoProc("ShowWorkflowStatus");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Workflow WF-12345 status: Running
+Workflow WF-12345 status: <status>
 ```
 
 ### Branch on the returned status
 
-Branches on the documented status values, with a fallback for unknown and empty results.
+Branches on the documented status values, with a fallback for unknown and empty results. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE HandleWorkflowStatus;
@@ -134,7 +135,7 @@ DoProc("HandleWorkflowStatus");
 
 ### Distinguish a failed lookup from a finished workflow
 
-Reads the workflow status and separates three outcomes: a failed lookup (empty string), a finished or no-longer-existing workflow, and an active workflow in any other state.
+Reads the workflow status and separates three outcomes: a failed lookup (empty string), a finished or no-longer-existing workflow, and an active workflow in any other state. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE CheckWorkflowStatusSafe;
@@ -167,4 +168,6 @@ DoProc("CheckWorkflowStatusSafe");
 
 - [`DocCommandFailed`](DocCommandFailed.md)
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`string`](../types/string.md)

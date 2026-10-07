@@ -66,6 +66,7 @@ Status is returned as one of these string values:
     - Check `ALen(aDocuments)` before iterating, because an invalid folder path or an unmatched filter returns an empty array.
     - Access document fields by their documented 1-based positions such as `aDocuments[nIndex, 2]` for the name and `aDocuments[nIndex, 5]` for the status.
     - Omit `sDocTypes` when you want the default `dm_document` behavior.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Treat each result row as an object with named properties. Each result row is an array.
@@ -76,12 +77,13 @@ Status is returned as one of these string values:
 
 - Blank strings for `sFolderPath` are not rejected. They are passed through to the Documentum query and will likely return an empty array.
 - Passing an empty string for `sDocTypes` is not the same as omitting it. Only [`NIL`](../literals/nil.md) triggers the `dm_document` default.
+- An empty array can also mean the Documentum query failed. Check [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) right after the call to tell the two apart.
 
 ## Examples
 
 ### List document names in a folder
 
-Calls `DocGetDocuments` without a type filter to list all `dm_document` entries under a folder, printing each document name in turn.
+Calls `DocGetDocuments` without a type filter to list all `dm_document` entries under a folder, printing each document name in turn. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ListRepositoryDocs;
@@ -112,7 +114,7 @@ DoProc("ListRepositoryDocs");
 
 ### Pass the document type filter explicitly
 
-Passes an explicit document type to `DocGetDocuments` and prints the ID, name, and content type of each result, illustrating how to access individual columns by position.
+Passes an explicit document type to `DocGetDocuments` and prints the ID, name, and content type of each result, illustrating how to access individual columns by position. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE GetTypedDocuments;
@@ -147,7 +149,7 @@ DoProc("GetTypedDocuments");
 
 ### Group results by checkout status
 
-Fetches documents from a folder and counts how many are checked in, checked out, or locked, then logs a summary line.
+Fetches documents from a folder and counts how many are checked in, checked out, or locked, then logs a summary line. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE SummarizeDocumentStatuses;
@@ -200,6 +202,9 @@ DoProc("SummarizeDocumentStatuses");
 
 ## Related
 
+- [`DocCommandFailed`](DocCommandFailed.md)
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`array`](../types/array.md)
 - [`string`](../types/string.md)

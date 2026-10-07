@@ -52,6 +52,7 @@ DocExistsUser(sLoginName, sUserName)
     - Pass both required string arguments every time you call the function.
     - Validate candidate user names before using them in downstream workflow logic.
     - Handle the [`.F.`](../literals/false.md) result explicitly when the user is required for the next step.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `sLoginName` or `sUserName`; the function raises an error immediately.
@@ -66,7 +67,7 @@ DocExistsUser(sLoginName, sUserName)
 
 ### Check one user before continuing
 
-Calls `DocExistsUser` with hardcoded login and user names and logs whether the user was found in Documentum.
+Calls `DocExistsUser` with hardcoded login and user names and logs whether the user was found in Documentum. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ValidateApprover;
@@ -94,7 +95,7 @@ DoProc("ValidateApprover");
 
 ### Collect missing users from a list
 
-Iterates an array of user names, checks each one against Documentum, and returns an array containing only the names that were not found.
+Iterates an array of user names, checks each one against Documentum, and returns an array containing only the names that were not found. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE FindMissingDocUsers;
@@ -121,7 +122,7 @@ DoProc("FindMissingDocUsers", {"admin", {"jsmith", "mwilson"}});
 
 ### Audit lookups and capture null-argument errors
 
-Iterates a two-column array of login and user name pairs, wraps each lookup in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) to handle [`NIL`](../literals/nil.md)-argument exceptions, and collects a result row, including any error description, for every pair.
+Iterates a two-column array of login and user name pairs, wraps each lookup in [`:TRY`](../keywords/TRY.md) / [`:CATCH`](../keywords/CATCH.md) to handle [`NIL`](../literals/nil.md)-argument exceptions, and collects a result row, including any error description, for every pair. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE AuditDocUsers;
@@ -148,12 +149,14 @@ Iterates a two-column array of login and user name pairs, wraps each lookup in [
 :ENDPROC;
 
 /* Usage;
-DoProc("AuditDocUsers", {{{"admin", "jsmith"}, {"admin", "mwilson"}}});
+DoProc("AuditDocUsers", {{{"admin", "jsmith"}, {"admin", NIL}}});
 ```
 
 ## Related
 
 - [`DocCommandFailed`](DocCommandFailed.md)
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`boolean`](../types/boolean.md)
 - [`string`](../types/string.md)

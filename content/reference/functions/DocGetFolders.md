@@ -65,6 +65,7 @@ Status is returned as one of these string values:
     - Check `ALen(aFolders)` before iterating, because both an empty folder and a failed Documentum lookup can produce an empty array.
     - Access row values by their documented 1-based positions such as `aFolders[nIndex, 2]` for the folder name.
     - Check [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) when an empty result may indicate a failed lookup rather than a folder with no child folders.
+    - Call the function within an initialized, logged-in Documentum session ([`DocInitDocumentumInterface`](DocInitDocumentumInterface.md), [`DocLoginToDocumentum`](DocLoginToDocumentum.md)).
 
 !!! failure "Don't"
     - Treat each result row as an object with named properties. Each row is an array.
@@ -80,7 +81,7 @@ Status is returned as one of these string values:
 
 ### List child folder names
 
-Queries a folder for immediate children and prints each folder name, exiting early when the result is empty.
+Queries a folder for immediate children and prints each folder name, exiting early when the result is empty. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ListChildFolders;
@@ -111,7 +112,7 @@ DoProc("ListChildFolders");
 
 ### Validate required subfolders and detect lookup failures
 
-Checks that three required child folders exist under a path, distinguishing a failed Documentum lookup (empty result with [`DocCommandFailed`](DocCommandFailed.md) set) from a folder that is genuinely missing from the results.
+Checks that three required child folders exist under a path, distinguishing a failed Documentum lookup (empty result with [`DocCommandFailed`](DocCommandFailed.md) set) from a folder that is genuinely missing from the results. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ValidateRequiredFolders;
@@ -171,5 +172,7 @@ Unable to retrieve child folders: <repository error>
 - [`DocGetErrorMessage`](DocGetErrorMessage.md)
 - [`DocGetCabinets`](DocGetCabinets.md)
 - [`DocGetDocuments`](DocGetDocuments.md)
+- [`DocInitDocumentumInterface`](DocInitDocumentumInterface.md)
+- [`DocLoginToDocumentum`](DocLoginToDocumentum.md)
 - [`array`](../types/array.md)
 - [`string`](../types/string.md)

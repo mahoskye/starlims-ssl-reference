@@ -20,7 +20,7 @@ Some commands change process state. In particular, `CD` updates the current work
 ## When to use
 
 - When automating multiple file system operations in workflow logic where command-driven, shell-like control is preferred.
-- When initializing or validating environment state by interacting with directories or environment variables in an abstracted, platform-independent way.
+- When initializing or validating environment state by interacting with directories or environment variables.
 - When mimicking or scripting DOS-style file commands inside SSL without writing multiple function calls for each operation.
 - When access, modification, or inspection of directory structure is required in a batch or user-driven application process.
 
