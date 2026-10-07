@@ -100,23 +100,25 @@ Parameters for Analysis.SampleResults: SampleId, StartDate, EndDate
 
 ### Validate user-supplied parameters before running a data source
 
-Compares the caller-supplied parameter keys against the expected parameters for the data source and reports the first set of unknown keys before running the data source.
+Compares the caller-supplied parameter keys against the expected parameters for the data source and reports every unknown key. When all keys are valid, it passes the supplied values to [`RunDS`](RunDS.md) in the data source's parameter order, with [`NIL`](../literals/nil.md) for any parameter the caller did not supply.
 
 ```ssl
 :PROCEDURE ValidateAndRunSampleDS;
 	:PARAMETERS sDataSource, aUserParams;
 	:DEFAULT sDataSource, "";
 	:DEFAULT aUserParams, {};
-	:DECLARE aExpectedParams, sParamKey, bParamValid, nIndex, sErrorMsg, oResult;
+	:DECLARE aExpectedParams, aUserKeys, aValues, sParamKey, bParamValid, nIndex, nPos, sErrorMsg, oResult;
 
 	aExpectedParams := GetDSParameters(sDataSource);
+	aUserKeys := {};
 	bParamValid := .T.;
 	sErrorMsg := "";
 
 	:IF ALen(aUserParams) > 0;
 		:FOR nIndex := 1 :TO ALen(aUserParams);
 			sParamKey := aUserParams[nIndex, 1];
-			:IF AScan(aExpectedParams, sParamKey) == 0;
+			AAdd(aUserKeys, sParamKey);
+			:IF AScanExact(aExpectedParams, sParamKey) == 0;
 				bParamValid := .F.;
 				sErrorMsg := sErrorMsg + "Invalid parameter: " + sParamKey + ". ";
 			:ENDIF;
@@ -129,7 +131,18 @@ Compares the caller-supplied parameter keys against the expected parameters for 
 		:RETURN NIL;
 	:ENDIF;
 
-	oResult := RunDS(sDataSource);
+	/* Order the values the way the data source declares its parameters;
+	aValues := {};
+	:FOR nIndex := 1 :TO ALen(aExpectedParams);
+		nPos := AScanExact(aUserKeys, aExpectedParams[nIndex]);
+		:IF nPos > 0;
+			AAdd(aValues, aUserParams[nPos, 2]);
+		:ELSE;
+			AAdd(aValues, NIL);
+		:ENDIF;
+	:NEXT;
+
+	oResult := RunDS(sDataSource, aValues);
 	:RETURN oResult;
 :ENDPROC;
 

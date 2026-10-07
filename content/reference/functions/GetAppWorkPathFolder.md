@@ -66,7 +66,7 @@ Demonstrate how to use the work path folder to save a temporary export or interm
 	sFilePath := sWorkPath + sFileName;
 	nData := 42;
 
-	WriteText(sFilePath, LimsString(nData), .F.);
+	WriteText(sFilePath, LimsString(nData));
 
 	UsrMes("Temporary export saved to: " + sFilePath);
 :ENDPROC;
@@ -75,10 +75,10 @@ Demonstrate how to use the work path folder to save a temporary export or interm
 DoProc("SaveTempExport");
 ```
 
-[`UsrMes`](UsrMes.md) logs:
+[`UsrMes`](UsrMes.md) logs the path, where `<work-folder>` stands for the value `GetAppWorkPathFolder` returns in your environment:
 
 ```text
-Temporary export saved to: C:\STARLIMS\Work\temp_export_001.txt
+Temporary export saved to: <work-folder>temp_export_001.txt
 ```
 
 ### Validate the work path before performing file operations

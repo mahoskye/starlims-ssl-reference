@@ -47,7 +47,7 @@ FormatErrorMessage(vError)
 
 !!! failure "Don't"
     - Assume every input produces a meaningful description — non-SSLError values always fall back to `"Unknown error."`.
-    - Cast or convert error objects to string directly; direct conversion may produce technical or unhelpful output.
+    - Expect a short message. The result is `FullDescription`, which can span several lines and include runtime context; read `:Description` from the [`SSLError`](../classes/SSLError.md) object when you want only the short message for a user.
 
 ## Caveats
 
@@ -95,10 +95,10 @@ Format a result that may be an SSLError object or a plain value — the function
 :ENDPROC;
 
 /* Usage;
-DoProc("ReportServiceResult", {oErr});
+DoProc("ReportServiceResult", {"timeout"});
 ```
 
-`ErrorMes` logs a message with caption `Service error` and the formatted message string.
+`ErrorMes` logs a message with caption `Service error`. Because `"timeout"` is a plain string, not an SSLError object, the message is `Unknown error.`.
 
 ## Related
 

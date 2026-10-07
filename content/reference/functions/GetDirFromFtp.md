@@ -13,7 +13,7 @@ starlims:
 
 Lists directory entries from an FTP server, or from an SFTP server when `bIsSFTP` is [`.T.`](../literals/true.md).
 
-On the FTP path, the function sends an FTP `LIST` request for `sRemoteDirectory/sFilePattern`, defaults `sFilePattern` to [`*`](../operators/multiply.md) when it is empty, and returns the parsed listing. On the SFTP path, it ignores `bUsePassive`, connects with either password or private-key authentication, and lists the directory directly. A successful call returns an array of entry rows. Each row contains `{name, size, date, time, attributes}`, where `attributes` is `"A"` for a file or `"D"` for a directory.
+On the FTP path, the function sends an FTP `LIST` request for `sRemoteDirectory/sFilePattern`, defaults `sFilePattern` to `*` when it is empty, and returns the parsed listing. On the SFTP path, it ignores `bUsePassive`, connects with either password or private-key authentication, and lists the directory directly. A successful call returns an array of entry rows. Each row contains `{name, size, date, time, attributes}`, where `attributes` is `"A"` for a file or `"D"` for a directory.
 
 ## When to use
 
@@ -35,14 +35,14 @@ GetDirFromFtp(sServerNameOrIP, [sRemoteDirectory], [sFilePattern], [sUserName], 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `sServerNameOrIP` | [string](../types/string.md) | yes | — | Remote server name or IP address. |
-| `sRemoteDirectory` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Remote directory to list. The value is passed directly to the FTP or SFTP implementation. |
+| `sRemoteDirectory` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Remote directory to list, as the server expects it. |
 | `sFilePattern` | [string](../types/string.md) | no | `"*"` on FTP | Wildcard pattern appended to the FTP request path. On the SFTP path, this must be omitted, [`NIL`](../literals/nil.md), or an empty string. |
 | `sUserName` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | User name used for login. |
 | `sPassword` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Password for FTP login. On the SFTP path, this is also used as the private-key passphrase when `sPrivateKeyFilePath` is supplied. |
-| `nPort` | [number](../types/number.md) | no | `21` | Server port. If omitted or non-positive, the implementation uses `21`. |
+| `nPort` | [number](../types/number.md) | no | `21` | Server port. If omitted or not positive, port `21` is used. |
 | `sProxy` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Must be left empty. Supplying a non-empty value raises an error. |
 | `bUsePassive` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | FTP passive mode flag. Ignored on the SFTP path. |
-| `bIsSFTP` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Set to [`.T.`](../literals/true.md) to use the SFTP implementation. Omitted or [`NIL`](../literals/nil.md) keeps the FTP implementation. |
+| `bIsSFTP` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Set to [`.T.`](../literals/true.md) to use SFTP. Omitted or [`NIL`](../literals/nil.md) uses FTP. |
 | `sPrivateKeyFilePath` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Optional private key file for SFTP authentication. Ignored on the FTP path. |
 
 ## Returns
@@ -90,7 +90,7 @@ Each row is a 5-element positional array:
 
 ## Caveats
 
-- The implementation falls back to port `21` when `nPort` is omitted or less
+- Port `21` is used when `nPort` is omitted or less
   than or equal to zero, even on the SFTP path.
 - On the FTP path, unparseable listing text causes a user message and a [`NIL`](../literals/nil.md)
   return.
@@ -138,9 +138,10 @@ Use the FTP path with the default wildcard to inspect a drop folder.
 
     :RETURN .T.;
 :ENDPROC;
-```
 
-Call with `DoProc("ListFtpDrop");`.
+/* Usage;
+DoProc("ListFtpDrop");
+```
 
 ### List an SFTP folder with private-key authentication
 
@@ -200,9 +201,10 @@ Use the SFTP path, keep `sFilePattern` empty, and handle connection or login err
 
     :RETURN .T.;
 :ENDPROC;
-```
 
-Call with `DoProc("ListPartnerSftpDrop");`.
+/* Usage;
+DoProc("ListPartnerSftpDrop");
+```
 
 ### Split the returned rows into files and directories
 
@@ -255,9 +257,10 @@ Inspect the entry layout and branch on the attributes column so later logic can 
 
     :RETURN {aFiles, aDirectories};
 :ENDPROC;
-```
 
-Call with `DoProc("ClassifyRemoteEntries");`.
+/* Usage;
+DoProc("ClassifyRemoteEntries");
+```
 
 ## Related
 

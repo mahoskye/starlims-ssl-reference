@@ -13,9 +13,9 @@ starlims:
 
 Executes a SQL query and returns the result as XML dataset text with schema always included.
 
-`GetDataSetWithSchemaFromSelect` is a narrow convenience wrapper around the
-same XML-export path used by [`GetDataSetEx`](GetDataSetEx.md). It always
-includes both the XML header and the XML schema, and it accepts an optional
+`GetDataSetWithSchemaFromSelect` works like
+[`GetDataSetEx`](GetDataSetEx.md) with the XML header and schema always
+included. It accepts an optional
 connection name plus an optional positional values array for `?`
 placeholders in the SQL text.
 
@@ -41,8 +41,8 @@ GetDataSetWithSchemaFromSelect(sCommandString, [sConnectionName], [aValues], [aP
 | `sCommandString` | [string](../types/string.md) | yes | — | SQL command text to execute. |
 | `sConnectionName` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Database connection name to run the command against. When [`NIL`](../literals/nil.md), the current default connection is used. |
 | `aValues` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Positional values for `?` placeholders in `sCommandString`. Omit when the query has no parameters. |
-| `aPrimaryKeys` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Accepted by the function signature, but currently ignored by the implementation. |
-| `aUniqueConstraints` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Accepted by the function signature, but currently ignored by the implementation. |
+| `aPrimaryKeys` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Accepted but has no effect on the returned XML. |
+| `aUniqueConstraints` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Accepted but has no effect on the returned XML. |
 
 ## Returns
 

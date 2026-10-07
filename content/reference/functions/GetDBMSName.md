@@ -24,7 +24,7 @@ Returns `"SQL"` for SQL Server connections and `"ORACLE"` for Oracle connections
 ## Syntax
 
 ```ssl
-GetDBMSName(sConnectionName)
+GetDBMSName([sConnectionName])
 ```
 
 ## Parameters

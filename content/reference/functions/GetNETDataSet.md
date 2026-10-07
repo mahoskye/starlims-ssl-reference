@@ -74,7 +74,7 @@ GetNETDataSet(sCommandString, [sConnectionName], [aValues], [sTableName], [bRetu
 ## Caveats
 
 - A command that returns no result set, such as a T-SQL `DECLARE`, returns a data set with one empty table instead of raising an error.
-- Passing extra values beyond the placeholder count does not raise an error; only too few values raises `Parameters count mismatch.`
+- Passing extra values beyond the placeholder count does not raise an error; only too few values raises `Parameters count mismatch`.
 - XML and object output use the same query path; `bReturnXml` changes only the final return format.
 
 ## Examples

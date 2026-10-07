@@ -13,8 +13,9 @@ starlims:
 
 Executes a SQL query and returns the result as XML dataset text.
 
-`GetDataSetXMLFromSelect` is the configurable XML-export form behind
-[`GetDataSet`](GetDataSet.md) and related helpers. It runs the SQL against a
+`GetDataSetXMLFromSelect` is a configurable XML-export function, similar to
+[`GetDataSetEx`](GetDataSetEx.md) but with a different argument order
+(`bIncludeHeader` before `aValues`). It runs the SQL against a
 database connection, applies positional `?` parameter values when supplied, and
 serializes the returned dataset as XML.
 

@@ -72,9 +72,10 @@ Retrieve the current web folder path and display it.
 
 	:RETURN sWebFolder;
 :ENDPROC;
-```
 
-Call it with `DoProc("ShowWebFolder")`.
+/* Usage;
+DoProc("ShowWebFolder");
+```
 
 ### Build a file path under the web folder
 
@@ -102,9 +103,10 @@ Check the returned folder value, add a separator only when needed, and then appe
 
 	:RETURN sAssetPath;
 :ENDPROC;
-```
 
-Call it with `DoProc("GetAssetPath")`.
+/* Usage;
+DoProc("GetAssetPath");
+```
 
 ### Choose the correct root for published output
 
@@ -139,9 +141,10 @@ Compare the web folder with other folder helpers so published output goes under 
 
 	:RETURN sOutputPath;
 :ENDPROC;
-```
 
-Call it with `DoProc("ResolvePublishedOutputPath")`.
+/* Usage;
+DoProc("ResolvePublishedOutputPath");
+```
 
 ## Related
 

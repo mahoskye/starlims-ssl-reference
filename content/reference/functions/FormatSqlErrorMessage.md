@@ -41,12 +41,12 @@ FormatSqlErrorMessage(vError)
 ## Best practices
 
 !!! success "Do"
-    - Always use this function before displaying or logging SQL errors.
+    - Use this function when you want the full description (statement text and runtime context) for a log.
+    - Use `:Description` from the error object for a short user-facing message.
     - Handle the possibility of `"Unknown error."` as a return value in your user interface.
     - Use in combination with error retrieval functions like [`GetLastSQLError`](GetLastSQLError.md).
 
 !!! failure "Don't"
-    - Extract message properties directly from the error object; use this function to ensure consistent formatting and avoid runtime errors with unexpected value types.
     - Assume all errors will contain detailed or helpful information — non-[`SSLError`](../classes/SSLError.md) values always fall back to `"Unknown error."`.
     - Rely solely on raw SQL error output in user-facing processes.
 

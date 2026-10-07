@@ -123,7 +123,7 @@ Checks whether the returned folder is just `\` (unconfigured) before calling [`W
 	:ENDIF;
 
 	sMarkerPath := sLogsFolder + "run-marker.txt";
-	WriteText(sMarkerPath, "Run started", .F.);
+	WriteText(sMarkerPath, "Run started");
 
 	:RETURN .T.;
 :ENDPROC;

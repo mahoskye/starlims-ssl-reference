@@ -147,10 +147,10 @@ Passes a bound `@status` parameter and assigns the stable table name `orders_by_
 DoProc("LoadOrdersByStatus", {"PENDING"});
 ```
 
-[`UsrMes`](UsrMes.md) logs:
+[`UsrMes`](UsrMes.md) logs the row count, where `<n>` depends on your data:
 
 ```text
-Loaded 12 order rows
+Loaded <n> order rows
 ```
 
 ### Preserve nulls and mark date columns as invariant
