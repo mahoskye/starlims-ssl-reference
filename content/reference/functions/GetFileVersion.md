@@ -13,7 +13,7 @@ starlims:
 
 Retrieves the file version string for a specified file path.
 
-`GetFileVersion` accepts one string argument, `sFileName`, and returns the version string reported for that file. The surfaced SSL implementation only adds a null check for `sFileName` and then performs the file-version lookup.
+`GetFileVersion` accepts one string argument, `sFileName`, and returns the version string reported for that file. A [`NIL`](../literals/nil.md) `sFileName` raises an argument error, and a path to a missing file raises an error whose message is the path.
 
 ## When to use
 

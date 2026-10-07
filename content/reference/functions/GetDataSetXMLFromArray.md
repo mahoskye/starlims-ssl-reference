@@ -17,7 +17,7 @@ Generates dataset XML from in-memory values, field definitions, and output flags
 
 With the header enabled, the XML starts with the declaration `<?xml version="1.0" standalone="yes" ?>`. The data follows as an indented `<DataSet>` root element that holds one element per row, named after `sTableName`, with one child element per field.
 
-Unlike [`GetDataSetFromArrayEx`](GetDataSetFromArrayEx.md), this function does not add the extra field-name normalization step before calling the XML generator. Use it when you want direct control over the XML-oriented form.
+Unlike [`GetDataSetFromArrayEx`](GetDataSetFromArrayEx.md), this function does not generate default field names (`Field1`, `Field2`, ...) when `aArrayFields` is omitted. Use it when you want direct control over the XML-oriented form.
 
 ## When to use
 
@@ -63,15 +63,13 @@ GetDataSetXMLFromArray(aArrayOfValues, [aArrayFields], [sTableName], [bIncludeHe
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `aArrayOfValues` and expect an empty result. The function raises an error instead.
-    - Assume this function will add the same field-name defaults as [`GetDataSetFromArrayEx`](GetDataSetFromArrayEx.md). If you need that convenience, use the wrapper.
+    - Assume this function will add the same field-name defaults as [`GetDataSetFromArrayEx`](GetDataSetFromArrayEx.md). If you need that convenience, use that function instead.
     - Rely on the default table name when downstream consumers care about the table identifier.
 
 ## Caveats
 
 - If `aArrayOfValues` is empty and `bIncludeSchema` is [`.F.`](../literals/false.md), the function returns an empty string.
-- When schema output is disabled, generated columns are treated as string columns.
-- When schema output is enabled, field definitions can carry type metadata: `"S"` for string, `"N"` for numeric, and `"D"` for date.
-- If a field definition only supplies the field name, the runtime infers the column type from the first non-null value it finds in that column.
+- Column types appear in the output only when `bIncludeSchema` is [`.T.`](../literals/true.md). Field definitions can then carry type metadata (`"S"` for string, `"N"` for numeric, `"D"` for date), and a definition that only supplies the field name takes the type of the first non-null value in that column. With schema output disabled, generated columns are treated as string columns.
 - If row width and field-definition count do not match, the generated output is trimmed to the smaller available column count.
 - [`NIL`](../literals/nil.md) values and blank strings in row data are emitted as empty dataset values.
 

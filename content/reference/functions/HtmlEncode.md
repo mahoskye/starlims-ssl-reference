@@ -17,9 +17,9 @@ Converts selected characters in a string to entity sequences for HTML or XML tex
 
 | Character | Entity sequence |
 |---|---|
-| [`&`](../operators/and.md) | `&amp;` |
-| [`<`](../operators/less-than.md) | `&lt;` |
-| [`>`](../operators/greater-than.md) | `&gt;` |
+| `&` | `&amp;` |
+| `<` | `&lt;` |
+| `>` | `&gt;` |
 | `'` | `&apos;` |
 | `"` | `&quot;` |
 
@@ -27,7 +27,7 @@ Use this function when text must be inserted into HTML or XML content as literal
 
 ## When to use
 
-- When inserting text into generated HTML or XML content and the text may contain [`<`](../operators/less-than.md), [`>`](../operators/greater-than.md), [`&`](../operators/and.md), quotes, or apostrophes.
+- When inserting text into generated HTML or XML content and the text may contain `<`, `>`, `&`, quotes, or apostrophes.
 - When building markup strings from data that should be treated as text rather than interpreted as tags or attributes.
 - When you need the exact entity replacements supported by `HtmlEncode` before passing the result to another system.
 
@@ -45,7 +45,7 @@ HtmlEncode(sData)
 
 ## Returns
 
-**[string](../types/string.md)** — The encoded string with [`&`](../operators/and.md), [`<`](../operators/less-than.md), [`>`](../operators/greater-than.md), `'`, and `"` replaced by their entity sequences. Returns [`NIL`](../literals/nil.md) when `sData` is [`NIL`](../literals/nil.md).
+**[string](../types/string.md)** — The encoded string with `&`, `<`, `>`, `'`, and `"` replaced by their entity sequences. Returns [`NIL`](../literals/nil.md) when `sData` is [`NIL`](../literals/nil.md).
 
 ## Best practices
 
@@ -123,7 +123,7 @@ DoProc("BuildSampleXml");
 
 ### Encode a batch of values including NIL entries
 
-Encode an array containing a mix of strings and a [`NIL`](../literals/nil.md) entry, showing that `HtmlEncode` passes [`NIL`](../literals/nil.md) through unchanged while encoding all other values. After the loop, `aEncodedNotes[1]` holds `&lt;alpha&gt;`, entry 2 remains [`NIL`](../literals/nil.md), `aEncodedNotes[3]` holds `Tom &amp; Jerry`, and `aEncodedNotes[4]` holds `She said &quot;go&quot;`. The [`UsrMes`](UsrMes.md) call confirms that the [`NIL`](../literals/nil.md) entry was preserved.
+Encode an array containing a mix of strings and a [`NIL`](../literals/nil.md) entry, showing that `HtmlEncode` passes [`NIL`](../literals/nil.md) through unchanged while encoding all other values. After the loop, `aEncodedNotes[1]` holds `&lt;alpha&gt;`, entry 2 remains [`NIL`](../literals/nil.md), `aEncodedNotes[3]` holds `Tom &amp; Jerry`, and `aEncodedNotes[4]` holds `She said &quot;go&quot;`. The [`UsrMes`](UsrMes.md) call confirms that entry 2 is still empty ([`NIL`](../literals/nil.md)).
 
 ```ssl
 :PROCEDURE EncodeNotes;

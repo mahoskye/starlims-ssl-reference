@@ -103,22 +103,25 @@ DoProc("ValidateCurrentUser");
 
 ### Save and restore user context
 
-Preserve the original user name before a temporary context switch, then restore it in [`:FINALLY`](../keywords/FINALLY.md).
+Preserve the original user name before a temporary context switch, then restore it in [`:FINALLY`](../keywords/FINALLY.md). The messages are logged after the restore, because [`UsrMes`](UsrMes.md) writes to the log of whichever user name is set (see [`SetUserData`](SetUserData.md)).
 
 ```ssl
 :PROCEDURE RunAsServiceUser;
     :PARAMETERS sServiceUser;
-    :DECLARE sOriginalUser;
+    :DECLARE sOriginalUser, sTempUser;
 
     sOriginalUser := GetUserData();
 
     :TRY;
         SetUserData(sServiceUser);
-        UsrMes("Temporary user context: " + GetUserData());
+        sTempUser := GetUserData();
     :FINALLY;
         SetUserData(sOriginalUser);
-        UsrMes("Restored user context: " + GetUserData());
     :ENDTRY;
+
+    /* Log after restoring so the messages go to the caller's log;
+    UsrMes("Temporary user context: " + sTempUser);
+    UsrMes("Restored user context: " + GetUserData());
 
     :RETURN .T.;
 :ENDPROC;

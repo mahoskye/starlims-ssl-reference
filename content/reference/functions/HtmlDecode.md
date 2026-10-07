@@ -17,11 +17,11 @@ Converts selected HTML/XML entity sequences in a string back to literal characte
 
 | Entity sequence | Decoded character |
 | --- | --- |
-| `&lt;` | [`<`](../operators/less-than.md) |
-| `&gt;` | [`>`](../operators/greater-than.md) |
+| `&lt;` | `<` |
+| `&gt;` | `>` |
 | `&apos;` | `'` |
 | `&quot;` | `"` |
-| `&amp;` | [`&`](../operators/and.md) |
+| `&amp;` | `&` |
 
 Use this function when you need to reverse output produced by [`HtmlEncode`](HtmlEncode.md) or to make encoded text readable in a plain-text context.
 
@@ -56,7 +56,7 @@ HtmlDecode(sData)
 
 !!! failure "Don't"
     - Assume `HtmlDecode` sanitizes content. It only converts supported entity sequences back to literal characters.
-    - Assume it decodes every named HTML entity. The implementation only replaces `&lt;`, `&gt;`, `&apos;`, `&quot;`, and `&amp;`.
+    - Assume it decodes every named HTML entity. `HtmlDecode` only replaces `&lt;`, `&gt;`, `&apos;`, `&quot;`, and `&amp;`.
     - Inject decoded untrusted content into an HTML-rendering context without separate validation or sanitization.
 
 ## Caveats

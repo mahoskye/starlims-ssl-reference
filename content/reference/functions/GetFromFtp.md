@@ -72,7 +72,7 @@ GetFromFtp(sServerNameOrIP, [sRemoteDirectory], sRemoteFileName, [sLocalFileName
 ## Caveats
 
 - In the FTP path, a failed transfer deletes the incomplete local file before the function returns [`.F.`](../literals/false.md).
-- In the SFTP path, the source does not provide the same explicit partial-file cleanup behavior.
+- In the SFTP path, a partially downloaded local file may remain after a failure; delete it yourself before retrying.
 
 ## Examples
 
@@ -111,13 +111,14 @@ Downloads a file from a named FTP directory to an explicit local path and report
 
     :RETURN bDownloaded;
 :ENDPROC;
-```
 
-Call with `DoProc("DownloadPartnerFile");`.
+/* Usage;
+DoProc("DownloadPartnerFile");
+```
 
 ### Download from SFTP with key-based authentication
 
-Uses SFTP with a private key file for authentication, targets port 22, and reports any download failure with details from the SSL error object.
+Uses SFTP with a private key file for authentication, targets port 22, and reports any download failure with details from the SSL error object. [`ClearLastSSLError`](ClearLastSSLError.md) runs first so an earlier, unrelated error is not reported.
 
 ```ssl
 :PROCEDURE DownloadNightlyReport;
@@ -134,6 +135,7 @@ Uses SFTP with a private key file for authentication, targets port 22, and repor
     sKeyPath := "C:\Keys\report_service.pem";
     nPort := 22;
 
+    ClearLastSSLError();
     bDownloaded := GetFromFtp(
         sServer,
         sRemoteDir,
@@ -159,9 +161,10 @@ Uses SFTP with a private key file for authentication, targets port 22, and repor
 
     :RETURN bDownloaded;
 :ENDPROC;
-```
 
-Call with `DoProc("DownloadNightlyReport");`.
+/* Usage;
+DoProc("DownloadNightlyReport");
+```
 
 ### Use the remote file name as the local file name and handle validation and transfer failures
 
@@ -179,6 +182,7 @@ Omits the local file name so the function saves under the remote name and wraps 
     sPassword := "secret";
 
     :TRY;
+        ClearLastSSLError();
         bDownloaded := GetFromFtp(
             sServer,
             sRemoteDir,
@@ -215,9 +219,10 @@ Omits the local file name so the function saves under the remote name and wraps 
 
     :RETURN bDownloaded;
 :ENDPROC;
-```
 
-Call with `DoProc("FetchInboundFile");`.
+/* Usage;
+DoProc("FetchInboundFile");
+```
 
 ## Related
 

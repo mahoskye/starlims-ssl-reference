@@ -13,7 +13,7 @@ starlims:
 
 Extracts table names from the `FROM` portion of a SQL `SELECT` string.
 
-`GetTables` performs text parsing on a SQL string and returns the table names it can identify after the `FROM` clause. The implementation first looks for a `SELECT ... FROM` pattern, then scans the text up to the first `WHERE`, `GROUP`, `HAVING`, or `ORDER` keyword and collects table names that appear at the start of the list, after commas, or after `JOIN`.
+`GetTables` performs text parsing on a SQL string and returns the table names it can identify after the `FROM` clause. It finds the first `SELECT ... FROM`, then reads the text up to the first `WHERE`, `GROUP`, `HAVING`, or `ORDER` keyword and collects table names that appear at the start of the list, after commas, or after `JOIN`.
 
 If the input is [`NIL`](../literals/nil.md), empty, or does not match that `SELECT ... FROM` pattern, the function returns an empty array. It parses query text only. It does not connect to the database, validate whether the tables exist, or resolve aliases.
 
@@ -37,7 +37,7 @@ GetTables([sSql])
 
 ## Returns
 
-**[array](../types/array.md)** — Table names found in the `FROM` portion of the SQL text, one per element. Returns an empty array when the input is [`NIL`](../literals/nil.md), empty, or does not match the `SELECT ... FROM` pattern. Names with a leading [`#`](../operators/hash.md) are returned without the [`#`](../operators/hash.md).
+**[array](../types/array.md)** — Table names found in the `FROM` portion of the SQL text, one per element. Returns an empty array when the input is [`NIL`](../literals/nil.md), empty, or does not match the `SELECT ... FROM` pattern. Names with a leading `#` are returned without the `#`.
 
 ## Best practices
 
@@ -112,7 +112,7 @@ Extracts all table names from the incoming SQL and checks each one against an al
     :ENDIF;
 
     :FOR nIndex := 1 :TO ALen(aTables);
-        :IF AScan(aAllowed, Lower(aTables[nIndex])) == 0;
+        :IF AScanExact(aAllowed, Lower(aTables[nIndex])) == 0;
             UsrMes("Disallowed table in query: " + aTables[nIndex]);
             /* Logs each disallowed table name;
             bValid := .F.;

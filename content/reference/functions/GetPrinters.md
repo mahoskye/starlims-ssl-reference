@@ -87,7 +87,7 @@ DoProc("ShowPrinterList");
 
 ### Validate printer presence before a printer-dependent task
 
-Uses [`AScan`](AScan.md) to check whether a required printer name appears in the returned list, returning [`.T.`](../literals/true.md) or [`.F.`](../literals/false.md) accordingly.
+Uses [`AScanExact`](AScanExact.md) to check whether a required printer name appears exactly in the returned list, returning [`.T.`](../literals/true.md) or [`.F.`](../literals/false.md) accordingly.
 
 ```ssl
 :PROCEDURE ValidateRequiredPrinter;
@@ -95,7 +95,7 @@ Uses [`AScan`](AScan.md) to check whether a required printer name appears in the
 	:DECLARE aPrinters, nPos;
 
 	aPrinters := GetPrinters();
-	nPos := AScan(aPrinters, sRequiredPrinter);
+	nPos := AScanExact(aPrinters, sRequiredPrinter);
 
 	:IF nPos > 0;
 		UsrMes("Printer is available: " + sRequiredPrinter);
@@ -131,14 +131,14 @@ Captures the printer list before and after a configuration step, then computes w
 
 	:FOR nIndex := 1 :TO ALen(aAfter);
 		sPrinter := aAfter[nIndex];
-		:IF AScan(aBefore, sPrinter) == 0;
+		:IF AScanExact(aBefore, sPrinter) == 0;
 			AAdd(aAdded, sPrinter);
 		:ENDIF;
 	:NEXT;
 
 	:FOR nIndex := 1 :TO ALen(aBefore);
 		sPrinter := aBefore[nIndex];
-		:IF AScan(aAfter, sPrinter) == 0;
+		:IF AScanExact(aAfter, sPrinter) == 0;
 			AAdd(aRemoved, sPrinter);
 		:ENDIF;
 	:NEXT;

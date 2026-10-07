@@ -13,7 +13,7 @@ starlims:
 
 Returns a comma-separated string of connected usernames when called with the special key `"STARLIMSUSERS"` in a `CUSTOM` session context.
 
-`GetFromApplication` does not provide general application-variable lookup in the SSL implementation documented here. It recognizes one key only: `"STARLIMSUSERS"`. When that key is used and the current `Session:Mode` is `"CUSTOM"`, the function returns the connected usernames joined into a single comma-separated string.
+`GetFromApplication` is not a general application-variable lookup. It recognizes one key only: `"STARLIMSUSERS"`. When that key is used and the current `Session:Mode` is `"CUSTOM"`, the function returns the connected usernames joined into a single comma-separated string.
 
 For any other key, and for [`NIL`](../literals/nil.md) or empty input, the function returns [`NIL`](../literals/nil.md).
 If the key is `"STARLIMSUSERS"` but the current session mode is not `"CUSTOM"`, the function returns an empty string. The function also expects the public `Session` variable to be available in the current execution context.

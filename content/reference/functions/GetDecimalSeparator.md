@@ -43,12 +43,12 @@ This function takes no parameters.
 
 !!! success "Do"
     - Retrieve the separator each time you need it, rather than storing it for long periods.
-    - Use the value from this function in any numeric-to-string or string-to-numeric operation.
+    - Use the value from this function when parsing or producing numeric text for users in the session's locale.
     - Validate numeric string inputs against the current separator returned by this function.
 
 !!! failure "Don't"
     - Assume the value cannot change within the lifetime of your session. Dynamic retrieval ensures your logic always reflects the latest user or system setting.
-    - Hardcode any decimal separator in your calculations or string formatting. Hardcoding reduces correctness, portability, and support for internationalization.
+    - Hardcode a decimal separator in numeric text shown to or entered by users. SQL, JSON, and XML are different: they need `.` regardless of the session setting.
     - Trust user input to always use the correct separator for the environment. Validation prevents parsing errors and improves data quality when formats differ by user locale.
 
 ## Caveats

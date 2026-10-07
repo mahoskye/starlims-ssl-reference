@@ -73,9 +73,13 @@ GetRegion(sRegionName, [aSourceValues], [aDestinationValues])
 
 ### Look up a region with error handling
 
-Wraps the lookup in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) to handle the case where the region is not in scope, displaying the content if found or the error description if the region does not exist.
+Wraps the lookup in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) to handle the case where the region is not in scope, displaying the content if found or the error description if the region does not exist. The script defines the `WelcomeBanner` region with [`:REGION`](../keywords/REGION.md). A missing name raises only when the script defines regions; in a script that defines none, `GetRegion` returns an empty string.
 
 ```ssl
+:REGION WelcomeBanner;
+Welcome to the laboratory portal
+:ENDREGION;
+
 :PROCEDURE ShowBanner;
     :DECLARE sBanner;
 
@@ -98,9 +102,13 @@ DoProc("ShowBanner");
 
 ### Replace placeholders in region text
 
-Reads a template region that contains `{USER}` and `{DATE}` placeholders and replaces both with runtime values in a single call, showing how parallel source and destination arrays drive the substitution.
+Reads a template region that contains `{USER}` and `{DATE}` placeholders and replaces both with runtime values in a single call, showing how parallel source and destination arrays drive the substitution. The script defines the `WelcomeTemplate` region with [`:REGION`](../keywords/REGION.md).
 
 ```ssl
+:REGION WelcomeTemplate;
+Welcome {USER}, today is {DATE}
+:ENDREGION;
+
 :PROCEDURE BuildWelcomeMessage;
     :DECLARE aSrc, aDst, sMessage;
 

@@ -4449,7 +4449,7 @@
         ],
         "dont": [
           "Assume every input produces a meaningful description — non-SSLError values always fall back to \"Unknown error.\".",
-          "Cast or convert error objects to string directly; direct conversion may produce technical or unhelpful output."
+          "Expect a short message. The result is FullDescription, which can span several lines and include runtime context; read :Description from the SSLError object when you want only the short message for a user."
         ]
       }
     },
@@ -4466,12 +4466,12 @@
       ],
       "best_practices": {
         "do": [
-          "Always use this function before displaying or logging SQL errors.",
+          "Use this function when you want the full description (statement text and runtime context) for a log.",
+          "Use :Description from the error object for a short user-facing message.",
           "Handle the possibility of \"Unknown error.\" as a return value in your user interface.",
           "Use in combination with error retrieval functions like GetLastSQLError."
         ],
         "dont": [
-          "Extract message properties directly from the error object; use this function to ensure consistent formatting and avoid runtime errors with unexpected value types.",
           "Assume all errors will contain detailed or helpful information — non-SSLError values always fall back to \"Unknown error.\".",
           "Rely solely on raw SQL error output in user-facing processes."
         ]
@@ -4563,7 +4563,6 @@
       "source_path": "content/reference/functions/GetAppBaseFolder.md",
       "exceptions": [],
       "caveats": [
-        "Because the result is static, changes to the configuration during runtime will not affect already-running code that has cached the result.",
         "This function does not check if the returned folder actually exists on disk; using an invalid path will result in errors later."
       ],
       "best_practices": {
@@ -4651,12 +4650,10 @@
       "best_practices": {
         "do": [
           "Validate that the connection name exists in your configuration before calling.",
-          "Release the connection object after use.",
           "Use this function to centralize database connection logic."
         ],
         "dont": [
           "Pass hardcoded or unvalidated names — a name not present in the system configuration raises an error.",
-          "Leave connections open after use.",
           "Pass an empty string expecting it to fall back to the default connection.",
           "Display or log sensitive connection properties such as oConn:Password or oConn:ConnectionString."
         ]
@@ -4674,11 +4671,11 @@
       "best_practices": {
         "do": [
           "Check for an empty array before iterating.",
-          "Treat the returned array as a snapshot. Re-call the function if you need fresh data."
+          "Treat the returned array as a snapshot. Re-call the function if you need fresh data.",
+          "Read column 1 for the name, column 2 for the provider settings, and column 3 for the connection string."
         ],
         "dont": [
-          "Assume the array always has at least one row. The system may have no connections configured.",
-          "Assume column order. Column 1 is the name, column 2 the provider settings, and column 3 the connection string. Always access by index in that order."
+          "Assume the array always has at least one row. The system may have no connections configured."
         ]
       }
     },
@@ -5020,9 +5017,7 @@
       ],
       "caveats": [
         "If aArrayOfValues is empty and bIncludeSchema is .F., the function returns an empty string.",
-        "When schema output is disabled, generated columns are treated as string columns.",
-        "When schema output is enabled, field definitions can carry type metadata: \"S\" for string, \"N\" for numeric, and \"D\" for date.",
-        "If a field definition only supplies the field name, the runtime infers the column type from the first non-null value it finds in that column.",
+        "Column types appear in the output only when bIncludeSchema is .T.. Field definitions can then carry type metadata (\"S\" for string, \"N\" for numeric, \"D\" for date), and a definition that only supplies the field name takes the type of the first non-null value in that column. With schema output disabled, generated columns are treated as string columns.",
         "If row width and field-definition count do not match, the generated output is trimmed to the smaller available column count.",
         "NIL values and blank strings in row data are emitted as empty dataset values."
       ],
@@ -5034,7 +5029,7 @@
         ],
         "dont": [
           "Pass NIL for aArrayOfValues and expect an empty result. The function raises an error instead.",
-          "Assume this function will add the same field-name defaults as GetDataSetFromArrayEx. If you need that convenience, use the wrapper.",
+          "Assume this function will add the same field-name defaults as GetDataSetFromArrayEx. If you need that convenience, use that function instead.",
           "Rely on the default table name when downstream consumers care about the table identifier."
         ]
       }
@@ -5127,12 +5122,12 @@
       "best_practices": {
         "do": [
           "Retrieve the separator each time you need it, rather than storing it for long periods.",
-          "Use the value from this function in any numeric-to-string or string-to-numeric operation.",
+          "Use the value from this function when parsing or producing numeric text for users in the session's locale.",
           "Validate numeric string inputs against the current separator returned by this function."
         ],
         "dont": [
           "Assume the value cannot change within the lifetime of your session. Dynamic retrieval ensures your logic always reflects the latest user or system setting.",
-          "Hardcode any decimal separator in your calculations or string formatting. Hardcoding reduces correctness, portability, and support for internationalization.",
+          "Hardcode a decimal separator in numeric text shown to or entered by users. SQL, JSON, and XML are different: they need . regardless of the session setting.",
           "Trust user input to always use the correct separator for the environment. Validation prevents parsing errors and improves data quality when formats differ by user locale."
         ]
       }
@@ -5187,7 +5182,7 @@
         }
       ],
       "caveats": [
-        "The implementation falls back to port 21 when nPort is omitted or less than or equal to zero, even on the SFTP path.",
+        "Port 21 is used when nPort is omitted or less than or equal to zero, even on the SFTP path.",
         "On the FTP path, unparseable listing text causes a user message and a NIL return.",
         "SFTP connection, login, or private-key setup failures occur before the NIL return path, so those errors can propagate as exceptions rather than returning NIL.",
         "The returned array shape is the same on both paths, but the date and time values come from each protocol's listing data."
@@ -5297,7 +5292,7 @@
       ],
       "caveats": [
         "In the FTP path, a failed transfer deletes the incomplete local file before the function returns .F..",
-        "In the SFTP path, the source does not provide the same explicit partial-file cleanup behavior."
+        "In the SFTP path, a partially downloaded local file may remain after a failure; delete it yourself before retrying."
       ],
       "best_practices": {
         "do": [
@@ -6126,7 +6121,7 @@
         ],
         "dont": [
           "Assume HtmlDecode sanitizes content. It only converts supported entity sequences back to literal characters.",
-          "Assume it decodes every named HTML entity. The implementation only replaces &lt;, &gt;, &apos;, &quot;, and &amp;.",
+          "Assume it decodes every named HTML entity. HtmlDecode only replaces &lt;, &gt;, &apos;, &quot;, and &amp;.",
           "Inject decoded untrusted content into an HTML-rendering context without separate validation or sanitization."
         ]
       }

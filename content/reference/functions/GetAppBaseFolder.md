@@ -50,7 +50,6 @@ This function takes no parameters.
 
 ## Caveats
 
-- Because the result is static, changes to the configuration during runtime will not affect already-running code that has cached the result.
 - This function does not check if the returned folder actually exists on disk; using an invalid path will result in errors later.
 
 ## Examples
@@ -94,12 +93,14 @@ Combine the application base folder with relative paths to read configuration fi
 	sConfigRelative := "config\application.cfg";
 	sFullPath := sBaseFolder + sConfigRelative;
 
-	sContent := ReadText(sFullPath);
-	:IF Empty(sContent);
+	:IF !FileSupport(sFullPath, "CHECK");
 		ErrorMes("Configuration file not found at: " + sFullPath);
-	:ELSE;
-		UsrMes("Configuration loaded from: " + sFullPath);
+
+		:RETURN "";
 	:ENDIF;
+
+	sContent := ReadText(sFullPath);
+	UsrMes("Configuration loaded from: " + sFullPath);
 
 	:RETURN sContent;
 :ENDPROC;

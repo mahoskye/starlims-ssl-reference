@@ -70,9 +70,13 @@ GetRegionEx(sRegionName, [aSourceValues], [aDestinationValues], [oLocalRegions])
 
 ### Look up a region by name
 
-Retrieves a named region without any token substitution, wrapping the call in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) so that a missing region name can be reported without halting the procedure.
+Retrieves a named region without any token substitution, wrapping the call in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) so that a missing region name can be reported without halting the procedure. The script defines the `InvoiceHeader` region with [`:REGION`](../keywords/REGION.md); the [`:CATCH`](../keywords/CATCH.md) runs only when the script defines regions but not the requested one.
 
 ```ssl
+:REGION InvoiceHeader;
+Acme Corp - Invoice
+:ENDREGION;
+
 :PROCEDURE ShowRegionText;
 	:DECLARE oErr, sResult;
 
@@ -132,7 +136,7 @@ Passes a caller-supplied local region map as `oLocalRegions` so that the local m
 
 ```ssl
 :PROCEDURE ResolveImportRegion;
-	:PARAMETERS oLocalRegions, sSampleID;
+	:PARAMETERS sSampleID, oLocalRegions;
 	:DECLARE aDst, aSrc, oErr, sRegionText;
 
 	aSrc := {"{SAMPLE}"};
@@ -153,7 +157,7 @@ Passes a caller-supplied local region map as `oLocalRegions` so that the local m
 :ENDPROC;
 
 /* Usage;
-DoProc("ResolveImportRegion", {NIL, "LAB-001"});
+DoProc("ResolveImportRegion", {"LAB-001"});
 ```
 
 ## Related

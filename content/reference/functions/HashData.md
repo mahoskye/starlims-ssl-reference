@@ -69,17 +69,16 @@ HashData(sInputData, [sAlgorithm])
 
 ### Hash a value with the default algorithm
 
-Hash a string with the default `SH1` algorithm and compare it to a known hash.
+Hash a token with the default `SH1` algorithm and compare it to a hash stored earlier. The caller passes in the stored hash; the usage line computes it inline so the example runs on its own, but in practice it would come from a table or setting.
 
 ```ssl
 :PROCEDURE VerifySampleToken;
-    :DECLARE sToken, sExpectedHash, sActualHash;
+    :PARAMETERS sToken, sStoredHash;
+    :DECLARE sActualHash;
 
-    sToken := "LAB-2026-0001";
-    sExpectedHash := HashData("LAB-2026-0001");
     sActualHash := HashData(sToken);
 
-    :IF sActualHash == sExpectedHash;
+    :IF sActualHash == sStoredHash;
         UsrMes("Token hash matched");
         :RETURN .T.;
     :ENDIF;
@@ -90,7 +89,7 @@ Hash a string with the default `SH1` algorithm and compare it to a known hash.
 :ENDPROC;
 
 /* Usage;
-DoProc("VerifySampleToken");
+DoProc("VerifySampleToken", {"LAB-2026-0001", HashData("LAB-2026-0001")});
 ```
 
 ### Use an explicit algorithm for an external interface

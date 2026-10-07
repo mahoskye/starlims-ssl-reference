@@ -24,7 +24,7 @@ Returns the provider identifier for the connection identified by `sConnectionNam
 ## Syntax
 
 ```ssl
-GetDBMSProviderName(sConnectionName)
+GetDBMSProviderName([sConnectionName])
 ```
 
 ## Parameters

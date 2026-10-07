@@ -26,7 +26,7 @@ Returns a [`SQLConnection`](../classes/SQLConnection.md) object for the given `s
 ## Syntax
 
 ```ssl
-GetConnectionByName(sConnectionName)
+GetConnectionByName([sConnectionName])
 ```
 
 ## Parameters
@@ -49,12 +49,10 @@ GetConnectionByName(sConnectionName)
 
 !!! success "Do"
     - Validate that the connection name exists in your configuration before calling.
-    - Release the connection object after use.
     - Use this function to centralize database connection logic.
 
 !!! failure "Don't"
     - Pass hardcoded or unvalidated names — a name not present in the system configuration raises an error.
-    - Leave connections open after use.
     - Pass an empty string expecting it to fall back to the default connection.
     - Display or log sensitive connection properties such as `oConn:Password` or `oConn:ConnectionString`.
 
