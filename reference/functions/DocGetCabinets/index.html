@@ -3934,13 +3934,14 @@
 <li>Check <code>ALen(aCabinets)</code> before iterating or validating against the result.</li>
 <li>Treat the result as a list of names only. If you need more than the name, fetch that data separately.</li>
 <li>Use <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> or <a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a> when an empty array might indicate a failed Documentum call rather than simply no results.</li>
+<li>Call the function within an initialized, logged-in Documentum session (<a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a>, <a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a>).</li>
 </ul>
 </div>
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
 <li>Assume the array contains cabinet objects or metadata fields. This function returns names only.</li>
-<li>Assume the result order is stable. The raw query does not apply an <code>ORDER BY</code> clause.</li>
+<li>Assume any particular result order. Sort the array yourself if order matters.</li>
 <li>Call the function repeatedly inside tight loops when one lookup can be reused.</li>
 </ul>
 </div>
@@ -3950,7 +3951,7 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="list-all-cabinet-names">List all cabinet names<a class="headerlink" href="#list-all-cabinet-names" title="Permanent link">&para;</a></h3>
-<p>Calls <code>DocGetCabinets()</code>, exits early when the result is empty, then prints each cabinet name in turn.</p>
+<p>Calls <code>DocGetCabinets()</code>, exits early when the result is empty, then prints each cabinet name in turn. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListCabinetNames</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aCabinets</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sCabinetName</span><span class="p">;</span>
 
@@ -3971,7 +3972,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ListCabinetNames"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="validate-a-configured-cabinet-name">Validate a configured cabinet name<a class="headerlink" href="#validate-a-configured-cabinet-name" title="Permanent link">&para;</a></h3>
-<p>Searches the cabinet list for a case-insensitive match against a configured name, then checks <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> on a negative result to distinguish a backend failure from a genuinely missing cabinet.</p>
+<p>Searches the cabinet list for a case-insensitive match against a configured name, then checks <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> on a negative result to distinguish a backend failure from a genuinely missing cabinet. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateCabinetName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sTargetCabinet</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aCabinets</span><span class="p">,</span><span class="w"> </span><span class="n">bExists</span><span class="p">;</span>
@@ -4001,7 +4002,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateCabinetName"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"QA_Reports"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="reconcile-cabinets-against-a-control-table">Reconcile cabinets against a control table<a class="headerlink" href="#reconcile-cabinets-against-a-control-table" title="Permanent link">&para;</a></h3>
-<p>Fetches the live cabinet list, checks <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> immediately, then compares against configured cabinet names from a control table and inserts an audit row for each cabinet that is missing in Documentum.</p>
+<p>Fetches the live cabinet list, checks <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> immediately, then compares against configured cabinet names from a control table and inserts an audit row for each cabinet that is missing in Documentum. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AuditConfiguredCabinets</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aCabinets</span><span class="p">,</span><span class="w"> </span><span class="n">aConfigured</span><span class="p">,</span><span class="w"> </span><span class="n">aMissing</span><span class="p">,</span><span class="w"> </span><span class="n">sCabinetName</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
 
@@ -4048,6 +4049,8 @@
 <li><a href="../DocCommandFailed/"><code>DocCommandFailed</code></a></li>
 <li><a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a></li>
 <li><a href="../DocGetFolders/"><code>DocGetFolders</code></a></li>
+<li><a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a></li>
+<li><a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a></li>
 <li><a href="../../types/array/"><code>array</code></a></li>
 <li><a href="../../types/string/"><code>string</code></a></li>
 </ul>
@@ -4071,7 +4074,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:02:08 UTC">October 7, 2026</span>
   </span>
 
     

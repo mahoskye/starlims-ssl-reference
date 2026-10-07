@@ -3799,7 +3799,7 @@
 <p>Performs multiple file operations through a single request-driven interface.</p>
 <p><code>FileSupport</code> works in two modes. Path-based requests operate on a file path, while handle-based requests operate on a numeric file handle returned by <code>CREATE</code> or <code>OPEN</code>. The <code>sEncoding</code> argument defaults to <code>"UTF8"</code> and is used when a file handle is created or opened.</p>
 <p>Supported request families are <code>CHECK</code>, <code>SETATTR</code>, <code>GETATTR</code>, <code>CREATE</code>, <code>OPEN</code>, <code>CLOSE</code>, <code>READ</code>, <code>READBLK</code>, <code>WRITE</code>, <code>BOF</code>, <code>EOF</code>, <code>TELL</code>, <code>SEEK</code>, <code>RESIZE</code>, <code>COPY</code>, <code>DELETE</code>, <code>MOVE</code>, <code>RENAME</code>, <code>PATH</code>, <code>FOLDERNAME</code>, <code>FILENAME</code>, <code>NAME</code>, <code>EXT</code>, <code>SIZE</code>, <code>DATE</code>, <code>TIME</code>, and <code>DIR</code>.</p>
-<p>The implementation matches <code>sRequest</code> by case-insensitive leading text. Use the canonical request names above to avoid accidental matches.</p>
+<p><code>sRequest</code> is matched case-insensitively on its leading text, so a prefix can select a request. Use the canonical request names above to avoid accidental matches.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need low-level file-handle operations such as <code>OPEN</code>, <code>READ</code>, <code>WRITE</code>, <code>SEEK</code>, and <code>CLOSE</code>.</li>
@@ -3953,7 +3953,7 @@
 <tr>
 <td><code>MOVE</code>, <code>RENAME</code></td>
 <td><a href="../../types/boolean/">boolean</a></td>
-<td>Moves the source file to the destination path in <code>vArg1</code>. <code>RENAME</code> uses the same implementation as <code>MOVE</code>.</td>
+<td>Moves the source file to the destination path in <code>vArg1</code>. <code>RENAME</code> behaves exactly like <code>MOVE</code>.</td>
 </tr>
 <tr>
 <td><code>PATH</code></td>
@@ -4056,7 +4056,7 @@
 <p class="admonition-title">Do</p>
 <ul>
 <li>Use <code>CREATE</code> or <code>OPEN</code> first, keep the returned handle, and close it with <code>CLOSE</code> when you finish.</li>
-<li>Use the canonical request names such as <code>"READ"</code>, <code>"WRITE"</code>, and <code>"SEEK"</code> even though the implementation matches by leading text.</li>
+<li>Use the canonical request names such as <code>"READ"</code>, <code>"WRITE"</code>, and <code>"SEEK"</code> even though a leading-text match also works.</li>
 <li>Check the boolean result from <code>COPY</code>, <code>DELETE</code>, <code>MOVE</code>, <code>RENAME</code>, and <code>CLOSE</code> before assuming the operation succeeded.</li>
 <li>Wrap path-based operations in <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> when the target path may fall outside the configured whitelist.</li>
 </ul>
@@ -4066,8 +4066,8 @@
 <ul>
 <li>Pass a file path to handle-based requests such as <code>READ</code> or <code>WRITE</code>, or a handle to path-based requests such as <code>COPY</code> or <code>DIR</code>.</li>
 <li>Assume <code>READ</code> returns a short string at end of file. It pads the result with spaces when fewer characters are available.</li>
-<li>Treat <code>RENAME</code> as a metadata-only rename. It uses the same move logic as <code>MOVE</code> and therefore depends on a destination path.</li>
-<li>Rely on non-canonical request prefixes in published code just because the implementation accepts leading-text matches.</li>
+<li>Treat <code>RENAME</code> as a metadata-only rename. It behaves exactly like <code>MOVE</code> and therefore depends on a destination path.</li>
+<li>Rely on non-canonical request prefixes in published code just because leading-text matches are accepted.</li>
 <li>Pass <code>"EXISTS"</code> to test whether a file exists. There is no such request, so it raises <code>Invalid request provided!</code>. Use <code>CHECK</code>.</li>
 </ul>
 </div>
@@ -4199,7 +4199,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:02:08 UTC">October 7, 2026</span>
   </span>
 
     

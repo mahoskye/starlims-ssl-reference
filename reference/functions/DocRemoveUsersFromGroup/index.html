@@ -4020,7 +4020,7 @@
 <h1 id="docremoveusersfromgroup">DocRemoveUsersFromGroup<a class="headerlink" href="#docremoveusersfromgroup" title="Permanent link">&para;</a></h1>
 <p>Removes one or more users from an existing Documentum group.</p>
 <p>Pass the target group name and an array of user names. The function returns <a href="../../literals/true/"><code>.T.</code></a> when the group update completes successfully and <a href="../../literals/false/"><code>.F.</code></a> when the removal operation fails. Passing <a href="../../literals/nil/"><code>NIL</code></a> for <code>sGroupName</code> or <code>aUsers</code> raises an error before the Documentum call starts.</p>
-<p>When the named group cannot be found, the underlying removal call fails and this function returns <a href="../../literals/false/"><code>.F.</code></a> rather than surfacing that backend error directly.</p>
+<p>When the named group cannot be found, the function returns <a href="../../literals/false/"><code>.F.</code></a> instead of raising. After a <a href="../../literals/false/"><code>.F.</code></a> result, check <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> and read <a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a> immediately for the reason.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When removing selected users from an existing Documentum group.</li>
@@ -4086,6 +4086,7 @@
 <li>Validate that <code>sGroupName</code> and <code>aUsers</code> are populated before calling the function.</li>
 <li>Check the boolean return value and treat <a href="../../literals/false/"><code>.F.</code></a> as an operation failure.</li>
 <li>Build the <code>aUsers</code> array from validated user names before calling the function.</li>
+<li>Call the function within an initialized, logged-in Documentum session (<a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a>, <a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a>).</li>
 </ul>
 </div>
 <div class="admonition failure">
@@ -4103,7 +4104,7 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="remove-one-user-from-a-known-group">Remove one user from a known group<a class="headerlink" href="#remove-one-user-from-a-known-group" title="Permanent link">&para;</a></h3>
-<p>Wraps a single user name in a one-element array and reports success or failure.</p>
+<p>Wraps a single user name in a one-element array and reports success or failure. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RemoveOneUser</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aUsers</span><span class="p">,</span><span class="w"> </span><span class="n">bRemoved</span><span class="p">;</span>
 
@@ -4122,7 +4123,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RemoveOneUser"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="remove-a-validated-user-list-from-one-project-group">Remove a validated user list from one project group<a class="headerlink" href="#remove-a-validated-user-list-from-one-project-group" title="Permanent link">&para;</a></h3>
-<p>Constructs a group name from a project code, removes the supplied user list, reports the outcome, and returns the boolean so the caller can react to a failure.</p>
+<p>Constructs a group name from a project code, removes the supplied user list, reports the outcome, and returns the boolean so the caller can react to a failure. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RemoveProjectUsers</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sProjectCode</span><span class="p">,</span><span class="w"> </span><span class="n">aUsersToRemove</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sGroupName</span><span class="p">,</span><span class="w"> </span><span class="n">bRemoved</span><span class="p">;</span>
@@ -4144,7 +4145,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RemoveProjectUsers"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"ALPHA"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"jsmith"</span><span class="p">}});</span>
 </code></pre></div>
 <h3 id="remove-users-from-several-groups-and-capture-per-group-results">Remove users from several groups and capture per-group results<a class="headerlink" href="#remove-users-from-several-groups-and-capture-per-group-results" title="Permanent link">&para;</a></h3>
-<p>Applies the same user list removal to each group in a list, records each per-group result in a <a href="../CreateUdObject/"><code>CreateUdObject</code></a>, and returns the full result array.</p>
+<p>Applies the same user list removal to each group in a list, records each per-group result in a <a href="../CreateUdObject/"><code>CreateUdObject</code></a>, and returns the full result array. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RemoveUsersFromGroups</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aGroupNames</span><span class="p">,</span><span class="w"> </span><span class="n">aUsersToRemove</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aResults</span><span class="p">,</span><span class="w"> </span><span class="n">oResult</span><span class="p">,</span><span class="w"> </span><span class="n">sGroupName</span><span class="p">;</span>
@@ -4183,6 +4184,10 @@
 <li><a href="../DocRemoveAllUsersFromGroup/"><code>DocRemoveAllUsersFromGroup</code></a></li>
 <li><a href="../DocCreateGroup/"><code>DocCreateGroup</code></a></li>
 <li><a href="../DocExistsUser/"><code>DocExistsUser</code></a></li>
+<li><a href="../DocCommandFailed/"><code>DocCommandFailed</code></a></li>
+<li><a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a></li>
+<li><a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a></li>
+<li><a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a></li>
 <li><a href="../../types/boolean/"><code>boolean</code></a></li>
 <li><a href="../../types/string/"><code>string</code></a></li>
 <li><a href="../../types/array/"><code>array</code></a></li>
@@ -4207,7 +4212,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:02:08 UTC">October 7, 2026</span>
   </span>
 
     

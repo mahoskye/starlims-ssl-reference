@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Creates a new user account and returns its identifier.">
+        <meta name="description" content="Creates a Documentum user and returns its identifier.">
       
       
       
@@ -1581,10 +1581,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#catch-null-argument-errors-and-check-for-an-empty-result" class="md-nav__link">
+  <a href="#catch-unexpected-errors-and-check-for-an-empty-result" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Catch null-argument errors and check for an empty result
+        Catch unexpected errors and check for an empty result
       
     </span>
   </a>
@@ -3856,10 +3856,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#catch-null-argument-errors-and-check-for-an-empty-result" class="md-nav__link">
+  <a href="#catch-unexpected-errors-and-check-for-an-empty-result" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Catch null-argument errors and check for an empty result
+        Catch unexpected errors and check for an empty result
       
     </span>
   </a>
@@ -4018,7 +4018,7 @@
 
 
 <h1 id="doccreateuser">DocCreateUser<a class="headerlink" href="#doccreateuser" title="Permanent link">&para;</a></h1>
-<p>Creates a new user account and returns its identifier.</p>
+<p>Creates a Documentum user and returns its identifier.</p>
 <p><code>DocCreateUser</code> requires <code>sLoginName</code> and <code>sPassword</code>, then optionally accepts <code>sUserName</code>, <code>sEmail</code>, <code>sDefaultFolder</code>, <code>sGroupName</code>, <code>sPermissionSet</code>, and <code>nUserPrivileges</code>. If <code>sLoginName</code> or <code>sPassword</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the function raises an error before attempting creation. Optional string arguments can be omitted, and <code>nUserPrivileges</code> defaults to <code>0</code> when omitted. On success, the function returns the created user identifier as a string. If the create operation does not return a value, the function returns an empty string.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4139,6 +4139,7 @@
   group, permission, or privilege settings immediately.</li>
 <li>Check whether the returned identifier is empty before treating the create
   operation as successful.</li>
+<li>Call the function within an initialized, logged-in Documentum session (<a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a>, <a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a>).</li>
 </ul>
 </div>
 <div class="admonition failure">
@@ -4155,7 +4156,7 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="create-a-user-with-required-credentials-only">Create a user with required credentials only<a class="headerlink" href="#create-a-user-with-required-credentials-only" title="Permanent link">&para;</a></h3>
-<p>Creates a Documentum user account with only a login name and password and logs the returned identifier or an error when the result is empty.</p>
+<p>Creates a Documentum user account with only a login name and password and logs the returned identifier or an error when the result is empty. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateBasicUser</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sUserId</span><span class="p">;</span>
 
@@ -4179,7 +4180,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CreateBasicUser"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="create-a-user-with-profile-and-access-settings">Create a user with profile and access settings<a class="headerlink" href="#create-a-user-with-profile-and-access-settings" title="Permanent link">&para;</a></h3>
-<p>Creates a full user account by passing all eight arguments: login name, password, display name, email, default folder, group, permission set, and privilege level.</p>
+<p>Creates a full user account by passing all eight arguments: login name, password, display name, email, default folder, group, permission set, and privilege level. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateLabTechUser</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sEmail</span><span class="p">,</span><span class="w"> </span><span class="n">sDefaultFolder</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sGroupName</span><span class="p">,</span><span class="w"> </span><span class="n">sPermissionSet</span><span class="p">,</span><span class="w"> </span><span class="n">nUserPrivileges</span><span class="p">,</span><span class="w"> </span><span class="n">sUserId</span><span class="p">;</span>
@@ -4221,8 +4222,8 @@
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CreateLabTechUser"</span><span class="p">);</span>
 </code></pre></div>
-<h3 id="catch-null-argument-errors-and-check-for-an-empty-result">Catch null-argument errors and check for an empty result<a class="headerlink" href="#catch-null-argument-errors-and-check-for-an-empty-result" title="Permanent link">&para;</a></h3>
-<p>Wraps the call in <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle a <a href="../../literals/nil/"><code>NIL</code></a>-argument exception and also guards against an empty identifier result to cover both failure paths.</p>
+<h3 id="catch-unexpected-errors-and-check-for-an-empty-result">Catch unexpected errors and check for an empty result<a class="headerlink" href="#catch-unexpected-errors-and-check-for-an-empty-result" title="Permanent link">&para;</a></h3>
+<p>Wraps the call in <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> to guard against unexpected errors and also checks for an empty identifier result. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CreateUserWithHandling</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sUserId</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
@@ -4246,14 +4247,8 @@
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sUserId</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-
-<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">oErr</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"DocCreateUser failed for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">);</span>
-<span class="w">            </span><span class="c1">/* Logs a generic failure message for the login;</span>
-<span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"DocCreateUser failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
-<span class="w">            </span><span class="c1">/* Logs the failure details returned by SSL;</span>
-<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"DocCreateUser failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">/* Logs the error details;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
@@ -4267,6 +4262,8 @@
 <li><a href="../DocExistsUser/"><code>DocExistsUser</code></a></li>
 <li><a href="../DocUpdateUser/"><code>DocUpdateUser</code></a></li>
 <li><a href="../DocDeleteUser/"><code>DocDeleteUser</code></a></li>
+<li><a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a></li>
+<li><a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a></li>
 <li><a href="../GetLastSSLError/"><code>GetLastSSLError</code></a></li>
 <li><a href="../../types/string/"><code>string</code></a></li>
 <li><a href="../../types/number/"><code>number</code></a></li>
@@ -4291,7 +4288,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:02:08 UTC">October 7, 2026</span>
   </span>
 
     

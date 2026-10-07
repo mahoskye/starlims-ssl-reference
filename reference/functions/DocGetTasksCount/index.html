@@ -4098,7 +4098,7 @@ If the underlying Documentum call fails, the function returns <code>-1</code>.</
 <p class="admonition-title">Do</p>
 <ul>
 <li>Check for <code>-1</code> before using the returned count in workflow logic or UI.</li>
-<li>Initialize the Documentum interface and log in before calling this function.</li>
+<li>Call the function within an initialized, logged-in Documentum session (<a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a>, <a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a>).</li>
 <li>Pair a <code>-1</code> result with <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> and <a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a> when you need failure details.</li>
 <li>Use this function when you need only the total count, not the individual task rows.</li>
 </ul>
@@ -4115,7 +4115,7 @@ If the underlying Documentum call fails, the function returns <code>-1</code>.</
 <ul>
 <li>The function exposes only one failure sentinel: <code>-1</code>.</li>
 <li>The function returns only the total inbox count. It does not filter by workflow or distinguish task types.</li>
-<li>The Documentum helper layer clears the previous failure state before the call runs. If this call fails, it records the new failure and returns <code>-1</code>.</li>
+<li>Each call clears the previous Documentum failure state first. If this call fails, it records the new failure and returns <code>-1</code>.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="show-current-inbox-workload-to-user">Show current inbox workload to user<a class="headerlink" href="#show-current-inbox-workload-to-user" title="Permanent link">&para;</a></h3>
@@ -4152,7 +4152,7 @@ If the underlying Documentum call fails, the function returns <code>-1</code>.</
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowDashboardTaskCount"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="branch-workflow-behavior-on-count-vs-failure">Branch workflow behavior on count vs failure<a class="headerlink" href="#branch-workflow-behavior-on-count-vs-failure" title="Permanent link">&para;</a></h3>
-<p>Reads the inbox count and branches on three distinct cases: a failed call (returns <code>-1</code>), an empty inbox, and a non-empty inbox, returning <a href="../../literals/true/"><code>.T.</code></a> only when there are tasks to process.</p>
+<p>Reads the inbox count and branches on three distinct cases: a failed call (returns <code>-1</code>), an empty inbox, and a non-empty inbox, returning <a href="../../literals/true/"><code>.T.</code></a> only when there are tasks to process. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CheckInboxBeforeWork</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nTaskCount</span><span class="p">;</span>
 
@@ -4183,6 +4183,7 @@ If the underlying Documentum call fails, the function returns <code>-1</code>.</
 <li><a href="../DocCommandFailed/"><code>DocCommandFailed</code></a></li>
 <li><a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a></li>
 <li><a href="../DocGetTasks/"><code>DocGetTasks</code></a></li>
+<li><a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a></li>
 <li><a href="../../types/number/"><code>number</code></a></li>
 </ul>
 
@@ -4205,7 +4206,7 @@ If the underlying Documentum call fails, the function returns <code>-1</code>.</
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:02:08 UTC">October 7, 2026</span>
   </span>
 
     

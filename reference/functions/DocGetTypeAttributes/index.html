@@ -4201,7 +4201,7 @@
 <div class="admonition success">
 <p class="admonition-title">Do</p>
 <ul>
-<li>Initialize and log in to the Documentum interface before calling <code>DocGetTypeAttributes</code> in workflows that use Documentum APIs.</li>
+<li>Call the function within an initialized, logged-in Documentum session (<a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a>, <a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a>).</li>
 <li>Treat each result row as a fixed-position array and read values by their documented 1-based positions.</li>
 <li>Check <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> and <a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a> immediately after an empty result when you need to know whether the lookup failed.</li>
 <li>Use <code>row[4]</code>, <code>row[5]</code>, and <code>row[6]</code> for schema decisions such as type-sensitive validation, length checks, and handling repeating attributes.</li>
@@ -4224,7 +4224,7 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="list-attribute-names-for-a-known-type">List attribute names for a known type<a class="headerlink" href="#list-attribute-names-for-a-known-type" title="Permanent link">&para;</a></h3>
-<p>Fetches all attributes for the <code>dm_document</code> type and prints each attribute's name alongside its description, exiting early when the result is empty.</p>
+<p>Fetches all attributes for the <code>dm_document</code> type and prints each attribute's name alongside its description, exiting early when the result is empty. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ListTypeAttributes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">aAttrs</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sLine</span><span class="p">;</span>
 
@@ -4248,11 +4248,10 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ListTypeAttributes"</span><span class="p">);</span>
 </code></pre></div>
 <p><code>UsrMes</code> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>No attributes returned for dm_document
-[attribute name] - [attribute description]
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>&lt;attribute name&gt; - &lt;attribute description&gt;
 </code></pre></div>
 <h3 id="separate-repeating-and-single-value-attributes">Separate repeating and single-value attributes<a class="headerlink" href="#separate-repeating-and-single-value-attributes" title="Permanent link">&para;</a></h3>
-<p>Counts how many attributes are single-value and how many are repeating for a caller-supplied type name, then logs a summary line.</p>
+<p>Counts how many attributes are single-value and how many are repeating for a caller-supplied type name, then logs a summary line. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SummarizeTypeAttributes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aAttrs</span><span class="p">,</span><span class="w"> </span><span class="n">nRepeating</span><span class="p">,</span><span class="w"> </span><span class="n">nSingle</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">sSummary</span><span class="p">;</span>
@@ -4286,7 +4285,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SummarizeTypeAttributes"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"dm_document"</span><span class="p">});</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>Type [type name] has [n] single-value attributes and [n] repeating attributes
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Type &lt;type name&gt; has &lt;n&gt; single-value attributes and &lt;n&gt; repeating attributes
 </code></pre></div>
 <h3 id="distinguish-an-empty-result-from-a-failed-documentum-lookup">Distinguish an empty result from a failed Documentum lookup<a class="headerlink" href="#distinguish-an-empty-result-from-a-failed-documentum-lookup" title="Permanent link">&para;</a></h3>
 <p>Logs in to Documentum, fetches type attributes, and distinguishes a failed lookup (indicated by <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a>) from a type that returned no attributes, then prints the name and type code of each attribute found.</p>
@@ -4329,11 +4328,11 @@
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AuditTypeDefinition"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"ProductionDB"</span><span class="p">,</span><span class="w"> </span><span class="s2">"doc_user"</span><span class="p">,</span><span class="w"> </span><span class="s2">"secret"</span><span class="p">,</span><span class="w"> </span><span class="s2">"dm_document"</span><span class="p">});</span>
 </code></pre></div>
-<p>Possible output:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>Documentum login failed: [Documentum error]
-Type attribute lookup failed: [Documentum error]
+<p>Depending on the outcome, <code>ErrorMes</code> or <code>UsrMes</code> logs one of:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Documentum login failed: &lt;Documentum error&gt;
+Type attribute lookup failed: &lt;Documentum error&gt;
 No attributes returned for type dm_document
-[attribute name] type=[type code]
+&lt;attribute name&gt; type=&lt;type code&gt;
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4342,6 +4341,7 @@ No attributes returned for type dm_document
 <li><a href="../DocGetMetadata/"><code>DocGetMetadata</code></a></li>
 <li><a href="../DocGetTypeAttributesAsDataset/"><code>DocGetTypeAttributesAsDataset</code></a></li>
 <li><a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a></li>
+<li><a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a></li>
 <li><a href="../../types/array/"><code>array</code></a></li>
 <li><a href="../../types/string/"><code>string</code></a></li>
 <li><a href="../../types/number/"><code>number</code></a></li>
@@ -4367,7 +4367,7 @@ No attributes returned for type dm_document
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:02:08 UTC">October 7, 2026</span>
   </span>
 
     

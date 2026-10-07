@@ -4104,8 +4104,8 @@
 <h1 id="docimportdocument">DocImportDocument<a class="headerlink" href="#docimportdocument" title="Permanent link">&para;</a></h1>
 <p>Imports a document into Documentum and returns the underlying import result as a string.</p>
 <p><code>DocImportDocument</code> sends the source file path and destination path to the Documentum import operation. You can also supply a document name, document type, application code, and ACL name when that metadata should be part of the import.</p>
-<p>Only <code>sDocFile</code> and <code>sDestinationPath</code> are null-validated by this function. When <code>sDocName</code>, <code>sDocType</code>, <code>sAppCode</code>, or <code>sAclName</code> are omitted, the call forwards them as omitted values to the Documentum import operation.</p>
-<p>The function runs inside the current Documentum interface context. When the underlying import operation throws, the Documentum helper records the failure in that context and this function returns <code>""</code>.</p>
+<p>Only <code>sDocFile</code> and <code>sDestinationPath</code> are required, and passing <a href="../../literals/nil/"><code>NIL</code></a> for either raises. Omit <code>sDocName</code>, <code>sDocType</code>, <code>sAppCode</code>, and <code>sAclName</code> when the import does not need them.</p>
+<p>The function runs inside the current Documentum interface context. If the import fails, the function returns <code>""</code>, <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> returns <a href="../../literals/true/"><code>.T.</code></a>, and <a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a> gives the reason.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need to import a local file into a Documentum repository location.</li>
@@ -4221,7 +4221,7 @@
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The exact content or format of the success string is not defined here.</li>
-<li>The Documentum helper clears the current failure state before the import runs. If the import throws, it stores that exception and the function returns <code>""</code>.</li>
+<li>Each call clears the previous Documentum failure state first. If the import fails, the new failure is recorded and the function returns <code>""</code>.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="import-with-only-the-required-arguments">Import with only the required arguments<a class="headerlink" href="#import-with-only-the-required-arguments" title="Permanent link">&para;</a></h3>
@@ -4258,7 +4258,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ImportDocumentBasic"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="import-with-metadata-and-acl">Import with metadata and ACL<a class="headerlink" href="#import-with-metadata-and-acl" title="Permanent link">&para;</a></h3>
-<p>Imports a typed document with all six metadata fields, showing how to supply name, type, application code, and ACL alongside the required source and destination paths.</p>
+<p>Imports a typed document with all six arguments: the required source and destination paths plus name, type, application code, and ACL.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ImportTypedDocument</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sDocFile</span><span class="p">,</span><span class="w"> </span><span class="n">sDestinationPath</span><span class="p">,</span><span class="w"> </span><span class="n">sDocName</span><span class="p">,</span><span class="w"> </span><span class="n">sDocType</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAppCode</span><span class="p">,</span><span class="w"> </span><span class="n">sAclName</span><span class="p">,</span><span class="w"> </span><span class="n">sImportResult</span><span class="p">;</span>
@@ -4409,7 +4409,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:02:08 UTC">October 7, 2026</span>
   </span>
 
     

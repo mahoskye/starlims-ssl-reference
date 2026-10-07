@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Updates a Documentum user and returns the backend result message.">
+        <meta name="description" content="Updates a Documentum user and returns the Documentum result message.">
       
       
       
@@ -3996,12 +3996,12 @@
 
 
 <h1 id="docupdateuser">DocUpdateUser<a class="headerlink" href="#docupdateuser" title="Permanent link">&para;</a></h1>
-<p>Updates a Documentum user and returns the backend result message.</p>
-<p><code>DocUpdateUser</code> requires <code>sLoginName</code> and <code>sPassword</code>, then optionally accepts <code>sUserName</code>, <code>sEMail</code>, <code>sDefaultFolder</code>, <code>sGroupName</code>, <code>sPermissionSet</code>, and <code>nUserPrivileges</code>. If <code>sLoginName</code> or <code>sPassword</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the function raises an error before attempting the update. If <code>nUserPrivileges</code> is omitted or <a href="../../literals/nil/"><code>NIL</code></a>, the function uses <code>0</code>. The function returns the backend string result, or an empty string when the update path does not return a value.</p>
+<p>Updates a Documentum user and returns the Documentum result message.</p>
+<p><code>DocUpdateUser</code> requires <code>sLoginName</code> and <code>sPassword</code>, then optionally accepts <code>sUserName</code>, <code>sEMail</code>, <code>sDefaultFolder</code>, <code>sGroupName</code>, <code>sPermissionSet</code>, and <code>nUserPrivileges</code>. If <code>sLoginName</code> or <code>sPassword</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the function raises an error before attempting the update. If <code>nUserPrivileges</code> is omitted or <a href="../../literals/nil/"><code>NIL</code></a>, the function uses <code>0</code>. The function returns the result text Documentum returns for the update, or an empty string when there is none.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When an SSL script needs to submit updated Documentum user details.</li>
-<li>When a workflow needs the backend result message after an update attempt.</li>
+<li>When a workflow needs the Documentum result message after an update attempt.</li>
 <li>When the update should include an explicit privilege value instead of the default <code>0</code>.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
@@ -4078,7 +4078,7 @@
 </tbody>
 </table>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
-<p><strong><a href="../../types/string/">string</a></strong> — The backend result message, or an empty string when the update path does not return a value.</p>
+<p><strong><a href="../../types/string/">string</a></strong> — The result message Documentum returns for the update, or an empty string when there is none.</p>
 <h2 id="exceptions">Exceptions<a class="headerlink" href="#exceptions" title="Permanent link">&para;</a></h2>
 <table data-ssl-table="exceptions"><colgroup><col><col></colgroup>
 <thead>
@@ -4105,19 +4105,20 @@
 <li>Validate that <code>sLoginName</code> and <code>sPassword</code> are assigned before calling the function.</li>
 <li>Omit trailing optional arguments you do not need, and skip only the positions required to reach a later argument.</li>
 <li>Check whether the returned string is empty before treating the update as confirmed.</li>
+<li>Call the function within an initialized, logged-in Documentum session (<a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a>, <a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a>).</li>
 </ul>
 </div>
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
 <li>Pass <a href="../../literals/nil/"><code>NIL</code></a> for <code>sLoginName</code> or <code>sPassword</code>. Those arguments raise an immediate error instead of attempting the update.</li>
-<li>Assume omitted optional arguments have a documented repository-side effect beyond being forwarded as omitted values.</li>
+<li>Assume omitted optional arguments leave the user's existing values unchanged. Pass every field whose value matters.</li>
 <li>Ignore an empty return string when later logic depends on a confirmed update result.</li>
 </ul>
 </div>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="update-a-users-display-name-and-email">Update a user's display name and email<a class="headerlink" href="#update-a-users-display-name-and-email" title="Permanent link">&para;</a></h3>
-<p>Passes only the required credentials plus display name and email, then logs the backend result string.</p>
+<p>Passes only the required credentials plus display name and email, then logs the result string. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateUserContact</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sEMail</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
@@ -4134,7 +4135,7 @@
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">/* Logs backend result message on success;</span>
+<span class="w">    </span><span class="c1">/* Logs the result message on success;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -4143,7 +4144,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"UpdateUserContact"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="update-folder-group-and-permission-set-by-skipping-optional-positions">Update folder, group, and permission set by skipping optional positions<a class="headerlink" href="#update-folder-group-and-permission-set-by-skipping-optional-positions" title="Permanent link">&para;</a></h3>
-<p>Skips the <code>sUserName</code> and <code>sEMail</code> positions using adjacent commas so that only the folder, group, and permission set are updated.</p>
+<p>Skips the <code>sUserName</code> and <code>sEMail</code> positions using adjacent commas so that only the folder, group, and permission set are updated. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateUserAccess</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sDefaultFolder</span><span class="p">,</span><span class="w"> </span><span class="n">sGroupName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sPermissionSet</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
@@ -4168,7 +4169,7 @@
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
-<span class="w">    </span><span class="c1">/* Logs backend result message on success;</span>
+<span class="w">    </span><span class="c1">/* Logs the result message on success;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -4177,7 +4178,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"UpdateUserAccess"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="update-all-fields-with-error-handling">Update all fields with error handling<a class="headerlink" href="#update-all-fields-with-error-handling" title="Permanent link">&para;</a></h3>
-<p>Passes all eight arguments and wraps the call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle SSL exceptions, using <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> to extract the failure description.</p>
+<p>Passes all eight arguments and wraps the call in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle SSL exceptions, using <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> to extract the failure description. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateUserWithHandling</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">,</span><span class="w"> </span><span class="n">sUserName</span><span class="p">,</span><span class="w"> </span><span class="n">sEMail</span><span class="p">,</span><span class="w"> </span><span class="n">sDefaultFolder</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sGroupName</span><span class="p">,</span><span class="w"> </span><span class="n">sPermissionSet</span><span class="p">,</span><span class="w"> </span><span class="n">nUserPrivileges</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
@@ -4209,18 +4210,13 @@
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="n">sResult</span><span class="p">);</span>
-<span class="w">        </span><span class="c1">/* Logs backend result message on success;</span>
+<span class="w">        </span><span class="c1">/* Logs the result message on success;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:CATCH</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-
-<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">oErr</span><span class="p">);</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"DocUpdateUser failed for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sLoginName</span><span class="p">);</span>
-<span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"DocUpdateUser failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
-<span class="w">            </span><span class="c1">/* Logs failure details when available;</span>
-<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"DocUpdateUser failed: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">/* Logs the error details;</span>
 
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDTRY</span><span class="p">;</span>
@@ -4234,6 +4230,8 @@
 <li><a href="../DocCreateUser/"><code>DocCreateUser</code></a></li>
 <li><a href="../DocDeleteUser/"><code>DocDeleteUser</code></a></li>
 <li><a href="../DocExistsUser/"><code>DocExistsUser</code></a></li>
+<li><a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a></li>
+<li><a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a></li>
 <li><a href="../GetLastSSLError/"><code>GetLastSSLError</code></a></li>
 <li><a href="../../types/string/"><code>string</code></a></li>
 <li><a href="../../types/number/"><code>number</code></a></li>
@@ -4258,7 +4256,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:02:08 UTC">October 7, 2026</span>
   </span>
 
     

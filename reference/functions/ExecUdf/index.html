@@ -3545,7 +3545,7 @@
 
 <h1 id="execudf">ExecUdf<a class="headerlink" href="#execudf" title="Permanent link">&para;</a></h1>
 <p>Executes SSL source supplied as a string and returns the result.</p>
-<p><code>ExecUdf</code> runs SSL code built at runtime. If <code>sCode</code> is an expression without a trailing semicolon, the runtime evaluates it as a return expression. If <code>sCode</code> is a bare identifier that matches a local variable, <code>ExecUdf</code> returns that variable's current value instead of compiling new code. When supplied, <code>aArgs</code> must be an array, and <code>bCacheCode</code> enables reuse of compiled code for repeated execution of the same source text.</p>
+<p><code>ExecUdf</code> runs SSL code built at runtime. If <code>sCode</code> is a single expression with no trailing semicolon, <code>ExecUdf</code> returns its value. If <code>sCode</code> is just the name of a local variable, <code>ExecUdf</code> returns that variable's current value. When supplied, <code>aArgs</code> must be an array, and <code>bCacheCode</code> enables reuse of compiled code for repeated execution of the same source text.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need to execute SSL source assembled at runtime.</li>
@@ -3637,7 +3637,7 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="evaluate-a-simple-expression-string">Evaluate a simple expression string<a class="headerlink" href="#evaluate-a-simple-expression-string" title="Permanent link">&para;</a></h3>
-<p>Passes an arithmetic expression as a string to <code>ExecUdf</code> and logs the numeric result. Because the string does not end with <code>;</code>, the runtime wraps it as <code>:RETURN 2 + 3 * 4;</code> and returns <code>14</code>.</p>
+<p>Passes an arithmetic expression as a string to <code>ExecUdf</code> and logs the numeric result. Because the string is a single expression with no trailing <code>;</code>, <code>ExecUdf</code> returns its value, <code>14</code>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RunDynamicExpression</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="n">nResult</span><span class="p">;</span>
 
@@ -3655,7 +3655,7 @@
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Calculated value: 14
 </code></pre></div>
 <h3 id="return-a-local-variable-by-name">Return a local variable by name<a class="headerlink" href="#return-a-local-variable-by-name" title="Permanent link">&para;</a></h3>
-<p>Passes a bare identifier string to <code>ExecUdf</code>. Because <code>"sStatus"</code> matches an existing local variable and does not end with <code>;</code>, the runtime returns that variable's current value directly instead of compiling new code.</p>
+<p>Passes a bare identifier string to <code>ExecUdf</code>. Because <code>"sStatus"</code> matches an existing local variable and does not end with <code>;</code>, <code>ExecUdf</code> returns that variable's current value.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ReturnLocalValue</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sCode</span><span class="p">,</span><span class="w"> </span><span class="n">sStatus</span><span class="p">,</span><span class="w"> </span><span class="n">sResult</span><span class="p">;</span>
 
@@ -3745,7 +3745,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:02:08 UTC">October 7, 2026</span>
   </span>
 
     

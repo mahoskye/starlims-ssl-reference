@@ -4168,6 +4168,7 @@
 <li>Validate that <code>sWorkitemId</code> and <code>aUsers</code> are assigned before calling the function.</li>
 <li>Check the boolean return value and handle <a href="../../literals/false/"><code>.F.</code></a> explicitly in workflow logic.</li>
 <li>Pass the optional signoff values when the repeat must capture approval context.</li>
+<li>Call the function within an initialized, logged-in Documentum session (<a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a>, <a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a>).</li>
 </ul>
 </div>
 <div class="admonition failure">
@@ -4180,11 +4181,11 @@
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li>A <a href="../../literals/false/"><code>.F.</code></a> result indicates the repeat did not succeed, but the function does not return a separate failure message.</li>
+<li>A <a href="../../literals/false/"><code>.F.</code></a> result indicates the repeat did not succeed. Check <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a> and read <a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a> immediately for the reason.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="repeat-a-workitem-for-a-new-assignee-list">Repeat a workitem for a new assignee list<a class="headerlink" href="#repeat-a-workitem-for-a-new-assignee-list" title="Permanent link">&para;</a></h3>
-<p>Shows the minimum call form using only the two required parameters: the workitem ID and the user list.</p>
+<p>Shows the minimum call form using only the two required parameters: the workitem ID and the user list. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RepeatWorkitemBasic</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aUsers</span><span class="p">,</span><span class="w"> </span><span class="n">bRepeated</span><span class="p">;</span>
@@ -4208,10 +4209,12 @@
 </code></pre></div>
 <p><code>UsrMes</code> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Repeated workitem WI-2024-00423
-Could not repeat workitem WI-2024-00423
+</code></pre></div>
+<p>On failure, <code>UsrMes</code> logs:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Could not repeat workitem WI-2024-00423
 </code></pre></div>
 <h3 id="repeat-a-workitem-with-signoff-details">Repeat a workitem with signoff details<a class="headerlink" href="#repeat-a-workitem-with-signoff-details" title="Permanent link">&para;</a></h3>
-<p>Shows the full five-argument call form, passing signoff credentials and a reason alongside the workitem ID and user list.</p>
+<p>Shows the full five-argument call form, passing signoff credentials and a reason alongside the workitem ID and user list. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RepeatWorkitemWithSignoff</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sWorkitemId</span><span class="p">,</span><span class="w"> </span><span class="n">sSignOffUser</span><span class="p">,</span><span class="w"> </span><span class="n">sSignOffPass</span><span class="p">,</span><span class="w"> </span><span class="n">sSignOffReason</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMessage</span><span class="p">,</span><span class="w"> </span><span class="n">bRepeated</span><span class="p">;</span>
@@ -4247,7 +4250,9 @@ Could not repeat workitem WI-2024-00423
 </code></pre></div>
 <p><code>UsrMes</code> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Repeated WI-2024-00847 with signoff context
-Repeat request failed for WI-2024-00847
+</code></pre></div>
+<p>On failure, <code>UsrMes</code> logs:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Repeat request failed for WI-2024-00847
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4256,6 +4261,10 @@ Repeat request failed for WI-2024-00847
 <li><a href="../DocStopWorkflow/"><code>DocStopWorkflow</code></a></li>
 <li><a href="../DocGetTasks/"><code>DocGetTasks</code></a></li>
 <li><a href="../DocGetWorkflowStatus/"><code>DocGetWorkflowStatus</code></a></li>
+<li><a href="../DocCommandFailed/"><code>DocCommandFailed</code></a></li>
+<li><a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a></li>
+<li><a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a></li>
+<li><a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a></li>
 <li><a href="../../types/boolean/"><code>boolean</code></a></li>
 <li><a href="../../types/string/"><code>string</code></a></li>
 <li><a href="../../types/array/"><code>array</code></a></li>
@@ -4280,7 +4289,7 @@ Repeat request failed for WI-2024-00847
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:02:08 UTC">October 7, 2026</span>
   </span>
 
     

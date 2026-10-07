@@ -4159,6 +4159,7 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
 <li>Call <a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a> before Documentum operations and check the result immediately after this call.</li>
 <li>Treat an empty string as an ambiguous result until you also check <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a>.</li>
 <li>Capture <a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a> right away when <a href="../DocCommandFailed/"><code>DocCommandFailed()</code></a> is <a href="../../literals/true/"><code>.T.</code></a>.</li>
+<li>Call the function within an initialized, logged-in Documentum session (<a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a>, <a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a>).</li>
 </ul>
 </div>
 <div class="admonition failure">
@@ -4175,11 +4176,9 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="retrieve-attributes-for-a-known-type">Retrieve attributes for a known type<a class="headerlink" href="#retrieve-attributes-for-a-known-type" title="Permanent link">&para;</a></h3>
-<p>Initializes Documentum, fetches the attribute dataset for <code>dm_document</code>, and logs it when the call succeeds and returns a non-empty result.</p>
+<p>Fetches the attribute dataset for <code>dm_document</code> and logs it when the call succeeds and returns a non-empty result. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowTypeAttributes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">,</span><span class="w"> </span><span class="n">sAttrs</span><span class="p">;</span>
-
-<span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
 <span class="w">    </span><span class="n">sTypeName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"dm_document"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sAttrs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetTypeAttributesAsDataset</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">);</span>
@@ -4187,8 +4186,6 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">DocCommandFailed</span><span class="p">()</span><span class="w"> </span><span class="ow">.AND.</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sAttrs</span><span class="p">);</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Attributes for "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">":"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">Chr</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sAttrs</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-
-<span class="w">    </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
@@ -4196,15 +4193,13 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Attributes for dm_document:
-[dataset text]
+&lt;dataset text&gt;
 </code></pre></div>
 <h3 id="distinguish-an-empty-result-from-a-failed-command">Distinguish an empty result from a failed command<a class="headerlink" href="#distinguish-an-empty-result-from-a-failed-command" title="Permanent link">&para;</a></h3>
-<p>Retrieves the attribute dataset for a caller-supplied type name, distinguishing a backend failure (checked via <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a>) from a successful call that returned no data.</p>
+<p>Retrieves the attribute dataset for a caller-supplied type name, distinguishing a backend failure (checked via <a href="../DocCommandFailed/"><code>DocCommandFailed</code></a>) from a successful call that returned no data. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadTypeAttributes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAttrs</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">;</span>
-
-<span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
 <span class="w">    </span><span class="n">sAttrs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetTypeAttributesAsDataset</span><span class="p">(</span><span class="n">sTypeName</span><span class="p">);</span>
 
@@ -4212,15 +4207,12 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
 <span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Unable to load type attributes: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on failure: Unable to load type attributes;</span>
-<span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sAttrs</span><span class="p">);</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No attribute dataset was returned for type "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sTypeName</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-
-<span class="w">    </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sAttrs</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -4229,12 +4221,10 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"LoadTypeAttributes"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"dm_document"</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="compare-two-type-definitions-before-a-mapping-step">Compare two type definitions before a mapping step<a class="headerlink" href="#compare-two-type-definitions-before-a-mapping-step" title="Permanent link">&para;</a></h3>
-<p>Calls <code>DocGetTypeAttributesAsDataset</code> twice to retrieve source and target type definitions, returning <a href="../../literals/true/"><code>.T.</code></a> only when both calls succeed and the resulting datasets are identical.</p>
+<p>Calls <code>DocGetTypeAttributesAsDataset</code> twice to retrieve source and target type definitions, returning <a href="../../literals/true/"><code>.T.</code></a> only when both calls succeed and the resulting datasets are identical. Assumes the caller already has a Documentum session open.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CompareTypeDefinitions</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSourceType</span><span class="p">,</span><span class="w"> </span><span class="n">sTargetType</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sSourceAttrs</span><span class="p">,</span><span class="w"> </span><span class="n">sTargetAttrs</span><span class="p">,</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">;</span>
-
-<span class="w">    </span><span class="nf">DocInitDocumentumInterface</span><span class="p">();</span>
 
 <span class="w">    </span><span class="n">sSourceAttrs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetTypeAttributesAsDataset</span><span class="p">(</span><span class="n">sSourceType</span><span class="p">);</span>
 
@@ -4242,7 +4232,6 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
 <span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Failed to read source type attributes: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on source failure: Failed to read source type attributes;</span>
-<span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -4252,17 +4241,13 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
 <span class="w">        </span><span class="n">sErrMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">DocGetErrorMessage</span><span class="p">();</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Failed to read target type attributes: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sErrMsg</span><span class="p">);</span>
 <span class="w">        </span><span class="c1">/* Logs on target failure: Failed to read target type attributes;</span>
-<span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sSourceAttrs</span><span class="p">)</span><span class="w"> </span><span class="ow">.OR.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">sTargetAttrs</span><span class="p">);</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"One or both type definitions returned no dataset text"</span><span class="p">);</span>
-<span class="w">        </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 <span class="w">        </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
-
-<span class="w">    </span><span class="nf">DocEndDocumentumInterface</span><span class="p">();</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">sSourceAttrs</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sTargetAttrs</span><span class="p">;</span>
 <span class="k">:ENDPROC</span><span class="p">;</span>
@@ -4276,6 +4261,7 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
 <li><a href="../DocGetErrorMessage/"><code>DocGetErrorMessage</code></a></li>
 <li><a href="../DocGetTypeAttributes/"><code>DocGetTypeAttributes</code></a></li>
 <li><a href="../DocInitDocumentumInterface/"><code>DocInitDocumentumInterface</code></a></li>
+<li><a href="../DocLoginToDocumentum/"><code>DocLoginToDocumentum</code></a></li>
 <li><a href="../../types/string/"><code>string</code></a></li>
 </ul>
 
@@ -4298,7 +4284,7 @@ Returns <code>""</code> when the underlying Documentum call does not return a da
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:02:08 UTC">October 7, 2026</span>
   </span>
 
     

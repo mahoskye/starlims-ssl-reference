@@ -1612,10 +1612,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#strategy-pattern-pick-one-code-block-out-of-several" class="md-nav__link">
+  <a href="#strategy-pattern-apply-a-tiers-chain-of-pricing-rules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Strategy pattern — pick one code block out of several
+        Strategy pattern — apply a tier's chain of pricing rules
       
     </span>
   </a>
@@ -3257,10 +3257,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#strategy-pattern-pick-one-code-block-out-of-several" class="md-nav__link">
+  <a href="#strategy-pattern-apply-a-tiers-chain-of-pricing-rules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Strategy pattern — pick one code block out of several
+        Strategy pattern — apply a tier's chain of pricing rules
       
     </span>
   </a>
@@ -3409,10 +3409,10 @@
 <p>Eval does not parse or compile SSL source text. If you have SSL source in a string, use a dynamic-code mechanism such as <a href="../ExecUdf/"><code>ExecUdf</code></a>; Eval is only for code block values such as <code>{|nValue| nValue * 2}</code> or code blocks returned from other routines. Because Eval simply forwards the arguments to the block, the result can be any SSL value, including another code block.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
-<li>When you need to run code generated or composed at runtime rather than defined statically.</li>
-<li>When supporting configurable business rules or workflows where logic is stored as code blocks externally.</li>
-<li>When implementing systems that allow users to script behaviors at runtime.</li>
-<li>When you want to pass arguments to dynamic code blocks for evaluation.</li>
+<li>When a routine receives a code block (a callback, predicate, or strategy) and needs to call it.</li>
+<li>When choosing one of several code blocks at runtime, for example from a dispatch table.</li>
+<li>When you want to pass arguments to a code block value and use its result.</li>
+<li>To run SSL source text stored in a string, use <a href="../ExecUdf/"><code>ExecUdf</code></a> instead.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Eval</span><span class="p">(</span><span class="n">fnCode</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">vArg1</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">vArg2</span><span class="p">],</span><span class="w"> </span><span class="err">...</span><span class="p">)</span>
@@ -3467,7 +3467,7 @@
 <p class="admonition-title">Do</p>
 <ul>
 <li>Pass a code block value (from a <code>{|params| expr}</code> literal or a function that returns one) as the first argument.</li>
-<li>Reserve use of Eval for scenarios requiring dynamic, runtime code evaluation.</li>
+<li>Reserve use of Eval for calling code block values that are chosen or passed in at runtime.</li>
 <li>Handle errors that may arise from evaluated code blocks.</li>
 </ul>
 </div>
@@ -3482,7 +3482,7 @@
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Errors raised inside the invoked block propagate to the Eval call site; wrap the call in <a href="../../keywords/TRY/"><code>:TRY</code></a> / <a href="../../keywords/CATCH/"><code>:CATCH</code></a> when the block may fail.</li>
-<li>Eval forwards the supplied argument array to the code block; it does not compile source text, rename parameters, or add its own defaults.</li>
+<li>Eval passes the supplied arguments to the code block in order; it does not compile source text, rename parameters, or add its own defaults.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="invoke-a-code-block-literal-with-arguments">Invoke a code block literal with arguments<a class="headerlink" href="#invoke-a-code-block-literal-with-arguments" title="Permanent link">&para;</a></h3>
@@ -3512,8 +3512,8 @@
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Adding 25 + 17 = 42
 </code></pre></div>
-<h3 id="strategy-pattern-pick-one-code-block-out-of-several">Strategy pattern — pick one code block out of several<a class="headerlink" href="#strategy-pattern-pick-one-code-block-out-of-several" title="Permanent link">&para;</a></h3>
-<p>Choose between several pricing rule code blocks based on a customer tier and apply the chosen rule to a running total.</p>
+<h3 id="strategy-pattern-apply-a-tiers-chain-of-pricing-rules">Strategy pattern — apply a tier's chain of pricing rules<a class="headerlink" href="#strategy-pattern-apply-a-tiers-chain-of-pricing-rules" title="Permanent link">&para;</a></h3>
+<p>Choose a list of pricing rule code blocks based on a customer tier and apply them in order to a running total. The VIP tier applies the VIP discount and then the clearance rule.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ApplyDiscountRules</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">fnStandardDiscount</span><span class="p">,</span><span class="w"> </span><span class="n">fnVipDiscount</span><span class="p">,</span><span class="w"> </span><span class="n">fnClearance</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRuleBlocks</span><span class="p">,</span><span class="w"> </span><span class="n">fnRule</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="n">nCount</span><span class="p">;</span>
@@ -3625,7 +3625,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:02:08 UTC">October 7, 2026</span>
   </span>
 
     
