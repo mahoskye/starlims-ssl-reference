@@ -173,11 +173,10 @@ Uses one `:TRY` block for a multi-step operation, then branches inside the singl
 :PROCEDURE ProcessBatchRecords;
     :PARAMETERS sBatchID;
     :DECLARE aRecords, oErr, sStatusMessage;
-    :DECLARE bLoadedRecords, bUpdatedBatch;
+    :DECLARE bLoadedRecords;
 
     sStatusMessage := "";
     bLoadedRecords := .F.;
-    bUpdatedBatch := .F.;
 
     :TRY;
         aRecords := SQLExecute("
@@ -191,16 +190,12 @@ Uses one `:TRY` block for a multi-step operation, then branches inside the singl
             RaiseError("No records found for batch " + sBatchID);
         :ENDIF;
 
-        bUpdatedBatch := RunSQL("
+        RunSQL("
             UPDATE batches SET
                 processed = ?,
                 processed_on = GETDATE()
             WHERE batch_id = ?
         ",, {1, sBatchID});
-
-        :IF !bUpdatedBatch;
-            RaiseError("Batch update did not complete");
-        :ENDIF;
 
         sStatusMessage := "Batch " + sBatchID + " processed successfully";
 

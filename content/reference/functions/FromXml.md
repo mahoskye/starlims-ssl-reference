@@ -101,7 +101,7 @@ Parsed value: 42
 
 ### Round-trip an array through XML
 
-Use [`ToXml`](ToXml.md) to serialize an array and `FromXml` to restore it, verifying that both values match after the round-trip.
+Use [`ToXml`](ToXml.md) to serialize an array and `FromXml` to restore it, then log the restored elements.
 
 ```ssl
 :PROCEDURE RoundTripArray;

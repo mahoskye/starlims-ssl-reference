@@ -13,7 +13,7 @@ starlims:
 
 Executes SQL and returns either query results or a success flag.
 
-`SQLExecute` runs a SQL statement against the specified connection or the current default connection. When the prepared SQL begins with `SELECT`, it can return rows as an array, XML text, or a dataset object depending on `vReturnType`. Other statements return a boolean success value. This is the database function that supports named `?varName?` parameter substitution in the SQL text.
+`SQLExecute` runs a SQL statement against the specified connection or the current default connection. When the statement begins with `SELECT`, it can return rows as an array, XML text, or a dataset object depending on `vReturnType`. Other statements return a boolean success value. This is the database function that supports named `?varName?` parameter substitution in the SQL text.
 
 ## When to use
 
@@ -34,11 +34,11 @@ SQLExecute(sCommandString, [sConnectionName], [bRollbackExistingTransaction], [b
 |------|------|----------|---------|-------------|
 | `sCommandString` | [string](../types/string.md) | yes | — | SQL to execute. Must be a non-empty string. |
 | `sConnectionName` | [string](../types/string.md) | no | current default connection | Connection name to run the SQL against. |
-| `bRollbackExistingTransaction` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Applies to non-`SELECT` statements. Whatever its value, a failed statement leaves an open transaction open; see [Caveats](#caveats). |
+| `bRollbackExistingTransaction` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Applies to non-`SELECT` statements. No effect on a failed statement was observed: an open transaction stays open whether this is [`.T.`](../literals/true.md) or [`.F.`](../literals/false.md), so end the transaction yourself; see [Caveats](#caveats). |
 | `bNullAsBlank` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) for returned `SELECT` results | Controls null-to-blank handling when materializing `SELECT` results. |
 | `aInvariantDateCols` | [array](../types/array.md) | no | omitted | Date columns to return as stored, without time-zone conversion, when materializing `SELECT` results. Pass 1-based column positions or column names. |
-| `vReturnType` | [boolean](../types/boolean.md) or [string](../types/string.md) | no | `"array"` | When the prepared SQL begins with `SELECT`: [`.F.`](../literals/false.md) or non-`xml`/non-`dataset` strings return an array, [`.T.`](../literals/true.md) or `"xml"` returns XML text, and the exact string `"dataset"` returns a dataset object. Ignored for other statements. |
-| `sTableName` | [string](../types/string.md) | no | omitted | Optional table name to use for XML or dataset-shaped results when the prepared SQL begins with `SELECT`. |
+| `vReturnType` | [boolean](../types/boolean.md) or [string](../types/string.md) | no | `"array"` | For a `SELECT` statement: [`.F.`](../literals/false.md) or non-`xml`/non-`dataset` strings return an array, [`.T.`](../literals/true.md) or `"xml"` returns XML text, and the exact string `"dataset"` returns a dataset object. Ignored for other statements. |
+| `sTableName` | [string](../types/string.md) | no | omitted | Optional table name to use for XML or dataset-shaped results for a `SELECT` statement. |
 | `bIncludeSchema` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) when returning XML | Includes schema in XML output. Ignored for array returns, dataset-object returns, and non-`SELECT` statements. |
 | `bIncludeHeader` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) when returning XML | Includes header information in XML output. Ignored for array returns, dataset-object returns, and non-`SELECT` statements. |
 
@@ -46,7 +46,7 @@ SQLExecute(sCommandString, [sConnectionName], [bRollbackExistingTransaction], [b
 
 **any** — Rows for a `SELECT` statement, as an array, XML string, or dataset object depending on `vReturnType`; a boolean success value for other statements.
 
-When the prepared SQL begins with `SELECT`, the return value depends on `vReturnType`:
+For a `SELECT` statement, the return value depends on `vReturnType`:
 
 | Condition | Return type | Behavior |
 |-----------|-------------|----------|
@@ -170,14 +170,14 @@ DoProc("CompleteTask", {"ORD-2024-001", "pH", "jsmith"});
 Request a dataset object instead of an array, then traverse its rows using the .NET `DataTable` and `DataRowCollection` properties with zero-based indexing.
 
 ```ssl
-:PROCEDURE ExportBatchAsJson;
+:PROCEDURE ListBatchSamples;
 	:PARAMETERS sBatch;
 	:DEFAULT sBatch, "";
 	:DECLARE sSQL, oDs, oTable, oRows, oRow, nCount, nIndex;
 	:DECLARE sSampleId, sStatus;
 
 	:IF Empty(sBatch);
-		UsrMes("ExportBatchAsJson: batch ID is required");
+		UsrMes("ListBatchSamples: batch ID is required");
 		:RETURN;
 	:ENDIF;
 
@@ -207,7 +207,7 @@ Request a dataset object instead of an array, then traverse its rows using the .
 :ENDPROC;
 
 /* Usage;
-DoProc("ExportBatchAsJson", {"B-2024-001"});
+DoProc("ListBatchSamples", {"B-2024-001"});
 ```
 
 ## Related

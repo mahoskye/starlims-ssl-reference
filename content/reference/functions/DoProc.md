@@ -13,7 +13,7 @@ starlims:
 
 Calls a local or scripted procedure by name with an optional argument array.
 
-`DoProc` takes a procedure name and an optional argument array. A one-segment name calls a procedure in the current script. A three-segment name is passed through the same runtime path used by [`ExecFunction`](ExecFunction.md).
+`DoProc` takes a procedure name and an optional argument array. A one-segment name calls a procedure in the current script. A three-segment name calls `Category.Script.Procedure` the same way [`ExecFunction`](ExecFunction.md) does.
 
 The second argument, when supplied, must be an array. `DoProc` does not enforce an exact argument count before dispatch. Extra values are ignored, and missing positions are left for the target procedure to handle.
 
@@ -33,7 +33,7 @@ DoProc(sProcedureName, [aArguments])
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `sProcedureName` | [string](../types/string.md) | yes | — | Procedure name to invoke. Use a one-segment name for a procedure in the current script, or a three-segment name to dispatch through the same runtime path as [`ExecFunction`](ExecFunction.md). |
+| `sProcedureName` | [string](../types/string.md) | yes | — | Procedure name to invoke. Use a one-segment name for a procedure in the current script, or a three-segment name to call `Category.Script.Procedure` the same way [`ExecFunction`](ExecFunction.md) does. |
 | `aArguments` | [array](../types/array.md) | no | omitted | Positional argument array for the target procedure. If omitted, the call runs with no supplied arguments. |
 
 ## Returns
@@ -46,7 +46,7 @@ DoProc(sProcedureName, [aArguments])
 | --- | --- |
 | The name has exactly two segments or more than three segments. | `Run-time error: Invalid procedure name: {name}` |
 | `aArguments` is provided but is not an array. | `Value cannot be null.`, then `Parameter name: Wrong parameters for {name}` on the second line |
-| A one-segment name does not resolve in the current script. | `Run-time error: Method {name} not found in script {scriptName}!` |
+| A one-segment name computed at runtime does not resolve in the current script. | `Run-time error: Method {name} not found in script {scriptName}!` |
 
 ## Best practices
 
@@ -66,10 +66,11 @@ DoProc(sProcedureName, [aArguments])
 ## Caveats
 
 - Calling `DoProc()` with no arguments stops the script from compiling, so no runtime error can be caught.
+- A string literal name is resolved when the script compiles: `DoProc("NoSuchProc")` stops the script from compiling with `Invalid method: NoSuchProc`, so no [`:TRY`](../keywords/TRY.md) can catch it. The runtime "not found" error in Exceptions applies only to names built at runtime.
 - `DoProc` is a compile-time error inside class methods — every name form is rejected, not just same-class calls. Use `Me:MethodName()` or `Base:MethodName()` instead.
 - The called procedure does not get an isolated set of variables. Names it never declares resolve outward into the calling scope, so an undeclared assignment in the procedure can overwrite a caller variable of the same name. See [Variable Scope](../../guides/variable-scope.md).
 - One-segment names are resolved case-insensitively in the current script.
-- Three-segment names are passed into the executor path instead of local method lookup.
+- A three-segment name calls `Category.Script.Procedure` the same way [`ExecFunction`](ExecFunction.md) does.
 
 ## Examples
 
@@ -166,7 +167,7 @@ DoProc("RouteStatusMessage", {.T., "Something failed"});
 
 ### Dispatch to an external procedure path
 
-Builds a three-segment procedure name at runtime and dispatches to it using `DoProc`, demonstrating the external executor path.
+Builds a three-segment procedure name at runtime and dispatches to it using `DoProc`, the same way [`ExecFunction`](ExecFunction.md) would.
 
 ```ssl
 :PROCEDURE SubmitConfiguredStep;

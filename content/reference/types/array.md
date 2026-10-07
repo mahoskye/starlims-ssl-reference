@@ -44,6 +44,7 @@ Arrays support identity comparison operators. Arithmetic and relational operator
 | Operator | Symbol | Returns | Behavior |
 |---|---|---|---|
 | `strict-equals` | [`==`](../operators/strict-equals.md) | [boolean](boolean.md) | Returns [`.T.`](../literals/true.md) only when both operands reference the same array instance. |
+| `equals` | [`=`](../operators/equals.md) | [boolean](boolean.md) | Returns [`.T.`](../literals/true.md) only when both operands reference the same array instance. |
 | `not-equals` | [`!=`](../operators/not-equals.md) | [boolean](boolean.md) | Returns [`.T.`](../literals/true.md) when the operands do not reference the same array instance. |
 
 ## Members
@@ -66,7 +67,7 @@ An `array` value also exposes the public members of a .NET `System.Object[]` arr
 
 In practice, this passthrough is rarely the best path for SSL arrays, for two reasons:
 
-- The most useful array operations in .NET — `Sort`, `Reverse`, `IndexOf`, `BinarySearch` — are static methods on `System.Array` that take the array as an explicit parameter rather than a receiver. They are reached most reliably through explicit netobject interop with [`LimsNETTypeOf`](../functions/LimsNETTypeOf.md) (see [`netobject`](netobject.md)) rather than through the implicit `:` passthrough on an array value.
+- The most useful array operations in .NET — `Sort`, `Reverse`, `IndexOf`, `BinarySearch` — are static methods on `System.Array` that take the array as an explicit parameter rather than a receiver. They are reached through the static form of [`LimsNETConnect`](../functions/LimsNETConnect.md), such as `LimsNETConnect(, "System.Array",, .T.)` (see [`netobject`](netobject.md)), rather than through the implicit `:` passthrough on an array value.
 - The instance-level members reachable through the `:` syntax are limited (`Length`, `Rank`, `GetType()`, `Clone()`). `Length` matches [`ALen`](../functions/ALen.md), and `Clone()` returns a new array with the same top-level elements.
 
 Prefer SSL-native array functions ([`ALen`](../functions/ALen.md), [`AScan`](../functions/AScan.md), [`SortArray`](../functions/SortArray.md), [`AAdd`](../functions/AAdd.md)) for portability and readability. Reach for the .NET passthrough only when you need a specific `System.Array` operation that the SSL library does not cover.

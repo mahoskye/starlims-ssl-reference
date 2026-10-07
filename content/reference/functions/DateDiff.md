@@ -92,7 +92,7 @@ Computes the elapsed days between a fixed log date and today using the default `
 :PROCEDURE GetSampleAgeDays;
 	:DECLARE dLoggedOn, dToday, nAgeDays;
 
-	dLoggedOn := CToD("03/15/2026");
+	dLoggedOn := DateFromNumbers(2026, 3, 15);
 	dToday := Today();
 
 	nAgeDays := DateDiff(dLoggedOn, dToday);

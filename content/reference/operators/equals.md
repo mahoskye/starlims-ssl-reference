@@ -142,24 +142,24 @@ Replicate count matches
 
 ### Guarding dynamic values before comparing
 
-Checks runtime types before applying `=` to avoid invalid-operand errors. With `nLeftValue = 42` (number) and `sRightValue = "42"` (string), the types differ and the comparison is skipped.
+Checks runtime types before applying `=` to avoid invalid-operand errors. With `vLeft = 42` (number) and `vRight = "42"` (string), the types differ and the comparison is skipped.
 
 ```ssl
 :PROCEDURE SafeLooseEquality;
-    :DECLARE nLeftValue, sRightValue, sLeftType, sRightType, bMatch, sMessage;
+    :DECLARE vLeft, vRight, sLeftType, sRightType, bMatch, sMessage;
 
-    nLeftValue := 42;
-    sRightValue := "42";
-    sLeftType := LimsTypeEx(nLeftValue);
-    sRightType := LimsTypeEx(sRightValue);
+    vLeft := 42;
+    vRight := "42";
+    sLeftType := LimsTypeEx(vLeft);
+    sRightType := LimsTypeEx(vRight);
     bMatch := .F.;
 
     :IF sLeftType == "STRING" .AND. sRightType == "STRING";
-        bMatch := nLeftValue = sRightValue;
+        bMatch := vLeft = vRight;
         sMessage := "Loose string comparison completed";
     :ELSE;
         :IF sLeftType == "NUMERIC" .AND. sRightType == "NUMERIC";
-            bMatch := nLeftValue = sRightValue;
+            bMatch := vLeft = vRight;
             sMessage := "Numeric equality comparison completed";
         :ELSE;
             sMessage := "Skipped: operands have different types";

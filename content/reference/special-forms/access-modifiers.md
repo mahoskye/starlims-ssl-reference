@@ -48,7 +48,7 @@ The modifier must appear on the line **immediately before** the [`:PROCEDURE`](.
 | `/*@private;` | Yes | No | No |
 
 !!! warning "Script-level procedures only"
-    Access modifiers only work on **script-level procedures**, standalone [`:PROCEDURE`](../keywords/PROCEDURE.md) blocks in server scripts and data sources. They have **no effect on methods inside [`:CLASS`](../keywords/CLASS.md) blocks**. The class compilation path does not process these annotations, so placing `/*@private;` before a class method will be silently ignored.
+    Access modifiers only work on **script-level procedures**, standalone [`:PROCEDURE`](../keywords/PROCEDURE.md) blocks in server scripts and data sources. They have **no effect on methods inside [`:CLASS`](../keywords/CLASS.md) blocks**: `/*@private;` before a class method has no effect and raises no error.
 
 ## Notes for daily SSL work
 

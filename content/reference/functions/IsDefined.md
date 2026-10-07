@@ -163,9 +163,9 @@ Walk a list of candidate variable names and read the first one that is both defi
 ```ssl
 :PROCEDURE ResolveBatchIdentifier;
     :PARAMETERS aCandidateVars;
-    :DECLARE nIndex, sVarName, vBatchValue, sBatchId;
+    :DECLARE nIndex, sVarName, vBatchValue, sResolvedId;
 
-    sBatchId := "";
+    sResolvedId := "";
 
     /* Read the first available variable from a list of supported names;
     :FOR nIndex := 1 :TO ALen(aCandidateVars);
@@ -175,18 +175,18 @@ Walk a list of candidate variable names and read the first one that is both defi
             vBatchValue := GetByName(sVarName);
 
             :IF ! Empty(vBatchValue);
-                sBatchId := LimsString(vBatchValue);
+                sResolvedId := LimsString(vBatchValue);
                 :EXITFOR;
             :ENDIF;
         :ENDIF;
     :NEXT;
 
-    :IF Empty(sBatchId);
+    :IF Empty(sResolvedId);
         ErrorMes("No batch identifier variable is available");
         :RETURN .F.;
     :ENDIF;
 
-    UsrMes("Using batch identifier: " + sBatchId);
+    UsrMes("Using batch identifier: " + sResolvedId);
     /* Logs selected batch identifier;
 
     :RETURN .T.;
