@@ -89,7 +89,7 @@ Imports a single file using only the two required arguments, then checks [`DocCo
 :PROCEDURE ImportDocumentBasic;
     :DECLARE sDocFile, sDestinationPath, sImportResult;
 
-    sDocFile := "C:\\Docs\\Result.pdf";
+    sDocFile := "C:\Docs\Result.pdf";
     sDestinationPath := "/Standard/Reports/2026";
 
     DocInitDocumentumInterface();
@@ -127,7 +127,7 @@ Imports a typed document with all six metadata fields, showing how to supply nam
     :DECLARE sDocFile, sDestinationPath, sDocName, sDocType;
     :DECLARE sAppCode, sAclName, sImportResult;
 
-    sDocFile := "C:\\Docs\\BatchRelease.pdf";
+    sDocFile := "C:\Docs\BatchRelease.pdf";
     sDestinationPath := "/Quality/BatchRelease/2026";
     sDocName := "BatchRelease-2026-04-18";
     sDocType := "BatchRelease";
@@ -179,7 +179,7 @@ Iterates a list of three documents and imports each one, collecting per-file fai
 
     aImports := {
         {
-            "C:\\Docs\\COA-001.pdf",
+            "C:\Docs\COA-001.pdf",
             "/Quality/COA/2026",
             "COA-001",
             "COA",
@@ -187,7 +187,7 @@ Iterates a list of three documents and imports each one, collecting per-file fai
             "QC_REVIEWERS"
         },
         {
-            "C:\\Docs\\COA-002.pdf",
+            "C:\Docs\COA-002.pdf",
             "/Quality/COA/2026",
             "COA-002",
             "COA",
@@ -195,7 +195,7 @@ Iterates a list of three documents and imports each one, collecting per-file fai
             "QC_REVIEWERS"
         },
         {
-            "C:\\Docs\\COA-003.pdf",
+            "C:\Docs\COA-003.pdf",
             "/Quality/COA/2026",
             "COA-003",
             "COA",

@@ -64,8 +64,8 @@ Checks whether the supplied batch identifier is running.
 
 **Raises:**
 
-- **When `vBatchId` is [`NIL`](../literals/nil.md):** `Argument: vBatchId cannot be null.`
-- **When `vBatchId` is a non-integer number:** `Argument: vBatchId must be an integer.`
+- **When `vBatchId` is [`NIL`](../literals/nil.md):** `Argument: batchId cannot be null. IsRunning()`
+- **When `vBatchId` is a non-integer number:** `Argument: batchId must be an integer.`
 - **When `vBatchId` is an empty string:** `Invalid argument`
 
 ## Inheritance

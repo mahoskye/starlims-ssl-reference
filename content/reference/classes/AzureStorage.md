@@ -448,7 +448,7 @@ Manage a blob container, upload files, then use both blob retrieval patterns.
 	aFiles := {"report.txt", "invoice.txt"};
 
 	:FOR nIndex := 1 :TO ALen(aFiles);
-		sLocalPath := "C:\\Temp\\" + aFiles[nIndex];
+		sLocalPath := "C:\Temp\" + aFiles[nIndex];
 		sBlobName := aFiles[nIndex];
 
 		:TRY;

@@ -236,6 +236,7 @@ Loads the first table from an XML string and replaces the current table.
 - `Select({}, {})` returns an empty result set, not all rows.
 - `GetInsertSql()` and `GetUpdateSql()` skip binary columns.
 - `SaveToDb()` can still include binary columns unless you omit them with `aSkipColumns`.
+- `SaveToDb()` expects the target table to have the standard `ORIGREC` column. On a table without it, the call raises `Invalid column name 'ORIGREC'.`
 - `UpdateFieldFromArray()` returns [`.T.`](../literals/true.md) even when no row values match the provided keys.
 
 ## Examples

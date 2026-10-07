@@ -99,7 +99,7 @@ Stores the error message immediately after a failed import so the value is prese
 		:ENDIF;
 
 		sDocId := DocImportDocument(
-			"C:\\Docs\\Result.pdf",
+			"C:\Docs\Result.pdf",
 			"/Standard/Reports/2024",
 			"Result.pdf",
 			"PDF",
@@ -156,7 +156,7 @@ Encapsulates the [`DocCommandFailed`](DocCommandFailed.md) flag and `DocGetError
 		:ENDIF;
 
 		sDocId := DocImportDocument(
-			"C:\\Docs\\Result.pdf",
+			"C:\Docs\Result.pdf",
 			"/Standard/Reports/2024",
 			"Result.pdf",
 			"PDF",

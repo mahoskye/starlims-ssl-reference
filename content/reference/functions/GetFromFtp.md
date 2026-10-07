@@ -88,7 +88,7 @@ Downloads a file from a named FTP directory to an explicit local path and report
     sServer := "ftp.partner.example.com";
     sRemoteDir := "/public/data";
     sRemoteFile := "daily_rates.csv";
-    sLocalFile := "C:\\WorkflowData\\daily_rates.csv";
+    sLocalFile := "C:\WorkflowData\daily_rates.csv";
     sUser := "publicuser";
     sPassword := "public";
 
@@ -128,10 +128,10 @@ Uses SFTP with a private key file for authentication, targets port 22, and repor
     sServer := "sftp.partner.example.com";
     sRemoteDir := "/daily/reports";
     sRemoteFile := "daily_report.csv";
-    sLocalFile := "C:\\Imports\\daily_report.csv";
+    sLocalFile := "C:\Imports\daily_report.csv";
     sUser := "report_service";
     sPassphrase := "key-passphrase";
-    sKeyPath := "C:\\Keys\\report_service.pem";
+    sKeyPath := "C:\Keys\report_service.pem";
     nPort := 22;
 
     bDownloaded := GetFromFtp(

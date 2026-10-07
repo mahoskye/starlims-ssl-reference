@@ -94,11 +94,11 @@ Check the returned folder value, add a separator only when needed, and then appe
 	sLastChar := sWebFolder[Len(sWebFolder)];
 	sSeparator := "";
 
-	:IF !(sLastChar $ "/\\");
+	:IF !(sLastChar $ "/\");
 		sSeparator := "\\";
 	:ENDIF;
 
-	sAssetPath := sWebFolder + sSeparator + "assets\\report_template.html";
+	sAssetPath := sWebFolder + sSeparator + "assets\report_template.html";
 
 	:RETURN sAssetPath;
 :ENDPROC;
@@ -131,11 +131,11 @@ Compare the web folder with other folder helpers so published output goes under 
 	sLastChar := sWebFolder[Len(sWebFolder)];
 	sSeparator := "";
 
-	:IF !(sLastChar $ "/\\");
+	:IF !(sLastChar $ "/\");
 		sSeparator := "\\";
 	:ENDIF;
 
-	sOutputPath := sWebFolder + sSeparator + "downloads\\daily-report.txt";
+	sOutputPath := sWebFolder + sSeparator + "downloads\daily-report.txt";
 
 	:RETURN sOutputPath;
 :ENDPROC;

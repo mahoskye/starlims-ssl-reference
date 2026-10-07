@@ -108,10 +108,10 @@ Get a field from a row, check for null, and convert it only when a value is pres
 	oImport := TablesImport{"C:/Import"};
 	oTable := oImport:GetTable("limsusers");
 	oRow := oTable:Rows[1];
-	oField := oRow:GetField("user_name");
+	oField := oRow:GetField("username");
 
 	:IF oField:IsNull;
-		UsrMes("user_name is null");
+		UsrMes("username is null");
 		:RETURN NIL;
 	:ENDIF;
 

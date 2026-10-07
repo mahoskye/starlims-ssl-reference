@@ -142,7 +142,7 @@ Queue an HTML message with a PDF attachment, CC and BCC recipients, and SMTP aut
 	sFromWho := "qa@example.com";
 	sSubject := "Certificate package";
 	sBody := "<p>Your certificate package is attached.</p>";
-	aAttachList := {"C:\\Reports\\Certificate.pdf"};
+	aAttachList := {"C:\Reports\Certificate.pdf"};
 	aCCList := {"supervisor@example.com"};
 	aBCCList := {"audit@example.com"};
 	sReplyTo := "support@example.com";

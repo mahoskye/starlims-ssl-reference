@@ -89,7 +89,7 @@ Logs in to Documentum, checks in a local PDF using only the required arguments, 
     sDocBase := "QualityRepository";
     sUser := "doc_user";
     sPassword := "secret";
-    sFilePath := "C:\\Docs\\QA_Report.pdf";
+    sFilePath := "C:\Docs\QA_Report.pdf";
     sDocumentId := "DOC-2024-001";
     bLoggedIn := .F.;
 
@@ -131,7 +131,7 @@ Checks in a revised document with `bReplaceContent` set to [`.T.`](../literals/t
     sDocBase := "QualityRepository";
     sUser := "doc_user";
     sPassword := "secret";
-    sFilePath := "C:\\Docs\\Spec_Report_v2.docx";
+    sFilePath := "C:\Docs\Spec_Report_v2.docx";
     sDocumentId := "DOC-2024-0042";
     sVersion := "2.1";
     bReplaceContent := .T.;
@@ -180,7 +180,7 @@ Checks in a document with `bMajorVersion` set to [`.T.`](../literals/true.md) an
     sDocBase := "QualityRepository";
     sUser := "doc_user";
     sPassword := "secret";
-    sFilePath := "C:\\Docs\\QCP-2024-001.pdf";
+    sFilePath := "C:\Docs\QCP-2024-001.pdf";
     sDocumentId := "DOC-2024-00042";
     sVersion := "3.0";
     bReplaceContent := .F.;
