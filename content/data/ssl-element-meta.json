@@ -38,7 +38,7 @@
           "Use AAdd inside loops when you need to collect matching values into one result array."
         ],
         "dont": [
-          "Pass NIL as the target array. AAdd only works with an existing array and raises Target array cannot be null. when the target is NIL.",
+          "Pass NIL as the target array. AAdd only works with an existing array and raises AAdd(): target array cannot be null. when the target is NIL.",
           "Assume the return value is the updated array. AAdd returns the appended value, so code that needs the array should keep using aTarget."
         ]
       }
@@ -355,7 +355,7 @@
         "do": [
           "Use AddNameDelimiters for individual table, view, or column names.",
           "Pass the name of the connection where the SQL will run, such as \"DATABASE\" for the default connection.",
-          "Use this together with AddColDelimiters when you need both individual identifiers and qualified column arrays.",
+          "To qualify table.column names, apply AddNameDelimiters to the table and to each column (AddColDelimiters can't be called from SSL).",
           "Pass the raw identifier value and let the function trim outer spaces before adding delimiters."
         ],
         "dont": [
@@ -636,7 +636,7 @@
       "caveats": [
         "Empty arrays are allowed. With omitted type information, an empty array defaults to string TVP behavior.",
         "NIL elements are allowed as long as the non-NIL elements still match the chosen TVP type.",
-        "The one-dimensional check is explicit only for the first element. Other unsupported element shapes fail later through the normal mixed-type checks.",
+        "Only the first element is checked for nesting. A nested array later in the list does not raise the one-dimensional error; it fails the element-type checks instead.",
         "This function only creates the TVP object. How that object is bound to a query or procedure depends on the database call that receives it."
       ],
       "best_practices": {
@@ -786,7 +786,7 @@
           "Prefer one shared cleanup or recovery label over repeating the same shutdown logic in several places."
         ],
         "dont": [
-          "Pass plain label names such as \"CLEANUP\" for a normal :LABEL CLEANUP; target. The text must match the stored label name exactly.",
+          "Pass plain label names such as \"CLEANUP\" for a normal :LABEL CLEANUP; target. The text must match the label exactly as written after the colon.",
           "Use Branch as a substitute for ordinary :IF, :FOR, :WHILE, or :RETURN flow when structured control is sufficient.",
           "Assume a computed target will raise an error when it does not match. A computed miss simply falls through to the next statement."
         ]
@@ -11369,7 +11369,7 @@
         ],
         "dont": [
           "Assume the credential constructors default to HTTPS. The two-argument constructor uses HTTP, and the three-argument constructor only uses HTTPS when bUseHttp is .T..",
-          "Build SelectEntities() filters with comparison operators such as less-than or greater-than. The public API only builds equality filters from the properties you supply.",
+          "Build SelectEntities() filters with comparison operators such as less-than or greater-than. SelectEntities() only builds equality filters from the properties you supply.",
           "Expect GetBlob() to return blob contents. It returns a file path to the downloaded blob.",
           "Omit PartitionKey or RowKey when inserting or updating entities. Those calls fail before the request is sent."
         ]
@@ -11440,7 +11440,7 @@
       "caveats": [
         "Get() raises an error for invalid names, invalid types, NIL, and out-of-range numeric positions.",
         "Numeric access is 1-based, but the value reported in out-of-range error messages may not match the index you supplied.",
-        "Add() and Set() are surfaced members, but they do not modify the collection."
+        "Add() and Set() can be called, but they do not modify the collection."
       ],
       "best_practices": {
         "do": [
@@ -11537,7 +11537,7 @@
       ],
       "best_practices": {
         "do": [
-          "Use GetTable() from TablesImport or FromXml() when you need a CDataTable with a working schema already in place.",
+          "Use GetTable() from TablesImport or the FromXml() method when you need a CDataTable with a working schema already in place.",
           "Call AddPK() before using GetUpdateSql() or relying on update behavior in SaveToDb().",
           "Use Select({fieldNames}, {valueArrays}) when you want predictable exact field/value matching from SSL code.",
           "Use Rows when you want every row in the table, and ToArray() when you want plain value arrays instead of CDataRow objects.",
@@ -11713,7 +11713,7 @@
           "Assume Compare() returns every row from the source table — unchanged rows are removed from the current result set.",
           "Treat ConnectToExternalSystem() failures as thrown errors — the method reports failure with .F..",
           "Expect GetDataFromWholeDictionary() to clear earlier rows first — it appends collected metadata to the existing ResultTable.",
-          "Assume setting LogFilePath always succeeds — invalid or inaccessible paths are recorded in InternalErrors and the trace listeners are only updated on success."
+          "Assume setting LogFilePath always succeeds — invalid or inaccessible paths are recorded in InternalErrors, and the trace log is not redirected to them."
         ]
       }
     },
@@ -11848,7 +11848,7 @@
       "caveats": [
         "UploadOriginalDoc(), AttachDocToWorkflow(), AttachFileToDocument(), UploadOfficeTemplate(), UploadELNDocument(), and UploadNewRevisionForWorkflowDocument() can auto-fill blank DocName, FileType, and ProjectName values.",
         "CheckInDocument() does not auto-fill DocName; it raises an error if DocName is blank.",
-        "AttachDocToWorkflow() validates missing workflow IDs only when those properties are still in the missing-value state used by the credentialed constructor.",
+        "AttachDocToWorkflow() raises its missing-ID errors only on an uploader created with SDMSDocUploader{oCredentials} whose WorkflowId, StageId, or ActionId has not been set.",
         "CheckInWorkflowDocument() accepts NIL for nDocEntryPoint; in that case it skips the source stage header.",
         "DoUpload() returns the document ID, while the higher-level helper methods return booleans.",
         "When UploadOriginalDoc() runs the UXML upload, FilePath is overwritten with a temporary path. Reassign FilePath before reusing the same uploader instance.",
@@ -11917,7 +11917,7 @@
           "Read Keys, Values, and Count after updates when you need the current dictionary state."
         ],
         "dont": [
-          "Document or write examples as if SSLBaseDictionary{} can be instantiated directly, because this page describes an abstract base class.",
+          "Create SSLBaseDictionary{} directly. Create a concrete dictionary such as SSLStringDictionary{} or SSLIntDictionary{} instead.",
           "Assume all dictionary classes accept the same key types, because the concrete class decides what is valid.",
           "Expect all invalid-key operations to fail the same way, because AddValue and GetValue handle invalid keys differently from Contains, Remove, and TryGetValue.",
           "Treat TryGetValue as returning the value by itself, because it returns an object with Exists and Value.",
@@ -11973,7 +11973,7 @@
         ],
         "dont": [
           "Assume ToArray() includes every table in a multi-table dataset. It only returns the first table.",
-          "Treat bNullAsBlank as optional in SSLDataset{xData, xNullAsBlank}. The wrapping constructor expects both arguments.",
+          "Treat bNullAsBlank as optional in SSLDataset{oData, bNullAsBlank}. The wrapping constructor expects both arguments.",
           "Call ToXml() on an empty SSLDataset{}. Load data first.",
           "Use ToDataSet() unless the next API specifically needs a dataset handle. ToArray() or ToXml() are usually clearer in SSL code."
         ]
@@ -12151,7 +12151,7 @@
       "source_path": "content/reference/classes/Sequence.md",
       "exceptions": [],
       "caveats": [
-        "SequenceName is derived from the table name and field name, both converted to uppercase, and always starts with C_. When a prefix is supplied, it is appended in uppercase after the field name.",
+        "SequenceName is derived from the table name and field name, both converted to uppercase, and always starts with C_. When sPrefix is not empty, it is appended in uppercase after the field name, separated by _.",
         "Create() handles create failures by showing a message rather than exposing a dedicated return value.",
         "Drop(), Exists, NextValue, and Reset() still depend on the target database being reachable and the sequence being valid in that database.",
         "Oracle and SQL Server do not reset sequences the same way. Oracle reset recreates the sequence, while SQL Server resets the existing sequence in place.",
@@ -12180,7 +12180,7 @@
       "source_path": "content/reference/classes/TablesImport.md",
       "exceptions": [],
       "caveats": [
-        "GetTable() only checks the conventional import path <sFolder>/<sName>/<sName>.txt.",
+        "GetTable() only checks the conventional import path <sFolder>\\<sName>\\<sName>.txt.",
         "NullAsBlank is writable on the class, but GetTable() does not use it.",
         "Passing NIL for sName raises an error instead of returning NIL and setting ErrMsg.",
         "IncludeORIGREC only affects the returned table when the imported data actually contains an ORIGREC column."

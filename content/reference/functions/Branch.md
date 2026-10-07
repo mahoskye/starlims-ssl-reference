@@ -13,9 +13,9 @@ starlims:
 
 Transfers control to a label in the current procedure.
 
-`Branch` requires exactly one argument. If that argument is a string literal, SSL uses that literal text as the branch target. If it is any other expression, SSL evaluates it, converts the result to a string, and compares that text against the labels registered in the current procedure. If a computed target does not match any label, execution continues with the next statement.
+`Branch` requires exactly one argument. If that argument is a string literal, SSL uses that literal text as the branch target. If it is any other expression, SSL evaluates it, converts the result to a string, and compares that text against the labels in the current procedure. If a computed target does not match any label, execution continues with the next statement.
 
-For normal label declarations such as [`:LABEL CLEANUP;`](../keywords/LABEL.md), the target text must match the stored label text, so the usual form is `Branch("LABEL CLEANUP")`. Forward references are supported within the same procedure because labels are collected before code generation. When `Branch` is used inside a [`:TRY`](../keywords/TRY.md) or [`:CATCH`](../keywords/CATCH.md) region, SSL leaves that protected region before transferring control.
+For normal label declarations such as [`:LABEL CLEANUP;`](../keywords/LABEL.md), the target text must match the label as written after the colon, so the usual form is `Branch("LABEL CLEANUP")`. You can branch to a label that appears later in the same procedure. When `Branch` is used inside a [`:TRY`](../keywords/TRY.md) or [`:CATCH`](../keywords/CATCH.md) region, SSL leaves that protected region before transferring control.
 `Branch` does not return a useful value.
 
 ## When to use
@@ -34,7 +34,7 @@ Branch(vTarget)
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `vTarget` | any | yes | — | Target label text. A string literal is used directly as the target text. Any other expression is evaluated and converted to a string before SSL compares it to the labels registered in the current procedure. |
+| `vTarget` | any | yes | — | Target label text. A string literal is used directly as the target text. Any other expression is evaluated and converted to a string before SSL compares it to the labels in the current procedure. |
 
 ## Returns
 
@@ -54,7 +54,7 @@ Branch(vTarget)
     - Prefer one shared cleanup or recovery label over repeating the same shutdown logic in several places.
 
 !!! failure "Don't"
-    - Pass plain label names such as `"CLEANUP"` for a normal [`:LABEL CLEANUP;`](../keywords/LABEL.md) target. The text must match the stored label name exactly.
+    - Pass plain label names such as `"CLEANUP"` for a normal [`:LABEL CLEANUP;`](../keywords/LABEL.md) target. The text must match the label exactly as written after the colon.
     - Use `Branch` as a substitute for ordinary [`:IF`](../keywords/IF.md), [`:FOR`](../keywords/FOR.md), [`:WHILE`](../keywords/WHILE.md), or [`:RETURN`](../keywords/RETURN.md) flow when structured control is sufficient.
     - Assume a computed target will raise an error when it does not match. A computed miss simply falls through to the next statement.
 
@@ -142,7 +142,7 @@ Uses `Branch` inside a [`:TRY`](../keywords/TRY.md) block to jump to a shared cl
 :PROCEDURE SaveBatch;
     :DECLARE sBatchID, bCleanup, oErr;
 
-    sBatchID := "B-100";
+    sBatchID := "";
     bCleanup := .F.;
 
     :TRY;

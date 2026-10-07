@@ -13,7 +13,7 @@ starlims:
 
 Composes, loads, saves, sends, or queues email messages with attachments and optional signing or encryption.
 
-Email lets SSL code build a message, send it through SMTP, save it to a message file, load a saved message for later sending, or queue it for outbox delivery. Create it with `Email{}` when you want methods to return [`.F.`](../literals/false.md) and populate `Exception` instead of raising, or use `Email{.F.}` when you want failures to raise and be handled with [`:TRY`](../keywords/TRY.md) and [`GetLastSSLError`](../functions/GetLastSSLError.md). Before `Send`, `SaveMessage`, or [`SendToOutbox`](../functions/SendToOutbox.md), set `From`, `To`, `Subject`, and `Body`. Before `Send` or [`SendToOutbox`](../functions/SendToOutbox.md), also set `SMTPServerName` and `SMTPServerPort`. SMTP credentials are optional and are only used when `SMTPServerUserName` is not empty.
+Email lets SSL code build a message, send it through SMTP, save it to a message file, load a saved message for later sending, or queue it for outbox delivery. Create it with `Email{}` when you want methods to return [`.F.`](../literals/false.md) and populate `Exception` instead of raising, or use `Email{.F.}` when you want failures to raise and be handled with [`:TRY`](../keywords/TRY.md) and [`GetLastSSLError`](../functions/GetLastSSLError.md). Before `Send`, `SaveMessage`, or `SendToOutbox`, set `From`, `To`, `Subject`, and `Body`. Before `Send` or `SendToOutbox`, also set `SMTPServerName` and `SMTPServerPort`. SMTP credentials are optional and are only used when `SMTPServerUserName` is not empty.
 
 ## When to use
 
@@ -63,7 +63,7 @@ Creates an `Email` object with exception suppression enabled by default. Operati
 | `LoadMessage(sPathToMessage)` | [boolean](../types/boolean.md) | Loads a message file for later `Send`. |
 | `SaveMessage(sPathToMessage)` | [boolean](../types/boolean.md) | Saves the current message to a file in message format. |
 | `Send()` | [boolean](../types/boolean.md) | Sends the current message through SMTP. |
-| [`SendToOutbox()`](../functions/SendToOutbox.md) | [boolean](../types/boolean.md) | Queues the current message for later delivery. |
+| `SendToOutbox()` | [boolean](../types/boolean.md) | Queues the current message for later delivery. |
 | `SetEncryptCertificateFromPath(sPathToCertificate, sCertificatePassword)` | [boolean](../types/boolean.md) | Loads the encryption certificate from a file. |
 | `SetEncryptCertificateFromStore(sCertificateEmailAddress, sCertificateStoreName)` | [boolean](../types/boolean.md) | Loads the encryption certificate from a certificate store. |
 | `SetSignCertificateFromPath(sPathToCertificate, sCertificatePassword)` | [boolean](../types/boolean.md) | Loads the signing certificate from a file. |
@@ -95,7 +95,7 @@ Sends the current or loaded message through the configured SMTP server.
 
 **Returns:** [boolean](../types/boolean.md) — [`.T.`](../literals/true.md) when the message was sent.
 
-### [`SendToOutbox`](../functions/SendToOutbox.md)
+### `SendToOutbox`
 
 Queues the current property-based message for later delivery.
 
@@ -152,28 +152,28 @@ Loads the encryption certificate from a certificate file.
 ## Best practices
 
 !!! success "Do"
-    - Set `From`, `To`, `Subject`, and `Body` before calling `Send`, `SaveMessage`, or [`SendToOutbox`](../functions/SendToOutbox.md).
+    - Set `From`, `To`, `Subject`, and `Body` before calling `Send`, `SaveMessage`, or `SendToOutbox`.
     - Set `To` to a non-empty array of recipient addresses.
-    - Set `SMTPServerName` and `SMTPServerPort` before calling `Send` or [`SendToOutbox`](../functions/SendToOutbox.md).
+    - Set `SMTPServerName` and `SMTPServerPort` before calling `Send` or `SendToOutbox`.
     - Use `Email{}` when you want non-throwing behavior and plan to inspect `oEmail:Exception:Description` after a failure.
     - Use `Email{.F.}` inside [`:TRY`](../keywords/TRY.md) and handle failures with [`GetLastSSLError()`](../functions/GetLastSSLError.md) when the script should stop on email errors.
     - Validate attachment paths and certificate inputs before sending or queueing mail.
-    - Use [`SendToOutbox`](../functions/SendToOutbox.md) when delivery should be deferred to later processing.
+    - Use `SendToOutbox` when delivery should be deferred to later processing.
 
 !!! failure "Don't"
     - Assume `Email{}` raises on failure — it suppresses exceptions by default and returns [`.F.`](../literals/false.md) instead.
-    - Leave `To` unset or empty before `Send`, `SaveMessage`, or [`SendToOutbox`](../functions/SendToOutbox.md).
+    - Leave `To` unset or empty before `Send`, `SaveMessage`, or `SendToOutbox`.
     - Omit required message fields — the message must include `From`, `Subject`, and `Body` before it can be built.
-    - Omit `SMTPServerName` or set `SMTPServerPort` to `0` when calling `Send` or [`SendToOutbox`](../functions/SendToOutbox.md) — SMTP validation fails.
+    - Omit `SMTPServerName` or set `SMTPServerPort` to `0` when calling `Send` or `SendToOutbox` — SMTP validation fails.
     - Rely on `SMTPTimeout` or `LogSMTP` for queued outbox delivery — those settings apply to direct `Send` behavior, not later outbox processing.
     - Pass an invalid certificate store name, an unknown certificate email address, or a missing certificate file — the certificate methods fail and the email cannot be signed or encrypted.
-    - Expect `LoadMessage` to populate the editable properties used by `SaveMessage` or [`SendToOutbox`](../functions/SendToOutbox.md) — loaded message content is only reused by `Send`.
+    - Expect `LoadMessage` to populate the editable properties used by `SaveMessage` or `SendToOutbox` — loaded message content is only reused by `Send`.
 
 ## Caveats
 
 - `LoadMessage` and `SaveMessage` require a non-empty file path.
 - If `SMTPServerUserName` is empty, `Send` connects without attempting SMTP login.
-- After a successful `LoadMessage`, `Send` transmits the loaded message content with the current SMTP settings; `SaveMessage` and [`SendToOutbox`](../functions/SendToOutbox.md) always use the current property values, not the loaded content.
+- After a successful `LoadMessage`, `Send` transmits the loaded message content with the current SMTP settings; `SaveMessage` and `SendToOutbox` always use the current property values, not the loaded content.
 
 ## Examples
 
@@ -219,7 +219,7 @@ DoProc("SendNotificationEmail");
 
 ### Queue a signed report for outbox delivery
 
-Uses `Email{.F.}` so failures raise exceptions, then wraps the operation in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md). Signs the message with a `.pfx` certificate before queuing it with [`SendToOutbox()`](../functions/SendToOutbox.md). Since `IgnoreExceptions` is [`.F.`](../literals/false.md), certificate load failures propagate to [`:CATCH`](../keywords/CATCH.md) rather than silently returning [`.F.`](../literals/false.md).
+Uses `Email{.F.}` so failures raise exceptions, then wraps the operation in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md). Signs the message with a `.pfx` certificate before queuing it with `SendToOutbox()`. Since `IgnoreExceptions` is [`.F.`](../literals/false.md), certificate load failures propagate to [`:CATCH`](../keywords/CATCH.md) rather than silently returning [`.F.`](../literals/false.md).
 
 ```ssl
 :PROCEDURE QueueSignedReport;
@@ -232,7 +232,7 @@ Uses `Email{.F.}` so failures raise exceptions, then wraps the operation in [`:T
 	oEmail:CC := {"quality@laboratory.com"};
 	oEmail:Subject := "Q4 laboratory results";
 	oEmail:Body := "The signed report is attached for review.";
-	oEmail:Attachments := {"C:/Reports/Q4Results.pdf"};
+	oEmail:Attachments := {"C:\Reports\Q4Results.pdf"};
 
 	oEmail:SMTPServerName := "smtp.laboratory.com";
 	oEmail:SMTPServerPort := 587;
@@ -241,8 +241,8 @@ Uses `Email{.F.}` so failures raise exceptions, then wraps the operation in [`:T
 	oEmail:SMTPServerUserPassword := "<smtp-password>";
 
 	:TRY;
-		oEmail:SetSignCertificateFromPath("C:/Certificates/report-signing.pfx",
-			"Secret123");
+		oEmail:SetSignCertificateFromPath("C:\Certificates\report-signing.pfx",
+			"<certificate-password>");
 
 		bQueued := oEmail:SendToOutbox();
 

@@ -105,7 +105,7 @@ Get a field from a row, check for null, and convert it only when a value is pres
 :PROCEDURE ReadUserNameField;
 	:DECLARE oImport, oTable, oRow, oField, sUserName;
 
-	oImport := TablesImport{"C:/Import"};
+	oImport := TablesImport{"C:\Import"};
 	oTable := oImport:GetTable("limsusers");
 	oRow := oTable:Rows[1];
 	oField := oRow:GetField("username");
@@ -133,7 +133,7 @@ Write a new value to a field and then read it back from the same row.
 :PROCEDURE UpdateStatusField;
 	:DECLARE oImport, oTable, oRow, oField;
 
-	oImport := TablesImport{"C:/Import"};
+	oImport := TablesImport{"C:\Import"};
 	oTable := oImport:GetTable("sample");
 	oRow := oTable:Rows[1];
 	oField := oRow:GetField("status");
@@ -163,7 +163,7 @@ Read a binary field to a file path, then write updated contents back from a diff
 	:DECLARE oImport, oTable, oRow, oField;
 	:DECLARE sExportedFile, sReplacementFile;
 
-	oImport := TablesImport{"C:/Import"};
+	oImport := TablesImport{"C:\Import"};
 	oTable := oImport:GetTable("attachments");
 	oRow := oTable:Rows[1];
 	oField := oRow:GetField("attachment_blob");
@@ -171,7 +171,7 @@ Read a binary field to a file path, then write updated contents back from a diff
 	sExportedFile := oField:Value;
 	UsrMes("Binary field exported to: " + sExportedFile);
 
-	sReplacementFile := "C:/Import/replacement.bin";
+	sReplacementFile := "C:\Import\replacement.bin";
 	oField:Value := sReplacementFile;
 
 	:RETURN oField:Value;
@@ -184,7 +184,7 @@ DoProc("CopyBinaryField");
 [`UsrMes`](../functions/UsrMes.md) logs (the filename is derived from the binary content hash):
 
 ```text
-Binary field exported to: C:/Import/a3f2b1c4d5e6f7890123456789abcdef.bin
+Binary field exported to: <import folder>\<content hash>.bin
 ```
 
 ### Format a field value for SQL string building
@@ -195,7 +195,7 @@ Use the helper when you need the current field rendered as a SQL literal.
 :PROCEDURE BuildFilterFromField;
 	:DECLARE oImport, oTable, oRow, oField, sWhere;
 
-	oImport := TablesImport{"C:/Import"};
+	oImport := TablesImport{"C:\Import"};
 	oTable := oImport:GetTable("sample");
 	oRow := oTable:Rows[1];
 	oField := oRow:GetField("sample_id");

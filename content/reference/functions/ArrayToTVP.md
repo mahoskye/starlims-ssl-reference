@@ -25,9 +25,8 @@ Runtime support is limited to string and integer TVPs:
 - If `sDataType` is omitted or is not a string, the function infers the type
   from the array contents.
 - `"INT"` selects integer TVP behavior.
-- `"DOUBLE"` and `"DATE"` are recognized strings, but TVP creation still fails
-  because the underlying TVP implementations support only integer and string
-  payloads.
+- `"DOUBLE"` and `"DATE"` are recognized strings, but the call raises
+  `Unsupported data type: <type>`.
 - Any other string value falls back to string TVP behavior.
 
 All non-[`NIL`](../literals/nil.md) elements must match the chosen TVP type. Integer TVPs accept only whole-number values that fit the supported integer range. Mixed non-[`NIL`](../literals/nil.md) element types fail.
@@ -97,8 +96,9 @@ ArrayToTVP(aValues, [sDataType], [sConnectionName])
   defaults to string TVP behavior.
 - [`NIL`](../literals/nil.md) elements are allowed as long as the non-[`NIL`](../literals/nil.md) elements still match the
   chosen TVP type.
-- The one-dimensional check is explicit only for the first element. Other
-  unsupported element shapes fail later through the normal mixed-type checks.
+- Only the first element is checked for nesting. A nested array later in the
+  list does not raise the one-dimensional error; it fails the element-type
+  checks instead.
 - This function only creates the TVP object. How that object is bound to a
   query or procedure depends on the database call that receives it.
 

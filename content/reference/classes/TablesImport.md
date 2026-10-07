@@ -13,7 +13,7 @@ starlims:
 
 Loads one imported table at a time from a folder structure and returns it as a [`CDataTable`](CDataTable.md).
 
-Create `TablesImport{sFolder}` with the root folder that contains your imported tables, then call `GetTable(sName)` to load a specific table. `GetTable(sName)` looks for the table file at `<sFolder>/<sName>/<sName>.txt`, tries XML first, then falls back to the text-table importer. Imported columns are returned writable, non-auto-incrementing, and allowed to contain null values.
+Create `TablesImport{sFolder}` with the root folder that contains your imported tables, then call `GetTable(sName)` to load a specific table. `GetTable(sName)` looks for the table file at `<sFolder>\<sName>\<sName>.txt`. The file can contain dataset XML or a text-table export.
 
 ## When to use
 
@@ -49,11 +49,11 @@ Creates an importer for a specific root folder.
 
 Loads one table from the import folder.
 
-It reads `<sFolder>/<sName>/<sName>.txt`, tries XML first, then falls back to the text-table importer. On success, the returned table is named after `sName`. If `IncludeORIGREC` is [`.F.`](../literals/false.md), the `ORIGREC` column is removed when present.
+It reads `<sFolder>\<sName>\<sName>.txt`, which can contain dataset XML or a text-table export. On success, the returned table is named after `sName`. If `IncludeORIGREC` is [`.F.`](../literals/false.md), the `ORIGREC` column is removed when present.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `sName` | [string](../types/string.md) | yes | Table name. The class looks for `<sFolder>/<sName>/<sName>.txt`. |
+| `sName` | [string](../types/string.md) | yes | Table name. The class looks for `<sFolder>\<sName>\<sName>.txt`. |
 
 **Returns:** [object](../types/object.md) — [`CDataTable`](CDataTable.md) on success, or [`NIL`](../literals/nil.md) when loading fails.
 
@@ -62,7 +62,7 @@ It reads `<sFolder>/<sName>/<sName>.txt`, tries XML first, then falls back to th
 
 ## Inheritance
 
-**Base class:** `EnterpriseImpExBase`
+**Base class:** [`object`](../types/object.md)
 
 ## Best practices
 
@@ -78,7 +78,7 @@ It reads `<sFolder>/<sName>/<sName>.txt`, tries XML first, then falls back to th
 
 ## Caveats
 
-- `GetTable()` only checks the conventional import path `<sFolder>/<sName>/<sName>.txt`.
+- `GetTable()` only checks the conventional import path `<sFolder>\<sName>\<sName>.txt`.
 - `NullAsBlank` is writable on the class, but `GetTable()` does not use it.
 - Passing [`NIL`](../literals/nil.md) for `sName` raises an error instead of returning [`NIL`](../literals/nil.md) and setting `ErrMsg`.
 - `IncludeORIGREC` only affects the returned table when the imported data actually contains an `ORIGREC` column.
@@ -93,7 +93,7 @@ Loads a lookup table from an import folder and reports either the row count or t
 :PROCEDURE LoadSampleTypes;
     :DECLARE sFolder, sTableName, oImport, oTable, sError;
 
-    sFolder := "C:/STARLIMS/Import/LookupTables";
+    sFolder := "C:\STARLIMS\Import\LookupTables";
     sTableName := "sampletypes";
 
     oImport := TablesImport{sFolder};

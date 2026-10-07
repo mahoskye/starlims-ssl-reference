@@ -334,7 +334,7 @@ Establishes a full `Connect` -> `Login` -> `Secure` session in explicit TLS mode
 		UsrMes("Connect: " + sResult);
 		/* Logs: connect response text;
 
-		sResult := oFtps:Login("reports_user", "secure_password", "");
+		sResult := oFtps:Login("reports_user", "<ftps-password>", "");
 		UsrMes("Login: " + sResult);
 		/* Logs: login response text;
 
@@ -343,7 +343,7 @@ Establishes a full `Connect` -> `Login` -> `Secure` session in explicit TLS mode
 		bOk := oFtps:SendToFtps(
 			"/data/reports",
 			"weekly_report.txt",
-			"C:/Temp/weekly_report.txt"
+			"C:\Temp\weekly_report.txt"
 		);
 
 		:IF bOk;
@@ -368,7 +368,7 @@ DoProc("UploadReportToFtps");
 
 ### List a directory and verify a file
 
-Reads a remote directory with `GetDirFromFtps`, prints each entry's name, size, date, time, and attributes, then calls `CheckOnFtps` to confirm a specific file is present. Each row of the 2D listing array is formatted as a [`|`](../operators/or.md)-delimited line.
+Reads a remote directory with `GetDirFromFtps`, prints each entry's name, size, date, time, and attributes, then calls `CheckOnFtps` to confirm a specific file is present. Each row of the 2D listing array is formatted as a `|`-delimited line.
 
 ```ssl
 :PROCEDURE ReviewFtpsFolder;
@@ -378,7 +378,7 @@ Reads a remote directory with `GetDirFromFtps`, prints each entry's name, size, 
 
 	:TRY;
 		sResult := oFtps:Connect("ftp.example.com", 21, "Explicit");
-		sResult := oFtps:Login("qc_user", "secure_password", "");
+		sResult := oFtps:Login("qc_user", "<ftps-password>", "");
 
 		oFtps:Secure();
 
@@ -433,13 +433,13 @@ Calls `SetTlsParameters` before `Connect` to specify a cipher suite, expected co
 		"ftp.example.com",
 		"TLS12",
 		"Path",
-		"C:/Certificates/ComplianceFTPS.pfx",
-		"CertPassword123"
+		"C:\Certificates\ComplianceFTPS.pfx",
+		"<certificate-password>"
 	);
 
 	:TRY;
 		sResult := oFtps:Connect("ftp.example.com", 21, "Explicit");
-		sResult := oFtps:Login("compliance_user", "secure_password", "");
+		sResult := oFtps:Login("compliance_user", "<ftps-password>", "");
 
 		oFtps:Secure();
 

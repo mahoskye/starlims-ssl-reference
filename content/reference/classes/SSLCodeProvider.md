@@ -225,9 +225,10 @@ Compiles a specific server script by full name and returns the error list to the
 
 	:RETURN oErrors;
 :ENDPROC;
-```
 
-Call it with `DoProc("ValidateOneScript")`.
+/* Usage;
+DoProc("ValidateOneScript");
+```
 
 ### Compile one category of data sources
 
@@ -242,9 +243,10 @@ Compiles all data sources in a known category by its GUID and returns the combin
 
 	:RETURN oErrors;
 :ENDPROC;
-```
 
-Call it with `DoProc("ValidateDataSourceCategory")`.
+/* Usage;
+DoProc("ValidateDataSourceCategory");
+```
 
 ### Compile all server scripts and data sources
 
@@ -259,9 +261,10 @@ Runs a full validation pass across all published scripts and data sources. Usefu
 
 	:RETURN oErrors;
 :ENDPROC;
-```
 
-Call it with `DoProc("ValidateAllPublishedCode")`.
+/* Usage;
+DoProc("ValidateAllPublishedCode");
+```
 
 ### Compile a selected list of changed scripts
 
@@ -278,9 +281,10 @@ Compiles a targeted list of changed scripts in one pass rather than recompiling 
 
 	:RETURN oErrors;
 :ENDPROC;
-```
 
-Call it with `DoProc("ValidateChangedScripts")`.
+/* Usage;
+DoProc("ValidateChangedScripts");
+```
 
 ## Related
 

@@ -100,7 +100,7 @@ Converts a user-defined object to an XML string with [`ToXml`](ToXml.md) before 
 		{"TestCode", "WETCHEM"}
 	});
 
-	sPayload := ToXml(oContext, "AnalysisContext");
+	sPayload := ToXml(oContext);
 	AddToSession("CurrentAnalysisContext", sPayload);
 
 	UsrMes("Serialized analysis context stored as XML.");

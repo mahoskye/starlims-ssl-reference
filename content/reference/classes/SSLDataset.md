@@ -13,7 +13,7 @@ starlims:
 
 Represents dataset results so SSL code can work with query output as an object, convert the first table to an array, export XML, or pass the dataset handle to APIs that expect one.
 
-`SSLDataset` is usually obtained from [`GetSSLDataset`](../functions/GetSSLDataset.md) or from [`RunDS`](../functions/RunDS.md) with the `"ssldataset"` return type. An empty `SSLDataset{}` starts with no loaded data. `ToArray()` reads only the first table and returns an empty array when no table is available. [`ToXml()`](../functions/ToXml.md) exports the current dataset as XML with schema and an XML declaration. `ToDataSet()` returns the current dataset handle in object form for APIs that specifically expect it.
+`SSLDataset` is usually obtained from [`GetSSLDataset`](../functions/GetSSLDataset.md) or from [`RunDS`](../functions/RunDS.md) with the `"ssldataset"` return type. An empty `SSLDataset{}` starts with no loaded data. `ToArray()` reads only the first table and returns an empty array when no table is available. `ToXml()` exports the current dataset as XML with schema and an XML declaration. `ToDataSet()` returns the current dataset handle in object form for APIs that specifically expect it.
 
 ## When to use
 
@@ -40,11 +40,11 @@ Creates an `SSLDataset` from an existing dataset handle.
 
 | Name | Returns | Description |
 |------|---------|-------------|
-| [`ToXml`](../functions/ToXml.md) | [string](../types/string.md) | Serializes the current dataset to XML with schema and an XML declaration. |
+| `ToXml` | [string](../types/string.md) | Serializes the current dataset to XML with schema and an XML declaration. |
 | `ToArray` | [array](../types/array.md) | Returns the first table as an array of rows. |
 | `ToDataSet` | [object](../types/object.md) | Returns the current dataset handle in object form. |
 
-### [`ToXml`](../functions/ToXml.md)
+### `ToXml`
 
 Serializes the current dataset to XML.
 
@@ -76,14 +76,14 @@ Returns the current dataset handle in object form.
 
 !!! failure "Don't"
     - Assume `ToArray()` includes every table in a multi-table dataset. It only returns the first table.
-    - Treat `bNullAsBlank` as optional in `SSLDataset{xData, xNullAsBlank}`. The wrapping constructor expects both arguments.
-    - Call [`ToXml()`](../functions/ToXml.md) on an empty `SSLDataset{}`. Load data first.
-    - Use `ToDataSet()` unless the next API specifically needs a dataset handle. `ToArray()` or [`ToXml()`](../functions/ToXml.md) are usually clearer in SSL code.
+    - Treat `bNullAsBlank` as optional in `SSLDataset{oData, bNullAsBlank}`. The wrapping constructor expects both arguments.
+    - Call `ToXml()` on an empty `SSLDataset{}`. Load data first.
+    - Use `ToDataSet()` unless the next API specifically needs a dataset handle. `ToArray()` or `ToXml()` are usually clearer in SSL code.
 
 ## Caveats
 
 - The `bNullAsBlank` setting affects `ToArray()` output, not the underlying dataset itself.
-- [`ToXml()`](../functions/ToXml.md) requires loaded dataset content. An empty `SSLDataset{}` does not provide a safe XML export.
+- `ToXml()` requires loaded dataset content. An empty `SSLDataset{}` does not provide a safe XML export.
 
 ## Examples
 
@@ -120,7 +120,7 @@ DoProc("ReviewRecentTasks");
 
 ### Wrap a dataset handle before exporting XML
 
-Uses the two-argument constructor to wrap an existing dataset handle from [`RunDS`](../functions/RunDS.md), controlling null handling with `bNullAsBlank`, then exports the result to XML with [`ToXml()`](../functions/ToXml.md).
+Uses the two-argument constructor to wrap an existing dataset handle from [`RunDS`](../functions/RunDS.md), controlling null handling with `bNullAsBlank`, then exports the result to XML with `ToXml()`.
 
 ```ssl
 :PROCEDURE ExportPendingOrdersXml;

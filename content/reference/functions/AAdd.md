@@ -51,7 +51,7 @@ AAdd(aTarget, vElement)
     - Use `AAdd` inside loops when you need to collect matching values into one result array.
 
 !!! failure "Don't"
-    - Pass [`NIL`](../literals/nil.md) as the target array. `AAdd` only works with an existing array and raises `Target array cannot be null.` when the target is [`NIL`](../literals/nil.md).
+    - Pass [`NIL`](../literals/nil.md) as the target array. `AAdd` only works with an existing array and raises `AAdd(): target array cannot be null.` when the target is [`NIL`](../literals/nil.md).
     - Assume the return value is the updated array. `AAdd` returns the appended value, so code that needs the array should keep using `aTarget`.
 
 ## Examples

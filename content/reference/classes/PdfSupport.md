@@ -21,7 +21,7 @@ Provides methods to create, modify, secure, save, and print PDF documents.
 - When merging pages from multiple PDFs or images into a single, consolidated PDF is required.
 - When enforcing security and permissions on PDF files, such as password protection or restricting printing/extraction.
 - When automating the printing of PDFs to specific printers via Adobe Reader.
-- When you need granular control over annotations, forms, and document assembly within a PDF workflow.
+- When you need to set per-permission flags (annotations, form filling, page assembly) on a saved PDF.
 
 ## Constructors
 
@@ -222,8 +222,8 @@ Imports a JPEG as a new PDF page, then calls `SetTextStyle` to switch to bold gr
 :PROCEDURE AddTextOverlayToImage;
     :DECLARE oPdf, sImagePath, sOutputPath, sLabel;
 
-    sImagePath := "C:/Documents/InspectionPhoto.jpg";
-    sOutputPath := "C:/Documents/LabeledPhoto.pdf";
+    sImagePath := "C:\Documents\InspectionPhoto.jpg";
+    sOutputPath := "C:\Documents\LabeledPhoto.pdf";
     sLabel := "PASS - Inspected";
 
     oPdf := PdfSupport{};
@@ -256,12 +256,12 @@ Merges a header image, all pages from an existing PDF, and a footer image into o
     :DECLARE sOutputPath, sUserPass, sOwnerPass, sMsg;
     :DECLARE nPageCount;
 
-    sImage1 := "/documents/report_header.png";
-    sImage2 := "/documents/report_footer.png";
-    sExistingPdf := "/documents/reference.pdf";
-    sOutputPath := "/documents/final_report.pdf";
-    sUserPass := "UserPass2024";
-    sOwnerPass := "OwnerPass2024";
+    sImage1 := "C:\Documents\report_header.png";
+    sImage2 := "C:\Documents\report_footer.png";
+    sExistingPdf := "C:\Documents\reference.pdf";
+    sOutputPath := "C:\Documents\final_report.pdf";
+    sUserPass := "<user-password>";
+    sOwnerPass := "<owner-password>";
 
     oPdf := PdfSupport{};
     oPdf:AddPageFromImage(sImage1);
@@ -291,7 +291,7 @@ DoProc("AssembleSecureMultiSourcePdf");
 [`UsrMes`](../functions/UsrMes.md) logs (page count depends on merged sources):
 
 ```text
-Assembled PDF has 5 pages and is print-protected
+Assembled PDF has <n> pages and is print-protected
 ```
 
 ### Protect and print a PDF report
@@ -301,13 +301,13 @@ Opens an existing PDF, draws a title on page 1, then applies `Protect`, which se
 ```ssl
 :PROCEDURE GenerateSecureReport;
     :PARAMETERS sPdfPath, sPrinterName;
-    :DEFAULT sPdfPath, "C:/Reports/QuarterlyReport.pdf";
+    :DEFAULT sPdfPath, "C:\Reports\QuarterlyReport.pdf";
     :DEFAULT sPrinterName, "HP_LaserJet_5000";
     :DECLARE oPdf, sAdobePath, sReportTitle, sOutputPath, oErr;
 
-    sAdobePath := "C:/Program Files/Adobe/Acrobat DC/Acrobat/Acrobat.exe";
+    sAdobePath := "C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.exe";
     sReportTitle := "Q4 Analytical Results";
-    sOutputPath := "C:/Reports/Secure_QuarterlyReport.pdf";
+    sOutputPath := "C:\Reports\Secure_QuarterlyReport.pdf";
 
     oPdf := PdfSupport{};
     oPdf:Open(sPdfPath);
@@ -315,7 +315,7 @@ Opens an existing PDF, draws a title on page 1, then applies `Protect`, which se
     oPdf:SetTextStyle("Arial", 12, "Bold", "Black");
     oPdf:AddTextOnPage(sReportTitle, 1, 50, 50);
 
-    oPdf:Protect("SecureReport123");
+    oPdf:Protect("<pdf-password>");
     oPdf:PermitModifyDocument := .F.;
     oPdf:Save(sOutputPath);
 

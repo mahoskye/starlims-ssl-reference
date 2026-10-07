@@ -13,7 +13,7 @@ starlims:
 
 Provides an in-memory table object for working with rows, columns, XML, and database persistence from SSL.
 
-`CDataTable` is typically used for table data that already has a schema, such as tables returned by [`TablesImport:GetTable()`](TablesImport.md) or tables loaded with [`FromXml()`](../functions/FromXml.md). It exposes column metadata through `Columns`, row objects through `Rows`, plain array data through `ToArray()`, and SQL or persistence helpers such as `GetInsertSql()`, `GetUpdateSql()`, and `SaveToDb()`.
+`CDataTable` is typically used for table data that already has a schema, such as tables returned by [`TablesImport:GetTable()`](TablesImport.md) or tables loaded with the `FromXml()` method. It exposes column metadata through `Columns`, row objects through `Rows`, plain array data through `ToArray()`, and SQL or persistence helpers such as `GetInsertSql()`, `GetUpdateSql()`, and `SaveToDb()`.
 
 ## When to use
 
@@ -73,7 +73,7 @@ Creates an empty named table.
 | `SaveToDb(bOverwrite, aWhereFields, aFieldsValues, bDoAudit, aSkipColumns)` | [boolean](../types/boolean.md) | Persists current rows, or a selected subset of current rows, to the database. |
 | `Select(vWhereFields, aFieldsValues)` | [array](../types/array.md) | Returns matching [`CDataRow`](CDataRow.md) objects. |
 | `ToArray()` | [array](../types/array.md) | Returns the table as a 2D array of values. |
-| [`ToXml()`](../functions/ToXml.md) | [string](../types/string.md) | Serializes the table, including schema, to XML. |
+| `ToXml()` | [string](../types/string.md) | Serializes the table, including schema, to XML. |
 | `UpdateField(sFieldName, vNewValue, vOldValue)` | [boolean](../types/boolean.md) | Replaces one field value across matching rows. |
 | `UpdateFieldFromArray(sFieldName, aValues)` | [boolean](../types/boolean.md) | Replaces field values by key lookup from an array of `{newValue, key}` pairs. |
 | `FromXml(sXml)` | [`NIL`](../literals/nil.md) | Replaces the current table with the first table read from XML. |
@@ -136,7 +136,7 @@ Persists rows from the current table to the database.
 
 **Raises:**
 
-- `count is null.` — the row-count lookup returned null during persist.
+- `count is null.`
 
 ### `Select`
 
@@ -160,7 +160,7 @@ Returns the table as a plain 2D array of field values in row order.
 
 **Returns:** [array](../types/array.md) — Each row is an array of values in column order.
 
-### [`ToXml`](../functions/ToXml.md)
+### `ToXml`
 
 Serializes the table, including schema and data, to XML.
 
@@ -199,13 +199,13 @@ Updates one field by looking up each row's current field value in an array of `{
 - `Argument 'aValues' must be a non null array.`
 - `Invalid values. Index: <n>`
 
-### [`FromXml`](../functions/FromXml.md)
+### `FromXml`
 
 Loads the first table from an XML string and replaces the current table.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `sXml` | [string](../types/string.md) | yes | XML string that includes table schema and data. |
+| `sXml` | [string](../types/string.md) | yes | Dataset XML that includes table schema and data, such as the output of [`GetDataSetXMLFromArray`](../functions/GetDataSetXMLFromArray.md) or this class's `ToXml()` method. |
 
 **Returns:** [`NIL`](../literals/nil.md) — Replaces the current table contents with those from the XML string.
 
@@ -216,7 +216,7 @@ Loads the first table from an XML string and replaces the current table.
 ## Best practices
 
 !!! success "Do"
-    - Use `GetTable()` from [`TablesImport`](TablesImport.md) or [`FromXml()`](../functions/FromXml.md) when you need a `CDataTable` with a working schema already in place.
+    - Use `GetTable()` from [`TablesImport`](TablesImport.md) or the `FromXml()` method when you need a `CDataTable` with a working schema already in place.
     - Call `AddPK()` before using `GetUpdateSql()` or relying on update behavior in `SaveToDb()`.
     - Use `Select({fieldNames}, {valueArrays})` when you want predictable exact field/value matching from SSL code.
     - Use `Rows` when you want every row in the table, and `ToArray()` when you want plain value arrays instead of [`CDataRow`](CDataRow.md) objects.
@@ -249,7 +249,7 @@ This example demonstrates loading a table with `GetTable()`, filtering rows usin
 :PROCEDURE FindPendingRows;
 	:DECLARE oImport, oTable, aRows, oRow, sSampleId;
 
-	oImport := TablesImport{"C:/Import"};
+	oImport := TablesImport{"C:\Import"};
 	oTable := oImport:GetTable("sample");
 	aRows := oTable:Select({"status"}, {{"Pending"}});
 
@@ -277,7 +277,7 @@ This example demonstrates assigning a primary key with `AddPK()`, updating a fie
 :PROCEDURE CompletePendingRows;
 	:DECLARE oImport, oTable, bSaved;
 
-	oImport := TablesImport{"C:/Import"};
+	oImport := TablesImport{"C:\Import"};
 	oTable := oImport:GetTable("sample");
 
 	oTable:AddPK("sample_id");

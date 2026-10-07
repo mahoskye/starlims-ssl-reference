@@ -13,7 +13,7 @@ starlims:
 
 Wrap a name in database-specific delimiters.
 
-AddNameDelimiters returns `sName` wrapped in the identifier delimiters used by the database identified by `sDSN`. If `sDSN` is omitted or [`NIL`](../literals/nil.md), it uses the delimiters of the default connection. If `sName` is [`NIL`](../literals/nil.md), it also uses an empty string.
+AddNameDelimiters returns `sName` wrapped in the identifier delimiters used by the database identified by `sDSN`. If `sDSN` is omitted or [`NIL`](../literals/nil.md), it uses the delimiters of the default connection. If `sName` is [`NIL`](../literals/nil.md), it is treated as an empty string.
 
 Before adding delimiters, the function trims `sName`. If `sDSN` is empty, the function returns the trimmed name without any delimiter characters. A non-empty `sDSN` must name a database connection configured in your environment, such as the default `DATABASE` connection. Any other name raises an error.
 
@@ -37,7 +37,7 @@ AddNameDelimiters(sDSN, sName)
 
 | Name | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
-| `sDSN` | [string](../types/string.md) | no | `""` | Name of the database connection whose delimiter rules apply, such as `"DATABASE"`. An empty value produces no delimiter characters. A name that is not a configured connection raises an error. |
+| `sDSN` | [string](../types/string.md) | no | default connection | Name of the database connection whose delimiter rules apply, such as `"DATABASE"`. Omitted or [`NIL`](../literals/nil.md) uses the default connection's delimiters; `""` produces no delimiter characters. A name that is not a configured connection raises an error. |
 | `sName` | [string](../types/string.md) | no | `""` | Identifier to wrap in database-specific delimiters. The function trims this value before wrapping it. |
 
 ## Returns
@@ -55,7 +55,7 @@ AddNameDelimiters(sDSN, sName)
 !!! success "Do"
     - Use AddNameDelimiters for individual table, view, or column names.
     - Pass the name of the connection where the SQL will run, such as `"DATABASE"` for the default connection.
-    - Use this together with [`AddColDelimiters`](AddColDelimiters.md) when you need both individual identifiers and qualified column arrays.
+    - To qualify `table.column` names, apply AddNameDelimiters to the table and to each column ([`AddColDelimiters`](AddColDelimiters.md) can't be called from SSL).
     - Pass the raw identifier value and let the function trim outer spaces before adding delimiters.
 
 !!! failure "Don't"

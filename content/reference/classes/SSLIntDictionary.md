@@ -166,7 +166,7 @@ Adds two entries keyed by numeric ID, then retrieves a value with `GetValue`, ch
 	oStatusById:AddValue(1001, "Logged");
 	oStatusById:AddValue(1002, "In Review");
 
-sStatus := oStatusById:GetValue(1001, "Missing");
+	sStatus := oStatusById:GetValue(1001, "Missing");
 	UsrMes("Status for 1001: " + sStatus);
 	/* Logs stored status for key 1001;
 
@@ -177,6 +177,9 @@ sStatus := oStatusById:GetValue(1001, "Missing");
 	UsrMes("Entry count: " + LimsString(oStatusById:Count));
 	/* Logs current entry count;
 :ENDPROC;
+
+/* Usage;
+DoProc("DemoIntDictionary");
 ```
 
 ### Use TryGetValue before reading the stored value
@@ -205,6 +208,9 @@ Creates a dictionary with an initial capacity hint, adds one result entry, then 
 		UsrMes("Result 9999 was not found");
 	:ENDIF;
 :ENDPROC;
+
+/* Usage;
+DoProc("DemoIntDictionaryLookup");
 ```
 
 ## Related

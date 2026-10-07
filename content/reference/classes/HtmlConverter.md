@@ -126,9 +126,9 @@ This example sets `OptionsXml` before conversion and reads the full log after th
 	:DECLARE oConverter, sHtmlXml, oErr;
 
 	oConverter := HtmlConverter{};
-	oConverter:OptionsXml := sOptionsXml;
 
 	:TRY;
+		oConverter:OptionsXml := sOptionsXml;
 		sHtmlXml := oConverter:Convert(sXfdXml, sXfdGuid, sHtmlGuid);
 
 		:IF .NOT. Empty(oConverter:Log);
