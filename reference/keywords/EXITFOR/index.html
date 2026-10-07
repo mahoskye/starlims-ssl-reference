@@ -2846,16 +2846,16 @@
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
-<li>Use <code>:EXITFOR</code> outside a <a href="../FOR/"><code>:FOR</code></a> loop. That raises <code>Found :EXITFOR outside :FOR</code>.</li>
-<li>Place <code>:EXITFOR</code> in a <a href="../FINALLY/"><code>:FINALLY</code></a> block. That raises <code>Cannot have :EXITFOR inside :FINALLY.</code></li>
+<li>Use <code>:EXITFOR</code> outside a <a href="../FOR/"><code>:FOR</code></a> loop. That is a compile-time error: <code>Found :EXITFOR outside :FOR</code>.</li>
+<li>Place <code>:EXITFOR</code> in a <a href="../FINALLY/"><code>:FINALLY</code></a> block. That is a compile-time error: <code>Cannot have :EXITFOR inside :FINALLY.</code></li>
 <li>Use <code>:EXITFOR</code> as a substitute for ordinary branching when the loop should continue running.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>:EXITFOR</code> must be written in uppercase.</li>
-<li>Outside a <a href="../FOR/"><code>:FOR</code></a> loop, <code>:EXITFOR</code> raises <code>Found :EXITFOR outside :FOR</code>.</li>
-<li>Inside a <a href="../FINALLY/"><code>:FINALLY</code></a> block, <code>:EXITFOR</code> raises <code>Cannot have :EXITFOR inside :FINALLY.</code></li>
+<li>Outside a <a href="../FOR/"><code>:FOR</code></a> loop, <code>:EXITFOR</code> is a compile-time error: <code>Found :EXITFOR outside :FOR</code>.</li>
+<li>Inside a <a href="../FINALLY/"><code>:FINALLY</code></a> block, <code>:EXITFOR</code> is a compile-time error: <code>Cannot have :EXITFOR inside :FINALLY.</code></li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="finding-the-first-matching-record-in-a-list">Finding the first matching record in a list<a class="headerlink" href="#finding-the-first-matching-record-in-a-list" title="Permanent link">&para;</a></h3>
@@ -2897,7 +2897,7 @@
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Found Batch B (ID 1002)
 </code></pre></div>
 <h3 id="exit-only-the-inner-loop-in-nested-for-blocks">Exit only the inner loop in nested FOR blocks<a class="headerlink" href="#exit-only-the-inner-loop-in-nested-for-blocks" title="Permanent link">&para;</a></h3>
-<p><code>:EXITFOR</code> exits only the innermost <a href="../FOR/"><code>:FOR</code></a> loop. A <code>bFound</code> flag signals the outer loop to exit on the next iteration. With <code>sTargetID</code> set to <code>"SMP-005"</code>, the match is at row 2, column 2.</p>
+<p><code>:EXITFOR</code> exits only the innermost <a href="../FOR/"><code>:FOR</code></a> loop. A <code>bFound</code> flag, checked right after the inner loop, makes the outer loop exit too. With <code>sTargetID</code> set to <code>"SMP-005"</code>, the match is at row 2, column 2.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindSampleInGrid</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleGrid</span><span class="p">,</span><span class="w"> </span><span class="n">sTargetID</span><span class="p">,</span><span class="w"> </span><span class="n">sFoundPos</span><span class="p">,</span><span class="w"> </span><span class="n">nOuter</span><span class="p">,</span><span class="w"> </span><span class="n">nInner</span><span class="p">,</span><span class="w"> </span><span class="n">bFound</span><span class="p">;</span>
 
@@ -2963,7 +2963,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:06:40 UTC">October 7, 2026</span>
   </span>
 
     

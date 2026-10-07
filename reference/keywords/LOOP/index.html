@@ -2847,7 +2847,7 @@
 In nested loops, <code>:LOOP</code> affects only the nearest enclosing <a href="../WHILE/"><code>:WHILE</code></a> or <a href="../FOR/"><code>:FOR</code></a>.</p>
 <h2 id="behavior">Behavior<a class="headerlink" href="#behavior" title="Permanent link">&para;</a></h2>
 <p><code>:LOOP</code> has no arguments and no return value. It is a loop-control keyword, not an expression.</p>
-<p><code>:LOOP</code> is only valid inside an active <a href="../WHILE/"><code>:WHILE</code></a> or <a href="../FOR/"><code>:FOR</code></a> loop. Using it outside either loop raises <code>Found :LOOP outside :WHILE/:FOR</code>. It is also a compile-time error to place <code>:LOOP</code> inside a <a href="../FINALLY/"><code>:FINALLY</code></a> block, where it raises <code>Cannot have :LOOP inside :FINALLY.</code></p>
+<p><code>:LOOP</code> is only valid inside an active <a href="../WHILE/"><code>:WHILE</code></a> or <a href="../FOR/"><code>:FOR</code></a> loop. Using it outside either loop is a compile-time error: <code>Found :LOOP outside :WHILE/:FOR</code>. It is also a compile-time error to place <code>:LOOP</code> inside a <a href="../FINALLY/"><code>:FINALLY</code></a> block: <code>Cannot have :LOOP inside :FINALLY.</code></p>
 <p>When <code>:LOOP</code> runs inside a <a href="../WHILE/"><code>:WHILE</code></a>, control jumps to the loop's next condition check. When it runs inside a <a href="../FOR/"><code>:FOR</code></a>, control jumps to the loop's increment step and then evaluates whether another iteration should run.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2874,7 +2874,7 @@ In nested loops, <code>:LOOP</code> affects only the nearest enclosing <a href="
 <p class="admonition-title">Don't</p>
 <ul>
 <li>Use <a href="../EXITFOR/"><code>:EXITFOR</code></a> or <a href="../EXITWHILE/"><code>:EXITWHILE</code></a> when only the current iteration should be skipped. Those keywords terminate the loop instead of continuing it.</li>
-<li>Place <code>:LOOP</code> inside a <a href="../FINALLY/"><code>:FINALLY</code></a> block. That raises <code>Cannot have :LOOP inside :FINALLY.</code></li>
+<li>Place <code>:LOOP</code> inside a <a href="../FINALLY/"><code>:FINALLY</code></a> block. That is a compile-time error: <code>Cannot have :LOOP inside :FINALLY.</code></li>
 <li>Place <code>:LOOP</code> where required cleanup or bookkeeping would be skipped unintentionally.</li>
 <li>Assume code after <code>:LOOP</code> still runs for that iteration. It never does.</li>
 </ul>
@@ -2986,7 +2986,7 @@ In nested loops, <code>:LOOP</code> affects only the nearest enclosing <a href="
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:06:40 UTC">October 7, 2026</span>
   </span>
 
     
