@@ -1,6 +1,6 @@
 # SSL Type System
 
-SSL has eight core value types plus NIL (the absence of a value). Every variable can hold any type — SSL is dynamically typed.
+SSL has eight core value types (object covers both class instances and dynamic [`SSLExpando`](../reference/classes/SSLExpando.md) objects) plus NIL (the absence of a value). Every variable can hold any type — SSL is dynamically typed.
 
 ## Type overview
 
@@ -46,7 +46,7 @@ Re-declaring an existing variable with [`:DECLARE`](../reference/keywords/DECLAR
 |----------|---------|
 | [`LimsType`](../reference/functions/LimsType.md)(sName) | Takes a **string** holding a variable name or expression, such as `LimsType("sMyVar")`, and returns a type code: `"C"`, `"N"`, `"A"`, `"D"`, `"L"`, `"B"` (dynamic object, `SSLExpando`), `"O"`, `"U"` (undeclared name, or the literal expression `"NIL"`), `"UE"` (evaluation error), or `"UI"` (unrecognized, such as a code block). A non-string argument raises an error. |
 | [`LimsTypeEx`](../reference/functions/LimsTypeEx.md)(x) | Extended type info (returns full type name like `"NUMERIC"`, `"STRING"`, etc.) |
-| [`IsNumeric`](../reference/functions/IsNumeric.md)(x) | True if value is numeric or numeric string |
+| [`IsNumeric`](../reference/functions/IsNumeric.md)(sNumber) | True if the string is valid numeric text under the current separators. A number or [`NIL`](../reference/literals/nil.md) raises an error, so check `LimsTypeEx(x) == "NUMERIC"` for values that are already numbers |
 | [`Empty`](../reference/functions/Empty.md)(x) | True if value is empty for its type |
 | [`IsDefined`](../reference/functions/IsDefined.md)(sVarName) | Takes a variable name as a string, such as `IsDefined("sMyVar")`. True if the name resolves in the current scope, a caller scope, or public scope, so a [`.T.`](../reference/literals/true.md) result does not prove the variable is local |
 

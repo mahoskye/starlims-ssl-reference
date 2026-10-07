@@ -123,6 +123,9 @@ If the work inside `:TRY` opens a transaction, close it in `:FINALLY` guarded wi
     :NEXT;
     :RETURN nSum / ALen(aValues);
 :ENDPROC;
+
+/* Usage;
+DoProc("CalculateAverage", {{10, 20, 30}});
 ```
 
 ## Key language rules

@@ -141,7 +141,9 @@ When an inner `EndLimsTransaction(, .F.)` is called:
 !!! danger "Always handle the poisoned-transaction exception"
     If you call `EndLimsTransaction(, .T.)` on an outer transaction where an inner transaction was rolled back, the commit silently becomes a rollback AND throws. Always use [`:TRY`](../reference/keywords/TRY.md) / [`:CATCH`](../reference/keywords/CATCH.md) / [`:FINALLY`](../reference/keywords/FINALLY.md) around your transaction boundaries.
 
-### Safe nested transaction pattern
+### Per-step error handling inside one transaction
+
+Instead of nesting [`BeginLimsTransaction`](../reference/functions/BeginLimsTransaction.md), catch each step's error and let the single outer transaction decide whether to commit.
 
 ```ssl
 :PROCEDURE ProcessBatchWithSteps;
@@ -174,11 +176,14 @@ When an inner `EndLimsTransaction(, .F.)` is called:
         :ENDIF;
     :ENDTRY;
 :ENDPROC;
+
+/* Usage;
+DoProc("ProcessBatchWithSteps", {{"R-001", "R-002"}});
 ```
 
 ## Isolation levels
 
-In most cases, calling [`BeginLimsTransaction`](../reference/functions/BeginLimsTransaction.md) with no arguments is the right choice — the server's configured default isolation level applies (typically Read Committed, configurable per tenant by the system administrator).
+In most cases, calling [`BeginLimsTransaction`](../reference/functions/BeginLimsTransaction.md) with no arguments is the right choice — the server's default isolation level applies (on SQL Server this is normally Read Committed unless the database or connection is configured otherwise).
 
 For advanced scenarios where you need explicit control, [`BeginLimsTransaction`](../reference/functions/BeginLimsTransaction.md) accepts an optional second parameter to override the isolation level:
 
@@ -192,7 +197,7 @@ Supported values (case-insensitive):
 
 **`Read Uncommitted`** — Lowest isolation. Your transaction can see uncommitted changes from other transactions (dirty reads). Fast but risky — use only for rough estimates or monitoring queries where accuracy isn't critical.
 
-**`Read Committed`** — The default. Your transaction only sees data that other transactions have committed. However, if you read the same row twice, another transaction could change it between reads (non-repeatable read). Suitable for most LIMS operations.
+**`Read Committed`** — Normally the SQL Server default. Your transaction only sees data that other transactions have committed. However, if you read the same row twice, another transaction could change it between reads (non-repeatable read). Suitable for most LIMS operations.
 
 **`Repeatable Read`** — Once your transaction reads a row, that row is locked and cannot be changed by others until you commit or roll back. Prevents non-repeatable reads but other transactions can still insert new rows that match your query (phantom reads).
 
@@ -309,6 +314,9 @@ This pattern covers the common case — a procedure that modifies data with prop
         :ENDIF;
     :ENDTRY;
 :ENDPROC;
+
+/* Usage;
+DoProc("UpdateSampleStatus", {"S-001", "Released"});
 ```
 
 Key points:

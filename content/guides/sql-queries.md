@@ -25,7 +25,7 @@ aResults := LSelect1("SELECT sample_id, status FROM samples WHERE batch = ?",, {
 RunSQL("UPDATE samples SET status = 'C' WHERE sample_id = ?",, {"S-001"});
 
 /* XML dataset;
-sXml := GetDataSet("SELECT sample_id FROM samples WHERE batch = ?",, {"B-100"});
+sXml := GetDataSet("SELECT sample_id FROM samples WHERE batch = ?", {"B-100"});
 
 /* Named-parameter query;
 sBatch := "B-100";
@@ -34,14 +34,14 @@ aRows := SQLExecute("SELECT sample_id FROM samples WHERE batch = ?sBatch?");
 
 Two idioms in these examples are worth decoding up front:
 
-- **Adjacent commas** (`,,`) skip an optional middle parameter — here the connection name, so the call uses the default connection. `LSearch("...", "",, {...})` passes the SQL, then a default value, skips the connection name, then passes the bound values.
+- **Adjacent commas** (`,,`) skip an optional middle parameter — here the connection name, so the call uses the default connection. `LSearch("...", "",, {...})` passes the SQL, then a default value, skips the connection name, then passes the bound values. [`GetDataSet`](../reference/functions/GetDataSet.md) has no connection parameter, so its values array comes second with nothing skipped.
 - **`?sBatch?`** is [`SQLExecute`](../reference/functions/SQLExecute.md)'s named-parameter form: the engine substitutes the value of the variable `sBatch` from the calling scope. The other functions use positional `?` placeholders with a values array instead. Both are covered in detail [below](#sqlexecute-flexible-execution).
 
 ## Connection names
 
 Most SQL functions accept an optional connection name parameter that identifies which configured database to run the query against. When omitted, the function uses the current default connection.
 
-The connection name is the key registered in the system's database configuration. You can discover available names at runtime with [`GetConnectionStrings`](../reference/functions/GetConnectionStrings.md), which returns a 2D array where column 1 is the connection name, column 2 is the provider, and column 3 is the full connection string.
+The connection name is the key registered in the system's database configuration. You can discover available names at runtime with [`GetConnectionStrings`](../reference/functions/GetConnectionStrings.md), which returns a 2D array where column 1 is the connection name, column 2 is the provider settings string (such as `SQL;NATIVESQL;...;USEUTC`), and column 3 is the full connection string.
 
 ```ssl
 :DECLARE aConns, nIndex, aRows, sDefault;
@@ -62,7 +62,7 @@ aRows := LSelect1("SELECT sample_id FROM sample WHERE status = ?", "ARCHIVE", {"
 sDefault := GetDefaultConnection();
 ```
 
-The same connection name parameter appears in [`RunSQL`](../reference/functions/RunSQL.md), [`LSelect`](../reference/functions/LSelect.md), [`LSelect1`](../reference/functions/LSelect1.md), [`SQLExecute`](../reference/functions/SQLExecute.md), and related functions as the second argument after the SQL string. Watch for two exceptions: [`LSearch`](../reference/functions/LSearch.md) takes the connection name as its **third** argument (after the default value), and [`GetDataSet`](../reference/functions/GetDataSet.md) has no connection parameter at all — use [`GetDataSetEx`](../reference/functions/GetDataSetEx.md) (connection name second) to query a named connection.
+The same connection name parameter appears in [`RunSQL`](../reference/functions/RunSQL.md), [`LSelect1`](../reference/functions/LSelect1.md), [`SQLExecute`](../reference/functions/SQLExecute.md), and related functions as the second argument after the SQL string. Watch for three exceptions: [`LSearch`](../reference/functions/LSearch.md) takes the connection name as its **third** argument (after the default value), [`LSelect`](../reference/functions/LSelect.md) takes a field list second and the connection name **third**, and [`GetDataSet`](../reference/functions/GetDataSet.md) has no connection parameter at all — use [`GetDataSetEx`](../reference/functions/GetDataSetEx.md) (connection name second) to query a named connection.
 
 ## Parameterized queries
 
@@ -89,7 +89,7 @@ The values are **bound as parameters**, not interpolated into the SQL string. Th
 
 ### Parameter count must match
 
-The number of `?` placeholders must match the number of elements in the values array. A mismatch throws a "Parameters count mismatch" error. Each `?` is positional — there are no named parameters, so if you need the same value in multiple places, you must pass it multiple times.
+The number of `?` placeholders must match the number of elements in the values array. Too few values raises an error, and the message depends on the function: [`RunSQL`](../reference/functions/RunSQL.md) raises `ExecuteNonQuery exception Not enough values provided for parameters.`, while [`LSelect`](../reference/functions/LSelect.md), [`LSelect1`](../reference/functions/LSelect1.md), [`LSearch`](../reference/functions/LSearch.md) and [`GetDataSet`](../reference/functions/GetDataSet.md) raise `Parameters count mismatch`. Each `?` is positional — there are no named parameters, so if you need the same value in multiple places, you must pass it multiple times.
 
 ```ssl
 :DECLARE sSQL;
@@ -197,22 +197,22 @@ aResults := LSelect1(sSQL);
 ```
 
 !!! note "Empty array behavior"
-    Both functions handle empty arrays gracefully by substituting a type-appropriate sentinel value that matches no real rows. This ensures the SQL is syntactically valid and returns zero rows instead of throwing an error.
+    [`PrepareArrayForIn`](../reference/functions/PrepareArrayForIn.md) adds one sentinel of the requested type to an empty array. [`BuildStringForIn`](../reference/functions/BuildStringForIn.md) returns a fixed quoted string sentinel for an empty or [`NIL`](../reference/literals/nil.md) array. Either way the `IN` clause stays syntactically valid and matches no real rows, so the query returns zero rows instead of raising an error.
 
 ## String concatenation (not recommended)
 
-The alternative to parameterized queries is building the SQL string with concatenation and [`LimsString`](../reference/functions/LimsString.md):
+The alternative to parameterized queries is building the SQL string with concatenation:
 
 ```ssl
 :DECLARE sSQL, aResults;
 
 /* String concatenation — avoid when possible;
-sSQL := "SELECT * FROM samples WHERE batch_id = " + LimsString(sBatchId);
-sSQL := sSQL + " AND status = " + LimsString(sStatus);
+sSQL := "SELECT * FROM samples WHERE batch_id = '" + sBatchId + "'";
+sSQL := sSQL + " AND status = '" + sStatus + "'";
 aResults := LSelect1(sSQL);
 ```
 
-[`LimsString`](../reference/functions/LimsString.md) wraps strings in single quotes and formats dates and numbers for SQL. While it handles basic quoting, it is **not a substitute for parameterized queries**:
+[`LimsString`](../reference/functions/LimsString.md) converts a value to text but does not quote it or escape embedded quotes, so string values must be quoted (and their single quotes doubled) by hand, as above. Concatenation is **not a substitute for parameterized queries**:
 
 - No protection against SQL injection if values contain crafted content
 - Date and number formatting depends on server locale settings
@@ -237,7 +237,7 @@ sStatus := LSearch("SELECT status FROM samples WHERE sample_id = ?", "UNKNOWN",,
 nCount := LSearch("SELECT COUNT(*) FROM samples WHERE batch_id = ?", 0,, {"B-100"});
 ```
 
-The second parameter is the default returned when the query finds no rows. This avoids needing to check for NIL after every lookup.
+The second parameter is the default returned when the query finds no rows. Without one, a miss returns an empty string `""`, not NIL.
 
 ### LSelect1 — result array
 
@@ -281,7 +281,7 @@ Returns a SELECT result as an XML string. Useful when passing data to external s
 ```ssl
 :DECLARE sXml;
 
-sXml := GetDataSet("SELECT sample_id, status FROM samples WHERE batch = ?",, {"B-100"});
+sXml := GetDataSet("SELECT sample_id, status FROM samples WHERE batch = ?", {"B-100"});
 ```
 
 ## SQLExecute — flexible execution
