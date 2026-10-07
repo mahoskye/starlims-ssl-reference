@@ -13,9 +13,9 @@ starlims:
 
 Returns the most recently stored SQL error as an [`SSLSQLError`](../classes/SSLSQLError.md) object, or [`NIL`](../literals/nil.md) when no SQL error is currently recorded.
 
-`GetLastSQLError` is the SSL-facing alias of [`ReturnLastSQLError`](ReturnLastSQLError.md). It gives you the current database error object after a failing SQL operation so you can inspect members such as `Description`, `SQLState`, `GenCode`, `Sql`, and `ErrorStackTrace`.
+`GetLastSQLError` is an alias of [`ReturnLastSQLError`](ReturnLastSQLError.md). It gives you the current database error object after a failing SQL operation so you can inspect members such as `Description`, `SQLState`, `GenCode`, `Sql`, and `ErrorStackTrace`.
 
-The function does not take parameters and does not create a new error object. It returns the SQL error currently stored by the database library, if one is available.
+The function does not take parameters and does not create a new error object. It returns the SQL error currently recorded for the session, if one is available.
 
 ## When to use
 
@@ -46,12 +46,12 @@ This function takes no parameters.
 
 !!! failure "Don't"
     - Assume a value is always returned. A later database call may leave you with [`NIL`](../literals/nil.md) or a different SQL error state.
-    - Assume this function returns general non-database exceptions. It is specifically for the database library's stored SQL error.
+    - Assume this function returns general non-database exceptions. It is specifically for the recorded SQL error.
     - Show raw SQL text or stack traces to end users unless that level of technical detail is intentional.
 
 ## Caveats
 
-- This function reports the SQL error currently stored by the database library, not a snapshot taken at call time.
+- This function reports the SQL error currently recorded, not a snapshot taken at call time.
 - Later database operations can clear or replace the stored SQL error before you read it.
 
 ## Examples

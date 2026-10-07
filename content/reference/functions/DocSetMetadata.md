@@ -96,7 +96,7 @@ DoProc("UpdateDocumentStatus");
 
 ### Update several fields and inspect the failure state
 
-Updates three fields at once and uses [`DocCommandFailed`](DocCommandFailed.md) to confirm a backend failure before reading the error message. Assumes the caller already has a Documentum session open.
+Updates three fields at once and uses [`DocCommandFailed`](DocCommandFailed.md) to confirm a Documentum failure before reading the error message. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE UpdateDocumentProfile;

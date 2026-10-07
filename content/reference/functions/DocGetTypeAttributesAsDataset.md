@@ -59,7 +59,7 @@ Returns `""` when the underlying Documentum call does not return a dataset.
 
 ## Caveats
 
-- The function does not itself tell you why an empty string was returned. Check [`DocCommandFailed`](DocCommandFailed.md) to distinguish a backend failure from a type that has no attributes.
+- The function does not itself tell you why an empty string was returned. Check [`DocCommandFailed`](DocCommandFailed.md) to distinguish a Documentum failure from a type that has no attributes.
 
 ## Examples
 
@@ -92,7 +92,7 @@ Attributes for dm_document:
 
 ### Distinguish an empty result from a failed command
 
-Retrieves the attribute dataset for a caller-supplied type name, distinguishing a backend failure (checked via [`DocCommandFailed`](DocCommandFailed.md)) from a successful call that returned no data. Assumes the caller already has a Documentum session open.
+Retrieves the attribute dataset for a caller-supplied type name, distinguishing a Documentum failure (checked via [`DocCommandFailed`](DocCommandFailed.md)) from a successful call that returned no data. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE LoadTypeAttributes;

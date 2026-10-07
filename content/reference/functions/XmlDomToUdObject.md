@@ -68,7 +68,7 @@ Returned objects follow these rules:
 
 ## Caveats
 
-- Attribute names that contain `:` are surfaced with `_` instead.
+- Attribute names that contain `:` appear with `_` instead.
 - When an attribute name is `value`, the function renames it with an `Attr` prefix to avoid colliding with the generated `Value` property.
 - `bPreserveWhitespace` only changes what the XML loader keeps. Whitespace nodes between nested elements are still not exposed as child properties in the returned object tree.
 - Non-boolean `bPreserveWhitespace` values behave like the argument was omitted,

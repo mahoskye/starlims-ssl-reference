@@ -40,7 +40,7 @@ RaiseError(sMessage, [sLocation], [nErrorCode], [oInnerException])
 
 ## Returns
 
-**[boolean](../types/boolean.md)** — The surfaced return type is boolean, but `RaiseError` does not return normally because it always raises an error.
+**[boolean](../types/boolean.md)** — The declared return type is boolean, but `RaiseError` does not return normally because it always raises an error.
 
 ## Exceptions
 

@@ -50,7 +50,7 @@ This function takes no parameters.
 
 ## Caveats
 
-- An empty result can mean either a Documentum backend failure or an installation with no cabinets. Check [`DocCommandFailed`](DocCommandFailed.md) to distinguish the two.
+- An empty result can mean either a Documentum Documentum failure or an installation with no cabinets. Check [`DocCommandFailed`](DocCommandFailed.md) to distinguish the two.
 
 ## Examples
 
@@ -81,7 +81,7 @@ DoProc("ListCabinetNames");
 
 ### Validate a configured cabinet name
 
-Searches the cabinet list for a case-insensitive match against a configured name, then checks [`DocCommandFailed`](DocCommandFailed.md) on a negative result to distinguish a backend failure from a genuinely missing cabinet. Assumes the caller already has a Documentum session open.
+Searches the cabinet list for a case-insensitive match against a configured name, then checks [`DocCommandFailed`](DocCommandFailed.md) on a negative result to distinguish a Documentum failure from a genuinely missing cabinet. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ValidateCabinetName;

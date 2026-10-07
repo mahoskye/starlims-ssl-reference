@@ -112,7 +112,7 @@ DoProc("ExportDocumentAsPdf");
 
 ### Export using the default format
 
-Exports a document without specifying a format, demonstrating the single-argument call form, and checks [`DocCommandFailed`](DocCommandFailed.md) on the return to detect backend failures.
+Exports a document without specifying a format, demonstrating the single-argument call form, and checks [`DocCommandFailed`](DocCommandFailed.md) on the return to detect Documentum failures.
 
 ```ssl
 :PROCEDURE ExportDocumentDefaultFormat;

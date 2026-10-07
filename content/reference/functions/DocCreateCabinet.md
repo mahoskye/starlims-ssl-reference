@@ -13,7 +13,7 @@ starlims:
 
 Creates a Documentum cabinet and returns the string result from the create operation.
 
-`DocCreateCabinet` takes a required cabinet name and optional cabinet type and ACL values. The surfaced SSL function raises immediately only when `sCabinetName` is [`NIL`](../literals/nil.md). Otherwise it forwards the provided values to the Documentum create call and returns its string result. If that call does not produce a value, the function returns an empty string.
+`DocCreateCabinet` takes a required cabinet name and optional cabinet type and ACL values. The function raises immediately only when `sCabinetName` is [`NIL`](../literals/nil.md). Otherwise it forwards the provided values to the Documentum create call and returns its string result. If that call does not produce a value, the function returns an empty string.
 
 Treat a `""` result as a failed or unusable create result and check it immediately with [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md).
 

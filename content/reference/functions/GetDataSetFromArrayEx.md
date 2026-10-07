@@ -61,7 +61,7 @@ GetDataSetFromArrayEx(aArrayOfValues, [aArrayFields], [sTableName], [bIncludeHea
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `aArrayOfValues` and expect an empty result. The function raises an error instead.
     - Assume mismatched field counts will be rejected with a dedicated validation error. Extra field names or extra row values are trimmed to the smaller available column count.
-    - Use this function when the fixed defaults from [`GetDataSetFromArray`](GetDataSetFromArray.md) already match your needs. The wrapper is simpler for that case.
+    - Use this function when the fixed defaults from [`GetDataSetFromArray`](GetDataSetFromArray.md) already match your needs. The simpler function is simpler for that case.
 
 ## Caveats
 

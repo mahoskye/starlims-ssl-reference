@@ -101,7 +101,7 @@ starlims:
 | [GetDefaultConnection](GetDefaultConnection.md) | Returns the current default database connection name. |
 | [IsDBConnected](IsDBConnected.md) | Checks whether STARLIMS currently has a database connection available for a given connection name. |
 | [LimsSqlConnect](LimsSqlConnect.md) | Registers a configured database connection by connection name. |
-| [LimsSqlDisconnect](LimsSqlDisconnect.md) | Closes an active database connection by name and removes it from the internal registry. |
+| [LimsSqlDisconnect](LimsSqlDisconnect.md) | Closes an active database connection by name and removes it from the session's connection list. |
 | [SetDefaultConnection](SetDefaultConnection.md) | Changes the active default database connection name and returns the previous default connection. |
 | [SetSqlTimeout](SetSqlTimeout.md) | Sets the SQL command timeout for a database connection and returns the previous timeout value for that same connection. |
 

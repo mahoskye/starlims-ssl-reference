@@ -17,7 +17,7 @@ Retrieves Documentum workflow tasks as a two-dimensional array.
 
 When `sWorkflowId` is a non-empty string, the function returns only tasks for the matching workflow ID. The comparison is case-insensitive. When `sWorkflowId` is [`NIL`](../literals/nil.md) or an empty string, no workflow filter is applied and the function returns all available tasks.
 
-If the underlying Documentum call fails, the function returns an empty array. Check [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) immediately after the call when you need to distinguish a true no-results case from a backend failure.
+If the underlying Documentum call fails, the function returns an empty array. Check [`DocCommandFailed`](DocCommandFailed.md) and [`DocGetErrorMessage`](DocGetErrorMessage.md) immediately after the call when you need to distinguish a true no-results case from a Documentum failure.
 
 ## When to use
 
@@ -107,7 +107,7 @@ DoProc("ListWorkflowTasks");
 
 ### Detect lookup failures when filtering by workflow
 
-Calls `DocGetTasks` with a workflow ID and distinguishes a backend failure (empty result with [`DocCommandFailed`](DocCommandFailed.md) set) from a workflow that genuinely has no tasks, returning an empty array with an error message only on failure. Assumes the caller already has a Documentum session open.
+Calls `DocGetTasks` with a workflow ID and distinguishes a Documentum failure (empty result with [`DocCommandFailed`](DocCommandFailed.md) set) from a workflow that genuinely has no tasks, returning an empty array with an error message only on failure. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE GetWorkflowTasksSafe;
