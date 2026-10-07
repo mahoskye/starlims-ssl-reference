@@ -42,9 +42,9 @@ _XOR(nValue1, nValue2)
 
 | Trigger | Exception message |
 | --- | --- |
-| Either operand is not a whole number. | `SSLDouble:{value} _XOR {v}: invalid operand(s). Expected integers.` |
-| `nValue2` is [`NIL`](../literals/nil.md). | `SSLDouble - invalid operand: (of type null) for operator: _XOR.` |
-| `_XOR` is called on a non-numeric type. | `the operator/method: _XOR is not implemented on type: {type}. Operand: {operand}` |
+| Either operand is not a whole number. | `Run-time error: SSLDouble:{value} _XOR {v}: invalid operand(s). Expected integers.` |
+| `nValue2` is [`NIL`](../literals/nil.md). | `Run-time error: SSLDouble - invalid operand:  (of type null) for operator: _XOR.` |
+| `_XOR` is called on a non-numeric type. | `Run-time error: the operator/method: _XOR is not implemented on type: {type}. Operand: {operand}` |
 
 ## Best practices
 

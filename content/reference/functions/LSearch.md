@@ -54,10 +54,10 @@ Common return shapes include:
 
 | Trigger | Exception message |
 | --- | --- |
-| `sCommandString` is [`NIL`](../literals/nil.md) or empty. | `The command string is null.` |
+| `sCommandString` is [`NIL`](../literals/nil.md) or empty. | `The command string is null` |
 | The connection cannot resolve a database engine. | `Cannot determine the database engine name.` |
 | `sConnectionName` does not identify a configured connection. | `The provider name: <sConnectionName> not found.` |
-| `aArrayOfValues` contains nested arrays. | `The current array has more than 1 dimension.` |
+| `aArrayOfValues` contains nested arrays. | `The current array has more than 1 dimmension.` |
 | The number of `?` placeholders does not match the number of supplied values. | `Parameters count mismatch` |
 
 ## Best practices

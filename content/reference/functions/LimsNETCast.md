@@ -54,8 +54,8 @@ Common outcomes:
 
 | Trigger | Exception message |
 | --- | --- |
-| `sNewType` is [`NIL`](../literals/nil.md) or empty. | `Argument sNewType cannot be empty.` |
-| `sNewType` starts with `enum:` and `vVal` is not a string or number. | `Argument vVal must be a number or a string.` |
+| `sNewType` is [`NIL`](../literals/nil.md) or empty. | `Argument newType cannot be empty. LimsNETCast().` |
+| `sNewType` starts with `enum:` and `vVal` is not a string or number. | `Argument val must be a number or a string. LimsNETConnect()` |
 | `vVal` is numeric and `sNewType` is not a valid numeric target type. | `Invalid type for cast: <sNewType>` |
 
 ## Best practices

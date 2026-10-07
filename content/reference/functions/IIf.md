@@ -44,7 +44,7 @@ IIf(bCondition, vTrueValue, vFalseValue)
 | Trigger | Exception message |
 | --- | --- |
 | `bCondition` is [`NIL`](../literals/nil.md). | `Null argument passed to IIf()` |
-| The call does not supply exactly three arguments. | `Invalid number of arguments for function IIF.` |
+| The call does not supply exactly three arguments. | `Compile-time error: Invalid number of arguments for function IIF.` |
 
 ## Best practices
 

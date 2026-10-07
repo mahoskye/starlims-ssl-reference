@@ -54,8 +54,8 @@ RunDS(sDataSourceName, [aParameters], [vReturnType])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sDataSourceName` is not a string. | `Argument 'sDataSourceName' must be a string` |
-| `aParameters` is supplied but is not an array. | `Argument 'aParameters' must be NIL or an array` |
+| `sDataSourceName` is not a string. | `Argument 'dataSourceName' must be a string` |
+| `aParameters` is supplied but is not an array. | `Argument 'parameters' must be NIL or an array` |
 | `sDataSourceName` is a GUID that does not resolve to a stored data source. | `Data source with id: {dataSourceId} doesn't exist in the database.` |
 
 ## Best practices

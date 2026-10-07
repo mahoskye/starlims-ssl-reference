@@ -45,9 +45,9 @@ Right(sSource, nLength)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sSource` is [`NIL`](../literals/nil.md). | `Argument sSource cannot be null.` |
-| `nLength` is [`NIL`](../literals/nil.md). | `Argument nLength cannot be null.` |
-| The rounded effective length is negative. | `A negative [nLength] value is not allowed.` |
+| `sSource` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. Right().` |
+| `nLength` is [`NIL`](../literals/nil.md). | `Argument length cannot be null. Right().` |
+| The rounded effective length is negative. | `Right(): A negative [length] value is not allowed.` |
 
 ## Best practices
 

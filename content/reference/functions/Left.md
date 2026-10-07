@@ -44,8 +44,8 @@ Left(sSource, nLength)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sSource` is [`NIL`](../literals/nil.md). | `Argument sSource cannot be null.` |
-| `nLength` is [`NIL`](../literals/nil.md). | `Argument nLength cannot be null.` |
+| `sSource` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. Left().` |
+| `nLength` is [`NIL`](../literals/nil.md). | `Argument length cannot be null. Left().` |
 
 ## Best practices
 

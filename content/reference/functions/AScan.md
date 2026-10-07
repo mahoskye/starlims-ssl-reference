@@ -48,11 +48,11 @@ AScan(aTarget, vValueOrBlock, [nStart], [nCount])
 
 | Trigger | Exception message |
 | --- | --- |
-| `nStart` is not a whole number. | `Starting index must be an integer value.` |
-| `nCount` is not a whole number. | `Count must be an integer value.` |
-| `nStart < 1`. | `Starting index cannot be less than one.` |
-| `nCount < 0`. | `Count cannot be less than zero.` |
-| A non-[`NIL`](../literals/nil.md) search value and a scanned element have different types. | `Search value and array elements cannot have different types.` |
+| `nStart` is not a whole number. | `AScan(): starting index must be an integer value.` |
+| `nCount` is not a whole number. | `AScan(): count must be an integer value.` |
+| `nStart < 1`. | `AScan(): starting index cannot be less than one.` |
+| `nCount < 0`. | `AScan(): count cannot be less than zero.` |
+| A non-[`NIL`](../literals/nil.md) search value and a scanned element have different types. | `AScan(): search value and array elements cannot have different types.` |
 
 ## Best practices
 

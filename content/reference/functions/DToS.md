@@ -41,8 +41,8 @@ DToS(dDate)
 
 | Trigger | Exception message |
 | --- | --- |
-| `dDate` is [`NIL`](../literals/nil.md). | `dDate argument cannot be null` |
-| `dDate` is not a date value. | `dDate must be of date type` |
+| `dDate` is [`NIL`](../literals/nil.md). | `Argument: date cannot be null.` |
+| `dDate` is not a date value. | `Argument: date must be of date type` |
 
 ## Best practices
 

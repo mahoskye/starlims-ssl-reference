@@ -43,7 +43,7 @@ SortArray(aTarget, [vNumeric])
 
 | Trigger | Exception message |
 | --- | --- |
-| `aTarget` is [`NIL`](../literals/nil.md). | `Target array cannot be null.` |
+| `aTarget` is [`NIL`](../literals/nil.md). | `SortArray(): target array cannot be null.` |
 | The custom comparator does not return a numeric comparison result. | `Array sort: the code block which compares two elements of the array, needs to return an integer value (less than zero if first element is smaller; zero if they are equal; and greater than zero if first element is greater).` |
 
 ## Best practices

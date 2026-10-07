@@ -48,9 +48,9 @@ StrSrch(subStr, source, [indexOrOccurence], [flag])
 
 | Trigger | Exception message |
 | --- | --- |
-| `subStr` is [`NIL`](../literals/nil.md). | `Argument subStr cannot be null.` |
-| `source` is [`NIL`](../literals/nil.md). | `Argument source cannot be null.` |
-| `indexOrOccurence` is out of range for the selected mode. | `A negative [indexOrOccurence] value is not allowed.` |
+| `subStr` is [`NIL`](../literals/nil.md). | `Argument subStr cannot be null. StrSrch().` |
+| `source` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. StrSrch().` |
+| `indexOrOccurence` is out of range for the selected mode. | `StrSrch(): A negative [indexOrOccurence] value is not allowed.` |
 
 ## Best practices
 

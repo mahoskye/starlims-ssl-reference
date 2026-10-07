@@ -41,7 +41,7 @@ UrlEncode(sData)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sData` is not a string. | `Argument <sData> must be a string.` |
+| `sData` is not a string. | `Argument <data> must be a string` |
 
 ## Best practices
 

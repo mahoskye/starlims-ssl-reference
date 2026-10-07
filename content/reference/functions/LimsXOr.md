@@ -42,8 +42,8 @@ LimsXOr(nVal1, nVal2)
 
 | Trigger | Exception message |
 | --- | --- |
-| `nVal1` or `nVal2` is [`NIL`](../literals/nil.md). The runtime raises the same message regardless of which argument is [`NIL`](../literals/nil.md). | `First argument cannot be null.` |
-| `nVal1` or `nVal2` has a fractional part. | `Xor is available only for integer numbers.` |
+| `nVal1` or `nVal2` is [`NIL`](../literals/nil.md). The runtime raises the same message regardless of which argument is [`NIL`](../literals/nil.md). | `first argument cannot be null. LimsXor()` |
+| `nVal1` or `nVal2` has a fractional part. | `xor is available only for integer numbers.` |
 
 ## Best practices
 

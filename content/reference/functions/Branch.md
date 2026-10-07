@@ -44,7 +44,7 @@ Branch(vTarget)
 
 | Trigger | Exception message |
 | --- | --- |
-| More than one argument is provided. | `Branch with too many arguments` |
+| More than one argument is provided. | `Compile-time error: <line>:<column> Branch with too many arguments` |
 | The branch target argument is missing. | `Branch target missing` |
 
 ## Best practices

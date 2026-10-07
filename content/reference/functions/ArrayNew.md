@@ -50,9 +50,9 @@ ArrayNew([nDim1], [nDim2], [nDim3])
 
 | Trigger | Exception message |
 | --- | --- |
-| Any supplied dimension is negative. | `If used, dimension parameters cannot be less than zero.` |
-| Any supplied dimension is not a whole number. | `If used, dimension parameters must be integer values.` |
-| A later dimension is supplied without a valid earlier dimension. | `If dimension N is used, then dimension N-1 must be greater than zero.` |
+| Any supplied dimension is negative. | `ArrayNew(): if used, dimension parameters cannot be less than zero.` |
+| Any supplied dimension is not a whole number. | `ArrayNew(): if used, dimension parameters must be integer values.` |
+| A later dimension is supplied without a valid earlier dimension. | `ArrayNew(): if dimension N is used, then dimension N-1 must be greater than zero.` |
 
 ## Best practices
 

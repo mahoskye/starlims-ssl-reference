@@ -43,8 +43,8 @@ GetInternal(oTarget, sPropName)
 
 | Trigger | Exception message |
 | --- | --- |
-| `oTarget` is [`NIL`](../literals/nil.md). | `Argument oTarget cannot be null.` |
-| `sPropName` is [`NIL`](../literals/nil.md). | `Argument sPropName cannot be null.` |
+| `oTarget` is [`NIL`](../literals/nil.md). | `Argument o cannot be null. GetInternal()` |
+| `sPropName` is [`NIL`](../literals/nil.md). | `Argument propName cannot be null. GetInternal()` |
 | A dynamic object does not contain the named property. | `Run-time error: Property not found: <propertyName>.` |
 
 ## Best practices

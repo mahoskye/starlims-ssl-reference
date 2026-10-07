@@ -44,7 +44,7 @@ SubStr(sSource, [nStartPos], [nLength])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sSource` is [`NIL`](../literals/nil.md). | `Argument sSource cannot be null.` |
+| `sSource` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. Substr().` |
 
 ## Best practices
 

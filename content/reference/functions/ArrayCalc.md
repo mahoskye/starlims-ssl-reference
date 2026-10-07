@@ -76,22 +76,22 @@ ArrayCalc(aTarget, [sOperation], [vValue], [nStart], [nCount])
 
 | Trigger | Exception message |
 | --- | --- |
-| `aTarget` is [`NIL`](../literals/nil.md). | `Target array cannot be null.` |
-| `MERGE` receives a non-array `vValue`. | `For MERGE operations, value parameter must be an array.` |
+| `aTarget` is [`NIL`](../literals/nil.md). | `ArrayCalc(): target array cannot be null.` |
+| `MERGE` receives a non-array `vValue`. | `ArrayCalc(): for MERGE operations, value parameter must be an array.` |
 | `SORT` receives an empty array for `vValue`. | A runtime error is raised. |
 | `SORT` receives an unsupported type for `vValue`. Accepted types are a numeric column index, an array of numeric column indexes, or a comparison code block. | A runtime error is raised. |
 | A `SORT` comparison code block returns a non-numeric result. | `Array sort: the code block which compares two elements of the array, needs to return an integer value (less than zero if first element is smaller; zero if they are equal; and greater than zero if first element is greater).` |
-| `nStart` is not a whole number for `COPY`. The same condition raises the same message for `DEL`, `FILL`, and `INS`. | `For COPY operations, starting index must be an integer value.` |
-| `nStart < 1` for `COPY`. The same condition raises the same message for `DEL`, `FILL`, and `INS`. | `For COPY operations, starting index cannot be less than one.` |
-| `nCount` is not a whole number for `COPY`. The same condition raises the same message for `DEL` and `FILL`. | `For COPY operations, count must be an integer value.` |
-| `nCount < 0` for `COPY`. The same condition raises the same message for `DEL` and `FILL`. | `For COPY operations, count cannot be less than zero.` |
-| `MIN` receives an empty array. The same pattern applies to `MAX`. | `For MIN operations, target array must have at least one element.` |
-| A scanned element is [`NIL`](../literals/nil.md) during `MIN`. The same pattern applies to `MAX`. | `For MIN operations, array elements cannot be null.` |
-| Scanned elements use mixed types during `MIN`. The same pattern applies to `MAX`. | `For MIN operations, array elements must have the same type.` |
-| `AVG1` receives a target array with no elements. | `For AVG1 operations, target array must contain at least one element (cannot divide by zero).` |
-| `AVG` receives a target array with no non-empty elements. | `For AVG operations, target array must contain at least one non-empty element (cannot divide by zero).` |
-| `DEV1` receives a target array with fewer than two elements. | `For DEV1 operations, target array must contain at least two elements (cannot divide by zero).` |
-| Fewer than two non-empty, nonzero elements remain after filtering for `DEV`. | `For DEV operations, target array must contain at least two elements (cannot divide by zero).` |
+| `nStart` is not a whole number for `COPY`. The same condition raises the same message for `DEL`, `FILL`, and `INS`. | `ArrayCalc(): for COPY operations, starting index must be an integer value.` |
+| `nStart < 1` for `COPY`. The same condition raises the same message for `DEL`, `FILL`, and `INS`. | `ArrayCalc(): for COPY operations, starting index cannot be less than one.` |
+| `nCount` is not a whole number for `COPY`. The same condition raises the same message for `DEL` and `FILL`. | `ArrayCalc(): for COPY operations, count must be an integer value.` |
+| `nCount < 0` for `COPY`. The same condition raises the same message for `DEL` and `FILL`. | `ArrayCalc(): for COPY operations, count cannot be less than zero.` |
+| `MIN` receives an empty array. The same pattern applies to `MAX`. | `ArrayCalc(): for MIN operations, target array must have at least one element.` |
+| A scanned element is [`NIL`](../literals/nil.md) during `MIN`. The same pattern applies to `MAX`. | `ArrayCalc(): for MIN operations, array elements cannot be null.` |
+| Scanned elements use mixed types during `MIN`. The same pattern applies to `MAX`. | `ArrayCalc(): for MIN operations, array elements must have the same type.` |
+| `AVG1` receives a target array with no elements. | `ArrayCalc(): for AVG1 operations, target array must contain at least one element (cannot divide by zero).` |
+| `AVG` receives a target array with no non-empty elements. | `ArrayCalc(): for AVG operations, target array must contain at least one non-empty element (cannot divide by zero).` |
+| `DEV1` receives a target array with fewer than two elements. | `ArrayCalc(): for DEV1 operations, target array must contain at least two elements (cannot divide by zero).` |
+| Fewer than two non-empty, nonzero elements remain after filtering for `DEV`. | `ArrayCalc(): for DEV operations, target array must contain at least two elements (cannot divide by zero).` |
 
 ## Best practices
 

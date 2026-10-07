@@ -46,8 +46,8 @@ AddProperty(oTarget, vPropName)
 
 | Trigger | Exception message |
 | --- | --- |
-| `oTarget` is [`NIL`](../literals/nil.md). | `Argument oTarget cannot be null.` |
-| `vPropName` is [`NIL`](../literals/nil.md). | `Argument vPropName cannot be null.` |
+| `oTarget` is [`NIL`](../literals/nil.md). | `Argument o cannot be null. AddProperty()` |
+| `vPropName` is [`NIL`](../literals/nil.md). | `Argument propName cannot be null. AddProperty()` |
 | `vPropName` is not a string or an array element is not a string. | `Invalid property` |
 | A property name is not a valid identifier. | `Invalid property name: <name>` |
 

@@ -48,11 +48,11 @@ AEval(aTarget, fnBlock, [nStart], [nCount])
 
 | Trigger | Exception message |
 | --- | --- |
-| `aTarget` is [`NIL`](../literals/nil.md). | `Target array cannot be null.` |
-| `nStart` is not a whole number. | `Starting index must be an integer value.` |
-| `nCount` is not a whole number. | `Count must be an integer value.` |
-| `nStart < 1`. | `Starting index cannot be less than one.` |
-| `nCount < 0`. | `Count cannot be less than zero.` |
+| `aTarget` is [`NIL`](../literals/nil.md). | `Aeval(): target array cannot be null.` |
+| `nStart` is not a whole number. | `Aeval(): starting index must be an integer value.` |
+| `nCount` is not a whole number. | `Aeval(): count must be an integer value.` |
+| `nStart < 1`. | `Aeval(): starting index cannot be less than one.` |
+| `nCount < 0`. | `Aeval(): count cannot be less than zero.` |
 
 ## Best practices
 

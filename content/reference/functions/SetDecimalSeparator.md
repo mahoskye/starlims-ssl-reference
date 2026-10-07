@@ -41,8 +41,8 @@ SetDecimalSeparator(sDecimalSep)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sDecimalSep` is [`NIL`](../literals/nil.md). | `Argument: sDecimalSep cannot be null.` |
-| `sDecimalSep` is empty or has more than one character. | `Wrong value for argument: sDecimalSep` |
+| `sDecimalSep` is [`NIL`](../literals/nil.md). | `Argument: decimalSep cannot be null.` |
+| `sDecimalSep` is empty or has more than one character. | `Wrong value for argument: decimalSep` |
 
 ## Best practices
 

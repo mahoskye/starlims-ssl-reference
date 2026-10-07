@@ -42,7 +42,7 @@ GetFromSession(sKey)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sKey` is [`NIL`](../literals/nil.md). | `Argument: sKey cannot be null.` |
+| `sKey` is [`NIL`](../literals/nil.md). | `Argument: key cannot be null. GetFromSession().` |
 
 ## Best practices
 

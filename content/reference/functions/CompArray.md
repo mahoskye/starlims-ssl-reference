@@ -44,8 +44,8 @@ CompArray(a1, a2)
 
 | Trigger | Exception message |
 | --- | --- |
-| `a1` is [`NIL`](../literals/nil.md). | `First array cannot be null.` |
-| `a2` is [`NIL`](../literals/nil.md). | `Second array cannot be null.` |
+| `a1` is [`NIL`](../literals/nil.md). | `CompArray(): first array cannot be null.` |
+| `a2` is [`NIL`](../literals/nil.md). | `CompArray(): second array cannot be null.` |
 
 ## Best practices
 

@@ -63,8 +63,8 @@ ExecInternal(o, sMethodName, [vArg01], [vArg02], [vArg03], [vArg04], [vArg05], [
 
 | Trigger | Exception message |
 | --- | --- |
-| `o` is [`NIL`](../literals/nil.md). | `Argument o cannot be null.` |
-| `sMethodName` is [`NIL`](../literals/nil.md). | `Argument sMethodName cannot be null.` |
+| `o` is [`NIL`](../literals/nil.md). | `Argument o cannot be null. ExecInternal()` |
+| `sMethodName` is [`NIL`](../literals/nil.md). | `Argument methodName cannot be null. ExecInternal()` |
 
 ## Best practices
 

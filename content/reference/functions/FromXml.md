@@ -49,7 +49,7 @@ FromXml(sXml)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sXml` is [`NIL`](../literals/nil.md). | `Argument sXml cannot be null.` |
+| `sXml` is [`NIL`](../literals/nil.md). | `Argument xml cannot be null. FromXml().` |
 | The string cannot be parsed as valid XML, or the root element is not one of the recognized type tags. | `Error unpacking XML` |
 | An element inside `<complextype>` does not match the declared element type. | `Incorrect element type {element} found in array of type {typeName}` |
 | The `<complextype>` contents cannot be converted to the target array type. | `Can't convert to array` |

@@ -47,7 +47,7 @@ IsTableFld(sConnectionName, sTableName, sFieldName)
 | Trigger | Exception message |
 | --- | --- |
 | `sTableName` or `sFieldName` is [`NIL`](../literals/nil.md). | `The table name or field name parameter is null` |
-| `sConnectionName`, `sTableName`, or `sFieldName` is an empty string. | `The input parameters are incorrect.` |
+| `sConnectionName`, `sTableName`, or `sFieldName` is an empty string. | `The imput parameters are incorrect.` |
 
 ## Best practices
 

@@ -63,15 +63,15 @@ For other statements, `SQLExecute` returns a boolean success value.
 
 | Trigger | Exception message |
 | --- | --- |
-| `sCommandString` is missing, empty, or not a string. | `1st argument must be a non-empty string` |
-| `sConnectionName` is provided but is not a string. | `2nd argument must be a string` |
-| `bRollbackExistingTransaction` is provided but is not a boolean. | `3rd argument must be a boolean` |
-| `bNullAsBlank` is provided but is not a boolean. | `4th argument must be a boolean` |
-| `aInvariantDateCols` is provided but is not an array. | `5th argument must be an array` |
-| `vReturnType` is provided but is neither a boolean nor a string. | `6th argument must be a boolean/string` |
-| `sTableName` is provided but is not a string. | `7th argument must be a string` |
-| `bIncludeSchema` is provided but is not a boolean. | `8th argument must be a boolean` |
-| `bIncludeHeader` is provided but is not a boolean. | `9th argument must be a boolean` |
+| `sCommandString` is missing, empty, or not a string. | `SQLExecute: 1st argument must be a non-empty string` |
+| `sConnectionName` is provided but is not a string. | `SQLExecute: 2nd argument must be a string` |
+| `bRollbackExistingTransaction` is provided but is not a boolean. | `SQLExecute: 3rd argument must be a boolean` |
+| `bNullAsBlank` is provided but is not a boolean. | `SQLExecute: 4th argument must be a boolean` |
+| `aInvariantDateCols` is provided but is not an array. | `SQLExecute: 5th argument must be an array` |
+| `vReturnType` is provided but is neither a boolean nor a string. | `SQLExecute: 6th argument must be a boolean/string` |
+| `sTableName` is provided but is not a string. | `SQLExecute: 7th argument must be a string` |
+| `bIncludeSchema` is provided but is not a boolean. | `SQLExecute: 8th argument must be a boolean` |
+| `bIncludeHeader` is provided but is not a boolean. | `SQLExecute: 9th argument must be a boolean` |
 
 ## Best practices
 

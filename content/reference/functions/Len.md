@@ -43,8 +43,8 @@ Len(vSource)
 
 | Trigger | Exception message |
 | --- | --- |
-| `vSource` is [`NIL`](../literals/nil.md). | `Argument vSource cannot be null.` |
-| `vSource` is neither a string nor an array. | `Invalid type: <type>.` |
+| `vSource` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. Len().` |
+| `vSource` is neither a string nor an array. | `Invalid type: <type>. Len()` |
 
 ## Best practices
 

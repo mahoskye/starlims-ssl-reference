@@ -45,8 +45,8 @@ At(sSubString, sSource)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sSubString` is [`NIL`](../literals/nil.md). | `Argument sSubString cannot be null.` |
-| `sSource` is [`NIL`](../literals/nil.md). | `Argument sSource cannot be null.` |
+| `sSubString` is [`NIL`](../literals/nil.md). | `Argument subString cannot be null. At().` |
+| `sSource` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. At().` |
 
 ## Best practices
 

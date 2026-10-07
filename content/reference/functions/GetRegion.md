@@ -45,7 +45,7 @@ GetRegion(sRegionName, [aSourceValues], [aDestinationValues])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sRegionName` is [`NIL`](../literals/nil.md). | `Argument cannot be null.` |
+| `sRegionName` is [`NIL`](../literals/nil.md). | `Argument cannot be null` |
 | `sRegionName` is not a string. | `Argument must be of type string.` |
 | `aSourceValues` or `aDestinationValues` is not an array. | `Invalid arguments for GetRegion! Should be: string, array, array.` |
 | `aSourceValues` and `aDestinationValues` have different lengths. | `Invalid arguments for GetRegion! Source array's length is not equal with destination array's length.` |

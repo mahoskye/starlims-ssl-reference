@@ -47,7 +47,7 @@ If `vDate` is a string that cannot be parsed, `LIMSDate` treats it as a null dat
 
 | Trigger | Exception message |
 | --- | --- |
-| `vDate` is [`NIL`](../literals/nil.md). | `Argument vDate cannot be null.` |
+| `vDate` is [`NIL`](../literals/nil.md). | `Argument: date cannot be null.` |
 | `vDate` is neither a string nor a date. | `Argument vDate must be a date or string value.` |
 
 ## Best practices

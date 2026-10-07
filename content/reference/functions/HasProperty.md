@@ -44,8 +44,8 @@ HasProperty(oTarget, sPropName)
 
 | Trigger | Exception message |
 | --- | --- |
-| `oTarget` is [`NIL`](../literals/nil.md). | `Argument oTarget cannot be null.` |
-| `sPropName` is [`NIL`](../literals/nil.md). | `Argument sPropName cannot be null.` |
+| `oTarget` is [`NIL`](../literals/nil.md). | `Argument o cannot be null. HasProperty()` |
+| `sPropName` is [`NIL`](../literals/nil.md). | `Argument propName cannot be null. HasProperty()` |
 
 ## Best practices
 

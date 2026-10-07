@@ -41,7 +41,7 @@ ConvertReport(sFile)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sFile` is [`NIL`](../literals/nil.md). | `Source string cannot be null.` |
+| `sFile` is [`NIL`](../literals/nil.md). | `ConvertReport(): Source string cannot be null.` |
 | The conversion fails. | `Error Converting Report(s): <underlying error message>` |
 
 ## Best practices

@@ -44,8 +44,8 @@ IsDefined(sVarName)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sVarName` is [`NIL`](../literals/nil.md). | `Argument 'sVarName' cannot be null!` |
-| `sVarName` is not a string or is empty. | `Argument 'sVarName' must be a non-empty string!` |
+| `sVarName` is [`NIL`](../literals/nil.md). | `Argument 'varName' cannot be null!` |
+| `sVarName` is not a string or is empty. | `Argument 'varName' must be a non-empty string!` |
 
 ## Best practices
 

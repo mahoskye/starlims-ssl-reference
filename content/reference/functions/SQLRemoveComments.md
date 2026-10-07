@@ -49,7 +49,7 @@ SQLRemoveComments(sStatement)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sStatement` is not a string and not [`NIL`](../literals/nil.md). | `Argument 'sStatement' must be a string` |
+| `sStatement` is not a string and not [`NIL`](../literals/nil.md). | `Argument 'statement' must be a string` |
 
 ## Best practices
 

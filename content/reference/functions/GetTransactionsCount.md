@@ -42,7 +42,7 @@ GetTransactionsCount(sConnection)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sConnection` is provided but is not a string. | `Argument 'sConnection' must be a string.` |
+| `sConnection` is provided but is not a string. | `Argument 'connection' must be a string.` |
 | `sConnection` names a connection that does not exist. | `The provider name: <sConnection> not found.` |
 
 ## Best practices

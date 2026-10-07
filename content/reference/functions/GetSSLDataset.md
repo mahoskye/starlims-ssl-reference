@@ -53,9 +53,9 @@ For `SELECT` statements, the first table contains the returned rows. For non-`SE
 
 | Trigger | Exception message |
 | --- | --- |
-| `sSql` is [`NIL`](../literals/nil.md). | `sSql parameter cannot be null.` |
-| `sSql` is an empty string. | `The command string is null.` |
-| `aParamNames` has more entries than `aParamValues`. | `Not enough values provided for parameters.` |
+| `sSql` is [`NIL`](../literals/nil.md). | `sql parameter cannot be null: GetSSLDataset()` |
+| `sSql` is an empty string. | `The command string is null` |
+| `aParamNames` has more entries than `aParamValues`. | `ExecuteNonQuery exception Not enough values provided for parameters.` |
 | The connection name is not configured. | `The provider name: <name> not found.` |
 | The database collection is unavailable. | `The internal database collection is null.` |
 

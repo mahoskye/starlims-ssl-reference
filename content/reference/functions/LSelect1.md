@@ -47,8 +47,8 @@ LSelect1(sCommandString, [sConnectionName], [aArrayOfValues], [bNullAsBlank], [a
 
 | Trigger | Exception message |
 | --- | --- |
-| `sCommandString` is [`NIL`](../literals/nil.md) or empty. | `The command string is null.` |
-| `aArrayOfValues` is multidimensional. | `The current array has more than 1 dimension.` |
+| `sCommandString` is [`NIL`](../literals/nil.md) or empty. | `The command string is null` |
+| `aArrayOfValues` is multidimensional. | `The current array has more than 1 dimmension.` |
 | `sConnectionName` does not match a configured connection. | `The provider name: <sConnectionName> not found.` |
 | The connection cannot resolve a database engine. | `Cannot determine the database engine name.` |
 | The number of `?` placeholders does not match the number of supplied values. | `Parameters count mismatch` |

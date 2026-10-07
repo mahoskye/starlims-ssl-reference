@@ -42,9 +42,9 @@ _OR(nValue1, nValue2)
 
 | Trigger | Exception message |
 | --- | --- |
-| Either operand is not a whole number. | `SSLDouble: <value> _OR <v>: invalid operand(s). Expected integers.` |
+| Either operand is not a whole number. | `Run-time error: SSLDouble: <value> _OR <v>: invalid operand(s). Expected integers.` |
 | Either operand is [`NIL`](../literals/nil.md). | `SSLDouble - invalid operand: (of type null) for operator: _OR.` |
-| `_OR` is called on a non-numeric type. | `the operator/method: _OR is not implemented on type: <type>. Operand: <operand>` |
+| `_OR` is called on a non-numeric type. | `Run-time error: the operator/method: _OR is not implemented on type: <type>. Operand: <operand>` |
 
 ## Best practices
 

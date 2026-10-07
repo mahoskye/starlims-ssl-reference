@@ -47,7 +47,7 @@ DateToString(dDate, [sFormat])
 | --- | --- |
 | `dDate` is [`NIL`](../literals/nil.md). | `Argument: date cannot be null.` |
 | `dDate` is not a date value. | `Argument: date must be of date type` |
-| `sFormat` is not a string. | `Argument type must be of type SSLString.` |
+| `sFormat` is not a string. | `argument type must be of type SSLString. DateToString().` |
 
 ## Best practices
 

@@ -41,8 +41,8 @@ LimsNETTypeOf(sTypeName)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sTypeName` is [`NIL`](../literals/nil.md). | `Value cannot be null. (Parameter 'sTypeName')` |
-| `sTypeName` is not a string or trims to an empty value. | `Argument must be a non-empty string.` |
+| `sTypeName` is [`NIL`](../literals/nil.md). | `Value cannot be null.` |
+| `sTypeName` is not a string or trims to an empty value. | `Argument must be a non-empty string` |
 | The type name cannot be resolved. | `Type: <typeFullName> was not found.` |
 
 ## Best practices
