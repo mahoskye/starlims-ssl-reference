@@ -42,7 +42,7 @@ Returned objects follow these rules:
 
 - `XmlType` contains the current element name.
 - Attributes become properties on the same object.
-- A leaf element gets a `Value` property containing its text, or `""` when the element has no children.
+- A leaf element gets a `Value` property containing its text, or `""` when the element is empty.
 - Each child element name is exposed twice:
   - `<name>` holds the first child object with that name.
   - `<name>Collection` holds an array of all child objects with that name.

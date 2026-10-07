@@ -15,7 +15,7 @@ Returns the field names for a table on a selected database connection.
 
 `TableFldLst` returns an array of strings containing the field names for `sTableName`. Pass `sConnectionName` to use a specific database connection. If `sConnectionName` is [`NIL`](../literals/nil.md), SSL replaces it with the current default connection before the lookup runs.
 
-`sTableName` is required. Passing [`NIL`](../literals/nil.md) for `sTableName` raises an immediate error. Passing an empty string for `sConnectionName` or `sTableName` causes the lower database layer to raise an input-parameter error. If the selected connection cannot be opened, or the table metadata cannot be read, the call can also fail with a database error.
+`sTableName` is required. Passing [`NIL`](../literals/nil.md) for `sTableName` raises an immediate error. Passing an empty string for `sConnectionName` or `sTableName` raises `The input parameters are incorrect.` If the selected connection cannot be opened, or the table metadata cannot be read, the call can also fail with a database error.
 
 Use [`IsTable`](IsTable.md) when you only need to know whether a table exists.
 Use [`IsTableFld`](IsTableFld.md) when you only need to test one field.
@@ -97,7 +97,7 @@ DoProc("ShowSampleFields");
 
 ### Validate required fields on the default connection
 
-Pass [`NIL`](../literals/nil.md) for the connection to use the default, then scan the returned array for each required field name and collect any that are absent.
+Leave the connection argument empty to use the default, then use [`AScanExact`](AScanExact.md) to look for each required field name in the returned array and collect any that are absent.
 
 ```ssl
 :PROCEDURE GetMissingSampleFields;
@@ -106,12 +106,12 @@ Pass [`NIL`](../literals/nil.md) for the connection to use the default, then sca
     sTableName := "sample";
     aRequiredFields := {"sample_id", "status", "received_date"};
     aMissingFields := {};
-    aFieldNames := TableFldLst(NIL, sTableName);
+    aFieldNames := TableFldLst(, sTableName);
 
     :FOR nIndex := 1 :TO ALen(aRequiredFields);
         sFieldName := aRequiredFields[nIndex];
 
-        :IF AScan(aFieldNames, sFieldName) == 0;
+        :IF AScanExact(aFieldNames, sFieldName) == 0;
             AAdd(aMissingFields, sFieldName);
         :ENDIF;
     :NEXT;

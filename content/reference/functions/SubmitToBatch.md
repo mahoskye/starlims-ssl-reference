@@ -15,12 +15,12 @@ Submits SSL code to a batch worker and returns the submitted job identifier.
 
 `SubmitToBatch()` queues or starts background execution for the supplied SSL code string. The return value is the batch job ID, not the execution result. If `sCode` is [`NIL`](../literals/nil.md) or an empty string, the function returns `""` and does not submit anything.
 
-The `parameters` argument is interpreted in one of two supported ways:
+The `vParameters` argument is interpreted in one of two supported ways:
 
 - an array of positional script parameters for the submitted code
 - an object with a `Parameters` array and/or a `Caption` string
 
-If `mode` is omitted or not recognized, the runtime uses the system batch mode setting. If that setting is also not recognized, submission falls back to queue mode. If `userName` or `password` is omitted, the current session credentials are used.
+If `sMode` is omitted or not recognized, the runtime uses the system batch mode setting. If that setting is also not recognized, submission falls back to queue mode. If `sUserName` or `sPassword` is omitted, the current session credentials are used.
 
 ## When to use
 
@@ -55,7 +55,7 @@ SubmitToBatch(sCode, [vParameters], [sMode], [sUserName], [sPassword])
     - Pass an array when the submitted code expects positional parameters.
     - Use an object with `Parameters` and `Caption` when you want both runtime inputs and a readable job label.
     - Capture the returned batch ID if later workflow needs to track or correlate the submission.
-    - Omit `userName` and `password` unless the batch must run under different credentials.
+    - Omit `sUserName` and `sPassword` unless the batch must run under different credentials.
 
 !!! failure "Don't"
     - Assume the function returns the batch execution result. It returns a submission ID.

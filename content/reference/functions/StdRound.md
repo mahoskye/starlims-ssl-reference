@@ -13,9 +13,9 @@ starlims:
 
 Returns a string produced by applying a named rounding standard to a numeric value.
 
-`StdRound(sStandard, nDigits, nNumber)` requires all three arguments and returns text, not a numeric value. The function has explicit handling only for `FDA`, `EPA`, and `ISO`, then replaces `.` with the current system decimal separator before returning. Negative inputs keep a leading minus sign in the final string, and `ISO` results are left-padded with spaces to a total width of 15 characters when needed.
+`StdRound(sStandard, nDigits, nNumber)` requires all three arguments and returns text, not a numeric value. The supported standards are `FDA`, `EPA`, and `ISO`, and the result uses the current decimal separator. Negative inputs keep a leading minus sign in the final string, and `ISO` results are left-padded with spaces to a total width of 15 characters when needed.
 
-The meaning of `nDigits` depends on the selected standard. The FDA and ISO branches use it as a decimal-digit count in the returned string. The EPA branch uses it in its own rounding path and preserves that many significant digits in the formatted result.
+The meaning of `nDigits` depends on the selected standard. FDA and ISO round to `nDigits` decimal places in the returned string. EPA keeps `nDigits` significant digits in the formatted result.
 
 ## When to use
 
@@ -34,12 +34,12 @@ StdRound(sStandard, nDigits, nNumber)
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `sStandard` | [string](../types/string.md) | yes | — | Rounding standard name. Supported names are `FDA`, `EPA`, and `ISO`. |
-| `nDigits` | [number](../types/number.md) | yes | — | Whole-number digit count passed to the selected rounding routine. FDA and ISO use it as decimal digits; EPA uses it in its own significant-digit-style rounding path. |
+| `nDigits` | [number](../types/number.md) | yes | — | Whole-number digit count. FDA and ISO use it as decimal places; EPA uses it as the number of significant digits. |
 | `nNumber` | [number](../types/number.md) | yes | — | Numeric value to round and format. |
 
 ## Returns
 
-**[string](../types/string.md)** — The formatted string returned by the selected rounding routine.
+**[string](../types/string.md)** — The rounded value as a formatted string.
 
 ## Exceptions
 
@@ -62,14 +62,14 @@ StdRound(sStandard, nDigits, nNumber)
     - Assume `StdRound` returns a number. It returns formatted text.
     - Pass [`NIL`](../literals/nil.md) for any argument. The function raises an error instead
       of supplying defaults.
-    - Rely on undocumented standard names or alternate casing. The function only branches on exact `FDA`, `EPA`, and `ISO` values.
-    - Assume `nDigits` means the same thing for every standard. The EPA path does not behave like a simple decimal-place formatter.
+    - Rely on undocumented standard names or alternate casing. Standard names are case-sensitive: only exact `FDA`, `EPA`, and `ISO` are recognized.
+    - Assume `nDigits` means the same thing for every standard. EPA does not behave like a simple decimal-place formatter.
 
 ## Caveats
 
 - For `ISO`, the returned string is truncated to 15 characters when it becomes longer than that.
-- `nDigits` is parsed as an integer by the implementation, so fractional values are not a supported input shape.
-- Unsupported `sStandard` values are not rejected. They skip the named rounding branches and still return a formatted string.
+- Pass a whole number for `nDigits`; fractional values are not supported.
+- Unsupported `sStandard` values are not rejected; the function still returns a formatted string.
 
 ## Examples
 

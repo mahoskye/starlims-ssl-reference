@@ -1,6 +1,6 @@
 ---
 title: "SetGroupSeparator"
-summary: "Changes the group (thousands) separator character used when numbers are formatted as strings across the application."
+summary: "Changes the group (thousands) separator character used when numbers are formatted as strings."
 id: ssl.function.setgroupseparator
 element_type: function
 doc_status: published
@@ -11,9 +11,9 @@ starlims:
 
 # SetGroupSeparator
 
-Changes the group (thousands) separator character used when numbers are formatted as strings across the application.
+Changes the group (thousands) separator character used when numbers are formatted as strings.
 
-`SetGroupSeparator` changes the global group separator to `sGroupSep` and returns the previous setting. `sGroupSep` must be exactly one character long; passing [`NIL`](../literals/nil.md), an empty string, or a multi-character string raises an error.
+`SetGroupSeparator` changes the group separator to `sGroupSep` and returns the previous setting. `sGroupSep` must be exactly one character long; passing [`NIL`](../literals/nil.md), an empty string, or a multi-character string raises an error.
 
 ## When to use
 
@@ -54,12 +54,12 @@ SetGroupSeparator(sGroupSep)
 
 !!! failure "Don't"
     - Pass multi-character strings or empty values as `sGroupSep`.
-    - Frequently switch the separator mid-session unless all components are aware of the change; the setting is global and unpredictable changes can cause inconsistent parsing.
+    - Frequently switch the separator mid-session unless all components are aware of the change; unexpected changes can cause inconsistent parsing.
     - Assume the initial separator value without querying; other modules may have changed it.
 
 ## Caveats
 
-- Changing the separator affects all subsequent numeric operations globally; parts of the application that expect a different separator may behave incorrectly.
+- Changing the separator affects all subsequent numeric operations; parts of the application that expect a different separator may behave incorrectly.
 - There is no validation that `sGroupSep` does not conflict with the current decimal separator.
 
 ## Examples
@@ -109,15 +109,16 @@ DoProc("ImportNumericData");
 
 ### Update both separators for a locale and roll back on error
 
-Change group and decimal separator together during a localization update, with rollback if either change fails.
+Change group and decimal separator together during a localization update, restoring both original separators if the change fails.
 
 ```ssl
 :PROCEDURE UpdateUserLocalization;
 	:DECLARE sGroupSep, sDecimalSep, sCurrentGroup, sCurrentDecimal;
-	:DECLARE sUserID, sRegion, sFormatMessage, oUserProfile;
+	:DECLARE sUserID, sRegion, sFormatMessage, bOk;
 
 	sUserID := "USR-2024-001";
 	sRegion := "German";
+	bOk := .F.;
 
 	sCurrentGroup := GetGroupSeparator();
 	sCurrentDecimal := GetDecimalSeparator();
@@ -126,16 +127,11 @@ Change group and decimal separator together during a localization update, with r
 	sDecimalSep := ",";
 
 	:TRY;
-		oUserProfile := CreateUdObject();
-		oUserProfile:UserID := sUserID;
-		oUserProfile:Region := sRegion;
-		oUserProfile:PreferredGroupSep := sGroupSep;
-		oUserProfile:PreferredDecimalSep := sDecimalSep;
-
 		SetGroupSeparator(sGroupSep);
 		SetDecimalSeparator(sDecimalSep);
 
 		:IF GetGroupSeparator() == sGroupSep .AND. GetDecimalSeparator() == sDecimalSep;
+			bOk := .T.;
 			sFormatMessage := "Localization updated for user " + sUserID + " to " + sRegion
 				+ " region";
 			InfoMes(sFormatMessage);
@@ -153,13 +149,14 @@ Change group and decimal separator together during a localization update, with r
 	:CATCH;
 		ErrorMes("Localization update failed: " + GetLastSSLError():Description);
 		/* Logs localization failure reason;
-		SetGroupSeparator(sCurrentGroup);
-		SetDecimalSeparator(sCurrentDecimal);
 	:FINALLY;
-		oUserProfile := NIL;
+		:IF !bOk;
+			SetGroupSeparator(sCurrentGroup);
+			SetDecimalSeparator(sCurrentDecimal);
+		:ENDIF;
 	:ENDTRY;
 
-	:RETURN .T.;
+	:RETURN bOk;
 :ENDPROC;
 
 /* Usage;

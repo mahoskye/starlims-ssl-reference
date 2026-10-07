@@ -15,7 +15,7 @@ Updates a user's password and returns the stored password hash.
 
 `SetUserPassword()` hashes `sPassword`, attempts to store the new value for `sUserName`, and returns the hash when the update succeeds. If the update does not succeed, the function returns `""`.
 
-The function raises an exception when either argument is [`NIL`](../literals/nil.md). It does not reject empty strings, and it does not perform password-policy or password-history checks. When `sUserName` matches the current session user, the function also stores the new password in the session under `STARLIMSPass`.
+The function raises an exception when either argument is [`NIL`](../literals/nil.md). It does not reject empty strings, and it does not perform password-policy or password-history checks. When `sUserName` matches the current session user, the session's stored password is updated too.
 
 ## When to use
 
@@ -56,7 +56,7 @@ SetUserPassword(sUserName, sPassword)
 
 !!! failure "Don't"
     - Assume this function enforces password complexity, password history, or other policy rules.
-    - Assume empty strings raise an exception. Only [`NIL`](../literals/nil.md) is rejected by the documented implementation.
+    - Assume empty strings raise an exception. Only [`NIL`](../literals/nil.md) is rejected.
     - Ignore the return value when the password change must be confirmed.
     - Expose the new password carelessly in current-user flows, because the session is updated when `sUserName` matches the active user.
 
@@ -130,11 +130,11 @@ DoProc("ChangePasswordAfterCheck", {"jsmith", "CurrentPass!", "NewPass2026!"});
 
 ### Apply password-history checks in a reset loop
 
-Process multiple requested resets, skipping values that already appear in each user's stored password history.
+Process multiple requested resets, skipping values that already appear in a supplied password history for that user.
 
 ```ssl
 :PROCEDURE ResetPasswordsWithHistoryCheck;
-	:DECLARE aResetRequests, aHistoryByUser, nIndex;
+	:DECLARE aResetRequests, aHistoryByUser, nIndex, nHistoryIndex;
 	:DECLARE sUserName, sNewPassword, sStoredHash, aPrevPasswords;
 
 	aResetRequests := {
@@ -150,7 +150,11 @@ Process multiple requested resets, skipping values that already appear in each u
 	:FOR nIndex := 1 :TO ALen(aResetRequests);
 		sUserName := aResetRequests[nIndex, 1];
 		sNewPassword := aResetRequests[nIndex, 2];
-		aPrevPasswords := aHistoryByUser[nIndex, 2];
+		nHistoryIndex := AScan(aHistoryByUser, {|aRow| aRow[1] == sUserName});
+		aPrevPasswords := "";
+		:IF nHistoryIndex > 0;
+			aPrevPasswords := aHistoryByUser[nHistoryIndex, 2];
+		:ENDIF;
 
 		:IF !ChkNewPassword(sNewPassword, aPrevPasswords);
 			UsrMes("Skipped " + sUserName + " because the password was used before.");

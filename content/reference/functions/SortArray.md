@@ -44,6 +44,7 @@ SortArray(aTarget, [vNumeric])
 | Trigger | Exception message |
 | --- | --- |
 | `aTarget` is [`NIL`](../literals/nil.md). | `SortArray(): target array cannot be null.` |
+| `vNumeric` is `1` or [`.T.`](../literals/true.md) and the elements are numbers, not strings. | `Failed to compare two elements in the array.` |
 | The custom comparator does not return a numeric comparison result. | `Failed to compare two elements in the array.` (the inner error reads `Array sort: the code block which compares two elements of the array, needs to return an integer value (less than zero if first element is smaller; zero if they are equal; and greater than zero if first element is greater).`) |
 
 ## Best practices
@@ -56,11 +57,11 @@ SortArray(aTarget, [vNumeric])
 !!! failure "Don't"
     - Assume the code block receives one element. It compares two elements and must return a negative number, `0`, or a positive number.
     - Expect `SortArray` to leave the original array unchanged. Any other reference to the same array sees the new order.
-    - Expect unsupported error behavior for other `vNumeric` values. Values other than [`.T.`](../literals/true.md), `1`, or a code block fall back to the default sort path.
+    - Expect an error for other `vNumeric` values. Values other than [`.T.`](../literals/true.md), `1`, or a code block silently use the default sort.
 
 ## Caveats
 
-- Only [`.T.`](../literals/true.md) and numeric `1` select the numeric comparer. Other truthy values fall back to the default sort.
+- Only [`.T.`](../literals/true.md) and numeric `1` select the numeric comparer. Other values, such as `2` or `"Y"`, fall back to the default sort.
 
 ## Examples
 

@@ -13,7 +13,7 @@ starlims:
 
 Changes the active default database connection name and returns the previous default connection.
 
-`SetDefaultConnection()` stores the supplied string as the runtime default connection value and returns the previous default connection name. The function accepts one surfaced parameter, `sDefaultConnection`. It rejects [`NIL`](../literals/nil.md) and any non-string value, but otherwise assigns the provided string without validating that it names a configured or connected database. Use it when later database calls should rely on a different default connection and you want to restore the previous value afterward.
+`SetDefaultConnection()` stores the supplied string as the runtime default connection value and returns the previous default connection name. The function takes one parameter, `sDefaultConnection`. It rejects [`NIL`](../literals/nil.md) and any non-string value, but otherwise assigns the provided string without validating that it names a configured or connected database. Use it when later database calls should rely on a different default connection and you want to restore the previous value afterward.
 
 ## When to use
 

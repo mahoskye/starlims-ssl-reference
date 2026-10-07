@@ -90,8 +90,8 @@ DoProc("SubmitDataForBatchProcessing");
 
 ### Queue independent background jobs and validate each ID
 
-Submit several jobs separately so each one gets its own batch ID, then check
-which submissions succeeded.
+Submit several jobs separately so each one gets its own batch ID, then log
+each returned ID. An empty ID means nothing was submitted for that job.
 
 ```ssl
 :PROCEDURE QueueNightlyRefreshes;
@@ -116,21 +116,21 @@ which submissions succeeded.
     sBatchId3 := SubmitToBatchEx(sCode3);
 
     :IF Empty(sBatchId1);
-        UsrMes("Daily KPIs submission was skipped or failed");
+        UsrMes("Daily KPIs returned no batch ID");
     :ELSE;
         UsrMes("Queued daily KPIs as batch " + sBatchId1);
         /* Logs batch ID on success;
     :ENDIF;
 
     :IF Empty(sBatchId2);
-        UsrMes("Monthly rollup submission was skipped or failed");
+        UsrMes("Monthly rollup returned no batch ID");
     :ELSE;
         UsrMes("Queued monthly rollup as batch " + sBatchId2);
         /* Logs batch ID on success;
     :ENDIF;
 
     :IF Empty(sBatchId3);
-        UsrMes("Lab audit submission was skipped or failed");
+        UsrMes("Lab audit returned no batch ID");
     :ELSE;
         UsrMes("Queued lab audit as batch " + sBatchId3);
         /* Logs batch ID on success;

@@ -115,7 +115,7 @@ DoProc("NormalizeCodes");
 
 ### Trim and normalize before membership checks
 
-Clean incoming values, convert them to uppercase, and compare them against a normalized allowed list. Both conditional branches produce visible output so the caller knows whether the code was accepted or rejected.
+Clean incoming values, convert them to uppercase, and look for an exact match in a normalized allowed list with [`AScanExact`](AScanExact.md). Both conditional branches produce visible output so the caller knows whether the code was accepted or rejected.
 
 ```ssl
 :PROCEDURE ValidateStatusCode;
@@ -125,7 +125,7 @@ Clean incoming values, convert them to uppercase, and compare them against a nor
     sNormalizedStatus := Upper(AllTrim(sStatusCode));
     aValidStatuses := {"ACTIVE", "PENDING", "CLOSED"};
 
-    bIsValid := AScan(aValidStatuses, sNormalizedStatus) > 0;
+    bIsValid := AScanExact(aValidStatuses, sNormalizedStatus) > 0;
 
     :IF bIsValid;
         UsrMes("Accepted status: " + sNormalizedStatus);

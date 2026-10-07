@@ -63,7 +63,7 @@ SetUserData(sUserName)
 ## Caveats
 
 - The change affects the current execution context immediately.
-- While the session user name is changed, messages written with [`UsrMes`](UsrMes.md) go to the user log of the name you set, not to your own log (verified in Designer). Capture anything you need to report, restore the original user name, then log.
+- While the session user name is changed, messages written with [`UsrMes`](UsrMes.md) go to the user log of the name you set, not to your own log. Capture anything you need to report, restore the original user name, then log.
 
 ## Examples
 

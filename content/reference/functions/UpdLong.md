@@ -183,10 +183,12 @@ Copy an external file to a local temp path, update the long column inside a tran
         BeginLimsTransaction(sConnectionName, "SERIALIZABLE");
         bInTrans := .T.;
 
-        :IF FileSupport(sExternalPath, "CHECK");
-            FileSupport(sExternalPath, "COPYTOFILE", sInputPath);
-        :ELSE;
+        :IF !FileSupport(sExternalPath, "CHECK");
             RaiseError("External file not found at " + sExternalPath);
+        :ENDIF;
+
+        :IF !FileSupport(sExternalPath, "COPY", sInputPath);
+            RaiseError("Copy failed: " + sExternalPath);
         :ENDIF;
 
         UpdLong(sConnectionName, sTableName, sColumnName, sWhereCond, sInputPath);

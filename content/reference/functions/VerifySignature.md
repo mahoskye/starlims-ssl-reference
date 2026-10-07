@@ -48,7 +48,7 @@ VerifySignature(sCertificateString, sData, sSignature)
 | --- | --- |
 | `sCertificateString` is empty, [`NIL`](../literals/nil.md), not valid base64, not a DER certificate, or does not expose a supported public key for this verification. | For an empty string: `m_safeCertContext is an invalid handle.` Other certificate problems raise their own messages. |
 | `sData` is [`NIL`](../literals/nil.md). | `String reference not set to an instance of a String.` |
-| `sSignature` is [`NIL`](../literals/nil.md) or not valid base64. Unsupported or malformed signature content can also raise an error. | For NIL: `Value cannot be null.`, then `Parameter name: s` on the second line. Invalid base64 raises its own message. |
+| `sSignature` is [`NIL`](../literals/nil.md) or not valid base64. Unsupported or malformed signature content can also raise an error. | For NIL: `Value cannot be null.`, then `Parameter name: s` on the second line. For invalid base64: `Exception has been thrown by the target of an invocation.`, with the inner error `Invalid length for a Base-64 char array or string.` |
 
 ## Best practices
 
@@ -64,7 +64,7 @@ VerifySignature(sCertificateString, sData, sSignature)
 
 ## Caveats
 
-- Invalid Base64 input raises `Exception has been thrown by the target of an invocation.`, whose underlying error is `Invalid length for a Base-64 char array or string.` Catch it with [`:TRY`](../keywords/TRY.md) when the values come from outside the script.
+- Invalid Base64 input raises an error rather than returning [`.F.`](../literals/false.md) (see [Exceptions](#exceptions)). Catch it with [`:TRY`](../keywords/TRY.md) when the values come from outside the script.
 - `VerifySignature` verifies the signature with the certificate's public key by using a SHA-1 digest of the UTF-8 bytes of `sData`.
 
 ## Examples
@@ -132,7 +132,7 @@ DoProc("ValidatePartnerMessage", {"MIIBIjANBgkq...", "ORDER|2026-04-19|ACME-1001
 
 ### Verify multiple signed records in one pass
 
-Loop through a batch of signed records, track mismatches, and capture malformed records separately. The third record uses `"not-base64"` as its signature, which raises an error that lands in the [`:CATCH`](../keywords/CATCH.md) block.
+Loop through a batch of signed records, track mismatches, and capture malformed records separately. The certificate and the first two signatures are placeholders: replace them with a real Base64 DER certificate and Base64 signatures made with its private key, as in the first example. As written they are not valid Base64, so every record raises. With real values in place, only the third record, whose signature is `"not-base64"`, raises an error that lands in the [`:CATCH`](../keywords/CATCH.md) block.
 
 ```ssl
 :PROCEDURE AuditSignedRecords;
