@@ -115,7 +115,7 @@ Passes [`.F.`](../literals/false.md) for `bAllVersions` to request a single-vers
     :IF DocCommandFailed();
         ErrorMes("Single-version delete failed: " + sErrMsg);
     :ELSE;
-        UsrMes("Single-version delete request returned .F. with no stored backend message");
+        UsrMes("Single-version delete request returned .F. with no stored Documentum message");
     :ENDIF;
 
     :RETURN .F.;

@@ -13,7 +13,7 @@ starlims:
 
 Builds a dataset XML string from an array of values and an optional array of field names.
 
-`GetDataSetFromArray` is the simple wrapper around [`GetDataSetFromArrayEx`](GetDataSetFromArrayEx.md). It always uses the table name `TABLE`, includes the dataset header, and does not include schema metadata. Pass a two-dimensional array when each inner array represents one row. If `aArrayFields` is omitted or empty, the function generates default column names such as `Field1`, `Field2`, and so on.
+`GetDataSetFromArray` is the simpler form of [`GetDataSetFromArrayEx`](GetDataSetFromArrayEx.md). It always uses the table name `TABLE`, includes the dataset header, and does not include schema metadata. Pass a two-dimensional array when each inner array represents one row. If `aArrayFields` is omitted or empty, the function generates default column names such as `Field1`, `Field2`, and so on.
 
 The returned XML starts with the declaration `<?xml version="1.0" standalone="yes" ?>`, followed by an indented `<DataSet>` root element that holds one `<TABLE>` element per row, with one child element per field.
 
@@ -58,7 +58,7 @@ GetDataSetFromArray(aArrayOfValues, [aArrayFields])
 !!! failure "Don't"
     - Pass a [`NIL`](../literals/nil.md) values array and expect an empty result. The function raises an error instead.
     - Rely on auto-generated field names when the dataset will be shared or imported elsewhere. Generic names are harder to interpret.
-    - Use this wrapper when you need schema metadata or a custom table name. Those options are fixed here.
+    - Use this function when you need schema metadata or a custom table name. Those options are fixed here.
 
 ## Caveats
 

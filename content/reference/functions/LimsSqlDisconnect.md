@@ -1,6 +1,6 @@
 ---
 title: "LimsSqlDisconnect"
-summary: "Closes an active database connection by name and removes it from the internal registry."
+summary: "Closes an active database connection by name and removes it from the session's connection list."
 id: ssl.function.limssqldisconnect
 element_type: function
 doc_status: published
@@ -11,7 +11,7 @@ starlims:
 
 # LimsSqlDisconnect
 
-Closes an active database connection by name and removes it from the internal registry.
+Closes an active database connection by name and removes it from the session's connection list.
 
 `LimsSqlDisconnect` closes the named connection and removes it from the active connection set. It returns [`.T.`](../literals/true.md) when the disconnect succeeds and [`.F.`](../literals/false.md) when the name does not exist or the connection is already closed. The function does not raise an error on failure. Closing a connection affects all code that targets it by name until it is re-registered with [`LimsSqlConnect`](LimsSqlConnect.md).
 

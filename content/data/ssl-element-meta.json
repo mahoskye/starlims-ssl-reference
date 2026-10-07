@@ -3159,7 +3159,7 @@
       "source_path": "content/reference/functions/DocGetCabinets.md",
       "exceptions": [],
       "caveats": [
-        "An empty result can mean either a Documentum backend failure or an installation with no cabinets. Check DocCommandFailed to distinguish the two."
+        "An empty result can mean either a Documentum Documentum failure or an installation with no cabinets. Check DocCommandFailed to distinguish the two."
       ],
       "best_practices": {
         "do": [
@@ -3292,7 +3292,7 @@
           "Pass NIL for sObjId; that raises an error instead of returning an empty array.",
           "Treat each metadata row as an object with properties such as :Name or :Value.",
           "Assume every empty array means the object simply has no metadata; it can also indicate a failed Documentum command.",
-          "Assume an invalid sAttributes list is silently ignored; a backend failure can still surface as an empty array plus a failed command state."
+          "Assume an invalid sAttributes list is silently ignored; a Documentum failure can still surface as an empty array plus a failed command state."
         ]
       }
     },
@@ -3395,7 +3395,7 @@
         }
       ],
       "caveats": [
-        "The function does not itself tell you why an empty string was returned. Check DocCommandFailed to distinguish a backend failure from a type that has no attributes."
+        "The function does not itself tell you why an empty string was returned. Check DocCommandFailed to distinguish a Documentum failure from a type that has no attributes."
       ],
       "best_practices": {
         "do": [
@@ -4929,7 +4929,7 @@
         "dont": [
           "Pass a NIL values array and expect an empty result. The function raises an error instead.",
           "Rely on auto-generated field names when the dataset will be shared or imported elsewhere. Generic names are harder to interpret.",
-          "Use this wrapper when you need schema metadata or a custom table name. Those options are fixed here."
+          "Use this function when you need schema metadata or a custom table name. Those options are fixed here."
         ]
       }
     },
@@ -4964,7 +4964,7 @@
         "dont": [
           "Pass NIL for aArrayOfValues and expect an empty result. The function raises an error instead.",
           "Assume mismatched field counts will be rejected with a dedicated validation error. Extra field names or extra row values are trimmed to the smaller available column count.",
-          "Use this function when the fixed defaults from GetDataSetFromArray already match your needs. The wrapper is simpler for that case."
+          "Use this function when the fixed defaults from GetDataSetFromArray already match your needs. The simpler function is simpler for that case."
         ]
       }
     },
@@ -5502,7 +5502,7 @@
       "source_path": "content/reference/functions/GetLastSQLError.md",
       "exceptions": [],
       "caveats": [
-        "This function reports the SQL error currently stored by the database library, not a snapshot taken at call time.",
+        "This function reports the SQL error currently recorded, not a snapshot taken at call time.",
         "Later database operations can clear or replace the stored SQL error before you read it."
       ],
       "best_practices": {
@@ -5513,7 +5513,7 @@
         ],
         "dont": [
           "Assume a value is always returned. A later database call may leave you with NIL or a different SQL error state.",
-          "Assume this function returns general non-database exceptions. It is specifically for the database library's stored SQL error.",
+          "Assume this function returns general non-database exceptions. It is specifically for the recorded SQL error.",
           "Show raw SQL text or stack traces to end users unless that level of technical detail is intentional."
         ]
       }
@@ -7733,7 +7733,7 @@
       "id": "ssl.function.limssqldisconnect",
       "element_type": "function",
       "title": "LimsSqlDisconnect",
-      "summary": "Closes an active database connection by name and removes it from the internal registry.",
+      "summary": "Closes an active database connection by name and removes it from the session's connection list.",
       "doc_status": "published",
       "source_path": "content/reference/functions/LimsSqlDisconnect.md",
       "exceptions": [],
@@ -9543,7 +9543,7 @@
         }
       ],
       "caveats": [
-        "The function does not validate sRemoteDirectory before delegating to the FTP or SFTP backend."
+        "The function does not validate sRemoteDirectory before the upload."
       ],
       "best_practices": {
         "do": [
@@ -11124,7 +11124,7 @@
         }
       ],
       "caveats": [
-        "Attribute names that contain : are surfaced with _ instead.",
+        "Attribute names that contain : appear with _ instead.",
         "When an attribute name is value, the function renames it with an Attr prefix to avoid colliding with the generated Value property.",
         "bPreserveWhitespace only changes what the XML loader keeps. Whitespace nodes between nested elements are still not exposed as child properties in the returned object tree.",
         "Non-boolean bPreserveWhitespace values behave like the argument was omitted, so whitespace preservation stays off."

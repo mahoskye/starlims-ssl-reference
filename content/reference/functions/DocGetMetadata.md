@@ -70,7 +70,7 @@ DocGetMetadata(sObjId, [sAttributes])
     - Pass [`NIL`](../literals/nil.md) for `sObjId`; that raises an error instead of returning an empty array.
     - Treat each metadata row as an object with properties such as `:Name` or `:Value`.
     - Assume every empty array means the object simply has no metadata; it can also indicate a failed Documentum command.
-    - Assume an invalid `sAttributes` list is silently ignored; a backend failure can still surface as an empty array plus a failed command state.
+    - Assume an invalid `sAttributes` list is silently ignored; a Documentum failure can still surface as an empty array plus a failed command state.
 
 ## Caveats
 
@@ -82,7 +82,7 @@ DocGetMetadata(sObjId, [sAttributes])
 
 ### List all metadata name and value pairs
 
-Requests all metadata for a document, checks [`DocCommandFailed`](DocCommandFailed.md) on an empty result to distinguish a backend failure from an object with no attributes, and prints each name-value pair. Assumes the caller already has a Documentum session open.
+Requests all metadata for a document, checks [`DocCommandFailed`](DocCommandFailed.md) on an empty result to distinguish a Documentum failure from an object with no attributes, and prints each name-value pair. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE ListDocumentMetadata;

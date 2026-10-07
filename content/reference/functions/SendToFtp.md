@@ -34,7 +34,7 @@ SendToFtp(sServerNameOrIP, sRemoteDirectory, [sRemoteFileName], sLocalFileName, 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `sServerNameOrIP` | [string](../types/string.md) | yes | — | FTP or SFTP server name or IP address. |
-| `sRemoteDirectory` | [string](../types/string.md) | yes | — | Remote folder path passed to the selected backend. |
+| `sRemoteDirectory` | [string](../types/string.md) | yes | — | Remote folder path on the server. |
 | `sRemoteFileName` | [string](../types/string.md) | no | local file name | Remote file name. If omitted, empty, or [`NIL`](../literals/nil.md), the function uses the file name portion of `sLocalFileName`. |
 | `sLocalFileName` | [string](../types/string.md) | yes | — | Local file path to upload. |
 | `sUserName` | [string](../types/string.md) | yes | — | User name for the FTP or SFTP login step. |
@@ -47,7 +47,7 @@ SendToFtp(sServerNameOrIP, sRemoteDirectory, [sRemoteFileName], sLocalFileName, 
 
 ## Returns
 
-**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the file upload completes successfully; [`.F.`](../literals/false.md) when the selected backend catches a file-read or transfer error during the upload attempt.
+**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the file upload completes successfully; [`.F.`](../literals/false.md) when a file-read or transfer error occurs during the upload attempt.
 
 ## Exceptions
 
@@ -74,7 +74,7 @@ SendToFtp(sServerNameOrIP, sRemoteDirectory, [sRemoteFileName], sLocalFileName, 
 
 ## Caveats
 
-- The function does not validate `sRemoteDirectory` before delegating to the FTP or SFTP backend.
+- The function does not validate `sRemoteDirectory` before the upload.
 
 ## Examples
 
