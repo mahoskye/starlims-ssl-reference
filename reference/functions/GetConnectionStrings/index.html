@@ -3941,7 +3941,7 @@
 
 <h1 id="getconnectionstrings">GetConnectionStrings<a class="headerlink" href="#getconnectionstrings" title="Permanent link">&para;</a></h1>
 <p>Retrieves all configured database connections as a two-dimensional <a href="../../types/array/">array</a>.</p>
-<p>Returns a 2D <a href="../../types/array/">array</a> where each row represents one configured database connection. Column 1 is the connection name, column 2 is the provider settings string, and column 3 is the full connection string. The provider settings string is a semicolon-separated list that starts with the platform name and the provider, for example <code>SQL;NATIVESQL;USEUTC</code>. If no connections are configured, the function returns an empty array. It never raises an exception.</p>
+<p>Returns a 2D <a href="../../types/array/">array</a> where each row represents one configured database connection. Column 1 is the connection name, column 2 is the provider settings string, and column 3 is the full connection string. The provider settings string is a semicolon-separated list that starts with the platform name and the provider, for example <code>SQL;NATIVESQL;...;USEUTC</code>. If no connections are configured, the function returns an empty array. It never raises an exception.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When displaying or auditing all database connections configured in the application.</li>
@@ -3962,13 +3962,13 @@ the connection name, the provider settings string, and the full connection strin
 <ul>
 <li>Check for an empty array before iterating.</li>
 <li>Treat the returned array as a snapshot. Re-call the function if you need fresh data.</li>
+<li>Read column 1 for the name, column 2 for the provider settings, and column 3 for the connection string.</li>
 </ul>
 </div>
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
 <li>Assume the array always has at least one row. The system may have no connections configured.</li>
-<li>Assume column order. Column 1 is the name, column 2 the provider settings, and column 3 the connection string. Always access by index in that order.</li>
 </ul>
 </div>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
@@ -3988,7 +3988,7 @@ the connection name, the provider settings string, and the full connection strin
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ListConnectionNames"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="find-a-connection-entry-by-name">Find a connection entry by name<a class="headerlink" href="#find-a-connection-entry-by-name" title="Permanent link">&para;</a></h3>
-<p>Search the connection list for a specific name and display its provider when found. Returns <a href="../../literals/true/"><code>.T.</code></a> if the name was found, <a href="../../literals/false/"><code>.F.</code></a> otherwise.</p>
+<p>Search the connection list for a specific name and display its provider settings when found. Returns <a href="../../literals/true/"><code>.T.</code></a> if the name was found, <a href="../../literals/false/"><code>.F.</code></a> otherwise.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindConnection</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sTarget</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aConnections</span><span class="p">,</span><span class="w"> </span><span class="n">nIndex</span><span class="p">;</span>
@@ -3997,7 +3997,7 @@ the connection name, the provider settings string, and the full connection strin
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aConnections</span><span class="p">);</span>
 <span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="n">aConnections</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">sTarget</span><span class="p">;</span>
-<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Provider: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aConnections</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]);</span><span class="w"> </span><span class="c1">/* Logs the matching provider;</span>
+<span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Provider settings: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aConnections</span><span class="p">[</span><span class="n">nIndex</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]);</span><span class="w"> </span><span class="c1">/* Logs the matching provider settings;</span>
 <span class="w">            </span><span class="k">:RETURN</span><span class="w"> </span><span class="kc">.T.</span><span class="p">;</span>
 <span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:NEXT</span><span class="p">;</span>
@@ -4037,7 +4037,7 @@ the connection name, the provider settings string, and the full connection strin
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:59:27 UTC">October 7, 2026</span>
   </span>
 
     

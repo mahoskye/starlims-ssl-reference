@@ -3869,7 +3869,7 @@
 <p>Generates dataset XML from in-memory values, field definitions, and output flags.</p>
 <p><code>GetDataSetXMLFromArray</code> converts array data into an XML dataset string. You can control the table name, whether the XML output includes header information, and whether schema metadata is emitted. The function requires <code>aArrayOfValues</code>; when that argument is <a href="../../literals/nil/"><code>NIL</code></a>, it raises an error before any XML is built.</p>
 <p>With the header enabled, the XML starts with the declaration <code>&lt;?xml version="1.0" standalone="yes" ?&gt;</code>. The data follows as an indented <code>&lt;DataSet&gt;</code> root element that holds one element per row, named after <code>sTableName</code>, with one child element per field.</p>
-<p>Unlike <a href="../GetDataSetFromArrayEx/"><code>GetDataSetFromArrayEx</code></a>, this function does not add the extra field-name normalization step before calling the XML generator. Use it when you want direct control over the XML-oriented form.</p>
+<p>Unlike <a href="../GetDataSetFromArrayEx/"><code>GetDataSetFromArrayEx</code></a>, this function does not generate default field names (<code>Field1</code>, <code>Field2</code>, ...) when <code>aArrayFields</code> is omitted. Use it when you want direct control over the XML-oriented form.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When another system needs dataset XML rather than an <a href="../../classes/SSLDataset/"><code>SSLDataset</code></a> object.</li>
@@ -3964,16 +3964,14 @@
 <p class="admonition-title">Don't</p>
 <ul>
 <li>Pass <a href="../../literals/nil/"><code>NIL</code></a> for <code>aArrayOfValues</code> and expect an empty result. The function raises an error instead.</li>
-<li>Assume this function will add the same field-name defaults as <a href="../GetDataSetFromArrayEx/"><code>GetDataSetFromArrayEx</code></a>. If you need that convenience, use the wrapper.</li>
+<li>Assume this function will add the same field-name defaults as <a href="../GetDataSetFromArrayEx/"><code>GetDataSetFromArrayEx</code></a>. If you need that convenience, use that function instead.</li>
 <li>Rely on the default table name when downstream consumers care about the table identifier.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li>If <code>aArrayOfValues</code> is empty and <code>bIncludeSchema</code> is <a href="../../literals/false/"><code>.F.</code></a>, the function returns an empty string.</li>
-<li>When schema output is disabled, generated columns are treated as string columns.</li>
-<li>When schema output is enabled, field definitions can carry type metadata: <code>"S"</code> for string, <code>"N"</code> for numeric, and <code>"D"</code> for date.</li>
-<li>If a field definition only supplies the field name, the runtime infers the column type from the first non-null value it finds in that column.</li>
+<li>Column types appear in the output only when <code>bIncludeSchema</code> is <a href="../../literals/true/"><code>.T.</code></a>. Field definitions can then carry type metadata (<code>"S"</code> for string, <code>"N"</code> for numeric, <code>"D"</code> for date), and a definition that only supplies the field name takes the type of the first non-null value in that column. With schema output disabled, generated columns are treated as string columns.</li>
 <li>If row width and field-definition count do not match, the generated output is trimmed to the smaller available column count.</li>
 <li><a href="../../literals/nil/"><code>NIL</code></a> values and blank strings in row data are emitted as empty dataset values.</li>
 </ul>
@@ -4130,7 +4128,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:59:27 UTC">October 7, 2026</span>
   </span>
 
     

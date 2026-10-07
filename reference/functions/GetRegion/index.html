@@ -3509,8 +3509,12 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="look-up-a-region-with-error-handling">Look up a region with error handling<a class="headerlink" href="#look-up-a-region-with-error-handling" title="Permanent link">&para;</a></h3>
-<p>Wraps the lookup in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle the case where the region is not in scope, displaying the content if found or the error description if the region does not exist.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowBanner</span><span class="p">;</span>
+<p>Wraps the lookup in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a> to handle the case where the region is not in scope, displaying the content if found or the error description if the region does not exist. The script defines the <code>WelcomeBanner</code> region with <a href="../../keywords/REGION/"><code>:REGION</code></a>. A missing name raises only when the script defines regions; in a script that defines none, <code>GetRegion</code> returns an empty string.</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:REGION</span><span class="w"> </span><span class="n">WelcomeBanner</span><span class="p">;</span>
+<span class="n">Welcome</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">laboratory</span><span class="w"> </span><span class="n">portal</span>
+<span class="k">:ENDREGION</span><span class="p">;</span>
+
+<span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ShowBanner</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBanner</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
@@ -3530,8 +3534,12 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ShowBanner"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="replace-placeholders-in-region-text">Replace placeholders in region text<a class="headerlink" href="#replace-placeholders-in-region-text" title="Permanent link">&para;</a></h3>
-<p>Reads a template region that contains <code>{USER}</code> and <code>{DATE}</code> placeholders and replaces both with runtime values in a single call, showing how parallel source and destination arrays drive the substitution.</p>
-<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildWelcomeMessage</span><span class="p">;</span>
+<p>Reads a template region that contains <code>{USER}</code> and <code>{DATE}</code> placeholders and replaces both with runtime values in a single call, showing how parallel source and destination arrays drive the substitution. The script defines the <code>WelcomeTemplate</code> region with <a href="../../keywords/REGION/"><code>:REGION</code></a>.</p>
+<div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:REGION</span><span class="w"> </span><span class="n">WelcomeTemplate</span><span class="p">;</span>
+<span class="n">Welcome</span><span class="w"> </span><span class="p">{</span><span class="n">USER</span><span class="p">},</span><span class="w"> </span><span class="n">today</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="p">{</span><span class="n">DATE</span><span class="p">}</span>
+<span class="k">:ENDREGION</span><span class="p">;</span>
+
+<span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildWelcomeMessage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSrc</span><span class="p">,</span><span class="w"> </span><span class="n">aDst</span><span class="p">,</span><span class="w"> </span><span class="n">sMessage</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">aSrc</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"{USER}"</span><span class="p">,</span><span class="w"> </span><span class="s2">"{DATE}"</span><span class="p">};</span>
@@ -3586,7 +3594,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:59:27 UTC">October 7, 2026</span>
   </span>
 
     

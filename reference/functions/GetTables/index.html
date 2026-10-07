@@ -3823,7 +3823,7 @@
 
 <h1 id="gettables">GetTables<a class="headerlink" href="#gettables" title="Permanent link">&para;</a></h1>
 <p>Extracts table names from the <code>FROM</code> portion of a SQL <code>SELECT</code> string.</p>
-<p><code>GetTables</code> performs text parsing on a SQL string and returns the table names it can identify after the <code>FROM</code> clause. The implementation first looks for a <code>SELECT ... FROM</code> pattern, then scans the text up to the first <code>WHERE</code>, <code>GROUP</code>, <code>HAVING</code>, or <code>ORDER</code> keyword and collects table names that appear at the start of the list, after commas, or after <code>JOIN</code>.</p>
+<p><code>GetTables</code> performs text parsing on a SQL string and returns the table names it can identify after the <code>FROM</code> clause. It finds the first <code>SELECT ... FROM</code>, then reads the text up to the first <code>WHERE</code>, <code>GROUP</code>, <code>HAVING</code>, or <code>ORDER</code> keyword and collects table names that appear at the start of the list, after commas, or after <code>JOIN</code>.</p>
 <p>If the input is <a href="../../literals/nil/"><code>NIL</code></a>, empty, or does not match that <code>SELECT ... FROM</code> pattern, the function returns an empty array. It parses query text only. It does not connect to the database, validate whether the tables exist, or resolve aliases.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3856,7 +3856,7 @@
 </tbody>
 </table>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
-<p><strong><a href="../../types/array/">array</a></strong> — Table names found in the <code>FROM</code> portion of the SQL text, one per element. Returns an empty array when the input is <a href="../../literals/nil/"><code>NIL</code></a>, empty, or does not match the <code>SELECT ... FROM</code> pattern. Names with a leading <a href="../../operators/hash/"><code>#</code></a> are returned without the <a href="../../operators/hash/"><code>#</code></a>.</p>
+<p><strong><a href="../../types/array/">array</a></strong> — Table names found in the <code>FROM</code> portion of the SQL text, one per element. Returns an empty array when the input is <a href="../../literals/nil/"><code>NIL</code></a>, empty, or does not match the <code>SELECT ... FROM</code> pattern. Names with a leading <code>#</code> are returned without the <code>#</code>.</p>
 <h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <div class="admonition success">
 <p class="admonition-title">Do</p>
@@ -3927,7 +3927,7 @@
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:FOR</span><span class="w"> </span><span class="n">nIndex</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">:TO</span><span class="w"> </span><span class="nf">ALen</span><span class="p">(</span><span class="n">aTables</span><span class="p">);</span>
-<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">AScan</span><span class="p">(</span><span class="n">aAllowed</span><span class="p">,</span><span class="w"> </span><span class="nf">Lower</span><span class="p">(</span><span class="n">aTables</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="nf">AScanExact</span><span class="p">(</span><span class="n">aAllowed</span><span class="p">,</span><span class="w"> </span><span class="nf">Lower</span><span class="p">(</span><span class="n">aTables</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="w">            </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Disallowed table in query: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">aTables</span><span class="p">[</span><span class="n">nIndex</span><span class="p">]);</span>
 <span class="w">            </span><span class="c1">/* Logs each disallowed table name;</span>
 <span class="w">            </span><span class="n">bValid</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
@@ -3970,7 +3970,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:59:27 UTC">October 7, 2026</span>
   </span>
 
     
