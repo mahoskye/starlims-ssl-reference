@@ -2857,7 +2857,7 @@
 
 <h1 id="email">Email<a class="headerlink" href="#email" title="Permanent link">&para;</a></h1>
 <p>Composes, loads, saves, sends, or queues email messages with attachments and optional signing or encryption.</p>
-<p>Email lets SSL code build a message, send it through SMTP, save it to a message file, load a saved message for later sending, or queue it for outbox delivery. Create it with <code>Email{}</code> when you want methods to return <a href="../../literals/false/"><code>.F.</code></a> and populate <code>Exception</code> instead of raising, or use <code>Email{.F.}</code> when you want failures to raise and be handled with <a href="../../keywords/TRY/"><code>:TRY</code></a> and <a href="../../functions/GetLastSSLError/"><code>GetLastSSLError</code></a>. Before <code>Send</code>, <code>SaveMessage</code>, or <a href="../../functions/SendToOutbox/"><code>SendToOutbox</code></a>, set <code>From</code>, <code>To</code>, <code>Subject</code>, and <code>Body</code>. Before <code>Send</code> or <a href="../../functions/SendToOutbox/"><code>SendToOutbox</code></a>, also set <code>SMTPServerName</code> and <code>SMTPServerPort</code>. SMTP credentials are optional and are only used when <code>SMTPServerUserName</code> is not empty.</p>
+<p>Email lets SSL code build a message, send it through SMTP, save it to a message file, load a saved message for later sending, or queue it for outbox delivery. Create it with <code>Email{}</code> when you want methods to return <a href="../../literals/false/"><code>.F.</code></a> and populate <code>Exception</code> instead of raising, or use <code>Email{.F.}</code> when you want failures to raise and be handled with <a href="../../keywords/TRY/"><code>:TRY</code></a> and <a href="../../functions/GetLastSSLError/"><code>GetLastSSLError</code></a>. Before <code>Send</code>, <code>SaveMessage</code>, or <code>SendToOutbox</code>, set <code>From</code>, <code>To</code>, <code>Subject</code>, and <code>Body</code>. Before <code>Send</code> or <code>SendToOutbox</code>, also set <code>SMTPServerName</code> and <code>SMTPServerPort</code>. SMTP credentials are optional and are only used when <code>SMTPServerUserName</code> is not empty.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When an SSL script needs to send an email message directly through SMTP.</li>
@@ -3028,7 +3028,7 @@
 <td>Sends the current message through SMTP.</td>
 </tr>
 <tr>
-<td><a href="../../functions/SendToOutbox/"><code>SendToOutbox()</code></a></td>
+<td><code>SendToOutbox()</code></td>
 <td><a href="../../types/boolean/">boolean</a></td>
 <td>Queues the current message for later delivery.</td>
 </tr>
@@ -3099,7 +3099,7 @@
 <h3 id="send"><code>Send</code><a class="headerlink" href="#send" title="Permanent link">&para;</a></h3>
 <p>Sends the current or loaded message through the configured SMTP server.</p>
 <p><strong>Returns:</strong> <a href="../../types/boolean/">boolean</a> — <a href="../../literals/true/"><code>.T.</code></a> when the message was sent.</p>
-<h3 id="sendtooutbox"><a href="../../functions/SendToOutbox/"><code>SendToOutbox</code></a><a class="headerlink" href="#sendtooutbox" title="Permanent link">&para;</a></h3>
+<h3 id="sendtooutbox"><code>SendToOutbox</code><a class="headerlink" href="#sendtooutbox" title="Permanent link">&para;</a></h3>
 <p>Queues the current property-based message for later delivery.</p>
 <p><strong>Returns:</strong> <a href="../../types/boolean/">boolean</a> — <a href="../../literals/true/"><code>.T.</code></a> when the message was queued.</p>
 <h3 id="setsigncertificatefromstore"><code>SetSignCertificateFromStore</code><a class="headerlink" href="#setsigncertificatefromstore" title="Permanent link">&para;</a></h3>
@@ -3216,32 +3216,32 @@
 <div class="admonition success">
 <p class="admonition-title">Do</p>
 <ul>
-<li>Set <code>From</code>, <code>To</code>, <code>Subject</code>, and <code>Body</code> before calling <code>Send</code>, <code>SaveMessage</code>, or <a href="../../functions/SendToOutbox/"><code>SendToOutbox</code></a>.</li>
+<li>Set <code>From</code>, <code>To</code>, <code>Subject</code>, and <code>Body</code> before calling <code>Send</code>, <code>SaveMessage</code>, or <code>SendToOutbox</code>.</li>
 <li>Set <code>To</code> to a non-empty array of recipient addresses.</li>
-<li>Set <code>SMTPServerName</code> and <code>SMTPServerPort</code> before calling <code>Send</code> or <a href="../../functions/SendToOutbox/"><code>SendToOutbox</code></a>.</li>
+<li>Set <code>SMTPServerName</code> and <code>SMTPServerPort</code> before calling <code>Send</code> or <code>SendToOutbox</code>.</li>
 <li>Use <code>Email{}</code> when you want non-throwing behavior and plan to inspect <code>oEmail:Exception:Description</code> after a failure.</li>
 <li>Use <code>Email{.F.}</code> inside <a href="../../keywords/TRY/"><code>:TRY</code></a> and handle failures with <a href="../../functions/GetLastSSLError/"><code>GetLastSSLError()</code></a> when the script should stop on email errors.</li>
 <li>Validate attachment paths and certificate inputs before sending or queueing mail.</li>
-<li>Use <a href="../../functions/SendToOutbox/"><code>SendToOutbox</code></a> when delivery should be deferred to later processing.</li>
+<li>Use <code>SendToOutbox</code> when delivery should be deferred to later processing.</li>
 </ul>
 </div>
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
 <li>Assume <code>Email{}</code> raises on failure — it suppresses exceptions by default and returns <a href="../../literals/false/"><code>.F.</code></a> instead.</li>
-<li>Leave <code>To</code> unset or empty before <code>Send</code>, <code>SaveMessage</code>, or <a href="../../functions/SendToOutbox/"><code>SendToOutbox</code></a>.</li>
+<li>Leave <code>To</code> unset or empty before <code>Send</code>, <code>SaveMessage</code>, or <code>SendToOutbox</code>.</li>
 <li>Omit required message fields — the message must include <code>From</code>, <code>Subject</code>, and <code>Body</code> before it can be built.</li>
-<li>Omit <code>SMTPServerName</code> or set <code>SMTPServerPort</code> to <code>0</code> when calling <code>Send</code> or <a href="../../functions/SendToOutbox/"><code>SendToOutbox</code></a> — SMTP validation fails.</li>
+<li>Omit <code>SMTPServerName</code> or set <code>SMTPServerPort</code> to <code>0</code> when calling <code>Send</code> or <code>SendToOutbox</code> — SMTP validation fails.</li>
 <li>Rely on <code>SMTPTimeout</code> or <code>LogSMTP</code> for queued outbox delivery — those settings apply to direct <code>Send</code> behavior, not later outbox processing.</li>
 <li>Pass an invalid certificate store name, an unknown certificate email address, or a missing certificate file — the certificate methods fail and the email cannot be signed or encrypted.</li>
-<li>Expect <code>LoadMessage</code> to populate the editable properties used by <code>SaveMessage</code> or <a href="../../functions/SendToOutbox/"><code>SendToOutbox</code></a> — loaded message content is only reused by <code>Send</code>.</li>
+<li>Expect <code>LoadMessage</code> to populate the editable properties used by <code>SaveMessage</code> or <code>SendToOutbox</code> — loaded message content is only reused by <code>Send</code>.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>LoadMessage</code> and <code>SaveMessage</code> require a non-empty file path.</li>
 <li>If <code>SMTPServerUserName</code> is empty, <code>Send</code> connects without attempting SMTP login.</li>
-<li>After a successful <code>LoadMessage</code>, <code>Send</code> transmits the loaded message content with the current SMTP settings; <code>SaveMessage</code> and <a href="../../functions/SendToOutbox/"><code>SendToOutbox</code></a> always use the current property values, not the loaded content.</li>
+<li>After a successful <code>LoadMessage</code>, <code>Send</code> transmits the loaded message content with the current SMTP settings; <code>SaveMessage</code> and <code>SendToOutbox</code> always use the current property values, not the loaded content.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="send-a-notification-email">Send a notification email<a class="headerlink" href="#send-a-notification-email" title="Permanent link">&para;</a></h3>
@@ -3281,7 +3281,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SendNotificationEmail"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="queue-a-signed-report-for-outbox-delivery">Queue a signed report for outbox delivery<a class="headerlink" href="#queue-a-signed-report-for-outbox-delivery" title="Permanent link">&para;</a></h3>
-<p>Uses <code>Email{.F.}</code> so failures raise exceptions, then wraps the operation in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a>. Signs the message with a <code>.pfx</code> certificate before queuing it with <a href="../../functions/SendToOutbox/"><code>SendToOutbox()</code></a>. Since <code>IgnoreExceptions</code> is <a href="../../literals/false/"><code>.F.</code></a>, certificate load failures propagate to <a href="../../keywords/CATCH/"><code>:CATCH</code></a> rather than silently returning <a href="../../literals/false/"><code>.F.</code></a>.</p>
+<p>Uses <code>Email{.F.}</code> so failures raise exceptions, then wraps the operation in <a href="../../keywords/TRY/"><code>:TRY</code></a>/<a href="../../keywords/CATCH/"><code>:CATCH</code></a>. Signs the message with a <code>.pfx</code> certificate before queuing it with <code>SendToOutbox()</code>. Since <code>IgnoreExceptions</code> is <a href="../../literals/false/"><code>.F.</code></a>, certificate load failures propagate to <a href="../../keywords/CATCH/"><code>:CATCH</code></a> rather than silently returning <a href="../../literals/false/"><code>.F.</code></a>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">QueueSignedReport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oEmail</span><span class="p">,</span><span class="w"> </span><span class="n">bQueued</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
@@ -3292,7 +3292,7 @@
 <span class="w">    </span><span class="n">oEmail</span><span class="p">:</span><span class="n">CC</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"quality@laboratory.com"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">oEmail</span><span class="p">:</span><span class="n">Subject</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Q4 laboratory results"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oEmail</span><span class="p">:</span><span class="n">Body</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"The signed report is attached for review."</span><span class="p">;</span>
-<span class="w">    </span><span class="n">oEmail</span><span class="p">:</span><span class="n">Attachments</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"C:/Reports/Q4Results.pdf"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">oEmail</span><span class="p">:</span><span class="n">Attachments</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"C:\Reports\Q4Results.pdf"</span><span class="p">};</span>
 
 <span class="w">    </span><span class="n">oEmail</span><span class="p">:</span><span class="n">SMTPServerName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"smtp.laboratory.com"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oEmail</span><span class="p">:</span><span class="n">SMTPServerPort</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">587</span><span class="p">;</span>
@@ -3301,8 +3301,8 @@
 <span class="w">    </span><span class="n">oEmail</span><span class="p">:</span><span class="n">SMTPServerUserPassword</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"&lt;smtp-password&gt;"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
-<span class="w">        </span><span class="n">oEmail</span><span class="p">:</span><span class="nf">SetSignCertificateFromPath</span><span class="p">(</span><span class="s2">"C:/Certificates/report-signing.pfx"</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">"Secret123"</span><span class="p">);</span>
+<span class="w">        </span><span class="n">oEmail</span><span class="p">:</span><span class="nf">SetSignCertificateFromPath</span><span class="p">(</span><span class="s2">"C:\Certificates\report-signing.pfx"</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"&lt;certificate-password&gt;"</span><span class="p">);</span>
 
 <span class="w">        </span><span class="n">bQueued</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">oEmail</span><span class="p">:</span><span class="nf">SendToOutbox</span><span class="p">();</span>
 
@@ -3357,7 +3357,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:50:27 UTC">October 7, 2026</span>
   </span>
 
     

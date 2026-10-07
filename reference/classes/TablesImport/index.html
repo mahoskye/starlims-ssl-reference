@@ -2659,7 +2659,7 @@
 
 <h1 id="tablesimport">TablesImport<a class="headerlink" href="#tablesimport" title="Permanent link">&para;</a></h1>
 <p>Loads one imported table at a time from a folder structure and returns it as a <a href="../CDataTable/"><code>CDataTable</code></a>.</p>
-<p>Create <code>TablesImport{sFolder}</code> with the root folder that contains your imported tables, then call <code>GetTable(sName)</code> to load a specific table. <code>GetTable(sName)</code> looks for the table file at <code>&lt;sFolder&gt;/&lt;sName&gt;/&lt;sName&gt;.txt</code>, tries XML first, then falls back to the text-table importer. Imported columns are returned writable, non-auto-incrementing, and allowed to contain null values.</p>
+<p>Create <code>TablesImport{sFolder}</code> with the root folder that contains your imported tables, then call <code>GetTable(sName)</code> to load a specific table. <code>GetTable(sName)</code> looks for the table file at <code>&lt;sFolder&gt;\&lt;sName&gt;\&lt;sName&gt;.txt</code>. The file can contain dataset XML or a text-table export.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need to load reference or setup tables from an import folder.</li>
@@ -2737,7 +2737,7 @@
 </table>
 <h3 id="gettable"><code>GetTable</code><a class="headerlink" href="#gettable" title="Permanent link">&para;</a></h3>
 <p>Loads one table from the import folder.</p>
-<p>It reads <code>&lt;sFolder&gt;/&lt;sName&gt;/&lt;sName&gt;.txt</code>, tries XML first, then falls back to the text-table importer. On success, the returned table is named after <code>sName</code>. If <code>IncludeORIGREC</code> is <a href="../../literals/false/"><code>.F.</code></a>, the <code>ORIGREC</code> column is removed when present.</p>
+<p>It reads <code>&lt;sFolder&gt;\&lt;sName&gt;\&lt;sName&gt;.txt</code>, which can contain dataset XML or a text-table export. On success, the returned table is named after <code>sName</code>. If <code>IncludeORIGREC</code> is <a href="../../literals/false/"><code>.F.</code></a>, the <code>ORIGREC</code> column is removed when present.</p>
 <table>
 <thead>
 <tr>
@@ -2752,7 +2752,7 @@
 <td><code>sName</code></td>
 <td><a href="../../types/string/">string</a></td>
 <td>yes</td>
-<td>Table name. The class looks for <code>&lt;sFolder&gt;/&lt;sName&gt;/&lt;sName&gt;.txt</code>.</td>
+<td>Table name. The class looks for <code>&lt;sFolder&gt;\&lt;sName&gt;\&lt;sName&gt;.txt</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -2760,7 +2760,7 @@
 <p><strong>Raises:</strong>
 - <code>sName argument cannot be null.</code> (runtime message reads <code>TName arg. can not be null</code>)</p>
 <h2 id="inheritance">Inheritance<a class="headerlink" href="#inheritance" title="Permanent link">&para;</a></h2>
-<p><strong>Base class:</strong> <code>EnterpriseImpExBase</code></p>
+<p><strong>Base class:</strong> <a href="../../types/object/"><code>object</code></a></p>
 <h2 id="best-practices">Best practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
 <div class="admonition success">
 <p class="admonition-title">Do</p>
@@ -2780,7 +2780,7 @@
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>GetTable()</code> only checks the conventional import path <code>&lt;sFolder&gt;/&lt;sName&gt;/&lt;sName&gt;.txt</code>.</li>
+<li><code>GetTable()</code> only checks the conventional import path <code>&lt;sFolder&gt;\&lt;sName&gt;\&lt;sName&gt;.txt</code>.</li>
 <li><code>NullAsBlank</code> is writable on the class, but <code>GetTable()</code> does not use it.</li>
 <li>Passing <a href="../../literals/nil/"><code>NIL</code></a> for <code>sName</code> raises an error instead of returning <a href="../../literals/nil/"><code>NIL</code></a> and setting <code>ErrMsg</code>.</li>
 <li><code>IncludeORIGREC</code> only affects the returned table when the imported data actually contains an <code>ORIGREC</code> column.</li>
@@ -2791,7 +2791,7 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">LoadSampleTypes</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sFolder</span><span class="p">,</span><span class="w"> </span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">oImport</span><span class="p">,</span><span class="w"> </span><span class="n">oTable</span><span class="p">,</span><span class="w"> </span><span class="n">sError</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sFolder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:/STARLIMS/Import/LookupTables"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sFolder</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\STARLIMS\Import\LookupTables"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sTableName</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"sampletypes"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oImport</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TablesImport</span><span class="p">{</span><span class="n">sFolder</span><span class="p">};</span>
@@ -2851,7 +2851,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:50:27 UTC">October 7, 2026</span>
   </span>
 
     

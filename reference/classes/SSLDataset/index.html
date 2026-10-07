@@ -2725,7 +2725,7 @@
 
 <h1 id="ssldataset">SSLDataset<a class="headerlink" href="#ssldataset" title="Permanent link">&para;</a></h1>
 <p>Represents dataset results so SSL code can work with query output as an object, convert the first table to an array, export XML, or pass the dataset handle to APIs that expect one.</p>
-<p><code>SSLDataset</code> is usually obtained from <a href="../../functions/GetSSLDataset/"><code>GetSSLDataset</code></a> or from <a href="../../functions/RunDS/"><code>RunDS</code></a> with the <code>"ssldataset"</code> return type. An empty <code>SSLDataset{}</code> starts with no loaded data. <code>ToArray()</code> reads only the first table and returns an empty array when no table is available. <a href="../../functions/ToXml/"><code>ToXml()</code></a> exports the current dataset as XML with schema and an XML declaration. <code>ToDataSet()</code> returns the current dataset handle in object form for APIs that specifically expect it.</p>
+<p><code>SSLDataset</code> is usually obtained from <a href="../../functions/GetSSLDataset/"><code>GetSSLDataset</code></a> or from <a href="../../functions/RunDS/"><code>RunDS</code></a> with the <code>"ssldataset"</code> return type. An empty <code>SSLDataset{}</code> starts with no loaded data. <code>ToArray()</code> reads only the first table and returns an empty array when no table is available. <code>ToXml()</code> exports the current dataset as XML with schema and an XML declaration. <code>ToDataSet()</code> returns the current dataset handle in object form for APIs that specifically expect it.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need the first table of a dataset as a plain SSL array.</li>
@@ -2772,7 +2772,7 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../../functions/ToXml/"><code>ToXml</code></a></td>
+<td><code>ToXml</code></td>
 <td><a href="../../types/string/">string</a></td>
 <td>Serializes the current dataset to XML with schema and an XML declaration.</td>
 </tr>
@@ -2788,7 +2788,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="toxml"><a href="../../functions/ToXml/"><code>ToXml</code></a><a class="headerlink" href="#toxml" title="Permanent link">&para;</a></h3>
+<h3 id="toxml"><code>ToXml</code><a class="headerlink" href="#toxml" title="Permanent link">&para;</a></h3>
 <p>Serializes the current dataset to XML.</p>
 <p><strong>Returns:</strong> <a href="../../types/string/">string</a> — XML for the current dataset, including schema and an XML declaration.</p>
 <h3 id="toarray"><code>ToArray</code><a class="headerlink" href="#toarray" title="Permanent link">&para;</a></h3>
@@ -2813,15 +2813,15 @@
 <p class="admonition-title">Don't</p>
 <ul>
 <li>Assume <code>ToArray()</code> includes every table in a multi-table dataset. It only returns the first table.</li>
-<li>Treat <code>bNullAsBlank</code> as optional in <code>SSLDataset{xData, xNullAsBlank}</code>. The wrapping constructor expects both arguments.</li>
-<li>Call <a href="../../functions/ToXml/"><code>ToXml()</code></a> on an empty <code>SSLDataset{}</code>. Load data first.</li>
-<li>Use <code>ToDataSet()</code> unless the next API specifically needs a dataset handle. <code>ToArray()</code> or <a href="../../functions/ToXml/"><code>ToXml()</code></a> are usually clearer in SSL code.</li>
+<li>Treat <code>bNullAsBlank</code> as optional in <code>SSLDataset{oData, bNullAsBlank}</code>. The wrapping constructor expects both arguments.</li>
+<li>Call <code>ToXml()</code> on an empty <code>SSLDataset{}</code>. Load data first.</li>
+<li>Use <code>ToDataSet()</code> unless the next API specifically needs a dataset handle. <code>ToArray()</code> or <code>ToXml()</code> are usually clearer in SSL code.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The <code>bNullAsBlank</code> setting affects <code>ToArray()</code> output, not the underlying dataset itself.</li>
-<li><a href="../../functions/ToXml/"><code>ToXml()</code></a> requires loaded dataset content. An empty <code>SSLDataset{}</code> does not provide a safe XML export.</li>
+<li><code>ToXml()</code> requires loaded dataset content. An empty <code>SSLDataset{}</code> does not provide a safe XML export.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="read-the-first-table-as-rows">Read the first table as rows<a class="headerlink" href="#read-the-first-table-as-rows" title="Permanent link">&para;</a></h3>
@@ -2852,7 +2852,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ReviewRecentTasks"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="wrap-a-dataset-handle-before-exporting-xml">Wrap a dataset handle before exporting XML<a class="headerlink" href="#wrap-a-dataset-handle-before-exporting-xml" title="Permanent link">&para;</a></h3>
-<p>Uses the two-argument constructor to wrap an existing dataset handle from <a href="../../functions/RunDS/"><code>RunDS</code></a>, controlling null handling with <code>bNullAsBlank</code>, then exports the result to XML with <a href="../../functions/ToXml/"><code>ToXml()</code></a>.</p>
+<p>Uses the two-argument constructor to wrap an existing dataset handle from <a href="../../functions/RunDS/"><code>RunDS</code></a>, controlling null handling with <code>bNullAsBlank</code>, then exports the result to XML with <code>ToXml()</code>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportPendingOrdersXml</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oData</span><span class="p">,</span><span class="w"> </span><span class="n">oDataset</span><span class="p">,</span><span class="w"> </span><span class="n">sXml</span><span class="p">;</span>
 
@@ -2902,7 +2902,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:50:27 UTC">October 7, 2026</span>
   </span>
 
     

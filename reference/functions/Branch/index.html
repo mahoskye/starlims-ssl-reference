@@ -3545,8 +3545,8 @@
 
 <h1 id="branch">Branch<a class="headerlink" href="#branch" title="Permanent link">&para;</a></h1>
 <p>Transfers control to a label in the current procedure.</p>
-<p><code>Branch</code> requires exactly one argument. If that argument is a string literal, SSL uses that literal text as the branch target. If it is any other expression, SSL evaluates it, converts the result to a string, and compares that text against the labels registered in the current procedure. If a computed target does not match any label, execution continues with the next statement.</p>
-<p>For normal label declarations such as <a href="../../keywords/LABEL/"><code>:LABEL CLEANUP;</code></a>, the target text must match the stored label text, so the usual form is <code>Branch("LABEL CLEANUP")</code>. Forward references are supported within the same procedure because labels are collected before code generation. When <code>Branch</code> is used inside a <a href="../../keywords/TRY/"><code>:TRY</code></a> or <a href="../../keywords/CATCH/"><code>:CATCH</code></a> region, SSL leaves that protected region before transferring control.
+<p><code>Branch</code> requires exactly one argument. If that argument is a string literal, SSL uses that literal text as the branch target. If it is any other expression, SSL evaluates it, converts the result to a string, and compares that text against the labels in the current procedure. If a computed target does not match any label, execution continues with the next statement.</p>
+<p>For normal label declarations such as <a href="../../keywords/LABEL/"><code>:LABEL CLEANUP;</code></a>, the target text must match the label as written after the colon, so the usual form is <code>Branch("LABEL CLEANUP")</code>. You can branch to a label that appears later in the same procedure. When <code>Branch</code> is used inside a <a href="../../keywords/TRY/"><code>:TRY</code></a> or <a href="../../keywords/CATCH/"><code>:CATCH</code></a> region, SSL leaves that protected region before transferring control.
 <code>Branch</code> does not return a useful value.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3574,7 +3574,7 @@
 <td>any</td>
 <td>yes</td>
 <td>—</td>
-<td>Target label text. A string literal is used directly as the target text. Any other expression is evaluated and converted to a string before SSL compares it to the labels registered in the current procedure.</td>
+<td>Target label text. A string literal is used directly as the target text. Any other expression is evaluated and converted to a string before SSL compares it to the labels in the current procedure.</td>
 </tr>
 </tbody>
 </table>
@@ -3607,7 +3607,7 @@
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
-<li>Pass plain label names such as <code>"CLEANUP"</code> for a normal <a href="../../keywords/LABEL/"><code>:LABEL CLEANUP;</code></a> target. The text must match the stored label name exactly.</li>
+<li>Pass plain label names such as <code>"CLEANUP"</code> for a normal <a href="../../keywords/LABEL/"><code>:LABEL CLEANUP;</code></a> target. The text must match the label exactly as written after the colon.</li>
 <li>Use <code>Branch</code> as a substitute for ordinary <a href="../../keywords/IF/"><code>:IF</code></a>, <a href="../../keywords/FOR/"><code>:FOR</code></a>, <a href="../../keywords/WHILE/"><code>:WHILE</code></a>, or <a href="../../keywords/RETURN/"><code>:RETURN</code></a> flow when structured control is sufficient.</li>
 <li>Assume a computed target will raise an error when it does not match. A computed miss simply falls through to the next statement.</li>
 </ul>
@@ -3684,7 +3684,7 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">SaveBatch</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">,</span><span class="w"> </span><span class="n">bCleanup</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sBatchID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"B-100"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sBatchID</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
 <span class="w">    </span><span class="n">bCleanup</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
@@ -3737,7 +3737,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:50:27 UTC">October 7, 2026</span>
   </span>
 
     

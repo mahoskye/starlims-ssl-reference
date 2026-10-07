@@ -4193,8 +4193,6 @@
 
 <h1 id="addcoldelimiters">AddColDelimiters<a class="headerlink" href="#addcoldelimiters" title="Permanent link">&para;</a></h1>
 <p>Qualify each column in an array as <code>table.column</code> with database-specific identifier delimiters.</p>
-<p>AddColDelimiters updates <code>aCols</code> in place. For each element, it builds a value in the form <code>table.column</code>, wrapping both parts with the delimiter characters for the database identified by <code>sDSN</code>.</p>
-<p>If <code>sDSN</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the function uses empty delimiters. If <code>aCols</code> is <a href="../../literals/nil/"><code>NIL</code></a> or <code>sTable</code> is <a href="../../literals/nil/"><code>NIL</code></a>, the function leaves the array unchanged and returns no value. The function trims <code>sTable</code> before building the qualified names.</p>
 <div class="admonition warning">
 <p class="admonition-title">Not callable from SSL</p>
 <p>On STARLIMS v11, every call to <code>AddColDelimiters</code> from SSL code fails to compile with <code>Compile-time error: … Invalid prototype for built-in function: AddColDelimiters</code>, whatever arguments are passed. Sixteen argument shapes were tested, from no arguments to four. Build qualified names with <a href="../AddNameDelimiters/"><code>AddNameDelimiters</code></a> instead, as in the example below.</p>
@@ -4222,7 +4220,7 @@
 <td><code>sDSN</code></td>
 <td><a href="../../types/string/">string</a></td>
 <td>no</td>
-<td><code>""</code></td>
+<td>—</td>
 <td>Data source name used to determine delimiter rules.</td>
 </tr>
 <tr>
@@ -4230,19 +4228,19 @@
 <td><a href="../../types/array/">array</a></td>
 <td>yes</td>
 <td>—</td>
-<td>Array of column names to update in place. Each element is replaced with a qualified name.</td>
+<td>Array of column names to qualify.</td>
 </tr>
 <tr>
 <td><code>sTable</code></td>
 <td><a href="../../types/string/">string</a></td>
 <td>yes</td>
 <td>—</td>
-<td>Table name used to qualify each column. The function trims this value before using it.</td>
+<td>Table name used to qualify each column.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
-<p><strong>none</strong> — No return value. The function updates <code>aCols</code> directly.</p>
+<p><strong>none</strong> — Calls from SSL do not compile, so there is no result to use.</p>
 <h2 id="exceptions">Exceptions<a class="headerlink" href="#exceptions" title="Permanent link">&para;</a></h2>
 <table data-ssl-table="exceptions"><colgroup><col><col></colgroup>
 <thead>
@@ -4326,7 +4324,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:50:27 UTC">October 7, 2026</span>
   </span>
 
     

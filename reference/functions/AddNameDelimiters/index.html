@@ -4215,7 +4215,7 @@
 
 <h1 id="addnamedelimiters">AddNameDelimiters<a class="headerlink" href="#addnamedelimiters" title="Permanent link">&para;</a></h1>
 <p>Wrap a name in database-specific delimiters.</p>
-<p>AddNameDelimiters returns <code>sName</code> wrapped in the identifier delimiters used by the database identified by <code>sDSN</code>. If <code>sDSN</code> is omitted or <a href="../../literals/nil/"><code>NIL</code></a>, it uses the delimiters of the default connection. If <code>sName</code> is <a href="../../literals/nil/"><code>NIL</code></a>, it also uses an empty string.</p>
+<p>AddNameDelimiters returns <code>sName</code> wrapped in the identifier delimiters used by the database identified by <code>sDSN</code>. If <code>sDSN</code> is omitted or <a href="../../literals/nil/"><code>NIL</code></a>, it uses the delimiters of the default connection. If <code>sName</code> is <a href="../../literals/nil/"><code>NIL</code></a>, it is treated as an empty string.</p>
 <p>Before adding delimiters, the function trims <code>sName</code>. If <code>sDSN</code> is empty, the function returns the trimmed name without any delimiter characters. A non-empty <code>sDSN</code> must name a database connection configured in your environment, such as the default <code>DATABASE</code> connection. Any other name raises an error.</p>
 <p>The function always returns a string result. It does not modify its inputs.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
@@ -4245,8 +4245,8 @@
 <td><code>sDSN</code></td>
 <td><a href="../../types/string/">string</a></td>
 <td>no</td>
-<td><code>""</code></td>
-<td>Name of the database connection whose delimiter rules apply, such as <code>"DATABASE"</code>. An empty value produces no delimiter characters. A name that is not a configured connection raises an error.</td>
+<td>default connection</td>
+<td>Name of the database connection whose delimiter rules apply, such as <code>"DATABASE"</code>. Omitted or <a href="../../literals/nil/"><code>NIL</code></a> uses the default connection's delimiters; <code>""</code> produces no delimiter characters. A name that is not a configured connection raises an error.</td>
 </tr>
 <tr>
 <td><code>sName</code></td>
@@ -4280,7 +4280,7 @@
 <ul>
 <li>Use AddNameDelimiters for individual table, view, or column names.</li>
 <li>Pass the name of the connection where the SQL will run, such as <code>"DATABASE"</code> for the default connection.</li>
-<li>Use this together with <a href="../AddColDelimiters/"><code>AddColDelimiters</code></a> when you need both individual identifiers and qualified column arrays.</li>
+<li>To qualify <code>table.column</code> names, apply AddNameDelimiters to the table and to each column (<a href="../AddColDelimiters/"><code>AddColDelimiters</code></a> can't be called from SSL).</li>
 <li>Pass the raw identifier value and let the function trim outer spaces before adding delimiters.</li>
 </ul>
 </div>
@@ -4356,7 +4356,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:50:27 UTC">October 7, 2026</span>
   </span>
 
     

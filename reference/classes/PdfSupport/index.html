@@ -2886,7 +2886,7 @@
 <li>When merging pages from multiple PDFs or images into a single, consolidated PDF is required.</li>
 <li>When enforcing security and permissions on PDF files, such as password protection or restricting printing/extraction.</li>
 <li>When automating the printing of PDFs to specific printers via Adobe Reader.</li>
-<li>When you need granular control over annotations, forms, and document assembly within a PDF workflow.</li>
+<li>When you need to set per-permission flags (annotations, form filling, page assembly) on a saved PDF.</li>
 </ul>
 <h2 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">&para;</a></h2>
 <h3 id="pdfsupport_1"><code>PdfSupport{}</code><a class="headerlink" href="#pdfsupport_1" title="Permanent link">&para;</a></h3>
@@ -3365,8 +3365,8 @@
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">AddTextOverlayToImage</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPdf</span><span class="p">,</span><span class="w"> </span><span class="n">sImagePath</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">,</span><span class="w"> </span><span class="n">sLabel</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sImagePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:/Documents/InspectionPhoto.jpg"</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:/Documents/LabeledPhoto.pdf"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sImagePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Documents\InspectionPhoto.jpg"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Documents\LabeledPhoto.pdf"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sLabel</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"PASS - Inspected"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oPdf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">PdfSupport</span><span class="p">{};</span>
@@ -3392,12 +3392,12 @@
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">,</span><span class="w"> </span><span class="n">sUserPass</span><span class="p">,</span><span class="w"> </span><span class="n">sOwnerPass</span><span class="p">,</span><span class="w"> </span><span class="n">sMsg</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">nPageCount</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sImage1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/documents/report_header.png"</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sImage2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/documents/report_footer.png"</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sExistingPdf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/documents/reference.pdf"</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"/documents/final_report.pdf"</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sUserPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"UserPass2024"</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sOwnerPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"OwnerPass2024"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sImage1</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Documents\report_header.png"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sImage2</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Documents\report_footer.png"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sExistingPdf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Documents\reference.pdf"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Documents\final_report.pdf"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sUserPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"&lt;user-password&gt;"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOwnerPass</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"&lt;owner-password&gt;"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oPdf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">PdfSupport</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">AddPageFromImage</span><span class="p">(</span><span class="n">sImage1</span><span class="p">);</span>
@@ -3424,19 +3424,19 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"AssembleSecureMultiSourcePdf"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs (page count depends on merged sources):</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>Assembled PDF has 5 pages and is print-protected
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Assembled PDF has &lt;n&gt; pages and is print-protected
 </code></pre></div>
 <h3 id="protect-and-print-a-pdf-report">Protect and print a PDF report<a class="headerlink" href="#protect-and-print-a-pdf-report" title="Permanent link">&para;</a></h3>
 <p>Opens an existing PDF, draws a title on page 1, then applies <code>Protect</code>, which sets a 128-bit security profile. The <code>PermitModifyDocument</code> override shows that individual permissions can be tightened after <code>Protect</code>. The final <code>Print</code> call sends the saved file path to Adobe Reader. It does not print the in-memory document.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GenerateSecureReport</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sPdfPath</span><span class="p">,</span><span class="w"> </span><span class="n">sPrinterName</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sPdfPath</span><span class="p">,</span><span class="w"> </span><span class="s2">"C:/Reports/QuarterlyReport.pdf"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sPdfPath</span><span class="p">,</span><span class="w"> </span><span class="s2">"C:\Reports\QuarterlyReport.pdf"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">sPrinterName</span><span class="p">,</span><span class="w"> </span><span class="s2">"HP_LaserJet_5000"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPdf</span><span class="p">,</span><span class="w"> </span><span class="n">sAdobePath</span><span class="p">,</span><span class="w"> </span><span class="n">sReportTitle</span><span class="p">,</span><span class="w"> </span><span class="n">sOutputPath</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">sAdobePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:/Program Files/Adobe/Acrobat DC/Acrobat/Acrobat.exe"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sAdobePath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.exe"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sReportTitle</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Q4 Analytical Results"</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:/Reports/Secure_QuarterlyReport.pdf"</span><span class="p">;</span>
+<span class="w">    </span><span class="n">sOutputPath</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Reports\Secure_QuarterlyReport.pdf"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oPdf</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">PdfSupport</span><span class="p">{};</span>
 <span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Open</span><span class="p">(</span><span class="n">sPdfPath</span><span class="p">);</span>
@@ -3444,7 +3444,7 @@
 <span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">SetTextStyle</span><span class="p">(</span><span class="s2">"Arial"</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="s2">"Bold"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Black"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">AddTextOnPage</span><span class="p">(</span><span class="n">sReportTitle</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Protect</span><span class="p">(</span><span class="s2">"SecureReport123"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Protect</span><span class="p">(</span><span class="s2">"&lt;pdf-password&gt;"</span><span class="p">);</span>
 <span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="n">PermitModifyDocument</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
 <span class="w">    </span><span class="n">oPdf</span><span class="p">:</span><span class="nf">Save</span><span class="p">(</span><span class="n">sOutputPath</span><span class="p">);</span>
 
@@ -3485,7 +3485,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:50:27 UTC">October 7, 2026</span>
   </span>
 
     

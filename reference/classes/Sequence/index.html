@@ -2769,7 +2769,7 @@
 
 <h1 id="sequence">Sequence<a class="headerlink" href="#sequence" title="Permanent link">&para;</a></h1>
 <p>Creates and manages a database sequence for a table field on Oracle or SQL Server.</p>
-<p><code>Sequence</code> gives SSL scripts a compact API for creating, resetting, dropping, and querying a database sequence. You construct it with a platform name, table name, field name, and a prefix, passing <code>""</code> as the prefix when you do not need one. The object derives a sequence name from those values, uses <code>StartWith</code> when creating the sequence on both platforms, and uses <code>CacheSize</code> when creating the sequence on SQL Server.</p>
+<p><code>Sequence</code> gives SSL scripts a compact API for creating, resetting, dropping, and querying a database sequence. You construct it with a platform name, table name, field name, and a suffix (the <code>sPrefix</code> argument), passing <code>""</code> when you do not need one. The object derives a sequence name from those values, uses <code>StartWith</code> when creating the sequence on both platforms, and uses <code>CacheSize</code> when creating the sequence on SQL Server.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When a script needs a database sequence for a specific table field.</li>
@@ -2812,7 +2812,7 @@
 <td><code>sPrefix</code></td>
 <td><a href="../../types/string/">string</a></td>
 <td>yes</td>
-<td>Suffix added to the derived sequence name. Pass <code>""</code> for no suffix. With <code>""</code>, the sequence is named <code>C_&lt;TABLE&gt;_&lt;FIELD&gt;</code>, for example <code>C_SAMPLE_SAMPLE_ID</code> for table <code>sample</code> and field <code>sample_id</code>.</td>
+<td>Despite its name, <code>sPrefix</code> is appended as a suffix: <code>C_&lt;TABLE&gt;_&lt;FIELD&gt;_&lt;SPREFIX&gt;</code>. Pass <code>""</code> for no suffix. With <code>""</code>, the sequence is named <code>C_&lt;TABLE&gt;_&lt;FIELD&gt;</code>, for example <code>C_SAMPLE_SAMPLE_ID</code> for table <code>sample</code> and field <code>sample_id</code>.</td>
 </tr>
 </tbody>
 </table>
@@ -2962,7 +2962,7 @@
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>SequenceName</code> is derived from the table name and field name, both converted to uppercase, and always starts with <code>C_</code>. When a prefix is supplied, it is appended in uppercase after the field name.</li>
+<li><code>SequenceName</code> is derived from the table name and field name, both converted to uppercase, and always starts with <code>C_</code>. When <code>sPrefix</code> is not empty, it is appended in uppercase after the field name, separated by <code>_</code>.</li>
 <li><code>Create()</code> handles create failures by showing a message rather than exposing a dedicated return value.</li>
 <li><code>Drop()</code>, <code>Exists</code>, <code>NextValue</code>, and <code>Reset()</code> still depend on the target database being reachable and the sequence being valid in that database.</li>
 <li>Oracle and SQL Server do not reset sequences the same way. Oracle reset recreates the sequence, while SQL Server resets the existing sequence in place.</li>
@@ -3065,7 +3065,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:50:27 UTC">October 7, 2026</span>
   </span>
 
     

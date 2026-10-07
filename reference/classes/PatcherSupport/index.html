@@ -2786,7 +2786,7 @@
 <td><code>LogFilePath</code></td>
 <td><a href="../../types/string/">string</a></td>
 <td>read-write</td>
-<td>Current log file path. Setting it attempts to create or replace the file and resets the active trace listeners to write to that file.</td>
+<td>Current log file path. Setting it creates or replaces the file and sends the trace log there.</td>
 </tr>
 <tr>
 <td><code>ResultTable</code></td>
@@ -2819,7 +2819,7 @@
 </table>
 <p><strong>Returns:</strong> <a href="../../types/object/">object</a> — Filtered result table, or <a href="../../literals/nil/"><code>NIL</code></a> when comparison cannot be performed.</p>
 <h3 id="connecttoexternalsystem"><code>ConnectToExternalSystem</code><a class="headerlink" href="#connecttoexternalsystem" title="Permanent link">&para;</a></h3>
-<p>Attempts to connect to another STARLIMS system using the supplied URL, username, and password. The URL is converted to the generic service endpoint before login is attempted.</p>
+<p>Attempts to connect to another STARLIMS system using the supplied URL, username, and password.</p>
 <table>
 <thead>
 <tr>
@@ -2877,7 +2877,7 @@
 <li>Assume <code>Compare()</code> returns every row from the source table — unchanged rows are removed from the current result set.</li>
 <li>Treat <code>ConnectToExternalSystem()</code> failures as thrown errors — the method reports failure with <a href="../../literals/false/"><code>.F.</code></a>.</li>
 <li>Expect <code>GetDataFromWholeDictionary()</code> to clear earlier rows first — it appends collected metadata to the existing <code>ResultTable</code>.</li>
-<li>Assume setting <code>LogFilePath</code> always succeeds — invalid or inaccessible paths are recorded in <code>InternalErrors</code> and the trace listeners are only updated on success.</li>
+<li>Assume setting <code>LogFilePath</code> always succeeds — invalid or inaccessible paths are recorded in <code>InternalErrors</code>, and the trace log is not redirected to them.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
@@ -2925,7 +2925,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"CompareDictionaryMetadata"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="connect-to-another-system-before-collecting-metadata">Connect to another system before collecting metadata<a class="headerlink" href="#connect-to-another-system-before-collecting-metadata" title="Permanent link">&para;</a></h3>
-<p>Sets <code>LogFilePath</code> to create a trace file for the run, then calls <code>ConnectToExternalSystem()</code> before attempting to collect dictionary metadata. If connection fails, <code>InternalErrors</code> is checked for any captured error detail.</p>
+<p>Sets <code>LogFilePath</code> to create a trace file for the run, then calls <code>ConnectToExternalSystem()</code> before attempting to collect dictionary metadata. If connection fails, the example also checks <code>InternalErrors</code>, which at that point can only hold an error from the earlier <code>LogFilePath</code> assignment.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">CollectExternalDictionaryMetadata</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oPatcher</span><span class="p">,</span><span class="w"> </span><span class="n">bConnected</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sUrl</span><span class="p">,</span><span class="w"> </span><span class="n">sUser</span><span class="p">,</span><span class="w"> </span><span class="n">sPassword</span><span class="p">;</span>
@@ -2979,7 +2979,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:50:27 UTC">October 7, 2026</span>
   </span>
 
     
