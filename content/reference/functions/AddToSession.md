@@ -44,9 +44,9 @@ AddToSession(sKey, vValue)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sKey` is [`NIL`](../literals/nil.md). | `Argument: key cannot be null.` |
+| `sKey` is [`NIL`](../literals/nil.md). | `Argument: key cannot be null. AddToSession().` |
 | `vValue` is an object. | `Objects are not supported in session - use Serialize/Deserialize methods.` |
-| `vValue` is an array. | `Arrays are not supported in session - use ToXml/FromXml methods.` |
+| `vValue` is an array. | `Arrays are not supported in session - use ToXml/FromXml methods` |
 
 ## Best practices
 

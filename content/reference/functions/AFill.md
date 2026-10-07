@@ -46,11 +46,11 @@ AFill(aTarget, vValue, [nStart], [nCount])
 
 | Trigger | Exception message |
 | --- | --- |
-| `aTarget` is [`NIL`](../literals/nil.md). | `Target array cannot be null.` |
-| `nStart` is not a whole number. | `Starting index must be an integer value.` |
-| `nCount` is not a whole number. | `Count must be an integer value.` |
-| `nStart` is outside the valid array range. | `Starting index cannot be less than one or greater than total number of elements in the array.` |
-| `nCount < 0`. | `Count cannot be less than zero.` |
+| `aTarget` is [`NIL`](../literals/nil.md). | `AFill(): target array cannot be null.` |
+| `nStart` is not a whole number. | `AFill(): starting index must be an integer value.` |
+| `nCount` is not a whole number. | `AFill(): count must be an integer value.` |
+| `nStart` is outside the valid array range. | `AFill(): starting index cannot be less than one or greater than total number of elements in the array.` |
+| `nCount < 0`. | `AFill(): count cannot be less than zero.` |
 
 ## Best practices
 

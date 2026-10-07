@@ -44,7 +44,7 @@ IsNumeric(sNumber, [bAllowHex])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sNumber` is [`NIL`](../literals/nil.md) or not a string. | `Value cannot be null. (Parameter 'sNumber')` |
+| `sNumber` is [`NIL`](../literals/nil.md) or not a string. | `Value cannot be null.` |
 
 ## Best practices
 

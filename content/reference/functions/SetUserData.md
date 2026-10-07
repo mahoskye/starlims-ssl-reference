@@ -45,7 +45,7 @@ SetUserData(sUserName)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sUserName` is [`NIL`](../literals/nil.md), not a string, or empty. | `Argument: sUserName must be a non-empty string.` |
+| `sUserName` is [`NIL`](../literals/nil.md), not a string, or empty. | `Argument: userName must be a non-empty string.` |
 
 ## Best practices
 

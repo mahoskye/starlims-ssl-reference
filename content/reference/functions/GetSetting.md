@@ -41,7 +41,7 @@ GetSetting(sName)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sName` is [`NIL`](../literals/nil.md). | `Argument name cannot be null.` |
+| `sName` is [`NIL`](../literals/nil.md). | `Argument name cannot be null. GetSetting()` |
 
 ## Best practices
 

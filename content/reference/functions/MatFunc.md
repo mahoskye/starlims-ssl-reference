@@ -44,8 +44,8 @@ MatFunc(sFunctionName, nNumber)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sFunctionName` is [`NIL`](../literals/nil.md). | `sFunctionName cannot be null.` |
-| `nNumber` is [`NIL`](../literals/nil.md). | `nNumber cannot be null.` |
+| `sFunctionName` is [`NIL`](../literals/nil.md). | `Value cannot be null.` |
+| `nNumber` is [`NIL`](../literals/nil.md). | `Value cannot be null.` |
 | `sFunctionName` is not a supported operation name. | `Invalid Mathematical function call <sFunctionName>` |
 
 ## Best practices

@@ -43,7 +43,7 @@ ToScientific(nNumber, [nDecimalPlaces])
 | Trigger | Exception message |
 | --- | --- |
 | `nNumber` is not numeric. | `Argument 'nNumber' must be a numeric.` |
-| `nDecimalPlaces` is not an integer. | `Argument 'nDecimalPlaces' must be an integer.` |
+| `nDecimalPlaces` is not an integer. | `Argument 'decimalPlaces' must be an integer.` |
 
 ## Best practices
 

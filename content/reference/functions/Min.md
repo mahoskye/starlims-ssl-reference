@@ -47,7 +47,7 @@ Min(vValue1, vValue2)
 | --- | --- |
 | `vValue1` or `vValue2` is [`NIL`](../literals/nil.md). | `Argument cannot be null.` |
 | `vValue1` and `vValue2` are different types. | `Function arguments type must match.` |
-| Both arguments are the same type but not a supported type (string, number, or date). | `Min function arguments type must match.` |
+| Both arguments are the same type but not a supported type (string, number, or date). | `Min function arrguments type must match.` |
 
 ## Best practices
 

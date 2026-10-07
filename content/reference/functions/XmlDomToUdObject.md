@@ -51,7 +51,7 @@ Returned objects follow these rules:
 
 | Trigger | Exception message |
 | --- | --- |
-| `sXml` is [`NIL`](../literals/nil.md), empty, or not a string. | `Argument 'sXml' cannot be empty.` |
+| `sXml` is [`NIL`](../literals/nil.md), empty, or not a string. | `Argument 'xml' cannot be empty` |
 | `sXml` is malformed XML. | A runtime error from the XML loader. |
 
 ## Best practices

@@ -47,8 +47,8 @@ XmlExportSql(sSql, sFile, [sDb], [aSqlParams], [sTable])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sSql` is [`NIL`](../literals/nil.md). | `Sql parameter cannot be null.` |
-| `sFile` is [`NIL`](../literals/nil.md). | `File name parameter cannot be null.` |
+| `sSql` is [`NIL`](../literals/nil.md). | `XmlExportSql(): sql parameter cannot be null.` |
+| `sFile` is [`NIL`](../literals/nil.md). | `XmlExportSql(): file name parameter cannot be null.` |
 
 ## Best practices
 

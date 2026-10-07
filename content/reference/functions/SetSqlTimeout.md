@@ -44,8 +44,8 @@ SetSqlTimeout([nTimeout], [sConnection])
 
 | Trigger | Exception message |
 | --- | --- |
-| `nTimeout` is supplied but is not an integer-valued number. | `Argument 'nTimeout' must be an integer.` |
-| `sConnection` is supplied but is not a string. | `Argument 'sConnection' must be a string.` |
+| `nTimeout` is supplied but is not an integer-valued number. | `Argument 'timeout' must be an integer.` |
+| `sConnection` is supplied but is not a string. | `Argument 'connection' must be a string.` |
 
 ## Best practices
 

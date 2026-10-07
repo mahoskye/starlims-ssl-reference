@@ -45,8 +45,8 @@ StrTran(source, searchFor, replaceWith)
 
 | Trigger | Exception message |
 | --- | --- |
-| `source` is [`NIL`](../literals/nil.md). | `Argument source cannot be null.` |
-| `searchFor` is [`NIL`](../literals/nil.md). | `Argument searchFor cannot be null.` |
+| `source` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. StrTran().` |
+| `searchFor` is [`NIL`](../literals/nil.md). | `Argument searchFor cannot be null. StrTran().` |
 
 ## Best practices
 

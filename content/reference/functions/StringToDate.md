@@ -47,8 +47,8 @@ StringToDate(sDateString, sDateFormat)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sDateString` is [`NIL`](../literals/nil.md). | `Argument: sDateString cannot be null.` |
-| `sDateFormat` is [`NIL`](../literals/nil.md). | `Argument: sDateFormat cannot be null.` |
+| `sDateString` is [`NIL`](../literals/nil.md). | `Argument: date cannot be null.` |
+| `sDateFormat` is [`NIL`](../literals/nil.md). | `Argument: format cannot be null.` |
 
 ## Best practices
 

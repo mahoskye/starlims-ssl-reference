@@ -48,8 +48,8 @@ BuildString2(aTarget, [sLineDelimiter], [sColDelimiter])
 
 | Trigger | Exception message |
 | --- | --- |
-| `aTarget` is [`NIL`](../literals/nil.md). | `Target array cannot be null.` |
-| Any top-level element is [`NIL`](../literals/nil.md) or not an array. | `Target array cannot be null.` |
+| `aTarget` is [`NIL`](../literals/nil.md). | `BuildString2(): target array cannot be null.` |
+| Any top-level element is [`NIL`](../literals/nil.md) or not an array. | `BuildString(): target array cannot be null.` |
 
 ## Best practices
 

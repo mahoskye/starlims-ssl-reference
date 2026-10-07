@@ -49,10 +49,10 @@ GetNETDataSet(sCommandString, [sConnectionName], [aValues], [sTableName], [bRetu
 
 | Trigger | Exception message |
 | --- | --- |
-| `sCommandString` is not a string. | `Argument sCommandString must be a non-empty string.` |
+| `sCommandString` is not a string. | `Argument commandString must be a non-empty string` |
 | `sCommandString` is an empty string. | `The command string is null.` |
-| `aValues` is multi-dimensional. | `The current array has more than 1 dimension.` |
-| The query contains more `?` placeholders than supplied values. | `Parameters count mismatch.` |
+| `aValues` is multi-dimensional. | `The current array has more than 1 dimmension.` |
+| The query contains more `?` placeholders than supplied values. | `Parameters count mismatch` |
 | The provider for `sConnectionName` cannot be resolved. | `The provider name: <sConnectionName> not found.` |
 | The database collection is unavailable. | `The internal database collection is null.` |
 | The database engine name cannot be determined. | `Cannot determine the database engine name.` |

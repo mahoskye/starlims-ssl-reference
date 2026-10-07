@@ -45,8 +45,8 @@ ExtractZip(sZipFileName, sTargetDirectory, [sFileFilter], [sPassword])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sZipFileName` is [`NIL`](../literals/nil.md). | `Null argument passed to ExtractZip()`. |
-| `sTargetDirectory` is [`NIL`](../literals/nil.md). | `Null argument passed to ExtractZip()`. |
+| `sZipFileName` is [`NIL`](../literals/nil.md). | `Null argument passed to CreateZip()` |
+| `sTargetDirectory` is [`NIL`](../literals/nil.md). | `Null argument passed to CreateZip()` |
 
 ## Best practices
 

@@ -41,8 +41,8 @@ SetDefaultConnection(sDefaultConnection)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sDefaultConnection` is [`NIL`](../literals/nil.md). | `Argument: sDefaultConnection cannot be null` |
-| `sDefaultConnection` is not a string. | `Argument: sDefaultConnection must be a non-null string` |
+| `sDefaultConnection` is [`NIL`](../literals/nil.md). | `Argument: defualtConnection cannot be null` |
+| `sDefaultConnection` is not a string. | `Argument: defualtConnection must be a non-null string` |
 
 ## Best practices
 

@@ -47,7 +47,7 @@ UpdLong([sConnectionName], sTableName, sColumnName, sWhereCondition, sInputFileP
 
 | Trigger | Exception message |
 | --- | --- |
-| `bIsCompressed` is [`.T.`](../literals/true.md). | `(bIsCompressed = TRUE) - not implemented yet.` |
+| `bIsCompressed` is [`.T.`](../literals/true.md). | `UpdLong - (isCompressed = TRUE) - not implemented yet.` |
 | `sTableName`, `sColumnName`, `sWhereCondition`, or `sInputFilePath` is [`NIL`](../literals/nil.md). | `Function parameters are incorrect.` |
 | The input path is not allowed by whitelist settings. | `Access to folder/file <sInputFilePath> is denied.` |
 | The input file does not exist. | `File <sInputFilePath> cannot be found.` |

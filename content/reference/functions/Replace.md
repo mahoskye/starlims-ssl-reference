@@ -46,9 +46,9 @@ Replace(source, searchFor, replaceWith)
 
 | Trigger | Exception message |
 | --- | --- |
-| `source` is [`NIL`](../literals/nil.md). | `Argument source cannot be null.` |
-| `searchFor` is [`NIL`](../literals/nil.md). | `Argument searchFor cannot be null.` |
-| `replaceWith` is [`NIL`](../literals/nil.md). | `Argument replaceWith cannot be null.` |
+| `source` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. Replace().` |
+| `searchFor` is [`NIL`](../literals/nil.md). | `Argument searchFor cannot be null. Replace().` |
+| `replaceWith` is [`NIL`](../literals/nil.md). | `Argument replaceWith cannot be null. Replace().` |
 | `searchFor` matches again starting inside a previous match, such as `Replace("aaa", "aa", "X")`. | `Value must be positive.` followed by `Parameter name: count` on a second line |
 
 ## Best practices

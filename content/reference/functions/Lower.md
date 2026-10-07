@@ -42,7 +42,7 @@ Lower(sSource)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sSource` is [`NIL`](../literals/nil.md). | `Argument sSource cannot be null.` |
+| `sSource` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. LLower().` |
 
 ## Best practices
 

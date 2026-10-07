@@ -41,7 +41,7 @@ GetFileVersion(sFileName)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sFileName` is [`NIL`](../literals/nil.md). | `Argument cannot be null.` |
+| `sFileName` is [`NIL`](../literals/nil.md). | `Argument cannot be null. GetFileVersion()` |
 
 ## Best practices
 

@@ -48,7 +48,7 @@ TableFldLst([sConnectionName], sTableName)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sTableName` is [`NIL`](../literals/nil.md). | `The table name or field name parameter is null.` |
+| `sTableName` is [`NIL`](../literals/nil.md). | `The table name or field name parameter is null` |
 | `sConnectionName` or `sTableName` is an empty string. | `The input parameters are incorrect.` |
 
 ## Best practices

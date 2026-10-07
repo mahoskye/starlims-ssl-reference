@@ -53,11 +53,11 @@ LSelect(sCommandString, [aFieldList], [sConnectionName], [aArrayOfValues], [bNul
 
 | Trigger | Exception message |
 | --- | --- |
-| `aFieldList` is supplied. | `aFieldList != NULL - Not implemented yet.` |
-| `sCommandString` is [`NIL`](../literals/nil.md) or empty. | `The command string is null.` |
+| `aFieldList` is supplied. | `fieldList != NULL - Not implemented yet.` |
+| `sCommandString` is [`NIL`](../literals/nil.md) or empty. | `The command string is null` |
 | `sConnectionName` does not match a configured connection. | `The provider name: <sConnectionName> not found.` |
 | The connection cannot resolve a database engine. | `Cannot determine the database engine name.` |
-| `aArrayOfValues` contains nested arrays. | `The current array has more than 1 dimension.` |
+| `aArrayOfValues` contains nested arrays. | `The current array has more than 1 dimmension.` |
 | The number of `?` placeholders does not match the number of supplied values. | `Parameters count mismatch` |
 
 ## Best practices

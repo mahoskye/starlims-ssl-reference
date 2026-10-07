@@ -43,7 +43,7 @@ LToHex(vSource)
 
 | Trigger | Exception message |
 | --- | --- |
-| `vSource` is a non-empty unsupported type, a non-integer numeric value, or outside the supported numeric range. | `Argument: source must be a string or an integer.` followed by `Parameter name: source` on a second line |
+| `vSource` is a non-empty unsupported type, a non-integer numeric value, or outside the supported numeric range. | `Argument: source must be a string or an integer.` |
 
 ## Best practices
 

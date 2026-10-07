@@ -20,6 +20,15 @@ Element pages draw from a common set of sections — the exact mix varies by cat
 - **Code examples** demonstrating common and advanced usage
 - **Related elements** for cross-reference
 
+## Reading the Exceptions tables
+
+The **Exception message** column shows the error text as the runtime gives it, which is what `GetLastSSLError():Description` returns inside [`:CATCH`](keywords/CATCH.md). Keep these points in mind:
+
+- Messages often start with the function name, such as `AAdd(): target array cannot be null.`. They name arguments the way the runtime does (`date`), not the way the parameter tables do (`dDate`).
+- Many argument errors add a second line, `Parameter name: <name>`, with the runtime's name for the argument. The tables show only the first line.
+- `<…>` and `{…}` mark parts of a message that change from call to call, such as a value, a type or a connection name.
+- Some messages keep the runtime's own wording, including its spelling, so that you can match them exactly.
+
 ## Sections
 
 - [Functions](functions/index.md) — 330 built-in functions

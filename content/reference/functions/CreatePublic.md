@@ -42,8 +42,8 @@ CreatePublic(sVarName, [vVarValue])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sVarName` is [`NIL`](../literals/nil.md). | `Argument sVarName cannot be null.` |
-| `sVarName` is not a string. | `Argument sVarName must be a string.` |
+| `sVarName` is [`NIL`](../literals/nil.md). | `Argument varName cannot be null. CreatePublic().` |
+| `sVarName` is not a string. | `Argument varName must be a string. CreatePublic().` |
 
 ## Best practices
 

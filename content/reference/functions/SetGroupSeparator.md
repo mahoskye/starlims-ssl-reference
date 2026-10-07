@@ -42,8 +42,8 @@ SetGroupSeparator(sGroupSep)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sGroupSep` is [`NIL`](../literals/nil.md). | `Argument: sGroupSep cannot be null.` |
-| `sGroupSep` is empty or not exactly one character. | `Wrong value for argument: sGroupSep` |
+| `sGroupSep` is [`NIL`](../literals/nil.md). | `Argument: groupSep cannot be null.` |
+| `sGroupSep` is empty or not exactly one character. | `Wrong value for argument: decimalSep` |
 
 ## Best practices
 

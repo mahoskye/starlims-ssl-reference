@@ -53,9 +53,9 @@ SetInternalC(oTarget, sCollectionName, vValue, vArg1, [vArg2], [vArg3], [vArg4],
 
 | Trigger | Exception message |
 | --- | --- |
-| `oTarget` is [`NIL`](../literals/nil.md). | `Argument oTarget cannot be null.` |
-| `sCollectionName` is [`NIL`](../literals/nil.md). | `Argument sCollectionName cannot be null.` |
-| `vArg1` is [`NIL`](../literals/nil.md). | `Argument vArg1 cannot be null.` |
+| `oTarget` is [`NIL`](../literals/nil.md). | `Argument o cannot be null. SetInternalC()` |
+| `sCollectionName` is [`NIL`](../literals/nil.md). | `Argument collectionName cannot be null. SetInternalC()` |
+| `vArg1` is [`NIL`](../literals/nil.md). | `Argument arg1 cannot be null. SetInternalC()` |
 
 ## Best practices
 

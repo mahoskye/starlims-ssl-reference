@@ -41,8 +41,8 @@ _NOT(nOperand)
 
 | Trigger | Exception message |
 | --- | --- |
-| `nOperand` is not a whole number. | `SSLDouble: _NOT : <value> : invalid operand. Expected integers.` |
-| `_NOT` is called on a non-numeric type. | `the operator/method: _NOT is not implemented on type: <type>. Operand: <operand>` |
+| `nOperand` is not a whole number. | `Run-time error: SSLDouble: _NOT : <value> : invalid operand. Expected integers.` |
+| `_NOT` is called on a non-numeric type. | `Run-time error: the operator/method: _NOT is not implemented on type: <type>. Operand: <operand>` |
 
 ## Best practices
 

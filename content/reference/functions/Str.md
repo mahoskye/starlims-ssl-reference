@@ -43,7 +43,7 @@ Str(nNumber, [nLength], [nDecimals])
 
 | Trigger | Exception message |
 | --- | --- |
-| `nNumber` is [`NIL`](../literals/nil.md). | `Argument nNumber cannot be null.` |
+| `nNumber` is [`NIL`](../literals/nil.md). | `Argument number cannot be null. Str().` |
 
 ## Best practices
 

@@ -42,9 +42,9 @@ _AND(nValue1, nValue2)
 
 | Trigger | Exception message |
 | --- | --- |
-| `_AND` is called on a non-numeric type. | `the operator/method: _AND is not implemented on type: {type}. Operand: {operand}` |
-| Either operand is not a whole number. | `SSLDouble: {value} _AND {v}: invalid operand(s). Expected integers.` |
-| `nValue2` is [`NIL`](../literals/nil.md). | `SSLDouble - invalid operand: (of type null) for operator: _AND.` |
+| `_AND` is called on a non-numeric type. | `Run-time error: the operator/method: _AND is not implemented on type: {type}. Operand: {operand}` |
+| Either operand is not a whole number. | `Run-time error: SSLDouble: {value} _AND {v}: invalid operand(s). Expected integers.` |
+| `nValue2` is [`NIL`](../literals/nil.md). | `Run-time error: SSLDouble - invalid operand:  (of type null) for operator: _AND.` |
 
 ## Best practices
 

@@ -45,7 +45,7 @@ IsTable(sConnectionName, sTableName)
 | Trigger | Exception message |
 | --- | --- |
 | `sTableName` is [`NIL`](../literals/nil.md). | `The table name parameter is null` |
-| `sConnectionName` or `sTableName` is an empty string. | `The input parameters are incorrect.` |
+| `sConnectionName` or `sTableName` is an empty string. | `The imput parameters are incorrect.` |
 
 ## Best practices
 

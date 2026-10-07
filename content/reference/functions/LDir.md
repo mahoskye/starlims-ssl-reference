@@ -48,7 +48,7 @@ LDir(sFilePattern, [sAttributes])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sFilePattern` is [`NIL`](../literals/nil.md) or omitted. | `Second parameter cannot be null.` |
+| `sFilePattern` is [`NIL`](../literals/nil.md) or omitted. | `DosSupport(): second parameter cannot be null.` |
 | The specified path is not in the allowed folders. | `Access to folder/file {folderOrFile} is denied. If system needs access to this folder/file please ask the System Administrator to add the item to WhitelistFolders setting in the configuration file.` |
 
 ## Best practices

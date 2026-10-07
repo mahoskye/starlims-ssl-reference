@@ -42,8 +42,8 @@ DOY(dDate)
 
 | Trigger | Exception message |
 | --- | --- |
-| `dDate` is [`NIL`](../literals/nil.md) or an empty date. | `dDate argument cannot be null` |
-| `dDate` is not a date value. | `dDate must be of date type` |
+| `dDate` is [`NIL`](../literals/nil.md) or an empty date. | `Argument date cannot be null. DoY()` |
+| `dDate` is not a date value. | `Argument: date must be of date type` |
 
 ## Best practices
 

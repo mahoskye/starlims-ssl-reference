@@ -42,7 +42,7 @@ Integer(nValue)
 
 | Trigger | Exception message |
 | --- | --- |
-| `nValue` is [`NIL`](../literals/nil.md). | `Value cannot be null. (Parameter 'nValue')` |
+| `nValue` is [`NIL`](../literals/nil.md). | `Value cannot be null.` |
 
 ## Best practices
 

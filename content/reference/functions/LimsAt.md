@@ -45,8 +45,8 @@ LimsAt(sSubString, sSource, [nOffset])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sSubString` is [`NIL`](../literals/nil.md). | `Argument sSubString cannot be null.` |
-| `sSource` is [`NIL`](../literals/nil.md). | `Argument sSource cannot be null.` |
+| `sSubString` is [`NIL`](../literals/nil.md). | `Argument subString cannot be null. LimsAt().` |
+| `sSource` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. LimsAt().` |
 
 ## Best practices
 

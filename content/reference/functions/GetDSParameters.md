@@ -42,7 +42,7 @@ GetDSParameters(sDsName)
 
 | Trigger | Exception message |
 | --- | --- |
-| `sDsName` is [`NIL`](../literals/nil.md). | `Argument cannot be null.` |
+| `sDsName` is [`NIL`](../literals/nil.md). | `argument cannot be null. GetDSParameters().` |
 | `sDsName` cannot be resolved to a known data source. | `There is no info for data source: {sDsName}` |
 | `sDsName` is not a GUID and does not contain a `.` separating category and data source name. | `Data Source name should be: categ_name.ds_name` |
 

@@ -42,10 +42,10 @@ DelArray(aTarget, nIndex)
 
 | Trigger | Exception message |
 | --- | --- |
-| `aTarget` is [`NIL`](../literals/nil.md). | `Target array cannot be null.` |
-| `nIndex` is [`NIL`](../literals/nil.md). | `Element index cannot be null.` |
+| `aTarget` is [`NIL`](../literals/nil.md). | `DelArray(): target array cannot be null.` |
+| `nIndex` is [`NIL`](../literals/nil.md). | `DelArray(): element index cannot be null.` |
 | `nIndex` is not an integer-valued number. | `Element index must be an integer value.` |
-| `nIndex` is less than `1`. | `Element index cannot be less than one.` |
+| `nIndex` is less than `1`. | `DelArray(): element index cannot be less than one.` |
 
 ## Best practices
 

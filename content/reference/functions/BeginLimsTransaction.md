@@ -46,7 +46,7 @@ BeginLimsTransaction([sConnectionName], [sIsoLevel])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sConnectionName` is provided as a non-string value. | `Argument 'sConnectionName' must be a string` |
+| `sConnectionName` is provided as a non-string value. | `Argument 'friendlyName' must be a string` |
 | The named connection does not exist. | `The provider name: {sConnectionName} not found.` |
 | No database collection is available. | `The internal database collection is null` |
 | The database provider fails to begin the transaction. | `The transaction cannot be started {message}` |

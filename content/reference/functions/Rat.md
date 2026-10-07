@@ -44,8 +44,8 @@ Rat(subStr, source)
 
 | Trigger | Exception message |
 | --- | --- |
-| `subStr` is [`NIL`](../literals/nil.md). | `Argument subStr cannot be null.` |
-| `source` is [`NIL`](../literals/nil.md). | `Argument source cannot be null.` |
+| `subStr` is [`NIL`](../literals/nil.md). | `Argument subStr cannot be null. RAt().` |
+| `source` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. RAt().` |
 
 ## Best practices
 

@@ -65,8 +65,8 @@ For `DIR`, `vDbg` can be a string or numeric attribute filter. The filter affect
 
 | Trigger | Exception message |
 | --- | --- |
-| `sCmd` is [`NIL`](../literals/nil.md). | `Command parameter cannot be null` |
-| `sPrm` is [`NIL`](../literals/nil.md) for commands other than `WORK`, `WORKDIR`, and `CURRENTDRIVE`. | `Second parameter cannot be null` |
+| `sCmd` is [`NIL`](../literals/nil.md). | `DosSupport(): command parameter cannot be null.` |
+| `sPrm` is [`NIL`](../literals/nil.md) for commands other than `WORK`, `WORKDIR`, and `CURRENTDRIVE`. | `DosSupport(): second parameter cannot be null.` |
 | `sCmd` is not a supported command. | `Unknown option - {command}` |
 | `DIR`, `MD`, `CD`, `RD`, or `ISDIR` targets a non-whitelisted path. | `Access to folder/file {path} is denied` |
 

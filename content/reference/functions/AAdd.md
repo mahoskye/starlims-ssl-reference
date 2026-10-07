@@ -42,7 +42,7 @@ AAdd(aTarget, vElement)
 
 | Trigger | Exception message |
 | --- | --- |
-| `aTarget` is [`NIL`](../literals/nil.md). | `Target array cannot be null.` |
+| `aTarget` is [`NIL`](../literals/nil.md). | `AAdd(): target array cannot be null.` |
 
 ## Best practices
 

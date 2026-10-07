@@ -42,9 +42,9 @@ Replicate(source, count)
 
 | Trigger | Exception message |
 | --- | --- |
-| `source` is [`NIL`](../literals/nil.md). | `Argument source cannot be null.` |
-| `count` is [`NIL`](../literals/nil.md). | `Argument count cannot be null.` |
-| `count` is negative. | `Argument count cannot be less than zero.` |
+| `source` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. Replicate().` |
+| `count` is [`NIL`](../literals/nil.md). | `Argument count cannot be null. Replicate().` |
+| `count` is negative. | `Argument count cannot be less then zero. Replicate().` |
 
 ## Best practices
 

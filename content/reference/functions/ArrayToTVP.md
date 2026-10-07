@@ -61,12 +61,12 @@ ArrayToTVP(aValues, [sDataType], [sConnectionName])
 
 | Trigger | Exception message |
 | --- | --- |
-| `aValues` is not an array. | `Argument 'aValues' must be an array` |
-| `aValues` has at least one element and the first element is an array. | `Argument 'aValues' must be a one-dimensional array` |
+| `aValues` is not an array. | `Argument 'values' must be an array` |
+| `aValues` has at least one element and the first element is an array. | `Argument 'values' must be a one-dimensional array` |
 | `sConnectionName` names an unknown database. | `The provider name: {sConnectionName} not found.` |
 | Database resolution is not available. | `The internal database collection is null` |
 | The resolved database platform is not `SQL` or `ORACLE`. | `Unsupported database: {dbType}` |
-| `sDataType` or inferred content selects an unsupported TVP type. | `Unsupported data type: Double` or `Unsupported data type: Date` |
+| `sDataType` or inferred content selects an unsupported TVP type. | `Unsupported data type: <type>` |
 | Non-[`NIL`](../literals/nil.md) elements do not all match the chosen TVP type. | `Mixed values are not supported` |
 | An integer TVP receives a non-integer numeric element. | `Only integer numbers are supported for TVP. Index: <N>` |
 

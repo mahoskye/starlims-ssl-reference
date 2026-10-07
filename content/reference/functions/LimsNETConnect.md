@@ -55,7 +55,7 @@ LimsNETConnect([sAssembly], [sTypeName], [aArgs], [bAsStatic])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sAssembly` is not a string. | `Argument 'sAssembly' must be a string.` |
+| `sAssembly` is not a string. | `Argument 'assembly' must be a string. LimsNETConnect().` |
 | `sTypeName` is not a string. | `Argument 'sTypeName' must be a string.` |
 | `aArgs` is not an array. | `Argument 'aArgs' must be an array.` |
 | A `.dll` path cannot be found. | `File: <path> doesn't exist.` |

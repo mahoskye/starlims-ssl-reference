@@ -90,7 +90,7 @@ For `SETATTR`, only the first non-space character is used. The supported values 
 | `vFileIdentifier` is neither a string nor a number. | `Request argument does not contain a string/numeric!` |
 | `sRequest` is [`NIL`](../literals/nil.md). | `Request is mandatory!` |
 | `sRequest` is not a string. | `Request argument does not contain a string!` |
-| `sEncoding` is provided but is not a string. | `Argument: <encoding> must be of type string.` |
+| `sEncoding` is provided but is not a string. | `Argument: <encoding> must be of type string. FileSupport().` |
 | `sRequest` does not match any supported request family. | `Invalid request provided!` |
 | The byte count for `READ` is negative. | `Read size expected positive or 0` |
 | `CHECK`, `SETATTR`, `GETATTR`, `CREATE`, `OPEN`, `COPY`, `DELETE`, `MOVE`, `RENAME`, or `DIR` targets a path outside the configured whitelist. | `Access to folder/file {path} is denied. If system needs access to this folder/file please ask the System Administrator to add the item to WhitelistFolders setting in the configuration file.` |

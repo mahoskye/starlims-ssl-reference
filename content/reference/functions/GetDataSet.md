@@ -51,8 +51,8 @@ The returned XML always includes the XML header. If you need control over header
 
 | Trigger | Exception message |
 | --- | --- |
-| `sCommandString` is [`NIL`](../literals/nil.md). | `The command string is null.` |
-| `aValues` is multi-dimensional. | `The current array has more than 1 dimension.` |
+| `sCommandString` is [`NIL`](../literals/nil.md). | `The command string is null` |
+| `aValues` is multi-dimensional. | `The current array has more than 1 dimmension.` |
 | The query contains more `?` placeholders than supplied values. | `Parameters count mismatch` |
 | The database engine name cannot be determined for the default connection. | `Cannot determine the database engine name.` |
 | The resolved default connection is not configured. | `The provider name: {name} not found.` |

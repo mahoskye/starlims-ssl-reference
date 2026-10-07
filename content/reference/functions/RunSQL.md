@@ -46,7 +46,7 @@ RunSQL(sCommandString, [sConnectionName], [aValues])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sCommandString` is [`NIL`](../literals/nil.md) or empty. | `The command string is null.` |
+| `sCommandString` is [`NIL`](../literals/nil.md) or empty. | `The command string is null` |
 | SSL cannot resolve the connection's DBMS. | `Cannot determine the database engine name.` |
 | `sConnectionName` does not identify a configured connection. | `The provider name: <sConnectionName> not found.` |
 | `aValues` is a multidimensional array. | `The current array has more than 1 dimension.` |

@@ -42,8 +42,8 @@ Decompress(sSource, [bFromFile])
 
 | Trigger | Exception message |
 | --- | --- |
-| `sSource` is [`NIL`](../literals/nil.md). | `Argument 'sSource' cannot be null.` |
-| `sSource` is empty or not a string value. | `Argument 'sSource' must be a non-empty string.` |
+| `sSource` is [`NIL`](../literals/nil.md). | `Argument 'source' cannot be null` |
+| `sSource` is empty or not a string value. | `Argument 'source' must be a non-empty string` |
 
 ## Best practices
 

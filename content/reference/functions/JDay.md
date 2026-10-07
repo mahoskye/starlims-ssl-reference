@@ -50,7 +50,7 @@ JDay([dDate])
 
 | Trigger | Exception message |
 | --- | --- |
-| `dDate` is not a date value. | `Argument: dDate must be of date type` |
+| `dDate` is not a date value. | `Argument: date must be of date type` |
 
 ## Best practices
 

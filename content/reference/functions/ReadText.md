@@ -46,7 +46,7 @@ ReadText(sFileName, [nCharsToRead], [sEncoding])
 | Trigger | Exception message |
 | --- | --- |
 | `sFileName` is [`NIL`](../literals/nil.md) or empty. | `Value cannot be null.` |
-| `sEncoding` is not a string. | `Argument: <encoding> must be of type string.` |
+| `sEncoding` is not a string. | `Argument: <encoding> must be of type string. ReadText().` |
 | The path is outside the configured whitelist folders. | `Access to folder/file <path> is denied. If system needs access to this folder/file please ask the System Administrator to add the item to WhitelistFolders setting in the configuration file.` |
 | The file cannot be opened or the encoding name is unsupported. | The underlying file I/O or encoding lookup raises an error. |
 
