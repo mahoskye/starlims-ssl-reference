@@ -51,6 +51,7 @@ StrSrch(subStr, source, [indexOrOccurence], [flag])
 | `subStr` is [`NIL`](../literals/nil.md). | `Argument subStr cannot be null. StrSrch().` |
 | `source` is [`NIL`](../literals/nil.md). | `Argument source cannot be null. StrSrch().` |
 | `indexOrOccurence` is out of range for the selected mode. | `StrSrch(): A negative [indexOrOccurence] value is not allowed.` |
+| In start-position mode, `indexOrOccurence` is past the end of `source`. | `Index was out of range. Must be non-negative and less than the size of the collection.` |
 
 ## Best practices
 
@@ -69,6 +70,8 @@ StrSrch(subStr, source, [indexOrOccurence], [flag])
 ## Caveats
 
 - In start-position mode, passing `0` raises the same out-of-range error used for negative values.
+- In occurrence mode, `0` returns `0`.
+- Matching is case-sensitive: `StrSrch("A", "banana")` returns `0`.
 
 ## Examples
 

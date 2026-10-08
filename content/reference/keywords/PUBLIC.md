@@ -1,6 +1,6 @@
 ---
 title: "PUBLIC"
-summary: "Declares public variables shared down the call stack — visible to the declaring scope and every scope it calls."
+summary: "Declares public variables shared across the running program — reachable from any procedure until the program context clears them."
 id: ssl.keyword.public
 element_type: keyword
 doc_status: published
@@ -11,9 +11,9 @@ starlims:
 
 # PUBLIC
 
-Declares public variables shared down the call stack — visible to the declaring scope and every scope it calls.
+Declares public variables shared across the running program — reachable from any procedure until the program context clears them.
 
-The `:PUBLIC` keyword declares one or more names as public variables. Like [`:DECLARE`](DECLARE.md), it is a regular statement, so SSL allows it anywhere a statement is valid in a script or procedure body. Each declared public variable starts with the empty string `""` and can then be read or updated by the declaring scope and any scope invoked beneath it on the call stack — public variables are call-stack scoped, not program-global.
+The `:PUBLIC` keyword declares one or more names as public variables. Like [`:DECLARE`](DECLARE.md), it is a regular statement, so SSL allows it anywhere a statement is valid in a script or procedure body. Each declared public variable starts with the empty string `""` and can then be read or updated from any procedure in the running program, including procedures called after the declaring procedure has returned.
 
 ## Behavior
 

@@ -144,7 +144,7 @@ C7082BA7C83D38CAE98421BE494753931F8B52A8
 1 element: -2147483648
 ```
 
-The sentinel is what keeps an `IN (...)` query valid on MS SQL Server. Without it, an empty array would give you no placeholders and the statement would end in `IN ()`, which is a syntax error. After `PrepareArrayForIn`, the array always has at least one element, so the placeholder list has at least one `?`. The sentinel value matches no real row, so the query runs and returns no rows. Replacing `""` works the same way: a blank entry can no longer match rows whose column holds an empty string.
+The sentinel is what keeps an `IN (...)` query valid on MS SQL Server. Without it, an empty array would give you no placeholders and the statement would end in `IN ()`, which is a syntax error. After `PrepareArrayForIn`, the array always has at least one element, so the placeholder list has at least one `?`. The sentinel value matches no real row, so the query runs and returns no rows. This applies when you build the `?` list yourself: [`SQLExecute`](../reference/functions/SQLExecute.md)'s `?name?` substitution accepts an empty array and runs the query, which then returns no rows. Replacing `""` works the same way: a blank entry can no longer match rows whose column holds an empty string.
 
 Build the placeholder list from the prepared array:
 

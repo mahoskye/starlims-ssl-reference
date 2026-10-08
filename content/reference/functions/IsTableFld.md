@@ -53,12 +53,12 @@ IsTableFld(sConnectionName, sTableName, sFieldName)
 
 !!! success "Do"
     - Check the result before generating SQL, importing data, or reading optional fields.
-    - Use [`NIL`](../literals/nil.md) for `sConnectionName` only when you intentionally want the default connection.
+    - Leave `sConnectionName` empty only when you intentionally want the default connection.
     - Use [`IsTable`](IsTable.md) for table-only checks and [`TableFldLst`](TableFldLst.md) when you need all field names.
 
 !!! failure "Don't"
     - Assume invalid input returns [`.F.`](../literals/false.md). [`NIL`](../literals/nil.md) and empty-string cases can raise errors instead.
-    - Treat `""` as the same as omitting `sConnectionName`. Only [`NIL`](../literals/nil.md) falls back to the default connection.
+    - Treat `""` as the same as omitting `sConnectionName`. Only an omitted or [`NIL`](../literals/nil.md) connection falls back to the default connection.
     - Pass an empty `sFieldName` expecting a table-only check. Use [`IsTable`](IsTable.md) for that case.
 
 ## Caveats
@@ -100,13 +100,13 @@ DoProc("GetSamplesWithOptionalDate");
 
 ### Use the default connection explicitly
 
-Pass [`NIL`](../literals/nil.md) as the connection name to target the default database connection. The two [`UsrMes`](UsrMes.md) calls are mutually exclusive; only one fires depending on whether the field is found.
+Leave the connection argument empty to target the default database connection. The two [`UsrMes`](UsrMes.md) calls are mutually exclusive; only one fires depending on whether the field is found.
 
 ```ssl
 :PROCEDURE CheckAuditCommentField;
     :DECLARE bHasComment;
 
-    bHasComment := IsTableFld(NIL, "audit_log", "comment_text");
+    bHasComment := IsTableFld(, "audit_log", "comment_text");
 
     :IF bHasComment;
         UsrMes("comment_text is available in the default connection");
