@@ -65,6 +65,7 @@ GetRegionEx(sRegionName, [aSourceValues], [aDestinationValues], [oLocalRegions])
 ## Caveats
 
 - Replacements are applied in order, so overlapping source values can affect the final result.
+- No SSL value is documented here as a compatible `oLocalRegions` map. Without one, `GetRegionEx` looks up regions the same way as [`GetRegion`](GetRegion.md).
 
 ## Examples
 
@@ -128,36 +129,6 @@ DoProc("BuildInvoiceHeader");
 
 ```text
 Invoice for Acme Corp dated <date>
-```
-
-### Override region lookup with a local region map
-
-Passes a caller-supplied local region map as `oLocalRegions` so that the local map is checked first; if the name is found there it overrides the global scope, otherwise the fallback lookup proceeds normally. The [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) guards against missing region names in both sources.
-
-```ssl
-:PROCEDURE ResolveImportRegion;
-	:PARAMETERS sSampleID, oLocalRegions;
-	:DECLARE aDst, aSrc, oErr, sRegionText;
-
-	aSrc := {"{SAMPLE}"};
-	aDst := {sSampleID};
-
-	:TRY;
-		sRegionText := GetRegionEx("ImportTemplate", aSrc, aDst, oLocalRegions);
-		UsrMes(sRegionText);
-		/* Logs the resolved import template text;
-	:CATCH;
-		oErr := GetLastSSLError();
-		ErrorMes("ResolveImportRegion failed: " + oErr:Description);
-		/* Logs on error: import lookup failed;
-		:RETURN "";
-	:ENDTRY;
-
-	:RETURN sRegionText;
-:ENDPROC;
-
-/* Usage;
-DoProc("ResolveImportRegion", {"LAB-001"});
 ```
 
 ## Related

@@ -36,7 +36,7 @@ GetFromFtp(sServerNameOrIP, [sRemoteDirectory], sRemoteFileName, [sLocalFileName
 | `sServerNameOrIP` | [string](../types/string.md) | yes | — | FTP or SFTP server host name or IP address. |
 | `sRemoteDirectory` | [string](../types/string.md) | no | — | Remote folder that contains the file. Pass an empty string when the file is in the server's default or root location. |
 | `sRemoteFileName` | [string](../types/string.md) | yes | — | Remote file name to download. |
-| `sLocalFileName` | [string](../types/string.md) | no | `sRemoteFileName` | Local path and file name to create. If empty, the function uses `sRemoteFileName`. |
+| `sLocalFileName` | [string](../types/string.md) | no | `sRemoteFileName` | Local path and file name to create. If empty, the function uses `sRemoteFileName`. Pass a full local path so you control where the file is written. |
 | `sUserName` | [string](../types/string.md) | no | — | User name for FTP or SFTP login. |
 | `sPassword` | [string](../types/string.md) | no | — | Password for FTP login or password-based SFTP login. When `sPrivateKeyFilePath` is supplied for SFTP, this value is used as the private-key passphrase. |
 | `nPort` | [number](../types/number.md) | no | `21` | Server port. Values less than or equal to 0 are reset to `21`. |
@@ -61,6 +61,7 @@ GetFromFtp(sServerNameOrIP, [sRemoteDirectory], sRemoteFileName, [sLocalFileName
 
 !!! success "Do"
     - Check the boolean return value before using the downloaded file.
+    - Pass a full local path in `sLocalFileName` rather than relying on a bare file name.
     - Use `GetLastSSLError():Description` after a [`.F.`](../literals/false.md) result when an SSL error object is available and you need more detail about a failed transfer.
     - Set `bIsSFTP` to [`.T.`](../literals/true.md) for secure transfers, and provide `sPrivateKeyFilePath` when the server requires key-based authentication.
 

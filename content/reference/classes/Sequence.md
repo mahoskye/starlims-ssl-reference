@@ -108,7 +108,7 @@ Changes the database used for later property lookups and method calls.
 ## Caveats
 
 - `SequenceName` is derived from the table name and field name, both converted to uppercase, and always starts with `C_`. When `sPrefix` is not empty, it is appended in uppercase after the field name, separated by `_`.
-- `Create()` handles create failures by showing a message rather than exposing a dedicated return value.
+- `Create()` has no return value. Check `Exists` afterwards to confirm that the sequence was created.
 - `Drop()`, `Exists`, `NextValue`, and `Reset()` still depend on the target database being reachable and the sequence being valid in that database.
 - Oracle and SQL Server do not reset sequences the same way. Oracle reset recreates the sequence, while SQL Server resets the existing sequence in place.
 - Very long Oracle-derived sequence names may not remain human-readable because the name is shortened before use.

@@ -13,7 +13,7 @@ starlims:
 
 Details on a failed HTTP request — status, message, and the server's response body.
 
-An `HttpException` is the object you receive from [`HttpClient:GetLastServerException`](HttpClient.md#getlastserverexception) after a failed call. The same exception is also raised by the call that failed, so you can either catch it directly or look it up from the client after the fact.
+An `HttpException` is the object you receive from [`HttpClient:GetLastServerException`](HttpClient.md#getlastserverexception) after a failed call. The failed call also raises an error, so wrap it in [`:TRY`](../keywords/TRY.md) and call `GetLastServerException()` inside [`:CATCH`](../keywords/CATCH.md) to read the details.
 
 `StatusCode` and `Status` describe the failure mode in terms of the request lifecycle (DNS, connection, server response). `MessageDetails` gives you the server's error body when one is available — useful for APIs that return a JSON or text error payload alongside a non-success HTTP status.
 
@@ -29,7 +29,7 @@ An `HttpException` is the object you receive from [`HttpClient:GetLastServerExce
 |---|---|
 | [`HttpClient`](HttpClient.md) | `oHttpClient:GetLastServerException()` |
 
-`HttpException` is also raised directly by [`HttpClient:GetResponse`](HttpClient.md#getresponse) (and any method that delegates to it) when a request fails. Catch the error in a `:TRY` / `:CATCH` block and call `GetLastServerException()` inside `:CATCH` to read it, as the examples below do.
+[`HttpClient:GetResponse`](HttpClient.md#getresponse) (and any method that delegates to it) also raises an error when a request fails. Catch the error in a `:TRY` / `:CATCH` block and call `GetLastServerException()` inside `:CATCH` to read the `HttpException`, as the examples below do.
 
 ## Properties
 
@@ -48,13 +48,13 @@ An `HttpException` is the object you receive from [`HttpClient:GetLastServerExce
     - Capture both `Status` and `MessageDetails` in error logs so a reader can tell whether the failure was on the way out or on the way back.
 
 !!! failure "Don't"
-    - Try to construct an `HttpException` directly — it is only obtainable via [`HttpClient:GetLastServerException`](HttpClient.md#getlastserverexception) or by catching the error raised by a failed call.
+    - Try to construct an `HttpException` directly — obtain it from [`HttpClient:GetLastServerException`](HttpClient.md#getlastserverexception).
     - Confuse `StatusCode` with the HTTP response status code. `StatusCode` here describes the failure mode of the request itself; for a non-success HTTP status (e.g., 404, 500), the server's response is in `MessageDetails`.
     - Rely on `MessageDetails` always being meaningful — when the server returned no body, it falls back to a generic message.
 
 ## Caveats
 
-- `HttpException` is not directly constructable. Obtain it from [`HttpClient:GetLastServerException`](HttpClient.md#getlastserverexception) or catch it as the error raised by a failed [`HttpClient:GetResponse`](HttpClient.md#getresponse).
+- `HttpException` is not directly constructable. Obtain it from [`HttpClient:GetLastServerException`](HttpClient.md#getlastserverexception), for example inside the [`:CATCH`](../keywords/CATCH.md) of a failed [`HttpClient:GetResponse`](HttpClient.md#getresponse).
 - The value returned by `GetLastServerException` is cleared by the next successful response on the same client. Read it immediately after a failure.
 - `StatusCode` is not the HTTP response code. For HTTP-level failures (404, 500, etc.) the failure mode is reported as a protocol-level status, and the server's body is exposed via `MessageDetails`.
 

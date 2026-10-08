@@ -1,6 +1,6 @@
 ---
 title: "GetPrinters"
-summary: "Returns a list of printer names currently installed on the system."
+summary: "Returns a list of printer names installed on the STARLIMS application server."
 id: ssl.function.getprinters
 element_type: function
 doc_status: published
@@ -11,9 +11,9 @@ starlims:
 
 # GetPrinters
 
-Returns a list of printer names currently installed on the system.
+Returns a list of printer names installed on the STARLIMS application server.
 
-`GetPrinters` returns the printer names currently available to the running environment. It takes no arguments and returns an array where each element is a printer name string.
+`GetPrinters` returns the printer names available on the machine where the server script runs, which is the STARLIMS application server, not the user's workstation. It takes no arguments and returns an array where each element is a printer name string.
 
 If no printers are installed, the function returns an empty array.
 
@@ -51,7 +51,7 @@ This function takes no parameters.
 
 ## Caveats
 
-- Results depend on the printers installed on the machine where the function runs.
+- Results depend on the printers installed on the machine where the function runs: the application server, not the user's client machine. A printer installed only on a workstation does not appear in the list.
 
 ## Examples
 

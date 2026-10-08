@@ -24,14 +24,14 @@ Closes an active database connection by name and removes it from the session's c
 ## Syntax
 
 ```ssl
-LimsSqlDisconnect([sConnectionName])
+LimsSqlDisconnect(sConnectionName)
 ```
 
 ## Parameters
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `sConnectionName` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Connection name of the connection to disconnect. When [`NIL`](../literals/nil.md), falls back to the system default connection. |
+| `sConnectionName` | [string](../types/string.md) | yes | — | Name of the connection to disconnect. Always pass the name explicitly. |
 
 ## Returns
 
@@ -48,10 +48,12 @@ LimsSqlDisconnect([sConnectionName])
     - Assume success without checking the return value.
     - Leave connections open unnecessarily.
     - Silently ignore a [`.F.`](../literals/false.md) return; it can indicate the connection was never registered or was already closed.
+    - Call `LimsSqlDisconnect` without a connection name, or with [`NIL`](../literals/nil.md) or an empty string. Pass the name of the connection you opened.
+    - Disconnect `"DATABASE"`. Other code in the session relies on that connection.
 
 ## Caveats
 
-- Calling with [`NIL`](../literals/nil.md), an empty string, or a misspelled name will not disconnect any connection and returns [`.F.`](../literals/false.md).
+- A misspelled or unregistered name does not disconnect any connection and returns [`.F.`](../literals/false.md).
 - Disconnecting a connection that is in use by other operations can cause those operations to fail.
 
 ## Examples

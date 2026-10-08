@@ -61,7 +61,7 @@ LimsOleConnect(vProgId)
 
 - Available members depend entirely on the object created by that ProgID.
 - Cleanup is not automatic; use [`EndLimsOleConnect`](EndLimsOleConnect.md) explicitly when you finish with the object.
-- The ProgID `StarLIMS.SoapClient.SoapClient` is handled specially and returns the platform SOAP client object instead of creating an external COM server.
+- For SOAP integrations, use [`WebServices{}:CreateSoapClient()`](../classes/WebServices.md#createsoapclient) to get a [`SoapClient`](../returns/SoapClient.md) rather than creating one through a ProgID.
 
 ## Examples
 

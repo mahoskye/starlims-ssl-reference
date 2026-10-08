@@ -15,16 +15,15 @@ starlims:
 
 SSL supports two comment-based access modifiers that control procedure visibility. Place one on the line immediately before a [`:PROCEDURE`](../keywords/PROCEDURE.md) declaration.
 
-`/*@private;` marks a procedure as private, callable only from other procedures within the same script file. External scripts and inheriting scripts cannot invoke it.
+`/*@private;` marks a procedure as private, callable only from other procedures within the same script file. External scripts cannot invoke it.
 
-`/*@protected;` marks a procedure as protected, callable from the same script file and from scripts that inherit from or extend the containing class or category. External scripts cannot invoke it.
+`/*@protected;` marks a procedure as protected, callable from the same script file. External scripts cannot invoke it. How `/*@protected;` differs from `/*@private;` for script-level procedures is not documented here, so prefer `/*@private;` for helpers that only the same script calls.
 
 Procedures with no modifier are **public** by default and can be called from anywhere.
 
 ## When to use it
 
 - When a helper procedure is an implementation detail that external callers should never invoke directly, use `/*@private;`.
-- When a shared utility needs to be available to inheriting scripts but hidden from unrelated external callers, use `/*@protected;`.
 - When organizing a script with a clear public API boundary alongside internal implementation procedures.
 
 ## Syntax
@@ -41,11 +40,11 @@ Procedures with no modifier are **public** by default and can be called from any
 
 The modifier must appear on the line **immediately before** the [`:PROCEDURE`](../keywords/PROCEDURE.md) keyword. The exact syntax is `/*@private;` or `/*@protected;`, with no spaces between `/*` and `@`, and the modifier name must be lowercase. Procedures without a modifier are public by default. Although these annotations use comment syntax, SSL recognizes them as access modifiers — they are not regular comments.
 
-| Modifier | Same script | Inheriting scripts | External scripts |
-| --- | --- | --- | --- |
-| *(none — default)* | Yes | Yes | Yes |
-| `/*@protected;` | Yes | Yes | No |
-| `/*@private;` | Yes | No | No |
+| Modifier | Same script | External scripts |
+| --- | --- | --- |
+| *(none — default)* | Yes | Yes |
+| `/*@protected;` | Yes | No |
+| `/*@private;` | Yes | No |
 
 !!! warning "Script-level procedures only"
     Access modifiers only work on **script-level procedures**, standalone [`:PROCEDURE`](../keywords/PROCEDURE.md) blocks in server scripts and data sources. They have **no effect on methods inside [`:CLASS`](../keywords/CLASS.md) blocks**: `/*@private;` before a class method has no effect and raises no error.
@@ -54,7 +53,6 @@ The modifier must appear on the line **immediately before** the [`:PROCEDURE`](.
 
 !!! success "Do"
     - Put `/*@private;` on the line immediately before [`:PROCEDURE`](../keywords/PROCEDURE.md) with no blank lines between them.
-    - Use `/*@protected;` for shared utilities that inheriting scripts need but external callers should not access.
     - Default to public only when external invocation is intentional.
 
 !!! failure "Don't"
@@ -72,7 +70,7 @@ The modifier must appear on the line **immediately before** the [`:PROCEDURE`](.
 
 ### Combining public, protected, and private procedures
 
-Shows all three visibility levels in one script. `GetSample` is the public entry point, `ValidateSample` is available to inheriting scripts, and `FormatSampleLog` is internal only.
+Shows all three visibility levels in one script. `GetSample` is the public entry point, `ValidateSample` is protected, and `FormatSampleLog` is internal only.
 
 ```ssl
 /* region Sample Management API;
@@ -107,5 +105,5 @@ Shows all three visibility levels in one script. `GetSample` is the public entry
 In this example:
 
 - `GetSample` — public, callable from anywhere
-- `ValidateSample` — protected, callable from this script and inheriting scripts
+- `ValidateSample` — protected, callable from this script; external scripts cannot call it
 - `FormatSampleLog` — private, callable only within this script

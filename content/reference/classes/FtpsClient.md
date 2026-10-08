@@ -293,7 +293,7 @@ If the target file already exists, the method writes starting at the current fil
 
 !!! success "Do"
     - Configure proxy and TLS settings before `Connect` so the session starts with the intended network and certificate behavior.
-    - Call `Connect`, then `Login`, then `Secure` only when that matches the server workflow you need.
+    - Choose the `sSecurity` mode, and whether to call `Secure`, to match your server's FTPS configuration. Confirm that the session is encrypted before `Login` sends credentials.
     - Check boolean return values after file and directory operations so your script can stop or recover cleanly.
     - Validate remote file names, directory paths, and local file paths before
       calling methods that require them.
@@ -309,6 +309,7 @@ If the target file already exists, the method writes starting at the current fil
 
 ## Caveats
 
+- How each `sSecurity` mode interacts with `Secure`, including whether a mode already encrypts the session before `Login`, is not documented here. The examples connect with `"Explicit"` and call `Secure` after `Login`; confirm that order against your server before sending real credentials.
 - `CheckOnFtps` checks for a file, not for directory existence.
 - `CopyToFtps` writes identical content to every name in `aRemoteFileNames`.
 - `GetDirFromFtps` returns rows in the shape `{name, size, date, time, attributes}`, with [`date`](../types/date.md) and `time` returned as strings.

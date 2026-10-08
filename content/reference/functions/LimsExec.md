@@ -51,18 +51,18 @@ LimsExec(sApplication, [bShow], [sArguments])
 
 !!! success "Do"
     - Use `sArguments` for normal argument passing so the executable path stays clear and easy to validate.
-    - Check the boolean result and inspect [`GetLastSSLError`](GetLastSSLError.md) when the launch returns [`.F.`](../literals/false.md).
+    - Call [`ClearLastSSLError`](ClearLastSSLError.md) before the launch and check the boolean result. After [`.F.`](../literals/false.md), read [`GetLastSSLError`](GetLastSSLError.md) only when it is not empty.
     - Use [`RunApp`](RunApp.md) instead when the workflow must wait for the external program to finish.
 
 !!! failure "Don't"
     - Assume [`.T.`](../literals/true.md) means the external program completed successfully. It only means the process was started.
-    - Pass an empty, malformed, or unquoted executable path. Invalid `sApplication` values raise exceptions instead of returning [`.F.`](../literals/false.md).
+    - Pass an empty, malformed, or unquoted executable path. Validate `sApplication` first, check the result, and wrap the call in [`:TRY`](../keywords/TRY.md) when the path comes from input, so a bad value is handled whether it raises or returns [`.F.`](../literals/false.md).
     - Ignore paths with spaces when embedding the full command line in `sApplication`. Quote the executable path first so SSL can split the command correctly.
 
 ## Caveats
 
-- Only a [`NIL`](../literals/nil.md) `sApplication` raises an exception — empty strings and invalid paths return [`.F.`](../literals/false.md) and set the last SSL error.
-- Startup failures return [`.F.`](../literals/false.md), set the last SSL error, and write the error message.
+- A [`NIL`](../literals/nil.md) `sApplication` raises the exception listed above. Other invalid values are not covered by the Exceptions table, so handle both a raised error and a [`.F.`](../literals/false.md) result.
+- After a [`.F.`](../literals/false.md) result, [`GetLastSSLError`](GetLastSSLError.md) may be empty, or may still hold an earlier error unless you cleared it before the call.
 - When `bShow` is [`.F.`](../literals/false.md), the function requests a hidden window, but the final behavior still depends on the launched application.
 
 ## Examples
@@ -94,7 +94,7 @@ DoProc("LaunchAuditExport");
 
 ### Launch silently and report the startup error
 
-Run a background utility without showing its window and surface the last SSL error when startup fails.
+Run a background utility without showing its window and surface the last SSL error when startup fails. [`ClearLastSSLError`](ClearLastSSLError.md) runs first so an earlier, unrelated error is not reported, and the error object is checked before it is read.
 
 ```ssl
 :PROCEDURE PrintBarcodeLabel;
@@ -103,15 +103,21 @@ Run a background utility without showing its window and surface the last SSL err
 	sSampleID := "LAB-2024-0042";
 	sApp := "C:\Program Files\BarcodePrint\LabelPrinter.exe";
 	sArgs := "/silent /label " + sSampleID;
+	ClearLastSSLError();
 	bStarted := LimsExec(sApp, .F., sArgs);
 
 	:IF bStarted;
 		UsrMes("Barcode print job was submitted for " + sSampleID);
 	:ELSE;
 		oErr := GetLastSSLError();
-		ErrorMes(
-			"Barcode print launch failed: " + oErr:Description
-		);  /* Logs on failure: last SSL error message;
+
+		:IF .NOT. Empty(oErr);
+			ErrorMes(
+				"Barcode print launch failed: " + oErr:Description
+			);  /* Logs on failure: last SSL error message;
+		:ELSE;
+			ErrorMes("Barcode print launch failed.");
+		:ENDIF;
 	:ENDIF;
 
 	:RETURN bStarted;

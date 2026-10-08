@@ -1,6 +1,6 @@
 ---
 title: "SSLCodeProvider"
-summary: "Compiles published server scripts and data sources and returns a list of compilation errors."
+summary: "Compiles published server scripts and data sources and returns the compilation errors found."
 id: ssl.class.sslcodeprovider
 element_type: class
 doc_status: published
@@ -11,11 +11,11 @@ starlims:
 
 # SSLCodeProvider
 
-Compiles published server scripts and data sources and returns a list of compilation errors.
+Compiles published server scripts and data sources and returns the compilation errors found.
 
 Use `SSLCodeProvider{}` when you need to validate published SSL code before a release, during deployment checks, or while troubleshooting compile failures. The class can compile all server scripts, all data sources, one item, or all items in one or more categories. For single-item methods, pass either the item GUID or its full name in `category.name` format.
 
-Every compile method returns the same shape: a list of compilation errors. An empty list means the compile succeeded. Each entry identifies the script (name and id), the kind of script, the location of the failure (line and column), and the error message. Index into the list and read those fields directly to surface or log the errors.
+Every compile method returns an object that holds the compilation errors found. Inspect it before treating a compile as clean.
 
 ## When to use
 
@@ -195,20 +195,22 @@ Accepts a block of SSL code as text.
 
 !!! success "Do"
     - Pass a full `category.name` or a GUID when targeting one server script or data source.
-    - Use the bulk and category methods when validating larger changes.
-    - Check the returned error list even when you expect a clean compile.
+    - Use the list and category methods when validating larger changes.
+    - Check the returned errors even when you expect a clean compile.
     - Use category GUIDs with the `...Category` and `...Categories` methods.
 
 !!! failure "Don't"
     - Pass a bare script or data source name without its category. Those calls are rejected unless you provide a GUID.
     - Use `CompileScript` for ad hoc code validation. It currently raises a not-implemented error for any non-null input.
-    - Assume a successful call means every target compiled cleanly. Review the returned error list before continuing automation or deployment steps.
+    - Assume a successful call means every target compiled cleanly. Review the returned errors before continuing automation or deployment steps.
+    - Call `CompileAll` or `CompileAllServerScripts` from an interactive Designer session. They compile every server script on the server, which can take long enough for the Designer call to time out.
 
 ## Caveats
 
 - Single-item compile methods require either a GUID or a full `category.name`.
 - Category methods take category IDs, not category names.
 - The class reports compile-time problems only. It does not validate runtime behavior.
+- `CompileAll`, `CompileAllServerScripts` and `CompileAllDataSources` compile every matching item on the server. On a system with many scripts this can take long enough for a Designer call to time out. For an interactive check, compile only the scripts, data sources or categories you changed.
 
 ## Examples
 
@@ -250,7 +252,7 @@ DoProc("ValidateDataSourceCategory");
 
 ### Compile all server scripts and data sources
 
-Runs a full validation pass across all published scripts and data sources. Useful as a pre-deployment check.
+Runs a full validation pass across all published scripts and data sources. Useful as a pre-deployment check; because it compiles everything, run it where a long call is acceptable rather than from an interactive Designer session.
 
 ```ssl
 :PROCEDURE ValidateAllPublishedCode;

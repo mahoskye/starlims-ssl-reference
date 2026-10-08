@@ -21,7 +21,6 @@ The `sApplication` argument is required. You can pass arguments separately throu
 
 - When SSL must wait for an external program to finish before continuing.
 - When you want a simple [`.T.`](../literals/true.md) or [`.F.`](../literals/false.md) result for process startup.
-- When your workflow needs to inspect [`GetLastSSLError`](GetLastSSLError.md) after a launch failure.
 
 ## Syntax
 
@@ -50,12 +49,12 @@ RunApp(sApplication, [sArguments])
 
 !!! success "Do"
     - Pass `sArguments` separately for normal usage so the executable path stays clear and easy to validate.
-    - Check the boolean result and inspect [`GetLastSSLError`](GetLastSSLError.md) when `RunApp` returns [`.F.`](../literals/false.md).
+    - Call [`ClearLastSSLError`](ClearLastSSLError.md) before the launch and check the boolean result. After [`.F.`](../literals/false.md), read [`GetLastSSLError`](GetLastSSLError.md) only when it is not empty.
     - Use [`LimsExec`](LimsExec.md) instead when the workflow should continue without waiting.
 
 !!! failure "Don't"
     - Assume [`.T.`](../literals/true.md) means the external program completed its work successfully. `RunApp` does not report the child process exit code.
-    - Pass an empty or malformed `sApplication` value. Validation errors raise exceptions instead of returning [`.F.`](../literals/false.md).
+    - Pass an empty or malformed `sApplication` value. Only the [`NIL`](../literals/nil.md) case is listed under Exceptions; validate the value first, and wrap the call in [`:TRY`](../keywords/TRY.md) when the path comes from input, so a bad value is handled whether it raises or returns [`.F.`](../literals/false.md).
     - Use `RunApp` for long-running tools when blocking the SSL workflow would be a problem.
 
 ## Caveats
@@ -92,7 +91,7 @@ DoProc("GeneratePdfReport");
 
 ### Report the launch error after a failed start
 
-Wait for a command-line tool to finish, and surface the last SSL error when the process could not be created.
+Wait for a command-line tool to finish, and surface the last SSL error when the process could not be created. [`ClearLastSSLError`](ClearLastSSLError.md) runs first so an earlier, unrelated error is not reported, and the error object is checked before it is read.
 
 ```ssl
 :PROCEDURE ExportAuditData;
@@ -100,16 +99,22 @@ Wait for a command-line tool to finish, and surface the last SSL error when the 
 
 	sApp := "C:\Program Files\Acme Tools\AuditExport.exe";
 	sArgs := '/batch B-1042 /output "C:\Exports\audit.csv"';
+	ClearLastSSLError();
 	bFinished := RunApp(sApp, sArgs);
 
 	:IF bFinished;
 		UsrMes("Audit export finished");
 	:ELSE;
 		oErr := GetLastSSLError();
-		/* Logs on failure: startup error;
-		ErrorMes(
-			"Audit export could not be started: " + oErr:Description
-		);
+
+		:IF .NOT. Empty(oErr);
+			/* Logs on failure: startup error;
+			ErrorMes(
+				"Audit export could not be started: " + oErr:Description
+			);
+		:ELSE;
+			ErrorMes("Audit export could not be started.");
+		:ENDIF;
 	:ENDIF;
 
 	:RETURN bFinished;

@@ -60,6 +60,7 @@ ConvertReport(sFile)
 ## Caveats
 
 - `ConvertReport` never returns [`.F.`](../literals/false.md). Code that branches on a false return value is misleading because failures are reported as raised errors.
+- The output format and the location of the converted file are not documented here. Check the result in your environment before relying on it in an automated workflow.
 
 ## Examples
 

@@ -87,5 +87,5 @@ Interact with the STARLIMS platform itself — batch monitoring, the dictionary,
 | [PatcherSupport](PatcherSupport.md) | Provides helper methods for collecting package-style dictionary metadata, connecting to another STARLIMS system, and comparing one collected result table to another. |
 | [RegSetup](RegSetup.md) | Provides access to Windows registry values under HKEY_LOCAL_MACHINE. |
 | [SQLConnection](SQLConnection.md) | Represents a configured database connection returned by GetConnectionByName. |
-| [SSLCodeProvider](SSLCodeProvider.md) | Compiles published server scripts and data sources and returns a list of compilation errors. |
+| [SSLCodeProvider](SSLCodeProvider.md) | Compiles published server scripts and data sources and returns the compilation errors found. |
 | [HtmlConverter](HtmlConverter.md) | Converts XFD form XML into HTML form XML and exposes the most recent conversion log. |

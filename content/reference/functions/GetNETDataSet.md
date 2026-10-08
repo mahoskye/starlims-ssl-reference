@@ -35,7 +35,7 @@ GetNETDataSet(sCommandString, [sConnectionName], [aValues], [sTableName], [bRetu
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `sCommandString` | [string](../types/string.md) | yes | — | SQL command text to execute. |
-| `sConnectionName` | [string](../types/string.md) | no | `"DATABASE"` | Connection name to use. |
+| `sConnectionName` | [string](../types/string.md) | no | — | Connection name to use. When omitted, the query runs against the default connection (`"DATABASE"` in a standard install). Pass the name explicitly if your script changes the default with [`SetDefaultConnection`](SetDefaultConnection.md). |
 | `aValues` | [array](../types/array.md) | no | [`NIL`](../literals/nil.md) | Positional values for `?` placeholders in `sCommandString`. Non-array values are replaced with an empty array. |
 | `sTableName` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Table name to assign to the returned dataset table. |
 | `bReturnXml` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | When [`.T.`](../literals/true.md), returns dataset XML. When [`.F.`](../literals/false.md), returns a [`netobject`](../types/netobject.md) wrapping the dataset. |
