@@ -188,7 +188,7 @@ walks out to caller scopes and publics before deciding to create anything.
 ## Related
 
 - [`:DECLARE`](../reference/keywords/DECLARE.md) — introduce names in the current scope
-- [`:PUBLIC`](../reference/keywords/PUBLIC.md) — share names down the call stack
+- [`:PUBLIC`](../reference/keywords/PUBLIC.md) — share names across the running program
 - [`:PARAMETERS`](../reference/keywords/PARAMETERS.md) — declare a routine's arguments
 - [`:FOR`](../reference/keywords/FOR.md) — counted loops and their loop variable
 - [Type System](type-system.md) — initialization values and type checking

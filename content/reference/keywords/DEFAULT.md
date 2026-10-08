@@ -56,7 +56,7 @@ The `:DEFAULT` keyword works with a parameter that was already declared by [`:PA
 
 !!! failure "Don't"
     - Use `:DEFAULT` as a replacement for normal assignments later in the routine. It only belongs in the parameter setup section.
-    - Scatter `:DEFAULT` lines after [`:DECLARE`](DECLARE.md) or executable statements. That placement does not match SSL syntax.
+    - Scatter `:DEFAULT` lines after [`:DECLARE`](DECLARE.md) or executable statements. That placement is a compile-time error: `expecting "ENDPROC", found ':DEFAULT'`.
     - Hide important business decisions inside surprising defaults. If a default changes behavior in a meaningful way, document it clearly.
 
 ## Caveats

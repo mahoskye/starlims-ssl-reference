@@ -6613,7 +6613,7 @@
         "do": [
           "Check the result before running queries or updates that assume a table exists.",
           "Pass the exact connection name and table name used in your environment.",
-          "Use NIL for sConnectionName only when you intentionally want the default connection."
+          "Leave sConnectionName empty only when you intentionally want the default connection."
         ],
         "dont": [
           "Pass NIL for sTableName; this raises an immediate error.",
@@ -6647,12 +6647,12 @@
       "best_practices": {
         "do": [
           "Check the result before generating SQL, importing data, or reading optional fields.",
-          "Use NIL for sConnectionName only when you intentionally want the default connection.",
+          "Leave sConnectionName empty only when you intentionally want the default connection.",
           "Use IsTable for table-only checks and TableFldLst when you need all field names."
         ],
         "dont": [
           "Assume invalid input returns .F.. NIL and empty-string cases can raise errors instead.",
-          "Treat \"\" as the same as omitting sConnectionName. Only NIL falls back to the default connection.",
+          "Treat \"\" as the same as omitting sConnectionName. Only an omitted or NIL connection falls back to the default connection.",
           "Pass an empty sFieldName expecting a table-only check. Use IsTable for that case."
         ]
       }
@@ -10267,10 +10267,16 @@
         {
           "trigger": "indexOrOccurence is out of range for the selected mode.",
           "message": "StrSrch(): A negative [indexOrOccurence] value is not allowed."
+        },
+        {
+          "trigger": "In start-position mode, indexOrOccurence is past the end of source.",
+          "message": "Index was out of range. Must be non-negative and less than the size of the collection."
         }
       ],
       "caveats": [
-        "In start-position mode, passing 0 raises the same out-of-range error used for negative values."
+        "In start-position mode, passing 0 raises the same out-of-range error used for negative values.",
+        "In occurrence mode, 0 returns 0.",
+        "Matching is case-sensitive: StrSrch(\"A\", \"banana\") returns 0."
       ],
       "best_practices": {
         "do": [
@@ -12461,7 +12467,7 @@
         ],
         "dont": [
           "Use :DEFAULT as a replacement for normal assignments later in the routine. It only belongs in the parameter setup section.",
-          "Scatter :DEFAULT lines after :DECLARE or executable statements. That placement does not match SSL syntax.",
+          "Scatter :DEFAULT lines after :DECLARE or executable statements. That placement is a compile-time error: expecting \"ENDPROC\", found ':DEFAULT'.",
           "Hide important business decisions inside surprising defaults. If a default changes behavior in a meaningful way, document it clearly."
         ]
       }
@@ -13049,7 +13055,7 @@
       "id": "ssl.keyword.public",
       "element_type": "keyword",
       "title": "PUBLIC",
-      "summary": "Declares public variables shared down the call stack — visible to the declaring scope and every scope it calls.",
+      "summary": "Declares public variables shared across the running program — reachable from any procedure until the program context clears them.",
       "doc_status": "published",
       "source_path": "content/reference/keywords/PUBLIC.md",
       "exceptions": [],
@@ -14393,7 +14399,7 @@
       "exceptions": [],
       "caveats": [
         "Code blocks contain a single expression, not multiple statements.",
-        "At least one bound variable is required between the pipes; {|| ...} is not valid.",
+        "At least one bound variable is required between the pipes; {|| ...} is a compile-time error: expecting \"IDENT\", found '|'.",
         "Comparing code blocks directly is not supported.",
         "Executing a code block with fewer arguments than it declares parameters raises an error instead of passing NIL: Eval({|nA, nB| nB}, 1) raises Index was outside the bounds of the array.",
         "Outer variables referenced inside a code block are captured by reference. Changes to those variables in the outer scope are visible inside later Eval calls."

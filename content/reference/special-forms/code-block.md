@@ -64,7 +64,7 @@ Code blocks cannot appear as the left-hand side of an assignment.
 ## Errors and edge cases
 
 - Code blocks contain a single expression, not multiple statements.
-- At least one bound variable is required between the pipes; `{|| ...}` is not valid.
+- At least one bound variable is required between the pipes; `{|| ...}` is a compile-time error: `expecting "IDENT", found '|'`.
 - Comparing code blocks directly is not supported.
 - Executing a code block with fewer arguments than it declares parameters raises an error instead of passing [`NIL`](../literals/nil.md): `Eval({|nA, nB| nB}, 1)` raises `Index was outside the bounds of the array.`
 - Outer variables referenced inside a code block are captured by reference. Changes to those variables in the outer scope are visible inside later [`Eval`](../functions/Eval.md) calls.

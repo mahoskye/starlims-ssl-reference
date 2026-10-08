@@ -52,7 +52,7 @@ IsTable(sConnectionName, sTableName)
 !!! success "Do"
     - Check the result before running queries or updates that assume a table exists.
     - Pass the exact connection name and table name used in your environment.
-    - Use [`NIL`](../literals/nil.md) for `sConnectionName` only when you intentionally want the default connection.
+    - Leave `sConnectionName` empty only when you intentionally want the default connection.
 
 !!! failure "Don't"
     - Pass [`NIL`](../literals/nil.md) for `sTableName`; this raises an immediate error.
@@ -97,13 +97,13 @@ DoProc("GetSampleRows");
 
 ### Use the default connection explicitly
 
-Pass [`NIL`](../literals/nil.md) as the connection name to target the default connection. The [`UsrMes`](UsrMes.md) call fires only if `audit_log` is absent from that connection.
+Leave the connection argument empty to target the default connection. The [`UsrMes`](UsrMes.md) call fires only if `audit_log` is absent from that connection.
 
 ```ssl
 :PROCEDURE LoadAuditRows;
 	:DECLARE aAuditRows;
 
-	:IF !IsTable(NIL, "audit_log");
+	:IF !IsTable(, "audit_log");
 		UsrMes("audit_log is not available in the default connection");
 		:RETURN {};
 	:ENDIF;
