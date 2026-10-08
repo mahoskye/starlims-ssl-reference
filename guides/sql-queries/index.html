@@ -1586,10 +1586,10 @@
 <h3 id="building-in-clauses">Building IN clauses<a class="headerlink" href="#building-in-clauses" title="Permanent link">&para;</a></h3>
 <p>SQL <code>IN (...)</code> clauses need special handling because you can't use a single <code>?</code> for a list of values. SSL provides two helpers:</p>
 <h4 id="preparearrayforin">PrepareArrayForIn<a class="headerlink" href="#preparearrayforin" title="Permanent link">&para;</a></h4>
-<p>Sanitizes an array for use with a parameterized <code>IN</code> clause. It modifies the array you pass in place, so there is nothing to assign: each empty-string element is replaced with a string sentinel that matches nothing, and an empty array gains one sentinel of the requested type:</p>
+<p>Sanitizes an array for use with a parameterized <code>IN</code> clause. It modifies the array you pass in place, so there is nothing to assign: a literal empty-string element is replaced with a string sentinel that matches nothing (empty strings from the database or built at run time are not; see <a href="../../reference/functions/PrepareArrayForIn/#caveats"><code>PrepareArrayForIn</code></a>), and an empty array gains one sentinel of the requested type:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIds</span><span class="p">,</span><span class="w"> </span><span class="n">aOrderIds</span><span class="p">;</span>
 
-<span class="c1">/* A populated array with a blank entry, for example from an empty form field;</span>
+<span class="c1">/* A populated array with a literal blank entry;</span>
 <span class="n">aSampleIds</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="s2">"S-003"</span><span class="p">};</span>
 <span class="nf">PrepareArrayForIn</span><span class="p">(</span><span class="n">aSampleIds</span><span class="p">,</span><span class="w"> </span><span class="s2">"string"</span><span class="p">);</span>
 <span class="nf">UsrMes</span><span class="p">(</span><span class="n">aSampleIds</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
@@ -1603,7 +1603,7 @@
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>C7082BA7C83D38CAE98421BE494753931F8B52A8
 1 element: -2147483648
 </code></pre></div>
-<p>The sentinel is what keeps an <code>IN (...)</code> query valid on MS SQL Server. Without it, an empty array would give you no placeholders and the statement would end in <code>IN ()</code>, which is a syntax error. After <code>PrepareArrayForIn</code>, the array always has at least one element, so the placeholder list has at least one <code>?</code>. The sentinel value matches no real row, so the query runs and returns no rows. This applies when you build the <code>?</code> list yourself: <a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a>'s <code>?name?</code> substitution accepts an empty array and runs the query, which then returns no rows. Replacing <code>""</code> works the same way: a blank entry can no longer match rows whose column holds an empty string.</p>
+<p>The sentinel is what keeps an <code>IN (...)</code> query valid on MS SQL Server. Without it, an empty array would give you no placeholders and the statement would end in <code>IN ()</code>, which is a syntax error. After <code>PrepareArrayForIn</code>, the array always has at least one element, so the placeholder list has at least one <code>?</code>. The sentinel value matches no real row, so the query runs and returns no rows. This applies when you build the <code>?</code> list yourself: <a href="../../reference/functions/SQLExecute/"><code>SQLExecute</code></a>'s <code>?name?</code> substitution accepts an empty array and runs the query, which then returns no rows. Replacing a literal <code>""</code> works the same way: that entry can no longer match rows whose column holds an empty string. Blanks that came from the database or were built at run time are not replaced, so remove them yourself when they must not match.</p>
 <p>Build the placeholder list from the prepared array:</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aSampleIds</span><span class="p">,</span><span class="w"> </span><span class="n">sTemp</span><span class="p">,</span><span class="w"> </span><span class="n">sPlaceholders</span><span class="p">,</span><span class="w"> </span><span class="n">sSQL</span><span class="p">,</span><span class="w"> </span><span class="n">aResults</span><span class="p">;</span>
 
@@ -1845,7 +1845,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2026 15:47:04 UTC">October 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2026 16:56:03 UTC">October 8, 2026</span>
   </span>
 
     
