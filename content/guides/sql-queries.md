@@ -121,12 +121,12 @@ SQL `IN (...)` clauses need special handling because you can't use a single `?` 
 
 #### PrepareArrayForIn
 
-Sanitizes an array for use with a parameterized `IN` clause. It modifies the array you pass in place, so there is nothing to assign: each empty-string element is replaced with a string sentinel that matches nothing, and an empty array gains one sentinel of the requested type:
+Sanitizes an array for use with a parameterized `IN` clause. It modifies the array you pass in place, so there is nothing to assign: a literal empty-string element is replaced with a string sentinel that matches nothing (empty strings from the database or built at run time are not; see [`PrepareArrayForIn`](../reference/functions/PrepareArrayForIn.md#caveats)), and an empty array gains one sentinel of the requested type:
 
 ```ssl
 :DECLARE aSampleIds, aOrderIds;
 
-/* A populated array with a blank entry, for example from an empty form field;
+/* A populated array with a literal blank entry;
 aSampleIds := {"S-001", "", "S-003"};
 PrepareArrayForIn(aSampleIds, "string");
 UsrMes(aSampleIds[2]);
@@ -144,7 +144,7 @@ C7082BA7C83D38CAE98421BE494753931F8B52A8
 1 element: -2147483648
 ```
 
-The sentinel is what keeps an `IN (...)` query valid on MS SQL Server. Without it, an empty array would give you no placeholders and the statement would end in `IN ()`, which is a syntax error. After `PrepareArrayForIn`, the array always has at least one element, so the placeholder list has at least one `?`. The sentinel value matches no real row, so the query runs and returns no rows. This applies when you build the `?` list yourself: [`SQLExecute`](../reference/functions/SQLExecute.md)'s `?name?` substitution accepts an empty array and runs the query, which then returns no rows. Replacing `""` works the same way: a blank entry can no longer match rows whose column holds an empty string.
+The sentinel is what keeps an `IN (...)` query valid on MS SQL Server. Without it, an empty array would give you no placeholders and the statement would end in `IN ()`, which is a syntax error. After `PrepareArrayForIn`, the array always has at least one element, so the placeholder list has at least one `?`. The sentinel value matches no real row, so the query runs and returns no rows. This applies when you build the `?` list yourself: [`SQLExecute`](../reference/functions/SQLExecute.md)'s `?name?` substitution accepts an empty array and runs the query, which then returns no rows. Replacing a literal `""` works the same way: that entry can no longer match rows whose column holds an empty string. Blanks that came from the database or were built at run time are not replaced, so remove them yourself when they must not match.
 
 Build the placeholder list from the prepared array:
 

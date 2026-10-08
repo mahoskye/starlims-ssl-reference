@@ -17,7 +17,7 @@ Prepares an array for SQL `IN` clause helpers by mutating it in place.
 
 If `aTarget` is empty, it appends one type-appropriate sentinel value so downstream SQL-building logic can still produce a valid `IN (...)` clause that matches no real rows. The sentinel type is chosen based on `sItemType`: `"string"`, `"numeric"`, or `"date"`.
 
-If `aTarget` already has elements, the function does not apply typed defaults. Instead, it only replaces elements that are exactly the empty string `""` with the string sentinel value.
+If `aTarget` already has elements, the function does not apply typed defaults. Instead, it replaces empty-string elements with the string sentinel value, but not every empty string qualifies (see [Caveats](#caveats)).
 
 The function returns the same array after mutation. Passing [`NIL`](../literals/nil.md) for `aTarget` raises an argument-null error, and passing a non-array value raises an argument error.
 
@@ -59,7 +59,8 @@ PrepareArrayForIn(aTarget, sItemType)
     - Use it before generating placeholder lists or literal `IN (...)` text so empty input still produces valid SQL.
 
 !!! failure "Don't"
-    - Assume it normalizes every kind of empty value in a populated array. It only replaces elements that are exactly `""`.
+    - Assume it normalizes every kind of empty value in a populated array. It only replaces some empty strings, and never `NIL`, `0` or blanks such as `"   "`.
+    - Rely on it to replace blanks read from the database or built at run time. Remove or replace those entries yourself before the call.
     - Expect `sItemType` to affect populated arrays. Typed sentinels are only
       used when the array starts empty.
     - Pass numeric type codes such as `1` or undocumented strings and expect typed behavior.
@@ -69,7 +70,8 @@ PrepareArrayForIn(aTarget, sItemType)
 - A non-string `sItemType` is treated like `"string"` when the array is empty.
 - An empty-string `sItemType` also falls back to `"string"`.
 - If `sItemType` is an unrecognized string, no fallback element is appended to an empty array.
-- In a populated array, [`NIL`](../literals/nil.md), [`.F.`](../literals/false.md), `0`, and strings such as `"   "` are not replaced unless the value is exactly `""`.
+- In a populated array, [`NIL`](../literals/nil.md), [`.F.`](../literals/false.md), `0`, and strings such as `"   "` are not replaced.
+- Not every empty string is replaced. In observed runtime behavior, a literal `""`, a declared but unassigned variable, and the empty results of `AllTrim`, `SubStr`, `Left` and `LimsString` are replaced. Empty strings read from the database, or produced by concatenation, `Trim`, `Replicate` or `StrTran`, are left as `""`.
 
 ## Examples
 
