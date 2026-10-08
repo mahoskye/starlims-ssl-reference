@@ -44,7 +44,7 @@ When a request fails, the underlying error is recorded on the client and is reac
 
 ### `CreateHttpRequest`
 
-Creates a configurable request for the given URL. The returned [`HttpRequest`](HttpRequest.md) defaults to an unauthenticated GET — set its properties and call `SetContent` before passing it to `GetResponse` if you need anything else.
+Creates a configurable request for the given URL. The returned [`HttpRequest`](HttpRequest.md) defaults to a GET — set its properties and call `SetContent` before passing it to `GetResponse` if you need anything else.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
@@ -116,7 +116,7 @@ Sends a request and writes the response body to a file.
 ## Best practices
 
 !!! success "Do"
-    - Use the URL-only forms (`GetText(sUrl)`, `GetResponse(sUrl)`, `GetXmlDom(sUrl)`, `SaveFile(sUrl)`) for simple, unauthenticated GETs.
+    - Use the URL-only forms (`GetText(sUrl)`, `GetResponse(sUrl)`, `GetXmlDom(sUrl)`, `SaveFile(sUrl)`) for simple GETs.
     - Build an [`HttpRequest`](HttpRequest.md) when you need to set headers, change the method, or attach a body.
     - Check `GetLastServerException` after a failure to see the server's response body.
 
