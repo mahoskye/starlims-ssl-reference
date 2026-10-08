@@ -17,8 +17,6 @@ Registers a configured database connection by connection name.
 connection set so later database calls can target it by name. It returns [`.T.`](../literals/true.md)
 when the registration succeeds and [`.F.`](../literals/false.md) when the name cannot be registered.
 
-If the runtime supplies a null connection name, SSL substitutes the current default connection name before attempting the lookup. That fallback is only a name substitution; the call still returns [`.F.`](../literals/false.md) if the resolved name is not configured or cannot be registered.
-
 This function does not change the default connection by itself. Use [`SetDefaultConnection`](SetDefaultConnection.md) separately when you want later database calls to use a different default connection.
 
 Use [`GetConnectionByName`](GetConnectionByName.md) when you need a [`SQLConnection`](../classes/SQLConnection.md) object with readable connection metadata such as `DataSource`, `DatabaseName`, or `UseUTC`.
@@ -39,7 +37,7 @@ LimsSqlConnect(sConnectionName)
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `sConnectionName` | [string](../types/string.md) | yes | — | Connection name of the configured connection to register. If the runtime supplies a null value, SSL substitutes the current default connection name before lookup. |
+| `sConnectionName` | [string](../types/string.md) | yes | — | Connection name of the configured connection to register. Always pass the name explicitly. |
 
 ## Returns
 

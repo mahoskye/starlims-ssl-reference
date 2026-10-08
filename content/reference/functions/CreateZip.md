@@ -36,7 +36,7 @@ CreateZip(sZipFileName, sSourceDirectory, [bRecurse], [sFileFilter], [sPassword]
 | `sZipFileName` | [string](../types/string.md) | yes | — | Full path and file name for the ZIP file to create. |
 | `sSourceDirectory` | [string](../types/string.md) | yes | — | Directory whose contents will be added to the archive. |
 | `bRecurse` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | When [`.T.`](../literals/true.md), includes matching files from subdirectories. When [`.F.`](../literals/false.md), scans only the top level of `sSourceDirectory`. |
-| `sFileFilter` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Case-insensitive regular-expression filter applied to each file's full path while scanning. You can combine include and exclude expressions with `;`. When omitted, all files are eligible. |
+| `sFileFilter` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Case-insensitive regular-expression filter applied to each file's full path while scanning. When omitted, all files are eligible. |
 | `sPassword` | [string](../types/string.md) | no | [`NIL`](../literals/nil.md) | Password applied to the ZIP archive when supplied. |
 
 ## Returns

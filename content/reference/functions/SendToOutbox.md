@@ -48,9 +48,9 @@ SendToOutbox(
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `sSMTP` | [string](../types/string.md) | yes | — | SMTP server name. [`NIL`](../literals/nil.md) is handled by `bIgnoreErrors`; an empty string is invalid. |
-| `aRecipients` | [array](../types/array.md) | yes | — | Recipient address array. [`NIL`](../literals/nil.md) is handled by `bIgnoreErrors`; an empty array is invalid. |
-| `sFromWho` | [string](../types/string.md) | yes | — | Sender address. [`NIL`](../literals/nil.md) is handled by `bIgnoreErrors`; an empty string is invalid. |
+| `sSMTP` | [string](../types/string.md) | yes | — | SMTP server name. Must not be [`NIL`](../literals/nil.md) or empty (see Exceptions). |
+| `aRecipients` | [array](../types/array.md) | yes | — | Recipient address array. Must not be [`NIL`](../literals/nil.md) or empty (see Exceptions). |
+| `sFromWho` | [string](../types/string.md) | yes | — | Sender address. Must not be [`NIL`](../literals/nil.md) or empty (see Exceptions). |
 | `sSubject` | [string](../types/string.md) | no | `""` | Subject line. |
 | `sMessageBody` | [string](../types/string.md) | no | `"***"` | Message body text. |
 | `aAttachList` | [array](../types/array.md) | no | `{}` | Attachment path array. |
@@ -60,14 +60,14 @@ SendToOutbox(
 | `nPort` | [number](../types/number.md) | no | `25` | SMTP port. `0` is also treated as `25`. |
 | `sUName` | [string](../types/string.md) | no | `""` | SMTP user name. |
 | `sUPass` | [string](../types/string.md) | no | `""` | SMTP password. |
-| `bIgnoreErrors` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Accepted for API compatibility. The three required-argument validation throws occur unconditionally regardless of this value. |
+| `bIgnoreErrors` | [boolean](../types/boolean.md) | no | [`.T.`](../literals/true.md) | Does not suppress the required-argument exceptions listed under Exceptions. |
 | `bUseSSL` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Uses a secure SMTP connection. |
 | `bIsBodyHTML` | [boolean](../types/boolean.md) | no | [`.F.`](../literals/false.md) | Marks the body as HTML. |
 | `sEncryptedData` | [string](../types/string.md) | no | `""` | Additional encrypted payload stored with the queued message. |
 
 ## Returns
 
-**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the outbox row is written successfully; [`.F.`](../literals/false.md) when the queue operation fails without raising, such as the `bIgnoreErrors` handling for [`NIL`](../literals/nil.md) required arguments.
+**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the outbox row is written successfully; [`.F.`](../literals/false.md) when the queue operation fails without raising.
 
 A successful return means the message was queued, not delivered.
 
@@ -87,13 +87,12 @@ These exceptions are raised unconditionally regardless of `bIgnoreErrors`.
     - Validate `sSMTP`, `aRecipients`, and `sFromWho` before calling so you do not depend on runtime argument errors.
     - Pass explicit arrays for attachments, CC, and BCC when those lists are part of the workflow.
     - Use [`SendFromOutbox`](SendFromOutbox.md) as the follow-up step when queued messages should actually be delivered.
-    - Set `bIgnoreErrors` to [`.F.`](../literals/false.md) when the caller should surface and handle validation failures explicitly.
 
 !!! failure "Don't"
     - Treat a successful return as proof that the email was sent. It only means the request was queued.
     - Pass `""` for `sSMTP` or `sFromWho`, or pass an empty recipient array. Those values are still invalid.
     - Use `SendToOutbox` when the requirement is immediate delivery. Use [`SendLimsEmail`](SendLimsEmail.md) for direct send behavior.
-    - Assume `bIgnoreErrors` suppresses every failure. Its special handling only covers [`NIL`](../literals/nil.md) required arguments before the queue call proceeds.
+    - Rely on `bIgnoreErrors` to turn a missing required argument into a [`.F.`](../literals/false.md) result. Validate the arguments and wrap the call in [`:TRY`](../keywords/TRY.md).
 
 ## Caveats
 

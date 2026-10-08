@@ -474,7 +474,7 @@ Manage *inline code* — SSL snippets stored in the dictionary between [`:BEGINI
 
 | Function | Description |
 |----------|-------------|
-| [GetPrinters](GetPrinters.md) | Returns a list of printer names currently installed on the system. |
+| [GetPrinters](GetPrinters.md) | Returns a list of printer names installed on the STARLIMS application server. |
 | [InBatchProcess](InBatchProcess.md) | Returns whether the current SSL execution context is running in a batch process. |
 | [IsProductionModeOn](IsProductionModeOn.md) | Returns .T. when the application's production mode flag is enabled and .F. otherwise. |
 | [LWait](LWait.md) | Blocks further script execution for a specified number of seconds and returns an empty string. |

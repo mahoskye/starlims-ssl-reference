@@ -1432,7 +1432,8 @@
         }
       ],
       "caveats": [
-        "ConvertReport never returns .F.. Code that branches on a false return value is misleading because failures are reported as raised errors."
+        "ConvertReport never returns .F.. Code that branches on a false return value is misleading because failures are reported as raised errors.",
+        "The output format and the location of the converted file are not documented here. Check the result in your environment before relying on it in an automated workflow."
       ],
       "best_practices": {
         "do": [
@@ -5339,6 +5340,7 @@
       "best_practices": {
         "do": [
           "Check the boolean return value before using the downloaded file.",
+          "Pass a full local path in sLocalFileName rather than relying on a bare file name.",
           "Use GetLastSSLError():Description after a .F. result when an SSL error object is available and you need more detail about a failed transfer.",
           "Set bIsSFTP to .T. for secure transfers, and provide sPrivateKeyFilePath when the server requires key-based authentication."
         ],
@@ -5679,12 +5681,12 @@
       "id": "ssl.function.getprinters",
       "element_type": "function",
       "title": "GetPrinters",
-      "summary": "Returns a list of printer names currently installed on the system.",
+      "summary": "Returns a list of printer names installed on the STARLIMS application server.",
       "doc_status": "published",
       "source_path": "content/reference/functions/GetPrinters.md",
       "exceptions": [],
       "caveats": [
-        "Results depend on the printers installed on the machine where the function runs."
+        "Results depend on the printers installed on the machine where the function runs: the application server, not the user's client machine. A printer installed only on a workstation does not appear in the list."
       ],
       "best_practices": {
         "do": [
@@ -5806,7 +5808,8 @@
         }
       ],
       "caveats": [
-        "Replacements are applied in order, so overlapping source values can affect the final result."
+        "Replacements are applied in order, so overlapping source values can affect the final result.",
+        "No SSL value is documented here as a compatible oLocalRegions map. Without one, GetRegionEx looks up regions the same way as GetRegion."
       ],
       "best_practices": {
         "do": [
@@ -7480,19 +7483,19 @@
         }
       ],
       "caveats": [
-        "Only a NIL sApplication raises an exception — empty strings and invalid paths return .F. and set the last SSL error.",
-        "Startup failures return .F., set the last SSL error, and write the error message.",
+        "A NIL sApplication raises the exception listed above. Other invalid values are not covered by the Exceptions table, so handle both a raised error and a .F. result.",
+        "After a .F. result, GetLastSSLError may be empty, or may still hold an earlier error unless you cleared it before the call.",
         "When bShow is .F., the function requests a hidden window, but the final behavior still depends on the launched application."
       ],
       "best_practices": {
         "do": [
           "Use sArguments for normal argument passing so the executable path stays clear and easy to validate.",
-          "Check the boolean result and inspect GetLastSSLError when the launch returns .F..",
+          "Call ClearLastSSLError before the launch and check the boolean result. After .F., read GetLastSSLError only when it is not empty.",
           "Use RunApp instead when the workflow must wait for the external program to finish."
         ],
         "dont": [
           "Assume .T. means the external program completed successfully. It only means the process was started.",
-          "Pass an empty, malformed, or unquoted executable path. Invalid sApplication values raise exceptions instead of returning .F..",
+          "Pass an empty, malformed, or unquoted executable path. Validate sApplication first, check the result, and wrap the call in :TRY when the path comes from input, so a bad value is handled whether it raises or returns .F..",
           "Ignore paths with spaces when embedding the full command line in sApplication. Quote the executable path first so SSL can split the command correctly."
         ]
       }
@@ -7663,7 +7666,7 @@
       "caveats": [
         "Available members depend entirely on the object created by that ProgID.",
         "Cleanup is not automatic; use EndLimsOleConnect explicitly when you finish with the object.",
-        "The ProgID StarLIMS.SoapClient.SoapClient is handled specially and returns the platform SOAP client object instead of creating an external COM server."
+        "For SOAP integrations, use WebServices{}:CreateSoapClient() to get a SoapClient rather than creating one through a ProgID."
       ],
       "best_practices": {
         "do": [
@@ -7773,7 +7776,7 @@
       "source_path": "content/reference/functions/LimsSqlDisconnect.md",
       "exceptions": [],
       "caveats": [
-        "Calling with NIL, an empty string, or a misspelled name will not disconnect any connection and returns .F..",
+        "A misspelled or unregistered name does not disconnect any connection and returns .F..",
         "Disconnecting a connection that is in use by other operations can cause those operations to fail."
       ],
       "best_practices": {
@@ -7785,7 +7788,9 @@
         "dont": [
           "Assume success without checking the return value.",
           "Leave connections open unnecessarily.",
-          "Silently ignore a .F. return; it can indicate the connection was never registered or was already closed."
+          "Silently ignore a .F. return; it can indicate the connection was never registered or was already closed.",
+          "Call LimsSqlDisconnect without a connection name, or with NIL or an empty string. Pass the name of the connection you opened.",
+          "Disconnect \"DATABASE\". Other code in the session relies on that connection."
         ]
       }
     },
@@ -9073,12 +9078,12 @@
       "best_practices": {
         "do": [
           "Pass sArguments separately for normal usage so the executable path stays clear and easy to validate.",
-          "Check the boolean result and inspect GetLastSSLError when RunApp returns .F..",
+          "Call ClearLastSSLError before the launch and check the boolean result. After .F., read GetLastSSLError only when it is not empty.",
           "Use LimsExec instead when the workflow should continue without waiting."
         ],
         "dont": [
           "Assume .T. means the external program completed its work successfully. RunApp does not report the child process exit code.",
-          "Pass an empty or malformed sApplication value. Validation errors raise exceptions instead of returning .F..",
+          "Pass an empty or malformed sApplication value. Only the NIL case is listed under Exceptions; validate the value first, and wrap the call in :TRY when the path comes from input, so a bad value is handled whether it raises or returns .F..",
           "Use RunApp for long-running tools when blocking the SSL workflow would be a problem."
         ]
       }
@@ -9627,14 +9632,13 @@
         "do": [
           "Validate sSMTP, aRecipients, and sFromWho before calling so you do not depend on runtime argument errors.",
           "Pass explicit arrays for attachments, CC, and BCC when those lists are part of the workflow.",
-          "Use SendFromOutbox as the follow-up step when queued messages should actually be delivered.",
-          "Set bIgnoreErrors to .F. when the caller should surface and handle validation failures explicitly."
+          "Use SendFromOutbox as the follow-up step when queued messages should actually be delivered."
         ],
         "dont": [
           "Treat a successful return as proof that the email was sent. It only means the request was queued.",
           "Pass \"\" for sSMTP or sFromWho, or pass an empty recipient array. Those values are still invalid.",
           "Use SendToOutbox when the requirement is immediate delivery. Use SendLimsEmail for direct send behavior.",
-          "Assume bIgnoreErrors suppresses every failure. Its special handling only covers NIL required arguments before the queue call proceeds."
+          "Rely on bIgnoreErrors to turn a missing required argument into a .F. result. Validate the arguments and wrap the call in :TRY."
         ]
       }
     },
@@ -11709,6 +11713,7 @@
       "source_path": "content/reference/classes/FtpsClient.md",
       "exceptions": [],
       "caveats": [
+        "How each sSecurity mode interacts with Secure, including whether a mode already encrypts the session before Login, is not documented here. The examples connect with \"Explicit\" and call Secure after Login; confirm that order against your server before sending real credentials.",
         "CheckOnFtps checks for a file, not for directory existence.",
         "CopyToFtps writes identical content to every name in aRemoteFileNames.",
         "GetDirFromFtps returns rows in the shape {name, size, date, time, attributes}, with date and time returned as strings.",
@@ -11720,7 +11725,7 @@
       "best_practices": {
         "do": [
           "Configure proxy and TLS settings before Connect so the session starts with the intended network and certificate behavior.",
-          "Call Connect, then Login, then Secure only when that matches the server workflow you need.",
+          "Choose the sSecurity mode, and whether to call Secure, to match your server's FTPS configuration. Confirm that the session is encrypted before Login sends credentials.",
           "Check boolean return values after file and directory operations so your script can stop or recover cleanly.",
           "Validate remote file names, directory paths, and local file paths before calling methods that require them.",
           "Call Disconnect when the transfer session is complete.",
@@ -12004,26 +12009,28 @@
       "id": "ssl.class.sslcodeprovider",
       "element_type": "class",
       "title": "SSLCodeProvider",
-      "summary": "Compiles published server scripts and data sources and returns a list of compilation errors.",
+      "summary": "Compiles published server scripts and data sources and returns the compilation errors found.",
       "doc_status": "published",
       "source_path": "content/reference/classes/SSLCodeProvider.md",
       "exceptions": [],
       "caveats": [
         "Single-item compile methods require either a GUID or a full category.name.",
         "Category methods take category IDs, not category names.",
-        "The class reports compile-time problems only. It does not validate runtime behavior."
+        "The class reports compile-time problems only. It does not validate runtime behavior.",
+        "CompileAll, CompileAllServerScripts and CompileAllDataSources compile every matching item on the server. On a system with many scripts this can take long enough for a Designer call to time out. For an interactive check, compile only the scripts, data sources or categories you changed."
       ],
       "best_practices": {
         "do": [
           "Pass a full category.name or a GUID when targeting one server script or data source.",
-          "Use the bulk and category methods when validating larger changes.",
-          "Check the returned error list even when you expect a clean compile.",
+          "Use the list and category methods when validating larger changes.",
+          "Check the returned errors even when you expect a clean compile.",
           "Use category GUIDs with the ...Category and ...Categories methods."
         ],
         "dont": [
           "Pass a bare script or data source name without its category. Those calls are rejected unless you provide a GUID.",
           "Use CompileScript for ad hoc code validation. It currently raises a not-implemented error for any non-null input.",
-          "Assume a successful call means every target compiled cleanly. Review the returned error list before continuing automation or deployment steps."
+          "Assume a successful call means every target compiled cleanly. Review the returned errors before continuing automation or deployment steps.",
+          "Call CompileAll or CompileAllServerScripts from an interactive Designer session. They compile every server script on the server, which can take long enough for the Designer call to time out."
         ]
       }
     },
@@ -12227,7 +12234,7 @@
       "exceptions": [],
       "caveats": [
         "SequenceName is derived from the table name and field name, both converted to uppercase, and always starts with C_. When sPrefix is not empty, it is appended in uppercase after the field name, separated by _.",
-        "Create() handles create failures by showing a message rather than exposing a dedicated return value.",
+        "Create() has no return value. Check Exists afterwards to confirm that the sequence was created.",
         "Drop(), Exists, NextValue, and Reset() still depend on the target database being reachable and the sequence being valid in that database.",
         "Oracle and SQL Server do not reset sequences the same way. Oracle reset recreates the sequence, while SQL Server resets the existing sequence in place.",
         "Very long Oracle-derived sequence names may not remain human-readable because the name is shortened before use."
@@ -14352,7 +14359,6 @@
       "best_practices": {
         "do": [
           "Put /*@private; on the line immediately before :PROCEDURE with no blank lines between them.",
-          "Use /*@protected; for shared utilities that inheriting scripts need but external callers should not access.",
           "Default to public only when external invocation is intentional."
         ],
         "dont": [
@@ -14561,7 +14567,7 @@
       "source_path": "content/reference/returns/HttpException.md",
       "exceptions": [],
       "caveats": [
-        "HttpException is not directly constructable. Obtain it from HttpClient:GetLastServerException or catch it as the error raised by a failed HttpClient:GetResponse.",
+        "HttpException is not directly constructable. Obtain it from HttpClient:GetLastServerException, for example inside the :CATCH of a failed HttpClient:GetResponse.",
         "The value returned by GetLastServerException is cleared by the next successful response on the same client. Read it immediately after a failure.",
         "StatusCode is not the HTTP response code. For HTTP-level failures (404, 500, etc.) the failure mode is reported as a protocol-level status, and the server's body is exposed via MessageDetails."
       ],
@@ -14572,7 +14578,7 @@
           "Capture both Status and MessageDetails in error logs so a reader can tell whether the failure was on the way out or on the way back."
         ],
         "dont": [
-          "Try to construct an HttpException directly — it is only obtainable via HttpClient:GetLastServerException or by catching the error raised by a failed call.",
+          "Try to construct an HttpException directly — obtain it from HttpClient:GetLastServerException.",
           "Confuse StatusCode with the HTTP response status code. StatusCode here describes the failure mode of the request itself; for a non-success HTTP status (e.g., 404, 500), the server's response is in MessageDetails.",
           "Rely on MessageDetails always being meaningful — when the server returned no body, it falls back to a generic message."
         ]

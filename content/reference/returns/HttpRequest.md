@@ -13,9 +13,7 @@ starlims:
 
 A configurable outbound HTTP request — method, headers, content type, body, and timeout.
 
-An `HttpRequest` is the object you receive from [`HttpClient:CreateHttpRequest(sUrl)`](HttpClient.md#createhttprequest). It starts as an unauthenticated GET for the URL you passed. Set its properties and call `SetContent` (or `AddHeader`, `SetContentFromFile`) before passing it to [`HttpClient:GetResponse`](HttpClient.md#getresponse).
-
-A new request authenticates with default credentials unless a user and password are supplied at creation time, in which case it authenticates as that user.
+An `HttpRequest` is the object you receive from [`HttpClient:CreateHttpRequest(sUrl)`](HttpClient.md#createhttprequest). It starts as a GET for the URL you passed. Set its properties and call `SetContent` (or `AddHeader`, `SetContentFromFile`) before passing it to [`HttpClient:GetResponse`](HttpClient.md#getresponse).
 
 ## When to use
 

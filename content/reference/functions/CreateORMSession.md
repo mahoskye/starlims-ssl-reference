@@ -15,7 +15,7 @@ Creates the shared ORM session object for the current SSL runtime, or returns th
 
 `CreateORMSession` gives SSL one shared ORM session object for the current runtime context. The first call creates that object. Later calls return the same shared session instead of creating another one.
 
-The function also registers ORM-aware table-update checking. When a supported table update runs, SSL calls the session's `UpdatingTable` member with the table name and the update operation's friendly name. The member must return [`.T.`](../literals/true.md) to allow the update or [`.F.`](../literals/false.md) to block it.
+The function also registers ORM-aware table-update checking. When a supported table update runs, SSL calls the session's `UpdatingTable` member with two arguments, the first of which is the table name. The member must return [`.T.`](../literals/true.md) to allow the update or [`.F.`](../literals/false.md) to block it.
 
 ## When to use
 
@@ -67,7 +67,7 @@ This function takes no parameters.
 
 ### Control table updates with UpdatingTable
 
-Creates an ORM session and assigns a code block to `UpdatingTable` that permits updates only on the `ORDTASK` table through the `DATABASE` connection. The [`RunSQL`](RunSQL.md) call triggers the check, which allows or blocks the update based on the table and connection name. A blocked update raises, so [`:CATCH`](../keywords/CATCH.md) logs the reason and the procedure returns [`.F.`](../literals/false.md).
+Creates an ORM session and assigns a code block to `UpdatingTable` that permits updates only on the `ORDTASK` table. The block declares both arguments but decides on the first, the table name. The [`RunSQL`](RunSQL.md) call triggers the check, which allows or blocks the update based on the table name. A blocked update raises, so [`:CATCH`](../keywords/CATCH.md) logs the reason and the procedure returns [`.F.`](../literals/false.md).
 
 ```ssl
 :PROCEDURE UpdateAllowedTable;
@@ -76,9 +76,8 @@ Creates an ORM session and assigns a code block to `UpdatingTable` that permits 
 
 	oOrmSession := CreateORMSession();
 
-	oOrmSession:UpdatingTable := {|sTableName, sConnectionName|
+	oOrmSession:UpdatingTable := {|sTableName, vSecondArg|
 		Upper(sTableName) == "ORDTASK"
-			.AND. sConnectionName == "DATABASE"
 	};
 
 	:TRY;
