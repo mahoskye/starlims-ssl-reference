@@ -97,7 +97,7 @@ Usage:
 ```ssl
 :DECLARE oCalc;
 
-oCalc := CreateUdObject("OrderCalculator", {5, 12});
+oCalc := CreateUdObject("Lab.OrderCalculator", {5, 12});
 oCalc:CalculateTotal();
 ```
 
@@ -151,7 +151,7 @@ Usage:
 ```ssl
 :DECLARE oSample;
 
-oSample := CreateUdObject("SampleProcessor", {"S-001"});
+oSample := CreateUdObject("Lab.SampleProcessor", {"S-001"});
 oSample:Process();
 
 UsrMes("Status: " + oSample:GetStatus());
@@ -198,7 +198,7 @@ Usage:
 ```ssl
 :DECLARE oEntry;
 
-oEntry := CreateUdObject("ConfigEntry", {"MaxRetries", "3"});
+oEntry := CreateUdObject("Lab.ConfigEntry", {"MaxRetries", "3"});
 oEntry:UpdateValue("5");
 UsrMes(oEntry:GetDisplay());
 ```

@@ -16,7 +16,7 @@ Specifies the parent class for an SSL class.
 !!! info "One class per script"
     SSL allows only one [`:CLASS`](CLASS.md) definition per script file. Use `:INHERIT` in the child class file, and define the parent class in a separate script.
 
-Use `:INHERIT` immediately after [`:CLASS`](CLASS.md) `ClassName;` to make the new class derive from a parent class. The parent can be a plain class name or a qualified name such as `Category.ParentClass`, so the child class can inherit fields, methods, and inherited behavior from that parent. If `:INHERIT` is omitted, the class still inherits from the standard built-in base class.
+Use `:INHERIT` immediately after [`:CLASS`](CLASS.md) `ClassName;` to make the new class derive from a parent class. Name the parent with its category, as `Category.ParentClass`, so the child class can inherit fields, methods, and inherited behavior from that parent. If `:INHERIT` is omitted, the class still inherits from the standard built-in base class.
 
 The keyword can only appear directly after the class declaration, and only one parent class can be specified.
 
@@ -35,14 +35,14 @@ The keyword does not stand alone and is not used in script code outside a class 
 ## Syntax
 
 ```ssl
-:INHERIT ClassName;
+:INHERIT Category.ClassName;
 ```
 
 ## Parameters
 
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
-| `ClassName` | Identifier | Yes | The parent class to inherit from. This can be a plain name such as `BaseValidator` or a qualified name such as `Lab.BaseValidator`. |
+| `Category.ClassName` | Identifier | Yes | The parent class, written as its category and script name, such as `Lab.BaseValidator`. A plain name is a compile-time error: `Specify the full name of the class in :INHERIT : categoryname.scriptname!`. A colon separator (`Lab:BaseValidator`) is a syntax error. |
 
 ## Keyword group
 
@@ -96,7 +96,7 @@ Derived class script:
 
 ```ssl
 :CLASS SampleValidator;
-:INHERIT ValidationBase;
+:INHERIT Lab.ValidationBase;
 :DECLARE sSampleId;
 
 :PROCEDURE ValidateId;
@@ -123,7 +123,7 @@ Usage:
 :PROCEDURE RunValidation;
     :DECLARE oVal, sResult;
 
-    oVal := CreateUdObject("SampleValidator");
+    oVal := CreateUdObject("Lab.SampleValidator");
     oVal:sSampleId := "";
     sResult := oVal:ValidateId();
 
@@ -167,7 +167,7 @@ Derived class script:
 
 ```ssl
 :CLASS EnvReport;
-:INHERIT BaseReport;
+:INHERIT Lab.BaseReport;
 
 :DECLARE nContaminantLimit, sRegStandard;
 
@@ -194,7 +194,7 @@ Usage:
 :PROCEDURE ShowReportHeader;
     :DECLARE oReport;
 
-    oReport := CreateUdObject("EnvReport");
+    oReport := CreateUdObject("Lab.EnvReport");
     UsrMes(oReport:GetHeader());
 :ENDPROC;
 
@@ -240,7 +240,7 @@ First derived class script:
 
 ```ssl
 :CLASS ApprovalWorkflow;
-:INHERIT Workflow;
+:INHERIT Lab.Workflow;
 :DECLARE aApprovers, nCurrentStep;
 
 :PROCEDURE Execute;
@@ -270,7 +270,7 @@ Second derived class script:
 
 ```ssl
 :CLASS NotificationWorkflow;
-:INHERIT Workflow;
+:INHERIT Lab.Workflow;
 :DECLARE nSentCount;
 
 :PROCEDURE Execute;
@@ -300,8 +300,8 @@ Usage:
     :DECLARE oWorkflow, aWorkflows, nOuter, nInner, sStatus;
 
     aWorkflows := {
-        CreateUdObject("ApprovalWorkflow"),
-        CreateUdObject("NotificationWorkflow")
+        CreateUdObject("Lab.ApprovalWorkflow"),
+        CreateUdObject("Lab.NotificationWorkflow")
     };
 
     :FOR nOuter := 1 :TO ALen(aWorkflows);

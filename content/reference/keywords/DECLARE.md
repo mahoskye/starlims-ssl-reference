@@ -153,7 +153,7 @@ Usage:
 ```ssl
 :DECLARE oContext, sMessage;
 
-oContext := CreateUdObject("SampleContext");
+oContext := CreateUdObject("Lab.SampleContext");
 oContext:SetSample("LAB-2024-0042");
 oContext:AddResult();
 

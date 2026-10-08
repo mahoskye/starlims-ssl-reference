@@ -11,7 +11,7 @@ SSL has eight core value types (object covers both class instances and dynamic [
 | [boolean](../reference/types/boolean.md) | [`.T.`](../reference/literals/true.md), [`.F.`](../reference/literals/false.md) | [`.F.`](../reference/literals/false.md) is empty, [`.T.`](../reference/literals/true.md) is not | `"L"` | `"LOGIC"` |
 | [date](../reference/types/date.md) | No literal; use [`Today()`](../reference/functions/Today.md) | Null date is empty | `"D"` | `"DATE"` |
 | [array](../reference/types/array.md) | `{1, 2, 3}` | Empty array `{}` is empty | `"A"` | `"ARRAY"` |
-| [object](../reference/types/object.md) (class instance) | [`CreateUdObject("ClassName")`](../reference/functions/CreateUdObject.md) for a user-defined class, `Email{}` for a built-in class | Always non-empty | `"O"` | `"OBJECT"` |
+| [object](../reference/types/object.md) (class instance) | [`CreateUdObject("Category.ClassName")`](../reference/functions/CreateUdObject.md) for a user-defined class, `Email{}` for a built-in class | Always non-empty | `"O"` | `"OBJECT"` |
 | dynamic object ([`SSLExpando`](../reference/classes/SSLExpando.md)) | [`CreateUdObject()`](../reference/functions/CreateUdObject.md) or `CreateUdObject({{"prop", value}})` | Always non-empty | `"B"` | `"OBJECT"` |
 | [codeblock](../reference/types/codeblock.md) | `{|param| expression}` | Never empty once created | `"UI"` | `"CODEBLOCK"` |
 | [netobject](../reference/types/netobject.md) | [`MakeNETObject(...)`](../reference/functions/MakeNETObject.md) | Empty only when the wrapped reference is null | `"O"` | `"OBJECT"` |
@@ -36,7 +36,7 @@ When a variable is referenced, lookup proceeds in this order:
 2. **Caller scopes** — up the call stack
 3. **Public variables** — declared with [`:PUBLIC`](../reference/keywords/PUBLIC.md)
 
-Reading a caller's variable works but generates a warning. Writing to one raises no error at run time — an assignment to a name the current scope never declared can silently overwrite a caller's variable. Always declare variables locally; see [Variable Scope](variable-scope.md) for the full model.
+Reading a caller's variable works. Writing to one raises no error at run time — an assignment to a name the current scope never declared can silently overwrite a caller's variable. Always declare variables locally; see [Variable Scope](variable-scope.md) for the full model.
 
 Re-declaring an existing variable with [`:DECLARE`](../reference/keywords/DECLARE.md) is silently ignored — no error is thrown and the existing value is preserved.
 

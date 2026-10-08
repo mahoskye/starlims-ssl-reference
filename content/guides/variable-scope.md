@@ -23,7 +23,7 @@ in this order:
 The search stops at the first match. This applies to **writes as well as reads**
 — an assignment does not automatically create a variable in the current scope.
 
-Reading a caller's variable works but generates a warning. Writing to one raises
+Reading a caller's variable works. Writing to one raises
 no error at run time: the caller's value simply changes.
 
 ## Declaring is what makes a name private
