@@ -17,7 +17,7 @@ Runs one-time class initialization code when a user-defined class instance is cr
 
 Use `Constructor` to set initial field values, validate incoming arguments, and prepare an object before any other instance method runs. It is a reserved constructor declaration name inside [`:CLASS`](../keywords/CLASS.md), not a normal method name. If a class does not declare a constructor, it can still be created with no arguments.
 
-When `CreateUdObject("ClassName")` or `CreateUdObject("ClassName", {args})` creates a user-defined class instance, SSL runs that class's constructor automatically. Before the constructor body runs, the parent class's parameterless constructor runs automatically. Constructors cannot return values.
+When `CreateUdObject("Category.ClassName")` or `CreateUdObject("Category.ClassName", {args})` creates a user-defined class instance, SSL runs that class's constructor automatically. Before the constructor body runs, the parent class's parameterless constructor runs automatically. Constructors cannot return values.
 
 Because `Constructor` is a special declaration form, it cannot be called on an
 instance (for example `oItem:Constructor()`). The only explicit call is
@@ -57,8 +57,8 @@ Declare the constructor as `:PROCEDURE Constructor;` inside a [`:CLASS`](../keyw
 Create user-defined class instances with [`CreateUdObject`](../functions/CreateUdObject.md), not curly-brace construction:
 
 ```ssl
-oItem := CreateUdObject("MyClass");
-oItem := CreateUdObject("MyClass", {"Sample-001", 42});
+oItem := CreateUdObject("Lab.MyClass");
+oItem := CreateUdObject("Lab.MyClass", {"Sample-001", 42});
 ```
 
 ### Assigning to class fields
@@ -122,7 +122,7 @@ Usage:
 ```ssl
 :DECLARE oCounter, sMessage;
 
-oCounter := CreateUdObject("SampleCounter");
+oCounter := CreateUdObject("Lab.SampleCounter");
 oCounter:Increment();
 oCounter:Increment();
 
@@ -173,15 +173,15 @@ Usage:
 ```ssl
 :DECLARE oSample;
 
-oSample := CreateUdObject("Sample", {"S-001", "ACTIVE"});
+oSample := CreateUdObject("Lab.Sample", {"S-001", "ACTIVE"});
 UsrMes(oSample:GetSummary());
 
-oSample := CreateUdObject("Sample", {"S-002"});
+oSample := CreateUdObject("Lab.Sample", {"S-002"});
 UsrMes(oSample:GetSummary());
 
 /* The constructor raises on bad input, so guard creation with :TRY / :CATCH;
 :TRY;
-    oSample := CreateUdObject("Sample", {""});
+    oSample := CreateUdObject("Lab.Sample", {""});
 :CATCH;
     UsrMes("Rejected: " + GetLastSSLError():Description);
     ClearLastSSLError();
@@ -220,7 +220,7 @@ Derived class script:
 
 ```ssl
 :CLASS AuditCounter;
-:INHERIT Lab:CounterBase;
+:INHERIT Lab.CounterBase;
 
 :DECLARE sLabel;
 
@@ -240,7 +240,7 @@ Usage:
 ```ssl
 :DECLARE oCounter;
 
-oCounter := CreateUdObject("AuditCounter", {"Batch A"});
+oCounter := CreateUdObject("Lab.AuditCounter", {"Batch A"});
 UsrMes(oCounter:GetSummary());
 ```
 

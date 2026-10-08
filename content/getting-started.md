@@ -170,7 +170,7 @@ Built-in functions (e.g., [`Len`](reference/functions/Len.md), [`ALen`](referenc
 ### Built-in vs user-defined classes
 
 - **Built-in classes** instantiate with curly braces only: `Email{}`, `SSLDataset{}`. They cannot be created via `CreateUdObject`.
-- **User-defined classes** (`:CLASS` files) instantiate via [`CreateUdObject`](reference/functions/CreateUdObject.md)`("ClassName")` or `CreateUdObject("ClassName", {args})`.
+- **User-defined classes** (`:CLASS` files) instantiate via [`CreateUdObject`](reference/functions/CreateUdObject.md)`("Category.ClassName")` or `CreateUdObject("Category.ClassName", {args})`.
 - `CreateUdObject()` with no argument creates an empty dynamic object (`SSLExpando`).
 
 ### Case fall-through

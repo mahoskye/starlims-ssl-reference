@@ -78,6 +78,7 @@ Only one form is used per call. `aPropertyDefs` and `sClassName` are both the fi
 
 ## Caveats
 
+- Pass the class as `Category.ClassName`. A bare class name is looked up only among the default categories, so for a class in your own category it raises `There is no script with name: <name> among default categories.`
 - Property names in the array form are not checked against identifier rules. In observed runtime behavior, `CreateUdObject({"1abc"})` creates a property named `1abc` instead of raising an error.
 - An empty `aPropertyDefs` array is valid and returns an empty dynamic object.
 - If the same property name appears more than once in `aPropertyDefs`, the last value wins.

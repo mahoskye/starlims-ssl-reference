@@ -98,7 +98,7 @@ Malformed procedure declarations fail at compile time. Common problems include a
 
 - `:PROCEDURE` is case-sensitive and must be written in uppercase.
 - [`:DEFAULT`](DEFAULT.md) lines belong immediately after [`:PARAMETERS`](PARAMETERS.md), not on [`:DECLARE`](DECLARE.md) lines.
-- More than 20 parameters is allowed, but it produces a performance warning.
+- More than 20 parameters is allowed.
 - Script-level visibility annotations such as `/*@private;` and `/*@protected;` apply only to script procedures and must appear immediately before `:PROCEDURE`.
 
 ## Examples

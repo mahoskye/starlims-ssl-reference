@@ -93,7 +93,7 @@ Derived class:
 
 ```ssl
 :CLASS Calculator;
-:INHERIT Lab:CalculatorBase;
+:INHERIT Lab.CalculatorBase;
 
 :DECLARE nLastValue;
 
@@ -122,7 +122,7 @@ Usage:
 ```ssl
 :DECLARE oCalc, nTotal;
 
-oCalc := CreateUdObject("Calculator");
+oCalc := CreateUdObject("Lab.Calculator");
 oCalc:Add(5);
 oCalc:Add(3);
 
@@ -164,7 +164,7 @@ Derived class:
 
 ```ssl
 :CLASS EmployeeRecord;
-:INHERIT Lab:PersonBase;
+:INHERIT Lab.PersonBase;
 
 :DECLARE sBadgeName, sRole;
 
@@ -196,7 +196,7 @@ Usage:
 ```ssl
 :DECLARE oEmployee;
 
-oEmployee := CreateUdObject("EmployeeRecord", {"Alice Adams", "A. Adams", "Chemist"});
+oEmployee := CreateUdObject("Lab.EmployeeRecord", {"Alice Adams", "A. Adams", "Chemist"});
 oEmployee:ShowNames();
 ```
 

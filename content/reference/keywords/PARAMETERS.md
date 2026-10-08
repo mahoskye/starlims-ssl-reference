@@ -22,7 +22,7 @@ The `:PARAMETERS` keyword introduces the argument names a routine can receive. I
 - Standard scripts and routines can omit `:PARAMETERS` when they take no arguments.
 - If `:PARAMETERS` is present, it must come before any other statements in that body.
 - A parameter list must contain at least one name.
-- More than 20 parameters is allowed, but it produces a performance warning.
+- More than 20 parameters is allowed.
 
 SSL data source files use a different form. In SSL and SQL data source files, parameters are declared inline with defaults on the same line, using [`:=`](../operators/assignment.md) instead of separate [`:DEFAULT`](DEFAULT.md) statements.
 

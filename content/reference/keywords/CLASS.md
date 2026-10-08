@@ -49,11 +49,6 @@ Constructors use the reserved declaration name [`Constructor`](../special-forms/
 
 ```ssl
 :CLASS ClassName;
-:INHERIT ParentClass;
-```
-
-```ssl
-:CLASS ClassName;
 :INHERIT Category.ParentClass;
 ```
 
@@ -162,7 +157,7 @@ Derived class script:
 
 ```ssl
 :CLASS QcSample;
-:INHERIT LabSample;
+:INHERIT Samples.LabSample;
 
 :DECLARE nResultValue;
 
