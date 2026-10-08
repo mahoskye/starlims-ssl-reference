@@ -2026,13 +2026,12 @@
 <h1 id="access-modifiers">Access Modifiers<a class="headerlink" href="#access-modifiers" title="Permanent link">&para;</a></h1>
 <h2 id="what-it-does">What it does<a class="headerlink" href="#what-it-does" title="Permanent link">&para;</a></h2>
 <p>SSL supports two comment-based access modifiers that control procedure visibility. Place one on the line immediately before a <a href="../../keywords/PROCEDURE/"><code>:PROCEDURE</code></a> declaration.</p>
-<p><code>/*@private;</code> marks a procedure as private, callable only from other procedures within the same script file. External scripts and inheriting scripts cannot invoke it.</p>
-<p><code>/*@protected;</code> marks a procedure as protected, callable from the same script file and from scripts that inherit from or extend the containing class or category. External scripts cannot invoke it.</p>
+<p><code>/*@private;</code> marks a procedure as private, callable only from other procedures within the same script file. External scripts cannot invoke it.</p>
+<p><code>/*@protected;</code> marks a procedure as protected, callable from the same script file. External scripts cannot invoke it. How <code>/*@protected;</code> differs from <code>/*@private;</code> for script-level procedures is not documented here, so prefer <code>/*@private;</code> for helpers that only the same script calls.</p>
 <p>Procedures with no modifier are <strong>public</strong> by default and can be called from anywhere.</p>
 <h2 id="when-to-use-it">When to use it<a class="headerlink" href="#when-to-use-it" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When a helper procedure is an implementation detail that external callers should never invoke directly, use <code>/*@private;</code>.</li>
-<li>When a shared utility needs to be available to inheriting scripts but hidden from unrelated external callers, use <code>/*@protected;</code>.</li>
 <li>When organizing a script with a clear public API boundary alongside internal implementation procedures.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
@@ -2049,7 +2048,6 @@
 <tr>
 <th>Modifier</th>
 <th>Same script</th>
-<th>Inheriting scripts</th>
 <th>External scripts</th>
 </tr>
 </thead>
@@ -2058,18 +2056,15 @@
 <td><em>(none — default)</em></td>
 <td>Yes</td>
 <td>Yes</td>
-<td>Yes</td>
 </tr>
 <tr>
 <td><code>/*@protected;</code></td>
-<td>Yes</td>
 <td>Yes</td>
 <td>No</td>
 </tr>
 <tr>
 <td><code>/*@private;</code></td>
 <td>Yes</td>
-<td>No</td>
 <td>No</td>
 </tr>
 </tbody>
@@ -2083,7 +2078,6 @@
 <p class="admonition-title">Do</p>
 <ul>
 <li>Put <code>/*@private;</code> on the line immediately before <a href="../../keywords/PROCEDURE/"><code>:PROCEDURE</code></a> with no blank lines between them.</li>
-<li>Use <code>/*@protected;</code> for shared utilities that inheriting scripts need but external callers should not access.</li>
 <li>Default to public only when external invocation is intentional.</li>
 </ul>
 </div>
@@ -2103,7 +2097,7 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="combining-public-protected-and-private-procedures">Combining public, protected, and private procedures<a class="headerlink" href="#combining-public-protected-and-private-procedures" title="Permanent link">&para;</a></h3>
-<p>Shows all three visibility levels in one script. <code>GetSample</code> is the public entry point, <code>ValidateSample</code> is available to inheriting scripts, and <code>FormatSampleLog</code> is internal only.</p>
+<p>Shows all three visibility levels in one script. <code>GetSample</code> is the public entry point, <code>ValidateSample</code> is protected, and <code>FormatSampleLog</code> is internal only.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="c1">/* region Sample Management API;</span>
 
 <span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetSample</span><span class="p">;</span>
@@ -2135,7 +2129,7 @@
 <p>In this example:</p>
 <ul>
 <li><code>GetSample</code> — public, callable from anywhere</li>
-<li><code>ValidateSample</code> — protected, callable from this script and inheriting scripts</li>
+<li><code>ValidateSample</code> — protected, callable from this script; external scripts cannot call it</li>
 <li><code>FormatSampleLog</code> — private, callable only within this script</li>
 </ul>
 
@@ -2158,7 +2152,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:48:07 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2026 15:58:28 UTC">October 8, 2026</span>
   </span>
 
     

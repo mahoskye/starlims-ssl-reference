@@ -3421,21 +3421,21 @@
 <td><a href="../../types/string/">string</a></td>
 <td>yes</td>
 <td>—</td>
-<td>SMTP server name. <a href="../../literals/nil/"><code>NIL</code></a> is handled by <code>bIgnoreErrors</code>; an empty string is invalid.</td>
+<td>SMTP server name. Must not be <a href="../../literals/nil/"><code>NIL</code></a> or empty (see Exceptions).</td>
 </tr>
 <tr>
 <td><code>aRecipients</code></td>
 <td><a href="../../types/array/">array</a></td>
 <td>yes</td>
 <td>—</td>
-<td>Recipient address array. <a href="../../literals/nil/"><code>NIL</code></a> is handled by <code>bIgnoreErrors</code>; an empty array is invalid.</td>
+<td>Recipient address array. Must not be <a href="../../literals/nil/"><code>NIL</code></a> or empty (see Exceptions).</td>
 </tr>
 <tr>
 <td><code>sFromWho</code></td>
 <td><a href="../../types/string/">string</a></td>
 <td>yes</td>
 <td>—</td>
-<td>Sender address. <a href="../../literals/nil/"><code>NIL</code></a> is handled by <code>bIgnoreErrors</code>; an empty string is invalid.</td>
+<td>Sender address. Must not be <a href="../../literals/nil/"><code>NIL</code></a> or empty (see Exceptions).</td>
 </tr>
 <tr>
 <td><code>sSubject</code></td>
@@ -3505,7 +3505,7 @@
 <td><a href="../../types/boolean/">boolean</a></td>
 <td>no</td>
 <td><a href="../../literals/true/"><code>.T.</code></a></td>
-<td>Accepted for API compatibility. The three required-argument validation throws occur unconditionally regardless of this value.</td>
+<td>Does not suppress the required-argument exceptions listed under Exceptions.</td>
 </tr>
 <tr>
 <td><code>bUseSSL</code></td>
@@ -3531,7 +3531,7 @@
 </tbody>
 </table>
 <h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
-<p><strong><a href="../../types/boolean/">boolean</a></strong> — <a href="../../literals/true/"><code>.T.</code></a> when the outbox row is written successfully; <a href="../../literals/false/"><code>.F.</code></a> when the queue operation fails without raising, such as the <code>bIgnoreErrors</code> handling for <a href="../../literals/nil/"><code>NIL</code></a> required arguments.</p>
+<p><strong><a href="../../types/boolean/">boolean</a></strong> — <a href="../../literals/true/"><code>.T.</code></a> when the outbox row is written successfully; <a href="../../literals/false/"><code>.F.</code></a> when the queue operation fails without raising.</p>
 <p>A successful return means the message was queued, not delivered.</p>
 <h2 id="exceptions">Exceptions<a class="headerlink" href="#exceptions" title="Permanent link">&para;</a></h2>
 <table data-ssl-table="exceptions"><colgroup><col><col></colgroup>
@@ -3564,7 +3564,6 @@
 <li>Validate <code>sSMTP</code>, <code>aRecipients</code>, and <code>sFromWho</code> before calling so you do not depend on runtime argument errors.</li>
 <li>Pass explicit arrays for attachments, CC, and BCC when those lists are part of the workflow.</li>
 <li>Use <a href="../SendFromOutbox/"><code>SendFromOutbox</code></a> as the follow-up step when queued messages should actually be delivered.</li>
-<li>Set <code>bIgnoreErrors</code> to <a href="../../literals/false/"><code>.F.</code></a> when the caller should surface and handle validation failures explicitly.</li>
 </ul>
 </div>
 <div class="admonition failure">
@@ -3573,7 +3572,7 @@
 <li>Treat a successful return as proof that the email was sent. It only means the request was queued.</li>
 <li>Pass <code>""</code> for <code>sSMTP</code> or <code>sFromWho</code>, or pass an empty recipient array. Those values are still invalid.</li>
 <li>Use <code>SendToOutbox</code> when the requirement is immediate delivery. Use <a href="../SendLimsEmail/"><code>SendLimsEmail</code></a> for direct send behavior.</li>
-<li>Assume <code>bIgnoreErrors</code> suppresses every failure. Its special handling only covers <a href="../../literals/nil/"><code>NIL</code></a> required arguments before the queue call proceeds.</li>
+<li>Rely on <code>bIgnoreErrors</code> to turn a missing required argument into a <a href="../../literals/false/"><code>.F.</code></a> result. Validate the arguments and wrap the call in <a href="../../keywords/TRY/"><code>:TRY</code></a>.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
@@ -3725,7 +3724,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:58:19 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2026 15:58:28 UTC">October 8, 2026</span>
   </span>
 
     

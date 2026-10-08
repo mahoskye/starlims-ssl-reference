@@ -2093,7 +2093,7 @@
 
 <h1 id="httpexception">HttpException<a class="headerlink" href="#httpexception" title="Permanent link">&para;</a></h1>
 <p>Details on a failed HTTP request — status, message, and the server's response body.</p>
-<p>An <code>HttpException</code> is the object you receive from <a href="../HttpClient/#getlastserverexception"><code>HttpClient:GetLastServerException</code></a> after a failed call. The same exception is also raised by the call that failed, so you can either catch it directly or look it up from the client after the fact.</p>
+<p>An <code>HttpException</code> is the object you receive from <a href="../HttpClient/#getlastserverexception"><code>HttpClient:GetLastServerException</code></a> after a failed call. The failed call also raises an error, so wrap it in <a href="../../keywords/TRY/"><code>:TRY</code></a> and call <code>GetLastServerException()</code> inside <a href="../../keywords/CATCH/"><code>:CATCH</code></a> to read the details.</p>
 <p><code>StatusCode</code> and <code>Status</code> describe the failure mode in terms of the request lifecycle (DNS, connection, server response). <code>MessageDetails</code> gives you the server's error body when one is available — useful for APIs that return a JSON or text error payload alongside a non-success HTTP status.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2116,7 +2116,7 @@
 </tr>
 </tbody>
 </table>
-<p><code>HttpException</code> is also raised directly by <a href="../HttpClient/#getresponse"><code>HttpClient:GetResponse</code></a> (and any method that delegates to it) when a request fails. Catch the error in a <code>:TRY</code> / <code>:CATCH</code> block and call <code>GetLastServerException()</code> inside <code>:CATCH</code> to read it, as the examples below do.</p>
+<p><a href="../HttpClient/#getresponse"><code>HttpClient:GetResponse</code></a> (and any method that delegates to it) also raises an error when a request fails. Catch the error in a <code>:TRY</code> / <code>:CATCH</code> block and call <code>GetLastServerException()</code> inside <code>:CATCH</code> to read the <code>HttpException</code>, as the examples below do.</p>
 <h2 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2166,14 +2166,14 @@
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
-<li>Try to construct an <code>HttpException</code> directly — it is only obtainable via <a href="../HttpClient/#getlastserverexception"><code>HttpClient:GetLastServerException</code></a> or by catching the error raised by a failed call.</li>
+<li>Try to construct an <code>HttpException</code> directly — obtain it from <a href="../HttpClient/#getlastserverexception"><code>HttpClient:GetLastServerException</code></a>.</li>
 <li>Confuse <code>StatusCode</code> with the HTTP response status code. <code>StatusCode</code> here describes the failure mode of the request itself; for a non-success HTTP status (e.g., 404, 500), the server's response is in <code>MessageDetails</code>.</li>
 <li>Rely on <code>MessageDetails</code> always being meaningful — when the server returned no body, it falls back to a generic message.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>HttpException</code> is not directly constructable. Obtain it from <a href="../HttpClient/#getlastserverexception"><code>HttpClient:GetLastServerException</code></a> or catch it as the error raised by a failed <a href="../HttpClient/#getresponse"><code>HttpClient:GetResponse</code></a>.</li>
+<li><code>HttpException</code> is not directly constructable. Obtain it from <a href="../HttpClient/#getlastserverexception"><code>HttpClient:GetLastServerException</code></a>, for example inside the <a href="../../keywords/CATCH/"><code>:CATCH</code></a> of a failed <a href="../HttpClient/#getresponse"><code>HttpClient:GetResponse</code></a>.</li>
 <li>The value returned by <code>GetLastServerException</code> is cleared by the next successful response on the same client. Read it immediately after a failure.</li>
 <li><code>StatusCode</code> is not the HTTP response code. For HTTP-level failures (404, 500, etc.) the failure mode is reported as a protocol-level status, and the server's body is exposed via <code>MessageDetails</code>.</li>
 </ul>
@@ -2260,7 +2260,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 22:09:01 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2026 15:58:28 UTC">October 8, 2026</span>
   </span>
 
     

@@ -4216,7 +4216,7 @@
 <h1 id="createormsession">CreateORMSession<a class="headerlink" href="#createormsession" title="Permanent link">&para;</a></h1>
 <p>Creates the shared ORM session object for the current SSL runtime, or returns the existing one if it has already been created.</p>
 <p><code>CreateORMSession</code> gives SSL one shared ORM session object for the current runtime context. The first call creates that object. Later calls return the same shared session instead of creating another one.</p>
-<p>The function also registers ORM-aware table-update checking. When a supported table update runs, SSL calls the session's <code>UpdatingTable</code> member with the table name and the update operation's friendly name. The member must return <a href="../../literals/true/"><code>.T.</code></a> to allow the update or <a href="../../literals/false/"><code>.F.</code></a> to block it.</p>
+<p>The function also registers ORM-aware table-update checking. When a supported table update runs, SSL calls the session's <code>UpdatingTable</code> member with two arguments, the first of which is the table name. The member must return <a href="../../literals/true/"><code>.T.</code></a> to allow the update or <a href="../../literals/false/"><code>.F.</code></a> to block it.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need one shared ORM session object that can be reused across related SSL code.</li>
@@ -4275,16 +4275,15 @@
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="control-table-updates-with-updatingtable">Control table updates with UpdatingTable<a class="headerlink" href="#control-table-updates-with-updatingtable" title="Permanent link">&para;</a></h3>
-<p>Creates an ORM session and assigns a code block to <code>UpdatingTable</code> that permits updates only on the <code>ORDTASK</code> table through the <code>DATABASE</code> connection. The <a href="../RunSQL/"><code>RunSQL</code></a> call triggers the check, which allows or blocks the update based on the table and connection name. A blocked update raises, so <a href="../../keywords/CATCH/"><code>:CATCH</code></a> logs the reason and the procedure returns <a href="../../literals/false/"><code>.F.</code></a>.</p>
+<p>Creates an ORM session and assigns a code block to <code>UpdatingTable</code> that permits updates only on the <code>ORDTASK</code> table. The block declares both arguments but decides on the first, the table name. The <a href="../RunSQL/"><code>RunSQL</code></a> call triggers the check, which allows or blocks the update based on the table name. A blocked update raises, so <a href="../../keywords/CATCH/"><code>:CATCH</code></a> logs the reason and the procedure returns <a href="../../literals/false/"><code>.F.</code></a>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">UpdateAllowedTable</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">nTaskID</span><span class="p">,</span><span class="w"> </span><span class="n">sNewStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oOrmSession</span><span class="p">,</span><span class="w"> </span><span class="n">bUpdated</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">oOrmSession</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">CreateORMSession</span><span class="p">();</span>
 
-<span class="w">    </span><span class="n">oOrmSession</span><span class="p">:</span><span class="n">UpdatingTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="err">|</span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">sConnectionName</span><span class="err">|</span>
+<span class="w">    </span><span class="n">oOrmSession</span><span class="p">:</span><span class="n">UpdatingTable</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="err">|</span><span class="n">sTableName</span><span class="p">,</span><span class="w"> </span><span class="n">vSecondArg</span><span class="err">|</span>
 <span class="w">        </span><span class="nf">Upper</span><span class="p">(</span><span class="n">sTableName</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"ORDTASK"</span>
-<span class="w">            </span><span class="ow">.AND.</span><span class="w"> </span><span class="n">sConnectionName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"DATABASE"</span>
 <span class="w">    </span><span class="p">};</span>
 
 <span class="w">    </span><span class="k">:TRY</span><span class="p">;</span>
@@ -4334,7 +4333,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2026 15:58:28 UTC">October 8, 2026</span>
   </span>
 
     

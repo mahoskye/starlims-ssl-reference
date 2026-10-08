@@ -3551,7 +3551,6 @@
 <ul>
 <li>When SSL must wait for an external program to finish before continuing.</li>
 <li>When you want a simple <a href="../../literals/true/"><code>.T.</code></a> or <a href="../../literals/false/"><code>.F.</code></a> result for process startup.</li>
-<li>When your workflow needs to inspect <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> after a launch failure.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">RunApp</span><span class="p">(</span><span class="n">sApplication</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sArguments</span><span class="p">])</span>
@@ -3606,7 +3605,7 @@
 <p class="admonition-title">Do</p>
 <ul>
 <li>Pass <code>sArguments</code> separately for normal usage so the executable path stays clear and easy to validate.</li>
-<li>Check the boolean result and inspect <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> when <code>RunApp</code> returns <a href="../../literals/false/"><code>.F.</code></a>.</li>
+<li>Call <a href="../ClearLastSSLError/"><code>ClearLastSSLError</code></a> before the launch and check the boolean result. After <a href="../../literals/false/"><code>.F.</code></a>, read <a href="../GetLastSSLError/"><code>GetLastSSLError</code></a> only when it is not empty.</li>
 <li>Use <a href="../LimsExec/"><code>LimsExec</code></a> instead when the workflow should continue without waiting.</li>
 </ul>
 </div>
@@ -3614,7 +3613,7 @@
 <p class="admonition-title">Don't</p>
 <ul>
 <li>Assume <a href="../../literals/true/"><code>.T.</code></a> means the external program completed its work successfully. <code>RunApp</code> does not report the child process exit code.</li>
-<li>Pass an empty or malformed <code>sApplication</code> value. Validation errors raise exceptions instead of returning <a href="../../literals/false/"><code>.F.</code></a>.</li>
+<li>Pass an empty or malformed <code>sApplication</code> value. Only the <a href="../../literals/nil/"><code>NIL</code></a> case is listed under Exceptions; validate the value first, and wrap the call in <a href="../../keywords/TRY/"><code>:TRY</code></a> when the path comes from input, so a bad value is handled whether it raises or returns <a href="../../literals/false/"><code>.F.</code></a>.</li>
 <li>Use <code>RunApp</code> for long-running tools when blocking the SSL workflow would be a problem.</li>
 </ul>
 </div>
@@ -3646,22 +3645,28 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GeneratePdfReport"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="report-the-launch-error-after-a-failed-start">Report the launch error after a failed start<a class="headerlink" href="#report-the-launch-error-after-a-failed-start" title="Permanent link">&para;</a></h3>
-<p>Wait for a command-line tool to finish, and surface the last SSL error when the process could not be created.</p>
+<p>Wait for a command-line tool to finish, and surface the last SSL error when the process could not be created. <a href="../ClearLastSSLError/"><code>ClearLastSSLError</code></a> runs first so an earlier, unrelated error is not reported, and the error object is checked before it is read.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ExportAuditData</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sApp</span><span class="p">,</span><span class="w"> </span><span class="n">sArgs</span><span class="p">,</span><span class="w"> </span><span class="n">bFinished</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sApp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"C:\Program Files\Acme Tools\AuditExport.exe"</span><span class="p">;</span>
 <span class="w">    </span><span class="n">sArgs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="err">'</span><span class="o">/</span><span class="n">batch</span><span class="w"> </span><span class="n">B</span><span class="o">-</span><span class="mi">1042</span><span class="w"> </span><span class="o">/</span><span class="n">output</span><span class="w"> </span><span class="s2">"C:\Exports\audit.csv"</span><span class="err">'</span><span class="p">;</span>
+<span class="w">    </span><span class="nf">ClearLastSSLError</span><span class="p">();</span>
 <span class="w">    </span><span class="n">bFinished</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunApp</span><span class="p">(</span><span class="n">sApp</span><span class="p">,</span><span class="w"> </span><span class="n">sArgs</span><span class="p">);</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bFinished</span><span class="p">;</span>
 <span class="w">        </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Audit export finished"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ELSE</span><span class="p">;</span>
 <span class="w">        </span><span class="n">oErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">GetLastSSLError</span><span class="p">();</span>
-<span class="w">        </span><span class="c1">/* Logs on failure: startup error;</span>
-<span class="w">        </span><span class="nf">ErrorMes</span><span class="p">(</span>
-<span class="w">            </span><span class="s2">"Audit export could not be started: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span>
-<span class="w">        </span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">:IF</span><span class="w"> </span><span class="ow">.NOT.</span><span class="w"> </span><span class="nf">Empty</span><span class="p">(</span><span class="n">oErr</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">/* Logs on failure: startup error;</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span>
+<span class="w">                </span><span class="s2">"Audit export could not be started: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">oErr</span><span class="p">:</span><span class="n">Description</span>
+<span class="w">            </span><span class="p">);</span>
+<span class="w">        </span><span class="k">:ELSE</span><span class="p">;</span>
+<span class="w">            </span><span class="nf">ErrorMes</span><span class="p">(</span><span class="s2">"Audit export could not be started."</span><span class="p">);</span>
+<span class="w">        </span><span class="k">:ENDIF</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="n">bFinished</span><span class="p">;</span>
@@ -3716,7 +3721,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2026 15:58:28 UTC">October 8, 2026</span>
   </span>
 
     

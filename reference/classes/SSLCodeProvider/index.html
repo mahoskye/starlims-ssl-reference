@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Compiles published server scripts and data sources and returns a list of compilation errors.">
+        <meta name="description" content="Compiles published server scripts and data sources and returns the compilation errors found.">
       
       
       
@@ -2944,9 +2944,9 @@
 
 
 <h1 id="sslcodeprovider">SSLCodeProvider<a class="headerlink" href="#sslcodeprovider" title="Permanent link">&para;</a></h1>
-<p>Compiles published server scripts and data sources and returns a list of compilation errors.</p>
+<p>Compiles published server scripts and data sources and returns the compilation errors found.</p>
 <p>Use <code>SSLCodeProvider{}</code> when you need to validate published SSL code before a release, during deployment checks, or while troubleshooting compile failures. The class can compile all server scripts, all data sources, one item, or all items in one or more categories. For single-item methods, pass either the item GUID or its full name in <code>category.name</code> format.</p>
-<p>Every compile method returns the same shape: a list of compilation errors. An empty list means the compile succeeded. Each entry identifies the script (name and id), the kind of script, the location of the failure (line and column), and the error message. Index into the list and read those fields directly to surface or log the errors.</p>
+<p>Every compile method returns an object that holds the compilation errors found. Inspect it before treating a compile as clean.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need to validate all published server scripts before a release.</li>
@@ -3257,8 +3257,8 @@
 <p class="admonition-title">Do</p>
 <ul>
 <li>Pass a full <code>category.name</code> or a GUID when targeting one server script or data source.</li>
-<li>Use the bulk and category methods when validating larger changes.</li>
-<li>Check the returned error list even when you expect a clean compile.</li>
+<li>Use the list and category methods when validating larger changes.</li>
+<li>Check the returned errors even when you expect a clean compile.</li>
 <li>Use category GUIDs with the <code>...Category</code> and <code>...Categories</code> methods.</li>
 </ul>
 </div>
@@ -3267,7 +3267,8 @@
 <ul>
 <li>Pass a bare script or data source name without its category. Those calls are rejected unless you provide a GUID.</li>
 <li>Use <code>CompileScript</code> for ad hoc code validation. It currently raises a not-implemented error for any non-null input.</li>
-<li>Assume a successful call means every target compiled cleanly. Review the returned error list before continuing automation or deployment steps.</li>
+<li>Assume a successful call means every target compiled cleanly. Review the returned errors before continuing automation or deployment steps.</li>
+<li>Call <code>CompileAll</code> or <code>CompileAllServerScripts</code> from an interactive Designer session. They compile every server script on the server, which can take long enough for the Designer call to time out.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
@@ -3275,6 +3276,7 @@
 <li>Single-item compile methods require either a GUID or a full <code>category.name</code>.</li>
 <li>Category methods take category IDs, not category names.</li>
 <li>The class reports compile-time problems only. It does not validate runtime behavior.</li>
+<li><code>CompileAll</code>, <code>CompileAllServerScripts</code> and <code>CompileAllDataSources</code> compile every matching item on the server. On a system with many scripts this can take long enough for a Designer call to time out. For an interactive check, compile only the scripts, data sources or categories you changed.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="compile-one-server-script">Compile one server script<a class="headerlink" href="#compile-one-server-script" title="Permanent link">&para;</a></h3>
@@ -3306,7 +3308,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ValidateDataSourceCategory"</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="compile-all-server-scripts-and-data-sources">Compile all server scripts and data sources<a class="headerlink" href="#compile-all-server-scripts-and-data-sources" title="Permanent link">&para;</a></h3>
-<p>Runs a full validation pass across all published scripts and data sources. Useful as a pre-deployment check.</p>
+<p>Runs a full validation pass across all published scripts and data sources. Useful as a pre-deployment check; because it compiles everything, run it where a long call is acceptable rather than from an interactive Designer session.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ValidateAllPublishedCode</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">oProvider</span><span class="p">,</span><span class="w"> </span><span class="n">oErrors</span><span class="p">;</span>
 
@@ -3361,7 +3363,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:50:27 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2026 15:58:28 UTC">October 8, 2026</span>
   </span>
 
     
