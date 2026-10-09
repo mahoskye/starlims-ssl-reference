@@ -19,6 +19,9 @@ If `aTarget` is [`NIL`](../literals/nil.md) or empty, the function returns the f
 
 The function always returns literal SQL text. It does not produce positional parameter arrays for database calls such as [`RunSQL`](RunSQL.md), [`LSearch`](LSearch.md), [`LSelect`](LSelect.md), [`LSelect1`](LSelect1.md), [`LSelectC`](LSelectC.md), or [`GetDataSet`](GetDataSet.md).
 
+!!! warning "Pass only an array as the first argument"
+    Where argument types are not checked (the `CompilerCheckParamType` setting is off), passing a non-array, for example `BuildStringForIn("A1")`, can crash the server process, and the failure cannot be caught with [`:TRY`](../keywords/TRY.md). Check the value with [`LimsTypeEx`](LimsTypeEx.md) (`"ARRAY"`) when it can arrive as more than one type. See [Argument types for built-in functions](../../guides/type-system.md#argument-types-for-built-in-functions).
+
 ## When to use
 
 - When you must embed a literal `IN (...)` list into dynamically assembled SQL.

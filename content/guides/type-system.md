@@ -53,6 +53,25 @@ Re-declaring an existing variable with [`:DECLARE`](../reference/keywords/DECLAR
 !!! warning "`LimsType` raises for a variable that holds NIL"
     `LimsType("NIL")` returns `"U"`, but `LimsType("vValue")` raises an error when `vValue` holds [`NIL`](../reference/literals/nil.md), and so does naming an omitted [`:PARAMETERS`](../reference/keywords/PARAMETERS.md) argument. Check for [`NIL`](../reference/literals/nil.md) first with `LimsTypeEx(vValue) == "NIL"`, or use [`LimsTypeEx`](../reference/functions/LimsTypeEx.md), which accepts any value.
 
+## Argument types for built-in functions
+
+Each built-in function expects particular types for its parameters. Whether a call with the wrong type is rejected depends on the installation's `CompilerCheckParamType` setting:
+
+- **On:** the call raises a parameter-type error that [`:TRY`](../reference/keywords/TRY.md) can catch.
+- **Off:** nothing checks the type, and the function reads the value as if it were the type it expected.
+
+!!! warning "A non-array where an array is expected can crash the server"
+    Where the setting is off, passing a non-array to a parameter that expects an array can crash the server process. The failure cannot be caught with [`:TRY`](../reference/keywords/TRY.md), [`:FINALLY`](../reference/keywords/FINALLY.md) may not run, and the crash can take down the worker process for every user on it. This has been observed with [`AAdd`](../reference/functions/AAdd.md), [`BuildString`](../reference/functions/BuildString.md), [`BuildStringForIn`](../reference/functions/BuildStringForIn.md) and the value list of [`LSelect1`](../reference/functions/LSelect1.md). Other functions that take an array, such as [`LSelect`](../reference/functions/LSelect.md), [`LSelectC`](../reference/functions/LSelectC.md) and [`LSearch`](../reference/functions/LSearch.md), may behave the same way.
+
+Other wrong types give a quiet wrong answer instead of an error. A string where a number is expected reads as `0`, and a number where a string is expected reads as empty: `Left("abc", "x")` and `Upper(1)` both return `""`.
+
+Code should not depend on the setting. These patterns are the usual way a wrong type reaches a built-in function:
+
+- **An accumulator started as a string.** `aItems := "";` followed by `AAdd(aItems, x)` in a loop. Start arrays with `{}`.
+- **A value that is sometimes an array.** A parameter that callers pass either as an array or as a delimited string, or a variable assigned in different branches. Check `LimsTypeEx(vValue) == "ARRAY"` before passing it on.
+- **A single value where a list is expected.** `LSelect1(sSQL,, nId)` instead of `LSelect1(sSQL,, {nId})`.
+- **Arguments shifted by a missing comma.** Dropping the comma for an omitted parameter moves the next value into the wrong position.
+
 ## Type coercion
 
 SSL performs limited implicit type coercion:

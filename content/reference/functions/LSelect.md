@@ -79,6 +79,7 @@ LSelect(sCommandString, [aFieldList], [sConnectionName], [aArrayOfValues], [bNul
 - `LSelect` currently behaves like [`LSelect1`](LSelect1.md) because the `aFieldList` path is not implemented.
 - If you need to skip `aFieldList` and still pass later arguments, keep the skipped-argument commas adjacent, for example `LSelect(sSQL,,"DATABASE",{sID});`.
 - `aInvariantDateCols` is interpreted either as names or as numeric indexes. Use one style consistently within the same array.
+- [Where argument types are not checked](../../guides/type-system.md#argument-types-for-built-in-functions), a non-array `aArrayOfValues` is not rejected and may crash the server process, as it does for [`LSelect1`](LSelect1.md). Always pass an array of bind values.
 
 ## Examples
 

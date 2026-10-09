@@ -14,7 +14,7 @@
       "returns": 12
     },
     "with_exceptions": 267,
-    "with_caveats": 402,
+    "with_caveats": 404,
     "with_best_practices": 458
   },
   "elements": [
@@ -38,7 +38,7 @@
           "Use AAdd inside loops when you need to collect matching values into one result array."
         ],
         "dont": [
-          "Pass a string, number or any other non-array as the target. It can crash the server process instead of raising an error you can catch.",
+          "Pass a string, number or any other non-array as the target, for example an accumulator started as \"\". It can crash the server process instead of raising an error you can catch.",
           "Pass NIL as the target array. AAdd only works with an existing array and raises AAdd(): target array cannot be null. when the target is NIL.",
           "Assume the return value is the updated array. AAdd returns the appended value, so code that needs the array should keep using aTarget."
         ]
@@ -5893,7 +5893,8 @@
         }
       ],
       "caveats": [
-        "Because a missing setting and a configured empty-string setting both surface as \"\", GetSetting alone cannot distinguish those cases."
+        "Because a missing setting and a configured empty-string setting both surface as \"\", GetSetting alone cannot distinguish those cases.",
+        "Where argument types are not checked, a number as sName reads as empty: GetSetting(17) returns \"\"."
       ],
       "best_practices": {
         "do": [
@@ -7048,6 +7049,14 @@
           "message": "The provider name: <sConnectionName> not found."
         },
         {
+          "trigger": "sCommandString is a number, where argument types are not checked.",
+          "message": "The command string is null (GetPreparedStatement)."
+        },
+        {
+          "trigger": "sConnectionName is an array, where argument types are not checked.",
+          "message": "Exception of type 'System.OutOfMemoryException' was thrown."
+        },
+        {
           "trigger": "aArrayOfValues contains nested arrays.",
           "message": "The current array has more than 1 dimmension."
         },
@@ -7059,7 +7068,8 @@
       "caveats": [
         "LSearch falls back only when the scalar result is missing or database NULL. An actual empty string from the database is returned as-is.",
         "With the fallback omitted or NIL and no matching row, LSearch returns an empty string, not NIL, in observed runtime behavior. A = NIL or == NIL check on the result is therefore false. Use Empty() instead.",
-        "In observed runtime behavior, passing a non-array value as aArrayOfValues (the fourth parameter) can lock up the application instead of raising an error. Always pass an array of bind values or omit the parameter entirely."
+        "In observed runtime behavior, passing a non-array value as aArrayOfValues (the fourth parameter) can lock up the application instead of raising an error. Always pass an array of bind values or omit the parameter entirely. See Argument types for built-in functions.",
+        "Where argument types are not checked, a number as sConnectionName is not rejected: the query runs on the default connection."
       ],
       "best_practices": {
         "do": [
@@ -7115,7 +7125,8 @@
       "caveats": [
         "LSelect currently behaves like LSelect1 because the aFieldList path is not implemented.",
         "If you need to skip aFieldList and still pass later arguments, keep the skipped-argument commas adjacent, for example LSelect(sSQL,,\"DATABASE\",{sID});.",
-        "aInvariantDateCols is interpreted either as names or as numeric indexes. Use one style consistently within the same array."
+        "aInvariantDateCols is interpreted either as names or as numeric indexes. Use one style consistently within the same array.",
+        "Where argument types are not checked, a non-array aArrayOfValues is not rejected and may crash the server process, as it does for LSelect1. Always pass an array of bind values."
       ],
       "best_practices": {
         "do": [
@@ -7161,7 +7172,9 @@
           "message": "Parameters count mismatch"
         }
       ],
-      "caveats": [],
+      "caveats": [
+        "Where argument types are not checked, a number as sConnectionName is not rejected: the query runs on the default connection."
+      ],
       "best_practices": {
         "do": [
           "Check ALen(aRows) before processing the result.",
@@ -7213,7 +7226,8 @@
       "caveats": [
         "LSelectC currently behaves the same as LSelect.",
         "If you need to skip aFieldList and still pass later arguments, keep the skipped-argument commas adjacent, for example LSelectC(sSQL,, \"DATABASE\", {sID});.",
-        "aInvariantDateCols is interpreted either as names or as numeric indexes. Use one style consistently within the same array."
+        "aInvariantDateCols is interpreted either as names or as numeric indexes. Use one style consistently within the same array.",
+        "Where argument types are not checked, a non-array aArrayOfValues is not rejected and may crash the server process, as it does for LSelect1. Always pass an array of bind values."
       ],
       "best_practices": {
         "do": [
@@ -7389,7 +7403,8 @@
       "caveats": [
         "An empty sSource with a positive nLength returns an empty string.",
         "nLength is rounded before evaluation, so decimal values can change whether the result is a string or NIL.",
-        "Left does not pad results — if fewer characters are available, it returns only the available characters."
+        "Left does not pad results — if fewer characters are available, it returns only the available characters.",
+        "Where argument types are not checked, a non-numeric nLength reads as 0: Left(\"abc\", \"x\") returns \"\"."
       ],
       "best_practices": {
         "do": [
@@ -8872,7 +8887,9 @@
           "message": "Argument count cannot be less then zero. Replicate()."
         }
       ],
-      "caveats": [],
+      "caveats": [
+        "Where argument types are not checked, a non-numeric nCount reads as 0: Replicate(\"a\", \"x\") returns \"\"."
+      ],
       "best_practices": {
         "do": [
           "Always validate that nCount is zero or greater before calling the function.",
@@ -10242,7 +10259,8 @@
         "If the value with nDecimals decimal places does not fit in nLength, Str() drops the decimal digits that do not fit instead of widening the field. Str(123456.789, 8, 2) returns \"123456.7\".",
         "When nLength is supplied and nDecimals is omitted, the function keeps fractional digits only as long as they fit in the field.",
         "Negative values are padded so that the minus sign stays immediately before the first visible digit.",
-        "A negative nLength returns the number without padding and without trailing decimal zeros: Str(1234.5, -10, 2) returns \"1234.5\", while Str(1234.5, 10, 2) returns \"   1234.50\"."
+        "A negative nLength returns the number without padding and without trailing decimal zeros: Str(1234.5, -10, 2) returns \"1234.5\", while Str(1234.5, 10, 2) returns \"   1234.50\".",
+        "Where argument types are not checked, a non-numeric nNumber reads as 0: Str(\"x\") returns \"         0\"."
       ],
       "best_practices": {
         "do": [
@@ -10420,7 +10438,8 @@
         }
       ],
       "caveats": [
-        "A negative nStartPos that would go before the start of the string clamps to position 1."
+        "A negative nStartPos that would go before the start of the string clamps to position 1.",
+        "Where argument types are not checked, a number as sSource reads as empty: SubStr(17, 1) returns \"\"."
       ],
       "best_practices": {
         "do": [
@@ -10793,7 +10812,8 @@
         }
       ],
       "caveats": [
-        "Case conversion follows the runtime's uppercase rules, so some characters can uppercase differently in different locales."
+        "Case conversion follows the runtime's uppercase rules, so some characters can uppercase differently in different locales.",
+        "Where argument types are not checked, a number as sSource reads as empty: Upper(1) returns \"\"."
       ],
       "best_practices": {
         "do": [

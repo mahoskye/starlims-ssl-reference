@@ -57,6 +57,8 @@ Common return shapes include:
 | `sCommandString` is [`NIL`](../literals/nil.md) or empty. | `The command string is null` |
 | The connection cannot resolve a database engine. | `Cannot determine the database engine name.` |
 | `sConnectionName` does not identify a configured connection. | `The provider name: <sConnectionName> not found.` |
+| `sCommandString` is a number, where argument types are not checked. | `The command string is null (GetPreparedStatement).` |
+| `sConnectionName` is an array, where argument types are not checked. | `Exception of type 'System.OutOfMemoryException' was thrown.` |
 | `aArrayOfValues` contains nested arrays. | `The current array has more than 1 dimmension.` |
 | The number of `?` placeholders does not match the number of supplied values. | `Parameters count mismatch` |
 
@@ -81,7 +83,8 @@ Common return shapes include:
 
 - `LSearch` falls back only when the scalar result is missing or database `NULL`. An actual empty string from the database is returned as-is.
 - With the fallback omitted or [`NIL`](../literals/nil.md) and no matching row, `LSearch` returns an empty string, not [`NIL`](../literals/nil.md), in observed runtime behavior. A `= NIL` or `== NIL` check on the result is therefore false. Use [`Empty`](Empty.md)`()` instead.
-- In observed runtime behavior, passing a non-array value as `aArrayOfValues` (the fourth parameter) can lock up the application instead of raising an error. Always pass an array of bind values or omit the parameter entirely.
+- In observed runtime behavior, passing a non-array value as `aArrayOfValues` (the fourth parameter) can lock up the application instead of raising an error. Always pass an array of bind values or omit the parameter entirely. See [Argument types for built-in functions](../../guides/type-system.md#argument-types-for-built-in-functions).
+- [Where argument types are not checked](../../guides/type-system.md#argument-types-for-built-in-functions), a number as `sConnectionName` is not rejected: the query runs on the default connection.
 
 ## Examples
 

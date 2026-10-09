@@ -16,7 +16,7 @@ Appends an element to the end of an array and returns the appended element.
 `AAdd` appends one value to an existing array. It updates the target array in place and returns the appended value. If the target array is [`NIL`](../literals/nil.md), the call raises an error.
 
 !!! warning "Pass only an array as the first argument"
-    Passing anything other than an array as `aTarget`, for example `AAdd("x", 1)`, can crash the server process on installations where the `CompilerCheckParamType` setting is off. The failure cannot be caught with [`:TRY`](../keywords/TRY.md), [`:FINALLY`](../keywords/FINALLY.md) may not run, and the crash can take down the worker process for every user on it. Where the setting is on, the same call raises a catchable parameter-type error instead, but code should not depend on that. Initialize the target with `{}`, or check it with [`LimsTypeEx`](LimsTypeEx.md) (`"ARRAY"`), before calling `AAdd`.
+    Passing anything other than an array as `aTarget`, for example `AAdd("x", 1)`, can crash the server process on installations where the `CompilerCheckParamType` setting is off. The failure cannot be caught with [`:TRY`](../keywords/TRY.md), [`:FINALLY`](../keywords/FINALLY.md) may not run, and the crash can take down the worker process for every user on it. Where the setting is on, the same call raises a catchable parameter-type error instead, but code should not depend on that. Initialize the target with `{}`, or check it with [`LimsTypeEx`](LimsTypeEx.md) (`"ARRAY"`), before calling `AAdd`. See [Argument types for built-in functions](../../guides/type-system.md#argument-types-for-built-in-functions).
 
 ## When to use
 
@@ -54,7 +54,7 @@ AAdd(aTarget, vElement)
     - Use `AAdd` inside loops when you need to collect matching values into one result array.
 
 !!! failure "Don't"
-    - Pass a string, number or any other non-array as the target. It can crash the server process instead of raising an error you can catch.
+    - Pass a string, number or any other non-array as the target, for example an accumulator started as `""`. It can crash the server process instead of raising an error you can catch.
     - Pass [`NIL`](../literals/nil.md) as the target array. `AAdd` only works with an existing array and raises `AAdd(): target array cannot be null.` when the target is [`NIL`](../literals/nil.md).
     - Assume the return value is the updated array. `AAdd` returns the appended value, so code that needs the array should keep using `aTarget`.
 
