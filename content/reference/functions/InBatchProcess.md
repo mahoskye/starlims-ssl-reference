@@ -34,7 +34,7 @@ This function takes no parameters.
 
 ## Returns
 
-**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the current execution context is running in batch process mode; otherwise [`.F.`](../literals/false.md).
+**[boolean](../types/boolean.md)** — [`.T.`](../literals/true.md) when the current execution context is running in batch process mode; otherwise [`.F.`](../literals/false.md). A job submitted in `"internal"` mode returns [`.F.`](../literals/false.md).
 
 ## Best practices
 
@@ -51,6 +51,7 @@ This function takes no parameters.
 ## Caveats
 
 - `InBatchProcess()` only tells you whether the current context is in batch mode.
+- In observed runtime behavior, a job submitted with [`SubmitToBatch`](SubmitToBatch.md) in `"queue"` mode returns [`.T.`](../literals/true.md). The same job submitted in `"internal"` mode returns [`.F.`](../literals/false.md). Don't use `InBatchProcess()` to detect every submitted job.
 - The function does not identify a batch job or provide batch metadata.
 
 ## Examples

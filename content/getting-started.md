@@ -38,7 +38,7 @@ Run it in Designer: the `:RETURN` value shows in the console pane, and the `UsrM
 
 ### System-provided variables
 
-The runtime predefines some global variables. The one used throughout this reference is `MYUSERNAME` — a string holding the current user's username. Deployments may expose other predefined globals; this reference only relies on what has been verified.
+Every server script can read some names it never declares. The one used throughout this reference is `MYUSERNAME`, a string holding the current user's user name. It is a public variable that the application's server-start scripts create, along with others such as `CRLF`, so it can differ between installations. [Predefined Globals](guides/predefined-globals.md) lists them, along with the four objects the platform itself provides.
 
 ### How scripts address each other
 
