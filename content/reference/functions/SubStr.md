@@ -61,6 +61,7 @@ SubStr(sSource, [nStartPos], [nLength])
 ## Caveats
 
 - A negative `nStartPos` that would go before the start of the string clamps to position 1.
+- [Where argument types are not checked](../../guides/type-system.md#argument-types-for-built-in-functions), a number as `sSource` reads as empty: `SubStr(17, 1)` returns `""`.
 
 ## Examples
 

@@ -64,6 +64,7 @@ Left(sSource, nLength)
 - An empty `sSource` with a positive `nLength` returns an empty string.
 - `nLength` is rounded before evaluation, so decimal values can change whether the result is a string or [`NIL`](../literals/nil.md).
 - `Left` does not pad results — if fewer characters are available, it returns only the available characters.
+- [Where argument types are not checked](../../guides/type-system.md#argument-types-for-built-in-functions), a non-numeric `nLength` reads as `0`: `Left("abc", "x")` returns `""`.
 
 ## Examples
 

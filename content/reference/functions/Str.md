@@ -63,6 +63,7 @@ Str(nNumber, [nLength], [nDecimals])
 - When `nLength` is supplied and `nDecimals` is omitted, the function keeps fractional digits only as long as they fit in the field.
 - Negative values are padded so that the minus sign stays immediately before the first visible digit.
 - A negative `nLength` returns the number without padding and without trailing decimal zeros: `Str(1234.5, -10, 2)` returns `"1234.5"`, while `Str(1234.5, 10, 2)` returns `"   1234.50"`.
+- [Where argument types are not checked](../../guides/type-system.md#argument-types-for-built-in-functions), a non-numeric `nNumber` reads as `0`: `Str("x")` returns `"         0"`.
 
 ## Examples
 

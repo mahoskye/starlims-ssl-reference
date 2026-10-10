@@ -58,6 +58,10 @@ Replicate(sSource, nCount)
     - Assume the function handles negative counts gracefully. Negative counts raise an error that halts execution if unhandled.
     - Expect a non-empty result when `sSource` is empty, even with a positive count. The function always returns `""` when `sSource` is empty.
 
+## Caveats
+
+- [Where argument types are not checked](../../guides/type-system.md#argument-types-for-built-in-functions), a non-numeric `nCount` reads as `0`: `Replicate("a", "x")` returns `""`.
+
 ## Examples
 
 ### Repeat a pattern a fixed number of times

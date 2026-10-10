@@ -59,6 +59,7 @@ GetSetting(sName)
 ## Caveats
 
 - Because a missing setting and a configured empty-string setting both surface as `""`, `GetSetting` alone cannot distinguish those cases.
+- [Where argument types are not checked](../../guides/type-system.md#argument-types-for-built-in-functions), a number as `sName` reads as empty: `GetSetting(17)` returns `""`.
 
 ## Examples
 

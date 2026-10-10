@@ -59,6 +59,7 @@ Upper(sSource)
 ## Caveats
 
 - Case conversion follows the runtime's uppercase rules, so some characters can uppercase differently in different locales.
+- [Where argument types are not checked](../../guides/type-system.md#argument-types-for-built-in-functions), a number as `sSource` reads as empty: `Upper(1)` returns `""`.
 
 ## Examples
 

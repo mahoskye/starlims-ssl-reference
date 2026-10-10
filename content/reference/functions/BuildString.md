@@ -20,6 +20,9 @@ If `nStart` is omitted, the function starts at element `1`. If `nCount` is omitt
 
 `nStart` and `nCount` must be integer-valued numbers. If `nStart` is greater than the array length, the function clamps the start position to the last valid element for non-empty arrays instead of returning an out-of-range error.
 
+!!! warning "Pass only an array as the first argument"
+    Where argument types are not checked (the `CompilerCheckParamType` setting is off), a string of nine or more characters as `aTarget`, for example `BuildString("CHEM,PHYS")`, can hang or crash the server process, and the failure cannot be caught with [`:TRY`](../keywords/TRY.md). A number or a string of up to four characters returns `""` instead of raising an error. Check the target with [`LimsTypeEx`](LimsTypeEx.md) (`"ARRAY"`) when it can arrive as more than one type. See [Argument types for built-in functions](../../guides/type-system.md#argument-types-for-built-in-functions).
+
 ## When to use
 
 - When you need to join array values into one delimited string.

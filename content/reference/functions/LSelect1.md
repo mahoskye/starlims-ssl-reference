@@ -17,6 +17,9 @@ Executes a parameterized SQL `SELECT` command and returns the result as an array
 
 If `sConnectionName` is omitted, `LSelect1` uses the default database connection. `bNullAsBlank` defaults to [`.T.`](../literals/true.md), which converts database `NULL` values to blank SSL defaults for the column type. `aInvariantDateCols` lets you mark date columns that should be returned without timezone conversion.
 
+!!! warning "Pass bind values as an array"
+    Write `LSelect1(sSQL,, {nId})`, not `LSelect1(sSQL,, nId)`. Where argument types are not checked (the `CompilerCheckParamType` setting is off), a non-array value list can crash the server process, and the failure cannot be caught with [`:TRY`](../keywords/TRY.md). See [Argument types for built-in functions](../../guides/type-system.md#argument-types-for-built-in-functions).
+
 ## When to use
 
 - When you need all rows from a `SELECT` as an SSL array of row arrays.
@@ -66,6 +69,10 @@ LSelect1(sCommandString, [sConnectionName], [aArrayOfValues], [bNullAsBlank], [a
     - Assume a successful call returned data. An empty result is still a valid array.
     - Pass a multidimensional values array.
     - Use invariant date handling unless the date column really needs to bypass timezone conversion.
+
+## Caveats
+
+- [Where argument types are not checked](../../guides/type-system.md#argument-types-for-built-in-functions), a number as `sConnectionName` is not rejected: the query runs on the default connection.
 
 ## Examples
 
