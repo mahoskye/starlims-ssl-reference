@@ -3628,14 +3628,14 @@
 <li>Pass a scalar as the second argument. <code>DoProc</code> expects an array there.</li>
 <li>Assume argument-count mismatches raise an immediate <code>DoProc</code> error.</li>
 <li>Use a two-segment procedure name. That format is rejected.</li>
-<li>Use <code>DoProc</code> inside class methods.</li>
+<li>Call a procedure by its bare name inside a class method. Only a fully qualified <code>Category.Script.Procedure</code> target is accepted there.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Calling <code>DoProc()</code> with no arguments stops the script from compiling, so no runtime error can be caught.</li>
 <li>A string literal name is resolved when the script compiles: <code>DoProc("NoSuchProc")</code> stops the script from compiling with <code>Invalid method: NoSuchProc</code>, so no <a href="../../keywords/TRY/"><code>:TRY</code></a> can catch it. The runtime "not found" error in Exceptions applies only to names built at runtime.</li>
-<li><code>DoProc</code> is a compile-time error inside class methods — every name form is rejected, not just same-class calls. Use <code>Me:MethodName()</code> or <code>Base:MethodName()</code> instead.</li>
+<li>Inside class methods, <code>DoProc</code> accepts only a fully qualified <code>Category.Script.Procedure</code> target, such as <code>DoProc("Lab.Rules.Normalize", {sValue})</code>. A bare procedure name is a compile-time error there. Call methods of the same class with <code>Me:MethodName()</code> or <code>Base:MethodName()</code>.</li>
 <li>The called procedure does not get an isolated set of variables. Names it never declares resolve outward into the calling scope, so an undeclared assignment in the procedure can overwrite a caller variable of the same name. See <a href="../../../guides/variable-scope/">Variable Scope</a>.</li>
 <li>One-segment names are resolved case-insensitively in the current script.</li>
 <li>A three-segment name calls <code>Category.Script.Procedure</code> the same way <a href="../ExecFunction/"><code>ExecFunction</code></a> does.</li>
@@ -3774,7 +3774,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:48:07 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 10, 2026 05:06:42 UTC">October 10, 2026</span>
   </span>
 
     

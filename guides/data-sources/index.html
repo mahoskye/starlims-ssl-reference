@@ -1194,7 +1194,7 @@
 </code></pre></div>
 <p><strong>Rules:</strong></p>
 <ul>
-<li>Every parameter <strong>must</strong> have a default value.</li>
+<li>Defaults are set inline with <code>:=</code> on the <code>:PARAMETERS</code> line. A parameter without a default is accepted, but what it receives when the caller leaves it out is not documented, so give a default to every parameter a caller may omit.</li>
 <li><code>:PARAMETERS;</code> with no parameters is an error. A data source that takes no parameters leaves the <code>:PARAMETERS</code> line out.</li>
 <li>Do <strong>not</strong> use <code>:DEFAULT</code> lines in data sources — defaults are inline only.</li>
 <li>The inline-default form is what sets a STARLIMS-mode data source apart from a server script. The same <code>:PARAMETERS</code> line is not valid in a server script.</li>
@@ -1227,6 +1227,7 @@
 <span class="w">    </span><span class="n">AND</span><span class="w"> </span><span class="n">sample_id</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="err">@</span><span class="n">sFromId</span>
 <span class="n">ORDER</span><span class="w"> </span><span class="n">BY</span><span class="w"> </span><span class="n">sample_id</span>
 </code></pre></div>
+<p>Comments in a SQL-mode data source use SQL syntax: <code>-- line comments</code> and <code>/* block comments */</code>. The SSL comment form, which ends at the first <code>;</code>, does not apply, so semicolons inside a SQL comment or string literal are just text.</p>
 <p>It takes the same parameters and applies the same filter as the STARLIMS-mode example above, so both are called the same way. <code>RunDS</code> returns the rows as an array unless the caller asks for another return type.</p>
 <h3 id="directives">Directives<a class="headerlink" href="#directives" title="Permanent link">&para;</a></h3>
 <p>The directives are not SSL keywords. Their names are case-sensitive, so write them in uppercase: a lowercase <code>:nullasblank</code> line is ignored.</p>
@@ -1275,7 +1276,7 @@
 <span class="c1">/* Return as an SSLDataset object;</span>
 <span class="n">oDs</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">RunDS</span><span class="p">(</span><span class="s2">"Category.DataSourceName"</span><span class="p">,,</span><span class="w"> </span><span class="s2">"ssldataset"</span><span class="p">);</span>
 </code></pre></div>
-<p>Parameter values bind by <strong>position</strong>, in the order the data source declares them in <code>:PARAMETERS</code>; names are not matched. For the examples above, <code>{"Released", "S-1000"}</code> sets <code>sStatus</code> to <code>"Released"</code> and <code>sFromId</code> to <code>"S-1000"</code>. Trailing values you leave out keep their inline defaults, and values beyond the declared parameters are silently ignored. Passing <code>{name, value}</code> pairs does not work: each pair is bound whole to one parameter.</p>
+<p>Parameter values bind by <strong>position</strong>, in the order the data source declares them in <code>:PARAMETERS</code>; names are not matched. For the examples above, <code>{"Released", "S-1000"}</code> sets <code>sStatus</code> to <code>"Released"</code> and <code>sFromId</code> to <code>"S-1000"</code>. Trailing values you leave out take their inline defaults, and values beyond the declared parameters are silently ignored. Passing <code>{name, value}</code> pairs does not work: each pair is bound whole to one parameter.</p>
 <p>The return-type argument in the last call converts only an <code>SSLDataset</code> result. A STARLIMS-mode data source that returns an array still returns that array (see <a href="#starlims-mode-data-sources">STARLIMS-mode data sources</a>).</p>
 <p>Use <a href="../../reference/functions/GetDSParameters/"><code>GetDSParameters</code></a> to get a data source's parameter names in declaration order, which is the order <code>RunDS</code> binds them.</p>
 
@@ -1298,7 +1299,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 29, 2026 16:47:05 UTC">September 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 10, 2026 05:06:42 UTC">October 10, 2026</span>
   </span>
 
     
