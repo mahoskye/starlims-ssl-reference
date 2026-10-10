@@ -4122,6 +4122,14 @@
 <td><code>The provider name: &lt;sConnectionName&gt; not found.</code></td>
 </tr>
 <tr>
+<td><code>sCommandString</code> is a number, where argument types are not checked.</td>
+<td><code>The command string is null (GetPreparedStatement).</code></td>
+</tr>
+<tr>
+<td><code>sConnectionName</code> is an array, where argument types are not checked.</td>
+<td><code>Exception of type 'System.OutOfMemoryException' was thrown.</code></td>
+</tr>
+<tr>
 <td><code>aArrayOfValues</code> contains nested arrays.</td>
 <td><code>The current array has more than 1 dimmension.</code></td>
 </tr>
@@ -4157,7 +4165,8 @@
 <ul>
 <li><code>LSearch</code> falls back only when the scalar result is missing or database <code>NULL</code>. An actual empty string from the database is returned as-is.</li>
 <li>With the fallback omitted or <a href="../../literals/nil/"><code>NIL</code></a> and no matching row, <code>LSearch</code> returns an empty string, not <a href="../../literals/nil/"><code>NIL</code></a>, in observed runtime behavior. A <code>= NIL</code> or <code>== NIL</code> check on the result is therefore false. Use <a href="../Empty/"><code>Empty</code></a><code>()</code> instead.</li>
-<li>In observed runtime behavior, passing a non-array value as <code>aArrayOfValues</code> (the fourth parameter) can lock up the application instead of raising an error. Always pass an array of bind values or omit the parameter entirely.</li>
+<li>In observed runtime behavior, passing a non-array value as <code>aArrayOfValues</code> (the fourth parameter) can lock up the application instead of raising an error. Always pass an array of bind values or omit the parameter entirely. See <a href="../../../guides/type-system/#argument-types-for-built-in-functions">Argument types for built-in functions</a>.</li>
+<li><a href="../../../guides/type-system/#argument-types-for-built-in-functions">Where argument types are not checked</a>, a number as <code>sConnectionName</code> is not rejected: the query runs on the default connection.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="return-a-default-string-when-no-row-is-found">Return a default string when no row is found<a class="headerlink" href="#return-a-default-string-when-no-row-is-found" title="Permanent link">&para;</a></h3>
@@ -4264,7 +4273,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:57:44 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 9, 2026 21:17:09 UTC">October 9, 2026</span>
   </span>
 
     

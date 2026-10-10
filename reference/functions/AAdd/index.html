@@ -3644,6 +3644,10 @@
 <h1 id="aadd">AAdd<a class="headerlink" href="#aadd" title="Permanent link">&para;</a></h1>
 <p>Appends an element to the end of an array and returns the appended element.</p>
 <p><code>AAdd</code> appends one value to an existing array. It updates the target array in place and returns the appended value. If the target array is <a href="../../literals/nil/"><code>NIL</code></a>, the call raises an error.</p>
+<div class="admonition warning">
+<p class="admonition-title">Pass only an array as the first argument</p>
+<p>Passing anything other than an array as <code>aTarget</code>, for example <code>AAdd("x", 1)</code>, can crash the server process on installations where the <code>CompilerCheckParamType</code> setting is off. The failure cannot be caught with <a href="../../keywords/TRY/"><code>:TRY</code></a>, <a href="../../keywords/FINALLY/"><code>:FINALLY</code></a> may not run, and the crash can take down the worker process for every user on it. Where the setting is on, the same call raises a catchable parameter-type error instead, but code should not depend on that. Initialize the target with <code>{}</code>, or check it with <a href="../LimsTypeEx/"><code>LimsTypeEx</code></a> (<code>"ARRAY"</code>), before calling <code>AAdd</code>. See <a href="../../../guides/type-system/#argument-types-for-built-in-functions">Argument types for built-in functions</a>.</p>
+</div>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you are building an array one value at a time.</li>
@@ -3670,7 +3674,7 @@
 <td><a href="../../types/array/">array</a></td>
 <td>yes</td>
 <td>—</td>
-<td>Existing array to modify.</td>
+<td>Existing array to modify. Must be an array; see the warning above.</td>
 </tr>
 <tr>
 <td><code>vElement</code></td>
@@ -3709,6 +3713,7 @@
 <div class="admonition failure">
 <p class="admonition-title">Don't</p>
 <ul>
+<li>Pass a string, number or any other non-array as the target, for example an accumulator started as <code>""</code>. It can crash the server process instead of raising an error you can catch.</li>
 <li>Pass <a href="../../literals/nil/"><code>NIL</code></a> as the target array. <code>AAdd</code> only works with an existing array and raises <code>AAdd(): target array cannot be null.</code> when the target is <a href="../../literals/nil/"><code>NIL</code></a>.</li>
 <li>Assume the return value is the updated array. <code>AAdd</code> returns the appended value, so code that needs the array should keep using <code>aTarget</code>.</li>
 </ul>
@@ -3782,7 +3787,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:50:27 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 9, 2026 21:17:09 UTC">October 9, 2026</span>
   </span>
 
     

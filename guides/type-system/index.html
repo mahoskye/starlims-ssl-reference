@@ -611,6 +611,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#argument-types-for-built-in-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Argument types for built-in functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#type-coercion" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1043,6 +1054,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#argument-types-for-built-in-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Argument types for built-in functions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#type-coercion" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1276,6 +1298,24 @@
 <p class="admonition-title"><code>LimsType</code> raises for a variable that holds NIL</p>
 <p><code>LimsType("NIL")</code> returns <code>"U"</code>, but <code>LimsType("vValue")</code> raises an error when <code>vValue</code> holds <a href="../../reference/literals/nil/"><code>NIL</code></a>, and so does naming an omitted <a href="../../reference/keywords/PARAMETERS/"><code>:PARAMETERS</code></a> argument. Check for <a href="../../reference/literals/nil/"><code>NIL</code></a> first with <code>LimsTypeEx(vValue) == "NIL"</code>, or use <a href="../../reference/functions/LimsTypeEx/"><code>LimsTypeEx</code></a>, which accepts any value.</p>
 </div>
+<h2 id="argument-types-for-built-in-functions">Argument types for built-in functions<a class="headerlink" href="#argument-types-for-built-in-functions" title="Permanent link">&para;</a></h2>
+<p>Each built-in function expects particular types for its parameters. Whether a call with the wrong type is rejected depends on the installation's <code>CompilerCheckParamType</code> setting:</p>
+<ul>
+<li><strong>On:</strong> the call raises a parameter-type error that <a href="../../reference/keywords/TRY/"><code>:TRY</code></a> can catch.</li>
+<li><strong>Off:</strong> nothing checks the type, and the function reads the value as if it were the type it expected.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">A non-array where an array is expected can crash the server</p>
+<p>Where the setting is off, passing a non-array to a parameter that expects an array can crash the server process. The failure cannot be caught with <a href="../../reference/keywords/TRY/"><code>:TRY</code></a>, <a href="../../reference/keywords/FINALLY/"><code>:FINALLY</code></a> may not run, and the crash can take down the worker process for every user on it. This has been observed with <a href="../../reference/functions/AAdd/"><code>AAdd</code></a>, <a href="../../reference/functions/BuildString/"><code>BuildString</code></a>, <a href="../../reference/functions/BuildStringForIn/"><code>BuildStringForIn</code></a> and the value list of <a href="../../reference/functions/LSelect1/"><code>LSelect1</code></a>. Other functions that take an array, such as <a href="../../reference/functions/LSelect/"><code>LSelect</code></a>, <a href="../../reference/functions/LSelectC/"><code>LSelectC</code></a> and <a href="../../reference/functions/LSearch/"><code>LSearch</code></a>, may behave the same way.</p>
+</div>
+<p>Other wrong types give a quiet wrong answer instead of an error. A string where a number is expected reads as <code>0</code>, and a number where a string is expected reads as empty: <code>Left("abc", "x")</code> and <code>Upper(1)</code> both return <code>""</code>.</p>
+<p>Code should not depend on the setting. These patterns are the usual way a wrong type reaches a built-in function:</p>
+<ul>
+<li><strong>An accumulator started as a string.</strong> <code>aItems := "";</code> followed by <code>AAdd(aItems, x)</code> in a loop. Start arrays with <code>{}</code>.</li>
+<li><strong>A value that is sometimes an array.</strong> A parameter that callers pass either as an array or as a delimited string, or a variable assigned in different branches. Check <code>LimsTypeEx(vValue) == "ARRAY"</code> before passing it on.</li>
+<li><strong>A single value where a list is expected.</strong> <code>LSelect1(sSQL,, nId)</code> instead of <code>LSelect1(sSQL,, {nId})</code>.</li>
+<li><strong>Arguments shifted by a missing comma.</strong> Dropping the comma for an omitted parameter moves the next value into the wrong position.</li>
+</ul>
 <h2 id="type-coercion">Type coercion<a class="headerlink" href="#type-coercion" title="Permanent link">&para;</a></h2>
 <p>SSL performs limited implicit type coercion:</p>
 <ul>
@@ -1378,7 +1418,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2026 16:03:49 UTC">October 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 9, 2026 21:17:09 UTC">October 9, 2026</span>
   </span>
 
     
