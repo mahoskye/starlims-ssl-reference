@@ -27,7 +27,7 @@ In data sources of either mode, [`:PARAMETERS`](../reference/keywords/PARAMETERS
 
 **Rules:**
 
-- Every parameter **must** have a default value.
+- Defaults are set inline with `:=` on the `:PARAMETERS` line. A parameter without a default is accepted, but what it receives when the caller leaves it out is not documented, so give a default to every parameter a caller may omit.
 - `:PARAMETERS;` with no parameters is an error. A data source that takes no parameters leaves the `:PARAMETERS` line out.
 - Do **not** use `:DEFAULT` lines in data sources — defaults are inline only.
 - The inline-default form is what sets a STARLIMS-mode data source apart from a server script. The same `:PARAMETERS` line is not valid in a server script.
@@ -70,6 +70,8 @@ WHERE status = @sStatus
 ORDER BY sample_id
 ```
 
+Comments in a SQL-mode data source use SQL syntax: `-- line comments` and `/* block comments */`. The SSL comment form, which ends at the first `;`, does not apply, so semicolons inside a SQL comment or string literal are just text.
+
 It takes the same parameters and applies the same filter as the STARLIMS-mode example above, so both are called the same way. `RunDS` returns the rows as an array unless the caller asks for another return type.
 
 ### Directives
@@ -107,7 +109,7 @@ oResult := RunDS("Category.DataSourceName", {"Released", "S-1000"});
 oDs := RunDS("Category.DataSourceName",, "ssldataset");
 ```
 
-Parameter values bind by **position**, in the order the data source declares them in `:PARAMETERS`; names are not matched. For the examples above, `{"Released", "S-1000"}` sets `sStatus` to `"Released"` and `sFromId` to `"S-1000"`. Trailing values you leave out keep their inline defaults, and values beyond the declared parameters are silently ignored. Passing `{name, value}` pairs does not work: each pair is bound whole to one parameter.
+Parameter values bind by **position**, in the order the data source declares them in `:PARAMETERS`; names are not matched. For the examples above, `{"Released", "S-1000"}` sets `sStatus` to `"Released"` and `sFromId` to `"S-1000"`. Trailing values you leave out take their inline defaults, and values beyond the declared parameters are silently ignored. Passing `{name, value}` pairs does not work: each pair is bound whole to one parameter.
 
 The return-type argument in the last call converts only an `SSLDataset` result. A STARLIMS-mode data source that returns an array still returns that array (see [STARLIMS-mode data sources](#starlims-mode-data-sources)).
 

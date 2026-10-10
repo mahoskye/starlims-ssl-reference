@@ -44,7 +44,7 @@ Standard script, procedure, method, or constructor body:
 SSL or SQL data source file:
 
 ```ssl
-:PARAMETERS param1 := default1[, param2 := default2, ...];
+:PARAMETERS param1[ := default1][, param2[ := default2], ...];
 ```
 
 ## Parameters
@@ -52,7 +52,7 @@ SSL or SQL data source file:
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
 | `param1[, param2, ...]` | Identifier list | Yes | — | One or more parameter names in call-order for a standard script, procedure, method, or constructor. |
-| `:= defaultValue` | Inline default clause | Data source files only | — | Required for every parameter in SSL and SQL data source files. This inline form is only valid in data source files. |
+| `:= defaultValue` | Inline default clause | No | — | Default for a data source parameter that the caller leaves out. This inline form is only valid in data source files. |
 
 ## Keyword group
 
@@ -69,14 +69,14 @@ SSL or SQL data source file:
 !!! failure "Don't"
     - Write `:PARAMETERS` after [`:DECLARE`](DECLARE.md), executable statements, or control flow. That placement is invalid in standard SSL bodies.
     - Use `:PARAMETERS` as a substitute for local-variable declarations. Local working names belong in [`:DECLARE`](DECLARE.md).
-    - Use standard `:PARAMETERS` plus separate [`:DEFAULT`](DEFAULT.md) lines in data source files. Data sources require inline [`:=`](../operators/assignment.md) defaults on the `:PARAMETERS` line.
+    - Use standard `:PARAMETERS` plus separate [`:DEFAULT`](DEFAULT.md) lines in data source files. Data sources set defaults inline with [`:=`](../operators/assignment.md) on the `:PARAMETERS` line.
 
 ## Caveats
 
 - Use at most one `:PARAMETERS` statement in a given script, procedure, method, or constructor body.
 - A standard `:PARAMETERS` statement must include at least one parameter name.
 - In standard SSL, [`:DEFAULT`](DEFAULT.md) lines must immediately follow `:PARAMETERS` when used.
-- In SSL and SQL data source files, every parameter must include an inline default value with [`:=`](../operators/assignment.md).
+- In SSL and SQL data source files, defaults are set inline with [`:=`](../operators/assignment.md). A parameter without one is accepted, but what it receives when the caller leaves it out is not documented.
 - Colon-prefixed keywords are case-sensitive, so write `:PARAMETERS` in uppercase.
 
 ## Examples

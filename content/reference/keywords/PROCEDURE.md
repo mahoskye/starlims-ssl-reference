@@ -92,7 +92,7 @@ Malformed procedure declarations fail at compile time. Common problems include a
 !!! failure "Don't"
     - Call a custom script procedure directly as `ProcedureName(args)`. Use [`DoProc`](../functions/DoProc.md) for same-file procedures or [`ExecFunction`](../functions/ExecFunction.md) for external scripts.
     - Omit [`:ENDPROC`](ENDPROC.md) `;` or treat it as optional. The procedure body must close explicitly.
-    - Use [`DoProc`](../functions/DoProc.md) inside class methods. Inside a class, call sibling or inherited routines with `Me:Method()` or `Base:Method()`.
+    - Call a procedure by its bare name with [`DoProc`](../functions/DoProc.md) inside a class method. That is a compile-time error. Call sibling or inherited routines with `Me:Method()` or `Base:Method()`.
 
 ## Caveats
 
