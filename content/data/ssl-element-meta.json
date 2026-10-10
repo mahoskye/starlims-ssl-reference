@@ -2462,7 +2462,7 @@
       "caveats": [
         "Calling DoProc() with no arguments stops the script from compiling, so no runtime error can be caught.",
         "A string literal name is resolved when the script compiles: DoProc(\"NoSuchProc\") stops the script from compiling with Invalid method: NoSuchProc, so no :TRY can catch it. The runtime \"not found\" error in Exceptions applies only to names built at runtime.",
-        "DoProc is a compile-time error inside class methods — every name form is rejected, not just same-class calls. Use Me:MethodName() or Base:MethodName() instead.",
+        "Inside class methods, DoProc accepts only a fully qualified Category.Script.Procedure target, such as DoProc(\"Lab.Rules.Normalize\", {sValue}). A bare procedure name is a compile-time error there. Call methods of the same class with Me:MethodName() or Base:MethodName().",
         "The called procedure does not get an isolated set of variables. Names it never declares resolve outward into the calling scope, so an undeclared assignment in the procedure can overwrite a caller variable of the same name. See Variable Scope.",
         "One-segment names are resolved case-insensitively in the current script.",
         "A three-segment name calls Category.Script.Procedure the same way ExecFunction does."
@@ -2479,7 +2479,7 @@
           "Pass a scalar as the second argument. DoProc expects an array there.",
           "Assume argument-count mismatches raise an immediate DoProc error.",
           "Use a two-segment procedure name. That format is rejected.",
-          "Use DoProc inside class methods."
+          "Call a procedure by its bare name inside a class method. Only a fully qualified Category.Script.Procedure target is accepted there."
         ]
       }
     },
@@ -9134,7 +9134,7 @@
       "caveats": [
         "RunDS trims the incoming data source name before execution.",
         "String vReturnType values are lowercased and trimmed before matching.",
-        "aParameters values beyond the parameters the data source declares are silently ignored, and declared parameters you leave out keep their inline defaults."
+        "aParameters values beyond the parameters the data source declares are silently ignored, and declared parameters you leave out take their inline defaults."
       ],
       "best_practices": {
         "do": [
@@ -12919,7 +12919,7 @@
       "best_practices": {
         "do": [
           "Place :INHERIT immediately after :CLASS ClassName;.",
-          "Use a plain or qualified parent class name such as BaseValidator or Lab.BaseValidator.",
+          "Name the parent as Category.ClassName, such as Lab.BaseValidator.",
           "Use Base:MethodName() in child methods when you want to extend, not replace, inherited behavior."
         ],
         "dont": [
@@ -13040,7 +13040,7 @@
         "Use at most one :PARAMETERS statement in a given script, procedure, method, or constructor body.",
         "A standard :PARAMETERS statement must include at least one parameter name.",
         "In standard SSL, :DEFAULT lines must immediately follow :PARAMETERS when used.",
-        "In SSL and SQL data source files, every parameter must include an inline default value with :=.",
+        "In SSL and SQL data source files, defaults are set inline with :=. A parameter without one is accepted, but what it receives when the caller leaves it out is not documented.",
         "Colon-prefixed keywords are case-sensitive, so write :PARAMETERS in uppercase."
       ],
       "best_practices": {
@@ -13052,7 +13052,7 @@
         "dont": [
           "Write :PARAMETERS after :DECLARE, executable statements, or control flow. That placement is invalid in standard SSL bodies.",
           "Use :PARAMETERS as a substitute for local-variable declarations. Local working names belong in :DECLARE.",
-          "Use standard :PARAMETERS plus separate :DEFAULT lines in data source files. Data sources require inline := defaults on the :PARAMETERS line."
+          "Use standard :PARAMETERS plus separate :DEFAULT lines in data source files. Data sources set defaults inline with := on the :PARAMETERS line."
         ]
       }
     },
@@ -13079,7 +13079,7 @@
         "dont": [
           "Call a custom script procedure directly as ProcedureName(args). Use DoProc for same-file procedures or ExecFunction for external scripts.",
           "Omit :ENDPROC ; or treat it as optional. The procedure body must close explicitly.",
-          "Use DoProc inside class methods. Inside a class, call sibling or inherited routines with Me:Method() or Base:Method()."
+          "Call a procedure by its bare name with DoProc inside a class method. That is a compile-time error. Call sibling or inherited routines with Me:Method() or Base:Method()."
         ]
       }
     },

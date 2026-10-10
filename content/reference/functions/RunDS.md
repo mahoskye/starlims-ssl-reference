@@ -76,7 +76,7 @@ RunDS(sDataSourceName, [aParameters], [vReturnType])
 
 - `RunDS` trims the incoming data source name before execution.
 - String `vReturnType` values are lowercased and trimmed before matching.
-- `aParameters` values beyond the parameters the data source declares are silently ignored, and declared parameters you leave out keep their inline defaults.
+- `aParameters` values beyond the parameters the data source declares are silently ignored, and declared parameters you leave out take their inline defaults.
 
 ## Examples
 

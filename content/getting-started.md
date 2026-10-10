@@ -163,7 +163,7 @@ Custom SSL procedures **cannot** be called with bare `Name()` syntax. Use:
 
 The dotted path is the addressing form described in [How scripts address each other](#how-scripts-address-each-other) — the first segment is a server-script category or an application name.
 
-Inside a [`:CLASS`](reference/keywords/CLASS.md), use [`Me:`](reference/special-forms/me.md)`Method()` to call a method on the same object and [`Base:`](reference/special-forms/base.md)`Method()` to call the parent class's implementation. `DoProc` is a compile-time error inside class methods.
+Inside a [`:CLASS`](reference/keywords/CLASS.md), use [`Me:`](reference/special-forms/me.md)`Method()` to call a method on the same object and [`Base:`](reference/special-forms/base.md)`Method()` to call the parent class's implementation. Inside class methods, `DoProc` with a bare procedure name is a compile-time error; only a fully qualified `Category.Script.Procedure` target is accepted.
 
 Built-in functions (e.g., [`Len`](reference/functions/Len.md), [`ALen`](reference/functions/ALen.md)) are called directly with normal syntax. Omit trailing optional parameters rather than passing empty values: `GetDataSet(sQuery)` not `GetDataSet(sQuery, {})`. For skipped middle parameters, use adjacent commas: `DoProc("MyProc", {p1,,p3})`.
 

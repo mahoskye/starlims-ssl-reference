@@ -6,7 +6,7 @@ element_type: keyword
 doc_status: published
 starlims:
   applies_to: [11, 12]
-  verified_against: [11]
+  verified_against: [12]
 ---
 
 # INHERIT
@@ -53,7 +53,7 @@ The keyword does not stand alone and is not used in script code outside a class 
 
 !!! success "Do"
     - Place `:INHERIT` immediately after [`:CLASS`](CLASS.md) `ClassName;`.
-    - Use a plain or qualified parent class name such as `BaseValidator` or `Lab.BaseValidator`.
+    - Name the parent as `Category.ClassName`, such as `Lab.BaseValidator`.
     - Use [`Base:MethodName()`](../special-forms/base.md) in child methods when you want to extend, not replace, inherited behavior.
 
 !!! failure "Don't"

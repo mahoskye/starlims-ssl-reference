@@ -61,13 +61,13 @@ DoProc(sProcedureName, [aArguments])
     - Pass a scalar as the second argument. `DoProc` expects an array there.
     - Assume argument-count mismatches raise an immediate `DoProc` error.
     - Use a two-segment procedure name. That format is rejected.
-    - Use `DoProc` inside class methods.
+    - Call a procedure by its bare name inside a class method. Only a fully qualified `Category.Script.Procedure` target is accepted there.
 
 ## Caveats
 
 - Calling `DoProc()` with no arguments stops the script from compiling, so no runtime error can be caught.
 - A string literal name is resolved when the script compiles: `DoProc("NoSuchProc")` stops the script from compiling with `Invalid method: NoSuchProc`, so no [`:TRY`](../keywords/TRY.md) can catch it. The runtime "not found" error in Exceptions applies only to names built at runtime.
-- `DoProc` is a compile-time error inside class methods — every name form is rejected, not just same-class calls. Use `Me:MethodName()` or `Base:MethodName()` instead.
+- Inside class methods, `DoProc` accepts only a fully qualified `Category.Script.Procedure` target, such as `DoProc("Lab.Rules.Normalize", {sValue})`. A bare procedure name is a compile-time error there. Call methods of the same class with `Me:MethodName()` or `Base:MethodName()`.
 - The called procedure does not get an isolated set of variables. Names it never declares resolve outward into the calling scope, so an undeclared assignment in the procedure can overwrite a caller variable of the same name. See [Variable Scope](../../guides/variable-scope.md).
 - One-segment names are resolved case-insensitively in the current script.
 - A three-segment name calls `Category.Script.Procedure` the same way [`ExecFunction`](ExecFunction.md) does.
