@@ -58,6 +58,7 @@ CToD(sDateString)
 ## Caveats
 
 - `CToD` uses the current date format setting, so the same text can parse differently after [`DateFormat`](DateFormat.md) changes that setting.
+- Text in another order does not parse. Under the default `M/d/yyyy` format, the ISO form `CToD("2026-03-05")` returns an empty date.
 
 ## Examples
 

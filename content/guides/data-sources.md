@@ -27,7 +27,7 @@ In data sources of either mode, [`:PARAMETERS`](../reference/keywords/PARAMETERS
 
 **Rules:**
 
-- Defaults are set inline with `:=` on the `:PARAMETERS` line. A parameter without a default is accepted, but what it receives when the caller leaves it out is not documented, so give a default to every parameter a caller may omit.
+- Every parameter **must** have an inline default (`:= value`). A data source with a parameter that has none fails when it runs, whatever the caller passes: `Incorrect synatx in :PARAMETERS. No default value for one or more parameters.`
 - `:PARAMETERS;` with no parameters is an error. A data source that takes no parameters leaves the `:PARAMETERS` line out.
 - Do **not** use `:DEFAULT` lines in data sources — defaults are inline only.
 - The inline-default form is what sets a STARLIMS-mode data source apart from a server script. The same `:PARAMETERS` line is not valid in a server script.
