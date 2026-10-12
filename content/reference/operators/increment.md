@@ -16,7 +16,7 @@ Increases a number variable by one, modifying its value in place.
 
 The `++` operator adds one to a numeric variable. It supports both prefix (`++variable`) and postfix (`variable++`) forms. Both forms increment the variable in place, but they differ in what they return when used inside a larger expression: prefix returns the new (incremented) value; postfix returns the original value before incrementing.
 
-`++` is equivalent to `variable += 1` but more concise. The operand must be a variable holding a number or a date; on a date, `++` adds one day. Using `++` on a variable of another type, a literal, or an expression result raises a runtime error.
+`++` is equivalent to `variable += 1` but more concise. The operand must be a variable, an array element such as `aCounts[1]`, or an object property such as `oStats:nHits`, holding a number or a date; on a date, `++` adds one day. Using `++` on a value of another type, a literal, or an expression result raises a runtime error.
 
 ## When to use it
 

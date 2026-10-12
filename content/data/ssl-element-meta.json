@@ -1022,7 +1022,8 @@
         }
       ],
       "caveats": [
-        "CToD uses the current date format setting, so the same text can parse differently after DateFormat changes that setting."
+        "CToD uses the current date format setting, so the same text can parse differently after DateFormat changes that setting.",
+        "Text in another order does not parse. Under the default M/d/yyyy format, the ISO form CToD(\"2026-03-05\") returns an empty date."
       ],
       "best_practices": {
         "do": [
@@ -2462,7 +2463,7 @@
       "caveats": [
         "Calling DoProc() with no arguments stops the script from compiling, so no runtime error can be caught.",
         "A string literal name is resolved when the script compiles: DoProc(\"NoSuchProc\") stops the script from compiling with Invalid method: NoSuchProc, so no :TRY can catch it. The runtime \"not found\" error in Exceptions applies only to names built at runtime.",
-        "Inside class methods, DoProc accepts only a fully qualified Category.Script.Procedure target, such as DoProc(\"Lab.Rules.Normalize\", {sValue}). A bare procedure name is a compile-time error there. Call methods of the same class with Me:MethodName() or Base:MethodName().",
+        "Inside class methods, DoProc with a bare procedure name is a compile-time error. Whether a fully qualified Category.Script.Procedure target is accepted there has not been confirmed. Call methods of the same class with Me:MethodName() or Base:MethodName().",
         "The called procedure does not get an isolated set of variables. Names it never declares resolve outward into the calling scope, so an undeclared assignment in the procedure can overwrite a caller variable of the same name. See Variable Scope.",
         "One-segment names are resolved case-insensitively in the current script.",
         "A three-segment name calls Category.Script.Procedure the same way ExecFunction does."
@@ -2479,7 +2480,7 @@
           "Pass a scalar as the second argument. DoProc expects an array there.",
           "Assume argument-count mismatches raise an immediate DoProc error.",
           "Use a two-segment procedure name. That format is rejected.",
-          "Call a procedure by its bare name inside a class method. Only a fully qualified Category.Script.Procedure target is accepted there."
+          "Call a procedure by its bare name inside a class method. That is a compile-time error."
         ]
       }
     },
@@ -9127,6 +9128,10 @@
           "message": "Argument 'parameters' must be NIL or an array"
         },
         {
+          "trigger": "The data source declares a parameter with no inline default.",
+          "message": "Incorrect synatx in :PARAMETERS. No default value for one or more parameters."
+        },
+        {
           "trigger": "sDataSourceName is a GUID that does not resolve to a stored data source.",
           "message": "Data source with id: {dataSourceId} doesn't exist in the database."
         }
@@ -12731,17 +12736,18 @@
       "source_path": "content/reference/keywords/EXITCASE.md",
       "exceptions": [],
       "caveats": [
-        "SSL keywords are case-sensitive. Write :EXITCASE in uppercase."
+        "SSL keywords are case-sensitive. Write :EXITCASE in uppercase.",
+        ":EXITCASE; cannot be made conditional. To leave the block from part of a branch, restructure the branch (for example, split it into separate :CASE conditions) instead of nesting :EXITCASE; in an :IF."
       ],
       "best_practices": {
         "do": [
           "End each :CASE and :OTHERWISE branch with :EXITCASE; unless you intentionally want later matching branches to run.",
           "Use :EXITCASE; to make single-branch :BEGINCASE behavior explicit.",
-          "Keep :EXITCASE; on its own line at the end of the branch body."
+          "Keep :EXITCASE; on its own line as the last statement of the branch body."
         ],
         "dont": [
           "Omit :EXITCASE; by accident. Without it, later :CASE expressions are still evaluated and more than one branch body may run.",
-          "Place statements after :EXITCASE; in the same branch. That code is unreachable and makes the block harder to read.",
+          "Place statements after :EXITCASE; in the same branch, or put :EXITCASE; inside an :IF within the branch. Both are compile-time errors (unexpected token).",
           "Use :EXITCASE; outside a :BEGINCASE structure."
         ]
       }
@@ -13040,7 +13046,7 @@
         "Use at most one :PARAMETERS statement in a given script, procedure, method, or constructor body.",
         "A standard :PARAMETERS statement must include at least one parameter name.",
         "In standard SSL, :DEFAULT lines must immediately follow :PARAMETERS when used.",
-        "In SSL and SQL data source files, defaults are set inline with :=. A parameter without one is accepted, but what it receives when the caller leaves it out is not documented.",
+        "In SSL and SQL data source files, every parameter must include an inline default value with :=. A data source with a parameter that has none fails when it runs, with Incorrect synatx in :PARAMETERS. No default value for one or more parameters.",
         "Colon-prefixed keywords are case-sensitive, so write :PARAMETERS in uppercase."
       ],
       "best_practices": {
@@ -13052,7 +13058,7 @@
         "dont": [
           "Write :PARAMETERS after :DECLARE, executable statements, or control flow. That placement is invalid in standard SSL bodies.",
           "Use :PARAMETERS as a substitute for local-variable declarations. Local working names belong in :DECLARE.",
-          "Use standard :PARAMETERS plus separate :DEFAULT lines in data source files. Data sources set defaults inline with := on the :PARAMETERS line."
+          "Use standard :PARAMETERS plus separate :DEFAULT lines in data source files. Data sources require inline := defaults on the :PARAMETERS line."
         ]
       }
     },

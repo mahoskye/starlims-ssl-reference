@@ -56,6 +56,7 @@ RunDS(sDataSourceName, [aParameters], [vReturnType])
 | --- | --- |
 | `sDataSourceName` is not a string. | `Argument 'dataSourceName' must be a string` |
 | `aParameters` is supplied but is not an array. | `Argument 'parameters' must be NIL or an array` |
+| The data source declares a parameter with no inline default. | `Incorrect synatx in :PARAMETERS. No default value for one or more parameters.` |
 | `sDataSourceName` is a GUID that does not resolve to a stored data source. | `Data source with id: {dataSourceId} doesn't exist in the database.` |
 
 ## Best practices

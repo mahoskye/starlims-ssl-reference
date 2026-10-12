@@ -18,7 +18,7 @@ The `--` operator decreases the value of variables in place, supporting numbers 
 
 For number variables, prefix (`--x`) subtracts one then returns the new value, while postfix (`x--`) returns the original value before decrementing. With dates, `--` subtracts one day from the date. A string operand raises a runtime invalid-operand error.
 
-The operator must be applied directly to a variable. Applying it to a constant, expression result, or a value of an unsupported type raises an error.
+The operator must be applied to a variable, an array element such as `aCounts[1]`, or an object property such as `oStats:nHits`. Applying it to a constant, expression result, or a value of an unsupported type raises an error.
 
 `--` differs from [`++`](increment.md), which increases values, and from [`subtract-assign`](subtract-assign.md) ([`-=`](subtract-assign.md)), which supports multi-step or non-unit decrements.
 

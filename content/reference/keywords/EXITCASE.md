@@ -15,7 +15,7 @@ Ends the current [`:CASE`](CASE.md) or [`:OTHERWISE`](OTHERWISE.md) branch and c
 
 Use `:EXITCASE;` inside a [`:BEGINCASE`](BEGINCASE.md) block when a matching branch should stop the whole block immediately. When `:EXITCASE;` is present, execution continues with the statement after [`:ENDCASE`](ENDCASE.md) `;`. Without it, later [`:CASE`](CASE.md) expressions can still be evaluated and additional matching case bodies can run.
 
-`:EXITCASE` does not take parameters and does not return a value. It is valid only inside a [`:CASE`](CASE.md) or [`:OTHERWISE`](OTHERWISE.md) branch within a [`:BEGINCASE`](BEGINCASE.md) block.
+`:EXITCASE` does not take parameters and does not return a value. It is valid only as the last statement of a [`:CASE`](CASE.md) or [`:OTHERWISE`](OTHERWISE.md) branch within a [`:BEGINCASE`](BEGINCASE.md) block, directly in the branch body.
 
 ## When to use
 
@@ -39,16 +39,17 @@ Use `:EXITCASE;` inside a [`:BEGINCASE`](BEGINCASE.md) block when a matching bra
 !!! success "Do"
     - End each [`:CASE`](CASE.md) and [`:OTHERWISE`](OTHERWISE.md) branch with `:EXITCASE;` unless you intentionally want later matching branches to run.
     - Use `:EXITCASE;` to make single-branch [`:BEGINCASE`](BEGINCASE.md) behavior explicit.
-    - Keep `:EXITCASE;` on its own line at the end of the branch body.
+    - Keep `:EXITCASE;` on its own line as the last statement of the branch body.
 
 !!! failure "Don't"
     - Omit `:EXITCASE;` by accident. Without it, later [`:CASE`](CASE.md) expressions are still evaluated and more than one branch body may run.
-    - Place statements after `:EXITCASE;` in the same branch. That code is unreachable and makes the block harder to read.
+    - Place statements after `:EXITCASE;` in the same branch, or put `:EXITCASE;` inside an [`:IF`](IF.md) within the branch. Both are compile-time errors (`unexpected token`).
     - Use `:EXITCASE;` outside a [`:BEGINCASE`](BEGINCASE.md) structure.
 
 ## Caveats
 
 - SSL keywords are case-sensitive. Write `:EXITCASE` in uppercase.
+- `:EXITCASE;` cannot be made conditional. To leave the block from part of a branch, restructure the branch (for example, split it into separate [`:CASE`](CASE.md) conditions) instead of nesting `:EXITCASE;` in an [`:IF`](IF.md).
 
 ## Examples
 
