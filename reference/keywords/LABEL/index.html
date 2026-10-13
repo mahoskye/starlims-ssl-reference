@@ -2872,6 +2872,7 @@
 <h2 id="behavior">Behavior<a class="headerlink" href="#behavior" title="Permanent link">&para;</a></h2>
 <p><code>:LABEL</code> is a marker, not a block. Execution continues with the statement after the label unless control was transferred there by <a href="../../functions/Branch/"><code>Branch</code></a><code>()</code>.</p>
 <p>Label targets are resolved within the current procedure or script. Forward references are supported, so <a href="../../functions/Branch/"><code>Branch</code></a><code>()</code> can jump to a label declared later in the same scope.</p>
+<p>Matching is exact and case-sensitive. A string-literal <a href="../../functions/Branch/"><code>Branch</code></a><code>()</code> target that matches no label, including one that differs only in case, stops the script from compiling, so none of it runs.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need a <a href="../../functions/Branch/"><code>Branch</code></a><code>()</code> target in the current procedure or script.</li>
@@ -2912,7 +2913,7 @@
 <p class="admonition-title">Do</p>
 <ul>
 <li>Choose descriptive labels such as <code>CLEANUP</code> or <code>RECOVER</code> that make the jump target obvious.</li>
-<li>Pass the exact stored target text to <a href="../../functions/Branch/"><code>Branch</code></a><code>()</code>, such as <code>Branch("LABEL CLEANUP")</code> for <code>:LABEL CLEANUP;</code>.</li>
+<li>Pass the exact stored target text to <a href="../../functions/Branch/"><code>Branch</code></a><code>()</code> as a string literal, with the same case, such as <code>Branch("LABEL CLEANUP")</code> for <code>:LABEL CLEANUP;</code>.</li>
 <li>Reserve labels for shared recovery or cleanup paths when structured flow would be less clear.</li>
 </ul>
 </div>
@@ -2928,6 +2929,9 @@
 <ul>
 <li><code>:LABEL name;</code> and <code>:LABELname;</code> are different stored texts and require different <a href="../../functions/Branch/"><code>Branch</code></a><code>()</code> targets.</li>
 <li>Keyword names are case-sensitive and must be uppercase: use <code>:LABEL</code>, not <code>:label</code>.</li>
+<li>Label text is matched case-sensitively. <code>Branch("label skip")</code> does not reach <code>:LABEL SKIP;</code>; as a string literal it stops the script from compiling.</li>
+<li>Only a string-literal <a href="../../functions/Branch/"><code>Branch</code></a><code>()</code> target reaches a label. A computed target (a variable, parameter or expression) never matches, even with the exact label text, and falls through silently.</li>
+<li>A label before <a href="../ERROR/"><code>:ERROR</code></a> can be reached from the handler, so the handler can branch back and retry. A label inside the handler cannot be reached from the statements before <code>:ERROR</code>: that branch raises a runtime error.</li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="jump-to-a-shared-recovery-section">Jump to a shared recovery section<a class="headerlink" href="#jump-to-a-shared-recovery-section" title="Permanent link">&para;</a></h3>
@@ -3006,7 +3010,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 13, 2026 18:24:41 UTC">October 13, 2026</span>
   </span>
 
     

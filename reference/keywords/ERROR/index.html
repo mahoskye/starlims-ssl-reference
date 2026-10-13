@@ -2874,6 +2874,7 @@
 <p><strong>Placement.</strong> <code>:ERROR</code> protects the statements that come before it in the same procedure. The statements after it are handler code, not protected code: they run only when an earlier statement fails. A handler placed first therefore protects nothing, and the code after it never runs on the success path. When no error occurs, execution never enters the handler body, and a procedure that reaches <code>:ERROR</code> without a <a href="../RETURN/"><code>:RETURN</code></a> returns an empty string.</p>
 <p><strong>Without <a href="../RESUME/"><code>:RESUME</code></a>.</strong> The first failing statement skips the rest of the protected region and runs the handler. The procedure then ends and returns whatever the handler returns, or <code>""</code> if the handler has no <a href="../RETURN/"><code>:RETURN</code></a>. A <a href="../TRY/"><code>:TRY</code></a> block in the protected region keeps its own <a href="../CATCH/"><code>:CATCH</code></a>: errors raised inside the <code>:TRY</code> body go to that <code>:CATCH</code>, not to the legacy handler.</p>
 <p><strong>With <a href="../RESUME/"><code>:RESUME</code></a>.</strong> Every failing statement in the protected region runs the handler, and execution then continues with the statement after the one that failed. This includes statements inside a <a href="../TRY/"><code>:TRY</code></a> body: in observed runtime behavior the legacy handler takes the error, <a href="../CATCH/"><code>:CATCH</code></a> does not run, and the rest of the <code>:TRY</code> body keeps running.</p>
+<p><strong>Labels.</strong> The handler can use <a href="../../functions/Branch/"><code>Branch</code></a> to jump back to a <a href="../LABEL/"><code>:LABEL</code></a> before <code>:ERROR</code>, which runs the protected statements again from that label, so a retry loop works. The reverse does not: branching from the protected statements to a label inside the handler raises a runtime error, <code>Exception has been thrown by the target of an invocation.</code></p>
 <p>Use <a href="../../functions/GetLastSSLError/"><code>GetLastSSLError()</code></a> inside the handler to retrieve the current error object and read properties such as <code>:Description</code>.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2919,6 +2920,7 @@
 <li>Without <a href="../RESUME/"><code>:RESUME</code></a>, a <a href="../TRY/"><code>:TRY</code></a> block in the protected region keeps its own <a href="../CATCH/"><code>:CATCH</code></a>.</li>
 <li>With <a href="../RESUME/"><code>:RESUME</code></a>, the legacy handler takes errors raised inside a <a href="../TRY/"><code>:TRY</code></a> body before <a href="../CATCH/"><code>:CATCH</code></a> can run, and execution continues inside the <code>:TRY</code> body at the next statement. Do not combine resume mode with <a href="../TRY/"><code>:TRY</code></a>/<a href="../CATCH/"><code>:CATCH</code></a> in the same procedure. See <a href="../../../guides/error-handling/#do-not-mix-errorresume-with-trycatch">Error Handling</a>.</li>
 <li>If no error occurs, the handler body is skipped.</li>
+<li>The handler can <a href="../../functions/Branch/"><code>Branch</code></a> back to a label before <code>:ERROR</code> to retry. Keep a counter so the retry stops. Branching from the protected statements to a label inside the handler raises <code>Exception has been thrown by the target of an invocation.</code></li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="logging-a-failure-and-stopping-the-procedure">Logging a failure and stopping the procedure<a class="headerlink" href="#logging-a-failure-and-stopping-the-procedure" title="Permanent link">&para;</a></h3>
@@ -3024,7 +3026,7 @@ Approval failed for S-1002: Result cannot be negative
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:26:58 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 13, 2026 15:08:22 UTC">October 13, 2026</span>
   </span>
 
     

@@ -1352,10 +1352,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#use-a-computed-target" class="md-nav__link">
+  <a href="#choose-a-target-at-run-time-with-literal-calls" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Use a computed target
+        Choose a target at run time with literal calls
       
     </span>
   </a>
@@ -3399,10 +3399,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#use-a-computed-target" class="md-nav__link">
+  <a href="#choose-a-target-at-run-time-with-literal-calls" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Use a computed target
+        Choose a target at run time with literal calls
       
     </span>
   </a>
@@ -3547,14 +3547,14 @@
 
 <h1 id="branch">Branch<a class="headerlink" href="#branch" title="Permanent link">&para;</a></h1>
 <p>Transfers control to a label in the current procedure.</p>
-<p><code>Branch</code> requires exactly one argument. If that argument is a string literal, SSL uses that literal text as the branch target. If it is any other expression, SSL evaluates it, converts the result to a string, and compares that text against the labels in the current procedure. If a computed target does not match any label, execution continues with the next statement.</p>
+<p><code>Branch</code> requires exactly one argument. If that argument is a string literal, SSL uses that literal text as the branch target, and it must match a label in the current procedure exactly, including case. A literal target that matches no label stops the script from compiling, so none of it runs. If the argument is any other expression, <code>Branch</code> never jumps: no label matches a computed target, even when its text is exactly the label's, and execution continues with the next statement without an error. This holds at script level and inside procedures, and for variables, parameters and expressions such as <code>"LABEL " + "SKIP"</code>. Always pass the target as a string literal.</p>
 <p>For normal label declarations such as <a href="../../keywords/LABEL/"><code>:LABEL CLEANUP;</code></a>, the target text must match the label as written after the colon, so the usual form is <code>Branch("LABEL CLEANUP")</code>. You can branch to a label that appears later in the same procedure. When <code>Branch</code> is used inside a <a href="../../keywords/TRY/"><code>:TRY</code></a> or <a href="../../keywords/CATCH/"><code>:CATCH</code></a> region, SSL leaves that protected region before transferring control.
 <code>Branch</code> does not return a useful value.</p>
 <h2 id="when-to-use">When to use<a class="headerlink" href="#when-to-use" title="Permanent link">&para;</a></h2>
 <ul>
 <li>When you need to jump to a shared cleanup or recovery section in the same procedure.</li>
 <li>When maintaining legacy SSL that already uses labels for explicit control flow.</li>
-<li>When a fixed or computed label target is clearer than duplicating the same exit logic in several places.</li>
+<li>When a jump to a fixed label is clearer than duplicating the same exit logic in several places.</li>
 </ul>
 <h2 id="syntax">Syntax<a class="headerlink" href="#syntax" title="Permanent link">&para;</a></h2>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="nf">Branch</span><span class="p">(</span><span class="n">vTarget</span><span class="p">)</span>
@@ -3576,7 +3576,7 @@
 <td>any</td>
 <td>yes</td>
 <td>—</td>
-<td>Target label text. A string literal is used directly as the target text. Any other expression is evaluated and converted to a string before SSL compares it to the labels in the current procedure.</td>
+<td>Target label text. A string literal is used directly as the target text and must match a label exactly, including case. Any other expression never matches a label, so the call falls through to the next statement.</td>
 </tr>
 </tbody>
 </table>
@@ -3603,6 +3603,7 @@
 <ul>
 <li>Use descriptive labels that make the jump target obvious, such as <code>CLEANUP</code> or <code>RECOVER</code>.</li>
 <li>For labels declared with <a href="../../keywords/LABEL/"><code>:LABEL name;</code></a>, pass the matching target text such as <code>"LABEL CLEANUP"</code>.</li>
+<li>Pass the target as a string literal. When the target depends on runtime data, choose among literal <code>Branch</code> calls with <a href="../../keywords/IF/"><code>:IF</code></a> or <a href="../../keywords/BEGINCASE/"><code>:BEGINCASE</code></a>.</li>
 <li>Prefer one shared cleanup or recovery label over repeating the same shutdown logic in several places.</li>
 </ul>
 </div>
@@ -3610,14 +3611,19 @@
 <p class="admonition-title">Don't</p>
 <ul>
 <li>Pass plain label names such as <code>"CLEANUP"</code> for a normal <a href="../../keywords/LABEL/"><code>:LABEL CLEANUP;</code></a> target. The text must match the label exactly as written after the colon.</li>
+<li>Change the case of the target text. <code>Branch("label cleanup")</code> does not match <code>:LABEL CLEANUP;</code>, and the script does not compile.</li>
+<li>Pass a variable, parameter or expression as the target. A computed target never reaches a label. Use a string literal.</li>
 <li>Use <code>Branch</code> as a substitute for ordinary <a href="../../keywords/IF/"><code>:IF</code></a>, <a href="../../keywords/FOR/"><code>:FOR</code></a>, <a href="../../keywords/WHILE/"><code>:WHILE</code></a>, or <a href="../../keywords/RETURN/"><code>:RETURN</code></a> flow when structured control is sufficient.</li>
-<li>Assume a computed target will raise an error when it does not match. A computed miss simply falls through to the next statement.</li>
+<li>Expect an error from a computed target. It falls through silently, so the jump is lost without any sign.</li>
 </ul>
 </div>
 <h2 id="caveats">Caveats<a class="headerlink" href="#caveats" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Calling <code>Branch()</code> without a target stops the script from compiling, so no runtime error can be caught.</li>
 <li>For <a href="../../keywords/LABEL/"><code>:LABEL name;</code></a>, the usual branch target is <code>"LABEL name"</code>. For mashed labels such as <a href="../../keywords/LABEL/"><code>:LABELNAME;</code></a>, the target text must match that exact token text instead.</li>
+<li>A string-literal target that matches no label stops the script from compiling, so none of the script runs and no <a href="../../keywords/TRY/"><code>:TRY</code></a> can catch the failure. Matching is case-sensitive: a literal <code>Branch("label skip")</code> for <a href="../../keywords/LABEL/"><code>:LABEL SKIP;</code></a> fails the same way.</li>
+<li>A computed target never jumps, at script level or inside a procedure, even when its text exactly matches a label (verified on STARLIMS 12). Execution continues with the next statement, and no error is raised.</li>
+<li>An <a href="../../keywords/ERROR/"><code>:ERROR</code></a> handler can branch back to a label before <code>:ERROR</code>, so a retry loop works. Branching the other way, from the protected statements to a label inside the handler, raises a runtime error: <code>Exception has been thrown by the target of an invocation.</code></li>
 </ul>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="skip-process-steps-based-on-condition">Skip process steps based on condition<a class="headerlink" href="#skip-process-steps-based-on-condition" title="Permanent link">&para;</a></h3>
@@ -3644,34 +3650,27 @@
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"SkipStepsIfValidationFails"</span><span class="p">);</span>
 </code></pre></div>
-<h3 id="use-a-computed-target">Use a computed target<a class="headerlink" href="#use-a-computed-target" title="Permanent link">&para;</a></h3>
-<p>Builds the branch target string dynamically based on <code>sMode</code> and shows that the computed value <code>"LABEL REVIEW"</code> routes execution to the <code>REVIEW</code> label.</p>
+<h3 id="choose-a-target-at-run-time-with-literal-calls">Choose a target at run time with literal calls<a class="headerlink" href="#choose-a-target-at-run-time-with-literal-calls" title="Permanent link">&para;</a></h3>
+<p>Selects the jump from <code>sMode</code> with <a href="../../keywords/IF/"><code>:IF</code></a> blocks, each holding a string-literal target, instead of building the target text in a variable. With <code>sMode</code> set to <code>"REVIEW"</code>, the second <code>Branch</code> call jumps to the <code>REVIEW</code> label.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">RouteWorkflow</span><span class="p">;</span>
-<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMode</span><span class="p">,</span><span class="w"> </span><span class="n">sTarget</span><span class="p">;</span>
+<span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sMode</span><span class="p">;</span>
 
 <span class="w">    </span><span class="n">sMode</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"REVIEW"</span><span class="p">;</span>
-<span class="w">    </span><span class="n">sTarget</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LABEL FINISH"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sMode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"RETRY"</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sTarget</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LABEL RETRY"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">Branch</span><span class="p">(</span><span class="s2">"LABEL RETRY"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">sMode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"REVIEW"</span><span class="p">;</span>
-<span class="w">        </span><span class="n">sTarget</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"LABEL REVIEW"</span><span class="p">;</span>
+<span class="w">        </span><span class="nf">Branch</span><span class="p">(</span><span class="s2">"LABEL REVIEW"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
-<span class="w">    </span><span class="nf">Branch</span><span class="p">(</span><span class="n">sTarget</span><span class="p">);</span>
-
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"No matching label was found"</span><span class="p">);</span>
-<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">"NONE"</span><span class="p">;</span>
+<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Finishing the workflow"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">"DONE"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:LABEL</span><span class="w"> </span><span class="n">RETRY</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Retrying the workflow step"</span><span class="p">);</span>
 <span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">"RETRY"</span><span class="p">;</span>
-
-<span class="w">    </span><span class="k">:LABEL</span><span class="w"> </span><span class="n">FINISH</span><span class="p">;</span>
-<span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Finishing the workflow"</span><span class="p">);</span>
-<span class="w">    </span><span class="k">:RETURN</span><span class="w"> </span><span class="s2">"DONE"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">:LABEL</span><span class="w"> </span><span class="n">REVIEW</span><span class="p">;</span>
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Reviewing the workflow before completion"</span><span class="p">);</span>
@@ -3680,6 +3679,9 @@
 
 <span class="c1">/* Usage;</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"RouteWorkflow"</span><span class="p">);</span>
+</code></pre></div>
+<p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Reviewing the workflow before completion
 </code></pre></div>
 <h3 id="leave-a-try-block-for-shared-cleanup">Leave a TRY block for shared cleanup<a class="headerlink" href="#leave-a-try-block-for-shared-cleanup" title="Permanent link">&para;</a></h3>
 <p>Uses <code>Branch</code> inside a <a href="../../keywords/TRY/"><code>:TRY</code></a> block to jump to a shared cleanup label when an early-exit condition is detected, demonstrating that <code>Branch</code> exits the protected region before transferring control.</p>
@@ -3718,6 +3720,7 @@
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../../keywords/LABEL/"><code>LABEL</code></a></li>
+<li><a href="../../keywords/ERROR/"><code>ERROR</code></a></li>
 </ul>
 
 
@@ -3739,7 +3742,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:50:27 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 13, 2026 18:24:41 UTC">October 13, 2026</span>
   </span>
 
     
