@@ -5425,7 +5425,8 @@
         }
       ],
       "caveats": [
-        "GetInlineCode retrieves code text; it does not execute that code."
+        "GetInlineCode retrieves code text; it does not execute that code.",
+        "A block is stored when execution reaches its :BEGININLINECODE statement. After DeleteInlineCode removes a name, a later block with the same name stores it again, and GetInlineCode returns the later block's text."
       ],
       "best_practices": {
         "do": [
@@ -12366,6 +12367,7 @@
       "source_path": "content/reference/keywords/BEGININLINECODE.md",
       "exceptions": [],
       "caveats": [
+        "A block is stored when execution reaches it. A block with the same name that runs after DeleteInlineCode stores the name again.",
         "GetInlineCode raises a runtime error if the named block is not in scope.",
         "DeleteInlineCode raises <name> not in scope. when other inline blocks exist but this name is not among them. With no inline blocks defined, it returns .T.."
       ],
@@ -13437,7 +13439,7 @@
         ],
         "dont": [
           "Assume postfix (variable--) also returns the updated value. The postfix form returns the original before decrementing.",
-          "Use -- on strings, arrays, objects, booleans, or expression results. Unsupported usage raises errors.",
+          "Use -- on literals, expression results, or values other than numbers and dates. The target must be a variable, an array element, or an object property holding a number or a date.",
           "Use -- when a non-unit decrement is needed. Use subtract-assign (-=) instead."
         ]
       }
@@ -13644,7 +13646,7 @@
           "Use the prefix form (++variable) when the incremented value is needed immediately in the same expression."
         ],
         "dont": [
-          "Use ++ on non-variable values or on types other than numbers and dates. Only variables holding numbers or dates can be incremented.",
+          "Use ++ on literals, expression results, or values other than numbers and dates. The target must be a variable, an array element, or an object property holding a number or a date.",
           "Assume prefix and postfix always behave identically inside expressions. Prefix returns the new value; postfix returns the old value."
         ]
       }

@@ -61,6 +61,7 @@ GetInlineCode(sValue, [aVariables])
 ## Caveats
 
 - `GetInlineCode` retrieves code text; it does not execute that code.
+- A block is stored when execution reaches its [`:BEGININLINECODE`](../keywords/BEGININLINECODE.md) statement. After [`DeleteInlineCode`](DeleteInlineCode.md) removes a name, a later block with the same name stores it again, and `GetInlineCode` returns the later block's text.
 
 ## Examples
 

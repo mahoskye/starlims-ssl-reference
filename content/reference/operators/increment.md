@@ -56,7 +56,7 @@ Prefix form — increments, then returns new value:
     - Use the prefix form (`++variable`) when the incremented value is needed immediately in the same expression.
 
 !!! failure "Don't"
-    - Use `++` on non-variable values or on types other than numbers and dates. Only variables holding numbers or dates can be incremented.
+    - Use `++` on literals, expression results, or values other than numbers and dates. The target must be a variable, an array element, or an object property holding a number or a date.
     - Assume prefix and postfix always behave identically inside expressions. Prefix returns the new value; postfix returns the old value.
 
 ## Examples

@@ -19,6 +19,8 @@ Starts a named inline SSL code block that is stored for later retrieval with [`G
 
 `:BEGININLINECODE` can appear where a statement is allowed. The block body is captured until [`:ENDINLINECODE`](ENDINLINECODE.md) and stored under the supplied name.
 
+The block is stored when execution reaches it, like any other statement. After [`DeleteInlineCode`](../functions/DeleteInlineCode.md) removes a name, a later `:BEGININLINECODE` block with the same name stores it again, and [`GetInlineCode`](../functions/GetInlineCode.md) returns that later block's text.
+
 Unlike [`:REGION`](REGION.md), the inline body is validated as executable SSL. Use this form when you want a named block of executable SSL code that can be retrieved later as text.
 
 ## When to use
@@ -68,6 +70,7 @@ You can also quote the block name:
 
 ## Caveats
 
+- A block is stored when execution reaches it. A block with the same name that runs after [`DeleteInlineCode`](../functions/DeleteInlineCode.md) stores the name again.
 - [`GetInlineCode`](../functions/GetInlineCode.md) raises a runtime error if the named block is not in scope.
 - [`DeleteInlineCode`](../functions/DeleteInlineCode.md) raises `<name> not in scope.` when other inline blocks exist but this name is not among them. With no inline blocks defined, it returns [`.T.`](../literals/true.md).
 
