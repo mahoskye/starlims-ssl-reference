@@ -33,6 +33,8 @@ leftBoolean .AND. rightBoolean
 | Left | Right | Result | Behavior |
 |------|-------|--------|----------|
 | [boolean](../types/boolean.md) | [boolean](../types/boolean.md) | [boolean](../types/boolean.md) | Returns [`.T.`](../literals/true.md) only when both operands are [`.T.`](../literals/true.md). If the left operand is [`.F.`](../literals/false.md), the right operand is not evaluated. |
+| [boolean](../types/boolean.md) | any other type | the right operand | When the left operand is [`.T.`](../literals/true.md), `.AND.` returns the right operand unchanged, so `.T. .AND. "x"` returns `"x"`. When the left operand is [`.F.`](../literals/false.md), the result is [`.F.`](../literals/false.md) and the right operand is not evaluated. |
+| any other type | any | error | Raises a runtime error. A non-boolean left operand cannot be converted to a logical value. |
 
 ## Precedence
 
@@ -50,10 +52,13 @@ leftBoolean .AND. rightBoolean
     - Put an expensive lookup on the left when a simple flag check could reject the condition first.
     - Access a property, method, or array element on the left and expect a later condition to protect it. The left operand always runs.
     - Rely on readers to infer precedence in a long mixed logical expression. Group it explicitly.
+    - Use `.AND.` with a string, number, or other non-boolean operand. A non-boolean left operand raises an error, and a non-boolean right operand comes back unchanged instead of as a boolean.
 
 ## Errors and edge cases
 
 - `.AND.` is a logical operator. Use boolean expressions on both sides.
+- A non-boolean right operand does not raise. When the left operand is [`.F.`](../literals/false.md), the right side is not evaluated and the result is [`.F.`](../literals/false.md), so `.F. .AND. "x"` returns [`.F.`](../literals/false.md). When the left operand is [`.T.`](../literals/true.md), `.AND.` returns the right operand unchanged, so `.T. .AND. "x"` returns `"x"` and `.T. .AND. 5` returns `5`, not a boolean. This mirrors [`.OR.`](or.md).
+- A non-boolean left operand raises a runtime error. The message ends `invalid operand: <value> (of type <type>) for operator: asBool`.
 - Only the right operand is skipped. Any side effects in the left operand still happen.
 - `.AND.` is not the integer bitwise AND operator. For bitwise integer operations, use [`_AND`](../functions/_AND.md)`(a, b)`.
 

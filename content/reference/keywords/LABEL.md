@@ -23,6 +23,8 @@ The stored label text includes the word `LABEL`. For example, `:LABEL CLEANUP;` 
 
 Label targets are resolved within the current procedure or script. Forward references are supported, so [`Branch`](../functions/Branch.md)`()` can jump to a label declared later in the same scope.
 
+Matching is exact and case-sensitive. A string-literal [`Branch`](../functions/Branch.md)`()` target that matches no label, including one that differs only in case, stops the script from compiling, so none of it runs.
+
 ## When to use
 
 - When you need a [`Branch`](../functions/Branch.md)`()` target in the current procedure or script.
@@ -52,7 +54,7 @@ Label targets are resolved within the current procedure or script. Forward refer
 
 !!! success "Do"
     - Choose descriptive labels such as `CLEANUP` or `RECOVER` that make the jump target obvious.
-    - Pass the exact stored target text to [`Branch`](../functions/Branch.md)`()`, such as `Branch("LABEL CLEANUP")` for `:LABEL CLEANUP;`.
+    - Pass the exact stored target text to [`Branch`](../functions/Branch.md)`()` as a string literal, with the same case, such as `Branch("LABEL CLEANUP")` for `:LABEL CLEANUP;`.
     - Reserve labels for shared recovery or cleanup paths when structured flow would be less clear.
 
 !!! failure "Don't"
@@ -64,6 +66,9 @@ Label targets are resolved within the current procedure or script. Forward refer
 
 - `:LABEL name;` and `:LABELname;` are different stored texts and require different [`Branch`](../functions/Branch.md)`()` targets.
 - Keyword names are case-sensitive and must be uppercase: use `:LABEL`, not `:label`.
+- Label text is matched case-sensitively. `Branch("label skip")` does not reach `:LABEL SKIP;`; as a string literal it stops the script from compiling.
+- Only a string-literal [`Branch`](../functions/Branch.md)`()` target reaches a label. A computed target (a variable, parameter or expression) never matches, even with the exact label text, and falls through silently.
+- A label before [`:ERROR`](ERROR.md) can be reached from the handler, so the handler can branch back and retry. A label inside the handler cannot be reached from the statements before `:ERROR`: that branch raises a runtime error.
 
 ## Examples
 

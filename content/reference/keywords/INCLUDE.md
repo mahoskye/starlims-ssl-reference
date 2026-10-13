@@ -69,6 +69,7 @@ If the same include target is encountered again while compiling a script, the la
 - `:INCLUDE` must be written in uppercase with the leading colon.
 - The target name is normally written in identifier syntax (`:INCLUDE ScriptName;` or `:INCLUDE Category.ScriptName;`). A quoted-string target (`:INCLUDE "ScriptName";`) is not accepted: it raises `unexpected char: '"'`.
 - If the target script cannot be loaded, compilation fails.
+- [`:REGION`](REGION.md) blocks in the included script are visible to [`GetRegion`](../functions/GetRegion.md) in the including script, and the included script's procedures can be called as if they were defined there.
 
 ## Examples
 

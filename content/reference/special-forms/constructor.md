@@ -90,6 +90,8 @@ The parent class's parameterless constructor runs automatically before the const
 - Constructors run during object creation; they are not invoked like ordinary
   methods.
 - If no constructor is declared, the class can still be created with no arguments.
+- An argument-count mismatch does not raise. Parameters with no matching element in the [`CreateUdObject`](../functions/CreateUdObject.md) argument array arrive as [`NIL`](../literals/nil.md), including when the array is omitted or empty, and extra elements are ignored.
+- Declaring `Constructor` before the class's other methods is allowed. Placing it last is a convention, not a requirement.
 
 ## Examples
 

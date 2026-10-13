@@ -19,6 +19,10 @@ Starts a named inline SSL code block that is stored for later retrieval with [`G
 
 `:BEGININLINECODE` can appear where a statement is allowed. The block body is captured until [`:ENDINLINECODE`](ENDINLINECODE.md) and stored under the supplied name.
 
+The block is stored when execution reaches it, like any other statement. Reaching it stores the text only: the block's body does not run where it stands. After [`DeleteInlineCode`](../functions/DeleteInlineCode.md) removes a name, a later `:BEGININLINECODE` block with the same name stores it again, and [`GetInlineCode`](../functions/GetInlineCode.md) returns that later block's text.
+
+Before execution reaches the block, [`GetInlineCode`](../functions/GetInlineCode.md) cannot see it. It returns an empty string when no inline block is stored yet, and raises `GetInlineCode: <name> not in scope.` when another inline block is already stored. Once the block has been reached, it returns the block's text.
+
 Unlike [`:REGION`](REGION.md), the inline body is validated as executable SSL. Use this form when you want a named block of executable SSL code that can be retrieved later as text.
 
 ## When to use
@@ -59,6 +63,7 @@ You can also quote the block name:
 !!! success "Do"
     - Use a clear block name that matches how the code will be retrieved.
     - Keep the inline body valid SSL so the script compiles cleanly.
+    - Place the block before the [`GetInlineCode`](../functions/GetInlineCode.md) call that reads it, so the block has been stored by the time the call runs.
     - Delete temporary inline code with [`DeleteInlineCode`](../functions/DeleteInlineCode.md) after use when the block is no longer needed.
 
 !!! failure "Don't"
@@ -68,7 +73,9 @@ You can also quote the block name:
 
 ## Caveats
 
-- [`GetInlineCode`](../functions/GetInlineCode.md) raises a runtime error if the named block is not in scope.
+- A block is stored when execution reaches it. A block with the same name that runs after [`DeleteInlineCode`](../functions/DeleteInlineCode.md) stores the name again.
+- The block's body does not run where the block stands. Retrieve it with [`GetInlineCode`](../functions/GetInlineCode.md) and run it with [`ExecUdf`](../functions/ExecUdf.md).
+- [`GetInlineCode`](../functions/GetInlineCode.md) called before execution reaches the block returns an empty string when no inline block is stored yet, and raises `GetInlineCode: <name> not in scope.` when another inline block is already stored.
 - [`DeleteInlineCode`](../functions/DeleteInlineCode.md) raises `<name> not in scope.` when other inline blocks exist but this name is not among them. With no inline blocks defined, it returns [`.T.`](../literals/true.md).
 
 ## Examples

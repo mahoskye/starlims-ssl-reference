@@ -27,6 +27,8 @@ Use `:ERROR` primarily when maintaining older SSL code that already relies on th
 
 **With [`:RESUME`](RESUME.md).** Every failing statement in the protected region runs the handler, and execution then continues with the statement after the one that failed. This includes statements inside a [`:TRY`](TRY.md) body: in observed runtime behavior the legacy handler takes the error, [`:CATCH`](CATCH.md) does not run, and the rest of the `:TRY` body keeps running.
 
+**Labels.** The handler can use [`Branch`](../functions/Branch.md) to jump back to a [`:LABEL`](LABEL.md) before `:ERROR`, which runs the protected statements again from that label, so a retry loop works. The reverse does not: branching from the protected statements to a label inside the handler raises a runtime error, `Exception has been thrown by the target of an invocation.`
+
 Use [`GetLastSSLError()`](../functions/GetLastSSLError.md) inside the handler to retrieve the current error object and read properties such as `:Description`.
 
 ## When to use
@@ -74,6 +76,7 @@ Use [`GetLastSSLError()`](../functions/GetLastSSLError.md) inside the handler to
 - Without [`:RESUME`](RESUME.md), a [`:TRY`](TRY.md) block in the protected region keeps its own [`:CATCH`](CATCH.md).
 - With [`:RESUME`](RESUME.md), the legacy handler takes errors raised inside a [`:TRY`](TRY.md) body before [`:CATCH`](CATCH.md) can run, and execution continues inside the `:TRY` body at the next statement. Do not combine resume mode with [`:TRY`](TRY.md)/[`:CATCH`](CATCH.md) in the same procedure. See [Error Handling](../../guides/error-handling.md#do-not-mix-errorresume-with-trycatch).
 - If no error occurs, the handler body is skipped.
+- The handler can [`Branch`](../functions/Branch.md) back to a label before `:ERROR` to retry. Keep a counter so the retry stops. Branching from the protected statements to a label inside the handler raises `Exception has been thrown by the target of an invocation.`
 
 ## Examples
 

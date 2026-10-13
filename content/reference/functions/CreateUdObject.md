@@ -73,11 +73,13 @@ Only one form is used per call. `aPropertyDefs` and `sClassName` are both the fi
 !!! failure "Don't"
     - Use `CreateUdObject` to instantiate built-in classes. Use curly-brace construction such as `Email{}` or `SSLDataset{}` instead.
     - Pass constructor arguments as separate parameters. The class-name form expects one array argument list.
+    - Expect an argument-count mismatch to raise. Missing constructor arguments arrive as [`NIL`](../literals/nil.md) and extra ones are ignored, so check required arguments in the constructor.
     - Use empty property names or names that contain spaces, hyphens, or leading digits.
     - Assume a bare property-name entry gives you a custom default value. It creates the property with `""`.
 
 ## Caveats
 
+- In the class-name form, constructor parameters with no matching argument arrive as [`NIL`](../literals/nil.md). That holds when `aArgs` is omitted, when it is `{}`, and when it has fewer elements than the constructor's [`:PARAMETERS`](../keywords/PARAMETERS.md). Extra elements beyond the declared parameters are ignored without an error.
 - Pass the class as `Category.ClassName`. A bare class name is looked up only among the default categories, so for a class in your own category it raises `There is no script with name: <name> among default categories.`
 - Property names in the array form are not checked against identifier rules. In observed runtime behavior, `CreateUdObject({"1abc"})` creates a property named `1abc` instead of raising an error.
 - An empty `aPropertyDefs` array is valid and returns an empty dynamic object.

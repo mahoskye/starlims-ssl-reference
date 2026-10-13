@@ -68,6 +68,8 @@ GetRegion(sRegionName, [aSourceValues], [aDestinationValues])
 ## Caveats
 
 - Replacements are applied in order, so overlapping source values can affect the final result.
+- `GetRegion` sees regions defined in a script pulled in with [`:INCLUDE`](../keywords/INCLUDE.md), as well as regions in the current script.
+- Region markers inside a comment, such as `/*:REGION Hidden;`, define no region. `GetRegion("Hidden")` then raises `GetRegion: hidden not in scope.` when the script defines other regions.
 
 ## Examples
 
