@@ -67,7 +67,7 @@ Matching is exact and case-sensitive. A string-literal [`Branch`](../functions/B
 - `:LABEL name;` and `:LABELname;` are different stored texts and require different [`Branch`](../functions/Branch.md)`()` targets.
 - Keyword names are case-sensitive and must be uppercase: use `:LABEL`, not `:label`.
 - Label text is matched case-sensitively. `Branch("label skip")` does not reach `:LABEL SKIP;`; as a string literal it stops the script from compiling.
-- In observed runtime behavior inside a procedure, a computed [`Branch`](../functions/Branch.md)`()` target held in a variable fell through even when its text matched the label exactly. Target labels with string literals.
+- Only a string-literal [`Branch`](../functions/Branch.md)`()` target reaches a label. A computed target (a variable, parameter or expression) never matches, even with the exact label text, and falls through silently.
 - A label before [`:ERROR`](ERROR.md) can be reached from the handler, so the handler can branch back and retry. A label inside the handler cannot be reached from the statements before `:ERROR`: that branch raises a runtime error.
 
 ## Examples

@@ -13,7 +13,7 @@ starlims:
 
 Transfers control to a label in the current procedure.
 
-`Branch` requires exactly one argument. If that argument is a string literal, SSL uses that literal text as the branch target, and it must match a label in the current procedure exactly, including case. A literal target that matches no label stops the script from compiling, so none of it runs. If the argument is any other expression, SSL evaluates it, converts the result to a string, and compares that text against the labels in the current procedure. If a computed target does not match any label, execution continues with the next statement. In observed runtime behavior inside a procedure, a computed target fell through even when its text matched a label exactly, so prefer string-literal targets.
+`Branch` requires exactly one argument. If that argument is a string literal, SSL uses that literal text as the branch target, and it must match a label in the current procedure exactly, including case. A literal target that matches no label stops the script from compiling, so none of it runs. If the argument is any other expression, `Branch` never jumps: no label matches a computed target, even when its text is exactly the label's, and execution continues with the next statement without an error. This holds at script level and inside procedures, and for variables, parameters and expressions such as `"LABEL " + "SKIP"`. Always pass the target as a string literal.
 
 For normal label declarations such as [`:LABEL CLEANUP;`](../keywords/LABEL.md), the target text must match the label as written after the colon, so the usual form is `Branch("LABEL CLEANUP")`. You can branch to a label that appears later in the same procedure. When `Branch` is used inside a [`:TRY`](../keywords/TRY.md) or [`:CATCH`](../keywords/CATCH.md) region, SSL leaves that protected region before transferring control.
 `Branch` does not return a useful value.
@@ -34,7 +34,7 @@ Branch(vTarget)
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `vTarget` | any | yes | — | Target label text. A string literal is used directly as the target text and must match a label exactly, including case. Any other expression is evaluated and converted to a string before SSL compares it to the labels in the current procedure. |
+| `vTarget` | any | yes | — | Target label text. A string literal is used directly as the target text and must match a label exactly, including case. Any other expression never matches a label, so the call falls through to the next statement. |
 
 ## Returns
 
@@ -57,16 +57,16 @@ Branch(vTarget)
 !!! failure "Don't"
     - Pass plain label names such as `"CLEANUP"` for a normal [`:LABEL CLEANUP;`](../keywords/LABEL.md) target. The text must match the label exactly as written after the colon.
     - Change the case of the target text. `Branch("label cleanup")` does not match `:LABEL CLEANUP;`, and the script does not compile.
-    - Rely on a computed target to reach a label inside a procedure. Use a string literal instead.
+    - Pass a variable, parameter or expression as the target. A computed target never reaches a label. Use a string literal.
     - Use `Branch` as a substitute for ordinary [`:IF`](../keywords/IF.md), [`:FOR`](../keywords/FOR.md), [`:WHILE`](../keywords/WHILE.md), or [`:RETURN`](../keywords/RETURN.md) flow when structured control is sufficient.
-    - Assume a computed target will raise an error when it does not match. A computed miss simply falls through to the next statement.
+    - Expect an error from a computed target. It falls through silently, so the jump is lost without any sign.
 
 ## Caveats
 
 - Calling `Branch()` without a target stops the script from compiling, so no runtime error can be caught.
 - For [`:LABEL name;`](../keywords/LABEL.md), the usual branch target is `"LABEL name"`. For mashed labels such as [`:LABELNAME;`](../keywords/LABEL.md), the target text must match that exact token text instead.
 - A string-literal target that matches no label stops the script from compiling, so none of the script runs and no [`:TRY`](../keywords/TRY.md) can catch the failure. Matching is case-sensitive: a literal `Branch("label skip")` for [`:LABEL SKIP;`](../keywords/LABEL.md) fails the same way.
-- In observed runtime behavior inside a procedure, a computed target fell through to the next statement even when its text matched a label exactly, while the same text as a string literal reached the label. Use string-literal targets.
+- A computed target never jumps, at script level or inside a procedure, even when its text exactly matches a label (verified on STARLIMS 12). Execution continues with the next statement, and no error is raised.
 - An [`:ERROR`](../keywords/ERROR.md) handler can branch back to a label before `:ERROR`, so a retry loop works. Branching the other way, from the protected statements to a label inside the handler, raises a runtime error: `Exception has been thrown by the target of an invocation.`
 
 ## Examples
