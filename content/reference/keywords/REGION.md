@@ -68,6 +68,8 @@ region body text
 - `:REGION` and [`:ENDREGION`](ENDREGION.md) are case-sensitive keywords and must be uppercase.
 - [`GetRegion`](../functions/GetRegion.md)`()` raises an error if the requested region name is not in scope.
 - Leading and trailing line breaks immediately inside the region body are trimmed before the text is stored.
+- Region markers inside a comment define nothing. With `/*:REGION Hidden;` written as a comment line, `GetRegion("Hidden")` raises `GetRegion: hidden not in scope.` when the script defines other regions.
+- Regions defined in a script pulled in with [`:INCLUDE`](INCLUDE.md) are visible to [`GetRegion`](../functions/GetRegion.md)`()` in the including script.
 
 ## Examples
 

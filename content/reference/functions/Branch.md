@@ -13,7 +13,7 @@ starlims:
 
 Transfers control to a label in the current procedure.
 
-`Branch` requires exactly one argument. If that argument is a string literal, SSL uses that literal text as the branch target. If it is any other expression, SSL evaluates it, converts the result to a string, and compares that text against the labels in the current procedure. If a computed target does not match any label, execution continues with the next statement.
+`Branch` requires exactly one argument. If that argument is a string literal, SSL uses that literal text as the branch target, and it must match a label in the current procedure exactly, including case. A literal target that matches no label stops the script from compiling, so none of it runs. If the argument is any other expression, SSL evaluates it, converts the result to a string, and compares that text against the labels in the current procedure. If a computed target does not match any label, execution continues with the next statement. In observed runtime behavior inside a procedure, a computed target fell through even when its text matched a label exactly, so prefer string-literal targets.
 
 For normal label declarations such as [`:LABEL CLEANUP;`](../keywords/LABEL.md), the target text must match the label as written after the colon, so the usual form is `Branch("LABEL CLEANUP")`. You can branch to a label that appears later in the same procedure. When `Branch` is used inside a [`:TRY`](../keywords/TRY.md) or [`:CATCH`](../keywords/CATCH.md) region, SSL leaves that protected region before transferring control.
 `Branch` does not return a useful value.
@@ -22,7 +22,7 @@ For normal label declarations such as [`:LABEL CLEANUP;`](../keywords/LABEL.md),
 
 - When you need to jump to a shared cleanup or recovery section in the same procedure.
 - When maintaining legacy SSL that already uses labels for explicit control flow.
-- When a fixed or computed label target is clearer than duplicating the same exit logic in several places.
+- When a jump to a fixed label is clearer than duplicating the same exit logic in several places.
 
 ## Syntax
 
@@ -34,7 +34,7 @@ Branch(vTarget)
 
 | Name | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
-| `vTarget` | any | yes | — | Target label text. A string literal is used directly as the target text. Any other expression is evaluated and converted to a string before SSL compares it to the labels in the current procedure. |
+| `vTarget` | any | yes | — | Target label text. A string literal is used directly as the target text and must match a label exactly, including case. Any other expression is evaluated and converted to a string before SSL compares it to the labels in the current procedure. |
 
 ## Returns
 
@@ -51,10 +51,13 @@ Branch(vTarget)
 !!! success "Do"
     - Use descriptive labels that make the jump target obvious, such as `CLEANUP` or `RECOVER`.
     - For labels declared with [`:LABEL name;`](../keywords/LABEL.md), pass the matching target text such as `"LABEL CLEANUP"`.
+    - Pass the target as a string literal. When the target depends on runtime data, choose among literal `Branch` calls with [`:IF`](../keywords/IF.md) or [`:BEGINCASE`](../keywords/BEGINCASE.md).
     - Prefer one shared cleanup or recovery label over repeating the same shutdown logic in several places.
 
 !!! failure "Don't"
     - Pass plain label names such as `"CLEANUP"` for a normal [`:LABEL CLEANUP;`](../keywords/LABEL.md) target. The text must match the label exactly as written after the colon.
+    - Change the case of the target text. `Branch("label cleanup")` does not match `:LABEL CLEANUP;`, and the script does not compile.
+    - Rely on a computed target to reach a label inside a procedure. Use a string literal instead.
     - Use `Branch` as a substitute for ordinary [`:IF`](../keywords/IF.md), [`:FOR`](../keywords/FOR.md), [`:WHILE`](../keywords/WHILE.md), or [`:RETURN`](../keywords/RETURN.md) flow when structured control is sufficient.
     - Assume a computed target will raise an error when it does not match. A computed miss simply falls through to the next statement.
 
@@ -62,6 +65,9 @@ Branch(vTarget)
 
 - Calling `Branch()` without a target stops the script from compiling, so no runtime error can be caught.
 - For [`:LABEL name;`](../keywords/LABEL.md), the usual branch target is `"LABEL name"`. For mashed labels such as [`:LABELNAME;`](../keywords/LABEL.md), the target text must match that exact token text instead.
+- A string-literal target that matches no label stops the script from compiling, so none of the script runs and no [`:TRY`](../keywords/TRY.md) can catch the failure. Matching is case-sensitive: a literal `Branch("label skip")` for [`:LABEL SKIP;`](../keywords/LABEL.md) fails the same way.
+- In observed runtime behavior inside a procedure, a computed target fell through to the next statement even when its text matched a label exactly, while the same text as a string literal reached the label. Use string-literal targets.
+- An [`:ERROR`](../keywords/ERROR.md) handler can branch back to a label before `:ERROR`, so a retry loop works. Branching the other way, from the protected statements to a label inside the handler, raises a runtime error: `Exception has been thrown by the target of an invocation.`
 
 ## Examples
 
@@ -93,37 +99,30 @@ Jumps to `LABEL SKIP_PROCESS_STEPS` when validation fails, bypassing the registr
 DoProc("SkipStepsIfValidationFails");
 ```
 
-### Use a computed target
+### Choose a target at run time with literal calls
 
-Builds the branch target string dynamically based on `sMode` and shows that the computed value `"LABEL REVIEW"` routes execution to the `REVIEW` label.
+Selects the jump from `sMode` with [`:IF`](../keywords/IF.md) blocks, each holding a string-literal target, instead of building the target text in a variable. With `sMode` set to `"REVIEW"`, the second `Branch` call jumps to the `REVIEW` label.
 
 ```ssl
 :PROCEDURE RouteWorkflow;
-    :DECLARE sMode, sTarget;
+    :DECLARE sMode;
 
     sMode := "REVIEW";
-    sTarget := "LABEL FINISH";
 
     :IF sMode == "RETRY";
-        sTarget := "LABEL RETRY";
+        Branch("LABEL RETRY");
     :ENDIF;
 
     :IF sMode == "REVIEW";
-        sTarget := "LABEL REVIEW";
+        Branch("LABEL REVIEW");
     :ENDIF;
 
-    Branch(sTarget);
-
-    UsrMes("No matching label was found");
-    :RETURN "NONE";
+    UsrMes("Finishing the workflow");
+    :RETURN "DONE";
 
     :LABEL RETRY;
     UsrMes("Retrying the workflow step");
     :RETURN "RETRY";
-
-    :LABEL FINISH;
-    UsrMes("Finishing the workflow");
-    :RETURN "DONE";
 
     :LABEL REVIEW;
     UsrMes("Reviewing the workflow before completion");
@@ -132,6 +131,12 @@ Builds the branch target string dynamically based on `sMode` and shows that the 
 
 /* Usage;
 DoProc("RouteWorkflow");
+```
+
+[`UsrMes`](UsrMes.md) logs:
+
+```text
+Reviewing the workflow before completion
 ```
 
 ### Leave a TRY block for shared cleanup
@@ -175,3 +180,4 @@ DoProc("SaveBatch");
 ## Related
 
 - [`LABEL`](../keywords/LABEL.md)
+- [`ERROR`](../keywords/ERROR.md)

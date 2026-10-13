@@ -21,6 +21,8 @@ Executes a block of statements only when a condition evaluates to true.
 
 `:IF` is a control-flow keyword, not a function call. It takes a condition expression followed by a terminating semicolon, an optional sequence of statements in the `:IF` body, an optional [`:ELSE`](ELSE.md) section, and a closing [`:ENDIF;`](ENDIF.md).
 
+The condition must evaluate to a logical value. SSL does not treat strings, numbers, or [`NIL`](../literals/nil.md) as true or false: a non-logical condition raises a runtime error, as it does for [`:WHILE`](WHILE.md) and [`:CASE`](CASE.md).
+
 Use [`:ELSE`](ELSE.md) when false-case handling belongs in the same decision block. For exact string comparisons inside conditions, prefer [`==`](../operators/strict-equals.md) instead of [`=`](../operators/equals.md) because [`=`](../operators/equals.md) performs prefix matching for strings in SSL.
 
 ## When to use
@@ -61,10 +63,13 @@ Use [`:ELSE`](ELSE.md) when false-case handling belongs in the same decision blo
     - Write complex nested conditions that are difficult to read or debug. Clear conditions reduce maintenance complexity and misinterpretation.
     - Omit [`:ENDIF`](ENDIF.md) or misalign [`:ENDIF`](ENDIF.md) and [`:ELSE`](ELSE.md), which can cause unreachable code or errors.
     - Overload a single `:IF` with unrelated checks connected by complex boolean logic. Keeping blocks focused improves clarity and simplifies future changes.
+    - Use a string, number, or [`NIL`](../literals/nil.md) as the condition and expect it to count as true or false. Compare it explicitly, for example `:IF ! Empty(sValue);`.
 
 ## Caveats
 
 - `:IF`, [`:ELSE`](ELSE.md), and [`:ENDIF`](ENDIF.md) are case-sensitive SSL keywords and must be written in uppercase with the leading colon.
+- A condition that evaluates to a string, number, or other non-logical value raises a runtime error whose message ends `invalid operand: <value> (of type <type>) for operator: asBool`, the same error [`:WHILE`](WHILE.md) and [`:CASE`](CASE.md) raise. This includes a condition such as `.T. .AND. ""`, because [`.AND.`](../operators/and.md) returns a non-boolean right operand unchanged.
+- A condition that evaluates to [`NIL`](../literals/nil.md) raises a less specific error: `Exception has been thrown by the target of an invocation.`
 
 ## Examples
 

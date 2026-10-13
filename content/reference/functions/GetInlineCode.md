@@ -36,13 +36,13 @@ GetInlineCode(sValue, [aVariables])
 
 ## Returns
 
-**[string](../types/string.md)** — The inline code text for the named block. Returns an empty string when no inline code blocks are defined in the current execution context. Returns the code unchanged when `aVariables` is omitted or [`NIL`](../literals/nil.md).
+**[string](../types/string.md)** — The inline code text for the named block. Returns an empty string when no inline code blocks are stored in the current execution context, including when the call runs before execution reaches the first [`:BEGININLINECODE`](../keywords/BEGININLINECODE.md) block. Returns the code unchanged when `aVariables` is omitted or [`NIL`](../literals/nil.md).
 
 ## Exceptions
 
 | Trigger | Exception message |
 | --- | --- |
-| Inline code blocks are defined but the named block is not among them. | `<name> not in scope.` |
+| Inline code blocks are stored but the named block is not among them, including when the call runs before execution reaches that block. | `GetInlineCode: <name> not in scope.` |
 | A name in `aVariables` is not defined in the current scope. | `Variable [<variable_name>] is undefined!` |
 
 ## Best practices
@@ -51,6 +51,7 @@ GetInlineCode(sValue, [aVariables])
     - Use `GetInlineCode` when you need the stored inline code text, with or
       without variable substitution.
     - Pass only the variable names that must be resolved into the returned code.
+    - Call `GetInlineCode` after execution has passed the [`:BEGININLINECODE`](../keywords/BEGININLINECODE.md) block it reads.
     - Delete temporary inline code with [`DeleteInlineCode`](DeleteInlineCode.md) when you are finished with it.
 
 !!! failure "Don't"
@@ -62,6 +63,8 @@ GetInlineCode(sValue, [aVariables])
 
 - `GetInlineCode` retrieves code text; it does not execute that code.
 - A block is stored when execution reaches its [`:BEGININLINECODE`](../keywords/BEGININLINECODE.md) statement. After [`DeleteInlineCode`](DeleteInlineCode.md) removes a name, a later block with the same name stores it again, and `GetInlineCode` returns the later block's text.
+- Called before execution reaches the block, `GetInlineCode` returns an empty string when no inline block is stored yet, and raises `GetInlineCode: <name> not in scope.` when another block is already stored. After the block is reached, it returns the block's text.
+- Reaching a [`:BEGININLINECODE`](../keywords/BEGININLINECODE.md) block stores its text but does not run its body.
 
 ## Examples
 
