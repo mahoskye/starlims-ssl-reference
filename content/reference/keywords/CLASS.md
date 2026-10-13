@@ -70,7 +70,7 @@ Constructors use the reserved declaration name [`Constructor`](../special-forms/
       another class.
     - Keep class fields in [`:DECLARE`](DECLARE.md) statements near the top of the file so
       the object shape is easy to read.
-    - Place regular methods before [`Constructor`](../special-forms/constructor.md) and keep the constructor last for predictable structure.
+    - Place regular methods before [`Constructor`](../special-forms/constructor.md) and keep the constructor last for predictable structure. This is a convention: a class that declares `Constructor` first compiles and runs the same way.
     - Instantiate user-defined classes with [`CreateUdObject`](../functions/CreateUdObject.md) instead of built-in-class curly-brace syntax.
     - Use [`Me:`](../special-forms/me.md) for sibling method calls and [`Base:`](../special-forms/base.md) for inherited behavior inside class methods.
     - Qualify every class-field reference inside a method with [`Me:`](../special-forms/me.md) (or [`Base:`](../special-forms/base.md) for a parent field). A bare name resolves to a local or parameter, not the class field.
