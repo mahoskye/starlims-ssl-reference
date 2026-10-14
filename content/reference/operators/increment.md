@@ -58,6 +58,11 @@ Prefix form — increments, then returns new value:
 !!! failure "Don't"
     - Use `++` on literals, expression results, or values other than numbers and dates. The target must be a variable, an array element, or an object property holding a number or a date.
     - Assume prefix and postfix always behave identically inside expressions. Prefix returns the new value; postfix returns the old value.
+    - Apply `++` to the same variable more than once in one expression. The result depends on evaluation order.
+
+## Errors and edge cases
+
+- Operands are evaluated left to right, and each `++` takes effect before the next operand is read. With `i = 1`, `i++ + i++` returns `3` (`1 + 2`) and leaves `i` at `3`.
 
 ## Examples
 

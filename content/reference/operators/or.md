@@ -55,6 +55,7 @@ leftBoolean .OR. rightBoolean
 
 ## Errors and edge cases
 
+- [`.AND.`](and.md) groups before `.OR.`, so `.T. .OR. .T. .AND. .F.` returns [`.T.`](../literals/true.md). In `.T. .OR. X .AND. Y`, the whole `X .AND. Y` is the right operand, so neither `X` nor `Y` is evaluated.
 - A non-boolean right operand does not raise. When the left operand is [`.T.`](../literals/true.md), the right side is not evaluated; when it is [`.F.`](../literals/false.md), `.OR.` returns the right operand unchanged, so `.F. .OR. "x"` returns `"x"`, not a boolean.
 
 ## Examples

@@ -16,7 +16,7 @@ Performs boolean negation, returning [`.T.`](../literals/true.md) for [`.F.`](..
 
 The `.NOT.` operator is SSL's keyword form of logical negation. It applies to a single boolean operand and returns the opposite boolean value. It is equivalent to [`bang`](bang.md) (`!`), but uses the keyword-style syntax that is often clearer in longer conditions. `.NOT.` works on boolean values and raises a runtime error for other operand types.
 
-`.NOT.` is a unary operator, so it is parsed before [`.AND.`](and.md) and [`.OR.`](or.md) expressions. For compound conditions, wrap the full expression in parentheses: `.NOT. (bReady .AND. bReleased)`.
+`.NOT.` is a unary operator, so it binds before comparison operators such as [`=`](equals.md) and before [`.AND.`](and.md) and [`.OR.`](or.md). `.NOT. s = "AB"` applies `.NOT.` to `s` first, not to the comparison. For compound conditions and comparisons, wrap the full expression in parentheses: `.NOT. (bReady .AND. bReleased)`, `.NOT. (s = "AB")`.
 
 ## When to use it
 
@@ -46,18 +46,20 @@ The `.NOT.` operator is SSL's keyword form of logical negation. It applies to a 
 
 !!! success "Do"
     - Use `.NOT.` for clear boolean negation in conditions such as `.NOT. bIsReleased`.
-    - Wrap compound expressions in parentheses: `.NOT. (bReady .AND. bReleased)`.
+    - Wrap compound expressions and comparisons in parentheses: `.NOT. (bReady .AND. bReleased)`, `.NOT. (sStatus = "AB")`.
     - Keep `.NOT.` for boolean logic only; convert or compare values to booleans before negating.
 
 !!! failure "Don't"
     - Apply `.NOT.` to strings, numbers, arrays, objects, or dates. It only supports boolean operands.
     - Rely on readers to infer grouping in longer expressions. Add parentheses around the expression being negated.
+    - Write `.NOT. sStatus = "AB"` to negate a comparison. `.NOT.` applies to `sStatus` alone and raises an error. Write `.NOT. (sStatus = "AB")`. Replacing it with [`!=`](not-equals.md) or [`#`](hash.md) is not equivalent for strings: those compare exactly, while [`=`](equals.md) matches a prefix.
     - Confuse `.NOT.` with [`_NOT()`](../functions/_NOT.md), which is the bitwise integer operation rather than logical negation.
 
 ## Errors and edge cases
 
 - `.NOT.` is a prefix unary operator, not a postfix operator.
 - Double negation such as `.NOT. .NOT. bFlag` is valid and evaluates back to the original boolean value.
+- `.NOT.` binds before a comparison. With a string `s`, `.NOT. s = "AB"` raises `the operator/method: .NOT. is not implemented on type: SSLString`. With a boolean `b`, `.NOT. b = .F.` runs as `(.NOT. b) = .F.`, so with `b = .T.` it returns [`.T.`](../literals/true.md).
 
 ## Examples
 

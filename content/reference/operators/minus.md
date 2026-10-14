@@ -60,7 +60,8 @@ vLeft - vRight
 
 ## Errors and edge cases
 
-- For strings, only trailing space characters on the left operand are trimmed; leading spaces and the right operand are left unchanged.
+- For strings, only trailing space characters on the left operand are trimmed. A trailing tab is not trimmed, so `"Lot" + Chr(9) - "A"` keeps the tab before `"A"`.
+- Leading spaces and the right operand are left unchanged: `"  Lot  " - "  A"` returns `"  Lot  A"`.
 
 ## Examples
 
