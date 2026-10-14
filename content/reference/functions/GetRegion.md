@@ -104,6 +104,13 @@ DoProc("ShowBanner", {"WelcomeBanner"});
 DoProc("ShowBanner", {"WelcomeFooter"});
 ```
 
+[`UsrMes`](UsrMes.md) logs the first line and [`ErrorMes`](ErrorMes.md) the second:
+
+```text
+Welcome to the laboratory portal
+Run-time error: GetRegion: welcomefooter not in scope.
+```
+
 ### Replace placeholders in region text
 
 Reads a template region that contains `{USER}` and `{DATE}` placeholders and replaces both with runtime values in a single call, showing how parallel source and destination arrays drive the substitution. The script defines the `WelcomeTemplate` region with [`:REGION`](../keywords/REGION.md).
