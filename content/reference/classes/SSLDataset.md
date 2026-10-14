@@ -120,7 +120,7 @@ DoProc("ReviewRecentTasks");
 
 ### Wrap a dataset handle before exporting XML
 
-Uses the two-argument constructor to wrap an existing dataset handle from [`RunDS`](../functions/RunDS.md), controlling null handling with `bNullAsBlank`, then exports the result to XML with `ToXml()`.
+Uses the two-argument constructor to wrap an existing dataset handle from [`RunDS`](../functions/RunDS.md), then exports the result to XML with `ToXml()`. The constructor requires `bNullAsBlank`, but the flag affects only `ToArray()` output, so `ToXml()` returns the same XML whichever value you pass.
 
 ```ssl
 :PROCEDURE ExportPendingOrdersXml;

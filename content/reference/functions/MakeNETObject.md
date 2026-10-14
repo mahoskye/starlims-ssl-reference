@@ -75,7 +75,7 @@ DoProc("ConvertMessageForNet");
 
 ### Preserve [`NIL`](../literals/nil.md) input through conversion
 
-Pass an optional value through `MakeNETObject` and branch on whether the result is [`NIL`](../literals/nil.md). The output message reflects which branch the code took.
+Pass an optional value through `MakeNETObject` and branch on whether the result is [`NIL`](../literals/nil.md). The first call omits the value, so `MakeNETObject` receives [`NIL`](../literals/nil.md) and returns [`NIL`](../literals/nil.md); the second passes a string, which is converted.
 
 ```ssl
 :PROCEDURE ConvertOptionalValue;
@@ -96,10 +96,11 @@ Pass an optional value through `MakeNETObject` and branch on whether the result 
 :ENDPROC;
 
 /* Usage;
+DoProc("ConvertOptionalValue");
 DoProc("ConvertOptionalValue", {"Sample 1001"});
 ```
 
-`UsrMes` logs one of:
+`UsrMes` logs:
 
 ```text
 No value was supplied for .NET interop

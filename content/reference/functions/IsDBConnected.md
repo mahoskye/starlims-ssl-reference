@@ -120,7 +120,7 @@ DoProc("CheckMultiDatabaseConnections");
 
 ### Check a caller-supplied connection name
 
-Take the connection name as a parameter and branch on the result. A name that does not match a known connection returns [`.F.`](../literals/false.md) rather than raising, so the procedure can report it and return.
+Take the connection name as a parameter and branch on the result. A name that does not match a known connection returns [`.F.`](../literals/false.md) rather than raising, so the procedure can report it and return. The second call passes such a name, so it logs `Requested connection is not available` and returns [`.F.`](../literals/false.md).
 
 ```ssl
 :PROCEDURE CheckDatabaseConnectivity;
@@ -141,6 +141,7 @@ Take the connection name as a parameter and branch on the result. A name that do
 
 /* Usage;
 DoProc("CheckDatabaseConnectivity", {"DATABASE"});
+DoProc("CheckDatabaseConnectivity", {"NO_SUCH_CONNECTION"});
 ```
 
 ## Related

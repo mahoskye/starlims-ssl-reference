@@ -100,13 +100,13 @@ Approved
 
 ### Use an empty false branch
 
-Omit the false branch to get an empty string when the condition is [`.F.`](../literals/false.md). When `bNeedsReview` is [`.T.`](../literals/true.md), the suffix `"-R"` is appended; when it is [`.F.`](../literals/false.md), `sSuffix` is `""` and the base code is returned unchanged.
+Omit the false branch to get an empty string when the condition is [`.F.`](../literals/false.md). When `bNeedsReview` is [`.T.`](../literals/true.md), the suffix `"-R"` is appended; when it is [`.F.`](../literals/false.md), `sSuffix` is `""` and the base code is returned unchanged. The example sets `bNeedsReview` to [`.F.`](../literals/false.md), so the procedure returns `"LAB-2026-001"`.
 
 ```ssl
 :PROCEDURE BuildSampleCode;
     :DECLARE bNeedsReview, sBaseCode, sSuffix, sFinalCode;
 
-    bNeedsReview := .T.;
+    bNeedsReview := .F.;
     sBaseCode := "LAB-2026-001";
     sSuffix := LCase(bNeedsReview, '"-R"');
 

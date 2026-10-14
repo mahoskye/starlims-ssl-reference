@@ -69,13 +69,13 @@ AScanExact(aTarget, vValueOrBlock, [nStart], [nCount])
 
 ### Find an exact string match
 
-Searches for `"APP"` exactly in an array that also contains `"APPROVED"`. Unlike [`AScan`](AScan.md), `AScanExact` matches only position 1 and skips `"APPROVED"`.
+Searches for `"APP"` exactly in an array that also contains `"APPROVED"`. `AScanExact` skips `"APPROVED"` at position 1 and matches position 2. [`AScan`](AScan.md) would return 1, because its prefix matching treats `"APPROVED"` as a match for `"APP"`.
 
 ```ssl
 :PROCEDURE FindStatusExact;
 	:DECLARE aStatuses, nPosition;
 
-	aStatuses := {"APP", "APPROVED", "REJECTED"};
+	aStatuses := {"APPROVED", "APP", "REJECTED"};
 	nPosition := AScanExact(aStatuses, "APP");
 
 	UsrMes("Exact match found at position " + LimsString(nPosition));
@@ -88,7 +88,7 @@ DoProc("FindStatusExact");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Exact match found at position 1
+Exact match found at position 2
 ```
 
 ### Match [`NIL`](../literals/nil.md) values exactly

@@ -99,31 +99,31 @@ DoProc("FindFirstComma");
 First comma found at position 6
 ```
 
-### Find the second occurrence of a marker
+### Find the third occurrence of a marker
 
-Use occurrence mode explicitly when you need the Nth match rather than the first one.
+Use occurrence mode explicitly when you need the Nth match rather than the first one. The markers start at positions 1, 10, and 19, so occurrence `3` returns `19`. In start-position mode, `3` would start the search at position 3 and return `10`.
 
 ```ssl
-:PROCEDURE FindSecondMarker;
+:PROCEDURE FindThirdMarker;
     :DECLARE sText, sMarker, nPos;
 
     sText := "Batch=Q1|Batch=Q2|Batch=Q3";
     sMarker := "Batch=";
-    nPos := StrSrch(sMarker, sText, 2, .F.);
+    nPos := StrSrch(sMarker, sText, 3, .F.);
 
     :IF nPos == 0;
-        UsrMes("Second marker not found");
+        UsrMes("Third marker not found");
 
         :RETURN 0;
     :ENDIF;
 
-    UsrMes("Second marker starts at position " + LimsString(nPos));  /* Logs sample second marker position;
+    UsrMes("Third marker starts at position " + LimsString(nPos));  /* Logs sample third marker position;
 
     :RETURN nPos;
 :ENDPROC;
 
 /* Usage;
-DoProc("FindSecondMarker");
+DoProc("FindThirdMarker");
 ```
 
 ### Resume searching after an earlier match

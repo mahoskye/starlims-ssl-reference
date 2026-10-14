@@ -121,7 +121,7 @@ Numeric result: 12.5
 
 ### Choose between tolerant and strict conversion
 
-Pass `bRequireWholeValue = .T.` to require that the entire string be numeric (using [`ToNumeric`](ToNumeric.md)), or [`.F.`](../literals/false.md) to accept a leading numeric prefix (using `Val`). With `"100.0"` and either flag the result is the same.
+Pass `bRequireWholeValue = .T.` to require that the entire string be numeric (using [`ToNumeric`](ToNumeric.md)), or [`.F.`](../literals/false.md) to accept a leading numeric prefix (using `Val`). With `"100 units"` and [`.F.`](../literals/false.md), `Val` stops at the space and returns `100`. With [`.T.`](../literals/true.md), `ToNumeric` raises its format error instead, because the whole string is not numeric.
 
 ```ssl
 :PROCEDURE ImportQuantityField;
@@ -141,7 +141,7 @@ Pass `bRequireWholeValue = .T.` to require that the entire string be numeric (us
 :ENDPROC;
 
 /* Usage;
-DoProc("ImportQuantityField", {"100.0", .F.});
+DoProc("ImportQuantityField", {"100 units", .F.});
 ```
 
 [`UsrMes`](UsrMes.md) logs:
