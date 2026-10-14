@@ -97,7 +97,7 @@ Sample LAB-2024-0042 - Calcium Carbonate Test registered with result 98.6
 
 ### Declaring a variable where a new logic block starts
 
-`:DECLARE` can appear later in the statement flow when a new working variable becomes needed. Here `sAuditText` is declared inside the [`:IF`](IF.md) block, next to the only code that uses it. The declaration still belongs to the whole procedure: [`:IF`](IF.md) does not create a separate scope, so the variable stays readable after [`:ENDIF`](ENDIF.md).
+`:DECLARE` can appear later in the statement flow when a new working variable becomes needed. Here `sAuditText` is declared inside the [`:IF`](IF.md) block that builds it. The declaration still belongs to the whole procedure: [`:IF`](IF.md) does not create a separate scope, so the variable stays readable after [`:ENDIF`](ENDIF.md), where the second block appends it to the message. With `bIncludeAudit` set to `.T.`, the call returns `Sample LAB-001 is ready for review (Checked by <user> on <date>)`.
 
 ```ssl
 :PROCEDURE DescribeSampleStatus;
@@ -111,6 +111,9 @@ Sample LAB-2024-0042 - Calcium Carbonate Test registered with result 98.6
 		:DECLARE sAuditText;
 
 		sAuditText := "Checked by " + MYUSERNAME + " on " + DToC(Today());
+	:ENDIF;
+
+	:IF bIncludeAudit;
 		sMessage := sMessage + " (" + sAuditText + ")";
 	:ENDIF;
 
@@ -118,7 +121,7 @@ Sample LAB-2024-0042 - Calcium Carbonate Test registered with result 98.6
 :ENDPROC;
 
 /* Usage;
-DoProc("DescribeSampleStatus", {"LAB-001"});
+DoProc("DescribeSampleStatus", {"LAB-001", .T.});
 ```
 
 ### Declaring class fields

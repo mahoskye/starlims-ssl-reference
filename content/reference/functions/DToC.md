@@ -89,7 +89,7 @@ Logged on 3/15/2024
 
 ### Replace the empty-date placeholder with a friendly label
 
-Replaces the `"  /  /    "` placeholder returned for empty dates with a user-friendly `[Not specified]` label.
+Replaces the `"  /  /    "` placeholder returned for empty dates with a user-friendly `[Not specified]` label. The first call passes an empty date and returns `[Not specified]`. The second passes a real date, so the check does not match and the call returns `3/15/2024` in the session date format.
 
 ```ssl
 :PROCEDURE GetReleaseDateText;
@@ -107,12 +107,13 @@ Replaces the `"  /  /    "` placeholder returned for empty dates with a user-fri
 :ENDPROC;
 
 /* Usage;
+DoProc("GetReleaseDateText", {CToD("")});
 DoProc("GetReleaseDateText", {CToD("03/15/2024")});
 ```
 
 ### Format multiple date fields for report output
 
-Converts received and released date columns for a batch of samples, replacing any empty released date with `[Pending]` before building the summary lines.
+Converts received and released date columns for a batch of samples, replacing any empty released date with `[Pending]` before building the summary lines. The second sample has no released date, so the call returns `"S-001 | Received: 3/15/2024 | Released: 3/16/2024"` and `"S-002 | Received: 3/18/2024 | Released: [Pending]"`.
 
 ```ssl
 :PROCEDURE BuildSampleDateSummary;
@@ -141,7 +142,10 @@ Converts received and released date columns for a batch of samples, replacing an
 :ENDPROC;
 
 /* Usage;
-DoProc("BuildSampleDateSummary", {{{"S-001", CToD("03/15/2024"), CToD("03/16/2024")}}});
+DoProc("BuildSampleDateSummary", {{
+	{"S-001", CToD("03/15/2024"), CToD("03/16/2024")},
+	{"S-002", CToD("03/18/2024"), CToD("")}
+}});
 ```
 
 ## Related

@@ -71,13 +71,15 @@ MakeDateInvariant(vDate, [vColumnsIndex])
 
 ### Mark a single date as invariant
 
-Mark a converted date as invariant, then verify the result with [`IsInvariantDate`](IsInvariantDate.md).
+Mark a local date as invariant, then verify the result with [`IsInvariantDate`](IsInvariantDate.md). A date built with [`CToD`](CToD.md) is already invariant, so the example first marks it local with [`MakeDateLocal`](MakeDateLocal.md) and logs its kind before the call.
 
 ```ssl
 :PROCEDURE NormalizeUserSubmittedDate;
     :DECLARE dUserDate, dInvariantDate, bInvariant;
 
-    dUserDate := CToD("03/15/2024");
+    dUserDate := MakeDateLocal(CToD("03/15/2024"));
+    UsrMes("Before: " + LimsString(IsInvariantDate(dUserDate)));
+
     dInvariantDate := MakeDateInvariant(dUserDate);
     bInvariant := IsInvariantDate(dInvariantDate);
 
@@ -93,22 +95,28 @@ DoProc("NormalizeUserSubmittedDate");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
+Before: .F.
 Invariant kind applied: .T.
 ```
 
 ### Mark one date column in a row array as invariant
 
-Mark column 2 (the date column) as invariant in each row and confirm the change with [`IsInvariantDate`](IsInvariantDate.md).
+Mark column 2 (the date column) as invariant in each row and confirm the change with [`IsInvariantDate`](IsInvariantDate.md). The rows are built with local dates from [`MakeDateLocal`](MakeDateLocal.md), because [`CToD`](CToD.md) dates are already invariant. The first log line shows row 1 before the call.
 
 ```ssl
 :PROCEDURE StandardizeImportedDates;
     :DECLARE aRows, aInvariantRows, nIndex;
 
     aRows := {
-        {"S-001", CToD("01/15/2024"), "Open"},
-        {"S-002", CToD("02/20/2024"), "Closed"},
-        {"S-003", CToD("03/25/2024"), "Open"}
+        {"S-001", MakeDateLocal(CToD("01/15/2024")), "Open"},
+        {"S-002", MakeDateLocal(CToD("02/20/2024")), "Closed"},
+        {"S-003", MakeDateLocal(CToD("03/25/2024")), "Open"}
     };
+
+    UsrMes(
+        "Row 1 date is invariant before the call: " +
+        LimsString(IsInvariantDate(aRows[1, 2]))
+    );
 
     aInvariantRows := MakeDateInvariant(aRows, 2);
 
@@ -127,17 +135,28 @@ Mark column 2 (the date column) as invariant in each row and confirm the change 
 DoProc("StandardizeImportedDates");
 ```
 
+[`UsrMes`](UsrMes.md) logs:
+
+```text
+Row 1 date is invariant before the call: .F.
+Row 1 date is invariant: .T.
+Row 2 date is invariant: .T.
+Row 3 date is invariant: .T.
+```
+
 ### Mark multiple date columns in each row as invariant
 
-Pass `aColumns` as an array of column indexes to mark both date columns (positions 2 and 3) as invariant in a single call.
+Pass `aColumns` as an array of column indexes to mark both date columns (positions 2 and 3) as invariant in a single call. Both columns start as local dates from [`MakeDateLocal`](MakeDateLocal.md), so passing only column 2 would leave `reported` at [`.F.`](../literals/false.md).
 
 ```ssl
 :PROCEDURE PrepareAuditDates;
     :DECLARE aAuditRows, aColumns, aPreparedRows, nIndex;
 
     aAuditRows := {
-        {"AUD-001", CToD("04/01/2024"), CToD("04/03/2024"), "Open"},
-        {"AUD-002", CToD("04/02/2024"), CToD("04/04/2024"), "Closed"}
+        {"AUD-001", MakeDateLocal(CToD("04/01/2024")),
+            MakeDateLocal(CToD("04/03/2024")), "Open"},
+        {"AUD-002", MakeDateLocal(CToD("04/02/2024")),
+            MakeDateLocal(CToD("04/04/2024")), "Closed"}
     };
     aColumns := {2, 3};
 
@@ -158,6 +177,13 @@ Pass `aColumns` as an array of column indexes to mark both date columns (positio
 
 /* Usage;
 DoProc("PrepareAuditDates");
+```
+
+[`UsrMes`](UsrMes.md) logs:
+
+```text
+AUD-001: received=.T., reported=.T.
+AUD-002: received=.T., reported=.T.
 ```
 
 ## Related

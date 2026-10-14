@@ -167,7 +167,7 @@ Processing failed: Processing failed due to invalid sample state
 
 ### Handling multiple failure paths in one CATCH block
 
-Uses one `:TRY` block for a multi-step operation, then branches inside the single [`:CATCH`](CATCH.md) block SSL supports. [`:FINALLY`](FINALLY.md) always logs the outcome regardless of success or failure. With `sBatchID` set to `"B-1001"` and both the load and update succeeding, the final message confirms processing.
+Uses one `:TRY` block for a multi-step operation, then branches inside the single [`:CATCH`](CATCH.md) block SSL supports. [`:FINALLY`](FINALLY.md) always logs the outcome regardless of success or failure. With `sBatchID` set to `"B-9999"`, a batch that has no records, the load succeeds but returns no rows. [`RaiseError`](../functions/RaiseError.md) sends control to [`:CATCH`](CATCH.md), where the second branch picks the nothing-to-process message. A lookup error would take the first branch instead, and a failed update the third.
 
 ```ssl
 :PROCEDURE ProcessBatchRecords;
@@ -223,7 +223,13 @@ Uses one `:TRY` block for a multi-step operation, then branches inside the singl
 :ENDPROC;
 
 /* Usage;
-DoProc("ProcessBatchRecords", {"B-1001"});
+DoProc("ProcessBatchRecords", {"B-9999"});
+```
+
+[`UsrMes`](../functions/UsrMes.md) logs:
+
+```text
+Nothing to process for batch B-9999
 ```
 
 ## Related

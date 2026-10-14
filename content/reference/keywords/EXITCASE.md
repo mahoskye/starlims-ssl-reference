@@ -55,7 +55,7 @@ Use `:EXITCASE;` inside a [`:BEGINCASE`](BEGINCASE.md) block when a matching bra
 
 ### Stop after the first matching branch
 
-`:EXITCASE;` prevents later branches from running after the current match. With `sStatus` set to `"HIGH"`, only the second branch executes and the procedure reports its priority message.
+`:EXITCASE;` prevents later branches from running after the current match. The third condition also accepts `"HIGH"`, so with `sStatus` set to `"HIGH"` both the second and third conditions are true. The second branch runs, and its `:EXITCASE;` ends the block before the third condition is evaluated. Without it, the third body would also run and replace the priority with `"Queue for normal processing"`.
 
 ```ssl
 :PROCEDURE GetSamplePriority;
@@ -71,7 +71,7 @@ Use `:EXITCASE;` inside a [`:BEGINCASE`](BEGINCASE.md) block when a matching bra
     :CASE sStatus == "HIGH";
         sPriority := "Process within 24 hours";
         :EXITCASE;
-    :CASE sStatus == "STANDARD";
+    :CASE sStatus == "HIGH" .OR. sStatus == "STANDARD";
         sPriority := "Queue for normal processing";
         :EXITCASE;
     :OTHERWISE;
@@ -97,7 +97,7 @@ Sample priority: Process within 24 hours
 
 ### Classify a result value with exclusive branches
 
-Each branch uses `:EXITCASE;` so only one category applies. With `nResultValue` set to `80`, the second branch matches (80 >= 75) and the first is skipped (80 < 90).
+Each branch uses `:EXITCASE;` so only one category applies. With `nResultValue` set to `95`, both conditions are true (95 >= 90 and 95 >= 75). The first branch runs and its `:EXITCASE;` ends the block, so the result is `"Critical"`. Without it, the second body would also run and replace the category with `"Warning"`.
 
 ```ssl
 :PROCEDURE ClassifyResult;
@@ -124,13 +124,13 @@ Each branch uses `:EXITCASE;` so only one category applies. With `nResultValue` 
 :ENDPROC;
 
 /* Usage;
-DoProc("ClassifyResult", {80});
+DoProc("ClassifyResult", {95});
 ```
 
 [`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
-Warning
+Critical
 ```
 
 ## Related

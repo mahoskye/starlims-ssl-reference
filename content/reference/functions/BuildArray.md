@@ -96,7 +96,7 @@ Statuses: [Logged] [Complete] [Pending]
 
 ### Trim values from a custom-delimited filter
 
-Splits a pipe-delimited string with surrounding spaces, using `bTrimSpaces` to clean each element so the result contains compact identifiers.
+Splits a pipe-delimited string with surrounding spaces. Each element is trimmed, so the result contains compact identifiers. Trimming is the default (`bTrimSpaces` is [`.T.`](../literals/true.md) unless you pass [`.F.`](../literals/false.md)); the call passes it only to make that explicit, and gives the same result without it.
 
 ```ssl
 :PROCEDURE ParseSampleFilter;

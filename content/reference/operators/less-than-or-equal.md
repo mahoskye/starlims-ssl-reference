@@ -65,13 +65,13 @@ vLeft <= vRight
 
 ### Validating an upper numeric limit
 
-Checks whether `nCurrentTemp` stays at or below `nSafeLimit`. With 8.5 <= 10.0, the result is [`.T.`](../literals/true.md) and the within-limit branch runs.
+Checks whether `nCurrentTemp` stays at or below `nSafeLimit`. The reading sits exactly at the limit: 8.5 <= 8.5 is [`.T.`](../literals/true.md), so the within-limit branch runs. [`<`](less-than.md) would return [`.F.`](../literals/false.md) here.
 
 ```ssl
 :PROCEDURE CheckMaximumTemperature;
 	:DECLARE nSafeLimit, nCurrentTemp, bWithinLimit, sMessage;
 
-	nSafeLimit := 10.0;
+	nSafeLimit := 8.5;
 	nCurrentTemp := 8.5;
 	bWithinLimit := nCurrentTemp <= nSafeLimit;
 
@@ -98,14 +98,14 @@ Temperature is within the safe limit: 8.5
 
 ### Accepting records up to a cutoff date
 
-Checks whether `dEntryDate` falls on or before `dCutoff`. With 03/28/2024 <= 03/31/2024, the result is [`.T.`](../literals/true.md) and the within-cutoff branch runs.
+Checks whether `dEntryDate` falls on or before `dCutoff`. The entry date is the cutoff date itself: 03/28/2024 <= 03/28/2024 is [`.T.`](../literals/true.md), so the within-cutoff branch runs. [`<`](less-than.md) would return [`.F.`](../literals/false.md) for the same dates.
 
 ```ssl
 :PROCEDURE CheckDateCutoff;
 	:DECLARE dEntryDate, dCutoff, bIsValid, sMessage;
 
 	dEntryDate := CToD("03/28/2024");
-	dCutoff := CToD("03/31/2024");
+	dCutoff := CToD("03/28/2024");
 	bIsValid := dEntryDate <= dCutoff;
 
 	:IF bIsValid;
@@ -133,13 +133,13 @@ Dates print in the session date format (see [`DateFormat`](../functions/DateForm
 
 ### Comparing batch keys against an inclusive boundary
 
-Uses `<=` on strings to check whether a batch key sorts before or at the processing boundary. `"BATCH-042"` is lexicographically less than `"BATCH-100"`, so the result is [`.T.`](../literals/true.md).
+Uses `<=` on strings to check whether a batch key sorts before or at the processing boundary. The key `"BATCH-100"` equals the boundary, so `<=` returns [`.T.`](../literals/true.md), while [`<`](less-than.md) would return [`.F.`](../literals/false.md).
 
 ```ssl
 :PROCEDURE CheckBatchBoundary;
 	:DECLARE sBatchId, sBoundary, bInRange, sMessage;
 
-	sBatchId := "BATCH-042";
+	sBatchId := "BATCH-100";
 	sBoundary := "BATCH-100";
 	bInRange := sBatchId <= sBoundary;
 
@@ -161,7 +161,7 @@ DoProc("CheckBatchBoundary");
 [`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
-Batch is within the processing boundary: BATCH-042
+Batch is within the processing boundary: BATCH-100
 ```
 
 ## Related elements

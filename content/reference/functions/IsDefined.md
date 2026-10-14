@@ -158,7 +158,7 @@ Available input variables: sCacheKey, sContextId
 
 ### Resolve the first non-empty variable from a candidate list
 
-Walk a list of candidate variable names and read the first one that is both defined and non-empty using [`GetByName`](GetByName.md). The `IsDefined` check prevents [`GetByName`](GetByName.md) from raising an error on a missing name.
+Walk a list of candidate variable names and read the first one that is both defined and non-empty using [`GetByName`](GetByName.md). The `IsDefined` check prevents [`GetByName`](GetByName.md) from raising an error on a missing name. `RunBatchResolution` creates only `sOrderNo` with [`CreatePublic`](CreatePublic.md), so `sBatchId` is skipped as undefined and the value of `sOrderNo` is used. It removes the variable again with [`LKill`](LKill.md) afterward.
 
 ```ssl
 :PROCEDURE ResolveBatchIdentifier;
@@ -192,8 +192,26 @@ Walk a list of candidate variable names and read the first one that is both defi
     :RETURN .T.;
 :ENDPROC;
 
+:PROCEDURE RunBatchResolution;
+    :DECLARE bResolved;
+
+    CreatePublic("sOrderNo", "ORD-77");
+
+    bResolved := DoProc("ResolveBatchIdentifier", {{"sBatchId", "sOrderNo"}});
+
+    LKill("sOrderNo");
+
+    :RETURN bResolved;
+:ENDPROC;
+
 /* Usage;
-DoProc("ResolveBatchIdentifier", {{"sBatchId", "sOrderNo"}});
+DoProc("RunBatchResolution");
+```
+
+[`UsrMes`](UsrMes.md) logs:
+
+```text
+Using batch identifier: ORD-77
 ```
 
 ## Related

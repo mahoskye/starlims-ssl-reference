@@ -160,7 +160,7 @@ Guards against a blank cabinet name, passes all three arguments (name, type, ACL
 		sCreateResult := DocCreateCabinet(sCabinetName, sCabinetType, sAcl);
 	:CATCH;
 		oErr := GetLastSSLError();
-		ErrorMes("DocCreateCabinet raised an error: " + oErr:Description); /* Logs when NIL is passed;
+		ErrorMes("DocCreateCabinet raised an error: " + oErr:Description); /* Logs if DocCreateCabinet raises;
 		:RETURN "";
 	:ENDTRY;
 

@@ -74,14 +74,14 @@ bDifferent := vLeft <> vRight;
 
 ### Comparing exact string values in legacy code
 
-Checks whether two status strings differ. `"PENDING" <> "COMPLETE"` is [`.T.`](../literals/true.md), so the changed branch runs.
+Checks whether two status strings differ. The current status `"REVIEW"` is a prefix of the stored `"REVIEWED"`, so the loose comparison `"REVIEWED" = "REVIEW"` is [`.T.`](../literals/true.md). `<>` compares exactly, so `"REVIEWED" <> "REVIEW"` is also [`.T.`](../literals/true.md) and the changed branch runs.
 
 ```ssl
 :PROCEDURE CheckStatusChange;
     :DECLARE sStoredStatus, sCurrentStatus, bChanged, sMessage;
 
-    sStoredStatus := "PENDING";
-    sCurrentStatus := "COMPLETE";
+    sStoredStatus := "REVIEWED";
+    sCurrentStatus := "REVIEW";
     bChanged := sStoredStatus <> sCurrentStatus;
 
     :IF bChanged;
@@ -102,7 +102,7 @@ DoProc("CheckStatusChange");
 [`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
-Status changed from PENDING to COMPLETE
+Status changed from REVIEWED to REVIEW
 ```
 
 ### Guarding operand types before numeric inequality

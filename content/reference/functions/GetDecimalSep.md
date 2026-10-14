@@ -78,7 +78,7 @@ Decimal separator code: 46 character: .
 
 ### Normalize input using the active separator
 
-Convert numeric text written with the active decimal separator to a `.`-based form before further processing. The procedure expects text that uses the session's separator, such as `3,14` in a session whose separator is `,`. The usage line builds its input from the active separator, so the result is `3.14` whatever the session's separator is.
+Convert numeric text written with the active decimal separator to a `.`-based form before further processing. `NormalizeWithComma` switches the separator to `,` with [`SetDecimalSeparator`](SetDecimalSeparator.md), passes `3,14`, and restores the previous separator afterward. [`StrTran`](StrTran.md) replaces the `,` with `.`, so the result is `3.14`.
 
 ```ssl
 :PROCEDURE NormalizeNumericText;
@@ -94,8 +94,20 @@ Convert numeric text written with the active decimal separator to a `.`-based fo
     :RETURN sNormalized;
 :ENDPROC;
 
+:PROCEDURE NormalizeWithComma;
+    :DECLARE sPrevSep, sNormalized;
+
+    sPrevSep := SetDecimalSeparator(",");
+
+    sNormalized := DoProc("NormalizeNumericText", {"3,14"});
+
+    SetDecimalSeparator(sPrevSep);
+
+    :RETURN sNormalized;
+:ENDPROC;
+
 /* Usage;
-DoProc("NormalizeNumericText", {"3" + Chr(GetDecimalSep()) + "14"});
+DoProc("NormalizeWithComma");
 ```
 
 [`UsrMes`](UsrMes.md) logs:

@@ -75,7 +75,7 @@ GetRegion(sRegionName, [aSourceValues], [aDestinationValues])
 
 ### Look up a region with error handling
 
-Wraps the lookup in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) to handle the case where the region is not in scope, displaying the content if found or the error description if the region does not exist. The script defines the `WelcomeBanner` region with [`:REGION`](../keywords/REGION.md). A missing name raises only when the script defines regions; in a script that defines none, `GetRegion` returns an empty string.
+Wraps the lookup in [`:TRY`](../keywords/TRY.md)/[`:CATCH`](../keywords/CATCH.md) to handle the case where the region is not in scope, displaying the content if found or the error description if the region does not exist. The script defines the `WelcomeBanner` region with [`:REGION`](../keywords/REGION.md), so the first call logs its text. The second call asks for `WelcomeFooter`, which the script does not define, so `GetRegion` raises and the [`:CATCH`](../keywords/CATCH.md) block logs the not-in-scope message. A missing name raises only when the script defines regions; in a script that defines none, `GetRegion` returns an empty string.
 
 ```ssl
 :REGION WelcomeBanner;
@@ -83,10 +83,11 @@ Welcome to the laboratory portal
 :ENDREGION;
 
 :PROCEDURE ShowBanner;
+    :PARAMETERS sRegionName;
     :DECLARE sBanner;
 
     :TRY;
-        sBanner := GetRegion("WelcomeBanner");
+        sBanner := GetRegion(sRegionName);
         /* Logs the stored region text;
         UsrMes(sBanner);
     :CATCH;
@@ -99,7 +100,8 @@ Welcome to the laboratory portal
 :ENDPROC;
 
 /* Usage;
-DoProc("ShowBanner");
+DoProc("ShowBanner", {"WelcomeBanner"});
+DoProc("ShowBanner", {"WelcomeFooter"});
 ```
 
 ### Replace placeholders in region text
