@@ -60,6 +60,7 @@ leftBoolean .AND. rightBoolean
 - A non-boolean right operand does not raise. When the left operand is [`.F.`](../literals/false.md), the right side is not evaluated and the result is [`.F.`](../literals/false.md), so `.F. .AND. "x"` returns [`.F.`](../literals/false.md). When the left operand is [`.T.`](../literals/true.md), `.AND.` returns the right operand unchanged, so `.T. .AND. "x"` returns `"x"` and `.T. .AND. 5` returns `5`, not a boolean. This mirrors [`.OR.`](or.md).
 - A non-boolean left operand raises a runtime error. The message ends `invalid operand: <value> (of type <type>) for operator: asBool`.
 - Only the right operand is skipped. Any side effects in the left operand still happen.
+- Because `.AND.` groups first, in `.T. .OR. X .AND. Y` the whole `X .AND. Y` is the right operand of [`.OR.`](or.md). The `.T.` short-circuits the `.OR.`, so neither `X` nor `Y` is evaluated.
 - `.AND.` is not the integer bitwise AND operator. For bitwise integer operations, use [`_AND`](../functions/_AND.md)`(a, b)`.
 
 ## Examples

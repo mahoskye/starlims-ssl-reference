@@ -66,6 +66,7 @@ variable--
     - Assume postfix (`variable--`) also returns the updated value. The postfix form returns the original before decrementing.
     - Use `--` on literals, expression results, or values other than numbers and dates. The target must be a variable, an array element, or an object property holding a number or a date.
     - Use `--` when a non-unit decrement is needed. Use [`subtract-assign`](subtract-assign.md) ([`-=`](subtract-assign.md)) instead.
+    - Apply `--` to the same variable more than once in one expression. Operands are evaluated left to right, so each `--` sees the previous one's result, as with [`++`](increment.md).
 
 ## Examples
 

@@ -109,7 +109,7 @@ Length: 3
 | Read behavior | Returns the value at the specified 1-based index |
 | Assignment | Supported, for example `aValues[2] := "Released";` |
 
-Index expressions must evaluate to an integer. If the index expression is not an integer, SSL raises an error with the message `Argument for index must be an integer: <value>`.
+Index expressions must evaluate to a whole number. A non-integer index such as `aValues[2.5]` or `aValues[3 / 2]` raises a runtime error, `Exception has been thrown by the target of an invocation.` An index computed by division works only when the quotient is a whole number, such as `aValues[4 / 2]`.
 
 ## Notes for daily SSL work
 
