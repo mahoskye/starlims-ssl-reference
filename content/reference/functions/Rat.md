@@ -71,13 +71,13 @@ Rat(sSubString, sSource)
 
 ### Find a file extension
 
-Locate the last period in a file name before extracting the extension.
+Locate the last period in a file name before extracting the extension. The name contains three periods; `Rat` finds the last one at position 15, so the extension is `pdf`. [`At`](At.md) would find the first one at position 7 and give `Q4.2024.pdf`.
 
 ```ssl
 :PROCEDURE ExtractFileExtension;
     :DECLARE sFileName, sExtension, nDotPos;
 
-    sFileName := "report_Q4_2024.pdf";
+    sFileName := "report.Q4.2024.pdf";
     nDotPos := Rat(".", sFileName);
 
     :IF nDotPos > 0;

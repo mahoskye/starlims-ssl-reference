@@ -130,7 +130,7 @@ Average calculated: 30
 
 ### Combine validation and exact matching
 
-Uses multiple conditions to route processing and demonstrates exact string comparison with [`==`](../operators/strict-equals.md). With `sStatus` set to `"Logged"` and `bHasResult` to [`.T.`](../literals/true.md), the `:IF` condition is true and `sAction` is set to `"Release"`.
+Uses multiple conditions to route processing and demonstrates exact string comparison with [`==`](../operators/strict-equals.md). With `sStatus` set to `"Logged"` and `bHasResult` to [`.T.`](../literals/true.md), the `:IF` condition is true and `sAction` is set to `"Release"`. The second call passes `"Logged-Hold"` and returns `"Review"`, because `==` is exact; the prefix-matching [`=`](../operators/equals.md) would treat `"Logged-Hold"` as matching `"Logged"` and return `"Release"`.
 
 ```ssl
 :PROCEDURE RouteSample;
@@ -150,6 +150,7 @@ Uses multiple conditions to route processing and demonstrates exact string compa
 
 /* Usage;
 DoProc("RouteSample", {"Logged", .T.});
+DoProc("RouteSample", {"Logged-Hold", .T.});
 ```
 
 ## Related

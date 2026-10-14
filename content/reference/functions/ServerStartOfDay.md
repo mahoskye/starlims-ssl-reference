@@ -64,7 +64,7 @@ ServerStartOfDay(dDate)
 
 ### Normalize a date to the server day's start
 
-Take any date value and return a version stamped to `00:00:00` on the same calendar day, then display the result with [`DateToString`](DateToString.md), because [`LimsString`](LimsString.md) shows only the date part.
+Take any date value and return a version stamped to `00:00:00` on the same calendar day, then display the result with [`DateToString`](DateToString.md), because [`LimsString`](LimsString.md) shows only the date part. The input is 14:30 on April 15, 2026, so the time of day is reset to midnight.
 
 ```ssl
 :PROCEDURE GetServerDayStart;
@@ -80,7 +80,7 @@ Take any date value and return a version stamped to `00:00:00` on the same calen
 :ENDPROC;
 
 /* Usage;
-DoProc("GetServerDayStart", {DateFromNumbers(2026, 4, 15)});
+DoProc("GetServerDayStart", {DateFromNumbers(2026, 4, 15, 14, 30)});
 ```
 
 [`UsrMes`](UsrMes.md) logs:

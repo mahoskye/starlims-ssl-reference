@@ -92,7 +92,7 @@ Local value: Queued
 
 ### Initialize a local to an empty string
 
-Calls `CreateLocal` without a second argument so the new variable is initialized to an empty string, then checks whether the variable is empty.
+Calls `CreateLocal` without a second argument so the new variable is initialized to an empty string, then logs the variable's type and whether it is empty. The type check matters because [`Empty`](Empty.md) also returns [`.T.`](../literals/true.md) for [`NIL`](../literals/nil.md); [`LimsTypeEx`](LimsTypeEx.md) shows `STRING` for an empty string and `NIL` for an unset value.
 
 ```ssl
 :PROCEDURE DemoCreateLocalDefault;
@@ -102,9 +102,7 @@ Calls `CreateLocal` without a second argument so the new variable is initialized
 	CreateLocal(sVarName);
 	sValue := GetByName(sVarName);
 
-	:IF Empty(sValue);
-		UsrMes("The local starts as an empty string.");
-	:ENDIF;
+	UsrMes("Type: " + LimsTypeEx(sValue) + ", empty: " + LimsString(Empty(sValue)));
 
 	:RETURN sValue;
 :ENDPROC;
@@ -116,7 +114,7 @@ DoProc("DemoCreateLocalDefault");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-The local starts as an empty string.
+Type: STRING, empty: .T.
 ```
 
 ### Shadow the same local name in a nested call

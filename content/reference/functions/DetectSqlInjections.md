@@ -108,7 +108,7 @@ SQL injection detection is now enabled for DATABASE
 
 ### Temporarily disable detection and restore it
 
-Disables SQL injection detection before running a controlled query, then restores the prior setting in a [`:FINALLY`](../keywords/FINALLY.md) block even if the query fails.
+Disables SQL injection detection before running a controlled query, then restores the prior setting in a [`:FINALLY`](../keywords/FINALLY.md) block even if the query fails. The query starts with a `--` comment line, so with detection on it would raise `Invalid SQL statement: remove the comments.`; with detection off it runs.
 
 ```ssl
 :PROCEDURE RunControlledQuery;
@@ -119,6 +119,7 @@ Disables SQL injection detection before running a controlled query, then restore
 
     :TRY;
         sSQL := "
+                -- nightly status report
                 SELECT sampleid, status
                 FROM sample
                 WHERE status = 'A'

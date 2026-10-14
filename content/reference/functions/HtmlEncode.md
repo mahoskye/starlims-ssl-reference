@@ -123,7 +123,7 @@ DoProc("BuildSampleXml");
 
 ### Encode a batch of values including NIL entries
 
-Encode an array containing a mix of strings and a [`NIL`](../literals/nil.md) entry, showing that `HtmlEncode` passes [`NIL`](../literals/nil.md) through unchanged while encoding all other values. After the loop, `aEncodedNotes[1]` holds `&lt;alpha&gt;`, entry 2 remains [`NIL`](../literals/nil.md), `aEncodedNotes[3]` holds `Tom &amp; Jerry`, and `aEncodedNotes[4]` holds `She said &quot;go&quot;`. The [`UsrMes`](UsrMes.md) call confirms that entry 2 is still empty ([`NIL`](../literals/nil.md)).
+Encode an array containing a mix of strings and a [`NIL`](../literals/nil.md) entry, showing that `HtmlEncode` passes [`NIL`](../literals/nil.md) through unchanged while encoding all other values. After the loop, `aEncodedNotes[1]` holds `&lt;alpha&gt;`, entry 2 remains [`NIL`](../literals/nil.md), `aEncodedNotes[3]` holds `Tom &amp; Jerry`, and `aEncodedNotes[4]` holds `She said &quot;go&quot;`. The [`UsrMes`](UsrMes.md) call logs the type of entry 2 with [`LimsTypeEx`](LimsTypeEx.md), which confirms it is still [`NIL`](../literals/nil.md); an empty string would log `STRING`.
 
 ```ssl
 :PROCEDURE EncodeNotes;
@@ -138,7 +138,7 @@ Encode an array containing a mix of strings and a [`NIL`](../literals/nil.md) en
 		AAdd(aEncodedNotes, vEncoded);
 	:NEXT;
 
-	UsrMes(LimsString(Empty(aEncodedNotes[2])));
+	UsrMes(LimsTypeEx(aEncodedNotes[2]));
 
 	:RETURN aEncodedNotes;
 :ENDPROC;
@@ -150,7 +150,7 @@ DoProc("EncodeNotes");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-.T.
+NIL
 ```
 
 ## Related

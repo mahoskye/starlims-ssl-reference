@@ -92,7 +92,7 @@ DoProc("HandleUserLogout");
 
 ### Reset session before rebuilding workflow state
 
-Clears stale session values from a previous workflow step, then stores a fresh set of values for the next step.
+Clears stale session values from a previous workflow step, then stores a fresh set of values for the next step. The check confirms that `SelectedTab`, which is not stored again, is gone; without `ClearSession` it would still hold `"History"`.
 
 ```ssl
 :PROCEDURE RestartOrderReview;
@@ -112,7 +112,7 @@ Clears stale session values from a previous workflow step, then stores a fresh s
 
 	sStoredReviewMode := GetFromSession("ReviewMode");
 
-	:IF sStoredReviewMode == "PENDING_REVIEW";
+	:IF sStoredReviewMode == "PENDING_REVIEW" .AND. Empty(GetFromSession("SelectedTab"));
 		UsrMes("Order review restarted with a clean session.");
 	:ENDIF;
 :ENDPROC;

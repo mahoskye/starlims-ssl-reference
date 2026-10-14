@@ -92,16 +92,16 @@ Result: 12.35
 
 ### Round tax amounts away from zero for compliance
 
-Round monetary amounts for tax calculations, requiring rounding away from zero on midpoint values.
+Round monetary amounts for tax calculations, requiring rounding away from zero on midpoint values. The tax here is exactly `0.125`, a midpoint: `"AwayFromZero"` rounds it to `0.13`, while the default `"ToEven"` would give `0.12`.
 
 ```ssl
 :PROCEDURE CalculateTaxAmount;
     :DECLARE nUnitPrice, nQuantity, nSubtotal, nTaxRate, nTaxAmount;
     :DECLARE nRoundedTax, nTotal, sMessage;
 
-    nUnitPrice := 29.99;
-    nQuantity := 7;
-    nTaxRate := 0.0825;
+    nUnitPrice := 1.25;
+    nQuantity := 2;
+    nTaxRate := 0.05;
 
     nSubtotal := nUnitPrice * nQuantity;
     nTaxAmount := nSubtotal * nTaxRate;
@@ -123,7 +123,7 @@ DoProc("CalculateTaxAmount");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Subtotal: 209.93, Tax: 17.32, Total: 227.25
+Subtotal: 2.5, Tax: 0.13, Total: 2.63
 ```
 
 ### Avoid cumulative bias when aggregating a large dataset

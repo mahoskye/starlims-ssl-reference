@@ -126,7 +126,7 @@ Sample S-001 is missing a result value
 
 ### Log a caught exception
 
-Capture the runtime error text in a [`:CATCH`](../keywords/CATCH.md) block and write it with a stable caption.
+Capture the runtime error text in a [`:CATCH`](../keywords/CATCH.md) block and write it with a stable caption. The usage passes an empty result, so [`RaiseError`](RaiseError.md) runs inside the [`:TRY`](../keywords/TRY.md) block and the handler logs its message.
 
 ```ssl
 :PROCEDURE SaveResult;
@@ -151,14 +151,14 @@ Capture the runtime error text in a [`:CATCH`](../keywords/CATCH.md) block and w
 :ENDPROC;
 
 /* Usage;
-DoProc("SaveResult", {"S-001", "Positive"});
+DoProc("SaveResult", {"S-001", ""});
 ```
 
 `ErrorMes` logs:
 
 ```text
 <user> / <date> / <time> / … / SaveResult failed
-Sample S-001: <error description>
+Sample S-001: Result text is required
 ```
 
 ### Log a transaction rollback

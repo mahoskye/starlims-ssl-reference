@@ -95,7 +95,7 @@ Names match: .T.
 
 ### Combine trimming and lowercase normalization
 
-Clean a user-entered status value before validating it against an allowed list.
+Clean a user-entered status value before validating it against an allowed list. The padded input `"  Active "` is accepted only because [`AllTrim`](AllTrim.md) removes the spaces; `"  active "` would not match any entry.
 
 ```ssl
 :PROCEDURE ValidateStatus;
@@ -119,7 +119,13 @@ Clean a user-entered status value before validating it against an allowed list.
 :ENDPROC;
 
 /* Usage;
-DoProc("ValidateStatus", {"Active"});
+DoProc("ValidateStatus", {"  Active "});
+```
+
+[`UsrMes`](UsrMes.md) logs:
+
+```text
+Status accepted: active
 ```
 
 ### Normalize a batch of incoming codes
