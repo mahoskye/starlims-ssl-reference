@@ -4452,7 +4452,7 @@
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Logged on 3/15/2024
 </code></pre></div>
 <h3 id="replace-the-empty-date-placeholder-with-a-friendly-label">Replace the empty-date placeholder with a friendly label<a class="headerlink" href="#replace-the-empty-date-placeholder-with-a-friendly-label" title="Permanent link">&para;</a></h3>
-<p>Replaces the <code>"  /  /    "</code> placeholder returned for empty dates with a user-friendly <code>[Not specified]</code> label.</p>
+<p>Replaces the <code>"  /  /    "</code> placeholder returned for empty dates with a user-friendly <code>[Not specified]</code> label. The first call passes an empty date and returns <code>[Not specified]</code>. The second passes a real date, so the check does not match and the call returns <code>3/15/2024</code> in the session date format.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">GetReleaseDateText</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">dReleaseDate</span><span class="p">;</span>
 
@@ -4468,10 +4468,11 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetReleaseDateText"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">""</span><span class="p">)});</span>
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"GetReleaseDateText"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/15/2024"</span><span class="p">)});</span>
 </code></pre></div>
 <h3 id="format-multiple-date-fields-for-report-output">Format multiple date fields for report output<a class="headerlink" href="#format-multiple-date-fields-for-report-output" title="Permanent link">&para;</a></h3>
-<p>Converts received and released date columns for a batch of samples, replacing any empty released date with <code>[Pending]</code> before building the summary lines.</p>
+<p>Converts received and released date columns for a batch of samples, replacing any empty released date with <code>[Pending]</code> before building the summary lines. The second sample has no released date, so the call returns <code>"S-001 | Received: 3/15/2024 | Released: 3/16/2024"</code> and <code>"S-002 | Received: 3/18/2024 | Released: [Pending]"</code>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">BuildSampleDateSummary</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">aSamples</span><span class="p">;</span>
 
@@ -4498,7 +4499,10 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSampleDateSummary"</span><span class="p">,</span><span class="w"> </span><span class="p">{{{</span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/15/2024"</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/16/2024"</span><span class="p">)}}});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"BuildSampleDateSummary"</span><span class="p">,</span><span class="w"> </span><span class="p">{{</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"S-001"</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/15/2024"</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/16/2024"</span><span class="p">)},</span>
+<span class="w">    </span><span class="p">{</span><span class="s2">"S-002"</span><span class="p">,</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">"03/18/2024"</span><span class="p">),</span><span class="w"> </span><span class="nf">CToD</span><span class="p">(</span><span class="s2">""</span><span class="p">)}</span>
+<span class="p">}});</span>
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4533,7 +4537,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 23:10:56 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 21:04:52 UTC">October 14, 2026</span>
   </span>
 
     

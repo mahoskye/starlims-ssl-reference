@@ -3749,11 +3749,11 @@
 </div>
 <h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="find-an-exact-string-match">Find an exact string match<a class="headerlink" href="#find-an-exact-string-match" title="Permanent link">&para;</a></h3>
-<p>Searches for <code>"APP"</code> exactly in an array that also contains <code>"APPROVED"</code>. Unlike <a href="../AScan/"><code>AScan</code></a>, <code>AScanExact</code> matches only position 1 and skips <code>"APPROVED"</code>.</p>
+<p>Searches for <code>"APP"</code> exactly in an array that also contains <code>"APPROVED"</code>. <code>AScanExact</code> skips <code>"APPROVED"</code> at position 1 and matches position 2. <a href="../AScan/"><code>AScan</code></a> would return 1, because its prefix matching treats <code>"APPROVED"</code> as a match for <code>"APP"</code>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">FindStatusExact</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aStatuses</span><span class="p">,</span><span class="w"> </span><span class="n">nPosition</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">aStatuses</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"APP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"APPROVED"</span><span class="p">,</span><span class="w"> </span><span class="s2">"REJECTED"</span><span class="p">};</span>
+<span class="w">    </span><span class="n">aStatuses</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">{</span><span class="s2">"APPROVED"</span><span class="p">,</span><span class="w"> </span><span class="s2">"APP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"REJECTED"</span><span class="p">};</span>
 <span class="w">    </span><span class="n">nPosition</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nf">AScanExact</span><span class="p">(</span><span class="n">aStatuses</span><span class="p">,</span><span class="w"> </span><span class="s2">"APP"</span><span class="p">);</span>
 
 <span class="w">    </span><span class="nf">UsrMes</span><span class="p">(</span><span class="s2">"Exact match found at position "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">LimsString</span><span class="p">(</span><span class="n">nPosition</span><span class="p">));</span>
@@ -3763,7 +3763,7 @@
 <span class="nf">DoProc</span><span class="p">(</span><span class="s2">"FindStatusExact"</span><span class="p">);</span>
 </code></pre></div>
 <p><a href="../UsrMes/"><code>UsrMes</code></a> logs:</p>
-<div class="language-text highlight"><pre data-search-exclude><span></span><code>Exact match found at position 1
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Exact match found at position 2
 </code></pre></div>
 <h3 id="match-nil-values-exactly">Match <a href="../../literals/nil/"><code>NIL</code></a> values exactly<a class="headerlink" href="#match-nil-values-exactly" title="Permanent link">&para;</a></h3>
 <p>Scans an array for the first <a href="../../literals/nil/"><code>NIL</code></a> element by passing <a href="../../literals/nil/"><code>NIL</code></a> as the search value, which <code>AScanExact</code> compares by exact type and value.</p>
@@ -3812,7 +3812,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:50:27 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 21:04:16 UTC">October 14, 2026</span>
   </span>
 
     

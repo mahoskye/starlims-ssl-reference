@@ -2973,7 +2973,7 @@
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Sample LAB-2024-0042 - Calcium Carbonate Test registered with result 98.6
 </code></pre></div>
 <h3 id="declaring-a-variable-where-a-new-logic-block-starts">Declaring a variable where a new logic block starts<a class="headerlink" href="#declaring-a-variable-where-a-new-logic-block-starts" title="Permanent link">&para;</a></h3>
-<p><code>:DECLARE</code> can appear later in the statement flow when a new working variable becomes needed. Here <code>sAuditText</code> is declared inside the <a href="../IF/"><code>:IF</code></a> block, next to the only code that uses it. The declaration still belongs to the whole procedure: <a href="../IF/"><code>:IF</code></a> does not create a separate scope, so the variable stays readable after <a href="../ENDIF/"><code>:ENDIF</code></a>.</p>
+<p><code>:DECLARE</code> can appear later in the statement flow when a new working variable becomes needed. Here <code>sAuditText</code> is declared inside the <a href="../IF/"><code>:IF</code></a> block that builds it. The declaration still belongs to the whole procedure: <a href="../IF/"><code>:IF</code></a> does not create a separate scope, so the variable stays readable after <a href="../ENDIF/"><code>:ENDIF</code></a>, where the second block appends it to the message. With <code>bIncludeAudit</code> set to <code>.T.</code>, the call returns <code>Sample LAB-001 is ready for review (Checked by &lt;user&gt; on &lt;date&gt;)</code>.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">DescribeSampleStatus</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sSampleID</span><span class="p">,</span><span class="w"> </span><span class="n">bIncludeAudit</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DEFAULT</span><span class="w"> </span><span class="n">bIncludeAudit</span><span class="p">,</span><span class="w"> </span><span class="kc">.F.</span><span class="p">;</span>
@@ -2985,6 +2985,9 @@
 <span class="w">        </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">sAuditText</span><span class="p">;</span>
 
 <span class="w">        </span><span class="n">sAuditText</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s2">"Checked by "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">MYUSERNAME</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" on "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">DToC</span><span class="p">(</span><span class="nf">Today</span><span class="p">());</span>
+<span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">:IF</span><span class="w"> </span><span class="n">bIncludeAudit</span><span class="p">;</span>
 <span class="w">        </span><span class="n">sMessage</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">sMessage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" ("</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sAuditText</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">")"</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:ENDIF</span><span class="p">;</span>
 
@@ -2992,7 +2995,7 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DescribeSampleStatus"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LAB-001"</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"DescribeSampleStatus"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"LAB-001"</span><span class="p">,</span><span class="w"> </span><span class="kc">.T.</span><span class="p">});</span>
 </code></pre></div>
 <h3 id="declaring-class-fields">Declaring class fields<a class="headerlink" href="#declaring-class-fields" title="Permanent link">&para;</a></h3>
 <p>Use <code>:DECLARE</code> in a class body to define fields shared by all class methods. The fields declared at the class level are readable and writable from every method, but a method must qualify each reference with <a href="../../special-forms/me/"><code>Me:fieldName</code></a> (or <a href="../../special-forms/base/"><code>Base:fieldName</code></a> for an inherited parent field). A bare identifier inside the method body always refers to a local variable or <a href="../PARAMETERS/"><code>:PARAMETERS</code></a> entry, never to the class field of the same name.</p>
@@ -3058,7 +3061,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2026 16:03:49 UTC">October 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 21:04:52 UTC">October 14, 2026</span>
   </span>
 
     

@@ -2999,7 +2999,7 @@
 <div class="language-text highlight"><pre data-search-exclude><span></span><code>Processing failed: Processing failed due to invalid sample state
 </code></pre></div>
 <h3 id="handling-multiple-failure-paths-in-one-catch-block">Handling multiple failure paths in one CATCH block<a class="headerlink" href="#handling-multiple-failure-paths-in-one-catch-block" title="Permanent link">&para;</a></h3>
-<p>Uses one <code>:TRY</code> block for a multi-step operation, then branches inside the single <a href="../CATCH/"><code>:CATCH</code></a> block SSL supports. <a href="../FINALLY/"><code>:FINALLY</code></a> always logs the outcome regardless of success or failure. With <code>sBatchID</code> set to <code>"B-1001"</code> and both the load and update succeeding, the final message confirms processing.</p>
+<p>Uses one <code>:TRY</code> block for a multi-step operation, then branches inside the single <a href="../CATCH/"><code>:CATCH</code></a> block SSL supports. <a href="../FINALLY/"><code>:FINALLY</code></a> always logs the outcome regardless of success or failure. With <code>sBatchID</code> set to <code>"B-9999"</code>, a batch that has no records, the load succeeds but returns no rows. <a href="../../functions/RaiseError/"><code>RaiseError</code></a> sends control to <a href="../CATCH/"><code>:CATCH</code></a>, where the second branch picks the nothing-to-process message. A lookup error would take the first branch instead, and a failed update the third.</p>
 <div class="language-ssl highlight"><pre data-search-exclude><span></span><code><span class="k">:PROCEDURE</span><span class="w"> </span><span class="n">ProcessBatchRecords</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:PARAMETERS</span><span class="w"> </span><span class="n">sBatchID</span><span class="p">;</span>
 <span class="w">    </span><span class="k">:DECLARE</span><span class="w"> </span><span class="n">aRecords</span><span class="p">,</span><span class="w"> </span><span class="n">oErr</span><span class="p">,</span><span class="w"> </span><span class="n">sStatusMessage</span><span class="p">;</span>
@@ -3053,7 +3053,10 @@
 <span class="k">:ENDPROC</span><span class="p">;</span>
 
 <span class="c1">/* Usage;</span>
-<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ProcessBatchRecords"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"B-1001"</span><span class="p">});</span>
+<span class="nf">DoProc</span><span class="p">(</span><span class="s2">"ProcessBatchRecords"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s2">"B-9999"</span><span class="p">});</span>
+</code></pre></div>
+<p><a href="../../functions/UsrMes/"><code>UsrMes</code></a> logs:</p>
+<div class="language-text highlight"><pre data-search-exclude><span></span><code>Nothing to process for batch B-9999
 </code></pre></div>
 <h2 id="related">Related<a class="headerlink" href="#related" title="Permanent link">&para;</a></h2>
 <ul>
@@ -3081,7 +3084,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2026 21:48:07 UTC">October 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 14, 2026 21:04:52 UTC">October 14, 2026</span>
   </span>
 
     
