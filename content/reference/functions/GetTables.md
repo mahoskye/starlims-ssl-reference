@@ -95,7 +95,7 @@ DoProc("ListJoinedTables");
 
 ### Reject SQL that references disallowed tables
 
-Extracts all table names from the incoming SQL and checks each one against an allowlist, reporting disallowed names and returning [`.F.`](../literals/false.md) if any are found.
+Extracts all table names from the incoming SQL and checks each one against an allowlist, reporting disallowed names and returning [`.F.`](../literals/false.md) if any are found. The usage query joins `audit_log`, which is not on the allowlist, so the procedure returns [`.F.`](../literals/false.md).
 
 ```ssl
 :PROCEDURE ValidateQuerySources;
@@ -126,7 +126,14 @@ Extracts all table names from the incoming SQL and checks each one against an al
 :ENDPROC;
 
 /* Usage;
-DoProc("ValidateQuerySources", {"SELECT s.sampleid FROM sample s WHERE s.status = 'L'"});
+DoProc("ValidateQuerySources", {"SELECT s.sampleid FROM sample s INNER JOIN audit_log a ON a.sampleid = s.sampleid WHERE s.status = 'L'"});
+```
+
+[`UsrMes`](UsrMes.md) logs:
+
+```text
+Allowed table: sample
+Disallowed table in query: audit_log
 ```
 
 ## Related

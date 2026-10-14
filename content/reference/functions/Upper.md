@@ -116,7 +116,7 @@ DoProc("NormalizeCodes");
 
 ### Trim and normalize before membership checks
 
-Clean incoming values, convert them to uppercase, and look for an exact match in a normalized allowed list with [`AScanExact`](AScanExact.md). Both conditional branches produce visible output so the caller knows whether the code was accepted or rejected.
+Clean incoming values, convert them to uppercase, and look for an exact match in a normalized allowed list with [`AScanExact`](AScanExact.md). Both conditional branches produce visible output so the caller knows whether the code was accepted or rejected. The padded input `"  Active "` is accepted only because [`AllTrim`](AllTrim.md) removes the spaces; `"  ACTIVE "` would not match exactly.
 
 ```ssl
 :PROCEDURE ValidateStatusCode;
@@ -138,7 +138,13 @@ Clean incoming values, convert them to uppercase, and look for an exact match in
 :ENDPROC;
 
 /* Usage;
-DoProc("ValidateStatusCode", {"Active"});
+DoProc("ValidateStatusCode", {"  Active "});
+```
+
+[`UsrMes`](UsrMes.md) logs:
+
+```text
+Accepted status: ACTIVE
 ```
 
 ## Related

@@ -89,7 +89,7 @@ Sample date key: 20240315
 
 ### Replace the empty-date result before using the key downstream
 
-Replaces the eight-space result returned for an empty date with a `[No release date]` placeholder before returning the key.
+Replaces the eight-space result returned for an empty date with a `[No release date]` placeholder before returning the key. The first call passes a real date and returns `"20240315"`; the second passes an empty date and returns `"[No release date]"`.
 
 ```ssl
 :PROCEDURE GetReleaseDateKey;
@@ -107,11 +107,12 @@ Replaces the eight-space result returned for an empty date with a `[No release d
 
 /* Usage;
 DoProc("GetReleaseDateKey", {CToD("03/15/2024")});
+DoProc("GetReleaseDateKey", {CToD("")});
 ```
 
 ### Build sortable identifiers for a batch of records
 
-Builds a sortable `SampleID_yyyyMMdd` key for each row in a sample array, substituting `_PENDING` when the logged date is empty.
+Builds a sortable `SampleID_yyyyMMdd` key for each row in a sample array, substituting `_PENDING` when the logged date is empty. The usage returns `{"S-001_20240315", "S-002_PENDING"}`.
 
 ```ssl
 :PROCEDURE BuildBatchKeys;
@@ -139,7 +140,7 @@ Builds a sortable `SampleID_yyyyMMdd` key for each row in a sample array, substi
 :ENDPROC;
 
 /* Usage;
-DoProc("BuildBatchKeys", {{{"S-001", CToD("03/15/2024")}}});
+DoProc("BuildBatchKeys", {{{"S-001", CToD("03/15/2024")}, {"S-002", CToD("")}}});
 ```
 
 ## Related

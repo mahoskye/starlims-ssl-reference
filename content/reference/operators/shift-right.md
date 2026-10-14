@@ -113,7 +113,7 @@ DoProc("ShiftNegativeValue");
 
 ### Extracting a packed flag group
 
-Shifts the desired bits into the low positions, then masks the extracted field. With `nPackedFlags = 112` (binary: 1110000), priority bits 4–6 are shifted right 4 → 7 (0b111), then masked with 7.
+Shifts the desired bits into the low positions, then masks the extracted field. With `nPackedFlags = 240` (binary: 11110000), priority bits 4–6 are shifted right 4 → 15 (0b1111), then masked with 7 → 7 (0b111). The mask drops bit 7, which is set but not part of the priority field; without it the result would be 15.
 
 ```ssl
 :PROCEDURE ExtractPriority;
@@ -134,7 +134,7 @@ Shifts the desired bits into the low positions, then masks the extracted field. 
 :ENDPROC;
 
 /* Usage;
-DoProc("ExtractPriority", {112});
+DoProc("ExtractPriority", {240});
 ```
 
 [`UsrMes`](../functions/UsrMes.md) logs:

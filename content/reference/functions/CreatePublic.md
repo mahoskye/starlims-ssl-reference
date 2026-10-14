@@ -92,7 +92,7 @@ Public value: Queued
 
 ### Initialize a public variable to an empty string
 
-Calls `CreatePublic` without a second argument so the new variable is initialized to an empty string, then checks whether the variable is empty.
+Calls `CreatePublic` without a second argument so the new variable is initialized to an empty string, then checks with [`LimsTypeEx`](LimsTypeEx.md) that the variable is a string and that it is empty. The type check matters because [`Empty`](Empty.md) also returns [`.T.`](../literals/true.md) for [`NIL`](../literals/nil.md).
 
 ```ssl
 :PROCEDURE DemoCreatePublicDefault;
@@ -102,7 +102,7 @@ Calls `CreatePublic` without a second argument so the new variable is initialize
 	CreatePublic(sVarName);
 	sValue := GetByName(sVarName);
 
-	:IF Empty(sValue);
+	:IF LimsTypeEx(sValue) == "STRING" .AND. Empty(sValue);
 		UsrMes("The public variable starts as an empty string.");
 	:ENDIF;
 

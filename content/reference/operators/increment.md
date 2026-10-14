@@ -106,20 +106,23 @@ Shows that postfix `++` assigns the original value before incrementing, while pr
 
 ```ssl
 :PROCEDURE DemoIncrementForms;
-    :DECLARE nCounter, nCapturedPostfix, nCapturedPrefix, sOutput;
+    :DECLARE nCounter, nCapturedPostfix, nAfterPostfix, nCapturedPrefix, sOutput;
 
     nCounter := 5;
 
     /* Postfix: assigns original value, then increments;
     nCapturedPostfix := nCounter++;
+    nAfterPostfix := nCounter;
 
     /* Prefix: increments first, then returns new value;
     nCapturedPrefix := ++nCounter;
 
-    sOutput := "Postfix captured: " + LimsString(nCapturedPostfix) + ", nCounter after postfix: 6";
+    sOutput := "Postfix captured: " + LimsString(nCapturedPostfix)
+        + ", nCounter after postfix: " + LimsString(nAfterPostfix);
     UsrMes(sOutput);
 
-    sOutput := "Prefix captured: " + LimsString(nCapturedPrefix) + ", nCounter after prefix: 7";
+    sOutput := "Prefix captured: " + LimsString(nCapturedPrefix)
+        + ", nCounter after prefix: " + LimsString(nCounter);
     UsrMes(sOutput);
 
     :RETURN nCounter;

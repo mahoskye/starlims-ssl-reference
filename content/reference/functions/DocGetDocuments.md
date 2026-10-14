@@ -112,9 +112,9 @@ Calls `DocGetDocuments` without a type filter to list all `dm_document` entries 
 DoProc("ListRepositoryDocs");
 ```
 
-### Pass the document type filter explicitly
+### Pass the default document type filter explicitly
 
-Passes an explicit document type to `DocGetDocuments` and prints the ID, name, and content type of each result, illustrating how to access individual columns by position. Assumes the caller already has a Documentum session open.
+Passes `"dm_document"`, the default filter, as an explicit `sDocTypes` argument, so the call returns the same rows as omitting it; pass a different document type from your repository to restrict the results to that type. Prints the ID, name, and content type of each result, illustrating how to access individual columns by position. Assumes the caller already has a Documentum session open.
 
 ```ssl
 :PROCEDURE GetTypedDocuments;

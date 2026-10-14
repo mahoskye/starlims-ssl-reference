@@ -116,13 +116,13 @@ Row 3: John Davis | Production | Technician
 
 ### Use custom delimiters for imported records
 
-Passes `"##"` as the row separator and `"|"` as the column separator to parse an import string where standard delimiters are already in the data.
+Passes `"##"` as the row separator and `"|"` as the column separator to parse an import string where standard delimiters are already in the data. The status for `S-1001` contains a comma, which the default `","` column delimiter would have split; with `"|"` it stays in one column.
 
 ```ssl
 :PROCEDURE ParseImportedRecords;
 	:DECLARE sImportText, aRows, aRow, nRow, sSummary;
 
-	sImportText := "S-1001|Logged|25.4##S-1002|Pending|18.3##"
+	sImportText := "S-1001|Logged, rechecked|25.4##S-1002|Pending|18.3##"
 					+ "S-1003|Closed|22.1";
 	aRows := BuildArray2(sImportText, "##", "|", .F., .T.);
 
@@ -145,7 +145,7 @@ DoProc("ParseImportedRecords");
 
 ```text
 Imported records:
-S-1001 -> Logged -> 25.4
+S-1001 -> Logged, rechecked -> 25.4
 S-1002 -> Pending -> 18.3
 S-1003 -> Closed -> 22.1
 ```

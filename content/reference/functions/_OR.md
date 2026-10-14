@@ -93,19 +93,19 @@ DoProc("CombineFlags");
 
 ### Add a mask to an existing value
 
-Set selected bits in an existing packed value.
+Set selected bits in an existing packed value. The bit with value `2` is set in both `3` (binary `011`) and `6` (binary `110`); `_OR` keeps it set once, giving `7` (binary `111`), where adding the two values would give `9`.
 
 ```ssl
 :PROCEDURE SetArchiveAndReviewFlags;
     :DECLARE nCurrentFlags, nMask, nUpdatedFlags;
 
-    nCurrentFlags := 1;
+    nCurrentFlags := 3;
     nMask := 6;
 
     nUpdatedFlags := _OR(nCurrentFlags, nMask);
 
     UsrMes("Original flags: " + LimsString(nCurrentFlags));
-    /* Logs: Original flags: 1;
+    /* Logs: Original flags: 3;
     UsrMes("Mask: " + LimsString(nMask));
     /* Logs: Mask: 6;
     UsrMes("Updated flags: " + LimsString(nUpdatedFlags));

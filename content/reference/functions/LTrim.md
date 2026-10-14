@@ -65,13 +65,13 @@ LTrim(sSource)
 
 ### Remove leading spaces from a sample code
 
-Trim accidental leading spaces from a code value before display. The brackets in the output confirm that no leading spaces remain and that trailing content is unchanged.
+Trim accidental leading spaces from a code value before display. The brackets in the output confirm that no leading spaces remain and that the two trailing spaces are kept. [`AllTrim`](AllTrim.md) would print `[QC-1042]`.
 
 ```ssl
 :PROCEDURE NormalizeSampleCode;
 	:DECLARE sRawCode, sCleanCode;
 
-	sRawCode := "   QC-1042";
+	sRawCode := "   QC-1042  ";
 	sCleanCode := LTrim(sRawCode);
 
 	UsrMes("[" + sCleanCode + "]");
@@ -84,7 +84,7 @@ DoProc("NormalizeSampleCode");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-[QC-1042]
+[QC-1042  ]
 ```
 
 ### Filter blank rows from an imported list after trimming

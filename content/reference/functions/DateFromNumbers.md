@@ -117,7 +117,7 @@ Sample date constructed: 11/15/2024
 
 ### Build a full timestamp from numeric date and time parts
 
-Passes all seven numeric components including milliseconds to construct a full timestamp. [`LimsString`](LimsString.md) on a date value uses the `MM/dd/yyyy` format and does not include the time portion.
+Passes all seven numeric components including milliseconds to construct a full timestamp, then displays it with [`DateToString`](DateToString.md) so the time portion is visible. [`LimsString`](LimsString.md) on a date value shows only the date part.
 
 ```ssl
 :PROCEDURE BuildRunTimestamp;
@@ -125,7 +125,7 @@ Passes all seven numeric components including milliseconds to construct a full t
 
 	dRunAt := DateFromNumbers(2026, 4, 18, 14, 30, 45, 125);
 
-	UsrMes("Run timestamp: " + LimsString(dRunAt));
+	UsrMes("Run timestamp: " + DateToString(dRunAt, "MM/dd/yyyy HH:mm:ss.fff"));
 
 	:RETURN dRunAt;
 :ENDPROC;
@@ -137,7 +137,7 @@ DoProc("BuildRunTimestamp");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
-Run timestamp: 04/18/2026
+Run timestamp: 04/18/2026 14:30:45.125
 ```
 
 ### Create an invariant date and verify it

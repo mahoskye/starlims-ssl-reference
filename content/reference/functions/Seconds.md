@@ -84,13 +84,14 @@ Current time of day: <0–86399> seconds since midnight
 
 ### Measure same-day elapsed time with midnight rollover
 
-Capture a start and end value, handle the midnight-rollover edge case, and display the elapsed time in seconds.
+Capture a start and end value around some timed work, handle the midnight-rollover edge case, and display the elapsed time in seconds. Here the work is a two-second [`LWait`](LWait.md). Because `Seconds()` counts whole seconds, `<n>` is `2` or `3`, depending on where the wait falls relative to the second boundaries.
 
 ```ssl
 :PROCEDURE MeasureElapsedSeconds;
     :DECLARE nStartSeconds, nEndSeconds, nElapsedSeconds, sMessage;
 
     nStartSeconds := Seconds();
+    LWait(2);
     nEndSeconds := Seconds();
 
     :IF nEndSeconds >= nStartSeconds;

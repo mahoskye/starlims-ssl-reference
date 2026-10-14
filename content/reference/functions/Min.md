@@ -122,7 +122,7 @@ Lower reading: 38.7
 
 ### Select the lower-sorting string as a canonical key
 
-Normalize two candidate labels, then keep the lower-sorting one as a stable key.
+Normalize two candidate labels, then keep the lower-sorting one as a stable key. The inputs carry stray spaces and mixed case; after normalization `"ALPHA"` sorts first. Without it, the comparison would also weigh the stray spaces and the letter case, so the key could change with how the labels were typed.
 
 ```ssl
 :PROCEDURE GetCanonicalName;
@@ -139,7 +139,7 @@ Normalize two candidate labels, then keep the lower-sorting one as a stable key.
 :ENDPROC;
 
 /* Usage;
-DoProc("GetCanonicalName", {"ALPHA", "BETA"});
+DoProc("GetCanonicalName", {" beta", "alpha "});
 ```
 
 [`UsrMes`](UsrMes.md) logs:

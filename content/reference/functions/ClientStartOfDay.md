@@ -63,9 +63,9 @@ ClientStartOfDay(dDate)
 
 ## Examples
 
-### Normalize a user-selected date to the client-local day start
+### Normalize a user-selected date and time to the start of its day
 
-Converts a user-selected date to the start of the client-local day and logs the resulting boundary timestamp.
+Resets a date and time to the start of its day and logs the resulting boundary timestamp. The input is built with [`DateFromNumbers`](DateFromNumbers.md) as an invariant date, so, like a date from [`CToD`](CToD.md), it carries no timezone information and gets the server boundary: midnight of the same calendar day, the value [`ServerStartOfDay`](ServerStartOfDay.md) returns. To get the client-local day, pass a value that carries timezone information, as the last example does.
 
 ```ssl
 :PROCEDURE NormalizeClientFilterDate;
@@ -81,7 +81,7 @@ Converts a user-selected date to the start of the client-local day and logs the 
 :ENDPROC;
 
 /* Usage;
-DoProc("NormalizeClientFilterDate", {CToD("04/23/2026")});
+DoProc("NormalizeClientFilterDate", {DateFromNumbers(2026, 4, 23, 14, 30,,, .T.)});
 ```
 
 `UsrMes` logs:

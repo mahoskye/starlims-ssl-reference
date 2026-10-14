@@ -65,7 +65,7 @@ ClientEndOfDay(dDate)
 
 ### Build an inclusive upper bound for a user-selected day
 
-Converts a user-selected date to the end of the client-local day and logs the resulting date-time value.
+Converts a user-selected date to an inclusive end-of-day bound and logs the resulting date-time value. A date built with [`CToD`](CToD.md) carries no timezone information, so the result is the server boundary, the same value [`ServerEndOfDay`](ServerEndOfDay.md) returns. To get the client-local day, pass a value that carries timezone information, such as one from [`Now`](Now.md).
 
 ```ssl
 :PROCEDURE GetClientDayCutoff;
@@ -92,7 +92,7 @@ Client end of day: 04/23/2026 23:59:59.997
 
 ### Use the end-of-day cutoff as a query upper bound
 
-Passes the client end-of-day value as the upper bound of a SQL query so only transactions on or before the end of the user's calendar day are included.
+Passes the client end-of-day value as the upper bound of a SQL query so only transactions on or before the end of the user's calendar day are included. The usage passes [`Now`](Now.md), because a date built with [`CToD`](CToD.md) would give the server boundary instead.
 
 ```ssl
 :PROCEDURE GenerateClientDayReport;
@@ -114,7 +114,7 @@ Passes the client end-of-day value as the upper bound of a SQL query so only tra
 :ENDPROC;
 
 /* Usage;
-DoProc("GenerateClientDayReport", {CToD("04/23/2026")});
+DoProc("GenerateClientDayReport", {Now()});
 ```
 
 ### Compare client and server end-of-day cutoffs

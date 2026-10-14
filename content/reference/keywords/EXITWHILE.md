@@ -95,7 +95,7 @@ DoProc("ValidateSampleBatch");
 
 ### Exit only the inner WHILE in nested loops
 
-`:EXITWHILE` exits only the nearest [`:WHILE`](WHILE.md). A `bFound` flag signals the outer loop to exit on the next check. With `sTargetID` set to `"SMP-005"`, the match is at row 2, column 2.
+`:EXITWHILE` exits only the nearest [`:WHILE`](WHILE.md). A `bFound` flag signals the outer loop to exit on the next check. With `sTargetID` set to `"SMP-005"`, the match is at row 2, column 2. The "Finished scanning row 2" line shows that control returns to the outer loop after the inner `:EXITWHILE`, and the missing row 3 line shows that the flag stopped the outer loop.
 
 ```ssl
 :PROCEDURE FindTargetCell;
@@ -124,6 +124,8 @@ DoProc("ValidateSampleBatch");
             nCol := nCol + 1;
         :ENDWHILE;
 
+        UsrMes("Finished scanning row " + LimsString(nRow));
+
         :IF bFound;
             :EXITWHILE;
         :ENDIF;
@@ -143,6 +145,8 @@ DoProc("FindTargetCell");
 [`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
+Finished scanning row 1
+Finished scanning row 2
 Row 2, Col 2
 ```
 

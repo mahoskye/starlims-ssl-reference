@@ -92,7 +92,7 @@ DoProc("ValidateHexCode");
 
 ### Normalize mixed-case input before validating
 
-Trim whitespace and convert to uppercase before calling `IsHex`, so that values like `" a3f7 "` pass validation rather than failing on case or whitespace. Calling with `"a3f7"` produces `"A3F7"` after normalization, which is valid; calling with `"not hex"` produces `"NOT HEX"`, which is not.
+Trim whitespace and convert to uppercase before calling `IsHex`, so that values like `" a3f7 "` pass validation rather than failing on case or whitespace. Calling with `" a3f7 "` produces `"A3F7"` after normalization, which is valid; calling with `"not hex"` produces `"NOT HEX"`, which is not.
 
 ```ssl
 :PROCEDURE NormalizeAndValidateHex;
@@ -114,7 +114,7 @@ Trim whitespace and convert to uppercase before calling `IsHex`, so that values 
 :ENDPROC;
 
 /* Usage;
-DoProc("NormalizeAndValidateHex", {"a3f7"});
+DoProc("NormalizeAndValidateHex", {" a3f7 "});
 ```
 
 ### Filter and convert a batch of hex strings

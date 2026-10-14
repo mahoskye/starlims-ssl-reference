@@ -86,7 +86,7 @@ Hypotenuse: 5
 
 ### Guard against negative input
 
-Validate the input first when a negative value would produce `NaN` that you do not want to propagate.
+Validate the input first when a negative value would produce `NaN` that you do not want to propagate. The second call passes a negative value, which the guard rejects before `Sqrt` runs.
 
 ```ssl
 :PROCEDURE SafeSquareRoot;
@@ -107,12 +107,14 @@ Validate the input first when a negative value would produce `NaN` that you do n
 
 /* Usage;
 DoProc("SafeSquareRoot", {9});
+DoProc("SafeSquareRoot", {-9});
 ```
 
 `UsrMes` logs:
 
 ```text
 Square root: 3
+Square root requires a non-negative value
 ```
 
 ### Calculate RMS from a series

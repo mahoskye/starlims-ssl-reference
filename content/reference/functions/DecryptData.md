@@ -92,7 +92,7 @@ DoProc("ShowDecryptedEmail");
 
 ### Validate required input and handle failure
 
-Guards against an empty password before calling `DecryptData`, then handles the empty-string result that indicates a wrong password or unreadable ciphertext.
+Guards against an empty password before calling `DecryptData`, then handles the empty-string result that indicates a wrong password or unreadable ciphertext. The usage encrypts the note with one password and tries to read it with another, so `DecryptData` returns an empty string and the failure branch runs.
 
 ```ssl
 :PROCEDURE ReadSecretNote;
@@ -117,8 +117,14 @@ Guards against an empty password before calling `DecryptData`, then handles the 
 /* Usage;
 DoProc(
     "ReadSecretNote",
-    {EncryptData("example note", "SecureP@ssw0rd"), "SecureP@ssw0rd"}
+    {EncryptData("example note", "SecureP@ssw0rd"), "WrongPassword"}
 );
+```
+
+[`UsrMes`](UsrMes.md) logs:
+
+```text
+The note could not be decrypted with the supplied password
 ```
 
 ### Round-trip verification with EncryptData

@@ -162,12 +162,12 @@ Square root of 150 = 12.2474487308713
 
 ### Nested loops with conditional exit
 
-Scans a 4×3 sample grid to find `"SAMPLE-003"`, exiting the inner loop with [`:EXITWHILE`](EXITWHILE.md) when found and stopping the outer loop via the `!bFound` condition. With `sTarget` set to `"SAMPLE-003"`, the match is in row 3, column 1.
+Scans a 4×3 sample grid to find `"SAMPLE-003"`, exiting the inner loop with [`:EXITWHILE`](EXITWHILE.md) when found and stopping the outer loop via the `!bFound` condition. With `sTarget` set to `"SAMPLE-003"`, the match is in row 3, column 1. `nChecked` counts the cells compared: rows 1 and 2 take three comparisons each and row 3 stops after one, so the count is 7. Without [`:EXITWHILE`](EXITWHILE.md), the inner loop would also compare the rest of row 3 and the count would be 9.
 
 ```ssl
 :PROCEDURE ProcessSampleMatrix;
     :DECLARE aSampleGrid, oResult, nRow, nCol, nRows, nCols, sTarget, bFound, sLog;
-    :DECLARE nTargetRow, nTargetCol;
+    :DECLARE nTargetRow, nTargetCol, nChecked;
 
     aSampleGrid := {
         {"SAMPLE-001", "Pending", "2024-01-15"},
@@ -182,6 +182,7 @@ Scans a 4×3 sample grid to find `"SAMPLE-003"`, exiting the inner loop with [`:
     bFound := .F.;
     nTargetRow := 0;
     nTargetCol := 0;
+    nChecked := 0;
     sLog := "";
 
     oResult := CreateUdObject();
@@ -193,6 +194,8 @@ Scans a 4×3 sample grid to find `"SAMPLE-003"`, exiting the inner loop with [`:
         nCol := 1;
 
         :WHILE nCol <= nCols;
+            nChecked += 1;
+
             :IF aSampleGrid[nRow, nCol] == sTarget;
                 nTargetRow := nRow;
                 nTargetCol := nCol;
@@ -219,6 +222,7 @@ Scans a 4×3 sample grid to find `"SAMPLE-003"`, exiting the inner loop with [`:
         oResult:value := aSampleGrid[nTargetRow, nTargetCol];
     :ENDIF;
 
+    sLog := sLog + " Cells checked: " + LimsString(nChecked) + ".";
     UsrMes(sLog);
 
     :RETURN oResult;
@@ -231,7 +235,7 @@ DoProc("ProcessSampleMatrix");
 [`UsrMes`](../functions/UsrMes.md) logs:
 
 ```text
-Row 1 scanned. Row 2 scanned. Target found at row 3, col 1.
+Row 1 scanned. Row 2 scanned. Target found at row 3, col 1. Cells checked: 7.
 ```
 
 ## Related

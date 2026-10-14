@@ -122,7 +122,7 @@ DoProc("CreateProjectAcl", {"ALPHA"});
 
 ### Validate inputs and inspect the Documentum failure state on an empty result
 
-Guards against an empty ACL name, strips blank group names from the input array, then calls the function and reads the Documentum failure state when the result is empty.
+Guards against an empty ACL name, strips blank group names from the input array, then calls the function and reads the Documentum failure state when the result is empty. The usage passes a blank entry and a padded one, so `aCleanGroups` becomes `{"LabUsers", "Supervisors"}` before the call.
 
 ```ssl
 :PROCEDURE CreateAclSafely;
@@ -169,7 +169,7 @@ Guards against an empty ACL name, strips blank group names from the input array,
 :ENDPROC;
 
 /* Usage;
-DoProc("CreateAclSafely", {"QualityACL", "ACL for quality", {"LabUsers", "Supervisors"}});
+DoProc("CreateAclSafely", {"QualityACL", "ACL for quality", {"LabUsers", "", " Supervisors "}});
 ```
 
 ## Related

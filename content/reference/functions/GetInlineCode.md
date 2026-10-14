@@ -100,7 +100,7 @@ Hello from inline code
 
 ### Substitute current variable values before execution
 
-Passes variable names in `aVariables` so the function embeds their current values into the code text before returning it; the substituted code is then executed by [`ExecUdf`](ExecUdf.md).
+Passes variable names in `aVariables` so the function embeds their current values into the code text before returning it; the substituted code is then executed by [`ExecUdf`](ExecUdf.md). The first log line confirms that the value `Complete` now appears in the code text. `sStatus` is changed after the call, but the result still shows `Complete`, because the value was captured when `GetInlineCode` ran.
 
 ```ssl
 :PROCEDURE BuildStatusMessage;
@@ -114,6 +114,9 @@ Passes variable names in `aVariables` so the function embeds their current value
 	:ENDINLINECODE;
 
 	sCode := GetInlineCode("StatusTemplate", {"sStatus", "nCount"});
+	sStatus := "Reopened";
+
+	UsrMes("Value embedded in code: " + LimsString(At("Complete", sCode) > 0));
 	sMessage := ExecUdf(sCode, {}, .F.);
 
 	DeleteInlineCode("StatusTemplate");
@@ -128,6 +131,7 @@ DoProc("BuildStatusMessage");
 [`UsrMes`](UsrMes.md) logs:
 
 ```text
+Value embedded in code: .T.
 Status: Complete Count: 12
 ```
 
